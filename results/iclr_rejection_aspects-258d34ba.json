@@ -1,0 +1,46 @@
+{
+  "run_id": "iclr_rejection_aspects-258d34ba",
+  "experiment": "iclr_rejection_aspects",
+  "config": {
+    "dataset": "weizhey/asap_review (ASAP-Review, Yuan et al.)",
+    "split": "test",
+    "filter": "ICLR_* ids only",
+    "venue_years": "ICLR 2017-2020",
+    "caveat": "predates the LLM era; norms may have shifted, treat as a prior not a measurement of 2026"
+  },
+  "metrics": {
+    "n_reviews": 1542,
+    "negative_share": {
+      "substance": 0.7383,
+      "soundness": 0.6139,
+      "clarity": 0.6202,
+      "replicability": 0.9408,
+      "motivation": 0.2714,
+      "originality": 0.5101,
+      "meaningful_comparison": 0.904
+    },
+    "negative_counts": {
+      "substance": 818,
+      "soundness": 1032,
+      "clarity": 1027,
+      "replicability": 318,
+      "motivation": 225,
+      "originality": 633,
+      "meaningful_comparison": 678
+    },
+    "positive_counts": {
+      "motivation": 604,
+      "soundness": 649,
+      "clarity": 629,
+      "substance": 290,
+      "originality": 608,
+      "meaningful_comparison": 72,
+      "replicability": 20
+    }
+  },
+  "timestamp": "2026-09-09T03:38:00Z",
+  "code_revision": "HEAD-dirty",
+  "n_samples": 1542,
+  "notes": "What ICLR reviewers actually complain about, by annotated aspect.",
+  "content_hash": "cb3e87da1915836f"
+}

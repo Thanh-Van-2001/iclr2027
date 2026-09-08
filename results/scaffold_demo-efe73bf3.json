@@ -1,0 +1,28 @@
+{
+  "run_id": "scaffold_demo-efe73bf3",
+  "experiment": "scaffold_demo",
+  "config": {
+    "seeds": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "note": "pipeline smoke test"
+  },
+  "metrics": {
+    "demo_value": [
+      0.812,
+      0.798,
+      0.826,
+      0.805,
+      0.819
+    ]
+  },
+  "timestamp": "2026-09-09T03:20:00Z",
+  "code_revision": "HEAD-dirty",
+  "n_samples": 5,
+  "notes": "Exists only to prove the number path; deleted before submission.",
+  "content_hash": "279f8676e56558bf"
+}

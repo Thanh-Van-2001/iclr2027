@@ -1,0 +1,154 @@
+"""One command that decides whether the paper may be submitted.
+
+    python -m paperengine.cli check --dir paper/submission
+
+Every gate is a separate exit code so that a continuous-integration job can
+distinguish "a citation is wrong" from "the prose is flabby".  The gates run in
+the order in which failures are cheapest to fix.
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import subprocess
+import sys
+from typing import Optional
+
+from . import compliance, provenance, refcheck, style
+
+GREEN, RED, YELLOW, DIM, RESET = "\033[32m", "\033[31m", "\033[33m", "\033[2m", "\033[0m"
+
+
+def _hdr(title: str) -> None:
+    print(f"\n{DIM}{'-' * 72}{RESET}\n{title}\n")
+
+
+def build(paper_dir: str, main: str) -> tuple[bool, str]:
+    stem = os.path.splitext(main)[0]
+    env = dict(os.environ)
+    tex_bin = os.path.expandvars(r"%APPDATA%\TinyTeX\bin\windows")
+    if os.path.isdir(tex_bin):
+        env["PATH"] = tex_bin + os.pathsep + env.get("PATH", "")
+    proc = subprocess.run(
+        ["latexmk", "-pdf", "-interaction=nonstopmode", main],
+        cwd=paper_dir, capture_output=True, text=True, env=env, timeout=600,
+    )
+    pdf = os.path.join(paper_dir, stem + ".pdf")
+    return os.path.exists(pdf) and proc.returncode == 0, proc.stdout[-1500:]
+
+
+def cmd_check(args: argparse.Namespace) -> int:
+    paper_dir = args.dir
+    stem = os.path.splitext(args.main)[0]
+    tex_files = sorted(
+        os.path.join(paper_dir, f) for f in os.listdir(paper_dir)
+        if f.endswith(".tex") and f not in ("math_commands.tex", "numbers.tex")
+    )
+    bib_files = [os.path.join(paper_dir, f) for f in os.listdir(paper_dir) if f.endswith(".bib")]
+    results: dict[str, str] = {}
+
+    if not args.no_build:
+        _hdr("1. BUILD")
+        ok, tail = build(paper_dir, args.main)
+        results["build"] = "pass" if ok else "fail"
+        print(f"  {GREEN}compiled{RESET}" if ok else f"  {RED}compilation failed{RESET}\n{tail}")
+        if not ok:
+            print(f"\n{RED}stopping: nothing else can be checked until the paper compiles{RESET}")
+            return 1
+
+    _hdr("2. CITATIONS -- every reference must resolve to a real record")
+    ref_rc = 0
+    for bib in bib_files:
+        print(f"  {os.path.basename(bib)}")
+        rc = refcheck.main([bib, "--json", os.path.join(args.out, "refcheck.json")]
+                           + (["--strict"] if args.strict else []))
+        ref_rc = max(ref_rc, rc)
+    if not bib_files:
+        print(f"  {YELLOW}no .bib file found{RESET}")
+    results["citations"] = {0: "pass", 1: "fail", 2: "incomplete"}.get(ref_rc, "fail")
+
+    _hdr("3. NUMBERS -- every empirical figure must come from a recorded run")
+    num_rc = provenance.main(tex_files + (["--allow", args.allow] if args.allow else [])
+                             + ["--json", os.path.join(args.out, "numbers.json")])
+    results["numbers"] = "pass" if num_rc == 0 else "fail"
+
+    _hdr("4. PROSE -- readable, and written by someone who took responsibility for it")
+    sty_rc = style.main(tex_files + ["--json", os.path.join(args.out, "style.json"),
+                                     "--max-style", str(args.max_style)])
+    results["prose"] = "pass" if sty_rc == 0 else "fail"
+
+    _hdr("5. SUBMISSION RULES -- the desk-rejection checklist")
+    comp_rc = compliance.main(["--dir", paper_dir, "--main", args.main,
+                               "--json", os.path.join(args.out, "compliance.json")]
+                              + (["--reference-style-dir", args.reference_style_dir]
+                                 if args.reference_style_dir else []))
+    results["submission_rules"] = "pass" if comp_rc == 0 else "fail"
+
+    _hdr("VERDICT")
+    for gate, verdict in results.items():
+        colour = GREEN if verdict == "pass" else (YELLOW if verdict == "incomplete" else RED)
+        print(f"  {colour}{verdict:<11}{RESET} {gate}")
+    with open(os.path.join(args.out, "verdict.json"), "w", encoding="utf-8") as fh:
+        json.dump(results, fh, indent=2)
+
+    failed = [g for g, v in results.items() if v == "fail"]
+    incomplete = [g for g, v in results.items() if v == "incomplete"]
+    print()
+    if failed:
+        print(f"{RED}DO NOT SUBMIT{RESET}: {', '.join(failed)}")
+        return 1
+    if incomplete:
+        print(f"{YELLOW}RE-RUN BEFORE SUBMITTING{RESET}: {', '.join(incomplete)} could not be checked")
+        return 2
+    print(f"{GREEN}All gates pass.{RESET} Human judgement is still the last gate: read it once more on paper.")
+    return 0
+
+
+def cmd_lit(args: argparse.Namespace) -> int:
+    from . import litreview
+    argv: list[str] = []
+    for q in args.query:
+        argv += ["--query", q]
+    for t in args.term:
+        argv += ["--term", t]
+    argv += ["--generations", str(args.generations), "--top", str(args.top),
+             "--out-dir", args.out_dir, "--year", str(args.year)]
+    if args.concepts:
+        argv += ["--concepts", args.concepts]
+    return litreview.main(argv)
+
+
+def main(argv: Optional[list[str]] = None) -> int:
+    ap = argparse.ArgumentParser(prog="paperengine", description="Gates for an ICLR 2027 submission.")
+    sub = ap.add_subparsers(dest="cmd", required=True)
+
+    c = sub.add_parser("check", help="run every gate against the paper")
+    c.add_argument("--dir", default="paper/submission")
+    c.add_argument("--main", default="main.tex")
+    c.add_argument("--out", default="out")
+    c.add_argument("--reference-style-dir", default="paper/_official")
+    c.add_argument("--allow", default="", help="numeric literals that are legitimately hand-written")
+    c.add_argument("--max-style", type=int, default=25)
+    c.add_argument("--strict", action="store_true")
+    c.add_argument("--no-build", action="store_true")
+    c.set_defaults(func=cmd_check)
+
+    l = sub.add_parser("lit", help="build a snowballed, API-verified literature corpus")
+    l.add_argument("--query", action="append", required=True)
+    l.add_argument("--term", action="append", default=[])
+    l.add_argument("--generations", type=int, default=1)
+    l.add_argument("--top", type=int, default=60)
+    l.add_argument("--year", type=int, default=2026)
+    l.add_argument("--concepts", default=None)
+    l.add_argument("--out-dir", default="out/litreview")
+    l.set_defaults(func=cmd_lit)
+
+    args = ap.parse_args(argv)
+    os.makedirs(getattr(args, "out", "out"), exist_ok=True)
+    return args.func(args)
+
+
+if __name__ == "__main__":
+    sys.exit(main())
