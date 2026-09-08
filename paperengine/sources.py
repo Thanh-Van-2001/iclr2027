@@ -27,7 +27,11 @@ import xml.etree.ElementTree as ET
 from typing import Any, Iterable, Optional
 
 CACHE_DIR = os.environ.get("PAPERENGINE_CACHE", os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "cache"))
-CONTACT_EMAIL = os.environ.get("PAPERENGINE_EMAIL", "felicenguyen2001@gmail.com")
+# OpenAlex and Crossref ask for a contact address so they can put the caller in
+# their polite pool.  It is read from the environment rather than written here:
+# this file ships as supplementary material, and a hard-coded address would
+# deanonymise the submission.  Set PAPERENGINE_EMAIL locally.
+CONTACT_EMAIL = os.environ.get("PAPERENGINE_EMAIL", "anonymous@example.org")
 USER_AGENT = f"paperengine/0.1 (mailto:{CONTACT_EMAIL})"
 S2_API_KEY = os.environ.get("S2_API_KEY", "")
 
@@ -90,9 +94,17 @@ class SourceUnavailable(RuntimeError):
 _MIN_INTERVAL = {
     "export.arxiv.org": 3.1,
     "api.semanticscholar.org": 1.2,
-    "api.openalex.org": 0.15,
-    "api.crossref.org": 0.15,
+    # OpenAlex moved to a spend-based limiter in 2026: a request costs a small
+    # amount from a slowly refilling budget, and exceeding it returns 429 with
+    # "Insufficient budget" rather than a retry-after. Measured empirically on
+    # 2026-09-09, roughly one request per second is sustainable from an
+    # unauthenticated client in the polite pool.
+    "api.openalex.org": 1.1,
+    "api.crossref.org": 0.2,
 }
+# A spend limiter needs a much longer pause than an ordinary rate limiter,
+# because the budget refills with time rather than resetting on a window.
+_BACKOFF_BASE = {"api.openalex.org": 12.0}
 _LAST_CALL: dict[str, float] = {}
 
 
@@ -120,7 +132,7 @@ def _fetch(url: str, *, headers: Optional[dict] = None, retries: int = 4, is_jso
     hdrs.update(headers or {})
     host = urllib.parse.urlparse(url).netloc
 
-    delay, last = 2.0, "unknown error"
+    delay, last = _BACKOFF_BASE.get(host, 2.0), "unknown error"
     for attempt in range(retries):
         _throttle(host)
         try:
