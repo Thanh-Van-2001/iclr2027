@@ -52,8 +52,26 @@ def _get(url: str, *, retries: int = 3, timeout: int = 90) -> bytes:
 # --------------------------------------------------------------------------
 
 def neurips_index(year: int) -> list[dict]:
-    """Every accepted NeurIPS paper for a year, with its PDF URL."""
-    html = _get(f"https://papers.nips.cc/paper_files/paper/{year}").decode("utf-8", "replace")
+    """Every accepted NeurIPS paper for a year, with its PDF URL.
+
+    From 2025 the site splits each year into volume pages, so the year index
+    lists only a handful of links and the papers live one level down. Checking
+    this was prompted by an obvious question -- why 2024 and not 2025 -- that
+    the first version of this file had simply never asked.
+    """
+    url = f"https://papers.nips.cc/paper_files/paper/{year}"
+    html = _get(url).decode("utf-8", "replace")
+    if html.count("/hash/") < 200:
+        vols = re.findall(rf'href="(/paper_files/paper/{year}/[a-z0-9-]*(?:main-conference|track)[^"]*)"',
+                          html, re.I)
+        parts = []
+        for v in dict.fromkeys(vols):
+            try:
+                parts.append(_get("https://papers.nips.cc" + v).decode("utf-8", "replace"))
+            except RuntimeError:
+                continue
+        if parts:
+            html = chr(10).join(parts)
     out = []
     for m in re.finditer(
         r'href="(/paper_files/paper/%d/hash/([0-9a-f]+)-Abstract[^"]*\.html)"[^>]*>(.*?)</a>' % year,
@@ -84,9 +102,11 @@ def pmlr_index(volume: str, venue: str, year: int) -> list[dict]:
 
 
 SOURCES = {
+    "neurips2025": lambda: neurips_index(2025),
     "neurips2024": lambda: neurips_index(2024),
     "neurips2023": lambda: neurips_index(2023),
     "neurips2022": lambda: neurips_index(2022),
+    "icml2025": lambda: pmlr_index("v267", "ICML", 2025),
     "icml2024": lambda: pmlr_index("v235", "ICML", 2024),
     "icml2023": lambda: pmlr_index("v202", "ICML", 2023),
 }

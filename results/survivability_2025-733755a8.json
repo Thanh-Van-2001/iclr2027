@@ -1,0 +1,59 @@
+{
+  "run_id": "survivability_2025-733755a8",
+  "experiment": "survivability_2025",
+  "config": {
+    "corpus": "1869 accepted papers (1130 NeurIPS 2025, 739 ICML 2025)",
+    "sampling": "random 2000 from 5823 NeurIPS + 3330 ICML listings, seed 0; 131 download failures",
+    "replication": "independent of the 475-paper 2024 pilot"
+  },
+  "metrics": {
+    "corpus": {
+      "n_papers": 1869,
+      "n_reporting_explicit_error_bar": 479,
+      "pct_reporting_explicit_error_bar": 25.6,
+      "n_reporting_any_dispersion": 620,
+      "pct_reporting_any_dispersion": 33.2,
+      "n_stating_number_of_runs": 464,
+      "pct_stating_number_of_runs": 24.8,
+      "median_runs_when_stated": 10.0
+    },
+    "comparisons": {
+      "n_total": 11690,
+      "n_testable": 267,
+      "pct_testable": 2.3,
+      "median_comparisons_per_table": 5.0,
+      "median_relative_gap": 0.0411
+    },
+    "survival": {
+      "n_tested": 267,
+      "survives_uncorrected": 146,
+      "survives_holm": 139,
+      "survives_bh": 140,
+      "pct_uncorrected": 54.7,
+      "pct_holm": 52.1,
+      "pct_bh": 52.4
+    },
+    "untestable": {
+      "neither_side": 10543,
+      "no_n_stated": 514,
+      "one_side_only": 348,
+      "testable": 267,
+      "other": 18
+    },
+    "pct_neither_side": 90.2,
+    "pct_testable": 2.3,
+    "pct_failing_uncorrected": 45.3,
+    "n_distinct_papers_testable": 65,
+    "median_relative_gap_failing_pct": 1.17,
+    "median_relative_gap_passing_pct": 4.24,
+    "by_venue_explicit_error_bar_pct": {
+      "NeurIPS": 25.8,
+      "ICML": 25.3
+    }
+  },
+  "timestamp": "2026-09-10T00:00:00Z",
+  "code_revision": "4af3c71c8c0577ff5fc9e46e7189757d752b6a58-dirty",
+  "n_samples": 1869,
+  "notes": "Replicates the 2024 pilot closely on an independent, four times larger sample: 25.6 vs 26.5 percent of papers with explicit error bars, 45.3 vs 42.2 percent of testable comparisons failing.",
+  "content_hash": "58024ed6578918bf"
+}
