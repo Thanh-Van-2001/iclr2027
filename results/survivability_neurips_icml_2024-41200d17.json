@@ -1,0 +1,60 @@
+{
+  "run_id": "survivability_neurips_icml_2024-41200d17",
+  "experiment": "survivability_neurips_icml_2024",
+  "config": {
+    "corpus": "475 accepted papers (283 NeurIPS 2024, 192 ICML 2024) from open proceedings",
+    "sampling": "random, seed 0, from 4034 NeurIPS + 2610 ICML listings",
+    "extraction": "caption-anchored tables, line-reassembled spans, bold = claimed winner",
+    "test": "two-sample z from printed means and error bars; Holm and BH within table",
+    "known_limitations": [
+      "testable comparisons come from only 24 distinct papers",
+      "dispersion kind unstated for 93 of 135 testable comparisons",
+      "paren-style dispersion is ambiguous and excluded from the strict count",
+      "25 of 500 sampled PDFs failed to download"
+    ]
+  },
+  "metrics": {
+    "corpus": {
+      "n_papers": 475,
+      "n_reporting_explicit_error_bar": 126,
+      "pct_reporting_explicit_error_bar": 26.5,
+      "n_reporting_any_dispersion": 157,
+      "pct_reporting_any_dispersion": 33.1,
+      "n_stating_number_of_runs": 133,
+      "pct_stating_number_of_runs": 28.0,
+      "median_runs_when_stated": 10
+    },
+    "comparisons": {
+      "n_total": 2682,
+      "n_testable": 135,
+      "pct_testable": 5.0,
+      "median_comparisons_per_table": 5.0,
+      "median_relative_gap": 0.0392
+    },
+    "survival": {
+      "n_tested": 135,
+      "survives_uncorrected": 78,
+      "survives_holm": 74,
+      "survives_bh": 75,
+      "pct_uncorrected": 57.8,
+      "pct_holm": 54.8,
+      "pct_bh": 55.6
+    },
+    "untestable_reasons": {
+      "neither_side_has_error_bar": 2256,
+      "error_bar_but_no_n": 151,
+      "one_side_only": 125,
+      "testable": 135,
+      "other": 15
+    },
+    "n_distinct_papers_with_testable": 24,
+    "pct_not_significant_uncorrected": 42.2,
+    "median_relative_gap_overall": 0.0392,
+    "median_relative_gap_failing": 0.0073
+  },
+  "timestamp": "2026-09-09T21:10:00Z",
+  "code_revision": "51ad18ca8eeb0a6fa6e7b7fc02d9c2d79ee865f6-dirty",
+  "n_samples": 475,
+  "notes": "First full run. Headline shifts from does-it-survive to can-it-be-checked: 84.1 percent of highlighted comparisons print no uncertainty on either side.",
+  "content_hash": "2b1b7cbf9261bf86"
+}

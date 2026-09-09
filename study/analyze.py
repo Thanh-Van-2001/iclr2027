@@ -99,6 +99,8 @@ def comparisons_from_table(table: dict) -> list:
             "relative_gap": gap / abs(runner["mean"]) if runner["mean"] else None,
             "winner_dispersion": win["dispersion"],
             "runner_dispersion": runner["dispersion"],
+            "winner_style": win.get("dispersion_style"),
+            "runner_style": runner.get("dispersion_style"),
             "dispersion_kind": kind,
             "n_runs": n_runs,
             "n_in_column": len(col),
@@ -124,6 +126,7 @@ def test_comparison(cmp: dict, kind_override: Optional[str] = None) -> Optional[
 
 def analyse(records: list) -> dict:
     n_papers = len(records)
+    reports_pm = [r for r in records if r.get("reports_explicit_error_bar")]
     reports_disp = [r for r in records if r["reports_any_dispersion"]]
     states_runs = [r for r in records if r.get("n_runs_global")]
 
@@ -184,6 +187,8 @@ def analyse(records: list) -> dict:
     return {
         "corpus": {
             "n_papers": n_papers,
+            "n_reporting_explicit_error_bar": len(reports_pm),
+            "pct_reporting_explicit_error_bar": round(100 * len(reports_pm) / max(n_papers, 1), 1),
             "n_reporting_any_dispersion": len(reports_disp),
             "pct_reporting_any_dispersion": round(100 * len(reports_disp) / max(n_papers, 1), 1),
             "n_stating_number_of_runs": len(states_runs),
@@ -234,7 +239,8 @@ def main(argv=None) -> int:
 
     c, cm, s = res["corpus"], res["comparisons"], res["survival"]
     print(f"corpus: {c['n_papers']} accepted papers")
-    print(f"  report any dispersion : {c['n_reporting_any_dispersion']} ({c['pct_reporting_any_dispersion']}%)")
+    print(f"  explicit +/- error bar: {c['n_reporting_explicit_error_bar']} ({c['pct_reporting_explicit_error_bar']}%)")
+    print(f"  any dispersion at all : {c['n_reporting_any_dispersion']} ({c['pct_reporting_any_dispersion']}%)")
     print(f"  state number of runs  : {c['n_stating_number_of_runs']} ({c['pct_stating_number_of_runs']}%)")
     print(f"  median runs when said : {c['median_runs_when_stated']}")
     print(f"\ncomparisons: {cm['n_total']} bold-vs-runner-up, {cm['n_testable']} testable ({cm['pct_testable']}%)")

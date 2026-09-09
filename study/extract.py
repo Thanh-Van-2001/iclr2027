@@ -62,6 +62,7 @@ class Cell:
     text: str
     mean: Optional[float]
     dispersion: Optional[float]
+    dispersion_style: str   # "pm" (explicit +/-), "paren" (ambiguous), "none"
     bold: bool
     page: int
     y: float
@@ -186,13 +187,13 @@ def _cells_from_lines(lines: list) -> list:
     for line in lines:
         text = line["text"]
         claimed = set()
-        for pat in (NUM_PM, NUM_PAREN):
+        for pat, style in ((NUM_PM, "pm"), (NUM_PAREN, "paren")):
             for m in pat.finditer(text):
                 if any(s <= m.start() < e for s, e in claimed):
                     continue
                 claimed.add((m.start(), m.end()))
                 cells.append(Cell(text=m.group(0), mean=float(m.group(1)),
-                                  dispersion=float(m.group(2)),
+                                  dispersion=float(m.group(2)), dispersion_style=style,
                                   bold=_bold_at(line, m.start(), m.end()),
                                   page=line["page"], y=round(line["y"], 1),
                                   x=round(_x_at(line, m.start()), 1)))
@@ -204,6 +205,7 @@ def _cells_from_lines(lines: list) -> list:
             except ValueError:
                 continue
             cells.append(Cell(text=m.group(1), mean=val, dispersion=None,
+                              dispersion_style="none",
                               bold=_bold_at(line, m.start(), m.end()),
                               page=line["page"], y=round(line["y"], 1),
                               x=round(_x_at(line, m.start()), 1)))
@@ -300,13 +302,23 @@ def extract_paper(pdf_path: str, max_pages: int = 40) -> dict:
             n_runs=_n_runs(cap["text"], page_text),
         ))
 
-    n_with_disp = sum(1 for c in numeric if c.dispersion is not None)
+    # Only cells inside a detected table count. A "(0.3)" in the running text is
+    # far more often a citation year or an equation tag than an error bar, and
+    # counting those inflated the headline figure from 27% to 92% before this
+    # distinction was drawn.
+    in_tables = [c for b in blocks for c in b.cells]
+    n_pm = sum(1 for c in in_tables if c.dispersion_style == "pm")
+    n_paren = sum(1 for c in in_tables if c.dispersion_style == "paren")
     return {
         "path": pdf_path,
         "n_pages": n_pages,
         "n_numeric_cells": len(numeric),
-        "n_cells_with_dispersion": n_with_disp,
-        "reports_any_dispersion": n_with_disp > 0,
+        "n_table_cells": len(in_tables),
+        "n_cells_pm": n_pm,
+        "n_cells_paren": n_paren,
+        "n_cells_with_dispersion": n_pm + n_paren,
+        "reports_explicit_error_bar": n_pm > 0,
+        "reports_any_dispersion": (n_pm + n_paren) > 0,
         "n_runs_global": _n_runs("", full_text),
         "n_tables_detected": len(blocks),
         "tables": [b.to_dict() for b in blocks],
