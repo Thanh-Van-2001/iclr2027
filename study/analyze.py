@@ -38,21 +38,54 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."
 from paperengine.stats import benjamini_hochberg, holm_bonferroni, norm_cdf  # noqa: E402
 
 COLUMN_TOL = 12.0        # points; cells within this x-distance share a column
+ROW_TOL = 6.0            # points; cells within this y-distance share a row
 MIN_COLUMN_CELLS = 3
+
+
+def _group(cells: list, key: str, tol: float) -> list:
+    ordered = sorted(cells, key=lambda c: c[key])
+    groups, cur = [], []
+    for c in ordered:
+        if cur and c[key] - cur[-1][key] > tol:
+            groups.append(cur)
+            cur = []
+        cur.append(c)
+    if cur:
+        groups.append(cur)
+    return [g for g in groups if len(g) >= MIN_COLUMN_CELLS]
 
 
 def _columns(cells: list) -> list:
     """Group a table's cells into columns by horizontal position."""
-    by_x = sorted(cells, key=lambda c: c["x"])
-    cols, cur = [], []
-    for c in by_x:
-        if cur and c["x"] - cur[-1]["x"] > COLUMN_TOL:
-            cols.append(cur)
-            cur = []
-        cur.append(c)
-    if cur:
-        cols.append(cur)
-    return [c for c in cols if len(c) >= MIN_COLUMN_CELLS]
+    return _group(cells, "x", COLUMN_TOL)
+
+
+def _rows(cells: list) -> list:
+    """Group a table's cells into rows by vertical position."""
+    return _group(cells, "y", ROW_TOL)
+
+
+def orientation(cells: list) -> str:
+    """Does bold mark the best in each column, or the best in each row?
+
+    Both layouts are common and they invert the comparison. A table with methods
+    in rows and benchmarks in columns bolds one winner per column; a table with
+    methods in columns bolds one per row. Reading the second as though it were
+    the first compares a method against itself on a different benchmark, which
+    is not a claim anyone made. A sampled offline-RL table was being read that
+    way before this check existed.
+
+    The layout is recoverable from where the bold cells fall: whichever
+    grouping yields more groups containing exactly one bold cell is the one the
+    authors were marking.
+    """
+    def score(groups):
+        return sum(1 for g in groups if sum(1 for c in g if c["bold"]) == 1)
+    col_score = score(_columns(cells))
+    row_score = score(_rows(cells))
+    if col_score == 0 and row_score == 0:
+        return "none"
+    return "column" if col_score >= row_score else "row"
 
 
 def _standard_error(dispersion: float, kind: str, n: Optional[int]) -> Optional[float]:
@@ -75,7 +108,11 @@ def comparisons_from_table(table: dict) -> list:
     out = []
     n_runs = table.get("n_runs")
     kind = table.get("dispersion_kind", "unknown")
-    for col in _columns(table["cells"]):
+    orient = orientation(table["cells"])
+    if orient == "none":
+        return out
+    groups = _columns(table["cells"]) if orient == "column" else _rows(table["cells"])
+    for col in groups:
         bold = [c for c in col if c["bold"]]
         plain = [c for c in col if not c["bold"]]
         if len(bold) != 1 or not plain:
@@ -103,6 +140,7 @@ def comparisons_from_table(table: dict) -> list:
             "runner_style": runner.get("dispersion_style"),
             "dispersion_kind": kind,
             "n_runs": n_runs,
+            "orientation": orient,
             "n_in_column": len(col),
         })
     for c in out:

@@ -1,0 +1,66 @@
+{
+  "run_id": "survivability_2025_final-ee0ef07d",
+  "experiment": "survivability_2025_final",
+  "config": {
+    "corpus": "1796 accepted papers (NeurIPS 2025 + ICML 2025 open proceedings)",
+    "sampling": "random 2000, seed 0, from 5823 + 3330 listings; 204 download or size failures",
+    "extractor_fixes": [
+      "line clustering by vertical overlap, for subscript error bars",
+      "cells confined to the caption horizontal band, for two-column layouts",
+      "largest contiguous row run, and header/footer zones dropped",
+      "table orientation detected from where the bold cells fall"
+    ],
+    "validation": "2 of 2 sampled comparisons correct by visual inspection of the rendered page; Wilson 95% CI [0.34, 1.00], far too few for the paper"
+  },
+  "metrics": {
+    "corpus": {
+      "n_papers": 1796,
+      "n_reporting_explicit_error_bar": 436,
+      "pct_reporting_explicit_error_bar": 24.3,
+      "n_reporting_any_dispersion": 532,
+      "pct_reporting_any_dispersion": 29.6,
+      "n_stating_number_of_runs": 454,
+      "pct_stating_number_of_runs": 25.3,
+      "median_runs_when_stated": 10.0
+    },
+    "comparisons": {
+      "n_total": 15027,
+      "n_testable": 1240,
+      "pct_testable": 8.3,
+      "median_comparisons_per_table": 7,
+      "median_relative_gap": 0.0421
+    },
+    "survival": {
+      "n_tested": 1240,
+      "survives_uncorrected": 779,
+      "survives_holm": 695,
+      "survives_bh": 730,
+      "pct_uncorrected": 62.8,
+      "pct_holm": 56.0,
+      "pct_bh": 58.9
+    },
+    "untestable": {
+      "neither_side": 11721,
+      "no_n_stated": 1722,
+      "one_side_only": 291,
+      "testable": 1240,
+      "other": 53
+    },
+    "pct_neither_side": 78.0,
+    "pct_testable": 8.3,
+    "pct_fail_uncorrected": 37.2,
+    "pct_fail_holm": 44.0,
+    "n_distinct_papers_testable": 118,
+    "median_gap_failing_pct": 1.33,
+    "median_gap_passing_pct": 6.76,
+    "orientation": {
+      "column": 11497,
+      "row": 3530
+    }
+  },
+  "timestamp": "2026-09-10T05:00:00Z",
+  "code_revision": "8a654b9878e2a3a5e6db940f320dd22fa1d1172d-dirty",
+  "n_samples": 1796,
+  "notes": "Final pipeline. Multiplicity is not cosmetic here: Holm moves the failure rate from 37.2 to 44.0 percent.",
+  "content_hash": "26af791300fb1be5"
+}
