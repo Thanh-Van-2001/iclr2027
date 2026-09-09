@@ -1,0 +1,38 @@
+{
+  "run_id": "literature_bridge_arxiv-d726c253",
+  "experiment": "literature_bridge_arxiv",
+  "config": {
+    "source": "arXiv API export.arxiv.org/api/query",
+    "field": "all:",
+    "date": "2026-09-09",
+    "limitations": [
+      "arXiv all: indexes title/abstract/comments, not full text, so a paper using a method without naming it in the abstract is not counted",
+      "several queries returned -1 (rate limited) and must be re-measured"
+    ],
+    "phrase_search_verified": "2026-09-09: confirmed. all:\"deflated sharpe ratio\" -> 2, scrambled all:\"sharpe ratio deflated\" -> 0, unquoted conjunction -> 3. Quoted arXiv queries are true phrase matches, so the counts mean what they were read to mean."
+  },
+  "metrics": {
+    "single": {
+      "deflated sharpe ratio": 2,
+      "backtest overfitting": 12,
+      "probability of backtest overfitting": 3,
+      "purged cross-validation": 1,
+      "white reality check": 2,
+      "superior predictive ability": 20,
+      "multiple testing": 1084,
+      "selection bias": 1076,
+      "data snooping": 16,
+      "neural architecture search": 1934,
+      "hyperparameter optimization": 1093
+    },
+    "joint": {
+      "multiple testing AND agent benchmark": 0,
+      "superior predictive ability AND large language model": 0
+    }
+  },
+  "timestamp": "2026-09-09T04:05:00Z",
+  "code_revision": "22d608519a719dd8dd980fe8d8073a33934f42ea",
+  "n_samples": null,
+  "notes": "Evidence for a literature bridge gap between quantitative-finance selection-bias methodology and machine-learning model search. Incomplete: rate-limited queries pending.",
+  "content_hash": "7540ebe25c8ca75b"
+}
