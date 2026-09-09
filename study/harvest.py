@@ -1,0 +1,176 @@
+"""Build the corpus of accepted papers.
+
+The study needs papers whose acceptance is not in question, whose PDFs are
+publicly downloadable without an account, and whose venue is central enough to
+machine learning that a reviewer cannot dismiss the sample as unrepresentative.
+
+Three sources satisfy that:
+
+- NeurIPS, from ``papers.nips.cc``, which lists every accepted paper per year.
+- ICML and the other PMLR volumes, from ``proceedings.mlr.press``.
+- ICLR, which has no open proceedings mirror; OpenReview now sits behind a bot
+  challenge, so ICLR is reached through arXiv where the paper is also posted.
+
+Everything is cached on disk and recorded in a manifest, so a rerun downloads
+nothing and produces the same corpus. A study about other people's
+reproducibility that cannot itself be rerun would be an embarrassment.
+"""
+
+from __future__ import annotations
+
+import argparse
+import hashlib
+import json
+import os
+import random
+import re
+import sys
+import time
+import urllib.error
+import urllib.request
+from typing import Iterable, Optional
+
+UA = {"User-Agent": "Mozilla/5.0 (compatible; paper-audit/0.1)"}
+CACHE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "corpus")
+DELAY = 1.0
+
+
+def _get(url: str, *, retries: int = 3, timeout: int = 90) -> bytes:
+    last: Optional[Exception] = None
+    for attempt in range(retries):
+        try:
+            with urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=timeout) as r:
+                return r.read()
+        except Exception as exc:  # IncompleteRead is not an OSError
+            last = exc
+            time.sleep(2.0 * (attempt + 1))
+    raise RuntimeError(f"failed to fetch {url}: {last}")
+
+
+# --------------------------------------------------------------------------
+# indexes
+# --------------------------------------------------------------------------
+
+def neurips_index(year: int) -> list[dict]:
+    """Every accepted NeurIPS paper for a year, with its PDF URL."""
+    html = _get(f"https://papers.nips.cc/paper_files/paper/{year}").decode("utf-8", "replace")
+    out = []
+    for m in re.finditer(
+        r'href="(/paper_files/paper/%d/hash/([0-9a-f]+)-Abstract[^"]*\.html)"[^>]*>(.*?)</a>' % year,
+        html, re.S,
+    ):
+        href, digest, title = m.group(1), m.group(2), re.sub(r"<[^>]+>", "", m.group(3)).strip()
+        suffix = "-Paper-Conference.pdf" if "Abstract-Conference" in href else "-Paper.pdf"
+        out.append({
+            "venue": "NeurIPS", "year": year, "id": digest, "title": title,
+            "pdf": f"https://papers.nips.cc/paper_files/paper/{year}/file/{digest}{suffix}",
+            "abstract_page": "https://papers.nips.cc" + href,
+        })
+    return out
+
+
+def pmlr_index(volume: str, venue: str, year: int) -> list[dict]:
+    """Every paper in one PMLR volume (e.g. ``v235`` is ICML 2024)."""
+    html = _get(f"https://proceedings.mlr.press/{volume}/").decode("utf-8", "replace")
+    out = []
+    for m in re.finditer(r'<p class="title">(.*?)</p>.*?href="([^"]*?\.pdf)"', html, re.S):
+        title = re.sub(r"<[^>]+>", "", m.group(1)).strip()
+        pdf = m.group(2)
+        if pdf.startswith("/"):
+            pdf = "https://proceedings.mlr.press" + pdf
+        out.append({"venue": venue, "year": year, "id": hashlib.sha1(pdf.encode()).hexdigest()[:16],
+                    "title": title, "pdf": pdf, "abstract_page": f"https://proceedings.mlr.press/{volume}/"})
+    return out
+
+
+SOURCES = {
+    "neurips2024": lambda: neurips_index(2024),
+    "neurips2023": lambda: neurips_index(2023),
+    "neurips2022": lambda: neurips_index(2022),
+    "icml2024": lambda: pmlr_index("v235", "ICML", 2024),
+    "icml2023": lambda: pmlr_index("v202", "ICML", 2023),
+}
+
+
+# --------------------------------------------------------------------------
+# download
+# --------------------------------------------------------------------------
+
+def fetch_pdfs(records: Iterable[dict], *, cache_dir: str = CACHE, delay: float = DELAY,
+               verbose: bool = True) -> list[dict]:
+    os.makedirs(cache_dir, exist_ok=True)
+    out = []
+    for i, rec in enumerate(records, 1):
+        path = os.path.join(cache_dir, f"{rec['venue']}{rec['year']}_{rec['id']}.pdf")
+        rec = dict(rec)
+        if os.path.exists(path) and os.path.getsize(path) > 20_000:
+            rec["path"], rec["cached"] = path, True
+        else:
+            try:
+                blob = _get(rec["pdf"])
+            except Exception as exc:
+                if verbose:
+                    print(f"  [{i}] SKIP {rec['title'][:60]}: {exc}")
+                continue
+            if len(blob) < 20_000 or not blob.startswith(b"%PDF"):
+                if verbose:
+                    print(f"  [{i}] SKIP {rec['title'][:60]}: not a usable PDF")
+                continue
+            with open(path, "wb") as fh:
+                fh.write(blob)
+            rec["path"], rec["cached"] = path, False
+            time.sleep(delay)
+        rec["sha256"] = _sha256(path)
+        rec["bytes"] = os.path.getsize(path)
+        out.append(rec)
+        if verbose and i % 25 == 0:
+            print(f"  {i} done ({sum(1 for r in out if r['cached'])} from cache)")
+    return out
+
+
+def _sha256(path: str) -> str:
+    h = hashlib.sha256()
+    with open(path, "rb") as fh:
+        for chunk in iter(lambda: fh.read(1 << 20), b""):
+            h.update(chunk)
+    return h.hexdigest()[:16]
+
+
+def main(argv: Optional[list[str]] = None) -> int:
+    ap = argparse.ArgumentParser(description="Harvest accepted-paper PDFs into a cached, manifested corpus.")
+    ap.add_argument("--source", action="append", required=True,
+                    help=f"one of {sorted(SOURCES)} (repeatable)")
+    ap.add_argument("--sample", type=int, default=0, help="random subsample size, 0 for all")
+    ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--cache-dir", default=CACHE)
+    ap.add_argument("--manifest", default="data/corpus_manifest.json")
+    args = ap.parse_args(argv)
+
+    records: list[dict] = []
+    for src in args.source:
+        if src not in SOURCES:
+            print(f"unknown source {src!r}; known: {sorted(SOURCES)}")
+            return 2
+        idx = SOURCES[src]()
+        print(f"{src}: {len(idx)} papers listed")
+        records.extend(idx)
+
+    # Sample before downloading, and sample deterministically, so that the
+    # corpus is a function of the seed alone and can be regenerated exactly.
+    records.sort(key=lambda r: (r["venue"], r["year"], r["id"]))
+    if args.sample and args.sample < len(records):
+        records = random.Random(args.seed).sample(records, args.sample)
+        records.sort(key=lambda r: (r["venue"], r["year"], r["id"]))
+        print(f"sampled {len(records)} with seed {args.seed}")
+
+    fetched = fetch_pdfs(records, cache_dir=args.cache_dir)
+    os.makedirs(os.path.dirname(os.path.abspath(args.manifest)) or ".", exist_ok=True)
+    with open(args.manifest, "w", encoding="utf-8") as fh:
+        json.dump({"sources": args.source, "sample": args.sample, "seed": args.seed,
+                   "n": len(fetched), "papers": fetched}, fh, indent=1)
+    print(f"\n{len(fetched)} PDFs in corpus -> {args.manifest}")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())

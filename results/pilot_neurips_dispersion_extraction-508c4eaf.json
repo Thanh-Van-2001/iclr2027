@@ -1,0 +1,22 @@
+{
+  "run_id": "pilot_neurips_dispersion_extraction-508c4eaf",
+  "experiment": "pilot_neurips_dispersion_extraction",
+  "config": {
+    "source": "papers.nips.cc NeurIPS 2024 open proceedings",
+    "n_listed": 4034,
+    "sample": "random.seed(0), 6 papers",
+    "extractor": "PyMuPDF text + regex for x+/-y, seeds, CI language",
+    "purpose": "feasibility check for a corpus-level audit of reported dispersion"
+  },
+  "metrics": {
+    "n_papers": 6,
+    "n_reporting_dispersion": 4,
+    "n_pm_pairs_total": 67,
+    "max_pm_pairs_single_paper": 67
+  },
+  "timestamp": "2026-09-09T19:20:00Z",
+  "code_revision": "a644eee34124815bf24864801e91e263edc8b3da",
+  "n_samples": 6,
+  "notes": "Pipeline works end to end. Sample far too small for any claim; establishes only that extraction is viable.",
+  "content_hash": "5ef1a2cf5b6eef38"
+}
