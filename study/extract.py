@@ -42,7 +42,7 @@ except ImportError:  # pragma: no cover
 BOLD_FLAG = 1 << 4
 
 # 82.4 +/- 0.3, 82.4 (0.3)
-NUM_PM = re.compile(r"(-?\d+\.?\d*)\s*(?:±|\+/-|\+-)\s*(\d+\.?\d*)")
+NUM_PM = re.compile(r"(-?\d+\.?\d*)[\s\*†‡§]{0,3}(?:±|\+/-|\+-)[\s]{0,2}(\d+\.?\d*)")
 NUM_PAREN = re.compile(r"(-?\d+\.?\d*)\s*\(\s*(\d+\.?\d*)\s*\)")
 NUM_BARE = re.compile(r"^-?\d+\.?\d*$")
 
@@ -98,6 +98,19 @@ MIN_CELLS = 6
 # tokens rather than one number split by the typesetter.
 GLUE_GAP = 0.8
 
+# How many recently opened lines a span may join. Spans are processed in y
+# order, so anything older cannot overlap.
+LINE_LOOKBACK = 6
+
+# A cell may sit this far outside the caption's horizontal extent, and rows may
+# be this far apart, before they are treated as belonging to something else.
+COLUMN_MARGIN = 18.0
+ROW_GAP_MAX = 34.0
+
+# Fractions of page height treated as running head and footer.
+HEADER_FRACTION = 0.045
+FOOTER_FRACTION = 0.055
+
 
 def _caption_text(spans: list, anchor: dict, span_points: float = 60.0) -> str:
     """Reassemble a caption from the spans that follow its 'Table N' marker."""
@@ -110,12 +123,49 @@ def _caption_text(spans: list, anchor: dict, span_points: float = 60.0) -> str:
     return re.sub(r"\s+", " ", " ".join(parts))[:400]
 
 
+def _caption_extent(spans: list, anchor: dict, span_points: float = 60.0) -> tuple:
+    """Horizontal extent of the caption, which is also the table's column."""
+    xs = [(s["x"], s.get("x1", s["x"])) for s in spans
+          if s["page"] == anchor["page"] and anchor["y"] <= s["y"] <= anchor["y"] + span_points]
+    if not xs:
+        return anchor["x"], anchor["x"] + 200.0
+    return min(a for a, _ in xs), max(b for _, b in xs)
+
+
+def _contiguous_run(cells: list) -> list:
+    """Keep the rows that actually belong to the table.
+
+    Table rows are a line apart; the gap to the body text or the page number
+    below is much larger. Taking the *first* run rather than the largest was too
+    eager: a caption reading "with p-value less than 0.05" contributes a numeric
+    cell of its own, and the gap from caption to table header then truncated the
+    table to that single number. The table body is the largest run.
+    """
+    if not cells:
+        return cells
+    runs, cur = [], [cells[0]]
+    for c in cells[1:]:
+        if c.y - cur[-1].y > ROW_GAP_MAX:
+            runs.append(cur)
+            cur = []
+        cur.append(c)
+    runs.append(cur)
+    return max(runs, key=len)
+
+
 def _spans(doc, max_pages: int) -> list:
-    """Every text span with its typography and position."""
+    """Every text span with its typography and position.
+
+    Running heads and page numbers are dropped: a page number is a bare integer
+    sitting below every table on the page, and one of them was extracted as the
+    runner-up in a sampled comparison.
+    """
     out = []
     for pno, page in enumerate(doc):
         if pno >= max_pages:
             break
+        ph = page.rect.height or 792.0
+        top_cut, bottom_cut = ph * HEADER_FRACTION, ph * (1.0 - FOOTER_FRACTION)
         for block in page.get_text("dict").get("blocks", []):
             for line in block.get("lines", []):
                 for span in line.get("spans", []):
@@ -124,44 +174,82 @@ def _spans(doc, max_pages: int) -> list:
                         continue
                     font = span.get("font", "")
                     bold = bool(span.get("flags", 0) & BOLD_FLAG) or "bold" in font.lower()
-                    x0, y0, x1, _ = span.get("bbox", (0, 0, 0, 0))
+                    x0, y0, x1, y1 = span.get("bbox", (0, 0, 0, 0))
+                    if y0 < top_cut or y0 > bottom_cut:
+                        continue
                     out.append({"text": txt, "bold": bold, "page": pno, "y": y0,
-                                "x": x0, "x1": x1})
+                                "x": x0, "x1": x1, "y1": y1,
+                                "size": span.get("size", 0.0)})
     return out
 
 
-def _lines(spans: list, tol: float = 2.5) -> list:
-    """Reassemble spans into visual lines.
+def _lines(spans: list, min_overlap: float = 0.45) -> list:
+    """Reassemble spans into visual lines by vertical overlap.
 
-    A cell reading ``82.4 +/- 0.3`` is routinely split by the PDF into three
-    spans -- the mean, the symbol, the dispersion -- because they differ in
-    font. Parsing spans individually therefore misses almost every error bar in
-    the corpus, which was the first thing this extractor got wrong. Working at
-    line level restores the pairs, and the character offsets are kept so that
-    boldness can still be attributed to the exact number it decorates.
+    Two earlier versions of this got it wrong in ways that would have produced a
+    confident and false paper.
+
+    Parsing spans one at a time missed almost every error bar, because a PDF
+    splits ``82.4 +/- 0.3`` into separate spans for the mean, the symbol and the
+    dispersion.
+
+    Grouping spans into lines by rounding the y coordinate then broke the very
+    common table style that sets the error bar as a subscript: a subscript sits
+    a point or two lower than its baseline, so it landed in its own line, and a
+    row rendered as ``91.48*±0.40  66.53*±8.55`` was read as the single value
+    0.40 +/- 8.55 -- one column's error bar paired with the next column's. That
+    was found by rendering a sampled table and looking at it.
+
+    Clustering on vertical overlap fixes both, because a subscript overlaps the
+    line it belongs to and the next table row does not.
     """
-    groups: dict = {}
-    for s in spans:
-        groups.setdefault((s["page"], round(s["y"] / tol)), []).append(s)
+    by_page: dict = {}
+    for s_ in spans:
+        by_page.setdefault(s_["page"], []).append(s_)
 
     lines = []
-    for (page, _), members in groups.items():
-        members.sort(key=lambda s: s["x"])
-        text, offsets, pos, prev_x1 = "", [], 0, None
-        for s in members:
-            # Only separate spans that are visually apart. PDFs routinely split
-            # "0.29" into "0." and "29"; inserting a space there turns 0.29 into
-            # the number 29, which would silently corrupt every value parsed.
-            gap = None if prev_x1 is None else s["x"] - prev_x1
-            if text and (gap is None or gap > GLUE_GAP):
-                text += " "
-                pos += 1
-            offsets.append((pos, pos + len(s["text"]), s))
-            text += s["text"]
-            pos += len(s["text"])
-            prev_x1 = s.get("x1", s["x"])
-        lines.append({"page": page, "y": members[0]["y"], "x": members[0]["x"],
-                      "text": text, "offsets": offsets})
+    for page, members in by_page.items():
+        members.sort(key=lambda s_: (s_["y"], s_["x"]))
+        groups: list = []
+        # Spans arrive sorted by y, and a group's vertical extent only grows, so
+        # a new span can overlap only the most recently opened groups. Scanning
+        # every group instead made this quadratic and cut throughput from about
+        # twenty papers a minute to three and a half.
+        for s_ in members:
+            y0, y1 = s_["y"], s_.get("y1", s_["y"])
+            h = max(1e-6, y1 - y0)
+            placed = False
+            for g in reversed(groups[-LINE_LOOKBACK:]):
+                if g["y1"] <= y0:
+                    continue
+                gh = max(1e-6, g["y1"] - g["y0"])
+                overlap = min(g["y1"], y1) - max(g["y0"], y0)
+                if overlap / min(h, gh) >= min_overlap:
+                    g["items"].append(s_)
+                    g["y0"] = min(g["y0"], y0)
+                    g["y1"] = max(g["y1"], y1)
+                    placed = True
+                    break
+            if not placed:
+                groups.append({"y0": y0, "y1": y1, "items": [s_]})
+
+        for g in groups:
+            items = sorted(g["items"], key=lambda s_: s_["x"])
+            text, offsets, pos, prev_x1 = "", [], 0, None
+            for s_ in items:
+                # Only separate spans that are visually apart. PDFs routinely
+                # split "0.29" into "0." and "29"; inserting a space there turns
+                # 0.29 into the number 29.
+                gap = None if prev_x1 is None else s_["x"] - prev_x1
+                if text and (gap is None or gap > GLUE_GAP):
+                    text += " "
+                    pos += 1
+                offsets.append((pos, pos + len(s_["text"]), s_))
+                text += s_["text"]
+                pos += len(s_["text"])
+                prev_x1 = s_.get("x1", s_["x"])
+            lines.append({"page": page, "y": g["y0"], "x": items[0]["x"],
+                          "text": text, "offsets": offsets})
     lines.sort(key=lambda l: (l["page"], l["y"], l["x"]))
     return lines
 
@@ -273,7 +361,9 @@ def extract_paper(pdf_path: str, max_pages: int = 40) -> dict:
     for s in spans:
         m = re.match(r"^\s*Tab(?:le|\.)\s*(\d+|[IVX]+)\b", s["text"], re.I)
         if m:
+            cx0, cx1 = _caption_extent(spans, s)
             caption_spans.append({"number": m.group(1), "page": s["page"], "y": s["y"],
+                                  "x0": cx0, "x1": cx1,
                                   "text": _caption_text(spans, s)})
 
     numeric = _cells_from_lines(lines)
@@ -286,11 +376,18 @@ def extract_paper(pdf_path: str, max_pages: int = 40) -> dict:
         same_page = [c for c in caption_spans[i + 1:] if c["page"] == cap["page"] and c["y"] > cap["y"]]
         y_stop = min([c["y"] for c in same_page], default=cap["y"] + WINDOW_DOWN)
         y_stop = min(y_stop, cap["y"] + WINDOW_DOWN)
+        # Two-column venues put an unrelated table beside this one, and the page
+        # number sits below every table on the page. Both were being swept in: a
+        # sampled ICML table came out with the page number 8 as its runner-up.
+        # Constrain to the caption's own horizontal band, then keep only the run
+        # of rows contiguous with the caption.
         cells = [c for c in numeric
-                 if c.page == cap["page"] and cap["y"] - WINDOW_UP <= c.y < y_stop]
+                 if c.page == cap["page"] and cap["y"] - WINDOW_UP <= c.y < y_stop
+                 and cap["x0"] - COLUMN_MARGIN <= c.x <= cap["x1"] + COLUMN_MARGIN]
+        cells.sort(key=lambda c: (c.y, c.x))
+        cells = _contiguous_run(cells)
         if len(cells) < MIN_CELLS:
             continue
-        cells.sort(key=lambda c: (c.y, c.x))
         page_text = page_texts[cap["page"]] if cap["page"] < len(page_texts) else ""
         has_disp = any(c.dispersion is not None for c in cells)
         blocks.append(TableBlock(

@@ -34,6 +34,10 @@ from extract import extract_paper  # noqa: E402
 from harvest import SOURCES, _get  # noqa: E402
 
 
+# Above this size a PDF is skipped rather than parsed.
+MAX_PDF_BYTES = 30_000_000
+
+
 def _already_done(path: str) -> set:
     done = set()
     if not os.path.exists(path):
@@ -50,7 +54,7 @@ def _already_done(path: str) -> set:
     return done
 
 
-def run(records: list, out_jsonl: str, *, workers: int = 3, delay: float = 0.4,
+def run(records: list, out_jsonl: str, *, workers: int = 3, delay: float = 0.1,
         max_pages: int = 40) -> dict:
     done = _already_done(out_jsonl)
     todo = [r for r in records if r["id"] not in done]
@@ -61,7 +65,7 @@ def run(records: list, out_jsonl: str, *, workers: int = 3, delay: float = 0.4,
         work.put(r)
 
     lock = threading.Lock()
-    stats = {"ok": 0, "download_failed": 0, "parse_failed": 0}
+    stats = {"ok": 0, "download_failed": 0, "parse_failed": 0, "skipped_large": 0}
     fh = open(out_jsonl, "a", encoding="utf-8")
 
     def worker() -> None:
@@ -75,6 +79,12 @@ def run(records: list, out_jsonl: str, *, workers: int = 3, delay: float = 0.4,
                 blob = _get(rec["pdf"])
                 if len(blob) < 20_000 or not blob.startswith(b"%PDF"):
                     raise ValueError("not a usable PDF")
+                # A handful of very large PDFs -- image-heavy appendices, mostly
+                # -- can hang the parser indefinitely. One of them stalled a
+                # 2,000-paper run for eighty minutes with no output. Skipping
+                # them costs a little coverage and is recorded as a skip.
+                if len(blob) > MAX_PDF_BYTES:
+                    raise ValueError(f"PDF too large ({len(blob) // 1_000_000} MB)")
                 digest = hashlib.sha256(blob).hexdigest()[:16]
                 fd, tmp = tempfile.mkstemp(suffix=".pdf")
                 with os.fdopen(fd, "wb") as tf:
@@ -82,7 +92,10 @@ def run(records: list, out_jsonl: str, *, workers: int = 3, delay: float = 0.4,
                 out = extract_paper(tmp, max_pages=max_pages)
             except Exception as exc:
                 with lock:
-                    key = "parse_failed" if tmp else "download_failed"
+                    if "too large" in str(exc):
+                        key = "skipped_large"
+                    else:
+                        key = "parse_failed" if tmp else "download_failed"
                     stats[key] += 1
                     if (stats["download_failed"] + stats["parse_failed"]) % 25 == 1:
                         print(f"  [{key}] {rec['title'][:55]}: {type(exc).__name__}")
@@ -105,7 +118,7 @@ def run(records: list, out_jsonl: str, *, workers: int = 3, delay: float = 0.4,
                 fh.flush()
                 stats["ok"] += 1
                 n = stats["ok"]
-                if n % 50 == 0:
+                if n % 25 == 0:
                     print(f"  {n} extracted "
                           f"({stats['download_failed']} dl-fail, {stats['parse_failed']} parse-fail)",
                           flush=True)
