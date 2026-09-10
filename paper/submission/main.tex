@@ -220,6 +220,17 @@ it, \nPctErrorBarDiscarded{}. Whatever the filter selects for, it is not the
 absence of uncertainty, and the headline computed on the retained tables is if
 anything the more generous of the two figures.
 
+We also looked at \nRejectedJudged{} rejected tables to see why they were
+rejected, since detecting bold in a PDF is fragile and a silent failure would
+be invisible. \nRejectedNotResults{} were not results tables at all---prompt
+templates, hyperparameter grids, dataset descriptions---and
+\nRejectedUnmarked{} marked no winner. In \nRejectedStructural{} the bold count
+matched what a reader sees but was not one cell per group. That leaves two cases
+that bound the risk: one table marks its winners with background shading instead
+of bold, and one may be a genuine detection failure. On twelve tables the
+interval on that failure rate is \nRejectedFailCi{}, which is wide, and we
+report it rather than the assertion it replaces.
+
 Figure~\ref{fig:untestable} gives the decomposition. Of
 \nComparisonsTwentyFive{} highlighted comparisons in 2025, \nPctNeitherSide{}
 have no error bar on either value, \nPctOneSideOnly{} have one on only one side,

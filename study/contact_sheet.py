@@ -36,6 +36,36 @@ PAD = 14
 LABEL_H = 26
 
 
+def sample_rejected_tables(extracted_path: str, n: int, seed: int) -> list:
+    """Tables the pipeline threw away for having no single-bold comparison group.
+
+    These are 62% of everything detected, and the paper had asserted rather than
+    measured why. Each one is either genuinely unmarked, marked by a convention
+    other than bold, or a bold-detection failure -- and only the third is a bug.
+    """
+    import sys as _sys
+    _sys.path.insert(0, HERE)
+    from analyze import comparisons_from_table, orientation
+
+    with open(extracted_path, encoding="utf-8") as fh:
+        recs = json.load(fh)
+    rows = []
+    for r in recs:
+        for t in r.get("tables", []):
+            cells = t["cells"]
+            if orientation(cells) != "none" and comparisons_from_table(t):
+                continue
+            ys = [c["y"] for c in cells]
+            xs = [c["x"] for c in cells]
+            n_bold = sum(1 for c in cells if c["bold"])
+            rows.append({"paper": r["id"], "table": t.get("number"), "page": t.get("page"),
+                         "n_comparisons": 0,
+                         "extractor_says": f"rejected: {n_bold} bold cell(s) of {len(cells)}",
+                         "bbox": {"y_min": min(ys), "y_max": max(ys),
+                                  "x_min": min(xs), "x_max": max(xs)}})
+    return random.Random(seed).sample(rows, min(n, len(rows)))
+
+
 def sample_tables(analysis_path: str, n: int, seed: int, bucket: str) -> list:
     """One entry per (paper, table), not per comparison."""
     with open(analysis_path, encoding="utf-8") as fh:
@@ -174,8 +204,9 @@ def main(argv=None) -> int:
     b.add_argument("--source", action="append", default=["neurips2025", "icml2025"])
     b.add_argument("--n", type=int, default=36)
     b.add_argument("--seed", type=int, default=17)
-    b.add_argument("--bucket", choices=["no_error_bar", "has_error_bar", "all"],
+    b.add_argument("--bucket", choices=["no_error_bar", "has_error_bar", "all", "rejected"],
                    default="no_error_bar")
+    b.add_argument("--extracted", default="data/extracted_2025.json")
     b.add_argument("--per-sheet", type=int, default=6)
     b.add_argument("--out-dir", default="out/sheets")
     s = sub.add_parser("score")
@@ -186,7 +217,10 @@ def main(argv=None) -> int:
         print(json.dumps(score(args.manifest), indent=1))
         return 0
 
-    rows = sample_tables(args.analysis, args.n, args.seed, args.bucket)
+    if args.bucket == "rejected":
+        rows = sample_rejected_tables(args.extracted, args.n, args.seed)
+    else:
+        rows = sample_tables(args.analysis, args.n, args.seed, args.bucket)
     print(f"sampled {len(rows)} tables from the '{args.bucket}' bucket; building index ...")
     index = {}
     for src in args.source:

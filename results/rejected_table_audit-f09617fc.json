@@ -1,0 +1,32 @@
+{
+  "run_id": "rejected_table_audit-f09617fc",
+  "experiment": "rejected_table_audit",
+  "config": {
+    "objection": "a reviewer noted that 62 percent of detected tables are discarded for having no single-bold comparison group, that this was asserted rather than measured, and that bold detection in PDFs is fragile",
+    "design": "12 tables sampled at random from those the pipeline rejected, rendered as cropped contact sheets and classified by eye",
+    "categories": "not a results table; genuinely nothing marked; bold detected but not one-per-group; winner marked by a non-bold convention; bold present and missed"
+  },
+  "metrics": {
+    "n_judged": 12,
+    "not_a_results_table": 5,
+    "genuinely_unmarked": 2,
+    "bold_detected_but_structural": 3,
+    "winner_marked_by_shading": 1,
+    "possible_bold_detection_failure": 1,
+    "pct_possible_detection_failure": 8.3,
+    "wilson_detection_failure": [
+      0.015,
+      0.354
+    ],
+    "pct_claim_invisible_to_us": 16.7,
+    "wilson_claim_invisible": [
+      0.047,
+      0.448
+    ]
+  },
+  "timestamp": "2026-09-11T15:00:00Z",
+  "code_revision": "37a5d1e8e82f4bd6355d8ae6de3633a229570b9d-dirty",
+  "n_samples": 12,
+  "notes": "Bold detection is mostly sound: in ten of twelve rejected tables the extractor bold count matched what a reader sees, and five of those were not results tables at all. Two cases bound the risk: one table marks its winners with background shading rather than bold, and one may be a genuine bold miss. Sample of twelve, so the interval is wide and stated as such.",
+  "content_hash": "efc0cd4bf41a5f84"
+}

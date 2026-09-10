@@ -198,6 +198,13 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("papers tables no comparison", 514, provenance=fs)
     reg.add("papers tables no comparison with bar", 107, provenance=fs)
 
+    rj = "rejected_table_audit-f09617fc"
+    reg.add("rejected judged", 12, provenance=rj)
+    reg.add("rejected not results", "Five", provenance=rj)
+    reg.add("rejected unmarked", "two more", provenance=rj)
+    reg.add("rejected structural", "three", provenance=rj)
+    reg.add("rejected fail ci", "1.5\% to 35\%", provenance=rj)
+
     # The binomial route: checkability for the metrics that have a test-set size
     # rather than a run count. Needs no error bars, so its base is far larger.
     bn = _j("binomial_check")
