@@ -1,0 +1,60 @@
+{
+  "run_id": "survivability_both_years-7f18e22a",
+  "experiment": "survivability_both_years",
+  "config": {
+    "corpus": "2894 accepted papers: 1797 from NeurIPS+ICML 2025, 1097 from NeurIPS+ICML 2024",
+    "sampling": "random with seed 0 from the open proceedings listings of each venue-year",
+    "design": "the two years are independent samples; 2024 is a replication, not a pooled arm",
+    "extractor": "span geometry with vertical-overlap line clustering, caption-anchored tables, typography-derived orientation and direction",
+    "validation": "a second extractor built on pdfplumber grid detection confirms 78.2 percent of values with an error bar; disagreements inspected are mostly the second extractor failing, so that is a lower bound"
+  },
+  "metrics": {
+    "by_year": {
+      "2024": {
+        "papers": 1097,
+        "pct_err": 24.5,
+        "pct_n": 28.4,
+        "comparisons": 7867,
+        "pct_neither": 78.0,
+        "pct_no_n": 10.2,
+        "pct_one": 1.8,
+        "pct_testable": 9.4,
+        "n_testable": 738,
+        "papers_testable": 81,
+        "pct_fail": 43.2,
+        "pct_fail_holm": 46.7,
+        "gap_fail": 1.72,
+        "gap_pass": 10.4
+      },
+      "2025": {
+        "papers": 1797,
+        "pct_err": 24.3,
+        "pct_n": 25.3,
+        "comparisons": 15034,
+        "pct_neither": 78.0,
+        "pct_no_n": 11.5,
+        "pct_one": 1.9,
+        "pct_testable": 8.2,
+        "n_testable": 1240,
+        "papers_testable": 118,
+        "pct_fail": 40.9,
+        "pct_fail_holm": 48.1,
+        "gap_fail": 1.28,
+        "gap_pass": 7.34
+      }
+    },
+    "headline_pct_neither_side": {
+      "2024": 78.0,
+      "2025": 78.0
+    },
+    "headline_pct_papers_with_error_bar": {
+      "2024": 24.5,
+      "2025": 24.3
+    }
+  },
+  "timestamp": "2026-09-10T15:30:00Z",
+  "code_revision": "b5ade1c9769529c7e9f028747439f5a0ea12da9e-dirty",
+  "n_samples": 2894,
+  "notes": "The central figure replicates to the first decimal place across two independent year samples: 78.0 percent of highlighted comparisons carry no error bar on either side.",
+  "content_hash": "5adc68ce7d4be449"
+}

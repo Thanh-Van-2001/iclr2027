@@ -49,7 +49,7 @@ UA = {"User-Agent": "Mozilla/5.0 (compatible; paper-audit/0.1)"}
 # cost an hour of pointlessly adding workers.
 HOST_LIMITS = {
     "raw.githubusercontent.com": 4,
-    "papers.nips.cc": 16,
+    "papers.nips.cc": 28,
     "proceedings.mlr.press": 6,
 }
 DEFAULT_HOST_LIMIT = 6
