@@ -264,3 +264,55 @@ def correlation_sensitivity(comparisons: list, rhos=(0.0, 0.3, 0.5, 0.7, 0.9)) -
                          "pct_fail": round(100 * fail / n, 1),
                          "pct_fail_holm": round(100 * fail_holm / n, 1)}
     return out
+
+
+def power_audit(comparisons: list, power: float = 0.8, alpha: float = 0.05) -> dict:
+    """Was the experiment ever capable of detecting what it claims?
+
+    A reviewer called the finding that failing improvements are smaller ones
+    close to tautological, and he was right as it was stated: a smaller gap is
+    harder to detect, so of course the failures are small. The non-tautological
+    question runs the other way. From the dispersion and run count a paper
+    prints, one can compute the smallest difference that experiment could have
+    detected at conventional power -- and then ask how the gap it reports
+    compares.
+
+    A comparison whose reported gap falls below its own minimum detectable
+    effect was not a close call. The experiment could not have distinguished
+    that difference from zero however it came out, and the bold cell records a
+    coin flip rather than a finding.
+    """
+    import math
+    from analyze import _standard_error
+    from paperengine.stats import norm_ppf
+
+    z_a, z_b = norm_ppf(1 - alpha / 2), norm_ppf(power)
+    rows = []
+    for c in comparisons:
+        kind = c.get("dispersion_kind")
+        se_w = _standard_error(c["winner_dispersion"], kind, c.get("n_runs"))
+        se_r = _standard_error(c["runner_dispersion"], kind, c.get("n_runs"))
+        if se_w is None or se_r is None:
+            continue
+        se_diff = math.sqrt(se_w ** 2 + se_r ** 2)
+        mde = (z_a + z_b) * se_diff
+        rows.append({"gap": c["gap"], "mde": mde,
+                     "underpowered": c["gap"] < mde,
+                     "ratio": c["gap"] / mde if mde > 0 else None,
+                     "paper": c["paper"]})
+    if not rows:
+        return {"n": 0}
+
+    under = [r for r in rows if r["underpowered"]]
+    ratios = sorted(r["ratio"] for r in rows if r["ratio"] is not None)
+    return {
+        "n": len(rows),
+        "n_papers": len(set(r["paper"] for r in rows)),
+        "underpowered": len(under),
+        "pct_underpowered": round(100 * len(under) / len(rows), 1),
+        "median_gap_over_mde": round(ratios[len(ratios) // 2], 3) if ratios else None,
+        "q1_gap_over_mde": round(ratios[len(ratios) // 4], 3) if ratios else None,
+        "power": power, "alpha": alpha,
+        "reading": ("A ratio below 1 means the experiment could not have detected the "
+                    "difference it reports, at conventional power, whichever way it came out."),
+    }

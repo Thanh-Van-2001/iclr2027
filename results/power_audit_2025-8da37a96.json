@@ -1,0 +1,24 @@
+{
+  "run_id": "power_audit_2025-8da37a96",
+  "experiment": "power_audit_2025",
+  "config": {
+    "quantity": "minimum detectable effect at alpha 0.05 and power 0.8, computed from the dispersion and run count the paper itself prints",
+    "why": "a reviewer called the finding that failing improvements are smaller ones close to tautological, and he was right as stated; this asks the non-tautological question instead"
+  },
+  "metrics": {
+    "n": 1240,
+    "n_papers": 118,
+    "underpowered": 641,
+    "pct_underpowered": 51.7,
+    "median_gap_over_mde": 0.948,
+    "q1_gap_over_mde": 0.362,
+    "power": 0.8,
+    "alpha": 0.05,
+    "reading": "A ratio below 1 means the experiment could not have detected the difference it reports, at conventional power, whichever way it came out."
+  },
+  "timestamp": "2026-09-11T01:00:00Z",
+  "code_revision": "f44661fc0a3041d0786e9c9afb8cb3a5c62d6920-dirty",
+  "n_samples": 1240,
+  "notes": "51.7 percent of checkable comparisons report a gap smaller than the smallest difference their own experiment could have detected. The median ratio of reported gap to detectable threshold is 0.948 and the first quartile 0.362. This is not a claim that the results are wrong; it is that the experiments could not have established them either way.",
+  "content_hash": "2ad8a61bdb138bb4"
+}
