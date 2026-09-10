@@ -255,10 +255,13 @@ class NumberRegistry:
         ]
         for macro in sorted(self.entries):
             e = self.entries[macro]
-            # A value carrying \pm or other math has to survive being dropped
-            # into running text, so wrap it rather than trusting the call site.
+            # A value carrying \pm or other math-only markup has to survive
+            # being dropped into running text, so wrap it rather than trusting
+            # the call site. An escaped percent is *not* math-only, and wrapping
+            # it was a real bug: math mode discards spaces, so an interval came
+            # out as "78.2%[73.6, 82.4]" and a range as "1.5%to35%".
             value = e["value"]
-            if re.search(r"\\(?:pm|times|cdot|leq|geq|approx|infty|%|_|\^)", value):
+            if re.search(r"\\(?:pm|times|cdot|leq|geq|approx|infty)|[_^]", value):
                 value = f"\\ensuremath{{{value}}}"
             lines.append(f"% {e['source_name']}: {e['provenance']}")
             lines.append(f"\\newcommand{{\\n{macro}}}{{{value}}}")
