@@ -329,6 +329,27 @@ The conclusion does not depend on where the filter is drawn. Widening it to all
 values in $(0, 100]$ raises the median requirement to \nBinomMedianNWide{}
 items; the share needing more than GSM8K moves by a point.
 
+\paragraph{Against the benchmark actually used.} Where a caption names exactly
+one benchmark we can do better than a hypothetical test set, because the size of
+that benchmark's evaluation split is public. The smallest difference it can
+resolve is then a property of the benchmark, fixed, and independent of anything
+the paper prints. On \nResolutionComparisons{} such comparisons from
+\nResolutionPapers{} papers, the median reported gap is \nResolutionMedianGap{}
+points against a median resolution of \nResolutionMedianRes{}, and
+\nResolutionPctBelow{} of the gaps fall below what the benchmark can resolve.
+Treating the two systems as independent makes that resolution coarser than it
+really is, so the figure is an upper bound; under the most generous correlation
+we consider it is \nResolutionPctBelowRhoNine{}.
+
+\input{resolution_table.tex}
+
+Table~\ref{tab:resolution} gives the breakdown, and the pattern in it is the
+internal check on the method: ImageNet, with the largest evaluation split, has
+the smallest share of unresolvable gaps, while WinoGrande and TruthfulQA, with
+around a thousand items each, have almost nothing else. A benchmark of a
+thousand items cannot resolve a one-point difference, and one-point differences
+are what the field reports on it.
+
 \section{How much is a definitional choice?}
 \label{sec:sensitivity}
 

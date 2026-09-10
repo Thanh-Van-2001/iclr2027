@@ -1,0 +1,159 @@
+{
+  "run_id": "benchmark_resolution-70df59d3",
+  "experiment": "benchmark_resolution",
+  "config": {
+    "method": "match a table caption to exactly one named benchmark, take that benchmark published evaluation split size, and compare the reported gap against the smallest difference that many items can resolve",
+    "why": "this needs nothing the paper prints about uncertainty; the resolution is a property of the benchmark",
+    "ambiguity": "captions naming zero or more than one benchmark are skipped rather than guessed at",
+    "conservatism": "treating the two systems as independent makes the resolution coarser than reality, so the headline is an upper bound; the correlation range is reported",
+    "benchmark_sizes": "entered by hand from dataset papers and release notes, released with the code"
+  },
+  "metrics": {
+    "n_comparisons": 1029,
+    "n_papers": 163,
+    "n_below_resolution": 533,
+    "pct_below_resolution": 51.8,
+    "median_gap": 1.56,
+    "median_resolution": 1.67,
+    "by_benchmark": {
+      "ImageNet": {
+        "n": 274,
+        "below": 79,
+        "size": 50000,
+        "pct_below": 28.8
+      },
+      "CIFAR-10": {
+        "n": 222,
+        "below": 106,
+        "size": 10000,
+        "pct_below": 47.7
+      },
+      "CIFAR-100": {
+        "n": 131,
+        "below": 78,
+        "size": 10000,
+        "pct_below": 59.5
+      },
+      "WinoGrande": {
+        "n": 79,
+        "below": 78,
+        "size": 1267,
+        "pct_below": 98.7
+      },
+      "GSM8K": {
+        "n": 65,
+        "below": 43,
+        "size": 1319,
+        "pct_below": 66.2
+      },
+      "DROP": {
+        "n": 54,
+        "below": 15,
+        "size": 9536,
+        "pct_below": 27.8
+      },
+      "AIME": {
+        "n": 50,
+        "below": 24,
+        "size": 30,
+        "pct_below": 48.0
+      },
+      "MATH": {
+        "n": 49,
+        "below": 26,
+        "size": 5000,
+        "pct_below": 53.1
+      },
+      "SST-2": {
+        "n": 20,
+        "below": 16,
+        "size": 872,
+        "pct_below": 80.0
+      },
+      "MATH-500": {
+        "n": 17,
+        "below": 13,
+        "size": 500,
+        "pct_below": 76.5
+      },
+      "TruthfulQA": {
+        "n": 16,
+        "below": 16,
+        "size": 817,
+        "pct_below": 100.0
+      },
+      "MMLU": {
+        "n": 14,
+        "below": 8,
+        "size": 14042,
+        "pct_below": 57.1
+      },
+      "HellaSwag": {
+        "n": 12,
+        "below": 10,
+        "size": 10042,
+        "pct_below": 83.3
+      },
+      "GPQA Diamond": {
+        "n": 10,
+        "below": 10,
+        "size": 198,
+        "pct_below": 100.0
+      },
+      "SWE-bench Verified": {
+        "n": 4,
+        "below": 4,
+        "size": 500,
+        "pct_below": 100.0
+      },
+      "HumanEval": {
+        "n": 3,
+        "below": 3,
+        "size": 164,
+        "pct_below": 100.0
+      },
+      "MBPP": {
+        "n": 2,
+        "below": 1,
+        "size": 500,
+        "pct_below": 50.0
+      },
+      "MNLI": {
+        "n": 2,
+        "below": 2,
+        "size": 9815,
+        "pct_below": 100.0
+      },
+      "SQuAD": {
+        "n": 2,
+        "below": 0,
+        "size": 10570,
+        "pct_below": 0.0
+      },
+      "MMLU-Pro": {
+        "n": 2,
+        "below": 0,
+        "size": 12032,
+        "pct_below": 0.0
+      },
+      "ARC-Challenge": {
+        "n": 1,
+        "below": 1,
+        "size": 1172,
+        "pct_below": 100.0
+      }
+    },
+    "correlation_sensitivity": {
+      "0.0": 51.8,
+      "0.3": 47.5,
+      "0.5": 44.7,
+      "0.7": 39.8,
+      "0.9": 28.6
+    }
+  },
+  "timestamp": "2026-09-11T16:30:00Z",
+  "code_revision": "c7b72f918bdc9575bf7d29f6eb684c6957fc3026-dirty",
+  "n_samples": 1029,
+  "notes": "On 1029 comparisons from 163 papers, 51.8 percent report a gap smaller than the benchmark they are measured on can resolve, falling to 28.6 percent under the most generous correlation assumption. The per-benchmark pattern is the internal check: ImageNet at 50000 items is lowest at 28.8 percent while WinoGrande at 1267 is 98.7 and TruthfulQA at 817 is 100.",
+  "content_hash": "bf682b3f20ea66ff"
+}

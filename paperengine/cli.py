@@ -44,7 +44,8 @@ def cmd_check(args: argparse.Namespace) -> int:
     stem = os.path.splitext(args.main)[0]
     tex_files = sorted(
         os.path.join(paper_dir, f) for f in os.listdir(paper_dir)
-        if f.endswith(".tex") and f not in ("math_commands.tex", "numbers.tex")
+        if f.endswith(".tex") and f not in ("math_commands.tex", "numbers.tex",
+                                     "resolution_table.tex")
     )
     bib_files = [os.path.join(paper_dir, f) for f in os.listdir(paper_dir) if f.endswith(".bib")]
     results: dict[str, str] = {}

@@ -281,7 +281,12 @@ _SAFE_PATTERNS = [
     re.compile(r"\\begin\{(?:equation|align|gather|figure|table)\*?\}\[[^\]]*\]"),
     re.compile(r"\d+(?:\.\d+)?\s*(?:pt|em|ex|cm|mm|in|\\textwidth|\\linewidth|\\columnwidth)"),
     re.compile(r"\[[^\]]*\d[^\]]*\]"),          # optional args: [0.5\textwidth], [h!]
-    re.compile(r"\$[^$]*\$"),                    # inline math: symbolic, audited separately
+    # Inline math, bounded. An unbounded $...$ pairs the first dollar with the
+    # next one anywhere in the file, so a single stray or escaped dollar makes
+    # the mask run away: on this paper it swallowed 43% of the source, including
+    # a hand-typed results table, and the audit passed. Inline math is short and
+    # never spans a blank line.
+    re.compile(r"\$(?:[^$\n]{0,160})\$"),
     re.compile(r"\\begin\{(equation|align|gather|split|array|cases)\*?\}.*?\\end\{\1\*?\}", re.DOTALL),
     re.compile(r"\\(?:sec|fig|tab|eq|app|thm|lem|prop)[A-Za-z]*:\S*"),
     re.compile(r"(?:Section|Figure|Table|Appendix|Equation|Theorem|Lemma|Definition)~?\\?ref"),
