@@ -80,10 +80,12 @@ class TableBlock:
     cells: list
     dispersion_kind: str          # std | sem | ci | iqr | unknown | none
     n_runs: Optional[int]
+    n_runs_source: Optional[str]  # "caption" | "page" | None
 
     def to_dict(self) -> dict:
         return {"number": self.number, "caption": self.caption, "page": self.page,
                 "dispersion_kind": self.dispersion_kind, "n_runs": self.n_runs,
+                "n_runs_source": self.n_runs_source,
                 "cells": [c.to_dict() for c in self.cells]}
 
 
@@ -330,12 +332,34 @@ def _dispersion_kind(caption: str, body_nearby: str) -> str:
 
 
 def _n_runs(caption: str, body_nearby: str):
-    best = None
-    for m in N_RUNS.finditer(caption + " " + body_nearby):
-        n = int(m.group(1))
-        if 2 <= n <= 200:
-            best = n if best is None else max(best, n)
-    return best
+    """How many runs produced these means, and how sure are we.
+
+    Returns ``(n, source)`` where source is "caption", "page" or None.
+
+    The first version scanned caption and page together and kept the largest
+    match. That was wrong twice over. Scanning the page picks up any number
+    followed by "runs" anywhere on it, and a row label reading "top 100" in a
+    table about something else produced n=100 for a table whose true n is
+    unstated. And taking the maximum is the anti-conservative choice: a larger n
+    shrinks the standard error and manufactures significance, which biases this
+    study towards under-reporting failures -- the opposite of the direction an
+    author should be willing to err in.
+
+    The caption is authoritative. Failing that, the page is used but the
+    smallest plausible value is taken, and the source is recorded so the
+    analysis can report results with and without page-derived counts.
+    """
+    def scan(text):
+        vals = [int(m.group(1)) for m in N_RUNS.finditer(text)]
+        return [v for v in vals if 2 <= v <= 200]
+
+    cap = scan(caption)
+    if cap:
+        return min(cap), "caption"
+    page = scan(body_nearby)
+    if page:
+        return min(page), "page"
+    return None, None
 
 
 def extract_paper(pdf_path: str, max_pages: int = 40) -> dict:
@@ -390,13 +414,15 @@ def extract_paper(pdf_path: str, max_pages: int = 40) -> dict:
             continue
         page_text = page_texts[cap["page"]] if cap["page"] < len(page_texts) else ""
         has_disp = any(c.dispersion is not None for c in cells)
+        n_runs, n_runs_source = _n_runs(cap["text"], page_text)
         blocks.append(TableBlock(
             number=cap["number"],
             caption=cap["text"][:300],
             page=cap["page"],
             cells=cells,
             dispersion_kind=("none" if not has_disp else _dispersion_kind(cap["text"], page_text)),
-            n_runs=_n_runs(cap["text"], page_text),
+            n_runs=n_runs,
+            n_runs_source=n_runs_source,
         ))
 
     # Only cells inside a detected table count. A "(0.3)" in the running text is
@@ -416,7 +442,7 @@ def extract_paper(pdf_path: str, max_pages: int = 40) -> dict:
         "n_cells_with_dispersion": n_pm + n_paren,
         "reports_explicit_error_bar": n_pm > 0,
         "reports_any_dispersion": (n_pm + n_paren) > 0,
-        "n_runs_global": _n_runs("", full_text),
+        "n_runs_global": _n_runs("", full_text)[0],
         "n_tables_detected": len(blocks),
         "tables": [b.to_dict() for b in blocks],
     }

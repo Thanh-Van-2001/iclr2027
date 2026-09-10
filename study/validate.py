@@ -58,7 +58,28 @@ def _index_by_id(sources: list) -> dict:
     return out
 
 
-def render(comparisons: list, index: dict, out_dir: str, *, zoom: float = 2.0) -> list:
+def _table_clip(page, comparison: dict, pad: float = 26.0):
+    """Bounding box of the table this comparison came from.
+
+    Rendering the whole page is legible but wasteful: most of the pixels are
+    body text nobody needs to read to decide whether two numbers were parsed
+    correctly. Cropping to the caption's band and the rows beneath it makes each
+    check cheap enough to do a hundred times, which is what the paper needs.
+    """
+    b = comparison.get("bbox")
+    if not b:
+        return None
+    top = max(0.0, b["y_min"] - pad * 2.4)
+    bottom = min(page.rect.height, b["y_max"] + pad * 1.2)
+    left = max(0.0, b["x_min"] - pad * 3.2)
+    right = min(page.rect.width, b["x_max"] + pad * 3.2)
+    if bottom - top < 60 or right - left < 120:
+        return None
+    return fitz.Rect(left, top, right, bottom)
+
+
+def render(comparisons: list, index: dict, out_dir: str, *, zoom: float = 2.6,
+           crop: bool = True) -> list:
     os.makedirs(out_dir, exist_ok=True)
     cache: dict = {}
     manifest = []
@@ -82,7 +103,8 @@ def render(comparisons: list, index: dict, out_dir: str, *, zoom: float = 2.0) -
             doc.close()
             continue
         page = doc[c["page"]]
-        pix = page.get_pixmap(matrix=fitz.Matrix(zoom, zoom))
+        clip = _table_clip(page, c) if crop else None
+        pix = page.get_pixmap(matrix=fitz.Matrix(zoom, zoom), clip=clip)
         name = f"{i:03d}_{c['paper'][:8]}_p{c['page']}_t{c['table']}.png"
         pix.save(os.path.join(out_dir, name))
         doc.close()
@@ -141,6 +163,8 @@ def main(argv=None) -> int:
     r.add_argument("--seed", type=int, default=0)
     r.add_argument("--bucket", choices=["testable", "no_error_bar", "all"], default="all")
     r.add_argument("--out-dir", default="out/validation")
+    r.add_argument("--no-crop", action="store_true",
+                   help="render the whole page instead of just the table")
 
     s = sub.add_parser("score")
     s.add_argument("--manifest", default="out/validation/manifest.json")
@@ -154,7 +178,7 @@ def main(argv=None) -> int:
     print(f"sampled {len(cmps)} comparisons; building the source index ...")
     index = _index_by_id(args.source)
     print(f"index has {len(index)} papers")
-    manifest = render(cmps, index, args.out_dir)
+    manifest = render(cmps, index, args.out_dir, crop=not args.no_crop)
     print(f"\nrendered {len(manifest)} pages into {args.out_dir}")
     print("Now open each image, compare with the 'extracted' block in manifest.json,")
     print("and set verdict to correct / wrong / unclear.")

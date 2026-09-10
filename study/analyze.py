@@ -111,6 +111,11 @@ def comparisons_from_table(table: dict) -> list:
     orient = orientation(table["cells"])
     if orient == "none":
         return out
+    # Keep the table's extent so a sampled comparison can be cropped out of the
+    # page for visual checking without re-parsing the PDF.
+    ys = [c["y"] for c in table["cells"]]
+    xs = [c["x"] for c in table["cells"]]
+    bbox = {"y_min": min(ys), "y_max": max(ys), "x_min": min(xs), "x_max": max(xs)}
     groups = _columns(table["cells"]) if orient == "column" else _rows(table["cells"])
     for col in groups:
         bold = [c for c in col if c["bold"]]
@@ -141,6 +146,7 @@ def comparisons_from_table(table: dict) -> list:
             "dispersion_kind": kind,
             "n_runs": n_runs,
             "orientation": orient,
+            "bbox": bbox,
             "n_in_column": len(col),
         })
     for c in out:
