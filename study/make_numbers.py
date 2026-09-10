@@ -18,10 +18,19 @@ sys.path.insert(0, os.path.join(HERE, ".."))
 from paperengine.provenance import NumberRegistry, load_runs  # noqa: E402
 
 
-def build(both_years_path: str, crosscheck_path: str, out_path: str) -> dict:
+def _ci(d: dict, digits: int = 1) -> str:
+    """A percentage with its cluster-bootstrap interval, as the paper prints it."""
+    return (f"{d['point']:.{digits}f}\% [{d['lo']:.{digits}f}, {d['hi']:.{digits}f}]")
+
+
+def build(both_years_path: str, crosscheck_path: str, out_path: str,
+          bootstrap_path: str = "out/bootstrap_ci.json") -> dict:
     with open(both_years_path, encoding="utf-8") as fh:
         by = json.load(fh)
     y25, y24 = by["2025"], by["2024"]
+    with open(bootstrap_path, encoding="utf-8") as fh:
+        boot = json.load(fh)
+    b25, b24 = boot["2025"], boot["2024"]
 
     reg = NumberRegistry()
     run = "survivability_both_years-7f18e22a"
@@ -65,6 +74,30 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str) -> dict:
     reg.add("pct moved by multiplicity", f"{moved}\\%", provenance=run)
     reg.add("one in n moved by multiplicity", int(round(100.0 / moved)) if moved else 0,
             provenance=run)
+
+    # Our own uncertainty. A paper asking everyone else to print a dispersion
+    # and a run count has no business printing point estimates of its own, and
+    # three of four reviewers said so in the same words.
+    bootrun = "survivability_both_years-7f18e22a (cluster bootstrap over papers)"
+    reg.add("ci neither side", _ci(b25["pct_neither"]), provenance=bootrun)
+    reg.add("ci neither side twenty four", _ci(b24["pct_neither"]), provenance=bootrun)
+    reg.add("ci testable", _ci(b25["pct_testable"]), provenance=bootrun)
+    reg.add("ci testable twenty four", _ci(b24["pct_testable"]), provenance=bootrun)
+    reg.add("ci fail", _ci(b25["pct_fail"]), provenance=bootrun)
+    reg.add("ci fail twenty four", _ci(b24["pct_fail"]), provenance=bootrun)
+    reg.add("ci fail holm", _ci(b25["pct_fail_holm"]), provenance=bootrun)
+    reg.add("ci fail holm twenty four", _ci(b24["pct_fail_holm"]), provenance=bootrun)
+    reg.add("ci holm delta", _ci(b25["holm_delta"]), provenance=bootrun)
+    d = b25["deff"]
+    reg.add("icc", f"{d['icc']:.2f}", provenance=bootrun)
+    reg.add("design effect", f"{d['design_effect']:.2f}", provenance=bootrun)
+    reg.add("n effective", d["n_eff"], provenance=bootrun)
+    reg.add("mean cluster", f"{d['mean_cluster']:.1f}", provenance=bootrun)
+
+    # The 2024 column was printing an em-dash for a category whose value was
+    # sitting in the analysis output all along, which led one reviewer to
+    # conclude the two years had been processed by different pipelines.
+    reg.add("pct no n stated twenty four", f"{y24['pct_no_n']}\%", provenance=run)
 
     # Extractor validation
     with open(crosscheck_path, encoding="utf-8") as fh:

@@ -1,0 +1,102 @@
+{
+  "run_id": "cluster_bootstrap_ci-7a62b52f",
+  "experiment": "cluster_bootstrap_ci",
+  "config": {
+    "method": "nonparametric bootstrap resampling papers with replacement, 2000 draws, seed 11",
+    "why_papers": "comparisons within a paper are not independent; one author governs every table",
+    "trap": "a paper drawn twice must become two clusters before regrouping by table, or its tables merge into one oversized Holm family"
+  },
+  "metrics": {
+    "2024": {
+      "pct_neither": {
+        "point": 78.0475,
+        "lo": 73.4647,
+        "hi": 82.3569,
+        "n_papers": 557,
+        "n_boot": 2000
+      },
+      "pct_testable": {
+        "point": 9.381,
+        "lo": 6.6447,
+        "hi": 12.3714,
+        "n_papers": 557,
+        "n_boot": 2000
+      },
+      "pct_fail": {
+        "point": 43.2249,
+        "lo": 34.7496,
+        "hi": 51.0236,
+        "n_papers": 81,
+        "n_boot": 2000
+      },
+      "pct_fail_holm": {
+        "point": 46.748,
+        "lo": 37.7285,
+        "hi": 55.4517,
+        "n_papers": 81,
+        "n_boot": 2000
+      },
+      "holm_delta": {
+        "point": 3.523,
+        "lo": 2.2427,
+        "hi": 5.0926,
+        "n_papers": 81,
+        "n_boot": 2000
+      },
+      "deff": {
+        "icc": 0.274,
+        "mean_cluster": 9.11,
+        "design_effect": 3.223,
+        "n_eff": 229
+      }
+    },
+    "2025": {
+      "pct_neither": {
+        "point": 78.0098,
+        "lo": 74.1629,
+        "hi": 81.6847,
+        "n_papers": 1048,
+        "n_boot": 2000
+      },
+      "pct_testable": {
+        "point": 8.248,
+        "lo": 6.25,
+        "hi": 10.5088,
+        "n_papers": 1048,
+        "n_boot": 2000
+      },
+      "pct_fail": {
+        "point": 40.8871,
+        "lo": 34.2928,
+        "hi": 47.4747,
+        "n_papers": 118,
+        "n_boot": 2000
+      },
+      "pct_fail_holm": {
+        "point": 48.1452,
+        "lo": 40.8798,
+        "hi": 55.1546,
+        "n_papers": 118,
+        "n_boot": 2000
+      },
+      "holm_delta": {
+        "point": 7.2581,
+        "lo": 5.3853,
+        "hi": 9.1784,
+        "n_papers": 118,
+        "n_boot": 2000
+      },
+      "deff": {
+        "icc": 0.2998,
+        "mean_cluster": 10.51,
+        "design_effect": 3.851,
+        "n_eff": 322
+      }
+    }
+  },
+  "timestamp": "2026-09-10T20:00:00Z",
+  "code_revision": "b45b42b8b0969b732d92ebe2f9153339ed470c81-dirty",
+  "n_samples": 2894,
+  "notes": "Raised by three of four simulated reviewers in the same words: a paper demanding dispersions printed none of its own. Design effect 3.85 means 1240 comparisons carry the information of 322.",
+  "content_hash": "8e9ad2b720497ba1"
+}

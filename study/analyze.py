@@ -304,3 +304,82 @@ def main(argv=None) -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+
+
+# --------------------------------------------------------------------------
+# uncertainty on our own numbers
+# --------------------------------------------------------------------------
+
+def cluster_bootstrap(comparisons: list, statistic, *, n_boot: int = 2000,
+                      seed: int = 11, alpha: float = 0.05) -> dict:
+    """Resample papers, not comparisons.
+
+    A paper contributes many comparisons and they are not independent: one
+    author's habits govern every table in it. Bootstrapping comparisons would
+    treat 1,240 correlated observations as 1,240 independent ones and produce
+    intervals several times too narrow.
+
+    It would be a strange paper that demanded dispersions from everyone else
+    and printed point estimates of its own, so every headline number carries one
+    of these.
+
+    One trap, hit on the first implementation: a paper drawn twice must become
+    two distinct clusters before comparisons are regrouped by table, or its
+    tables merge into one oversized multiplicity family and the Holm-corrected
+    figure comes out wrong.
+    """
+    import random as _random
+
+    by_paper: dict = {}
+    for c in comparisons:
+        by_paper.setdefault(c["paper"], []).append(c)
+    papers = list(by_paper)
+    if not papers:
+        return {"point": None, "lo": None, "hi": None, "n_papers": 0}
+
+    point = statistic(comparisons)
+    rng = _random.Random(seed)
+    draws = []
+    for _ in range(n_boot):
+        resampled = []
+        for rep, p in enumerate(rng.choices(papers, k=len(papers))):
+            for c in by_paper[p]:
+                d = dict(c)
+                d["paper"] = f"{p}#rep{rep}"
+                if d.get("table") is not None:
+                    d["table"] = f"{d['table']}#rep{rep}"
+                resampled.append(d)
+        try:
+            draws.append(statistic(resampled))
+        except (ZeroDivisionError, ValueError):
+            continue
+    draws.sort()
+    if not draws:
+        return {"point": point, "lo": None, "hi": None, "n_papers": len(papers)}
+    lo = draws[max(0, int(alpha / 2 * len(draws)) - 1)]
+    hi = draws[min(len(draws) - 1, int((1 - alpha / 2) * len(draws)))]
+    return {"point": round(point, 4), "lo": round(lo, 4), "hi": round(hi, 4),
+            "n_papers": len(papers), "n_boot": len(draws)}
+
+
+def design_effect(comparisons: list, value) -> dict:
+    """How much the clustering costs, expressed as an effective sample size."""
+    by_paper: dict = {}
+    for c in comparisons:
+        v = value(c)
+        if v is not None:
+            by_paper.setdefault(c["paper"], []).append(float(v))
+    groups = [g for g in by_paper.values() if g]
+    n = sum(len(g) for g in groups)
+    k = len(groups)
+    if k < 2 or n <= k:
+        return {"icc": None, "mean_cluster": None, "design_effect": None, "n_eff": n}
+    grand = sum(sum(g) for g in groups) / n
+    between = sum(len(g) * (sum(g) / len(g) - grand) ** 2 for g in groups) / (k - 1)
+    within = sum(sum((x - sum(g) / len(g)) ** 2 for x in g) for g in groups) / (n - k)
+    m = n / k
+    icc = (between - within) / (between + (m - 1) * within) if (between + (m - 1) * within) else 0.0
+    icc = max(0.0, min(1.0, icc))
+    deff = 1 + (m - 1) * icc
+    return {"icc": round(icc, 4), "mean_cluster": round(m, 2),
+            "design_effect": round(deff, 3), "n_eff": int(round(n / deff))}

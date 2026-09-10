@@ -130,7 +130,10 @@ them, so that the second is a replication of the first.
 \caption{The same measurement in two independent samples, a year apart. Each
 column is a separate draw from that year's proceedings; the years are not
 pooled. Percentages of comparisons are of all highlighted comparisons in that
-sample.}
+sample. Brackets give $95\%$ intervals from a bootstrap that resamples
+\emph{papers} rather than comparisons, because one author's habits govern every
+table in a paper: the intraclass correlation is \nIcc{}, so \nNTestable{}
+comparisons carry about as much information as \nNEffective{} independent ones.}
 \label{tab:main}
 \begin{tabular}{lrr}
 \toprule
@@ -140,13 +143,13 @@ Papers & \nPapersTwentyFour{} & \nPapersTwentyFive{} \\
 Highlighted comparisons & \nComparisonsTwentyFour{} & \nComparisonsTwentyFive{} \\
 \midrule
 \multicolumn{3}{l}{\emph{Can the comparison be checked?}} \\
-\quad Neither value has an error bar & \nPctNeitherSideTwentyFour{} & \nPctNeitherSide{} \\
-\quad Error bar given, runs not stated & --- & \nPctNoNStated{} \\
-\quad Testable & \nPctTestableTwentyFour{} & \nPctTestable{} \\
+\quad Neither value has an error bar & \nCiNeitherSideTwentyFour{} & \nCiNeitherSide{} \\
+\quad Error bar given, runs not stated & \nPctNoNStatedTwentyFour{} & \nPctNoNStated{} \\
+\quad Testable & \nCiTestableTwentyFour{} & \nCiTestable{} \\
 \midrule
 \multicolumn{3}{l}{\emph{Of those that can be checked}} \\
-\quad Not distinguishable from zero & \nPctFailTwentyFour{} & \nPctFail{} \\
-\quad Not distinguishable, Holm-corrected & \nPctFailHolmTwentyFour{} & \nPctFailHolm{} \\
+\quad Not distinguishable from zero & \nCiFailTwentyFour{} & \nCiFail{} \\
+\quad Not distinguishable, Holm-corrected & \nCiFailHolmTwentyFour{} & \nCiFailHolm{} \\
 \quad Median gap, failing & \nGapFailingTwentyFour{} & \nGapFailing{} \\
 \quad Median gap, surviving & \nGapPassingTwentyFour{} & \nGapPassing{} \\
 \midrule
@@ -197,12 +200,20 @@ bars. Failures are not spread evenly: they are the small margins.}
 \label{fig:gapsurvival}
 \end{figure}
 
-Of the \nNTestable{} testable comparisons in 2025, \nPctFail{} are not
+Of the \nNTestable{} testable comparisons in 2025, \nCiFail{} are not
 distinguishable from zero at the $5\%$ level using the numbers the authors
 printed. Applying Holm--Bonferroni within each table raises this to
-\nPctFailHolm{}: multiplicity alone moves about one highlighted result in
-\nOneInNMovedByMultiplicity{} from significant to not, which is not a rounding
-effect.
+\nCiFailHolm{}. The correction's effect is a paired quantity---Holm can only
+move a comparison from significant to not, never back---so it is estimated far
+more precisely than either level: \nCiHolmDelta{} of testable comparisons change
+verdict, an interval nowhere near zero.
+
+All intervals here resample papers rather than comparisons. That matters: with
+an intraclass correlation of \nIcc{} and \nMeanCluster{} comparisons per paper,
+the design effect is \nDesignEffect{}, so treating comparisons as independent
+would report intervals about twice too narrow. A paper that asked the field to
+print dispersions and then printed point estimates of its own would deserve the
+objection it invited.
 
 Figure~\ref{fig:gapsurvival} shows where the failures sit. Improvements that
 fail have a median relative size of \nGapFailing{}, against \nGapPassing{} for
