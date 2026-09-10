@@ -460,8 +460,14 @@ had called empty and looked at them. An audit of eighteen found one miss---the
 sixth bug, values written $76.63(\pm 3.98)$ with the bracket wrapping the
 symbol---and correcting it across the corpus moved the headline by
 \nHeadlineMoveSixth{}, not the eight points that extrapolating from that audit
-would have predicted. A second audit of \nRecallTwoJudged{} tables after the fix
-found \nRecallTwoMissed{} misses (\nRecallTwoCi{}).
+would have predicted. We then audited \nRecallThreeJudged{} more tables on the
+corrected extractor and found \nRecallThreeMissed{} misses
+(\nRecallThreeCi{}). The audit also turned up three conventions worth naming
+rather than counting as failures: a caption that bounds the standard error
+instead of printing it per cell, one that marks significant differences with a
+dagger from a permutation test, and one that bolds every result tied for best.
+In each the extractor is right that no error bar is present, and in each a
+reader is nonetheless given something to check against.
 
 That interval is the dominant uncertainty in this paper, and it is wider than
 the sampling interval. Propagating it, the share of comparisons carrying no

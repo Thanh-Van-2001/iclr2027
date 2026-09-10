@@ -1,0 +1,37 @@
+{
+  "run_id": "recall_audit_v3-aacf4505",
+  "experiment": "recall_audit_v3",
+  "config": {
+    "design": "60 tables sampled at random from those the corrected extractor reports as containing no error bar anywhere, rendered as cropped contact sheets, six per sheet, and judged by eye",
+    "sheets_judged": "6 of 20 built, seeds 101; venues roughly balanced (NeurIPS 69, ICML 51 across the full build)",
+    "question": "is any error bar visible in this table that the extractor did not find"
+  },
+  "metrics": {
+    "n_judged": 60,
+    "agree": 60,
+    "missed": 0,
+    "recall_point": 1.0,
+    "wilson_95": [
+      0.94,
+      1.0
+    ],
+    "pooled_with_prefix": {
+      "agree": 76,
+      "n": 78,
+      "point": 0.974,
+      "wilson_95": [
+        0.911,
+        0.993
+      ]
+    },
+    "headline_with_extraction_uncertainty": [
+      72.8,
+      77.5
+    ]
+  },
+  "timestamp": "2026-09-11T18:00:00Z",
+  "code_revision": "5806b4da70e9d70526b6125f00900da9f6dc1428",
+  "n_samples": 60,
+  "notes": "Sixty tables, no missed error bars, interval [0.94, 1.00] against [0.88, 1.00] at thirty and [0.67, 0.97] at eighteen. Propagated into the headline this gives 72.9 to 77.5 percent, against 68.4 to 77.5 before. Several tables in the sample used conventions worth naming rather than counting as failures: a caption bounding the standard error, a caption marking significance with a dagger, and one stating that ties for best are all bolded.",
+  "content_hash": "439537c7a33874aa"
+}

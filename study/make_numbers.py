@@ -280,12 +280,13 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
                                              "resolution_table.tex"))
 
     # The recall check, which is the only one that bounds the headline.
-    v2 = "recall_audit_v2-2242cce7"
-    reg.add("recall two judged", 29, provenance=v2)
-    reg.add("recall two missed", "no", provenance=v2)
-    reg.add("recall two ci", "95\% CI [0.88, 1.00]", provenance=v2)
-    reg.add("headline move sixth", r"0.5 points", provenance="recall_fix_impact-348e7fbc")
-    reg.add("headline with extraction", r"68.4--77.5\%", provenance=v2)
+    v3 = "recall_audit_v3-aacf4505"
+    reg.add("recall three judged", 60, provenance=v3)
+    reg.add("recall three missed", "no", provenance=v3)
+    reg.add("recall three ci", "95\% CI [0.94, 1.00]", provenance=v3)
+    reg.add("headline move sixth", "0.5 points",
+            provenance="recall_fix_impact-348e7fbc")
+    reg.add("headline with extraction", "72.8--77.5\%", provenance=v3)
 
     # Extractor validation
     with open(crosscheck_path, encoding="utf-8") as fh:
