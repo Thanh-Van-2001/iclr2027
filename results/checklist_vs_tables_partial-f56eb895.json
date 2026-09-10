@@ -1,0 +1,34 @@
+{
+  "run_id": "checklist_vs_tables_partial-f56eb895",
+  "experiment": "checklist_vs_tables_partial",
+  "config": {
+    "source": "the mandatory NeurIPS checklist question on experiment statistical significance, parsed from the paper PDF",
+    "sample": "partial run, 1276 of 2000 papers extracted so far; 535 NeurIPS papers with a parsed answer",
+    "venue_caveat": "NeurIPS and ICML differ in more than the checklist, so the venue contrast is associational and not causal"
+  },
+  "metrics": {
+    "n_with_answer": 535,
+    "answered_yes": 365,
+    "answered_no": 126,
+    "answered_na": 44,
+    "yes_and_table_has_error_bar": 142,
+    "yes_but_no_table_error_bar": 223,
+    "pct_of_yes_with_no_table_error_bar": 61.1,
+    "of_those_justified_by_figures": 44,
+    "no_but_table_has_error_bar": 7,
+    "precision_against_self_report": 0.953,
+    "wilson_95": [
+      0.906,
+      0.977
+    ],
+    "pct_papers_with_table_error_bar": {
+      "NeurIPS": 27.5,
+      "ICML": 23.7
+    }
+  },
+  "timestamp": "2026-09-11T00:30:00Z",
+  "code_revision": "6c8a9036027decaa12b46586d890c1682fb5e040",
+  "n_samples": 535,
+  "notes": "Two results. Of papers declaring they report error bars, 61 percent print none in any results table and only a fifth of those point to figures. And only 7 papers that answered No do have table error bars, so the extractor agrees with author self-report on 142 of 149 cases, a precision check at a scale visual inspection cannot reach.",
+  "content_hash": "e1797d4e77fd9958"
+}
