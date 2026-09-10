@@ -370,14 +370,27 @@ tie-marked comparisons moves the failure rate from \nPctFail{} to
 enrichment. The commoner convention, marking the second-best result
 (\nPctSecondBest{} of tables), is not a tie claim and is left in.
 
-\paragraph{We read tables, and papers are more than tables.} Uncertainty is
-sometimes reported in a figure, in prose, or as a bound in a caption rather than
-per cell. Two measurements bound this. Captions that state something
-quantitative about spread appear in \nPctCaptionUncertainty{} of the tables we
-call empty, so that route is real but rare. And among NeurIPS papers that
-answered \emph{yes} to the checklist question while printing no table error bar,
-\nCheckJustifiedByFigures{} of \nCheckYesNoTable{} justify the answer by
-pointing to figures. The remainder do not explain the gap at all.
+\paragraph{Our two best pieces of evidence appear to contradict each other.} The
+recall audit says the extractor misses almost nothing; the checklist says
+\nCheckYesNoTable{} NeurIPS papers claim error bars we cannot find. Both cannot
+be right unless the claim means something other than what we measure, so we read
+what those \nCheckYesNoTable{} justifications actually say.
+
+They mostly do not claim an error bar in a results table. The commonest
+justification, at \nJustSeeds{}, is that several random seeds were used---which
+is averaging, not reporting dispersion. Another \nJustTest{} report having run a
+significance test, \nJustFigure{} point to a figure and \nJustAppendix{} to an
+appendix, and \nJustNone{} make no recognisable claim at all. The two
+measurements are therefore consistent, and the disagreement is the finding: what
+the checklist records is not what it asks.
+
+Two extraction limits could have produced the same gap and do not. Papers longer
+than our \nMaxPages{}-page window are \nPctLongPapers{} of the corpus and have a
+\emph{lower} error-bar rate (\nErrorBarLong{} against \nErrorBarShort{}), so
+truncation is not hiding a mass of error bars in appendices. And
+\nPctNoTable{} of papers yield no detected table at all; excluding them raises
+the paper-level rate from \nPctWithErrorBar{} to \nPctWithErrorBarConditional{},
+and we report both.
 
 \paragraph{Large PDFs are skipped.} A size cap excludes a small number of
 image-heavy papers, which are not a random subset. We report the count rather

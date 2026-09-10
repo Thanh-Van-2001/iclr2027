@@ -1,0 +1,29 @@
+{
+  "run_id": "checklist_tension_resolved-8dc2e641",
+  "experiment": "checklist_tension_resolved",
+  "config": {
+    "objection": "a reviewer noted that our recall audit says the extractor misses almost nothing while our checklist comparison says 416 NeurIPS papers claim error bars we cannot find, and that the two cannot both be true",
+    "method": "classify what the 416 justifications actually claim, and check the two extraction limits that could explain the gap"
+  },
+  "metrics": {
+    "n_yes": 652,
+    "n_yes_without_table_error_bar": 416,
+    "justification_says_seeds_used_pct": 31.0,
+    "justification_claims_std_or_interval_pct": 28.4,
+    "justification_says_a_test_was_run_pct": 19.5,
+    "justification_points_to_figure_pct": 13.9,
+    "justification_points_to_appendix_pct": 13.7,
+    "justification_unrecognisable_pct": 29.6,
+    "papers_with_no_detected_table_pct": 15.9,
+    "corpus_papers_over_40_pages_pct": 12.9,
+    "error_bar_rate_short_papers": 25.3,
+    "error_bar_rate_long_papers": 22.1,
+    "paper_level_rate_all": 24.9,
+    "paper_level_rate_conditional_on_a_table": 28.6
+  },
+  "timestamp": "2026-09-11T09:00:00Z",
+  "code_revision": "cc9eaead8ee9b35f6983ebf95920a59640fe500c",
+  "n_samples": 416,
+  "notes": "The tension resolves without either measurement being wrong. The commonest justification, at 31 percent, is that multiple seeds were used, which is averaging rather than reporting dispersion; another 19.5 percent report having run a test. Only 13.9 percent point to a figure and 13.7 percent to an appendix. The 40-page extraction window cannot explain the gap either: long papers have a lower error-bar rate than short ones. What the checklist measures is not what it asks.",
+  "content_hash": "6a96f70beec56417"
+}

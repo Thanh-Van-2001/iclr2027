@@ -170,6 +170,21 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("fail among tie marked", r"84.6\%", provenance=tierun)
     reg.add("fail excluding tie", r"40.1\%", provenance=tierun)
 
+    # Resolving the apparent contradiction between the recall audit and the
+    # checklist comparison, which a reviewer was right to say could not both hold.
+    tens = "checklist_tension_resolved-8dc2e641"
+    reg.add("just seeds", r"31.0\%", provenance=tens)
+    reg.add("just test", r"19.5\%", provenance=tens)
+    reg.add("just figure", r"13.9\%", provenance=tens)
+    reg.add("just appendix", r"13.7\%", provenance=tens)
+    reg.add("just none", r"29.6\%", provenance=tens)
+    reg.add("max pages", 40, provenance=tens)
+    reg.add("pct long papers", r"12.9\%", provenance=tens)
+    reg.add("error bar long", r"22.1\%", provenance=tens)
+    reg.add("error bar short", r"25.3\%", provenance=tens)
+    reg.add("pct no table", r"13.2\%", provenance=tens)
+    reg.add("pct with error bar conditional", r"28.6\%", provenance=tens)
+
     # The recall check, which is the only one that bounds the headline.
     v2 = "recall_audit_v2-2242cce7"
     reg.add("recall two judged", 29, provenance=v2)
