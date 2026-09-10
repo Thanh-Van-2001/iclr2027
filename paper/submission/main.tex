@@ -346,11 +346,19 @@ the funnel in Section~\ref{sec:checkable} gives every count.
 paper that bolds the best result and marks every result not statistically
 distinguishable from it has already declared those pairs to be ties; counting
 them as failed comparisons would inflate our failure rate. The convention is
-real and rare: captions claiming statistical indistinguishability appear in
-\nPctTieTables{} of tables, in \nTiePapers{} papers. The commoner convention,
-marking the second-best result, appears in \nPctSecondBest{} of tables and is
-not a tie claim. We leave both in rather than filtering on caption text, and
-note that the first would move the failure rate by less than a tenth of a point.
+real, and it concentrates exactly where it does the most damage: captions
+claiming statistical indistinguishability appear in \nPctTieTables{} of all
+tables but \nPctTieTestable{} of the testable subset, a tenfold enrichment,
+because the papers careful enough to print dispersions are the ones most likely
+to mark ties. Those comparisons fail at \nFailAmongTieMarked{} against
+\nPctFail{} overall, which is what one would expect of pairs the authors had
+already declared indistinguishable.
+
+The mechanism is therefore confirmed and the magnitude is small. Removing
+tie-marked comparisons moves the failure rate from \nPctFail{} to
+\nFailExcludingTie{}, because the convention remains rare even after the
+enrichment. The commoner convention, marking the second-best result
+(\nPctSecondBest{} of tables), is not a tie claim and is left in.
 
 \paragraph{We read tables, and papers are more than tables.} Uncertainty is
 sometimes reported in a figure, in prose, or as a bound in a caption rather than

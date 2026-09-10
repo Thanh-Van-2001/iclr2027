@@ -165,6 +165,10 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("pct tie tables", r"0.10\%", provenance="tie_marking_convention-c37d51a2")
     reg.add("tie papers", 8, provenance="tie_marking_convention-c37d51a2")
     reg.add("pct second best", r"4.1\%", provenance="tie_marking_convention-c37d51a2")
+    tierun = "tie_marking_in_testable_subset-df684b2c"
+    reg.add("pct tie testable", r"1.03\%", provenance=tierun)
+    reg.add("fail among tie marked", r"84.6\%", provenance=tierun)
+    reg.add("fail excluding tie", r"40.1\%", provenance=tierun)
 
     # The recall check, which is the only one that bounds the headline.
     reg.add("recall n", 18, provenance="contact_sheet_recall_v1-63f3e1cf")

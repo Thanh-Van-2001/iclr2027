@@ -1,0 +1,25 @@
+{
+  "run_id": "tie_marking_in_testable_subset-df684b2c",
+  "experiment": "tie_marking_in_testable_subset",
+  "config": {
+    "objection": "a reviewer argued that tie-marking tables concentrate in the testable subset, because the papers careful enough to print dispersions are the ones most likely to mark ties, and that those comparisons are non-significant by construction",
+    "test": "measure the convention inside the testable subset rather than across all tables, and recompute the failure rate with those comparisons removed"
+  },
+  "metrics": {
+    "n_testable": 1266,
+    "tie_marked_in_testable": 13,
+    "pct_tie_marked_in_testable": 1.03,
+    "pct_tie_marked_all_tables": 0.1,
+    "enrichment_factor": 10.3,
+    "second_best_marked_in_testable": 106,
+    "pct_second_best_in_testable": 8.37,
+    "fail_rate_all": 40.6,
+    "fail_rate_excluding_tie_marked": 40.1,
+    "fail_rate_among_tie_marked": 84.6
+  },
+  "timestamp": "2026-09-11T05:00:00Z",
+  "code_revision": "a7606503a77d25238cb497e81013d36584c5c7cf",
+  "n_samples": 1266,
+  "notes": "The reviewer mechanism is confirmed in both directions: tie-marked tables are ten times more concentrated in the testable subset than across the corpus, and they fail at 84.6 percent against 40.6 overall. The magnitude is small because the convention is rare even after that enrichment: removing them moves the headline by half a point.",
+  "content_hash": "ece704f37597d3e0"
+}
