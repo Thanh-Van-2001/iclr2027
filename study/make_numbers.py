@@ -118,6 +118,48 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("pct error bar papers stating runs",
             rf"{ct['pct_of_error_bar_papers_that_also_state_runs']}\%", provenance=sensrun)
 
+    # Everything the adversarial review round asked for and the earlier draft
+    # did not have: the funnel, the power audit, the correlation range, what the
+    # bold cell actually marks, and the checklist comparison.
+    def _j(name):
+        with open(f"out/{name}.json", encoding="utf-8") as fh:
+            return json.load(fh)
+
+    fn, pw, bs, ck = _j("funnel"), _j("power_audit"), _j("bold_semantics"), _j("checklist")
+    corr = _j("correlation_sensitivity")
+
+    reg.add("tables detected", fn["tables_detected"], provenance="funnel")
+    reg.add("tables no orientation", fn["tables_with_no_usable_orientation"], provenance="funnel")
+    reg.add("candidate groups", fn["candidate_groups"], provenance="funnel")
+    reg.add("pct groups usable", rf"{fn['pct_of_groups_usable']}\%", provenance="funnel")
+    reg.add("pct caption uncertainty",
+            rf"{fn['pct_of_empty_tables_with_caption_uncertainty']}\%", provenance="funnel")
+
+    reg.add("pct underpowered", rf"{pw['pct_underpowered']}\%", provenance="power_audit_2025")
+    reg.add("median gap over mde", f"{pw['median_gap_over_mde']}", provenance="power_audit_2025")
+    reg.add("q one gap over mde", f"{pw['q1_gap_over_mde']}", provenance="power_audit_2025")
+
+    reg.add("pct bold not extremal", rf"{bs['pct_not_extremal']}\%", provenance="bold_semantics")
+
+    reg.add("check yes", ck["answered_yes"], provenance="checklist_vs_tables")
+    reg.add("check yes no table", ck["yes_but_no_table_error_bar"], provenance="checklist_vs_tables")
+    reg.add("pct check yes no table",
+            rf"{ck['pct_of_yes_with_no_table_error_bar']}\%", provenance="checklist_vs_tables")
+    reg.add("check justified by figures", ck["of_those_justified_by_figures"],
+            provenance="checklist_vs_tables")
+    reg.add("check no but has bar", ck["no_but_table_has_error_bar"], provenance="checklist_vs_tables")
+    agree = ck["yes_and_table_has_error_bar"]
+    denom = agree + ck["no_but_table_has_error_bar"]
+    reg.add("check precision", f"{agree} of {denom}", provenance="checklist_vs_tables")
+
+    reg.add("fail rho half", rf"{corr['0.5']['pct_fail']}\%", provenance="correlation_sensitivity")
+    reg.add("fail rho nine", rf"{corr['0.9']['pct_fail']}\%", provenance="correlation_sensitivity")
+
+    # The recall check, which is the only one that bounds the headline.
+    reg.add("recall n", 18, provenance="contact_sheet_recall_v1-63f3e1cf")
+    reg.add("recall agree", 16, provenance="contact_sheet_recall_v1-63f3e1cf")
+    reg.add("recall ci", "[0.67, 0.97]", provenance="contact_sheet_recall_v1-63f3e1cf")
+
     # Extractor validation
     with open(crosscheck_path, encoding="utf-8") as fh:
         cc = json.load(fh)["summary"]
