@@ -316,3 +316,48 @@ def power_audit(comparisons: list, power: float = 0.8, alpha: float = 0.05) -> d
         "reading": ("A ratio below 1 means the experiment could not have detected the "
                     "difference it reports, at conventional power, whichever way it came out."),
     }
+
+
+def checkability_span(comparisons: list) -> dict:
+    """How far the share that can be checked moves across the conventions.
+
+    A standard error is already the dispersion of a mean, so a comparison whose
+    bars are standard errors needs no run count to be testable. That makes the
+    checkability headline the most convention-dependent number in the paper --
+    more so than the failure rate, which is the only one an earlier draft gave a
+    range for.
+
+    Both ends and the ratio are computed here rather than typed, because when
+    they were typed the ratio drifted from 8.3 to 9.5 the first time the
+    analysis was regenerated.
+    """
+    n = len(comparisons)
+    if not n:
+        return {}
+    as_reported = sum(1 for c in comparisons if c.get("test"))
+
+    strict = 0
+    for c in comparisons:
+        d = dict(c)
+        if d.get("n_runs_source") != "caption":
+            d["n_runs"] = None
+        if test_comparison(d):
+            strict += 1
+
+    as_sem = 0
+    for c in comparisons:
+        if c.get("test"):
+            as_sem += 1
+        elif (c["winner_dispersion"] is not None and c["runner_dispersion"] is not None
+              and test_comparison(c, kind_override="sem")):
+            as_sem += 1
+
+    lo = round(100 * strict / n, 1)
+    hi = round(100 * as_sem / n, 1)
+    return {
+        "n_comparisons": n,
+        "pct_strict_caption_only": lo,
+        "pct_as_reported": round(100 * as_reported / n, 1),
+        "pct_every_bar_a_standard_error": hi,
+        "span_factor": round(hi / lo, 1) if lo else None,
+    }

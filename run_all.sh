@@ -9,5 +9,8 @@ python study/benchmark_resolution.py
 python study/make_numbers.py
 python study/figures_paper.py --analysis out/analysis_2025.json \
     --run-id survivability_both_years --out-dir paper/submission/figures
-( cd paper/submission && latexmk -pdf -interaction=nonstopmode main.tex )
+# Clean first: latexmk caches a previous failure and will otherwise report
+# "up-to-date" while leaving a stale PDF built from the old macros, which is the
+# worst kind of failure because everything looks fine.
+( cd paper/submission && latexmk -C >/dev/null &&   latexmk -pdf -interaction=nonstopmode main.tex &&   bibtex main >/dev/null &&   latexmk -pdf -interaction=nonstopmode main.tex )
 ./check.sh

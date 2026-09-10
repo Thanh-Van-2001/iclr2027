@@ -20,8 +20,9 @@ sys.path.insert(0, os.path.join(HERE, ".."))
 
 from analyze import (analyse, checklist_agreement, cluster_bootstrap,  # noqa: E402
                      design_effect, extraction_funnel, orientation, _columns, _rows)
-from sensitivity import (correlation_sensitivity, error_bar_meaning,  # noqa: E402
-                         paper_level_crosstab, power_audit, run_count_scope)
+from sensitivity import (checkability_span, correlation_sensitivity,  # noqa: E402
+                         error_bar_meaning, paper_level_crosstab, power_audit,
+                         run_count_scope)
 
 YEARS = (2024, 2025)
 
@@ -169,6 +170,7 @@ def main() -> int:
     from binomial_check import analyse as binom_analyse
     from benchmark_resolution import identify as _bench_identify  # noqa: F401
     for name, value in (("correlation_sensitivity", correlation_sensitivity(cs)),
+                        ("checkability_span", checkability_span(cs)),
                         ("binomial_check", binom_analyse(cs)),
                         ("power_audit", power_audit(cs)),
                         ("funnel", extraction_funnel(records)),

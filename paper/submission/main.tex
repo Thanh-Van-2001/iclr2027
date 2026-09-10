@@ -23,34 +23,36 @@
 
 \begin{abstract}
 Machine learning decides what to believe by comparing numbers in tables. We ask
-how many of those comparisons a reader could check. From \nPapersTotal{} papers
-accepted at NeurIPS and ICML we extract every results table, identify the claim
-each one makes---the value the authors set in bold against the best value they
-did not---and ask whether the paper prints what a test of that claim would
-need. Usually it does not. Of \nComparisonsTwentyFive{} highlighted comparisons
-in the 2025 sample, \nPctNeitherSide{} carry no error bar on either side and a
-further \nPctNoNStated{} give an error bar but never say how many runs produced
-it, leaving \nPctTestable{} that can be tested at all; only
-\nPctWithErrorBar{} of accepted papers print an explicit error bar in any
-results table. Among comparisons that can be tested, \nPctFail{} are not
-distinguishable from zero at the $5\%$ level using the authors' own numbers,
-rising to \nPctFailHolm{} once the simultaneous comparisons in the same table
-are accounted for. That figure is not precise, and cannot be: across the
-conventions the source papers leave unstated it spans \nSpanLow{} to
-\nSpanHigh{}, more than three times the sampling interval, which is the paper's
-own thesis turned on itself. A second measurement needs no error bars at all and so
-covers \nBinomPapers{} papers rather than \nPapersContributing{}: taking the
-gaps papers report between two accuracy-like values, the median gap is
-\nBinomMedianGap{} points and would require about \nBinomMedianN{} test items to
-distinguish from zero, so \nBinomOverGsm{} of those comparisons would need a
-test set larger than GSM8K and \nBinomOverMmlu{} one larger than MMLU. Repeating
-the whole measurement on an independent sample of \nPapersTwentyFour{} papers
-from 2024 reproduces the first two figures above at
-\nPctNeitherSideTwentyFour{} and \nPctFailTwentyFour{}, and NeurIPS and ICML
-agree to within two points. We release the pipeline, the per-comparison
-database, and the record of six parser bugs that visual validation caught---each
-of which had produced a confident and wrong version of these numbers, and every
-one of which could only have moved them in the same direction.
+how many of those comparisons a reader could check.
+
+From \nPapersTotal{} papers accepted at NeurIPS and ICML we extract every
+results table and identify the claim each one makes: the value the authors set
+in bold against the best value they did not. Then we ask whether the paper
+prints what a test of that claim would need---an error bar on each of the two
+values, and the number of runs behind them. Usually it does not. Of
+\nComparisonsTwentyFive{} highlighted comparisons in the 2025 sample,
+\nPctNeitherSide{} carry no error bar on either side, and \nPctTestable{} can be
+tested at all.
+
+Of those that can be tested, \nPctFail{} are not distinguishable from zero using
+the authors' own numbers, and \nPctFailHolm{} once the other comparisons in the
+same table are accounted for. A second measurement needs no error bars and so
+reaches \nBinomPapers{} papers rather than \nPapersContributing{}: the median
+reported gap between two accuracy-like values is \nBinomMedianGap{} points, and
+distinguishing that from zero would take roughly \nBinomMedianN{} test items.
+Where a caption names its benchmark, we can be concrete. \nResolutionPctBelow{}
+of those gaps are smaller than the benchmark they are measured on can resolve.
+
+Neither headline is precise, and neither can be. Across conventions the source
+papers leave unstated, the failure rate spans \nSpanLow{} to \nSpanHigh{} and
+the share that is checkable spans \nStrictTestable{} to \nTestableAsSem{}, both
+far wider than sampling error. That imprecision is not a flaw in the measurement
+but the finding restated: the papers do not print enough to pin down their own
+claims. An independent sample of \nPapersTwentyFour{} papers from 2024
+reproduces the first two figures at \nPctNeitherSideTwentyFour{} and
+\nPctFailTwentyFour{}. We release the pipeline, the per-comparison database, and
+the six parser bugs that looking at rendered tables caught---every one of which
+had produced a confident and wrong version of these numbers.
 \end{abstract}
 
 \section{Introduction}
@@ -64,10 +66,11 @@ all examined at once.
 
 Whether a reader can tell is a separate question from whether the claim is true,
 and it is the question we ask. Testing a difference between two reported means
-requires three things the paper must print: an error bar on each value, and the
-number of runs behind them. If any is missing, the comparison cannot be
-evaluated by anyone---not by a reviewer, not by a reader deciding what to build
-on, not by the authors themselves a year later.
+needs three quantities, and a paper must print all of them: a dispersion on the
+first value, a dispersion on the second, and the number of runs the two rest on.
+Miss any one and the comparison cannot be evaluated by anyone---not by a
+reviewer, not by a reader deciding what to build on, not by the authors
+themselves a year later.
 
 We measure how often those three things are present. Across \nPapersTotal{}
 papers accepted at NeurIPS and ICML in 2024 and 2025, the answer is that
@@ -615,11 +618,11 @@ the validation renderings are released.
 The authors used a large language model as a coding assistant throughout: to
 write and revise the extraction and analysis code, to draft and edit prose, and
 to search the literature. Every empirical number in the paper was produced by
-the released code and checked against its run record. The five extractor bugs
+the released code and checked against its run record. All six extractor bugs
 described in Section~\ref{sec:threats} were found by the authors inspecting
-rendered tables against extracted values; that inspection, and every
-methodological decision, was made by the authors, who take full responsibility
-for the paper's claims.
+rendered tables against extracted values---five in the first pass and the sixth
+in the recall audit; that inspection, and every methodological decision, was
+made by the authors, who take full responsibility for the paper's claims.
 
 \subsubsection*{Ethics statement}
 This work audits published papers in aggregate. We report no individual paper as

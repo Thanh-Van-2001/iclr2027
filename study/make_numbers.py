@@ -207,56 +207,14 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("rho half", "0.5", provenance="correlation_sensitivity")
     reg.add("rho nine", "0.9", provenance="correlation_sensitivity")
 
-    reg.add("pct tie tables", r"0.10\%", provenance="tie_marking_convention-c37d51a2")
-    reg.add("tie papers", 8, provenance="tie_marking_convention-c37d51a2")
-    reg.add("pct second best", r"4.1\%", provenance="tie_marking_convention-c37d51a2")
-    tierun = "tie_marking_in_testable_subset-df684b2c"
-    reg.add("pct tie testable", r"1.03\%", provenance=tierun)
-    reg.add("fail among tie marked", r"84.6\%", provenance=tierun)
-    reg.add("fail excluding tie", r"40.1\%", provenance=tierun)
-
-    # Resolving the apparent contradiction between the recall audit and the
-    # checklist comparison, which a reviewer was right to say could not both hold.
-    tens = "checklist_tension_resolved-8dc2e641"
-    reg.add("just seeds", r"31.0\%", provenance=tens)
-    reg.add("just test", r"19.5\%", provenance=tens)
-    reg.add("just figure", r"13.9\%", provenance=tens)
-    reg.add("just appendix", r"13.7\%", provenance=tens)
-    reg.add("just none", r"29.6\%", provenance=tens)
-    reg.add("max pages", 40, provenance=tens)
-    reg.add("pct long papers", r"12.9\%", provenance=tens)
-    reg.add("error bar long", r"22.1\%", provenance=tens)
-    reg.add("error bar short", r"25.3\%", provenance=tens)
-    reg.add("pct no table", r"13.2\%", provenance=tens)
-    reg.add("pct with error bar conditional", r"28.6\%", provenance=tens)
-
-    span = _j("headline_span")
-    reg.add("span low", rf"{span['span'][0]}\%", provenance="headline_span")
-    reg.add("span high", rf"{span['span'][1]}\%", provenance="headline_span")
-
-    # The filter-selection check, which a reviewer proposed as a mechanism and
-    # which measurement answers against itself.
-    fs = "filter_selection_check-a76c61bb"
-    reg.add("pct error bar retained", r"21.2\%", provenance=fs)
-    reg.add("pct error bar discarded", r"11.7\%", provenance=fs)
-    reg.add("papers tables no comparison", 514, provenance=fs)
-    reg.add("papers tables no comparison with bar", 107, provenance=fs)
-
-    rj = "rejected_table_audit-f09617fc"
-    reg.add("rejected judged", 12, provenance=rj)
-    reg.add("rejected not results", "Five", provenance=rj)
-    reg.add("rejected unmarked", "two more", provenance=rj)
-    reg.add("rejected structural", "three", provenance=rj)
-    reg.add("rejected fail ci", "1.5\% to 35\%", provenance=rj)
-
-    # The binomial route: checkability for the metrics that have a test-set size
-    # rather than a run count. Needs no error bars, so its base is far larger.
+    # Checkability without error bars: how large a test set the reported gaps
+    # would need, and how that compares to the benchmark actually named.
     bn = _j("binomial_check")
     binrun = "required_test_set_size-612527a6"
     reg.add("binom comparisons", bn["n_comparisons"], provenance=binrun)
     reg.add("binom papers", bn["n_papers"], provenance=binrun)
     reg.add("binom median gap", f"{bn['median_gap_points']}", provenance=binrun)
-    reg.add("binom median n", f"{bn['required_test_set_size']['median']:,}".replace(",", ","), provenance=binrun)
+    reg.add("binom median n", f"{bn['required_test_set_size']['median']:,}", provenance=binrun)
     reg.add("binom over gsm", rf"{bn['share_needing_more_than']['GSM8K (test) (1319)']}\%",
             provenance=binrun)
     reg.add("binom over mmlu", rf"{bn['share_needing_more_than']['MMLU (test) (14042)']}\%",
@@ -272,16 +230,68 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("resolution pct below", rf"{br['pct_below_resolution']}\%", provenance=brun)
     reg.add("resolution pct below rho nine",
             rf"{br['correlation_sensitivity']['0.9']}\%", provenance=brun)
-
-    # The per-benchmark rows are generated into their own file rather than typed
-    # into the paper. The audit caught twenty-five hand-written numbers in that
-    # table once the inline-math mask was fixed, and it was right to.
     _write_resolution_table(br, os.path.join(os.path.dirname(out_path),
                                              "resolution_table.tex"))
 
-    cs = "checkability_span-" + "0"
-    reg.add("testable as sem", r"19.0\%", provenance="checkability_span")
-    reg.add("testable span factor", "9.5", provenance="checkability_span")
+    ck2 = _j("checkability_span")
+    reg.add("testable as sem", rf"{ck2['pct_every_bar_a_standard_error']}\%",
+            provenance="checkability_span")
+    reg.add("testable span factor", f"{ck2['span_factor']}", provenance="checkability_span")
+
+    span = _j("headline_span")
+    reg.add("span low", rf"{span['span'][0]}\%", provenance="headline_span")
+    reg.add("span high", rf"{span['span'][1]}\%", provenance="headline_span")
+
+    rj = "rejected_table_audit-f09617fc"
+    reg.add("rejected judged", 12, provenance=rj)
+    reg.add("rejected not results", "Five", provenance=rj)
+    reg.add("rejected unmarked", "two more", provenance=rj)
+    reg.add("rejected structural", "three", provenance=rj)
+    reg.add("rejected fail ci", r"1.5\% to 35\%", provenance=rj)
+
+    v3 = "recall_audit_v3-aacf4505"
+    reg.add("recall three judged", 60, provenance=v3)
+    reg.add("recall three missed", "no", provenance=v3)
+    reg.add("recall three ci", r"95\% CI [0.94, 1.00]", provenance=v3)
+    reg.add("headline move sixth", "0.5 points",
+            provenance="recall_fix_impact-348e7fbc")
+
+    # Everything below was once computed at a command line and typed here, on
+    # the far side of the audit that guards the LaTeX. It is computed now.
+    xs = _j("extra_stats")
+    tm, cj, xl, fs2 = (xs["tie_marking"], xs["checklist_justifications"],
+                       xs["extraction_limits"], xs["filter_selection"])
+    hx = xs["headline_with_extraction"]
+
+    reg.add("pct tie tables", rf"{tm['pct_tables_claiming_a_tie']}\%", provenance="extra_stats")
+    reg.add("tie papers", tm["papers_affected"], provenance="extra_stats")
+    reg.add("pct second best", rf"{tm['pct_tables_marking_second_best']}\%", provenance="extra_stats")
+    reg.add("pct tie testable", rf"{tm['pct_of_testable_tie_marked']}\%", provenance="extra_stats")
+    reg.add("fail among tie marked", rf"{tm['fail_rate_among_tie_marked']}\%", provenance="extra_stats")
+    reg.add("fail excluding tie", rf"{tm['fail_rate_excluding_tie_marked']}\%", provenance="extra_stats")
+
+    reg.add("just seeds", rf"{cj['pct_seeds']}\%", provenance="extra_stats")
+    reg.add("just test", rf"{cj['pct_test']}\%", provenance="extra_stats")
+    reg.add("just figure", rf"{cj['pct_figure']}\%", provenance="extra_stats")
+    reg.add("just appendix", rf"{cj['pct_appendix']}\%", provenance="extra_stats")
+    reg.add("just none", rf"{cj['pct_unrecognised']}\%", provenance="extra_stats")
+
+    reg.add("max pages", xl["max_pages"], provenance="extra_stats")
+    reg.add("pct long papers", rf"{xl['pct_papers_over_window']}\%", provenance="extra_stats")
+    reg.add("error bar long", rf"{xl['error_bar_rate_long']}\%", provenance="extra_stats")
+    reg.add("error bar short", rf"{xl['error_bar_rate_short']}\%", provenance="extra_stats")
+    reg.add("pct no table", rf"{xl['pct_papers_with_no_table']}\%", provenance="extra_stats")
+    reg.add("pct with error bar conditional",
+            rf"{xl['paper_level_rate_with_a_table']}\%", provenance="extra_stats")
+
+    reg.add("pct error bar retained", rf"{fs2['pct_error_bar_retained']}\%", provenance="extra_stats")
+    reg.add("pct error bar discarded", rf"{fs2['pct_error_bar_discarded']}\%", provenance="extra_stats")
+    reg.add("papers tables no comparison",
+            fs2["papers_with_tables_but_no_comparison"], provenance="extra_stats")
+    reg.add("papers tables no comparison with bar",
+            fs2["of_those_with_an_error_bar"], provenance="extra_stats")
+
+    reg.add("headline with extraction", rf"{hx['low']}--{hx['high']}\%", provenance="extra_stats")
 
     # The recall check, which is the only one that bounds the headline.
     v3 = "recall_audit_v3-aacf4505"
