@@ -43,8 +43,9 @@ covers \nBinomPapers{} papers rather than \nPapersContributing{}: taking the
 gaps papers report between two accuracy-like values, the median gap is
 \nBinomMedianGap{} points and would require about \nBinomMedianN{} test items to
 distinguish from zero, so \nBinomOverGsm{} of those comparisons would need a
-test set larger than GSM8K and \nBinomOverMmlu{} one larger than MMLU. An
-independent sample of \nPapersTwentyFour{} papers from 2024 gives
+test set larger than GSM8K and \nBinomOverMmlu{} one larger than MMLU. Repeating
+the whole measurement on an independent sample of \nPapersTwentyFour{} papers
+from 2024 reproduces the first two figures above at
 \nPctNeitherSideTwentyFour{} and \nPctFailTwentyFour{}, and NeurIPS and ICML
 agree to within two points. We release the pipeline, the per-comparison
 database, and the record of six parser bugs that visual validation caught---each
@@ -387,6 +388,10 @@ Compared values correlated at $\rho = \nRhoNine{}$ & \nFailRhoNine{} \\
 Tie-marked comparisons removed & \nFailExcludingTie{} \\
 \midrule
 Sampling interval, conventions held fixed & \nCiFail{} \\
+\midrule
+\multicolumn{2}{l}{\emph{And the share that is checkable at all}} \\
+As reported & \nPctTestable{} \\
+Run count taken from the caption only & \nStrictTestable{} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -494,48 +499,21 @@ analyse is therefore the set of claimed wins, not of all highlighted cells, and
 the funnel in Section~\ref{sec:checkable} gives every count.
 
 \paragraph{Some tables mark ties, and we would score a tie as a failure.} A
-paper that bolds the best result and marks every result not statistically
-distinguishable from it has already declared those pairs to be ties; counting
-them as failed comparisons would inflate our failure rate. The convention is
-real, and it concentrates exactly where it does the most damage: captions
-claiming statistical indistinguishability appear in \nPctTieTables{} of all
-tables but \nPctTieTestable{} of the testable subset, a tenfold enrichment,
-because the papers careful enough to print dispersions are the ones most likely
-to mark ties. Those comparisons fail at \nFailAmongTieMarked{} against
-\nPctFail{} overall, which is what one would expect of pairs the authors had
-already declared indistinguishable.
-
-The mechanism is therefore confirmed and the magnitude is small. Removing
-tie-marked comparisons moves the failure rate from \nPctFail{} to
-\nFailExcludingTie{}, because the convention remains rare even after the
-enrichment. The commoner convention, marking the second-best result
-(\nPctSecondBest{} of tables), is not a tie claim and is left in.
+paper that bolds the best result and marks everything statistically
+indistinguishable from it has declared those pairs ties, and the convention does
+concentrate where it hurts: it appears in \nPctTieTables{} of all tables but
+\nPctTieTestable{} of the testable subset, where those comparisons fail at
+\nFailAmongTieMarked{}. Removing them moves the failure rate to
+\nFailExcludingTie{}. Appendix~\ref{app:ties} gives the detail.
 
 \paragraph{Our two best pieces of evidence appear to contradict each other.} The
 recall audit says the extractor misses almost nothing; the checklist says
-\nCheckYesNoTable{} NeurIPS papers claim error bars we cannot find. Both cannot
-be right unless the claim means something other than what we measure, so we read
-what those \nCheckYesNoTable{} justifications actually say.
-
-They mostly do not claim an error bar in a results table. The commonest
-justification, at \nJustSeeds{}, is that several random seeds were used---which
-is averaging, not reporting dispersion. Another \nJustTest{} report having run a
-significance test, \nJustFigure{} point to a figure and \nJustAppendix{} to an
-appendix, and \nJustNone{} make no recognisable claim at all. The two
-measurements are therefore consistent, and the disagreement is the finding: what
-the checklist records is not what it asks.
-
-Two extraction limits could have produced the same gap and do not. Papers longer
-than our \nMaxPages{}-page window are \nPctLongPapers{} of the corpus and have a
-\emph{lower} error-bar rate (\nErrorBarLong{} against \nErrorBarShort{}), so
-truncation is not hiding a mass of error bars in appendices. And
-\nPctNoTable{} of papers yield no detected table at all; excluding them raises
-the paper-level rate from \nPctWithErrorBar{} to \nPctWithErrorBarConditional{},
-and we report both. Note that the paper-level statistic reads every detected
-table, not only those that reach the comparison stage: of the
-\nPapersTablesNoComparison{} papers whose tables yield no comparison,
-\nPapersTablesNoComparisonWithBar{} are correctly credited with an error bar.
-Only papers with no detected table are scored blind.
+\nCheckYesNoTable{} NeurIPS papers claim error bars we cannot find. Reading
+those justifications resolves it: most do not claim an error bar in a results
+table at all, the commonest at \nJustSeeds{} being that several seeds were used,
+which is averaging rather than reporting dispersion. What the checklist records
+is not what it asks. Appendix~\ref{app:checklist} gives the breakdown and rules
+out the two extraction limits that could have produced the same gap.
 
 \paragraph{Large PDFs are skipped.} A size cap excludes a small number of
 image-heavy papers, which are not a random subset. We report the count rather
@@ -566,8 +544,19 @@ at a time. Our measurement needs only the printed page, so it covers whole
 venues, at the cost of saying nothing about whether any individual result is
 true.
 
-\paragraph{Statistical practice as an object of study.} The closest predecessors
-ask our question of one subfield each. \citet{card2020with} compute the
+\paragraph{Hand audits of reporting practice.} Two studies ask our exact
+question by reading papers one at a time. \citet{kirly2018nips} reviewed NeurIPS
+2017 by hand and found roughly a third reporting confidence intervals and a few
+per cent making a formal comparison. \citet{christodoulou2024confidence}
+hand-annotated 221 MICCAI 2023 segmentation papers and found more than half
+assessing no performance variability at all. Theirs is the method ours approximates, and their
+numbers are the closest external check we have: our \nPctWithErrorBar{} sits
+between them, on a corpus two orders of magnitude larger. Automation buys scale
+and a per-comparison unit, and costs the judgement a human annotator brings to
+an ambiguous table.
+
+\paragraph{Statistical practice as an object of study.} A second group asks the
+question of one subfield each. \citet{card2020with} compute the
 statistical power of natural language processing experiments and find most
 underpowered for the effects they report; our power audit
 (Section~\ref{sec:power}) is that analysis carried out on whatever a paper
@@ -629,5 +618,54 @@ conventions, not of the people following them.
 
 \bibliographystyle{iclr2027_conference}
 \bibliography{refs}
+
+\appendix
+
+\section{Tie marking}
+\label{app:ties}
+
+A paper that bolds the best result and marks every result not statistically
+distinguishable from it has already declared those pairs to be ties; counting
+them as failed comparisons would inflate our failure rate. The convention is
+real, and it concentrates exactly where it does the most damage. Captions
+claiming statistical indistinguishability appear in \nPctTieTables{} of all
+tables but \nPctTieTestable{} of the testable subset---a tenfold
+enrichment---because the papers careful enough to print dispersions are the ones
+most likely to mark ties. Those comparisons fail at \nFailAmongTieMarked{}
+against \nPctFail{} overall, which is what one would expect of pairs the authors
+had already declared indistinguishable.
+
+The mechanism is therefore confirmed and the magnitude is small. Removing
+tie-marked comparisons moves the failure rate from \nPctFail{} to
+\nFailExcludingTie{}, because the convention remains rare even after the
+enrichment. The commoner convention, marking the second-best result
+(\nPctSecondBest{} of tables), is not a tie claim and is left in.
+
+\section{The checklist and the recall audit}
+\label{app:checklist}
+
+The recall audit says the extractor misses almost nothing; the checklist says
+\nCheckYesNoTable{} NeurIPS papers claim error bars we cannot find. Both cannot
+be right unless the claim means something other than what we measure, so we read
+what those justifications actually say.
+
+They mostly do not claim an error bar in a results table. The commonest, at
+\nJustSeeds{}, is that several random seeds were used---which is averaging, not
+reporting dispersion. Another \nJustTest{} report having run a significance
+test, \nJustFigure{} point to a figure and \nJustAppendix{} to an appendix, and
+\nJustNone{} make no recognisable claim at all. The two measurements are
+consistent, and the disagreement is the finding: what the checklist records is
+not what it asks.
+
+Two extraction limits could have produced the same gap and do not. Papers longer
+than our \nMaxPages{}-page window are \nPctLongPapers{} of the corpus and have a
+\emph{lower} error-bar rate (\nErrorBarLong{} against \nErrorBarShort{}), so
+truncation is not hiding a mass of error bars in appendices. And \nPctNoTable{}
+of papers yield no detected table at all; excluding them raises the paper-level
+rate from \nPctWithErrorBar{} to \nPctWithErrorBarConditional{}, and we report
+both. The paper-level statistic reads every detected table, not only those
+reaching the comparison stage: of the \nPapersTablesNoComparison{} papers whose
+tables yield no comparison, \nPapersTablesNoComparisonWithBar{} are correctly
+credited with an error bar. Only papers with no detected table are scored blind.
 
 \end{document}

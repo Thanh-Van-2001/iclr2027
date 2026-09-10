@@ -10,8 +10,11 @@
 #   76.63, 3.98  the actual value that exposed the sixth parser bug, quoted in
 #                Section 9 so the reader can see the format that broke. Not a
 #                finding either, and quoting it approximately would be worse.
+#   221          a corpus size from Christodoulou et al., quoted in related
+#                work. Not our measurement, and checkable by the reader through
+#                the citation next to it.
 #
 # Every other number in the paper is a macro generated from a run record.
 exec python -m paperengine.cli check \
   --dir paper/submission --main main.tex \
-  --allow "82.4,0.3,76.63,3.98" "$@"
+  --allow "82.4,0.3,76.63,3.98,221" "$@"
