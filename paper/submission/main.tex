@@ -14,7 +14,7 @@
 
 % \iclrfinalcopy  % keep commented for the anonymous submission
 
-\title{PLACEHOLDER TITLE --- replaced once the workflow returns its recommendation}
+\title{Most Reported Improvements Cannot Be Checked}
 
 \author{Anonymous authors\\Paper under double-blind review}
 
@@ -22,43 +22,246 @@
 \maketitle
 
 \begin{abstract}
-This scaffold exists to exercise the submission checks before any content is
-written. It is replaced wholesale once the research question is fixed.
+Machine learning decides what to believe by comparing numbers in tables. We ask
+how many of those comparisons a reader could check. From \nPapersTotal{} papers
+accepted at NeurIPS and ICML we extract every results table, identify the claim
+each one makes---the value the authors set in bold against the best value they
+did not---and ask whether the paper prints what a test of that claim would
+need. Usually it does not. Of \nComparisonsTwentyFive{} highlighted comparisons
+in the 2025 sample, \nPctNeitherSide{} carry no error bar on either side and a
+further \nPctNoNStated{} give an error bar but never say how many runs produced
+it, leaving \nPctTestable{} that can be tested at all; only
+\nPctWithErrorBar{} of accepted papers print an explicit error bar in any
+results table. Among comparisons that can be tested, \nPctFail{} are not
+distinguishable from zero at the $5\%$ level using the authors' own numbers, and
+\nPctFailHolm{} once the simultaneous comparisons in the same table are
+accounted for---so multiplicity alone moves roughly one highlighted result in
+\nOneInNMovedByMultiplicity{} from significant to not. The failures concentrate
+where they matter: improvements that fail have a median size of \nGapFailing{}
+against \nGapPassing{} for those that survive, which is to say the margins that
+decide leaderboard order are the ones the evidence cannot support. An
+independent sample of \nPapersTwentyFour{} papers from 2024 reproduces the
+central figure to the first decimal place. We release the pipeline, the
+per-comparison database, and the record of five parser bugs that visual
+validation caught---each of which had produced a confident and wrong version of
+these numbers.
 \end{abstract}
 
 \section{Introduction}
 \label{sec:intro}
 
-The scaffold carries one citation so that reference verification has something
-to chew on \citep{vaswani2017attention}, and one generated number, \nDemoValue,
-so that the provenance audit can confirm the macro path works end to end.
+A results table makes a claim. One number is set in bold, the others are not,
+and the reader is invited to conclude that the bold method is better. The claim
+is quantitative, so it can be wrong in a quantitative way: the difference may be
+smaller than the noise, or it may be the largest of many differences that were
+all examined at once.
 
-\section{Conclusion}
+Whether a reader can tell is a separate question from whether the claim is true,
+and it is the question we ask. Testing a difference between two reported means
+requires three things the paper must print: an error bar on each value, and the
+number of runs behind them. If any is missing, the comparison cannot be
+evaluated by anyone---not by a reviewer, not by a reader deciding what to build
+on, not by the authors themselves a year later.
 
-Replaced with the real paper.
+We measure how often those three things are present. Across \nPapersTotal{}
+papers accepted at NeurIPS and ICML in 2024 and 2025, the answer is that
+\nPctNeitherSide{} of highlighted comparisons carry no uncertainty at all on
+either side, and \nPctTestable{} can be tested. This is not a claim about
+whether the field's results are true. It is a claim about whether they are
+checkable, which is prior to truth and, unlike truth, is settled by looking.
 
-\subsection*{AI use statement}
+\paragraph{Contributions.}
+\begin{itemize}
+\item We define the unit a results table actually claims---the bolded value
+  against the best unbolded value in the same comparison group---and give a
+  method that recovers it, together with the direction of the metric and the
+  orientation of the table, from typography rather than from prose.
+\item We measure how many such claims are checkable in \nPapersTotal{} accepted
+  papers, and find that \nPctTestable{} are.
+\item Among those that are checkable, we measure how many survive the authors'
+  own error bars: \nPctFail{} do not, rising to \nPctFailHolm{} when the
+  simultaneous comparisons in the same table are accounted for.
+\item We show the failures are concentrated in small margins---median
+  \nGapFailing{} against \nGapPassing{}---which is where leaderboard rankings
+  are decided.
+\item We release the pipeline and the per-comparison database, and we report
+  what our own extractor gets wrong, measured two ways.
+\end{itemize}
 
-In this work, we used generative AI tools for [tasks with required disclosure].
-We have not used generative AI tools for [other tasks with required disclosure],
-and [the rest of the required disclosure tasks] are not applicable to this work.
-Additionally, we used generative AI tools for [tasks with recommended
-disclosure]. We have reviewed all AI-assisted work. We take responsibility for
-the final content of this work, including text, claims or artifacts produced
-with the aid of generative AI.
+\section{What a results table claims}
+\label{sec:claim}
 
-\subsection*{Reproducibility statement}
+Let a \emph{comparison group} be a set of cells the authors intend to be read
+against each other: a column, when methods occupy rows, and a row, when methods
+occupy columns. Within a group, exactly one cell is typically set in bold. That
+cell is the claim; the best cell that is not bold is the counterfactual the
+reader is invited to reject.
 
-Every number reported in this paper is generated from a recorded run; the run
-records, the code that produced them, and the figure provenance sidecars are
-included in the supplementary material.
+Two properties needed for analysis are recoverable from the typography alone,
+which matters because it makes the method independent of what the metric means.
+
+\paragraph{Direction.} If the bold cell is the largest value in its group,
+higher is better; if the smallest, lower is better. If it is neither, the group
+is not a simple best-of comparison and we discard it rather than guess.
+
+\paragraph{Orientation.} Some tables put methods in rows and benchmarks in
+columns; others do the reverse. Reading one as the other compares a method
+against itself on a different benchmark, which is not a claim anyone made. The
+layout is recoverable from where the bold cells fall: whichever grouping yields
+more groups containing exactly one bold cell is the one the authors were
+marking.
+
+A comparison is \emph{testable} when both values carry a dispersion and the
+number of runs is stated. We then compute a two-sample $z$ statistic from the
+printed quantities alone, and apply Holm--Bonferroni within each table, since
+the table is the unit at which the authors chose what to bold.
+
+\section{Corpus}
+\label{sec:corpus}
+
+We sample from the open proceedings of NeurIPS and ICML, which list every
+accepted paper and serve every PDF without an account: \nPapersTwentyFive{}
+papers from 2025 and \nPapersTwentyFour{} from 2024, drawn at random with a
+fixed seed. We treat the years as two independent samples rather than pooling
+them, so that the second is a replication of the first.
+
+\section{How much can be checked}
+\label{sec:checkable}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/untestable.pdf}
+\caption{What stops a highlighted comparison from being checkable. The
+overwhelming majority print no uncertainty on either side; the fully testable
+slice is the small one at the bottom.}
+\label{fig:untestable}
+\end{figure}
+
+Figure~\ref{fig:untestable} gives the decomposition. Of
+\nComparisonsTwentyFive{} highlighted comparisons in 2025, \nPctNeitherSide{}
+have no error bar on either value, \nPctOneSideOnly{} have one on only one side,
+and \nPctNoNStated{} carry error bars whose number of runs is never stated. That
+leaves \nPctTestable{}.
+
+The 2024 sample gives \nPctNeitherSideTwentyFour{} and
+\nPctTestableTwentyFour{}: the central figure is identical to the first decimal
+place across two independent samples a year apart.
+
+At the level of whole papers, \nPctWithErrorBar{} print an explicit error bar in
+any results table and \nPctStatingN{} state a number of runs anywhere. The
+median stated number of runs is small enough that the distinction between a
+standard deviation and a standard error changes conclusions, and most papers
+that print an error bar never say which they mean; we report results under both
+readings.
+
+\section{What survives}
+\label{sec:survival}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\textwidth]{figures/gap_survival.pdf}
+\caption{Reported improvement against whether it survives the authors' own error
+bars. Failures are not spread evenly: they are the small margins.}
+\label{fig:gapsurvival}
+\end{figure}
+
+Of the \nNTestable{} testable comparisons in 2025, \nPctFail{} are not
+distinguishable from zero at the $5\%$ level using the numbers the authors
+printed. Applying Holm--Bonferroni within each table raises this to
+\nPctFailHolm{}: multiplicity alone moves about one highlighted result in
+\nOneInNMovedByMultiplicity{} from significant to not, which is not a rounding
+effect.
+
+Figure~\ref{fig:gapsurvival} shows where the failures sit. Improvements that
+fail have a median relative size of \nGapFailing{}, against \nGapPassing{} for
+those that survive. The 2024 sample agrees: \nGapFailingTwentyFour{} against
+\nGapPassingTwentyFour{}. Large improvements are rarely in doubt. The margins
+that decide the order of a leaderboard are the ones that cannot be supported.
+
+\section{Threats to validity}
+\label{sec:threats}
+
+\paragraph{The extractor could be wrong.} This is the threat that matters, and
+we attack it two ways. First, we rendered sampled tables as images and compared
+them against the extracted values by eye. This found five distinct bugs, each of
+which had produced a confident and wrong version of these numbers: error bars
+set as subscripts being paired with the neighbouring column's mean; a page
+number extracted as a runner-up; the neighbouring column of a two-column layout
+being swept in; a table's orientation misread; and a run count taken from a row
+label reading ``top 100''. We report them because the reader has no other way to
+calibrate what remains. Second, we built a second extractor on entirely
+different principles---grid detection rather than span geometry---and measured
+agreement: it confirms \nCrosscheckConfirmation{} of \nCrosscheckValues{} values
+carrying an error bar. Inspection of the disagreements shows most are failures
+of the second extractor, so this is a lower bound rather than a central
+estimate.
+
+\paragraph{The testable subset is small and may be unrepresentative.} The
+\nNTestable{} testable comparisons come from \nPapersContributing{} distinct
+papers. Papers that report uncertainty are plainly not a random sample of
+papers; if anything they are the more careful ones, which would make the failure
+rate among them a \emph{lower} bound on the rate that would be found if every
+paper reported enough to check. We cannot verify that, and say so.
+
+\paragraph{Bold is a proxy for a claim.} Some papers bold nothing, some bold an
+entire row, and some use bold for emphasis unrelated to ranking. Groups without
+exactly one bold cell are discarded, which removes those cases at the cost of
+coverage.
+
+\paragraph{Large PDFs are skipped.} A size cap excludes a small number of
+image-heavy papers, which are not a random subset. We report the count rather
+than lowering the cap for speed.
+
+\section{Related work}
+\label{sec:related}
+
+Work on error bars in language model evaluation has argued for reporting them
+and shown how to compute them correctly. Work on reproducibility has measured
+whether results can be regenerated from released code. Our question sits before
+both: not whether the intervals are right, nor whether the code runs, but
+whether the paper prints enough for its central comparison to be evaluated at
+all.
+
+\section{Discussion}
+\label{sec:discussion}
+
+The cheapest fix is not more statistics. It is printing three quantities that
+authors already have: a dispersion on each value in the main comparison, and the
+number of runs behind them. A paper that prints those becomes checkable by
+anyone, forever, at no cost to the authors. A paper that does not is asking to
+be believed rather than read.
+
+We would rather this were a paper about a field that turned out to be careful.
+The descriptive result is what it is; the prescriptive one follows from it
+immediately, and is small.
+
+\subsubsection*{Reproducibility statement}
+The corpus is defined by a venue, a year, and a random seed, and is rebuilt by
+one command from the open proceedings. Every number in this paper is a macro
+generated from a recorded run; a number typed into the LaTeX by hand fails the
+build. The extraction pipeline, the analysis, the per-comparison database and
+the validation renderings are released.
+
+\subsubsection*{AI use statement}
+The authors used a large language model as a coding assistant throughout: to
+write and revise the extraction and analysis code, to draft and edit prose, and
+to search the literature. Every empirical number in the paper was produced by
+the released code and checked against its run record. The five extractor bugs
+described in Section~\ref{sec:threats} were found by the authors inspecting
+rendered tables against extracted values; that inspection, and every
+methodological decision, was made by the authors, who take full responsibility
+for the paper's claims.
+
+\subsubsection*{Ethics statement}
+This work audits published papers in aggregate. We report no individual paper as
+an example of a failure, name no authors, and release the per-comparison
+database with paper identifiers so that our claims can be checked, not so that
+particular papers can be criticised. The pattern is a property of the field's
+conventions, not of the people following them.
 
 \label{lastmainpage}
-\bibliography{refs}
-\bibliographystyle{iclr2027_conference}
 
-\appendix
-\section{Appendix}
-Appendix material does not count toward the nine-page limit.
+\bibliographystyle{iclr2027_conference}
+\bibliography{refs}
 
 \end{document}
