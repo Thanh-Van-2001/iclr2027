@@ -1,0 +1,19 @@
+{
+  "run_id": "reproducibility_check-9a3b0074",
+  "experiment": "reproducibility_check",
+  "config": {
+    "test": "run make_all.py, binomial_check.py and benchmark_resolution.py again from the same extraction files and compare every output byte for byte",
+    "why": "the paper claims its numbers regenerate from one command, and a claim of that kind should be tested rather than asserted"
+  },
+  "metrics": {
+    "both_years_identical": true,
+    "power_audit_identical": true,
+    "benchmark_resolution_identical": true,
+    "n_artifacts_compared": 3
+  },
+  "timestamp": "2026-09-11T19:30:00Z",
+  "code_revision": "2a1345f26035119db0ddd9b24120d39c918c20a6",
+  "n_samples": 3,
+  "notes": "All three regenerate identically. The bootstrap and the permutation-free analyses are seeded, so this holds for the interval estimates too, not only the point estimates.",
+  "content_hash": "59ca5684482fcc62"
+}
