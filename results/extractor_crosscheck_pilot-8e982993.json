@@ -1,0 +1,23 @@
+{
+  "run_id": "extractor_crosscheck_pilot-8e982993",
+  "experiment": "extractor_crosscheck_pilot",
+  "config": {
+    "second_extractor": "pdfplumber, text-based column detection (booktabs tables have no vertical rules, so the default line-based detector returns nothing)",
+    "match_rule": "identical (mean, dispersion) pair anywhere in the document",
+    "sample": "10 random NeurIPS/ICML 2025 papers, seed 5, 3 of which report dispersion"
+  },
+  "metrics": {
+    "n_papers_compared": 10,
+    "n_papers_with_dispersion": 3,
+    "primary_values_with_dispersion": 1397,
+    "confirmed_by_second_extractor": 1092,
+    "confirmation_rate": 0.7817,
+    "found_only_by_second_extractor": 237,
+    "recall_gap": 0.145
+  },
+  "timestamp": "2026-09-10T12:45:00Z",
+  "code_revision": "854c119f12bf946bfa452c8a858b12273028e06c-dirty",
+  "n_samples": 10,
+  "notes": "78.2 percent of values with an error bar are independently confirmed. Inspection of the disagreements shows most are failures of the second extractor -- it reads 0.542 as 542.0, the same digit-splitting bug the primary extractor had before it was fixed -- so this rate is a lower bound on primary accuracy, not a central estimate. Needs a larger sample and a hand-adjudicated subset of the disagreements.",
+  "content_hash": "f0e48337d5d1f762"
+}
