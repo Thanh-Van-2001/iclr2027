@@ -36,10 +36,12 @@ results table. Among comparisons that can be tested, \nPctFail{} are not
 distinguishable from zero at the $5\%$ level using the authors' own numbers, and
 \nPctFailHolm{} once the simultaneous comparisons in the same table are
 accounted for---so multiplicity alone moves roughly one highlighted result in
-\nOneInNMovedByMultiplicity{} from significant to not. The failures concentrate
-where they matter: improvements that fail have a median size of \nGapFailing{}
-against \nGapPassing{} for those that survive, which is to say the margins that
-decide leaderboard order are the ones the evidence cannot support. An
+\nOneInNMovedByMultiplicity{} from significant to not. A second measurement needs no error bars at all and so
+covers \nBinomPapers{} papers rather than \nPapersContributing{}: taking the
+gaps papers report between two accuracy-like values, the median gap is
+\nBinomMedianGap{} points and would require about \nBinomMedianN{} test items to
+distinguish from zero, so \nBinomOverGsm{} of those comparisons would need a
+test set larger than GSM8K and \nBinomOverMmlu{} one larger than MMLU. An
 independent sample of \nPapersTwentyFour{} papers from 2024 gives
 \nPctNeitherSideTwentyFour{} and \nPctFailTwentyFour{}, and NeurIPS and ICML
 agree to within two points. We release the pipeline, the per-comparison
@@ -179,6 +181,37 @@ slice is the small one at the bottom.}
 \label{fig:untestable}
 \end{figure}
 
+\begin{table}[t]
+\centering
+\caption{Where tables and groups are lost between the PDF and the analysis, for
+the 2025 sample. Each discard is a decision that could have gone another way, so
+each is counted. The largest, by far, is tables in which no comparison group
+contains exactly one bold cell---most often because nothing is bold at all.}
+\label{tab:funnel}
+\begin{tabular}{lr}
+\toprule
+Tables detected & \nTablesDetected{} \\
+\quad no comparison group with exactly one bold cell & \nTablesNoOrientation{} \\
+\quad yielding at least one comparison & \nTablesYielding{} \\
+\midrule
+Candidate comparison groups & \nCandidateGroups{} \\
+\quad with exactly one bold cell and a rival & \nPctGroupsUsable{} \\
+\quad of those, bold cell not extremal (discarded) & \nPctBoldNotExtremal{} \\
+\midrule
+Highlighted comparisons analysed & \nComparisonsTwentyFive{} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:funnel} gives the funnel from PDF to analysed comparison. The
+population we measure is therefore not all results tables but the tables that
+mark a winner, and within those the groups where the mark is a claim of victory
+rather than a label on the authors' own row. That is the right population for
+the question---a table claiming nothing cannot be checked against a claim---but
+it is a filtered one, and the filter could correlate with the outcome. Tables
+that bold nothing may be tables whose authors thought differently about
+uncertainty. We cannot rule that out.
+
 Figure~\ref{fig:untestable} gives the decomposition. Of
 \nComparisonsTwentyFive{} highlighted comparisons in 2025, \nPctNeitherSide{}
 have no error bar on either value, \nPctOneSideOnly{} have one on only one side,
@@ -247,6 +280,35 @@ however it came out, so the bold cell records a coin flip rather than a finding.
 This also bounds how much of our result is an artifact of small $n$ rather than
 a property of the literature. It is both: the experiments are small, and the
 claims are made anyway.
+
+\section{How large a test set would these gaps need?}
+\label{sec:binomial}
+
+Everything so far assumes the uncertainty that matters is variance across
+training runs, which is why a comparison needs an error bar and a run count to
+be testable. That is one model. For an accuracy on a fixed test set the dominant
+uncertainty is over examples instead, and a binomial interval follows from the
+accuracy and the number of test items alone---no error bar required. The missing
+quantity is then the test-set size, not the dispersion.
+
+This lets us ask the question in a form that needs nothing the papers did not
+print. Given the gaps they report, how large would a shared test set have to be
+for those gaps to be distinguishable from zero? Restricting to comparisons whose
+two values both lie in $[40, 100]$, where a metric is almost certainly a rate,
+gives \nBinomComparisons{} comparisons from \nBinomPapers{} papers---four times
+the base of the variance-based analysis, because it needs no error bars.
+
+The median reported gap is \nBinomMedianGap{} points, and detecting it at
+\nPowerLevel{} power would require about \nBinomMedianN{} test items.
+\nBinomOverGsm{} of these comparisons would need a test set larger than GSM8K,
+and \nBinomOverMmlu{} one larger than MMLU. We treat the two values as
+independent binomials, which is conservative: systems scored on the same items
+are positively correlated, so a paired test needs fewer items and the true
+requirement is at most what we state.
+
+The conclusion does not depend on where the filter is drawn. Widening it to all
+values in $(0, 100]$ raises the median requirement to \nBinomMedianNWide{}
+items; the share needing more than GSM8K moves by a point.
 
 \section{How much is a definitional choice?}
 \label{sec:sensitivity}

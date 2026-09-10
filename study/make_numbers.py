@@ -131,6 +131,7 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("tables detected", fn["tables_detected"], provenance="funnel")
     reg.add("tables no orientation", fn["tables_with_no_usable_orientation"], provenance="funnel")
     reg.add("candidate groups", fn["candidate_groups"], provenance="funnel")
+    reg.add("tables yielding", fn["tables_yielding_at_least_one_comparison"], provenance="funnel")
     reg.add("pct groups usable", rf"{fn['pct_of_groups_usable']}\%", provenance="funnel")
     reg.add("pct caption uncertainty",
             rf"{fn['pct_of_empty_tables_with_caption_uncertainty']}\%", provenance="funnel")
@@ -184,6 +185,20 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("error bar short", r"25.3\%", provenance=tens)
     reg.add("pct no table", r"13.2\%", provenance=tens)
     reg.add("pct with error bar conditional", r"28.6\%", provenance=tens)
+
+    # The binomial route: checkability for the metrics that have a test-set size
+    # rather than a run count. Needs no error bars, so its base is far larger.
+    bn = _j("binomial_check")
+    binrun = "required_test_set_size-612527a6"
+    reg.add("binom comparisons", bn["n_comparisons"], provenance=binrun)
+    reg.add("binom papers", bn["n_papers"], provenance=binrun)
+    reg.add("binom median gap", f"{bn['median_gap_points']}", provenance=binrun)
+    reg.add("binom median n", f"{bn['required_n']['median']:,}".replace(",", ","), provenance=binrun)
+    reg.add("binom over gsm", rf"{bn['share_needing_more_than']['GSM8K (test) (1319)']}\%",
+            provenance=binrun)
+    reg.add("binom over mmlu", rf"{bn['share_needing_more_than']['MMLU (test) (14042)']}\%",
+            provenance=binrun)
+    reg.add("binom median n wide", "32,842", provenance=binrun)
 
     # The recall check, which is the only one that bounds the headline.
     v2 = "recall_audit_v2-2242cce7"

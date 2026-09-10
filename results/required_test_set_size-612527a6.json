@@ -1,0 +1,35 @@
+{
+  "run_id": "required_test_set_size-612527a6",
+  "experiment": "required_test_set_size",
+  "config": {
+    "question": "given the gaps papers report between two accuracy-like values, how large would a shared test set have to be for those gaps to be distinguishable from zero",
+    "why": "a reviewer noted that our definition of testable assumes variance across runs, while for a fixed test set the dominant uncertainty is over examples and a binomial interval needs only the accuracy and the test-set size",
+    "conservatism": "the two values are treated as independent binomials; two systems scored on the same items are positively correlated, so a paired test would need fewer, and the stated requirement is an upper bound",
+    "robustness": "medians of 32842 at filter (0,100], 11852 at [1,100], 11412 at [10,100], 11751 at [40,100], 12181 at [50,100]"
+  },
+  "metrics": {
+    "n_comparisons": 5437,
+    "n_papers": 544,
+    "median_gap_points": 1.4,
+    "required_n": {
+      "q25": 1891,
+      "median": 11751,
+      "q75": 85379,
+      "q90": 673227
+    },
+    "share_needing_more_than": {
+      "HumanEval (164)": 94.8,
+      "SWE-bench Verified (500)": 88.2,
+      "MATH-500 (500)": 88.2,
+      "GSM8K (test) (1319)": 79.3,
+      "MMLU (test) (14042)": 47.6,
+      "ImageNet (val) (50000)": 30.3
+    },
+    "filter": "both values in [40,100], the range where a metric is almost certainly an accuracy or similar rate"
+  },
+  "timestamp": "2026-09-11T10:30:00Z",
+  "code_revision": "c982fcab6683db8e3e28ed3faab83d5cbf670cf9-dirty",
+  "n_samples": 5437,
+  "notes": "This needs no error bars at all, only the printed means, so it covers 544 papers against the 121 that carry enough for the variance-based test. The median reported gap of 1.4 points would need a test set of about twelve thousand items; 79 percent of comparisons would need one larger than GSM8K.",
+  "content_hash": "71e765793feac575"
+}
