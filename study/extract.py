@@ -369,6 +369,27 @@ def _n_runs(caption: str, body_nearby: str):
     return None, None
 
 
+# Every NeurIPS submission since 2021 carries a mandatory checklist, printed in
+# the paper itself, one of whose questions is exactly what this study measures.
+# It is external ground truth for free, and the gap between what authors answer
+# and what their tables contain is a finding in its own right. ICML has no
+# equivalent, which makes the pair a natural experiment.
+CHECKLIST_Q = re.compile(
+    r"(?is)experiment\s+statistical\s+significance.{0,400}?answer:\s*\[?\s*(yes|no|na|n/a)\s*\]?"
+    r"(.{0,600}?)(?:guidelines:|\d+\.\s+[A-Z])")
+
+
+def checklist_error_bar_answer(full_text: str) -> dict:
+    """What the authors told the NeurIPS checklist about their error bars."""
+    m = CHECKLIST_Q.search(full_text)
+    if not m:
+        return {"answer": None, "justification": None}
+    ans = m.group(1).lower().replace("n/a", "na")
+    just = re.sub(r"\s+", " ", m.group(2) or "")
+    just = re.sub(r"(?i)^\s*justification:\s*", "", just).strip()
+    return {"answer": ans, "justification": just[:400]}
+
+
 def extract_paper(pdf_path=None, max_pages: int = 40, *, blob: bytes = None) -> dict:
     """Extract every table-like numeric block from one paper.
 
@@ -391,6 +412,9 @@ def extract_paper(pdf_path=None, max_pages: int = 40, *, blob: bytes = None) -> 
             break
         page_texts.append(page.get_text())
     full_text = "\n".join(page_texts)
+    # The checklist sits at the end of the paper, past max_pages, so it needs
+    # its own pass over the whole document.
+    checklist = checklist_error_bar_answer("\n".join(p.get_text() for p in doc))
     spans = _spans(doc, max_pages)
     lines = _lines(spans)
 
@@ -460,6 +484,8 @@ def extract_paper(pdf_path=None, max_pages: int = 40, *, blob: bytes = None) -> 
         "reports_explicit_error_bar": n_pm > 0,
         "reports_any_dispersion": (n_pm + n_paren) > 0,
         "n_runs_global": _n_runs("", full_text)[0],
+        "checklist_error_bars": checklist["answer"],
+        "checklist_justification": checklist["justification"],
         "n_tables_detected": len(blocks),
         "tables": [b.to_dict() for b in blocks],
     }
