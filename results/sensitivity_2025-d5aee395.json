@@ -1,0 +1,65 @@
+{
+  "run_id": "sensitivity_2025-d5aee395",
+  "experiment": "sensitivity_2025",
+  "config": {
+    "question_1": "where a run count may legitimately come from: the table caption only, or anywhere in the paper",
+    "question_2": "what an unlabelled error bar means: standard deviation or standard error",
+    "note": "both readings of question 2 are evaluated on the same 627 comparisons, since only those carry a run count and a naive split would compare different sets"
+  },
+  "metrics": {
+    "run_count_scope": {
+      "n_comparisons": 15034,
+      "strict": {
+        "pct_testable": 2.0,
+        "n": 300,
+        "pct_fail": 48.0,
+        "pct_fail_holm": 58.0,
+        "n_papers": 35
+      },
+      "permissive": {
+        "pct_testable": 8.2,
+        "n_borrowed_a_document_level_count": 0,
+        "n": 1240,
+        "pct_fail": 40.9,
+        "pct_fail_holm": 48.1,
+        "n_papers": 118
+      }
+    },
+    "error_bar_meaning": {
+      "n_unknown": 744,
+      "n_labelled": 1494,
+      "pct_of_error_barred_that_are_unlabelled": 33.2,
+      "read_as_std": {
+        "n": 627,
+        "pct_fail": 38.3,
+        "pct_fail_holm": 45.3,
+        "n_papers": 56
+      },
+      "read_as_sem": {
+        "n": 627,
+        "pct_fail": 69.7,
+        "pct_fail_holm": 73.8,
+        "n_papers": 56
+      },
+      "labelled_only": {
+        "n": 613,
+        "pct_fail": 43.6,
+        "pct_fail_holm": 51.1,
+        "n_papers": 82
+      }
+    },
+    "paper_level_crosstab": {
+      "n_papers": 1797,
+      "error_bar_and_run_count": 182,
+      "error_bar_only": 254,
+      "run_count_only": 273,
+      "neither": 1088,
+      "pct_of_error_bar_papers_that_also_state_runs": 41.7
+    }
+  },
+  "timestamp": "2026-09-10T21:00:00Z",
+  "code_revision": "2b0f4421b1b02c64b2326c19446e8cd3f1d4b739-dirty",
+  "n_samples": 1797,
+  "notes": "The reported headline uses the permissive run-count scope and the standard-deviation reading, which are the choices least favourable to this paper thesis. The labelled subset, where authors state what their error bar means, fails at 43.6 percent against 40.9 percent overall, which is evidence that the default reading is not distorting the result.",
+  "content_hash": "0f5a039e53e06f69"
+}
