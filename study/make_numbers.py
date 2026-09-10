@@ -136,6 +136,9 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
             rf"{fn['pct_of_empty_tables_with_caption_uncertainty']}\%", provenance="funnel")
 
     reg.add("pct underpowered", rf"{pw['pct_underpowered']}\%", provenance="power_audit_2025")
+    # The power level is a parameter of the analysis, not an illustration, so it
+    # comes from the run record like everything else rather than the whitelist.
+    reg.add("power level", rf"{int(pw['power'] * 100)}\%", provenance="power_audit_2025")
     reg.add("median gap over mde", f"{pw['median_gap_over_mde']}", provenance="power_audit_2025")
     reg.add("q one gap over mde", f"{pw['q1_gap_over_mde']}", provenance="power_audit_2025")
 
