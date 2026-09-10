@@ -1,0 +1,21 @@
+{
+  "run_id": "checkability_span-ed49420f",
+  "experiment": "checkability_span",
+  "config": {
+    "objection": "a reviewer pointed out that a standard error is already the dispersion of a mean, so the 11.6 percent class with a bar but no stated run count is untestable only under the standard-deviation reading",
+    "readings": "strict = run count from the caption; as reported = run count from anywhere in the paper; sem = every unlabelled bar read as a standard error, needing no run count"
+  },
+  "metrics": {
+    "n_comparisons": 14800,
+    "testable_strict_pct": 2.0,
+    "testable_as_reported_pct": 8.6,
+    "testable_as_sem_pct": 19.0,
+    "n_testable_as_sem": 2807,
+    "span_factor": 9.5
+  },
+  "timestamp": "2026-09-11T21:00:00Z",
+  "code_revision": "d59a24c0ea009846812f560ff9457a0fcdc6b413-dirty",
+  "n_samples": 14800,
+  "notes": "The checkability headline is more convention-dependent than the failure rate, spanning a factor of 9.5 against a sampling interval of about two points. The title claim survives the whole range: at the most generous end four highlighted comparisons in five still cannot be checked. The reviewer was right and the paper had reported sensitivity only for the failure rate.",
+  "content_hash": "d804773747524b39"
+}

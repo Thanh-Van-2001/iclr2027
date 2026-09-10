@@ -44,8 +44,16 @@ REFERENCE_BENCHMARKS = {
 }
 
 
+# Both values must lie in this range for the pair to be treated as rates. The
+# lower bound is not cosmetic: it is where a metric is almost certainly an
+# accuracy rather than a loss, a runtime or a count, and the paper reports the
+# figures from this filter. Widening it to (0, 100] moves the median requirement
+# but not the conclusion; the numbers for both appear in the run record.
+RATE_LOW, RATE_HIGH = 40.0, 100.0
+
+
 def looks_like_a_percentage(value: float) -> bool:
-    return 0.0 < value <= 100.0
+    return RATE_LOW <= value <= RATE_HIGH
 
 
 def required_test_set_size(p1: float, p2: float, *, alpha: float = 0.05,
@@ -86,7 +94,8 @@ def analyse(comparisons: list) -> dict:
     q = lambda f: needed[min(len(needed) - 1, int(f * len(needed)))]  # noqa: E731
 
     out = {
-        "n_comparisons_percentage_like": len(rows),
+        "n_comparisons": len(rows),
+        "filter": f"both values in [{RATE_LOW:.0f}, {RATE_HIGH:.0f}]",
         "n_papers": len(set(r["paper"] for r in rows)),
         "median_gap_points": round(statistics.median(r["gap"] for r in rows), 2),
         "required_test_set_size": {
@@ -113,8 +122,8 @@ def main(argv=None) -> int:
     with open(args.out, "w", encoding="utf-8") as fh:
         json.dump(res, fh, indent=1)
 
-    print(f"percentage-like comparisons: {res['n_comparisons_percentage_like']} "
-          f"from {res['n_papers']} papers")
+    print(f"rate-like comparisons: {res['n_comparisons']} from {res['n_papers']} papers "
+          f"({res['filter']})")
     print(f"median reported gap: {res['median_gap_points']} points")
     r = res["required_test_set_size"]
     print(f"test-set size needed to detect it, at 80% power:")

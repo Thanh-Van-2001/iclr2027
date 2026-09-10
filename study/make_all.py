@@ -166,7 +166,10 @@ def main() -> int:
     with open("out/sensitivity_2025.json", "w", encoding="utf-8") as fh:
         json.dump(extras, fh, indent=1)
 
+    from binomial_check import analyse as binom_analyse
+    from benchmark_resolution import identify as _bench_identify  # noqa: F401
     for name, value in (("correlation_sensitivity", correlation_sensitivity(cs)),
+                        ("binomial_check", binom_analyse(cs)),
                         ("power_audit", power_audit(cs)),
                         ("funnel", extraction_funnel(records)),
                         ("checklist", checklist_agreement(records)),

@@ -131,8 +131,19 @@ def main(argv=None) -> int:
     for d in by_bench.values():
         d["pct_below"] = round(100 * d["below"] / d["n"], 1)
 
+    # The independence assumption makes the resolution coarser than reality, so
+    # the headline is an upper bound. The whole range is emitted here rather
+    # than computed separately, so the released script produces every number the
+    # paper cites.
+    corr = {}
+    for rho in (0.0, 0.3, 0.5, 0.7, 0.9):
+        f = math.sqrt(1.0 - rho)
+        corr[str(rho)] = round(
+            100 * sum(1 for r in rows if r["gap"] < r["resolution"] * f) / len(rows), 1)
+
     res = {
         "n_comparisons": len(rows),
+        "correlation_sensitivity": corr,
         "n_papers": len(set(r["paper"] for r in rows)),
         "n_below_resolution": len(below),
         "pct_below_resolution": round(100 * len(below) / len(rows), 1),

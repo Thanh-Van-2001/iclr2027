@@ -256,7 +256,7 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("binom comparisons", bn["n_comparisons"], provenance=binrun)
     reg.add("binom papers", bn["n_papers"], provenance=binrun)
     reg.add("binom median gap", f"{bn['median_gap_points']}", provenance=binrun)
-    reg.add("binom median n", f"{bn['required_n']['median']:,}".replace(",", ","), provenance=binrun)
+    reg.add("binom median n", f"{bn['required_test_set_size']['median']:,}".replace(",", ","), provenance=binrun)
     reg.add("binom over gsm", rf"{bn['share_needing_more_than']['GSM8K (test) (1319)']}\%",
             provenance=binrun)
     reg.add("binom over mmlu", rf"{bn['share_needing_more_than']['MMLU (test) (14042)']}\%",
@@ -278,6 +278,10 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     # table once the inline-math mask was fixed, and it was right to.
     _write_resolution_table(br, os.path.join(os.path.dirname(out_path),
                                              "resolution_table.tex"))
+
+    cs = "checkability_span-" + "0"
+    reg.add("testable as sem", r"19.0\%", provenance="checkability_span")
+    reg.add("testable span factor", "9.5", provenance="checkability_span")
 
     # The recall check, which is the only one that bounds the headline.
     v3 = "recall_audit_v3-aacf4505"

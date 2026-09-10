@@ -392,6 +392,7 @@ Sampling interval, conventions held fixed & \nCiFail{} \\
 \multicolumn{2}{l}{\emph{And the share that is checkable at all}} \\
 As reported & \nPctTestable{} \\
 Run count taken from the caption only & \nStrictTestable{} \\
+Every unlabelled bar read as a standard error & \nTestableAsSem{} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -423,6 +424,19 @@ supports, and we flag here that it is the end of the range least favourable to
 the field. The finding does not depend on the choice: under every assumption we
 can defend, at least a fifth of checkable improvements are indistinguishable
 from zero.
+
+\paragraph{And this moves checkability further than it moves survival.} The
+share that can be checked at all is the more convention-dependent of our two
+headline figures, and we owe the reader that plainly. A standard error is
+already the dispersion of a mean, so a comparison whose bars are standard errors
+needs no run count: reading every unlabelled bar that way makes
+\nTestableAsSem{} of comparisons testable rather than \nPctTestable{}, while
+demanding the run count come from the caption leaves \nStrictTestable{}. That is
+a factor of \nTestableSpanFactor{} between the ends, against a sampling interval
+of about two points. We report \nPctTestable{} because it follows from the
+conventions we can defend, and the claim in our title survives the whole range:
+even at the most generous end, four highlighted comparisons in five cannot be
+checked.
 
 \paragraph{What an unlabelled error bar means.} A paper that prints
 $82.4 \pm 0.3$ usually does not say whether $0.3$ is a standard deviation or a
