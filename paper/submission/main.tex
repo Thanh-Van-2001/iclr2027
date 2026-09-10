@@ -221,6 +221,26 @@ those that survive. The 2024 sample agrees: \nGapFailingTwentyFour{} against
 \nGapPassingTwentyFour{}. Large improvements are rarely in doubt. The margins
 that decide the order of a leaderboard are the ones that cannot be supported.
 
+\section{Could the experiment have detected what it claims?}
+\label{sec:power}
+
+That failing comparisons have smaller margins than surviving ones is close to
+tautological: a smaller difference is harder to detect. The question worth
+asking runs the other way. From the dispersion and run count a paper prints, one
+can compute the smallest difference that experiment could have detected at
+conventional power, and compare it to the difference actually reported.
+
+\nPctUnderpowered{} of checkable comparisons report a gap below their own
+minimum detectable effect at $80\%$ power. The median ratio of reported gap to
+detectable threshold is \nMedianGapOverMde{}, and the first quartile
+\nQOneGapOverMde{}. These are not close calls that happened to fall the wrong
+way. The experiment could not have distinguished that difference from zero
+however it came out, so the bold cell records a coin flip rather than a finding.
+
+This also bounds how much of our result is an artifact of small $n$ rather than
+a property of the literature. It is both: the experiments are small, and the
+claims are made anyway.
+
 \section{How much is a definitional choice?}
 \label{sec:sensitivity}
 
@@ -255,7 +275,7 @@ that the convention we assume is not distorting the result.
 \label{sec:threats}
 
 \paragraph{The extractor could be wrong.} This is the threat that matters, and
-we attack it two ways. First, we rendered sampled tables as images and compared
+we attack it three ways, of which the third is the one that scales. First, we rendered sampled tables as images and compared
 them against the extracted values by eye. This found five distinct bugs, each of
 which had produced a confident and wrong version of these numbers: error bars
 set as subscripts being paired with the neighbouring column's mean; a page
@@ -267,7 +287,20 @@ different principles---grid detection rather than span geometry---and measured
 agreement: it confirms \nCrosscheckConfirmation{} of \nCrosscheckValues{} values
 carrying an error bar. Inspection of the disagreements shows most are failures
 of the second extractor, so this is a lower bound rather than a central
-estimate.
+estimate. Third, and most usefully, every NeurIPS paper since 2021 answers a
+mandatory checklist question that is nearly the one we ask: \emph{does the paper
+report error bars suitably and correctly defined?} Only \nCheckNoButHasBar{}
+papers answering \emph{no} turn out to have a table error bar, so the extractor
+agrees with author self-report on \nCheckPrecision{} cases---hundreds of papers
+rather than the handful a person can inspect.
+
+Neither precision check bounds the quantity the headline depends on, which is
+recall: an error bar present in the PDF and missed falls silently into ``neither
+value has an error bar''. We therefore sampled tables the extractor had called
+empty and looked at them. On \nRecallN{} such tables the extractor was right
+\nRecallAgree{} times (\nRecallCi{}). The disagreement was the sixth parser bug
+we have found this way, and the reason it matters is that all six could only
+have moved the headline in one direction.
 
 \paragraph{The testable subset is small and may be unrepresentative.} The
 \nNTestable{} testable comparisons come from \nPapersContributing{} distinct
@@ -276,10 +309,24 @@ papers; if anything they are the more careful ones, which would make the failure
 rate among them a \emph{lower} bound on the rate that would be found if every
 paper reported enough to check. We cannot verify that, and say so.
 
-\paragraph{Bold is a proxy for a claim.} Some papers bold nothing, some bold an
-entire row, and some use bold for emphasis unrelated to ranking. Groups without
-exactly one bold cell are discarded, which removes those cases at the cost of
-coverage.
+\paragraph{Bold is a proxy for a claim, and an imperfect one.} Some papers bold
+nothing, some bold an entire row, and some use bold for emphasis unrelated to
+ranking. Two discards follow, and both are large enough to state rather than
+describe. Groups without exactly one bold cell and a rival are dropped. Of the
+groups that remain, \nPctBoldNotExtremal{} have a bold cell that is not the best
+value in its group---authors marking their own method regardless of whether it
+won---and those are dropped too, since no victory is being claimed. What we
+analyse is therefore the set of claimed wins, not of all highlighted cells, and
+the funnel in Section~\ref{sec:checkable} gives every count.
+
+\paragraph{We read tables, and papers are more than tables.} Uncertainty is
+sometimes reported in a figure, in prose, or as a bound in a caption rather than
+per cell. Two measurements bound this. Captions that state something
+quantitative about spread appear in \nPctCaptionUncertainty{} of the tables we
+call empty, so that route is real but rare. And among NeurIPS papers that
+answered \emph{yes} to the checklist question while printing no table error bar,
+\nCheckJustifiedByFigures{} of \nCheckYesNoTable{} justify the answer by
+pointing to figures. The remainder do not explain the gap at all.
 
 \paragraph{Large PDFs are skipped.} A size cap excludes a small number of
 image-heavy papers, which are not a random subset. We report the count rather
@@ -310,13 +357,27 @@ at a time. Our measurement needs only the printed page, so it covers whole
 venues, at the cost of saying nothing about whether any individual result is
 true.
 
-\paragraph{Statistical practice as an object of study.}
+\paragraph{Statistical practice as an object of study.} The closest predecessors
+ask our question of one subfield each. \citet{card2020with} compute the
+statistical power of natural language processing experiments and find most
+underpowered for the effects they report; our power audit
+(Section~\ref{sec:power}) is that analysis carried out on whatever a paper
+happens to print, across two venues rather than one task family.
+\citet{marie2021scientific} hand-annotate machine translation papers for
+evaluation practice and find the field's conventions drifting; they establish
+what careful manual annotation can see, at the scale manual annotation permits.
 \citet{tang2020showing} show that the reporting practice proposed by
-\citet{dodge2019show} can itself mislead when applied as usually implemented,
-which is the closest in spirit to what we do: treating the field's statistical
-conventions, rather than its models, as the thing to be evaluated. We differ in
-scale and in unit---every highlighted comparison in \nPapersTotal{} papers,
-rather than one practice examined analytically.
+\citet{dodge2019show} can itself mislead as usually implemented. We differ from
+all three in unit and scale: every highlighted comparison in \nPapersTotal{}
+papers, at the cost of reading only what is printed.
+
+\paragraph{Extracting results from papers.} \citet{kardas2020axcell} extract
+result tables from machine learning PDFs to populate leaderboards. The task
+overlaps ours mechanically and diverges in purpose: leaderboard extraction wants
+the winning number and can ignore a missing error bar, whereas the missing error
+bar is our observation. We know of no released annotation of error-bar presence
+or run counts against which an extractor could be scored, which is why
+Section~\ref{sec:threats} measures ours three ways instead.
 
 \section{Discussion}
 \label{sec:discussion}

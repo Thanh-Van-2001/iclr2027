@@ -1,0 +1,22 @@
+{
+  "run_id": "recall_fix_impact-348e7fbc",
+  "experiment": "recall_fix_impact",
+  "config": {
+    "change": "error-bar pattern extended to bracketed forms such as 76.63(+/-3.98)",
+    "prediction_before_rerun": "the headline can only move down; a naive extrapolation from recall 16/18 suggested about 8 points"
+  },
+  "metrics": {
+    "pct_neither_before": 78.0,
+    "pct_neither_after": 77.5,
+    "pct_testable_before": 8.2,
+    "pct_testable_after": 8.6,
+    "pct_fail_before": 40.9,
+    "pct_fail_after": 40.6,
+    "headline_movement_pp": -0.5
+  },
+  "timestamp": "2026-09-11T02:10:00Z",
+  "code_revision": "2863816fac3867862b5efccd8a92ba768e3b8289-dirty",
+  "n_samples": 1785,
+  "notes": "Correcting the sixth bug across the whole corpus moved the headline by 0.5 points, not the 8 that extrapolating from a recall of 16 in 18 would predict. The single miss in that sample was unrepresentative: the bracketed format is rarer than one table in eighteen. A recall interval treats every miss as equally frequent, so it overstates the uncertainty in the headline; re-extracting and re-measuring is the only thing that answers the question.",
+  "content_hash": "9cbfddc190ca7dc8"
+}

@@ -1,0 +1,22 @@
+{
+  "run_id": "bold_semantics-08eeca72",
+  "experiment": "bold_semantics",
+  "config": {
+    "question": "when a comparison group contains exactly one bold cell, is that cell the best value in the group",
+    "sample": "1631 papers extracted so far, 17373 single-bold groups"
+  },
+  "metrics": {
+    "n_groups_single_bold_with_rival": 17373,
+    "bold_is_max": 9586,
+    "bold_is_min": 3965,
+    "bold_is_neither": 3822,
+    "pct_bold_extremal": 78.0,
+    "pct_bold_not_extremal": 22.0,
+    "groups_without_a_single_bold_and_rival": 12979
+  },
+  "timestamp": "2026-09-11T01:40:00Z",
+  "code_revision": "2863816fac3867862b5efccd8a92ba768e3b8289-dirty",
+  "n_samples": 17373,
+  "notes": "In 22 percent of groups the bolded cell is not the best value, which we read as authors marking their own method rather than a winner. Those groups are discarded, and the discard rate belongs in the paper: it says the analysed set is the set of claimed wins, not of all highlighted cells.",
+  "content_hash": "2e3f5fc701ebe517"
+}
