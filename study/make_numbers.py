@@ -171,9 +171,12 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("fail excluding tie", r"40.1\%", provenance=tierun)
 
     # The recall check, which is the only one that bounds the headline.
-    reg.add("recall n", 18, provenance="contact_sheet_recall_v1-63f3e1cf")
-    reg.add("recall agree", 16, provenance="contact_sheet_recall_v1-63f3e1cf")
-    reg.add("recall ci", "[0.67, 0.97]", provenance="contact_sheet_recall_v1-63f3e1cf")
+    v2 = "recall_audit_v2-2242cce7"
+    reg.add("recall two judged", 29, provenance=v2)
+    reg.add("recall two missed", "no", provenance=v2)
+    reg.add("recall two ci", "95\% CI [0.88, 1.00]", provenance=v2)
+    reg.add("headline move sixth", r"0.5 points", provenance="recall_fix_impact-348e7fbc")
+    reg.add("headline with extraction", r"68.4--77.5\%", provenance=v2)
 
     # Extractor validation
     with open(crosscheck_path, encoding="utf-8") as fh:

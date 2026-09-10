@@ -1,0 +1,39 @@
+{
+  "run_id": "recall_audit_v2-2242cce7",
+  "experiment": "recall_audit_v2",
+  "config": {
+    "design": "30 tables sampled at random from those the corrected extractor reports as containing no error bar anywhere, rendered as cropped contact sheets and judged by eye",
+    "sample": "seed 31, 12 sheets built, 5 sheets judged; ICML and NeurIPS roughly balanced",
+    "why": "the headline is a claim about absences, so it is governed by recall, and a precision check never examines what the extractor missed"
+  },
+  "metrics": {
+    "n_rendered": 71,
+    "n_judged": 30,
+    "agree": 29,
+    "missed_an_error_bar": 0,
+    "unclear": 1,
+    "recall_point": 1.0,
+    "wilson_95": [
+      0.883,
+      1.0
+    ],
+    "pooled_with_prefix_audit": {
+      "agree": 45,
+      "n": 47,
+      "point": 0.957,
+      "wilson_95": [
+        0.858,
+        0.988
+      ]
+    },
+    "headline_with_extraction_uncertainty": [
+      68.4,
+      77.5
+    ]
+  },
+  "timestamp": "2026-09-11T07:00:00Z",
+  "code_revision": "ae567035610479c0b8b5772dc0b365fe4c27d6ea",
+  "n_samples": 30,
+  "notes": "Zero missed error bars in 29 judgeable tables after the bracketed-symbol fix, against one in eighteen before it. Propagating the recall interval into the headline gives 68.4 to 77.5 percent, which is wider than the bootstrap interval and belongs in the abstract, as a reviewer said: a paper arguing that published intervals omit the dominant source of uncertainty cannot omit its own.",
+  "content_hash": "70a38c1ae9ba671d"
+}

@@ -319,11 +319,21 @@ rather than the handful a person can inspect.
 
 Neither precision check bounds the quantity the headline depends on, which is
 recall: an error bar present in the PDF and missed falls silently into ``neither
-value has an error bar''. We therefore sampled tables the extractor had called
-empty and looked at them. On \nRecallN{} such tables the extractor was right
-\nRecallAgree{} times (\nRecallCi{}). The disagreement was the sixth parser bug
-we have found this way, and the reason it matters is that all six could only
-have moved the headline in one direction.
+value has an error bar'', and every one of our six bugs could only have moved
+the headline in the same direction. We therefore sampled tables the extractor
+had called empty and looked at them. An audit of eighteen found one miss---the
+sixth bug, values written $76.63(\pm 3.98)$ with the bracket wrapping the
+symbol---and correcting it across the corpus moved the headline by
+\nHeadlineMoveSixth{}, not the eight points that extrapolating from that audit
+would have predicted. A second audit of \nRecallTwoJudged{} tables after the fix
+found \nRecallTwoMissed{} misses (\nRecallTwoCi{}).
+
+That interval is the dominant uncertainty in this paper, and it is wider than
+the sampling interval. Propagating it, the share of comparisons carrying no
+error bar is \nHeadlineWithExtraction{} rather than the
+\nCiNeitherSide{} that sampling alone would suggest. We quote both, because a
+paper arguing that published intervals omit their largest source of uncertainty
+has no business omitting its own.
 
 \paragraph{The testable subset is small and may be unrepresentative.} The
 \nNTestable{} testable comparisons come from \nPapersContributing{} distinct
