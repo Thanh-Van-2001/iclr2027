@@ -293,6 +293,10 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
 
     reg.add("headline with extraction", rf"{hx['low']}--{hx['high']}\%", provenance="extra_stats")
 
+    gb = xs["failure_by_gap_band"]
+    reg.add("fail under half", rf"{gb['pct_fail_under_half_point']}\%", provenance="extra_stats")
+    reg.add("fail over ten", rf"{gb['pct_fail_over_ten_points']}\%", provenance="extra_stats")
+
     # The recall check, which is the only one that bounds the headline.
     v3 = "recall_audit_v3-aacf4505"
     reg.add("recall three judged", 60, provenance=v3)

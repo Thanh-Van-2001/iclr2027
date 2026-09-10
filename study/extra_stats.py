@@ -172,6 +172,28 @@ def headline_with_extraction(pct_neither: float, recall_lo: float) -> dict:
     }
 
 
+def failure_by_gap_band(comparisons: list) -> dict:
+    """Failure rate in the smallest and largest bands of reported improvement.
+
+    The figure shows the whole curve; the text quotes its two ends, and they
+    should come from the same computation as the figure rather than be read off
+    it.
+    """
+    tested = [c for c in comparisons
+              if c.get("test") and c.get("relative_gap") is not None]
+
+    def rate(lo, hi):
+        band = [c for c in tested if lo <= 100 * c["relative_gap"] < hi]
+        return (round(100 * sum(1 for c in band if not c["survives_raw"]) / len(band))
+                if band else None), len(band)
+
+    low, n_low = rate(0, 0.5)
+    high, n_high = rate(10, 1e9)
+    return {"pct_fail_under_half_point": low, "n_under_half_point": n_low,
+            "pct_fail_over_ten_points": high, "n_over_ten_points": n_high}
+
+
+
 def compute(records: list, comparisons: list, pct_neither: float,
             recall_lo: float) -> dict:
     return {
@@ -180,6 +202,7 @@ def compute(records: list, comparisons: list, pct_neither: float,
         "extraction_limits": extraction_limits(records),
         "filter_selection": filter_selection(records),
         "headline_with_extraction": headline_with_extraction(pct_neither, recall_lo),
+        "failure_by_gap_band": failure_by_gap_band(comparisons),
     }
 
 

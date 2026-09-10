@@ -54,24 +54,41 @@ def fig_why_untestable(analysis: dict, out: str, run_id: str) -> None:
 
 
 def fig_gap_vs_survival(analysis: dict, comparisons: list, out: str, run_id: str) -> None:
-    """Improvements that fail are the small ones."""
-    passing = [100 * c["relative_gap"] for c in comparisons
-               if c.get("survives_raw") and c.get("relative_gap") is not None]
-    failing = [100 * c["relative_gap"] for c in comparisons
-               if c.get("test") and not c.get("survives_raw") and c.get("relative_gap") is not None]
+    """Failure rate as a function of how large the reported improvement is.
 
-    fig, ax = new_figure(width=WIDTH_DOUBLE, height=2.6)
-    bins = [0, 0.5, 1, 2, 3, 5, 8, 12, 20, 40]
-    ax.hist([failing, passing], bins=bins, color=[PALETTE[1], PALETTE[0]],
-            edgecolor="black", linewidth=0.6,
-            label=["Not distinguishable from zero", "Survives its own error bars"])
-    for patch in ax.patches[:len(bins) - 1]:
-        patch.set_hatch("//")
+    An earlier version drew two overlaid histograms, which buried the point
+    under uneven bins and a long right tail. The claim is that failures are the
+    small margins, so the figure should show exactly that: within each band of
+    reported improvement, what share cannot be distinguished from zero.
+    """
+    tested = [c for c in comparisons
+              if c.get("test") and c.get("relative_gap") is not None]
+    bins = [0, 0.5, 1, 2, 3, 5, 10, 100]
+    labels = ["<0.5", "0.5-1", "1-2", "2-3", "3-5", "5-10", ">10"]
+    rate, counts = [], []
+    for lo, hi in zip(bins[:-1], bins[1:]):
+        band = [c for c in tested if lo <= 100 * c["relative_gap"] < hi]
+        counts.append(len(band))
+        rate.append(100 * sum(1 for c in band if not c["survives_raw"]) / len(band)
+                    if band else 0.0)
+
+    fig, ax = new_figure(width=WIDTH_DOUBLE, height=2.7)
+    bars = ax.bar(range(len(rate)), rate, color=PALETTE[1], edgecolor="black",
+                  linewidth=0.6, width=0.68)
+    for b in bars:
+        b.set_hatch("//")
+    for i, (r, n) in enumerate(zip(rate, counts)):
+        ax.text(i, r + 2.5, f"{r:.0f}%", ha="center", fontsize=8)
+        # Sample sizes sit inside the bar: below the axis they collided with
+        # the tick labels.
+        ax.text(i, 3.0, f"n={n}", ha="center", fontsize=6.5, color="white")
+    ax.set_xticks(range(len(labels)))
+    ax.set_xticklabels(labels, fontsize=8)
     ax.set_xlabel("Reported improvement over the runner-up (%)")
-    ax.set_ylabel("Comparisons")
-    ax.legend(frameon=False, fontsize=8)
+    ax.set_ylabel("Not distinguishable\nfrom zero (%)")
+    ax.set_ylim(0, 105)
     save(fig, out, source_runs=[run_id],
-         caption_note="Failures concentrate in the small margins that decide rankings.")
+         caption_note="Failures are the small margins.")
 
 
 def fig_replication(rows: list, out: str, run_id: str) -> None:

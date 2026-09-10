@@ -258,8 +258,10 @@ readings.
 \begin{figure}[t]
 \centering
 \includegraphics[width=\textwidth]{figures/gap_survival.pdf}
-\caption{Reported improvement against whether it survives the authors' own error
-bars. Failures are not spread evenly: they are the small margins.}
+\caption{Within each band of reported improvement, the share that cannot be
+distinguished from zero using the authors' own error bars. Failures are not
+spread evenly across the range; they are concentrated in the small margins,
+which is where leaderboard positions are decided.}
 \label{fig:gapsurvival}
 \end{figure}
 
@@ -278,11 +280,14 @@ would report intervals about twice too narrow. A paper that asked the field to
 print dispersions and then printed point estimates of its own would deserve the
 objection it invited.
 
-Figure~\ref{fig:gapsurvival} shows where the failures sit. Improvements that
-fail have a median relative size of \nGapFailing{}, against \nGapPassing{} for
-those that survive. The 2024 sample agrees: \nGapFailingTwentyFour{} against
-\nGapPassingTwentyFour{}. Large improvements are rarely in doubt. The margins
-that decide the order of a leaderboard are the ones that cannot be supported.
+Figure~\ref{fig:gapsurvival} shows where the failures sit, and the pattern is
+monotone: \nFailUnderHalf{} of comparisons reporting an improvement below half a
+point cannot be distinguished from zero, against \nFailOverTen{} of those
+reporting more than ten. Improvements that fail have a median relative size of
+\nGapFailing{} against \nGapPassing{} for those that survive, and the 2024
+sample agrees at \nGapFailingTwentyFour{} against \nGapPassingTwentyFour{}.
+Large improvements are rarely in doubt. The margins that decide the order of a
+leaderboard are the ones that cannot be supported.
 
 \section{Could the experiment have detected what it claims?}
 \label{sec:power}
