@@ -186,6 +186,14 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("pct no table", r"13.2\%", provenance=tens)
     reg.add("pct with error bar conditional", r"28.6\%", provenance=tens)
 
+    # The filter-selection check, which a reviewer proposed as a mechanism and
+    # which measurement answers against itself.
+    fs = "filter_selection_check-a76c61bb"
+    reg.add("pct error bar retained", r"21.2\%", provenance=fs)
+    reg.add("pct error bar discarded", r"11.7\%", provenance=fs)
+    reg.add("papers tables no comparison", 514, provenance=fs)
+    reg.add("papers tables no comparison with bar", 107, provenance=fs)
+
     # The binomial route: checkability for the metrics that have a test-set size
     # rather than a run count. Needs no error bars, so its base is far larger.
     bn = _j("binomial_check")

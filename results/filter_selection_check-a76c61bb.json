@@ -1,0 +1,24 @@
+{
+  "run_id": "filter_selection_check-a76c61bb",
+  "experiment": "filter_selection_check",
+  "config": {
+    "objection_1": "a reviewer argued the orientation and single-bold filters may select against tables that report uncertainty, because dispersion-bearing cells are harder to parse, which would bias the headline upward",
+    "objection_2": "a reviewer argued that papers contributing no parsed comparison are scored as printing no error bar, inflating the paper-level absence rate",
+    "test": "measure the error-bar rate in discarded versus retained tables, and trace which table set the paper-level statistic actually reads"
+  },
+  "metrics": {
+    "pct_error_bar_retained_tables": 21.2,
+    "n_retained_tables": 3361,
+    "pct_error_bar_discarded_tables": 11.7,
+    "n_discarded_tables": 7563,
+    "papers_contributing_a_comparison": 1036,
+    "papers_with_tables_but_no_comparison": 514,
+    "of_those_with_an_error_bar": 107,
+    "papers_with_no_detected_table": 235
+  },
+  "timestamp": "2026-09-11T12:00:00Z",
+  "code_revision": "f4280cffcb4a0b599e47cd96f9613ea40291189c",
+  "n_samples": 10924,
+  "notes": "Both objections are answered against themselves. The filter selects for tables with error bars, not against: retained tables carry one at 21.2 percent and discarded tables at 11.7, so the headline is conservative rather than inflated. And error-bar detection reads every detected table rather than only those reaching the comparison stage, so 107 papers with tables but no comparison are correctly credited; only the 235 papers with no detected table at all are scored blind.",
+  "content_hash": "787513e2ef95ed09"
+}

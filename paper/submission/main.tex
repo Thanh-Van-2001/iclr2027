@@ -208,9 +208,15 @@ population we measure is therefore not all results tables but the tables that
 mark a winner, and within those the groups where the mark is a claim of victory
 rather than a label on the authors' own row. That is the right population for
 the question---a table claiming nothing cannot be checked against a claim---but
-it is a filtered one, and the filter could correlate with the outcome. Tables
-that bold nothing may be tables whose authors thought differently about
-uncertainty. We cannot rule that out.
+it is a filtered one, and the filter could correlate with the outcome. A cell
+carrying a dispersion is harder to parse than a bare number, so tables that
+report uncertainty might plausibly be the ones lost.
+
+They are not, and the bias runs the other way. Tables that survive the filter
+carry an error bar \nPctErrorBarRetained{} of the time; the tables discarded by
+it, \nPctErrorBarDiscarded{}. Whatever the filter selects for, it is not the
+absence of uncertainty, and the headline computed on the retained tables is if
+anything the more generous of the two figures.
 
 Figure~\ref{fig:untestable} gives the decomposition. Of
 \nComparisonsTwentyFive{} highlighted comparisons in 2025, \nPctNeitherSide{}
@@ -452,7 +458,11 @@ than our \nMaxPages{}-page window are \nPctLongPapers{} of the corpus and have a
 truncation is not hiding a mass of error bars in appendices. And
 \nPctNoTable{} of papers yield no detected table at all; excluding them raises
 the paper-level rate from \nPctWithErrorBar{} to \nPctWithErrorBarConditional{},
-and we report both.
+and we report both. Note that the paper-level statistic reads every detected
+table, not only those that reach the comparison stage: of the
+\nPapersTablesNoComparison{} papers whose tables yield no comparison,
+\nPapersTablesNoComparisonWithBar{} are correctly credited with an error bar.
+Only papers with no detected table are scored blind.
 
 \paragraph{Large PDFs are skipped.} A size cap excludes a small number of
 image-heavy papers, which are not a random subset. We report the count rather
