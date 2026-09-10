@@ -125,6 +125,38 @@ papers from 2025 and \nPapersTwentyFour{} from 2024, drawn at random with a
 fixed seed. We treat the years as two independent samples rather than pooling
 them, so that the second is a replication of the first.
 
+\begin{table}[t]
+\centering
+\caption{The same measurement in two independent samples, a year apart. Each
+column is a separate draw from that year's proceedings; the years are not
+pooled. Percentages of comparisons are of all highlighted comparisons in that
+sample.}
+\label{tab:main}
+\begin{tabular}{lrr}
+\toprule
+& \textbf{2024} & \textbf{2025} \\
+\midrule
+Papers & \nPapersTwentyFour{} & \nPapersTwentyFive{} \\
+Highlighted comparisons & \nComparisonsTwentyFour{} & \nComparisonsTwentyFive{} \\
+\midrule
+\multicolumn{3}{l}{\emph{Can the comparison be checked?}} \\
+\quad Neither value has an error bar & \nPctNeitherSideTwentyFour{} & \nPctNeitherSide{} \\
+\quad Error bar given, runs not stated & --- & \nPctNoNStated{} \\
+\quad Testable & \nPctTestableTwentyFour{} & \nPctTestable{} \\
+\midrule
+\multicolumn{3}{l}{\emph{Of those that can be checked}} \\
+\quad Not distinguishable from zero & \nPctFailTwentyFour{} & \nPctFail{} \\
+\quad Not distinguishable, Holm-corrected & \nPctFailHolmTwentyFour{} & \nPctFailHolm{} \\
+\quad Median gap, failing & \nGapFailingTwentyFour{} & \nGapFailing{} \\
+\quad Median gap, surviving & \nGapPassingTwentyFour{} & \nGapPassing{} \\
+\midrule
+\multicolumn{3}{l}{\emph{At the level of whole papers}} \\
+\quad Print an explicit error bar & \nPctWithErrorBarTwentyFour{} & \nPctWithErrorBar{} \\
+\quad State a number of runs & \nPctStatingNTwentyFour{} & \nPctStatingN{} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 \section{How much can be checked}
 \label{sec:checkable}
 
@@ -215,12 +247,35 @@ than lowering the cap for speed.
 \section{Related work}
 \label{sec:related}
 
-Work on error bars in language model evaluation has argued for reporting them
-and shown how to compute them correctly. Work on reproducibility has measured
-whether results can be regenerated from released code. Our question sits before
-both: not whether the intervals are right, nor whether the code runs, but
-whether the paper prints enough for its central comparison to be evaluated at
-all.
+\paragraph{How to report uncertainty.} A line of work tells authors what they
+should print. \citet{dodge2019show} argue for reporting the full distribution of
+results over hyperparameter search rather than a single tuned number;
+\citet{bouthillier2021accounting} decompose the variance of a benchmark result
+into its sources and show how many seeds are needed to detect a given effect;
+\citet{miller2024adding} derives the error bars a language model evaluation
+should carry, and \citet{bowyer2025position} shows that the usual normal
+approximation fails on the small evaluation sets now common. These papers say
+what a correct interval looks like. We measure how often any interval is
+printed at all, which is prior to whether it is correct.
+
+\paragraph{Whether reported gains are real.} A second line re-runs a
+literature under a common protocol and finds the gains smaller than claimed or
+absent: \citet{henderson2017deep} in deep reinforcement learning,
+\citet{musgrave2020metric} in metric learning, \citet{dacrema2019really} in
+neural recommendation. \citet{saidi2024unraveling} find the same pattern across
+machine-learning-driven science and attribute it partly to publication bias.
+Each of these requires re-running the methods, which bounds them to one subfield
+at a time. Our measurement needs only the printed page, so it covers whole
+venues, at the cost of saying nothing about whether any individual result is
+true.
+
+\paragraph{Statistical practice as an object of study.}
+\citet{tang2020showing} show that the reporting practice proposed by
+\citet{dodge2019show} can itself mislead when applied as usually implemented,
+which is the closest in spirit to what we do: treating the field's statistical
+conventions, rather than its models, as the thing to be evaluated. We differ in
+scale and in unit---every highlighted comparison in \nPapersTotal{} papers,
+rather than one practice examined analytically.
 
 \section{Discussion}
 \label{sec:discussion}
