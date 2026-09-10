@@ -221,6 +221,36 @@ those that survive. The 2024 sample agrees: \nGapFailingTwentyFour{} against
 \nGapPassingTwentyFour{}. Large improvements are rarely in doubt. The margins
 that decide the order of a leaderboard are the ones that cannot be supported.
 
+\section{How much is a definitional choice?}
+\label{sec:sensitivity}
+
+Two decisions in the pipeline are not forced by the data. Reporting a single
+number for a quantity that depends on an arbitrary convention would be the
+failure this paper is about, so both are reported as ranges, and in both cases
+the headline uses the reading least favourable to our own thesis.
+
+\paragraph{Where a run count may come from.} A table's caption sometimes states
+how many runs produced its means; more often the count appears once in the
+experimental setup and is meant to govern everything. Counting only captions
+gives \nStrictTestable{} testable and \nStrictFail{} failing; allowing a count
+stated anywhere in the paper to govern its tables gives \nPctTestable{} and
+\nPctFail{}. We report the second throughout. The choice matters because the two
+sets of papers barely overlap: of the papers that print an explicit error bar,
+only \nPctErrorBarPapersStatingRuns{} state a number of runs anywhere
+(\nPapersErrorBarAndRuns{} papers print both, \nPapersErrorBarOnly{} print an
+error bar and no count). Reporting a dispersion without saying what it is a
+dispersion over is itself the most common failure mode we see.
+
+\paragraph{What an unlabelled error bar means.} A paper that prints
+$82.4 \pm 0.3$ usually does not say whether $0.3$ is a standard deviation or a
+standard error, and the two differ by $\sqrt{n}$. On the \nNUnlabelled{}
+unlabelled comparisons that carry a run count, reading every bar as a standard
+deviation gives \nUnlabelledAsStd{} failing and as a standard error
+\nUnlabelledAsSem{}---a range wide enough to matter. We use the first, the more
+conservative. The subset where authors do say which they mean fails at
+\nLabelledOnlyFail{}, close to the \nPctFail{} headline, which is the evidence
+that the convention we assume is not distorting the result.
+
 \section{Threats to validity}
 \label{sec:threats}
 

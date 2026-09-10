@@ -99,6 +99,25 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     # conclude the two years had been processed by different pipelines.
     reg.add("pct no n stated twenty four", f"{y24['pct_no_n']}\%", provenance=run)
 
+    # Sensitivity to the two conventions the pipeline had to choose. Both are
+    # reported as ranges: giving one number for a quantity that depends on an
+    # arbitrary reading is the failure this paper is about.
+    with open("out/sensitivity_2025.json", encoding="utf-8") as fh:
+        sens = json.load(fh)
+    sc, eb, ct = sens["run_count_scope"], sens["error_bar_meaning"], sens["paper_level_crosstab"]
+    sensrun = "sensitivity_2025-d5aee395"
+    reg.add("strict testable", rf"{sc['strict']['pct_testable']}\%", provenance=sensrun)
+    reg.add("strict fail", rf"{sc['strict']['pct_fail']}\%", provenance=sensrun)
+    reg.add("strict fail holm", rf"{sc['strict']['pct_fail_holm']}\%", provenance=sensrun)
+    reg.add("unlabelled as std", rf"{eb['read_as_std']['pct_fail']}\%", provenance=sensrun)
+    reg.add("unlabelled as sem", rf"{eb['read_as_sem']['pct_fail']}\%", provenance=sensrun)
+    reg.add("labelled only fail", rf"{eb['labelled_only']['pct_fail']}\%", provenance=sensrun)
+    reg.add("n unlabelled", eb["n_unknown"], provenance=sensrun)
+    reg.add("papers error bar and runs", ct["error_bar_and_run_count"], provenance=sensrun)
+    reg.add("papers error bar only", ct["error_bar_only"], provenance=sensrun)
+    reg.add("pct error bar papers stating runs",
+            rf"{ct['pct_of_error_bar_papers_that_also_state_runs']}\%", provenance=sensrun)
+
     # Extractor validation
     with open(crosscheck_path, encoding="utf-8") as fh:
         cc = json.load(fh)["summary"]
