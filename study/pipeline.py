@@ -23,6 +23,7 @@ import random
 import sys
 import threading
 import time
+from urllib.parse import urlsplit
 from typing import Optional
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -39,6 +40,31 @@ from harvest import SOURCES  # noqa: E402
 # trip per download, and there are thousands of downloads.
 _local = threading.local()
 UA = {"User-Agent": "Mozilla/5.0 (compatible; paper-audit/0.1)"}
+
+# Concurrency is limited per host, not globally. Measured on 2026-09-10: one
+# connection to either host sustains about 5 MB/s, but twenty-four parallel
+# downloads from raw.githubusercontent.com -- which is where PMLR keeps every
+# ICML PDF -- collapse to 2 MB/s in total, because GitHub throttles concurrent
+# raw requests. Reading that as "we are bandwidth-limited" was wrong, and it
+# cost an hour of pointlessly adding workers.
+HOST_LIMITS = {
+    "raw.githubusercontent.com": 4,
+    "papers.nips.cc": 16,
+    "proceedings.mlr.press": 6,
+}
+DEFAULT_HOST_LIMIT = 6
+_host_semaphores: dict = {}
+_host_lock = threading.Lock()
+
+
+def _host_gate(url: str) -> threading.Semaphore:
+    host = urlsplit(url).netloc
+    with _host_lock:
+        sem = _host_semaphores.get(host)
+        if sem is None:
+            sem = threading.Semaphore(HOST_LIMITS.get(host, DEFAULT_HOST_LIMIT))
+            _host_semaphores[host] = sem
+    return sem
 
 
 def _session() -> "requests.Session":
@@ -66,7 +92,8 @@ def _content_length(url: str, timeout: int = 25):
     way is reported, and the cap is set high enough that it is small.
     """
     try:
-        r = _session().head(url, timeout=timeout, allow_redirects=True)
+        with _host_gate(url):
+            r = _session().head(url, timeout=timeout, allow_redirects=True)
         n = r.headers.get("Content-Length")
         return int(n) if n else None
     except requests.RequestException:
@@ -74,9 +101,10 @@ def _content_length(url: str, timeout: int = 25):
 
 
 def _fetch(url: str, timeout: int = 90) -> bytes:
-    r = _session().get(url, timeout=timeout)
-    r.raise_for_status()
-    return r.content
+    with _host_gate(url):
+        r = _session().get(url, timeout=timeout)
+        r.raise_for_status()
+        return r.content
 
 
 # Above this size a PDF is skipped rather than parsed.
