@@ -1,0 +1,64 @@
+{
+  "run_id": "headline_span-32e99b07",
+  "experiment": "headline_span",
+  "config": {
+    "objection": "a reviewer showed that the paper computed three ranges around its headline and quoted the end most favourable to its thesis each time, while claiming in the same section to use the least favourable reading",
+    "axes": "run-count scope, unlabelled error-bar meaning, correlation between compared values, tie-marked comparisons"
+  },
+  "metrics": {
+    "rows": [
+      [
+        "Headline as reported",
+        40.6
+      ],
+      [
+        "Run count from the caption only",
+        46.9
+      ],
+      [
+        "Unlabelled bars read as standard errors",
+        68.9
+      ],
+      [
+        "Only bars whose meaning is stated",
+        43.4
+      ],
+      [
+        "Correlation rho = 0.3",
+        36.5
+      ],
+      [
+        "Correlation rho = 0.5",
+        33.9
+      ],
+      [
+        "Correlation rho = 0.7",
+        30.0
+      ],
+      [
+        "Correlation rho = 0.9",
+        23.4
+      ],
+      [
+        "Tie-marked comparisons removed",
+        40.1
+      ]
+    ],
+    "span": [
+      23.4,
+      68.9
+    ],
+    "sampling_ci": [
+      34.1445,
+      47.4046
+    ],
+    "span_width_points": 45.5,
+    "sampling_width_points": 13.3,
+    "best_estimate_labelled_subset": 43.4
+  },
+  "timestamp": "2026-09-11T13:00:00Z",
+  "code_revision": "f474ca04079a7bae6f1d6a665fd1cf6d949c2916-dirty",
+  "n_samples": 1266,
+  "notes": "The objection was correct and the contradiction was in the paper text. The span across unstated conventions is 23.4 to 68.9 percent against a sampling interval of 13.3 points. Rather than defend a corner, the paper now reports the span and takes as its estimate the 43.4 percent measured on the subset where authors state what their error bar means. The width is not a weakness to argue away: it exists because the papers do not print which convention they used.",
+  "content_hash": "139b576d9aa1acec"
+}

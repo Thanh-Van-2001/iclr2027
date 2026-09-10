@@ -186,6 +186,10 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("pct no table", r"13.2\%", provenance=tens)
     reg.add("pct with error bar conditional", r"28.6\%", provenance=tens)
 
+    span = _j("headline_span")
+    reg.add("span low", rf"{span['span'][0]}\%", provenance="headline_span")
+    reg.add("span high", rf"{span['span'][1]}\%", provenance="headline_span")
+
     # The filter-selection check, which a reviewer proposed as a mechanism and
     # which measurement answers against itself.
     fs = "filter_selection_check-a76c61bb"

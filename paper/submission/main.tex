@@ -33,10 +33,12 @@ further \nPctNoNStated{} give an error bar but never say how many runs produced
 it, leaving \nPctTestable{} that can be tested at all; only
 \nPctWithErrorBar{} of accepted papers print an explicit error bar in any
 results table. Among comparisons that can be tested, \nPctFail{} are not
-distinguishable from zero at the $5\%$ level using the authors' own numbers, and
-\nPctFailHolm{} once the simultaneous comparisons in the same table are
-accounted for---so multiplicity alone moves roughly one highlighted result in
-\nOneInNMovedByMultiplicity{} from significant to not. A second measurement needs no error bars at all and so
+distinguishable from zero at the $5\%$ level using the authors' own numbers,
+rising to \nPctFailHolm{} once the simultaneous comparisons in the same table
+are accounted for. That figure is not precise, and cannot be: across the
+conventions the source papers leave unstated it spans \nSpanLow{} to
+\nSpanHigh{}, more than three times the sampling interval, which is the paper's
+own thesis turned on itself. A second measurement needs no error bars at all and so
 covers \nBinomPapers{} papers rather than \nPapersContributing{}: taking the
 gaps papers report between two accuracy-like values, the median gap is
 \nBinomMedianGap{} points and would require about \nBinomMedianN{} test items to
@@ -319,10 +321,43 @@ items; the share needing more than GSM8K moves by a point.
 \section{How much is a definitional choice?}
 \label{sec:sensitivity}
 
-Two decisions in the pipeline are not forced by the data. Reporting a single
-number for a quantity that depends on an arbitrary convention would be the
-failure this paper is about, so both are reported as ranges, and in both cases
-the headline uses the reading least favourable to our own thesis.
+Several decisions in the pipeline are not forced by the data, and they matter
+more than sampling does. Table~\ref{tab:span} gives the failure rate under each.
+The span is \nSpanLow{} to \nSpanHigh{}, against a bootstrap interval of
+\nCiFail{} that captures sampling alone---definitional uncertainty is more than
+three times the statistical kind.
+
+We could pick the corner that suits us, and an earlier draft of this section
+claimed to use the reading least favourable to our own thesis while quoting
+$\rho = 0$, which is the reading most favourable to it. The honest position is
+the one the data supports: on the subset where authors state what their error
+bar means, the failure rate is \nLabelledOnlyFail{}, close to the
+\nPctFail{} headline. That is our estimate. The width of the span is not a
+weakness to be argued away---it exists because the papers do not print which
+convention they used, which is the paper's own thesis applied to itself.
+
+\begin{table}[t]
+\centering
+\caption{The headline failure rate under each decision the pipeline had to
+make. The span across conventions is far wider than the sampling interval,
+because the source papers do not state which convention they used.}
+\label{tab:span}
+\begin{tabular}{lr}
+\toprule
+& Not distinguishable from zero \\
+\midrule
+As reported & \nPctFail{} \\
+Run count taken from the caption only & \nStrictFail{} \\
+Unlabelled bars read as standard errors & \nUnlabelledAsSem{} \\
+Only bars whose meaning is stated & \nLabelledOnlyFail{} \\
+Compared values correlated at $\rho = \nRhoHalf{}$ & \nFailRhoHalf{} \\
+Compared values correlated at $\rho = \nRhoNine{}$ & \nFailRhoNine{} \\
+Tie-marked comparisons removed & \nFailExcludingTie{} \\
+\midrule
+Sampling interval, conventions held fixed & \nCiFail{} \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \paragraph{Where a run count may come from.} A table's caption sometimes states
 how many runs produced its means; more often the count appears once in the
