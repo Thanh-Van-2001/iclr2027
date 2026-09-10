@@ -294,6 +294,10 @@ _SAFE_PATTERNS = [
     re.compile(r"\\(?:sec|fig|tab|eq|app|thm|lem|prop)[A-Za-z]*:\S*"),
     re.compile(r"(?:Section|Figure|Table|Appendix|Equation|Theorem|Lemma|Definition)~?\\?ref"),
     re.compile(r"\\n[A-Z][A-Za-z]*"),            # our own provenance macros
+    # Digits inside a proper noun: MATH-500, CIFAR-10, GPT-4, ARC-Challenge.
+    # These name a thing rather than measure one, and flagging them trains the
+    # author to widen the whitelist, which is how an audit stops working.
+    re.compile(r"\b[A-Za-z]{2,}[-‑]\d+[A-Za-z]*\b"),
 ]
 
 _NUM_RE = re.compile(r"(?<![\w\\.])\d+(?:\.\d+)?(?:e-?\d+)?%?")

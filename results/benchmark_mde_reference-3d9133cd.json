@@ -1,0 +1,30 @@
+{
+  "run_id": "benchmark_mde_reference-3d9133cd",
+  "experiment": "benchmark_mde_reference",
+  "config": {
+    "what": "smallest accuracy difference each common benchmark can distinguish from zero, at alpha 0.05 and power 0.8, from its published evaluation split size",
+    "reading": "independent binomials, which is conservative; a paired column at rho 0.5 is given alongside",
+    "scope": "a property of the benchmarks, not of our corpus"
+  },
+  "metrics": {
+    "n_benchmarks": 27,
+    "examples": {
+      "AIME": 33.15,
+      "HumanEval": 14.18,
+      "GPQA Diamond": 12.9,
+      "MBPP": 8.12,
+      "OpenBookQA": 8.12,
+      "MATH-500": 8.12
+    },
+    "aime_30_items_mde": 33.15,
+    "humaneval_164_mde": 14.18,
+    "gsm8k_1319_mde": 5.0,
+    "mmlu_14042_mde": 1.53,
+    "imagenet_50000_mde": 0.81
+  },
+  "timestamp": "2026-09-12T02:00:00Z",
+  "code_revision": "30910c256e648715ef2000e4fe92bf5acbe88dbf-dirty",
+  "n_samples": 27,
+  "notes": "AIME has thirty items and cannot distinguish any difference below about thirty-three points, while the field routinely reports three-point AIME improvements. The table is meant to be used before a claim is written, not after.",
+  "content_hash": "5500a9c93ed68dc8"
+}

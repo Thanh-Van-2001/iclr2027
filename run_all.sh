@@ -6,6 +6,7 @@ set -e
 python study/make_all.py
 python study/binomial_check.py
 python study/benchmark_resolution.py
+python study/resolution_table.py
 python study/make_numbers.py
 python study/figures_paper.py --analysis out/analysis_2025.json \
     --run-id survivability_both_years --out-dir paper/submission/figures

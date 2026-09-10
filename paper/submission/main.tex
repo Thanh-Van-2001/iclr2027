@@ -79,28 +79,39 @@ either side, and \nPctTestable{} can be tested. This is not a claim about
 whether the field's results are true. It is a claim about whether they are
 checkable, which is prior to truth and, unlike truth, is settled by looking.
 
-\paragraph{Contributions.}
+\paragraph{Contributions.} Prior audits of reporting practice annotate papers by
+hand, which bounds them to a few hundred papers and to a label per paper. We
+work at the unit a results table actually claims in, which is the comparison,
+and that changes both what can be measured and how much of it there is.
+
 \begin{itemize}
-\item We define the unit a results table actually claims---the bolded value
-  against the best unbolded value in the same comparison group---and give a
-  method that recovers it, together with the direction of the metric and the
-  orientation of the table, from typography rather than from prose.
-\item We measure how many such claims are checkable in \nPapersTotal{} accepted
-  papers, and find that \nPctTestable{} are.
-\item Among those that are checkable, we measure how many survive the authors'
-  own error bars: \nPctFail{} do not, rising to \nPctFailHolm{} when the
-  simultaneous comparisons in the same table are accounted for.
-\item We ask whether the experiments could have detected what they claim:
-  \nPctUnderpowered{} of checkable comparisons report a gap below their own
-  minimum detectable effect, so the failures are not close calls.
-\item We compare what NeurIPS authors declare on the mandatory checklist against
-  what their tables contain. Of \nCheckYes{} papers answering that they report
-  error bars suitably and correctly defined, \nCheckYesNoTable{} print none in
-  any results table.
-\item We release the pipeline and the per-comparison database, and we report
-  what our own extractor gets wrong, measured three ways---by eye, against a
-  second extractor built on different principles, and against author
-  self-report.
+\item \textbf{A claim unit recoverable from typography.} The object of
+  measurement is the bolded value against the best unbolded value in its group,
+  and it---with the metric's direction and the table's orientation---is
+  recovered from where the bold falls rather than from prose. That makes the
+  method independent of what any benchmark measures, which is what lets one
+  pipeline cover whole venues.
+\item \textbf{Checkability on \nComparisonsTwentyFive{} comparisons.}
+  \nPctNeitherSide{} carry no error bar on either side; \nPctTestable{} can be
+  tested. A paper-level audit cannot see this, because a paper with one error
+  bar in an appendix counts as reporting variability while its main claim stays
+  unchecked.
+\item \textbf{Three questions a paper-level label cannot answer.} Whether the
+  claimed difference survives the authors' own error bars (\nPctFail{} do not,
+  \nPctFailHolm{} after correcting for the rest of its table); whether the
+  experiment could ever have detected it (\nPctUnderpowered{} report a gap below
+  their own minimum detectable effect); and whether the benchmark can resolve it
+  (\nResolutionPctBelow{} cannot).
+\item \textbf{A reference table for what benchmarks can resolve}
+  (Appendix~\ref{app:mde}), from published split sizes alone. AIME supports no
+  claim below \nAimeMde{} points, a \nFiveHundredItems{}-item benchmark none
+  below \nFiveHundredMde{}. Usable before an experiment, not only after.
+\item \textbf{Declaring is not reporting.} Of \nCheckYes{} NeurIPS papers
+  answering that they report error bars suitably and correctly defined,
+  \nCheckYesNoTable{} print none in any results table.
+\item \textbf{An instrument measured three ways}---by eye, against a second
+  extractor built on different principles, and against author self-report---and
+  released with the per-comparison database.
 \end{itemize}
 
 \section{What a results table claims}
@@ -379,9 +390,10 @@ convention they used, which is the paper's own thesis applied to itself.
 
 \begin{table}[t]
 \centering
-\caption{The headline failure rate under each decision the pipeline had to
-make. The span across conventions is far wider than the sampling interval,
-because the source papers do not state which convention they used.}
+\caption{Both headline figures under each decision the pipeline had to make.
+The span across conventions is far wider than the sampling interval in both
+cases, because the source papers do not state which convention they used, and
+wider still for checkability than for the failure rate.}
 \label{tab:span}
 \begin{tabular}{lr}
 \toprule
@@ -433,9 +445,9 @@ the field. The finding does not depend on the choice: under every assumption we
 can defend, at least a fifth of checkable improvements are indistinguishable
 from zero.
 
-\paragraph{And this moves checkability further than it moves survival.} The
-share that can be checked at all is the more convention-dependent of our two
-headline figures, and we owe the reader that plainly. A standard error is
+\paragraph{Checkability moves further than survival does.} The share that can be
+checked at all is the more convention-dependent of our two headline figures, and
+we owe the reader that plainly. A standard error is
 already the dispersion of a mean, so a comparison whose bars are standard errors
 needs no run count: reading every unlabelled bar that way makes
 \nTestableAsSem{} of comparisons testable rather than \nPctTestable{}, while
@@ -571,11 +583,26 @@ question by reading papers one at a time. \citet{kirly2018nips} reviewed NeurIPS
 2017 by hand and found roughly a third reporting confidence intervals and a few
 per cent making a formal comparison. \citet{christodoulou2024confidence}
 hand-annotated 221 MICCAI 2023 segmentation papers and found more than half
-assessing no performance variability at all. Theirs is the method ours approximates, and their
-numbers are the closest external check we have: our \nPctWithErrorBar{} sits
-between them, on a corpus two orders of magnitude larger. Automation buys scale
-and a per-comparison unit, and costs the judgement a human annotator brings to
-an ambiguous table.
+assessing no performance variability at all. Theirs is the method ours
+approximates, and their numbers are the closest external check we have: our
+\nPctWithErrorBar{} sits between them, on a corpus two orders of magnitude
+larger.
+
+Their limit is the one manual annotation always has, and it is the gap this work
+fills. A person can read a few hundred papers, and can record only what happens
+at the level of a paper: whether it reports variability somewhere. But the unit
+a results table claims in is not the paper, it is the individual comparison, and
+a paper printing one error bar in an appendix while its main table prints none
+counts as reporting variability under a paper-level audit and as unchecked under
+ours. Working at the comparison is what makes \nComparisonsTwentyFive{}
+observations available where hand annotation yields a few hundred, and it is
+what makes the questions in Sections~\ref{sec:survival} to \ref{sec:binomial}
+askable at all: whether the specific difference being claimed survives its own
+error bars, whether the experiment could ever have detected it, and whether the
+benchmark it was measured on can resolve it. None of the three is answerable
+from a paper-level label. What automation costs is the judgement a human brings
+to an ambiguous table, which is why Section~\ref{sec:threats} spends its length
+measuring what ours gets wrong.
 
 \paragraph{Statistical practice as an object of study.} A second group asks the
 question of one subfield each. \citet{card2020with} compute the
@@ -592,11 +619,10 @@ all three in unit and scale: every highlighted comparison in \nPapersTotal{}
 papers, at the cost of reading only what is printed.
 
 \paragraph{Extracting results from papers.} \citet{kardas2020axcell} extract
-result tables from machine learning PDFs to populate leaderboards. The task
-overlaps ours mechanically and diverges in purpose: leaderboard extraction wants
-the winning number and can ignore a missing error bar, whereas the missing error
-bar is our observation. We know of no released annotation of error-bar presence
-or run counts against which an extractor could be scored, which is why
+result tables from machine learning PDFs to populate leaderboards: the same
+mechanics, the opposite purpose, since leaderboard extraction wants the winning
+number and can ignore a missing error bar. We know of no released annotation of
+error-bar presence against which an extractor could be scored, which is why
 Section~\ref{sec:threats} measures ours three ways instead.
 
 \section{Discussion}
@@ -608,9 +634,21 @@ number of runs behind them. A paper that prints those becomes checkable by
 anyone, forever, at no cost to the authors. A paper that does not is asking to
 be believed rather than read.
 
+A second fix costs nothing at all, because it applies before the experiment
+rather than after. The smallest difference a benchmark can resolve follows from
+its evaluation split and belongs to the benchmark, not to any paper.
+Appendix~\ref{app:mde} tabulates it, and some values are startling: AIME's
+\nAimeItems{} items cannot distinguish anything below about \nAimeMde{} points,
+HumanEval's \nHumanevalItems{} below \nHumanevalMde{}. An author who consults it
+first will sometimes find the sentence cannot be written, which is the point.
+
 We would rather this were a paper about a field that turned out to be careful.
 The descriptive result is what it is; the prescriptive one follows from it
 immediately, and is small.
+
+% The mandatory statements below do not count toward the nine-page limit,
+% so the main text ends here.
+\label{lastmainpage}
 
 \subsubsection*{Reproducibility statement}
 The corpus is defined by a venue, a year, and a random seed, and is rebuilt by
@@ -636,7 +674,6 @@ database with paper identifiers so that our claims can be checked, not so that
 particular papers can be criticised. The pattern is a property of the field's
 conventions, not of the people following them.
 
-\label{lastmainpage}
 
 \bibliographystyle{iclr2027_conference}
 \bibliography{refs}
@@ -662,6 +699,23 @@ tie-marked comparisons moves the failure rate from \nPctFail{} to
 \nFailExcludingTie{}, because the convention remains rare even after the
 enrichment. The commoner convention, marking the second-best result
 (\nPctSecondBest{} of tables), is not a tie claim and is left in.
+
+\section{What each benchmark can resolve}
+\label{app:mde}
+
+Table~\ref{tab:mde} gives, for each benchmark in common use, the smallest
+difference in accuracy it can distinguish from zero at $\alpha = 0.05$ and
+\nPowerLevel{} power. The quantity depends only on the published evaluation
+split, so it is fixed, checkable, and available before an experiment is run.
+
+Two readings are shown. The independent-binomial column treats the two systems
+as unrelated, which is conservative; the paired column assumes they are scored
+on the same items with a correlation of \nPairedRho{}, which is closer to how
+benchmarks are actually used and resolves finer. Values are given at three
+accuracies because a binomial variance is largest near one half, so a benchmark
+resolves more finely at the top of its scale than in the middle.
+
+\input{mde_table.tex}
 
 \section{The checklist and the recall audit}
 \label{app:checklist}
