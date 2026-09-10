@@ -1,0 +1,42 @@
+{
+  "run_id": "correlation_sensitivity-c408f7f7",
+  "experiment": "correlation_sensitivity",
+  "config": {
+    "model": "Var(A-B) = SE_A^2 + SE_B^2 - 2 rho SE_A SE_B",
+    "why": "two methods in one results table are evaluated on the same benchmark instances, so their errors are positively correlated and the difference is paired",
+    "direction_of_the_error": "assuming rho=0 inflates the standard error of the difference and therefore inflates this paper failure rate, which is the direction an author auditing other people statistics has least right to err in",
+    "limitation": "papers do not print the covariance, so this is a sensitivity analysis and not an estimate"
+  },
+  "metrics": {
+    "0.0": {
+      "n": 1240,
+      "pct_fail": 40.9,
+      "pct_fail_holm": 48.1
+    },
+    "0.3": {
+      "n": 1240,
+      "pct_fail": 36.9,
+      "pct_fail_holm": 43.2
+    },
+    "0.5": {
+      "n": 1240,
+      "pct_fail": 34.0,
+      "pct_fail_holm": 40.2
+    },
+    "0.7": {
+      "n": 1240,
+      "pct_fail": 29.9,
+      "pct_fail_holm": 34.3
+    },
+    "0.9": {
+      "n": 1240,
+      "pct_fail": 23.1,
+      "pct_fail_holm": 27.4
+    }
+  },
+  "timestamp": "2026-09-10T23:30:00Z",
+  "code_revision": "b8cab15575936da8e2e8280f969c9c385fbf9cb9-dirty",
+  "n_samples": 1240,
+  "notes": "The headline 40.9 percent assumes independence. At a plausible rho of 0.5 it is 34.0 percent, and even at rho 0.9 it is 23.1 percent, so the finding survives the assumption most generous to the field.",
+  "content_hash": "81a1981131d8f107"
+}

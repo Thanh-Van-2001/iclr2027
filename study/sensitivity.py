@@ -207,3 +207,60 @@ def main(argv=None) -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
+
+
+def correlation_sensitivity(comparisons: list, rhos=(0.0, 0.3, 0.5, 0.7, 0.9)) -> dict:
+    """What if the two compared values are not independent?
+
+    Two methods in one results table are nearly always evaluated on the same
+    benchmark instances, so their errors are positively correlated and the
+    difference is a paired quantity:
+
+        Var(A - B) = SE_A^2 + SE_B^2 - 2 rho SE_A SE_B
+
+    Assuming rho = 0 inflates the standard error of the difference, which makes
+    a gap harder to call significant and therefore makes this paper's failure
+    rate *higher* than it should be. That is the direction an author auditing
+    other people's statistics has the least right to err in, so the whole range
+    is reported and the headline uses a moderate positive correlation rather
+    than the value most flattering to the thesis.
+
+    The papers do not print the covariance, so this is a sensitivity analysis,
+    not an estimate.
+    """
+    import math
+    from analyze import _standard_error
+    from paperengine.stats import holm_bonferroni, norm_cdf
+
+    out = {}
+    for rho in rhos:
+        tested = []
+        for c in comparisons:
+            kind = c.get("dispersion_kind")
+            se_w = _standard_error(c["winner_dispersion"], kind, c.get("n_runs"))
+            se_r = _standard_error(c["runner_dispersion"], kind, c.get("n_runs"))
+            if se_w is None or se_r is None:
+                continue
+            var = se_w ** 2 + se_r ** 2 - 2 * rho * se_w * se_r
+            if var <= 0:
+                continue
+            z = c["gap"] / math.sqrt(var)
+            tested.append((c, 2 * (1 - norm_cdf(abs(z)))))
+        if not tested:
+            out[str(rho)] = {"n": 0}
+            continue
+        by_table: dict = {}
+        for c, p in tested:
+            by_table.setdefault((c["paper"], c["table"], c["page"]), []).append((c, p))
+        fail = fail_holm = 0
+        for group in by_table.values():
+            ps = [p for _, p in group]
+            holm = holm_bonferroni(ps, 0.05)
+            for (c, p), h in zip(group, holm):
+                fail += p >= 0.05
+                fail_holm += not h
+        n = len(tested)
+        out[str(rho)] = {"n": n,
+                         "pct_fail": round(100 * fail / n, 1),
+                         "pct_fail_holm": round(100 * fail_holm / n, 1)}
+    return out

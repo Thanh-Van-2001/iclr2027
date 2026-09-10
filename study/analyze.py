@@ -27,7 +27,9 @@ that maximises significance would be the same sin the study is measuring.
 from __future__ import annotations
 
 import argparse
+import collections
 import json
+import re
 import math
 import os
 import statistics
@@ -383,3 +385,110 @@ def design_effect(comparisons: list, value) -> dict:
     deff = 1 + (m - 1) * icc
     return {"icc": round(icc, 4), "mean_cluster": round(m, 2),
             "design_effect": round(deff, 3), "n_eff": int(round(n / deff))}
+
+
+# --------------------------------------------------------------------------
+# uncertainty that is reported, but not per cell
+# --------------------------------------------------------------------------
+
+# A caption reading "standard errors are within 0.005m" reports uncertainty
+# without attaching it to any cell. Counting such a table as printing nothing
+# would overstate the headline; counting it as testable would be worse, since
+# a bound is not an interval. It is its own category, found by looking at a
+# table the extractor had called empty.
+CAPTION_UNCERTAINTY = re.compile(
+    r"(?i)\b(?:standard\s+(?:error|deviation)s?|confidence\s+intervals?|error\s+bars?|"
+    r"variance|std\.?\s*dev|s\.?e\.?m)\b[^.]{0,120}?"
+    r"(?:are|is|were|was|within|less\s+than|below|at\s+most|<|\u2264)"
+)
+CAPTION_RUNS = re.compile(
+    r"(?i)\b(?:averaged?|mean|median)\b[^.]{0,80}?\b(?:over|across)\b[^.]{0,40}?\b\d{1,3}\b"
+    r"[^.]{0,20}?(?:seeds?|runs?|trials?)"
+)
+
+
+def caption_reports_uncertainty(table: dict) -> bool:
+    """Does the caption say something quantitative about spread, cell by cell or not?"""
+    cap = table.get("caption") or ""
+    return bool(CAPTION_UNCERTAINTY.search(cap) or CAPTION_RUNS.search(cap))
+
+
+def extraction_funnel(records: list) -> dict:
+    """Where tables and groups are lost between the PDF and the analysis.
+
+    Reviewers asked what population the comparisons are drawn from, and the
+    answer was not in the paper. Every discard here is a decision that could
+    have gone another way, so each is counted rather than described.
+    """
+    n_tables = n_no_orientation = n_with_comparisons = 0
+    n_groups = n_single_bold = 0
+    n_caption_uncertainty = 0
+    tables_no_cell_dispersion = 0
+
+    for r in records:
+        for t in r.get("tables", []):
+            n_tables += 1
+            cells = t["cells"]
+            orient = orientation(cells)
+            if orient == "none":
+                n_no_orientation += 1
+            groups = (_columns(cells) if orient == "column"
+                      else _rows(cells) if orient == "row" else [])
+            n_groups += len(groups)
+            n_single_bold += sum(1 for g in groups
+                                 if sum(1 for c in g if c["bold"]) == 1 and
+                                 any(not c["bold"] for c in g))
+            cmps = comparisons_from_table(t)
+            if cmps:
+                n_with_comparisons += 1
+            if not any(c["dispersion"] is not None for c in cells):
+                tables_no_cell_dispersion += 1
+                if caption_reports_uncertainty(t):
+                    n_caption_uncertainty += 1
+
+    return {
+        "tables_detected": n_tables,
+        "tables_with_no_usable_orientation": n_no_orientation,
+        "tables_yielding_at_least_one_comparison": n_with_comparisons,
+        "candidate_groups": n_groups,
+        "groups_with_exactly_one_bold_and_a_rival": n_single_bold,
+        "pct_of_groups_usable": round(100 * n_single_bold / max(n_groups, 1), 1),
+        "tables_with_no_cell_level_dispersion": tables_no_cell_dispersion,
+        "of_those_whose_caption_reports_uncertainty": n_caption_uncertainty,
+        "pct_of_empty_tables_with_caption_uncertainty": round(
+            100 * n_caption_uncertainty / max(tables_no_cell_dispersion, 1), 1),
+    }
+
+
+def checklist_agreement(records: list) -> dict:
+    """What NeurIPS authors answered, against what their tables contain.
+
+    The checklist question is nearly the one this study asks, so disagreement is
+    informative in both directions: it bounds the extractor, and it measures how
+    often a declared yes corresponds to anything a reader can use.
+    """
+    cells: dict = collections.Counter()
+    justif_figures = 0
+    for r in records:
+        ans = r.get("checklist_error_bars")
+        if ans not in ("yes", "no", "na"):
+            continue
+        has = bool(r.get("reports_explicit_error_bar"))
+        cells[(ans, has)] += 1
+        if ans == "yes" and not has:
+            j = (r.get("checklist_justification") or "").lower()
+            if "figure" in j or "plot" in j or "curve" in j or "shaded" in j:
+                justif_figures += 1
+    yes_total = cells[("yes", True)] + cells[("yes", False)]
+    return {
+        "n_with_a_checklist_answer": sum(cells.values()),
+        "answered_yes": yes_total,
+        "answered_no": cells[("no", True)] + cells[("no", False)],
+        "answered_na": cells[("na", True)] + cells[("na", False)],
+        "yes_and_table_has_error_bar": cells[("yes", True)],
+        "yes_but_no_table_error_bar": cells[("yes", False)],
+        "no_but_table_has_error_bar": cells[("no", True)],
+        "pct_of_yes_with_no_table_error_bar": round(
+            100 * cells[("yes", False)] / max(yes_total, 1), 1),
+        "of_those_justified_by_figures": justif_figures,
+    }
