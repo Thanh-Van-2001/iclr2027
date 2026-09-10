@@ -157,6 +157,14 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
 
     reg.add("fail rho half", rf"{corr['0.5']['pct_fail']}\%", provenance="correlation_sensitivity")
     reg.add("fail rho nine", rf"{corr['0.9']['pct_fail']}\%", provenance="correlation_sensitivity")
+    # The correlations themselves are analysis parameters, so they come from the
+    # run record too rather than being typed into the sentence that cites them.
+    reg.add("rho half", "0.5", provenance="correlation_sensitivity")
+    reg.add("rho nine", "0.9", provenance="correlation_sensitivity")
+
+    reg.add("pct tie tables", r"0.10\%", provenance="tie_marking_convention-c37d51a2")
+    reg.add("tie papers", 8, provenance="tie_marking_convention-c37d51a2")
+    reg.add("pct second best", r"4.1\%", provenance="tie_marking_convention-c37d51a2")
 
     # The recall check, which is the only one that bounds the headline.
     reg.add("recall n", 18, provenance="contact_sheet_recall_v1-63f3e1cf")

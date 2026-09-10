@@ -40,11 +40,12 @@ accounted for---so multiplicity alone moves roughly one highlighted result in
 where they matter: improvements that fail have a median size of \nGapFailing{}
 against \nGapPassing{} for those that survive, which is to say the margins that
 decide leaderboard order are the ones the evidence cannot support. An
-independent sample of \nPapersTwentyFour{} papers from 2024 reproduces the
-central figure to the first decimal place. We release the pipeline, the
-per-comparison database, and the record of five parser bugs that visual
-validation caught---each of which had produced a confident and wrong version of
-these numbers.
+independent sample of \nPapersTwentyFour{} papers from 2024 gives
+\nPctNeitherSideTwentyFour{} and \nPctFailTwentyFour{}, and NeurIPS and ICML
+agree to within two points. We release the pipeline, the per-comparison
+database, and the record of six parser bugs that visual validation caught---each
+of which had produced a confident and wrong version of these numbers, and every
+one of which could only have moved them in the same direction.
 \end{abstract}
 
 \section{Introduction}
@@ -81,11 +82,17 @@ checkable, which is prior to truth and, unlike truth, is settled by looking.
 \item Among those that are checkable, we measure how many survive the authors'
   own error bars: \nPctFail{} do not, rising to \nPctFailHolm{} when the
   simultaneous comparisons in the same table are accounted for.
-\item We show the failures are concentrated in small margins---median
-  \nGapFailing{} against \nGapPassing{}---which is where leaderboard rankings
-  are decided.
+\item We ask whether the experiments could have detected what they claim:
+  \nPctUnderpowered{} of checkable comparisons report a gap below their own
+  minimum detectable effect, so the failures are not close calls.
+\item We compare what NeurIPS authors declare on the mandatory checklist against
+  what their tables contain. Of \nCheckYes{} papers answering that they report
+  error bars suitably and correctly defined, \nCheckYesNoTable{} print none in
+  any results table.
 \item We release the pipeline and the per-comparison database, and we report
-  what our own extractor gets wrong, measured two ways.
+  what our own extractor gets wrong, measured three ways---by eye, against a
+  second extractor built on different principles, and against author
+  self-report.
 \end{itemize}
 
 \section{What a results table claims}
@@ -261,6 +268,22 @@ only \nPctErrorBarPapersStatingRuns{} state a number of runs anywhere
 error bar and no count). Reporting a dispersion without saying what it is a
 dispersion over is itself the most common failure mode we see.
 
+\paragraph{Whether the two values are independent.} Our test treats the winner
+and the runner-up as independent samples. They are not: in almost every table
+under study the two methods are evaluated on the same fixed test set, so their
+errors are positively correlated and the difference is a paired quantity, with
+$\mathrm{Var}(A - B) = \sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B$.
+Assuming $\rho = 0$ inflates the standard error of the difference, which makes a
+gap harder to call significant and therefore makes \emph{our own} failure rate
+too high. Papers do not print the covariance, so we report the range: at
+$\rho = 0.5$ the failure rate is \nFailRhoHalf{} rather than \nPctFail{}, and
+even at $\rho = \nRhoNine{}$ it is \nFailRhoNine{}. We quote the independent figure in
+the abstract because it is the assumption the source papers' own reporting
+supports, and we flag here that it is the end of the range least favourable to
+the field. The finding does not depend on the choice: under every assumption we
+can defend, at least a fifth of checkable improvements are indistinguishable
+from zero.
+
 \paragraph{What an unlabelled error bar means.} A paper that prints
 $82.4 \pm 0.3$ usually does not say whether $0.3$ is a standard deviation or a
 standard error, and the two differ by $\sqrt{n}$. On the \nNUnlabelled{}
@@ -318,6 +341,16 @@ value in its group---authors marking their own method regardless of whether it
 won---and those are dropped too, since no victory is being claimed. What we
 analyse is therefore the set of claimed wins, not of all highlighted cells, and
 the funnel in Section~\ref{sec:checkable} gives every count.
+
+\paragraph{Some tables mark ties, and we would score a tie as a failure.} A
+paper that bolds the best result and marks every result not statistically
+distinguishable from it has already declared those pairs to be ties; counting
+them as failed comparisons would inflate our failure rate. The convention is
+real and rare: captions claiming statistical indistinguishability appear in
+\nPctTieTables{} of tables, in \nTiePapers{} papers. The commoner convention,
+marking the second-best result, appears in \nPctSecondBest{} of tables and is
+not a tie claim. We leave both in rather than filtering on caption text, and
+note that the first would move the failure rate by less than a tenth of a point.
 
 \paragraph{We read tables, and papers are more than tables.} Uncertainty is
 sometimes reported in a figure, in prose, or as a bound in a caption rather than

@@ -1,0 +1,22 @@
+{
+  "run_id": "tie_marking_convention-c37d51a2",
+  "experiment": "tie_marking_convention",
+  "config": {
+    "objection": "a reviewer noted that some papers bold the best result and mark every result not statistically distinguishable from it, so our pipeline would score an author-declared tie as a failure",
+    "method": "caption text search, separating claims of statistical indistinguishability from the much commoner second-best marking"
+  },
+  "metrics": {
+    "n_tables": 10924,
+    "captions_claiming_a_statistical_tie": 11,
+    "pct_tables_claiming_a_tie": 0.1,
+    "papers_affected": 8,
+    "pct_papers_affected": 0.4,
+    "captions_marking_second_best_only": 448,
+    "pct_second_best": 4.1
+  },
+  "timestamp": "2026-09-11T03:30:00Z",
+  "code_revision": "b3df8dd6889f0ab2707283cecb1e246eb86d9f8b-dirty",
+  "n_samples": 10924,
+  "notes": "The objection is sound in principle and negligible in this corpus. Marking statistical ties appears in one table in a thousand. The commoner convention, marking the second-best result, is not a tie claim and does not affect the comparison.",
+  "content_hash": "51d6a6d8a7646b30"
+}
