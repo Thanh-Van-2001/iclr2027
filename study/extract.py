@@ -42,7 +42,14 @@ except ImportError:  # pragma: no cover
 BOLD_FLAG = 1 << 4
 
 # 82.4 +/- 0.3, 82.4 (0.3)
-NUM_PM = re.compile(r"(-?\d+\.?\d*)[\s\*†‡§]{0,3}(?:±|\+/-|\+-)[\s]{0,2}(\d+\.?\d*)")
+# 82.4 +/- 0.3, 82.4(+/-0.3), 82.4 [+/- 0.3]. The bracketed forms were missing
+# until a contact sheet showed a whole ICML table of "76.63(+/-3.98)" values
+# being reported as carrying no error bar at all: the mean-then-symbol pattern
+# needs the symbol adjacent, and the mean-then-parenthesis pattern needs a digit
+# after the bracket, so this style fell between the two.
+NUM_PM = re.compile(
+    r"(-?\d+\.?\d*)[\s\*†‡§]{0,3}[\(\[]?[\s]{0,2}"
+    r"(?:±|\+/-|\+-)[\s]{0,2}(\d+\.?\d*)[\)\]]?")
 NUM_PAREN = re.compile(r"(-?\d+\.?\d*)\s*\(\s*(\d+\.?\d*)\s*\)")
 NUM_BARE = re.compile(r"^-?\d+\.?\d*$")
 

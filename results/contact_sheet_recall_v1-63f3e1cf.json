@@ -1,0 +1,30 @@
+{
+  "run_id": "contact_sheet_recall_v1-63f3e1cf",
+  "experiment": "contact_sheet_recall_v1",
+  "config": {
+    "design": "18 tables sampled at random from those the extractor reported as containing no error bar anywhere, rendered as cropped contact sheets and judged by eye",
+    "question": "is there any error bar visible in this table that the extractor did not find",
+    "why_this_and_not_precision": "the headline claim can only fail through false negatives, and a precision check never looks at values the extractor missed"
+  },
+  "metrics": {
+    "n_judged": 18,
+    "agree": 16,
+    "missed_an_error_bar": 1,
+    "uncertainty_stated_in_caption_only": 1,
+    "recall_strict": 0.889,
+    "wilson_strict": [
+      0.672,
+      0.969
+    ],
+    "recall_counting_caption_case_as_correct": 0.944,
+    "wilson_lenient": [
+      0.742,
+      0.99
+    ]
+  },
+  "timestamp": "2026-09-10T22:30:00Z",
+  "code_revision": "a84e93fe84caec45e2891973d4710a658e0092bc-dirty",
+  "n_samples": 18,
+  "notes": "The miss is a sixth extractor bug: values written 76.63(+/-3.98), with the bracket wrapping the symbol, fell between the mean-then-symbol and mean-then-parenthesis patterns and a whole ICML table was reported as carrying no uncertainty. Pattern extended; the corpus must be re-extracted and the headline will move down. The caption case is a table with no per-cell error bar whose caption bounds the standard error, which is a real category the paper must name rather than an extraction failure.",
+  "content_hash": "ed08f895ba4fd6dd"
+}
