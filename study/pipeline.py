@@ -21,7 +21,6 @@ import os
 import queue
 import random
 import sys
-import tempfile
 import threading
 import time
 from typing import Optional
@@ -30,8 +29,54 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(HERE, ".."))
 
+import requests  # noqa: E402
+
 from extract import extract_paper  # noqa: E402
-from harvest import SOURCES, _get  # noqa: E402
+from harvest import SOURCES  # noqa: E402
+
+# One connection pool per worker thread. Every paper was previously a fresh TLS
+# handshake to the same two hosts; keeping the connection alive removes a round
+# trip per download, and there are thousands of downloads.
+_local = threading.local()
+UA = {"User-Agent": "Mozilla/5.0 (compatible; paper-audit/0.1)"}
+
+
+def _session() -> "requests.Session":
+    sess = getattr(_local, "session", None)
+    if sess is None:
+        sess = requests.Session()
+        sess.headers.update(UA)
+        adapter = requests.adapters.HTTPAdapter(pool_connections=4, pool_maxsize=4,
+                                                max_retries=2)
+        sess.mount("https://", adapter)
+        _local.session = sess
+    return sess
+
+
+def _content_length(url: str, timeout: int = 25):
+    """Ask how big the file is before spending bandwidth on it.
+
+    The size distribution is heavily skewed -- a median of 2 MB against a mean
+    of 5 -- so the few very large PDFs dominate the transfer. They were being
+    downloaded in full and then discarded for exceeding the cap, which is the
+    worst of both worlds. A HEAD request costs one round trip.
+
+    Note that the cap itself is a source of selection bias: image-heavy papers
+    are not a random subset of the literature. The count of papers skipped this
+    way is reported, and the cap is set high enough that it is small.
+    """
+    try:
+        r = _session().head(url, timeout=timeout, allow_redirects=True)
+        n = r.headers.get("Content-Length")
+        return int(n) if n else None
+    except requests.RequestException:
+        return None
+
+
+def _fetch(url: str, timeout: int = 90) -> bytes:
+    r = _session().get(url, timeout=timeout)
+    r.raise_for_status()
+    return r.content
 
 
 # Above this size a PDF is skipped rather than parsed.
@@ -54,7 +99,7 @@ def _already_done(path: str) -> set:
     return done
 
 
-def run(records: list, out_jsonl: str, *, workers: int = 3, delay: float = 0.1,
+def run(records: list, out_jsonl: str, *, workers: int = 3, delay: float = 0.02,
         max_pages: int = 40) -> dict:
     done = _already_done(out_jsonl)
     todo = [r for r in records if r["id"] not in done]
@@ -74,9 +119,11 @@ def run(records: list, out_jsonl: str, *, workers: int = 3, delay: float = 0.1,
                 rec = work.get_nowait()
             except queue.Empty:
                 return
-            tmp = None
             try:
-                blob = _get(rec["pdf"])
+                declared = _content_length(rec["pdf"])
+                if declared is not None and declared > MAX_PDF_BYTES:
+                    raise ValueError(f"PDF too large ({declared // 1_000_000} MB, from HEAD)")
+                blob = _fetch(rec["pdf"])
                 if len(blob) < 20_000 or not blob.startswith(b"%PDF"):
                     raise ValueError("not a usable PDF")
                 # A handful of very large PDFs -- image-heavy appendices, mostly
@@ -86,28 +133,22 @@ def run(records: list, out_jsonl: str, *, workers: int = 3, delay: float = 0.1,
                 if len(blob) > MAX_PDF_BYTES:
                     raise ValueError(f"PDF too large ({len(blob) // 1_000_000} MB)")
                 digest = hashlib.sha256(blob).hexdigest()[:16]
-                fd, tmp = tempfile.mkstemp(suffix=".pdf")
-                with os.fdopen(fd, "wb") as tf:
-                    tf.write(blob)
-                out = extract_paper(tmp, max_pages=max_pages)
+                out = extract_paper(blob=blob, max_pages=max_pages)
             except Exception as exc:
                 with lock:
                     if "too large" in str(exc):
                         key = "skipped_large"
+                    elif isinstance(exc, (requests.RequestException, ValueError)):
+                        key = "download_failed"
                     else:
-                        key = "parse_failed" if tmp else "download_failed"
+                        key = "parse_failed"
                     stats[key] += 1
                     if (stats["download_failed"] + stats["parse_failed"]) % 25 == 1:
                         print(f"  [{key}] {rec['title'][:55]}: {type(exc).__name__}")
-                if tmp and os.path.exists(tmp):
-                    os.unlink(tmp)
                 work.task_done()
                 time.sleep(delay)
                 continue
-            finally:
-                pass
 
-            os.unlink(tmp)
             out.pop("path", None)
             # The full cell dump is what makes the file enormous; keep the
             # per-table summaries and the cells, but not the page text.

@@ -362,11 +362,21 @@ def _n_runs(caption: str, body_nearby: str):
     return None, None
 
 
-def extract_paper(pdf_path: str, max_pages: int = 40) -> dict:
-    """Extract every table-like numeric block from one paper."""
+def extract_paper(pdf_path=None, max_pages: int = 40, *, blob: bytes = None) -> dict:
+    """Extract every table-like numeric block from one paper.
+
+    Accepts either a path or the PDF bytes. Passing bytes skips a write and a
+    read of several megabytes per paper, which is pure overhead when the file is
+    deleted immediately afterwards anyway.
+    """
     if fitz is None:
         raise RuntimeError("PyMuPDF is required: pip install pymupdf")
-    doc = fitz.open(pdf_path)
+    if blob is not None:
+        doc = fitz.open(stream=blob, filetype="pdf")
+    elif pdf_path is not None:
+        doc = fitz.open(pdf_path)
+    else:
+        raise ValueError("give extract_paper a path or a blob")
     n_pages = len(doc)
     page_texts = []
     for pno, page in enumerate(doc):
