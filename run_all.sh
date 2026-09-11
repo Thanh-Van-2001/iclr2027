@@ -4,6 +4,7 @@
 # network. Building the corpus itself is study/pipeline.py, which does.
 set -e
 python study/make_all.py
+python study/extra_stats.py > out/extra_stats.log
 python study/binomial_check.py
 python study/benchmark_resolution.py
 python study/resolution_table.py

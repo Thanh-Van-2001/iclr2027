@@ -318,6 +318,112 @@ def power_audit(comparisons: list, power: float = 0.8, alpha: float = 0.05) -> d
     }
 
 
+def design_mde(comparisons: list, records: list, power: float = 0.8, alpha: float = 0.05,
+               min_cells: int = 10, min_papers: int = 3) -> dict:
+    """Could a design with this many runs have detected this gap?
+
+    The first version of this audit computed the minimum detectable effect from
+    the paper's own error bar and run count. Two reviewers pointed out, rightly,
+    that gap over that quantity is the z statistic divided by 2.80, so "below
+    its own MDE" is the significance test at a different cutoff, the observed-
+    power fallacy of Hoenig and Heisey (2001). That version is kept below as
+    ``own_dispersion`` for comparison and is not what the paper reports.
+
+    This version takes the run count from the paper and the dispersion from
+    everyone else: the median standard deviation printed by other papers on the
+    same benchmark, on the same scale, or across the corpus when the benchmark
+    is unnamed or rarely reported with bars. That is a prospective statement
+    about the design -- three seeds, typical noise -- and it is independent of
+    the gap and of whatever the paper printed. It also reaches the comparisons
+    with a run count but no error bar at all, which the z test cannot.
+    """
+    import math
+    import statistics
+    from benchmark_resolution import identify
+    from paperengine.stats import norm_ppf
+
+    k = norm_ppf(1 - alpha / 2) + norm_ppf(power)
+
+    def scale_of(v):
+        if v is None:
+            return None
+        a = abs(v)
+        return "unit" if a <= 1.0 else ("percent" if a <= 100.0 else None)
+
+    captions = {}
+    sd_by_key: dict = {}      # (benchmark, scale) -> [(paper, sd)]
+    sd_by_scale: dict = {}    # scale -> [(paper, sd)]
+    for r in records:
+        for t in r.get("tables", []):
+            key = (r["id"], t.get("number"), t.get("page"))
+            captions[key] = t.get("caption") or ""
+            if t.get("dispersion_kind") != "std":
+                continue
+            benches = identify(captions[key])
+            for c in t["cells"]:
+                if c.get("dispersion") is None or c["dispersion"] <= 0:
+                    continue
+                sc = scale_of(c.get("mean"))
+                if sc is None:
+                    continue
+                sd_by_scale.setdefault(sc, []).append((r["id"], c["dispersion"]))
+                for b in benches:
+                    sd_by_key.setdefault((b, sc), []).append((r["id"], c["dispersion"]))
+
+    def external_sd(paper, benches, sc):
+        for b in benches:
+            pool = [sd for (p_, sd) in sd_by_key.get((b, sc), []) if p_ != paper]
+            if len(pool) >= min_cells and len({p_ for (p_, _) in sd_by_key[(b, sc)] if p_ != paper}) >= min_papers:
+                return statistics.median(pool), "benchmark"
+        pool = [sd for (p_, sd) in sd_by_scale.get(sc, []) if p_ != paper]
+        return (statistics.median(pool), "corpus") if pool else (None, None)
+
+    rows = []
+    for c in comparisons:
+        n = c.get("n_runs")
+        if not n or n < 2:
+            continue
+        sc = scale_of(c["winner"])
+        if sc is None or scale_of(c["runner_up"]) != sc:
+            continue
+        benches = identify(captions.get((c["paper"], c["table"], c["page"]), ""))
+        sd, source = external_sd(c["paper"], benches, sc)
+        if sd is None:
+            continue
+        mde = k * sd * math.sqrt(2.0 / n)
+        rows.append({"gap": c["gap"], "mde": mde, "below": c["gap"] < mde,
+                     "source": source, "testable": bool(c.get("test")),
+                     "no_bars": c["winner_dispersion"] is None and c["runner_dispersion"] is None,
+                     "paper": c["paper"], "n": n, "scale": sc, "sd": sd})
+    if not rows:
+        return {"n": 0}
+
+    def pct(sub):
+        return round(100 * sum(1 for r in sub if r["below"]) / len(sub), 1) if sub else None
+
+    testable = [r for r in rows if r["testable"]]
+    no_bars = [r for r in rows if r["no_bars"]]
+    own = power_audit(comparisons, power=power, alpha=alpha)
+    sds_pct = [r["sd"] for r in rows if r["scale"] == "percent"]
+    return {
+        "n": len(rows),
+        "n_papers": len(set(r["paper"] for r in rows)),
+        "pct_below_design_mde": pct(rows),
+        "n_testable": len(testable),
+        "pct_below_design_mde_testable": pct(testable),
+        "n_no_bars": len(no_bars),
+        "pct_below_design_mde_no_bars": pct(no_bars),
+        "pct_sd_from_benchmark": round(100 * sum(1 for r in rows if r["source"] == "benchmark") / len(rows), 1),
+        "median_external_sd_percent_scale": round(statistics.median(sds_pct), 2) if sds_pct else None,
+        "median_runs": statistics.median(r["n"] for r in rows),
+        "median_mde_percent_scale": round(statistics.median(
+            r["mde"] for r in rows if r["scale"] == "percent"), 2) if sds_pct else None,
+        "power": power, "alpha": alpha, "min_cells": min_cells, "min_papers": min_papers,
+        "own_dispersion": {"n": own.get("n"), "pct_underpowered": own.get("pct_underpowered"),
+                           "note": "gap/MDE = z/2.80 here; kept for comparison, not reported"},
+    }
+
+
 def checkability_span(comparisons: list) -> dict:
     """How far the share that can be checked moves across the conventions.
 

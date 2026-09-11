@@ -194,6 +194,114 @@ def failure_by_gap_band(comparisons: list) -> dict:
 
 
 
+def _fail_rate(rows: list, p_key: str = "_p", family: str = "table") -> dict:
+    """Failure rate, raw and Holm-corrected, with the family stated."""
+    if not rows:
+        return {"n": 0}
+    from paperengine.stats import holm_bonferroni
+    groups: dict = {}
+    for c in rows:
+        key = (c["paper"], c["table"], c["page"]) if family == "table" else c["paper"]
+        groups.setdefault(key, []).append(c)
+    fail = fail_holm = 0
+    for g in groups.values():
+        holm = holm_bonferroni([c[p_key] for c in g], 0.05)
+        for c, h in zip(g, holm):
+            fail += c[p_key] >= 0.05
+            fail_holm += not h
+    n = len(rows)
+    return {"n": n, "pct_fail": round(100 * fail / n, 1),
+            "pct_fail_holm": round(100 * fail_holm / n, 1)}
+
+
+def headline_span(comparisons: list) -> dict:
+    """Every row of the conventions table, each on a stated population.
+
+    A reviewer pointed out that the span quoted in an earlier draft ran from a
+    row computed on all testable comparisons to a row computed on the
+    unlabelled subset alone, so its two ends were not on the same population.
+    Here every row that can be evaluated on the full testable set is, and the
+    rows that cannot carry their own n. The span is taken over the full-
+    population rows only.
+    """
+    import math
+    from analyze import test_comparison, _standard_error
+    from paperengine.stats import norm_cdf
+
+    testable = [dict(c) for c in comparisons if c.get("test")]
+    for c in testable:
+        c["_p"] = c["test"]["p"]
+        c["_pt"] = c["test"].get("p_t", c["test"]["p"])
+    rows = {}
+    rows["as_reported"] = _fail_rate(testable)
+    rows["holm_family_paper"] = _fail_rate(testable, family="paper")
+    rows["welch_t_where_defined"] = _fail_rate(testable, p_key="_pt")
+
+    # Unlabelled bars read as standard errors, labelled bars as stated.
+    se_rows = []
+    for c in testable:
+        if c["dispersion_kind"] == "unknown":
+            r = test_comparison(c, kind_override="sem")
+            d = dict(c); d["_p"] = r["p"]; se_rows.append(d)
+        else:
+            se_rows.append(c)
+    rows["unlabelled_as_sem"] = _fail_rate(se_rows)
+    rows["labelled_only"] = _fail_rate([c for c in testable
+                                        if c["dispersion_kind"] in ("std", "sem", "ci")])
+
+    strict = []
+    for c in comparisons:
+        d = dict(c)
+        if d.get("n_runs_source") != "caption":
+            d["n_runs"] = None
+        r = test_comparison(d)
+        if r:
+            d["_p"] = r["p"]; strict.append(d)
+    rows["caption_run_count_only"] = _fail_rate(strict)
+
+    for rho in (0.5, 0.9):
+        rr = []
+        for c in testable:
+            kind = c["dispersion_kind"]
+            se_w = _standard_error(c["winner_dispersion"], kind, c["n_runs"])
+            se_r = _standard_error(c["runner_dispersion"], kind, c["n_runs"])
+            var = se_w ** 2 + se_r ** 2 - 2 * rho * se_w * se_r
+            if var <= 0:
+                continue
+            d = dict(c); d["_p"] = 2 * (1 - norm_cdf(abs(c["gap"] / math.sqrt(var)))); rr.append(d)
+        rows[f"rho_{rho}"] = _fail_rate(rr)
+
+    one_sided = [dict(c, _p=c["test"]["p"] / 2) for c in testable]
+    rows["one_sided"] = _fail_rate(one_sided)
+
+    full = [k for k, v in rows.items() if v.get("n") == len(testable)]
+    vals = [rows[k]["pct_fail"] for k in full]
+    return {"rows": rows, "n_full_population": len(testable),
+            "full_population_rows": full,
+            "span": [min(vals), max(vals)],
+            "span_all_rows": [min(v["pct_fail"] for v in rows.values() if v.get("n")),
+                              max(v["pct_fail"] for v in rows.values() if v.get("n"))]}
+
+
+def venue_counts(records: list, comparisons: list) -> dict:
+    """How the sample and the comparisons divide between the two venues."""
+    out = {}
+    for venue in sorted({r["venue"] for r in records}):
+        ids = {r["id"] for r in records if r["venue"] == venue}
+        cs = [c for c in comparisons if c["paper"] in ids]
+        t = [c for c in cs if c.get("test")]
+        out[venue] = {
+            "papers": len(ids), "comparisons": len(cs), "testable": len(t),
+            "pct_neither": round(100 * sum(1 for c in cs if c["winner_dispersion"] is None
+                                           and c["runner_dispersion"] is None) / max(len(cs), 1), 1),
+            "pct_fail": round(100 * sum(1 for c in t if not c["survives_raw"]) / max(len(t), 1), 1),
+            "pct_papers_with_error_bar": round(100 * sum(
+                1 for r in records if r["venue"] == venue and r.get("reports_explicit_error_bar"))
+                / max(len(ids), 1), 1),
+        }
+    return out
+
+
 def compute(records: list, comparisons: list, pct_neither: float,
             recall_lo: float) -> dict:
     return {
@@ -203,6 +311,8 @@ def compute(records: list, comparisons: list, pct_neither: float,
         "filter_selection": filter_selection(records),
         "headline_with_extraction": headline_with_extraction(pct_neither, recall_lo),
         "failure_by_gap_band": failure_by_gap_band(comparisons),
+        "headline_span": headline_span(comparisons),
+        "venue_counts": venue_counts(records, comparisons),
     }
 
 
@@ -219,6 +329,10 @@ def main() -> int:
     res = compute(records, comparisons, pct_neither, recall_lo=0.940)
     with open("out/extra_stats.json", "w", encoding="utf-8") as fh:
         json.dump(res, fh, indent=1)
+    # The conventions table reads its rows from here; it used to read a file
+    # that no script regenerated.
+    with open("out/headline_span.json", "w", encoding="utf-8") as fh:
+        json.dump(res["headline_span"], fh, indent=1)
     print(json.dumps(res, indent=1))
     return 0
 

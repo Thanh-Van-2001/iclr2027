@@ -32,27 +32,29 @@ prints what a test of that claim would need---an error bar on each of the two
 values, and the number of runs behind them. Usually it does not. Of
 \nComparisonsTwentyFive{} highlighted comparisons in the 2025 sample,
 \nPctNeitherSide{} carry no error bar on either side, and \nPctTestable{} can be
-tested at all.
+tested from what is printed.
 
 Of those that can be tested, \nPctFail{} are not distinguishable from zero using
 the authors' own numbers, and \nPctFailHolm{} once the other comparisons in the
-same table are accounted for. A second measurement needs no error bars and so
-reaches \nBinomPapers{} papers rather than \nPapersContributing{}: the median
-reported gap between two accuracy-like values is \nBinomMedianGap{} points, and
-distinguishing that from zero would take roughly \nBinomMedianN{} test items.
-Where a caption names its benchmark, we can be concrete. \nResolutionPctBelow{}
-of those gaps are smaller than the benchmark they are measured on can resolve.
+same table are accounted for. Two further measurements need no error bars. Taking
+the run count from the paper and the noise level from the rest of the corpus,
+\nPctBelowDesignMde{} of comparisons with a stated run count report a gap
+smaller than a design of that size could detect. And where a caption names its
+benchmark, the split size alone says what it can resolve:
+\nResolutionPctBelow{} of those gaps fall below it under independence,
+\nResolutionPctBelowRhoNine{} under paired scoring.
 
 Neither headline is precise, and neither can be. Across conventions the source
 papers leave unstated, the failure rate spans \nSpanLow{} to \nSpanHigh{} and
 the share that is checkable spans \nStrictTestable{} to \nTestableAsSem{}, both
 far wider than sampling error. That imprecision is not a flaw in the measurement
 but the finding restated: the papers do not print enough to pin down their own
-claims. An independent sample of \nPapersTwentyFour{} papers from 2024
-reproduces the first two figures at \nPctNeitherSideTwentyFour{} and
-\nPctFailTwentyFour{}. We release the pipeline, the per-comparison database, and
-the six parser bugs that looking at rendered tables caught---every one of which
-had produced a confident and wrong version of these numbers.
+claims. A second sample of \nPapersTwentyFour{} papers from 2024, run through the
+same instrument, gives \nPctNeitherSideTwentyFour{} and \nPctFailTwentyFour{}.
+We release the pipeline, the per-comparison database, the rendered tables on
+which the instrument was scored by hand, and the six parser bugs that looking at
+them caught---every one of which had produced a confident and wrong version of
+these numbers.
 \end{abstract}
 
 \section{Introduction}
@@ -65,12 +67,14 @@ smaller than the noise, or it may be the largest of many differences that were
 all examined at once.
 
 Whether a reader can tell is a separate question from whether the claim is true,
-and it is the question we ask. Testing a difference between two reported means
-needs three quantities, and a paper must print all of them: a dispersion on the
-first value, a dispersion on the second, and the number of runs the two rest on.
-Miss any one and the comparison cannot be evaluated by anyone---not by a
-reviewer, not by a reader deciding what to build on, not by the authors
-themselves a year later.
+and it is the question we ask. Re-testing a difference between two reported
+means needs three quantities, and a paper must print all of them: a dispersion
+on the first value, a dispersion on the second, and the number of runs the two
+rest on. Miss any one and the comparison cannot be re-tested from the printed
+means---not by a reviewer, not by a reader deciding what to build on, not by
+the authors themselves a year later. There are other routes to a check, a
+p-value or a marker on the difference among them, and we count how often those
+appear too; they are rare.
 
 We measure how often those three things are present. Across \nPapersTotal{}
 papers accepted at NeurIPS and ICML in 2024 and 2025, the answer is that
@@ -80,9 +84,10 @@ whether the field's results are true. It is a claim about whether they are
 checkable, which is prior to truth and, unlike truth, is settled by looking.
 
 \paragraph{Contributions.} Prior audits of reporting practice annotate papers by
-hand, which bounds them to a few hundred papers and to a label per paper. We
-work at the unit a results table actually claims in, which is the comparison,
-and that changes both what can be measured and how much of it there is.
+hand, which bounds them to a few hundred papers and to a label per paper
+(Table~\ref{tab:audits}). We work at the unit a results table actually claims
+in, which is the comparison, and that changes both what can be measured and how
+much of it there is.
 
 \begin{itemize}
 \item \textbf{A claim unit recoverable from typography.} The object of
@@ -98,20 +103,27 @@ and that changes both what can be measured and how much of it there is.
   unchecked.
 \item \textbf{Three questions a paper-level label cannot answer.} Whether the
   claimed difference survives the authors' own error bars (\nPctFail{} do not,
-  \nPctFailHolm{} after correcting for the rest of its table); whether the
-  experiment could ever have detected it (\nPctUnderpowered{} report a gap below
-  their own minimum detectable effect); and whether the benchmark can resolve it
-  (\nResolutionPctBelow{} cannot).
+  \nPctFailHolm{} after correcting for the rest of its table); whether a design
+  with that many runs could have detected it at all, judged against the noise
+  other papers report rather than the paper's own (\nPctBelowDesignMde{} could
+  not, including \nPctBelowDesignMdeNoBars{} of comparisons that print no
+  error bar); and whether the benchmark can resolve it (\nResolutionPctBelow{}
+  cannot). \citet{card2020with} asked the last of these for a handful of
+  natural language processing benchmarks by hand; we ask it of every
+  named-benchmark comparison in two venues.
 \item \textbf{A reference table for what benchmarks can resolve}
   (Appendix~\ref{app:mde}), from published split sizes alone. AIME supports no
   claim below \nAimeMde{} points, a \nFiveHundredItems{}-item benchmark none
   below \nFiveHundredMde{}. Usable before an experiment, not only after.
 \item \textbf{Declaring is not reporting.} Of \nCheckYes{} NeurIPS papers
   answering that they report error bars suitably and correctly defined,
-  \nCheckYesNoTable{} print none in any results table.
-\item \textbf{An instrument measured three ways}---by eye, against a second
-  extractor built on different principles, and against author self-report---and
-  released with the per-comparison database.
+  \nCheckYesNoTable{} print none in any results table; \nJustSeeds{} of those
+  justify the answer by having used several seeds, which is averaging, not
+  reporting.
+\item \textbf{An instrument scored against a gold set}, field by field, on
+  rendered tables read independently of its output, and released with the
+  per-comparison database and the renderings, so that the scoring can be
+  repeated by someone who has not seen the pipeline.
 \end{itemize}
 
 \section{What a results table claims}
@@ -138,24 +150,35 @@ more groups containing exactly one bold cell is the one the authors were
 marking.
 
 A comparison is \emph{testable} when both values carry a dispersion and the
-number of runs is stated. We then compute a two-sample $z$ statistic from the
-printed quantities alone, and apply Holm--Bonferroni within each table, since
-the table is the unit at which the authors chose what to bold.
+number of runs is stated. We then compute a two-sided two-sample $z$ statistic
+from the printed quantities alone, with each standard error taken as the printed
+deviation over $\sqrt{n}$, and apply Holm--Bonferroni within each table, the
+family being the testable comparisons in that table, since the table is the
+unit at which the authors chose what to bold. The $z$ test is the reading most
+favourable to the field: with the run counts these papers state, Welch's $t$
+with Satterthwaite degrees of freedom is the test a reader should compute, and
+Section~\ref{sec:sensitivity} reports it alongside. Both cells are maxima of
+noisy values, and the winner is the maximum of more of them, so the printed gap
+is if anything inflated and every failure rate we report is if anything low.
 
 \section{Corpus}
 \label{sec:corpus}
 
 We sample from the open proceedings of NeurIPS and ICML, which list every
 accepted paper and serve every PDF without an account: \nPapersTwentyFive{}
-papers from 2025 and \nPapersTwentyFour{} from 2024, drawn at random with a
-fixed seed. We treat the years as two independent samples rather than pooling
-them, so that the second is a replication of the first.
+papers from 2025 (\nNeuripsPapers{} NeurIPS, \nIcmlPapers{} ICML) and
+\nPapersTwentyFour{} from 2024, each a simple random sample without replacement
+from that year's two accepted-paper lists, with a fixed seed. We treat the years
+as two samples rather than pooling them. The second was drawn and processed
+after the extractor was final, so it tests whether the result holds across a
+year; it was read by the same instrument, so it does not test the instrument.
+Appendix~\ref{app:pipeline} specifies the pipeline and gives every count by
+venue.
 
 \begin{table}[t]
 \centering
-\caption{The same measurement in two independent samples, a year apart. Each
-column is a separate draw from that year's proceedings; the years are not
-pooled. Percentages of comparisons are of all highlighted comparisons in that
+\caption{The same measurement in two samples, a year apart. Each column is a
+separate draw from that year's proceedings; the years are not pooled. Percentages of comparisons are of all highlighted comparisons in that
 sample. Brackets give $95\%$ intervals from a bootstrap that resamples
 \emph{papers} rather than comparisons, because one author's habits govern every
 table in a paper: the intraclass correlation is \nIcc{}, so \nNTestable{}
@@ -253,15 +276,16 @@ and \nPctNoNStated{} carry error bars whose number of runs is never stated. That
 leaves \nPctTestable{}.
 
 The 2024 sample gives \nPctNeitherSideTwentyFour{} and
-\nPctTestableTwentyFour{}: the central figure is identical to the first decimal
-place across two independent samples a year apart.
+\nPctTestableTwentyFour{}: the central figure agrees to within a point across
+two samples a year apart, inside either bootstrap interval.
 
 At the level of whole papers, \nPctWithErrorBar{} print an explicit error bar in
-any results table and \nPctStatingN{} state a number of runs anywhere. The
-median stated number of runs is small enough that the distinction between a
-standard deviation and a standard error changes conclusions, and most papers
-that print an error bar never say which they mean; we report results under both
-readings.
+any results table and \nPctStatingN{} state a number of runs anywhere. Among
+testable comparisons the stated run count has median \nMedianRunsTestable{},
+quartiles \nRunsQOne{} and \nRunsQThree{}, and \nPctRunsLeThree{} rest on three
+runs or fewer. That is small enough that the distinction between a standard
+deviation and a standard error changes conclusions, and most papers that print
+an error bar never say which they mean; we report results under both readings.
 
 \section{What survives}
 \label{sec:survival}
@@ -284,6 +308,15 @@ move a comparison from significant to not, never back---so it is estimated far
 more precisely than either level: \nCiHolmDelta{} of testable comparisons change
 verdict, an interval nowhere near zero.
 
+Welch's $t$, which corrects the critical value for the stated run count, is
+defined for the \nWelchDefined{} comparisons whose bars are deviations; on those
+it fails \nFailWelchSubset{} against \nFailZSameSubset{} for $z$, and carrying
+it through the full set gives \nFailWelchT{}
+(Section~\ref{sec:sensitivity}). We keep $z$ as the headline because it is the
+reading more favourable to the field, and note that a standard deviation
+estimated from three runs has a relative error near one half, a second-order
+uncertainty we do not propagate.
+
 All intervals here resample papers rather than comparisons. That matters: with
 an intraclass correlation of \nIcc{} and \nMeanCluster{} comparisons per paper,
 the design effect is \nDesignEffect{}, so treating comparisons as independent
@@ -300,25 +333,34 @@ sample agrees at \nGapFailingTwentyFour{} against \nGapPassingTwentyFour{}.
 Large improvements are rarely in doubt. The margins that decide the order of a
 leaderboard are the ones that cannot be supported.
 
-\section{Could the experiment have detected what it claims?}
+\section{Could a design of that size have detected it?}
 \label{sec:power}
 
 That failing comparisons have smaller margins than surviving ones is close to
 tautological: a smaller difference is harder to detect. The question worth
-asking runs the other way. From the dispersion and run count a paper prints, one
-can compute the smallest difference that experiment could have detected at
-conventional power, and compare it to the difference actually reported.
+asking is prospective. Before the result is in, a design with $n$ runs and a
+given noise level can detect differences down to some size and no smaller. The
+noise level must not come from the paper being judged: a minimum detectable
+effect computed from the paper's own error bar is the $z$ statistic rescaled,
+and reading it as a separate finding is the observed-power fallacy
+\citep{hoenig2001abuse}. We therefore take the run count from the paper and the
+noise from everyone else---the median standard deviation printed by other
+papers on the same benchmark and scale, or across the corpus where the benchmark
+is unnamed---and compute the gap a design of that size could have detected at
+\nPowerLevel{} power. That quantity does not depend on the gap the paper found
+or on any dispersion it printed.
 
-\nPctUnderpowered{} of checkable comparisons report a gap below their own
-minimum detectable effect at \nPowerLevel{} power. The median ratio of reported gap to
-detectable threshold is \nMedianGapOverMde{}, and the first quartile
-\nQOneGapOverMde{}. These are not close calls that happened to fall the wrong
-way. The experiment could not have distinguished that difference from zero
-however it came out, so the bold cell records a coin flip rather than a finding.
-
-This also bounds how much of our result is an artifact of small $n$ rather than
-a property of the literature. It is both: the experiments are small, and the
-claims are made anyway.
+It can therefore be asked of every comparison with a stated run count, error
+bars or not: \nDesignMdeN{} comparisons from \nDesignMdePapers{} papers. With a
+median of \nDesignMedianRuns{} runs and a typical deviation of
+\nDesignMedianSd{} points, the median detectable gap is \nDesignMedianMde{}
+points, and \nPctBelowDesignMde{} of reported gaps fall below it. The share is
+\nPctBelowDesignMdeTestable{} on the comparisons that print error bars and
+\nPctBelowDesignMdeNoBars{} on the \nDesignMdeNoBarsN{} that print none, which
+is the first statement this paper can make about that larger population. On
+the testable subset the paper's own dispersion gives \nPctBelowOwnMde{}, close
+enough to confirm that the borrowed noise level is not distorting the result.
+The experiments are small, and the claims are made anyway.
 
 \section{How large a test set would these gaps need?}
 \label{sec:binomial}
@@ -333,21 +375,34 @@ quantity is then the test-set size, not the dispersion.
 This lets us ask the question in a form that needs nothing the papers did not
 print. Given the gaps they report, how large would a shared test set have to be
 for those gaps to be distinguishable from zero? Restricting to comparisons whose
-two values both lie in $[40, 100]$, where a metric is almost certainly a rate,
-gives \nBinomComparisons{} comparisons from \nBinomPapers{} papers---four times
-the base of the variance-based analysis, because it needs no error bars.
+two values both lie in $[40, 100]$ gives \nBinomComparisons{} comparisons from
+\nBinomPapers{} papers---four times the base of the variance-based analysis,
+because it needs no error bars. F1, BLEU and mean IoU live in that range too and
+are not proportions over items, so we also report the stricter subset whose
+caption or column header names an accuracy-like metric: \nBinomNamedComparisons{}
+comparisons from \nBinomNamedPapers{} papers.
 
 The median reported gap is \nBinomMedianGap{} points, and detecting it at
 \nPowerLevel{} power would require about \nBinomMedianN{} test items.
 \nBinomOverGsm{} of these comparisons would need a test set larger than GSM8K,
-and \nBinomOverMmlu{} one larger than MMLU. We treat the two values as
-independent binomials, which is conservative: systems scored on the same items
-are positively correlated, so a paired test needs fewer items and the true
-requirement is at most what we state.
+and \nBinomOverMmlu{} one larger than MMLU. On the subset that names an
+accuracy-like metric the median gap is \nBinomNamedMedianGap{} points and the
+requirement \nBinomNamedMedianN{} items, with \nBinomNamedOverGsm{} needing
+more than GSM8K: the filter changes the population and not the answer. We
+treat the two values as independent binomials, which is conservative: systems
+scored on the same items are positively correlated, so a paired test needs
+fewer items and the true requirement is at most what we state.
 
-The conclusion does not depend on where the filter is drawn. Widening it to all
-values in $(0, 100]$ raises the median requirement to \nBinomMedianNWide{}
-items; the share needing more than GSM8K moves by a point.
+Widening the range filter to all values in $(0, 100]$ raises the median
+requirement to \nBinomMedianNWide{} items, because it admits smaller gaps; the
+share needing more than GSM8K moves by a point.
+
+This analysis answers a different question from Section~\ref{sec:survival},
+and the two should not be read as one. Seed variance is the noise that matters
+for a claim about a training procedure on a fixed benchmark; item variance is
+the noise that matters for a claim that a system is better at the task the
+benchmark samples. Most papers make the second claim in words and the first in
+their error bars, when they print any.
 
 \paragraph{Against the benchmark actually used.} Where a caption names exactly
 one benchmark we can do better than a hypothetical test set, because the size of
@@ -358,8 +413,9 @@ the paper prints. On \nResolutionComparisons{} such comparisons from
 points against a median resolution of \nResolutionMedianRes{}, and
 \nResolutionPctBelow{} of the gaps fall below what the benchmark can resolve.
 Treating the two systems as independent makes that resolution coarser than it
-really is, so the figure is an upper bound; under the most generous correlation
-we consider it is \nResolutionPctBelowRhoNine{}.
+really is, so the figure is an upper bound; under paired scoring at the most
+generous correlation we consider it is \nResolutionPctBelowRhoNine{}, and the
+truth lies between.
 
 \input{resolution_table.tex}
 
@@ -374,45 +430,49 @@ are what the field reports on it.
 \label{sec:sensitivity}
 
 Several decisions in the pipeline are not forced by the data, and they matter
-more than sampling does. Table~\ref{tab:span} gives the failure rate under each.
-The span is \nSpanLow{} to \nSpanHigh{}, against a bootstrap interval of
-\nCiFail{} that captures sampling alone---definitional uncertainty is more than
-three times the statistical kind.
+more than sampling does. Table~\ref{tab:span} gives the failure rate under each,
+with the population each row is computed on. Over the rows that share the full
+population of \nSpanN{} testable comparisons the span is \nSpanLow{} to
+\nSpanHigh{}, against a bootstrap interval of \nCiFail{} that captures sampling
+alone---definitional uncertainty is more than twice the statistical kind.
 
-We could pick the corner that suits us, and an earlier draft of this section
-claimed to use the reading least favourable to our own thesis while quoting
-$\rho = 0$, which is the reading most favourable to it. The honest position is
-the one the data supports: on the subset where authors state what their error
-bar means, the failure rate is \nLabelledOnlyFail{}, close to the
-\nPctFail{} headline. That is our estimate. The width of the span is not a
+The headline sits at a definite place in that span, and we say where. It reads
+unlabelled bars as standard deviations, takes the two values as independent,
+and uses $z$ rather than $t$; the first and third favour the field, the second
+does not. The check on it is the subset where authors state what their error
+bar means, which fails at \nLabelledOnlyFail{}. The width of the span is not a
 weakness to be argued away---it exists because the papers do not print which
 convention they used, which is the paper's own thesis applied to itself.
 
 \begin{table}[t]
 \centering
-\caption{Both headline figures under each decision the pipeline had to make.
-The span across conventions is far wider than the sampling interval in both
-cases, because the source papers do not state which convention they used, and
-wider still for checkability than for the failure rate.}
+\caption{Both headline figures under each decision the pipeline had to make,
+each row on a stated population. The span across conventions is far wider than
+the sampling interval in both cases, because the source papers do not state
+which convention they used, and wider still for checkability than for the
+failure rate.}
 \label{tab:span}
-\begin{tabular}{lr}
+\begin{tabular}{lrr}
 \toprule
-& Not distinguishable from zero \\
+& $n$ & Not distinguishable from zero \\
 \midrule
-As reported & \nPctFail{} \\
-Run count taken from the caption only & \nStrictFail{} \\
-Unlabelled bars read as standard errors & \nUnlabelledAsSem{} \\
-Only bars whose meaning is stated & \nLabelledOnlyFail{} \\
-Compared values correlated at $\rho = \nRhoHalf{}$ & \nFailRhoHalf{} \\
-Compared values correlated at $\rho = \nRhoNine{}$ & \nFailRhoNine{} \\
-Tie-marked comparisons removed & \nFailExcludingTie{} \\
+As reported: two-sided $z$, Holm within table & \nSpanN{} & \nPctFail{} \\
+Welch's $t$ where a run count defines it & \nSpanN{} & \nFailWelchT{} \\
+One-sided $z$ & \nSpanN{} & \nFailOneSided{} \\
+Unlabelled bars read as standard errors & \nSpanN{} & \nUnlabelledAsSemFull{} \\
+Compared values correlated at $\rho = \nRhoHalf{}$ & \nSpanN{} & \nFailRhoHalf{} \\
+Compared values correlated at $\rho = \nRhoNine{}$ & \nSpanN{} & \nFailRhoNine{} \\
+Only bars whose meaning is stated & \nLabelledOnlyN{} & \nLabelledOnlyFail{} \\
+Run count taken from the caption only & \nStrictN{} & \nStrictFail{} \\
+Tie-marked comparisons removed & & \nFailExcludingTie{} \\
+Holm family the paper, not the table & \nSpanN{} & \nFailHolmPaper{} \\
 \midrule
-Sampling interval, conventions held fixed & \nCiFail{} \\
+Sampling interval, conventions held fixed & \nSpanN{} & \nCiFail{} \\
 \midrule
-\multicolumn{2}{l}{\emph{And the share that is checkable at all}} \\
-As reported & \nPctTestable{} \\
-Run count taken from the caption only & \nStrictTestable{} \\
-Every unlabelled bar read as a standard error & \nTestableAsSem{} \\
+\multicolumn{3}{l}{\emph{And the share that is checkable at all}} \\
+As reported & \nComparisonsTwentyFive{} & \nPctTestable{} \\
+Run count taken from the caption only & \nComparisonsTwentyFive{} & \nStrictTestable{} \\
+Every unlabelled bar read as a standard error & \nComparisonsTwentyFive{} & \nTestableAsSem{} \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -463,8 +523,9 @@ $82.4 \pm 0.3$ usually does not say whether $0.3$ is a standard deviation or a
 standard error, and the two differ by $\sqrt{n}$. On the \nNUnlabelled{}
 unlabelled comparisons that carry a run count, reading every bar as a standard
 deviation gives \nUnlabelledAsStd{} failing and as a standard error
-\nUnlabelledAsSem{}---a range wide enough to matter. We use the first, the more
-conservative. The subset where authors do say which they mean fails at
+\nUnlabelledAsSem{}; carried into the full population, with labelled bars read
+as labelled, the second gives \nUnlabelledAsSemFull{}. We use the first, the
+more conservative. The subset where authors do say which they mean fails at
 \nLabelledOnlyFail{}, close to the \nPctFail{} headline, which is the evidence
 that the convention we assume is not distorting the result.
 
@@ -578,15 +639,42 @@ at a time. Our measurement needs only the printed page, so it covers whole
 venues, at the cost of saying nothing about whether any individual result is
 true.
 
-\paragraph{Hand audits of reporting practice.} Two studies ask our exact
-question by reading papers one at a time. \citet{kirly2018nips} reviewed NeurIPS
-2017 by hand and found roughly a third reporting confidence intervals and a few
-per cent making a formal comparison. \citet{christodoulou2024confidence}
-hand-annotated 221 MICCAI 2023 segmentation papers and found more than half
-assessing no performance variability at all. Theirs is the method ours
-approximates, and their numbers are the closest external check we have: our
-\nPctWithErrorBar{} sits between them, on a corpus two orders of magnitude
-larger.
+\paragraph{Hand audits of reporting practice.} A line of studies asks our
+question by reading papers one at a time, and Table~\ref{tab:audits} sets them
+beside this one. \citet{bergkirkpatrick2012empirical} and \citet{dror2018hitchhiker}
+count significance testing in computational linguistics; \citet{gundersen2018state}
+score AAAI and IJCAI papers for what a reproduction would need;
+\citet{kirly2018nips} review NeurIPS 2017 and find roughly a third reporting
+confidence intervals; \citet{christodoulou2024confidence} annotate 221 MICCAI
+2023 papers and find more than half assessing no variability at all;
+\citet{agarwal2021deep} show that point estimates over a handful of runs
+misorder deep reinforcement learning methods. \citet{pineau2021improving}
+describe the NeurIPS checklist we read in Section~\ref{sec:threats}. Their
+figures are not ours on a larger corpus, because the definitions differ: an
+error bar anywhere in a paper, a confidence interval, a significance test, and
+an explicit interval in a results table are four different events, and ours is
+the narrowest. Our paper-level \nPctWithErrorBar{} is accordingly below the
+earlier figures, not between them.
+
+\begin{table}[t]
+\centering
+\caption{Audits of reporting practice. Each earlier study labels papers by
+hand, at the scale of a person; this one labels comparisons by machine, and
+Section~\ref{sec:threats} measures the instrument against tables read by hand.}
+\label{tab:audits}
+\small
+\begin{tabular}{lllll}
+\toprule
+Study & Venue & Labelled by & Unit & Headline \
+\midrule
+\citet{bergkirkpatrick2012empirical} & ACL & hand & paper & significance tests rarely reported \
+\citet{dror2018hitchhiker} & ACL, TACL 2017 & hand & paper & about a third test significance \
+\citet{gundersen2018state} & AAAI, IJCAI & hand & paper & most omit what a reproduction needs \
+\citet{kirly2018nips} & NeurIPS 2017 & hand & paper & about a third report intervals \
+\citet{christodoulou2024confidence} & MICCAI 2023 & hand & paper & over half assess no variability \
+This paper & NeurIPS, ICML 2024--25 & machine & comparison & \nPctNeitherSide{} print no error bar \
+\end{tabular}
+\end{table}
 
 Their limit is the one manual annotation always has, and it is the gap this work
 fills. A person can read a few hundred papers, and can record only what happens
@@ -598,18 +686,26 @@ ours. Working at the comparison is what makes \nComparisonsTwentyFive{}
 observations available where hand annotation yields a few hundred, and it is
 what makes the questions in Sections~\ref{sec:survival} to \ref{sec:binomial}
 askable at all: whether the specific difference being claimed survives its own
-error bars, whether the experiment could ever have detected it, and whether the
-benchmark it was measured on can resolve it. None of the three is answerable
+error bars, whether a design of that size could have detected it, and whether
+the benchmark it was measured on can resolve it. None of the three is answerable
 from a paper-level label. What automation costs is the judgement a human brings
 to an ambiguous table, which is why Section~\ref{sec:threats} spends its length
 measuring what ours gets wrong.
 
 \paragraph{Statistical practice as an object of study.} A second group asks the
-question of one subfield each. \citet{card2020with} compute the
-statistical power of natural language processing experiments and find most
-underpowered for the effects they report; our power audit
-(Section~\ref{sec:power}) is that analysis carried out on whatever a paper
-happens to print, across two venues rather than one task family.
+question of one subfield each. \citet{card2020with} compute the statistical
+power of natural language processing experiments and find most underpowered for
+the effects they report, and \citet{colas2018how} do the same for deep
+reinforcement learning; the comparison of a claimed gap against what a
+benchmark can resolve (Section~\ref{sec:binomial}) is theirs, carried out here
+by machine on every named-benchmark comparison in two venues rather than by
+hand on a few tasks. \citet{reimers2017reporting} show that a single run can
+misorder methods that several runs order correctly, and \citet{ulmer2022experimental}
+turn such findings into a standard; we measure how far the standard is from
+practice. The nearest ancestor in method is outside machine learning:
+\citet{nuijten2016prevalence} recompute the $p$-values printed in a quarter of
+a million psychology papers from the test statistics beside them, which is a
+corpus-scale re-test of published claims from the printed page alone.
 \citet{marie2021scientific} hand-annotate machine translation papers for
 evaluation practice and find the field's conventions drifting; they establish
 what careful manual annotation can see, at the scale manual annotation permits.
@@ -618,12 +714,12 @@ what careful manual annotation can see, at the scale manual annotation permits.
 all three in unit and scale: every highlighted comparison in \nPapersTotal{}
 papers, at the cost of reading only what is printed.
 
-\paragraph{Extracting results from papers.} \citet{kardas2020axcell} extract
-result tables from machine learning PDFs to populate leaderboards: the same
-mechanics, the opposite purpose, since leaderboard extraction wants the winning
-number and can ignore a missing error bar. We know of no released annotation of
-error-bar presence against which an extractor could be scored, which is why
-Section~\ref{sec:threats} measures ours three ways instead.
+\paragraph{Extracting results from papers.} \citet{hou2019identification} and
+\citet{kardas2020axcell} extract result tables from machine learning PDFs to
+populate leaderboards: the same mechanics, the opposite purpose, since
+leaderboard extraction wants the winning number and can ignore a missing error
+bar. We know of no released annotation of error-bar presence against which an
+extractor could be scored, so Section~\ref{sec:threats} builds one.
 
 \section{Discussion}
 \label{sec:discussion}
@@ -631,8 +727,7 @@ Section~\ref{sec:threats} measures ours three ways instead.
 The cheapest fix is not more statistics. It is printing three quantities that
 authors already have: a dispersion on each value in the main comparison, and the
 number of runs behind them. A paper that prints those becomes checkable by
-anyone, forever, at no cost to the authors. A paper that does not is asking to
-be believed rather than read.
+anyone, forever, at no cost to the authors.
 
 A second fix costs nothing at all, because it applies before the experiment
 rather than after. The smallest difference a benchmark can resolve follows from
@@ -642,7 +737,6 @@ Appendix~\ref{app:mde} tabulates it, and some values are startling: AIME's
 HumanEval's \nHumanevalItems{} below \nHumanevalMde{}. An author who consults it
 first will sometimes find the sentence cannot be written, which is the point.
 
-We would rather this were a paper about a field that turned out to be careful.
 The descriptive result is what it is; the prescriptive one follows from it
 immediately, and is small.
 

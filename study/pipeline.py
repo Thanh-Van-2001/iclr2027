@@ -213,11 +213,13 @@ def main(argv=None) -> int:
     args = ap.parse_args(argv)
 
     records = []
+    listed = {}
     for src in args.source:
         if src not in SOURCES:
             print(f"unknown source {src!r}; known: {sorted(SOURCES)}")
             return 2
         idx = SOURCES[src]()
+        listed[src] = len(idx)
         print(f"{src}: {len(idx)} papers listed")
         records.extend(idx)
 
@@ -229,8 +231,16 @@ def main(argv=None) -> int:
     os.makedirs(os.path.dirname(os.path.abspath(args.out)) or ".", exist_ok=True)
     stats = run(records, args.out, workers=args.workers)
     print(f"\nextracted {stats['ok']}  |  download failures {stats['download_failed']}  "
-          f"|  parse failures {stats['parse_failed']}")
+          f"|  parse failures {stats['parse_failed']}  |  skipped as too large {stats['skipped_large']}")
     print(f"-> {args.out}")
+    # The exclusions are part of the corpus definition, so they are recorded
+    # where the paper can cite them rather than left in a terminal.
+    stem = os.path.splitext(os.path.basename(args.out))[0]
+    os.makedirs("out", exist_ok=True)
+    with open(os.path.join("out", f"pipeline_stats_{stem}.json"), "w", encoding="utf-8") as fh:
+        json.dump({"sources": args.source, "sample": args.sample, "seed": args.seed,
+                   "listed": listed, "drawn": len(records), "max_pdf_bytes": MAX_PDF_BYTES,
+                   **stats}, fh, indent=1)
     return 0
 
 

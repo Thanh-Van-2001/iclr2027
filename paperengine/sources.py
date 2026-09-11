@@ -369,6 +369,12 @@ def openalex_count(query: str) -> int:
 
 def _crossref_to_record(it: dict) -> Record:
     title = (it.get("title") or [""])[0]
+    # Crossref files a subtitle separately, so "The Abuse of Power: The
+    # Pervasive Fallacy..." arrives as two fields and scored 0.40 against the
+    # full title a citation is expected to carry.
+    subtitle = (it.get("subtitle") or [""])[0]
+    if subtitle and subtitle.lower() not in title.lower():
+        title = f"{title}: {subtitle}"
     authors = [
         " ".join(x for x in [a.get("given"), a.get("family")] if x)
         for a in (it.get("author") or [])
@@ -488,8 +494,10 @@ def lookup_by_identifier(*, doi: Optional[str] = None, arxiv_id: Optional[str] =
     if arxiv_id:
         calls.append(("arxiv", lambda: arxiv_by_id(arxiv_id)))
     if doi:
-        calls.append(("openalex", lambda: openalex_by_doi(doi)))
+        # Crossref is the registry the DOI lives in, and it carries the
+        # subtitle; OpenAlex sometimes files only the short title.
         calls.append(("crossref", lambda: crossref_by_doi(doi)))
+        calls.append(("openalex", lambda: openalex_by_doi(doi)))
     if arxiv_id:
         calls.append(("semanticscholar", lambda: s2_by_id(f"ARXIV:{arxiv_id}")))
     if doi:

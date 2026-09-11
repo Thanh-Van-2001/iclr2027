@@ -30,15 +30,16 @@ def fig_why_untestable(analysis: dict, out: str, run_id: str) -> None:
         ("Neither value has\nan error bar", u["neither_side"]),
         ("Only one value\nhas an error bar", u["one_side_only"]),
         ("Error bar given,\nnumber of runs not", u["no_n_stated"]),
+        ("Both error bars\nprinted as zero", u.get("other", 0)),
         ("Testable", u["testable"]),
     ]
-    total = sum(v for _, v in order) + u.get("other", 0)
+    total = sum(v for _, v in order)
     labels = [k for k, _ in order]
     vals = [100 * v / total for _, v in order]
-    colours = [PALETTE[1], PALETTE[1], PALETTE[1], PALETTE[0]]
-    hatches = ["", "//", "xx", ""]
+    colours = [PALETTE[1], PALETTE[1], PALETTE[1], PALETTE[1], PALETTE[0]]
+    hatches = ["", "//", "xx", "..", ""]
 
-    fig, ax = new_figure(width=WIDTH_DOUBLE, height=2.6)
+    fig, ax = new_figure(width=WIDTH_DOUBLE, height=2.9)
     bars = ax.barh(range(len(vals)), vals, color=colours, edgecolor="black", linewidth=0.6)
     for b, h in zip(bars, hatches):
         b.set_hatch(h)
@@ -63,7 +64,7 @@ def fig_gap_vs_survival(analysis: dict, comparisons: list, out: str, run_id: str
     """
     tested = [c for c in comparisons
               if c.get("test") and c.get("relative_gap") is not None]
-    bins = [0, 0.5, 1, 2, 3, 5, 10, 100]
+    bins = [0, 0.5, 1, 2, 3, 5, 10, float("inf")]
     labels = ["<0.5", "0.5-1", "1-2", "2-3", "3-5", "5-10", ">10"]
     rate, counts = [], []
     for lo, hi in zip(bins[:-1], bins[1:]):

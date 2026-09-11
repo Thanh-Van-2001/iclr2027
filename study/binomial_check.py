@@ -22,6 +22,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+import re
 import os
 import statistics
 import sys
@@ -76,11 +77,26 @@ def required_test_set_size(p1: float, p2: float, *, alpha: float = 0.05,
     return ((z_a + z_b) ** 2) * var / (d ** 2)
 
 
-def analyse(comparisons: list) -> dict:
+# A value in [40, 100] is usually an accuracy, but F1, mIoU, BLEU and PSNR live
+# there too and are not proportions over test items. A caption or header that
+# names an accuracy-like metric is the stricter filter a reviewer asked for.
+ACCURACY_METRIC = re.compile(
+    r"(?i)\bacc(?:uracy|\.)?\b|exact[ -]match|\bEM\b|pass@\d|top-?[15]\b|"
+    r"success rate|win rate|solve[d]? rate|\bcorrect\b|error rate")
+
+
+def names_accuracy_metric(c: dict) -> bool:
+    return bool(ACCURACY_METRIC.search((c.get("caption") or "") + " " + (c.get("header_text") or "")))
+
+
+def analyse(comparisons: list, lo: float = RATE_LOW, hi: float = RATE_HIGH,
+            metric_named: bool = False) -> dict:
     rows = []
     for c in comparisons:
         w, r = c["winner"], c["runner_up"]
-        if not (looks_like_a_percentage(w) and looks_like_a_percentage(r)):
+        if not (lo <= w <= hi and lo <= r <= hi):
+            continue
+        if metric_named and not names_accuracy_metric(c):
             continue
         if w == r:
             continue
@@ -95,7 +111,7 @@ def analyse(comparisons: list) -> dict:
 
     out = {
         "n_comparisons": len(rows),
-        "filter": f"both values in [{RATE_LOW:.0f}, {RATE_HIGH:.0f}]",
+        "filter": f"both values in [{lo:.0f}, {hi:.0f}]" + (", accuracy-like metric named" if metric_named else ""),
         "n_papers": len(set(r["paper"] for r in rows)),
         "median_gap_points": round(statistics.median(r["gap"] for r in rows), 2),
         "required_test_set_size": {
@@ -119,6 +135,8 @@ def main(argv=None) -> int:
     with open(args.analysis, encoding="utf-8") as fh:
         cs = json.load(fh)["_comparisons"]
     res = analyse(cs)
+    res["wide"] = analyse(cs, lo=1e-9, hi=100.0)
+    res["metric_named"] = analyse(cs, metric_named=True)
     with open(args.out, "w", encoding="utf-8") as fh:
         json.dump(res, fh, indent=1)
 

@@ -39,9 +39,32 @@ from typing import Optional
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 from paperengine.stats import benjamini_hochberg, holm_bonferroni, norm_cdf  # noqa: E402
 
+
+def t_cdf(x: float, df: float) -> float:
+    """Student t distribution function, via the regularised incomplete beta."""
+    from scipy.stats import t as _t
+    return float(_t.cdf(x, df))
+
 COLUMN_TOL = 12.0        # points; cells within this x-distance share a column
 ROW_TOL = 6.0            # points; cells within this y-distance share a row
 MIN_COLUMN_CELLS = 3
+
+
+def _is_label(c: dict) -> bool:
+    """A bare integer among decimals is a row label, not a result.
+
+    "# of demos: 3, 5, 10, 20" and "epoch 10" sit in the first columns of many
+    tables, and once the rows of a six-point table were parsed correctly the
+    label 10 was the largest value in its row, so the bold 0.67 beside it was
+    no longer extremal and the claim vanished. Found by the gold-set audit.
+    """
+    return c.get("dispersion") is None and "." not in (c.get("text") or "")
+
+
+def _drop_labels(group: list) -> list:
+    if any(not _is_label(c) for c in group):
+        return [c for c in group if not _is_label(c)]
+    return group
 
 
 def _group(cells: list, key: str, tol: float) -> list:
@@ -54,17 +77,89 @@ def _group(cells: list, key: str, tol: float) -> list:
         cur.append(c)
     if cur:
         groups.append(cur)
+    groups = [_drop_labels(g) for g in groups]
     return [g for g in groups if len(g) >= MIN_COLUMN_CELLS]
 
 
+def _cut_positions(group: list, axis: str) -> list:
+    """Where a group with several bold cells would be cut into blocks.
+
+    Between each pair of successive bold cells the cut goes at the widest gap,
+    which is where the rule between dataset blocks sits. Returns the
+    coordinate of the first cell after each cut.
+    """
+    bold_idx = [i for i, c in enumerate(group) if c["bold"]]
+    cuts = []
+    for a, b in zip(bold_idx, bold_idx[1:]):
+        gaps = [(group[i + 1][axis] - group[i][axis], i + 1) for i in range(a, b)]
+        cuts.append(group[max(gaps)[1]][axis])
+    return cuts
+
+
+def _consensus_cuts(groups: list, axis: str, tol: float) -> list:
+    """Cuts that most multi-bold groups agree on, or nothing.
+
+    A column that carries one bold cell per dataset block -- MNIST, then
+    F-MNIST, then STL-10, each with its own winner -- has several bold cells,
+    and the orientation vote then flipped to rows, where every row has exactly
+    one, and compared a method's MCE with its ECE. The gold-set audit found
+    this in five of a hundred comparisons. Blocks are real when the columns
+    agree on where they are; a column whose bold cells fall at irregular rows
+    (a method that wins some tasks and not others) proposes cuts nobody else
+    does, and is left whole.
+    """
+    proposals = [_cut_positions(sorted(g, key=lambda c: c[axis]), axis)
+                 for g in groups if sum(1 for c in g if c["bold"]) >= 2]
+    if len(proposals) < 2:
+        return []
+    need = max(2, (len(proposals) + 1) // 2)
+    agreed = []
+    for cuts in proposals:
+        for y in cuts:
+            if any(abs(y - a) <= tol for a in agreed):
+                continue
+            votes = sum(1 for other in proposals if any(abs(y - o) <= tol for o in other))
+            if votes >= need:
+                agreed.append(y)
+    return sorted(agreed)
+
+
+def _apply_cuts(group: list, axis: str, cuts: list, tol: float) -> list:
+    if not cuts:
+        return [group]
+    ordered = sorted(group, key=lambda c: c[axis])
+    pieces, cur = [], []
+    for c in ordered:
+        if cur and any(abs(c[axis] - y) <= tol for y in cuts) and c[axis] > cur[-1][axis]:
+            pieces.append(cur)
+            cur = []
+        cur.append(c)
+    if cur:
+        pieces.append(cur)
+    return [pc for pc in pieces if len(pc) >= 2]
+
+
 def _columns(cells: list) -> list:
-    """Group a table's cells into columns by horizontal position."""
-    return _group(cells, "x", COLUMN_TOL)
+    """Group a table's cells into columns by horizontal position, split into
+    dataset blocks where the columns agree on them."""
+    groups = _group(cells, "x", COLUMN_TOL)
+    cuts = _consensus_cuts(groups, "y", ROW_TOL)
+    return [pc for g in groups for pc in _apply_cuts(g, "y", cuts, ROW_TOL)]
 
 
 def _rows(cells: list) -> list:
-    """Group a table's cells into rows by vertical position."""
-    return _group(cells, "y", ROW_TOL)
+    """Group a table's cells into rows by vertical position, split into
+    column blocks where the rows agree on them."""
+    groups = _group(cells, "y", ROW_TOL)
+    cuts = _consensus_cuts(groups, "x", COLUMN_TOL)
+    return [pc for g in groups for pc in _apply_cuts(g, "x", cuts, COLUMN_TOL)]
+
+
+# A caption that announces first/second/third-best marking is describing a
+# ranking, not a claim; every bold cell in such a table is one of several, and
+# none of them is a winner against the rest. Such tables are discarded whole.
+TOPK_CAPTION = re.compile(
+    r"(?i)\b(?:top|best)[- ]?(?:three|3)\b|\bfirst\W.{0,30}\bsecond\W.{0,30}\bthird\b")
 
 
 def orientation(cells: list) -> str:
@@ -91,9 +186,16 @@ def orientation(cells: list) -> str:
 
 
 def _standard_error(dispersion: float, kind: str, n: Optional[int]) -> Optional[float]:
-    """Convert a reported error bar into a standard error of the mean."""
-    if dispersion is None or dispersion <= 0:
+    """Convert a reported error bar into a standard error of the mean.
+
+    A printed ``+/- 0.0`` is an error bar, not a missing one: a deterministic
+    method has zero spread. It is kept as zero; the test is undefined only
+    when both sides are zero.
+    """
+    if dispersion is None or dispersion < 0:
         return None
+    if dispersion == 0:
+        return 0.0
     if kind == "sem":
         return dispersion
     if kind == "ci":
@@ -110,6 +212,8 @@ def comparisons_from_table(table: dict) -> list:
     out = []
     n_runs = table.get("n_runs")
     kind = table.get("dispersion_kind", "unknown")
+    if TOPK_CAPTION.search(table.get("caption") or ""):
+        return out
     orient = orientation(table["cells"])
     if orient == "none":
         return out
@@ -150,6 +254,11 @@ def comparisons_from_table(table: dict) -> list:
             "orientation": orient,
             "bbox": bbox,
             "n_in_column": len(col),
+            # Carried so that later passes can ask what the table measures
+            # without re-reading the PDF.
+            "caption": (table.get("caption") or "")[:300],
+            "header_text": table.get("header_text") or "",
+            "n_runs_source": table.get("n_runs_source"),
         })
     for c in out:
         c["n_comparisons_in_table"] = len(out)
@@ -167,7 +276,18 @@ def test_comparison(cmp: dict, kind_override: Optional[str] = None) -> Optional[
     if se <= 0:
         return None
     z = cmp["gap"] / se
-    return {"z": z, "p": 2 * (1 - norm_cdf(abs(z))), "se": se, "kind_used": kind}
+    out = {"z": z, "p": 2 * (1 - norm_cdf(abs(z))), "se": se, "kind_used": kind}
+    # A standard deviation from three runs is a rough estimate of the true one,
+    # and the z test pretends it is exact. Welch's t with Satterthwaite degrees
+    # of freedom is what a reader with the same numbers should compute. It is
+    # only defined when the run count is printed; the z figure is kept as the
+    # headline because it is the reading more favourable to the field.
+    n = cmp["n_runs"]
+    if n and n >= 2 and kind in ("std", "unknown"):
+        df = se ** 4 / ((se_w ** 4 + se_r ** 4) / (n - 1))
+        out["df"] = df
+        out["p_t"] = 2 * (1 - t_cdf(abs(z), df))
+    return out
 
 
 def analyse(records: list) -> dict:
@@ -218,6 +338,22 @@ def analyse(records: list) -> dict:
             n_survive_holm += h
             n_survive_bh += b
 
+    with_t = [c for c in testable if "p_t" in c["test"]]
+    n_survive_t = sum(1 for c in with_t if c["test"]["p_t"] < 0.05)
+    n_survive_z_same = sum(1 for c in with_t if c["test"]["p"] < 0.05)
+    runs_stated = sorted(c["n_runs"] for c in testable if c.get("n_runs"))
+    t_test = {
+        "n_with_t": len(with_t),
+        "survives_t": n_survive_t,
+        "pct_fail_t": round(100 * (1 - n_survive_t / max(len(with_t), 1)), 1),
+        "pct_fail_z_same_subset": round(100 * (1 - n_survive_z_same / max(len(with_t), 1)), 1),
+        "median_stated_runs": statistics.median(runs_stated) if runs_stated else None,
+        "pct_runs_le_3": round(100 * sum(1 for n in runs_stated if n <= 3) / max(len(runs_stated), 1), 1),
+        "pct_runs_le_5": round(100 * sum(1 for n in runs_stated if n <= 5) / max(len(runs_stated), 1), 1),
+        "runs_quartiles": ([runs_stated[len(runs_stated) // 4], runs_stated[len(runs_stated) // 2],
+                            runs_stated[3 * len(runs_stated) // 4]] if runs_stated else None),
+    }
+
     # Sensitivity: papers that never say what their error bar means.
     unknown = [c for c in all_cmps if c["dispersion_kind"] == "unknown"]
     sens = {}
@@ -259,6 +395,7 @@ def analyse(records: list) -> dict:
             "pct_holm": round(100 * n_survive_holm / max(len(testable), 1), 1),
             "pct_bh": round(100 * n_survive_bh / max(len(testable), 1), 1),
         },
+        "welch_t": t_test,
         "sensitivity_unknown_error_bar": {
             "n_unknown": len(unknown),
             "significant_if_read_as_std": sens.get("std"),

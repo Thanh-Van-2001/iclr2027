@@ -50,6 +50,11 @@ BOLD_FLAG = 1 << 4
 NUM_PM = re.compile(
     r"(-?\d+\.?\d*)[\s\*†‡§]{0,3}[\(\[]?[\s]{0,2}"
     r"(?:±|\+/-|\+-)[\s]{0,2}(\d+\.?\d*)[\)\]]?")
+# 76.3 [75.1, 77.5] or 76.3 (75.1-77.5): an interval, which needs no run count
+# to be tested. Rare in machine learning tables, but a reviewer was right that
+# a definition of "checkable" that could not see one was too narrow.
+NUM_CI = re.compile(
+    r"(-?\d+\.?\d*)\s*[\(\[]\s*(-?\d+\.?\d*)\s*(?:,|\u2013|-)\s*(-?\d+\.?\d*)\s*[\)\]]")
 NUM_PAREN = re.compile(r"(-?\d+\.?\d*)\s*\(\s*(\d+\.?\d*)\s*\)")
 NUM_BARE = re.compile(r"^-?\d+\.?\d*$")
 
@@ -58,9 +63,24 @@ STD_WORDS = re.compile(r"(?i)standard deviation|std\.?\s*dev|\bstd\b|\bsd\b")
 CI_WORDS = re.compile(r"(?i)confidence interval|\b9[05]%\s*ci\b|\bci\b")
 IQR_WORDS = re.compile(r"(?i)interquartile|\biqr\b|median absolute")
 
+# The noun is matched case-sensitively in lower case: "Run" and "Walker Run"
+# are task names in the control benchmarks, and a row label reading "Run"
+# beneath a cell ending in 95 was read as 95 runs. "four seeds" and "ten runs
+# of cross-validation" are written out in words at least as often as in
+# digits, and the digits-only version missed every one of them. Both were
+# found by the gold-set audit.
+_NUMBER_WORDS = {
+    "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7, "eight": 8,
+    "nine": 9, "ten": 10, "twelve": 12, "fifteen": 15, "twenty": 20, "thirty": 30,
+    "fifty": 50, "hundred": 100,
+}
 N_RUNS = re.compile(
-    r"(?i)\b(?:over|across|averaged?\s+over|mean\s+of|using)?\s*(\d{1,3})\s+"
-    r"(?:random\s+|independent\s+|different\s+)?(seeds?|runs?|trials?|repetitions?|replicates?)\b"
+    r"(?:\b(?:over|across|averaged?\s+over|mean\s+of|using|with|on|for|from)\s+)?"
+    r"\b(\d{1,3}|" + "|".join(_NUMBER_WORDS) + r")\s+"
+    r"(?:random\s+|independent\s+|different\s+|fixed\s+|distinct\s+)?"
+    r"(?:random\s+)?(?:(?:weight|model|training|evaluation|test)\s+)?(seeds?|runs?|trials?|repetitions?|replicates?|repeats?|"
+    r"(?:random\s+)?initiali[sz]ations?|restarts?|rollouts?)\b",
+    re.IGNORECASE,
 )
 
 
@@ -88,12 +108,75 @@ class TableBlock:
     dispersion_kind: str          # std | sem | ci | iqr | unknown | none
     n_runs: Optional[int]
     n_runs_source: Optional[str]  # "caption" | "page" | None
+    markers: dict = dataclasses.field(default_factory=dict)
+    header_text: str = ""         # the rows above the first numeric row
 
     def to_dict(self) -> dict:
         return {"number": self.number, "caption": self.caption, "page": self.page,
                 "dispersion_kind": self.dispersion_kind, "n_runs": self.n_runs,
-                "n_runs_source": self.n_runs_source,
+                "n_runs_source": self.n_runs_source, "markers": self.markers,
+                "header_text": self.header_text,
                 "cells": [c.to_dict() for c in self.cells]}
+
+
+# Uncertainty can be printed in forms that are not an error bar: a dagger or
+# star on the winning cell, a p-value in the footnote, a sentence in the
+# caption. The pipeline cannot test those, but it can count them, so that the
+# share of tables the definition of "testable" leaves out is a number rather
+# than a worry.
+MARKER_DAGGER = re.compile(r"[†‡§¶]")
+MARKER_STAR = re.compile(r"\d\s?\*{1,3}(?!\w)")
+MARKER_PVALUE = re.compile(r"(?i)\bp\s*(?:-\s*)?(?:value|<|\u2264|=)\s*0?\.\d")
+MARKER_SIGNIF = re.compile(r"(?i)significan")
+PAPER_TEST = re.compile(
+    r"(?i)\b(?:t-test|t test|Wilcoxon|Mann.Whitney|permutation test|sign test|"
+    r"bootstrap(?:ped)?\s+(?:confidence|interval|CI)|significance test|"
+    r"statistically significant|p-value|p\s*<\s*0?\.0)"
+)
+
+
+def _header_text(spans: list, cells: list, cap: dict, above: float = 45.0) -> str:
+    """The text between the caption and the first numeric row: column headers."""
+    if not cells:
+        return ""
+    y_top = min(c.y for c in cells)
+    x0, x1 = cap["x0"] - COLUMN_MARGIN, cap["x1"] + COLUMN_MARGIN
+    parts = [s["text"] for s in spans
+             if s["page"] == cap["page"] and y_top - above <= s["y"] < y_top - 1.0
+             and x0 <= s["x"] <= x1 and s["y"] > cap["y"]]
+    return re.sub(r"\s+", " ", " ".join(parts))[:300]
+
+
+FIGURE_CAPTION = re.compile(r"(?:Figure|Fig\.)\s*\d+[.:]\s")
+FIGURE_UNCERTAINTY = re.compile(
+    r"(?i)error bars?|shaded|shading|standard deviation|std|confidence|"
+    r"(?:seeds|runs|trials)|±|interquartile|percentile")
+
+
+def _figure_uncertainty(full_text: str) -> tuple:
+    """How many figure captions mention uncertainty at all."""
+    starts = [m.end() for m in FIGURE_CAPTION.finditer(full_text)]
+    caps = [full_text[a:min(a + 400, b)] for a, b in zip(starts, starts[1:] + [len(full_text)])]
+    return len(caps), sum(1 for c in caps if FIGURE_UNCERTAINTY.search(c))
+
+
+def _table_markers(spans: list, cells: list, cap: dict, below: float = 40.0) -> dict:
+    """Count significance markers in the table's own region and footnote."""
+    if not cells:
+        return {}
+    y0 = min(c.y for c in cells) - 2.0
+    y1 = max(c.y for c in cells) + below
+    x0, x1 = cap["x0"] - COLUMN_MARGIN, cap["x1"] + COLUMN_MARGIN
+    text = " ".join(s["text"] for s in spans
+                    if s["page"] == cap["page"] and y0 <= s["y"] <= y1
+                    and x0 <= s["x"] <= x1)
+    blob = cap["text"] + " " + text
+    return {
+        "dagger": len(MARKER_DAGGER.findall(text)),
+        "star": len(MARKER_STAR.findall(text)),
+        "pvalue": len(MARKER_PVALUE.findall(blob)),
+        "signif_word": len(MARKER_SIGNIF.findall(blob)),
+    }
 
 
 # How far below a caption a table's numbers may lie, in PDF points, and how far
@@ -175,20 +258,55 @@ def _spans(doc, max_pages: int) -> list:
             break
         ph = page.rect.height or 792.0
         top_cut, bottom_cut = ph * HEADER_FRACTION, ph * (1.0 - FOOTER_FRACTION)
-        for block in page.get_text("dict").get("blocks", []):
+        for block in page.get_text("rawdict").get("blocks", []):
             for line in block.get("lines", []):
                 for span in line.get("spans", []):
-                    txt = span.get("text", "").strip()
-                    if not txt:
-                        continue
                     font = span.get("font", "")
                     bold = bool(span.get("flags", 0) & BOLD_FLAG) or "bold" in font.lower()
-                    x0, y0, x1, y1 = span.get("bbox", (0, 0, 0, 0))
-                    if y0 < top_cut or y0 > bottom_cut:
-                        continue
-                    out.append({"text": txt, "bold": bold, "page": pno, "y": y0,
-                                "x": x0, "x1": x1, "y1": y1,
-                                "size": span.get("size", 0.0)})
+                    size = span.get("size", 0.0)
+                    for piece in _split_span(span.get("chars", []), size):
+                        txt, x0, y0, x1, y1 = piece
+                        if y0 < top_cut or y0 > bottom_cut:
+                            continue
+                        out.append({"text": txt, "bold": bold, "page": pno, "y": y0,
+                                    "x": x0, "x1": x1, "y1": y1, "size": size})
+    return out
+
+
+def _split_span(chars: list, size: float) -> list:
+    """Cut a span wherever its glyphs leave a visible gap.
+
+    A span is a run of glyphs in one font, and some PDFs set a whole table row
+    as one span with the columns separated by positioning rather than by
+    space characters. Read as text, such a row is "0.5943+-0.00160.7015+-0.0007",
+    and the parser then found a winner of 2577 +- 0.0046 in a column of values
+    near 0.25. Found by the gold-set audit. Splitting on the glyph geometry
+    recovers the cells; the threshold is a fraction of the font size so that
+    the kerning inside a number never counts as a gap.
+    """
+    gap_min = max(0.9, 0.28 * (size or 8.0))
+    pieces, cur, prev_x1, prev_space = [], [], None, False
+    for ch in chars:
+        c = ch.get("c", "")
+        cx0, cy0, cx1, cy1 = ch.get("bbox", (0, 0, 0, 0))
+        # A gap that the PDF already marks with a space character is left to
+        # the text; only an unmarked gap cuts the span, so that "Table 1:" and
+        # "82.4 +/- 0.3" keep their spaces and their caption anchors.
+        if cur and not prev_space and not c.isspace() and prev_x1 is not None                 and cx0 - prev_x1 > gap_min:
+            pieces.append(cur)
+            cur = []
+        cur.append((c, cx0, cy0, cx1, cy1))
+        prev_x1, prev_space = cx1, c.isspace()
+    if cur:
+        pieces.append(cur)
+    out = []
+    for pc in pieces:
+        body = [b for b in pc if not b[0].isspace()]
+        txt = "".join(c for c, *_ in pc).strip()
+        if not txt or not body:
+            continue
+        out.append((txt, min(b[1] for b in body), min(b[2] for b in body),
+                    max(b[3] for b in body), max(b[4] for b in body)))
     return out
 
 
@@ -224,23 +342,30 @@ def _lines(spans: list, min_overlap: float = 0.45) -> list:
         # a new span can overlap only the most recently opened groups. Scanning
         # every group instead made this quadratic and cut throughput from about
         # twenty papers a minute to three and a half.
+        # A line's vertical extent must not grow when a tall span joins it.
+        # A row label that spans two tightly set rows ("10" beside a Score row
+        # and an Ent row, in a six-point table) used to widen the line to cover
+        # both, and the second row was then glued onto the first: 0.67 and
+        # 0.00 +/- 0.00 became 670.0 +/- 0.0. Found by the gold-set audit. The
+        # test is therefore against the line's core, the extent of its
+        # shortest member, which a row label cannot widen.
         for s_ in members:
             y0, y1 = s_["y"], s_.get("y1", s_["y"])
             h = max(1e-6, y1 - y0)
             placed = False
             for g in reversed(groups[-LINE_LOOKBACK:]):
-                if g["y1"] <= y0:
+                if g["c1"] <= y0:
                     continue
-                gh = max(1e-6, g["y1"] - g["y0"])
-                overlap = min(g["y1"], y1) - max(g["y0"], y0)
-                if overlap / min(h, gh) >= min_overlap:
+                ch = max(1e-6, g["c1"] - g["c0"])
+                overlap = min(g["c1"], y1) - max(g["c0"], y0)
+                if overlap / min(h, ch) >= min_overlap:
                     g["items"].append(s_)
-                    g["y0"] = min(g["y0"], y0)
-                    g["y1"] = max(g["y1"], y1)
+                    if h < ch:
+                        g["c0"], g["c1"] = y0, y1
                     placed = True
                     break
             if not placed:
-                groups.append({"y0": y0, "y1": y1, "items": [s_]})
+                groups.append({"c0": y0, "c1": y1, "items": [s_]})
 
         for g in groups:
             items = sorted(g["items"], key=lambda s_: s_["x"])
@@ -257,7 +382,7 @@ def _lines(spans: list, min_overlap: float = 0.45) -> list:
                 text += s_["text"]
                 pos += len(s_["text"])
                 prev_x1 = s_.get("x1", s_["x"])
-            lines.append({"page": page, "y": g["y0"], "x": items[0]["x"],
+            lines.append({"page": page, "y": g["c0"], "x": items[0]["x"],
                           "text": text, "offsets": offsets})
     lines.sort(key=lambda l: (l["page"], l["y"], l["x"]))
     return lines
@@ -284,6 +409,16 @@ def _cells_from_lines(lines: list) -> list:
     for line in lines:
         text = line["text"]
         claimed = set()
+        for m in NUM_CI.finditer(text):
+            mean, lo, hi = (float(m.group(i)) for i in (1, 2, 3))
+            if not (lo <= mean <= hi and hi > lo):
+                continue
+            claimed.add((m.start(), m.end()))
+            cells.append(Cell(text=m.group(0), mean=mean, dispersion=(hi - lo) / 2.0,
+                              dispersion_style="ci",
+                              bold=_bold_at(line, m.start(), m.end()),
+                              page=line["page"], y=round(line["y"], 1),
+                              x=round(_x_at(line, m.start()), 1)))
         for pat, style in ((NUM_PM, "pm"), (NUM_PAREN, "paren")):
             for m in pat.finditer(text):
                 if any(s <= m.start() < e for s, e in claimed):
@@ -325,16 +460,46 @@ def _parse_value(text: str):
     return None, None
 
 
-def _dispersion_kind(caption: str, body_nearby: str) -> str:
-    blob = caption + " " + body_nearby
-    if CI_WORDS.search(blob):
-        return "ci"
-    if SEM_WORDS.search(blob):
+def _kind_in(text: str) -> str:
+    """Which kind of dispersion a stretch of text names, if any.
+
+    Standard error and standard deviation are checked before the confidence
+    interval: a page that says "mean and standard error" in one sentence and
+    "95% confidence intervals" in a figure caption is describing two things,
+    and the table's bars are the first.
+    """
+    if SEM_WORDS.search(text):
         return "sem"
-    if STD_WORDS.search(blob):
+    if STD_WORDS.search(text):
         return "std"
-    if IQR_WORDS.search(blob):
+    if CI_WORDS.search(text):
+        return "ci"
+    if IQR_WORDS.search(text):
         return "iqr"
+    return "unknown"
+
+
+def _dispersion_kind(caption: str, body_nearby: str, full_text: str = "") -> str:
+    """What the error bar means, from the caption first, then the page, then
+    the paper.
+
+    The first version pooled caption and page, so a caption saying "standard
+    deviation" lost to a "standard error" sentence elsewhere on the page. The
+    gold-set audit also found that most bars the pipeline called unlabelled
+    were named once, in the experimental setup, on another page; a reader who
+    has read the paper knows what they are. The paper as a whole is therefore
+    consulted last, and only when it names exactly one kind.
+    """
+    for text in (caption, body_nearby):
+        k = _kind_in(text)
+        if k != "unknown":
+            return k
+    if full_text:
+        named = {k for k, pat in (("sem", SEM_WORDS), ("std", STD_WORDS),
+                                  ("ci", CI_WORDS), ("iqr", IQR_WORDS))
+                 if pat.search(full_text)}
+        if len(named) == 1:
+            return named.pop()
     return "unknown"
 
 
@@ -357,7 +522,15 @@ def _n_runs(caption: str, body_nearby: str):
     analysis can report results with and without page-derived counts.
     """
     def scan(text):
-        vals = [int(m.group(1)) for m in N_RUNS.finditer(text)]
+        vals = []
+        for m in N_RUNS.finditer(text):
+            noun = m.group(2)
+            # The count is case-insensitive ("Five seeds" opens sentences) but
+            # the noun must be lower case: "Run" is a task, "Trial" a heading.
+            if not noun.islower():
+                continue
+            tok = m.group(1).lower()
+            vals.append(_NUMBER_WORDS[tok] if tok in _NUMBER_WORDS else int(tok))
         return [v for v in vals if 2 <= v <= 200]
 
     cap = scan(caption)
@@ -461,9 +634,12 @@ def extract_paper(pdf_path=None, max_pages: int = 40, *, blob: bytes = None) -> 
             caption=cap["text"][:300],
             page=cap["page"],
             cells=cells,
-            dispersion_kind=("none" if not has_disp else _dispersion_kind(cap["text"], page_text)),
+            dispersion_kind=("none" if not has_disp
+                             else _dispersion_kind(cap["text"], page_text, full_text)),
             n_runs=n_runs,
             n_runs_source=n_runs_source,
+            markers=_table_markers(spans, cells, cap),
+            header_text=_header_text(spans, cells, cap),
         ))
 
     # Only cells inside a detected table count. A "(0.3)" in the running text is
@@ -471,7 +647,8 @@ def extract_paper(pdf_path=None, max_pages: int = 40, *, blob: bytes = None) -> 
     # counting those inflated the headline figure from 27% to 92% before this
     # distinction was drawn.
     in_tables = [c for b in blocks for c in b.cells]
-    n_pm = sum(1 for c in in_tables if c.dispersion_style == "pm")
+    fig_total, fig_unc = _figure_uncertainty(full_text)
+    n_pm = sum(1 for c in in_tables if c.dispersion_style in ("pm", "ci"))
     n_paren = sum(1 for c in in_tables if c.dispersion_style == "paren")
     return {
         "path": pdf_path,
@@ -484,6 +661,10 @@ def extract_paper(pdf_path=None, max_pages: int = 40, *, blob: bytes = None) -> 
         "reports_explicit_error_bar": n_pm > 0,
         "reports_any_dispersion": (n_pm + n_paren) > 0,
         "n_runs_global": _n_runs("", full_text)[0],
+        "mentions_significance_test": bool(PAPER_TEST.search(full_text)),
+        "n_table_captions": len(caption_spans),
+        "n_figure_captions": fig_total,
+        "n_figure_captions_with_uncertainty": fig_unc,
         "checklist_error_bars": checklist["answer"],
         "checklist_justification": checklist["justification"],
         "n_tables_detected": len(blocks),

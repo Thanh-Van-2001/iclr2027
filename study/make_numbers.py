@@ -217,12 +217,26 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("pct caption uncertainty",
             rf"{fn['pct_of_empty_tables_with_caption_uncertainty']}\%", provenance="funnel")
 
-    reg.add("pct underpowered", rf"{pw['pct_underpowered']}\%", provenance="power_audit_2025")
     # The power level is a parameter of the analysis, not an illustration, so it
     # comes from the run record like everything else rather than the whitelist.
     reg.add("power level", rf"{int(pw['power'] * 100)}\%", provenance="power_audit_2025")
-    reg.add("median gap over mde", f"{pw['median_gap_over_mde']}", provenance="power_audit_2025")
-    reg.add("q one gap over mde", f"{pw['q1_gap_over_mde']}", provenance="power_audit_2025")
+    # Section 6 no longer conditions on the paper's own dispersion (that was the
+    # observed-power fallacy); the design-side version takes the run count from
+    # the paper and the noise from everyone else.
+    dm = _j("design_mde")
+    drun = "design_mde_2025"
+    reg.add("design mde n", dm["n"], provenance=drun)
+    reg.add("design mde papers", dm["n_papers"], provenance=drun)
+    reg.add("pct below design mde", rf"{dm['pct_below_design_mde']}\%", provenance=drun)
+    reg.add("design mde no bars n", dm["n_no_bars"], provenance=drun)
+    reg.add("pct below design mde no bars", rf"{dm['pct_below_design_mde_no_bars']}\%", provenance=drun)
+    reg.add("design mde testable n", dm["n_testable"], provenance=drun)
+    reg.add("pct below design mde testable", rf"{dm['pct_below_design_mde_testable']}\%", provenance=drun)
+    reg.add("pct below own mde", rf"{dm['own_dispersion']['pct_underpowered']}\%", provenance=drun)
+    reg.add("design median sd", f"{dm['median_external_sd_percent_scale']}", provenance=drun)
+    reg.add("design median mde", f"{dm['median_mde_percent_scale']}", provenance=drun)
+    reg.add("design pct benchmark sd", rf"{dm['pct_sd_from_benchmark']}\%", provenance=drun)
+    reg.add("design median runs", f"{dm['median_runs']:g}", provenance=drun)
 
     reg.add("pct bold not extremal", rf"{bs['pct_not_extremal']}\%", provenance="bold_semantics")
 
@@ -256,7 +270,16 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
             provenance=binrun)
     reg.add("binom over mmlu", rf"{bn['share_needing_more_than']['MMLU (test) (14042)']}\%",
             provenance=binrun)
-    reg.add("binom median n wide", "32,842", provenance=binrun)
+    reg.add("binom median n wide", f"{bn['wide']['required_test_set_size']['median']:,}",
+            provenance=binrun)
+    reg.add("binom named comparisons", bn["metric_named"]["n_comparisons"], provenance=binrun)
+    reg.add("binom named papers", bn["metric_named"]["n_papers"], provenance=binrun)
+    reg.add("binom named median gap", f"{bn['metric_named']['median_gap_points']}", provenance=binrun)
+    reg.add("binom named median n", f"{bn['metric_named']['required_test_set_size']['median']:,}",
+            provenance=binrun)
+    reg.add("binom named over gsm",
+            rf"{bn['metric_named']['share_needing_more_than']['GSM8K (test) (1319)']}\%",
+            provenance=binrun)
 
     br = _j("benchmark_resolution")
     brun = "benchmark_resolution-70df59d3"
@@ -290,9 +313,33 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
             provenance="checkability_span")
     reg.add("testable span factor", f"{ck2['span_factor']}", provenance="checkability_span")
 
+    # Every row of the conventions table on a stated population, and the span
+    # over the rows that share the full one.
     span = _j("headline_span")
+    hs = span["rows"]
     reg.add("span low", rf"{span['span'][0]}\%", provenance="headline_span")
     reg.add("span high", rf"{span['span'][1]}\%", provenance="headline_span")
+    reg.add("span n", span["n_full_population"], provenance="headline_span")
+    reg.add("fail welch t", rf"{hs['welch_t_where_defined']['pct_fail']}\%", provenance="headline_span")
+    reg.add("fail welch t holm", rf"{hs['welch_t_where_defined']['pct_fail_holm']}\%",
+            provenance="headline_span")
+    reg.add("fail one sided", rf"{hs['one_sided']['pct_fail']}\%", provenance="headline_span")
+    reg.add("fail holm paper", rf"{hs['holm_family_paper']['pct_fail_holm']}\%", provenance="headline_span")
+    reg.add("unlabelled as sem full", rf"{hs['unlabelled_as_sem']['pct_fail']}\%", provenance="headline_span")
+    reg.add("labelled only n", hs["labelled_only"]["n"], provenance="headline_span")
+    reg.add("strict n", hs["caption_run_count_only"]["n"], provenance="headline_span")
+
+    wt = _j("analysis_2025")["welch_t"]
+    reg.add("welch defined", wt["n_with_t"], provenance="analysis_2025")
+    reg.add("fail welch subset", rf"{wt['pct_fail_t']}\%", provenance="analysis_2025")
+    reg.add("fail z same subset", rf"{wt['pct_fail_z_same_subset']}\%", provenance="analysis_2025")
+    reg.add("median runs testable", f"{wt['median_stated_runs']:g}", provenance="analysis_2025")
+    reg.add("runs q one", wt["runs_quartiles"][0], provenance="analysis_2025")
+    reg.add("runs q three", wt["runs_quartiles"][2], provenance="analysis_2025")
+    reg.add("pct runs le three", rf"{wt['pct_runs_le_3']}\%", provenance="analysis_2025")
+    reg.add("fail welch t twenty four", rf"{_j('analysis_2024')['welch_t']['pct_fail_t']}\%",
+            provenance="analysis_2024")
+
 
     rj = "rejected_table_audit-f09617fc"
     reg.add("rejected judged", 12, provenance=rj)
@@ -349,14 +396,14 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("fail under half", rf"{gb['pct_fail_under_half_point']}\%", provenance="extra_stats")
     reg.add("fail over ten", rf"{gb['pct_fail_over_ten_points']}\%", provenance="extra_stats")
 
-    # The recall check, which is the only one that bounds the headline.
-    v3 = "recall_audit_v3-aacf4505"
-    reg.add("recall three judged", 60, provenance=v3)
-    reg.add("recall three missed", "no", provenance=v3)
-    reg.add("recall three ci", "95\% CI [0.94, 1.00]", provenance=v3)
-    reg.add("headline move sixth", "0.5 points",
-            provenance="recall_fix_impact-348e7fbc")
-    reg.add("headline with extraction", "72.8--77.5\%", provenance=v3)
+    vc = xs["venue_counts"]
+    for key, label in (("NeurIPS", "neurips"), ("ICML", "icml")):
+        reg.add(f"{label} papers", vc[key]["papers"], provenance="extra_stats")
+        reg.add(f"{label} comparisons", vc[key]["comparisons"], provenance="extra_stats")
+        reg.add(f"{label} testable", vc[key]["testable"], provenance="extra_stats")
+        reg.add(f"{label} neither", rf"{vc[key]['pct_neither']}\%", provenance="extra_stats")
+        reg.add(f"{label} fail", rf"{vc[key]['pct_fail']}\%", provenance="extra_stats")
+        reg.add(f"{label} error bar", rf"{vc[key]['pct_papers_with_error_bar']}\%", provenance="extra_stats")
 
     # Extractor validation
     with open(crosscheck_path, encoding="utf-8") as fh:

@@ -21,8 +21,8 @@ sys.path.insert(0, os.path.join(HERE, ".."))
 from analyze import (analyse, checklist_agreement, cluster_bootstrap,  # noqa: E402
                      design_effect, extraction_funnel, orientation, _columns, _rows)
 from sensitivity import (checkability_span, correlation_sensitivity,  # noqa: E402
-                         error_bar_meaning, paper_level_crosstab, power_audit,
-                         run_count_scope)
+                         design_mde, error_bar_meaning, paper_level_crosstab,
+                         power_audit, run_count_scope)
 
 YEARS = (2024, 2025)
 
@@ -171,8 +171,11 @@ def main() -> int:
     from benchmark_resolution import identify as _bench_identify  # noqa: F401
     for name, value in (("correlation_sensitivity", correlation_sensitivity(cs)),
                         ("checkability_span", checkability_span(cs)),
-                        ("binomial_check", binom_analyse(cs)),
+                        ("binomial_check", dict(binom_analyse(cs),
+                                                wide=binom_analyse(cs, lo=1e-9, hi=100.0),
+                                                metric_named=binom_analyse(cs, metric_named=True))),
                         ("power_audit", power_audit(cs)),
+                        ("design_mde", design_mde(cs, records)),
                         ("funnel", extraction_funnel(records)),
                         ("checklist", checklist_agreement(records)),
                         ("bold_semantics", bold_semantics(records))):
