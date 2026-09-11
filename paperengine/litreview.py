@@ -320,8 +320,11 @@ def to_bibtex(papers: Iterable[Paper]) -> str:
             lines.append("  archivePrefix = {arXiv},")
         if r.url:
             lines.append(f"  url = {{{r.url}}},")
-        lines.append(f"  note = {{verified via {r.source}}}")
+        # Provenance travels as a BibTeX comment, not a field: a note field is
+        # typeset into the published reference list, and 'verified via arxiv'
+        # appeared after every entry in a rendered draft.
         lines.append("}")
+        lines.append(f"% {p.key}: verified via {r.source}")
         out.append("\n".join(lines))
     return "\n\n".join(out) + "\n"
 
