@@ -197,6 +197,7 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     d = b25["deff"]
     reg.add("icc", f"{d['icc']:.2f}", provenance=bootrun)
     reg.add("design effect", f"{d['design_effect']:.2f}", provenance=bootrun)
+    reg.add("deff root", f"{d['design_effect'] ** 0.5:.1f}", provenance=bootrun)
     reg.add("n effective", d["n_eff"], provenance=bootrun)
     reg.add("mean cluster", f"{d['mean_cluster']:.1f}", provenance=bootrun)
 
@@ -288,6 +289,7 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     bn = _j("binomial_check")
     binrun = "required_test_set_size-612527a6"
     reg.add("binom comparisons", bn["n_comparisons"], provenance=binrun)
+    reg.add("binom base ratio", f"{bn['n_comparisons'] / y25['n_testable']:.1f}", provenance=binrun)
     reg.add("binom papers", bn["n_papers"], provenance=binrun)
     reg.add("binom median gap", f"{bn['median_gap_points']}", provenance=binrun)
     reg.add("binom median n", f"{bn['required_test_set_size']['median']:,}", provenance=binrun)

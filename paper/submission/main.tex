@@ -297,7 +297,7 @@ second-order uncertainty we do not propagate.
 All intervals resample papers rather than comparisons. With an intraclass
 correlation of \nIcc{} and \nMeanCluster{} comparisons per paper, the design
 effect is \nDesignEffect{}, so treating comparisons as independent would report
-intervals about twice too narrow; a paper asking the field to print
+intervals \nDeffRoot{} times too narrow; a paper asking the field to print
 dispersions cannot print point estimates of its own.
 
 Figure~\ref{fig:gapsurvival} shows where the failures sit, and the pattern is
@@ -348,8 +348,8 @@ the number of test items alone; the missing quantity is then the test-set
 size. Given the gaps the papers report, how large would a shared test set have
 to be for those gaps to be distinguishable from zero? Restricting to comparisons
 whose two values both lie in $[40, 100]$ gives \nBinomComparisons{} comparisons
-from \nBinomPapers{} papers---four times the base of the variance-based
-analysis, because it needs no error bars. F1, BLEU and mean IoU live in that
+from \nBinomPapers{} papers---\nBinomBaseRatio{} times the base of the
+variance-based analysis, because it needs no error bars. F1, BLEU and mean IoU live in that
 range too and are not proportions over items, so we also report the stricter
 subset whose caption or column header names an accuracy-like metric:
 \nBinomNamedComparisons{} comparisons from \nBinomNamedPapers{} papers.
@@ -401,7 +401,7 @@ more than sampling does. Table~\ref{tab:span} gives the failure rate under each,
 with the population each row is computed on. Over the rows that share the full
 population of \nSpanN{} testable comparisons the span is \nSpanLow{} to
 \nSpanHigh{}, against a bootstrap interval of \nCiFail{} that captures sampling
-alone: definitional uncertainty is more than twice the statistical kind.
+alone: definitional uncertainty is about twice the statistical kind.
 
 The headline sits at a definite place in that span. It reads unlabelled bars as
 standard deviations, takes the two values as independent, and uses $z$ rather
@@ -465,8 +465,8 @@ Assuming $\rho = 0$ inflates the standard error of the difference and so makes
 report the range: at $\rho = \nRhoHalf{}$ the failure rate is \nFailRhoHalf{}
 rather than \nPctFail{}, and even at $\rho = \nRhoNine{}$ it is
 \nFailRhoNine{}. The independent figure is the one the source papers' reporting
-supports; under every assumption we can defend, at least a fifth of checkable
-improvements are indistinguishable from zero.
+supports; under every assumption we can defend, more than a quarter of
+checkable improvements are indistinguishable from zero.
 
 \paragraph{Checkability moves further than survival does.} The share that can be
 checked is the more convention-dependent headline. A standard error is already
@@ -540,8 +540,9 @@ not results tables, \nGoldDiscardedOther{} mark winners in a way the pipeline
 does not read (shading, colour, several per column), and \nGoldDiscardedFault{}
 are the pipeline's fault. Of the non-extremal groups, \nGoldNonExtOwn{} are
 authors marking their own row regardless of rank, \nGoldNonExtSub{} mark the
-best within a sub-block or excluding an oracle, and \nGoldNonExtFault{} are
-misreads. Of \nGoldNoBarN{} retained comparisons the pipeline says carry no
+best within a sub-block or excluding an oracle, \nGoldNonExtFault{} are
+misreads, and \nGoldNonExtOther{} mark something else (a selected
+hyperparameter, a column mixing units). Of \nGoldNoBarN{} retained comparisons the pipeline says carry no
 error bar on either side, \nGoldNoBarAbsent{} carry none.
 
 \paragraph{Recall.} Precision does not bound the quantity the headline rests
@@ -695,11 +696,10 @@ conventions, not of the people following them.
 A paper that bolds the best result and marks every result not statistically
 distinguishable from it has already declared those pairs to be ties; counting
 them as failed comparisons would inflate our failure rate. The convention is
-real, and it concentrates exactly where it does the most damage. Captions
-claiming statistical indistinguishability appear in \nPctTieTables{} of all
-tables but \nPctTieTestable{} of the testable subset---a tenfold
-enrichment---because the papers careful enough to print dispersions are the ones
-most likely to mark ties. Those comparisons fail at \nFailAmongTieMarked{}
+real but rare, and it concentrates where it matters. Captions claiming
+statistical indistinguishability appear in \nPctTieTables{} of all tables but
+\nPctTieTestable{} of the testable subset, because the papers careful enough to
+print dispersions are the ones most likely to mark ties. Those comparisons fail at \nFailAmongTieMarked{}
 against \nPctFail{} overall, which is what one would expect of pairs the authors
 had already declared indistinguishable.
 
