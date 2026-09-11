@@ -30,6 +30,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(HERE, ".."))
 
+from analyze import load_records  # noqa: E402
 from paperengine.stats import norm_ppf  # noqa: E402
 
 # name -> (regex, test-set size). Sizes are the standard evaluation split.
@@ -86,14 +87,13 @@ def resolvable_gap(n: int, p: float = 0.5, *, alpha: float = 0.05, power: float 
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="Compare reported gaps against benchmark resolution.")
     ap.add_argument("--analysis", default="out/analysis_2025.json")
-    ap.add_argument("--extracted", default="data/extracted_2025.json")
+    ap.add_argument("--extracted", default="data/extracted_2025.jsonl")
     ap.add_argument("--out", default="out/benchmark_resolution.json")
     args = ap.parse_args(argv)
 
     with open(args.analysis, encoding="utf-8") as fh:
         cs = json.load(fh)["_comparisons"]
-    with open(args.extracted, encoding="utf-8") as fh:
-        recs = json.load(fh)
+    recs = load_records(args.extracted)
 
     captions = {}
     for r in recs:

@@ -1,0 +1,25 @@
+10 runs for CIFAR-10, CIFAR-100, and Tiny ImageNet, and over 3 runs for ImageNet-1K
+---
+10 runs)
+---
+Experiments run on NVIDIA V100 GPUs with 12 CPUs and 48 GB RAM
+---
+GoogLeNet runs 125 minutes baseline and 140 minutes
+---
+Justification: Results are averaged over three independent runs with different random seeds
+---
+Results are averaged over three runs
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+run with given experimental conditions)
+---
+three independent runs with varying random seeds to ensure reproducibility
+---
+• The instructions should contain the exact command and environment needed to run to

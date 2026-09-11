@@ -1,0 +1,33 @@
+Appendix and is self-contained, allowing one to replicate the experiments
+---
+Below, we summarize the metrics used in Table 2, where we present the results obtained from 25 runs
+---
+N = 25 random seeds (42–66)
+---
+Nreps = 50 repetitions
+---
+Random seed: 42
+---
+TCVAE for two arbitrarily selected random seeds: top: 43, bottom: 63
+---
+The MFEP parameterization experiment was run on a single Nvidia V100 GPU, taking 1 hour and 38
+---
+The results presented in the main paper were run on a laptop and required about 10 minutes for each
+---
+We retrain the models on each run and find the best parameterization of
+---
+over the 24 seeds kept after discarding the worst-Chamfer run for every model
+---
+reporting mean ± standard deviation over remaining 24 seeds
+---
+resulting encoding to add bias to the potential and run another simulation, then encode the data again,
+---
+seeds
+---
+statistical significance (or standard deviation) across multiple random seeds
+---
+summary statistics computed by dropping the worst-performing seed (by Chamfer distance) and
+---
+with different random seeds
+---
+z∥— and present the average over the random seeds

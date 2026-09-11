@@ -85,7 +85,7 @@ checkable, which is prior to truth and, unlike truth, is settled by looking.
 
 \paragraph{Contributions.} Prior audits of reporting practice annotate papers by
 hand, which bounds them to a few hundred papers and to a label per paper
-(Table~\ref{tab:audits}). We work at the unit a results table actually claims
+(Table~\ref{tab:audits}, Appendix~\ref{app:audits}). We work at the unit a results table actually claims
 in, which is the comparison, and that changes both what can be measured and how
 much of it there is.
 
@@ -258,16 +258,8 @@ it, \nPctErrorBarDiscarded{}. Whatever the filter selects for, it is not the
 absence of uncertainty, and the headline computed on the retained tables is if
 anything the more generous of the two figures.
 
-We also looked at \nRejectedJudged{} rejected tables to see why they were
-rejected, since detecting bold in a PDF is fragile and a silent failure would
-be invisible. \nRejectedNotResults{} were not results tables at all---prompt
-templates, hyperparameter grids, dataset descriptions---and
-\nRejectedUnmarked{} marked no winner. In \nRejectedStructural{} the bold count
-matched what a reader sees but was not one cell per group. That leaves two cases
-that bound the risk: one table marks its winners with background shading instead
-of bold, and one may be a genuine detection failure. On twelve tables the
-interval on that failure rate is \nRejectedFailCi{}, which is wide, and we
-report it rather than the assertion it replaces.
+Section~\ref{sec:threats} reads a sample of the discarded tables and of the
+groups whose bold cell is not the best, and says why each was dropped.
 
 Figure~\ref{fig:untestable} gives the decomposition. Of
 \nComparisonsTwentyFive{} highlighted comparisons in 2025, \nPctNeitherSide{}
@@ -278,6 +270,14 @@ leaves \nPctTestable{}.
 The 2024 sample gives \nPctNeitherSideTwentyFour{} and
 \nPctTestableTwentyFour{}: the central figure agrees to within a point across
 two samples a year apart, inside either bootstrap interval.
+
+The pattern is not one community's, though its size is.
+Appendix~\ref{app:topics} splits the sample by subfield of the title: the
+share of comparisons without an error bar runs from \nRlNeither{} in
+reinforcement learning to \nLmNeither{} in language-model papers, and the share
+that can be tested from \nRlTestable{} to \nLmTestable{}; among what can be
+tested, the failure rate stays between \nTopicFailLow{} and \nTopicFailHigh{}
+in every subfield with fifty or more testable comparisons.
 
 At the level of whole papers, \nPctWithErrorBar{} print an explicit error bar in
 any results table and \nPctStatingN{} state a number of runs anywhere. Among
@@ -477,17 +477,19 @@ Every unlabelled bar read as a standard error & \nComparisonsTwentyFive{} & \nTe
 \end{tabular}
 \end{table}
 
-\paragraph{Where a run count may come from.} A table's caption sometimes states
-how many runs produced its means; more often the count appears once in the
-experimental setup and is meant to govern everything. Counting only captions
+\paragraph{Where a run count comes from, and what a bar means.} A caption
+sometimes states how many runs produced its means; more often the count appears
+once in the setup and is meant to govern everything. Counting only captions
 gives \nStrictTestable{} testable and \nStrictFail{} failing; allowing a count
-stated anywhere in the paper to govern its tables gives \nPctTestable{} and
-\nPctFail{}. We report the second throughout. The choice matters because the two
-sets of papers barely overlap: of the papers that print an explicit error bar,
-only \nPctErrorBarPapersStatingRuns{} state a number of runs anywhere
-(\nPapersErrorBarAndRuns{} papers print both, \nPapersErrorBarOnly{} print an
-error bar and no count). Reporting a dispersion without saying what it is a
-dispersion over is itself the most common failure mode we see.
+stated anywhere in the paper gives \nPctTestable{} and \nPctFail{}, which we
+report. Of the papers that print an explicit error bar, only
+\nPctErrorBarPapersStatingRuns{} state a run count anywhere. Nor do most say
+what the bar is: on the \nNUnlabelled{} unlabelled comparisons with a run
+count, reading every bar as a standard deviation gives \nUnlabelledAsStd{}
+failing and as a standard error \nUnlabelledAsSem{}, and carried into the full
+population the second gives \nUnlabelledAsSemFull{}. We use the first, the more
+conservative; the subset whose authors do say fails at \nLabelledOnlyFail{},
+close to the headline.
 
 \paragraph{Whether the two values are independent.} Our test treats the winner
 and the runner-up as independent samples. They are not: in almost every table
@@ -498,83 +500,109 @@ Assuming $\rho = 0$ inflates the standard error of the difference, which makes a
 gap harder to call significant and therefore makes \emph{our own} failure rate
 too high. Papers do not print the covariance, so we report the range: at
 $\rho = 0.5$ the failure rate is \nFailRhoHalf{} rather than \nPctFail{}, and
-even at $\rho = \nRhoNine{}$ it is \nFailRhoNine{}. We quote the independent figure in
-the abstract because it is the assumption the source papers' own reporting
-supports, and we flag here that it is the end of the range least favourable to
-the field. The finding does not depend on the choice: under every assumption we
-can defend, at least a fifth of checkable improvements are indistinguishable
-from zero.
+even at $\rho = \nRhoNine{}$ it is \nFailRhoNine{}. The independent figure is
+the one the source papers' reporting supports, and it is the end of the range
+least favourable to the field; under every assumption we can defend, at least a
+fifth of checkable improvements are indistinguishable from zero.
 
 \paragraph{Checkability moves further than survival does.} The share that can be
-checked at all is the more convention-dependent of our two headline figures, and
-we owe the reader that plainly. A standard error is
-already the dispersion of a mean, so a comparison whose bars are standard errors
-needs no run count: reading every unlabelled bar that way makes
+checked is the more convention-dependent of the two headlines. A standard error
+is already the dispersion of a mean, so a comparison whose bars are standard
+errors needs no run count: reading every unlabelled bar that way makes
 \nTestableAsSem{} of comparisons testable rather than \nPctTestable{}, while
-demanding the run count come from the caption leaves \nStrictTestable{}. That is
-a factor of \nTestableSpanFactor{} between the ends, against a sampling interval
-of about two points. We report \nPctTestable{} because it follows from the
-conventions we can defend, and the claim in our title survives the whole range:
-even at the most generous end, four highlighted comparisons in five cannot be
-checked.
-
-\paragraph{What an unlabelled error bar means.} A paper that prints
-$82.4 \pm 0.3$ usually does not say whether $0.3$ is a standard deviation or a
-standard error, and the two differ by $\sqrt{n}$. On the \nNUnlabelled{}
-unlabelled comparisons that carry a run count, reading every bar as a standard
-deviation gives \nUnlabelledAsStd{} failing and as a standard error
-\nUnlabelledAsSem{}; carried into the full population, with labelled bars read
-as labelled, the second gives \nUnlabelledAsSemFull{}. We use the first, the
-more conservative. The subset where authors do say which they mean fails at
-\nLabelledOnlyFail{}, close to the \nPctFail{} headline, which is the evidence
-that the convention we assume is not distorting the result.
+demanding the run count come from the caption leaves \nStrictTestable{}, a
+factor of \nTestableSpanFactor{} between the ends. There are also routes to a
+check that are not an error bar on both cells, and the definition should say
+how much it leaves out. The extractor counts, per table, daggers and stars on
+values, $p$-values and the word ``significant'' in the table's region and
+caption, and interval cells $a\,[l, u]$. Of the comparisons with no error bar
+on either side, \nNoBarAnyMarker{} sit in a table with a marker of some kind
+and \nNoBarStrictMarker{} with a $p$-value or the word significant; a dagger
+often means ``copied from the original paper'', so the first is a ceiling.
+Crediting all of them raises the checkable share from \nPctTestable{} to
+\nTestableOrAnyMarker{}. Interval cells are rare (\nIntervalCells{} in the
+corpus); \nPctPapersMentionTest{} of papers use the vocabulary of a test
+anywhere; and \nPctNoBarPapersFigureUncertainty{} of the papers with no error
+bar in any table have a figure caption that mentions error bars, shading or
+seeds, which the instrument cannot see. The claim in our title survives every
+reading: at the most generous end, four highlighted comparisons in five cannot
+be checked from what the table prints.
 
 \section{Threats to validity}
 \label{sec:threats}
 
-\paragraph{The extractor could be wrong.} This is the threat that matters, and
-we attack it three ways, of which the third is the one that scales. First, we rendered sampled tables as images and compared
-them against the extracted values by eye. This found five distinct bugs, each of
-which had produced a confident and wrong version of these numbers: error bars
-set as subscripts being paired with the neighbouring column's mean; a page
-number extracted as a runner-up; the neighbouring column of a two-column layout
-being swept in; a table's orientation misread; and a run count taken from a row
-label reading ``top 100''. We report them because the reader has no other way to
-calibrate what remains. Second, we built a second extractor on entirely
-different principles---grid detection rather than span geometry---and measured
-agreement: it confirms \nCrosscheckConfirmation{} of \nCrosscheckValues{} values
-carrying an error bar. Inspection of the disagreements shows most are failures
-of the second extractor, so this is a lower bound rather than a central
-estimate. Third, and most usefully, every NeurIPS paper since 2021 answers a
-mandatory checklist question that is nearly the one we ask: \emph{does the paper
-report error bars suitably and correctly defined?} Only \nCheckNoButHasBar{}
-papers answering \emph{no} turn out to have a table error bar, so the extractor
-agrees with author self-report on \nCheckPrecision{} cases---hundreds of papers
-rather than the handful a person can inspect.
+\paragraph{The extractor could be wrong, so it was scored.} This is the threat
+that matters, and every earlier draft of this paper answered it indirectly:
+by eye on a handful of tables, against a second extractor, against author
+self-report. Reviewers were right that none of those measures the quantity
+the failure rate rests on, which is whether the pipeline read the right two
+cells, the right two error bars and the right run count. So we built a gold
+set. Table~\ref{tab:gold} gives the design: a stratified draw of claims and
+tables, each rendered from the PDF with the pipeline's chosen cell circled and
+nothing else, and read blind to the pipeline's output. The reader recorded the
+winner, the best unbolded rival, both means, both error bars, what the bars
+are, and the run count a reader of the whole paper would attach to the table;
+a cell the circle covered was recorded as unreadable and left out of that
+field. The reader was the vision-language model named in the AI use statement,
+which is also the obvious alternative extractor a reviewer would ask about;
+every disagreement between it and the pipeline was re-read, and the bugs below
+are the ones that survived. The renderings, the labels and the scoring script
+are released, so a reader who prefers a human's judgement can re-score them.
 
-Neither precision check bounds the quantity the headline depends on, which is
-recall: an error bar present in the PDF and missed falls silently into ``neither
-value has an error bar'', and every one of our six bugs could only have moved
-the headline in the same direction. We therefore sampled tables the extractor
-had called empty and looked at them. An audit of eighteen found one miss---the
-sixth bug, values written $76.63(\pm 3.98)$ with the bracket wrapping the
-symbol---and correcting it across the corpus moved the headline by
-\nHeadlineMoveSixth{}, not the eight points that extrapolating from that audit
-would have predicted. We then audited \nRecallThreeJudged{} more tables on the
-corrected extractor and found \nRecallThreeMissed{} misses
-(\nRecallThreeCi{}). The audit also turned up three conventions worth naming
-rather than counting as failures: a caption that bounds the standard error
-instead of printing it per cell, one that marks significant differences with a
-dagger from a permutation test, and one that bolds every result tied for best.
-In each the extractor is right that no error bar is present, and in each a
-reader is nonetheless given something to check against.
+The first hundred testable comparisons were read against the pipeline as it
+stood after the six bugs above, and they found \nGoldDevBugs{} more
+(Appendix~\ref{app:bugs}): rows glued together by a label spanning two
+six-point rows, a row set as one span with no space characters, dataset blocks
+that flipped the orientation vote, bare-integer row labels outranking the bold
+cell, and run counts written in words or read off a task called ``Run''. On
+that development set the pre-fix pipeline had the claim---bold cell, rival and
+all four values---right in \nGoldDevClaim{} of cases; after the fixes,
+\nGoldDevPostClaim{}, with \nGoldDevDropped{} claims no longer extracted, of
+which \nGoldDevDroppedRightly{} the reader had already marked as not a single
+claim. Because that set chose the fixes, its post-fix figure is optimistic. A
+second draw of \nGoldHeldN{} testable comparisons from papers the first never
+touched, read the same way against the fixed pipeline, is the estimate we
+stand on: \nGoldHeldClaim{} of claims fully correct, the winner's value right in
+\nGoldHeldWinner{}, the rival's in \nGoldHeldRunner{}, the run count in
+\nGoldHeldRuns{} and the meaning of the bar in \nGoldHeldKind{}. Recomputing
+the failure rate on that set from the reader's values rather than the
+pipeline's gives \nGoldHeldFailReader{} against \nGoldHeldFailPipe{} on the
+same items.
 
-That interval is the dominant uncertainty in this paper, and it is wider than
-the sampling interval. Propagating it, the share of comparisons carrying no
-error bar is \nHeadlineWithExtraction{} rather than the
-\nCiNeitherSide{} that sampling alone would suggest. We quote both, because a
-paper arguing that published intervals omit their largest source of uncertainty
-has no business omitting its own.
+The two weakest fields are the ones that require reading the paper rather than
+the table. A run count is stated once, in the setup, and may govern a
+different experiment than the table it is attached to; the meaning of an
+unlabelled bar is likewise stated elsewhere or not at all.
+Table~\ref{tab:span} bounds what either can do to the headline.
+
+\paragraph{What is thrown away.} The same audit read \nGoldDiscardedN{} tables
+the pipeline discards for lacking a single-bold group and \nGoldNonExtN{}
+groups whose bold cell is not the best. Of the discarded tables,
+\nGoldDiscardedNoBold{} mark no winner at all, \nGoldDiscardedNotResults{} are
+not results tables, \nGoldDiscardedOther{} mark winners in a way the pipeline
+does not read (shading, colour, several per column), and \nGoldDiscardedFault{}
+are the pipeline's fault. Of the non-extremal groups, \nGoldNonExtOwn{} are
+authors marking their own row regardless of rank, \nGoldNonExtSub{} mark the
+best within a sub-block or excluding an oracle, and \nGoldNonExtFault{} are
+misreads. Of \nGoldNoBarN{} retained comparisons the pipeline says carry no
+error bar on either side, \nGoldNoBarAbsent{} carry none.
+
+\paragraph{Recall.} Precision does not bound the quantity the headline rests
+on, which is recall: an error bar present in the PDF and missed falls silently
+into ``neither value has an error bar''. We therefore rendered
+\nRecallJudged{} tables the extractor called empty, six to a sheet, and looked
+for any error bar at all. The audit found \nRecallFoundThen{} misses, three of
+them bars written without a leading zero ($0.444 \pm .003$) and one a table
+whose bars the extractor had read but whose winning column the block-cut
+heuristic had dropped; both are fixed (Appendix~\ref{app:bugs}), the pipeline
+as released reads all four, and of the \nRecallStill{} judged tables it still
+calls empty it misses \nRecallMissed{} (recall \nRecallCi{}). An earlier round
+of the same audit found the sixth bug, and correcting that one moved the
+headline by \nHeadlineMoveSixth{}. Propagating the interval, the share of
+comparisons carrying no error bar is \nHeadlineWithExtraction{} rather than the
+\nCiNeitherSide{} that sampling alone would suggest; we quote both, because a
+paper arguing that published intervals omit their largest source of
+uncertainty has no business omitting its own.
 
 \paragraph{The testable subset is small and may be unrepresentative.} The
 \nNTestable{} testable comparisons come from \nPapersContributing{} distinct
@@ -584,35 +612,35 @@ rate among them a \emph{lower} bound on the rate that would be found if every
 paper reported enough to check. We cannot verify that, and say so.
 
 \paragraph{Bold is a proxy for a claim, and an imperfect one.} Some papers bold
-nothing, some bold an entire row, and some use bold for emphasis unrelated to
-ranking. Two discards follow, and both are large enough to state rather than
-describe. Groups without exactly one bold cell and a rival are dropped. Of the
-groups that remain, \nPctBoldNotExtremal{} have a bold cell that is not the best
-value in its group---authors marking their own method regardless of whether it
-won---and those are dropped too, since no victory is being claimed. What we
-analyse is therefore the set of claimed wins, not of all highlighted cells, and
-the funnel in Section~\ref{sec:checkable} gives every count.
+nothing, some bold an entire row, some use bold for emphasis. Groups without
+exactly one bold cell and a rival are dropped, and of those that remain,
+\nPctBoldNotExtremal{} have a bold cell that is not the best in its group and
+are dropped too, since no victory is claimed. What we analyse is the set of
+claimed wins, the funnel in Section~\ref{sec:checkable} counts every discard,
+and the audit above says what the discards are.
 
 \paragraph{Some tables mark ties, and we would score a tie as a failure.} A
 paper that bolds the best result and marks everything statistically
-indistinguishable from it has declared those pairs ties, and the convention does
-concentrate where it hurts: it appears in \nPctTieTables{} of all tables but
-\nPctTieTestable{} of the testable subset, where those comparisons fail at
-\nFailAmongTieMarked{}. Removing them moves the failure rate to
-\nFailExcludingTie{}. Appendix~\ref{app:ties} gives the detail.
+indistinguishable from it has declared those pairs ties. The convention appears
+in \nPctTieTables{} of tables but \nPctTieTestable{} of the testable subset;
+removing those comparisons moves the failure rate to \nFailExcludingTie{}
+(Appendix~\ref{app:ties}). The NeurIPS checklist, which says \nCheckYesNoTable{}
+papers report error bars we cannot find, is reconciled with the recall audit in
+Appendix~\ref{app:checklist}: most of those justifications do not claim an error
+bar in a table at all.
 
-\paragraph{Our two best pieces of evidence appear to contradict each other.} The
-recall audit says the extractor misses almost nothing; the checklist says
-\nCheckYesNoTable{} NeurIPS papers claim error bars we cannot find. Reading
-those justifications resolves it: most do not claim an error bar in a results
-table at all, the commonest at \nJustSeeds{} being that several seeds were used,
-which is averaging rather than reporting dispersion. What the checklist records
-is not what it asks. Appendix~\ref{app:checklist} gives the breakdown and rules
-out the two extraction limits that could have produced the same gap.
+\paragraph{The instrument reads table cells and nothing else.} Uncertainty
+printed in a figure, in a table rendered as an image, or signalled by shading
+or colour is invisible to it and is counted as absent. Every headline in this
+paper is a statement about table cells. The checklist justifications that point
+to a figure (\nJustFigure{}) or an appendix (\nJustAppendix{}) are a reminder of
+how much of the field's reporting lives outside them, and
+Appendix~\ref{app:pipeline} counts how many figure captions mention uncertainty
+at all.
 
 \paragraph{Large PDFs are skipped.} A size cap excludes a small number of
-image-heavy papers, which are not a random subset. We report the count rather
-than lowering the cap for speed.
+image-heavy papers, which are not a random subset. Appendix~\ref{app:pipeline}
+reports the count rather than lowering the cap for speed.
 
 \section{Related work}
 \label{sec:related}
@@ -656,56 +684,32 @@ an explicit interval in a results table are four different events, and ours is
 the narrowest. Our paper-level \nPctWithErrorBar{} is accordingly below the
 earlier figures, not between them.
 
-\begin{table}[t]
-\centering
-\caption{Audits of reporting practice. Each earlier study labels papers by
-hand, at the scale of a person; this one labels comparisons by machine, and
-Section~\ref{sec:threats} measures the instrument against tables read by hand.}
-\label{tab:audits}
-\small
-\begin{tabular}{lllll}
-\toprule
-Study & Venue & Labelled by & Unit & Headline \
-\midrule
-\citet{bergkirkpatrick2012empirical} & ACL & hand & paper & significance tests rarely reported \
-\citet{dror2018hitchhiker} & ACL, TACL 2017 & hand & paper & about a third test significance \
-\citet{gundersen2018state} & AAAI, IJCAI & hand & paper & most omit what a reproduction needs \
-\citet{kirly2018nips} & NeurIPS 2017 & hand & paper & about a third report intervals \
-\citet{christodoulou2024confidence} & MICCAI 2023 & hand & paper & over half assess no variability \
-This paper & NeurIPS, ICML 2024--25 & machine & comparison & \nPctNeitherSide{} print no error bar \
-\end{tabular}
-\end{table}
 
-Their limit is the one manual annotation always has, and it is the gap this work
-fills. A person can read a few hundred papers, and can record only what happens
-at the level of a paper: whether it reports variability somewhere. But the unit
-a results table claims in is not the paper, it is the individual comparison, and
-a paper printing one error bar in an appendix while its main table prints none
-counts as reporting variability under a paper-level audit and as unchecked under
-ours. Working at the comparison is what makes \nComparisonsTwentyFive{}
-observations available where hand annotation yields a few hundred, and it is
-what makes the questions in Sections~\ref{sec:survival} to \ref{sec:binomial}
-askable at all: whether the specific difference being claimed survives its own
-error bars, whether a design of that size could have detected it, and whether
-the benchmark it was measured on can resolve it. None of the three is answerable
-from a paper-level label. What automation costs is the judgement a human brings
-to an ambiguous table, which is why Section~\ref{sec:threats} spends its length
-measuring what ours gets wrong.
+Their limit is the one manual annotation has: a few hundred papers, and a
+label per paper. The unit a results table claims in is the comparison, and a
+paper printing one error bar in an appendix while its main table prints none
+counts as reporting variability under a paper-level audit and as unchecked
+under ours. Working at the comparison is what makes
+\nComparisonsTwentyFive{} observations available where hand annotation yields
+hundreds, and what makes Sections~\ref{sec:survival} to \ref{sec:binomial}
+askable: whether the claimed difference survives its own error bars, whether
+a design of that size could have detected it, and whether the benchmark can
+resolve it. What automation costs is judgement on an ambiguous table, which is
+why Section~\ref{sec:threats} measures what ours gets wrong.
 
 \paragraph{Statistical practice as an object of study.} A second group asks the
 question of one subfield each. \citet{card2020with} compute the statistical
-power of natural language processing experiments and find most underpowered for
-the effects they report, and \citet{colas2018how} do the same for deep
-reinforcement learning; the comparison of a claimed gap against what a
-benchmark can resolve (Section~\ref{sec:binomial}) is theirs, carried out here
-by machine on every named-benchmark comparison in two venues rather than by
-hand on a few tasks. \citet{reimers2017reporting} show that a single run can
-misorder methods that several runs order correctly, and \citet{ulmer2022experimental}
-turn such findings into a standard; we measure how far the standard is from
-practice. The nearest ancestor in method is outside machine learning:
-\citet{nuijten2016prevalence} recompute the $p$-values printed in a quarter of
-a million psychology papers from the test statistics beside them, which is a
-corpus-scale re-test of published claims from the printed page alone.
+power of natural language processing experiments and find most underpowered,
+and \citet{colas2018how} do the same for deep reinforcement learning; the
+comparison of a claimed gap against what a benchmark can resolve
+(Section~\ref{sec:binomial}) is theirs, carried out here by machine on every
+named-benchmark comparison in two venues. \citet{reimers2017reporting} show
+that a single run can misorder methods, and \citet{ulmer2022experimental} turn
+such findings into a standard; we measure the distance between the standard
+and practice. The nearest ancestor in method is outside machine learning:
+\citet{nuijten2016prevalence} recompute the $p$-values printed in psychology
+papers from the test statistics beside them, a corpus-scale re-test of
+published claims from the printed page.
 \citet{marie2021scientific} hand-annotate machine translation papers for
 evaluation practice and find the field's conventions drifting; they establish
 what careful manual annotation can see, at the scale manual annotation permits.
@@ -746,20 +750,24 @@ immediately, and is small.
 
 \subsubsection*{Reproducibility statement}
 The corpus is defined by a venue, a year, and a random seed, and is rebuilt by
-one command from the open proceedings. Every number in this paper is a macro
-generated from a recorded run; a number typed into the LaTeX by hand fails the
-build. The extraction pipeline, the analysis, the per-comparison database and
-the validation renderings are released.
+one command from the open proceedings; a second command regenerates every
+analysis, figure and number from the extraction files, deterministically.
+Every number in this paper is a macro generated from a recorded run; a number
+typed into the LaTeX by hand fails the build. The extraction pipeline, the
+analysis, the per-comparison database, the gold-set renderings with their
+labels and scoring script, and a regression test for every extractor bug
+described in this paper are released.
 
 \subsubsection*{AI use statement}
-The authors used a large language model as a coding assistant throughout: to
-write and revise the extraction and analysis code, to draft and edit prose, and
-to search the literature. Every empirical number in the paper was produced by
-the released code and checked against its run record. All six extractor bugs
-described in Section~\ref{sec:threats} were found by the authors inspecting
-rendered tables against extracted values---five in the first pass and the sixth
-in the recall audit; that inspection, and every methodological decision, was
-made by the authors, who take full responsibility for the paper's claims.
+The authors used a large language model assistant throughout: to write and
+revise the extraction and analysis code, to draft and edit prose, and to search
+the literature. Every empirical number in the paper was produced by the
+released code and checked against its run record. The rendered-table audits of
+Section~\ref{sec:threats}---the recall audit, the rejected-table audit and the
+gold set---were read from the images by the assistant under the blind protocol
+described there, with the pipeline's output hidden from it; the renderings and
+labels are released so that any reader can re-score them, and the authors are
+responsible for the protocol, the labels and every claim in the paper.
 
 \subsubsection*{Ethics statement}
 This work audits published papers in aggregate. We report no individual paper as
@@ -823,9 +831,13 @@ They mostly do not claim an error bar in a results table. The commonest, at
 \nJustSeeds{}, is that several random seeds were used---which is averaging, not
 reporting dispersion. Another \nJustTest{} report having run a significance
 test, \nJustFigure{} point to a figure and \nJustAppendix{} to an appendix, and
-\nJustNone{} make no recognisable claim at all. The two measurements are
-consistent, and the disagreement is the finding: what the checklist records is
-not what it asks.
+\nJustNone{} make no recognisable claim at all. The question allows ``other
+appropriate information about the statistical significance'', so the papers
+citing a test or a figure may well be compliant; our instrument does not read
+either, and the contribution is stated accordingly: \nCheckYesNoTable{} papers
+print no error bar in any results table, not \nCheckYesNoTable{} papers with
+nothing to show. The two measurements are consistent, and the disagreement is
+the finding: what the checklist records is not what it asks.
 
 Two extraction limits could have produced the same gap and do not. Papers longer
 than our \nMaxPages{}-page window are \nPctLongPapers{} of the corpus and have a
@@ -837,5 +849,163 @@ both. The paper-level statistic reads every detected table, not only those
 reaching the comparison stage: of the \nPapersTablesNoComparison{} papers whose
 tables yield no comparison, \nPapersTablesNoComparisonWithBar{} are correctly
 credited with an error bar. Only papers with no detected table are scored blind.
+
+\section{The gold set}
+\label{app:gold}
+
+\begin{table}[h]
+\centering
+\small
+\caption{The gold set. Each item is rendered from the PDF with the pipeline's
+chosen cell circled and read blind to its output. The development set found
+the bugs of Appendix~\ref{app:bugs}; the held-out set, drawn from papers the
+development set never touched, is the estimate the paper stands on.}
+\label{tab:gold}
+\begin{tabular}{llrl}
+\toprule
+Stratum & Drawn from & $n$ & What is read \\
+\midrule
+Development & testable comparisons, pre-fix pipeline & \nGoldDevN{} & every field \\
+Held-out & testable comparisons, fixed pipeline & \nGoldHeldN{} & every field \\
+No error bar & retained comparisons without bars & \nGoldNoBarN{} & is a bar really absent \\
+Discarded & tables with no single-bold group & \nGoldDiscardedN{} & why it was discarded \\
+Non-extremal & single-bold groups, bold not best & \nGoldNonExtN{} & what the bold marks \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Prior audits}
+\label{app:audits}
+
+\begin{table}[t]
+\centering
+\caption{Audits of reporting practice. Each earlier study labels papers by
+hand, at the scale of a person; this one labels comparisons by machine, and
+Section~\ref{sec:threats} measures the instrument against tables read by hand.}
+\label{tab:audits}
+\footnotesize
+\begin{tabular}{lllll}
+\toprule
+Study & Venue & Labelled by & Unit & Headline \\
+\midrule
+\citet{bergkirkpatrick2012empirical} & ACL & hand & paper & significance tests rarely reported \\
+\citet{dror2018hitchhiker} & ACL, TACL 2017 & hand & paper & about a third test significance \\
+\citet{gundersen2018state} & AAAI, IJCAI & hand & paper & most omit what a reproduction needs \\
+\citet{kirly2018nips} & NeurIPS 2017 & hand & paper & about a third report intervals \\
+\citet{christodoulou2024confidence} & MICCAI 2023 & hand & paper & over half assess no variability \\
+This paper & NeurIPS, ICML 2024 and 2025 & machine & comparison & \nPctNeitherSide{} print no error bar \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{By subfield}
+\label{app:topics}
+
+Table~\ref{tab:topics} assigns each paper a coarse subfield from its title by
+keyword, in the order listed, and reports both headline figures within each.
+The assignment is crude and is meant only to answer whether the headline is
+the property of one community. It is not: reporting is worst where evaluation
+is cheapest, in language-model and vision benchmarks, and the failure rate
+among what can be tested is similar everywhere there is enough to test.
+
+\input{topic_table.tex}
+
+\section{Every extractor bug, and what it did}
+\label{app:bugs}
+
+All eleven were found by rendering a sampled table and looking; none by reading
+code. Each has a regression test in the released code.
+
+\begin{enumerate}
+\item \textbf{Subscript error bars} set a point below the baseline were paired
+  with the neighbouring column's mean.
+\item \textbf{The page number} beneath a table was swept in as a runner-up.
+\item \textbf{The neighbouring column} of a two-column layout was swept in.
+\item \textbf{Orientation misread}: a table with methods in columns was read as
+  methods in rows, comparing a method with itself on another benchmark.
+\item \textbf{A run count from a row label} reading ``top 100''.
+\item \textbf{Bracketed bars} $76.63(\pm 3.98)$ fell between two patterns and
+  were read as bare numbers; correcting it moved the headline by
+  \nHeadlineMoveSixth{}.
+\item \textbf{Rows glued by a tall label}: a label spanning two six-point rows
+  widened the line so the next row joined it, and $0.67$ beside $0.00 \pm 0.00$
+  became $670.0 \pm 0.0$.
+\item \textbf{A row set as one span} with no space characters read as
+  $0.7015{\pm}0.00070.2577{\pm}0.0046$ and yielded a winner of $2577$.
+\item \textbf{Dataset blocks}: one bold cell per block made every column
+  multi-bold, the orientation vote flipped to rows, and a method's calibration
+  error was compared with its expected calibration error.
+\item \textbf{Bare-integer row labels} (``\# demos $=10$'') outranked the bold
+  cell, so the claim vanished as non-extremal.
+\item \textbf{Run counts in words} (``four seeds'', ``ten runs'') were invisible,
+  and a task named ``Run'' beneath a cell ending in 95 gave $n=95$.
+\end{enumerate}
+
+The last five were found by the gold set (Section~\ref{sec:threats}). Together
+they moved the 2025 headline from \nPrefixNeither{} to \nPctNeitherSide{}
+comparisons without an error bar and the failure rate from \nPrefixFail{} to
+\nPctFail{}; every intermediate version of these numbers was, at the time,
+confidently reported.
+
+\section{The pipeline, specified}
+\label{app:pipeline}
+
+\paragraph{Sampling.} Each year's corpus is the union of the NeurIPS and ICML
+accepted-paper lists as served by their open proceedings. A simple random sample
+without replacement is drawn with a fixed seed; PDFs are streamed, extracted and
+discarded, and each paper's SHA-256 is recorded so the corpus can be rebuilt and
+checked. Of the 2025 sample, \nNeuripsPapers{} papers are NeurIPS and
+\nIcmlPapers{} ICML. Their headline figures agree: \nNeuripsNeither{} and
+\nIcmlNeither{} of comparisons print no error bar, \nNeuripsFail{} and
+\nIcmlFail{} of testable ones fail, and \nNeuripsErrorBar{} and
+\nIcmlErrorBar{} of papers print an explicit error bar somewhere.
+
+\paragraph{Text layer.} The extractor is PyMuPDF. Every text span is read with
+its font name, its font flags and its bounding box; the first \nMaxPages{} pages
+are read for tables and the whole document for the checklist and for run-count
+sentences. A span is bold when the font's bold flag is set or its name contains
+``bold''. A font that is emboldened synthetically, or a Type~3 font whose flags
+are unset, is read as regular; Section~\ref{sec:threats} measures how often
+that happens by looking.
+
+\paragraph{Lines and tables.} Spans are clustered into lines by vertical
+overlap. A table is anchored on a span beginning ``Table $N$'': numeric cells
+within a fixed vertical window below the caption (and a small one above, for
+venues that caption underneath), within the caption's horizontal extent plus a
+margin, and forming a contiguous run of rows, are the table's cells. Cells past
+the next caption on the page belong to that caption. The horizontal constraint
+is what keeps a two-column layout's neighbouring table out; it was added after a
+sampled ICML table came back with the page number as its runner-up.
+
+\paragraph{Cells.} A cell is a number with an optional error bar in one of four
+forms: $a \pm b$, $a(b)$, $a(\pm b)$, or an interval $a\,[l, u]$. The
+parenthesised form is ambiguous and is credited as an error bar only when the
+caption or the surrounding page names a dispersion. What the bar means---standard
+deviation, standard error, confidence interval, interquartile range---is read
+from the caption and the page by keyword; a table whose bars are never named is
+``unlabelled'' and is read as a standard deviation, the reading more favourable
+to the field.
+
+\paragraph{Run count.} A sentence of the form ``$k$ (random) seeds/runs/trials''
+is sought in the caption first, then on the table's page, then anywhere in the
+paper; the caption wins if present, and the smallest count on the page is taken
+when several appear, after a row label reading ``top 100'' was once read as a
+count. Table~\ref{tab:span} gives the result under the caption-only reading.
+
+\paragraph{Groups, orientation, direction.} Cells are grouped into columns by
+horizontal position and into rows by vertical position. The orientation is the
+grouping that yields more groups containing exactly one bold cell; a table
+yielding none is discarded. Within a group the bold cell is the winner and the
+best non-bold cell the runner-up; if the bold cell is the group's maximum,
+higher is better, if its minimum, lower, and otherwise the group is discarded as
+not a claim of victory. The $z$ test, Holm within table, and the bootstrap over
+papers are as stated in Section~\ref{sec:claim}.
+
+\paragraph{What was excluded.} PDFs above \nMaxPdfMb{}~MB are skipped before
+download when the server states a size, and after it otherwise;
+\nSkippedLarge{} papers of the 2025 draw were excluded on that ground and
+\nDownloadFailed{} could not be fetched. Figure~\ref{fig:gapsurvival} bins by
+the improvement relative to the runner-up, in percent, with the last bin open;
+Section~\ref{sec:binomial} reports gaps in points.
 
 \end{document}

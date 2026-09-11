@@ -1,0 +1,63 @@
+, through repeated trial and error
+---
+06 and only 20% of runs surpass-
+---
+33, with only 3 trials reaching a maximum policy reward greater than 0
+---
+6 presents the peak average reward observed over 30 trials
+---
+Each algorithm was trained for 10 trials, with each trial
+---
+ProPS+, the LLM is updated every 20 episodes, resulting in 400 optimization iterations per trial
+---
+Run Time Comparison Next, we evaluate computational efficiency of our proposed methods,
+---
+The evaluation of baseline and finetuned models is performed over 30 trials, with 100 episodes in
+---
+The most notable difference is that there were 149 episodes (spread across 8 trials) when the average
+---
+We report the maximum reward in each trial
+---
+across 3 trials) for the baseline model
+---
+and learning stability, with 60% of runs achieving
+---
+ation of final objective function values from 50 independent runs (each with 100 opti-
+---
+baseline model could not find an optimal policy and the best maximum reward in the 30 trials was
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+consistent gait dynamics and ensuring robust convergence across different runs
+---
+dent trials, with each trial consisting of 8,000 episodes
+---
+due to random seed sensitivity, occasionally lead-
+---
+each trial
+---
+episodic reward achieved during training, averaged over 10 trials for each method
+---
+experimental runs as well as estimate the total compute
+---
+ing to slower convergence in certain trials
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+of trials reach the maximum reward
+---
+only tested on a few datasets or with a few runs
+---
+run with given experimental conditions)
+---
+the LLM to leverage information from both high- and low-performing past trials to inform its next
+---
+there were 12 trials (with 108 such episodes) when it was able to find an optimal policy, i
+---
+training trials
+---
+yielding higher mean rewards and reduced variability across runs
+---
+‘f(params)‘ over a limited number of trials
+---
+• The instructions should contain the exact command and environment needed to run to

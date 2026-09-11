@@ -19,7 +19,8 @@ sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(HERE, ".."))
 
 from analyze import (analyse, checklist_agreement, cluster_bootstrap,  # noqa: E402
-                     design_effect, extraction_funnel, orientation, _columns, _rows)
+                     design_effect, extraction_funnel, load_records, orientation,
+                     _columns, _rows)
 from sensitivity import (checkability_span, correlation_sensitivity,  # noqa: E402
                          design_mde, error_bar_meaning, paper_level_crosstab,
                          power_audit, run_count_scope)
@@ -28,8 +29,7 @@ YEARS = (2024, 2025)
 
 
 def _load(year: int) -> list:
-    with open(f"data/extracted_{year}.json", encoding="utf-8") as fh:
-        return json.load(fh)
+    return load_records(f"data/extracted_{year}.jsonl")
 
 
 def _summary(analysis: dict, comparisons: list) -> dict:

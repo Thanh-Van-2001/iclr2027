@@ -49,13 +49,16 @@ BOLD_FLAG = 1 << 4
 # after the bracket, so this style fell between the two.
 NUM_PM = re.compile(
     r"(-?\d+\.?\d*)[\s\*†‡§]{0,3}[\(\[]?[\s]{0,2}"
-    r"(?:±|\+/-|\+-)[\s]{0,2}(\d+\.?\d*)[\)\]]?")
+    r"(?:±|\+/-|\+-)[\s]{0,2}(\d+\.?\d*|\.\d+)[\)\]]?")
 # 76.3 [75.1, 77.5] or 76.3 (75.1-77.5): an interval, which needs no run count
 # to be tested. Rare in machine learning tables, but a reviewer was right that
 # a definition of "checkable" that could not see one was too narrow.
 NUM_CI = re.compile(
     r"(-?\d+\.?\d*)\s*[\(\[]\s*(-?\d+\.?\d*)\s*(?:,|\u2013|-)\s*(-?\d+\.?\d*)\s*[\)\]]")
-NUM_PAREN = re.compile(r"(-?\d+\.?\d*)\s*\(\s*(\d+\.?\d*)\s*\)")
+NUM_PAREN = re.compile(r"(-?\d+\.?\d*)\s*\(\s*(\d+\.?\d*|\.\d+)\s*\)")
+# A dispersion written without its leading zero, 0.444 +/- .003, is a common
+# space-saving style in wide tables; the recall audit of the fixed extractor
+# found a whole table of them called empty. Bug 12.
 NUM_BARE = re.compile(r"^-?\d+\.?\d*$")
 
 SEM_WORDS = re.compile(r"(?i)standard error|std\.?\s*err|s\.e\.m|\bsem\b")
@@ -262,7 +265,7 @@ def _spans(doc, max_pages: int) -> list:
             for line in block.get("lines", []):
                 for span in line.get("spans", []):
                     font = span.get("font", "")
-                    bold = bool(span.get("flags", 0) & BOLD_FLAG) or "bold" in font.lower()
+                    bold = bool(span.get("flags", 0) & BOLD_FLAG) or _bold_by_name(font)
                     size = span.get("size", 0.0)
                     for piece in _split_span(span.get("chars", []), size):
                         txt, x0, y0, x1, y1 = piece
@@ -271,6 +274,17 @@ def _spans(doc, max_pages: int) -> list:
                         out.append({"text": txt, "bold": bold, "page": pno, "y": y0,
                                     "x": x0, "x1": x1, "y1": y1, "size": size})
     return out
+
+
+# A PDF can set a bold weight without setting the bold flag, and the font's
+# name does not always say "bold": Nimbus Roman's bold face is "-Medi",
+# Computer Modern's is "CMBX". A whole bold row of a MAP table was read as
+# regular that way and the table discarded. Found by the held-out gold set.
+BOLD_NAME = re.compile(r"(?i)bold|black|heavy|semib|demi|-medi|cmbx|sfbx|ptmb|nimbusrom.*medi")
+
+
+def _bold_by_name(font: str) -> bool:
+    return bool(BOLD_NAME.search(font or ""))
 
 
 def _split_span(chars: list, size: float) -> list:
@@ -619,9 +633,21 @@ def extract_paper(pdf_path=None, max_pages: int = 40, *, blob: bytes = None) -> 
         # sampled ICML table came out with the page number 8 as its runner-up.
         # Constrain to the caption's own horizontal band, then keep only the run
         # of rows contiguous with the caption.
-        cells = [c for c in numeric
-                 if c.page == cap["page"] and cap["y"] - WINDOW_UP <= c.y < y_stop
+        below = [c for c in numeric
+                 if c.page == cap["page"] and cap["y"] <= c.y < y_stop
                  and cap["x0"] - COLUMN_MARGIN <= c.x <= cap["x1"] + COLUMN_MARGIN]
+        # The small window above the caption exists for venues that caption
+        # underneath the table. When the caption sits above its table, that
+        # window reaches into the table before it and sweeps in its last rows,
+        # whose bold cells then outranked the real winner. Found by the
+        # held-out gold set. So the window above is used only when nothing
+        # sits below.
+        if len(below) >= MIN_CELLS:
+            cells = below
+        else:
+            cells = [c for c in numeric
+                     if c.page == cap["page"] and cap["y"] - WINDOW_UP <= c.y < y_stop
+                     and cap["x0"] - COLUMN_MARGIN <= c.x <= cap["x1"] + COLUMN_MARGIN]
         cells.sort(key=lambda c: (c.y, c.x))
         cells = _contiguous_run(cells)
         if len(cells) < MIN_CELLS:

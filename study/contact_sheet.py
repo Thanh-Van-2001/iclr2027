@@ -45,10 +45,9 @@ def sample_rejected_tables(extracted_path: str, n: int, seed: int) -> list:
     """
     import sys as _sys
     _sys.path.insert(0, HERE)
-    from analyze import comparisons_from_table, orientation
+    from analyze import load_records, comparisons_from_table, orientation
 
-    with open(extracted_path, encoding="utf-8") as fh:
-        recs = json.load(fh)
+    recs = load_records(extracted_path)
     rows = []
     for r in recs:
         for t in r.get("tables", []):
@@ -206,7 +205,7 @@ def main(argv=None) -> int:
     b.add_argument("--seed", type=int, default=17)
     b.add_argument("--bucket", choices=["no_error_bar", "has_error_bar", "all", "rejected"],
                    default="no_error_bar")
-    b.add_argument("--extracted", default="data/extracted_2025.json")
+    b.add_argument("--extracted", default="data/extracted_2025.jsonl")
     b.add_argument("--per-sheet", type=int, default=6)
     b.add_argument("--out-dir", default="out/sheets")
     s = sub.add_parser("score")

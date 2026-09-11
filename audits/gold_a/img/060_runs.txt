@@ -1,0 +1,47 @@
+(c) Humanoid-run
+---
+(d) Quadruped-run
+---
+5 million using Humanoid-run as an
+---
+5 million, with the results of all experiments averaged over 3 random seeds
+---
+Humanoid tasks, which are one of the hardest tasks within 3 seeds, and the introductions of the
+---
+Humanoid-run
+---
+It optimizes policies through trial and error, with policy performance
+---
+Maintain balance and walk or run forward at a high
+---
+Quadruped-run
+---
+Std over 3 seeds
+---
+Table 2: Performance comparison of MoGE and related baselines on Humanoid-run task
+---
+We select the Humanoid-run task in DMC Suite with high
+---
+and the results are averaged over three random seeds
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+over 3 seeds
+---
+run with given experimental conditions)
+---
+the shaded areas represent the confidence intervals over three seeds
+---
+with three random seeds) using the same diffusion and baseline algorithm setup
+---
+• Run: In this task, the agent is required to achieve a high-speed forward motion of 10 m/s
+---
+• Run: The agent is required to accelerate to higher velocities, demanding agile gait adjust-
+---
+• The instructions should contain the exact command and environment needed to run to

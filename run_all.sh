@@ -4,6 +4,13 @@
 # network. Building the corpus itself is study/pipeline.py, which does.
 set -e
 python study/make_all.py
+# Hand-judged audits live in audits/; their scores are derived here.
+python study/gold_set.py recall --manifest audits/recall/manifest.json --analysis out/analysis_2025.json --out out/recall_v4.json > /dev/null
+python study/gold_set.py score --items audits/gold_a/items.json --labels audits/gold_a/labels.csv     --out out/gold_set_devA_prefix.json > /dev/null
+python study/gold_set.py score --items audits/gold_a/items.json --labels audits/gold_a/labels.csv     --rescore-with out/analysis_2025.json --out out/gold_set_devA_postfix.json > /dev/null
+python study/gold_set.py score --items audits/gold_b/items.json --labels audits/gold_b/labels.csv     --out out/gold_set_heldout.json > /dev/null
+python study/gold_set.py score --items audits/gold_b/items.json --labels audits/gold_b/labels.csv \
+    --rescore-with out/analysis_2025.json --out out/gold_set_heldout_final.json > /dev/null
 python study/extra_stats.py > out/extra_stats.log
 python study/binomial_check.py
 python study/benchmark_resolution.py

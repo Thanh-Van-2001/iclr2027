@@ -1,0 +1,47 @@
+25th and 75th enclosing percentiles over 50 epochs across 10 repetitions
+---
+All externally sourced methods were run using their default hyperparameter
+---
+Figure S9: Average training (top) and test (bottom) computation times per model across 10 repetitions
+---
+On the contrary, full geometric constraint (λ = 0, last column) simply replicates
+---
+Scores are shown as mean ± std across 10 repetitions on Sign
+---
+Table 1 shows average SIA and k-NN accuracy scores across 20 datasets and 10 repetitions
+---
+Unless otherwise specified, all methods were run with their default hyperparameters in our experi-
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+datasets and 10 repetitions
+---
+deviation across 20 datasets and 10 repetitions
+---
+each experiment is defined as running one model on one dataset with a single random seed, ranged
+---
+encoder (middle row) and the feature-based encoder (bottom row) after 50 epochs from a single run
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+multiple random seeds to report the mean and standard deviation of performance metrics
+---
+observation indices, including repetitions, co-occurring in a terminal node with xi in tree t
+---
+only tested on a few datasets or with a few runs
+---
+repetitions for observation xj in tree t, I(·) is the indicator function, Ji(t) is the set of in-bag
+---
+repetitions on Sign MNIST (top), OrganC MNIST (middle) and GTZAN (bottom) (see Table S2 for a
+---
+run with given experimental conditions)
+---
+runs with different random seeds over 20 different datasets, as described in Section 4
+---
+std across 20 datasets and 10 repetitions
+---
+structure and median learning curves over 50 epochs across 10 repetitions, as shown in Fig
+---
+• The instructions should contain the exact command and environment needed to run to

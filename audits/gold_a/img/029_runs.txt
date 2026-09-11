@@ -1,0 +1,55 @@
+, T} for each trial
+---
+Each trial of the task
+---
+Even though there was no inter-trial interval between sequential reaches,
+---
+Figure 7: 3D PCA visualizations of trial-averaged latent factors inferred for NHP grid reaching
+---
+Figure 8: 3D PCA visualizations of trial-averaged latent factors inferred for NHP center-out reaching
+---
+Inferring single-trial
+---
+Single-trial dynamics of motor cortex and their applications to brain-
+---
+The reported values are averaged over trials and latent dimensions
+---
+To compute trial-averaged 3D PCA visualizations, for each algorithm, we first computed 3D PCA
+---
+We generated 4 systems with different random seeds and performed 5-fold cross-
+---
+We generated 750 trials each containing 200 time-steps, and the initial condition
+---
+back to the center target position and the next trial started
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+correlation coefficient (CC) between the true and reconstructed latent factors for each trial and latent
+---
+dataset consists of continuous recordings without a clear trial structure, we created 1-second non-
+---
+experimental runs as well as estimate the total compute
+---
+fixed length (due to variable-length trials), and then computed trial averages of PCA projections for
+---
+for trial-averaged latent factor visualizations, Appendix A
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+io/lfads-run-manager/
+---
+of each trial was obtained by running the system for 500 burn-in steps starting from a random point
+---
+only tested on a few datasets or with a few runs
+---
+overlapping segments from continuous recordings to form trials so that we could utilize mini-batch
+---
+projections of latent factors, split them based on trial start and end indices, interpolated them to a
+---
+run with given experimental conditions)
+---
+smaller numbers of trials whose latent factors are averaged to obtain trial-averaged trajectories
+---
+trial/segment of multimodal neural activity
+---
+• The instructions should contain the exact command and environment needed to run to

@@ -1,0 +1,21 @@
+Each experiment runs for 3 days
+---
+For training R1-zero and R1-zero-Div, the codebase runs on Python 3
+---
+answers within k trials (with k = 16 in our experiments) on its Pass@1 failure samples
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+is built on TRL [46] and runs on 8×A6000 GPUs
+---
+only tested on a few datasets or with a few runs
+---
+run with given experimental conditions)
+---
+uses positive samples from k trials to teach the correct response
+---
+• The instructions should contain the exact command and environment needed to run to

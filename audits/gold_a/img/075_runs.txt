@@ -1,0 +1,35 @@
+A Fully Automated Trial
+---
+Each phrase has 80 trials per subject,
+---
+In each run, N labeled samples per class
+---
+Open Access Dataset for EEG+ Nirs Single-Trial Classification
+---
+This configuration yields an estimated 260 A100 GPU hours for a single pretraining run
+---
+We use the [2,6] second window from each trial, apply a 0
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+repeated 20 times per subject, and we report the average balanced accuracy across subjects and runs
+---
+run with given experimental conditions)
+---
+strategy is implemented as a single continuous training run, where the backbone is initially frozen
+---
+subject, multiple inductive FS runs were performed
+---
+the weights of multiple fine-tuning runs to improve accuracy
+---
+trials (72 per task)
+---
+trials per class for training, 10 for validation, and 10 for testing
+---
+• The instructions should contain the exact command and environment needed to run to

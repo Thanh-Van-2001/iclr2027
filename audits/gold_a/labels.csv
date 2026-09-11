@@ -1,0 +1,101 @@
+id,stratum,results_table,bold_ok,orientation,direction,winner_mean,winner_disp,runner_mean,runner_disp,disp_type,n_runs,n_source,error_bar_present,cause,note
+001,testable,y,y,row,higher,84.44,0.09,79.58,0.42,sd,3,paper,,,Avg F1 row; sd from setup text
+002,testable,y,y,column,lower,41.4,0.03,43.8,0.03,sd,4,paper,,,Table 7 AER column; four seeds in setup
+003,testable,y,y,row,higher,780.80,3.18,437.49,49.97,unlabelled,3,paper,,,Run row; table caption silent; 3 seeds in setup
+004,testable,y,y,column,higher,96.14,0.06,95.18,0.15,sd,3,caption,,,runner obscured by circle: 95.18
+005,testable,y,y,row,higher,12.3,0.3,12.2,0.4,unlabelled,30,paper,,,cell has two bars; paper states all results across 30 seeds; a figure caption on the page says 5 seeds
+006,testable,y,y,column,lower,7.92,0.05,8.19,0.03,sd,5,paper,,,"DEWP column; runner partly obscured, read 8.19"
+007,testable,y,n,column,lower,-3.5990,0.1949,unclear,unclear,unlabelled,3,paper,,,bold+colour marks top-3: SSSP column has three bold cells; circled cell is second best; extractor group wrong
+008,testable,y,y,column,higher,0.572,0.022,unclear,0.021,se,none,none,,,runner mean obscured by circle (0.5?5); no run count for NHP data
+009,testable,y,y,column,higher,unclear,1.11,55.47,1.15,sd,3,paper,,,"block-wise best: whole column has 3 bold cells, one per block; winner mean obscured 56.0?"
+010,testable,y,y,row,higher,2.80,0.26,2.29,0.91,se,10,paper,,,"Pong row; 10 training trials, 30 evaluation trials also stated"
+011,testable,y,y,row,higher,0.14,0.05,0.04,0.03,se,8,paper,,,bold marks statistically best; single bold in this row
+012,testable,y,y,column,lower,0.042,0.006,0.042,0.008,sd,6,caption,,,crash-rate block Merge column; runner ties in mean; caption says six seeds in words
+013,testable,y,y,row,higher,0.67,0.29,0.57,0.21,unlabelled,5,paper,,,Table 5 mode1/10 demos Score row
+014,testable,y,y,row,higher,0.54,0.03,0.47,0.06,unlabelled,5,paper,,,Table 6 mode8/5 demos Score row
+015,testable,y,y,row,lower,0.091,0.007,0.128,0.005,se,10,paper,,,telco row; parenthesised standard errors
+016,testable,y,y,row,higher,546.66,66.01,256.46,135.38,unlabelled,3,paper,,,Balance Simple row
+017,testable,y,y,column,higher,0.6759,0.0229,0.6671,0.0107,unlabelled,none,none,,,no run count found for this table
+018,testable,y,y,row,higher,70.04,0.04,70.03,0.06,unlabelled,unclear,unclear,,,"n ambiguous: '100 runs per model' vs '10 runs per task'; run count ambiguous in the paper, excluded"
+019,testable,y,y,row,higher,0.99,0.01,0.76,0.02,unlabelled,3,paper,,,DMC-Hard row (re-marked: the first render circled the DMC-Easy 0.99)
+020,testable,y,y,row,lower,0.614,0.023,0.615,0.019,unlabelled,5,paper,,,"parenthesised, meaning unstated; winner mean partly obscured"
+021,testable,y,y,row,lower,0.197,0.015,0.233,0.013,unlabelled,5,paper,,,row 44957
+022,testable,y,y,row,higher,67.53,0.21,66.66,0.28,unlabelled,10,paper,,,"n ambiguous: 10 runs for CIFAR-type sets, 3 for ImageNet; meaning of bar unstated"
+023,testable,y,n,column,higher,0.763,0.054,unclear,unclear,sd,10,caption,,,"top-3 marking: underlined bold first, bold second; Pearson column has two bold cells; circled is second best"
+024,testable,y,y,row,higher,92,4,86,7,sd,8,caption,,,bold = within 95% of best (tie convention); this row single bold
+025,testable,y,y,column,higher,90,6,79,7,unlabelled,3,paper,,,L14_RNA4 column
+026,testable,y,y,column,higher,0.6396,0.0095,0.5138,0.0066,unlabelled,none,none,,,BCIC-IV-2a balanced accuracy
+027,testable,y,y,row,higher,87.21,29.28,78.16,5.32,se,10,paper,,,Mount Car (C) row
+028,testable,y,y,column,higher,0.629,0.018,0.567,0.015,se,10,paper,,,HSNR column; SEM in caption; 10 seeds in text
+029,testable,y,y,column,higher,0.639,0.010,0.621,0.011,se,none,none,,,20 spike grid column
+030,testable,y,y,column,higher,62.65,0.88,62.53,0.58,se,10,paper,,,PTC_MR column; ten runs of 10-fold CV
+031,testable,y,y,column,lower,0.277,0.006,0.301,0.018,sd,15,paper,,,CompSol column; 15 runs in total vs 5 experiments per split
+032,testable,y,y,row,higher,unclear,0.31,74.37,0.23,se,none,none,,,AUC ResNet50 row; winner mean obscured 79.4?; bold = significant over all competitors
+033,testable,y,y,column,higher,unclear,0.0035,0.6539,0.0057,unlabelled,20,paper,,,full-model row all bold; ARI column; winner mean obscured 0.695?
+034,testable,y,y,column,lower,0.435,0.006,0.437,0.015,sd,15,paper,,,"CombiSolv column; winner disp partly obscured, 0.006"
+035,testable,y,y,row,higher,2978.8,539.8,2042.0,1295.0,unlabelled,30,paper,,,Walker2d noise 0.25 row; two bars per cell
+036,testable,y,y,column,lower,0.0180,0.0003,0.0188,0.0003,sd,10,paper,,,QM8 column; winner mean partly obscured; n 10 vs 3 ambiguous
+037,testable,y,y,column,higher,71.53,0.13,71.38,0.25,sd,3,caption,,,WA column; winner mean partly obscured
+038,testable,y,y,row,higher,98.33,0.55,98.19,0.58,sd,3,paper,,,Minesweeper row; colour-coded best; 3 seeds (4 for MalNet)
+039,testable,y,y,column,lower,1.11,0.22,1.66,0.14,unlabelled,10,caption,,,"block-wise best (InceptionV3 block), MCE column; runner partly obscured 1.?8 is PVI, MSP 1.66 is best non-bold"
+040,testable,y,y,column,higher,0.6480,0.0140,0.6417,0.0091,unlabelled,none,none,,,"winner mean obscured, confirmed from Table 12 of the same paper"
+041,testable,y,y,column,higher,55.01,3.36,46.84,7.31,unlabelled,unclear,unclear,,,"PubMed column; winner mean partly obscured; n ambiguous (5 seeds, 20 runs, 100 trials); run count ambiguous in the paper, excluded"
+042,testable,y,y,row,lower,0.340,0.010,0.369,0.005,unlabelled,5,paper,,,row 44964
+043,testable,y,y,row,higher,76.25,1.22,73.86,0.59,sd,5,paper,,,"Heartbeat 10% row; caption says sd, text above says standard error"
+044,testable,y,y,row,higher,71.81,0.80,71.29,0.90,sd,3,paper,,,UEA row
+045,testable,y,y,column,higher,90.77,1.83,88.35,3.27,unlabelled,unclear,unclear,,,"epsilon 0.26 column; winner mean partly obscured; n ambiguous 20 vs 5; run count ambiguous in the paper, excluded"
+046,testable,y,y,column,lower,0.13,0.01,0.17,0.02,unlabelled,2,paper,,,Illegal activity column (re-marked; first render circled the Harassment 0.13)
+047,testable,y,y,column,lower,0.012,0.001,0.038,0.004,sd,10,paper,,,Darcy flow pressure column; the rates column holds an identical bold 0.012 +/- 0.001 and the circle cannot tell them apart
+048,testable,y,y,row,higher,254.3,4.6,242.7,7.3,se,5,caption,,,maze2d-l row; only QT and RVDT carry bars; 5 seeds x 30 rollouts
+049,testable,y,y,row,higher,91.55,0.69,84.63,3.92,sd,3,paper,,,MixedShapes +LT row
+050,testable,y,y,column,higher,0.788,0.012,unclear,unclear,se,10,caption,,,"block-wise best (Norm uniform, C-index); runner-up obscured by circle"
+051,testable,y,y,column,higher,88.57,3.37,85.42,5.34,unlabelled,unclear,unclear,,,"epsilon 0.8 column; winner partly obscured; n ambiguous; run count ambiguous in the paper, excluded"
+052,testable,y,y,row,higher,0.69,0.13,0.23,0.05,se,8,paper,,,StandardMaze_Key row
+053,testable,y,y,row,higher,866.60,27.14,769.53,131.23,unlabelled,3,paper,,,Humanoid Stand row
+054,testable,y,y,row,higher,817.70,73.53,754.56,4.06,unlabelled,3,paper,,,Pole row
+055,testable,y,y,column,lower,1.035,0.012,1.060,0.011,sd,10,paper,,,CEP column; both values partly obscured; n 10 vs 3 ambiguous
+056,testable,y,y,column,higher,83.1,0.9,81.8,1.8,sd,5,caption,,,PROTEINS column; runner partly obscured 8?.8 read as 81.8
+057,testable,y,y,column,higher,unclear,0.6,unclear,unclear,sd,3,caption,,,RM column; winner and chi-PO cells obscured by circle
+058,testable,y,y,column,higher,79.42,0.21,79.37,0.25,unlabelled,10,paper,,,"R50 column, tiny font"
+059,testable,y,y,row,higher,15119.91,583.41,13765.24,712.18,unlabelled,3,paper,,,HalfCheetah row; winner partly obscured
+060,testable,y,y,row,higher,907.5,6.9,816.5,94.5,sd,3,caption,,,Humanoid-stand row
+061,testable,y,y,row,higher,98,2,84,15,sd,8,caption,,,pointmaze-large-stitch row; bold = within 95% of best
+062,testable,y,y,column,higher,1.173,0.077,0.925,0.087,se,5,caption,,,CNN CPD K=50 column; caption says five repetitions in words; winner partly obscured
+063,testable,y,y,column,higher,2.969,0.033,unclear,unclear,sd,3,caption,,,"CIFAR100 LL column; MCMC M3 cell obscured by circle, could be the runner-up"
+064,testable,y,y,column,higher,62.83,0.57,61.15,0.55,se,5,caption,,,FashionMNIST column; winner partly obscured
+065,testable,y,y,row,higher,70.54,0.16,70.53,0.04,unlabelled,unclear,unclear,,,"rel-hm/user-churn V row; n ambiguous; run count ambiguous in the paper, excluded"
+066,testable,y,y,row,higher,0.83,0.06,0.73,0.09,se,8,paper,,,StandardMaze3_Key row; two rivals tie at 0.73
+067,testable,y,y,column,higher,81.6,1.0,80.1,1.1,unlabelled,none,none,,,Cora column; runner partly obscured
+068,testable,y,y,row,higher,91.64,0.80,84.05,4.08,sd,3,paper,,,"MixedShapes +off.,LT row"
+069,testable,y,y,row,higher,69.4,2.5,68.2,2.5,unlabelled,5,paper,,,SM F1 row
+070,testable,y,y,row,higher,0.25,0.09,0.21,0.09,se,3,caption,,,Push row; parenthesised standard error; three seeds in words
+071,testable,y,y,row,higher,0.94,0.05,0.84,0.09,se,8,paper,,,StandardMaze3_Key row (13x13)
+072,testable,y,y,column,higher,71.59,0.16,67.60,0.72,sd,10,paper,,,Citeseer column; best non-bold is DUPLEX 67.60 though authors underline 67.42
+073,testable,y,y,row,lower,0.240,0.005,0.467,0.019,se,10,paper,,,wq row
+074,testable,y,y,row,higher,4.05,0.05,3.95,0.05,ci,none,none,,,"REL row; 95% CI stated in caption; subjective ratings, no run count"
+075,testable,y,y,column,higher,0.6484,0.0170,0.6427,0.0100,unlabelled,none,none,,,PhysioNet weighted F1 column
+076,testable,y,y,column,higher,51.93,0.25,51.33,0.57,se,10,paper,,,IMDB-M column
+077,testable,y,y,column,higher,79.53,0.27,76.31,0.21,sd,3,caption,,,"Aggre AP column; runner partly obscured, confirmed from item 004 render"
+078,testable,y,y,row,higher,0.11,0.05,0.08,0.08,se,3,caption,,,Basketball row
+079,testable,y,y,column,higher,84.39,1.19,80.98,2.39,sd,5,caption,,,BZR column; winner partly obscured
+080,testable,y,y,column,higher,0.5635,0.0123,0.5373,0.0108,unlabelled,none,none,,,BCIC2020-3 balanced accuracy; winner partly obscured 0.56?5
+081,testable,y,y,column,lower,0.528,0.019,0.561,0.025,sd,15,paper,,,"MNSol column; winner disp obscured, confirmed from Table 7 of same paper"
+082,testable,y,y,column,lower,unclear,0.212,unclear,unclear,sd,24,caption,,,mean 95th-perc error column; winner and AE cells obscured; caption says 24 seeds kept
+083,testable,y,y,row,higher,0.86,0.08,0.74,unclear,unlabelled,5,paper,,,Table 6 mode2/5 demos; two rivals tie at 0.74 with bars 0.11 and 0.13
+084,testable,y,y,column,higher,47.49,0.32,47.19,0.34,unlabelled,8,caption,,,College Math column; Avg@8 implies 8 samples; winner partly obscured
+085,testable,y,y,column,higher,74.85,1.58,73.41,2.28,sd,15,paper,,,Scaffold ZhangDDI column
+086,testable,y,y,row,higher,0.99,0.02,0.92,0.03,unlabelled,5,paper,,,Tollgate Success row (re-marked; first render circled the Merging 0.99)
+087,testable,y,y,column,lower,43.9,0.13,45.0,0.09,sd,4,paper,,,AER column ViT; both cells partly obscured; four seeds in words
+088,testable,y,y,column,lower,unclear,0.071,8.879,0.073,se,200,caption,,,Amazon base MSE column; winner last digit obscured (8.51?); K=200 replicates
+089,testable,y,y,column,lower,0.528,0.019,0.531,0.022,sd,15,paper,,,MNSol column of Table 7
+090,testable,y,y,column,lower,41.8,0.14,unclear,unclear,sd,4,paper,,,AER column; ROID cell obscured by circle
+091,testable,y,n,column,higher,80.02,0.86,unclear,unclear,sd,4,caption,,,colour-coded top-3; circled cell is second best (blue); first-best for Questions is below the crop; 4 weight initialisations in caption
+092,testable,y,y,column,higher,28.36,3.65,25.90,8.51,unlabelled,unclear,unclear,,,"Chameleon column; winner confirmed from item 041 render; run count ambiguous in the paper, excluded"
+093,testable,y,y,row,lower,0.769,0.019,0.770,0.018,unlabelled,5,paper,,,row 44993
+094,testable,y,y,row,higher,0.858,0.015,0.855,unclear,unlabelled,5,paper,,,row 1067; two rivals tie at 0.855 with bars 0.018 and 0.016
+095,testable,y,y,row,lower,0.011,0.003,0.035,0.004,se,10,paper,,,mushroom row
+096,testable,y,y,row,higher,72.67,10.09,20.79,4.47,sd,3,paper,,,"Arms out row; caption speaks of standard deviation, text of standard error; Arms down row has two bold (tie convention)"
+097,testable,y,y,row,lower,403.18,21.66,600.03,34.67,unlabelled,5,paper,,,Roundabout Time row; winner confirmed from item 086 render
+098,testable,y,y,row,lower,0.022,0.002,0.025,0.002,unlabelled,5,paper,,,row 44969
+099,testable,y,n,column,higher,unclear,0.0046,0.2135,none,sd,3,caption,,,"Validation F1 column: Persistence 0.1626 is also bold, and the best non-bold rival GloFAS 0.2135 prints no bar; the comparison should not be testable"
+100,testable,y,y,column,higher,78.23,1.47,77.78,0.94,unlabelled,5,paper,,,NCI1 column; winner last digit partly obscured

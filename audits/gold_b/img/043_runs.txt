@@ -1,0 +1,27 @@
+All experiments run on a server equipped with an Intel® Xeon® Gold 6254 CPU @ 3
+---
+For our method, we conduct experiments using five random seeds and report the
+---
+Seeds
+---
+We run Soft Actor-Critic (SAC) [47] on the
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+run with given experimental conditions)
+---
+scores achieved for each task, while the ± denotes the standard deviation computed over five seeds
+---
+seeds (normalized scores)
+---
+which, under RL’s non-stationarity and trial-and-error learning, exhibited optimization pathologies
+---
+{0, 10, 100, 1000, 10000} Five seeds used for all reported averages
+---
+• The instructions should contain the exact command and environment needed to run to

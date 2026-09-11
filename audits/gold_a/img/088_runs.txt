@@ -1,0 +1,15 @@
+For each trial k ∈[K], we create a random permutation for the raw data, with indices permuted by κ : N →N, and
+---
+Let K be the number of experiment trials, Tj be the total number of data points for problem j, i
+---
+Results aggregated over K = 200 replicates on three real-world datasets: Amazon review ratings with BERT-base and
+---
+Then in each Monte Carlo replicate, we randomly split the
+---
+efficient inference in text-based randomized trials
+---
+problem at trial k, then our final reported MSE and standard error is calculated as
+---
+requires running the prediction only once per dataset, making it fast to benchmark all estimators for K = 200 trials using
+---
+resample them for each problem across K trials, the MSE we obtained in Section 7

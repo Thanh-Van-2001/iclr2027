@@ -1,0 +1,15 @@
+, 2019), with 100 trials per outer fold, model, and dataset, using an inner 5-fold cross validation
+---
+Lines represent the mean performance over 5 runs, and shaded areas indicate 95% confidence intervals
+---
+Optuna in the innermost fold, using 100 trials per outer fold,
+---
+are run on a single CPU core on an institutional HPC clus-
+---
+cloud separation task, averaged across 10 runs
+---
+els, run independently for each dataset
+---
+experiment was repeated 5 times with different random seeds for each model
+---
+runs, and shaded areas indicate 95% confidence intervals

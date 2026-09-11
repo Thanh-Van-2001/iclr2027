@@ -1,0 +1,31 @@
+2) using ResNet-34, rank r = 25, and 1500 ImageNet images (classwise run)
+---
+Mean ± std across 5 runs
+---
+Values are mean across 5 runs
+---
+Values are mean ± std across 5 runs
+---
+Values are mean ±std across 5 runs
+---
+We replicate our KL regularization ablation for MobileNetV2 [28] by sweeping the regularization
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+deviation computed over five independent runs with different random seeds
+---
+experimental runs as well as estimate the total compute
+---
+ing consists of computing encoder activations and NNDSVD initialization; optimization runs PGD
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+run per class; hence, the computational cost scales with the number of images analyzed for that
+---
+run with given experimental conditions)
+---
+runs
+---
+• The instructions should contain the exact command and environment needed to run to

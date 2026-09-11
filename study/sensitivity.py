@@ -32,7 +32,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(HERE, ".."))
 
-from analyze import test_comparison  # noqa: E402
+from analyze import load_records, test_comparison  # noqa: E402
 from paperengine.stats import benjamini_hochberg, holm_bonferroni  # noqa: E402
 
 
@@ -157,14 +157,13 @@ def paper_level_crosstab(papers: list) -> dict:
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description="Sensitivity of the headline to two conventions.")
     ap.add_argument("--analysis", default="out/analysis_2025.json")
-    ap.add_argument("--extracted", default="data/extracted_2025.json")
+    ap.add_argument("--extracted", default="data/extracted_2025.jsonl")
     ap.add_argument("--out", default="out/sensitivity_2025.json")
     args = ap.parse_args(argv)
 
     with open(args.analysis, encoding="utf-8") as fh:
         cs = json.load(fh)["_comparisons"]
-    with open(args.extracted, encoding="utf-8") as fh:
-        papers = json.load(fh)
+    papers = load_records(args.extracted)
 
     res = {
         "run_count_scope": run_count_scope(cs, papers),

@@ -67,6 +67,21 @@ def _drop_labels(group: list) -> list:
     return group
 
 
+def load_records(path: str) -> list:
+    """Read an extraction file, whichever of the two layouts it uses.
+
+    The pipeline writes one JSON object per line so that an interrupted run
+    can resume; an earlier convenience step converted that to a single JSON
+    array, and the analysis scripts came to depend on the copy. Reading
+    either here removes the step and the copy.
+    """
+    if path.endswith(".jsonl"):
+        with open(path, encoding="utf-8") as fh:
+            return [json.loads(line) for line in fh if line.strip()]
+    with open(path, encoding="utf-8") as fh:
+        return json.load(fh)
+
+
 def _group(cells: list, key: str, tol: float) -> list:
     ordered = sorted(cells, key=lambda c: c[key])
     groups, cur = [], []
@@ -110,7 +125,11 @@ def _consensus_cuts(groups: list, axis: str, tol: float) -> list:
     """
     proposals = [_cut_positions(sorted(g, key=lambda c: c[axis]), axis)
                  for g in groups if sum(1 for c in g if c["bold"]) >= 2]
-    if len(proposals) < 2:
+    # Blocks are a property of the whole table: most groups must carry more
+    # than one bold cell. Two tie-marked rows in a twenty-row table proposed a
+    # cut that then split every row, and a table whose "ours" column won most
+    # rows was read as column-oriented.
+    if len(proposals) < 2 or len(proposals) < (len(groups) + 1) // 2:
         return []
     need = max(2, (len(proposals) + 1) // 2)
     agreed = []
@@ -121,7 +140,22 @@ def _consensus_cuts(groups: list, axis: str, tol: float) -> list:
             votes = sum(1 for other in proposals if any(abs(y - o) <= tol for o in other))
             if votes >= need:
                 agreed.append(y)
-    return sorted(agreed)
+    agreed.sort()
+    if not agreed:
+        return []
+    # The cuts must explain the multi-bold groups: after cutting, nearly every
+    # piece of a multi-bold group should hold exactly one bold cell. In a
+    # block table it does. In a table that bolds every value within a
+    # tolerance of the best, rows carry two, three or four bold cells at
+    # positions that only partly agree, and one cut leaves most pieces still
+    # multi-bold; that table was being cut at its "ours" column, which then
+    # stood alone and was dropped. Found by the recall audit.
+    multi = [g for g in groups if sum(1 for c in g if c["bold"]) >= 2]
+    pieces = [pc for g in multi for pc in _apply_cuts(g, axis, agreed, tol)]
+    single = sum(1 for pc in pieces if sum(1 for c in pc if c["bold"]) == 1)
+    if not pieces or single < 0.8 * len(pieces):
+        return []
+    return agreed
 
 
 def _apply_cuts(group: list, axis: str, cuts: list, tol: float) -> list:
@@ -259,6 +293,10 @@ def comparisons_from_table(table: dict) -> list:
             "caption": (table.get("caption") or "")[:300],
             "header_text": table.get("header_text") or "",
             "n_runs_source": table.get("n_runs_source"),
+            # Where the two cells sit, so an audit can find the same claim
+            # again after the extractor changes.
+            "winner_cell": {"x": win["x"], "y": win["y"]},
+            "runner_cell": {"x": runner["x"], "y": runner["y"]},
         })
     for c in out:
         c["n_comparisons_in_table"] = len(out)

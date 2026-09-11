@@ -1,0 +1,37 @@
+2 (10 runs per dataset)
+---
+Each method was run 100 times across varying compression ratios, according to the same
+---
+Justification: We include the model, code, and data required to run our experiments within
+---
+The diffusion map Z = √nVΛt represents the long-run connectivity structure of the graph after t
+---
+These were run on a HPC unit with an AMD Threadripper 3960X
+---
+This is run for a single sample
+---
+To meet these computational demands, we run these experiments from
+---
+Within this specification, we run each method 20 × 10 × 10 = 2000 times, and for 5 methods this
+---
+balloons to 10,000 runs
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+easier, for each iteration we run the encoding stage once, and apply the three decoders to the same
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+run Alg
+---
+run with given experimental conditions)
+---
+used and all runs
+---
+• For each dataset and bootstrap, we run each method with the specified dZ for the dimension-
+---
+• The instructions should contain the exact command and environment needed to run to

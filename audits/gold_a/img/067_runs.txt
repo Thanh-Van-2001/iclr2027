@@ -1,0 +1,45 @@
+24 shows that any GyroAtt variant using the LCM metric runs faster than
+---
+3, gradient responses for both ‘correct’ and ‘error’ trials centered around
+---
+After preprocessing, each trial consisted of 56 channels with 160 time points
+---
+Each run included 48
+---
+Each subject completed five sessions, with five trials per stimulation frequency in each
+---
+Each subject underwent five sessions: the first four with 60 trials each and the fifth with 100
+---
+Justification: We report mean ± standard deviation over 10 independent runs
+---
+The results indicate that GyroAtt-Gr runs slower than GDLNet, mainly because
+---
+This resulted in 500 trials of 1-second, 8-channel SSVEP signals per subject, with each input
+---
+To address distribution shifts across subjects and runs, we incorporate subject-
+---
+and run-specific batch normalization layers [41]
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+differences between correct and error trials as reported in [27]
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+run with given experimental conditions)
+---
+subject participated in two sessions on different days, each containing six runs
+---
+to the visual cortex; and (3) segmenting each trial into four 1-second segments from 1s to 5s after cue
+---
+trials
+---
+trials—12 per class—totaling 288 trials per session
+---
+• GyroAtt-Gr: Runs slower than GDLNet due to more SVD operations
+---
+• The instructions should contain the exact command and environment needed to run to

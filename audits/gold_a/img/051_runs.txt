@@ -1,0 +1,31 @@
+In addition to the synthetic dataset, we run experiments to compare the performance of different
+---
+In such scenarios, lower variability across runs
+---
+Table 4: Final layer DP fine-tuning on Fashion-MNIST for 4 epochs and δ = 10−6 over 5 seeds
+---
+We train for 5 epochs using 20 random seeds and
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+deviation across 20 random seeds
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+over different seeds
+---
+privacy constraints limit training to a single run
+---
+represent standard deviation across 20 random seeds
+---
+run with given experimental conditions)
+---
+standard deviations, indicating greater stability across random seeds
+---
+the performance metrics over multiple runs
+---
+• The instructions should contain the exact command and environment needed to run

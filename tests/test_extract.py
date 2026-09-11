@@ -144,3 +144,22 @@ def test_zero_error_bar_is_an_error_bar():
                                     "dispersion_kind": "std", "n_runs": 3}) is not None
     assert analyze.test_comparison({"gap": 1.0, "winner_dispersion": 0.0, "runner_dispersion": 0.0,
                                     "dispersion_kind": "std", "n_runs": 3}) is None
+
+
+def test_dispersion_without_leading_zero():
+    # Bug 12: 0.444 +/- .003 was read as a bare 0.444; a whole table of them was
+    # called empty by the recall audit.
+    spans = [_span("0.444", 100, 100), _span("±.003", 122, 103, h=5),
+             _span("0.643", 200, 100), _span("(.004)", 224, 100)]
+    cells = _cells(extract._lines(spans))
+    got = {(c["mean"], c["dispersion"]) for c in cells}
+    assert (0.444, 0.003) in got and (0.643, 0.004) in got
+
+
+def test_bold_weight_recognised_by_font_name():
+    # Bug 13: Nimbus Roman's bold face is "-Medi" and the flag bit was unset.
+    assert extract._bold_by_name("NimbusRomNo9L-Medi")
+    assert extract._bold_by_name("CMBX10")
+    assert extract._bold_by_name("TimesNewRomanPS-BoldMT")
+    assert not extract._bold_by_name("NimbusRomNo9L-Regu")
+    assert not extract._bold_by_name("CMR10")

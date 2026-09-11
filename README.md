@@ -139,15 +139,32 @@ resumes. Sources are `neurips2024`, `neurips2025`, `icml2024`, `icml2025`.
 
 ### Hand-judged inputs
 
-Two things a script cannot regenerate, because a person supplied them: the
-recall audit (sixty tables the extractor called empty, judged by eye) and the
-rejected-table audit (twelve, classified by eye). Their verdicts are in
-`out/gold_recall/manifest.json` and `out/rejected/manifest.json`, and the
-rendered sheets they were judged from are alongside. They are the only typed
-numbers in `make_numbers.py`, and they say so.
+Three things a script cannot regenerate, because a reader supplied them.
 
-### The six bugs
+- The **gold set** (`study/gold_set.py`). `sample` draws claims and tables in
+  four strata, renders each from the PDF with the pipeline's chosen cell
+  circled and nothing else, and writes an answer sheet; the reader fills the
+  sheet blind to the pipeline's values (`out/gold/labels.csv`), and `score`
+  compares field by field with Wilson intervals and recomputes the failure
+  rate from the reader's values. `score --rescore-with` scores a later
+  pipeline on the same claims; `sample --exclude-items` draws a held-out set
+  from papers the first never touched. The first hundred items found five
+  extractor bugs; the held-out set is the number the paper stands on.
+- The **recall audit**: tables the extractor called empty, rendered six to a
+  sheet (`study/contact_sheet.py`) and judged for whether any error bar is
+  present. `out/gold_recall/manifest.json`.
+- The **rejected-table audit**: twelve tables discarded for lacking a
+  single-bold group, classified by eye. `out/rejected/manifest.json`.
 
-Every extractor bug found is recorded in the commit history with what it did to
-the numbers. All six were found by rendering a sampled table and looking; none
-was found by reading code. That is the argument for the contact sheets.
+The rendered images are alongside the verdicts in every case, so the
+judgements can be repeated by someone who has not seen the pipeline's output.
+They are the only typed numbers in `make_numbers.py`, and they say so.
+
+### Every bug has a test
+
+Eleven extractor bugs are recorded in the commit history and in Appendix E of
+the paper with what each did to the numbers. All were found by rendering a
+sampled table and looking; none by reading code. Each has a regression test in
+`tests/test_extract.py` that reproduces the table pattern on synthetic spans:
+
+    python -m pytest tests

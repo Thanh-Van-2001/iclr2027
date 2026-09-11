@@ -1,0 +1,63 @@
+30 runs; shading indicates 95% CI assuming normality
+---
+Boxplots show PDC (top) and accuracy (bottom) across 100 runs for deterministic, drift-
+---
+CPU nodes, with each individual run being allocated 2 CPU cores and 16GB RAM
+---
+Each trial uses an independently generated dataset consisting of 50
+---
+In total, 20 baseline runs and 20 feedback datasets
+---
+Table 3: PDC performance across datasets with response time variability over 100 trials
+---
+Table 4: Accuracy performance across datasets with response time variability over 100 trials
+---
+We report all results across 30 random seeds
+---
+We report mean and 95% CI (assuming normality) across 30 seeds
+---
+We run 100 trials per condition
+---
+across 5 seeds
+---
+across 5 seeds as a function of noise
+---
+and averaging results over 5 runs per configuration
+---
+as mean ± standard deviation over 100 trials
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+computed over multiple identical query repetitions as the target value ¯Cx/¯tx, and integrate this into
+---
+dataset size (100 runs; shading indicates 95% CI assuming normality)
+---
+experimental runs as well as estimate the total compute
+---
+experiments were run on A100 and H100 GPUs, with a full-size (full training set fraction) run taking
+---
+for different random seeds
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+mean ± standard deviation over 100 trials
+---
+of dataset size (100 runs; shading indicates 95% CI assuming normality)
+---
+only tested on a few datasets or with a few runs
+---
+performed on nodes with access to a A100 and H100 GPU shared across four parallel runs
+---
+run with given experimental conditions)
+---
+runs are required (with shared GPUs) this results in approx
+---
+runs; shading indicates 95% CI assuming normality
+---
+seeds
+---
+size varying slightly depending on the sampled annotations determined by the seed (26
+---
+the mean performance across 30 seeds and indicate the 95% CI (assuming normality) in the error
+---
+• The instructions should contain the exact command and environment needed to run to

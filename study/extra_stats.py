@@ -23,7 +23,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(HERE, ".."))
 
-from analyze import comparisons_from_table, orientation  # noqa: E402
+from analyze import comparisons_from_table, load_records, orientation  # noqa: E402
 
 TIE_STRICT = re.compile(
     r"(?i)not (?:statistically )?significan|no significant differ|statistically indistinguish|"
@@ -302,6 +302,112 @@ def venue_counts(records: list, comparisons: list) -> dict:
     return out
 
 
+def other_routes(records: list, comparisons: list) -> dict:
+    """Ways a claim can be checked that are not an error bar on both cells.
+
+    A dagger from a permutation test, a p-value in the footnote, an interval
+    on the cell, a figure with error bars: the definition of "testable" sees
+    none of these, and a reviewer was right that the paper should say how
+    much it is leaving out. Daggers are counted as markers of some kind,
+    which overstates them -- a dagger often means "copied from the original
+    paper" -- so the figures here are ceilings on what the definition misses.
+    """
+    tables = {(r["id"], t.get("number"), t.get("page")): t
+              for r in records for t in r.get("tables", [])}
+
+    def marked(t):
+        m = t.get("markers") or {}
+        return any(m.get(k, 0) for k in ("dagger", "star", "pvalue", "signif_word"))
+
+    def marked_strict(t):
+        m = t.get("markers") or {}
+        return bool(m.get("pvalue", 0) or m.get("signif_word", 0))
+
+    n = len(comparisons)
+    no_bar = [c for c in comparisons
+              if c["winner_dispersion"] is None and c["runner_dispersion"] is None]
+    no_bar_marked = sum(1 for c in no_bar if marked(tables.get((c["paper"], c["table"], c["page"]), {})))
+    no_bar_strict = sum(1 for c in no_bar
+                        if marked_strict(tables.get((c["paper"], c["table"], c["page"]), {})))
+    testable = sum(1 for c in comparisons if c.get("test"))
+    interval_cells = sum(1 for t in tables.values() for c in t["cells"]
+                         if c.get("dispersion_style") == "ci")
+    ci_comparisons = sum(1 for c in comparisons
+                         if c.get("winner_style") == "ci" or c.get("runner_style") == "ci")
+
+    papers = len(records)
+    mentions_test = sum(1 for r in records if r.get("mentions_significance_test"))
+    fig_unc = sum(1 for r in records if r.get("n_figure_captions_with_uncertainty", 0) > 0)
+    no_bar_papers = [r for r in records if not r.get("reports_explicit_error_bar")]
+    no_bar_fig = sum(1 for r in no_bar_papers if r.get("n_figure_captions_with_uncertainty", 0) > 0)
+    captions = sum(r.get("n_table_captions", 0) for r in records)
+    detected = sum(r.get("n_tables_detected", 0) for r in records)
+
+    def pct(a, b):
+        return round(100 * a / b, 1) if b else None
+
+    return {
+        "n_comparisons": n,
+        "n_no_bar": len(no_bar),
+        "no_bar_with_any_marker": no_bar_marked,
+        "pct_no_bar_with_any_marker": pct(no_bar_marked, len(no_bar)),
+        "no_bar_with_pvalue_or_significance_word": no_bar_strict,
+        "pct_no_bar_with_pvalue_or_significance_word": pct(no_bar_strict, len(no_bar)),
+        "pct_testable_or_any_marker": pct(testable + no_bar_marked, n),
+        "pct_testable_or_strict_marker": pct(testable + no_bar_strict, n),
+        "interval_cells": interval_cells,
+        "comparisons_with_an_interval_cell": ci_comparisons,
+        "pct_papers_mentioning_a_test": pct(mentions_test, papers),
+        "pct_papers_with_figure_caption_uncertainty": pct(fig_unc, papers),
+        "pct_no_table_bar_papers_with_figure_caption_uncertainty": pct(no_bar_fig, len(no_bar_papers)),
+        "table_captions_seen": captions,
+        "tables_detected": detected,
+        "pct_captions_not_yielding_a_table": pct(captions - detected, captions),
+    }
+
+
+# A coarse subfield from the title, by keyword, in this order of precedence.
+# Crude, transparent, and enough to say whether the headline is a property of
+# one community; a reviewer asked which subfield the failure rate describes.
+TOPICS = [
+    ("reinforcement learning", r"(?i)reinforcement|polic(?:y|ies)|reward|RL|agents?|robot|control|offline|imitation|bandit"),
+    ("graphs and molecules", r"(?i)graph|GNN|node|molecul|protein|chemi|drug"),
+    ("vision and generation", r"(?i)image|vision|visual|video|segment|detect|3D|diffusion|generat|render|point cloud|scene|pixel"),
+    ("language models", r"(?i)language model|LLMs?|GPT|transformer|instruction|reasoning|prompt|token|text|alignment|RLHF|retrieval|dialogue|code generation"),
+    ("theory and optimisation", r"(?i)bound|convergen|optimal|theorem|complexity|regret|minimax|convex|provabl|guarantee|sample complexity|kernel|bayesian|causal|estimation"),
+]
+
+
+def topic_of(title: str) -> str:
+    for name, pat in TOPICS:
+        if re.search(pat, title or ""):
+            return name
+    return "other"
+
+
+def topic_breakdown(records: list, comparisons: list) -> dict:
+    """The two headline figures by coarse subfield of the paper's title."""
+    topic = {r["id"]: topic_of(r.get("title", "")) for r in records}
+    out = {}
+    for name in [t for t, _ in TOPICS] + ["other"]:
+        ids = {i for i, t in topic.items() if t == name}
+        cs = [c for c in comparisons if c["paper"] in ids]
+        tt = [c for c in cs if c.get("test")]
+        out[name] = {
+            "papers": len(ids),
+            "pct_papers_with_error_bar": round(100 * sum(
+                1 for r in records if r["id"] in ids and r.get("reports_explicit_error_bar"))
+                / max(len(ids), 1), 1),
+            "comparisons": len(cs),
+            "pct_neither": round(100 * sum(1 for c in cs if c["winner_dispersion"] is None
+                                           and c["runner_dispersion"] is None) / max(len(cs), 1), 1),
+            "pct_testable": round(100 * len(tt) / max(len(cs), 1), 1),
+            "n_testable": len(tt),
+            "pct_fail": round(100 * sum(1 for c in tt if not c["survives_raw"]) / max(len(tt), 1), 1),
+        }
+    return out
+
+
 def compute(records: list, comparisons: list, pct_neither: float,
             recall_lo: float) -> dict:
     return {
@@ -313,20 +419,23 @@ def compute(records: list, comparisons: list, pct_neither: float,
         "failure_by_gap_band": failure_by_gap_band(comparisons),
         "headline_span": headline_span(comparisons),
         "venue_counts": venue_counts(records, comparisons),
+        "other_routes": other_routes(records, comparisons),
+        "topic_breakdown": topic_breakdown(records, comparisons),
     }
 
 
 def main() -> int:
-    with open("data/extracted_2025.json", encoding="utf-8") as fh:
-        records = json.load(fh)
+    records = load_records("data/extracted_2025.jsonl")
     with open("out/analysis_2025.json", encoding="utf-8") as fh:
         comparisons = json.load(fh)["_comparisons"]
     with open("out/both_years.json", encoding="utf-8") as fh:
         pct_neither = json.load(fh)["2025"]["pct_neither"]
 
-    # The lower end of the visual recall audit, which is hand-counted and so is
-    # the one input here that a person supplies.
-    res = compute(records, comparisons, pct_neither, recall_lo=0.940)
+    # The lower end of the visual recall audit, scored from its manifest by
+    # contact_sheet.py; the manifest is the one input here a reader supplies.
+    with open("out/recall_v4.json", encoding="utf-8") as fh:
+        recall_lo = json.load(fh)["wilson_95"][0]
+    res = compute(records, comparisons, pct_neither, recall_lo=recall_lo)
     with open("out/extra_stats.json", "w", encoding="utf-8") as fh:
         json.dump(res, fh, indent=1)
     # The conventions table reads its rows from here; it used to read a file

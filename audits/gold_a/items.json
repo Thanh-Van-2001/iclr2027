@@ -1,0 +1,7462 @@
+[
+ {
+  "stratum": "testable",
+  "paper": "568ac75dbe4ef6bb",
+  "table": "10",
+  "page": 20,
+  "bbox": {
+   "y_min": 120.5,
+   "y_max": 158.8,
+   "x_min": 243.9,
+   "x_max": 361.0
+  },
+  "mark": {
+   "x": 243.9,
+   "y": 158.8
+  },
+  "pipeline": {
+   "winner": 84.44,
+   "winner_dispersion": 0.09,
+   "runner_up": 79.58,
+   "runner_dispersion": 0.42,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 3,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 19.597411476655935,
+   "p": 0.0,
+   "se": 0.24799193535274489,
+   "kind_used": "unknown",
+   "df": 2.183287009377354,
+   "p_t": 0.0017021720133876261
+  },
+  "id": "001",
+  "image": "001_testable.png",
+  "title": "Time Series Representations with Hard-Coded Invariances"
+ },
+ {
+  "stratum": "testable",
+  "paper": "62ab1c2cb4b03e717005479efb211841",
+  "table": "8",
+  "page": 27,
+  "bbox": {
+   "y_min": 462.8,
+   "y_max": 585.5,
+   "x_min": 107.7,
+   "x_max": 477.8
+  },
+  "mark": {
+   "x": 267.1,
+   "y": 544.8
+  },
+  "pipeline": {
+   "winner": 41.4,
+   "winner_dispersion": 0.03,
+   "runner_up": 43.8,
+   "runner_dispersion": 0.03,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 15,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 219.08902300206634,
+   "p": 0.0,
+   "se": 0.01095445115010332,
+   "kind_used": "std",
+   "df": 28.0,
+   "p_t": 0.0
+  },
+  "id": "002",
+  "image": "002_testable.png",
+  "title": "Parameter Dynamics of Online Machine Learning and Test-time Adaptation"
+ },
+ {
+  "stratum": "testable",
+  "paper": "4d49d2d97c9e5a19",
+  "table": "8",
+  "page": 17,
+  "bbox": {
+   "y_min": 304.2,
+   "y_max": 459.6,
+   "x_min": 172.9,
+   "x_max": 436.2
+  },
+  "mark": {
+   "x": 264.8,
+   "y": 387.9
+  },
+  "pipeline": {
+   "winner": 780.8,
+   "winner_dispersion": 3.18,
+   "runner_up": 437.49,
+   "runner_dispersion": 49.97,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 95,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 66.82843272527059,
+   "p": 0.0,
+   "se": 5.1371846682584295,
+   "kind_used": "unknown",
+   "df": 94.76135335794407,
+   "p_t": 0.0
+  },
+  "id": "003",
+  "image": "003_testable.png",
+  "title": "A Forget-and-Grow Strategy for Deep Reinforcement Learning Scaling in Continuous Control"
+ },
+ {
+  "stratum": "testable",
+  "paper": "0a045efa63f12074",
+  "table": "10",
+  "page": 14,
+  "bbox": {
+   "y_min": 322.2,
+   "y_max": 357.1,
+   "x_min": 109.6,
+   "x_max": 495.7
+  },
+  "mark": {
+   "x": 109.6,
+   "y": 357.1
+  },
+  "pipeline": {
+   "winner": 96.14,
+   "winner_dispersion": 0.06,
+   "runner_up": 95.18,
+   "runner_dispersion": 0.15,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 3,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 10.292280334442763,
+   "p": 0.0,
+   "se": 0.09327379053088815,
+   "kind_used": "std",
+   "df": 2.6240249609984394,
+   "p_t": 0.0034186290652118423
+  },
+  "id": "004",
+  "image": "004_testable.png",
+  "title": "Towards Robust Influence Functions with Flat Validation Minima"
+ },
+ {
+  "stratum": "testable",
+  "paper": "17e51d497e8bacaa79582e98cd043f1a",
+  "table": "13",
+  "page": 38,
+  "bbox": {
+   "y_min": 380.2,
+   "y_max": 559.5,
+   "x_min": 117.0,
+   "x_max": 474.2
+  },
+  "mark": {
+   "x": 415.8,
+   "y": 537.7
+  },
+  "pipeline": {
+   "winner": 12.3,
+   "winner_dispersion": 0.3,
+   "runner_up": 12.2,
+   "runner_dispersion": 0.4,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "ci",
+   "n_runs": 5,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.39200000000000557,
+   "p": 0.6950582138022037,
+   "se": 0.25510204081632654,
+   "kind_used": "ci"
+  },
+  "id": "005",
+  "image": "005_testable.png",
+  "title": "ResponseRank: Data-Efficient Reward Modeling through Preference Strength Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "23cf4f3fd33c2fb071fc40aee0ec2884",
+  "table": "10",
+  "page": 19,
+  "bbox": {
+   "y_min": 350.3,
+   "y_max": 389.8,
+   "x_min": 190.8,
+   "x_max": 455.6
+  },
+  "mark": {
+   "x": 303.3,
+   "y": 389.8
+  },
+  "pipeline": {
+   "winner": 7.92,
+   "winner_dispersion": 0.05,
+   "runner_up": 8.19,
+   "runner_dispersion": 0.03,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "unknown",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 10.354027349439484,
+   "p": 0.0,
+   "se": 0.026076809620810597,
+   "kind_used": "unknown",
+   "df": 6.549575070821532,
+   "p_t": 2.674155315496307e-05
+  },
+  "id": "006",
+  "image": "006_testable.png",
+  "title": "Mesh Interpolation Graph Network for Dynamic and Spatially Irregular Global Weather Forecasting"
+ },
+ {
+  "stratum": "testable",
+  "paper": "bc481ca60b651f7b",
+  "table": "1",
+  "page": 7,
+  "bbox": {
+   "y_min": 307.9,
+   "y_max": 467.4,
+   "x_min": 383.8,
+   "x_max": 482.2
+  },
+  "mark": {
+   "x": 432.4,
+   "y": 427.6
+  },
+  "pipeline": {
+   "winner": -3.599,
+   "winner_dispersion": 0.1949,
+   "runner_up": -0.5121,
+   "runner_dispersion": 0.0426,
+   "direction": "lower_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 3,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 26.800163962237942,
+   "p": 0.0,
+   "se": 0.11518213113731372,
+   "kind_used": "std",
+   "df": 2.1906625550607615,
+   "p_t": 0.0008450765375378477
+  },
+  "id": "007",
+  "image": "007_testable.png",
+  "title": "Graph Adaptive Autoregressive Moving Average Models"
+ },
+ {
+  "stratum": "testable",
+  "paper": "27e41a1f72811ce319f33e945cb45e6c",
+  "table": "7",
+  "page": 31,
+  "bbox": {
+   "y_min": 479.4,
+   "y_max": 524.7,
+   "x_min": 107.6,
+   "x_max": 449.3
+  },
+  "mark": {
+   "x": 345.1,
+   "y": 504.8
+  },
+  "pipeline": {
+   "winner": 0.572,
+   "winner_dispersion": 0.022,
+   "runner_up": 0.558,
+   "runner_dispersion": 0.022,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "sem",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.4499770425732544,
+   "p": 0.6527269942040059,
+   "se": 0.03111269837220809,
+   "kind_used": "sem"
+  },
+  "id": "008",
+  "image": "008_testable.png",
+  "title": "Dynamical modeling of nonlinear latent factors in multiscale neural activity with real-time inference"
+ },
+ {
+  "stratum": "testable",
+  "paper": "bb444c1f575099ac",
+  "table": "9",
+  "page": 15,
+  "bbox": {
+   "y_min": 667.7,
+   "y_max": 732.4,
+   "x_min": 293.1,
+   "x_max": 353.0
+  },
+  "mark": {
+   "x": 353.0,
+   "y": 682.5
+  },
+  "pipeline": {
+   "winner": 56.05,
+   "winner_dispersion": 1.11,
+   "runner_up": 55.47,
+   "runner_dispersion": 1.15,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 10,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 1.1475365832153572,
+   "p": 0.25115992249035934,
+   "se": 0.5054305095658551,
+   "kind_used": "std",
+   "df": 17.977487690784702,
+   "p_t": 0.2662024724864924
+  },
+  "id": "009",
+  "image": "009_testable.png",
+  "title": "Sample-specific Noise Injection for Diffusion-based Adversarial Purification"
+ },
+ {
+  "stratum": "testable",
+  "paper": "21f7467cf89c574407ef7c89a893461c",
+  "table": "1",
+  "page": 5,
+  "bbox": {
+   "y_min": 568.9,
+   "y_max": 707.0,
+   "x_min": 173.1,
+   "x_max": 445.4
+  },
+  "mark": {
+   "x": 445.4,
+   "y": 697.1
+  },
+  "pipeline": {
+   "winner": 2.8,
+   "winner_dispersion": 0.26,
+   "runner_up": 2.29,
+   "runner_dispersion": 0.91,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "sem",
+   "n_runs": 10,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.5388760585679336,
+   "p": 0.589972378010674,
+   "se": 0.9464142856064675,
+   "kind_used": "sem"
+  },
+  "id": "010",
+  "image": "010_testable.png",
+  "title": "Prompted Policy Search: Reinforcement Learning through Linguistic and Numerical Reasoning in LLMs"
+ },
+ {
+  "stratum": "testable",
+  "paper": "f6b1d75736fd0fc308afb2e380c324d2",
+  "table": "10",
+  "page": 25,
+  "bbox": {
+   "y_min": 134.6,
+   "y_max": 358.0,
+   "x_min": 216.5,
+   "x_max": 405.9
+  },
+  "mark": {
+   "x": 405.9,
+   "y": 341.9
+  },
+  "pipeline": {
+   "winner": 0.14,
+   "winner_dispersion": 0.05,
+   "runner_up": 0.04,
+   "runner_dispersion": 0.03,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 8,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 4.85071250072666,
+   "p": 1.230187543388439e-06,
+   "se": 0.0206155281280883,
+   "kind_used": "unknown",
+   "df": 11.461756373937677,
+   "p_t": 0.0004535005274954873
+  },
+  "id": "011",
+  "image": "011_testable.png",
+  "title": "Improving Regret Approximation for Unsupervised Dynamic Environment Generation"
+ },
+ {
+  "stratum": "testable",
+  "paper": "b9cb57059568ab7d",
+  "table": "5",
+  "page": 20,
+  "bbox": {
+   "y_min": 137.9,
+   "y_max": 312.3,
+   "x_min": 218.6,
+   "x_max": 501.7
+  },
+  "mark": {
+   "x": 275.7,
+   "y": 147.9
+  },
+  "pipeline": {
+   "winner": 0.042,
+   "winner_dispersion": 0.006,
+   "runner_up": 0.069,
+   "runner_dispersion": 0.014,
+   "direction": "lower_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 6,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 4.342055766093069,
+   "p": 1.4115569156203378e-05,
+   "se": 0.006218252702059211,
+   "kind_used": "std",
+   "df": 6.776792908944401,
+   "p_t": 0.003656280036999471
+  },
+  "id": "012",
+  "image": "012_testable.png",
+  "title": "Safety-Polarized and Prioritized Reinforcement Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "0939f13ffce3ff487509d902ddba4571",
+  "table": "5",
+  "page": 25,
+  "bbox": {
+   "y_min": 222.4,
+   "y_max": 430.3,
+   "x_min": 116.5,
+   "x_max": 482.6
+  },
+  "mark": {
+   "x": 472.0,
+   "y": 248.9
+  },
+  "pipeline": {
+   "winner": 670.0,
+   "winner_dispersion": 0.29,
+   "runner_up": 570.0,
+   "runner_dispersion": 0.21,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 624.512290210549,
+   "p": 0.0,
+   "se": 0.16012495120998474,
+   "kind_used": "unknown",
+   "df": 7.290278366132082,
+   "p_t": 0.0
+  },
+  "id": "013",
+  "image": "013_testable.png",
+  "title": "DPAIL: Training Diffusion Policy for Adversarial Imitation Learning without Policy Optimization"
+ },
+ {
+  "stratum": "testable",
+  "paper": "0939f13ffce3ff487509d902ddba4571",
+  "table": "6",
+  "page": 25,
+  "bbox": {
+   "y_min": 496.2,
+   "y_max": 704.0,
+   "x_min": 116.5,
+   "x_max": 482.6
+  },
+  "mark": {
+   "x": 472.0,
+   "y": 677.6
+  },
+  "pipeline": {
+   "winner": 541.76,
+   "winner_dispersion": 0.03,
+   "runner_up": 471.78,
+   "runner_dispersion": 0.06,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 2332.6666666666674,
+   "p": 0.0,
+   "se": 0.03,
+   "kind_used": "unknown",
+   "df": 5.882352941176471,
+   "p_t": 0.0
+  },
+  "id": "014",
+  "image": "014_testable.png",
+  "title": "DPAIL: Training Diffusion Policy for Adversarial Imitation Learning without Policy Optimization"
+ },
+ {
+  "stratum": "testable",
+  "paper": "f06d28d0fd9f36c3d7fadab88b4cfe4e",
+  "table": "1",
+  "page": 7,
+  "bbox": {
+   "y_min": 128.7,
+   "y_max": 333.2,
+   "x_min": 191.4,
+   "x_max": 449.9
+  },
+  "mark": {
+   "x": 312.5,
+   "y": 308.1
+  },
+  "pipeline": {
+   "winner": 0.091,
+   "winner_dispersion": 0.007,
+   "runner_up": 0.128,
+   "runner_dispersion": 0.005,
+   "direction": "lower_better",
+   "orientation": "row",
+   "dispersion_kind": "sem",
+   "n_runs": 10,
+   "n_runs_source": null,
+   "winner_style": "paren",
+   "runner_style": "paren"
+  },
+  "pipeline_test": {
+   "z": 4.301162633521314,
+   "p": 1.699042994762756e-05,
+   "se": 0.008602325267042627,
+   "kind_used": "sem"
+  },
+  "id": "015",
+  "image": "015_testable.png",
+  "title": "Autoencoding Random Forests"
+ },
+ {
+  "stratum": "testable",
+  "paper": "4d49d2d97c9e5a19",
+  "table": "8",
+  "page": 17,
+  "bbox": {
+   "y_min": 304.2,
+   "y_max": 459.6,
+   "x_min": 172.9,
+   "x_max": 436.2
+  },
+  "mark": {
+   "x": 177.9,
+   "y": 316.2
+  },
+  "pipeline": {
+   "winner": 546.66,
+   "winner_dispersion": 66.01,
+   "runner_up": 256.46,
+   "runner_dispersion": 135.38,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 95,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 18.779723837979603,
+   "p": 0.0,
+   "se": 15.452836394383363,
+   "kind_used": "unknown",
+   "df": 136.30479258240314,
+   "p_t": 0.0
+  },
+  "id": "016",
+  "image": "016_testable.png",
+  "title": "A Forget-and-Grow Strategy for Deep Reinforcement Learning Scaling in Continuous Control"
+ },
+ {
+  "stratum": "testable",
+  "paper": "20a917f77773ac0fa8bea2bdd6606b66",
+  "table": "15",
+  "page": 25,
+  "bbox": {
+   "y_min": 107.6,
+   "y_max": 237.6,
+   "x_min": 241.2,
+   "x_max": 393.5
+  },
+  "mark": {
+   "x": 241.2,
+   "y": 237.6
+  },
+  "pipeline": {
+   "winner": 0.6759,
+   "winner_dispersion": 0.0229,
+   "runner_up": 0.6671,
+   "runner_dispersion": 0.0107,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "unknown",
+   "n_runs": 60,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 2.6967572394826944,
+   "p": 0.007001829413674665,
+   "se": 0.0032631784096695256,
+   "kind_used": "unknown",
+   "df": 83.58988255530615,
+   "p_t": 0.008466357331797791
+  },
+  "id": "017",
+  "image": "017_testable.png",
+  "title": "REVE: A Foundation Model for EEG - Adapting to Any Setup with Large-Scale Pretraining on 25,000 Subjects"
+ },
+ {
+  "stratum": "testable",
+  "paper": "0c0936a505992ce0d45169cd595b9755",
+  "table": "2",
+  "page": 6,
+  "bbox": {
+   "y_min": 416.7,
+   "y_max": 568.1,
+   "x_min": 154.4,
+   "x_max": 460.8
+  },
+  "mark": {
+   "x": 410.3,
+   "y": 462.8
+  },
+  "pipeline": {
+   "winner": 70.04,
+   "winner_dispersion": 0.04,
+   "runner_up": 70.03,
+   "runner_dispersion": 0.06,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 10,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.438529009653739,
+   "p": 0.6610028456238162,
+   "se": 0.022803508501982758,
+   "kind_used": "unknown",
+   "df": 15.680412371134016,
+   "p_t": 0.6669846835004418
+  },
+  "id": "018",
+  "image": "018_testable.png",
+  "title": "A Pre-training Framework for Relational Data with Information-theoretic Principles"
+ },
+ {
+  "stratum": "testable",
+  "paper": "4d49d2d97c9e5a19",
+  "table": "2",
+  "page": 15,
+  "bbox": {
+   "y_min": 612.5,
+   "y_max": 689.3,
+   "x_min": 225.0,
+   "x_max": 403.7
+  },
+  "mark": {
+   "x": 225.0,
+   "y": 648.4
+  },
+  "pipeline": {
+   "winner": 0.99,
+   "winner_dispersion": 0.01,
+   "runner_up": 0.76,
+   "runner_dispersion": 0.02,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 3,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 17.815723392554116,
+   "p": 0.0,
+   "se": 0.012909944487358056,
+   "kind_used": "unknown",
+   "df": 2.941176470588235,
+   "p_t": 0.0004333785371588572
+  },
+  "id": "019",
+  "image": "019_testable.png",
+  "title": "A Forget-and-Grow Strategy for Deep Reinforcement Learning Scaling in Continuous Control"
+ },
+ {
+  "stratum": "testable",
+  "paper": "e4f950c602c154bc",
+  "table": "7",
+  "page": 26,
+  "bbox": {
+   "y_min": 138.7,
+   "y_max": 472.4,
+   "x_min": 98.3,
+   "x_max": 488.6
+  },
+  "mark": {
+   "x": 432.9,
+   "y": 148.8
+  },
+  "pipeline": {
+   "winner": 0.614,
+   "winner_dispersion": 0.023,
+   "runner_up": 0.615,
+   "runner_dispersion": 0.019,
+   "direction": "lower_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "paren",
+   "runner_style": "paren"
+  },
+  "pipeline_test": {
+   "z": 0.07495316889958621,
+   "p": 0.9402519728279188,
+   "se": 0.013341664064126334,
+   "kind_used": "unknown",
+   "df": 7.724752658705587,
+   "p_t": 0.942156536780292
+  },
+  "id": "020",
+  "image": "020_testable.png",
+  "title": "Random Feature Representation Boosting"
+ },
+ {
+  "stratum": "testable",
+  "paper": "e4f950c602c154bc",
+  "table": "7",
+  "page": 26,
+  "bbox": {
+   "y_min": 138.7,
+   "y_max": 472.4,
+   "x_min": 98.3,
+   "x_max": 488.6
+  },
+  "mark": {
+   "x": 488.6,
+   "y": 158.9
+  },
+  "pipeline": {
+   "winner": 0.197,
+   "winner_dispersion": 0.015,
+   "runner_up": 0.233,
+   "runner_dispersion": 0.013,
+   "direction": "lower_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "paren",
+   "runner_style": "paren"
+  },
+  "pipeline_test": {
+   "z": 4.055453181533998,
+   "p": 5.0037194619489966e-05,
+   "se": 0.008876936408468858,
+   "kind_used": "unknown",
+   "df": 7.841588159523147,
+   "p_t": 0.00381261228386931
+  },
+  "id": "021",
+  "image": "021_testable.png",
+  "title": "Random Feature Representation Boosting"
+ },
+ {
+  "stratum": "testable",
+  "paper": "368b5802665d8151a0e2e787bc4ccf94",
+  "table": "6",
+  "page": 38,
+  "bbox": {
+   "y_min": 226.7,
+   "y_max": 334.6,
+   "x_min": 118.0,
+   "x_max": 432.2
+  },
+  "mark": {
+   "x": 194.0,
+   "y": 268.3
+  },
+  "pipeline": {
+   "winner": 67.53,
+   "winner_dispersion": 0.21,
+   "runner_up": 66.66,
+   "runner_dispersion": 0.28,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 3,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 4.305383435956946,
+   "p": 1.666967479607706e-05,
+   "se": 0.20207259421636903,
+   "kind_used": "unknown",
+   "df": 3.7091988130563793,
+   "p_t": 0.014817559170375416
+  },
+  "id": "022",
+  "image": "022_testable.png",
+  "title": "Graph Your Own Prompt"
+ },
+ {
+  "stratum": "testable",
+  "paper": "89f39d0b3d49a47606a165eefba2778c",
+  "table": "1",
+  "page": 7,
+  "bbox": {
+   "y_min": 166.6,
+   "y_max": 296.2,
+   "x_min": 177.4,
+   "x_max": 443.0
+  },
+  "mark": {
+   "x": 376.6,
+   "y": 206.5
+  },
+  "pipeline": {
+   "winner": 0.763,
+   "winner_dispersion": 0.054,
+   "runner_up": 0.765,
+   "runner_dispersion": 0.051,
+   "direction": "lower_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 10,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.0851487944798843,
+   "p": 0.9321430987462231,
+   "se": 0.023488294957276057,
+   "kind_used": "std",
+   "df": 17.94151100548019,
+   "p_t": 0.9330860820953266
+  },
+  "id": "023",
+  "image": "023_testable.png",
+  "title": "Random Forest Autoencoders for Guided Representation Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "fe2a36c145c5150c",
+  "table": "1",
+  "page": 7,
+  "bbox": {
+   "y_min": 87.2,
+   "y_max": 473.6,
+   "x_min": 155.8,
+   "x_max": 512.5
+  },
+  "mark": {
+   "x": 509.6,
+   "y": 133.8
+  },
+  "pipeline": {
+   "winner": 92.0,
+   "winner_dispersion": 4.0,
+   "runner_up": 86.0,
+   "runner_dispersion": 7.0,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 8,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 2.1049392463368704,
+   "p": 0.03529659684140807,
+   "se": 2.850438562747845,
+   "kind_used": "std",
+   "df": 11.130974783590514,
+   "p_t": 0.05880267672208972
+  },
+  "id": "024",
+  "image": "024_testable.png",
+  "title": "Conservative Offline Goal-Conditioned Implicit V-Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "a327da3f8388b721",
+  "table": "2",
+  "page": 15,
+  "bbox": {
+   "y_min": 356.4,
+   "y_max": 438.2,
+   "x_min": 251.8,
+   "x_max": 425.3
+  },
+  "mark": {
+   "x": 423.6,
+   "y": 438.2
+  },
+  "pipeline": {
+   "winner": 90.0,
+   "winner_dispersion": 6.0,
+   "runner_up": 79.0,
+   "runner_dispersion": 7.0,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "unknown",
+   "n_runs": 3,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 2.066540160580993,
+   "p": 0.03877750439230665,
+   "se": 5.322906474223771,
+   "kind_used": "unknown",
+   "df": 3.9085745198809856,
+   "p_t": 0.10928202259581599
+  },
+  "id": "025",
+  "image": "025_testable.png",
+  "title": "Random Policy Evaluation Uncovers Policies of Generative Flow Networks"
+ },
+ {
+  "stratum": "testable",
+  "paper": "20a917f77773ac0fa8bea2bdd6606b66",
+  "table": "12",
+  "page": 23,
+  "bbox": {
+   "y_min": 429.5,
+   "y_max": 584.8,
+   "x_min": 108.0,
+   "x_max": 455.9
+  },
+  "mark": {
+   "x": 344.9,
+   "y": 584.8
+  },
+  "pipeline": {
+   "winner": 0.6396,
+   "winner_dispersion": 0.0095,
+   "runner_up": 0.5138,
+   "runner_dispersion": 0.0066,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "unknown",
+   "n_runs": 60,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 84.23876301992694,
+   "p": 0.0,
+   "se": 0.001493374255391684,
+   "kind_used": "unknown",
+   "df": 105.19273611573077,
+   "p_t": 0.0
+  },
+  "id": "026",
+  "image": "026_testable.png",
+  "title": "REVE: A Foundation Model for EEG - Adapting to Any Setup with Large-Scale Pretraining on 25,000 Subjects"
+ },
+ {
+  "stratum": "testable",
+  "paper": "21f7467cf89c574407ef7c89a893461c",
+  "table": "1",
+  "page": 5,
+  "bbox": {
+   "y_min": 568.9,
+   "y_max": 707.0,
+   "x_min": 173.1,
+   "x_max": 445.4
+  },
+  "mark": {
+   "x": 440.9,
+   "y": 568.9
+  },
+  "pipeline": {
+   "winner": 87.21,
+   "winner_dispersion": 29.28,
+   "runner_up": 78.16,
+   "runner_dispersion": 5.32,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "sem",
+   "n_runs": 10,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.30410578038791225,
+   "p": 0.7610473031612748,
+   "se": 29.759381714007436,
+   "kind_used": "sem"
+  },
+  "id": "027",
+  "image": "027_testable.png",
+  "title": "Prompted Policy Search: Reinforcement Learning through Linguistic and Numerical Reasoning in LLMs"
+ },
+ {
+  "stratum": "testable",
+  "paper": "d77247c4a3ca70e2",
+  "table": "5",
+  "page": 17,
+  "bbox": {
+   "y_min": 147.2,
+   "y_max": 167.1,
+   "x_min": 260.7,
+   "x_max": 388.6
+  },
+  "mark": {
+   "x": 388.6,
+   "y": 167.1
+  },
+  "pipeline": {
+   "winner": 0.629,
+   "winner_dispersion": 0.018,
+   "runner_up": 0.567,
+   "runner_dispersion": 0.015,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "sem",
+   "n_runs": 10,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 2.646095518613186,
+   "p": 0.008142682023215109,
+   "se": 0.023430749027719962,
+   "kind_used": "sem"
+  },
+  "id": "028",
+  "image": "028_testable.png",
+  "title": "Generating Hypotheses of Dynamic Causal Graphs in Neuroscience: Leveraging Generative Factor Models of Observed Time Series"
+ },
+ {
+  "stratum": "testable",
+  "paper": "27e41a1f72811ce319f33e945cb45e6c",
+  "table": "7",
+  "page": 31,
+  "bbox": {
+   "y_min": 479.4,
+   "y_max": 524.7,
+   "x_min": 107.6,
+   "x_max": 449.3
+  },
+  "mark": {
+   "x": 292.9,
+   "y": 504.8
+  },
+  "pipeline": {
+   "winner": 0.639,
+   "winner_dispersion": 0.01,
+   "runner_up": 0.621,
+   "runner_dispersion": 0.011,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "sem",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 1.2108110291933636,
+   "p": 0.22596783720051672,
+   "se": 0.014866068747318505,
+   "kind_used": "sem"
+  },
+  "id": "029",
+  "image": "029_testable.png",
+  "title": "Dynamical modeling of nonlinear latent factors in multiscale neural activity with real-time inference"
+ },
+ {
+  "stratum": "testable",
+  "paper": "619cbddb92b8c6fecaf2b86463153be9",
+  "table": "3",
+  "page": 9,
+  "bbox": {
+   "y_min": 235.0,
+   "y_max": 292.5,
+   "x_min": 175.2,
+   "x_max": 443.7
+  },
+  "mark": {
+   "x": 223.8,
+   "y": 260.5
+  },
+  "pipeline": {
+   "winner": 62.65,
+   "winner_dispersion": 0.88,
+   "runner_up": 62.53,
+   "runner_dispersion": 0.58,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "sem",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.1138579369932023,
+   "p": 0.9093504100762522,
+   "se": 1.0539449701004318,
+   "kind_used": "sem"
+  },
+  "id": "030",
+  "image": "030_testable.png",
+  "title": "MultiNet: Adaptive Multi-Viewed Subgraph Convolutional Networks for Graph Classification"
+ },
+ {
+  "stratum": "testable",
+  "paper": "2cd9c51775dd5a338b3f6dcc7aa73140",
+  "table": "7",
+  "page": 27,
+  "bbox": {
+   "y_min": 169.3,
+   "y_max": 188.3,
+   "x_min": 163.5,
+   "x_max": 466.7
+  },
+  "mark": {
+   "x": 380.7,
+   "y": 188.3
+  },
+  "pipeline": {
+   "winner": 0.277,
+   "winner_dispersion": 0.006,
+   "runner_up": 0.301,
+   "runner_dispersion": 0.018,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "unknown",
+   "n_runs": 15,
+   "n_runs_source": null,
+   "winner_style": "paren",
+   "runner_style": "paren"
+  },
+  "pipeline_test": {
+   "z": 4.898979485566349,
+   "p": 9.63357008609833e-07,
+   "se": 0.004898979485566357,
+   "kind_used": "unknown",
+   "df": 17.07317073170733,
+   "p_t": 0.00013382944790474305
+  },
+  "id": "031",
+  "image": "031_testable.png",
+  "title": "3D Interaction Geometric Pre-training for Molecular Relational Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "a7ed89529550ef1b",
+  "table": "9",
+  "page": 15,
+  "bbox": {
+   "y_min": 129.7,
+   "y_max": 284.7,
+   "x_min": 227.7,
+   "x_max": 385.5
+  },
+  "mark": {
+   "x": 385.5,
+   "y": 230.9
+  },
+  "pipeline": {
+   "winner": 79.4,
+   "winner_dispersion": 0.31,
+   "runner_up": 74.37,
+   "runner_dispersion": 0.23,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "sem",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "paren",
+   "runner_style": "paren"
+  },
+  "pipeline_test": {
+   "z": 13.030913167793624,
+   "p": 0.0,
+   "se": 0.38600518131237566,
+   "kind_used": "sem"
+  },
+  "id": "032",
+  "image": "032_testable.png",
+  "title": "EnsLoss: Stochastic Calibrated Loss Ensembles for Preventing Overfitting in Classification"
+ },
+ {
+  "stratum": "testable",
+  "paper": "6f4c216895c2c424ee328fcdde9cc314",
+  "table": "4",
+  "page": 9,
+  "bbox": {
+   "y_min": 352.0,
+   "y_max": 414.1,
+   "x_min": 205.1,
+   "x_max": 463.2
+  },
+  "mark": {
+   "x": 316.5,
+   "y": 352.0
+  },
+  "pipeline": {
+   "winner": 0.6953,
+   "winner_dispersion": 0.0035,
+   "runner_up": 0.6539,
+   "runner_dispersion": 0.0057,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "unknown",
+   "n_runs": 20,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 27.6800805164707,
+   "p": 0.0,
+   "se": 0.0014956603892595406,
+   "kind_used": "unknown",
+   "df": 31.54421842396041,
+   "p_t": 0.0
+  },
+  "id": "033",
+  "image": "033_testable.png",
+  "title": "ChromFound: Towards A Universal Foundation Model for Single-Cell Chromatin Accessibiltiy Data"
+ },
+ {
+  "stratum": "testable",
+  "paper": "2cd9c51775dd5a338b3f6dcc7aa73140",
+  "table": "2",
+  "page": 8,
+  "bbox": {
+   "y_min": 135.5,
+   "y_max": 175.4,
+   "x_min": 153.2,
+   "x_max": 476.3
+  },
+  "mark": {
+   "x": 351.8,
+   "y": 175.4
+  },
+  "pipeline": {
+   "winner": 0.435,
+   "winner_dispersion": 0.006,
+   "runner_up": 0.437,
+   "runner_dispersion": 0.015,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "unknown",
+   "n_runs": 15,
+   "n_runs_source": null,
+   "winner_style": "paren",
+   "runner_style": "paren"
+  },
+  "pipeline_test": {
+   "z": 0.47946330148538463,
+   "p": 0.631609069734782,
+   "se": 0.004171330722922841,
+   "kind_used": "unknown",
+   "df": 18.368174726989075,
+   "p_t": 0.6372681415047348
+  },
+  "id": "034",
+  "image": "034_testable.png",
+  "title": "3D Interaction Geometric Pre-training for Molecular Relational Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "17e51d497e8bacaa79582e98cd043f1a",
+  "table": "12",
+  "page": 37,
+  "bbox": {
+   "y_min": 365.8,
+   "y_max": 545.0,
+   "x_min": 119.5,
+   "x_max": 471.7
+  },
+  "mark": {
+   "x": 251.9,
+   "y": 485.3
+  },
+  "pipeline": {
+   "winner": 2978.8,
+   "winner_dispersion": 539.8,
+   "runner_up": 2042.0,
+   "runner_dispersion": 1295.0,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "ci",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 1.3087155961112191,
+   "p": 0.19063070673369298,
+   "se": 715.8163338036569,
+   "kind_used": "ci"
+  },
+  "id": "035",
+  "image": "035_testable.png",
+  "title": "ResponseRank: Data-Efficient Reward Modeling through Preference Strength Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "fe692980c5d9732cf153ce27947653a7",
+  "table": "7",
+  "page": 23,
+  "bbox": {
+   "y_min": 234.6,
+   "y_max": 300.1,
+   "x_min": 282.4,
+   "x_max": 388.8
+  },
+  "mark": {
+   "x": 320.9,
+   "y": 300.1
+  },
+  "pipeline": {
+   "winner": 0.018,
+   "winner_dispersion": 0.0003,
+   "runner_up": 0.0188,
+   "runner_dispersion": 0.0003,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 10,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 5.962847939999456,
+   "p": 2.4787909502776984e-09,
+   "se": 0.00013416407864998736,
+   "kind_used": "std",
+   "df": 18.0,
+   "p_t": 1.2162036760354766e-05
+  },
+  "id": "036",
+  "image": "036_testable.png",
+  "title": "Dynamic and Chemical Constraints to Enhance the Molecular Masked Graph Autoencoders"
+ },
+ {
+  "stratum": "testable",
+  "paper": "6d944b10ef1e6a45",
+  "table": "3",
+  "page": 7,
+  "bbox": {
+   "y_min": 142.3,
+   "y_max": 194.7,
+   "x_min": 168.0,
+   "x_max": 481.9
+  },
+  "mark": {
+   "x": 227.4,
+   "y": 142.3
+  },
+  "pipeline": {
+   "winner": 71.53,
+   "winner_dispersion": 0.13,
+   "runner_up": 71.38,
+   "runner_dispersion": 0.25,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 3,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.9220227462402687,
+   "p": 0.3565167111009999,
+   "se": 0.1626857912254991,
+   "kind_used": "std",
+   "df": 3.0079057983806714,
+   "p_t": 0.42435574050434544
+  },
+  "id": "037",
+  "image": "037_testable.png",
+  "title": "Rethinking the Stability-Plasticity Trade-off in Continual Learning from an Architectural Perspective"
+ },
+ {
+  "stratum": "testable",
+  "paper": "bc481ca60b651f7b",
+  "table": "17",
+  "page": 32,
+  "bbox": {
+   "y_min": 529.6,
+   "y_max": 732.4,
+   "x_min": 173.5,
+   "x_max": 458.1
+  },
+  "mark": {
+   "x": 458.1,
+   "y": 609.2
+  },
+  "pipeline": {
+   "winner": 98.33,
+   "winner_dispersion": 0.55,
+   "runner_up": 98.19,
+   "runner_dispersion": 0.58,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 3,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.30336971179011524,
+   "p": 0.761608125201068,
+   "se": 0.46148311633977107,
+   "kind_used": "std",
+   "df": 3.9887701841407,
+   "p_t": 0.7767728261297744
+  },
+  "id": "038",
+  "image": "038_testable.png",
+  "title": "Graph Adaptive Autoregressive Moving Average Models"
+ },
+ {
+  "stratum": "testable",
+  "paper": "4a64318595c24efa",
+  "table": "8",
+  "page": 36,
+  "bbox": {
+   "y_min": 272.7,
+   "y_max": 509.5,
+   "x_min": 100.4,
+   "x_max": 430.6
+  },
+  "mark": {
+   "x": 298.0,
+   "y": 474.5
+  },
+  "pipeline": {
+   "winner": 1.11,
+   "winner_dispersion": 0.22,
+   "runner_up": 6.84,
+   "runner_dispersion": 0.62,
+   "direction": "lower_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 10,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 27.542984386399144,
+   "p": 0.0,
+   "se": 0.20803845798313347,
+   "kind_used": "unknown",
+   "df": 11.231019802550088,
+   "p_t": 1.1475931316340393e-11
+  },
+  "id": "039",
+  "image": "039_testable.png",
+  "title": "Pointwise Information Measures as Confidence Estimators in Deep Neural Networks: A Comparative Study"
+ },
+ {
+  "stratum": "testable",
+  "paper": "20a917f77773ac0fa8bea2bdd6606b66",
+  "table": "3",
+  "page": 8,
+  "bbox": {
+   "y_min": 71.2,
+   "y_max": 222.7,
+   "x_min": 109.7,
+   "x_max": 401.3
+  },
+  "mark": {
+   "x": 248.9,
+   "y": 152.5
+  },
+  "pipeline": {
+   "winner": 0.648,
+   "winner_dispersion": 0.014,
+   "runner_up": 0.6417,
+   "runner_dispersion": 0.0091,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "unknown",
+   "n_runs": 60,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 2.922550346399648,
+   "p": 0.003471774878203604,
+   "se": 0.0021556514869833046,
+   "kind_used": "unknown",
+   "df": 101.30355163581012,
+   "p_t": 0.004282046996575195
+  },
+  "id": "040",
+  "image": "040_testable.png",
+  "title": "REVE: A Foundation Model for EEG - Adapting to Any Setup with Large-Scale Pretraining on 25,000 Subjects"
+ },
+ {
+  "stratum": "testable",
+  "paper": "7b7d7985f62284060d65f532ed2ea5fa",
+  "table": "2",
+  "page": 7,
+  "bbox": {
+   "y_min": 140.2,
+   "y_max": 246.9,
+   "x_min": 189.5,
+   "x_max": 455.5
+  },
+  "mark": {
+   "x": 295.8,
+   "y": 246.9
+  },
+  "pipeline": {
+   "winner": 55.01,
+   "winner_dispersion": 3.36,
+   "runner_up": 46.84,
+   "runner_dispersion": 7.31,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "unknown",
+   "n_runs": 100,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 10.155087704552187,
+   "p": 0.0,
+   "se": 0.8045228399492459,
+   "kind_used": "unknown",
+   "df": 139.04459476461213,
+   "p_t": 0.0
+  },
+  "id": "041",
+  "image": "041_testable.png",
+  "title": "One Prompt Fits All: Universal Graph Adaptation for Pretrained Models"
+ },
+ {
+  "stratum": "testable",
+  "paper": "e4f950c602c154bc",
+  "table": "7",
+  "page": 26,
+  "bbox": {
+   "y_min": 138.7,
+   "y_max": 472.4,
+   "x_min": 98.3,
+   "x_max": 488.6
+  },
+  "mark": {
+   "x": 488.6,
+   "y": 219.6
+  },
+  "pipeline": {
+   "winner": 0.34,
+   "winner_dispersion": 0.01,
+   "runner_up": 0.369,
+   "runner_dispersion": 0.005,
+   "direction": "lower_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "paren",
+   "runner_style": "paren"
+  },
+  "pipeline_test": {
+   "z": 5.7999999999999945,
+   "p": 6.631491800135336e-09,
+   "se": 0.004999999999999999,
+   "kind_used": "unknown",
+   "df": 5.88235294117647,
+   "p_t": 0.0012340139028481634
+  },
+  "id": "042",
+  "image": "042_testable.png",
+  "title": "Random Feature Representation Boosting"
+ },
+ {
+  "stratum": "testable",
+  "paper": "b75c000c500bf778568bf2c8f732b0fd",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 217.7,
+   "y_max": 387.0,
+   "x_min": 161.5,
+   "x_max": 463.0
+  },
+  "mark": {
+   "x": 463.0,
+   "y": 367.2
+  },
+  "pipeline": {
+   "winner": 76.25,
+   "winner_dispersion": 1.22,
+   "runner_up": 73.86,
+   "runner_dispersion": 0.59,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "sem",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 1.7636095204728355,
+   "p": 0.07779774372023152,
+   "se": 1.3551752654177245,
+   "kind_used": "sem"
+  },
+  "id": "043",
+  "image": "043_testable.png",
+  "title": "Functional Virtual Adversarial Training for Semi-Supervised Time Series Classification"
+ },
+ {
+  "stratum": "testable",
+  "paper": "568ac75dbe4ef6bb",
+  "table": "2",
+  "page": 7,
+  "bbox": {
+   "y_min": 117.8,
+   "y_max": 186.2,
+   "x_min": 81.4,
+   "x_max": 512.0
+  },
+  "mark": {
+   "x": 105.1,
+   "y": 117.8
+  },
+  "pipeline": {
+   "winner": 71.81,
+   "winner_dispersion": 0.8,
+   "runner_up": 71.29,
+   "runner_dispersion": 0.9,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 3,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.7479627503171934,
+   "p": 0.454482626035396,
+   "se": 0.6952217871538071,
+   "kind_used": "unknown",
+   "df": 3.9457633480341565,
+   "p_t": 0.4965960083922294
+  },
+  "id": "044",
+  "image": "044_testable.png",
+  "title": "Time Series Representations with Hard-Coded Invariances"
+ },
+ {
+  "stratum": "testable",
+  "paper": "093dd0011ada459922e38b86317aa8f3",
+  "table": "3",
+  "page": 8,
+  "bbox": {
+   "y_min": 77.1,
+   "y_max": 158.5,
+   "x_min": 107.7,
+   "x_max": 429.2
+  },
+  "mark": {
+   "x": 261.4,
+   "y": 122.6
+  },
+  "pipeline": {
+   "winner": 90.77,
+   "winner_dispersion": 1.83,
+   "runner_up": 88.35,
+   "runner_dispersion": 3.27,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "unknown",
+   "n_runs": 5,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 1.444072430200755,
+   "p": 0.14871860231591771,
+   "se": 1.6758162190407397,
+   "kind_used": "unknown",
+   "df": 6.2817063007186125,
+   "p_t": 0.19668055604712875
+  },
+  "id": "045",
+  "image": "045_testable.png",
+  "title": "GeoClip: Geometry-Aware Clipping for Differentially Private SGD"
+ },
+ {
+  "stratum": "testable",
+  "paper": "3cb4afdb1f00d8c15cfdcd134eb8bfd6",
+  "table": "19",
+  "page": 26,
+  "bbox": {
+   "y_min": 316.8,
+   "y_max": 385.4,
+   "x_min": 154.5,
+   "x_max": 465.7
+  },
+  "mark": {
+   "x": 245.8,
+   "y": 385.4
+  },
+  "pipeline": {
+   "winner": 0.13,
+   "winner_dispersion": 0.01,
+   "runner_up": 0.17,
+   "runner_dispersion": 0.02,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 2,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 2.529822128134704,
+   "p": 0.011412036386001745,
+   "se": 0.015811388300841896,
+   "kind_used": "std",
+   "df": 1.470588235294118,
+   "p_t": 0.17033403964102312
+  },
+  "id": "046",
+  "image": "046_testable.png",
+  "title": "RespoDiff: Dual-Module Bottleneck Transformation for Responsible &amp; Faithful T2I Generation"
+ },
+ {
+  "stratum": "testable",
+  "paper": "2f5fb82b8b593c548ed538a8d336d800",
+  "table": "1",
+  "page": 9,
+  "bbox": {
+   "y_min": 79.1,
+   "y_max": 155.9,
+   "x_min": 125.9,
+   "x_max": 430.9
+  },
+  "mark": {
+   "x": 174.2,
+   "y": 155.9
+  },
+  "pipeline": {
+   "winner": 0.012,
+   "winner_dispersion": 0.001,
+   "runner_up": 0.038,
+   "runner_dispersion": 0.004,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 10,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 19.94108971003163,
+   "p": 0.0,
+   "se": 0.0013038404810405298,
+   "kind_used": "std",
+   "df": 10.120622568093385,
+   "p_t": 1.8635255560894848e-09
+  },
+  "id": "047",
+  "image": "047_testable.png",
+  "title": "Thompson Sampling in Function Spaces via Neural Operators"
+ },
+ {
+  "stratum": "testable",
+  "paper": "d9e42b4d7163931f3689d6d6fbaa11d0",
+  "table": "14",
+  "page": 34,
+  "bbox": {
+   "y_min": 367.9,
+   "y_max": 701.2,
+   "x_min": 107.7,
+   "x_max": 477.4
+  },
+  "mark": {
+   "x": 467.1,
+   "y": 628.9
+  },
+  "pipeline": {
+   "winner": 254.3,
+   "winner_dispersion": 4.6,
+   "runner_up": 242.7,
+   "runner_dispersion": 7.3,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "sem",
+   "n_runs": 5,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 1.3443911292458395,
+   "p": 0.17882194083810177,
+   "se": 8.628441342444184,
+   "kind_used": "sem"
+  },
+  "id": "048",
+  "image": "048_testable.png",
+  "title": "Rebalancing Return Coverage for Conditional Sequence Modeling in Offline Reinforcement Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "568ac75dbe4ef6bb",
+  "table": "1",
+  "page": 5,
+  "bbox": {
+   "y_min": 183.2,
+   "y_max": 430.9,
+   "x_min": 270.4,
+   "x_max": 437.8
+  },
+  "mark": {
+   "x": 359.1,
+   "y": 243.9
+  },
+  "pipeline": {
+   "winner": 91.55,
+   "winner_dispersion": 0.69,
+   "runner_up": 84.63,
+   "runner_dispersion": 3.92,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 3,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 3.0113058227956584,
+   "p": 0.002601267165201371,
+   "se": 2.2980063823526105,
+   "kind_used": "unknown",
+   "df": 2.1238138802725666,
+   "p_t": 0.08816030304102762
+  },
+  "id": "049",
+  "image": "049_testable.png",
+  "title": "Time Series Representations with Hard-Coded Invariances"
+ },
+ {
+  "stratum": "testable",
+  "paper": "a7f5c1e46b91d904",
+  "table": "5",
+  "page": 35,
+  "bbox": {
+   "y_min": 418.7,
+   "y_max": 687.2,
+   "x_min": 55.4,
+   "x_max": 496.7
+  },
+  "mark": {
+   "x": 215.1,
+   "y": 509.5
+  },
+  "pipeline": {
+   "winner": 0.788,
+   "winner_dispersion": 0.012,
+   "runner_up": 0.696,
+   "runner_dispersion": 0.014,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "sem",
+   "n_runs": 10,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 4.989400529829096,
+   "p": 6.05669514763818e-07,
+   "se": 0.018439088914585774,
+   "kind_used": "sem"
+  },
+  "id": "050",
+  "image": "050_testable.png",
+  "title": "Learning Survival Distributions with the Asymmetric Laplace Distribution"
+ },
+ {
+  "stratum": "testable",
+  "paper": "093dd0011ada459922e38b86317aa8f3",
+  "table": "2",
+  "page": 7,
+  "bbox": {
+   "y_min": 610.1,
+   "y_max": 691.5,
+   "x_min": 107.7,
+   "x_max": 473.9
+  },
+  "mark": {
+   "x": 318.6,
+   "y": 655.7
+  },
+  "pipeline": {
+   "winner": 88.57,
+   "winner_dispersion": 3.37,
+   "runner_up": 85.42,
+   "runner_dispersion": 5.34,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 20,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 2.230944766827835,
+   "p": 0.025684787881213866,
+   "se": 1.4119578605610013,
+   "kind_used": "std",
+   "df": 32.062320175403755,
+   "p_t": 0.032804897044192094
+  },
+  "id": "051",
+  "image": "051_testable.png",
+  "title": "GeoClip: Geometry-Aware Clipping for Differentially Private SGD"
+ },
+ {
+  "stratum": "testable",
+  "paper": "f6b1d75736fd0fc308afb2e380c324d2",
+  "table": "8",
+  "page": 21,
+  "bbox": {
+   "y_min": 491.3,
+   "y_max": 583.7,
+   "x_min": 255.2,
+   "x_max": 392.0
+  },
+  "mark": {
+   "x": 255.2,
+   "y": 545.8
+  },
+  "pipeline": {
+   "winner": 0.69,
+   "winner_dispersion": 0.13,
+   "runner_up": 0.23,
+   "runner_dispersion": 0.05,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 8,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 9.341184719229295,
+   "p": 0.0,
+   "se": 0.04924428900898052,
+   "kind_used": "unknown",
+   "df": 9.026656616185843,
+   "p_t": 6.161942581961455e-06
+  },
+  "id": "052",
+  "image": "052_testable.png",
+  "title": "Improving Regret Approximation for Unsupervised Dynamic Environment Generation"
+ },
+ {
+  "stratum": "testable",
+  "paper": "4d49d2d97c9e5a19",
+  "table": "5",
+  "page": 16,
+  "bbox": {
+   "y_min": 463.3,
+   "y_max": 499.2,
+   "x_min": 191.7,
+   "x_max": 425.2
+  },
+  "mark": {
+   "x": 194.2,
+   "y": 487.2
+  },
+  "pipeline": {
+   "winner": 866.6,
+   "winner_dispersion": 27.14,
+   "runner_up": 769.53,
+   "runner_dispersion": 131.23,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 3,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 1.254636659873909,
+   "p": 0.20961068891477463,
+   "se": 77.3690129616933,
+   "kind_used": "unknown",
+   "df": 2.1707731743283842,
+   "p_t": 0.32778219506175454
+  },
+  "id": "053",
+  "image": "053_testable.png",
+  "title": "A Forget-and-Grow Strategy for Deep Reinforcement Learning Scaling in Continuous Control"
+ },
+ {
+  "stratum": "testable",
+  "paper": "4d49d2d97c9e5a19",
+  "table": "8",
+  "page": 17,
+  "bbox": {
+   "y_min": 304.2,
+   "y_max": 459.6,
+   "x_min": 172.9,
+   "x_max": 436.2
+  },
+  "mark": {
+   "x": 177.9,
+   "y": 364.0
+  },
+  "pipeline": {
+   "winner": 817.7,
+   "winner_dispersion": 73.53,
+   "runner_up": 754.56,
+   "runner_dispersion": 4.06,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 95,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 8.356815076543,
+   "p": 0.0,
+   "se": 7.555510014482635,
+   "kind_used": "unknown",
+   "df": 94.57316115313796,
+   "p_t": 5.453415496958769e-13
+  },
+  "id": "054",
+  "image": "054_testable.png",
+  "title": "A Forget-and-Grow Strategy for Deep Reinforcement Learning Scaling in Continuous Control"
+ },
+ {
+  "stratum": "testable",
+  "paper": "fe692980c5d9732cf153ce27947653a7",
+  "table": "5",
+  "page": 22,
+  "bbox": {
+   "y_min": 129.9,
+   "y_max": 195.4,
+   "x_min": 185.9,
+   "x_max": 477.6
+  },
+  "mark": {
+   "x": 317.1,
+   "y": 195.4
+  },
+  "pipeline": {
+   "winner": 1.035,
+   "winner_dispersion": 0.012,
+   "runner_up": 1.06,
+   "runner_dispersion": 0.011,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 10,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 4.856429311786347,
+   "p": 1.1952142124904697e-06,
+   "se": 0.0051478150704935,
+   "kind_used": "std",
+   "df": 17.865421036266508,
+   "p_t": 0.0001294000959279895
+  },
+  "id": "055",
+  "image": "055_testable.png",
+  "title": "Dynamic and Chemical Constraints to Enhance the Molecular Masked Graph Autoencoders"
+ },
+ {
+  "stratum": "testable",
+  "paper": "c0738aa38761763709fcb10fe0b3cca1",
+  "table": "1",
+  "page": 3,
+  "bbox": {
+   "y_min": 130.5,
+   "y_max": 464.2,
+   "x_min": 108.0,
+   "x_max": 492.1
+  },
+  "mark": {
+   "x": 422.2,
+   "y": 193.7
+  },
+  "pipeline": {
+   "winner": 83.1,
+   "winner_dispersion": 0.9,
+   "runner_up": 71.8,
+   "runner_dispersion": 2.8,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 8.59123091034767,
+   "p": 0.0,
+   "se": 1.3152946437965904,
+   "kind_used": "std",
+   "df": 4.817801187024825,
+   "p_t": 0.0004231046190843468
+  },
+  "id": "056",
+  "image": "056_testable.png",
+  "title": "The Underappreciated Power of Vision Models for Graph Structural Understanding"
+ },
+ {
+  "stratum": "testable",
+  "paper": "8f6c674a7edf57912f1a5830f4a66e3f",
+  "table": "1",
+  "page": 7,
+  "bbox": {
+   "y_min": 354.5,
+   "y_max": 462.4,
+   "x_min": 107.7,
+   "x_max": 438.1
+  },
+  "mark": {
+   "x": 217.2,
+   "y": 374.4
+  },
+  "pipeline": {
+   "winner": 84.6,
+   "winner_dispersion": 0.6,
+   "runner_up": 83.85,
+   "runner_dispersion": 0.8,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 3,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 1.2990381056766578,
+   "p": 0.1939308522824108,
+   "se": 0.5773502691896258,
+   "kind_used": "std",
+   "df": 3.709198813056381,
+   "p_t": 0.2687921322567479
+  },
+  "id": "057",
+  "image": "057_testable.png",
+  "title": "Mitigating Reward Over-optimization in Direct Alignment Algorithms with Importance Sampling"
+ },
+ {
+  "stratum": "testable",
+  "paper": "368b5802665d8151a0e2e787bc4ccf94",
+  "table": "2",
+  "page": 7,
+  "bbox": {
+   "y_min": 79.1,
+   "y_max": 149.1,
+   "x_min": 171.0,
+   "x_max": 445.6
+  },
+  "mark": {
+   "x": 384.6,
+   "y": 120.5
+  },
+  "pipeline": {
+   "winner": 79.42,
+   "winner_dispersion": 0.21,
+   "runner_up": 79.37,
+   "runner_dispersion": 0.25,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 3,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.26524794588363765,
+   "p": 0.7908184617446752,
+   "se": 0.18850287354131592,
+   "kind_used": "std",
+   "df": 3.884273960615684,
+   "p_t": 0.8042977273792558
+  },
+  "id": "058",
+  "image": "058_testable.png",
+  "title": "Graph Your Own Prompt"
+ },
+ {
+  "stratum": "testable",
+  "paper": "4d49d2d97c9e5a19",
+  "table": "3",
+  "page": 16,
+  "bbox": {
+   "y_min": 107.1,
+   "y_max": 143.0,
+   "x_min": 161.7,
+   "x_max": 422.5
+  },
+  "mark": {
+   "x": 161.7,
+   "y": 119.0
+  },
+  "pipeline": {
+   "winner": 15119.91,
+   "winner_dispersion": 583.41,
+   "runner_up": 13765.24,
+   "runner_dispersion": 712.18,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 3,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 2.548631064373448,
+   "p": 0.010814664131460372,
+   "se": 531.5284816765075,
+   "kind_used": "unknown",
+   "df": 3.8508006506276935,
+   "p_t": 0.06576927487038242
+  },
+  "id": "059",
+  "image": "059_testable.png",
+  "title": "A Forget-and-Grow Strategy for Deep Reinforcement Learning Scaling in Continuous Control"
+ },
+ {
+  "stratum": "testable",
+  "paper": "84f48d0c6633d110474d716975871aaf",
+  "table": "1",
+  "page": 8,
+  "bbox": {
+   "y_min": 228.6,
+   "y_max": 428.1,
+   "x_min": 107.7,
+   "x_max": 466.4
+  },
+  "mark": {
+   "x": 466.4,
+   "y": 281.6
+  },
+  "pipeline": {
+   "winner": 907.5,
+   "winner_dispersion": 6.9,
+   "runner_up": 816.5,
+   "runner_dispersion": 94.5,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 3,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 1.663472422061988,
+   "p": 0.0962179067359834,
+   "se": 54.70484439243018,
+   "kind_used": "std",
+   "df": 2.021324664739231,
+   "p_t": 0.23681401137649738
+  },
+  "id": "060",
+  "image": "060_testable.png",
+  "title": "Off-policy Reinforcement Learning with Model-based Exploration Augmentation"
+ },
+ {
+  "stratum": "testable",
+  "paper": "fe2a36c145c5150c",
+  "table": "1",
+  "page": 7,
+  "bbox": {
+   "y_min": 87.2,
+   "y_max": 473.6,
+   "x_min": 155.8,
+   "x_max": 512.5
+  },
+  "mark": {
+   "x": 509.6,
+   "y": 175.0
+  },
+  "pipeline": {
+   "winner": 98.0,
+   "winner_dispersion": 2.0,
+   "runner_up": 84.0,
+   "runner_dispersion": 15.0,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 8,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 2.6167081556895875,
+   "p": 0.008878221360101746,
+   "se": 5.350233639758174,
+   "kind_used": "std",
+   "df": 7.248810252562156,
+   "p_t": 0.03352870194942792
+  },
+  "id": "061",
+  "image": "061_testable.png",
+  "title": "Conservative Offline Goal-Conditioned Implicit V-Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "cef16c173bf78889",
+  "table": "8",
+  "page": 16,
+  "bbox": {
+   "y_min": 132.2,
+   "y_max": 228.2,
+   "x_min": 134.0,
+   "x_max": 493.8
+  },
+  "mark": {
+   "x": 347.0,
+   "y": 228.2
+  },
+  "pipeline": {
+   "winner": 1.173,
+   "winner_dispersion": 0.077,
+   "runner_up": 0.925,
+   "runner_dispersion": 0.087,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "sem",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 2.1346022797872717,
+   "p": 0.03279351107720063,
+   "se": 0.11618089343777659,
+   "kind_used": "sem"
+  },
+  "id": "062",
+  "image": "062_testable.png",
+  "title": "TIMING: Temporality-Aware Integrated Gradients for Time Series Explanation"
+ },
+ {
+  "stratum": "testable",
+  "paper": "15d44a9ef5642da3",
+  "table": "2",
+  "page": 5,
+  "bbox": {
+   "y_min": 119.9,
+   "y_max": 224.8,
+   "x_min": 141.7,
+   "x_max": 512.9
+  },
+  "mark": {
+   "x": 265.1,
+   "y": 185.3
+  },
+  "pipeline": {
+   "winner": 2.969,
+   "winner_dispersion": 0.033,
+   "runner_up": 2.829,
+   "runner_dispersion": 0.0426,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 3,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 4.499956378185305,
+   "p": 6.796740865899764e-06,
+   "se": 0.03111141269695094,
+   "kind_used": "std",
+   "df": 3.764815692564033,
+   "p_t": 0.012429594571919944
+  },
+  "id": "063",
+  "image": "063_testable.png",
+  "title": "Bayesian Neural Scaling Law Extrapolation with Prior-Data Fitted Networks"
+ },
+ {
+  "stratum": "testable",
+  "paper": "62766b4cb11c1c13",
+  "table": "1",
+  "page": 5,
+  "bbox": {
+   "y_min": 67.8,
+   "y_max": 174.9,
+   "x_min": 55.1,
+   "x_max": 411.1
+  },
+  "mark": {
+   "x": 406.4,
+   "y": 174.9
+  },
+  "pipeline": {
+   "winner": 62.83,
+   "winner_dispersion": 0.57,
+   "runner_up": 61.15,
+   "runner_dispersion": 0.55,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "sem",
+   "n_runs": 5,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 2.1209822037083574,
+   "p": 0.03392330007424782,
+   "se": 0.7920858539325141,
+   "kind_used": "sem"
+  },
+  "id": "064",
+  "image": "064_testable.png",
+  "title": "Equivariant Polynomial Functional Networks"
+ },
+ {
+  "stratum": "testable",
+  "paper": "0c0936a505992ce0d45169cd595b9755",
+  "table": "2",
+  "page": 6,
+  "bbox": {
+   "y_min": 416.7,
+   "y_max": 568.1,
+   "x_min": 154.4,
+   "x_max": 460.8
+  },
+  "mark": {
+   "x": 460.8,
+   "y": 483.9
+  },
+  "pipeline": {
+   "winner": 70.54,
+   "winner_dispersion": 0.16,
+   "runner_up": 70.53,
+   "runner_dispersion": 0.04,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 10,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.1917412472119407,
+   "p": 0.8479448947922141,
+   "se": 0.052153619241621194,
+   "kind_used": "unknown",
+   "df": 10.120622568093387,
+   "p_t": 0.8517373113273254
+  },
+  "id": "065",
+  "image": "065_testable.png",
+  "title": "A Pre-training Framework for Relational Data with Information-theoretic Principles"
+ },
+ {
+  "stratum": "testable",
+  "paper": "f6b1d75736fd0fc308afb2e380c324d2",
+  "table": "8",
+  "page": 21,
+  "bbox": {
+   "y_min": 491.3,
+   "y_max": 583.7,
+   "x_min": 255.2,
+   "x_max": 392.0
+  },
+  "mark": {
+   "x": 316.6,
+   "y": 567.6
+  },
+  "pipeline": {
+   "winner": 0.83,
+   "winner_dispersion": 0.06,
+   "runner_up": 0.73,
+   "runner_dispersion": 0.09,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 8,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 2.614881801842453,
+   "p": 0.008925833825206952,
+   "se": 0.03824264635194589,
+   "kind_used": "unknown",
+   "df": 12.195876288659798,
+   "p_t": 0.022344078516574273
+  },
+  "id": "066",
+  "image": "066_testable.png",
+  "title": "Improving Regret Approximation for Unsupervised Dynamic Environment Generation"
+ },
+ {
+  "stratum": "testable",
+  "paper": "a2e3b4132ab2e0b7a21e6e75da7f91a9",
+  "table": "17",
+  "page": 31,
+  "bbox": {
+   "y_min": 241.0,
+   "y_max": 300.5,
+   "x_min": 174.5,
+   "x_max": 352.4
+  },
+  "mark": {
+   "x": 352.4,
+   "y": 300.5
+  },
+  "pipeline": {
+   "winner": 81.6,
+   "winner_dispersion": 1.0,
+   "runner_up": 80.1,
+   "runner_dispersion": 1.1,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "unknown",
+   "n_runs": 10,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 3.1907672235863775,
+   "p": 0.0014189555299717327,
+   "se": 0.47010637094172636,
+   "kind_used": "unknown",
+   "df": 17.838926991599372,
+   "p_t": 0.005108002097126141
+  },
+  "id": "067",
+  "image": "067_testable.png",
+  "title": "Towards a General Attention Framework on Gyrovector Spaces for Matrix Manifolds"
+ },
+ {
+  "stratum": "testable",
+  "paper": "568ac75dbe4ef6bb",
+  "table": "1",
+  "page": 5,
+  "bbox": {
+   "y_min": 183.2,
+   "y_max": 430.9,
+   "x_min": 270.4,
+   "x_max": 437.8
+  },
+  "mark": {
+   "x": 359.1,
+   "y": 252.0
+  },
+  "pipeline": {
+   "winner": 91.64,
+   "winner_dispersion": 0.8,
+   "runner_up": 84.05,
+   "runner_dispersion": 4.08,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 3,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 3.1619145144817002,
+   "p": 0.0015673556883086803,
+   "se": 2.4004444032998005,
+   "kind_used": "unknown",
+   "df": 2.1535600198429545,
+   "p_t": 0.0791989372309847
+  },
+  "id": "068",
+  "image": "068_testable.png",
+  "title": "Time Series Representations with Hard-Coded Invariances"
+ },
+ {
+  "stratum": "testable",
+  "paper": "aaec5deedd87dacd9f59c5842ab62964",
+  "table": "1",
+  "page": 7,
+  "bbox": {
+   "y_min": 348.9,
+   "y_max": 528.5,
+   "x_min": 189.4,
+   "x_max": 465.8
+  },
+  "mark": {
+   "x": 465.8,
+   "y": 377.2
+  },
+  "pipeline": {
+   "winner": 69.4,
+   "winner_dispersion": 2.5,
+   "runner_up": 68.2,
+   "runner_dispersion": 2.5,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.7589466384404128,
+   "p": 0.44788447826411115,
+   "se": 1.5811388300841898,
+   "kind_used": "unknown",
+   "df": 8.000000000000002,
+   "p_t": 0.4696527558562016
+  },
+  "id": "069",
+  "image": "069_testable.png",
+  "title": "FedIGL: Federated Invariant Graph Learning for Non-IID Graphs"
+ },
+ {
+  "stratum": "testable",
+  "paper": "042beb6037d757dd",
+  "table": "5",
+  "page": 24,
+  "bbox": {
+   "y_min": 307.5,
+   "y_max": 442.7,
+   "x_min": 136.5,
+   "x_max": 484.7
+  },
+  "mark": {
+   "x": 304.4,
+   "y": 384.5
+  },
+  "pipeline": {
+   "winner": 0.25,
+   "winner_dispersion": 0.09,
+   "runner_up": 0.21,
+   "runner_dispersion": 0.09,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "sem",
+   "n_runs": 10,
+   "n_runs_source": "page",
+   "winner_style": "paren",
+   "runner_style": "paren"
+  },
+  "pipeline_test": {
+   "z": 0.31426968052735454,
+   "p": 0.7533162239313511,
+   "se": 0.12727922061357855,
+   "kind_used": "sem"
+  },
+  "id": "070",
+  "image": "070_testable.png",
+  "title": "Imitation Learning from a Single Temporally Misaligned Video"
+ },
+ {
+  "stratum": "testable",
+  "paper": "f6b1d75736fd0fc308afb2e380c324d2",
+  "table": "7",
+  "page": 21,
+  "bbox": {
+   "y_min": 303.2,
+   "y_max": 395.7,
+   "x_min": 210.2,
+   "x_max": 475.8
+  },
+  "mark": {
+   "x": 475.8,
+   "y": 379.6
+  },
+  "pipeline": {
+   "winner": 0.94,
+   "winner_dispersion": 0.05,
+   "runner_up": 0.84,
+   "runner_dispersion": 0.09,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 8,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 2.7472112789737797,
+   "p": 0.006010440200876044,
+   "se": 0.03640054944640259,
+   "kind_used": "unknown",
+   "df": 10.945171166156417,
+   "p_t": 0.019063746030200113
+  },
+  "id": "071",
+  "image": "071_testable.png",
+  "title": "Improving Regret Approximation for Unsupervised Dynamic Environment Generation"
+ },
+ {
+  "stratum": "testable",
+  "paper": "6b91cbd6e6526613",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 145.3,
+   "y_max": 310.2,
+   "x_min": 115.2,
+   "x_max": 501.6
+  },
+  "mark": {
+   "x": 218.4,
+   "y": 310.2
+  },
+  "pipeline": {
+   "winner": 71.59,
+   "winner_dispersion": 0.16,
+   "runner_up": 67.6,
+   "runner_dispersion": 0.72,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "unknown",
+   "n_runs": 10,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 17.106983867965297,
+   "p": 0.0,
+   "se": 0.233238075793812,
+   "kind_used": "unknown",
+   "df": 9.886726471035429,
+   "p_t": 1.1349188699938395e-08
+  },
+  "id": "072",
+  "image": "072_testable.png",
+  "title": "Commute Graph Neural Networks"
+ },
+ {
+  "stratum": "testable",
+  "paper": "f06d28d0fd9f36c3d7fadab88b4cfe4e",
+  "table": "1",
+  "page": 7,
+  "bbox": {
+   "y_min": 128.7,
+   "y_max": 333.2,
+   "x_min": 191.4,
+   "x_max": 449.9
+  },
+  "mark": {
+   "x": 191.4,
+   "y": 318.0
+  },
+  "pipeline": {
+   "winner": 0.24,
+   "winner_dispersion": 0.005,
+   "runner_up": 0.467,
+   "runner_dispersion": 0.019,
+   "direction": "lower_better",
+   "orientation": "row",
+   "dispersion_kind": "sem",
+   "n_runs": 10,
+   "n_runs_source": null,
+   "winner_style": "paren",
+   "runner_style": "paren"
+  },
+  "pipeline_test": {
+   "z": 11.55399578729583,
+   "p": 0.0,
+   "se": 0.0196468827043885,
+   "kind_used": "sem"
+  },
+  "id": "073",
+  "image": "073_testable.png",
+  "title": "Autoencoding Random Forests"
+ },
+ {
+  "stratum": "testable",
+  "paper": "82a505a32fb26e91",
+  "table": "6",
+  "page": 7,
+  "bbox": {
+   "y_min": 109.2,
+   "y_max": 223.8,
+   "x_min": 94.0,
+   "x_max": 499.8
+  },
+  "mark": {
+   "x": 499.8,
+   "y": 223.8
+  },
+  "pipeline": {
+   "winner": 4.05,
+   "winner_dispersion": 0.05,
+   "runner_up": 3.95,
+   "runner_dispersion": 0.05,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "ci",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 2.7718585822512565,
+   "p": 0.005573724535172353,
+   "se": 0.036076876591150386,
+   "kind_used": "ci"
+  },
+  "id": "074",
+  "image": "074_testable.png",
+  "title": "ETTA: Elucidating the Design Space of Text-to-Audio Models"
+ },
+ {
+  "stratum": "testable",
+  "paper": "20a917f77773ac0fa8bea2bdd6606b66",
+  "table": "12",
+  "page": 23,
+  "bbox": {
+   "y_min": 429.5,
+   "y_max": 584.8,
+   "x_min": 108.0,
+   "x_max": 455.9
+  },
+  "mark": {
+   "x": 287.5,
+   "y": 584.8
+  },
+  "pipeline": {
+   "winner": 0.6484,
+   "winner_dispersion": 0.017,
+   "runner_up": 0.6427,
+   "runner_dispersion": 0.01,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "unknown",
+   "n_runs": 60,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 2.238595777264053,
+   "p": 0.02518222925292779,
+   "se": 0.0025462390565956948,
+   "kind_used": "unknown",
+   "df": 95.46453737663198,
+   "p_t": 0.02750540405084889
+  },
+  "id": "075",
+  "image": "075_testable.png",
+  "title": "REVE: A Foundation Model for EEG - Adapting to Any Setup with Large-Scale Pretraining on 25,000 Subjects"
+ },
+ {
+  "stratum": "testable",
+  "paper": "619cbddb92b8c6fecaf2b86463153be9",
+  "table": "1",
+  "page": 7,
+  "bbox": {
+   "y_min": 78.7,
+   "y_max": 263.1,
+   "x_min": 112.6,
+   "x_max": 484.2
+  },
+  "mark": {
+   "x": 436.9,
+   "y": 263.1
+  },
+  "pipeline": {
+   "winner": 51.93,
+   "winner_dispersion": 0.25,
+   "runner_up": 51.33,
+   "runner_dispersion": 0.57,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "sem",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.9639875882041594,
+   "p": 0.335052148634573,
+   "se": 0.6224146527838174,
+   "kind_used": "sem"
+  },
+  "id": "076",
+  "image": "076_testable.png",
+  "title": "MultiNet: Adaptive Multi-Viewed Subgraph Convolutional Networks for Graph Classification"
+ },
+ {
+  "stratum": "testable",
+  "paper": "0a045efa63f12074",
+  "table": "10",
+  "page": 14,
+  "bbox": {
+   "y_min": 322.2,
+   "y_max": 357.1,
+   "x_min": 109.6,
+   "x_max": 495.7
+  },
+  "mark": {
+   "x": 164.6,
+   "y": 357.1
+  },
+  "pipeline": {
+   "winner": 79.53,
+   "winner_dispersion": 0.27,
+   "runner_up": 76.31,
+   "runner_dispersion": 0.21,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 3,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 16.305103810047026,
+   "p": 0.0,
+   "se": 0.197484176581315,
+   "kind_used": "std",
+   "df": 3.771479580450791,
+   "p_t": 0.00012318748165340843
+  },
+  "id": "077",
+  "image": "077_testable.png",
+  "title": "Towards Robust Influence Functions with Flat Validation Minima"
+ },
+ {
+  "stratum": "testable",
+  "paper": "042beb6037d757dd",
+  "table": "5",
+  "page": 24,
+  "bbox": {
+   "y_min": 307.5,
+   "y_max": 442.7,
+   "x_min": 136.5,
+   "x_max": 484.7
+  },
+  "mark": {
+   "x": 248.4,
+   "y": 401.6
+  },
+  "pipeline": {
+   "winner": 0.11,
+   "winner_dispersion": 0.05,
+   "runner_up": 0.08,
+   "runner_dispersion": 0.08,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "sem",
+   "n_runs": 10,
+   "n_runs_source": "page",
+   "winner_style": "paren",
+   "runner_style": "paren"
+  },
+  "pipeline_test": {
+   "z": 0.317999364001908,
+   "p": 0.7504854193424544,
+   "se": 0.09433981132056604,
+   "kind_used": "sem"
+  },
+  "id": "078",
+  "image": "078_testable.png",
+  "title": "Imitation Learning from a Single Temporally Misaligned Video"
+ },
+ {
+  "stratum": "testable",
+  "paper": "04f2e79cf94eea89",
+  "table": "11",
+  "page": 18,
+  "bbox": {
+   "y_min": 118.4,
+   "y_max": 207.0,
+   "x_min": 133.7,
+   "x_max": 483.5
+  },
+  "mark": {
+   "x": 133.7,
+   "y": 207.0
+  },
+  "pipeline": {
+   "winner": 84.39,
+   "winner_dispersion": 1.19,
+   "runner_up": 80.98,
+   "runner_dispersion": 2.39,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 2.8559423921107623,
+   "p": 0.004290929817379663,
+   "se": 1.194001675040701,
+   "kind_used": "std",
+   "df": 5.868461964750917,
+   "p_t": 0.02967778190631698
+  },
+  "id": "079",
+  "image": "079_testable.png",
+  "title": "Rhomboid Tiling for Geometric Graph Deep Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "20a917f77773ac0fa8bea2bdd6606b66",
+  "table": "11",
+  "page": 23,
+  "bbox": {
+   "y_min": 107.6,
+   "y_max": 217.6,
+   "x_min": 242.3,
+   "x_max": 394.7
+  },
+  "mark": {
+   "x": 242.3,
+   "y": 217.6
+  },
+  "pipeline": {
+   "winner": 0.5635,
+   "winner_dispersion": 0.0123,
+   "runner_up": 0.5373,
+   "runner_dispersion": 0.0108,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "unknown",
+   "n_runs": 60,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 12.398417155288648,
+   "p": 0.0,
+   "se": 0.0021131729697305896,
+   "kind_used": "unknown",
+   "df": 116.05892492459562,
+   "p_t": 0.0
+  },
+  "id": "080",
+  "image": "080_testable.png",
+  "title": "REVE: A Foundation Model for EEG - Adapting to Any Setup with Large-Scale Pretraining on 25,000 Subjects"
+ },
+ {
+  "stratum": "testable",
+  "paper": "2cd9c51775dd5a338b3f6dcc7aa73140",
+  "table": "2",
+  "page": 8,
+  "bbox": {
+   "y_min": 135.5,
+   "y_max": 175.4,
+   "x_min": 153.2,
+   "x_max": 476.3
+  },
+  "mark": {
+   "x": 240.0,
+   "y": 175.4
+  },
+  "pipeline": {
+   "winner": 0.528,
+   "winner_dispersion": 0.019,
+   "runner_up": 0.561,
+   "runner_dispersion": 0.025,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "unknown",
+   "n_runs": 15,
+   "n_runs_source": null,
+   "winner_style": "paren",
+   "runner_style": "paren"
+  },
+  "pipeline_test": {
+   "z": 4.070250252708731,
+   "p": 4.6962662849647785e-05,
+   "se": 0.008107609594284453,
+   "kind_used": "unknown",
+   "df": 26.126976692401893,
+   "p_t": 0.00038626202024794054
+  },
+  "id": "081",
+  "image": "081_testable.png",
+  "title": "3D Interaction Geometric Pre-training for Molecular Relational Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "a3edf86cbae26915b35ab24c253dfb96",
+  "table": "2",
+  "page": 8,
+  "bbox": {
+   "y_min": 162.2,
+   "y_max": 231.5,
+   "x_min": 107.7,
+   "x_max": 476.0
+  },
+  "mark": {
+   "x": 330.6,
+   "y": 171.9
+  },
+  "pipeline": {
+   "winner": 0.567,
+   "winner_dispersion": 0.212,
+   "runner_up": 0.76,
+   "runner_dispersion": 0.11,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "unknown",
+   "n_runs": 24,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 3.958748795668535,
+   "p": 7.534342980353159e-05,
+   "se": 0.04875277769864332,
+   "kind_used": "unknown",
+   "df": 34.54733225975528,
+   "p_t": 0.0003573330660817664
+  },
+  "id": "082",
+  "image": "082_testable.png",
+  "title": "Distributional Autoencoders Know the Score"
+ },
+ {
+  "stratum": "testable",
+  "paper": "0939f13ffce3ff487509d902ddba4571",
+  "table": "6",
+  "page": 25,
+  "bbox": {
+   "y_min": 496.2,
+   "y_max": 704.0,
+   "x_min": 116.5,
+   "x_max": 482.6
+  },
+  "mark": {
+   "x": 328.3,
+   "y": 565.4
+  },
+  "pipeline": {
+   "winner": 860.64,
+   "winner_dispersion": 0.08,
+   "runner_up": 740.2,
+   "runner_dispersion": 0.13,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 1764.3217520155417,
+   "p": 0.0,
+   "se": 0.06826419266350404,
+   "kind_used": "unknown",
+   "df": 6.64960039195272,
+   "p_t": 0.0
+  },
+  "id": "083",
+  "image": "083_testable.png",
+  "title": "DPAIL: Training Diffusion Policy for Adversarial Imitation Learning without Policy Optimization"
+ },
+ {
+  "stratum": "testable",
+  "paper": "8808b4c72d5ade9bbcf9270ac6411314",
+  "table": "2",
+  "page": 6,
+  "bbox": {
+   "y_min": 261.1,
+   "y_max": 328.1,
+   "x_min": 121.6,
+   "x_max": 468.0
+  },
+  "mark": {
+   "x": 402.9,
+   "y": 293.3
+  },
+  "pipeline": {
+   "winner": 47.49,
+   "winner_dispersion": 0.32,
+   "runner_up": 47.19,
+   "runner_dispersion": 0.34,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "sem",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "paren",
+   "runner_style": "paren"
+  },
+  "pipeline_test": {
+   "z": 0.642529405317188,
+   "p": 0.5205295029970871,
+   "se": 0.4669047011971501,
+   "kind_used": "sem"
+  },
+  "id": "084",
+  "image": "084_testable.png",
+  "title": "Diversity-Aware Policy Optimization for Large Language Model Reasoning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "2cd9c51775dd5a338b3f6dcc7aa73140",
+  "table": "8",
+  "page": 27,
+  "bbox": {
+   "y_min": 259.9,
+   "y_max": 279.5,
+   "x_min": 242.5,
+   "x_max": 385.1
+  },
+  "mark": {
+   "x": 339.7,
+   "y": 279.5
+  },
+  "pipeline": {
+   "winner": 74.85,
+   "winner_dispersion": 1.58,
+   "runner_up": 73.41,
+   "runner_dispersion": 2.28,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "unknown",
+   "n_runs": 15,
+   "n_runs_source": null,
+   "winner_style": "paren",
+   "runner_style": "paren"
+  },
+  "pipeline_test": {
+   "z": 2.0105248876487596,
+   "p": 0.0443756648581215,
+   "se": 0.7162308752536899,
+   "kind_used": "unknown",
+   "df": 24.92647415938728,
+   "p_t": 0.055312523951135395
+  },
+  "id": "085",
+  "image": "085_testable.png",
+  "title": "3D Interaction Geometric Pre-training for Molecular Relational Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "76486c7eb6056f12e7ce3addced61650",
+  "table": "2",
+  "page": 9,
+  "bbox": {
+   "y_min": 360.2,
+   "y_max": 513.1,
+   "x_min": 139.8,
+   "x_max": 469.6
+  },
+  "mark": {
+   "x": 469.6,
+   "y": 498.0
+  },
+  "pipeline": {
+   "winner": 0.99,
+   "winner_dispersion": 0.02,
+   "runner_up": 0.92,
+   "runner_dispersion": 0.03,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 4.341215710622293,
+   "p": 1.4169652806872435e-05,
+   "se": 0.0161245154965971,
+   "kind_used": "unknown",
+   "df": 6.969072164948455,
+   "p_t": 0.003426598052841845
+  },
+  "id": "086",
+  "image": "086_testable.png",
+  "title": "HMARL-CBF \u2013 Hierarchical Multi-Agent Reinforcement Learning with Control Barrier Functions for Safety-Critical Autonomous Systems"
+ },
+ {
+  "stratum": "testable",
+  "paper": "62ab1c2cb4b03e717005479efb211841",
+  "table": "4",
+  "page": 25,
+  "bbox": {
+   "y_min": 167.5,
+   "y_max": 233.7,
+   "x_min": 148.1,
+   "x_max": 481.4
+  },
+  "mark": {
+   "x": 474.5,
+   "y": 233.7
+  },
+  "pipeline": {
+   "winner": 43.9,
+   "winner_dispersion": 0.13,
+   "runner_up": 45.0,
+   "runner_dispersion": 0.09,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 15,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 26.944387170614995,
+   "p": 0.0,
+   "se": 0.0408248290463863,
+   "kind_used": "std",
+   "df": 24.913159842833537,
+   "p_t": 0.0
+  },
+  "id": "087",
+  "image": "087_testable.png",
+  "title": "Parameter Dynamics of Online Machine Learning and Test-time Adaptation"
+ },
+ {
+  "stratum": "testable",
+  "paper": "902b59e5da534af9",
+  "table": "3",
+  "page": 8,
+  "bbox": {
+   "y_min": 75.9,
+   "y_max": 230.0,
+   "x_min": 136.4,
+   "x_max": 483.9
+  },
+  "mark": {
+   "x": 138.6,
+   "y": 205.1
+  },
+  "pipeline": {
+   "winner": 8.517,
+   "winner_dispersion": 0.071,
+   "runner_up": 8.879,
+   "runner_dispersion": 0.073,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "ci",
+   "n_runs": 200,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 6.967472506873675,
+   "p": 3.226752198770555e-12,
+   "se": 0.051955712726942715,
+   "kind_used": "ci"
+  },
+  "id": "088",
+  "image": "088_testable.png",
+  "title": "Prediction-Powered Adaptive Shrinkage Estimation"
+ },
+ {
+  "stratum": "testable",
+  "paper": "2cd9c51775dd5a338b3f6dcc7aa73140",
+  "table": "7",
+  "page": 27,
+  "bbox": {
+   "y_min": 169.3,
+   "y_max": 188.3,
+   "x_min": 163.5,
+   "x_max": 466.7
+  },
+  "mark": {
+   "x": 295.7,
+   "y": 188.3
+  },
+  "pipeline": {
+   "winner": 0.528,
+   "winner_dispersion": 0.019,
+   "runner_up": 0.531,
+   "runner_dispersion": 0.022,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "unknown",
+   "n_runs": 15,
+   "n_runs_source": null,
+   "winner_style": "paren",
+   "runner_style": "paren"
+  },
+  "pipeline_test": {
+   "z": 0.39970403251589515,
+   "p": 0.6893745216541785,
+   "se": 0.007505553499465134,
+   "kind_used": "unknown",
+   "df": 27.41903630783072,
+   "p_t": 0.6924712464522154
+  },
+  "id": "089",
+  "image": "089_testable.png",
+  "title": "3D Interaction Geometric Pre-training for Molecular Relational Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "62ab1c2cb4b03e717005479efb211841",
+  "table": "1",
+  "page": 8,
+  "bbox": {
+   "y_min": 121.6,
+   "y_max": 187.8,
+   "x_min": 148.1,
+   "x_max": 481.4
+  },
+  "mark": {
+   "x": 474.5,
+   "y": 187.8
+  },
+  "pipeline": {
+   "winner": 41.8,
+   "winner_dispersion": 0.14,
+   "runner_up": 44.3,
+   "runner_dispersion": 0.14,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 15,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 48.903799777246974,
+   "p": 0.0,
+   "se": 0.05112077203381551,
+   "kind_used": "std",
+   "df": 28.00000000000001,
+   "p_t": 0.0
+  },
+  "id": "090",
+  "image": "090_testable.png",
+  "title": "Parameter Dynamics of Online Machine Learning and Test-time Adaptation"
+ },
+ {
+  "stratum": "testable",
+  "paper": "bc481ca60b651f7b",
+  "table": "6",
+  "page": 27,
+  "bbox": {
+   "y_min": 146.1,
+   "y_max": 487.8,
+   "x_min": 146.5,
+   "x_max": 419.5
+  },
+  "mark": {
+   "x": 419.5,
+   "y": 307.3
+  },
+  "pipeline": {
+   "winner": 80.02,
+   "winner_dispersion": 0.86,
+   "runner_up": 78.92,
+   "runner_dispersion": 0.89,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 3,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 1.5394530781587423,
+   "p": 0.12369372454957306,
+   "se": 0.7145394787320479,
+   "kind_used": "std",
+   "df": 3.995306235940367,
+   "p_t": 0.19861279446780356
+  },
+  "id": "091",
+  "image": "091_testable.png",
+  "title": "Graph Adaptive Autoregressive Moving Average Models"
+ },
+ {
+  "stratum": "testable",
+  "paper": "7b7d7985f62284060d65f532ed2ea5fa",
+  "table": "2",
+  "page": 7,
+  "bbox": {
+   "y_min": 140.2,
+   "y_max": 246.9,
+   "x_min": 189.5,
+   "x_max": 455.5
+  },
+  "mark": {
+   "x": 455.5,
+   "y": 232.4
+  },
+  "pipeline": {
+   "winner": 28.36,
+   "winner_dispersion": 3.65,
+   "runner_up": 25.9,
+   "runner_dispersion": 8.51,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "unknown",
+   "n_runs": 100,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 2.6566649300872336,
+   "p": 0.007891783751424075,
+   "se": 0.9259730017662502,
+   "kind_used": "unknown",
+   "df": 134.23203423577752,
+   "p_t": 0.008848701886451149
+  },
+  "id": "092",
+  "image": "092_testable.png",
+  "title": "One Prompt Fits All: Universal Graph Adaptation for Pretrained Models"
+ },
+ {
+  "stratum": "testable",
+  "paper": "e4f950c602c154bc",
+  "table": "7",
+  "page": 26,
+  "bbox": {
+   "y_min": 138.7,
+   "y_max": 472.4,
+   "x_min": 98.3,
+   "x_max": 488.6
+  },
+  "mark": {
+   "x": 321.4,
+   "y": 442.1
+  },
+  "pipeline": {
+   "winner": 0.769,
+   "winner_dispersion": 0.019,
+   "runner_up": 0.77,
+   "runner_dispersion": 0.018,
+   "direction": "lower_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "paren",
+   "runner_style": "paren"
+  },
+  "pipeline_test": {
+   "z": 0.08543576577167616,
+   "p": 0.9319149601232763,
+   "se": 0.011704699910719625,
+   "kind_used": "unknown",
+   "df": 7.9767272850907585,
+   "p_t": 0.9340204416989131
+  },
+  "id": "093",
+  "image": "093_testable.png",
+  "title": "Random Feature Representation Boosting"
+ },
+ {
+  "stratum": "testable",
+  "paper": "e4f950c602c154bc",
+  "table": "6",
+  "page": 24,
+  "bbox": {
+   "y_min": 250.1,
+   "y_max": 584.9,
+   "x_min": 160.8,
+   "x_max": 424.4
+  },
+  "mark": {
+   "x": 292.6,
+   "y": 250.1
+  },
+  "pipeline": {
+   "winner": 0.858,
+   "winner_dispersion": 0.015,
+   "runner_up": 0.855,
+   "runner_dispersion": 0.018,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "paren",
+   "runner_style": "paren"
+  },
+  "pipeline_test": {
+   "z": 0.2862991671569344,
+   "p": 0.7746489959548173,
+   "se": 0.010478549517943787,
+   "kind_used": "unknown",
+   "df": 7.748047891723057,
+   "p_t": 0.7821545230832938
+  },
+  "id": "094",
+  "image": "094_testable.png",
+  "title": "Random Feature Representation Boosting"
+ },
+ {
+  "stratum": "testable",
+  "paper": "f06d28d0fd9f36c3d7fadab88b4cfe4e",
+  "table": "1",
+  "page": 7,
+  "bbox": {
+   "y_min": 128.7,
+   "y_max": 333.2,
+   "x_min": 191.4,
+   "x_max": 449.9
+  },
+  "mark": {
+   "x": 312.5,
+   "y": 258.2
+  },
+  "pipeline": {
+   "winner": 0.011,
+   "winner_dispersion": 0.003,
+   "runner_up": 0.035,
+   "runner_dispersion": 0.004,
+   "direction": "lower_better",
+   "orientation": "row",
+   "dispersion_kind": "sem",
+   "n_runs": 10,
+   "n_runs_source": null,
+   "winner_style": "paren",
+   "runner_style": "paren"
+  },
+  "pipeline_test": {
+   "z": 4.800000000000001,
+   "p": 1.586656303897982e-06,
+   "se": 0.005,
+   "kind_used": "sem"
+  },
+  "id": "095",
+  "image": "095_testable.png",
+  "title": "Autoencoding Random Forests"
+ },
+ {
+  "stratum": "testable",
+  "paper": "042beb6037d757dd",
+  "table": "4",
+  "page": 23,
+  "bbox": {
+   "y_min": 118.7,
+   "y_max": 171.7,
+   "x_min": 119.9,
+   "x_max": 492.9
+  },
+  "mark": {
+   "x": 424.5,
+   "y": 142.6
+  },
+  "pipeline": {
+   "winner": 72.67,
+   "winner_dispersion": 10.09,
+   "runner_up": 20.79,
+   "runner_dispersion": 4.47,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 8,
+   "n_runs_source": null,
+   "winner_style": "paren",
+   "runner_style": "paren"
+  },
+  "pipeline_test": {
+   "z": 13.296609935677465,
+   "p": 0.0,
+   "se": 3.901746403855586,
+   "kind_used": "unknown",
+   "df": 9.645736922598354,
+   "p_t": 1.6025154736531988e-07
+  },
+  "id": "096",
+  "image": "096_testable.png",
+  "title": "Imitation Learning from a Single Temporally Misaligned Video"
+ },
+ {
+  "stratum": "testable",
+  "paper": "76486c7eb6056f12e7ce3addced61650",
+  "table": "2",
+  "page": 9,
+  "bbox": {
+   "y_min": 360.2,
+   "y_max": 513.1,
+   "x_min": 139.8,
+   "x_max": 469.6
+  },
+  "mark": {
+   "x": 465.0,
+   "y": 462.1
+  },
+  "pipeline": {
+   "winner": 403.18,
+   "winner_dispersion": 21.66,
+   "runner_up": 600.03,
+   "runner_dispersion": 34.67,
+   "direction": "lower_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 10.767399343327279,
+   "p": 0.0,
+   "se": 18.282037632605398,
+   "kind_used": "unknown",
+   "df": 6.7096798209215756,
+   "p_t": 1.7708473905031497e-05
+  },
+  "id": "097",
+  "image": "097_testable.png",
+  "title": "HMARL-CBF \u2013 Hierarchical Multi-Agent Reinforcement Learning with Control Barrier Functions for Safety-Critical Autonomous Systems"
+ },
+ {
+  "stratum": "testable",
+  "paper": "e4f950c602c154bc",
+  "table": "7",
+  "page": 26,
+  "bbox": {
+   "y_min": 138.7,
+   "y_max": 472.4,
+   "x_min": 98.3,
+   "x_max": 488.6
+  },
+  "mark": {
+   "x": 265.6,
+   "y": 260.1
+  },
+  "pipeline": {
+   "winner": 0.022,
+   "winner_dispersion": 0.002,
+   "runner_up": 0.025,
+   "runner_dispersion": 0.002,
+   "direction": "lower_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "paren",
+   "runner_style": "paren"
+  },
+  "pipeline_test": {
+   "z": 2.3717082451262868,
+   "p": 0.017706065807366667,
+   "se": 0.0012649110640673515,
+   "kind_used": "unknown",
+   "df": 7.999999999999997,
+   "p_t": 0.045125935446806986
+  },
+  "id": "098",
+  "image": "098_testable.png",
+  "title": "Random Feature Representation Boosting"
+ },
+ {
+  "stratum": "testable",
+  "paper": "c1501f836c75dd1da19974a38c64ee1e",
+  "table": "3",
+  "page": 9,
+  "bbox": {
+   "y_min": 326.6,
+   "y_max": 376.5,
+   "x_min": 159.9,
+   "x_max": 454.3
+  },
+  "mark": {
+   "x": 274.9,
+   "y": 376.5
+  },
+  "pipeline": {
+   "winner": 2577.0,
+   "winner_dispersion": 0.0046,
+   "runner_up": 1724.0,
+   "runner_dispersion": 0.0017,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 3,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 301267.3852610624,
+   "p": 0.0,
+   "se": 0.00283137187007759,
+   "kind_used": "std",
+   "df": 2.5363096547077526,
+   "p_t": 1.887379141862766e-14
+  },
+  "id": "099",
+  "image": "099_testable.png",
+  "title": "RiverMamba: A State Space Model for Global River Discharge and Flood Forecasting"
+ },
+ {
+  "stratum": "testable",
+  "paper": "87ea665a39d7f959",
+  "table": "9",
+  "page": 27,
+  "bbox": {
+   "y_min": 532.3,
+   "y_max": 578.1,
+   "x_min": 189.7,
+   "x_max": 495.3
+  },
+  "mark": {
+   "x": 297.4,
+   "y": 547.7
+  },
+  "pipeline": {
+   "winner": 78.23,
+   "winner_dispersion": 1.47,
+   "runner_up": 77.78,
+   "runner_dispersion": 0.94,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.5766861572478099,
+   "p": 0.5641514853043508,
+   "se": 0.7803204469959761,
+   "kind_used": "std",
+   "df": 6.802624502747154,
+   "p_t": 0.5827213695732576
+  },
+  "id": "100",
+  "image": "100_testable.png",
+  "title": "TopoTune: A Framework for Generalized Combinatorial Complex Neural Networks"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "d4b2fa29874eb983",
+  "table": "4",
+  "page": 7,
+  "bbox": {
+   "y_min": 335.6,
+   "y_max": 366.1,
+   "x_min": 197.8,
+   "x_max": 431.0
+  },
+  "mark": {
+   "x": 258.3,
+   "y": 335.6
+  },
+  "pipeline": {
+   "winner": 0.6183,
+   "winner_dispersion": null,
+   "runner_up": 0.6164,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "101",
+  "image": "101_no_bar.png",
+  "title": "Calibrating Video Watch-time Predictions with Credible Prototype Alignment"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "36721d1209a059dcb7a090dd543f34c4",
+  "table": "7",
+  "page": 28,
+  "bbox": {
+   "y_min": 115.9,
+   "y_max": 165.7,
+   "x_min": 168.2,
+   "x_max": 481.7
+  },
+  "mark": {
+   "x": 219.0,
+   "y": 125.1
+  },
+  "pipeline": {
+   "winner": 0.896,
+   "winner_dispersion": null,
+   "runner_up": 0.893,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": 3,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "102",
+  "image": "102_no_bar.png",
+  "title": "Towards Reliable Identification of Diffusion-based Image Manipulations"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "dc35c593e61f6df62db541b976d09dcf",
+  "table": "5",
+  "page": 26,
+  "bbox": {
+   "y_min": 272.4,
+   "y_max": 308.0,
+   "x_min": 107.7,
+   "x_max": 451.8
+  },
+  "mark": {
+   "x": 319.6,
+   "y": 292.0
+  },
+  "pipeline": {
+   "winner": 0.25,
+   "winner_dispersion": null,
+   "runner_up": 0.31,
+   "runner_dispersion": null,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "103",
+  "image": "103_no_bar.png",
+  "title": "Single-pass Adaptive Image Tokenization for Minimum Program Search"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "dc35c593e61f6df62db541b976d09dcf",
+  "table": "12",
+  "page": 27,
+  "bbox": {
+   "y_min": 548.8,
+   "y_max": 596.9,
+   "x_min": 107.7,
+   "x_max": 457.5
+  },
+  "mark": {
+   "x": 229.4,
+   "y": 570.0
+  },
+  "pipeline": {
+   "winner": 80.9,
+   "winner_dispersion": null,
+   "runner_up": 80.49,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "104",
+  "image": "104_no_bar.png",
+  "title": "Single-pass Adaptive Image Tokenization for Minimum Program Search"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "e4134f30ccd09557",
+  "table": "5",
+  "page": 20,
+  "bbox": {
+   "y_min": 334.3,
+   "y_max": 504.3,
+   "x_min": 212.3,
+   "x_max": 442.8
+  },
+  "mark": {
+   "x": 321.3,
+   "y": 504.3
+  },
+  "pipeline": {
+   "winner": 1.37,
+   "winner_dispersion": null,
+   "runner_up": 2.42,
+   "runner_dispersion": null,
+   "direction": "lower_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 3,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "105",
+  "image": "105_no_bar.png",
+  "title": "MODULI: Unlocking Preference Generalization via Diffusion Models for Offline Multi-Objective Reinforcement Learning"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "568ac75dbe4ef6bb",
+  "table": "11",
+  "page": 23,
+  "bbox": {
+   "y_min": 112.8,
+   "y_max": 297.7,
+   "x_min": 137.3,
+   "x_max": 524.9
+  },
+  "mark": {
+   "x": 207.5,
+   "y": 119.4
+  },
+  "pipeline": {
+   "winner": 42.22,
+   "winner_dispersion": null,
+   "runner_up": 37.78,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "none",
+   "n_runs": 3,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "106",
+  "image": "106_no_bar.png",
+  "title": "Time Series Representations with Hard-Coded Invariances"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "547981a39de805e3",
+  "table": "9",
+  "page": 14,
+  "bbox": {
+   "y_min": 252.3,
+   "y_max": 300.0,
+   "x_min": 132.6,
+   "x_max": 496.1
+  },
+  "mark": {
+   "x": 232.2,
+   "y": 300.0
+  },
+  "pipeline": {
+   "winner": 31.97,
+   "winner_dispersion": null,
+   "runner_up": 31.64,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "107",
+  "image": "107_no_bar.png",
+  "title": "DEALing with Image Reconstruction: Deep Attentive Least Squares"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "1759a83b007f0685c3fbc460fa1b6395",
+  "table": "12",
+  "page": 25,
+  "bbox": {
+   "y_min": 681.0,
+   "y_max": 706.1,
+   "x_min": 252.5,
+   "x_max": 399.5
+  },
+  "mark": {
+   "x": 252.5,
+   "y": 706.1
+  },
+  "pipeline": {
+   "winner": 3.85,
+   "winner_dispersion": null,
+   "runner_up": 5.0,
+   "runner_dispersion": null,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "108",
+  "image": "108_no_bar.png",
+  "title": "RAGRouter: Learning to Route Queries to Multiple Retrieval-Augmented Language Models"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "80613b043d43ffaae9824ee9d4b291e5",
+  "table": "9",
+  "page": 16,
+  "bbox": {
+   "y_min": 199.6,
+   "y_max": 275.7,
+   "x_min": 194.1,
+   "x_max": 458.2
+  },
+  "mark": {
+   "x": 254.3,
+   "y": 275.7
+  },
+  "pipeline": {
+   "winner": 0.395,
+   "winner_dispersion": null,
+   "runner_up": 0.424,
+   "runner_dispersion": null,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "109",
+  "image": "109_no_bar.png",
+  "title": "DeltaFlow: An Efficient Multi-frame Scene Flow Estimation Method"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "551d275ae5cb1bb1ebe6e37fbe201db8",
+  "table": "4",
+  "page": 8,
+  "bbox": {
+   "y_min": 210.4,
+   "y_max": 335.4,
+   "x_min": 133.9,
+   "x_max": 417.2
+  },
+  "mark": {
+   "x": 318.5,
+   "y": 308.2
+  },
+  "pipeline": {
+   "winner": 93.1,
+   "winner_dispersion": null,
+   "runner_up": 90.1,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "110",
+  "image": "110_no_bar.png",
+  "title": "Spot the Fake: Large Multimodal Model-Based Synthetic Image Detection with Artifact Explanation"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "82a505a32fb26e91",
+  "table": "21",
+  "page": 20,
+  "bbox": {
+   "y_min": 67.9,
+   "y_max": 126.2,
+   "x_min": 90.9,
+   "x_max": 449.0
+  },
+  "mark": {
+   "x": 272.5,
+   "y": 105.8
+  },
+  "pipeline": {
+   "winner": 77.07,
+   "winner_dispersion": null,
+   "runner_up": 89.6,
+   "runner_dispersion": null,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "111",
+  "image": "111_no_bar.png",
+  "title": "ETTA: Elucidating the Design Space of Text-to-Audio Models"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "ebb46358ffb50894f37b9263bbbb1d69",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 159.2,
+   "y_max": 242.7,
+   "x_min": 113.1,
+   "x_max": 478.4
+  },
+  "mark": {
+   "x": 425.4,
+   "y": 242.7
+  },
+  "pipeline": {
+   "winner": -98.4,
+   "winner_dispersion": null,
+   "runner_up": -96.8,
+   "runner_dispersion": null,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "112",
+  "image": "112_no_bar.png",
+  "title": "MoE-Gyro: Self-Supervised Over-Range Reconstruction and Denoising for MEMS Gyroscopes"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "ef58d11fd938a5d7",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 91.2,
+   "y_max": 205.6,
+   "x_min": 165.2,
+   "x_max": 486.8
+  },
+  "mark": {
+   "x": 371.7,
+   "y": 91.2
+  },
+  "pipeline": {
+   "winner": 1443.84,
+   "winner_dispersion": null,
+   "runner_up": 292.29,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "113",
+  "image": "113_no_bar.png",
+  "title": "HybridGS: High-Efficiency Gaussian Splatting Data Compression using Dual-Channel Sparse Representation and Point Cloud Encoder"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "638fdcfbbe10b2040b0b2b0dbfb2b2c0",
+  "table": "3",
+  "page": 9,
+  "bbox": {
+   "y_min": 138.7,
+   "y_max": 202.4,
+   "x_min": 279.9,
+   "x_max": 425.0
+  },
+  "mark": {
+   "x": 425.0,
+   "y": 178.5
+  },
+  "pipeline": {
+   "winner": 0.903,
+   "winner_dispersion": null,
+   "runner_up": 0.875,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "none",
+   "n_runs": 3,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "114",
+  "image": "114_no_bar.png",
+  "title": "JanusDNA: A Powerful Bi-directional Hybrid DNA Foundation Model"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "7e7fe2ab977c80c2",
+  "table": "7",
+  "page": 15,
+  "bbox": {
+   "y_min": 119.1,
+   "y_max": 155.0,
+   "x_min": 78.7,
+   "x_max": 479.8
+  },
+  "mark": {
+   "x": 354.4,
+   "y": 131.0
+  },
+  "pipeline": {
+   "winner": 70.7,
+   "winner_dispersion": null,
+   "runner_up": 70.6,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "115",
+  "image": "115_no_bar.png",
+  "title": "Balanced Learning for Domain Adaptive Semantic Segmentation"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "eee95ca54259180c",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 97.8,
+   "y_max": 384.7,
+   "x_min": 55.4,
+   "x_max": 511.7
+  },
+  "mark": {
+   "x": 511.7,
+   "y": 314.5
+  },
+  "pipeline": {
+   "winner": 519.6,
+   "winner_dispersion": null,
+   "runner_up": 474.9,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": "caption",
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "116",
+  "image": "116_no_bar.png",
+  "title": "Behavior-Regularized Diffusion Policy Optimization for Offline Reinforcement Learning"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "cc2730d5873b549e590fd1142c1a312a",
+  "table": "2",
+  "page": 6,
+  "bbox": {
+   "y_min": 142.2,
+   "y_max": 305.3,
+   "x_min": 107.7,
+   "x_max": 478.5
+  },
+  "mark": {
+   "x": 415.9,
+   "y": 282.6
+  },
+  "pipeline": {
+   "winner": 43.15,
+   "winner_dispersion": null,
+   "runner_up": 41.84,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "117",
+  "image": "117_no_bar.png",
+  "title": "Deciphering the Extremes: A Novel Approach for Pathological Long-tailed Recognition in Scientific Discovery"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "551d275ae5cb1bb1ebe6e37fbe201db8",
+  "table": "3",
+  "page": 7,
+  "bbox": {
+   "y_min": 616.3,
+   "y_max": 697.9,
+   "x_min": 175.2,
+   "x_max": 416.9
+  },
+  "mark": {
+   "x": 299.3,
+   "y": 697.9
+  },
+  "pipeline": {
+   "winner": 99.1,
+   "winner_dispersion": null,
+   "runner_up": 93.1,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "118",
+  "image": "118_no_bar.png",
+  "title": "Spot the Fake: Large Multimodal Model-Based Synthetic Image Detection with Artifact Explanation"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "ffdc933808448e5d",
+  "table": "4",
+  "page": 6,
+  "bbox": {
+   "y_min": 150.9,
+   "y_max": 283.5,
+   "x_min": 94.5,
+   "x_max": 478.3
+  },
+  "mark": {
+   "x": 199.0,
+   "y": 271.5
+  },
+  "pipeline": {
+   "winner": 43.5,
+   "winner_dispersion": null,
+   "runner_up": 42.9,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "119",
+  "image": "119_no_bar.png",
+  "title": "Are Large Language Models Ready for Multi-Turn Tabular Data Analysis?"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "31e89283741f8f70ad2290b5c197ae18",
+  "table": "6",
+  "page": 22,
+  "bbox": {
+   "y_min": 559.0,
+   "y_max": 623.9,
+   "x_min": 168.2,
+   "x_max": 415.9
+  },
+  "mark": {
+   "x": 415.2,
+   "y": 623.9
+  },
+  "pipeline": {
+   "winner": 84.43,
+   "winner_dispersion": null,
+   "runner_up": 72.5,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "120",
+  "image": "120_no_bar.png",
+  "title": "MURKA: Multi-Reward Reinforcement Learning with Knowledge Alignment for Optimization Tasks"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "e4030dd7cd3dd549",
+  "table": "7",
+  "page": 18,
+  "bbox": {
+   "y_min": 442.9,
+   "y_max": 686.9,
+   "x_min": 70.2,
+   "x_max": 506.1
+  },
+  "mark": {
+   "x": 403.2,
+   "y": 589.3
+  },
+  "pipeline": {
+   "winner": 90.4,
+   "winner_dispersion": null,
+   "runner_up": 50.9,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "121",
+  "image": "121_no_bar.png",
+  "title": "Accelerating LLM Inference with Lossless Speculative Decoding Algorithms for Heterogeneous Vocabularies"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "a831bd2b1bf8935641a5c890a158c519",
+  "table": "5",
+  "page": 8,
+  "bbox": {
+   "y_min": 498.9,
+   "y_max": 613.7,
+   "x_min": 138.3,
+   "x_max": 395.3
+  },
+  "mark": {
+   "x": 243.4,
+   "y": 596.1
+  },
+  "pipeline": {
+   "winner": 22.119,
+   "winner_dispersion": null,
+   "runner_up": 22.076,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "122",
+  "image": "122_no_bar.png",
+  "title": "Quantifying and Alleviating Co-Adaptation in Sparse-View 3D Gaussian Splatting"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "8ea50bf458f6070548b11babbe0bf89b",
+  "table": "7",
+  "page": 24,
+  "bbox": {
+   "y_min": 71.2,
+   "y_max": 292.8,
+   "x_min": 118.5,
+   "x_max": 474.8
+  },
+  "mark": {
+   "x": 278.0,
+   "y": 265.2
+  },
+  "pipeline": {
+   "winner": 82.0,
+   "winner_dispersion": null,
+   "runner_up": 81.2,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "123",
+  "image": "123_no_bar.png",
+  "title": "FRBNet: Revisiting Low-Light Vision through Frequency-Domain Radial Basis Network"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "5401bede0941e568fa42b7b5910fa72c",
+  "table": "10",
+  "page": 16,
+  "bbox": {
+   "y_min": 127.0,
+   "y_max": 259.4,
+   "x_min": 114.6,
+   "x_max": 472.5
+  },
+  "mark": {
+   "x": 114.6,
+   "y": 168.0
+  },
+  "pipeline": {
+   "winner": 2.5,
+   "winner_dispersion": null,
+   "runner_up": 0.815,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "124",
+  "image": "124_no_bar.png",
+  "title": "Dependency Matters: Enhancing LLM Reasoning with Explicit Knowledge Grounding"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "e5fb1d7e7c1541eb0b6132b7839baf34",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 249.9,
+   "y_max": 354.5,
+   "x_min": 165.5,
+   "x_max": 409.8
+  },
+  "mark": {
+   "x": 408.4,
+   "y": 249.9
+  },
+  "pipeline": {
+   "winner": 0.943,
+   "winner_dispersion": null,
+   "runner_up": 0.929,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "none",
+   "n_runs": 30,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "125",
+  "image": "125_no_bar.png",
+  "title": "Are Large Language Models Sensitive to the Motives Behind Communication?"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "8eb3e953455f01ebbd83d7df351bdf95",
+  "table": "7",
+  "page": 23,
+  "bbox": {
+   "y_min": 400.2,
+   "y_max": 449.0,
+   "x_min": 110.7,
+   "x_max": 486.8
+  },
+  "mark": {
+   "x": 144.7,
+   "y": 438.0
+  },
+  "pipeline": {
+   "winner": -94.6,
+   "winner_dispersion": null,
+   "runner_up": 67.3,
+   "runner_dispersion": null,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "126",
+  "image": "126_no_bar.png",
+  "title": "Wisdom is Knowing What not to Say: Hallucination-Free LLMs Unlearning via Attention Shifting"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "1b0197207f14d550",
+  "table": "8",
+  "page": 18,
+  "bbox": {
+   "y_min": 101.7,
+   "y_max": 145.6,
+   "x_min": 148.6,
+   "x_max": 523.7
+  },
+  "mark": {
+   "x": 169.9,
+   "y": 145.6
+  },
+  "pipeline": {
+   "winner": 20.6,
+   "winner_dispersion": null,
+   "runner_up": 50.8,
+   "runner_dispersion": null,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "127",
+  "image": "127_no_bar.png",
+  "title": "DPCore: Dynamic Prompt Coreset for Continual Test-Time Adaptation"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "c34f3a9ebf4abf00",
+  "table": "2",
+  "page": 6,
+  "bbox": {
+   "y_min": 81.7,
+   "y_max": 237.5,
+   "x_min": 79.8,
+   "x_max": 511.0
+  },
+  "mark": {
+   "x": 219.1,
+   "y": 223.1
+  },
+  "pipeline": {
+   "winner": 84.12,
+   "winner_dispersion": null,
+   "runner_up": 83.15,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "128",
+  "image": "128_no_bar.png",
+  "title": "FedSMU: Communication-Efficient and Generalization-Enhanced Federated Learning through Symbolic Model Updates"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "6ab3325de0bec40674c99fb0c20fc6a3",
+  "table": "5",
+  "page": 8,
+  "bbox": {
+   "y_min": 598.6,
+   "y_max": 659.7,
+   "x_min": 108.0,
+   "x_max": 469.3
+  },
+  "mark": {
+   "x": 315.8,
+   "y": 633.6
+  },
+  "pipeline": {
+   "winner": 0.257,
+   "winner_dispersion": null,
+   "runner_up": 0.252,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "129",
+  "image": "129_no_bar.png",
+  "title": "T2V-OptJail: Discrete Prompt Optimization for Text-to-Video Jailbreak Attacks"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "7e92a9fbf59f9992",
+  "table": "6",
+  "page": 24,
+  "bbox": {
+   "y_min": 399.4,
+   "y_max": 459.1,
+   "x_min": 55.4,
+   "x_max": 425.3
+  },
+  "mark": {
+   "x": 219.0,
+   "y": 430.4
+  },
+  "pipeline": {
+   "winner": 4.0,
+   "winner_dispersion": null,
+   "runner_up": 31.6,
+   "runner_dispersion": null,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "130",
+  "image": "130_no_bar.png",
+  "title": "Annealing Flow Generative Models Towards Sampling High-Dimensional and Multi-Modal Distributions"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "0f1d92d2fad704ff0bdfddd8798d5c0c",
+  "table": "6",
+  "page": 7,
+  "bbox": {
+   "y_min": 396.8,
+   "y_max": 547.7,
+   "x_min": 107.7,
+   "x_max": 475.4
+  },
+  "mark": {
+   "x": 440.4,
+   "y": 460.6
+  },
+  "pipeline": {
+   "winner": 4.0,
+   "winner_dispersion": null,
+   "runner_up": 61.4,
+   "runner_dispersion": null,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": 2,
+   "n_runs_source": "caption",
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "131",
+  "image": "131_no_bar.png",
+  "title": "Revolutionizing Training-Free NAS: Towards Efficient Automatic Proxy Discovery via Large Language Models"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "a74aaa7637deb9b2",
+  "table": "7",
+  "page": 35,
+  "bbox": {
+   "y_min": 98.3,
+   "y_max": 174.0,
+   "x_min": 55.4,
+   "x_max": 446.3
+  },
+  "mark": {
+   "x": 259.3,
+   "y": 174.0
+  },
+  "pipeline": {
+   "winner": 26763.4,
+   "winner_dispersion": null,
+   "runner_up": 26956.8,
+   "runner_dispersion": null,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "132",
+  "image": "132_no_bar.png",
+  "title": "Large Language Model-driven Large Neighborhood Search for Large-Scale MILP Problems"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "910f4659fae8ee50",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 67.9,
+   "y_max": 184.1,
+   "x_min": 55.1,
+   "x_max": 512.8
+  },
+  "mark": {
+   "x": 398.9,
+   "y": 184.1
+  },
+  "pipeline": {
+   "winner": 14.4,
+   "winner_dispersion": null,
+   "runner_up": 11.7,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "133",
+  "image": "133_no_bar.png",
+  "title": "unMORE: Unsupervised Multi-Object Segmentation via Center-Boundary Reasoning"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "1aa1fde3661b23ba9b043082069fd144",
+  "table": "15",
+  "page": 19,
+  "bbox": {
+   "y_min": 393.6,
+   "y_max": 438.6,
+   "x_min": 193.2,
+   "x_max": 468.3
+  },
+  "mark": {
+   "x": 193.2,
+   "y": 438.6
+  },
+  "pipeline": {
+   "winner": 0.922,
+   "winner_dispersion": null,
+   "runner_up": 0.71,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "134",
+  "image": "134_no_bar.png",
+  "title": "Image Editing As Programs with Diffusion Models"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "ad060c652cd5dc60a737560e4832a3da",
+  "table": "6",
+  "page": 8,
+  "bbox": {
+   "y_min": 206.8,
+   "y_max": 226.7,
+   "x_min": 283.7,
+   "x_max": 428.7
+  },
+  "mark": {
+   "x": 428.7,
+   "y": 226.7
+  },
+  "pipeline": {
+   "winner": 46.3,
+   "winner_dispersion": null,
+   "runner_up": 41.8,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "135",
+  "image": "135_no_bar.png",
+  "title": "Knowledge-based Visual Question Answer with Multimodal Processing, Retrieval and Filtering"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "0904c7edde20d7134a77fc7f9cd86ea2",
+  "table": "21",
+  "page": 30,
+  "bbox": {
+   "y_min": 156.0,
+   "y_max": 172.2,
+   "x_min": 156.5,
+   "x_max": 476.3
+  },
+  "mark": {
+   "x": 262.4,
+   "y": 156.0
+  },
+  "pipeline": {
+   "winner": 1.299,
+   "winner_dispersion": null,
+   "runner_up": 1.199,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": 3,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "136",
+  "image": "136_no_bar.png",
+  "title": "Can LLMs Reason Over Non-Text Modalities in a Training-Free Manner? A Case Study with In-Context Representation Learning"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "c4adae9e7d852ce8",
+  "table": "8",
+  "page": 24,
+  "bbox": {
+   "y_min": 132.7,
+   "y_max": 168.6,
+   "x_min": 243.6,
+   "x_max": 466.5
+  },
+  "mark": {
+   "x": 287.9,
+   "y": 168.6
+  },
+  "pipeline": {
+   "winner": 28.73,
+   "winner_dispersion": null,
+   "runner_up": 28.68,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "137",
+  "image": "137_no_bar.png",
+  "title": "ROME is Forged in Adversity: Robust Distilled Datasets via Information Bottleneck"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "f65973fd59e5d808",
+  "table": "3",
+  "page": 7,
+  "bbox": {
+   "y_min": 410.3,
+   "y_max": 450.4,
+   "x_min": 55.2,
+   "x_max": 495.0
+  },
+  "mark": {
+   "x": 400.8,
+   "y": 424.6
+  },
+  "pipeline": {
+   "winner": 24.35,
+   "winner_dispersion": null,
+   "runner_up": 23.38,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "138",
+  "image": "138_no_bar.png",
+  "title": "Flex3D: Feed-Forward 3D Generation with Flexible Reconstruction Model and Input View Curation"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "3085fd61063840fdb2e6eafac58589f8",
+  "table": "5",
+  "page": 9,
+  "bbox": {
+   "y_min": 79.1,
+   "y_max": 128.8,
+   "x_min": 163.6,
+   "x_max": 347.6
+  },
+  "mark": {
+   "x": 306.5,
+   "y": 128.8
+  },
+  "pipeline": {
+   "winner": 62.37,
+   "winner_dispersion": null,
+   "runner_up": 59.96,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "139",
+  "image": "139_no_bar.png",
+  "title": "Bisecle: Binding and Separation in Continual Learning for Video Language Understanding"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "b71cfefae46909178603b5bc6c11d3ae",
+  "table": "2",
+  "page": 7,
+  "bbox": {
+   "y_min": 224.5,
+   "y_max": 272.0,
+   "x_min": 195.9,
+   "x_max": 473.4
+  },
+  "mark": {
+   "x": 429.4,
+   "y": 272.0
+  },
+  "pipeline": {
+   "winner": 0.196,
+   "winner_dispersion": null,
+   "runner_up": 0.1994,
+   "runner_dispersion": null,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "140",
+  "image": "140_no_bar.png",
+  "title": "Learning Urban Climate Dynamics via Physics-Guided Urban Surface\u2013Atmosphere Interactions"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "7612dd27915fa8f9",
+  "table": "5",
+  "page": 25,
+  "bbox": {
+   "y_min": 86.6,
+   "y_max": 110.8,
+   "x_min": 123.3,
+   "x_max": 503.2
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 4,
+   "n_cells": 18,
+   "orientation": "none",
+   "dispersion_kind": "unknown"
+  },
+  "id": "141",
+  "image": "141_discarded.png",
+  "title": "Mirror, Mirror of the Flow: How Does Regularization Shape Implicit Bias?"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "6dc129f0383f9fa270347bb09f0030d4",
+  "table": "5",
+  "page": 16,
+  "bbox": {
+   "y_min": 143.9,
+   "y_max": 172.6,
+   "x_min": 219.5,
+   "x_max": 401.5
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 0,
+   "n_cells": 9,
+   "orientation": "none",
+   "dispersion_kind": "none"
+  },
+  "id": "142",
+  "image": "142_discarded.png",
+  "title": "AdaReasoner: Adaptive Reasoning Enables More Flexible Thinking"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "e4f950c602c154bc",
+  "table": "9",
+  "page": 27,
+  "bbox": {
+   "y_min": 582.0,
+   "y_max": 691.7,
+   "x_min": 324.1,
+   "x_max": 421.0
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 0,
+   "n_cells": 30,
+   "orientation": "none",
+   "dispersion_kind": "none"
+  },
+  "id": "143",
+  "image": "143_discarded.png",
+  "title": "Random Feature Representation Boosting"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "94114bcc90460433",
+  "table": "15",
+  "page": 23,
+  "bbox": {
+   "y_min": 465.1,
+   "y_max": 513.4,
+   "x_min": 55.4,
+   "x_max": 526.2
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 0,
+   "n_cells": 12,
+   "orientation": "none",
+   "dispersion_kind": "none"
+  },
+  "id": "144",
+  "image": "144_discarded.png",
+  "title": "SecEmb: Sparsity-Aware Secure Federated Learning of On-Device Recommender System with Large Embedding"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "8bd9f3ae50e9e1230e483dda4873e710",
+  "table": "1",
+  "page": 4,
+  "bbox": {
+   "y_min": 114.5,
+   "y_max": 238.8,
+   "x_min": 200.1,
+   "x_max": 486.9
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 36,
+   "n_cells": 192,
+   "orientation": "row",
+   "dispersion_kind": "none"
+  },
+  "id": "145",
+  "image": "145_discarded.png",
+  "title": "Geometric Logit Decoupling for Energy-Based Graph Out-of-distribution Detection"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "c84a22c24a6ade02",
+  "table": "4",
+  "page": 7,
+  "bbox": {
+   "y_min": 493.6,
+   "y_max": 583.2,
+   "x_min": 335.3,
+   "x_max": 494.1
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 3,
+   "n_cells": 18,
+   "orientation": "none",
+   "dispersion_kind": "unknown"
+  },
+  "id": "146",
+  "image": "146_discarded.png",
+  "title": "Primal-Dual Neural Algorithmic Reasoning"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "d27af2bebeab8a3e6f3848fc71736235",
+  "table": "2",
+  "page": 20,
+  "bbox": {
+   "y_min": 512.6,
+   "y_max": 677.8,
+   "x_min": 112.6,
+   "x_max": 445.1
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 2,
+   "n_cells": 41,
+   "orientation": "none",
+   "dispersion_kind": "std"
+  },
+  "id": "147",
+  "image": "147_discarded.png",
+  "title": "From Softmax to Score: Transformers Can Effectively Implement In-Context Denoising Steps"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "b1955fd70909fcd8",
+  "table": "1",
+  "page": 7,
+  "bbox": {
+   "y_min": 105.4,
+   "y_max": 369.0,
+   "x_min": 75.4,
+   "x_max": 520.1
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 12,
+   "n_cells": 215,
+   "orientation": "row",
+   "dispersion_kind": "none"
+  },
+  "id": "148",
+  "image": "148_discarded.png",
+  "title": "Towards Lifelong Model Editing via Simulating Ideal Editor"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "7bfb5d5fba90cbfe",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 102.3,
+   "y_max": 477.1,
+   "x_min": 109.5,
+   "x_max": 447.7
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 90,
+   "n_cells": 820,
+   "orientation": "none",
+   "dispersion_kind": "none"
+  },
+  "id": "149",
+  "image": "149_discarded.png",
+  "title": "Multi-Session Budget Optimization for Forward Auction-based Federated Learning"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "cde43c5d698076ae17f3838a80f5a1bc",
+  "table": "9",
+  "page": 24,
+  "bbox": {
+   "y_min": 502.9,
+   "y_max": 568.4,
+   "x_min": 131.8,
+   "x_max": 493.8
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 0,
+   "n_cells": 27,
+   "orientation": "none",
+   "dispersion_kind": "none"
+  },
+  "id": "150",
+  "image": "150_discarded.png",
+  "title": "Reparameterized LLM Training via Orthogonal Equivalence Transformation"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "3d42c7f2d745ba1a",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 123.1,
+   "y_max": 144.8,
+   "x_min": 156.0,
+   "x_max": 371.0
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 0,
+   "n_cells": 18,
+   "orientation": "none",
+   "dispersion_kind": "none"
+  },
+  "id": "151",
+  "image": "151_discarded.png",
+  "title": "Diffusion Sampling Correction via Approximately 10 Parameters"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "3d42c7f2d745ba1a",
+  "table": "4",
+  "page": 12,
+  "bbox": {
+   "y_min": 160.5,
+   "y_max": 315.6,
+   "x_min": 313.6,
+   "x_max": 526.4
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 10,
+   "n_cells": 44,
+   "orientation": "none",
+   "dispersion_kind": "none"
+  },
+  "id": "152",
+  "image": "152_discarded.png",
+  "title": "Diffusion Sampling Correction via Approximately 10 Parameters"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "91941f55efabf79a",
+  "table": "9",
+  "page": 22,
+  "bbox": {
+   "y_min": 283.2,
+   "y_max": 395.5,
+   "x_min": 162.3,
+   "x_max": 447.8
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 0,
+   "n_cells": 29,
+   "orientation": "none",
+   "dispersion_kind": "none"
+  },
+  "id": "153",
+  "image": "153_discarded.png",
+  "title": "MCU: An Evaluation Framework for Open-Ended Game Agents"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "aa558295aeae60d5",
+  "table": "6",
+  "page": 19,
+  "bbox": {
+   "y_min": 152.8,
+   "y_max": 275.0,
+   "x_min": 91.4,
+   "x_max": 504.1
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 11,
+   "n_cells": 91,
+   "orientation": "row",
+   "dispersion_kind": "none"
+  },
+  "id": "154",
+  "image": "154_discarded.png",
+  "title": "Adversarial Cooperative Rationalization: The Risk of Spurious Correlations in Even Clean Datasets"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "0d33b1148c6ee6bb3ea9f056ae3301e6",
+  "table": "2",
+  "page": 8,
+  "bbox": {
+   "y_min": 377.2,
+   "y_max": 475.5,
+   "x_min": 122.1,
+   "x_max": 468.8
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 0,
+   "n_cells": 26,
+   "orientation": "none",
+   "dispersion_kind": "none"
+  },
+  "id": "155",
+  "image": "155_discarded.png",
+  "title": "LMFusion: Adapting Pretrained Language Models for Multimodal Generation"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "2dcca4631ef4354b",
+  "table": "3",
+  "page": 8,
+  "bbox": {
+   "y_min": 367.6,
+   "y_max": 425.8,
+   "x_min": 83.6,
+   "x_max": 240.9
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 3,
+   "n_cells": 6,
+   "orientation": "none",
+   "dispersion_kind": "none"
+  },
+  "id": "156",
+  "image": "156_discarded.png",
+  "title": "FlowDrag: 3D-aware Drag-based Image Editing with Mesh-guided Deformation Vector Flow Fields"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "0e6be5952715a478",
+  "table": "4",
+  "page": 6,
+  "bbox": {
+   "y_min": 234.2,
+   "y_max": 387.1,
+   "x_min": 67.2,
+   "x_max": 533.9
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 9,
+   "n_cells": 36,
+   "orientation": "none",
+   "dispersion_kind": "none"
+  },
+  "id": "157",
+  "image": "157_discarded.png",
+  "title": "Right Time to Learn: Promoting Generalization via Bio-inspired Spacing Effect in Knowledge Distillation"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "2c90bf5bffe6497730ecade3a3a37458",
+  "table": "5",
+  "page": 9,
+  "bbox": {
+   "y_min": 346.9,
+   "y_max": 357.6,
+   "x_min": 180.6,
+   "x_max": 466.5
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 4,
+   "n_cells": 18,
+   "orientation": "none",
+   "dispersion_kind": "none"
+  },
+  "id": "158",
+  "image": "158_discarded.png",
+  "title": "Aux-Think: Exploring Reasoning Strategies for Data-Efficient Vision-Language Navigation"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "186becbf79f3e07e",
+  "table": "8",
+  "page": 37,
+  "bbox": {
+   "y_min": 217.1,
+   "y_max": 320.3,
+   "x_min": 164.8,
+   "x_max": 447.2
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 10,
+   "n_cells": 66,
+   "orientation": "row",
+   "dispersion_kind": "unknown"
+  },
+  "id": "159",
+  "image": "159_discarded.png",
+  "title": "OpenworldAUC: Towards Unified Evaluation and Optimization for Open-world Prompt Tuning"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "b71cfefae46909178603b5bc6c11d3ae",
+  "table": "11",
+  "page": 25,
+  "bbox": {
+   "y_min": 288.3,
+   "y_max": 428.1,
+   "x_min": 464.3,
+   "x_max": 482.6
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 0,
+   "n_cells": 12,
+   "orientation": "none",
+   "dispersion_kind": "none"
+  },
+  "id": "160",
+  "image": "160_discarded.png",
+  "title": "Learning Urban Climate Dynamics via Physics-Guided Urban Surface\u2013Atmosphere Interactions"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "b1e7f61f40d68b2177857bfcb195a507",
+  "table": "4",
+  "page": 14,
+  "bbox": {
+   "y_min": 609.0,
+   "y_max": 649.8,
+   "x_min": 235.0,
+   "x_max": 494.6
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 0,
+   "n_cells": 7,
+   "orientation": "none",
+   "dispersion_kind": "none"
+  },
+  "id": "161",
+  "image": "161_discarded.png",
+  "title": "Robustifying Learning-Augmented Caching Efficiently without Compromising 1-Consistency"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "5a3196f73b189788",
+  "table": "3",
+  "page": 16,
+  "bbox": {
+   "y_min": 87.1,
+   "y_max": 223.2,
+   "x_min": 251.7,
+   "x_max": 327.4
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 0,
+   "n_cells": 33,
+   "orientation": "none",
+   "dispersion_kind": "none"
+  },
+  "id": "162",
+  "image": "162_discarded.png",
+  "title": "Automatic Reward Shaping from Confounded Offline Data"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "06ed2acb0646c0f7",
+  "table": "9",
+  "page": 28,
+  "bbox": {
+   "y_min": 510.8,
+   "y_max": 544.3,
+   "x_min": 211.9,
+   "x_max": 400.5
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 0,
+   "n_cells": 24,
+   "orientation": "none",
+   "dispersion_kind": "none"
+  },
+  "id": "163",
+  "image": "163_discarded.png",
+  "title": "Zebra: In-Context Generative Pretraining for Solving Parametric PDEs"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "0c3ce12ad831324fff8144c8025eb17b",
+  "table": "6",
+  "page": 22,
+  "bbox": {
+   "y_min": 551.9,
+   "y_max": 587.0,
+   "x_min": 107.7,
+   "x_max": 457.4
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 0,
+   "n_cells": 16,
+   "orientation": "none",
+   "dispersion_kind": "none"
+  },
+  "id": "164",
+  "image": "164_discarded.png",
+  "title": "RAG4GFM: Bridging Knowledge Gaps in Graph Foundation Models through Graph Retrieval Augmented Generation"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "80164880902980257ef58412322fc374",
+  "table": "8",
+  "page": 16,
+  "bbox": {
+   "y_min": 622.1,
+   "y_max": 697.9,
+   "x_min": 158.4,
+   "x_max": 486.3
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 0,
+   "n_cells": 97,
+   "orientation": "none",
+   "dispersion_kind": "none"
+  },
+  "id": "165",
+  "image": "165_discarded.png",
+  "title": "Shapley-Coop: Credit Assignment for Emergent Cooperation in Self-Interested LLM Agents"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "62c599c5c2b365ba464a26ebad05b690",
+  "table": "9",
+  "page": 15,
+  "bbox": {
+   "y_min": 489.3,
+   "y_max": 742.3,
+   "x_min": 209.4,
+   "x_max": 422.3
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 33,
+   "n_cells": 223,
+   "orientation": "row",
+   "dispersion_kind": "none"
+  },
+  "id": "166",
+  "image": "166_discarded.png",
+  "title": "STAR: Spatial-Temporal Tracklet Matching for Multi-Object Tracking"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "8c5fe16b2e4c7965",
+  "table": "10",
+  "page": 13,
+  "bbox": {
+   "y_min": 593.9,
+   "y_max": 660.1,
+   "x_min": 118.5,
+   "x_max": 442.6
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 4,
+   "n_cells": 40,
+   "orientation": "none",
+   "dispersion_kind": "none"
+  },
+  "id": "167",
+  "image": "167_discarded.png",
+  "title": "LightGTS: A Lightweight General Time Series Forecasting Model"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "d4c08e02d6fb5d9a",
+  "table": "2",
+  "page": 5,
+  "bbox": {
+   "y_min": 163.0,
+   "y_max": 196.8,
+   "x_min": 145.6,
+   "x_max": 489.5
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 9,
+   "n_cells": 19,
+   "orientation": "none",
+   "dispersion_kind": "std"
+  },
+  "id": "168",
+  "image": "168_discarded.png",
+  "title": "Falcon: Fast Visuomotor Policies via Partial Denoising"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "5f326d2e040a20d52438873f5d727e58",
+  "table": "4",
+  "page": 9,
+  "bbox": {
+   "y_min": 125.9,
+   "y_max": 141.1,
+   "x_min": 307.3,
+   "x_max": 374.8
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 0,
+   "n_cells": 6,
+   "orientation": "none",
+   "dispersion_kind": "none"
+  },
+  "id": "169",
+  "image": "169_discarded.png",
+  "title": "Generating and Checking DNN Verification Proofs"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "e9372abc370b8302459abdce4bdce5a5",
+  "table": "9",
+  "page": 39,
+  "bbox": {
+   "y_min": 123.3,
+   "y_max": 149.6,
+   "x_min": 151.2,
+   "x_max": 420.3
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 0,
+   "n_cells": 22,
+   "orientation": "none",
+   "dispersion_kind": "sem"
+  },
+  "id": "170",
+  "image": "170_discarded.png",
+  "title": "Pattern-Guided Adaptive Prior for Structure Learning"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "b4859ba05d0bb489",
+  "table": "3",
+  "page": 26,
+  "bbox": {
+   "y_min": 231.1,
+   "y_max": 565.7,
+   "x_min": 180.9,
+   "x_max": 386.1
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 1,
+   "n_cells": 111,
+   "orientation": "none",
+   "dispersion_kind": "none"
+  },
+  "id": "171",
+  "image": "171_discarded.png",
+  "title": "Compressed Image Generation with Denoising Diffusion Codebook Models"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "46863e011cd5d2c7b270086815f6c2cb",
+  "table": "3",
+  "page": 9,
+  "bbox": {
+   "y_min": 231.6,
+   "y_max": 334.4,
+   "x_min": 108.0,
+   "x_max": 498.9
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 1,
+   "n_cells": 22,
+   "orientation": "column",
+   "dispersion_kind": "none"
+  },
+  "id": "172",
+  "image": "172_discarded.png",
+  "title": "Cost-Efficient LLM Training with Lifetime-Aware Tensor Offloading via GPUDirect Storage"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "0a85f2414e354f9d61ffea5705a8bbf4",
+  "table": "9",
+  "page": 33,
+  "bbox": {
+   "y_min": 608.9,
+   "y_max": 632.2,
+   "x_min": 250.3,
+   "x_max": 465.1
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 0,
+   "n_cells": 6,
+   "orientation": "none",
+   "dispersion_kind": "none"
+  },
+  "id": "173",
+  "image": "173_discarded.png",
+  "title": "STITCH-OPE: Trajectory Stitching with Guided Diffusion for Off-Policy Evaluation"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "5335eecc127ffc33",
+  "table": "1",
+  "page": 4,
+  "bbox": {
+   "y_min": 115.7,
+   "y_max": 130.6,
+   "x_min": 71.6,
+   "x_max": 253.1
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 0,
+   "n_cells": 15,
+   "orientation": "none",
+   "dispersion_kind": "none"
+  },
+  "id": "174",
+  "image": "174_discarded.png",
+  "title": "Deliberation in Latent Space via Differentiable Cache Augmentation"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "7fc54f90195097ed0ee6200f1dc274d3",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 110.1,
+   "y_max": 213.1,
+   "x_min": 107.7,
+   "x_max": 485.6
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 30,
+   "n_cells": 151,
+   "orientation": "none",
+   "dispersion_kind": "none"
+  },
+  "id": "175",
+  "image": "175_discarded.png",
+  "title": "MIHC: Multi-View Interpretable Hypergraph Neural Networks with Information Bottleneck for Chip Congestion Prediction"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "34d48213974c8f54",
+  "table": "5",
+  "page": 21,
+  "bbox": {
+   "y_min": 179.5,
+   "y_max": 186.9,
+   "x_min": 80.4,
+   "x_max": 508.5
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 0,
+   "n_cells": 60,
+   "orientation": "none",
+   "dispersion_kind": "sem"
+  },
+  "id": "176",
+  "image": "176_discarded.png",
+  "title": "A Market for Accuracy: Classification Under Competition"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "53dbd7e34fab703a639964e2d3ee9e84",
+  "table": "1",
+  "page": 7,
+  "bbox": {
+   "y_min": 263.7,
+   "y_max": 313.1,
+   "x_min": 133.2,
+   "x_max": 485.8
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 0,
+   "n_cells": 34,
+   "orientation": "none",
+   "dispersion_kind": "none"
+  },
+  "id": "177",
+  "image": "177_discarded.png",
+  "title": "Pairwise Calibrated Rewards for Pluralistic Alignment"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "0904c7edde20d7134a77fc7f9cd86ea2",
+  "table": "12",
+  "page": 27,
+  "bbox": {
+   "y_min": 303.8,
+   "y_max": 472.2,
+   "x_min": 117.6,
+   "x_max": 394.4
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 12,
+   "n_cells": 85,
+   "orientation": "none",
+   "dispersion_kind": "unknown"
+  },
+  "id": "178",
+  "image": "178_discarded.png",
+  "title": "Can LLMs Reason Over Non-Text Modalities in a Training-Free Manner? A Case Study with In-Context Representation Learning"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "9d851201661b2a09",
+  "table": "7",
+  "page": 14,
+  "bbox": {
+   "y_min": 350.0,
+   "y_max": 493.4,
+   "x_min": 318.7,
+   "x_max": 402.2
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 0,
+   "n_cells": 18,
+   "orientation": "none",
+   "dispersion_kind": "none"
+  },
+  "id": "179",
+  "image": "179_discarded.png",
+  "title": "Empowering World Models with Reflection for Embodied Video Prediction"
+ },
+ {
+  "stratum": "discarded",
+  "paper": "f092c84221d73387a6a5dd7517c500a5",
+  "table": "9",
+  "page": 24,
+  "bbox": {
+   "y_min": 447.3,
+   "y_max": 477.4,
+   "x_min": 107.7,
+   "x_max": 410.5
+  },
+  "mark": null,
+  "pipeline": {
+   "n_bold": 0,
+   "n_cells": 12,
+   "orientation": "none",
+   "dispersion_kind": "none"
+  },
+  "id": "180",
+  "image": "180_discarded.png",
+  "title": "StreamBP: Memory-Efficient Exact Backpropagation for Long Sequence Training of LLMs"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "63db82a532b6b477",
+  "table": "3",
+  "page": 6,
+  "bbox": {
+   "y_min": 230.8,
+   "y_max": 325.8,
+   "x_min": 84.1,
+   "x_max": 467.2
+  },
+  "mark": {
+   "x": 198.2,
+   "y": 325.8
+  },
+  "pipeline": {
+   "bold_value": 0.61,
+   "group_values": [
+    0.5,
+    0.51,
+    0.52,
+    0.52,
+    0.52,
+    0.56,
+    0.61,
+    0.74
+   ],
+   "orientation": "column"
+  },
+  "id": "181",
+  "image": "181_non_extremal.png",
+  "title": "Neural Genetic Search in Discrete Spaces"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "f2e774d91628227e",
+  "table": "2",
+  "page": 6,
+  "bbox": {
+   "y_min": 151.4,
+   "y_max": 415.6,
+   "x_min": 190.8,
+   "x_max": 465.6
+  },
+  "mark": {
+   "x": 442.9,
+   "y": 168.5
+  },
+  "pipeline": {
+   "bold_value": 65.73,
+   "group_values": [
+    1.3,
+    4.6,
+    52.37,
+    58.47,
+    62.02,
+    62.84,
+    65.73,
+    78.42,
+    85.79
+   ],
+   "orientation": "row"
+  },
+  "id": "182",
+  "image": "182_non_extremal.png",
+  "title": "Protein Structure Tokenization: Benchmarking and New Recipe"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "80613b043d43ffaae9824ee9d4b291e5",
+  "table": "3",
+  "page": 7,
+  "bbox": {
+   "y_min": 130.6,
+   "y_max": 194.0,
+   "x_min": 115.1,
+   "x_max": 480.2
+  },
+  "mark": {
+   "x": 480.2,
+   "y": 194.0
+  },
+  "pipeline": {
+   "bold_value": 0.79,
+   "group_values": [
+    0.0,
+    0.79,
+    1.5,
+    1.58,
+    4.45,
+    7.23,
+    12.18
+   ],
+   "orientation": "column"
+  },
+  "id": "183",
+  "image": "183_non_extremal.png",
+  "title": "DeltaFlow: An Efficient Multi-frame Scene Flow Estimation Method"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "481c70828a4ff20d31a646cc6cc95f3d",
+  "table": "1",
+  "page": 7,
+  "bbox": {
+   "y_min": 79.1,
+   "y_max": 230.8,
+   "x_min": 174.8,
+   "x_max": 474.2
+  },
+  "mark": {
+   "x": 181.8,
+   "y": 230.8
+  },
+  "pipeline": {
+   "bold_value": 80.54,
+   "group_values": [
+    50.03,
+    50.1,
+    50.48,
+    51.2,
+    53.73,
+    55.41,
+    80.54,
+    83.34
+   ],
+   "orientation": "row"
+  },
+  "id": "184",
+  "image": "184_non_extremal.png",
+  "title": "Gains: Fine-grained Federated Domain Adaptation in Open Set"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "ef58d11fd938a5d7",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 91.2,
+   "y_max": 205.6,
+   "x_min": 165.2,
+   "x_max": 486.8
+  },
+  "mark": {
+   "x": 457.7,
+   "y": 91.2
+  },
+  "pipeline": {
+   "bold_value": 39.83,
+   "group_values": [
+    33.42,
+    33.83,
+    34.59,
+    35.35,
+    35.46,
+    36.86,
+    36.89,
+    37.43,
+    37.65,
+    37.78,
+    39.05,
+    39.2,
+    39.25,
+    39.31,
+    39.59,
+    39.67,
+    39.82,
+    39.83,
+    39.89,
+    39.97
+   ],
+   "orientation": "column"
+  },
+  "id": "185",
+  "image": "185_non_extremal.png",
+  "title": "HybridGS: High-Efficiency Gaussian Splatting Data Compression using Dual-Channel Sparse Representation and Point Cloud Encoder"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "c34f3a9ebf4abf00",
+  "table": "8",
+  "page": 19,
+  "bbox": {
+   "y_min": 137.5,
+   "y_max": 221.0,
+   "x_min": 65.7,
+   "x_max": 515.9
+  },
+  "mark": {
+   "x": 243.9,
+   "y": 188.7
+  },
+  "pipeline": {
+   "bold_value": 270.0,
+   "group_values": [
+    45.0,
+    270.0,
+    632.0
+   ],
+   "orientation": "row"
+  },
+  "id": "186",
+  "image": "186_non_extremal.png",
+  "title": "FedSMU: Communication-Efficient and Generalization-Enhanced Federated Learning through Symbolic Model Updates"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "620ad659de40ce43",
+  "table": "3",
+  "page": 16,
+  "bbox": {
+   "y_min": 441.2,
+   "y_max": 505.9,
+   "x_min": 273.6,
+   "x_max": 458.4
+  },
+  "mark": {
+   "x": 445.4,
+   "y": 441.2
+  },
+  "pipeline": {
+   "bold_value": 6.0,
+   "group_values": [
+    0.0,
+    1.0,
+    4.0,
+    6.0,
+    8.0,
+    26.0
+   ],
+   "orientation": "column"
+  },
+  "id": "187",
+  "image": "187_non_extremal.png",
+  "title": "CFP-Gen: Combinatorial Functional Protein Generation via Diffusion Language Models"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "dfd94ed7075ca54b",
+  "table": "16",
+  "page": 15,
+  "bbox": {
+   "y_min": 283.4,
+   "y_max": 380.7,
+   "x_min": 277.0,
+   "x_max": 393.8
+  },
+  "mark": {
+   "x": 393.8,
+   "y": 366.8
+  },
+  "pipeline": {
+   "bold_value": 406.32,
+   "group_values": [
+    3.5,
+    406.32,
+    426.14
+   ],
+   "orientation": "row"
+  },
+  "id": "188",
+  "image": "188_non_extremal.png",
+  "title": "RobustLight: Improving Robustness via Diffusion Reinforcement Learning for Traffic Signal Control"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "286888e6329c0af52777830ce2af00a5",
+  "table": "3",
+  "page": 22,
+  "bbox": {
+   "y_min": 290.0,
+   "y_max": 339.5,
+   "x_min": 150.8,
+   "x_max": 458.8
+  },
+  "mark": {
+   "x": 364.8,
+   "y": 311.8
+  },
+  "pipeline": {
+   "bold_value": 1.19,
+   "group_values": [
+    0.71,
+    1.19,
+    1.37,
+    21.37
+   ],
+   "orientation": "column"
+  },
+  "id": "189",
+  "image": "189_non_extremal.png",
+  "title": "Predictive Coding Enhances Meta-RL To Achieve Interpretable Bayes-Optimal Belief Representation Under Partial Observability"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "963ccebfefe8e349cad24e3ed4a92907",
+  "table": "6",
+  "page": 25,
+  "bbox": {
+   "y_min": 394.5,
+   "y_max": 457.8,
+   "x_min": 183.9,
+   "x_max": 467.1
+  },
+  "mark": {
+   "x": 341.6,
+   "y": 425.1
+  },
+  "pipeline": {
+   "bold_value": 0.0128,
+   "group_values": [
+    0.0126,
+    0.0126,
+    0.0126,
+    0.0126,
+    0.0128,
+    0.0128,
+    0.895
+   ],
+   "orientation": "row"
+  },
+  "id": "190",
+  "image": "190_non_extremal.png",
+  "title": "LLM Interpretability with Identifiable Temporal-Instantaneous Representation"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "8252d8849915250edda23d5c952eb6a1",
+  "table": "10",
+  "page": 17,
+  "bbox": {
+   "y_min": 443.9,
+   "y_max": 476.3,
+   "x_min": 107.7,
+   "x_max": 421.9
+  },
+  "mark": {
+   "x": 363.1,
+   "y": 453.8
+  },
+  "pipeline": {
+   "bold_value": 0.77,
+   "group_values": [
+    0.58,
+    0.77,
+    0.97
+   ],
+   "orientation": "row"
+  },
+  "id": "191",
+  "image": "191_non_extremal.png",
+  "title": "Meta-learning how to Share Credit among Macro-Actions"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "b9cb57059568ab7d",
+  "table": "5",
+  "page": 20,
+  "bbox": {
+   "y_min": 137.9,
+   "y_max": 312.3,
+   "x_min": 218.6,
+   "x_max": 501.7
+  },
+  "mark": {
+   "x": 275.7,
+   "y": 272.2
+  },
+  "pipeline": {
+   "bold_value": 1.935,
+   "group_values": [
+    0.818,
+    1.935,
+    4.844,
+    10.217,
+    73.026,
+    273.679
+   ],
+   "orientation": "row"
+  },
+  "id": "192",
+  "image": "192_non_extremal.png",
+  "title": "Safety-Polarized and Prioritized Reinforcement Learning"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "4a547a7bc5239207",
+  "table": "11",
+  "page": 16,
+  "bbox": {
+   "y_min": 140.7,
+   "y_max": 239.1,
+   "x_min": 215.1,
+   "x_max": 519.8
+  },
+  "mark": {
+   "x": 272.5,
+   "y": 214.8
+  },
+  "pipeline": {
+   "bold_value": 32.0,
+   "group_values": [
+    4.0,
+    8.0,
+    16.0,
+    32.0,
+    64.0
+   ],
+   "orientation": "row"
+  },
+  "id": "193",
+  "image": "193_non_extremal.png",
+  "title": "HALoS: Hierarchical Asynchronous Local SGD over Slow Networks for Geo-Distributed Large Language Model Training"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "b537e8f8bc5971e9",
+  "table": "9",
+  "page": 15,
+  "bbox": {
+   "y_min": 642.2,
+   "y_max": 732.4,
+   "x_min": 90.6,
+   "x_max": 520.9
+  },
+  "mark": {
+   "x": 159.8,
+   "y": 708.0
+  },
+  "pipeline": {
+   "bold_value": 30.17,
+   "group_values": [
+    26.26,
+    27.08,
+    29.06,
+    30.17,
+    31.35,
+    31.96,
+    37.58
+   ],
+   "orientation": "column"
+  },
+  "id": "194",
+  "image": "194_non_extremal.png",
+  "title": "BlockDialect: Block-wise Fine-grained Mixed Format Quantization for Energy-Efficient LLM Inference"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "11d2d4e08db50db0",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 106.6,
+   "y_max": 484.5,
+   "x_min": 62.5,
+   "x_max": 530.4
+  },
+  "mark": {
+   "x": 420.2,
+   "y": 195.5
+  },
+  "pipeline": {
+   "bold_value": 1.323,
+   "group_values": [
+    0.1,
+    1.323,
+    1.329,
+    1.33,
+    1.353,
+    1.355,
+    1.359,
+    1.384,
+    1.391,
+    1.413,
+    1.542
+   ],
+   "orientation": "row"
+  },
+  "id": "195",
+  "image": "195_non_extremal.png",
+  "title": "LSCD: Lomb\u2013Scargle Conditioned Diffusion for Time series Imputation"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "9f8265edac41c4f8b4445b0d0cb83b80",
+  "table": "3",
+  "page": 7,
+  "bbox": {
+   "y_min": 310.9,
+   "y_max": 396.9,
+   "x_min": 149.1,
+   "x_max": 447.7
+  },
+  "mark": {
+   "x": 388.3,
+   "y": 365.2
+  },
+  "pipeline": {
+   "bold_value": 10.99,
+   "group_values": [
+    0.0,
+    10.99,
+    14.25,
+    14.39,
+    17.73,
+    20.42
+   ],
+   "orientation": "column"
+  },
+  "id": "196",
+  "image": "196_non_extremal.png",
+  "title": "AccuQuant: Simulating Multiple Denoising Steps for Quantizing Diffusion Models"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "ebb46358ffb50894f37b9263bbbb1d69",
+  "table": "6",
+  "page": 8,
+  "bbox": {
+   "y_min": 108.6,
+   "y_max": 138.4,
+   "x_min": 182.8,
+   "x_max": 474.3
+  },
+  "mark": {
+   "x": 217.1,
+   "y": 128.5
+  },
+  "pipeline": {
+   "bold_value": 24.19,
+   "group_values": [
+    12.9,
+    24.19,
+    24.58
+   ],
+   "orientation": "column"
+  },
+  "id": "197",
+  "image": "197_non_extremal.png",
+  "title": "MoE-Gyro: Self-Supervised Over-Range Reconstruction and Denoising for MEMS Gyroscopes"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "5356603f9c47399adfd372f77a677057",
+  "table": "12",
+  "page": 38,
+  "bbox": {
+   "y_min": 263.0,
+   "y_max": 557.9,
+   "x_min": 201.1,
+   "x_max": 503.0
+  },
+  "mark": {
+   "x": 364.7,
+   "y": 438.4
+  },
+  "pipeline": {
+   "bold_value": 0.036,
+   "group_values": [
+    0.035,
+    0.036,
+    0.037,
+    0.038,
+    0.038,
+    0.04,
+    0.041,
+    0.042,
+    0.046,
+    0.048,
+    0.069
+   ],
+   "orientation": "row"
+  },
+  "id": "198",
+  "image": "198_non_extremal.png",
+  "title": "TiRex: Zero-Shot Forecasting Across Long and Short Horizons with Enhanced In-Context Learning"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "f2e774d91628227e",
+  "table": "2",
+  "page": 6,
+  "bbox": {
+   "y_min": 151.4,
+   "y_max": 415.6,
+   "x_min": 190.8,
+   "x_max": 465.6
+  },
+  "mark": {
+   "x": 441.5,
+   "y": 219.7
+  },
+  "pipeline": {
+   "bold_value": 87.59,
+   "group_values": [
+    5.0,
+    17.33,
+    53.78,
+    64.05,
+    70.92,
+    74.65,
+    87.59,
+    93.19,
+    96.97
+   ],
+   "orientation": "row"
+  },
+  "id": "199",
+  "image": "199_non_extremal.png",
+  "title": "Protein Structure Tokenization: Benchmarking and New Recipe"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "e4134f30ccd09557",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 211.1,
+   "y_max": 334.7,
+   "x_min": 173.3,
+   "x_max": 477.4
+  },
+  "mark": {
+   "x": 477.4,
+   "y": 318.1
+  },
+  "pipeline": {
+   "bold_value": 2.09,
+   "group_values": [
+    0.33,
+    1.23,
+    2.0,
+    2.02,
+    2.09,
+    2.09,
+    107.0
+   ],
+   "orientation": "row"
+  },
+  "id": "200",
+  "image": "200_non_extremal.png",
+  "title": "MODULI: Unlocking Preference Generalization via Diffusion Models for Offline Multi-Objective Reinforcement Learning"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "2456a42386e445ba884511aa17ca4a30",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 79.0,
+   "y_max": 278.5,
+   "x_min": 107.7,
+   "x_max": 485.2
+  },
+  "mark": {
+   "x": 210.8,
+   "y": 252.7
+  },
+  "pipeline": {
+   "bold_value": 0.9258,
+   "group_values": [
+    0.7811,
+    0.8043,
+    0.8059,
+    0.813,
+    0.8171,
+    0.8333,
+    0.8338,
+    0.8509,
+    0.8552,
+    0.8613,
+    0.8719,
+    0.876,
+    0.9045,
+    0.9258,
+    1.0
+   ],
+   "orientation": "column"
+  },
+  "id": "201",
+  "image": "201_non_extremal.png",
+  "title": "Dual-Res Tandem Mamba-3D: Bilateral Breast Lesion Detection and Classification on Non-contrast Chest CT"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "82a505a32fb26e91",
+  "table": "3",
+  "page": 6,
+  "bbox": {
+   "y_min": 323.9,
+   "y_max": 428.7,
+   "x_min": 85.7,
+   "x_max": 477.1
+  },
+  "mark": {
+   "x": 477.1,
+   "y": 412.8
+  },
+  "pipeline": {
+   "bold_value": 3.57,
+   "group_values": [
+    3.15,
+    3.31,
+    3.35,
+    3.44,
+    3.57,
+    3.9
+   ],
+   "orientation": "column"
+  },
+  "id": "202",
+  "image": "202_non_extremal.png",
+  "title": "ETTA: Elucidating the Design Space of Text-to-Audio Models"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "00a0ebcad584c59dbc439c2af8793638",
+  "table": "4",
+  "page": 8,
+  "bbox": {
+   "y_min": 116.1,
+   "y_max": 197.4,
+   "x_min": 133.7,
+   "x_max": 455.0
+  },
+  "mark": {
+   "x": 389.3,
+   "y": 157.6
+  },
+  "pipeline": {
+   "bold_value": 53.8,
+   "group_values": [
+    51.66,
+    53.26,
+    53.58,
+    53.8,
+    56.29,
+    56.49
+   ],
+   "orientation": "column"
+  },
+  "id": "203",
+  "image": "203_non_extremal.png",
+  "title": "SALS: Sparse Attention in Latent Space for KV Cache Compression"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "bfe27c959fda8112520479539c69360f",
+  "table": "14",
+  "page": 26,
+  "bbox": {
+   "y_min": 470.1,
+   "y_max": 594.5,
+   "x_min": 107.7,
+   "x_max": 456.9
+  },
+  "mark": {
+   "x": 173.5,
+   "y": 528.5
+  },
+  "pipeline": {
+   "bold_value": 0.248,
+   "group_values": [
+    0.194,
+    0.214,
+    0.225,
+    0.235,
+    0.248,
+    14.0
+   ],
+   "orientation": "column"
+  },
+  "id": "204",
+  "image": "204_non_extremal.png",
+  "title": "Multimodal Disease Progression Modeling via Spatiotemporal Disentanglement and Multiscale Alignment"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "f15104629f306a32",
+  "table": "6",
+  "page": 11,
+  "bbox": {
+   "y_min": 661.0,
+   "y_max": 732.4,
+   "x_min": 230.2,
+   "x_max": 324.6
+  },
+  "mark": {
+   "x": 272.8,
+   "y": 661.0
+  },
+  "pipeline": {
+   "bold_value": 0.23,
+   "group_values": [
+    0.1,
+    0.23,
+    0.9,
+    1.073
+   ],
+   "orientation": "row"
+  },
+  "id": "205",
+  "image": "205_non_extremal.png",
+  "title": "Projection Optimization: A General Framework for Multi-Objective and Multi-Group RLHF"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "088463cd3126aef2002ffc69da42ec59",
+  "table": "12",
+  "page": 28,
+  "bbox": {
+   "y_min": 183.0,
+   "y_max": 523.8,
+   "x_min": 114.9,
+   "x_max": 485.3
+  },
+  "mark": {
+   "x": 114.9,
+   "y": 459.6
+  },
+  "pipeline": {
+   "bold_value": 12.0,
+   "group_values": [
+    8.0,
+    8.0,
+    10.0,
+    10.0,
+    12.0,
+    18.0,
+    18.0,
+    25.0,
+    80.0
+   ],
+   "orientation": "row"
+  },
+  "id": "206",
+  "image": "206_non_extremal.png",
+  "title": "Efficient Large Language Model Inference with Neural Block Linearization"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "61deb04475b31100",
+  "table": "9",
+  "page": 21,
+  "bbox": {
+   "y_min": 457.7,
+   "y_max": 562.9,
+   "x_min": 127.5,
+   "x_max": 491.2
+  },
+  "mark": {
+   "x": 216.7,
+   "y": 562.9
+  },
+  "pipeline": {
+   "bold_value": 0.1121,
+   "group_values": [
+    0.0117,
+    0.0945,
+    0.1007,
+    0.1015,
+    0.1121,
+    0.1131,
+    0.1148,
+    0.118
+   ],
+   "orientation": "column"
+  },
+  "id": "207",
+  "image": "207_non_extremal.png",
+  "title": "Scalable Model Merging with Progressive Layer-wise Distillation"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "54a1495b06c4ee2f07184afb9a37abda",
+  "table": "5",
+  "page": 20,
+  "bbox": {
+   "y_min": 250.6,
+   "y_max": 291.6,
+   "x_min": 141.6,
+   "x_max": 495.6
+  },
+  "mark": {
+   "x": 327.4,
+   "y": 291.6
+  },
+  "pipeline": {
+   "bold_value": 1.2336,
+   "group_values": [
+    1.2305,
+    1.2336,
+    5.0,
+    5.0
+   ],
+   "orientation": "column"
+  },
+  "id": "208",
+  "image": "208_non_extremal.png",
+  "title": "AlphaFold Database Debiasing for Robust Inverse Folding"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "f20376f5b56bcf20",
+  "table": "8",
+  "page": 13,
+  "bbox": {
+   "y_min": 91.4,
+   "y_max": 172.6,
+   "x_min": 306.9,
+   "x_max": 476.9
+  },
+  "mark": {
+   "x": 464.9,
+   "y": 172.6
+  },
+  "pipeline": {
+   "bold_value": 76.16,
+   "group_values": [
+    2.0,
+    10.0,
+    76.16,
+    82.65,
+    109.9,
+    121.1,
+    145.27,
+    168.1
+   ],
+   "orientation": "column"
+  },
+  "id": "209",
+  "image": "209_non_extremal.png",
+  "title": "EvoMesh: Adaptive Physical Simulation with Hierarchical Graph Evolutions"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "91941f55efabf79a",
+  "table": "2",
+  "page": 6,
+  "bbox": {
+   "y_min": 150.6,
+   "y_max": 334.6,
+   "x_min": 55.2,
+   "x_max": 529.1
+  },
+  "mark": {
+   "x": 162.0,
+   "y": 166.8
+  },
+  "pipeline": {
+   "bold_value": 85.0,
+   "group_values": [
+    43.0,
+    62.0,
+    85.0,
+    100.0
+   ],
+   "orientation": "column"
+  },
+  "id": "210",
+  "image": "210_non_extremal.png",
+  "title": "MCU: An Evaluation Framework for Open-Ended Game Agents"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "b537e8f8bc5971e9",
+  "table": "9",
+  "page": 15,
+  "bbox": {
+   "y_min": 642.2,
+   "y_max": 732.4,
+   "x_min": 90.6,
+   "x_max": 520.9
+  },
+  "mark": {
+   "x": 421.0,
+   "y": 708.0
+  },
+  "pipeline": {
+   "bold_value": 49.46,
+   "group_values": [
+    40.04,
+    41.84,
+    48.53,
+    49.16,
+    49.46,
+    52.24,
+    60.38
+   ],
+   "orientation": "column"
+  },
+  "id": "211",
+  "image": "211_non_extremal.png",
+  "title": "BlockDialect: Block-wise Fine-grained Mixed Format Quantization for Energy-Efficient LLM Inference"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "c9658e8c20879632cb1cfca91d80ceb7",
+  "table": "10",
+  "page": 24,
+  "bbox": {
+   "y_min": 478.6,
+   "y_max": 620.1,
+   "x_min": 192.3,
+   "x_max": 477.2
+  },
+  "mark": {
+   "x": 477.2,
+   "y": 602.8
+  },
+  "pipeline": {
+   "bold_value": 0.87,
+   "group_values": [
+    0.77,
+    0.79,
+    0.79,
+    0.79,
+    0.8,
+    0.8,
+    0.8,
+    0.81,
+    0.81,
+    0.82,
+    0.82,
+    0.82,
+    0.82,
+    0.83,
+    0.83,
+    0.84,
+    0.85,
+    0.86,
+    0.86,
+    0.86,
+    0.86,
+    0.87,
+    0.87,
+    0.88,
+    0.88
+   ],
+   "orientation": "column"
+  },
+  "id": "212",
+  "image": "212_non_extremal.png",
+  "title": "CrossAD: Time Series Anomaly Detection with Cross-scale Associations and Cross-window Modeling"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "c34f3a9ebf4abf00",
+  "table": "8",
+  "page": 19,
+  "bbox": {
+   "y_min": 137.5,
+   "y_max": 221.0,
+   "x_min": 65.7,
+   "x_max": 515.9
+  },
+  "mark": {
+   "x": 478.7,
+   "y": 156.4
+  },
+  "pipeline": {
+   "bold_value": 50.0,
+   "group_values": [
+    48.0,
+    50.0,
+    57.0,
+    62.0,
+    65.0,
+    96.0,
+    108.0,
+    111.0,
+    288.0
+   ],
+   "orientation": "row"
+  },
+  "id": "213",
+  "image": "213_non_extremal.png",
+  "title": "FedSMU: Communication-Efficient and Generalization-Enhanced Federated Learning through Symbolic Model Updates"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "f12b4df26344f3be803c06b555252efe",
+  "table": "1",
+  "page": 9,
+  "bbox": {
+   "y_min": 155.8,
+   "y_max": 381.9,
+   "x_min": 108.0,
+   "x_max": 471.5
+  },
+  "mark": {
+   "x": 318.6,
+   "y": 184.8
+  },
+  "pipeline": {
+   "bold_value": 16651.0,
+   "group_values": [
+    11908.7,
+    13871.2,
+    14870.0,
+    15672.0,
+    16651.0,
+    37187.5
+   ],
+   "orientation": "row"
+  },
+  "id": "214",
+  "image": "214_non_extremal.png",
+  "title": "Spatial-Aware Decision-Making with Ring Attractors in Reinforcement Learning Systems"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "a7f5c1e46b91d904",
+  "table": "4",
+  "page": 20,
+  "bbox": {
+   "y_min": 393.6,
+   "y_max": 687.8,
+   "x_min": 55.2,
+   "x_max": 496.1
+  },
+  "mark": {
+   "x": 442.9,
+   "y": 641.6
+  },
+  "pipeline": {
+   "bold_value": 1.001,
+   "group_values": [
+    -0.008,
+    0.012,
+    0.305,
+    0.317,
+    0.557,
+    0.558,
+    0.976,
+    1.001,
+    1.943
+   ],
+   "orientation": "row"
+  },
+  "id": "215",
+  "image": "215_non_extremal.png",
+  "title": "Learning Survival Distributions with the Asymmetric Laplace Distribution"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "e5fb1d7e7c1541eb0b6132b7839baf34",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 249.9,
+   "y_max": 354.5,
+   "x_min": 165.5,
+   "x_max": 409.8
+  },
+  "mark": {
+   "x": 337.7,
+   "y": 354.5
+  },
+  "pipeline": {
+   "bold_value": 0.34,
+   "group_values": [
+    0.266,
+    0.288,
+    0.34,
+    3.0
+   ],
+   "orientation": "row"
+  },
+  "id": "216",
+  "image": "216_non_extremal.png",
+  "title": "Are Large Language Models Sensitive to the Motives Behind Communication?"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "691bc87956315268",
+  "table": "2",
+  "page": 6,
+  "bbox": {
+   "y_min": 87.2,
+   "y_max": 317.1,
+   "x_min": 55.1,
+   "x_max": 526.4
+  },
+  "mark": {
+   "x": 156.3,
+   "y": 198.9
+  },
+  "pipeline": {
+   "bold_value": 69.8,
+   "group_values": [
+    3.8,
+    22.5,
+    26.0,
+    26.2,
+    26.2,
+    37.5,
+    47.8,
+    47.9,
+    48.5,
+    57.9,
+    60.1,
+    61.6,
+    69.8,
+    73.0
+   ],
+   "orientation": "row"
+  },
+  "id": "217",
+  "image": "217_non_extremal.png",
+  "title": "FIC-TSC: Learning Time Series Classification with Fisher Information Constraint"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "833295cb9278a3ba973842a94ea68e3c",
+  "table": "2",
+  "page": 7,
+  "bbox": {
+   "y_min": 303.9,
+   "y_max": 436.9,
+   "x_min": 107.7,
+   "x_max": 490.3
+  },
+  "mark": {
+   "x": 360.6,
+   "y": 386.5
+  },
+  "pipeline": {
+   "bold_value": 84.5,
+   "group_values": [
+    79.1,
+    81.2,
+    81.4,
+    82.1,
+    83.9,
+    84.5,
+    84.5,
+    84.6,
+    85.6
+   ],
+   "orientation": "column"
+  },
+  "id": "218",
+  "image": "218_non_extremal.png",
+  "title": "Eagle 2.5: Boosting Long-Context Post-Training for Frontier Vision-Language Models"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "0f1d92d2fad704ff0bdfddd8798d5c0c",
+  "table": "6",
+  "page": 7,
+  "bbox": {
+   "y_min": 396.8,
+   "y_max": 547.7,
+   "x_min": 107.7,
+   "x_max": 475.4
+  },
+  "mark": {
+   "x": 108.0,
+   "y": 396.8
+  },
+  "pipeline": {
+   "bold_value": 4.6,
+   "group_values": [
+    1.0,
+    4.6,
+    6.0,
+    10.0,
+    201.0
+   ],
+   "orientation": "column"
+  },
+  "id": "219",
+  "image": "219_non_extremal.png",
+  "title": "Revolutionizing Training-Free NAS: Towards Efficient Automatic Proxy Discovery via Large Language Models"
+ },
+ {
+  "stratum": "non_extremal",
+  "paper": "eed25c037bc08afcbefab6f7a6b700e0",
+  "table": "13",
+  "page": 28,
+  "bbox": {
+   "y_min": 610.4,
+   "y_max": 652.2,
+   "x_min": 223.1,
+   "x_max": 418.0
+  },
+  "mark": {
+   "x": 322.5,
+   "y": 652.2
+  },
+  "pipeline": {
+   "bold_value": -0.65,
+   "group_values": [
+    -0.9014,
+    -0.65,
+    -0.5386,
+    3.1655,
+    17.9827
+   ],
+   "orientation": "column"
+  },
+  "id": "220",
+  "image": "220_non_extremal.png",
+  "title": "TS-RAG: Retrieval-Augmented Generation based Time Series Foundation Models are Stronger Zero-Shot Forecaster"
+ }
+]

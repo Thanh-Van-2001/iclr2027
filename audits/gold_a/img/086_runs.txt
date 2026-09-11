@@ -1,0 +1,27 @@
+Table 6: Summary of skill transfer results (* indicates runs done by transferring skills)
+---
+Then we run five episodes for each seed and generate the evaluation
+---
+We ran our algorithm and the benchmark algorithms for 5 seeds over 300k and
+---
+baselines which we run for 1M iterations, thus confirming the claim about expediting convergence
+---
+example, train/test split, initialization, random drawing of some parameter, or overall run
+---
+experimental runs as well as estimate the total compute
+---
+how to replicate the results, access to a hosted model (e
+---
+multiple runs of each experiment to ensure statistical reliability
+---
+necessary to either make it possible for others to replicate the model with the same dataset,
+---
+results by computing the mean and standard deviation over the 25 runs
+---
+results in Table 2, we run the baseline algorithms by changing the penalty factors for the safety
+---
+so on) we train using five seeds
+---
+tested on a few datasets or with a few runs
+---
+• The instructions should contain the exact command and environment needed to run to

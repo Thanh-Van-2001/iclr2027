@@ -37,7 +37,8 @@ sys.path.insert(0, os.path.join(HERE, ".."))
 
 import fitz  # noqa: E402
 
-from analyze import _columns, _rows, comparisons_from_table, orientation, test_comparison  # noqa: E402
+from analyze import (_columns, _rows, comparisons_from_table, load_records,  # noqa: E402
+                     orientation, test_comparison)
 from harvest import SOURCES, _get  # noqa: E402
 from paperengine.stats import wilson_interval  # noqa: E402
 
@@ -59,16 +60,25 @@ def _bbox(cells: list) -> dict:
             "x_min": min(c["x"] for c in cells), "x_max": max(c["x"] for c in cells)}
 
 
-def sample(extracted_path: str, analysis_path: str, sizes: dict, seed: int) -> list:
-    with open(extracted_path, encoding="utf-8") as fh:
-        recs = json.load(fh)
+def sample(extracted_path: str, analysis_path: str, sizes: dict, seed: int,
+           exclude_papers: set = frozenset()) -> list:
+    recs = load_records(extracted_path)
     with open(analysis_path, encoding="utf-8") as fh:
         cmps = json.load(fh)["_comparisons"]
+    # A held-out draw never touches a paper the development set saw.
+    recs = [r for r in recs if r["id"] not in exclude_papers]
+    cmps = [c for c in cmps if c["paper"] not in exclude_papers]
     rng = random.Random(seed)
     tables = {(r["id"], t.get("number"), t.get("page")): t for r in recs for t in r.get("tables", [])}
     items = []
 
-    def find_cell(t, value, bold):
+    def find_cell(t, value, disp, bold):
+        # Mean and dispersion together: a table can hold the same bold mean
+        # twice (0.99 in four rows of success rates), and marking the first
+        # one circled the wrong claim in four of the first hundred items.
+        for c in t["cells"]:
+            if c["bold"] == bold and c["mean"] == value and c["dispersion"] == disp:
+                return c
         for c in t["cells"]:
             if c["bold"] == bold and c["mean"] == value:
                 return c
@@ -79,7 +89,7 @@ def sample(extracted_path: str, analysis_path: str, sizes: dict, seed: int) -> l
                                       and c["runner_dispersion"] is None])):
         for c in rng.sample(pool, min(sizes[stratum], len(pool))):
             t = tables[(c["paper"], c["table"], c["page"])]
-            w = find_cell(t, c["winner"], True)
+            w = find_cell(t, c["winner"], c["winner_dispersion"], True)
             items.append({"stratum": stratum, "paper": c["paper"], "table": c["table"],
                           "page": c["page"], "bbox": c["bbox"],
                           "mark": {"x": w["x"], "y": w["y"]} if w else None,
@@ -168,7 +178,8 @@ def render(items: list, sources: list, out_dir: str, zoom: float = 2.0) -> None:
             with open(os.path.join(img_dir, f"{it['id']}_runs.txt"), "w", encoding="utf-8") as fh:
                 fh.write("\n---\n".join(sents[:40]))
         doc.close()
-        print(f"  {it['id']} {it['stratum']:12s} {rec['title'][:50]}")
+        title = rec["title"][:50].encode("ascii", "replace").decode()
+        print(f"  {it['id']} {it['stratum']:12s} {title}")
 
 
 def _num(x):
@@ -191,6 +202,12 @@ def _match(a, b, tol=1e-6) -> bool:
     return abs(float(a) - float(b)) <= tol * max(1.0, abs(float(b)))
 
 
+def _unclear(v) -> bool:
+    """A cell the reader could not read (the circle covered it, or two rivals
+    tied) is left out of that field's denominator rather than scored."""
+    return str(v).strip().lower() == "unclear"
+
+
 def score(items_path: str, labels_path: str) -> dict:
     with open(items_path, encoding="utf-8") as fh:
         items = {it["id"]: it for it in json.load(fh)}
@@ -206,6 +223,9 @@ def score(items_path: str, labels_path: str) -> dict:
                 "ci": [round(100 * lo, 1), round(100 * hi, 1)], "what": label}
 
     # --- testable: field by field
+    # Labels whose item is absent (a rescore drops claims the new pipeline no
+    # longer makes) are skipped, not scored.
+    labels = {i: lb for i, lb in labels.items() if i in items}
     T = [(items[i], labels[i]) for i in labels if items[i]["stratum"] == "testable"
          and labels[i].get("results_table", "").lower().startswith("y")]
     fields = {}
@@ -222,21 +242,36 @@ def score(items_path: str, labels_path: str) -> dict:
                                "higher/lower is better")
     for f, key in (("winner_mean", "winner"), ("winner_disp", "winner_dispersion"),
                    ("runner_mean", "runner_up"), ("runner_disp", "runner_dispersion")):
-        fields[f] = rate(sum(1 for it, lb in T if _match(_num(lb[f]), it["pipeline"][key])), n, f)
+        clear = [(it, lb) for it, lb in T if not _unclear(lb[f])]
+        fields[f] = rate(sum(1 for it, lb in clear if _match(_num(lb[f]), it["pipeline"][key])),
+                         len(clear), f)
     kind_map = {"sd": "std", "se": "sem", "ci": "ci", "unlabelled": "unknown", "unknown": "unknown"}
     fields["disp_type"] = rate(sum(1 for it, lb in T
                                    if kind_map.get(lb["disp_type"].lower(), lb["disp_type"].lower())
                                    == it["pipeline"]["dispersion_kind"]), n,
                                "what the error bar is (SD, SE, CI, unlabelled)")
-    fields["n_runs"] = rate(sum(1 for it, lb in T if _match(_num(lb["n_runs"]), it["pipeline"]["n_runs"])), n,
-                            "the run count")
+    # What the test actually consumes: an unlabelled bar is read as a standard
+    # deviation, so "unlabelled" and "SD" are the same treatment, and the
+    # material disagreement is SD-or-unlabelled against SE-or-CI.
+
+    def treatment(kind):
+        return "se_like" if kind in ("sem", "ci") else "sd_like"
+
+    fields["disp_treatment"] = rate(sum(1 for it, lb in T
+                                        if treatment(kind_map.get(lb["disp_type"].lower(), "unknown"))
+                                        == treatment(it["pipeline"]["dispersion_kind"])), n,
+                                    "SD-or-unlabelled versus SE-or-CI, which is what the test uses")
+    clear_n = [(it, lb) for it, lb in T if not _unclear(lb["n_runs"])]
+    fields["n_runs"] = rate(sum(1 for it, lb in clear_n
+                                if _match(_num(lb["n_runs"]), it["pipeline"]["n_runs"])),
+                            len(clear_n), "the run count")
+    value_fields = (("winner_mean", "winner"), ("winner_disp", "winner_dispersion"),
+                    ("runner_mean", "runner_up"), ("runner_disp", "runner_dispersion"))
     all_ok = sum(1 for it, lb in T
                  if lb["bold_ok"].lower().startswith("y")
-                 and all(_match(_num(lb[f]), it["pipeline"][k]) for f, k in (
-                     ("winner_mean", "winner"), ("winner_disp", "winner_dispersion"),
-                     ("runner_mean", "runner_up"), ("runner_disp", "runner_dispersion"),
-                     ("n_runs", "n_runs"))))
-    fields["every_field"] = rate(all_ok, n, "all of the above at once")
+                 and all(_unclear(lb[f]) or _match(_num(lb[f]), it["pipeline"][k])
+                         for f, k in value_fields))
+    fields["claim_and_values"] = rate(all_ok, n, "bold cell, rival and all four values at once")
 
     # failure rate on the gold subset, from the reader's values vs the pipeline's
     fail_reader = fail_pipe = n_both = 0
@@ -305,11 +340,108 @@ def score(items_path: str, labels_path: str) -> dict:
     return out
 
 
+def rescore(items_path: str, labels_path: str, analysis_path: str, tol: float = 3.0) -> dict:
+    """Score a later pipeline on the claims of an existing gold set.
+
+    The development set was used to find bugs, so its post-fix accuracy is
+    optimistic and is reported as such; the point of this function is to say
+    what the fixes did to the very items that exposed them. Each item is
+    matched to the comparison the new pipeline makes for the same bold cell
+    (same paper, table, page, and cell position); an item with no such
+    comparison is "no longer extracted", which is the right outcome when the
+    reader had marked the bold cell as not alone in its group.
+    """
+    with open(items_path, encoding="utf-8") as fh:
+        items = {it["id"]: it for it in json.load(fh)}
+    with open(analysis_path, encoding="utf-8") as fh:
+        cmps = json.load(fh)["_comparisons"]
+    with open(labels_path, encoding="utf-8", newline="") as fh:
+        labels = {r["id"]: r for r in csv.DictReader(fh)}
+    by_table: dict = {}
+    for c in cmps:
+        by_table.setdefault((c["paper"], c["table"], c["page"]), []).append(c)
+
+    new_items = []
+    dropped, dropped_rightly = 0, 0
+    for i, it in items.items():
+        if it["stratum"] != "testable" or i not in labels or not it.get("mark"):
+            continue
+        lb = labels[i]
+        found = None
+        cands = by_table.get((it["paper"], it["table"], it["page"]), [])
+        # The same claim is the same bold cell: match on its printed value
+        # first (an extractor change can shift a cell's coordinates by a few
+        # points), then on position if the value occurs twice.
+        p = it["pipeline"]
+        same = [c for c in cands if c["winner"] == p["winner"]
+                and c["winner_dispersion"] == p["winner_dispersion"]]
+        if len(same) == 1:
+            found = same[0]
+        else:
+            for c in same or cands:
+                w = c.get("winner_cell") or {}
+                if abs(w.get("x", 1e9) - it["mark"]["x"]) <= tol and abs(w.get("y", 1e9) - it["mark"]["y"]) <= tol:
+                    found = c
+                    break
+        if found is None or not found.get("test"):
+            dropped += 1
+            if not lb["bold_ok"].lower().startswith("y") or lb["runner_disp"].strip().lower() == "none":
+                dropped_rightly += 1
+            continue
+        new_items.append({**it, "pipeline": {k: found.get(k) for k in it["pipeline"]},
+                          "pipeline_test": found.get("test")})
+    tmp_items = items_path + ".rescored.json"
+    with open(tmp_items, "w", encoding="utf-8") as fh:
+        json.dump(new_items, fh)
+    res = score(tmp_items, labels_path)
+    os.unlink(tmp_items)
+    res["testable"]["no_longer_extracted"] = dropped
+    res["testable"]["no_longer_extracted_and_reader_agreed"] = dropped_rightly
+    return res
+
+
+def recall_under(manifest_path: str, analysis_path: str) -> dict:
+    """Score the recall audit against the pipeline as it now stands.
+
+    The audit was drawn from tables one version of the pipeline called
+    empty. A later version that reads the bars the audit found no longer
+    calls those tables empty, so its recall is scored on the judged tables
+    it still calls empty: a table the reader marked as missed and the new
+    pipeline still misses counts against it; one it now reads does not.
+    """
+    with open(manifest_path, encoding="utf-8") as fh:
+        sheets = json.load(fh)
+    with open(analysis_path, encoding="utf-8") as fh:
+        cmps = json.load(fh)["_comparisons"]
+    empty = set()
+    seen = set()
+    for c in cmps:
+        key = (c["paper"], str(c["table"]), c["page"])
+        seen.add(key)
+        if c["winner_dispersion"] is None and c["runner_dispersion"] is None:
+            empty.add(key)
+    for c in cmps:
+        key = (c["paper"], str(c["table"]), c["page"])
+        if c["winner_dispersion"] is not None or c["runner_dispersion"] is not None:
+            empty.discard(key)
+    entries = [e for sh in sheets for e in sh["entries"] if e.get("verdict")]
+    still = [e for e in entries if (e["paper"], str(e["table"]), e["page"]) in empty]
+    agree = sum(1 for e in still if e["verdict"] == "agree")
+    missed = sum(1 for e in still if e["verdict"] == "missed")
+    lo, hi = wilson_interval(agree, len(still)) if still else (0.0, 1.0)
+    return {"n_judged": len(entries), "n_still_called_empty": len(still),
+            "agree": agree, "extractor_missed_an_error_bar": missed,
+            "no_longer_called_empty": len(entries) - len(still),
+            "missed_in_the_audited_version": sum(1 for e in entries if e["verdict"] == "missed"),
+            "recall_on_no_error_bar_calls": round(agree / len(still), 3) if still else None,
+            "wilson_95": [round(lo, 3), round(hi, 3)]}
+
+
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     sub = ap.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("sample")
-    s.add_argument("--extracted", default="data/extracted_2025.json")
+    s.add_argument("--extracted", default="data/extracted_2025.jsonl")
     s.add_argument("--analysis", default="out/analysis_2025.json")
     s.add_argument("--source", action="append", default=["neurips2025", "icml2025"])
     s.add_argument("--seed", type=int, default=2027)
@@ -318,16 +450,35 @@ def main(argv=None) -> int:
     s.add_argument("--discarded", type=int, default=40)
     s.add_argument("--non-extremal", type=int, default=40)
     s.add_argument("--out-dir", default="out/gold")
+    s.add_argument("--exclude-items", default=None,
+                   help="items.json of an earlier draw whose papers are held out")
     sc = sub.add_parser("score")
     sc.add_argument("--items", default="out/gold/items.json")
     sc.add_argument("--labels", default="out/gold/labels.csv")
     sc.add_argument("--out", default="out/gold_set.json")
+    sc.add_argument("--rescore-with", default=None,
+                    help="analysis JSON of a later pipeline to score on the same claims")
+    rc = sub.add_parser("recall")
+    rc.add_argument("--manifest", default="audits/recall/manifest.json")
+    rc.add_argument("--analysis", default="out/analysis_2025.json")
+    rc.add_argument("--out", default="out/recall_v4.json")
     args = ap.parse_args(argv)
+
+    if args.cmd == "recall":
+        res = recall_under(args.manifest, args.analysis)
+        with open(args.out, "w", encoding="utf-8") as fh:
+            json.dump(res, fh, indent=1)
+        print(json.dumps(res, indent=1))
+        return 0
 
     if args.cmd == "sample":
         sizes = {"testable": args.testable, "no_bar": args.no_bar,
                  "discarded": args.discarded, "non_extremal": args.non_extremal}
-        items = sample(args.extracted, args.analysis, sizes, args.seed)
+        exclude = set()
+        if args.exclude_items:
+            with open(args.exclude_items, encoding="utf-8") as fh:
+                exclude = {it["paper"] for it in json.load(fh)}
+        items = sample(args.extracted, args.analysis, sizes, args.seed, exclude)
         os.makedirs(args.out_dir, exist_ok=True)
         render(items, args.source, args.out_dir)
         with open(os.path.join(args.out_dir, "items.json"), "w", encoding="utf-8") as fh:
@@ -341,7 +492,8 @@ def main(argv=None) -> int:
                 w.writerow({"id": it["id"], "stratum": it["stratum"]})
         print(f"{len(items)} items -> {args.out_dir}")
         return 0
-    res = score(args.items, args.labels)
+    res = (rescore(args.items, args.labels, args.rescore_with) if args.rescore_with
+           else score(args.items, args.labels))
     with open(args.out, "w", encoding="utf-8") as fh:
         json.dump(res, fh, indent=1)
     print(json.dumps(res, indent=1))
