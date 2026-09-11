@@ -257,7 +257,9 @@ def comparisons_from_table(table: dict) -> list:
     xs = [c["x"] for c in table["cells"]]
     bbox = {"y_min": min(ys), "y_max": max(ys), "x_min": min(xs), "x_max": max(xs)}
     groups = _columns(table["cells"]) if orient == "column" else _rows(table["cells"])
+    n_ties = 0
     for col in groups:
+        col = [_unrank(c) for c in col]
         bold = [c for c in col if c["bold"]]
         plain = [c for c in col if not c["bold"]]
         if len(bold) != 1 or not plain:
@@ -271,6 +273,12 @@ def comparisons_from_table(table: dict) -> list:
         else:
             continue  # bold cell is not extremal: not a best-of comparison
         gap = abs(win["mean"] - runner["mean"])
+        # A bold cell tied with an unbolded one claims nothing: the authors
+        # bolded one of two equal values. Such groups are counted and dropped;
+        # the gold set turned one up (67.5 +/- 5 against 67.5 +/- 5).
+        if gap == 0:
+            n_ties += 1
+            continue
         out.append({
             "table": table.get("number"),
             "page": table.get("page"),
@@ -300,7 +308,23 @@ def comparisons_from_table(table: dict) -> list:
         })
     for c in out:
         c["n_comparisons_in_table"] = len(out)
+        c["n_ties_in_table"] = n_ties
     return out
+
+
+def _unrank(c: dict) -> dict:
+    """A parenthesised integer beside a decimal mean is a rank, not a bar.
+
+    ``0.9984 (1)`` is a value and its rank; the parenthesised form was being
+    credited as a dispersion whenever the page named one. Found by the
+    held-out gold set.
+    """
+    if c.get("dispersion_style") == "paren" and c.get("dispersion") is not None:
+        txt = c.get("text") or ""
+        inner = txt[txt.rfind("(") + 1:txt.rfind(")")].strip()
+        if inner.isdigit() and "." in txt[:txt.rfind("(")]:
+            c = dict(c, dispersion=None, dispersion_style="none")
+    return c
 
 
 def test_comparison(cmp: dict, kind_override: Optional[str] = None) -> Optional[dict]:
@@ -321,7 +345,10 @@ def test_comparison(cmp: dict, kind_override: Optional[str] = None) -> Optional[
     # only defined when the run count is printed; the z figure is kept as the
     # headline because it is the reading more favourable to the field.
     n = cmp["n_runs"]
-    if n and n >= 2 and kind in ("std", "unknown"):
+    if n and n >= 2:
+        # A standard error or interval with a stated run count also has
+        # n - 1 degrees of freedom per arm; the earlier version applied Welch
+        # only to deviations, which a reviewer rightly called unnecessary.
         df = se ** 4 / ((se_w ** 4 + se_r ** 4) / (n - 1))
         out["df"] = df
         out["p_t"] = 2 * (1 - t_cdf(abs(z), df))

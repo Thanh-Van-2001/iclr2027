@@ -1,0 +1,35 @@
+1 8B (pretrained on 15T tokens, representing 100 times more compute than our largest
+---
+3), we run pretraining for a range of
+---
+56 times shorter than its
+---
+And we run the same tuning for the BPE baseline, for which we ﬁnd:
+---
+Our experiments are run on a public code,
+---
+The second dial is the vocabulary size: raising this limit lets the merge process run for
+---
+We replicate their protocol
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+can run
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+experiments, the scaling-law runs use a higher data-to-model ratio (data-to-model ratio = 10 instead
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+run shown here)
+---
+run with given experimental conditions)
+---
+this paper, the scale of a run is its total pre-training compute C measured in Floating Point Operation
+---
+• The instructions should contain the exact command and environment needed to run to

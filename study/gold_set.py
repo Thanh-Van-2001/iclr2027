@@ -42,7 +42,9 @@ from analyze import (_columns, _rows, comparisons_from_table, load_records,  # n
 from harvest import SOURCES, _get  # noqa: E402
 from paperengine.stats import wilson_interval  # noqa: E402
 
-RUN_SENTENCE = re.compile(r"(?i)[^.\n]{0,160}\b(?:seeds?|runs?|trials?|repetitions?|replicates?)\b[^.\n]{0,160}")
+RUN_SENTENCE = re.compile(
+    r"(?i)[^.\n]{0,160}\b(?:seeds?|runs?|trials?|repetitions?|replicates?|repeat(?:ed|s)?|"
+    r"times|folds?|initiali[sz]ations?|restarts?|rollouts?|episodes|independent experiments)\b[^.\n]{0,160}")
 
 FIELDS = {
     "testable": ["results_table", "bold_ok", "orientation", "direction", "winner_mean",
@@ -52,6 +54,7 @@ FIELDS = {
                "runner_mean", "error_bar_present", "note"],
     "discarded": ["results_table", "cause", "note"],
     "non_extremal": ["results_table", "cause", "note"],
+    "no_n": ["results_table", "n_runs", "n_source", "note"],
 }
 
 
@@ -86,7 +89,12 @@ def sample(extracted_path: str, analysis_path: str, sizes: dict, seed: int,
 
     for stratum, pool in (("testable", [c for c in cmps if c.get("test")]),
                           ("no_bar", [c for c in cmps if c["winner_dispersion"] is None
-                                      and c["runner_dispersion"] is None])):
+                                      and c["runner_dispersion"] is None]),
+                          # both bars printed, no run count found anywhere: does the
+                          # paper state one the pattern does not match?
+                          ("no_n", [c for c in cmps if c["winner_dispersion"] is not None
+                                    and c["runner_dispersion"] is not None
+                                    and not c.get("n_runs") and not c.get("test")])):
         for c in rng.sample(pool, min(sizes[stratum], len(pool))):
             t = tables[(c["paper"], c["table"], c["page"])]
             w = find_cell(t, c["winner"], c["winner_dispersion"], True)
@@ -163,16 +171,20 @@ def render(items: list, sources: list, out_dir: str, zoom: float = 2.0) -> None:
                          min(page.rect.width, b["x_max"] + pad * 5.0),
                          min(page.rect.height, b["y_max"] + pad * 1.6))
         if it.get("mark"):
+            # The first renderings drew a circle over the cell, and the circle
+            # covered the digits being audited in a third of the items. A box
+            # drawn around the cell with a margin marks it without touching it.
             shape = page.new_shape()
-            shape.draw_circle(fitz.Point(it["mark"]["x"] + 8, it["mark"]["y"] + 4), 9)
-            shape.finish(color=(1, 0, 0), width=1.2)
+            x, y = it["mark"]["x"], it["mark"]["y"]
+            shape.draw_rect(fitz.Rect(x - 4, y - 3, x + 30, y + 11))
+            shape.finish(color=(1, 0, 0), width=0.9)
             shape.commit()
         pix = page.get_pixmap(matrix=fitz.Matrix(zoom, zoom), clip=clip)
         name = f"{it['id']}_{it['stratum']}.png"
         pix.save(os.path.join(img_dir, name))
         it["image"] = name
         it["title"] = rec["title"]
-        if it["stratum"] == "testable":
+        if it["stratum"] in ("testable", "no_n"):
             text = "\n".join(p.get_text() for p in doc)
             sents = sorted({m.group(0).strip() for m in RUN_SENTENCE.finditer(text)})
             with open(os.path.join(img_dir, f"{it['id']}_runs.txt"), "w", encoding="utf-8") as fh:
@@ -267,14 +279,27 @@ def score(items_path: str, labels_path: str) -> dict:
                             len(clear_n), "the run count")
     value_fields = (("winner_mean", "winner"), ("winner_disp", "winner_dispersion"),
                     ("runner_mean", "runner_up"), ("runner_disp", "runner_dispersion"))
-    all_ok = sum(1 for it, lb in T
+    # An item with a value the reader could not read is left out of this
+    # denominator rather than counted as agreed; the earlier version counted
+    # it, which a reviewer rightly called optimistic.
+    readable = [(it, lb) for it, lb in T if not any(_unclear(lb[f]) for f, _ in value_fields)]
+    all_ok = sum(1 for it, lb in readable
                  if lb["bold_ok"].lower().startswith("y")
-                 and all(_unclear(lb[f]) or _match(_num(lb[f]), it["pipeline"][k])
-                         for f, k in value_fields))
-    fields["claim_and_values"] = rate(all_ok, n, "bold cell, rival and all four values at once")
+                 and all(_match(_num(lb[f]), it["pipeline"][k]) for f, k in value_fields))
+    fields["claim_and_values"] = rate(all_ok, len(readable),
+                                      "bold cell, rival and all four values at once, on fully readable items")
+    fields["claim_or_unreadable"] = rate(
+        sum(1 for it, lb in T if lb["bold_ok"].lower().startswith("y")
+            and all(_unclear(lb[f]) or _match(_num(lb[f]), it["pipeline"][k]) for f, k in value_fields)),
+        n, "the same, counting an unreadable value as not contradicted")
 
-    # failure rate on the gold subset, from the reader's values vs the pipeline's
+    # failure rate on the gold subset, from the reader's values vs the pipeline's,
+    # and the per-item 2x2 of verdicts, which is what agreement means; the two
+    # marginal rates can match while every verdict flips.
     fail_reader = fail_pipe = n_both = 0
+    both_fail = both_pass = reader_fail_only = pipe_fail_only = 0
+    pipe_fail_all = sum(1 for it, lb in T if it.get("pipeline_test") and it["pipeline_test"]["p"] >= 0.05)
+    pipe_tested_all = sum(1 for it, lb in T if it.get("pipeline_test"))
     for it, lb in T:
         r = dict(it["pipeline"])
         c = {"gap": None, "winner_dispersion": _num(lb["winner_disp"]),
@@ -291,9 +316,21 @@ def score(items_path: str, labels_path: str) -> dict:
         t_pipe = it.get("pipeline_test")
         if t_reader and t_pipe:
             n_both += 1
-            fail_reader += t_reader["p"] >= 0.05
-            fail_pipe += t_pipe["p"] >= 0.05
+            rf, pf = t_reader["p"] >= 0.05, t_pipe["p"] >= 0.05
+            fail_reader += rf
+            fail_pipe += pf
+            both_fail += rf and pf
+            both_pass += (not rf) and (not pf)
+            reader_fail_only += rf and not pf
+            pipe_fail_only += pf and not rf
     out["testable"] = {"n_labelled": len(T), "fields": fields,
+                       "verdict_2x2": {"both_fail": both_fail, "both_survive": both_pass,
+                                       "reader_fail_pipeline_survive": reader_fail_only,
+                                       "pipeline_fail_reader_survive": pipe_fail_only,
+                                       "per_item_agreement": round(100 * (both_fail + both_pass) / n_both, 1) if n_both else None},
+                       "pipeline_fail_rate_all_items": round(100 * pipe_fail_all / pipe_tested_all, 1) if pipe_tested_all else None,
+                       "pipeline_tested_all_items": pipe_tested_all,
+                       "pipeline_fail_all_items": pipe_fail_all,
                        "failure_rate_reader_values": round(100 * fail_reader / n_both, 1) if n_both else None,
                        "failure_rate_pipeline_values_same_items": round(100 * fail_pipe / n_both, 1) if n_both else None,
                        "n_testable_under_both": n_both,
@@ -322,6 +359,18 @@ def score(items_path: str, labels_path: str) -> dict:
                               if lb["direction"].lower()[:3] == it["pipeline"]["direction"][:3]), len(Br),
                           "direction"),
     }
+
+    # --- no_n: run-count recall
+    N = [labels[i] for i in labels if items[i]["stratum"] == "no_n"]
+    if N:
+        found = sum(1 for lb in N if _num(lb["n_runs"]) is not None)
+        out["no_n"] = {"n": len(N),
+                       "reader_found_a_run_count": rate(found, len(N),
+                                                        "the paper states a run count the pattern missed"),
+                       "pipeline_right_that_none_is_stated": rate(len(N) - found, len(N),
+                                                                  "no run count anywhere in the paper"),
+                       "sources": dict(sorted(__import__("collections").Counter(
+                           lb["n_source"].strip().lower() for lb in N if _num(lb["n_runs"]) is not None).items()))}
 
     # --- discarded and non_extremal: cause breakdown
     for stratum in ("discarded", "non_extremal"):
@@ -449,6 +498,7 @@ def main(argv=None) -> int:
     s.add_argument("--no-bar", type=int, default=40)
     s.add_argument("--discarded", type=int, default=40)
     s.add_argument("--non-extremal", type=int, default=40)
+    s.add_argument("--no-n", type=int, default=0)
     s.add_argument("--out-dir", default="out/gold")
     s.add_argument("--exclude-items", default=None,
                    help="items.json of an earlier draw whose papers are held out")
@@ -473,7 +523,8 @@ def main(argv=None) -> int:
 
     if args.cmd == "sample":
         sizes = {"testable": args.testable, "no_bar": args.no_bar,
-                 "discarded": args.discarded, "non_extremal": args.non_extremal}
+                 "discarded": args.discarded, "non_extremal": args.non_extremal,
+                 "no_n": args.no_n}
         exclude = set()
         if args.exclude_items:
             with open(args.exclude_items, encoding="utf-8") as fh:

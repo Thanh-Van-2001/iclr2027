@@ -17,6 +17,7 @@ import collections
 import json
 import os
 import re
+import statistics
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -283,6 +284,29 @@ def headline_span(comparisons: list) -> dict:
                               max(v["pct_fail"] for v in rows.values() if v.get("n"))]}
 
 
+def holm_families(comparisons: list) -> dict:
+    """How large the within-table families the Holm correction runs over are."""
+    fam: dict = {}
+    for c in comparisons:
+        if c.get("test"):
+            fam[(c["paper"], c["table"], c["page"])] = fam.get((c["paper"], c["table"], c["page"]), 0) + 1
+    sizes = list(fam.values())
+    n = len(sizes)
+    per_table = {}
+    for c in comparisons:
+        per_table[(c["paper"], c["table"], c["page"])] = c.get("n_ties_in_table", 0)
+    ties = sum(per_table.values())
+    return {
+        "n_tables_with_testable": n,
+        "pct_family_size_1": round(100 * sum(1 for s in sizes if s == 1) / max(n, 1), 1),
+        "pct_family_size_2_to_5": round(100 * sum(1 for s in sizes if 2 <= s <= 5) / max(n, 1), 1),
+        "pct_family_size_over_5": round(100 * sum(1 for s in sizes if s > 5) / max(n, 1), 1),
+        "median_family_size": statistics.median(sizes) if sizes else None,
+        "pct_testable_in_families_over_5": round(100 * sum(s for s in sizes if s > 5) / max(sum(sizes), 1), 1),
+        "exact_ties_dropped": ties,
+    }
+
+
 def venue_counts(records: list, comparisons: list) -> dict:
     """How the sample and the comparisons divide between the two venues."""
     out = {}
@@ -421,6 +445,7 @@ def compute(records: list, comparisons: list, pct_neither: float,
         "venue_counts": venue_counts(records, comparisons),
         "other_routes": other_routes(records, comparisons),
         "topic_breakdown": topic_breakdown(records, comparisons),
+        "holm_families": holm_families(comparisons),
     }
 
 

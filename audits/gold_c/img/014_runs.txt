@@ -1,0 +1,27 @@
+Defining the N-fold tensor product operator by O⊗N := O ⊗· · · ⊗O : G⊗N →H⊗N, we obtain:
+---
+For further demonstrations of generality, we run experiments on irregularly
+---
+Justification: We report error bars from repeated tests in Section 5
+---
+Table 7: Wall-clock training times for Table 1
+---
+Table 8: Wall-clock sampling times per 1,000 samples for Table 1
+---
+To run Koopman VAE on
+---
+detailed complexity analysis by measuring wall-clock training and sampling times as well as parameter
+---
+example, train/test split, initialization, random drawing of some parameter, or overall run
+---
+experimental runs as well as estimate the total compute
+---
+how to replicate the results, access to a hosted model (e
+---
+necessary to either make it possible for others to replicate the model with the same dataset,
+---
+run a numerical experiment of evaluating the inner product ⟨x1 ⊗· · · ⊗xN, µ⟩between a rank-one
+---
+tested on a few datasets or with a few runs
+---
+• The instructions should contain the exact command and environment needed to run to

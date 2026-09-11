@@ -163,3 +163,28 @@ def test_bold_weight_recognised_by_font_name():
     assert extract._bold_by_name("TimesNewRomanPS-BoldMT")
     assert not extract._bold_by_name("NimbusRomNo9L-Regu")
     assert not extract._bold_by_name("CMR10")
+
+
+def test_rank_in_parentheses_is_not_a_bar_and_ties_claim_nothing():
+    cells = [_cell(0.9984, 100, 100, bold=True, disp=1.0, text="0.9984 (1)"),
+             _cell(0.9845, 100, 112, disp=2.0, text="0.9845 (2)"),
+             _cell(0.9700, 100, 124, disp=3.0, text="0.9700 (3)")]
+    for c in cells:
+        c["dispersion_style"] = "paren"
+    cmps = analyze.comparisons_from_table({"cells": cells, "number": "1", "page": 0,
+                                           "dispersion_kind": "std", "n_runs": 3, "caption": ""})
+    assert len(cmps) == 1 and cmps[0]["winner_dispersion"] is None
+    tie = [_cell(67.5, 100, 100, bold=True, disp=5.0), _cell(67.5, 100, 112, disp=5.0),
+           _cell(60.0, 100, 124, disp=5.0)]
+    assert analyze.comparisons_from_table({"cells": tie, "number": "1", "page": 0,
+                                           "dispersion_kind": "std", "n_runs": 3, "caption": ""}) == []
+
+
+def test_run_counts_in_other_phrasings():
+    # Bug 15: the run-count audit found these phrasings in 18 of 40 papers
+    # the pattern had called silent.
+    assert extract._n_runs("", "each experiment is repeated five times, with results averaged")[0] == 5
+    assert extract._n_runs("", "we repeat each experiment 10 times to reduce randomness")[0] == 10
+    assert extract._n_runs("", "test accuracies over three randomly seeded runs")[0] == 3
+    assert extract._n_runs("", "For Table 2, we average over seeds 32, 33, and 34")[0] == 3
+    assert extract._n_runs("", "which is almost 10 times higher than the baseline") == (None, None)

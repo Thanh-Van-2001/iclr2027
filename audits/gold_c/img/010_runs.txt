@@ -1,0 +1,59 @@
+10 times, and we report the average clustering costs along with deviations and the average running
+---
+Although some existing algorithms can achieve faster than O(ndk) running times for k-median
+---
+For each s ∈S, define cs to be the number of times s is sampled
+---
+Given a center c ∈C, TREE-CLOSE operation runs in time
+---
+Given a data point p ∈P, TREE-OPEN operation runs in time O(log2(d∆)) to update the data
+---
+Hence, the running time for initialization becomes ˜O(nd)
+---
+Justification: This paper reports standard deviations over multiple runs to indicate the
+---
+Starting with a random initialization, the BanditFastLS algorithm consists of the following two stages:
+---
+The TREE-OPEN and TREE-CLOSE operations can run in time O(log2(d∆)) to update
+---
+The process repeats until a
+---
+The proposed algorithm can run in
+---
+The tree initialization (steps 1-3 of Algorithm 1) takes time O(nd log(n∆))
+---
+This method runs in O(nd/ϵ) time but
+---
+This process is recursively repeated for
+---
+algorithm achieves a 5% improvement on clustering quality, while the running time is 50 times faster
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+distributions, where several initialization schemes with sub-linear (or linear) running time were
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+fast running times, with the MLS and LS++ algorithms delivering better clustering quality
+---
+in [18], the running time for initialization becomes ˜O(nd)
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+run with given experimental conditions)
+---
+seeds(210, 7)
+---
+since there are no active centers (centers that are opened) during the data structure initialization
+---
+times, and we report the average results with deviations and average runtime
+---
+we only run the dimension-reduction step on datasets with high dimensions (d ≥50)
+---
+|U|/ϵ) times from U such that each ai ∈S is sampled with probabilities
+---
+• The instructions should contain the exact command and environment needed to run to

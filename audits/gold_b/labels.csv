@@ -1,93 +1,93 @@
 id,stratum,results_table,bold_ok,orientation,direction,winner_mean,winner_disp,runner_mean,runner_disp,disp_type,n_runs,n_source,error_bar_present,cause,note
 001,testable,y,y,column,lower,0.046,0.020,3.004,0.056,se,none,none,,,Scenario 5 real-world MMD block; bracketed (+/- x) standard errors; no run count
-002,testable,y,y,column,higher,55.2,unclear,53.5,1.3,sd,3,paper,,,"UCF ResNet column; subscript bars tiny, winner bar obscured"
+002,testable,y,y,column,higher,55.2,1.4,53.5,1.3,sd,3,paper,,,"UCF ResNet column; subscript bars tiny, winner bar obscured; re-read with box marker"
 003,testable,y,n,row,higher,243.428,20.137,183.263,62.436,unlabelled,none,none,,,best and runner-up both in coloured bold (blue/violet): two bold cells per row
-004,testable,y,y,column,lower,unclear,0.010,0.229,0.004,sd,unclear,unclear,,,Cos.Dist. block t2 column; winner digit obscured (0.17?); seeds stated as three and five
+004,testable,y,y,column,lower,0.179,0.010,0.229,0.004,sd,unclear,unclear,,,Cos.Dist. block t2 column; winner digit obscured (0.17?); seeds stated as three and five; re-read with box marker
 005,testable,y,y,column,higher,67.5,5,67.5,5,unlabelled,none,none,,,D5 column; runner-up ties in mean and bar
-006,testable,y,y,column,higher,-0.7,unclear,-11.8,0.8,sd,3,paper,,,"RO-Color column top block; winner bar obscured; '3 evaluations' in caption, 'three runs' in text"
-007,testable,y,y,column,lower,0.159,0.154,unclear,0.240,se,none,none,,,Scenario 2 synthetic MMD; runner mean partly obscured (1.?75)
+006,testable,y,y,column,higher,-0.7,7.2,-11.8,0.8,sd,3,paper,,,"RO-Color column top block; winner bar obscured; '3 evaluations' in caption, 'three runs' in text; re-read with box marker"
+007,testable,y,y,column,lower,0.159,0.154,1.275,0.240,se,none,none,,,Scenario 2 synthetic MMD; runner mean partly obscured (1.?75); re-read with box marker
 008,testable,y,y,row,higher,0.9984,none,0.9845,none,none,none,none,,,"parenthesised values are ranks (1)/(2)/(3), not error bars; the comparison should not be testable"
-009,testable,y,y,column,higher,unclear,0.10,90.58,0.10,unlabelled,none,none,,,Natural Acc column; winner digit obscured (90.6?)
-010,testable,y,y,row,lower,0.02,unclear,0.04,0.01,unlabelled,10,paper,,,"Spectral Filtering tau=0.01 row, Learned block Deg.10; bar obscured; 10 runs stated in a figure caption"
+009,testable,y,y,column,higher,90.63,0.10,90.58,0.10,unlabelled,none,none,,,Natural Acc column; winner digit obscured (90.6?); re-read with box marker
+010,testable,y,y,row,lower,0.02,0.01,0.04,0.01,unlabelled,10,paper,,,"Spectral Filtering tau=0.01 row, Learned block Deg.10; bar obscured; 10 runs stated in a figure caption; re-read with box marker"
 011,testable,y,y,row,lower,24.53,0.48,56.62,2.80,unlabelled,3,caption,,,"PaiNN E row, N_train=1000 block; three runs in words"
-012,testable,y,y,row,higher,unclear,56.170,-163.866,74.375,unlabelled,none,none,,,GTOPX 2 row; winner mean partly obscured (-124.?95); D(best) column is a label column
+012,testable,y,y,row,higher,-124.995,56.170,-163.866,74.375,unlabelled,none,none,,,GTOPX 2 row; winner mean partly obscured (-124.?95); D(best) column is a label column; re-read with box marker
 013,testable,y,n,column,lower,0.014,0.006,0.016,0.008,se,none,none,,,Scenario 6 synthetic MMD: two bold cells (within two SE of best); best non-bold is ICL 0.016
-014,testable,y,y,column,lower,0.125,0.002,unclear,0.007,unlabelled,none,none,,,GCN block EA Test1 RMSE; underlined runner-up GRIN-RepAug obscured (0.1?0)
+014,testable,y,y,column,lower,0.125,0.002,0.129,0.007,unlabelled,none,none,,,GCN block EA Test1 RMSE; underlined runner-up GRIN-RepAug obscured (0.1?0); re-read with box marker
 015,testable,y,y,column,higher,54.5,0.237,53.7,0.060,unlabelled,none,none,,,"(S) Direction block, [20,40) column"
-016,testable,y,y,column,lower,0.257,0.044,unclear,0.260,se,none,none,,,Scenario 3 real-world W2; runner mean partly obscured (3.?01)
-017,testable,y,y,column,higher,82.3,unclear,82.0,0.2,unlabelled,5,paper,,,AUROC SpI column; SHE bar obscured; five seeds in text
+016,testable,y,y,column,lower,0.257,0.044,3.301,0.260,se,none,none,,,Scenario 3 real-world W2; runner mean partly obscured (3.?01); re-read with box marker
+017,testable,y,y,column,higher,82.3,0.2,82.0,0.2,unlabelled,5,paper,,,AUROC SpI column; SHE bar obscured; five seeds in text; re-read with box marker
 018,testable,y,y,row,higher,0.14,0.01,0.13,0.01,sd,4,caption,,,Walker2d-MR row; two rivals tie at 0.13+/-0.01; four seeds in words
-019,testable,y,y,column,higher,unclear,0.001,unclear,0.000,sd,5,paper,,,"Hyperparameter-shift context column, first block (Pre-train/SMCS); both cells obscured by the circle"
-020,testable,y,y,column,higher,0.978,0.001,unclear,0.116,sd,5,caption,,,CelebA block MobileNetV2 C-Ins; CRAFT mean obscured (0.9?0)
+019,testable,y,y,column,higher,1.2051,0.001,0.8136,0.000,sd,5,paper,,,"Hyperparameter-shift context column, first block (Pre-train/SMCS); both cells obscured by the circle; re-read with box marker"
+020,testable,y,y,column,higher,0.978,0.001,0.960,0.116,sd,5,caption,,,CelebA block MobileNetV2 C-Ins; CRAFT mean obscured (0.9?0); re-read with box marker
 021,testable,y,y,column,higher,0.43,0.205,0.37,0.160,unlabelled,none,none,,,"(J) Trajectory block, [20,40) column"
-022,testable,y,y,column,higher,92.3,unclear,91.3,0.3,unlabelled,5,paper,,,AUPR-IN AMC column; VIM bar obscured; two rivals tie at 91.3
-023,testable,y,n,column,higher,unclear,0.01,0.228,0.00,sd,3,paper,,,"Partition Level 1 block, U-QD column: two bold cells (CellTreeQM and -G); circled cell is the second; parenthesised sd"
+022,testable,y,y,column,higher,92.3,0.2,91.3,0.3,unlabelled,5,paper,,,AUPR-IN AMC column; VIM bar obscured; two rivals tie at 91.3; re-read with box marker
+023,testable,y,n,column,higher,0.331,0.01,0.228,0.00,sd,3,paper,,,"Partition Level 1 block, U-QD column: two bold cells (CellTreeQM and -G); circled cell is the second; parenthesised sd; re-read with box marker"
 024,testable,y,y,column,higher,93.03,0.33,79.65,0.41,unlabelled,none,none,,,Roman-Empire column; winner last digit partly obscured
-025,testable,y,y,column,higher,unclear,0.001,unclear,0.003,unlabelled,none,none,,,GIN block GlassTemp Test1 R2; winner and underlined RepAug both partly obscured
-026,testable,y,n,row,lower,unclear,1.100,2.222,1.030,unlabelled,none,none,,,Avg. Rank row: best (blue) and runner-up (violet) both bold; circled is the best; mean partly obscured
+025,testable,y,y,column,higher,0.896,0.001,0.894,0.003,unlabelled,none,none,,,GIN block GlassTemp Test1 R2; winner and underlined RepAug both partly obscured; re-read with box marker
+026,testable,y,n,row,lower,1.889,1.100,2.222,1.030,unlabelled,none,none,,,Avg. Rank row: best (blue) and runner-up (violet) both bold; circled is the best; mean partly obscured; re-read with box marker
 027,testable,y,y,column,higher,98.1,0.3,47.1,9.3,unlabelled,3,paper,,,mNAG column of the right-hand table; winner bar partly obscured
 028,testable,y,y,row,higher,0.61,0.02,0.58,0.04,sd,4,caption,,,HalfCheetah-ME row
-029,testable,y,n,column,lower,0.368,0.017,unclear,0.022,se,none,none,,,Laplace block real-world W2: two bold cells (within two SE); circled cell is not even the smaller; rival mean obscured
+029,testable,y,n,column,lower,0.368,0.017,0.376,0.022,se,none,none,,,Laplace block real-world W2: two bold cells (within two SE); circled cell is not even the smaller; rival mean obscured; re-read with box marker
 030,testable,y,y,column,higher,57.80,0.20,55.93,0.46,unlabelled,none,none,,,Gemini block Pose&Action Ego column; winner last digit partly obscured
-031,testable,y,y,column,higher,unclear,0.01,69.72,0.01,sd,5,caption,,,Graphormer block BBBP column; winner mean obscured (70.3?)
+031,testable,y,y,column,higher,70.32,0.01,69.72,0.01,sd,5,caption,,,Graphormer block BBBP column; winner mean obscured (70.3?); re-read with box marker
 032,testable,y,y,row,lower,0.43,0.01,0.50,0.18,unlabelled,5,paper,,,C3 block Delta_DP row; winner partly obscured; paper says mean and variance over five runs
-033,testable,y,y,column,lower,unclear,0.002,0.155,0.009,sd,3,caption,,,Crimes Worst column; winner mean partly obscured (0.1?6)
-034,testable,y,y,column,higher,96.5,2.8,unclear,4.9,sd,5,paper,,,AntMaze U-Maze column; underlined HD mean obscured (9?.0); Abs.(%) Avg. row holds improvements in parentheses
+033,testable,y,y,column,lower,0.146,0.002,0.155,0.009,sd,3,caption,,,Crimes Worst column; winner mean partly obscured (0.1?6); re-read with box marker
+034,testable,y,y,column,higher,96.5,2.8,91.0,4.9,sd,5,paper,,,AntMaze U-Maze column; underlined HD mean obscured (9?.0); Abs.(%) Avg. row holds improvements in parentheses; re-read with box marker
 035,testable,y,y,column,higher,73.6,0.1,73.3,0.8,unlabelled,5,paper,,,"BBBP column; parenthesised bars, meaning unstated; five rounds of experiments in text"
 036,testable,y,y,column,lower,7.09,0.08,7.16,0.08,unlabelled,5,paper,,,MAE All column; winner partly obscured
 037,testable,y,y,column,lower,0.20,0.01,0.22,0.08,sd,10,caption,,,"Cartpole Stab block, Dynamics AvgRisk column; Fuz rows carry arrow deltas beside the bars"
-038,testable,y,y,column,higher,unclear,0.20,85.29,0.24,sd,3,paper,,,"MRPC column; GoRA mean partly obscured (86.1?); three seeds, mean and std in text"
-039,testable,y,y,column,lower,unclear,24.9,unclear,11.7,unlabelled,none,none,,,GIN block O2Perm Test60 RMSE; winner and underlined RepAug both partly obscured
-040,testable,y,y,column,higher,unclear,unclear,86.1,0.4,sd,5,paper,,,"STL-10 NMI, CDC/CDC+Ours pair; bold marks the better of each pair; circled cell fully obscured"
+038,testable,y,y,column,higher,86.10,0.20,85.29,0.24,sd,3,paper,,,"MRPC column; GoRA mean partly obscured (86.1?); three seeds, mean and std in text; re-read with box marker"
+039,testable,y,y,column,lower,580.9,24.9,631.2,11.7,unlabelled,none,none,,,GIN block O2Perm Test60 RMSE; winner and underlined RepAug both partly obscured; re-read with box marker
+040,testable,y,y,column,higher,86.6,0.2,86.1,0.4,sd,5,paper,,,"STL-10 NMI, CDC/CDC+Ours pair; bold marks the better of each pair; circled cell fully obscured; re-read with box marker"
 041,testable,y,y,column,higher,88.49,0.24,82.57,4.24,unlabelled,5,paper,,,MOOC block Inductive AP; winner last digit partly obscured
-042,testable,y,y,column,higher,78.3,unclear,77.6,2.6,sd,5,paper,,,"ImageNet-Dogs ACC, CDC pair; winner bar obscured"
-043,testable,y,y,row,higher,unclear,0.4,115.2,0.4,unlabelled,5,paper,,,wa-me row; winner mean partly obscured (118.?); M column is an integer label
-044,testable,y,y,column,higher,unclear,1.60,unclear,0.88,unlabelled,none,none,,,"AA column, bottom block; winner and rival both partly obscured"
+042,testable,y,y,column,higher,78.3,2.5,77.6,2.6,sd,5,paper,,,"ImageNet-Dogs ACC, CDC pair; winner bar obscured; re-read with box marker"
+043,testable,y,y,row,higher,118.1,0.4,115.2,0.4,unlabelled,5,paper,,,wa-me row; winner mean partly obscured (118.?); M column is an integer label; re-read with box marker
+044,testable,y,y,column,higher,66.14,1.60,65.83,0.88,unlabelled,none,none,,,"AA column, bottom block; winner and rival both partly obscured; re-read with box marker"
 045,testable,y,y,column,lower,5.50,0.38,5.58,0.22,unlabelled,5,paper,,,"GM Median column; rival partly obscured, read as 5.58 (matches the same setting in Table 24)"
-046,testable,y,y,column,higher,64.0,unclear,unclear,5.2,sd,3,paper,,,Sort Shape column; winner bar and rival mean partly obscured
-047,testable,y,y,column,lower,0.543,0.021,unclear,0.030,se,none,none,,,Scenario 6 synthetic C2ST; rival mean partly obscured (0.8?7)
-048,testable,y,y,column,higher,unclear,0.014,0.876,0.020,sd,5,paper,,,"Yelp LWD/+CoD pair, k=64; bold marks the better of each pair; means tie"
-049,testable,y,y,row,lower,unclear,0.0156,0.1050,0.0963,sd,100,caption,,,beta=0.95 row; winner mean partly obscured (0.026?); beta column holds decimal labels
+046,testable,y,y,column,higher,64.0,4.6,54.0,5.2,sd,3,paper,,,Sort Shape column; winner bar and rival mean partly obscured; re-read with box marker
+047,testable,y,y,column,lower,0.543,0.021,0.837,0.030,se,none,none,,,Scenario 6 synthetic C2ST; rival mean partly obscured (0.8?7); re-read with box marker
+048,testable,y,y,column,higher,0.876,0.014,0.876,0.020,sd,5,paper,,,"Yelp LWD/+CoD pair, k=64; bold marks the better of each pair; means tie; re-read with box marker"
+049,testable,y,y,row,lower,0.0261,0.0156,0.1050,0.0963,sd,100,caption,,,beta=0.95 row; winner mean partly obscured (0.026?); beta column holds decimal labels; re-read with box marker
 050,testable,y,y,column,higher,1.09,0.02,1.04,0.05,sd,5,paper,,,4D HV column; winner partly obscured; HV and CS columns sit side by side
 051,no_bar,y,y,column,higher,96.43,,90.18,,,,,n,,Tall/Short column
-052,no_bar,y,y,row,lower,unclear,,0.311,,,,,n,,"ETTh2/96 row, PatchTST MSE pair (w/o vs +SL); bold marks the better of each pair; winner digit obscured"
-053,no_bar,y,y,column,higher,87.92,,unclear,,,,,n,,"Fscore DERMATO, SLA/DTP pair; rival obscured; caption says variances all zero"
-054,no_bar,y,y,column,lower,2.201,,unclear,,,,,n,,"FID column, EditTransfer/Ours pair; rival obscured (4.?08)"
+052,no_bar,y,y,row,lower,0.296,,0.311,,,,,n,,"ETTh2/96 row, PatchTST MSE pair (w/o vs +SL); bold marks the better of each pair; winner digit obscured; re-read with box marker"
+053,no_bar,y,y,column,higher,87.92,,73.79,,,,,n,,"Fscore DERMATO, SLA/DTP pair; rival obscured; caption says variances all zero; re-read with box marker"
+054,no_bar,y,y,column,lower,2.201,,4.908,,,,,n,,"FID column, EditTransfer/Ours pair; rival obscured (4.?08); re-read with box marker"
 055,no_bar,y,y,column,higher,13.4,,12.1,,,,,n,,Certified Acc 108/255 column
 056,no_bar,y,y,column,higher,0.822,,0.756,,,,,n,,"Overall Accuracy column; lambda and beta columns are hyperparameters, k column integer labels"
 057,no_bar,y,y,column,higher,21.0,,17.4,,,,,n,,AP_r column of a two-row table; improvement subscript beside the winner; many integer configuration columns
-058,no_bar,y,y,column,higher,unclear,,50.3,,,,,n,,Qwen2.5-7B block ARC-c; winner partly obscured (50.?)
-059,no_bar,y,y,column,higher,unclear,,78.55,,,,,n,,Finetune block E-commerce; winner partly obscured (78.8?)
-060,no_bar,y,y,column,higher,71.24,,unclear,,,,,n,,G->C column; rival w.o. TID obscured (70.?1)
+058,no_bar,y,y,column,higher,50.4,,50.3,,,,,n,,Qwen2.5-7B block ARC-c; winner partly obscured (50.?); re-read with box marker
+059,no_bar,y,y,column,higher,78.83,,78.55,,,,,n,,Finetune block E-commerce; winner partly obscured (78.8?); re-read with box marker
+060,no_bar,y,y,column,higher,71.24,,70.01,,,,,n,,G->C column; rival w.o. TID obscured (70.?1); re-read with box marker
 061,no_bar,y,y,column,lower,40,,121,,,,,n,,"Inference time column, all bare integers"
-062,no_bar,y,y,column,higher,unclear,,21.16,,,,,n,,ArcC column; winner partly obscured (21.4?)
-063,no_bar,y,y,column,lower,unclear,,0.52,,,,,n,,"avg L1, RigNet/RigNet* pair; bold marks the better of each pair; winner partly obscured"
+062,no_bar,y,y,column,higher,21.42,,21.16,,,,,n,,ArcC column; winner partly obscured (21.4?); re-read with box marker
+063,no_bar,y,y,column,lower,0.44,,0.52,,,,,n,,"avg L1, RigNet/RigNet* pair; bold marks the better of each pair; winner partly obscured; re-read with box marker"
 064,no_bar,y,y,column,lower,42.2,,42.7,,,,,n,,"CCC 6.7k column (error, lower better)"
-065,no_bar,y,y,column,higher,66.1,,unclear,,,,,n,,"ROxf(H) R-GeM, k-nn block; rival BSD+k-nn obscured (6?.0)"
+065,no_bar,y,y,column,higher,66.1,,63.0,,,,,n,,"ROxf(H) R-GeM, k-nn block; rival BSD+k-nn obscured (6?.0); re-read with box marker"
 066,no_bar,y,y,column,higher,49.4,,47.7,,,,,n,,AP_div column; two rivals tie at 47.7
 067,no_bar,y,y,column,higher,0.17,,0.14,,,,,n,,"GenEval, epoch-6 pair; epoch column integer labels"
 068,no_bar,y,y,column,higher,55.09,,54.97,,,,,n,,LongVideoBench 16k column; scaling-factor column holds decimal labels
 069,no_bar,y,n,column,lower,0.00,,0.00,,,,,y,,Std column of the SD block: two bold cells (bold follows the bold mean); the table reports dispersion in separate Std columns
-070,no_bar,y,n,column,higher,77.50,,unclear,,,,,n,,"the whole 'CVA better than both' column is bold (emphasis), no winner is marked"
-071,no_bar,y,y,column,higher,unclear,,81.56,,,,,n,,"LLaVA-Next Greedy block, Popular F1; winner partly obscured (83.2?)"
-072,no_bar,y,y,row,lower,unclear,,5.07,,,,,n,,"U-100 row, POMO-100 Vanilla/PUPO pair; winner partly obscured (4.6?)"
-073,no_bar,y,y,column,higher,unclear,,0.655,,,,,n,,PLCC block De-hazing column; winner last digit obscured
+070,no_bar,y,n,column,higher,77.50,,75.0,,,,,n,,"the whole 'CVA better than both' column is bold (emphasis), no winner is marked; re-read with box marker"
+071,no_bar,y,y,column,higher,83.22,,81.56,,,,,n,,"LLaVA-Next Greedy block, Popular F1; winner partly obscured (83.2?); re-read with box marker"
+072,no_bar,y,y,row,lower,4.61,,5.07,,,,,n,,"U-100 row, POMO-100 Vanilla/PUPO pair; winner partly obscured (4.6?); re-read with box marker"
+073,no_bar,y,y,column,higher,0.669,,0.655,,,,,n,,PLCC block De-hazing column; winner last digit obscured; re-read with box marker
 074,no_bar,y,y,column,higher,0.98,,0.89,,,,,n,,0->1 column of the upper table
 075,no_bar,y,y,row,higher,74.1,,73.0,,,,,n,,MR=0.6 row; cells hold two numbers (Acc/F1) separated by a slash; bold marks the first of GCNet and the second of HME
-076,no_bar,y,y,column,higher,66.0,,unclear,,,,,n,,"HIMap/SafeMap pair, mAP; rival partly obscured (6?.5)"
+076,no_bar,y,y,column,higher,66.0,,65.5,,,,,n,,"HIMap/SafeMap pair, mAP; rival partly obscured (6?.5); re-read with box marker"
 077,no_bar,y,y,column,higher,59.50,,57.33,,,,,n,,"Distill-Qwen-32B block, LiveCodeBench column"
-078,no_bar,y,y,column,lower,unclear,,unclear,,,,,n,,EfficientNet-B4 block DFD Violation pair; both cells partly obscured
-079,no_bar,y,n,column,higher,unclear,,0.573,,,,,n,,"Partition Level 3 block, K-QD column: two bold cells (top-2 marking); winner partly obscured"
-080,no_bar,y,y,column,lower,unclear,,unclear,,,,,n,,MR block Average column; winner and underlined rival both partly obscured
+078,no_bar,y,y,column,lower,0.0135,,0.0289,,,,,n,,EfficientNet-B4 block DFD Violation pair; both cells partly obscured; re-read with box marker
+079,no_bar,y,n,column,higher,0.992,,0.573,,,,,n,,"Partition Level 3 block, K-QD column: two bold cells (top-2 marking); winner partly obscured; re-read with box marker"
+080,no_bar,y,y,column,lower,277.3,,315.9,,,,,n,,MR block Average column; winner and underlined rival both partly obscured; re-read with box marker
 081,no_bar,y,y,column,higher,97.56,,97.25,,,,,n,,"Distill-Qwen-32B block, HumanEval column"
 082,no_bar,y,n,column,lower,0.00,,0.00,,,,,y,,"same cell as item 069: Std column of the SD block, two bold cells; dispersion reported in separate Std columns"
-083,no_bar,y,y,column,higher,unclear,,unclear,,,,,n,,Malware 40% column; winner and Dividemix rival both partly obscured
+083,no_bar,y,y,column,higher,83.33,,82.41,,,,,n,,Malware 40% column; winner and Dividemix rival both partly obscured; re-read with box marker
 084,no_bar,y,y,row,lower,1.53,,2.43,,,,,n,,Air quality 30% row (MSE)
-085,no_bar,y,y,column,higher,unclear,,77.67,,,,,n,,"128 block, zero-shot Flickr30K I2T; winner partly obscured (78.0?)"
+085,no_bar,y,y,column,higher,78.08,,77.67,,,,,n,,"128 block, zero-shot Flickr30K I2T; winner partly obscured (78.0?); re-read with box marker"
 086,no_bar,y,y,column,higher,25.13,,13.40,,,,,n,,"CLIP-ViT block, ALBEF TR R@1 column; asterisks mark white-box attacks"
-087,no_bar,y,y,column,higher,unclear,,0.7661,,,,,n,,"Hits@50 block, YAGO4 column; winner partly obscured (0.8?91)"
-088,no_bar,y,y,column,higher,unclear,,32.32,,,,,n,,Snow PSNR column; winner obscured
-089,no_bar,y,y,column,higher,61.3,,unclear,,,,,n,,"130M pair, BoolQ; rival partly obscured (5?.3)"
+087,no_bar,y,y,column,higher,0.8891,,0.7661,,,,,n,,"Hits@50 block, YAGO4 column; winner partly obscured (0.8?91); re-read with box marker"
+088,no_bar,y,y,column,higher,34.85,,32.32,,,,,n,,Snow PSNR column; winner obscured; re-read with box marker
+089,no_bar,y,y,column,higher,61.3,,50.3,,,,,n,,"130M pair, BoolQ; rival partly obscured (5?.3); re-read with box marker"
 090,no_bar,y,y,column,higher,52.0,,50.5,,,,,n,,GPQA-D column; two rivals tie at 50.5
 091,discarded,y,,,,,,,,,,,,no_bold,runtime breakdown table; nothing bold
 092,discarded,n,,,,,,,,,,,,not_results,anchor on a sentence 'Table 3 presents the main hyperparameters'; no table in the region

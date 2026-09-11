@@ -77,6 +77,35 @@ _NUMBER_WORDS = {
     "nine": 9, "ten": 10, "twelve": 12, "fifteen": 15, "twenty": 20, "thirty": 30,
     "fifty": 50, "hundred": 100,
 }
+# The phrasings a run-count audit of forty papers found the pattern above
+# missing: "repeated five times", "each experiment is run 10 times", "three
+# randomly seeded runs", and a list of the seeds themselves ("seeds 0, 1, 2").
+_NUM = r"(\d{1,3}|" + "|".join(_NUMBER_WORDS) + r")"
+N_TIMES = re.compile(
+    r"(?i)(?:repeat(?:ed|s)?|run|ran|conduct(?:ed)?|perform(?:ed)?|test(?:ed)?|train(?:ed)?|"
+    r"execut(?:ed)?|evaluat(?:ed)?)\s+(?:each\s+|all\s+|every\s+|the\s+|our\s+)?"
+    r"(?:experiments?|methods?|networks?|models?|settings?|configurations?|trainings?|runs?|"
+    r"algorithms?|procedures?|of them|it|them)?\s*(?:for\s+|over\s+)?" + _NUM + r"\s+times\b|"
+    r"\b(?:experiments?|methods?|models?|networks?|trials?)\s+(?:for\s+)?" + _NUM + r"\s+times\b")
+N_SEEDED = re.compile(r"(?i)\b" + _NUM + r"\s+(?:randomly[- ]seeded|random[- ]seed|seeded)\s+(?:runs?|trials?|experiments?)\b")
+N_OVER = re.compile(r"(?i)\b(?:averaged?|mean|median)\s+(?:over|across)\s+" + _NUM +
+                    r"\s+(?:independent\s+|different\s+|separate\s+)?(?:experiments?|repetitions?|repeats?|folds?|restarts?|runs?)\b")
+SEED_LIST = re.compile(r"(?i)\bseeds?\s*(?:=|:|\{|\(|of)?\s*(\d{1,4}(?:\s*,\s*(?:and\s+)?\d{1,4}){1,9})")
+
+
+def _alt_run_counts(text: str) -> list:
+    out = []
+    for pat in (N_TIMES, N_SEEDED, N_OVER):
+        for m in pat.finditer(text):
+            tok = next(g for g in m.groups() if g).lower()
+            out.append(_NUMBER_WORDS[tok] if tok in _NUMBER_WORDS else int(tok))
+    for m in SEED_LIST.finditer(text):
+        k = len(re.findall(r"\d+", m.group(1)))
+        if k >= 3:   # two numbers after "seed" is more often notation than a list
+            out.append(k)
+    return out
+
+
 N_RUNS = re.compile(
     r"(?:\b(?:over|across|averaged?\s+over|mean\s+of|using|with|on|for|from)\s+)?"
     r"\b(\d{1,3}|" + "|".join(_NUMBER_WORDS) + r")\s+"
@@ -545,6 +574,7 @@ def _n_runs(caption: str, body_nearby: str):
                 continue
             tok = m.group(1).lower()
             vals.append(_NUMBER_WORDS[tok] if tok in _NUMBER_WORDS else int(tok))
+        vals.extend(_alt_run_counts(text))
         return [v for v in vals if 2 <= v <= 200]
 
     cap = scan(caption)

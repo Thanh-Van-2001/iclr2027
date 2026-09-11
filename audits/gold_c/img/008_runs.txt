@@ -1,0 +1,77 @@
+, 2019) that could run faster at the expense of worse embeddings
+---
+2-tuples with vertex repetitions have an induced sub-hypergraph as the vertex itself since
+---
+3(a) can be distinguished only by the initialization
+---
+4 in the IMDB-Dir-Genre dataset, which is almost 10 times higher
+---
+81 s on the IMDB-Dir-Genre dataset, a nearly 9-fold difference
+---
+A Harder Example Not Distinguishable During the Initialization of 2-GWL
+---
+A random initialization cannot capture
+---
+Additionally, we also recorded the average time required to run one epoch across different hypergraph
+---
+An Example Distinguishable During the Initialization of 2-GWL
+---
+Both k-GWL and k-WL allow repetitions of vertices in
+---
+For example on the Twitter-Friend dataset, it is 14 times
+---
+In the initialization of k-tuple features, they ex-
+---
+K-TUPLE FEATURE INITIALIZATION (RQ1)
+---
+Other Details: To evaluate the model’s performance, we report the average classification accuracy over 5-fold cross-
+---
+Part (b) illustrates the initialization process of
+---
+Second, we have run experiments on k-HNNs for
+---
+Second, we have run experiments on k-HNNs for k = 3 based on the vertex sampling strategy with
+---
+The initialization of k-tuple features is a crucial step in
+---
+The initialization phase of the 2-GWL cannot distinguish the non-isomorphic hypergraphs as well
+---
+This is repeated for every possible labeled graph
+---
+To investigate the time complexity of the k-HNN model, we record the average time required to run one epoch across
+---
+We have presented an example where two non-isomorphic hypergraphs can be distinguished during the initialization phase
+---
+We run different number
+---
+We start with the details of the initialization part of 2-GWL (shared by 2-GFWL and 2-GOWL), as shown in
+---
+a server with 1080Ti GPU 11GB, except for 3-HNNs run-
+---
+called k-sets, where ordering and repeated vertices in a tu-
+---
+can effectively reduce the run-time to be closer to that of other methods
+---
+example of non-isomorphic hypergraphs that cannot be distinguished during the initialization phase of 2-GWL
+---
+extra labels 1, · · · , l to l vertices, but runs k-WL on the
+---
+k(s:k+1, HG), since k-GFWL and k-GOWL share the same initialization procedure
+---
+k-HNN model, we record the average time required to run
+---
+moves vertex repetitions
+---
+node initialization
+---
+non-isomorphic hypergraphs during the initialization phase
+---
+run-time is independent of the number of hyperedges in the
+---
+run-times of our methods are mostly smaller than double those of compared methods, while the vertex sampling approach
+---
+subject to that the initialization of k-tuple features uses our
+---
+vertex repetitions (e
+---
+which allow repetitions of vertices

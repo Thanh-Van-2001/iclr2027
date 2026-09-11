@@ -1,0 +1,55 @@
+2 outlines the initialization trick that instantiates these Nw regimes, and the E-step
+---
+All rebuttal experiments were run on a Tesla V100-SXM2 (26GB)
+---
+Each combination of K and d nodes is repeated three times,
+---
+Example of initialization with
+---
+Initialization trick
+---
+Justification: All the detailed needed to run our code and to reproduce our results are
+---
+Our initialization scheme builds some
+---
+Robustness to the pruning step, minimum regime duration, and regime initialization
+---
+This initialization leads
+---
+We evaluated robustness to the pruning step, minimum regime duration (ζ), and regime initialization
+---
+We showed in the table above (Table 5 and 6) that FANTOM is robust to the initialization parameter
+---
+With a window initialization of
+---
+With a window initialization of 1000 and
+---
+With a window initialization of 1500 and ζ = 1200, it starts with six initial regimes
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+initialisation step (the length of the initialized windows is greater than ζ minimum regime duration),
+---
+initialization, FANTOM alternates between two phases
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+needs the number of regimes a priori, we first describe an initialisation trick that removes this require-
+---
+of 40 nodes with 4 regimes, with a window initialization of 1500 and ζ = 1200, it starts with six
+---
+only tested on a few datasets or with a few runs
+---
+phases repeat until the algorithm reaches the maximum number of iterations
+---
+presents an initialization of three equal windows while the MTS is composed of two ground truth
+---
+run with given experimental conditions)
+---
+two-step alternative, that detects change points with KCP [1], then runs causal discovery on each
+---
+• The instructions should contain the exact command and environment needed to run to

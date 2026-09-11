@@ -1,0 +1,79 @@
+100 test episodes with the horizon size of H = 10, 30, 50, 100
+---
+2 Trial Efficiency
+---
+5-fold improvement in test return under limited environment trials
+---
+5-fold, 32% and 120% improvement in logic consistency, trial
+---
+Action Repeat
+---
+Cheetah Run
+---
+Figure 4 presents test returns under limited environment trials
+---
+Figure 4: Performance comparison of results on 4 DMC tasks under environment trials that indicate
+---
+Figure 9: Performance comparison of results on 4 DMC tasks under environment trials that indicate
+---
+Hard, and Quadruped Run
+---
+Hyper Parameters: seed episode S, training episodes N, batch size B, collect interval C,
+---
+Initialize dataset D with S seed episodes
+---
+Quadruped Run
+---
+Seed episode
+---
+Table 3: Action Repeat Setting and Action Dim
+---
+The action repeat setting for different DMControl tasks and robotic tasks is presented in TABLE 2
+---
+The mean and variance of logical consistency are reported over 100 test episodes
+---
+The vertical axis denotes the average test return over 100 episodes
+---
+Training episodes
+---
+Trial Efficiency
+---
+Trial efficiency
+---
+Walker Run
+---
+average test return over 100 test episodes
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+consistency enable our model to achieve higher task rewards under limited environment trials and
+---
+dimensional dynamics such as Cheetah Run and Quadruped Run
+---
+each imagination, and the vertical axis represents the average test return over 100 test episodes
+---
+environment trials are provided in Appendix H
+---
+environment trials serves as the x-axis to quantify exploration efficiency by measuring performance
+---
+environment trials, particularly in complex environments such as Cheetah Run and Finger Turn
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+interactions thereby significantly improving data efficiency and minimizing trial-and-error costs
+---
+on real-world trial and error [5, 6, 7, 62, 63]
+---
+only tested on a few datasets or with a few runs
+---
+represents the average test return over 100 test episodes
+---
+return over 100 test episodes
+---
+run with given experimental conditions)
+---
+the number of times that models explore the environments

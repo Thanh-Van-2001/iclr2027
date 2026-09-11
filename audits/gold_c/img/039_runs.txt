@@ -1,0 +1,57 @@
+(c) We run 10 Monte
+---
+(d) We run Monte Carlo simulations on a
+---
+2On carilion-Hospital and hiv-Trans, we adopt 1000-run MC simulations as the ground truth for
+---
+58×, consistently maintaining a runtime comparable to that of single-run MC
+---
+6: repeat
+---
+In many existing epidemic dynamic studies, Monte Carlo simulations are often repeated 104–105
+---
+MC-based methods require numerous runs to achieve statistically reliable estimates
+---
+We use 1000-run Monte Carlo simulation as the ground truth
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+by averaging its infection frequency over 50-run Monte Carlo simulations2
+---
+comparable to a single-run MC simulation
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+facilitates better initialization
+---
+hiv-Trans, we use 1000-run Monte Carlo simulation as ground-truth)
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+run 20 Monte Carlo simulations on a 1000-node asymmetric Erd˝os–Rényi graph (¯k = 10), varying
+---
+run with given experimental conditions)
+---
+simulations is their high computational cost, as it requires hundreds or even thousands of runs of
+---
+simulations of epidemic dynamics, such that more simulation runs are needed to achieve sufficient
+---
+six real-world networks show that RAPID matches the accuracy of multi-run Monte Carlo within
+---
+times without examining their necessity or computational trade-offs
+---
+trials M
+---
+• MC-based inference: 5-run and 10-run Monte Carlo
+---
+• The instructions should contain the exact command and environment needed to run to
+---
+▷Initialization
+---
+▷Residual initialization
+---
+▷Run M independent trials

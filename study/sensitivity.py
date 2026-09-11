@@ -110,9 +110,13 @@ def error_bar_meaning(comparisons: list) -> dict:
     reading it as a standard error does not, so a naive split compares 627
     comparisons against 1,836. Only those with a run count are used here.
     """
+    # Both subsets are testable comparisons, so that their sizes add up to the
+    # testable population; the earlier count included one-sided bars and did
+    # not reconcile.
     unknown = [c for c in comparisons
-               if c.get("dispersion_kind") == "unknown" and c.get("n_runs")]
-    labelled = [c for c in comparisons if c.get("dispersion_kind") in ("std", "sem", "ci")]
+               if c.get("dispersion_kind") == "unknown" and c.get("n_runs") and c.get("test")]
+    labelled = [c for c in comparisons
+                if c.get("dispersion_kind") in ("std", "sem", "ci") and c.get("test")]
     return {
         "n_unknown": len(unknown),
         "n_labelled": len(labelled),
@@ -378,36 +382,57 @@ def design_mde(comparisons: list, records: list, power: float = 0.8, alpha: floa
         return (statistics.median(pool), "corpus") if pool else (None, None)
 
     rows = []
+    excluded = {"no_run_count": 0, "outside_both_scales": 0, "scales_differ": 0, "no_noise_level": 0}
+    k_alpha = norm_ppf(1 - alpha / 2)
     for c in comparisons:
         n = c.get("n_runs")
         if not n or n < 2:
+            excluded["no_run_count"] += 1
             continue
         sc = scale_of(c["winner"])
-        if sc is None or scale_of(c["runner_up"]) != sc:
+        if sc is None:
+            excluded["outside_both_scales"] += 1
+            continue
+        if scale_of(c["runner_up"]) != sc:
+            excluded["scales_differ"] += 1
             continue
         benches = identify(captions.get((c["paper"], c["table"], c["page"]), ""))
         sd, source = external_sd(c["paper"], benches, sc)
         if sd is None:
+            excluded["no_noise_level"] += 1
             continue
-        mde = k * sd * math.sqrt(2.0 / n)
+        se_diff = sd * math.sqrt(2.0 / n)
+        mde = k * se_diff
         rows.append({"gap": c["gap"], "mde": mde, "below": c["gap"] < mde,
+                     "below_alpha": c["gap"] < k_alpha * se_diff,
                      "source": source, "testable": bool(c.get("test")),
                      "no_bars": c["winner_dispersion"] is None and c["runner_dispersion"] is None,
                      "paper": c["paper"], "n": n, "scale": sc, "sd": sd})
     if not rows:
         return {"n": 0}
 
-    def pct(sub):
-        return round(100 * sum(1 for r in sub if r["below"]) / len(sub), 1) if sub else None
+    def pct(sub, key="below"):
+        return round(100 * sum(1 for r in sub if r[key]) / len(sub), 1) if sub else None
 
     testable = [r for r in rows if r["testable"]]
     no_bars = [r for r in rows if r["no_bars"]]
     own = power_audit(comparisons, power=power, alpha=alpha)
     sds_pct = [r["sd"] for r in rows if r["scale"] == "percent"]
+    unit = [r for r in rows if r["scale"] == "unit"]
+    sds_unit = [r["sd"] for r in unit]
     return {
         "n": len(rows),
         "n_papers": len(set(r["paper"] for r in rows)),
+        "excluded": excluded,
         "pct_below_design_mde": pct(rows),
+        "pct_below_alpha_threshold": pct(rows, "below_alpha"),
+        "pct_below_alpha_threshold_no_bars": pct(no_bars, "below_alpha"),
+        "n_percent_scale": len(rows) - len(unit),
+        "n_unit_scale": len(unit),
+        "pct_below_design_mde_percent_scale": pct([r for r in rows if r["scale"] == "percent"]),
+        "pct_below_design_mde_unit_scale": pct(unit),
+        "median_external_sd_unit_scale": round(statistics.median(sds_unit), 4) if sds_unit else None,
+        "pct_below_design_mde_benchmark_matched": pct([r for r in rows if r["source"] == "benchmark"]),
         "n_testable": len(testable),
         "pct_below_design_mde_testable": pct(testable),
         "n_no_bars": len(no_bars),

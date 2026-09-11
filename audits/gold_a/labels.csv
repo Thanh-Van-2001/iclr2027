@@ -5,9 +5,9 @@ id,stratum,results_table,bold_ok,orientation,direction,winner_mean,winner_disp,r
 004,testable,y,y,column,higher,96.14,0.06,95.18,0.15,sd,3,caption,,,runner obscured by circle: 95.18
 005,testable,y,y,row,higher,12.3,0.3,12.2,0.4,unlabelled,30,paper,,,cell has two bars; paper states all results across 30 seeds; a figure caption on the page says 5 seeds
 006,testable,y,y,column,lower,7.92,0.05,8.19,0.03,sd,5,paper,,,"DEWP column; runner partly obscured, read 8.19"
-007,testable,y,n,column,lower,-3.5990,0.1949,unclear,unclear,unlabelled,3,paper,,,bold+colour marks top-3: SSSP column has three bold cells; circled cell is second best; extractor group wrong
-008,testable,y,y,column,higher,0.572,0.022,unclear,0.021,se,none,none,,,runner mean obscured by circle (0.5?5); no run count for NHP data
-009,testable,y,y,column,higher,unclear,1.11,55.47,1.15,sd,3,paper,,,"block-wise best: whole column has 3 bold cells, one per block; winner mean obscured 56.0?"
+007,testable,y,n,column,lower,-3.5990,0.1949,-3.9349,0.0699,unlabelled,3,paper,,,bold+colour marks top-3: SSSP column has three bold cells; circled cell is second best; extractor group wrong; re-read with box marker
+008,testable,y,y,column,higher,0.572,0.022,0.550,0.021,se,none,none,,,runner mean obscured by circle (0.5?5); no run count for NHP data; re-read with box marker
+009,testable,y,y,column,higher,56.05,1.11,55.47,1.15,sd,3,paper,,,"block-wise best: whole column has 3 bold cells, one per block; winner mean obscured 56.0?; re-read with box marker"
 010,testable,y,y,row,higher,2.80,0.26,2.29,0.91,se,10,paper,,,"Pong row; 10 training trials, 30 evaluation trials also stated"
 011,testable,y,y,row,higher,0.14,0.05,0.04,0.03,se,8,paper,,,bold marks statistically best; single bold in this row
 012,testable,y,y,column,lower,0.042,0.006,0.042,0.008,sd,6,caption,,,crash-rate block Merge column; runner ties in mean; caption says six seeds in words
@@ -21,7 +21,7 @@ id,stratum,results_table,bold_ok,orientation,direction,winner_mean,winner_disp,r
 020,testable,y,y,row,lower,0.614,0.023,0.615,0.019,unlabelled,5,paper,,,"parenthesised, meaning unstated; winner mean partly obscured"
 021,testable,y,y,row,lower,0.197,0.015,0.233,0.013,unlabelled,5,paper,,,row 44957
 022,testable,y,y,row,higher,67.53,0.21,66.66,0.28,unlabelled,10,paper,,,"n ambiguous: 10 runs for CIFAR-type sets, 3 for ImageNet; meaning of bar unstated"
-023,testable,y,n,column,higher,0.763,0.054,unclear,unclear,sd,10,caption,,,"top-3 marking: underlined bold first, bold second; Pearson column has two bold cells; circled is second best"
+023,testable,y,n,column,higher,0.763,0.054,0.647,0.048,sd,10,caption,,,"top-3 marking: underlined bold first, bold second; Pearson column has two bold cells; circled is second best; re-read with box marker"
 024,testable,y,y,row,higher,92,4,86,7,sd,8,caption,,,bold = within 95% of best (tie convention); this row single bold
 025,testable,y,y,column,higher,90,6,79,7,unlabelled,3,paper,,,L14_RNA4 column
 026,testable,y,y,column,higher,0.6396,0.0095,0.5138,0.0066,unlabelled,none,none,,,BCIC-IV-2a balanced accuracy
@@ -30,8 +30,8 @@ id,stratum,results_table,bold_ok,orientation,direction,winner_mean,winner_disp,r
 029,testable,y,y,column,higher,0.639,0.010,0.621,0.011,se,none,none,,,20 spike grid column
 030,testable,y,y,column,higher,62.65,0.88,62.53,0.58,se,10,paper,,,PTC_MR column; ten runs of 10-fold CV
 031,testable,y,y,column,lower,0.277,0.006,0.301,0.018,sd,15,paper,,,CompSol column; 15 runs in total vs 5 experiments per split
-032,testable,y,y,row,higher,unclear,0.31,74.37,0.23,se,none,none,,,AUC ResNet50 row; winner mean obscured 79.4?; bold = significant over all competitors
-033,testable,y,y,column,higher,unclear,0.0035,0.6539,0.0057,unlabelled,20,paper,,,full-model row all bold; ARI column; winner mean obscured 0.695?
+032,testable,y,y,row,higher,79.40,0.31,74.37,0.23,se,none,none,,,AUC ResNet50 row; winner mean obscured 79.4?; bold = significant over all competitors; re-read with box marker
+033,testable,y,y,column,higher,0.6953,0.0035,0.6539,0.0057,unlabelled,20,paper,,,full-model row all bold; ARI column; winner mean obscured 0.695?; re-read with box marker
 034,testable,y,y,column,lower,0.435,0.006,0.437,0.015,sd,15,paper,,,"CombiSolv column; winner disp partly obscured, 0.006"
 035,testable,y,y,row,higher,2978.8,539.8,2042.0,1295.0,unlabelled,30,paper,,,Walker2d noise 0.25 row; two bars per cell
 036,testable,y,y,column,lower,0.0180,0.0003,0.0188,0.0003,sd,10,paper,,,QM8 column; winner mean partly obscured; n 10 vs 3 ambiguous
@@ -48,20 +48,20 @@ id,stratum,results_table,bold_ok,orientation,direction,winner_mean,winner_disp,r
 047,testable,y,y,column,lower,0.012,0.001,0.038,0.004,sd,10,paper,,,Darcy flow pressure column; the rates column holds an identical bold 0.012 +/- 0.001 and the circle cannot tell them apart
 048,testable,y,y,row,higher,254.3,4.6,242.7,7.3,se,5,caption,,,maze2d-l row; only QT and RVDT carry bars; 5 seeds x 30 rollouts
 049,testable,y,y,row,higher,91.55,0.69,84.63,3.92,sd,3,paper,,,MixedShapes +LT row
-050,testable,y,y,column,higher,0.788,0.012,unclear,unclear,se,10,caption,,,"block-wise best (Norm uniform, C-index); runner-up obscured by circle"
+050,testable,y,y,column,higher,0.788,0.012,0.785,0.011,se,10,caption,,,"block-wise best (Norm uniform, C-index); runner-up obscured by circle; re-read with box marker"
 051,testable,y,y,column,higher,88.57,3.37,85.42,5.34,unlabelled,unclear,unclear,,,"epsilon 0.8 column; winner partly obscured; n ambiguous; run count ambiguous in the paper, excluded"
 052,testable,y,y,row,higher,0.69,0.13,0.23,0.05,se,8,paper,,,StandardMaze_Key row
 053,testable,y,y,row,higher,866.60,27.14,769.53,131.23,unlabelled,3,paper,,,Humanoid Stand row
 054,testable,y,y,row,higher,817.70,73.53,754.56,4.06,unlabelled,3,paper,,,Pole row
 055,testable,y,y,column,lower,1.035,0.012,1.060,0.011,sd,10,paper,,,CEP column; both values partly obscured; n 10 vs 3 ambiguous
 056,testable,y,y,column,higher,83.1,0.9,81.8,1.8,sd,5,caption,,,PROTEINS column; runner partly obscured 8?.8 read as 81.8
-057,testable,y,y,column,higher,unclear,0.6,unclear,unclear,sd,3,caption,,,RM column; winner and chi-PO cells obscured by circle
+057,testable,y,y,column,higher,84.60,0.6,83.85,0.8,sd,3,caption,,,RM column; winner and chi-PO cells obscured by circle; re-read with box marker
 058,testable,y,y,column,higher,79.42,0.21,79.37,0.25,unlabelled,10,paper,,,"R50 column, tiny font"
 059,testable,y,y,row,higher,15119.91,583.41,13765.24,712.18,unlabelled,3,paper,,,HalfCheetah row; winner partly obscured
 060,testable,y,y,row,higher,907.5,6.9,816.5,94.5,sd,3,caption,,,Humanoid-stand row
 061,testable,y,y,row,higher,98,2,84,15,sd,8,caption,,,pointmaze-large-stitch row; bold = within 95% of best
 062,testable,y,y,column,higher,1.173,0.077,0.925,0.087,se,5,caption,,,CNN CPD K=50 column; caption says five repetitions in words; winner partly obscured
-063,testable,y,y,column,higher,2.969,0.033,unclear,unclear,sd,3,caption,,,"CIFAR100 LL column; MCMC M3 cell obscured by circle, could be the runner-up"
+063,testable,y,y,column,higher,2.969,0.033,2.829,0.0426,sd,3,caption,,,"CIFAR100 LL column; MCMC M3 cell obscured by circle, could be the runner-up; re-read with box marker"
 064,testable,y,y,column,higher,62.83,0.57,61.15,0.55,se,5,caption,,,FashionMNIST column; winner partly obscured
 065,testable,y,y,row,higher,70.54,0.16,70.53,0.04,unlabelled,unclear,unclear,,,"rel-hm/user-churn V row; n ambiguous; run count ambiguous in the paper, excluded"
 066,testable,y,y,row,higher,0.83,0.06,0.73,0.09,se,8,paper,,,StandardMaze3_Key row; two rivals tie at 0.73
@@ -80,15 +80,15 @@ id,stratum,results_table,bold_ok,orientation,direction,winner_mean,winner_disp,r
 079,testable,y,y,column,higher,84.39,1.19,80.98,2.39,sd,5,caption,,,BZR column; winner partly obscured
 080,testable,y,y,column,higher,0.5635,0.0123,0.5373,0.0108,unlabelled,none,none,,,BCIC2020-3 balanced accuracy; winner partly obscured 0.56?5
 081,testable,y,y,column,lower,0.528,0.019,0.561,0.025,sd,15,paper,,,"MNSol column; winner disp obscured, confirmed from Table 7 of same paper"
-082,testable,y,y,column,lower,unclear,0.212,unclear,unclear,sd,24,caption,,,mean 95th-perc error column; winner and AE cells obscured; caption says 24 seeds kept
+082,testable,y,y,column,lower,0.567,0.212,0.760,0.110,sd,24,caption,,,mean 95th-perc error column; winner and AE cells obscured; caption says 24 seeds kept; re-read with box marker
 083,testable,y,y,row,higher,0.86,0.08,0.74,unclear,unlabelled,5,paper,,,Table 6 mode2/5 demos; two rivals tie at 0.74 with bars 0.11 and 0.13
 084,testable,y,y,column,higher,47.49,0.32,47.19,0.34,unlabelled,8,caption,,,College Math column; Avg@8 implies 8 samples; winner partly obscured
 085,testable,y,y,column,higher,74.85,1.58,73.41,2.28,sd,15,paper,,,Scaffold ZhangDDI column
 086,testable,y,y,row,higher,0.99,0.02,0.92,0.03,unlabelled,5,paper,,,Tollgate Success row (re-marked; first render circled the Merging 0.99)
 087,testable,y,y,column,lower,43.9,0.13,45.0,0.09,sd,4,paper,,,AER column ViT; both cells partly obscured; four seeds in words
-088,testable,y,y,column,lower,unclear,0.071,8.879,0.073,se,200,caption,,,Amazon base MSE column; winner last digit obscured (8.51?); K=200 replicates
+088,testable,y,y,column,lower,8.517,0.071,8.879,0.073,se,200,caption,,,Amazon base MSE column; winner last digit obscured (8.51?); K=200 replicates; re-read with box marker
 089,testable,y,y,column,lower,0.528,0.019,0.531,0.022,sd,15,paper,,,MNSol column of Table 7
-090,testable,y,y,column,lower,41.8,0.14,unclear,unclear,sd,4,paper,,,AER column; ROID cell obscured by circle
+090,testable,y,y,column,lower,41.8,0.14,44.3,0.14,sd,4,paper,,,AER column; ROID cell obscured by circle; re-read with box marker
 091,testable,y,n,column,higher,80.02,0.86,unclear,unclear,sd,4,caption,,,colour-coded top-3; circled cell is second best (blue); first-best for Questions is below the crop; 4 weight initialisations in caption
 092,testable,y,y,column,higher,28.36,3.65,25.90,8.51,unlabelled,unclear,unclear,,,"Chameleon column; winner confirmed from item 041 render; run count ambiguous in the paper, excluded"
 093,testable,y,y,row,lower,0.769,0.019,0.770,0.018,unlabelled,5,paper,,,row 44993
@@ -97,5 +97,5 @@ id,stratum,results_table,bold_ok,orientation,direction,winner_mean,winner_disp,r
 096,testable,y,y,row,higher,72.67,10.09,20.79,4.47,sd,3,paper,,,"Arms out row; caption speaks of standard deviation, text of standard error; Arms down row has two bold (tie convention)"
 097,testable,y,y,row,lower,403.18,21.66,600.03,34.67,unlabelled,5,paper,,,Roundabout Time row; winner confirmed from item 086 render
 098,testable,y,y,row,lower,0.022,0.002,0.025,0.002,unlabelled,5,paper,,,row 44969
-099,testable,y,n,column,higher,unclear,0.0046,0.2135,none,sd,3,caption,,,"Validation F1 column: Persistence 0.1626 is also bold, and the best non-bold rival GloFAS 0.2135 prints no bar; the comparison should not be testable"
+099,testable,y,n,column,higher,0.2577,0.0046,0.2135,none,sd,3,caption,,,"Validation F1 column: Persistence 0.1626 is also bold, and the best non-bold rival GloFAS 0.2135 prints no bar; the comparison should not be testable; re-read with box marker"
 100,testable,y,y,column,higher,78.23,1.47,77.78,0.94,unlabelled,5,paper,,,NCI1 column; winner last digit partly obscured
