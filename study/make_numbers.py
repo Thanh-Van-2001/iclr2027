@@ -263,6 +263,19 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("design median mde", f"{dm['median_mde_percent_scale']}", provenance=drun)
     reg.add("design pct benchmark sd", rf"{dm['pct_sd_from_benchmark']}\%", provenance=drun)
     reg.add("design median runs", f"{dm['median_runs']:g}", provenance=drun)
+    reg.add("pct below alpha threshold", rf"{dm['pct_below_alpha_threshold']}\%", provenance=drun)
+    reg.add("pct below alpha threshold no bars", rf"{dm['pct_below_alpha_threshold_no_bars']}\%",
+            provenance=drun)
+    reg.add("design n percent", dm["n_percent_scale"], provenance=drun)
+    reg.add("design n unit", dm["n_unit_scale"], provenance=drun)
+    reg.add("design below percent", rf"{dm['pct_below_design_mde_percent_scale']}\%", provenance=drun)
+    reg.add("design below unit", rf"{dm['pct_below_design_mde_unit_scale']}\%", provenance=drun)
+    reg.add("design below benchmark matched", rf"{dm['pct_below_design_mde_benchmark_matched']}\%",
+            provenance=drun)
+    reg.add("design median sd unit", f"{dm['median_external_sd_unit_scale']}", provenance=drun)
+    reg.add("design excluded no n", dm["excluded"]["no_run_count"], provenance=drun)
+    reg.add("design excluded scale", dm["excluded"]["outside_both_scales"] + dm["excluded"]["scales_differ"],
+            provenance=drun)
 
     reg.add("pct bold not extremal", rf"{bs['pct_not_extremal']}\%", provenance="bold_semantics")
 
@@ -317,6 +330,10 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("resolution pct below", rf"{br['pct_below_resolution']}\%", provenance=brun)
     reg.add("resolution pct below rho nine",
             rf"{br['correlation_sensitivity']['0.9']}\%", provenance=brun)
+    reg.add("resolution pct below rho half",
+            rf"{br['correlation_sensitivity']['0.5']}\%", provenance=brun)
+    reg.add("resolution pct below rho seven",
+            rf"{br['correlation_sensitivity']['0.7']}\%", provenance=brun)
     _write_resolution_table(br, os.path.join(os.path.dirname(out_path),
                                              "resolution_table.tex"))
 
@@ -350,6 +367,11 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("fail welch t", rf"{hs['welch_t_where_defined']['pct_fail']}\%", provenance="headline_span")
     reg.add("fail welch t holm", rf"{hs['welch_t_where_defined']['pct_fail_holm']}\%",
             provenance="headline_span")
+    for key, name in (("as_reported", "as reported"), ("one_sided", "one sided"),
+                      ("unlabelled_as_sem", "unlabelled as sem full"), ("rho_0.5", "rho half"),
+                      ("rho_0.9", "rho nine"), ("labelled_only", "labelled only"),
+                      ("caption_run_count_only", "strict")):
+        reg.add(f"holm {name}", rf"{hs[key]['pct_fail_holm']}\%", provenance="headline_span")
     reg.add("fail one sided", rf"{hs['one_sided']['pct_fail']}\%", provenance="headline_span")
     reg.add("fail holm paper", rf"{hs['holm_family_paper']['pct_fail_holm']}\%", provenance="headline_span")
     reg.add("unlabelled as sem full", rf"{hs['unlabelled_as_sem']['pct_fail']}\%", provenance="headline_span")
@@ -419,6 +441,12 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("fail under half", rf"{gb['pct_fail_under_half_point']}\%", provenance="extra_stats")
     reg.add("fail over ten", rf"{gb['pct_fail_over_ten_points']}\%", provenance="extra_stats")
 
+    hf = xs["holm_families"]
+    reg.add("family size one", rf"{hf['pct_family_size_1']}\%", provenance="extra_stats")
+    reg.add("family size two to five", rf"{hf['pct_family_size_2_to_5']}\%", provenance="extra_stats")
+    reg.add("family size over five", rf"{hf['pct_family_size_over_5']}\%", provenance="extra_stats")
+    reg.add("family median", f"{hf['median_family_size']:g}", provenance="extra_stats")
+    reg.add("ties dropped", hf["exact_ties_dropped"], provenance="extra_stats")
     vc = xs["venue_counts"]
     for key, label in (("NeurIPS", "neurips"), ("ICML", "icml")):
         reg.add(f"{label} papers", vc[key]["papers"], provenance="extra_stats")
@@ -478,28 +506,69 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     # other strata describe what the pipeline discards and keep their draw.
     gh = dict(gh, testable=_j("gold_set_heldout_final")["testable"])
     grun = "gold_set_audit"
-    reg.add("gold dev n", g0["testable"]["n_labelled"], provenance=grun)
+    def _frac(d):
+        return f"{d['correct']} of {d['n']}"
+
+    def _agree(t):
+        v = t["verdict_2x2"]
+        return f"{v['both_fail'] + v['both_survive']} of {sum(x for k, x in v.items() if k != 'per_item_agreement')}"
+
+    # development set: the pre-fix pipeline that drew it, then the released one
+    g0t, g1t = g0["testable"], g1["testable"]
+    reg.add("gold dev n", g0t["n_labelled"], provenance=grun)
     reg.add("gold dev bugs", "five", provenance=grun)
-    reg.add("gold dev claim", _pct_ci(g0["testable"]["fields"]["claim_and_values"]), provenance=grun)
-    reg.add("gold dev runs", rf"{g0['testable']['fields']['n_runs']['pct']}\%", provenance=grun)
-    reg.add("gold dev kind", rf"{g0['testable']['fields']['disp_type']['pct']}\%", provenance=grun)
-    reg.add("gold dev post claim", _pct_ci(g1["testable"]["fields"]["claim_and_values"]), provenance=grun)
-    reg.add("gold dev dropped", g1["testable"]["no_longer_extracted"], provenance=grun)
-    reg.add("gold dev dropped rightly", g1["testable"]["no_longer_extracted_and_reader_agreed"],
-            provenance=grun)
+    reg.add("gold dev claim", _pct_ci(g0t["fields"]["claim_and_values"]), provenance=grun)
+    reg.add("gold dev claim frac", _frac(g0t["fields"]["claim_and_values"]), provenance=grun)
+    reg.add("gold dev runs", rf"{g0t['fields']['n_runs']['pct']}\%", provenance=grun)
+    reg.add("gold dev kind", rf"{g0t['fields']['disp_treatment']['pct']}\%", provenance=grun)
+    reg.add("gold dev agree", _agree(g0t), provenance=grun)
+    reg.add("gold dev fail reader", rf"{g0t['failure_rate_reader_values']}\%", provenance=grun)
+    reg.add("gold dev fail pipe", rf"{g0t['failure_rate_pipeline_values_same_items']}\%", provenance=grun)
+    reg.add("gold dev both n", g0t["n_testable_under_both"], provenance=grun)
+    reg.add("gold dev post claim", _pct_ci(g1t["fields"]["claim_and_values"]), provenance=grun)
+    reg.add("gold dev post claim frac", _frac(g1t["fields"]["claim_and_values"]), provenance=grun)
+    reg.add("gold dev post agree", _agree(g1t), provenance=grun)
+    reg.add("gold dev post fail reader", rf"{g1t['failure_rate_reader_values']}\%", provenance=grun)
+    reg.add("gold dev post fail pipe", rf"{g1t['failure_rate_pipeline_values_same_items']}\%", provenance=grun)
+    reg.add("gold dev post both n", g1t["n_testable_under_both"], provenance=grun)
+    reg.add("gold dev dropped", g1t["no_longer_extracted"], provenance=grun)
+    reg.add("gold dev dropped rightly", g1t["no_longer_extracted_and_reader_agreed"], provenance=grun)
+
+    # held-out set: against the pipeline that drew it (honest), then the released one
+    h0 = _j("gold_set_heldout")["testable"]
     ht = gh["testable"]
-    reg.add("gold held n", ht["n_labelled"], provenance=grun)
-    reg.add("gold held claim", _pct_ci(ht["fields"]["claim_and_values"]), provenance=grun)
-    reg.add("gold held winner", rf"{ht['fields']['winner_mean']['pct']}\%", provenance=grun)
-    reg.add("gold held runner", rf"{ht['fields']['runner_mean']['pct']}\%", provenance=grun)
-    reg.add("gold held runs", rf"{ht['fields']['n_runs']['pct']}\%", provenance=grun)
-    reg.add("gold held kind", rf"{ht['fields']['disp_treatment']['pct']}\%", provenance=grun)
-    reg.add("gold held kind literal", rf"{ht['fields']['disp_type']['pct']}\%", provenance=grun)
-    reg.add("gold held bold", rf"{ht['fields']['bold_cell']['pct']}\%", provenance=grun)
-    reg.add("gold held orientation", rf"{ht['fields']['orientation']['pct']}\%", provenance=grun)
-    reg.add("gold held fail reader", rf"{ht['failure_rate_reader_values']}\%", provenance=grun)
-    reg.add("gold held fail pipe", rf"{ht['failure_rate_pipeline_values_same_items']}\%", provenance=grun)
-    reg.add("gold held both n", ht["n_testable_under_both"], provenance=grun)
+    reg.add("gold held n", h0["n_labelled"], provenance=grun)
+    reg.add("gold held claim", _pct_ci(h0["fields"]["claim_and_values"]), provenance=grun)
+    reg.add("gold held claim frac", _frac(h0["fields"]["claim_and_values"]), provenance=grun)
+    reg.add("gold held agree", _agree(h0), provenance=grun)
+    reg.add("gold held fail reader", rf"{h0['failure_rate_reader_values']}\%", provenance=grun)
+    reg.add("gold held fail pipe", rf"{h0['failure_rate_pipeline_values_same_items']}\%", provenance=grun)
+    reg.add("gold held both n", h0["n_testable_under_both"], provenance=grun)
+    reg.add("gold held pipe fail all", rf"{h0['pipeline_fail_rate_all_items']}\%", provenance=grun)
+    reg.add("gold held winner", rf"{h0['fields']['winner_mean']['pct']}\%", provenance=grun)
+    reg.add("gold held runner", rf"{h0['fields']['runner_mean']['pct']}\%", provenance=grun)
+    reg.add("gold held runs", rf"{h0['fields']['n_runs']['pct']}\%", provenance=grun)
+    reg.add("gold held runs frac", _frac(h0["fields"]["n_runs"]), provenance=grun)
+    reg.add("gold held kind", rf"{h0['fields']['disp_treatment']['pct']}\%", provenance=grun)
+    reg.add("gold held kind literal", rf"{h0['fields']['disp_type']['pct']}\%", provenance=grun)
+    reg.add("gold held bold", rf"{h0['fields']['bold_cell']['pct']}\%", provenance=grun)
+    reg.add("gold held orientation", rf"{h0['fields']['orientation']['pct']}\%", provenance=grun)
+    reg.add("gold held not testable", h0["reader_says_not_testable"], provenance=grun)
+    reg.add("gold held post n", ht["n_labelled"], provenance=grun)
+    reg.add("gold held post claim", _pct_ci(ht["fields"]["claim_and_values"]), provenance=grun)
+    reg.add("gold held post claim frac", _frac(ht["fields"]["claim_and_values"]), provenance=grun)
+    reg.add("gold held post agree", _agree(ht), provenance=grun)
+    reg.add("gold held post fail reader", rf"{ht['failure_rate_reader_values']}\%", provenance=grun)
+    reg.add("gold held post fail pipe", rf"{ht['failure_rate_pipeline_values_same_items']}\%", provenance=grun)
+    reg.add("gold held post both n", ht["n_testable_under_both"], provenance=grun)
+    reg.add("gold held dropped", ht["no_longer_extracted"], provenance=grun)
+    reg.add("gold held dropped rightly", ht["no_longer_extracted_and_reader_agreed"], provenance=grun)
+
+    # the run-count recall audit
+    gc = _j("gold_set_no_n")["no_n"]
+    reg.add("gold no n n", gc["n"], provenance=grun)
+    reg.add("gold no n found", _pct_ci(gc["reader_found_a_run_count"]), provenance=grun)
+    reg.add("gold no n found frac", _frac(gc["reader_found_a_run_count"]), provenance=grun)
     nb = gh["no_bar"]
     reg.add("gold no bar n", nb["n"], provenance=grun)
     reg.add("gold no bar absent", _pct_ci(nb["error_bar_truly_absent"]), provenance=grun)
