@@ -93,3 +93,61 @@ about prose quality, not camouflage.
     results/         one JSON per recorded run
     out/             gate reports
     tests/
+
+## The study
+
+`study/` is the paper. Everything below regenerates from two extraction files
+and one command.
+
+    ./run_all.sh
+
+That runs, in order: every analysis (`make_all.py`), the two that need no error
+bars (`binomial_check.py`, `benchmark_resolution.py`), the benchmark reference
+table (`resolution_table.py`), the LaTeX macros (`make_numbers.py`), the
+figures, a clean LaTeX build, and the five submission gates. It touches no
+network and is deterministic: the bootstrap is seeded. A rerun reproduces every
+artifact byte for byte, which was tested rather than assumed.
+
+Building the corpus itself is the one step that does touch the network:
+
+    python study/pipeline.py --source neurips2025 --source icml2025 \
+        --sample 2000 --seed 0 --out data/extracted_2025.jsonl
+    python study/pipeline.py --source neurips2024 --source icml2024 \
+        --sample 1200 --seed 0 --out data/extracted_2024.jsonl
+
+It downloads each PDF from the open proceedings, extracts it, records its
+SHA-256, and discards it. The JSONL is the checkpoint, so an interrupted run
+resumes. Sources are `neurips2024`, `neurips2025`, `icml2024`, `icml2025`.
+
+### What each file does
+
+| file | role |
+| --- | --- |
+| `harvest.py` | index the open proceedings; download with a cached, hashed manifest |
+| `pipeline.py` | download, extract, discard, at corpus scale, with per-host concurrency limits |
+| `extract.py` | the instrument: tables from captions, lines from vertical overlap, bold from font flags, the NeurIPS checklist answer |
+| `analyze.py` | comparisons from tables, orientation and direction from typography, the z test, Holm within table, the cluster bootstrap |
+| `sensitivity.py` | both readings of every convention the pipeline had to choose; power audit; correlation range |
+| `binomial_check.py` | checkability without error bars: how large a test set the reported gaps would need |
+| `benchmark_resolution.py` | the same, against the benchmark a caption actually names |
+| `resolution_table.py` | what each benchmark in common use can resolve, from its published split |
+| `extra_stats.py` | the numbers that answer reviewer objections, computed rather than typed |
+| `crosscheck.py` | a second extractor on different principles, for an agreement rate |
+| `contact_sheet.py`, `validate.py` | render sampled tables so a person can look at them |
+| `make_numbers.py` | every number the paper prints, as a macro traced to a run |
+| `make_all.py` | one entry point for all of the above |
+
+### Hand-judged inputs
+
+Two things a script cannot regenerate, because a person supplied them: the
+recall audit (sixty tables the extractor called empty, judged by eye) and the
+rejected-table audit (twelve, classified by eye). Their verdicts are in
+`out/gold_recall/manifest.json` and `out/rejected/manifest.json`, and the
+rendered sheets they were judged from are alongside. They are the only typed
+numbers in `make_numbers.py`, and they say so.
+
+### The six bugs
+
+Every extractor bug found is recorded in the commit history with what it did to
+the numbers. All six were found by rendering a sampled table and looking; none
+was found by reading code. That is the argument for the contact sheets.
