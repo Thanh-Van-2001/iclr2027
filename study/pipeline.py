@@ -229,7 +229,10 @@ def main(argv=None) -> int:
         records.sort(key=lambda r: (r["venue"], r["year"], r["id"]))
 
     os.makedirs(os.path.dirname(os.path.abspath(args.out)) or ".", exist_ok=True)
+    already = len(_already_done(args.out))
     stats = run(records, args.out, workers=args.workers)
+    # A resumed run must report the corpus, not the batch it just added.
+    stats["ok"] += already
     print(f"\nextracted {stats['ok']}  |  download failures {stats['download_failed']}  "
           f"|  parse failures {stats['parse_failed']}  |  skipped as too large {stats['skipped_large']}")
     print(f"-> {args.out}")

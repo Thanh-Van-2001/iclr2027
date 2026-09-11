@@ -162,7 +162,7 @@ They are the only typed numbers in `make_numbers.py`, and they say so.
 
 ### Every bug has a test
 
-Eleven extractor bugs are recorded in the commit history and in Appendix E of
+Fourteen extractor bugs are recorded in the commit history and in Appendix E of
 the paper with what each did to the numbers. All were found by rendering a
 sampled table and looking; none by reading code. Each has a regression test in
 `tests/test_extract.py` that reproduces the table pattern on synthetic spans:
