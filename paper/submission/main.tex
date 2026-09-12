@@ -51,7 +51,7 @@ than sampling error: the papers do not print enough to pin down their own
 claims. A second sample of \nPapersTwentyFour{} papers from 2024, run through
 the same instrument, gives \nPctNeitherSideTwentyFour{} and
 \nPctFailTwentyFour{}. We release the pipeline, the per-comparison database,
-the rendered tables on which the instrument was scored, and the fifteen parser
+the rendered tables on which the instrument was scored, and the sixteen parser
 bugs that looking at them caught.
 \end{abstract}
 
@@ -259,13 +259,12 @@ leaves \nPctTestable{}. The 2024 sample gives \nPctNeitherSideTwentyFour{} and
 \nPctTestableTwentyFour{}: the central figure agrees to within a point across
 two samples a year apart, inside either bootstrap interval.
 
-The pattern is not one community's, though its size is. By subfield of the
-title (Appendix~\ref{app:topics}), the share of comparisons without an error
-bar runs from \nRlNeither{} in reinforcement learning to \nLmNeither{} in
-language-model papers, the testable share from \nRlTestable{} to
-\nLmTestable{}, and among what can be tested the failure rate stays between
-\nTopicFailLow{} and \nTopicFailHigh{} in every subfield with fifty or more
-testable comparisons.
+The pattern is not one community's, though its size is: by subfield of the
+title (Appendix~\ref{app:topics}) the share without an error bar runs from
+\nRlNeither{} in reinforcement learning to \nLmNeither{} in language-model
+papers, while the failure rate among what can be tested stays between
+\nTopicFailLow{} and \nTopicFailHigh{} wherever fifty or more comparisons can
+be.
 
 Of whole papers, \nPctWithErrorBar{} print an explicit error bar in any
 results table and \nPctStatingN{} state a number of runs anywhere. Among
@@ -337,10 +336,10 @@ caption names one and ten cells from three papers exist
 (\nDesignPctBenchmarkSd{} of comparisons), else on the paper's own subfield
 (\nDesignPctSubfieldSd{}), else across the corpus. The statistic is the gap
 over the imputed standard error of the difference, reported below one
-cut-point, $1.96$, with $2.80$ (the $80\%$-power threshold) as the same
+cut-point, $1.96$, with $2.80$ (the \nPowerLevel{}-power threshold) as the same
 statistic at a stricter one. It is a comparison against typical noise, not a
-test on the paper's own numbers, and the imputed noise is crude: one median
-per subfield and scale, whatever the metric.
+test on the paper's own numbers, and the noise is crude: one median per
+subfield and scale, whatever the metric.
 
 It can be asked of every comparison with a stated run count and two values in
 one bucket, error bars or not: \nDesignMdeN{} comparisons from
@@ -354,10 +353,8 @@ that population. The calibration is on the identical comparisons: on the
 \nDesignSameN{} testable ones, the imputed noise puts \nDesignSameBorrowed{}
 below the cut-point and the paper's own printed noise \nDesignSameOwn{}, with
 per-comparison agreement of \nDesignSameAgree{} and the disagreements evenly
-split; the rates match, the individual verdicts often do not, which is what a
-crude noise level should produce. By subfield the share runs from
-\nDesignLmBelow{} in language-model papers to \nDesignRlBelow{} in
-reinforcement learning.
+split: the rates match, the individual verdicts often do not, as a crude noise
+level should produce. Appendix~\ref{app:topics} gives the share by subfield.
 
 \section{How large a test set would these gaps need?}
 \label{sec:binomial}
@@ -388,12 +385,11 @@ scored on the same items are positively correlated, so the true requirement is
 at most what we state. Widening the range filter to $(0, 100]$ moves the GSM8K
 share by a point (Appendix~\ref{app:secondary}).
 
-This analysis answers a different question from Section~\ref{sec:survival},
-and the two should not be read as one. Seed variance is the noise that matters
-for a claim about a training procedure on a fixed benchmark; item variance is
-the noise that matters for a claim that a system is better at the task the
-benchmark samples. Most papers make the second claim in words and the first in
-their error bars, when they print any.
+This answers a different question from Section~\ref{sec:survival}: seed
+variance is the noise behind a claim about a training procedure on a fixed
+benchmark, item variance the noise behind a claim that a system is better at
+the task the benchmark samples. Most papers make the second claim in words and
+the first in their error bars, when they print any.
 
 \paragraph{Against the benchmark actually used.} Where a caption names exactly
 one benchmark, the size of that benchmark's evaluation split is public, and the
@@ -440,6 +436,7 @@ each row on a stated population. The span across conventions is far wider than
 the sampling interval in both cases, and wider still for checkability than for
 the failure rate.}
 \label{tab:span}
+\setlength{\tabcolsep}{4pt}
 \begin{tabular}{lrrr}
 \toprule
 & $n$ & Uncorrected & Holm \\
@@ -449,9 +446,6 @@ Welch's $t$ at the stated run count & \nSpanN{} & \nFailWelchT{} & \nFailWelchTH
 One-sided $z$ & \nSpanN{} & \nFailOneSided{} & \nHolmOneSided{} \\
 Unlabelled bars read as standard errors & \nSpanN{} & \nUnlabelledAsSemFull{} & \nHolmUnlabelledAsSemFull{} \\
 Run count from the caption or the table's page & \nLocalN{} & \nLocalFail{} & \nHolmLocal{} \\
-\multicolumn{4}{l}{\emph{Matched-seed hypothetical, outside the span}} \\
-Compared values correlated at $\rho = \nRhoHalf{}$ & \nSpanN{} & \nFailRhoHalf{} & \nHolmRhoHalf{} \\
-Compared values correlated at $\rho = \nRhoNine{}$ & \nSpanN{} & \nFailRhoNine{} & \nHolmRhoNine{} \\
 Holm family the paper, not the table & \nSpanN{} & \nPctFail{} & \nFailHolmPaper{} \\
 Only bars whose meaning is stated & \nLabelledOnlyN{} & \nLabelledOnlyFail{} & \nHolmLabelledOnly{} \\
 Run count taken from the caption only & \nStrictN{} & \nStrictFail{} & \nHolmStrict{} \\
@@ -459,10 +453,14 @@ Tie-marked comparisons removed & & \nFailExcludingTie{} & \\
 \midrule
 Sampling interval, conventions held fixed & \nSpanN{} & \nCiFail{} & \nCiFailHolm{} \\
 \midrule
+\multicolumn{4}{l}{\emph{Matched-seed hypothetical, outside the span}} \\
+Compared values correlated at $\rho = \nRhoHalf{}$ & \nSpanN{} & \nFailRhoHalf{} & \nHolmRhoHalf{} \\
+Compared values correlated at $\rho = \nRhoNine{}$ & \nSpanN{} & \nFailRhoNine{} & \nHolmRhoNine{} \\
+\midrule
 \multicolumn{4}{l}{\emph{And the share that is checkable at all}} \\
 As reported & \nComparisonsTwentyFive{} & \nPctTestable{} & \\
 Run count taken from the caption only & \nComparisonsTwentyFive{} & \nStrictTestable{} & \\
-Every unlabelled bar read as a standard error & \nComparisonsTwentyFive{} & \nTestableAsSem{} & \\
+Unlabelled bars read as standard errors & \nComparisonsTwentyFive{} & \nTestableAsSem{} & \\
 Any marker or $p$-value counted as a check & \nComparisonsTwentyFive{} & \nTestableOrAnyMarker{} & \\
 \bottomrule
 \end{tabular}
@@ -569,12 +567,12 @@ a deviation or a standard error, in \nGoldHeldKind{}, but on the exact label
 in only \nGoldHeldKindLiteral{}: the pipeline's label is a keyword hit on the
 caption or the page, and Table~\ref{tab:span} bounds what it can do.
 
-\paragraph{What is thrown away.} The same audit read \nGoldDiscardedN{}
-discarded tables, \nGoldNonExtN{} non-extremal groups and \nGoldNoBarN{}
-retained comparisons without a bar; \nGoldDiscardedFault{} of the discards
-and \nGoldNonExtFault{} of the non-extremal groups are the pipeline's fault,
-and \nGoldNoBarAbsent{} of the no-bar comparisons carry none
-(Appendix~\ref{app:gold}).
+\paragraph{What is thrown away.} Bold is an imperfect proxy for a claim:
+groups without exactly one bold cell and a rival are dropped, as are the
+\nPctBoldNotExtremal{} whose bold cell is not the best in its group. The same
+audit read \nGoldDiscardedN{} discarded tables and \nGoldNonExtN{}
+non-extremal groups: \nGoldDiscardedFault{} and \nGoldNonExtFault{} are the
+pipeline's fault (Appendix~\ref{app:gold}).
 
 \paragraph{Recall.} Precision does not bound the quantity the headline rests
 on, which is recall: an error bar present in the PDF and missed falls silently
@@ -603,34 +601,24 @@ of a \nLatexSampled{}-paper draw whose arXiv source has table environments,
 source and pipeline agree on whether any table prints an error bar in
 \nLatexPaperAgree{} of papers, and on \nLatexTablesMatched{} tables paired by
 caption in \nLatexTableBarAgree{}; of the \nLatexPaperSourceBar{} papers
-whose source prints a bar, the pipeline finds one in \nLatexPaperRecall{},
-the misses being \nLatexMissMatched{} tables it read as empty,
-\nLatexMissUndetected{} it never detected in papers within its page window,
-and \nLatexMissWindow{} in papers beyond it. The arXiv version is not always
-the proceedings version, so these bound the extractor's error from above.
+whose source prints a bar, the pipeline finds one in \nLatexPaperRecall{};
+Appendix~\ref{app:latex} says where the misses are. The arXiv version is not
+always the proceedings version, so these bound the extractor's error from
+above.
 
-\paragraph{The testable subset is small and may be unrepresentative.} The
-\nNTestable{} testable comparisons come from \nPapersContributing{} distinct
-papers. Papers that report uncertainty are not a random sample of papers; if
-anything they are the more careful ones, which would make the failure rate
-among them a \emph{lower} bound on the rate if every paper reported enough to
-check. We cannot verify that, and say so.
+\paragraph{The testable subset may be unrepresentative.} The \nNTestable{}
+testable comparisons come from \nPapersContributing{} papers, which report
+uncertainty and are if anything the more careful ones; that would make their
+failure rate a \emph{lower} bound on the rate if every paper reported enough
+to check. We cannot verify that, and say so.
 
-\paragraph{Bold is a proxy for a claim, and an imperfect one.} Some papers bold
-nothing, some bold an entire row, some use bold for emphasis. Groups without
-exactly one bold cell and a rival are dropped, as are the \nPctBoldNotExtremal{}
-of the remainder whose bold cell is not the best in its group, since no
-victory is claimed; Table~\ref{tab:funnel} counts every discard and the audit
-above says what they are.
-
-\paragraph{Some tables mark ties, and we would score a tie as a failure.} A
-paper that bolds the best result and marks everything statistically
-indistinguishable from it has declared those pairs ties. The convention appears
-in \nPctTieTables{} of tables but \nPctTieTestable{} of the testable subset;
-removing those comparisons moves the failure rate to \nFailExcludingTie{}
-(Appendix~\ref{app:ties}). Appendix~\ref{app:checklist} reconciles the NeurIPS checklist, on which
-\nCheckYesNoTable{} papers report error bars we cannot find, with the recall
-audit: most of those justifications do not claim an error bar in a table.
+\paragraph{Ties and the checklist.} A paper that marks everything
+statistically indistinguishable from the best has declared ties; removing
+those comparisons moves the failure rate to \nFailExcludingTie{}
+(Appendix~\ref{app:ties}). Appendix~\ref{app:checklist} reconciles the NeurIPS
+checklist, on which \nCheckYesNoTable{} papers report error bars we cannot
+find, with the recall audit: most of those justifications do not claim an
+error bar in a table.
 
 \paragraph{The instrument reads table cells and nothing else.} Uncertainty
 printed in a figure, in a table rendered as an image, or signalled by shading
@@ -661,10 +649,10 @@ an error bar anywhere in a paper, a confidence interval, a significance test,
 and an explicit interval in a results table are four different events, ours
 the narrowest, so our paper-level \nPctWithErrorBar{} is below the earlier
 figures rather than between them. Working at the comparison yields
-\nComparisonsTwentyFive{} observations where hand annotation yields hundreds,
-and makes Sections~\ref{sec:survival} to \ref{sec:binomial} askable; what it
-costs is judgement on an ambiguous table, which is why
-Section~\ref{sec:threats} measures what ours gets wrong.
+\nComparisonsTwentyFive{} observations where hand annotation yields hundreds
+and makes Sections~\ref{sec:survival} to \ref{sec:binomial} askable, at the
+cost of judgement on an ambiguous table, which Section~\ref{sec:threats}
+measures.
 
 \paragraph{Statistical practice as an object of study.} \citet{card2020with}
 and \citet{colas2018how} compute the power of experiments in one subfield each;
@@ -688,14 +676,11 @@ against, so Section~\ref{sec:threats} builds one.
 The cheapest fix is not more statistics. It is printing three quantities that
 authors already have: a dispersion on each value in the main comparison, and the
 number of runs behind them. A paper that prints those becomes checkable by
-anyone, forever, at no cost. A second fix applies before the experiment. The smallest difference a benchmark can resolve
-follows from its evaluation split and belongs to the benchmark, not to any
-paper; Appendix~\ref{app:mde} tabulates it, and some values are startling:
-AIME's \nAimeItems{} items cannot distinguish anything below about \nAimeMde{}
-points, HumanEval's \nHumanevalItems{} below \nHumanevalMde{}. An author who
-consults it first will sometimes find the sentence cannot be written, which is
-the point. The descriptive result is what it is; the prescriptive one follows
-from it immediately, and is small.
+anyone, forever, at no cost. A second fix applies before the experiment:
+Appendix~\ref{app:mde} tabulates the smallest difference each benchmark can
+resolve from its split size alone (AIME's \nAimeItems{} items resolve nothing
+below about \nAimeMde{} points), and an author who consults it first will
+sometimes find the sentence cannot be written, which is the point.
 
 % The mandatory statements below do not count toward the nine-page limit,
 % so the main text ends here.
@@ -911,7 +896,11 @@ Matching tables by caption gives \nLatexTablesMatched{} pairs, on which the
 two agree about the presence of an error bar in \nLatexTableBarAgree{}
 (\nLatexTableSourceOnly{} tables where the source has one and the PDF read
 none, \nLatexTablePipelineOnly{} the reverse) and about the presence of a
-bold number in \nLatexTableBoldAgree{}.
+bold number in \nLatexTableBoldAgree{}. Of the papers whose source prints a
+bar and the pipeline reads none, \nLatexMissMatched{} have that table matched
+to a PDF table read as empty, \nLatexMissUndetected{} have it undetected in a
+paper within the page window, and \nLatexMissWindow{} are papers longer than
+the window.
 
 The script \texttt{latex\_crosscheck.py} queries the arXiv API with each
 paper's title, accepts a match whose title agrees at similarity $0.9$ or
@@ -970,15 +959,17 @@ keyword, in the order listed, and reports both headline figures within each.
 The assignment is crude and is meant only to answer whether the headline is
 the property of one community. It is not: reporting is worst where evaluation
 is cheapest, in language-model and vision benchmarks, and the failure rate
-among what can be tested is similar everywhere there is enough to test.
+among what can be tested is similar everywhere there is enough to test. The share of gaps below
+the imputed noise of Section~\ref{sec:power} runs from \nDesignLmBelow{} in
+language-model papers to \nDesignRlBelow{} in reinforcement learning.
 
 \input{topic_table.tex}
 
 \section{Every extractor bug, and what it did}
 \label{app:bugs}
 
-All fifteen were found by rendering a sampled table and looking; none by
-reading code. Each has a regression test in the released code.
+All sixteen were found by rendering a sampled table and looking, or by the
+LaTeX-source cross-check; none by reading code. Each has a regression test in the released code.
 
 \begin{enumerate}
 \item \textbf{Subscript error bars} set a point below the baseline were paired
@@ -1015,11 +1006,16 @@ reading code. Each has a regression test in the released code.
   five times'', ``three randomly seeded runs'', and a list of the seeds
   themselves were invisible to the pattern, and the comparison was called
   untestable.
+\item \textbf{A caption below its table} read as a figure: after fix fourteen
+  the window above a caption was searched first, and a table whose caption
+  sits underneath had its rows read as the axis ticks of the figure above; the
+  extractor now reads both windows and keeps the one with grid-shaped rows.
 \end{enumerate}
 
 Bugs seven to eleven were found by the development reference set, twelve by the
-recall audit, thirteen and fourteen by the held-out reference set, and fifteen by
-the run-count audit (Section~\ref{sec:threats}). Together
+recall audit, thirteen and fourteen by the held-out reference set, fifteen by
+the run-count audit (Section~\ref{sec:threats}), and sixteen by the
+LaTeX-source cross-check (Appendix~\ref{app:latex}). Together
 they moved the 2025 headline from \nPrefixNeither{} to \nPctNeitherSide{}
 comparisons without an error bar and the failure rate from \nPrefixFail{} to
 \nPctFail{}; every intermediate version of these numbers was, at the time,
