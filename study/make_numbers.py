@@ -533,6 +533,8 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("skipped large", ps["skipped_large"], provenance="pipeline_stats")
     reg.add("download failed", ps["download_failed"] + ps["parse_failed"], provenance="pipeline_stats")
     reg.add("drawn twenty five", ps["drawn"], provenance="pipeline_stats")
+    # The anonymous mirror of the release (code, extraction files, reference sets).
+    reg.add("release url", r"\url{https://anonymous.4open.science/r/checkable--E2C5}", provenance="release")
 
     # The gold set: the instrument scored field by field against tables read
     # blind. Development set (found the bugs), the same set re-scored after

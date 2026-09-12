@@ -1,4 +1,4 @@
-# Most Reported Improvements Cannot Be Checked
+# Most Highlighted Comparisons Cannot Be Checked From the Printed Page
 
 Code, extraction files and reference sets for the paper of that title
 (submitted to ICLR 2027, double blind). Every number in the paper is a macro
