@@ -575,7 +575,15 @@ the reader listing every single-bold group it could find: the pipeline's
 winner is among them in \nNoboxWinnerFoundFrac{}, with the same rival in
 \nNoboxRivalSameFrac{} of those (\nNoboxClaim{} of all). The
 failure modes this set exposed are listed in Appendix~\ref{app:bugs} and left
-unfixed, so that the set stays what it is.
+unfixed, so that the set stays what it is. Instrument error, not sampling, is the larger uncertainty on the failure
+rate, and it is propagated as recall was: the verdict disagreement of
+\nVerdictDisagreementsFrac{} has upper bound \nVerdictErrorUpper{}, and if
+that share of either verdict were wrong the headline would sit in
+\nFailInstrumentBand{} (Table~\ref{tab:main}); the observed disagreements all
+run one way, the pipeline surviving where the reader fails, which puts it at
+\nFailInstrumentPoint{}, or \nFailReaderTestableScaled{} dropping the items
+the reader could not test. The claim disagreement of a third is mostly in
+what the pipeline compares, not in the values it reads.
 
 \paragraph{The headline without the pipeline.} On \nPagesN{} table pages drawn
 at random from the corpus, one per paper, the same reader listed every
@@ -589,15 +597,7 @@ shares and disagree on the census: the reader lists \nPagesPipeFoundPct{} of
 the pipeline's groups, the pipeline only \nPagesReaderFoundPct{} of the
 reader's, so the corpus holds more highlighted comparisons than the pipeline
 counts, printing the same things.
-Instrument error, not sampling, is the larger uncertainty on the failure
-rate, and it is propagated as recall was: the verdict disagreement of
-\nVerdictDisagreementsFrac{} has upper bound \nVerdictErrorUpper{}, and if
-that share of either verdict were wrong the headline would sit in
-\nFailInstrumentBand{} (Table~\ref{tab:main}); the observed disagreements all
-run one way, the pipeline surviving where the reader fails, which puts it at
-\nFailInstrumentPoint{}, or \nFailReaderTestableScaled{} dropping the items
-the reader could not test. The claim disagreement of a third is mostly in
-what the pipeline compares, not in the values it reads.
+
 
 The weakest field is the run count, read from the paper rather than the table.
 On the held-out items the reader found none in \nGoldHeldNoRunsFrac{}; where
