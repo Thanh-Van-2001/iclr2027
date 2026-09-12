@@ -565,7 +565,10 @@ somewhere for \nGoldFrozenNoNFoundFrac{} of the no-run-count items
 \nGoldFrozenRivalCopiedFrac{}. Read again with nothing marked, so that the box cannot anchor it, the
 reader lists the pipeline's winner among the single-bold groups it finds in
 \nNoboxWinnerFoundFrac{}, with the same rival in \nNoboxRivalSameFrac{} of
-those (\nNoboxClaim{} of all). The
+those (\nNoboxClaim{} of all); a second reader, a smaller model, agrees with
+the first on the rival in \nReadersAgreeRunner{} of a sixty-item subset and
+with the pipeline on the verdict in \nReaderTwoAgree{}
+(Appendix~\ref{app:gold}). The
 failure modes this set exposed are listed in Appendix~\ref{app:bugs} and left
 unfixed, so that the set stays what it is. Instrument error, not sampling, is the larger uncertainty on the failure
 rate, and it is propagated as recall was: the verdict disagreement of
@@ -743,8 +746,9 @@ the literature. Every empirical number in the paper was produced by the
 released code and checked against its run record. The rendered-table audits of
 Section~\ref{sec:threats}---the recall audit, the rejected-table audit and the
 reference set---were read from the images by the assistant (Claude Opus 5,
-reading PNG renderings, with the prompt given in Appendix~\ref{app:gold}),
-with the pipeline's output hidden from it; the renderings and labels are
+reading PNG renderings, with the prompt given in Appendix~\ref{app:gold};
+the second reader of Appendix~\ref{app:gold} is Claude Sonnet 5), with the
+pipeline's output hidden from it; the renderings and labels are
 released so that any reader can re-score them, and the authors are responsible
 for the protocol, the labels and every claim in the paper.
 
@@ -947,6 +951,22 @@ same fields as the boxed items. The reader's content filter declined
 on the rest, \nPagesTablesWithBar{} print any dispersion. Groups are matched
 to pipeline comparisons on the same page by the winner's printed value;
 intervals resample pages.
+
+\paragraph{A second reader.} The sixty-item labelling kit released with the
+frozen set (its first \nGoldFrozenN{} testable items' first forty and the
+first twenty no-bar items) was also read blind by a smaller model of the same
+family (Claude Sonnet 5), under the same prompt. Against the first reader it
+agrees on the bold cell in \nReadersAgreeBold{} items both could judge, the
+orientation in \nReadersAgreeOrientation{}, the winner in
+\nReadersAgreeWinner{} and its bar in \nReadersAgreeWinnerDisp{}, the
+runner-up in \nReadersAgreeRunner{} and its bar in \nReadersAgreeRunnerDisp{},
+the bar kind in \nReadersAgreeKind{} and the run count in
+\nReadersAgreeRuns{}. Against the pipeline it agrees on the whole claim in
+\nReaderTwoClaimFrac{} and on the verdict in \nReaderTwoAgree{}, failing
+\nReaderTwoFailReader{} of those items where the pipeline fails
+\nReaderTwoFailPipe{}, and finds no bar on \nReaderTwoNoBarAbsentFrac{} of
+the no-bar items. Two models agreeing is not a human reference; the kit is
+released for one.
 
 \paragraph{All four scorings.} Table~\ref{tab:goldscores} prints every
 comparison of the reader's verdicts with the pipeline's, before and after the

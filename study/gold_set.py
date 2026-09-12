@@ -610,13 +610,18 @@ def agree(path_a: str, path_b: str) -> dict:
     A, B = load(path_a), load(path_b)
     ids = sorted(set(A) & set(B))
     out = {"items": len(ids)}
+    def _asked(a, b):
+        # a field neither reader filled (a stratum that does not ask for it) is not a comparison
+        return bool(a.strip() or b.strip())
+
     for f in ("bold_ok", "orientation", "direction", "disp_type"):
         pairs = [(A[i][f].strip().lower()[:3], B[i][f].strip().lower()[:3]) for i in ids
-                 if not _unclear(A[i][f]) and not _unclear(B[i][f])]
+                 if _asked(A[i][f], B[i][f]) and not _unclear(A[i][f]) and not _unclear(B[i][f])]
         hit = sum(1 for a, b in pairs if a == b)
         out[f] = {"n": len(pairs), "agree": hit, "pct": round(100 * hit / len(pairs), 1) if pairs else None}
     for f in ("winner_mean", "winner_disp", "runner_mean", "runner_disp", "n_runs"):
-        pairs = [(_num(A[i][f]), _num(B[i][f])) for i in ids if not _unclear(A[i][f]) and not _unclear(B[i][f])]
+        pairs = [(_num(A[i][f]), _num(B[i][f])) for i in ids
+                 if _asked(A[i][f], B[i][f]) and not _unclear(A[i][f]) and not _unclear(B[i][f])]
         hit = sum(1 for a, b in pairs if _match(a, b))
         out[f] = {"n": len(pairs), "agree": hit, "pct": round(100 * hit / len(pairs), 1) if pairs else None}
     return out

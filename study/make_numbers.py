@@ -801,6 +801,25 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
         reg.add("pages reader fail", rf"{rf_['pct_fail']}\% [{rf_['ci'][0]}, {rf_['ci'][1]}]", provenance=prun)
         reg.add("pages reader fail papers", rf_["n_papers"], provenance=prun)
 
+    # A second reader of a different model on the sixty-item kit: agreement
+    # with the first reader per field, and with the pipeline.
+    r2 = _j("gold_set_reader2")
+    ra = _j("reader_agreement")
+    rrun = "gold_set_reader2"
+    reg.add("reader two n", ra["items"], provenance=rrun)
+    for f, name in (("bold_ok", "bold"), ("orientation", "orientation"), ("winner_mean", "winner"),
+                    ("winner_disp", "winner disp"), ("runner_mean", "runner"), ("runner_disp", "runner disp"),
+                    ("n_runs", "runs"), ("disp_type", "kind")):
+        reg.add(f"readers agree {name}", f"{ra[f]['agree']} of {ra[f]['n']}", provenance=rrun)
+        reg.add(f"readers agree {name} pct", rf"{ra[f]['pct']}\%", provenance=rrun)
+    r2t = r2["testable"]
+    reg.add("reader two claim frac", _frac(r2t["fields"]["claim_and_values"]), provenance=rrun)
+    reg.add("reader two claim", _pct_ci(r2t["fields"]["claim_and_values"]), provenance=rrun)
+    reg.add("reader two agree", _agree(r2t), provenance=rrun)
+    reg.add("reader two fail reader", rf"{r2t['failure_rate_reader_values']}\%", provenance=rrun)
+    reg.add("reader two fail pipe", rf"{r2t['failure_rate_pipeline_values_same_items']}\%", provenance=rrun)
+    reg.add("reader two no bar absent frac", _frac(r2["no_bar"]["error_bar_truly_absent"]), provenance=rrun)
+
     # the run-count recall audit
     gc = _j("gold_set_no_n")["no_n"]
     reg.add("gold no n n", gc["n"], provenance=grun)
