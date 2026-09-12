@@ -1,0 +1,35 @@
+20,000 iterations, while Scholtes-C and Scholtes-D are run for 10 outer iterations (as they converge
+---
+SiPBA, AdaProx-PD, and AdaProx-SG are run for
+---
+The average results over ten independent runs are summarized
+---
+The performance is measured by test loss, averaged over 10 random seeds
+---
+Valid Runs
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+for those valid runs (Ave
+---
+in this subsection, the results are averaged over 10 independent runs, each initialized from a distinct,
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+instructions on how to run the code to ensure the reproducibility of the experiments
+---
+only tested on a few datasets or with a few runs
+---
+over ten runs are shown in Figure 3, which shows that SiPBA achieves the highest test accuracy
+---
+results are based on multiple repetitions of the experiments
+---
+run with given experimental conditions)
+---
+runs achieving the tolerance ϵrel < 10−4 (Valid Runs), and the average runtime to reach this tolerance
+---
+• The instructions should contain the exact command and environment needed to run to

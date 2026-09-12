@@ -1,0 +1,27 @@
+10, we can see that T-fold composition of M ◦Samplem satisfies
+---
+Assign local initialization: θc,t,0 ←θt
+---
+Justification: Although we do not include error bars in the experiments, we repeat each
+---
+and run T = 500 communication rounds; for the language task, we use b = 2 × 105 (approximately
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experiment five times and report the average results
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+private mechanisms satisfies (ϵ′, kδ + δ′)-differential privacy under k-fold adaptive composition for:
+---
+run with given experimental conditions)
+---
+sensitivity to the optimizer choice, we repeated the image-classification experiments with AMSGrad
+---
+• The instructions should contain the exact command and environment needed to run to

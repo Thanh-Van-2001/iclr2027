@@ -1,0 +1,39 @@
+After initialisation the controller waits for lcd_enable, switches from
+---
+Figure 3: Runtime comparison with the state of the art (all times are in log scale)
+---
+Figure 4: Runtime analysis of our approach (all times are in log scale)
+---
+G Φ meaning Φ always holds, Φ1 U Φ2 meaning Φ1 holds at all times until Φ2 necessarily holds at
+---
+Instead for statistical significance, we run each tool once on a substantial
+---
+MILP-based approach under multiple random initialisation sizes with 0 (our default), 10, 25, and
+---
+This is in contrast to prior work that benefits from random initialisation of the
+---
+We check the initialisation and ranking conditions independently
+---
+at most finitely many times
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+is either (i) unreachable or (ii) visited at most finitely many times
+---
+only tested on a few datasets or with a few runs
+---
+possible; hence, fair states must be visited at most finitely many times
+---
+run with given experimental conditions)
+---
+these sections provide sufficient detail to replicate our method for neural model checking of
+---
+to Dinit and Dtrans, and learning and checking are repeated in a loop
+---
+• The instructions should contain the exact command and environment needed to run to

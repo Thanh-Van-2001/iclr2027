@@ -1,0 +1,29 @@
+, 2017] train multiple models with different initializations,
+---
+All experiments use fixed random seeds for reproducibility and standard data augmentation per
+---
+Justification: All of our reported results are reported as mean values over 5 random runs
+---
+SGDR: stochastic gradient descent with warm restarts
+---
+Unless otherwise specified, all results are averaged over 5 random seeds
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+for practitioners: (i) use additional or repeated labels and noise-robust losses to reduce εBayes;
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+run with given experimental conditions)
+---
+– Cross-validation: Average selection thresholds over folds to reduce their variance and avoid
+---
+– Repeated labels: Collect multiple annotations (e
+---
+• The instructions should contain the exact command and environment needed to run to

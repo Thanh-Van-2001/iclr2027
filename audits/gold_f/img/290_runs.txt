@@ -1,0 +1,31 @@
+8} and run
+---
+Fine-tuning pretrained language models: Weight initializations, data orders, and early stopping,
+---
+Justification: code is provided to replicate the results, and the public checkpoints used are
+---
+We run the relaxation scheme based
+---
+[24] to replicate the results of the original model as closely as possible
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+experiments are run using 4 H100 GPUs, and each set of benchmarks takes roughly 15 minutes to
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+model is used to run benchmarks and not a stochastic process that would involve differing
+---
+only tested on a few datasets or with a few runs
+---
+results across runs
+---
+run for each checkpoint
+---
+run with given experimental conditions)
+---
+• The instructions should contain the exact command and environment needed to run to

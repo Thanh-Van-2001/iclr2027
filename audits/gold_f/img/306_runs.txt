@@ -1,0 +1,29 @@
+All other linear layers in the model were initialized using Xavier initialization
+---
+For the linear layers in M-MLP, we employed Kaiming initialization to set their initial parameters
+---
+Initialization
+---
+Specifically, to ensure the fairness of the comparison and guarantee that most models can run on our
+---
+Through this initialization method, each node can have a sufficiently large
+---
+We run each method
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+five times with different random seeds and report the average metric of each model
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+run with given experimental conditions)
+---
+zones at different times, thus presenting variations in flow observations in each zone
+---
+• The instructions should contain the exact command and environment needed to run to

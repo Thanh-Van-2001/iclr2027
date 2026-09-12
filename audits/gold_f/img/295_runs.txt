@@ -1,0 +1,43 @@
+3B [83] (our initialization weights) and LTX-
+---
+Autoregressive Diffusion Post-Training via Self-Rollout
+---
+Autoregressive self-rollout generates samples directly from the inference-time model distribution,
+---
+Critic network initialization
+---
+DF and DMD essentially replicates CausVid [100] within our implementation framework, allowing
+---
+For both ODE initialization and Self Forcing
+---
+Most of our training runs use 64 NVIDIA GPUs (80GB memory each) with a
+---
+Our DMD training runs take only approximately 1
+---
+Temporal AR rollout
+---
+The core idea of Self Forcing is to generate videos through autoregressive self-rollout during training
+---
+autoregressive self-rollout during training, denoising the next frame based on previous context frames
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+initialization protocol [100], we first finetune the base model with causal attention masking on 16k
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+rollout, it still processes all tokens within each individual frame/chunk in parallel, maintaining high
+---
+run with given experimental conditions)
+---
+sive (each run requires hundreds of H100 hours of compute)
+---
+tion on previously self-generated outputs by performing autoregressive rollout with
+---
+• The instructions should contain the exact command and environment needed to run to

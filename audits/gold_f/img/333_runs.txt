@@ -1,0 +1,61 @@
+1) Phrase Nodes: These seed
+---
+3) These final seed nodes
+---
+After determining the seed nodes, we assign reset probabilities to control how likely the
+---
+All passage nodes are taken as seed nodes since we find that activating a broader set of potential passages is more
+---
+Assigning seed node weights
+---
+By incorporating both phrase nodes and passage nodes into the PPR initialization, our approach ensures a more effective
+---
+For LLM deployment, we run Llama-3
+---
+More specifically, these seed nodes are used to assign the
+---
+Once the seed nodes and their reset probabilities are initialized, we run PPR over
+---
+Otherwise, we keep at most 5 phrase nodes as the seed
+---
+PPR Seed Nodes
+---
+PPR initialization is detailed in Appendix G
+---
+Seed Node
+---
+Seed Node Selection
+---
+Seed Passage Nodes (Title)
+---
+Seed Phrase Nodes
+---
+The seed nodes for the PPR search are categorized into two types: phrase nodes and passage nodes
+---
+These components collaborate to replicate the interactions
+---
+We manage our KG and run the PPR
+---
+We provide a detailed explanation of the PPR initialization process used in HippoRAG 2 here
+---
+also taken as seed nodes, as broader activation improves
+---
+are used to run the Personalized PageRank (PPR) algorithm
+---
+be used as seed nodes for graph search (§3
+---
+improve seed node selection for graph search (§3
+---
+scores both the passages and triples to identify the seed nodes of both types for the Personalized PageRank (PPR) algorithm
+---
+seed nodes and their neighborhoods, enabling HippoRAG’s
+---
+seed nodes for PPR
+---
+selecting seed nodes and assigning reset probabilities for
+---
+set as the final seed nodes (§3
+---
+sponding to these entities, which we refer to as seed nodes,
+---
+the seed nodes for the PPR search and assign appropriate reset probabilities to ensure an effective retrieval process

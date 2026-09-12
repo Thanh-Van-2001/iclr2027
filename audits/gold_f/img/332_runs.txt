@@ -1,0 +1,79 @@
+(a) Seeding: invoke DRAFT exactly nd times from the root v0; (b) Logging:
+---
+**PRINTS THE 5-FOLD CROSS-VALIDATION** score of the evaluation
+---
+**PRINTS THE 5-FOLD CROSS-VALIDATION** score of the evaluation metric
+---
+, 5-FOLD CROSS-VALIDATION,
+---
+, MLE-bench Lite) with higher seed counts rather than full
+---
+10 seeds
+---
+15 seeds
+---
+3 seeds
+---
+5 seeds
+---
+5, we use 20 seeds per task to enhance reliability
+---
+5-fold CV score
+---
+Each run represents a sample from the underlying performance distribution (estimated from 20 seeds),
+---
+Figure 11 demonstrates how dramatically agent rankings can shift with insufficient seed sampling
+---
+Figure 11: Potential algorithm rankings under different seed counts
+---
+Figure 12: Sources of performance variance across tasks and seeds
+---
+For each node v, fitness is the mean 5-fold cross-validation (CV) score
+---
+For future work we recommend a minimum of 10 seeds per competition (with 20 seeds much more
+---
+Justification: We report 95 % stratified bootstrap confidence intervals and repeat each
+---
+Mean with 20 Seeds
+---
+Methods utilizing R1 are averaged over 20 seeds per task and
+---
+Our experiments were run on a single-agent setup powered by an NVIDIA H200 GPU, 24 CPU cores
+---
+Repeat
+---
+The chosen operator from OAIRA is applied n times, creating
+---
+The evolutionary agent keeps a population Vt of fixed size n and repeats:
+---
+To ensure experiment validity and avoid hitting rate limits, we limited the number of parallel runs
+---
+We recommend using a minimum of 10 seeds
+---
+a baseline, we repeat the process for a set of random-k nodes, and summarize the results in Fig
+---
+across the independent runs on the MLE-bench lite suite in the main experiments (see Section 5
+---
+allowing us to allocate more seeds per task and increase our confidence in our results
+---
+and with only a few seeds, observed performance differences may be statistical artifacts rather than
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+evaluate on all 75 competitions with 3 seeds each or evaluate on 22 competitions with 10 seeds each,
+---
+evaluation (USE 5-FOLD CROSS-VALIDATION)
+---
+evaluation with few seeds
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+execution outputs—extracting run success, summary text, and validation metric
+---
+experiment using 10 different random seeds per task to ensure robustness and statistical
+---
+experimental runs as well as estimate the total compute
+---
+held-out test medal rates across 20 seeds for all tasks
+---
+instructions for how to replicate the results, access to a hosted model (e

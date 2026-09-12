@@ -1,0 +1,23 @@
+A100 or H100 GPU for three independent runs
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+deviation over three independent sampling runs
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+performance is evaluated on each dataset over three independent runs, using the checkpoint with the
+---
+run with given experimental conditions)
+---
+sampling runs for all main experiments in Table 2 and Figure 4
+---
+set using the trained checkpoint for three independent runs per dataset
+---
+• The instructions should contain the exact command and environment needed to run to

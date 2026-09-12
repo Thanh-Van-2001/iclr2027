@@ -78,6 +78,7 @@ def main(argv=None) -> int:
         by_page.setdefault((c["paper"], c["page"]), []).append(c)
 
     per_page = []
+    shared, reader_only, pipe_only = [], [], []
     m_g = m_n = u_g = u_n = 0   # reader groups the pipeline also has / does not
     r_groups = r_neither = r_testable = r_onebar = 0
     p_groups = p_neither = p_testable = 0
@@ -110,6 +111,18 @@ def main(argv=None) -> int:
                 groups.append({"w": _num(g.get("winner_mean")), "wb": wb, "rb": rb,
                                "testable": testable, "fail": fail, "paper": it["paper"]})
         pc = by_page.get((it["paper"], it["page"]), [])
+        # verdicts on the same pages: groups both instruments test, and the
+        # ones only one of them can
+        for g in groups:
+            m = next((c for c in pc if _eq(g["w"], c["winner"])), None)
+            if g["fail"] is not None and m is not None and m.get("test"):
+                shared.append((g["fail"], m["test"]["p"] >= 0.05))
+            elif g["fail"] is not None:
+                reader_only.append(g["fail"])
+        matched_w = {round(g["w"], 9) for g in groups if g["w"] is not None}
+        for c in pc:
+            if c.get("test") and not any(_eq(g["w"], c["winner"]) and g["fail"] is not None for g in groups):
+                pipe_only.append(c["test"]["p"] >= 0.05)
         page = {"id": iid, "n_groups": len(groups),
                 "neither": sum(1 for g in groups if not g["wb"] and not g["rb"]),
                 "testable": sum(1 for g in groups if g["testable"]),
@@ -163,6 +176,13 @@ def main(argv=None) -> int:
                           "ci": [round(bvals[50], 1), round(bvals[1949], 1)]}
     out = {
         "reader_failure": reader_failure,
+        "verdicts_same_pages": {
+            "shared": {"n": len(shared), "reader_fails": sum(1 for a, b in shared if a),
+                       "pipeline_fails": sum(1 for a, b in shared if b),
+                       "agree": sum(1 for a, b in shared if a == b)},
+            "reader_only": {"n": len(reader_only), "fails": sum(reader_only)},
+            "pipeline_only": {"n": len(pipe_only), "fails": sum(pipe_only)},
+        },
         "corpus_one_page_per_paper": {"pct_neither": round(sum(nei) / len(nei), 1),
                                       "pct_testable": round(sum(tes) / len(tes), 1)},
         "reader_groups_matched": {"groups": m_g, "pct_neither": round(100 * m_n / m_g, 1) if m_g else None},

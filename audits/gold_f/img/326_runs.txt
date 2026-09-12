@@ -1,0 +1,27 @@
+, less than 10k, the BP times under different partition sizes are
+---
+3-4B model and is averaged over 50 independent trials
+---
+Additionally, we include a StreamBP run under FP32 precision, denoted as
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+of unpartitioned parameter for D times during the backward
+---
+only tested on a few datasets or with a few runs
+---
+parameter for D times during the backward
+---
+repeat G×
+---
+run with given experimental conditions)
+---
+step K leads to approximately K times heavier backward communication cost than using batch
+---
+• The instructions should contain the exact command and environment needed to run to

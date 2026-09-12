@@ -1,0 +1,31 @@
+Initialization: ∀l ∈
+---
+This process is repeated for all layers
+---
+To find the zero-noise result, ZNE runs
+---
+We repeat the same protocol on the Fashion-MNIST dataset (Pullover vs
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experiment is repeated three times per setting, and the standard deviation is used to report variability
+---
+experimental runs as well as estimate the total compute
+---
+initialization avoids extra state preparation depth and associated gate noise, so our comparisons isolate
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+of such −1 recorded during the run
+---
+only tested on a few datasets or with a few runs
+---
+run with given experimental conditions)
+---
+samples; standard test split; three seeds)
+---
+with probability at least 1 −δ, the number of measurements (or number of runs) required to estimate
+---
+• The instructions should contain the exact command and environment needed to run to

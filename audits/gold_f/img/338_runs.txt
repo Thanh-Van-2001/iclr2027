@@ -1,0 +1,55 @@
+For SP, we don’t apply any µP++ scaling laws, and since LeCun initialization already scales its
+---
+In our architectures, Differential Attention uses a depth-dependent initialization factor, λinit =
+---
+Initialization
+---
+Justification: We report average results of multiple runs in our experimental section with
+---
+KV sharing across adjacent layers, achieving up to two times reduction in KV cache size while
+---
+LeCun initialization and does not include Depth-µP or weight decay modifications as in µP++) can
+---
+Now, how many times does R appearhere?
+---
+PyTorch default initialization)
+---
+Repeat after me: Transformers
+---
+The question is asking how many times the letter "r" appears in the word
+---
+Then, 4ac is 4 times 1 times 3, which is 12
+---
+We divide the initialization standard
+---
+We use LeCun uniform initialization (i
+---
+allowed, then the square root of -3 can be written as i times the square root of 3,where i is the
+---
+also try using Normal Initialization with 0
+---
+as adopted by LeCun initialization, rather than a global factor related to model width
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+dimension of the weight matrix, we instead use normal initialization with a standard deviation of
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+indicating that it is better to adjust the initialization multipliers based on each matrix’ dimension
+---
+initialization variance with respect to 1/din as the same as proposed in µP, where din is the fan-in
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+performance is tightly coupled with its optimization and initialization settings, we begin by estab-
+---
+run with given experimental conditions)
+---
+untied setting, we follow RWKV [PAA+23] by applying normal initialization with zero mean and a
+---
+• The instructions should contain the exact command and environment needed to run to

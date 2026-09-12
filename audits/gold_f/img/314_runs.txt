@@ -1,0 +1,49 @@
+25 times reduction
+---
+63 times reduction in Mean QGC
+---
+77 times in Mean QGC over UoT
+---
+97 times is observed on MedDG
+---
+Each experiment was run three times,
+---
+In the rollout phase, we traverse ds levels down from the selected node, choosing one of its child
+---
+Initialization: We initialize the candidate set Ωwith 5 possibilities generated from the
+---
+Repeat for K iterations
+---
+Rollout till ds
+---
+Simulation: A rollout policy is used to estimate the expected reward of the selected node by
+---
+We report results with both types of initializations
+---
+also employ lightweight rollout policies limited by predefined depth during the simulation
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+dom rollout explores the tree to depth ds;
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+initialization from full superset at the root node
+---
+initialization of root node with the constrained set of possibilities Ωc ⊆Ω
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+learning: a proof-of-concept trial
+---
+only tested on a few datasets or with a few runs
+---
+run with given experimental conditions)
+---
+sulting in fewer than ds calls per rollout
+---
+were run on an 8-core CPU with 16 GB RAM
+---
+• The instructions should contain the exact command and environment needed to run to

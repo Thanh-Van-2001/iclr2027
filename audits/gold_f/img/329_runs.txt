@@ -1,0 +1,55 @@
+25 times
+---
+80 timesteps of a simulation from the full 5D field after an autoregressive rollout
+---
+After a larger amount of rollout steps
+---
+Figure 8: Side-by-side comparison of autoregressive rollout predictions with GyroSwin compared
+---
+Finally, we include qualitative results for autoregressive rollouts of GyroSwin
+---
+Justification: We provide error bars across evaluation runs for different simulations, how-
+---
+To enable autoregressive rollouts,
+---
+Toward efficient runs of nonlinear gyroki-
+---
+We replicate this operation in the latent space of GyroSwin
+---
+We run each simulation for a total of 31,920 steps, which are averaged every 40 steps and
+---
+We run nonlinear simulations using the numerical code GKW (Peeters et al
+---
+across thousands of runs, radial locations, and time intervals, underscoring the need for scalable sur-
+---
+an autoregressive rollouts with the neural surrogates and measure correlation time
+---
+as they do not predict any turbulent flux transport after longer rollouts, leading to similar errors for
+---
+best combination of stable autoregressive rollouts and nonlinear flux prediction
+---
+ble rollouts, however it completely fails in capturing the nonlinear flux trace
+---
+correlation time for autoregressive rollouts with threshold τ = 0
+---
+correlation times for the neural surrogates in Table 2
+---
+ever we usually train only one seed due to computational constraints
+---
+for long rollouts well beyond 100 timesteps
+---
+nonlinear physics we report time-averaged pearson correlation for autoregressive rollout
+---
+performing stable autoregressive rollouts without drifting too far from the ground truth
+---
+preserves the high-level structure within the first rollout steps
+---
+scaling GyroSwin in terms of data and model size, we attain stable rollouts for over 100 timesteps,
+---
+the first 10 rollout steps, however, afterwards the model suffers from error accumulation
+---
+toregressive rollouts over 100 timesteps, it suffers from error accumulation
+---
+train it for three seeds and for both training sets, containing 48 and 241 simulations and report our
+---
+¯Q we report RMSE of time-averaged predictions after an autoregressive rollout

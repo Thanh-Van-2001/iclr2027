@@ -784,6 +784,15 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("neither census scaled", rf"{y25['pct_neither'] * _ratio:.1f}\%", provenance=prun)
     # The reader's own failure rate on the groups it could test, from its
     # values and the run count it found.
+    vs = pg["verdicts_same_pages"]
+    reg.add("pages shared n", vs["shared"]["n"], provenance=prun)
+    reg.add("pages shared reader fails", vs["shared"]["reader_fails"], provenance=prun)
+    reg.add("pages shared pipe fails", vs["shared"]["pipeline_fails"], provenance=prun)
+    reg.add("pages shared agree", vs["shared"]["agree"], provenance=prun)
+    reg.add("pages reader only n", vs["reader_only"]["n"], provenance=prun)
+    reg.add("pages reader only fails", vs["reader_only"]["fails"], provenance=prun)
+    reg.add("pages pipe only n", vs["pipeline_only"]["n"], provenance=prun)
+    reg.add("pages pipe only fails", vs["pipeline_only"]["fails"], provenance=prun)
     rf_ = pg.get("reader_failure")
     if rf_:
         reg.add("pages reader testable groups", rf_["n"], provenance=prun)

@@ -1,0 +1,73 @@
+(or Kaiming He) initialization in the presence of observation noise
+---
+All our results were averaged over 10 independent trials, and shaded areas
+---
+Figure 4: Cumulative regret across trials for the Darcy flow rate optimization problem with only
+---
+Figure 5: Cumulative regret across trials for the Darcy flow total pressure optimization problem with
+---
+Finally, the algorithm runs the potentially expensive step of querying the true operator G∗with the
+---
+NOTS was implemented using the Neural Operator library [47] and run on NVIDIA H100 GPUs
+---
+Observation noise and initialization in wide
+---
+The shaded areas correspond to one standard deviation across 10 trials
+---
+The summand corresponds to the information gain after nT,a repeated observations at the same a,
+---
+This process repeats for up to T iterations,
+---
+We note that, in practice, due to the small initialization variance of order
+---
+[37], which scale each layer’s weights initialization variance according to the width of the previous
+---
+architecture and the weights initialization distribution
+---
+as long as a LeCun or Kaiming/He type of initialization scheme is applied to the parameters with
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+distribution of the untrained neural network hθ : V →R under Gaussian weights initialization, whose
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+following model at initialization:
+---
+for any x, x′ ∈X, where the expectation is taken under the parameters initialization distribution
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+ized using Kaiming (or He) initialization [36] for the network weights, sampling from a normal
+---
+metrics across trials for the inverse problem in the shallow water data
+---
+neural networks trained via random initialization and gradient descent to approximate posterior
+---
+only tested on a few datasets or with a few runs
+---
+repeated choices of the same xt = x∗for all t at some point, for a fixed x∗∈X, which may or may
+---
+right) metrics across trials for the negative total flow rates case in the Darcy flow problem
+---
+run with given experimental conditions)
+---
+scale to accommodate longer runs or extensions to batched evaluations than a GP approach, even
+---
+shaded areas correspond to one standard deviation across 10 trials
+---
+the neural network, which consists of a random feature map ϕ : X →RM under the initialization
+---
+the neural operator posterior, each iteration begins with the random initialization of the parameters of
+---
+the rest are kept fixed at their random initialization; in which case case, the GP described by the NTK
+---
+to one standard deviation across 10 trials
+---
+where h ∼GP(0, kNNGP) denotes the network at its random initialization, as defined above, kNTK
+---
+θt,0 ∼N(0, Σ0), where Σ0 is a diagonal matrix following Kaiming He [36] or LeCun initialization
+---
+• The instructions should contain the exact command and environment needed to run to

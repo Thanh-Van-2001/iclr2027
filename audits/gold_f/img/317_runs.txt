@@ -1,0 +1,43 @@
+(2024c) to repeat a policy’s predicted action 2 times, which
+---
+6, 8, or 10 times, and we can slow down a segment by 2, 3, 4, 5, or 6 times
+---
+In addition to being affected by poor initialization due to
+---
+On each rollout, the loca-
+---
+To build the dataset, we utilize a set of rollout trajectories covering
+---
+We compute the mean and standard error across the 3 training runs, each evaluated
+---
+We run experiments in two different environments: Meta-world (Yu et al
+---
+We run experiments on 10 different tasks in the Meta-world (Yu et al
+---
+and 52% faster than RoboCLIP given rollouts of length 100, and it is comparable to threshold, OT, and DTW
+---
+and ORCA cannot reap the benefits of better initialization
+---
+as ORCA(NP), because it can take advantage of the better initialization
+---
+ation seeds are also different
+---
+each method, we evaluated 100 rollouts with a demonstration of length 100 and learner rollouts of length 100 and 300
+---
+error across the 3 training runs, each evaluated on 10 random seeds
+---
+learner rollout and demonstration
+---
+on 8 random seeds
+---
+perturbed demonstration is trained on a random seed, and we ensure that ORCA and TemporalOT are trained on that same
+---
+report the mean performance and standard error given learner rollouts of length 100 and 300
+---
+seed for fair comparison
+---
+speed, but the rest is sped up by five to ten times
+---
+standard error across the 3 training runs, each evaluated on 10 random seeds
+---
+standard error; each task is run on three random seeds

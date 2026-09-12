@@ -1,0 +1,13 @@
+) and instructing the model to repeat its output
+---
+We use 5-fold cross-validation, and report the change in
+---
+folds of a dataset D
+---
+individual training examples by simulating training runs
+---
+instead asking a model to repeat its output, and labeling the output as harmful if the model refuses to repeat it
+---
+model accuracy by choosing α appropriately, we first evenly divide D into K = 5 folds D1, · · · , DK
+---
+repeat that? defending against jailbreaks via repetition

@@ -153,10 +153,10 @@ interval. We compute Welch's two-sided $t$ from the printed quantities alone,
 each standard error being the printed deviation over $\sqrt{n}$ and the
 degrees of freedom Satterthwaite's, in the normal limit where no run count is
 printed, and apply Holm--Bonferroni within each table, the family being
-the testable comparisons in that table (median family \nFamilyMedian{};
-\nFamilySizeOne{} of families are a single comparison and
-\nFamilySizeOverFive{} exceed five), since the table is the unit at which the
-authors chose what to bold; Table~\ref{tab:span} gives the paper as family. A
+the testable comparisons in that table (median \nFamilyMedian{}), since the
+table is the unit at which the authors chose what to bold;
+Table~\ref{tab:span} gives the paper, and every group in the table, as
+family. A
 bold cell tied with an unbolded one claims nothing and is dropped
 (\nTiesDropped{} groups). Welch's $t$ is what a reader with the same numbers
 should compute; a two-sample $z$, which takes a deviation from three runs as
@@ -251,11 +251,9 @@ stated, leaving \nPctTestable{}. The 2024 sample gives
 \nPctNeitherSideTwentyFour{} and \nPctTestableTwentyFour{}, within a point
 and inside either bootstrap interval.
 
-The pattern is not one community's, though its size is: by subfield of the
-title (Appendix~\ref{app:topics}) the share without an error bar runs from
-\nRlNeither{} in reinforcement learning to \nLmNeither{} in language-model
-papers, while the failure rate among what can be tested stays between
-\nTopicFailLow{} and \nTopicFailHigh{}.
+The pattern is not one community's, though its size is: by subfield the
+share without an error bar runs from \nRlNeither{} in reinforcement learning
+to \nLmNeither{} in language-model papers (Appendix~\ref{app:topics}).
 
 Of whole papers, \nPctWithErrorBar{} print an explicit error bar in any
 results table and \nPctStatingN{} state a number of runs anywhere. Among
@@ -527,9 +525,9 @@ error bars and the right run count. So we built a reference set
 (Table~\ref{tab:gold}, Appendix~\ref{app:gold}): draws of claims and tables,
 each rendered from the PDF with the pipeline's chosen cell boxed and nothing
 else, and read with the pipeline's values hidden. The reader recorded the
-winner, the best unbolded rival, both means, both error bars, what the bars
-are, and the run count found in the paper's seed, run and trial sentences,
-which it received in full. The reader was the vision-language model named in
+winner, the rival, both means and bars, the bar kind, and the run count found
+in the paper's seed, run and trial sentences, supplied in full. The reader was
+the vision-language model named in
 the AI use statement, so these figures are agreement between two extractors of
 different technology, one on the text layer and one on the rendered image,
 not precision against a human reference; the marked cell anchors the reader on
@@ -547,8 +545,7 @@ papers the first set never touched agreed on the claim in
 \nGoldHeldAgree{}, and found two more. After the fixes the same items
 agree in \nGoldDevPostClaimFrac{} and \nGoldHeldPostClaimFrac{}, figures
 optimistic in the way a set that chose the fixes must be; Appendix~\ref{app:gold}
-prints all four scorings, and on the released pipeline's held-out row the
-reader and the pipeline fail within one item of each other. 
+prints all four scorings.
 
 A fourth draw was made after the released pipeline was tagged, from papers no
 earlier set touched, and nothing was fixed on it: \nGoldFrozenN{} testable
@@ -599,23 +596,28 @@ instruments agree on the shares and disagree on the census: the reader lists
 more often (\nPagesUnmatchedNeither{} bar-less against
 \nPagesMatchedNeither{}), yet over every group the reader finds the share is
 \nPagesCensusRatio{} times the pipeline's on the same pages, scaling the
-headline to \nNeitherCensusScaled{}.
+headline to \nNeitherCensusScaled{}. On the verdict the two agree on every one of the \nPagesSharedAgree{} groups
+both can test (\nPagesSharedReaderFails{} fail) and part company where they
+cannot: the reader tests \nPagesReaderOnlyN{} groups the pipeline does not
+and fails \nPagesReaderOnlyFails{}; the pipeline tests \nPagesPipeOnlyN{} the
+reader does not, on a run count read from elsewhere in the paper, and fails
+\nPagesPipeOnlyFails{}. Which run counts one accepts decides the failure rate
+as much as the test does, which is the caption-or-page row of
+Table~\ref{tab:span} seen from the other side.
 
 
 The weakest field is the run count, read from the paper rather than the table.
 On the held-out items the reader found none in \nGoldHeldNoRunsFrac{}; where
-it found one, the pipeline's agreed in \nGoldHeldRunsFoundFrac{}. The released
-pipeline attaches a count to \nAdjPipelineHasCount{} of those
-\nAdjReaderNoCount{}, and a second reading with the whole paper adjudicated
-each: in \nAdjReaderMiss{} the paper states that count for the boxed table and
-the first reader missed it; in \nAdjNotRunCount{}, all one paper, the number
-is an oracle's trial count quoted inside a prompt. Where the pipeline attaches
+it found one, the pipeline's agreed in \nGoldHeldRunsFoundFrac{}. A second
+reading with the whole paper adjudicated the \nAdjPipelineHasCount{} of those
+\nAdjReaderNoCount{} to which the released pipeline attaches a count:
+\nAdjReaderMiss{} were the first reader's misses, \nAdjNotRunCount{} (one
+paper) an oracle's trial count quoted in a prompt. Where the pipeline attaches
 a run count it is the paper's in \nRunCountPrecisionFrac{}
-(\nRunCountPrecision{}), and Table~\ref{tab:span} scales the checkable share
-by that precision. A third draw of \nGoldNoNN{} comparisons with both bars but
-no run count found showed the paper stating one in words the pattern had not
-matched in \nGoldNoNFoundFrac{}, a recall loss the released pattern closes for
-the phrasings found.
+(\nRunCountPrecision{}); Table~\ref{tab:span} scales the checkable share by
+that precision. A third draw of \nGoldNoNN{} comparisons with both bars but no
+count found showed the paper stating one in \nGoldNoNFoundFrac{}, a recall
+loss the released pattern closes for the phrasings found.
 
 \paragraph{Recall.} Bold is an imperfect proxy for a claim, and
 Appendix~\ref{app:gold} reads what the filter discards
@@ -660,11 +662,10 @@ by stated run count the rate is \nFailRunsLeThree{} at three or fewer,
 claim no bound.
 
 \paragraph{The instrument reads table cells and nothing else.} Uncertainty
-in a figure, in a table rendered as an image, or signalled by shading is
-invisible to it and counted as absent (Appendix~\ref{app:pipeline} counts what
-lies outside the cells; Appendix~\ref{app:ties} the tie-marked tables).
-Appendix~\ref{app:checklist} reads the \nCheckYesNoTable{} NeurIPS checklists
-that report error bars we cannot find: most do not claim one in a table.
+in a figure, an image table or shading is invisible to it and counted as
+absent (Appendix~\ref{app:pipeline} counts what lies outside the cells,
+Appendix~\ref{app:ties} tie-marked tables, Appendix~\ref{app:checklist} the
+\nCheckYesNoTable{} NeurIPS checklists reporting error bars we cannot find).
 
 \section{Related work}
 \label{sec:related}
@@ -714,11 +715,11 @@ one.
 \label{sec:discussion}
 
 The cheapest fix is not more statistics but printing three quantities authors
-already have: a dispersion on each value in the main comparison and the number
-of runs behind them, after which the paper is checkable by anyone, forever, at
-no cost. A second fix applies before the experiment: Appendix~\ref{app:mde}
-tabulates what each benchmark can resolve, and an author who consults it first
-will sometimes find the sentence cannot be written, which is the point.
+already have, a dispersion on each value in the main comparison and the number
+of runs behind them, after which the paper is checkable by anyone at no cost;
+the second is consulting Appendix~\ref{app:mde} before the experiment, where
+an author will sometimes find the sentence cannot be written, which is the
+point.
 
 % The mandatory statements below do not count toward the nine-page limit,
 % so the main text ends here.

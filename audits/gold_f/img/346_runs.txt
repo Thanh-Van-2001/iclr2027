@@ -1,0 +1,63 @@
+2 = en and run
+---
+22 for all times t ≥1
+---
+Additional plots from fixed initializations
+---
+Each algorithm was run
+---
+FP and Optimistic FP, we present plots of the two algorithms run from fixed initializations, similar to
+---
+First, we note that all code used to run experiments can be found in the supplementary material
+---
+For any even t ≥2, the primal iterates of Players 1 and 2 at times t + 1 and t + 2 update
+---
+For each setting, the algorithms were run from 100 random initializations, each
+---
+Observe that if ψ(zt) ≤B for all times t, then the statement
+---
+On the other hand, due to the initialization x1
+---
+Play, using any tiebreaking rule and for nearly all initializations, has regret at least Ω(
+---
+Random initializations
+---
+Then define Phase k as the subsequence of iterates from times
+---
+To generate a random initialization x ∈∆n, we
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+each initialization, each algorithm was run for T = 10000 iterations
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+for T = 10000 iterations, and we report the average regret over all initializations
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+report average empirical regrets (and standard deviations) over 100 random initializations, where for
+---
+run with given experimental conditions)
+---
+scripts used to run the experiments in the supplemental material
+---
+standard deviation (over 100 random initializations) of total regret after T = 10000 steps
+---
+standard deviations over the 100 random initializations
+---
+strategies, we evaluated the Fictitious Play variants over multiple random initializations of x0
+---
+this paper, all experiments were run locally on a single personal computer
+---
+we run the FP variants using both (a) fixed lexicographical tiebreaking (e
+---
+• (Initialization) Assume without loss of generality T is even
+---
+• The instructions should contain the exact command and environment needed to run to
+---
+∆n (for the Alternating FP initialization from Figure 1, note that the stated initialization is for

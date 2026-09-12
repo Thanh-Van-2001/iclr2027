@@ -1,0 +1,53 @@
+99 fidelity 100x times faster than TD3 (Fuji-
+---
+Averaged over 32 random seeds, our method achieves significantly higher F than prior work with reduced sensitivity to the
+---
+Benchmarking absolute compute times across different hard-
+---
+Each algorithm is run on the same Nvidia P100 GPU, using a
+---
+Each algorithm is run on the same Nvidia V100 GPU, using a single set of optimised hyper-parameters per method,
+---
+GPU and exhibit very similar compute times, hence we did
+---
+However, in the long run, it may contribute to
+---
+Table 3: Comparison of convergence times for different
+---
+The importance of generating smooth functions is three-fold
+---
+The solid lines represent the simulation times obtained with a GPU, while the dashed
+---
+and also more robust across different random initial seeds,
+---
+different seeds plotted against the number of RL Updates
+---
+fast gate times < 1µs in feasible time frames
+---
+finite rise times for the phase control,
+---
+for 32 random initial seeds and achieved a mean fidelity of
+---
+individual steps) per gate, with gate times on
+---
+initial seed, yielding experimentally feasible controls
+---
+lations and thereby longer computation times
+---
+of such tasks include system initialisation, (quantum) state
+---
+plotted on a logarithmic scale and averaged over multiple seeds
+---
+run on GPU so we provide a CPU benchmark here (Mac
+---
+seeks to maximise Ωat all times after a fast rise and compensates cross-talk with frequency chirping
+---
+single set of optimised hyper-parameters per algorithm, with a common batch size and results averaged over two seeds (one
+---
+state evolution, and significantly speed up simulation times
+---
+the value of µΩat times t = 0
+---
+torised run are completed within a fixed maximal time frame
+---
+width, as well as finite modulator rise times, and they are
