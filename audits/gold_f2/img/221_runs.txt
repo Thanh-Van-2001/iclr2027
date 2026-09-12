@@ -1,0 +1,19 @@
+5 times
+---
+Input: momentum weight β ∈[0, 1), initialization x1 ∈Rd
+---
+Input: momentum weight β ∈[0, 1), initialization x1 ∈Rd and m0 = 0, step sizes {αk := α > 0}K
+---
+To verify that our results are not sensitive to the choice of scheduler, we repeated the
+---
+a set of random values, they don’t need to store all these values - it’s sufficient to store only the seed from which they were
+---
+an update frequency T = 10 and plot mean and standard deviation across 5 independent runs
+---
+approximately 20 times the size of the model in tokens
+---
+rate schedule with restarts, with a warmup of 10% of the steps in a cycle length, and decay of the final learning rate down
+---
+run of 300k steps using a cosine learning rate scheduler
+---
+standard deviation across 3 independent runs

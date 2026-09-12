@@ -1,0 +1,31 @@
+Critical difference diagrams computed over CC18 and CTR23 fold results are given in Figures G
+---
+In the initialization phase, we first process the downloaded data
+---
+We repeat each experiment across
+---
+We run all methods on at least two different splits of the data
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+best hyperparameters for each dataset fold individually based on the validation performance
+---
+dataset folds and measure the average times to process 1,000 rows (computed overall on ≈2M rows)
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+run with given experimental conditions)
+---
+that other than context retrieval, no dataset-specific tuning is done and we only run forward passes
+---
+the 7 datasets and on average accuracy (over 50 seeds)
+---
+the model, including hyperparameter search, and to run inference
+---
+• The instructions should contain the exact command and environment needed to run to

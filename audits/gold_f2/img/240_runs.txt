@@ -1,0 +1,37 @@
+10 times with distinct random seeds
+---
+1: Input: base policy π, number of runs N, critic model
+---
+3: repeat
+---
+An alternative approach to replicate an environment state zt
+---
+Checkpoint/restart in userspace(criu),
+---
+However, we expect this approach to run into issues when applied to scenarios where stochasticity is
+---
+We run the majority of experiments with
+---
+When combined, they deliver a 2-fold
+---
+are presented for both N = 5 and N = 10 runs when using
+---
+computationally expensive as it requires to re-run all ac-
+---
+evaluation is limited to N = 5 runs without reporting SEM
+---
+ferences are statistically significant, we run each experiment
+---
+icantly boosts the performance of a single run, enabling a
+---
+mation error at the cost of a single run on the full evaluation
+---
+puted over 15 runs
+---
+the LLM runs out of context)
+---
+the agent runs repeatedly until it terminates by issuing a
+---
+times may result in different state trajectories, making it
+---
+yield a two-fold performance improvement, achieving state-

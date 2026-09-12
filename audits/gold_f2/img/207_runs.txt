@@ -1,0 +1,47 @@
+, N runs over all atoms inside a local atomic neighborhood defined up to a cutoff
+---
+196), and roughly 170 times faster on inference,
+---
+4 times faster compared to
+---
+4 times more accurate while being 4
+---
+Charge density initialization (ICHARG)
+---
+DFT initialization experiment
+---
+ELECTRA-initialized runs use ICHARG=1 to read the
+---
+QM9 DFT initialization experiment parameters
+---
+Table 5: VASP parameters used to reproduce the DFT initialization experiment on QM9
+---
+The initialization is important to
+---
+The parameters used to initialize fresh DFT runs with or without an initial density follow the original
+---
+The results showed that ELECTRA initialization reduces SCF
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+improvements (in particular, the inference times) are orders of magnitude better than prior
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+l times
+---
+only tested on a few datasets or with a few runs
+---
+orbitals (BO)) while being over 11 times faster
+---
+run with given experimental conditions)
+---
+this would require specialized methods to replicate floating orbitals periodically
+---
+where the first sum runs over all atoms, and the other two sum index into all basis functions per
+---
+• The instructions should contain the exact command and environment needed to run to

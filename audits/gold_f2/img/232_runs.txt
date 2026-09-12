@@ -1,0 +1,37 @@
+(2) Initialization / parameter sharing: in (A), the output projection layer parameters are tied with the
+---
+2) Ensemble: The LLM is prompted three times to generate top-k answers with confidence,
+---
+Otherwise, please repeat
+---
+Sample times
+---
+Sample times indicates the
+---
+Table 13: Comparison between ConfTuner, a classifier with random initialization, and a classifier
+---
+The experiments are run with 6 Nvidia A40 GPUs
+---
+This indicates that the random initialization might lead to noise (or noisy gradients), resulting in
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+confidence scores, proxy confidence estimates, or repeated sampling
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+original embedding matrix (C) performs better than the classifier with random initialization (B)
+---
+prompts 3 times, which is more expensive
+---
+run with given experimental conditions)
+---
+the top K guesses and their corresponding confidence, then inputs the same prompt multiple times,
+---
+• The instructions should contain the exact command and environment needed to run to

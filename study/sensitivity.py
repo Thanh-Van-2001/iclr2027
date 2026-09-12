@@ -401,7 +401,13 @@ def design_mde(comparisons: list, records: list, power: float = 0.8, alpha: floa
 
     rows = []
     excluded = {"no_run_count": 0, "outside_both_scales": 0, "scales_differ": 0, "no_noise_level": 0}
-    k_alpha = norm_ppf(1 - alpha / 2)
+    from analyze import t_ppf
+    # The cut-point is the critical value a reader would use at that run
+    # count: Welch's t with 2(n-1) degrees of freedom when both arms share
+    # the imputed noise, which is the headline's footing rather than a normal
+    # cut. At n = 5 it is 2.31 rather than 1.96.
+    def k_alpha_at(n):
+        return t_ppf(1 - alpha / 2, 2 * (n - 1))
     for c in comparisons:
         n = c.get("n_runs")
         if not n or n < 2:
@@ -422,8 +428,9 @@ def design_mde(comparisons: list, records: list, power: float = 0.8, alpha: floa
         se_diff = sd * math.sqrt(2.0 / n)
         mde = k * se_diff
         own = None
+        k_alpha = k_alpha_at(n)
         if c.get("test"):
-            own = c["test"]["z"] < k_alpha   # the paper's own numbers, same threshold
+            own = c["test"]["p"] >= alpha   # the paper's own numbers, the paper's own test
         rows.append({"gap": c["gap"], "mde": mde, "below": c["gap"] < mde,
                      "below_alpha": c["gap"] < k_alpha * se_diff,
                      "own_below_alpha": own,

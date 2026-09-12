@@ -1,0 +1,23 @@
+5 datasets, where we re-run all
+---
+This stage also runs for 10 epochs, using a smaller learning rate of
+---
+are trivial and likely caused by random initialization or local optima
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+fair comparison, we re-run iTransformer under our unified setting (including learning rate, hidden
+---
+forecasting performance, with reduced variance across different runs
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+run with given experimental conditions)
+---
+• The instructions should contain the exact command and environment needed to run to

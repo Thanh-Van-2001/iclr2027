@@ -22,7 +22,21 @@ sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
 
 from gold_set import _num  # noqa: E402
+from analyze import p_value  # noqa: E402
 from paperengine.stats import wilson_interval  # noqa: E402
+
+
+def _se(disp, kind, n):
+    """Standard error of one arm from the reader's bar and the caption's kind."""
+    d = _num(disp)
+    if d is None:
+        return None
+    if kind == "se":
+        return d
+    if kind == "ci":
+        return d / 1.96
+    # a deviation, or an unlabelled bar read as one, needs the run count
+    return d / (n ** 0.5) if n else None
 
 
 def _rate(k, n, what):
@@ -85,8 +99,16 @@ def main(argv=None) -> int:
             for g in t.get("groups", []):
                 wb = _num(g.get("winner_disp")) is not None or str(g.get("winner_disp", "")).startswith("[")
                 rb = _num(g.get("runner_disp")) is not None or str(g.get("runner_disp", "")).startswith("[")
+                testable = wb and rb and (n is not None or kind in ("se", "ci"))
+                fail = None
+                if testable:
+                    w, r = _num(g.get("winner_mean")), _num(g.get("runner_mean"))
+                    sw, sr = _se(g.get("winner_disp"), kind, n), _se(g.get("runner_disp"), kind, n)
+                    if None not in (w, r, sw, sr):
+                        res = p_value(abs(w - r), sw, sr, int(n) if n else None)
+                        fail = (res["p"] >= 0.05) if res else None
                 groups.append({"w": _num(g.get("winner_mean")), "wb": wb, "rb": rb,
-                               "testable": wb and rb and (n is not None or kind in ("se", "ci"))})
+                               "testable": testable, "fail": fail, "paper": it["paper"]})
         pc = by_page.get((it["paper"], it["page"]), [])
         page = {"id": iid, "n_groups": len(groups),
                 "neither": sum(1 for g in groups if not g["wb"] and not g["rb"]),
@@ -94,6 +116,7 @@ def main(argv=None) -> int:
                 "pipe_groups": len(pc),
                 "pipe_neither": sum(1 for c in pc if c["winner_dispersion"] is None and c["runner_dispersion"] is None),
                 "pipe_testable": sum(1 for c in pc if c.get("test"))}
+        page["tested_groups"] = [g for g in groups if g["testable"] and g["fail"] is not None]
         per_page.append(page)
         r_groups += page["n_groups"]; r_neither += page["neither"]; r_testable += page["testable"]
         r_onebar += sum(1 for g in groups if g["wb"] != g["rb"])
@@ -120,7 +143,26 @@ def main(argv=None) -> int:
             n_ += sum(1 for c in cs if c["winner_dispersion"] is None and c["runner_dispersion"] is None)
             t_ += sum(1 for c in cs if c.get("test"))
         nei.append(100 * n_ / g); tes.append(100 * t_ / g)
+    # the reader's own verdicts, with an interval that resamples papers
+    tested = [g for p_ in per_page for g in p_.get("tested_groups", [])]
+    by_pp: dict = {}
+    for g in tested:
+        by_pp.setdefault(g["paper"], []).append(g["fail"])
+    reader_failure = None
+    if tested:
+        papers_ = list(by_pp.values())
+        rng2 = random.Random(1)
+        bvals = []
+        for _ in range(2000):
+            draw = [papers_[rng2.randrange(len(papers_))] for _ in papers_]
+            flat = [x for pp in draw for x in pp]
+            bvals.append(100 * sum(flat) / len(flat))
+        bvals.sort()
+        reader_failure = {"n": len(tested), "n_papers": len(papers_),
+                          "pct_fail": round(100 * sum(g["fail"] for g in tested) / len(tested), 1),
+                          "ci": [round(bvals[50], 1), round(bvals[1949], 1)]}
     out = {
+        "reader_failure": reader_failure,
         "corpus_one_page_per_paper": {"pct_neither": round(sum(nei) / len(nei), 1),
                                       "pct_testable": round(sum(tes) / len(tes), 1)},
         "reader_groups_matched": {"groups": m_g, "pct_neither": round(100 * m_n / m_g, 1) if m_g else None},

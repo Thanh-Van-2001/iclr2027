@@ -393,6 +393,7 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
         reg.add(f"holm {name}", rf"{hs[key]['pct_fail_holm']}\%", provenance="headline_span")
     reg.add("fail one sided", rf"{hs['one_sided']['pct_fail']}\%", provenance="headline_span")
     reg.add("fail holm paper", rf"{hs['holm_family_paper']['pct_fail_holm']}\%", provenance="headline_span")
+    reg.add("fail holm all groups", rf"{hs['holm_family_all_groups']['pct_fail_holm']}\%", provenance="headline_span")
     reg.add("unlabelled as sem full", rf"{hs['unlabelled_as_sem']['pct_fail']}\%", provenance="headline_span")
     reg.add("labelled only n", hs["labelled_only"]["n"], provenance="headline_span")
     sd = _j("extra_stats")["subset_direction"]
@@ -658,6 +659,16 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("gold frozen agree pct", rf"{gft['verdict_2x2']['per_item_agreement']}\%", provenance=frun)
     reg.add("gold frozen both n", gft["n_testable_under_both"], provenance=frun)
     reg.add("gold frozen not testable", gft["reader_says_not_testable"], provenance=frun)
+    ru = gft["reader_untestable"]
+    nc = ru.get("not a single bold cell", {"n": 0, "pipeline_fails": 0, "papers": 0})
+    nb_ = ru.get("no usable bar or run count", {"n": 0, "pipeline_fails": 0, "papers": 0})
+    reg.add("frozen untestable n", nc["n"] + nb_["n"] + ru.get("a value unreadable", {"n": 0})["n"], provenance=frun)
+    reg.add("frozen not claim n", nc["n"], provenance=frun)
+    reg.add("frozen not claim papers", nc["papers"], provenance=frun)
+    reg.add("frozen not claim pipe fails", nc["pipeline_fails"], provenance=frun)
+    reg.add("frozen no usable n", nb_["n"], provenance=frun)
+    reg.add("frozen no usable papers", nb_["papers"], provenance=frun)
+    reg.add("frozen no usable pipe fails", nb_["pipeline_fails"], provenance=frun)
     reg.add("gold frozen fail reader", rf"{gft['failure_rate_reader_values']}\%", provenance=frun)
     reg.add("gold frozen fail pipe", rf"{gft['failure_rate_pipeline_values_same_items']}\%", provenance=frun)
     reg.add("gold frozen pipe fail all", rf"{gft['pipeline_fail_rate_all_items']}\%", provenance=frun)
@@ -765,6 +776,19 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("pages unmatched neither", rf"{pg['reader_groups_unmatched']['pct_neither']}\%", provenance=prun)
     reg.add("pages matched groups", pg["reader_groups_matched"]["groups"], provenance=prun)
     reg.add("pages unmatched groups", pg["reader_groups_unmatched"]["groups"], provenance=prun)
+    # The headline scaled by the census: the reader's no-bar share over every
+    # group it finds on the same pages, relative to the pipeline's over the
+    # groups it reads there.
+    _ratio = pg["reader"]["pct_neither"] / pg["pipeline_same_pages"]["pct_neither"]
+    reg.add("pages census ratio", f"{_ratio:.3f}", provenance=prun)
+    reg.add("neither census scaled", rf"{y25['pct_neither'] * _ratio:.1f}\%", provenance=prun)
+    # The reader's own failure rate on the groups it could test, from its
+    # values and the run count it found.
+    rf_ = pg.get("reader_failure")
+    if rf_:
+        reg.add("pages reader testable groups", rf_["n"], provenance=prun)
+        reg.add("pages reader fail", rf"{rf_['pct_fail']}\% [{rf_['ci'][0]}, {rf_['ci'][1]}]", provenance=prun)
+        reg.add("pages reader fail papers", rf_["n_papers"], provenance=prun)
 
     # the run-count recall audit
     gc = _j("gold_set_no_n")["no_n"]

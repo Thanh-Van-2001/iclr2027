@@ -1,0 +1,57 @@
+, Kaiming initialization [25]), and
+---
+, random seed, cfg value) of two models are the same
+---
+4 ByteDance Seed 5 RIKEN AIP 6 Dept
+---
+5% FLOPs of a single training run
+---
+5% FLOPs of a single training run for PixArt-α
+---
+5% FLOPs of one full pretraining run
+---
+5% of one training run for PixArt-α and 3%
+---
+Algorithmic experts take roughly 5 times the cost of full pretraining to tune HPs based on their
+---
+Based on the optimal base HPs searched from 80 trials trained for 30K steps, we further evaluate the
+---
+Besides, as algorithmic experts take roughly 5 times the cost of full pretraining, the ratio of µP tuning
+---
+ByteDance Seed Research Fund; the Public Computing Cloud of Renmin University of China; and
+---
+We conducted an additional 5 proxy training runs (100K steps
+---
+algorithmic experts, requiring roughly 5 times the cost of full pretraining, as detailed in Appendix E
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+initialization and during training
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+run with given experimental conditions)
+---
+run, while for MMDiT, tuning uses just 3% of the FLOPs typically consumed by human experts
+---
+that 30K iterations are enough for the proxy task, we conducted ﬁve proxy training runs (100K steps
+---
+the candidate set {2−13, 2−12, 2−11, 2−10, 2−9} as in Section 4, resulting in ﬁve proxy training trials
+---
+the optimal base HPs searched from multiple trials on small models to pretrain the target large models
+---
+weight multiplier, initialization variance, and learning rate (a
+---
+weight multiplier, initialization variance, and learning rate considered in abc-parameterization
+---
+where R is the number of HP search trials, S is the number of parameters, E is the training epochs, B
+---
+• The instructions should contain the exact command and environment needed to run to
+---
+∗Work done during an internship at ByteDance Seed

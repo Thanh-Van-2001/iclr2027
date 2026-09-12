@@ -1,0 +1,37 @@
+1 game per seed
+---
+4 days on a single RTX 4090, with experiments conducted across 3 random seeds for 5 million total
+---
+Each agent seed’s training required approximately
+---
+Justification: All results are run over multiple seeds with error bars reported
+---
+Replay, which balances between sampling from existing experiences and generating new rollouts to
+---
+Table 1: Generalization results: All values represent the mean return over three random seeds ±
+---
+[21] by reducing the proportion of successful episodes
+---
+a significant shift occurs where PLR begins prioritizing substantially longer episodes (up to 2
+---
+covers this effective learning progression while training exclusively on imagined rollouts from a
+---
+erating imagined rollouts during agent training
+---
+imagined autocurriculum that operates entirely within generated rollouts from a fixed world model
+---
+mately 4M steps, a significant shift occurs—PLR begins prioritizing substantially longer episodes
+---
+offline data, (2) using this model to generate imagined random episode length rollouts for agent
+---
+represent mean return over three random seeds ± standard deviation
+---
+rollouts
+---
+rollouts from a world model learned on 200 levels, our agents achieve strong performance on unseen
+---
+state s0 to begin imagination and runs the world model forward for exactly h steps
+---
+tion rollouts
+---
+training tasks from these imagined rollouts

@@ -1,0 +1,75 @@
+# episodes
+---
+Because 5 seeds is not enough for
+---
+For each layout, trials
+---
+For scenario 1), we evaluate the agents on 40 randomly generated test layouts, 1 trial per layout
+---
+In order to estimate how computationally expensive it is to run planning with a latent dynamics
+---
+In this second scenario we evaluate 5 trials per layout, thus a total of 5 × 5 = 25 per group
+---
+Optimal control tackles challenge differently: instead of learning a policy function via trial and error,
+---
+Results are averaged over 3 seeds, shaded area denotes standard error
+---
+Table 11: Ant-Umaze: dataset-specific hyperparameters for CRL, GCBC, and HILP, parsed from run names
+---
+Table 12: Ant-Umaze: dataset-specific hyperparameters for GCIQL and HIQL parsed from run names
+---
+Table 4: Results averaged over 3 seeds ± std
+---
+The same set of layouts and trials are used to evaluate all agents for a given experimental
+---
+Time is averaged across 25 episodes
+---
+We also run additional
+---
+We only tested one seed for TD-MPC2 + IDM
+---
+We set action repeat to 4 for our version of the environment
+---
+about 4 times slower during inference, although in Appendix F we find that even when limited to the
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+directions in latent space – even from short episodes
+---
+episodes’ length is T = 91, and the total number of transitions in the data is 3 million
+---
+evaluated on 10 trials
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+fixed between methods, we run additional evaluations, and report them in Figure 10 and Figure 11
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+is better than the corresponding method results across 10 seeds
+---
+learns policies via trial and error, and (ii) optimal control, which plans actions using
+---
+method is evaluated on 10 trials
+---
+methods struggle when trained with shorter episodes
+---
+model, we evaluate PLDM, GCIQL, and HIQL on 25 episodes in the Two-Rooms environment
+---
+only tested on a few datasets or with a few runs
+---
+rates (±standard error) across 3 seeds
+---
+real-world scenarios, collecting long episodes is often difficult—especially in open-ended environ-
+---
+regions are means and standard error over 3 seeds, respectively
+---
+run with given experimental conditions)
+---
+seeds for certain selected settings to get a total of 10 seeds per method, and show results of statistical
+---
+the corresponding method when pooling results across seeds and dataset parameters
+---
+• The instructions should contain the exact command and environment needed to run to

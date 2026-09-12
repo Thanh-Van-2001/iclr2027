@@ -37,7 +37,13 @@ def main(argv=None) -> int:
     ap.add_argument("--seed", type=int, default=20260914)
     ap.add_argument("--max-pages", type=int, default=40)
     ap.add_argument("--out-dir", default="audits/gold_f")
+    ap.add_argument("--exclude-items", action="append", default=None,
+                    help="items.json of an earlier draw whose papers are skipped (repeatable)")
+    ap.add_argument("--start-id", type=int, default=1, help="first item id, to continue an earlier draw")
     args = ap.parse_args(argv)
+    exclude = set()
+    for path in args.exclude_items or []:
+        exclude |= {it["paper"] for it in json.load(open(path, encoding="utf-8"))}
 
     recs = load_records(args.extracted)
     ids = sorted(r["id"] for r in recs)
@@ -54,6 +60,8 @@ def main(argv=None) -> int:
     for pid in ids:
         if len(items) >= args.n:
             break
+        if pid in exclude:
+            continue
         tried += 1
         rec = index.get(pid)
         if rec is None:
@@ -70,7 +78,7 @@ def main(argv=None) -> int:
             doc.close()
             continue
         page_no = rng.choice(cands)
-        iid = f"{len(items) + 1:03d}"
+        iid = f"{args.start_id + len(items):03d}"
         pix = doc[page_no].get_pixmap(matrix=fitz.Matrix(2.0, 2.0))
         pix.save(os.path.join(img_dir, f"{iid}_page.png"))
         text = "\n".join(pages)
@@ -80,7 +88,8 @@ def main(argv=None) -> int:
         items.append({"id": iid, "paper": pid, "page": page_no, "title": rec["title"],
                       "n_caption_pages": len(cands)})
         doc.close()
-        print(f"  {iid} {pid[:8]} page {page_no + 1} of {len(pages)} ({len(cands)} table pages)")
+        print(f"  {iid} {pid[:8]} page {page_no + 1} of {len(pages)} ({len(cands)} table pages)", flush=True)
+        json.dump(items, open(os.path.join(args.out_dir, "items.json"), "w", encoding="utf-8"), indent=1)
     json.dump(items, open(os.path.join(args.out_dir, "items.json"), "w", encoding="utf-8"), indent=1)
     print(len(items), "pages from", tried, "papers tried ->", args.out_dir)
     return 0

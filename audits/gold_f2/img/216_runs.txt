@@ -1,0 +1,41 @@
+33] enable draft generation to run concurrently with target verification, while heterogeneous compute
+---
+6-Vicuna-7B model across MMT-Bench, SEED-Bench, and ScienceQA show that retaining 3/4 of
+---
+6-Vicuna-7B model across the MMT-Bench, SEED-Bench,
+---
+DREAM is evaluated across eight diverse benchmarks: MMT-Bench [58], SEED-Bench-2 [21],
+---
+For benchmarks without predefined train–test splits (MMT-Bench, SEED-Bench-2, Math-
+---
+SEED
+---
+SEED Sci
+---
+SEED-Bench
+---
+SEED-Bench, and ScienceQA
+---
+Seed-bench-
+---
+We fix random seeds across all
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+inference, all models are run with KV caching enabled to ensure efficient autoregressive decoding
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+models struggle to replicate
+---
+only tested on a few datasets or with a few runs
+---
+run with given experimental conditions)
+---
+runs to reduce performance variance and report the average over three runs
+---
+• The instructions should contain the exact command and environment needed to run to

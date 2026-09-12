@@ -362,6 +362,10 @@ def score(items_path: str, labels_path: str) -> dict:
         it["pipeline_test"] = _pipeline_test(it)
     pipe_fail_all = sum(1 for it, lb in T if it.get("pipeline_test") and it["pipeline_test"]["p"] >= 0.05)
     pipe_tested_all = sum(1 for it, lb in T if it.get("pipeline_test"))
+    # Why the reader could not test an item the pipeline did: the boxed cell is
+    # not a single bold (so there is no claim to test), a value is unreadable,
+    # or the bars carry no usable run count. Each carries the pipeline's verdict.
+    untestable: dict = {}
     for it, lb in T:
         r = dict(it["pipeline"])
         c = {"gap": None, "winner_dispersion": _num(lb["winner_disp"]),
@@ -369,13 +373,23 @@ def score(items_path: str, labels_path: str) -> dict:
              "dispersion_kind": kind_map.get(lb["disp_type"].lower(), "unknown"),
              "n_runs": _num(lb["n_runs"])}
         wm, rm = _num(lb["winner_mean"]), _num(lb["runner_mean"])
-        if wm is None or rm is None:
-            continue
-        c["gap"] = abs(wm - rm)
-        if c["n_runs"]:
-            c["n_runs"] = int(c["n_runs"])
-        t_reader = test_comparison(c)
         t_pipe = it.get("pipeline_test")
+        is_claim = lb["bold_ok"].lower().startswith("y")
+        t_reader = None
+        if wm is not None and rm is not None:
+            c["gap"] = abs(wm - rm)
+            if c["n_runs"]:
+                c["n_runs"] = int(c["n_runs"])
+            t_reader = test_comparison(c)
+        if t_pipe and not (t_reader and is_claim):
+            why = ("not a single bold cell" if not is_claim else
+                   "a value unreadable" if wm is None or rm is None else
+                   "no usable bar or run count")
+            d_ = untestable.setdefault(why, {"n": 0, "pipeline_fails": 0, "papers": set()})
+            d_["n"] += 1
+            d_["pipeline_fails"] += t_pipe["p"] >= 0.05
+            d_["papers"].add(it["paper"])
+            continue
         if t_reader and t_pipe:
             n_both += 1
             rf, pf = t_reader["p"] >= 0.05, t_pipe["p"] >= 0.05
@@ -385,7 +399,10 @@ def score(items_path: str, labels_path: str) -> dict:
             both_pass += (not rf) and (not pf)
             reader_fail_only += rf and not pf
             pipe_fail_only += pf and not rf
+    for d_ in untestable.values():
+        d_["papers"] = len(d_["papers"])
     out["testable"] = {"n_labelled": len(T), "fields": fields,
+                       "reader_untestable": untestable,
                        "verdict_2x2": {"both_fail": both_fail, "both_survive": both_pass,
                                        "reader_fail_pipeline_survive": reader_fail_only,
                                        "pipeline_fail_reader_survive": pipe_fail_only,

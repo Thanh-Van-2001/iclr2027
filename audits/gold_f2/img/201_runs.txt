@@ -1,0 +1,43 @@
+1 are mapped to matching initialisation helpers in CBMC’s IR
+---
+6 whether we restart on UNSAT
+---
+In general, we restart at most ﬁve times in case of
+---
+In order to run the evaluation independently,
+---
+In this environment, running 100 tasks concurrently, full benchmark run takes approximatley 15
+---
+Justiﬁcation: We documented the hardware we used to run our experiments, apart from GPU
+---
+Removing this restart on UNSAT logic did not lead to any measurable decrease in
+---
+We repeated this evaluation multiple
+---
+We run the logic agent implementation on a developer
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+or ambiguous constraints as errors and restart
+---
+or not, since UNSAT results were extremely rare in our experimental runs
+---
+run with given experimental conditions)
+---
+score across our experimental evaluation runs
+---
+times before initial and camera-ready submission to conﬁrm our results, but otherwise
+---
+• The instructions should contain the exact command and environment needed to run to
+---
+ﬁnal ZebraLogicBench benchmark run of 1000 samples, we observe 51 occurrences of unsatisﬁable
+---
+ﬁve times if we receive an HTTP error from our LLM inference API, e

@@ -1,0 +1,33 @@
+During sampling, we run the standard classifier-free guidance (CFG) pass to obtain ϵcfg and then inject the
+---
+Specifically, we run the diffusion process with the base
+---
+To train all the models, run the entire evaluation suite, and create the CLIP and classificatio metrics, we used two
+---
+We include here the full quantitative results with standard deviations across runs, complementing Tables 1, 2,
+---
+both train and validation splits to avoid repeated VAE passes during classifier training
+---
+make it possible for others to replicate the model with the same dataset, or provide access to
+---
+on a few datasets or with a few runs
+---
+reproducibility can also be provided via detailed instructions for how to replicate the results,
+---
+seed and the original prompt when guided by this latent classifier (Table 4)
+---
+seed successfully restores them (Fig
+---
+seeds
+---
+sion process, while keeping the same prompt and seed, can bring erased concepts back
+---
+tal runs as well as estimate the total compute
+---
+the same technique to learn latent seeds that reconstruct the removed concepts
+---
+train/test split, initialization, random drawing of some parameter, or overall run with given
+---
+we execute it multiple times and select the generated image with the highest CLIP/classification
+---
+• The instructions should contain the exact command and environment needed to run to repro-

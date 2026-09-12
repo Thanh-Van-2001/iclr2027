@@ -1,0 +1,63 @@
+1, we averaged out the effect of random seeds
+---
+20(a), each point represents an average over multiple random seeds,
+---
+65 times
+---
+Although additional trials might yield more reliable results, we limit
+---
+Each run yields a candidate prompt p∗
+---
+Empirically, training on an H100 achieves an approximately two-fold speedup over an A100
+---
+For each configuration, we perform fine-tuning using 4 random seeds
+---
+For seeds, we compute the standard
+---
+If a legislative body runs privacy
+---
+In our experiments, we adopt the number of trials as 5,000
+---
+The relative privacy risk metric introduced in the main paper runs
+---
+We fine-tune Llama-2-7b non-privately with three random seeds, producing three distinct models
+---
+We run our experiments on three main computing environments
+---
+across random seeds)
+---
+compute the mean across seeds for each configuration and then the standard deviation of these means
+---
+deviation of empirical privacy scores across seeds for each configuration and average these values
+---
+each configuration, we perform fine-tuning using multiple random seeds (4 for GPT-2-S on Enron, and 3 for all other scenarios)
+---
+impact of random seeds
+---
+in Table 8, showing that variance from seeds is approximately half that of configurations
+---
+in this search, we repeat the process with 3 different random seeds
+---
+individual search runs (per model per secret) in Fig
+---
+multiple random seeds, and we retain models achieving at
+---
+per run
+---
+prompt across all seeds to compute the final ACR
+---
+sample half of the secrets (26 out of 52 author-genre pairs) without replacement for three times to create subsets (0, 1, 2)
+---
+seed to evaluate how effectively the model can memorize/compress the extracted secrets
+---
+shortest prompt found under seed ξi (though not guaranteed to be globally optimal)
+---
+their secret appears for fewer than 5 times; the average occurrence is 3
+---
+two sets of models, where models within each set share the same architecture and initialization, are trained on the same
+---
+variance induced by random seeds and that induced by hyperparameter configurations
+---
+with one (1) training run
+---
+ξi denote the shortest prompt found by GCG under seed ξi

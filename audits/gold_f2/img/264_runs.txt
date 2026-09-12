@@ -1,0 +1,35 @@
+Justification: We run 5 independent runs for stochastic experiments
+---
+SGD, each player i ∈[n] runs τ iterations
+---
+Second, in PEARL-SGD, local SGD steps are not run until players converge to
+---
+We run PEARL-SGD with the theoretical step-size γ = 1/(ℓτ+2(τ−1)Lmax
+---
+about √κ times smaller neighborhood within the same number of communication rounds R
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+each experiment 5 times and plot the mean relative error with standard deviation (shaded region)
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+repeated prisoners’ dilemma
+---
+run SGD independently in parallel to update
+---
+run with given experimental conditions)
+---
+shows results from the stochastic setting (we mini-batch from the finite sum (2)), where we repeat
+---
+which is in contrast with (24) where we used ℓin place of Lmax and obtained √κ times smaller
+---
+• The instructions should contain the exact command and environment needed to run to
+---
+√ℓµ = √κ times

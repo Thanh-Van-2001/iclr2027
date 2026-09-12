@@ -402,6 +402,30 @@ def headline_span(comparisons: list, records: list = None) -> dict:
     one_sided = [dict(c, _p=c["test"]["p"] / 2) for c in testable]
     rows["one_sided"] = _fail_rate(one_sided)
 
+    # Holm with the family being every highlighted comparison in the table,
+    # the untestable ones counting toward m but not tested: the family the
+    # authors chose to bold rather than the one that happens to carry bars.
+    m_all: dict = {}
+    for c in comparisons:
+        k = (c["paper"], c["table"], c["page"])
+        m_all[k] = m_all.get(k, 0) + 1
+    by_t: dict = {}
+    for c in testable:
+        by_t.setdefault((c["paper"], c["table"], c["page"]), []).append(c)
+    fail_h = 0
+    for k, g in by_t.items():
+        m = m_all[k]
+        order = sorted(g, key=lambda c: c["_p"])
+        rejected = 0
+        for rank, c in enumerate(order):
+            if c["_p"] <= 0.05 / (m - rank):
+                rejected += 1
+            else:
+                break
+        fail_h += len(g) - rejected
+    rows["holm_family_all_groups"] = {"n": len(testable), "pct_fail": rows["as_reported"]["pct_fail"],
+                                      "pct_fail_holm": round(100 * fail_h / len(testable), 1)}
+
     # The same comparisons reweighted to the population's subfield mix, so a
     # subfield that reports bars more often does not dominate the rate.
     if records is not None:

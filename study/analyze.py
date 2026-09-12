@@ -45,6 +45,12 @@ def t_cdf(x: float, df: float) -> float:
     from scipy.stats import t as _t
     return float(_t.cdf(x, df))
 
+
+def t_ppf(q: float, df: float) -> float:
+    """Student t quantile."""
+    from scipy.stats import t as _t
+    return float(_t.ppf(q, df))
+
 COLUMN_TOL = 12.0        # points; cells within this x-distance share a column
 ROW_TOL = 6.0            # points; cells within this y-distance share a row
 MIN_COLUMN_CELLS = 3

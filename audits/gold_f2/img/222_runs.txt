@@ -1,0 +1,29 @@
+For a fixed budget of K times, a multiscale template allows to consider a horizon in the past (and in
+---
+We repeat this procedure until all the gaps from the first applied largest template are filled
+---
+and mitigate rollout instabilities
+---
+conditioning on fine-grained present information and coarse-grained past times
+---
+conditioning on observed data, which contributes to rollout instability
+---
+distributions and improves rollout stability
+---
+due to the large space of possibilities: many candidates exist for pairs of conditioned times Cn and
+---
+generated step, 9 in the experiments, and can now repeat the above scheme to predict a complete
+---
+generated times In at each step that satisfy the above properties
+---
+gressive rollouts used in the literature [39, 62], our method predicts a distant future time step from
+---
+of noise, however, consider the times around a negative peak (approximately t = 30; see Fig
+---
+range dependencies, conditions more often in the past, and mitigate rollout instability by generating a
+---
+refiner: Achieving accurate long rollouts with neural pde solvers
+---
+that accumulate with the rollout
+---
+that standard inference schemes, such as autoregressive rollouts, fail to capture

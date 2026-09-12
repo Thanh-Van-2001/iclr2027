@@ -1,0 +1,33 @@
+# Initialization and Authentication
+---
+, redundant trial-and-error) even
+---
+For example, during the MetaFlowGen’s rollout, two MetaFlows may be generated: one that does
+---
+Intuitively, during the RL process, the model generates various MetaFlows through rollouts
+---
+Justification: The results we report are the average of multiple runs
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+prior experiences results in the repetition of unnecessary steps (e
+---
+run with given experimental conditions)
+---
+runs
+---
+that they run without
+---
+the model’s dependence on repeated trial and error during execution
+---
+to 28, learning rate to 1 × 10−6, KL coefficient to 0 [22], rollout number to 14
+---
+• The instructions should contain the exact command and environment needed to run to

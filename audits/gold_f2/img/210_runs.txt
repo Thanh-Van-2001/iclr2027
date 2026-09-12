@@ -1,0 +1,67 @@
+(averaged over n = 5 runs associated with the corresponding ± std envelopes) for the (a) MLP
+---
+(averaged over n = 5 runs associated with the corresponding ± std envelopes) for training with the
+---
+* The matrix–matrix product H(k)[m] ∈RN(k)×B times its transpose in RB×N(k) yields an
+---
+2 discusses the initialization
+---
+3 discuss the initialization of the
+---
+Each experiment was conducted five times under identical settings, and the
+---
+Execution times for other models (MLP, CNN, LC)
+---
+Gain parameter for Rg(k)(H(k,p))ϵ initialization in locally connected layers
+---
+Initialization of algorithm variables
+---
+Justification: Experiments were conducted five times, and average and standard deviation
+---
+Pytorch framework’s Xavier uniform initialization with the gain parameter equal to σRlocal
+---
+Standard deviation of the weight initialization
+---
+To provide context on execution times for our proposed CorInfoMax-EBD models:
+---
+We initialize the variables W(f,k), W(b,k), and Rh(k)ϵ using PyTorch’s Xavier uniform initialization
+---
+We use the Kaiming normal initialization for the weights, with a common standard deviation scaling
+---
+We use the Kaiming uniform initialization for the weights, with a common standard deviation scaling
+---
+We use the Pytorch framework’s Xavier uniform initialization with gain value 10−2 on the Rh(k)ϵ
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+during the initialization phase and maintaining these weights at zero throughout training
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental run utilized a single NVIDIA Tesla V100 GPU equipped with 32GB of HBM2 memory
+---
+experimental runs as well as estimate the total compute
+---
+fixed to its initialization, the EBD algorithm reduces to standard DFA
+---
+initialization of the algorithm’s variables and describe the hyperparameters
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+mean results with standard deviation envelopes from these multiple runs
+---
+of Rg(k)(H(k,p))ϵ initialization in convolutional layers
+---
+of Rh(k)ϵ initialization in linear layers
+---
+of the entropy gradient terms, specifically by avoiding repeated matrix inverse calculations
+---
+only tested on a few datasets or with a few runs
+---
+run with given experimental conditions)
+---
+runs associated with the corresponding ± std envelopes) for training with (a) 10-Layer CorInfoMax-
+---
+various update rules (averaged over n = 5 runs associated with the corresponding ± std envelopes)
+---
+• The instructions should contain the exact command and environment needed to run to

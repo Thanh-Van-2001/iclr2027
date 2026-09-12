@@ -1,0 +1,39 @@
+Both algorithms are efficient, and are even faster than the time CVX runs on small
+---
+The non-uniform initialization via ℓ∞Lewis weights in our algorithm immediately
+---
+We run each each experiment 5 times and report the mean and standard deviation of the
+---
+With this initialization, subsequent update
+---
+a proper initialization of weights
+---
+algorithm and the Newton’s method, we also measure the time they run on larger instances and the
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+denotes the ℓ∞diameter of the level set of the initialization point x0
+---
+dependence on the ℓ2 diameter of the level set of the initialization point, which scales as n1/2 in the
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+problem max∆: ∥A∆∥∞≤1/C resx(t)(∆) when we run it with the value M guaranteed by the above
+---
+run with given experimental conditions)
+---
+simply return to the algorithm by [EV19] and use a uniform initialization of the resistances
+---
+the ℓ∞Lewis weight overestimates we use at initialization
+---
+the ℓ∞diameter of the level set that contains the initialization point, rather than its ℓ2 diameter, which
+---
+very specific to the uniform initialization of the solution and only achieves iteration complexity
+---
+• The instructions should contain the exact command and environment needed to run to

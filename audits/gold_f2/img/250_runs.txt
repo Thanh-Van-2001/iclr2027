@@ -1,0 +1,79 @@
+100 episodes within each experiment
+---
+Effect of number of gradient updates per rollout on PPO-GBRL’s performance in CartPole-v1
+---
+Episodes are terminated after 50 steps if not solved
+---
+GBRL experimental runs required from 1GB to 24GB of
+---
+NN experimental runs required up to 3GB of GPU memory and runtime ranged from
+---
+Run Pass & Shoot keeper
+---
+Run to Score
+---
+Run to score w/ keeper
+---
+Starting from F0, at each training iteration, k, GBRL collects a rollout and computes
+---
+This makes it particularly well-suited to algorithms that support minibatching and multiple epochs per rollout
+---
+Updates per rollout
+---
+We fix the rollout length to 2048 and vary the batch size
+---
+We repeated this experiment for several batch sizes while keeping the rollout length fixed at 2048
+---
+and standard deviation of the average episode reward over the final 100 training episodes, aggregated across 5 random seeds
+---
+averaged across the last 100 episodes in Figure 4
+---
+deviation of the average episode reward over the final 100 training episodes, aggregated across 5 random seeds
+---
+episodes
+---
+evaluation episodes for each Variance ∈[0, 0
+---
+final 100 training episodes, aggregated across 5 random seeds
+---
+for the concluding action in a successful evaluation run, revealing
+---
+in Figure 15, increasing the number of trees added per rollout improves performance, but increases computational cost
+---
+ing times (seconds) for 1000 boosting iterations on random batches
+---
+mance but are able to solve the task in a subset of seeds
+---
+number of samples collected per rollout was fixed to 2048 for all experiments
+---
+over the final 100 training episodes, aggregated across 5 random seeds
+---
+per rollout
+---
+reward for the final 100 episodes
+---
+reward over the final 100 training episodes, aggregated across 5 random seeds
+---
+reward, GPU memory usage, and FPS, are compared across 10M environment (5 seeds, 3 MiniGrid environments)
+---
+schemes inherently affect how many trees are fitted per rollout
+---
+seeds
+---
+standard deviation of the average episode reward over the final 100 training episodes, aggregated across 5 random seeds
+---
+struct each tree but build fewer trees per rollout
+---
+the number of epochs while keeping the batch size and the rollout length fixed, thereby varying the number of updates
+---
+the number of samples collected per rollout, while varying the number of PPO epochs, thereby changing the number of gradient updates
+---
+to fit several small trees per rollout, yielding more stable and incremental updates
+---
+training episodes, aggregated across 5 random seeds
+---
+tree per rollout
+---
+trees per rollout, improving adaptability
+---
+• A2C - performs a single gradient step per rollout using the entire batch
