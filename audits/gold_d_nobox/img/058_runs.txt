@@ -1,0 +1,41 @@
+) adds 1, and then the next rollout begins
+---
+6 rollouts are
+---
+After MCTS completes its exploration for N rollouts with
+---
+Agent Initialization
+---
+Assuming each rollout expands ωk candidates (ω ∈(0, 1)), and N rollouts
+---
+Each rollout performs 6 iterations of exploration
+---
+If N rollouts are
+---
+MCTS conducts a total of N search rollouts
+---
+MCTS, on the other hand, expands multiple different paths during multiple rollouts
+---
+MCTS1 Rollout N
+---
+MCTS2 Rollout N
+---
+O(k · L) per rollout, where k is the number of possible actions per step
+---
+Q-value represents the score updated through backpropagation, and #V denotes the number of times each state has been
+---
+Summing up these steps, the complexity for a single rollout is O(k · L) , and with N rollouts, the total complexity of MCTS
+---
+The pseudocode formalizes this process, iteratively performing rollouts that follow the four stages
+---
+When a new MCTS rollout begins, the agent
+---
+agent initialization, heuristic environment exploration, and
+---
+is O(N · k · L) , which scales linearly with the number of rollouts and search depth
+---
+limit L, number of rollouts N, exploration weight w
+---
+o1: agent initialization, heuristic environment exploration
+---
+the n-th rollout (n = 1,

@@ -1,0 +1,29 @@
+Best Trial: 59 (Error: 0
+---
+Cumulative Best Error over Trials
+---
+Figure 7: Results of Bayesian Optimization for prior distribution hyperparameters over 60 trials
+---
+HPO Error per Trial
+---
+MCMC (BNSL) runs, and these runs are excluded
+---
+Top: RMSLE per trial,
+---
+Trial Number
+---
+Trial RMSLE
+---
+We report mean and standard deviation (std) over 3 runs for the MCMC baselines and our
+---
+bilistic rollouts for learning curve extrapolation across hy-
+---
+fold dimension
+---
+over trials, compared against the default RMSLE
+---
+with the default RMSLE shown as a dashed red line and the best trial highlighted
+---
+† indicates that a few trials failed due to overflow error, which were
+---
+† indicates that some trials failed, and these values were excluded

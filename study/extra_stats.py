@@ -287,10 +287,38 @@ def subset_direction(records: list, comparisons: list) -> dict:
     main_t = [c for c in testable if not ABLATION.search(c.get("caption") or "")]
     def fr(rows):
         return round(100 * sum(1 for c in rows if c["_p"] >= 0.05) / max(len(rows), 1), 1)
+    # (3) by stated run count, with paper-resampled intervals
+    def _band(lo, hi):
+        rows_ = [c for c in testable if c.get("n_runs") and lo <= c["n_runs"] <= hi]
+        return {"n": len(rows_), "pct_fail": fr(rows_), "ci_fail": _paper_bootstrap_fail(rows_) if rows_ else None}
+    by_runs = {"le3": _band(2, 3), "4to5": _band(4, 5), "ge6": _band(6, 10 ** 6)}
+    # (4) reweighted to the population's distribution of relative gap, the one
+    # quantity observed for every comparison and the strongest predictor of
+    # the verdict
+    edges = [0, 0.5, 1, 2, 5, 10, 1e9]
+    def _b(c):
+        g = 100 * (c.get("relative_gap") or 0)
+        for i in range(len(edges) - 1):
+            if edges[i] <= g < edges[i + 1]:
+                return i
+        return len(edges) - 2
+    pop = [0] * (len(edges) - 1)
+    for c in comparisons:
+        if c.get("relative_gap") is not None:
+            pop[_b(c)] += 1
+    tb = [[0, 0] for _ in range(len(edges) - 1)]
+    for c in testable:
+        if c.get("relative_gap") is not None:
+            i = _b(c); tb[i][0] += 1; tb[i][1] += c["_p"] >= 0.05
+    cov = sum(p for p, t in zip(pop, tb) if t[0])
+    gap_rew = sum(p / cov * (t[1] / t[0]) for p, t in zip(pop, tb) if t[0])
     return {
         "reweighted_to_population_subfields": {"pct_fail": round(100 * reweighted, 1),
                                                "n": len(testable),
                                                "pct_population_covered": round(100 * covered / n_all, 1)},
+        "reweighted_to_population_gaps": {"pct_fail": round(100 * gap_rew, 1), "n": len(testable),
+                                          "band_edges_pct": edges[:-1]},
+        "by_runs": by_runs,
         "ablation": {"n_all": len(abl), "pct_of_comparisons": round(100 * len(abl) / n_all, 1),
                      "pct_neither": neither(abl), "n_testable": len(abl_t),
                      "pct_testable": round(100 * len(abl_t) / max(len(abl), 1), 1),

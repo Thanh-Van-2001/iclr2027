@@ -1,0 +1,15 @@
+Our algorithm γ-LSCVI-UCB+ runs up to T steps of value
+---
+Reinforcement learning for long-run average
+---
+Their algorithm runs
+---
+algorithm runs in polynomial time with respect to problem
+---
+can be shown to happen only O(d log T) times, we can get
+---
+is to run the algorithm in phases, where each phase lasts
+---
+steps into episodes of a fixed length
+---
+technical reason, the algorithm runs in episodes, starting a new episode when the covariance Λt doubles (Line 8)

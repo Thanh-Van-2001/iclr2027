@@ -1,0 +1,41 @@
+, 2017) and consider a different domain as test domain in each run, indicated by the different rows in the figure
+---
+12 times less training compute compared to Ramé et al
+---
+12-fold reduction, as DiWA requires training 60 models for
+---
+6 times reduction in model size, showing
+---
+DART: Diversify-Aggregate-Repeat Training Improves
+---
+ERM (our runs)
+---
+Each out-of-domain performance is an average of three different runs
+---
+For example, run-
+---
+This shows the superior performance of quantization over ERM despite being more than 6 times
+---
+able offsets and better initialization
+---
+accuracies and standard errors are reported from three trials
+---
+cally reduced, becoming more than 4 times smaller than
+---
+considering a different target domain for each run, while utilizing the other domains for training
+---
+despite being 4 times smaller than its full-precision counterpart
+---
+domain in each run, indicated by the different columns
+---
+even with a 6 times smaller model, quantization still yields
+---
+from three trials
+---
+ing approximately four times smaller than its full-precision
+---
+main for each run, while utilizing the other domains for
+---
+nearly 6 times less memory than Arpit et al
+---
+pendently from initialization, using random seeds to ensure

@@ -1,0 +1,43 @@
+(2022b), and reported the average and standard-deviation performance across 3 seeds
+---
+(a) Initialization
+---
+At initialization, the weights assigned to layerwise features—denoted by ϕ
+---
+For MalNet-Tiny, we repeat the experiment on 4 different seeds and report the
+---
+For each model configuration, we perform 3 training runs with different weight initialization and
+---
+For each model configuration, we perform 4 training runs with different weight initialization and
+---
+Initialization
+---
+Our experiments are run on NVIDIA A6000 and A100 GPUs, with 48GB and 80GB of memory, respectively
+---
+Table 5: Mean test accuracy and std averaged over 4 random weight initializations on MalNet-Tiny
+---
+Table 6: Mean test set score and std averaged over 4 random weight initializations on heterophilic datasets
+---
+Table 8: Results for Peptides-func and Peptides-struct averaged over 3 training seeds
+---
+This initialization resembles a
+---
+aspects of our GRAMA – from its initialization to the graph
+---
+at overcoming these limitations, including the use of random node initializations (Sato et al
+---
+dom node initialization
+---
+eraged over 3 training seeds
+---
+features f for L times, where L > 0 is a hyperparameter that
+---
+fold adaptivity in the predicted ARMA coefficients: First,
+---
+of zeros at the initialization step
+---
+other methods) and report the training and inference times, as well as the performance on the Roman-Empire dataset, for
+---
+random weight initializations on Graph Property Prediction
+---
+runs with different weight initialization and report the average of the results

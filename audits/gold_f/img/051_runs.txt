@@ -1,0 +1,31 @@
+Finally, using the Open-R1 RL fine-tuning framework [2], we conducted separate training runs using
+---
+For the experiments presented in Table 5, the random baseline was independently run 5
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+expensive multi-step interactions or rollouts to observe outcomes and compute rewards or performance
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+leads to faster training times and a substantial reduction in energy consumption, aligning with the
+---
+obviating the need for repeated sampling runs, achieves a significant acceleration
+---
+only tested on a few datasets or with a few runs
+---
+pass, avoiding repeated inference
+---
+run with given experimental conditions)
+---
+single-pass uncertainty estimation method that efficiently evaluates data without requiring repeated
+---
+strategy were averaged over 5 independent runs
+---
+times, and we report the average value
+---
+• The instructions should contain the exact command and environment needed to run to

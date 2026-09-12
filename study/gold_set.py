@@ -55,6 +55,9 @@ FIELDS = {
     "discarded": ["results_table", "cause", "note"],
     "non_extremal": ["results_table", "cause", "note"],
     "no_n": ["results_table", "n_runs", "n_source", "note"],
+    # no error bar on either cell, but a run count attached from the paper:
+    # does the paper state that count for this table's experiment?
+    "no_bar_n": ["results_table", "n_runs", "n_source", "note"],
 }
 
 
@@ -94,8 +97,10 @@ def sample(extracted_path: str, analysis_path: str, sizes: dict, seed: int,
                           # paper state one the pattern does not match?
                           ("no_n", [c for c in cmps if c["winner_dispersion"] is not None
                                     and c["runner_dispersion"] is not None
-                                    and not c.get("n_runs") and not c.get("test")])):
-        for c in rng.sample(pool, min(sizes[stratum], len(pool))):
+                                    and not c.get("n_runs") and not c.get("test")]),
+                          ("no_bar_n", [c for c in cmps if c["winner_dispersion"] is None
+                                        and c["runner_dispersion"] is None and c.get("n_runs")])):
+        for c in rng.sample(pool, min(sizes.get(stratum, 0), len(pool))):
             t = tables[(c["paper"], c["table"], c["page"])]
             w = find_cell(t, c["winner"], c["winner_dispersion"], True)
             items.append({"stratum": stratum, "paper": c["paper"], "table": c["table"],
@@ -184,12 +189,12 @@ def render(items: list, sources: list, out_dir: str, zoom: float = 2.0) -> None:
         pix.save(os.path.join(img_dir, name))
         it["image"] = name
         it["title"] = rec["title"]
-        if it["stratum"] in ("testable", "no_n"):
+        if it["stratum"] in ("testable", "no_n", "no_bar_n"):
             text = "\n".join(p.get_text() for p in doc)
             sents = sorted({m.group(0).strip() for m in RUN_SENTENCE.finditer(text)})
             with open(os.path.join(img_dir, f"{it['id']}_runs.txt"), "w", encoding="utf-8") as fh:
                 fh.write("\n---\n".join(sents[:40]))
-            if it["stratum"] == "no_n":
+            if it["stratum"] in ("no_n", "no_bar_n"):
                 # The residual run-count miss is measured against the whole paper,
                 # not against the sentences the pattern already selects.
                 with open(os.path.join(img_dir, f"{it['id']}_fulltext.txt"), "w", encoding="utf-8") as fh:
@@ -429,6 +434,31 @@ def score(items_path: str, labels_path: str) -> dict:
                        "sources": dict(sorted(__import__("collections").Counter(
                            lb["n_source"].strip().lower() for lb in N if _num(lb["n_runs"]) is not None).items()))}
 
+    # --- no_bar_n: does the run count the pipeline attached to a bar-less
+    # table apply to it? The reader, given the whole paper, states the count
+    # that applies (or none); agreement with the pipeline's count is the
+    # precision of attachment on the population Section 6 rests on.
+    B = [(items[i], labels[i]) for i in labels if items[i]["stratum"] == "no_bar_n"]
+    if B:
+        with_pipe = [(it, lb) for it, lb in B if it["pipeline"].get("n_runs")]
+        agree = sum(1 for it, lb in with_pipe
+                    if _num(lb["n_runs"]) is not None and int(_num(lb["n_runs"])) == int(it["pipeline"]["n_runs"]))
+        reader_none = sum(1 for it, lb in with_pipe if _num(lb["n_runs"]) is None)
+        other = len(with_pipe) - agree - reader_none
+        out["no_bar_n"] = {"n": len(B),
+                           "attached_count_applies": rate(agree, len(with_pipe),
+                                                          "the paper states the pipeline's count for this table"),
+                           "reader_found_none": rate(reader_none, len(with_pipe),
+                                                     "the paper states no count for this table"),
+                           "reader_found_a_different_count": rate(other, len(with_pipe),
+                                                                  "the paper states another count for this table"),
+                           "by_source": {}}
+        for src in ("caption", "page", None):
+            sub = [(it, lb) for it, lb in with_pipe if it["pipeline"].get("n_runs_source") == src]
+            ok = sum(1 for it, lb in sub
+                     if _num(lb["n_runs"]) is not None and int(_num(lb["n_runs"])) == int(it["pipeline"]["n_runs"]))
+            out["no_bar_n"]["by_source"][src or "paper"] = rate(ok, len(sub), "count applies, by where it was read")
+
     # --- discarded and non_extremal: cause breakdown
     for stratum in ("discarded", "non_extremal"):
         S = [labels[i] for i in labels if items[i]["stratum"] == stratum]
@@ -588,6 +618,7 @@ def main(argv=None) -> int:
     s.add_argument("--discarded", type=int, default=40)
     s.add_argument("--non-extremal", type=int, default=40)
     s.add_argument("--no-n", type=int, default=0)
+    s.add_argument("--no-bar-n", type=int, default=0)
     s.add_argument("--out-dir", default="out/gold")
     s.add_argument("--exclude-items", action="append", default=None,
                    help="items.json of an earlier draw whose papers are held out (repeatable)")
@@ -619,7 +650,7 @@ def main(argv=None) -> int:
     if args.cmd == "sample":
         sizes = {"testable": args.testable, "no_bar": args.no_bar,
                  "discarded": args.discarded, "non_extremal": args.non_extremal,
-                 "no_n": args.no_n}
+                 "no_n": args.no_n, "no_bar_n": args.no_bar_n}
         exclude = set()
         for path in args.exclude_items or []:
             with open(path, encoding="utf-8") as fh:

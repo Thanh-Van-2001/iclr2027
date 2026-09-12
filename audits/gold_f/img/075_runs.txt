@@ -1,0 +1,35 @@
+Each trial presents two players with images of mixed blue and yellow
+---
+In all trials, the same LLM was assigned to both Player 1 and 2
+---
+Justification: Our experiments were run strictly by API and not locally, thus we did not need
+---
+Justification: We do not run any research studies with human participants
+---
+Specifically, we run additional
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+color pairings – we had 30 different pairings total, one for each run
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+image presented at each turn, we reduced the number of images in each run from 20 to 10
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+most models n = 40 times for each setting and prompt condition
+---
+only tested on a few datasets or with a few runs
+---
+prompted 10 times due to cost, while GPT-4o was prompted 80 times due to available Azure credits
+---
+prompting method, we conduct n = 30 trials over the same 20 pairs of images (order shuffled every
+---
+run with given experimental conditions)
+---
+trial), with temperature = 1
+---
+• The instructions should contain the exact command and environment needed to run to

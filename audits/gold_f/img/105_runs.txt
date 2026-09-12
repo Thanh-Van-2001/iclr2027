@@ -1,0 +1,41 @@
+Cut-Initialization
+---
+Due to computational constraints, we run with batch-size 256 in SimCLR
+---
+However, cut-initialization seems to counteract this and
+---
+Lastly, Table 3 shows that cut-initialization also provides the
+---
+PyTorch code for our cut-initialization layer
+---
+The effect of cut-initialization on Cifar-10 SSL representations
+---
+Thus, training with cut-initialization and large batches seems to be the most effective
+---
+We also evaluate cut-initialization in imbalanced data
+---
+We also see that cut-initialization has a
+---
+We also show the relationship between cut-initialization and the network’s batch size on SimSiam in Table S2
+---
+We study the interplay between cut-initialization and weight
+---
+and without cut-initialization in Table 4
+---
+by a constant c at initialization
+---
+ding norms at initialization which are then kept small via
+---
+initialization and GradScale continue to provide consis-
+---
+initialization experiments, this improvement becomes par-
+---
+it does not benefit from cut-initialization
+---
+pairing SSL models with cut-initialization often helps the
+---
+pairing cut-initialization with weight decay accelerates the
+---
+propose cut-initialization — dividing all network weights
+---
+tudes even under adaptive optimization: cut-initialization

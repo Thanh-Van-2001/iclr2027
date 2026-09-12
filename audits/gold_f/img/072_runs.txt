@@ -1,0 +1,25 @@
+3B tokens over 3 random seeds
+---
+Batch Sizes and Random Seeds
+---
+Green and red highlight runs with perplexity below 30 and above 50 respectively
+---
+Mean and standard deviation across 3 runs for different optimizers on pretraining LLaMA 130M task
+---
+Random seeds
+---
+Throughout our experiments, we fix the random seed for all runs within a same table
+---
+Unless specified otherwise, we run all
+---
+for sampling and/or the random seed to regenerate any random choices
+---
+investigate the effects of random seeds by running each batch size on 3 random seeds and report the mean and standard
+---
+loss spikes at the times when we switch subspace for Ga-
+---
+or even better than 5% gap for certain run
+---
+seed (at the cost of recomputating the projection at every
+---
+sizes, random seeds, combinations between adaptive step

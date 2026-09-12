@@ -1,0 +1,39 @@
+Figure 13: The performance graph of the online fine-tuning (300k), using five random seeds, corresponds to Table 3
+---
+Figure 17: Final normalized score of PARS for offline training, averaged over five random seeds with varying numbers of
+---
+Figure 18: Final normalized score of PARS for offline training averaged over five random seeds with varying activation
+---
+For the umaze and umaze-diverse scores for HIQL, we run the experiments using
+---
+Table 6: Final normalized evaluation scores averaged over five random seeds for SPOT and SVR
+---
+Table 7: Final normalized evaluation scores averaged over five random seeds for the baselines on the AntMaze Ultra datasets
+---
+We averaged the scores over five random seeds, with
+---
+We report the final normalized score averaged over five random seeds, with ± indicating the standard deviation
+---
+application of LN and PA, averaged over five random seeds
+---
+are set as 100 to 1000 times the boundary of AF
+---
+averaged over five random seeds, with ± representing the standard deviation
+---
+either 100 or 1000 times the boundary of AF
+---
+evaluations across five random seeds
+---
+experiments, we reported the final evaluation scores using five random seeds, with the mean and standard deviation provided
+---
+five random seeds with varying |LI| = |UI|
+---
+have faster training times than PARS, they use significantly more GPU memory
+---
+possible maximum norm, averaged over 5 seeds
+---
+seeds, with ± indicating the standard deviation
+---
+times hinder online fine-tuning (Zhang et al
+---
+unavailable, we re-run all the baselines using their corresponding official implementations, except for CQL, which uses the

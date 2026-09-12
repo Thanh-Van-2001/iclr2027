@@ -1,0 +1,53 @@
+Adversarial Initialization
+---
+Back to adversarial initialization
+---
+Diverse Adversarial Initialization
+---
+In Table 9 and Table 10, reverse predictions with adversarial initializations exhibit greater deviation
+---
+This validates Adv-BMT’s design of collision initialization + reverse predictions, which couldn’t
+---
+Upon reviewing the collisions detected in reverse predictions with real initializations, we found that
+---
+We design Adv-BMT to have diverse initializations, which do
+---
+We train a Twin Delayed DDPG (TD3) agent for 1 million steps using 8 random seeds
+---
+adversarial agent attacks the current ego agent based on its recent rollout trajectory records
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+catenated and repeated a number of times
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+free-form texts as inputs and extract embeddings to parameterize scene initializations and agent
+---
+from sampled collision initializations, the ADV is added into the scene together with existing traffic
+---
+initializations modify the terminal positions and headings of selected agents, which propagates
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+mechanism is used for selecting collision initializations
+---
+only tested on a few datasets or with a few runs
+---
+physically implausible collision initializations
+---
+prediction enables open-loop rollouts of future behaviors, whereas reverse prediction traces from a
+---
+prediction to generate the adversarial agent, then runs an additional forward prediction pass
+---
+run with given experimental conditions)
+---
+sion initializations for different opponent inter-
+---
+staged pipeline: it first conducts adversarial initializations and then inverse motion
+---
+times for forward prediction and reverse prediction are similar (10E6 and 15E6 steps, respectively)
+---
+• The instructions should contain the exact command and environment needed to run to

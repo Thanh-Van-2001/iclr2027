@@ -1,0 +1,57 @@
+1% of Training Cost: 5 Trials
+---
+1%-compute experiments presented in Figure 3 (generative loss) over the 3 trials used
+---
+15% the compute of the 410M training run
+---
+2B token training run (for an overall cost of 1%)
+---
+AP scores for the first 10 assays in PCBA, with error bars representing a 95% confidence interval over 3 trials
+---
+Experiments were run using A100 GPUs and AMD EPYC
+---
+Figure 3: MixMin consistently outperforms all baselines across the four target tasks using 1% of the final training run
+---
+Here we present results over 5 trials
+---
+MixMin weights were found using 1% the compute of the 160M model training run, which is
+---
+MixMin weights were found using 1% the compute of the 160M model training run, which is 0
+---
+We report AP scores with error bars representing a 95% confidence interval over 3 trials
+---
+chain rule, and hence we can run entropic descent to
+---
+for each proxy and baseline model by doing a 5-fold cross-
+---
+for generative loss across compute budgets (as shown in Figure 3) over the 3 trials used
+---
+for the first 10 assays in PCBA, with error bars representing a 95% confidence interval over 3 trials
+---
+ing runs
+---
+of the 410M training run
+---
+on the other assays in PCBA to run MixMin , using the train
+---
+over 3 trials (lower is better)
+---
+over 3 trials of random train-test splits
+---
+pute of the training run to find and improved the negative
+---
+pythia-160M training run on 3
+---
+relative to a full training run of the 160M pythia model, we
+---
+run compute (Left)
+---
+significant evaluation overhead: 100 times the alternatives
+---
+the 410M training run
+---
+the mean test AP score improvement (from 3 trials) over
+---
+trials
+---
+with 100% the cost of a full training run to 1%

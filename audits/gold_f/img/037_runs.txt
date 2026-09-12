@@ -1,0 +1,79 @@
+42 for this experiment, and based on consistent trends observed across seeds in other experiments, we
+---
+All results in the main experiments are reported as the average over three independent runs with
+---
+CIFAR-10 experiments, differnet seeds
+---
+Consequently, averaging across seeds does not provide
+---
+Distilgpt2 experiments, differnet seeds
+---
+Due to limited resources, we use seed
+---
+Each experiment runs for 106 steps with a 50/50 train/validation split
+---
+Figure 10: Resnet18 training results with different random seeds (42, 1, 15213), comparing standard
+---
+Figure 15: ViT training results with different random seeds (42, 1, 15213), comparing standard
+---
+Figure 16: TinyBERT training results with different random seeds (42, 1, 15213), comparing standard
+---
+Figure 17: TinyBERT unplug experiment with random seed 42, showing the effect of removing the
+---
+Figure 18: DistilGPT2 training results with different random seeds (42, 1, 15213), comparing standard
+---
+Figure 19: DistilGPT2 unplug experiment with random seed 42, showing the effect of removing the
+---
+Figures 17 and 19 present the unplug results with random seed 42
+---
+However, the relative flatness increases rapidly to nearly four times the level
+---
+Justification: Our experiments are performed with three random seeds and we display the
+---
+Random seeds
+---
+Relative flatness, seed 1
+---
+Relative flatness, seed 15213
+---
+Relative flatness, seed 42
+---
+The main experiments are initialized with seed 42, while additional results with seeds 1 and 15213
+---
+These behaviors are consistent across seeds
+---
+These patterns are consistent across seeds
+---
+These results demonstrate that initialization with different random seeds can
+---
+TinyBERT experiments, differnet seeds
+---
+Training runs for 300
+---
+Training runs for 300 epochs without learning
+---
+Training/validation accuracies, seed 1
+---
+Training/validation accuracies, seed 15213
+---
+Training/validation accuracies, seed 42
+---
+Training/validation losses (REG), seed 1
+---
+Training/validation losses (REG), seed 15213
+---
+Training/validation losses (REG), seed 42
+---
+Training/validation losses, seed 1
+---
+Training/validation losses, seed 15213
+---
+Training/validation losses, seed 42
+---
+ViT experiments, differnet seeds
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+computations are averaged over three random seeds
+---
+evaluated with Seed 42 due to computational constraints

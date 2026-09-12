@@ -1,0 +1,35 @@
+Justification: Our main results do not contain randomness as we fixed the seed
+---
+Large language monkeys: Scaling inference compute with repeated
+---
+Repeat: Go back to Step 2 and iterate until termination criteria are met
+---
+Standard Deviation with Multiple Trials
+---
+Table 5: Mean accuracy ± standard deviation over 3 runs with different seeds on MATH-500
+---
+To evaluate the robustness of our results, we conducted experiments over multiple trials using
+---
+Will we run out of data? limits of llm scaling based on human-generated data
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+different random seeds
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+multiple trials are consistent with our original findings, demonstrating the stability of the observed
+---
+only tested on a few datasets or with a few runs
+---
+repeated sampling efficiently scale test-time compute
+---
+run with given experimental conditions)
+---
+runs
+---
+• The instructions should contain the exact command and environment needed to run to

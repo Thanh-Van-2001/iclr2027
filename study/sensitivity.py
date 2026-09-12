@@ -428,6 +428,7 @@ def design_mde(comparisons: list, records: list, power: float = 0.8, alpha: floa
                      "below_alpha": c["gap"] < k_alpha * se_diff,
                      "own_below_alpha": own,
                      "source": source, "testable": bool(c.get("test")),
+                     "local_n": c.get("n_runs_source") in ("caption", "page"),
                      "topic": topic.get(c["paper"], "other"),
                      "no_bars": c["winner_dispersion"] is None and c["runner_dispersion"] is None,
                      "paper": c["paper"], "n": n, "scale": sc, "sd": sd})
@@ -478,6 +479,13 @@ def design_mde(comparisons: list, records: list, power: float = 0.8, alpha: floa
         "pct_below_design_mde_testable": pct(testable),
         "n_no_bars": len(no_bars),
         "pct_below_design_mde_no_bars": pct(no_bars),
+        # Only run counts read from the caption or the table's own page, which
+        # the bar-less audit found to apply to the table where a count read
+        # from elsewhere in the paper applied about half the time.
+        "n_local_n": sum(1 for r in rows if r["local_n"]),
+        "pct_below_alpha_threshold_local_n": pct([r for r in rows if r["local_n"]], "below_alpha"),
+        "n_no_bars_local_n": sum(1 for r in no_bars if r["local_n"]),
+        "pct_below_alpha_threshold_no_bars_local_n": pct([r for r in no_bars if r["local_n"]], "below_alpha"),
         "pct_sd_from_benchmark": round(100 * sum(1 for r in rows if r["source"] == "benchmark") / len(rows), 1),
         "median_external_sd_percent_scale": round(statistics.median(sds_pct), 2) if sds_pct else None,
         "median_runs": statistics.median(r["n"] for r in rows),

@@ -1,0 +1,79 @@
+(ˆc) on the held-out test sets across the 10 folds
+---
+15-fold cross-validation testing—was repeated 50 times
+---
+35 with the trial-averaged
+---
+A 10-fold stratified cross-validation scheme was used to evaluate the generalization performance of
+---
+All experiments were run on two different infrastructures based on their computational demands
+---
+All features in both the training and testing sets of that fold were then standardized by subtracting the
+---
+All model trainings were repeated three
+---
+Bars indicate mean±SEM across training seeds, as in subsequent analogous plots
+---
+Classification performance for each fold was
+---
+Each repetition
+---
+Each repetition used a different random seed
+---
+Each run took approximately
+---
+For each repetition of the decoding procedure, a subset of 128 neurons was randomly selected without
+---
+Here, where r is the predicted response and o is the observed response to N repeated stimuli; ¯o and ¯r
+---
+In each fold, the data corresponding to three consecutive rotation angles were
+---
+Moreover, we describe all procedures necessary to replicate
+---
+Performance and repetitions
+---
+Repetition of experiments to probe functional hierarchy
+---
+Repetitions and reporting
+---
+The appendix describes all necessary procedures to replicate the experiments,
+---
+The source of variability (across seeds and sessions) is clearly stated
+---
+The validation set is composed by 6 videos which were repeated 10 times during each recording
+---
+This process was repeated 10 times, with each fold serving as the test set exactly once
+---
+We find that current digital twins are able to replicate low-level functional properties, such as receptive
+---
+a 15-fold cyclic cross-validation procedure based on the rotation angle, identical to that used by
+---
+across the six MICrONS sessions and three training seed for each model
+---
+are the average recorded and predicted responses across all trials
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+cross-validation with MI calculation—was repeated 50 times for each visual area
+---
+different random seeds
+---
+dure—encompassing the random subsampling of 128 neurons and the subsequent 10-fold stratified
+---
+enhances the ability of digital twins to replicate population-level phenomena in the visual cortex,
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+fication, the neural response vectors underwent preprocessing steps within each fold of the cross-
+---
+fold, the mean and standard deviation of each feature (i
+---
+identity-preserving transformations, created to replicate the Froudarakis et al
+---
+independent repetitions, presented as mean ± standard error of the mean (SEM) calculated across the
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+iteration of the analysis was the average accuracy across the 15 folds

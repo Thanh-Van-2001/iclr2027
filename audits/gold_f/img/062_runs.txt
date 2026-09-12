@@ -1,0 +1,79 @@
+(Initialization) S∗= ∅; Loss = 0;
+---
+1: Initialization: S0 = ∅, k = 0
+---
+1: Initialization: S∗= ∅, DegITE = {}
+---
+1: Initialization: S∗= ∅, MargDic = ∅
+---
+2) During the early stage of seed growth, when the number of seeds is smaller
+---
+Additionally, we choose the randomized seed selection
+---
+Address challenge (ii): To achieve approximate optimum, we inductively select the seed candidate via
+---
+As a result, we expand the seed set (v4 is added), targeting
+---
+Choose v0 with the max value in DegITE as the seed: v0 = argmaxv{DegITE[v]},
+---
+Conduct propagation under current seed set S∗, generate ˆτi = d
+---
+Ensure: The deterministic seed set S0 with |S0| = K
+---
+Ensure: The deterministic seed set S∗with |S∗| = K
+---
+Expanding Seed Set S
+---
+For basic hyperparameters, we set seed number K = 15 and spread probability PSICP as
+---
+In another perspective, we can directly prove the optimal seed set of CauIM is one solution of the famous weighted
+---
+In sum, during each round of seed selection, we initially utilize a bipartite
+---
+Influence Maximization (IM) seeks a seed set to maximize information dissemina-
+---
+Initialization
+---
+Initialization is to obtain a trained [
+---
+Input: G(V , H , H); seed number K; Xi, initial treatment Ti and T−i of each node vi; observational data
+---
+Output: Deterministic seed set S∗with |S∗| = K
+---
+Re-compute marginal gain of of node cur with the current seed set S∗:
+---
+Remove the edge influence of the chosen seed node v0:
+---
+Repeated Until |S| = k
+---
+Require: G(V , H , H), size of the seed set K, causal influence function σ(·)
+---
+Require: Hypergraph G (V , H ), size of the seed set K, a constant T
+---
+Require: Hypergraph G(V , H , H), size of the seed set K, causal influence function σ(·)
+---
+Seed Number
+---
+Seed Number (iter=50)
+---
+Seed Selection
+---
+Seed Set S
+---
+Starting from an initial seed set S0, diffusion unfolds in discrete steps
+---
+Still, after the number of seeds exceeds 10, the scale of affected nodes rises significantly, since the cumulative
+---
+The evaluation metric is the sum of ITE spread by selected seeds with the
+---
+The optimal K-seed
+---
+Then Claim 1 follows by recursively applying this bound i times
+---
+Update Seed Set S
+---
+We randomly conduct each experiment for 10 times and each time for 20 rounds in
+---
+a marginal gain of node influence, thus guiding the seed node finding process
+---
+and find the second seed; else remove the second largest marginal gain node in MargDic,

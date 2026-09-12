@@ -1,0 +1,25 @@
+, repetition) caused by out-of-distribution
+---
+Initialization: If enable_soft_thinking is set, the model enters soft thinking mode for
+---
+Justification: The paper reports averaged results over 16 runs to ensure stability, with detailed
+---
+Since 30 is three times 10, I can first multiply 43 by 3 to get 129, and then add a zero to
+---
+This expansion entails an exponential number of paths, since each summation runs over the full
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+repeat until it hits the maximum generation length
+---
+run with given experimental conditions)
+---
+• The instructions should contain the exact command and environment needed to run to

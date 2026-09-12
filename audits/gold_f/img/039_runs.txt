@@ -1,0 +1,31 @@
+M ]M×M is the transition restart matrix to ensure b
+---
+Markov processes with restart
+---
+Next, a restart probability matrix 1
+---
+We repeat each experiment 10 times and report the average runtime in Fig
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+data was deduplicated, ensuring no repetitions in the training set, and randomly sampled to cover 20
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+repeated for T = 100 times, and the results are visualized as scattered plots in Fig
+---
+restart matrix w is set as 0
+---
+run with given experimental conditions)
+---
+simplicity, we ensure that each set of experiments is repeated 5 times independently and
+---
+w ∈(0, 1) is the relative weight for the restart matrix
+---
+• The instructions should contain the exact command and environment needed to run to

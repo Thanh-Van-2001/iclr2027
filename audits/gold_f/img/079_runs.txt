@@ -1,0 +1,53 @@
+6% accuracy drop (3 times as much) under the same conditions
+---
+Additionally, in our restart experiment, where we reset the MAB
+---
+Even if individual batches vary, the repeated
+---
+Our experiments are run on 4 RTX A6000 with 48G memory each
+---
+Restart (Qwen)
+---
+To validate that, we run an additional experiment on GSM8K, where we add the
+---
+We also run an additional experiment where we reset the MAB
+---
+While our main results are based on single runs,
+---
+[2024], where large-scale LLM training limits the feasibility of multi-seed
+---
+adding the new RM, and restart (Restart) in Table 7
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+be run in an offline data creation mode, where RM
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+models, generation of new supervision data, fine-tuning, and bandit updates – repeats for a total of
+---
+only tested on a few datasets or with a few runs
+---
+paired accuracy values across random seeds
+---
+policy from a prior LASER run on Wildchat
+---
+repeated exposure to diverse inputs allows the bandit to learn which RMs are more helpful overall
+---
+run with given experimental conditions)
+---
+seeds to ensure fair comparison), which are the most competitive across our benchmarks
+---
+shows that LASER consistently outperforms the baselines across runs, with standard deviations
+---
+significance of LASER, we report the mean and standard deviation over 5 seeds on reasoning
+---
+stability of LASER and baselines across multiple runs (Table 4)
+---
+utilized less that 3% of the times
+---
+• The instructions should contain the exact command and environment needed to run to

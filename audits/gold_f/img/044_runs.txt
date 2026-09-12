@@ -1,0 +1,27 @@
+Details of LDpred2 runs
+---
+Details of the GWAS runs
+---
+LMM, though more scalable, operates on a single trait at a time, requiring 18 separate runs
+---
+The p-value reflects the fraction of replicates where LDPred2’s AUROC ≥PRSformer’s
+---
+To account for this, we repeated variant selection using GWAS
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+p-values: estimated using a one-sided paired bootstrap test (10,000 replicates), sampling with
+---
+run with given experimental conditions)
+---
+training elastic net on the validation data using 5-fold cross validation
+---
+• The instructions should contain the exact command and environment needed to run to

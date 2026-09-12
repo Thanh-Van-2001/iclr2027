@@ -1,0 +1,37 @@
+Justification: We provide our entire anonymized code repository, and also share the game rollouts
+---
+Justification: We use LLMs to generate and evaluate game rollouts as described in our paper in
+---
+Our open-source sandbox environment, along with full logs of 400 complete game rollouts, 2054
+---
+Step 2: Add PyTorch hooks [22] after layer 20 and run the model’s forward pass to cache
+---
+To verify this hypothesis, we run continuations of the model on the TruthfulQA dataset with prefill
+---
+We open-source our sandbox codebase and game rollouts, and hope that the research community
+---
+We run 2054 games with 7 players randomly initialized as LLM-agents using 18 of the most popular
+---
+We run 400 games with 100 pairs of impostors and crewmates sampled from the open-weight
+---
+We’re also interested in responsible human trials (to compare human performance against frontier
+---
+example, train/test split, initialization, random drawing of some parameter, or overall run
+---
+experimental runs as well as estimate the total compute
+---
+explained by the variability of game outcomes based on random initialization and the stochasticity of
+---
+how to replicate the results, access to a hosted model (e
+---
+necessary to either make it possible for others to replicate the model with the same dataset,
+---
+run thousands of game rollouts and show that frontier “reasoning” models get differentially better at
+---
+tested on a few datasets or with a few runs
+---
+• For Figure 3, we run 400 games on Llama-3
+---
+• For Figures 2 and 5, we run 2054 games, which cost $2000 of OpenRouter API credits
+---
+• The instructions should contain the exact command and environment needed to run to

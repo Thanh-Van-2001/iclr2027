@@ -1,0 +1,37 @@
+A common strategy is to “seed” selected users, e
+---
+Each experiment runs efficiently on a personal laptop: every problem instance could be
+---
+Each experiment runs efficiently on a personal laptop: every problem instance could be computed
+---
+Each such iteration runs in time O(n)
+---
+FG,M, Algorithm 1 runs in polynomial time in n, G and log M and exhibits sublinear cM(1 −1/e)-
+---
+For each dataset, we report the average Ct and its standard deviation over five runs
+---
+In order to run the OCO policy, RAOCO first computes a super-
+---
+We repeat each experiment 5 times and report the average Ct along with one standard deviation
+---
+We report the average value of CT over 5 runs
+---
+We run experiments on six datasets: datasets Wikipedia, Images, and MovieRec were taken from
+---
+candidate pool xt ∈Xℓ, from which a seed set yt ∈YM(xt) of k users is selected, after observing
+---
+each dataset and each k, we run each experiment 5 times and report the average CT as well as the
+---
+each dataset and each ℓ, we run each experiment 5 times and report the average CT as well as the
+---
+that runs in polynomial time in n, m, G and log M and outputs a ground set x ∈Xℓfor which
+---
+the average value of Ct over 5 runs
+---
+the influence functions materialized in past rounds, in order to improve the quality of future seed
+---
+value over 5 runs (sampled over input and pipage rounding randomness), along with the
+---
+which runs RAOCO-OGA as if the second stage cardinality constraint was k = ℓ, i
+---
+ℓelements uniformly at random at each timestep; One-stage-OGA (1S-OGA) runs RAOCO-OGA

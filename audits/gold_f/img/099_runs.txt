@@ -1,0 +1,43 @@
+(2) Generate N rollouts
+---
+* If a line **repeats
+---
+**Repetition & Rephrasing**
+---
+5B base model with a batch size of N = 64 and a rollout group
+---
+Finally, while the above formulation considers multiple rollouts for a single prompt xi, in practice we
+---
+Given xi, for each rollout the model generates a response y = (y1,
+---
+Verbose Repetition and Self-Verification in Intermediate Steps
+---
+Walk before you run! concise llm reasoning via reinforcement
+---
+a new phase of calculation), categorize the repeated instance as
+---
+a prompt xi, our method generates n rollouts of candidate responses G(xi) = {y1, y2,
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+due to the absence of explicit correct rewards, the training still runs effectively
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+run with given experimental conditions)
+---
+sary repetition, excessive self-verification, and over-exploration of alternatives
+---
+several common problematic patterns in lengthy reasoning traces: (1) verbose repetitions without
+---
+to understand its function, especially for identifying repetitions,
+---
+we could not get enough replicates to report error bars (similar to other works)
+---
+• The instructions should contain the exact command and environment needed to run to

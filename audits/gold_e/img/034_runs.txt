@@ -1,0 +1,79 @@
+, sorted arrays, repeated elements, specific edge cases)
+---
+, when the conditions are satisfied, the solution will likely run slower than when they are not
+---
+, ≤1) the main loop will iterate for significantly more trials
+---
+1 // Check if the queue configurations have repeated , indicating a cycle
+---
+Analyzing physical running times reveals similar trends (see Appendix A
+---
+Compare line-level hit counts between the fast and slow runs
+---
+Each instrumented solution program is fed to AFL++ and runs for
+---
+Each machine runs Ubuntu 20
+---
+Ensure it compiles cleanly and runs without errors
+---
+For each generated mutator, we launch a dry run for three
+---
+If the dry run successfully exited with a number of new test inputs generated, the mutator is
+---
+Justification: For the main experiment we repeat each test execution (solution + test input)
+---
+Line-level hit counts for both runs, showing which lines get hit significantly more often on the slow input
+---
+Specifically, low or repeated p[i]
+---
+The mutator will mutate a previous input (seed input) to produce the next input (mutated input)
+---
+The prompting-and-dry-run
+---
+This leads the simulation to repeat the same deck
+---
+Thus a large n causes the code to run one iteration for each available box across all containers
+---
+To collect inputs, We run WEDGE’s fuzzing (based on our modified
+---
+WEDGE runs P against a set of user-provided tests ID, e
+---
+We implement a prototype of WEDGE and provide the scripts to run and collect experiment data,
+---
+We run experiments on six x86-64 machines equipped with a 24-core Intel Xeon Gold 6126 CPU with
+---
+Your goal is to diagnose why the program runs slowly for the slow input and derive conditions or invariants that
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+by two parameters (ai,bi), light i toggles its state at times bi, bi+ai, bi+2ai,
+---
+calls to check, which runs in O(n) time
+---
+code to execute 15% less instructions, run 46% faster, and use 16% less memory when providing
+---
+constraint-guided fuzzing, which runs for one hour
+---
+dominate the number of programs (59%) where they run the slowest among all the other baselines
+---
+each solution, we run EFFI-LEARNER with three different prompts to let EFFI-LEARNER optimize
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+five repetitions is more significant than for CPU instructions count, namely 12%, on average
+---
+following examples for inspiration — some maximising the input size, some not — but do not simply replicate
+---
+for five times and record the average execution time/instruction count
+---
+have to identify the inefficient implementation, understand the run-time behavior to exercise it, and
+---
+identifying inefficient code patterns, costly loops, repeated computations, and suboptimal usage of
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+it runs the instrumented code through a customized fuzzing tool to find performance-stressing inputs
+---
+its first toggle at t = bi, thereafter it repeats every ai seconds

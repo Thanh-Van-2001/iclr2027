@@ -1,0 +1,49 @@
+Analysis of scaling up rollout for perception policy learning
+---
+As shown in Figure 2, we conduct rollout-scaling
+---
+By generating sufficient rollouts, the model broadens its exploration space, increasing the
+---
+Crew\n\nUnlike other bike races, cyclocross requires you to be on foot at times
+---
+Glove\n\nThe cross season typically runs from September through February, so you’ll need hearty gloves like these,
+---
+MLLM model to generate several rollout responses, conduct reward modeling, and then apply
+---
+Rollout G
+---
+Rollouts
+---
+The tires can be run tubeless to better resist flats, and
+---
+We visualize the training reward curves under varying numbers of rollouts and evaluate the
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+is set as 1e −6 with 8 rollouts by default and a batch size of 1
+---
+llama see and draw with seed tokenizer
+---
+lower rewards) while concurrently increasing the rollout to broaden the model’s exploration space
+---
+only tested on a few datasets or with a few runs
+---
+rollout
+---
+rollout count enhances reward optimization and final performance
+---
+rollout number setting (1×) is 8
+---
+run with given experimental conditions)
+---
+specifically on scaling up the number of rollouts
+---
+strong scaling properties and underscores the critical role of rollout quantity in scaling perception
+---
+• The instructions should contain the exact command and environment needed to run to

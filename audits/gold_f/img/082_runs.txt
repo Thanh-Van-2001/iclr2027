@@ -1,0 +1,33 @@
+The random seed was set to 42, ensuring reproducibility across
+---
+The training used a random seed of 1234
+---
+This phenomenon was not observed in the training runs using the
+---
+We conducted a total of six training runs, dividing them into two sets based on batch sizes: three
+---
+and tasks, such as CV [20, 50, 42] and NLP [32, 33] training, with 3-5 times hyperparameter tuning
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+different runs
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+repeated experiments
+---
+requires more than 100 times of epochs that are required by 256-batch training, meanwhile 100
+---
+run with given experimental conditions)
+---
+runs with a batch size of 256, and three runs with a batch size of 32,768
+---
+such as lr=3e-4, epoch=200, and each set of experiments was conducted using ten random seeds
+---
+• The instructions should contain the exact command and environment needed to run to

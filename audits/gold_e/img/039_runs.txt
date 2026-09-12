@@ -1,0 +1,35 @@
+A direct (linear) scan to select a bin requires O(B) time, and this is repeated for each channel (C) and time step (T)
+---
+Although we found initialization can have an positive impact on
+---
+DLinear model’s "Average Initialization" with random initialization significantly affects model performance
+---
+Each experiment is repeated five times, and the best average results are shown in black, while the second-best results are
+---
+Fig 11 are results with identical settings across multiple runs but different random initializations
+---
+Results are averaged across 4 horizons and represent the mean MSE from 5 independent runs using
+---
+Shaded areas denote one standard deviation over five runs
+---
+Since each experiment is repeated five times and we cannot assume the normality of the result distributions, we conduct a
+---
+This weight initialization method is consistent with previous approaches in
+---
+To account for variability in the results, each experiment is repeated five
+---
+We report average per-batch inference times (in milliseconds per iteration) across six datasets in Table 12
+---
+different random seeds
+---
+follows: each experiment is repeated five times, and the average result is recorded
+---
+periment is repeated five times, and Mann-Whitney U tests
+---
+times
+---
+to initialization and learning rates compared to Gaussian
+---
+• Self-supervised loss and gradient-based updates on Wtest, repeated Niter times for each batch
+---
+• Starting point: A poor initialization θ0 can exacerbate the challenge, especially when high-variance updates cause

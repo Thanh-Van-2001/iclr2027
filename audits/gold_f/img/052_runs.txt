@@ -1,0 +1,35 @@
+Each simulation (rollout)
+---
+Large language monkeys: Scaling inference compute with repeated sampling
+---
+Question: Mari made 4 more than five times as many decorated buttons as Kendra
+---
+Random seeds were fixed and
+---
+bolic optimization over reasoning paths, requiring no additional rollouts or external reward
+---
+detailed instructions for how to replicate the results, access to a hosted model (e
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+for proofs [4]; and preference-learning variants treat each rollout as a pairwise comparison and fine-
+---
+it may be necessary to either make it possible for others to replicate the model with
+---
+only tested on a few datasets or with a few runs
+---
+pling budget on-the-fly, giving extra rejection-sampling trials to harder questions [46]; while Math-
+---
+reusing informative contrastive signals from partial rollouts
+---
+rollouts and iteratively retrains the policy and value heads [59]; ALPHAMATH-ALMOST-ZERO
+---
+run with given experimental conditions)
+---
+runs collective MCTS across multiple models to build a 260k multimodal tree-of-reasoning cor-
+---
+sion via LLM-generated feedback [58], it enables reasoning refinement without additional rollouts
+---
+• The instructions should contain the exact command and environment needed to run to

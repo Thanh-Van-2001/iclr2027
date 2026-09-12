@@ -1,0 +1,69 @@
+# run →cook
+---
+(a) Seed-size ablation
+---
+(a) shows how performance changes as the number of seed
+---
+(code) that the interpreter can run
+---
+- Never repeat numbers; never expose arithmetic/intermediate results
+---
+- Precisely replicate Existing Question’s table dimensions (rows, columns)
+---
+Method (#seed)
+---
+Qualitatively, 10-seed profiles request fewer steps and looser unit constraints than 100-seed profiles;
+---
+Seed-size ablation
+---
+Seeds vary 100→10 with the synthetic set fixed at 10k
+---
+Table 18: Seed-size ablation
+---
+Table 3: Model and seed scale results
+---
+We vary the number of seeds from 100 to 10 while fixing the synthetic set at 10k; for each level we
+---
+When the seed pool is extremely small (e
+---
+all sources and perform de-duplication against seed/benchmark sets
+---
+and details, the model is encouraged to generate data that does not replicate the original data but
+---
+confirming that the quality of Synth-Profiling governs performance under limited seed data
+---
+detailed instructions for how to replicate the results, access to a hosted model (e
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+in Table 3a, PANGEA remains strong with as few as 20 seeds and degrades gracefully only at 10,
+---
+in practice, ∼40 well-chosen seeds suffice to unlock most gains
+---
+issues—consistent with the seed-size trend in § B
+---
+it may be necessary to either make it possible for others to replicate the model with
+---
+only tested on a few datasets or with a few runs
+---
+random seeds
+---
+re-derive η and sample from the same Dg working subset to isolate seed effects
+---
+robust to 20–40 seeds and degrades only at 10 due to an under-specified profile
+---
+run with given experimental conditions)
+---
+show robustness down to 20–40 seeds and a drop at 10, where η under-specifies style and difficulty
+---
+the number of seed data from 100 to 10 while keeping the synthetic set fixed at 10k
+---
+to synthesize 10k CSAT items from official seeds
+---
+using official seeds, evaluate on a held-out 2025 set, and observe that PANGEA attains the highest
+---
+• The instructions should contain the exact command and environment needed to run to
+---
+• Unlike existing LLM-based synthetic data generators that rely on manually crafted seeds or

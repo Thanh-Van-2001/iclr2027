@@ -1,0 +1,31 @@
+7, and repetition penalty to 1
+---
+Due to resource limitation, we only run AWQ and the results are as shown in Table 16
+---
+Each experiment is performed for five times with different seeds and then reports the averaged
+---
+In a summary, our contributions are as three folds: 1) we conduct extensive empirical exploration
+---
+We run all
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+clustering in the activation space, we run k-means with k = 128 after dimensionality reduction to 64
+---
+evaluation scores over 5 runs), as shown in the Table 11
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+initialization from scratch
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+run a forward pass through the uncompressed model and extract layer-wise results
+---
+run with given experimental conditions)
+---
+• The instructions should contain the exact command and environment needed to run to

@@ -1,0 +1,73 @@
+005 times as much as the numeric counterparts
+---
+Although there is some variability between runs, Figure 13 highlights we are
+---
+For coset discovery, we seed the model with K = 64 basis elements and run 3 epochs with cross-entropy loss
+---
+In each column, we plot the distribution of the top 24 cosets for a given run
+---
+In particular, we run the discovery process for 20 epochs with a learning rate of
+---
+In the discovery process, we seed our model with a
+---
+In the infinitesimal generator discovery, we seed the basis with 7 elements by our criteria for choosing the dimension
+---
+LieGAN is run for 20 epochs with a learning rate of 0
+---
+Run #
+---
+The model is seeded with 4 generators, and we use a batch size of 16 and run for 30 epochs using cross-entropy
+---
+Then, we require at most k total runs to determine the optimal dimension of the basis
+---
+To do so, we repeat the discrete discovery
+---
+To further verify the resilience of AtlasD under the choice of atlas, we repeat the PDE experiment under a third atlas
+---
+We also run the global symmetry discovery baseline LieGG
+---
+We run each model 10 times and include the
+---
+We run our model and the baselines 3 times and record the average
+---
+We run our model for 10 epochs
+---
+We run the model for 10 epochs using
+---
+We run twice: once without the rectan-
+---
+We seed our basis with
+---
+We seed our discovery process with K = 64 matri-
+---
+We seed the discovery algorithm with K = 256 representatives and report the unique cosets among the top q = 128
+---
+We seed the model with K = 16 cosets and took the top q = 8 matrices before
+---
+We use the notation that T is the number of training iterations for a given run, k is the dimension of the
+---
+When training the predictors, we use cross-entropy loss and weigh background pixels 10 times less
+---
+despite having 7 times fewer parameters
+---
+discovery process we seed the model with a single infinitesimal generator
+---
+given run
+---
+not similar across consecutive runs
+---
+repeated for all T training iterations
+---
+results that are consistent across runs, albeit with a higher
+---
+run with the highest mean IoU
+---
+run without the heat source provides a reference for singular values
+---
+secutive runs
+---
+value of k, we first run the model repeatedly, varying the basis dimension in different runs
+---
+we numerically integrate 50 times with dt = 0
+---
+we seed the model with a single infinitesimal generator and

@@ -1,0 +1,61 @@
+After optimizing our kernels for the existing mLSTM computation, we seek ways to reduce kernel run-
+---
+All runs use
+---
+Although we enhance training stability through careful gate initialization informed by our empirical
+---
+At the lowest level the GPU runs multiple Threads, operating on small but fast
+---
+Effect of Input Gate Bias Initialization
+---
+Effect of Input Gate Bias Initialization (Figure 12 and 13)
+---
+Figure 12: Trainable and fixed exponential input gate for bias initializations [0, -2, -5, -10] and
+---
+Figure 13: Trainable and fixed sigmoid input gate for bias initializations [0, -2, -5, -10] and norm
+---
+FlashAttention 3 for longer sequence lengths and more than two times faster than Mamba 2 kernels
+---
+For the FLA kernels the head dimensions 32 and 64 did not run, due to Triton compiler errors
+---
+In extensive experiments on language modeling, we confirm that this initialization improves
+---
+Instead of comparing the times, we can also compare the arithmetic intesity or operational intensity
+---
+Justification: Our language modeling experiments were too expensive to run multiple seeds
+---
+Our kernel benchmark experiments are run in PyTorch
+---
+We analyze the effect of the input gate bias initialization
+---
+We run all kernels in bfloat16 precision
+---
+We run our benchmarks on NVIDIA H100 GPUs
+---
+We run our language modeling experiments in JAX 0
+---
+and input gate bias initializations for the mLSTM with exponential input gate with 160M parameters
+---
+are run on NVIDIA H100 80GB GPUs
+---
+cost of a more than 3 times longer runtime compared to our TFLA mLSTMsig kernel with chunk
+---
+executing a kernel, a grid (with typically 3 dimensions) of Thread blocks that run in parallel is
+---
+in Figure 16 and find that this comes at the cost of almost 2 times the GPU memory usage compared
+---
+indicates, that there exists an interplay between the norm layer epsilon and input gate bias initialization
+---
+initialization
+---
+mLSTM through careful gate initialization guided by our empirical transfer behavior analysis
+---
+norm layer epsilon and input gate bias initialization
+---
+recent hardware generations in the theoretical runtime analysis and also report runs with
+---
+run experienced irrecoverable loss spikes during training
+---
+tention has the least memory usage of all kernels, but is more than 3 times slower than our TFLA
+---
+we can or should also increase the input gate bias initialization, as the shift of the gain curve in positive

@@ -1,0 +1,27 @@
+2,472 interview segments with human-validated start times, end times, and transcriptions
+---
+In Table 2, we run G-Eval with three random seeds and report the mean score and standard deviation
+---
+Moreover, we conduct the experiments with 3 random seeds and report the
+---
+Table 4, our model produces scene change rate (SCR) and repetition rate (REP) closer to those of
+---
+Using a fixed random seed, we then measured recall under
+---
+When constructing teasers with our proposed method, to prevent repetition, we maintain a sliding
+---
+automatically detected narrator was correct, if the start and end times of an interview segment
+---
+correct start times, end times, and transcriptions
+---
+example, train/test split, initialization, random drawing of some parameter, or overall run
+---
+mental runs as well as estimate the total compute
+---
+tested on a few datasets or with a few runs
+---
+this, but reproducibility can also be provided via detailed instructions for how to replicate
+---
+to either make it possible for others to replicate the model with the same dataset, or provide
+---
+• The instructions should contain the exact command and environment needed to run to

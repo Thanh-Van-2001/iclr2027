@@ -1,0 +1,39 @@
+100, 200, 400, and 800 words for the generation latency evaluation—we either repeat or truncate the
+---
+ARXIV-QA, the parallel text encoding baselines (Block-RAG, PCW, APE) and Graph-KV run on 4
+---
+Distractors When adding distractors, we also employ randoms seeds 42 −44 to randomly sample
+---
+For sequential encoding and Block-RAG [35], we report the average performance with seeds 42 −44
+---
+For the other tasks, all the methods run on with
+---
+Graph-KV is capable of encoding more than 3 times the number of neighbors
+---
+Justification: In scenarios that may involve randomness, at least three random seeds are
+---
+N-fold reductions in LLM performance [3, 27, 65]
+---
+NVIDIA A100 Tensor Core GPUs, while the sequential encoding baseline runs on 8 NVIDIA A100
+---
+When distractors are included, the Paper Texts are repeated accordingly, while ensuring that each
+---
+average performance across seeds 42 to 44
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+different seeds
+---
+distractors are included, the Paper Texts are repeated accordingly, while ensuring that each citation
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+run with given experimental conditions)
+---
+• The instructions should contain the exact command and environment needed to run to

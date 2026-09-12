@@ -1,0 +1,61 @@
+, 2023] – Given a repeated query
+---
+A (3 seeds)
+---
+As shown in Figures 3, 4, and 6, not all random seeds exhibit successful length generalization transfer
+---
+B (3 seeds)
+---
+C (3 seeds)
+---
+For all experiment settings, each individual training run is at most 2 hours
+---
+For all experiments in the paper, we run on a single machine with two NVIDIA GeForce RTX 3090
+---
+In our experiments with 5 different seeds per task group, we observe considerable variability in length
+---
+It is worth noting that the generalization behavior is not entirely robust: different random seeds yield
+---
+Justification: The paper reports results across 5 different random seeds for model initial-
+---
+The variability is entirely due to different model initializations,
+---
+We replicate our length generalization transfer experiments using a pretrained language model,
+---
+We show that the same phenomenon replicates in pretrained language models, and that natural
+---
+and compute the average generalization gap over three random seeds
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experiment run as well as estimate of total compute in Appendix B
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+is trained with 5 random seeds; best-performing runs are shown in bold
+---
+ization (mentioned in Section 3), and the figures show multiple runs with different random
+---
+only tested on a few datasets or with a few runs
+---
+results across 5 random initialization seeds but the dataset is kept the same
+---
+run with given experimental conditions)
+---
+seed 45
+---
+seed 46
+---
+seed 47
+---
+seeds, providing visual indication of result variability
+---
+since we keep the dataset the same between runs
+---
+to construct a 32-node maze on an 8 × 8 grid, we run the algorithm until 32 nodes are added
+---
+• The instructions should contain the exact command and environment needed to run to

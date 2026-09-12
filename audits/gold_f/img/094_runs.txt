@@ -1,0 +1,25 @@
+(b) Object query initialization strategies
+---
+Effect of the object queries initialization strategies
+---
+In Table 5 (b), we present ablation studies on the effectiveness of different object query initialization strategies
+---
+The initialization strategies in existing grounding methods mainly include learnable zero vector [18], average
+---
+The innovations are three-fold
+---
+is temporally replicated T times for each frame resulting in object queries Q0 =
+---
+make it possible for others to replicate the model with the same dataset, or provide access to
+---
+on a few datasets or with a few runs
+---
+reproducibility can also be provided via detailed instructions for how to replicate the results,
+---
+runs as well as estimate the total compute
+---
+t is temporally replicated T times for each
+---
+train/test split, initialization, random drawing of some parameter, or overall run with given
+---
+• The instructions should contain the exact command and environment needed to run to reproduce

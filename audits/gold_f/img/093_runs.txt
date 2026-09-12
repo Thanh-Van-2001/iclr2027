@@ -1,0 +1,35 @@
+(MAD2R) which as a starting point runs MAD in two rounds,
+---
+For each of these text-based datasets we replicate
+---
+For smaller datasets, sequential algorithms are also reported as oracles and results are averaged over 5 trials with one standard deviation
+---
+In each round, the basic algorithm is run with
+---
+In the first round, we run
+---
+On the small scale datasets where we can run sequential
+---
+Releasing the output U from Algorithm 1 run with unbiased MAD (Algorithm 2) as the
+---
+We first state as a corollary that MAD run in a single round
+---
+We will prove a useful fact that Algorithm 2 is monotone in the sense that weights when run on S′ will only increase
+---
+and run on these huge datasets within 4 hours of wall-clock
+---
+as core computation repeated invocations of the uniform
+---
+compared to when run on only S
+---
+input data is available to a curator that runs the algorithm
+---
+small number of rounds, runs the basic algorithm as a black
+---
+that can be efficiently run in large-scale data process-
+---
+threshold algorithm run on S but is given some weight w′(i)
+---
+to run the sequential algorithms, however MAD2R has the
+---
+when ALG is run on S′

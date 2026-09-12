@@ -1,0 +1,41 @@
+6% with uniform initialization
+---
+Due to computational constraints, these experiments were run for a limited
+---
+The second estimates statistics multiple times using
+---
+Third, static weights fixed at initialization may become suboptimal as
+---
+We evaluate PiKE with two initializations:
+---
+and we run the Conceptual PiKE Algorithm (Algorithm 2) initialized at θ0 with the SGD optimizer in
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+configurations, PiKE benefits from utilizing already fine tuned weights as initialization, achieving
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+large models for 120K steps are approximately 1 day and 2 days per run, respectively
+---
+mately 1–2 days to run, we did not perform multiple runs and therefore do not report error
+---
+multiple times using different subsets of samples
+---
+only tested on a few datasets or with a few runs
+---
+or O(K2) computation from repeated backpropagation
+---
+run with given experimental conditions)
+---
+simulated training runs to model the non-additive effects of individual training examples, enabling
+---
+the influence of individual training examples by simulating training runs
+---
+with uniform initialization
+---
+• The instructions should contain the exact command and environment needed to run to

@@ -1,0 +1,61 @@
+, 2022) or heuristics and good initialization (Kerbl
+---
+10 random seeds
+---
+Here we show the times required
+---
+Memory and Compute Times
+---
+The same experiment is repeated for linear interpolation into the vector (line) features (left) versus nearest
+---
+W with values fixed at random initialization
+---
+We plot the training times, memory sizes and PSNR metrics of GA-Planes and K-Planes for radiance field reconstruction
+---
+We repeat opti-
+---
+We repeat this
+---
+also some high-frequency noise likely arising from unresolved hash collisions or sensitivity to random initialization
+---
+and W denotes the same weights frozen at initialization in-
+---
+are derived from the same grids frozen at their initialization
+---
+are sensitive to initialization
+---
+as W ∈Rh×d1 (which are fixed at random initialization)
+---
+decoder MLP, and thus risk getting stuck in suboptimal local minima depending on the randomness of initialization and the
+---
+fails to fit any test frame with some of the seeds
+---
+function of the convex model are frozen at initialization and used as fixed ReLU gating patterns
+---
+however the training times vary due to the choice of feature dimensions
+---
+i are defined by the fixed random weight initialization
+---
+increased sensitivity (to initialization, randomness, and prior
+---
+ing curves across random seeds, we find that the nonconvex
+---
+initialization
+---
+mization with 10 different random seeds used to initialize
+---
+reliable training across seeds, whereas the nonconvex model
+---
+require heuristic or discrete optimization strategies that result in sensitivity to initialization
+---
+seeds)
+---
+sizes of the points are proportional to training times, as written on the plot
+---
+slow and sensitive to initialization and hyperpa-
+---
+union (IOU) scores for video segmentation over 10 seeds,
+---
+with respect to random initialization, as is the semiconvex
+---
+with some seeds failing to converge at all

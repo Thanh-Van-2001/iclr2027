@@ -1,0 +1,53 @@
+50 times
+---
+Figure C7: Step-by-step illustration of pushing replicate nodes down a computation graph
+---
+First, propagate replicate nodes down the graph to
+---
+In table F3, we repeat the benchmark from
+---
+The approach we propose here exploits that the K-th derivative of g ◦h is ∂g times the K-th
+---
+To summarize the procedure, we evaluate the 6-jet three times
+---
+Two important properties of the new graph are (i) the replicate node moved to an output node,
+---
+allocation does not fluctuate much, we measure it in a single run
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+by multiplying our reported timings with the number of repetitions, then summing over all
+---
+d2f_r = replicate(-f0)
+---
+df_r = replicate(df)
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+f0_r = replicate(f0)
+---
+graph and pushes forward the replicate node, as illustrated step-by-step in fig
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+minimize noise: To measure runtime, we report the smallest number from repeating a run
+---
+only tested on a few datasets or with a few runs
+---
+remove repeated computations on the same tensors
+---
+replicate is a function that replicates a tensor R times along a new leading axis,
+---
+replicate x0
+---
+run with given experimental conditions)
+---
+starts from the graph produced by the replicate-push procedure, and propagates the final sum node up
+---
+the smallest execution time of 50 repetitions
+---
+x0_r = replicate(x0)
+---
+• The instructions should contain the exact command and environment needed to run to

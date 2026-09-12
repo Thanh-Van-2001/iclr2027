@@ -1,0 +1,55 @@
+3K seed samples and effective self-improvement strategy
+---
+5-7B-Instruct [29] on the seed dataset to get Qwen2
+---
+Large language monkeys: Scaling inference compute with repeated
+---
+Our method first uses a small set of seed data with
+---
+Seed Data Under Different Reasoning Efforts
+---
+Such a small set of seed data can be manually human-written or generated
+---
+The statistics of the seed data is shown in Table 1
+---
+We report the average accuracy across 5 random seeds in each
+---
+averaged over 5 random seeds
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+distribution of seed samples (i
+---
+effort from the seed data into the above generated dataset, resulting in a thinking-optimal dataset
+---
+effort-based prompts on a subset of the WebInstruct-verified dataset [23], and curate a seed general
+---
+ei to perform System-2 thinking, using a small set of seed data
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+number of seed problems as Ps, and our goal is to curate a seed dataset Ds = Ds1 ∪· · · ∪Dsn,
+---
+only tested on a few datasets or with a few runs
+---
+run with given experimental conditions)
+---
+seed data
+---
+seed data that contains 1
+---
+seeds for each evaluation experiment
+---
+subset of seed data containing 1
+---
+thinking-optimal distribution for our base model, we instead create the seed data containing responses
+---
+where Dsi = {(ei, x, yei)|x ∼Ps} represents the responses to seed problems under a specific
+---
+which first leverages a small set of seed data to teach LLMs to adopt varying levels of reasoning
+---
+• The instructions should contain the exact command and environment needed to run to

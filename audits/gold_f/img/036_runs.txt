@@ -1,0 +1,77 @@
+* Crease the folds sharply for a
+---
+Because our development set is small, we assess the stability of our runs
+---
+Due to limited compute resources, we use a single seed for all experiments; this is also
+---
+Figure 12: Steering score distribution for three distinct runs with different random seeds under the
+---
+Figure 16: Variance of steering scores across hyperparameter-tuning runs for both with and without
+---
+First repeat "Here is my response", then give your answer
+---
+Fold and Tape One Side:** * Pull one side of the paper over the gift and fold it neatly
+---
+Fold and Tape the Second Side:** * Pull the other side over, overlapping the first fold slightly
+---
+Fold the End Flaps:** * Fold one end flap toward the center of the gift, crease it, and tape it down
+---
+For each method–objective pair, we grid-searched the optimal hyperparameters with 72 runs for
+---
+In our example, the LM tends to repeat the system prompt
+---
+Our method leads to approximately 1,000 hyperparameter-tuning runs,
+---
+Repeat on the other end, ensuring the folds are neat and even
+---
+Run 1
+---
+Run 2
+---
+Run 3
+---
+Stability analyses of runs
+---
+Then, neatly fold
+---
+To select the best factor for instruction following attack, we run suppression on the rule base data
+---
+appendix E for details on the compute resources required for our training runs
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+exact same run configuration
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+first repeat "Here is my
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+is brittle and requires extensive manual trial and error [Chang et al
+---
+only tested on a few datasets or with a few runs
+---
+perform grid search with 168 distinct runs to select the best steering layer
+---
+run
+---
+run - House Greyjoy of the Iron Islands - House
+---
+run with given experimental conditions)
+---
+steering scores from hyperparameter-tuning runs without sampled factors exhibit significantly greater
+---
+the Gemma-2-2b and 9b models, and 168 runs for the Gemma-3-12b and 27b models, yielding the
+---
+three replicated runs across two settings exhibit similar distributions, with the maximum steering
+---
+we perform grid search with 72 distinct runs for each setting optimizing for the best combination of
+---
+we search over three layers with 24 runs each but apply the best hyperparameter setting to different
+---
+would require an impractically large number of offline hyperparameter-tuning runs
+---
+• The instructions should contain the exact command and environment needed to run to

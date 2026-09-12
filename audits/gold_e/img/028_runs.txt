@@ -1,0 +1,55 @@
+Algorithm 2 Generate k-fold Cyclic Cover from Real-world Network
+---
+By definition of k-fold cover, (u, v) ∈E(G)
+---
+Definition 5 (k-fold Cyclic Cover)
+---
+Ensure: k-fold cyclic cover graph H
+---
+For a base graph G = (V, E), the k-fold cyclic
+---
+For a graph G (without self-loops), its k-fold cyclic cover H is
+---
+For any graph G and k ≥2, the k-fold cyclic cover H admits an automorphism group
+---
+Justification: All experiments were run multiple times using multiple random seeds, with
+---
+Random walks with restart probability α = 0
+---
+Since (u, v) ∈E(G), by definition of k-fold cover:
+---
+Symmetry of k-fold Cyclic Cover
+---
+The shaded areas represent the standard deviation across multiple runs
+---
+To ensure reproducibility, we set fixed random seeds ∈[0, 1, 2, 3, 4] for all experiments,
+---
+We construct k-fold cyclic covers using real data as base graphs, with the
+---
+automorphism of the k-fold cyclic cover H of any graph G
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+controlling the initialization of model parameters, data splitting
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+models, reported as mean ± std over 5 runs
+---
+only tested on a few datasets or with a few runs
+---
+prising power of graph neural networks with random node initialization
+---
+run with given experimental conditions)
+---
+seed 0, with experiments conducted across five random seeds ∈[0, 1, 2, 3, 4] for robust evaluation
+---
+shaded areas represent the standard deviation across multiple runs
+---
+˜G (bipartite double cover) and Gk (k-fold cyclic cover) in the main text
+---
+• The instructions should contain the exact command and environment needed to run to

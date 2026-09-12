@@ -42,13 +42,17 @@ def _write_resolution_table(br: dict, path: str) -> None:
         size = format(d["size"], ",").replace(",", "{,}")
         rows.append(name + " & " + size + " & " + str(d["n"]) + " & "
                     + f"{d['median_gap']:.1f}" + " & " + f"{d['median_resolution']:.1f}" + " & "
+                    + str(d["pct_below_sig"]) + chr(92) + "% & "
                     + str(d["pct_below"]) + chr(92) + "%")
-    caption = ("Reported gaps against the resolution of the benchmark they are "
-               "measured on, for every benchmark with thirty or more matched "
-               "comparisons. Gap and resolution are medians in points at the "
-               "comparison's own pooled accuracy. The share below resolution is "
-               "not a function of split size alone: it depends on the gaps a "
-               "field reports on that benchmark.")
+    caption = ("Reported gaps against what the benchmark can resolve, for every "
+               "benchmark with thirty or more matched comparisons, treating the "
+               "two systems as independent. Gap and resolution (the minimum "
+               "detectable difference at 80\\% power) are medians in points at the "
+               "comparison's own pooled accuracy; `Not significant' is the share "
+               "of gaps below 1.96 standard errors of the difference, `Below "
+               "resolution' the share below the 80\\%-power value. Neither is a "
+               "function of split size alone: both depend on the gaps a field "
+               "reports on that benchmark.")
     nl = chr(10)
     rowsep = " " + chr(92) * 2 + nl
     b = chr(92)
@@ -58,9 +62,11 @@ def _write_resolution_table(br: dict, path: str) -> None:
         b + "centering",
         b + "caption{" + caption + "}",
         b + "label{tab:resolution}",
-        b + "begin{tabular}{lrrrrr}",
+        b + "small",
+        b + "setlength{" + b + "tabcolsep}{4pt}",
+        b + "begin{tabular}{lrrrrrr}",
         b + "toprule",
-        "Benchmark & Split size & Comparisons & Gap & Resolution & Below " + b * 2,
+        "Benchmark & Split & $n$ & Gap & Resolution & Not significant & Below resolution " + b * 2,
         b + "midrule",
         rowsep.join(rows) + " " + b * 2,
         b + "bottomrule",
@@ -338,6 +344,10 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("resolution median gap", f"{br['median_gap']}", provenance=brun)
     reg.add("resolution median res", f"{br['median_resolution']}", provenance=brun)
     reg.add("resolution pct below", rf"{br['pct_below_resolution']}\%", provenance=brun)
+    reg.add("resolution pct below sig", rf"{br['pct_below_significance']}\%", provenance=brun)
+    reg.add("resolution pct below sig rho half", rf"{br['correlation_sensitivity_significance']['0.5']}\%", provenance=brun)
+    reg.add("resolution pct below sig rho nine", rf"{br['correlation_sensitivity_significance']['0.9']}\%", provenance=brun)
+    reg.add("resolution median sig", f"{br['median_sig_threshold']:.2f}", provenance=brun)
     reg.add("resolution pct below rho nine",
             rf"{br['correlation_sensitivity']['0.9']}\%", provenance=brun)
     reg.add("resolution pct below rho half",
@@ -396,6 +406,11 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
             provenance="extra_stats")
     reg.add("main fail", rf"{sd['main']['pct_fail']}\% [{sd['main']['ci_fail'][0]}, {sd['main']['ci_fail'][1]}]",
             provenance="extra_stats")
+    reg.add("reweighted gaps fail", rf"{sd['reweighted_to_population_gaps']['pct_fail']}\%", provenance="extra_stats")
+    for key, name in (("le3", "runs le three"), ("4to5", "runs four five"), ("ge6", "runs ge six")):
+        d_ = sd["by_runs"][key]
+        reg.add(f"fail {name}", rf"{d_['pct_fail']}\% [{d_['ci_fail'][0]}, {d_['ci_fail'][1]}]", provenance="extra_stats")
+        reg.add(f"n {name}", d_["n"], provenance="extra_stats")
     reg.add("strict n", hs["caption_run_count_only"]["n"], provenance="headline_span")
 
     wt = _j("analysis_2025")["welch_t"]
@@ -466,7 +481,9 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("family size two to five", rf"{hf['pct_family_size_2_to_5']}\%", provenance="extra_stats")
     reg.add("family size over five", rf"{hf['pct_family_size_over_5']}\%", provenance="extra_stats")
     reg.add("family median", f"{hf['median_family_size']:g}", provenance="extra_stats")
-    reg.add("ties dropped", hf["exact_ties_dropped"], provenance="extra_stats")
+    # The full count of tied groups is the funnel's; the per-table count in
+    # holm_families misses tables whose every group tied.
+    reg.add("ties dropped", bs["tied_with_rival"], provenance="bold_semantics")
     vc = xs["venue_counts"]
     for key, label in (("NeurIPS", "neurips"), ("ICML", "icml")):
         reg.add(f"{label} papers", vc[key]["papers"], provenance="extra_stats")
@@ -661,6 +678,36 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("gold frozen no n n", fnn["n"], provenance=frun)
     reg.add("gold frozen no n found", _pct_ci(fnn["reader_found_a_run_count"]), provenance=frun)
     reg.add("gold frozen no n found frac", _frac(fnn["reader_found_a_run_count"]), provenance=frun)
+    # Instrument error propagated into the failure-rate headline, as recall is
+    # propagated into the no-bar share. u is the Wilson upper bound on the
+    # per-item verdict disagreement on the frozen set; if a share u of fails
+    # were really survivals the rate would be p(1-u), if a share u of survivals
+    # were really fails it would be p + u(1-p). The observed disagreements run
+    # one way, and the point moves by their net share.
+    from paperengine.stats import wilson_interval as _wi2
+    v2 = gft["verdict_2x2"]
+    n_both = v2["both_fail"] + v2["both_survive"] + v2["reader_fail_pipeline_survive"] + v2["pipeline_fail_reader_survive"]
+    n_dis = v2["reader_fail_pipeline_survive"] + v2["pipeline_fail_reader_survive"]
+    u = _wi2(n_dis, n_both)[1]
+    reg.add("verdict error upper", rf"{100 * u:.1f}\%", provenance=frun)
+    reg.add("verdict disagreements frac", f"{n_dis} of {n_both}", provenance=frun)
+    for key, label in (("pct_fail", "fail"), ("pct_fail_holm", "fail holm")):
+        pp = y25[key] / 100
+        shift = (v2["reader_fail_pipeline_survive"] / n_both) * (1 - pp) - (v2["pipeline_fail_reader_survive"] / n_both) * pp
+        reg.add(f"{label} instrument low", rf"{100 * pp * (1 - u):.1f}\%", provenance=frun)
+        reg.add(f"{label} instrument high", rf"{100 * (pp + u * (1 - pp)):.1f}\%", provenance=frun)
+        reg.add(f"{label} instrument point", rf"{100 * (pp + shift):.1f}\%", provenance=frun)
+        reg.add(f"{label} instrument band", rf"{100 * pp * (1 - u):.1f}--{100 * (pp + u * (1 - pp)):.1f}\%", provenance=frun)
+    # And the scenario in which the items the reader could not test are removed:
+    # the population rate scaled by the frozen set's ratio.
+    ratio = gft["failure_rate_pipeline_values_same_items"] / gft["pipeline_fail_rate_all_items"]
+    reg.add("fail reader testable scaled", rf"{y25['pct_fail'] * ratio:.1f}\%", provenance=frun)
+    # A copied rival is tested at the table's own run count; removing every
+    # such comparison at both extremes bounds what it can do.
+    s_c = rc_["pct"] / 100
+    pf = y25["pct_fail"] / 100
+    reg.add("fail copied removed low", rf"{100 * max(pf - s_c, 0) / (1 - s_c):.1f}\%", provenance=frun)
+    reg.add("fail copied removed high", rf"{100 * min(pf / (1 - s_c), 1):.1f}\%", provenance=frun)
     # The checkable share if the run counts the pattern still misses were
     # restored at the audited rate: comparisons with both bars and no count,
     # scaled by the share whose paper states one.
@@ -670,6 +717,48 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("testable with missed counts", rf"{y25['pct_testable'] + _f['pct'] / 100 * _pn:.1f}\%", provenance=frun)
     reg.add("testable with missed counts low", rf"{y25['pct_testable'] + _flo * _pn:.1f}\%", provenance=frun)
     reg.add("testable with missed counts high", rf"{y25['pct_testable'] + _fhi * _pn:.1f}\%", provenance=frun)
+
+    # The unanchored control: the same crops without the box, the reader
+    # listing every single-bold group it can find.
+    nb = _j("gold_set_nobox")
+    nrun = "gold_set_nobox"
+    reg.add("nobox n", nb["n"], provenance=nrun)
+    reg.add("nobox no single bold", nb["reader_lists_no_single_bold_group"], provenance=nrun)
+    reg.add("nobox winner found", _pct_ci(nb["pipeline_winner_among_reader_groups"]), provenance=nrun)
+    reg.add("nobox winner found frac", _frac(nb["pipeline_winner_among_reader_groups"]), provenance=nrun)
+    reg.add("nobox rival same frac", _frac(nb["same_rival_given_winner_found"]), provenance=nrun)
+    reg.add("nobox claim", _pct_ci(nb["claim_recovered_unanchored"]), provenance=nrun)
+    reg.add("nobox claim frac", _frac(nb["claim_recovered_unanchored"]), provenance=nrun)
+    reg.add("nobox claim pct", rf"{nb['claim_recovered_unanchored']['pct']}\%", provenance=nrun)
+    reg.add("nobox orientation", rf"{nb['orientation_agreement']['pct']}\%", provenance=nrun)
+    reg.add("nobox pipe groups found", _pct_ci(nb["pipeline_groups_found_by_reader"]), provenance=nrun)
+    reg.add("nobox pipe groups found frac", _frac(nb["pipeline_groups_found_by_reader"]), provenance=nrun)
+    reg.add("nobox reader groups found", _pct_ci(nb["reader_groups_found_by_pipeline"]), provenance=nrun)
+    reg.add("nobox reader groups found frac", _frac(nb["reader_groups_found_by_pipeline"]), provenance=nrun)
+
+    # The end-to-end reading of random corpus pages: the reader lists every
+    # results table and single-bold group on the page, and the two headline
+    # shares are computed from its labels alone, beside the pipeline's on the
+    # same pages.
+    pg = _j("gold_set_pages")
+    prun = "gold_set_pages"
+    with open("audits/gold_f/unread.json", encoding="utf-8") as fh:
+        unread = json.load(fh)["unread_pages"]
+    reg.add("pages n", pg["n_pages"], provenance=prun)
+    reg.add("pages drawn", pg["n_pages"] + len(unread), provenance=prun)
+    reg.add("pages unread", len(unread), provenance=prun)
+    reg.add("pages tables", pg["n_results_tables"], provenance=prun)
+    reg.add("pages tables with bar", rf"{pg['pct_results_tables_with_any_bar']}\%", provenance=prun)
+    reg.add("pages reader groups", pg["reader"]["groups"], provenance=prun)
+    reg.add("pages reader neither", rf"{pg['reader']['pct_neither']}\% [{pg['reader']['ci_neither'][0]}, {pg['reader']['ci_neither'][1]}]", provenance=prun)
+    reg.add("pages reader testable", rf"{pg['reader']['pct_testable']}\% [{pg['reader']['ci_testable'][0]}, {pg['reader']['ci_testable'][1]}]", provenance=prun)
+    reg.add("pages pipe groups", pg["pipeline_same_pages"]["groups"], provenance=prun)
+    reg.add("pages pipe neither", rf"{pg['pipeline_same_pages']['pct_neither']}\%", provenance=prun)
+    reg.add("pages pipe testable", rf"{pg['pipeline_same_pages']['pct_testable']}\%", provenance=prun)
+    reg.add("pages reader found", _pct_ci(pg["reader_groups_found_by_pipeline"]), provenance=prun)
+    reg.add("pages reader found pct", rf"{pg['reader_groups_found_by_pipeline']['pct']}\%", provenance=prun)
+    reg.add("pages pipe found", _pct_ci(pg["pipeline_groups_found_by_reader"]), provenance=prun)
+    reg.add("pages pipe found pct", rf"{pg['pipeline_groups_found_by_reader']['pct']}\%", provenance=prun)
 
     # the run-count recall audit
     gc = _j("gold_set_no_n")["no_n"]
@@ -751,6 +840,22 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
 
     # Section 6 calibration on the identical comparisons, and the subfield pool.
     ss = dm["same_subset"]
+    reg.add("design local n", dm["n_local_n"], provenance=drun)
+    reg.add("design local below", rf"{dm['pct_below_alpha_threshold_local_n']}\%", provenance=drun)
+    reg.add("design no bars local n", dm["n_no_bars_local_n"], provenance=drun)
+    reg.add("design no bars local below", rf"{dm['pct_below_alpha_threshold_no_bars_local_n']}\%", provenance=drun)
+    # The bar-less run-count audit: does the count the pipeline attached to a
+    # bar-less table apply to it?
+    ge = _j("gold_set_nobar_n")["no_bar_n"]
+    erun = "gold_set_nobar_n"
+    reg.add("nobar n n", ge["n"], provenance=erun)
+    reg.add("nobar n applies", _pct_ci(ge["attached_count_applies"]), provenance=erun)
+    reg.add("nobar n applies frac", _frac(ge["attached_count_applies"]), provenance=erun)
+    reg.add("nobar n none frac", _frac(ge["reader_found_none"]), provenance=erun)
+    reg.add("nobar n other frac", _frac(ge["reader_found_a_different_count"]), provenance=erun)
+    reg.add("nobar n local frac", f"{ge['by_source']['caption']['correct'] + ge['by_source']['page']['correct']} of "
+            f"{ge['by_source']['caption']['n'] + ge['by_source']['page']['n']}", provenance=erun)
+    reg.add("nobar n paper frac", _frac(ge["by_source"]["paper"]), provenance=erun)
     reg.add("design same n", ss["n"], provenance=drun)
     reg.add("design same borrowed", rf"{ss['borrowed_below_alpha']}\%", provenance=drun)
     reg.add("design same own", rf"{ss['own_below_alpha']}\%", provenance=drun)

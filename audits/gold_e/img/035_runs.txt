@@ -1,0 +1,35 @@
+As expected, the total time used to run optical flow and determine
+---
+Memory needed to run VGGT for VGGT-SLAM is independent of the total number of images in the
+---
+RANSAC, we report the average performance over five runs, which have a low spread (small standard
+---
+Runtime is averaged over five runs
+---
+We do not run the 3D point DPT head as it was
+---
+along with showing a tight statistical spread of results from averaging 5 runs from our experiments,
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+from arbitrary initialization using the variable projection method
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+keyframes for all frames in the submap (keyframe detection), the total time to run SALAD and
+---
+only tested on a few datasets or with a few runs
+---
+perform image retrieval for all frames in the submap (loop closure detection), and the time to run the
+---
+run with given experimental conditions)
+---
+scene since VGGT is run with fixed size submaps
+---
+the time needed to run VGGT
+---
+• The instructions should contain the exact command and environment needed to run to

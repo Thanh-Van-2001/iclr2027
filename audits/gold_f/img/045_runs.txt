@@ -1,0 +1,27 @@
+By Markov’s inequality, on any single repetition of the algorithm, we have that
+---
+Given the polynomial approximation and the degree upper bound, one can directly run L1 polynomial
+---
+Hence, after r = O(log(1/δ)/ϵ) repetitions of the algorithm, with probability at least 1 −δ/2, one
+---
+If we repeat the algorithm r = O(log(1/δ)/ϵ) times
+---
+If we repeat the algorithm r = O(log(1/δ)/ϵ) times with fresh examples each, and let
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+i=1 in a single run of Algorithm 1
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+run with given experimental conditions)
+---
+samples, runs in time poly(n, N), and computes a hypothesis h(x) such that, with probability at
+---
+• The instructions should contain the exact command and environment needed to run to

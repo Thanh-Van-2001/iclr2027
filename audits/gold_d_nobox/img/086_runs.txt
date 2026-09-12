@@ -1,0 +1,39 @@
+A cosine annealing scheduler with warm restarts (T0 = 10, Tmult = 2) is also used
+---
+For external validation, each of the 5 fold-specific models trained on
+---
+In each fold, patients are stratified by label
+---
+Inference times per WSI are 4
+---
+Results are reported as AUC (mean ±95% CI from 5-fold cross-validation)
+---
+Sgdr: Stochastic gradient descent with warm restarts
+---
+Training times for BLCA are 12 hours for UNI, 21 hours for Gigapath, and 24 hours for H-Optimus-0
+---
+as concordance index (C-index) with 95% confidence intervals from 5-fold cross-validation
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+cation tasks in terms of AUC (mean ± 95% CI from 5-fold cross-validation)
+---
+evaluated under 5-fold cross-validation at the patient level
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+fication tasks in terms of AUPRC (mean ± 95% CI from 5-fold cross-validation)
+---
+in terms of AUPRC (mean ± 95% CI from 5-fold cross-validation)
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+run with given experimental conditions)
+---
+the fold-specific validation set
+---
+• The instructions should contain the exact command and environment needed to run to

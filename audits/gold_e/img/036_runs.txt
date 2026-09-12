@@ -1,0 +1,53 @@
+1: // Step 1: Token Initialization
+---
+4: // Step 4: Token Re-Initialization
+---
+For One-D-Piece, this involves a single encoder pass but multiple decoder runs to find the
+---
+In the first run, the
+---
+Number of Enc + Dec Runs ↓
+---
+Recent adaptive tokenizers rely on iterative encoder-decoder runs at inference time to identify
+---
+Training Procedure: To train KARL, each training iteration involves two runs of the encoder-decoder
+---
+and use the corresponding embedding to condition the second run, which uses a larger token budget
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+decoder multiple times (2–4× on average over 5K IN100 images)
+---
+during the second training run
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+first run are labeled "keep" (0) and new tokens are labeled "halt" (1)
+---
+first run, encouraging it to match the same reconstruction quality
+---
+for the second run
+---
+image within the given error threshold (ϵ), adding more tokens is not required to repeat the same task
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+ond run, we take the generated simulated triplet of image, complexity
+---
+one attained during the lossless run
+---
+only tested on a few datasets or with a few runs
+---
+run with given experimental conditions)
+---
+runs to identify smallest #tokens
+---
+runs until the reconstruction target is met — about 4× more runs than KARL for a 0
+---
+the second adaptive tokenization run is executed: given a maximum token budget and a target recon
+---
+• The instructions should contain the exact command and environment needed to run to
+---
+❌Requires multiple Decoder runs to identify

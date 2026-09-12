@@ -1,0 +1,79 @@
+5, the 50-node RL run trained for 24 days
+---
+Averaging evaluations over several seeds would likely address this discrepancy
+---
+Because higher-dimensional runs require more training
+---
+But using greedy rollouts via a separate policy (updated
+---
+For example, trial 300 had the best outcome with a suboptimality gap of 0
+---
+However, due to resource constraints, we train only one seed
+---
+However, with only one seed per model size, we cannot determine statistical significance
+---
+If rollouts from
+---
+Intervals are similarly tight for seed-specific
+---
+LOO variance is likely closer to multi-seed variance
+---
+Lastly, we found that forcing a warm-start, human-intuition HP configuration for trial 0 allows BOHB
+---
+Near-optimal solution tours are generated via mass repetition of local search
+---
+Of the three runs that reached
+---
+Our greedy rollout implementation
+---
+Our single-seed node scaling results for RL and SFT demonstrate that SFT reaches
+---
+RL and SFT scaling laws may have non-trivial imprecision due to training with a single seed per
+---
+Runs often diverged when surpassing the reported upper bounds for max
+---
+Scaling laws and interpretability of learning from repeated data
+---
+Scaling laws predict the expectation of model performance over random seed variables like parameter
+---
+Startup trials
+---
+The longest spatial dimension scaling runs and
+---
+This full process is repeated B times using a
+---
+Trial
+---
+Trials
+---
+We summarize 5 random seeds for each baseline, where lines
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+because two runs timed out due to external load on our HPC cluster
+---
+best value achieved over the trial, which poses a question of statistical significance in near-optimal
+---
+discrete (bar gaps) or binned (no bar gaps) ranges, referencing all 400 trials
+---
+distinct from those obtained using multiple seeds, they quantify sensitivity to individual training runs
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+gradient clipping, pruning simply selected trials which most recently diverged
+---
+greedy rollout
+---
+greedy rollouts from a baseline policy network, referencing the difficulty of multi-objective actor-critic
+---
+implementation of 2-opt, which we found to be several times faster than a pure Python implementation
+---
+initializations and training batch sampling, and this outlier’s random seed appears to perform unusually
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+learning rate warm restarts) to sufficiently converge, dramatically slowing research flow
+---
+minimum gradient updates budgeted per trial

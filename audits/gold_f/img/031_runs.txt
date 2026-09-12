@@ -1,0 +1,33 @@
+7 hours of training time—over three times that of our method—and 102 epochs to reach
+---
+Each setting is repeated three times, and we report
+---
+Hutter, “Sgdr: Stochastic gradient descent with warm restarts,” 2017
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+cycle of perception →decision →execution →evaluation →learning repeats iteratively, enabling
+---
+each hyperparameter configuration, the model was trained three times to reduce random variation,
+---
+each method was independently experimented three times, and the average value was taken as
+---
+epochs, averaged over three runs on a single NVIDIA A100 GPU
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+label datasets (NUS-WIDE, OpenImages, Visual Genome) use stratified sampling with three repeats
+---
+of mAP, Rare-F1, and Loss Variance over three independent runs
+---
+only tested on a few datasets or with a few runs
+---
+run with given experimental conditions)
+---
+speed up convergence, while SGDR [18] avoids local optima with periodic restarts
+---
+• The instructions should contain the exact command and environment needed to run to

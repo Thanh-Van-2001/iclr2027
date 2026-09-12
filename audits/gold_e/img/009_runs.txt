@@ -1,0 +1,27 @@
+Justification: For the Q&A and hallucination correction tasks, experiments are repeated to
+---
+Similarly, for T = 10 on the SelfcheckGPT dataset, we average results over 60 runs
+---
+T = 1 on the ZsRE dataset are averaged over 1,000 independent experiments, each using a different
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+ensures that repeated inputs activate the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+random seed for index selection directly from the input activations; however, this results in highly
+---
+report results averaged over multiple runs using different edit samples
+---
+run with given experimental conditions)
+---
+the generalization shortcoming of random seeds
+---
+• The instructions should contain the exact command and environment needed to run to

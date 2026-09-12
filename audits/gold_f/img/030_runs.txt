@@ -1,0 +1,45 @@
+ASTREAM runs Algorithm 3 on all 1 ≤D ≤n and
+---
+Berkeley-Stanford Web Times for c = 1000
+---
+Following the ideas described before, we invoke Algorithm 2 Θ(√log n) times to simulate all
+---
+Google Web Times for c = 1000
+---
+LiveJournal Times for c = 1
+---
+Pokec Times for c = 10000
+---
+Slashdot Times for c = 1
+---
+The plot contains update times of the algorithms for batches of 10,000 edges
+---
+There exists a sublinear MPC algorithm that runs in ˜O(√log n) rounds and attains
+---
+To run these experiments, we use an M1 machine running macOS Sequoia 15
+---
+We plot the results of our algorithm run on
+---
+We run the algorithms on temporal directed graphs with ε = 0
+---
+We run the algorithms on the general directed graphs
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+data to run experiments
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+run with given experimental conditions)
+---
+than 1 + ε times the average degree
+---
+• The algorithm invokes Algorithm 2 16pδ log1+ε n/δ times, constantly providing back the
+---
+• The instructions should contain the exact command and environment needed to run to

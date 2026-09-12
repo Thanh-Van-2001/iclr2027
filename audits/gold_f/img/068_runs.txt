@@ -1,0 +1,33 @@
+Seed 100
+---
+Seed 2025
+---
+Seed 42
+---
+Table 5: Validation loss of LLaMA-1B models under different random seeds
+---
+To further assess robustness, we also pretrain LLaMA-1B models with different random seeds
+---
+are not seed-dependent
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+outperforms the baseline by a similar margin under both seeds, indicating that the observed gains
+---
+resources, we are not able to run the experiments many times to derive the error bars
+---
+reveal that learned Transformers exhibit a "copying" behavior, whereby they aggregate or replicate
+---
+run with given experimental conditions)
+---
+standard deviation is across three runs
+---
+• The instructions should contain the exact command and environment needed to run to

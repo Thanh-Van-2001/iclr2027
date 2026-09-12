@@ -115,8 +115,14 @@ def main(argv=None) -> int:
             continue
         gap = abs(w - r_)
         res = resolvable_gap(size, p)
+        # The 5%-level threshold is the same quantity at power one half:
+        # 1.96 standard errors of the difference. A gap below it would not
+        # be significant on the test set; a gap below the 80%-power value is
+        # one the benchmark could not be relied on to detect.
+        sig = resolvable_gap(size, p, power=0.5)
         rows.append({"benchmark": name, "size": size, "gap": gap, "resolution": res,
-                     "below": gap < res, "paper": c["paper"], "testable": bool(c.get("test"))})
+                     "below": gap < res, "sig_threshold": sig, "below_sig": gap < sig,
+                     "paper": c["paper"], "testable": bool(c.get("test"))})
 
     if not rows:
         print("no comparisons could be matched to a named benchmark")
@@ -130,6 +136,7 @@ def main(argv=None) -> int:
         d["below"] += r["below"]
     for name, d in by_bench.items():
         d["pct_below"] = round(100 * d["below"] / d["n"], 1)
+        d["pct_below_sig"] = round(100 * sum(1 for r in rows if r["benchmark"] == name and r["below_sig"]) / d["n"], 1)
         d["median_gap"] = round(statistics.median(r["gap"] for r in rows if r["benchmark"] == name), 2)
         d["median_resolution"] = round(statistics.median(r["resolution"] for r in rows
                                                          if r["benchmark"] == name), 2)
@@ -150,15 +157,21 @@ def main(argv=None) -> int:
     # than computed separately, so the released script produces every number the
     # paper cites.
     corr = {}
+    corr_sig = {}
     for rho in (0.0, 0.3, 0.5, 0.7, 0.9):
         f = math.sqrt(1.0 - rho)
         corr[str(rho)] = round(
             100 * sum(1 for r in rows if r["gap"] < r["resolution"] * f) / len(rows), 1)
+        corr_sig[str(rho)] = round(
+            100 * sum(1 for r in rows if r["gap"] < r["sig_threshold"] * f) / len(rows), 1)
 
     res = {
         "n_comparisons": len(rows),
         "checkable_union": checkable_union,
         "correlation_sensitivity": corr,
+        "correlation_sensitivity_significance": corr_sig,
+        "pct_below_significance": round(100 * sum(1 for r in rows if r["below_sig"]) / len(rows), 1),
+        "median_sig_threshold": round(statistics.median(r["sig_threshold"] for r in rows), 2),
         "n_papers": len(set(r["paper"] for r in rows)),
         "n_below_resolution": len(below),
         "pct_below_resolution": round(100 * len(below) / len(rows), 1),

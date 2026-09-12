@@ -113,6 +113,10 @@
 \newcommand{\nDesignExcludedScale}{947}
 % design lm below: design_mde_2025
 \newcommand{\nDesignLmBelow}{31.2\%}
+% design local below: design_mde_2025
+\newcommand{\nDesignLocalBelow}{43.3\%}
+% design local n: design_mde_2025
+\newcommand{\nDesignLocalN}{2918}
 % design mde n: design_mde_2025
 \newcommand{\nDesignMdeN}{13509}
 % design mde no bars n: design_mde_2025
@@ -133,6 +137,10 @@
 \newcommand{\nDesignNPercent}{9449}
 % design n unit: design_mde_2025
 \newcommand{\nDesignNUnit}{4060}
+% design no bars local below: design_mde_2025
+\newcommand{\nDesignNoBarsLocalBelow}{40.6\%}
+% design no bars local n: design_mde_2025
+\newcommand{\nDesignNoBarsLocalN}{1198}
 % design pct benchmark sd: design_mde_2025
 \newcommand{\nDesignPctBenchmarkSd}{9.3\%}
 % design pct subfield sd: design_mde_2025
@@ -169,18 +177,46 @@
 \newcommand{\nErrorBarShort}{26.2\%}
 % fail among tie marked: extra_stats
 \newcommand{\nFailAmongTieMarked}{84.6\%}
+% fail copied removed high: gold_set_frozen
+\newcommand{\nFailCopiedRemovedHigh}{50.2\%}
+% fail copied removed low: gold_set_frozen
+\newcommand{\nFailCopiedRemovedLow}{44.7\%}
 % fail excluding tie: extra_stats
 \newcommand{\nFailExcludingTie}{47.5\%}
+% fail holm instrument band: gold_set_frozen
+\newcommand{\nFailHolmInstrumentBand}{53.9--64.9\%}
+% fail holm instrument high: gold_set_frozen
+\newcommand{\nFailHolmInstrumentHigh}{64.9\%}
+% fail holm instrument low: gold_set_frozen
+\newcommand{\nFailHolmInstrumentLow}{53.9\%}
+% fail holm instrument point: gold_set_frozen
+\newcommand{\nFailHolmInstrumentPoint}{62.2\%}
 % fail holm paper: headline_span
 \newcommand{\nFailHolmPaper}{66.7\%}
+% fail instrument band: gold_set_frozen
+\newcommand{\nFailInstrumentBand}{42.4--53.4\%}
+% fail instrument high: gold_set_frozen
+\newcommand{\nFailInstrumentHigh}{53.4\%}
+% fail instrument low: gold_set_frozen
+\newcommand{\nFailInstrumentLow}{42.4\%}
+% fail instrument point: gold_set_frozen
+\newcommand{\nFailInstrumentPoint}{49.7\%}
 % fail one sided: headline_span
 \newcommand{\nFailOneSided}{40.3\%}
 % fail over ten: extra_stats
 \newcommand{\nFailOverTen}{24\%}
+% fail reader testable scaled: gold_set_frozen
+\newcommand{\nFailReaderTestableScaled}{52.7\%}
 % fail rho half: correlation_sensitivity
 \newcommand{\nFailRhoHalf}{40.5\%}
 % fail rho nine: correlation_sensitivity
 \newcommand{\nFailRhoNine}{30.3\%}
+% fail runs four five: extra_stats
+\newcommand{\nFailRunsFourFive}{51.4\% [43.1, 59.3]}
+% fail runs ge six: extra_stats
+\newcommand{\nFailRunsGeSix}{36.6\% [26.4, 46.1]}
+% fail runs le three: extra_stats
+\newcommand{\nFailRunsLeThree}{56.5\% [50.7, 62.6]}
 % fail under half: extra_stats
 \newcommand{\nFailUnderHalf}{87\%}
 % fail welch subset: analysis_2025
@@ -527,6 +563,12 @@
 \newcommand{\nMedianRunsTestable}{5}
 % n effective: survivability_both_years-7f18e22a (cluster bootstrap over papers)
 \newcommand{\nNEffective}{811}
+% n runs four five: extra_stats
+\newcommand{\nNRunsFourFive}{2302}
+% n runs ge six: extra_stats
+\newcommand{\nNRunsGeSix}{1370}
+% n runs le three: extra_stats
+\newcommand{\nNRunsLeThree}{1395}
 % n testable: survivability_both_years-7f18e22a
 \newcommand{\nNTestable}{5465}
 % n testable twenty four: survivability_both_years-7f18e22a
@@ -549,8 +591,78 @@
 \newcommand{\nNoBarAnyMarker}{12.6\%}
 % no bar strict marker: extra_stats
 \newcommand{\nNoBarStrictMarker}{5.9\%}
+% nobar n applies: gold_set_nobar_n
+\newcommand{\nNobarNApplies}{52.5\% [37.5, 67.1]}
+% nobar n applies frac: gold_set_nobar_n
+\newcommand{\nNobarNAppliesFrac}{21 of 40}
+% nobar n local frac: gold_set_nobar_n
+\newcommand{\nNobarNLocalFrac}{4 of 4}
+% nobar n n: gold_set_nobar_n
+\newcommand{\nNobarNN}{40}
+% nobar n none frac: gold_set_nobar_n
+\newcommand{\nNobarNNoneFrac}{18 of 40}
+% nobar n other frac: gold_set_nobar_n
+\newcommand{\nNobarNOtherFrac}{1 of 40}
+% nobar n paper frac: gold_set_nobar_n
+\newcommand{\nNobarNPaperFrac}{17 of 36}
+% nobox claim: gold_set_nobox
+\newcommand{\nNoboxClaim}{78.0\% [68.9, 85.0]}
+% nobox claim frac: gold_set_nobox
+\newcommand{\nNoboxClaimFrac}{78 of 100}
+% nobox claim pct: gold_set_nobox
+\newcommand{\nNoboxClaimPct}{78.0\%}
+% nobox n: gold_set_nobox
+\newcommand{\nNoboxN}{100}
+% nobox no single bold: gold_set_nobox
+\newcommand{\nNoboxNoSingleBold}{12}
+% nobox orientation: gold_set_nobox
+\newcommand{\nNoboxOrientation}{87.0\%}
+% nobox pipe groups found: gold_set_nobox
+\newcommand{\nNoboxPipeGroupsFound}{74.6\% [72.0, 77.0]}
+% nobox pipe groups found frac: gold_set_nobox
+\newcommand{\nNoboxPipeGroupsFoundFrac}{872 of 1169}
+% nobox reader groups found: gold_set_nobox
+\newcommand{\nNoboxReaderGroupsFound}{76.2\% [73.6, 78.6]}
+% nobox reader groups found frac: gold_set_nobox
+\newcommand{\nNoboxReaderGroupsFoundFrac}{871 of 1143}
+% nobox rival same frac: gold_set_nobox
+\newcommand{\nNoboxRivalSameFrac}{78 of 85}
+% nobox winner found: gold_set_nobox
+\newcommand{\nNoboxWinnerFound}{85.0\% [76.7, 90.7]}
+% nobox winner found frac: gold_set_nobox
+\newcommand{\nNoboxWinnerFoundFrac}{85 of 100}
 % one in n moved by multiplicity: survivability_both_years-7f18e22a
 \newcommand{\nOneInNMovedByMultiplicity}{8}
+% pages drawn: gold_set_pages
+\newcommand{\nPagesDrawn}{106}
+% pages n: gold_set_pages
+\newcommand{\nPagesN}{97}
+% pages pipe found: gold_set_pages
+\newcommand{\nPagesPipeFound}{83.5\% [79.6, 86.7]}
+% pages pipe found pct: gold_set_pages
+\newcommand{\nPagesPipeFoundPct}{83.5\%}
+% pages pipe groups: gold_set_pages
+\newcommand{\nPagesPipeGroups}{417}
+% pages pipe neither: gold_set_pages
+\newcommand{\nPagesPipeNeither}{90.2\%}
+% pages pipe testable: gold_set_pages
+\newcommand{\nPagesPipeTestable}{6.5\%}
+% pages reader found: gold_set_pages
+\newcommand{\nPagesReaderFound}{47.4\% [43.8, 51.0]}
+% pages reader found pct: gold_set_pages
+\newcommand{\nPagesReaderFoundPct}{47.4\%}
+% pages reader groups: gold_set_pages
+\newcommand{\nPagesReaderGroups}{736}
+% pages reader neither: gold_set_pages
+\newcommand{\nPagesReaderNeither}{91.6\% [79.7, 99.6]}
+% pages reader testable: gold_set_pages
+\newcommand{\nPagesReaderTestable}{7.1\% [0.0, 18.4]}
+% pages tables: gold_set_pages
+\newcommand{\nPagesTables}{109}
+% pages tables with bar: gold_set_pages
+\newcommand{\nPagesTablesWithBar}{19.3\%}
+% pages unread: gold_set_pages
+\newcommand{\nPagesUnread}{9}
 % paired rho: benchmark_mde_reference-3d9133cd
 \newcommand{\nPairedRho}{0.5}
 % papers contributing: survivability_both_years-7f18e22a
@@ -689,6 +801,8 @@
 \newcommand{\nResolutionMedianGap}{1.2}
 % resolution median res: benchmark_resolution-70df59d3
 \newcommand{\nResolutionMedianRes}{1.65}
+% resolution median sig: benchmark_resolution-70df59d3
+\newcommand{\nResolutionMedianSig}{1.15}
 % resolution papers: benchmark_resolution-70df59d3
 \newcommand{\nResolutionPapers}{162}
 % resolution pct below: benchmark_resolution-70df59d3
@@ -699,8 +813,16 @@
 \newcommand{\nResolutionPctBelowRhoNine}{30.7\%}
 % resolution pct below rho seven: benchmark_resolution-70df59d3
 \newcommand{\nResolutionPctBelowRhoSeven}{41.7\%}
+% resolution pct below sig: benchmark_resolution-70df59d3
+\newcommand{\nResolutionPctBelowSig}{46.9\%}
+% resolution pct below sig rho half: benchmark_resolution-70df59d3
+\newcommand{\nResolutionPctBelowSigRhoHalf}{39.6\%}
+% resolution pct below sig rho nine: benchmark_resolution-70df59d3
+\newcommand{\nResolutionPctBelowSigRhoNine}{24.3\%}
 % reweighted fail: extra_stats
 \newcommand{\nReweightedFail}{45.4\%}
+% reweighted gaps fail: extra_stats
+\newcommand{\nReweightedGapsFail}{46.5\%}
 % rho half: correlation_sensitivity
 \newcommand{\nRhoHalf}{0.5}
 % rho nine: correlation_sensitivity
@@ -763,8 +885,8 @@
 \newcommand{\nTestableWithMissedCountsLow}{17.8\%}
 % tie papers: extra_stats
 \newcommand{\nTiePapers}{10}
-% ties dropped: extra_stats
-\newcommand{\nTiesDropped}{682}
+% ties dropped: bold_semantics
+\newcommand{\nTiesDropped}{785}
 % topic fail high: extra_stats
 \newcommand{\nTopicFailHigh}{51.1\%}
 % topic fail low: extra_stats
@@ -775,6 +897,10 @@
 \newcommand{\nUnlabelledAsSemFull}{55.3\%}
 % unlabelled as std: sensitivity_2025-d5aee395
 \newcommand{\nUnlabelledAsStd}{47.2\%}
+% verdict disagreements frac: gold_set_frozen
+\newcommand{\nVerdictDisagreementsFrac}{3 of 76}
+% verdict error upper: gold_set_frozen
+\newcommand{\nVerdictErrorUpper}{11.0\%}
 % vision testable: extra_stats
 \newcommand{\nVisionTestable}{8.6\%}
 % welch defined: analysis_2025

@@ -1,0 +1,33 @@
+, k = 2dn resulting in a run time of
+---
+6 in a run time
+---
+It is evident from the results that the empirical run time of CEMS is o par with competing methods and
+---
+Results show average RMSE and MAPE across three seeds
+---
+Run time comparison In Table 4, we compare the total run time of the training process in seconds to provide an estimate
+---
+Standard deviations are calculated over 3 seeds
+---
+Standard deviations are derived from a 5-fold data split in PovertyMap and or
+---
+The dataset is divided into 5 cross-validation folds with
+---
+Thus, the run time complexity of the SVD operation per batch is O(min(k2D, kD2))
+---
+Training times comparison (in seconds)
+---
+We present the average RMSE across domains as well as the ”worst within-domain” RMSE from three different seeds
+---
+We present the average RMSE and MAPE across three seeds
+---
+average RMSE and MAPE (or worst RMSE) across three seeds
+---
+calculated over 3 seeds for other datasets
+---
+fold M whose intrinsic dimension d is significantly lower
+---
+folds without retraining
+---
+terms of average RMSE and MAPE (or worst-case RMSE) over three seeds

@@ -1,0 +1,59 @@
+(zero-shot) in terms of average and best cumulative reward values across 10 repetitions per method
+---
+15 -- This function is run every time the player dies
+---
+All figures above aggregate the results from 5 repetitions per setup,
+---
+Components denoted with ×N are repeated according to the number of agents
+---
+Episodes terminate if the agent dies (falling from a great height) or if 3K
+---
+Episodes terminate when 2K timesteps are reached
+---
+Example Python script that loads and runs the custom environment with a randomly acting agent
+---
+Finally, episodes terminate if the agent dies or the 4K timestep limit is reached
+---
+Finally, episodes terminate if the health of the agent is exhausted or 5K timesteps are reached
+---
+Finally, episodes terminate if the number of health points
+---
+For example, the server could update the world many times while the
+---
+In the case of LLaVa-Agent, each run was constrained by a 1-hour limit (≈7000 prompting iterations per run)
+---
+In this case, the function is run every time the
+---
+Most notably, Minecraft is a game and is not intended to run on a server without
+---
+Results aggregate 5 different runs per task: average is denoted with lines and the standard error with the contour
+---
+Results aggregate 5 runs per task, where PPO was trained for 1M timesteps each
+---
+Results show the average of 5 runs in 3 differ-
+---
+Run faster
+---
+Run the Luanti binary (which should already
+---
+The code defines two callback functions: the first (line 1) runs at every timestep, setting the reward to
+---
+The figure aggregates results from 10 different random seeds for each method, PPO+LSTM, and
+---
+The measurements aggregate the results of 5 different runs of 1K steps in 3 environments per framework
+---
+With the world and mod set up, the final step is to run the environment
+---
+directory, run the following CLI commands from Craftium’s main directory:
+---
+environments run 38× faster than alternatives based on the
+---
+from five 1-hour runs for each prompt
+---
+pete, compromise, and cooperate in repeated general-sum
+---
+seeds per task, while the contour denotes the standard error of the results
+---
+• Luanti has a client/server architecture, where the server runs the world’s logic and the client interfaces with the player
+---
+• Resetting episodes in complex environments can be time-consuming, sometimes requiring closing and restarting the

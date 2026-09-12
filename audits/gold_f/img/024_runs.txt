@@ -1,0 +1,49 @@
+0) runs and carry out inference
+---
+All alignment runs were done using the Adam optimizer with a
+---
+All experiments were run with no regularization to the reference policy (γ = 0)
+---
+As with the QED alignment runs in Section 4
+---
+For the same QED maximization run (β = 100
+---
+GSK3β oracles, respectively, for five different random seeds
+---
+Jobs run on NERSC used
+---
+Starting from a random initialization, we carry out pretraining on a dataset of 2
+---
+Table S9: Top-10 AUC scores on GSK3β and JNK3 tasks averaged across 5 random seeds
+---
+We observe that at the first saved checkpoint of the DPO alignment run, the model
+---
+We repeat the experiment with a related objective of
+---
+and ERA alignment runs were trained with the same hyperparameters and dataset, with checkpoints
+---
+any repeated molecules
+---
+averaged across 5 random seeds
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+be run on invalid SMILES string because of the failure of RDKit to parse
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+run with given experimental conditions)
+---
+that is repeated among these examples beyond the model attempting to generate highly branched
+---
+training, the chemical validity of further checkpoints drops to 0% for the remaining runs, despite the
+---
+we repeated the random perturbation until a valid molecule was generated
+---
+• The instructions should contain the exact command and environment needed to run to

@@ -1,0 +1,31 @@
+*N/A indicates that the method was unable to complete the run within the limited resources
+---
+A typical fine-tuning run for our primary models took approximately
+---
+Furthermore, the low standard deviations across multiple runs confirm that these
+---
+The default policy for MCTS rollouts was random
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+experimental runs for all main results, as presented in Table 1, Table 3, and Table 4
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+nodes, nrun is the running times of the heuristics selected at each step
+---
+only tested on a few datasets or with a few runs
+---
+run with given experimental conditions)
+---
+state encountered during a training instance generation process, MCTS was run for 1000 iterations to
+---
+the typical execution time (approximately 32 hours for a fine-tuning run)
+---
+• Disadvantages: Results can vary significantly between runs
+---
+• The instructions should contain the exact command and environment needed to run to

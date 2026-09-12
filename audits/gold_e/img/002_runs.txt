@@ -1,0 +1,37 @@
+, 2021), which performs multiple times
+---
+EvoMesh by conducting three independent runs on the test
+---
+Figures 9 showcase rollout error maps for the Airfoil, Flag, and DeformingPlate datasets
+---
+Full Results over Multiple Training Seeds
+---
+Full quantitative results over three training seeds
+---
+In Table 2 in the main manuscript, we report the mean results calculated over three random seeds
+---
+One-step (RMSE-1) and 50-step (RMSE-50) rollout prediction errors on out-of-distribution (OOD) mesh resolutions
+---
+Rollout Showcases
+---
+Showcases of rollout prediction error maps on Airfoil, Flag and DeformingPlate dataset
+---
+Table 4 reports one-step and 50-step rollout errors
+---
+We report the mean results over 3 random seeds,
+---
+average number of nodes in the test data is twice that of the training data, and the number of edges is three times greater
+---
+errors reveal minimal discrepancies across different runs, as
+---
+long-term rollouts for 100–600 future time steps (RMSE-
+---
+neighboring nodes may be averaged out, and the repeated
+---
+ods generally rely on repeated local message passing to
+---
+of the training data, and the number of edges is three times
+---
+rollout errors than the baseline models
+---
+stability of EvoMesh by running the trained model on the test set in three independent trials
