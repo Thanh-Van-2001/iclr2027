@@ -9,7 +9,9 @@
 # anonymous.4open.science; the paper cites the mirror.
 set -e
 DEST=${1:-../checkable}
-rm -rf "$DEST"
+# Keep the destination's .git (the pushed history the anonymous mirror points at); replace everything else.
+mkdir -p "$DEST"
+find "$DEST" -mindepth 1 -maxdepth 1 ! -name .git -exec rm -rf {} +
 mkdir -p "$DEST/data" "$DEST/paper" "$DEST/out"
 
 # code
