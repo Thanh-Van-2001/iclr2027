@@ -277,6 +277,13 @@ def score(items_path: str, labels_path: str) -> dict:
     fields["n_runs"] = rate(sum(1 for it, lb in clear_n
                                 if _match(_num(lb["n_runs"]), it["pipeline"]["n_runs"])),
                             len(clear_n), "the run count")
+    with_n = [(it, lb) for it, lb in clear_n if _num(lb["n_runs"]) is not None]
+    fields["n_runs_when_reader_found_one"] = rate(
+        sum(1 for it, lb in with_n if _match(_num(lb["n_runs"]), it["pipeline"]["n_runs"])),
+        len(with_n), "the run count, on items where the reader found one")
+    fields["reader_found_no_run_count"] = rate(
+        sum(1 for it, lb in clear_n if _num(lb["n_runs"]) is None), len(clear_n),
+        "items where the reader found no run count in the paper")
     value_fields = (("winner_mean", "winner"), ("winner_disp", "winner_dispersion"),
                     ("runner_mean", "runner_up"), ("runner_disp", "runner_dispersion"))
     # An item with a value the reader could not read is left out of this
@@ -462,28 +469,60 @@ def recall_under(manifest_path: str, analysis_path: str) -> dict:
         sheets = json.load(fh)
     with open(analysis_path, encoding="utf-8") as fh:
         cmps = json.load(fh)["_comparisons"]
-    empty = set()
-    seen = set()
+    seen, with_bar = set(), set()
     for c in cmps:
         key = (c["paper"], str(c["table"]), c["page"])
         seen.add(key)
-        if c["winner_dispersion"] is None and c["runner_dispersion"] is None:
-            empty.add(key)
-    for c in cmps:
-        key = (c["paper"], str(c["table"]), c["page"])
         if c["winner_dispersion"] is not None or c["runner_dispersion"] is not None:
-            empty.discard(key)
+            with_bar.add(key)
     entries = [e for sh in sheets for e in sh["entries"] if e.get("verdict")]
-    still = [e for e in entries if (e["paper"], str(e["table"]), e["page"]) in empty]
+
+    def key_of(e):
+        return (e["paper"], str(e["table"]), e["page"])
+    # Three fates for a judged table under the current pipeline: it now reads
+    # a bar (the fixed misses), it yields no claim at all any more (ties,
+    # top-k captions, block rules) and so leaves the population, or it is
+    # still called empty, which is where recall is scored.
+    reads_bar = [e for e in entries if key_of(e) in with_bar]
+    dropped = [e for e in entries if key_of(e) not in seen]
+    still = [e for e in entries if key_of(e) in seen and key_of(e) not in with_bar]
     agree = sum(1 for e in still if e["verdict"] == "agree")
     missed = sum(1 for e in still if e["verdict"] == "missed")
     lo, hi = wilson_interval(agree, len(still)) if still else (0.0, 1.0)
     return {"n_judged": len(entries), "n_still_called_empty": len(still),
             "agree": agree, "extractor_missed_an_error_bar": missed,
+            "now_reads_a_bar": len(reads_bar),
+            "now_reads_a_bar_that_the_reader_saw": sum(1 for e in reads_bar if e["verdict"] == "missed"),
+            "dropped_from_population": len(dropped),
             "no_longer_called_empty": len(entries) - len(still),
             "missed_in_the_audited_version": sum(1 for e in entries if e["verdict"] == "missed"),
             "recall_on_no_error_bar_calls": round(agree / len(still), 3) if still else None,
             "wilson_95": [round(lo, 3), round(hi, 3)]}
+
+
+def agree(path_a: str, path_b: str) -> dict:
+    """Field-by-field agreement between two label files on the items both hold.
+
+    Meant for a human reading against the model's reading of the same
+    renderings: the number a reviewer asks for when the reference labels come
+    from a model.
+    """
+    def load(path):
+        with open(path, encoding="utf-8", newline="") as fh:
+            return {r["id"]: r for r in csv.DictReader(fh) if any(v.strip() for k, v in r.items() if k not in ("id", "stratum"))}
+    A, B = load(path_a), load(path_b)
+    ids = sorted(set(A) & set(B))
+    out = {"items": len(ids)}
+    for f in ("bold_ok", "orientation", "direction", "disp_type"):
+        pairs = [(A[i][f].strip().lower()[:3], B[i][f].strip().lower()[:3]) for i in ids
+                 if not _unclear(A[i][f]) and not _unclear(B[i][f])]
+        hit = sum(1 for a, b in pairs if a == b)
+        out[f] = {"n": len(pairs), "agree": hit, "pct": round(100 * hit / len(pairs), 1) if pairs else None}
+    for f in ("winner_mean", "winner_disp", "runner_mean", "runner_disp", "n_runs"):
+        pairs = [(_num(A[i][f]), _num(B[i][f])) for i in ids if not _unclear(A[i][f]) and not _unclear(B[i][f])]
+        hit = sum(1 for a, b in pairs if _match(a, b))
+        out[f] = {"n": len(pairs), "agree": hit, "pct": round(100 * hit / len(pairs), 1) if pairs else None}
+    return out
 
 
 def main(argv=None) -> int:
@@ -508,12 +547,18 @@ def main(argv=None) -> int:
     sc.add_argument("--out", default="out/gold_set.json")
     sc.add_argument("--rescore-with", default=None,
                     help="analysis JSON of a later pipeline to score on the same claims")
+    ag = sub.add_parser("agree")
+    ag.add_argument("--a", required=True)
+    ag.add_argument("--b", required=True)
     rc = sub.add_parser("recall")
     rc.add_argument("--manifest", default="audits/recall/manifest.json")
     rc.add_argument("--analysis", default="out/analysis_2025.json")
     rc.add_argument("--out", default="out/recall_v4.json")
     args = ap.parse_args(argv)
 
+    if args.cmd == "agree":
+        print(json.dumps(agree(args.a, args.b), indent=1))
+        return 0
     if args.cmd == "recall":
         res = recall_under(args.manifest, args.analysis)
         with open(args.out, "w", encoding="utf-8") as fh:

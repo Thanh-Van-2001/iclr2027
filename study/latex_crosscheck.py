@@ -168,23 +168,43 @@ def compare(records: list, matched: dict) -> dict:
     tab_bold = {"both": 0, "neither": 0, "source_only": 0, "pipeline_only": 0}
     n_tables_matched = 0
     unmatched_source_tables = 0
+    source_only_why = {"matched_table_read_empty": 0, "unmatched_paper_within_window": 0,
+                       "unmatched_paper_over_window": 0}
     for r in records:
         m = matched.get(r["id"])
         if not m or not m.get("tables"):
             continue
         src_bar = any(t["has_pm"] for t in m["tables"] if t["n_cells"] >= 6)
         pipe_bar = bool(r.get("reports_explicit_error_bar"))
+        pdf_tables = [{"caption": _norm(t.get("caption") or "")[:120],
+                       "has_pm": any(c.get("dispersion_style") in ("pm", "ci") for c in t["cells"]),
+                       "has_bold": any(c["bold"] for c in t["cells"])} for t in r.get("tables", [])]
         if src_bar and pipe_bar:
             paper_2x2["both_bar"] += 1
         elif not src_bar and not pipe_bar:
             paper_2x2["both_none"] += 1
         elif src_bar:
             paper_2x2["source_only"] += 1
+            # Why: the bar-bearing source table was matched to a PDF table read
+            # as empty (an extractor miss), or matched nothing in a paper the
+            # pipeline read in full (a table it never detected), or matched
+            # nothing in a paper longer than the page window.
+            matched_any = False
+            for st in m["tables"]:
+                if not (st["has_pm"] and st["n_cells"] >= 6):
+                    continue
+                key = _norm(st["caption"])[:120]
+                if len(key) >= 20 and any(
+                        difflib.SequenceMatcher(None, key, pt["caption"]).ratio() >= 0.6 for pt in pdf_tables):
+                    matched_any = True
+            if matched_any:
+                source_only_why["matched_table_read_empty"] += 1
+            elif r.get("n_pages", 0) > 40:
+                source_only_why["unmatched_paper_over_window"] += 1
+            else:
+                source_only_why["unmatched_paper_within_window"] += 1
         else:
             paper_2x2["pipeline_only"] += 1
-        pdf_tables = [{"caption": _norm(t.get("caption") or "")[:120],
-                       "has_pm": any(c.get("dispersion_style") in ("pm", "ci") for c in t["cells"]),
-                       "has_bold": any(c["bold"] for c in t["cells"])} for t in r.get("tables", [])]
         for st in m["tables"]:
             if st["n_cells"] < 6:
                 continue
@@ -227,6 +247,7 @@ def compare(records: list, matched: dict) -> dict:
                             100 * paper_2x2["both_bar"] / n_src_bar, 1) if n_src_bar else None,
                         "pipeline_recall_ci": [round(100 * x, 1) for x in wilson_interval(
                             paper_2x2["both_bar"], n_src_bar)] if n_src_bar else None},
+        "source_only_why": source_only_why,
         "tables_matched": n_tables_matched,
         "source_tables_unmatched": unmatched_source_tables,
         "table_level_error_bar": {**tab_pm, **agree(tab_pm, ("both", "neither"))},

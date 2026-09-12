@@ -163,6 +163,20 @@ def filter_selection(records: list) -> dict:
     }
 
 
+def headline_with_comparison_audit(pct_neither: float, absent: dict) -> dict:
+    """The no-bar share, scaled by the comparison-level audit of that stratum.
+
+    The table-level recall audit is conditional on a table being detected and
+    read as empty; the comparison-level audit reads retained comparisons the
+    pipeline calls bar-less and finds a few whose dispersion sits in a
+    separate column. Scaling the headline by that rate, with its interval, is
+    the other bound the paper owes.
+    """
+    lo, hi = absent["ci"][0] / 100.0, absent["ci"][1] / 100.0
+    return {"point": round(pct_neither * absent["pct"] / 100.0, 1),
+            "low": round(pct_neither * lo, 1), "high": round(pct_neither * hi, 1)}
+
+
 def headline_with_extraction(pct_neither: float, recall_lo: float) -> dict:
     """The headline once the recall interval is folded in."""
     return {
@@ -260,6 +274,18 @@ def headline_span(comparisons: list) -> dict:
             d["_p"] = r["p"]; strict.append(d)
     rows["caption_run_count_only"] = _fail_rate(strict)
 
+    # A count found on the table's own page, as well as in its caption: the
+    # middle reading between caption-only and anywhere-in-the-paper.
+    local = []
+    for c in comparisons:
+        d = dict(c)
+        if d.get("n_runs_source") not in ("caption", "page"):
+            d["n_runs"] = None
+        r = test_comparison(d)
+        if r:
+            d["_p"] = r["p"]; local.append(d)
+    rows["caption_or_page_run_count"] = _fail_rate(local)
+
     for rho in (0.5, 0.9):
         rr = []
         for c in testable:
@@ -275,7 +301,10 @@ def headline_span(comparisons: list) -> dict:
     one_sided = [dict(c, _p=c["test"]["p"] / 2) for c in testable]
     rows["one_sided"] = _fail_rate(one_sided)
 
-    full = [k for k, v in rows.items() if v.get("n") == len(testable)]
+    # The rho rows are a matched-seed hypothetical: run-to-run fluctuations of
+    # two methods are independent unless the seeds were matched, which print
+    # cannot confirm. They are reported but kept out of the span.
+    full = [k for k, v in rows.items() if v.get("n") == len(testable) and not k.startswith("rho_")]
     vals = [rows[k]["pct_fail"] for k in full]
     return {"rows": rows, "n_full_population": len(testable),
             "full_population_rows": full,
@@ -440,6 +469,8 @@ def compute(records: list, comparisons: list, pct_neither: float,
         "extraction_limits": extraction_limits(records),
         "filter_selection": filter_selection(records),
         "headline_with_extraction": headline_with_extraction(pct_neither, recall_lo),
+        "headline_with_comparison_audit": headline_with_comparison_audit(
+            pct_neither, json.load(open("out/gold_set_heldout.json", encoding="utf-8"))["no_bar"]["error_bar_truly_absent"]),
         "failure_by_gap_band": failure_by_gap_band(comparisons),
         "headline_span": headline_span(comparisons),
         "venue_counts": venue_counts(records, comparisons),

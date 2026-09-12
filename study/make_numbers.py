@@ -198,6 +198,7 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("icc", f"{d['icc']:.2f}", provenance=bootrun)
     reg.add("design effect", f"{d['design_effect']:.2f}", provenance=bootrun)
     reg.add("deff root", f"{d['design_effect'] ** 0.5:.1f}", provenance=bootrun)
+    reg.add("boot replicates", b25["pct_fail"]["n_boot"], provenance=bootrun)
     reg.add("n effective", d["n_eff"], provenance=bootrun)
     reg.add("mean cluster", f"{d['mean_cluster']:.1f}", provenance=bootrun)
 
@@ -549,6 +550,8 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("gold held runner", rf"{h0['fields']['runner_mean']['pct']}\%", provenance=grun)
     reg.add("gold held runs", rf"{h0['fields']['n_runs']['pct']}\%", provenance=grun)
     reg.add("gold held runs frac", _frac(h0["fields"]["n_runs"]), provenance=grun)
+    reg.add("gold held runs found frac", _frac(h0["fields"]["n_runs_when_reader_found_one"]), provenance=grun)
+    reg.add("gold held no runs frac", _frac(h0["fields"]["reader_found_no_run_count"]), provenance=grun)
     reg.add("gold held kind", rf"{h0['fields']['disp_treatment']['pct']}\%", provenance=grun)
     reg.add("gold held kind literal", rf"{h0['fields']['disp_type']['pct']}\%", provenance=grun)
     reg.add("gold held bold", rf"{h0['fields']['bold_cell']['pct']}\%", provenance=grun)
@@ -592,6 +595,8 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     # The recall audit, scored from its manifest rather than typed.
     rc = _j("recall_v4")
     reg.add("recall judged", rc["n_judged"], provenance="recall_audit_v4")
+    reg.add("recall reads bar now", rc["now_reads_a_bar"], provenance="recall_audit_v4")
+    reg.add("recall dropped", rc["dropped_from_population"], provenance="recall_audit_v4")
     reg.add("recall still", rc["n_still_called_empty"], provenance="recall_audit_v4")
     reg.add("recall found then", {0: "none", 1: "one", 2: "two", 3: "three", 4: "four"}.get(
         rc["missed_in_the_audited_version"], str(rc["missed_in_the_audited_version"])),
@@ -623,6 +628,37 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
             provenance=lrun)
     reg.add("latex table bold source only", tbold["source_only"], provenance=lrun)
     reg.add("latex table bold pipeline only", tbold["pipeline_only"], provenance=lrun)
+    why = lx["source_only_why"]
+    reg.add("latex miss matched", why["matched_table_read_empty"], provenance=lrun)
+    reg.add("latex miss undetected", why["unmatched_paper_within_window"], provenance=lrun)
+    reg.add("latex miss window", why["unmatched_paper_over_window"], provenance=lrun)
+
+    # Recall propagated from the comparison-level audit, beside the table-level one.
+    hc = xs["headline_with_comparison_audit"]
+    reg.add("headline with comparison audit", rf"{hc['low']}--{hc['high']}\%", provenance="extra_stats")
+    reg.add("headline with comparison audit point", rf"{hc['point']}\%", provenance="extra_stats")
+
+    # Section 6 calibration on the identical comparisons, and the subfield pool.
+    ss = dm["same_subset"]
+    reg.add("design same n", ss["n"], provenance=drun)
+    reg.add("design same borrowed", rf"{ss['borrowed_below_alpha']}\%", provenance=drun)
+    reg.add("design same own", rf"{ss['own_below_alpha']}\%", provenance=drun)
+    reg.add("design same agree", rf"{ss['per_comparison_agreement']}\%", provenance=drun)
+    reg.add("design pct subfield sd", rf"{dm['pct_sd_from_subfield']}\%", provenance=drun)
+    bt = dm["by_subfield"]
+    reg.add("design rl below", rf"{bt['reinforcement learning']['pct_below_alpha']}\%", provenance=drun)
+    reg.add("design lm below", rf"{bt['language models']['pct_below_alpha']}\%", provenance=drun)
+    reg.add("design vision below", rf"{bt['vision and generation']['pct_below_alpha']}\%", provenance=drun)
+
+    # The run count from the caption or the table's own page.
+    reg.add("local n", hs["caption_or_page_run_count"]["n"], provenance="headline_span")
+    reg.add("local fail", rf"{hs['caption_or_page_run_count']['pct_fail']}\%", provenance="headline_span")
+    reg.add("holm local", rf"{hs['caption_or_page_run_count']['pct_fail_holm']}\%", provenance="headline_span")
+
+    # The funnel closes: ties and top-k tables between extremal groups and comparisons.
+    reg.add("groups tied", bs["tied_with_rival"], provenance="bold_semantics")
+    reg.add("groups topk", bs["topk_caption"], provenance="bold_semantics")
+    reg.add("groups extremal", bs["extremal"], provenance="bold_semantics")
 
     # Extractor validation
     with open(crosscheck_path, encoding="utf-8") as fh:

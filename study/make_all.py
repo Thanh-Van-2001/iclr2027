@@ -107,6 +107,9 @@ def _bootstrap(comparisons: list) -> dict:
 
 
 def bold_semantics(records: list) -> dict:
+    """Every discard between a single-bold group and an analysed comparison,
+    counted so that the funnel closes to the comparison count."""
+    from analyze import TOPK_CAPTION, _unrank
     stats = collections.Counter()
     for r in records:
         for t in r.get("tables", []):
@@ -114,7 +117,9 @@ def bold_semantics(records: list) -> dict:
             o = orientation(cells)
             if o == "none":
                 continue
+            topk = bool(TOPK_CAPTION.search(t.get("caption") or ""))
             for g in (_columns(cells) if o == "column" else _rows(cells)):
+                g = [_unrank(c) for c in g]
                 bold = [c for c in g if c["bold"]]
                 plain = [c for c in g if not c["bold"]]
                 if len(bold) != 1 or not plain:
@@ -122,14 +127,23 @@ def bold_semantics(records: list) -> dict:
                     continue
                 vals = [c["mean"] for c in g]
                 w = bold[0]["mean"]
-                if w == max(vals) or w == min(vals):
-                    stats["extremal"] += 1
-                else:
+                if not (w == max(vals) or w == min(vals)):
                     stats["not_extremal"] += 1
+                    continue
+                stats["extremal"] += 1
+                rival = (max if w == max(vals) else min)(plain, key=lambda c: c["mean"])["mean"]
+                if topk:
+                    stats["topk_caption"] += 1
+                elif rival == w:
+                    stats["tied"] += 1
+                else:
+                    stats["analysed"] += 1
     usable = stats["extremal"] + stats["not_extremal"]
     return {"n_single_bold_groups": usable,
             "extremal": stats["extremal"], "not_extremal": stats["not_extremal"],
             "pct_not_extremal": round(100 * stats["not_extremal"] / max(usable, 1), 1),
+            "tied_with_rival": stats["tied"], "topk_caption": stats["topk_caption"],
+            "analysed": stats["analysed"],
             "groups_without_single_bold_and_rival": stats["no_single_bold_with_rival"]}
 
 

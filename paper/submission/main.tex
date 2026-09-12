@@ -37,10 +37,9 @@ tested from what is printed.
 Of those that can be tested, \nPctFail{} are not distinguishable from zero by
 a two-sample $z$ test on the authors' own numbers (\nFailWelchT{} by Welch's
 $t$ at the stated run counts), and \nPctFailHolm{} (\nFailWelchTHolm{}) once
-the other comparisons in the same table are accounted for. Taking the run count from the paper and the
-noise level from the rest of the corpus,
-\nPctBelowDesignMde{} of comparisons with a stated run count report a gap
-smaller than a design of that size could detect. And where a caption names its
+the other comparisons in the same table are accounted for. Against the noise other papers report at the
+same run count, \nPctBelowAlphaThreshold{} of comparisons with a stated run
+count report a gap below the ordinary threshold. And where a caption names its
 benchmark, the split size alone says what it can resolve:
 \nResolutionPctBelow{} of those gaps fall below it under independence,
 \nResolutionPctBelowRhoNine{} under paired scoring.
@@ -102,8 +101,9 @@ results table claims in, the comparison.
   larger than the noise other papers report at that run count
   (\nPctBelowAlphaThreshold{} are not, including
   \nPctBelowAlphaThresholdNoBars{} of comparisons that print no error bar at
-  all); and whether the benchmark can resolve it (\nResolutionPctBelow{}
-  cannot).
+  all, a design of \citet{christodoulou2024confidence} carried out by
+  machine); and whether the benchmark can resolve it
+  (\nResolutionPctBelow{} cannot).
   \citet{card2020with} asked the last of these for a handful of natural
   language processing benchmarks by hand; we ask it of every named-benchmark
   comparison in two venues.
@@ -116,10 +116,10 @@ results table claims in, the comparison.
   \nCheckYesNoTable{} print none in any results table; \nJustSeeds{} of those
   justify the answer by having used several seeds, which is averaging, not
   reporting.
-\item \textbf{An instrument scored against a gold set}, field by field, on
-  rendered tables read independently of its output, and against the LaTeX
-  source of the papers where arXiv has it; released with the per-comparison
-  database and the renderings.
+\item \textbf{An instrument scored against a reference set}, field by field,
+  on rendered tables read with the pipeline's values hidden and its chosen
+  cell marked, and against the LaTeX source of the papers where arXiv has it;
+  released with the per-comparison database and the renderings.
 \end{itemize}
 
 \section{What a results table claims}
@@ -232,6 +232,8 @@ Tables detected & \nTablesDetected{} \\
 Candidate comparison groups & \nCandidateGroups{} \\
 \quad with exactly one bold cell and a rival & \nPctGroupsUsable{} \\
 \quad of those, bold cell not extremal (discarded) & \nPctBoldNotExtremal{} \\
+\quad extremal, tied with an unbolded cell (discarded) & \nGroupsTied{} \\
+\quad extremal, in a table whose caption marks top three (discarded) & \nGroupsTopk{} \\
 \midrule
 Highlighted comparisons analysed & \nComparisonsTwentyFive{} \\
 \bottomrule
@@ -300,10 +302,12 @@ $2.78$ against $1.96$), and it fails \nFailWelchT{} of the same comparisons,
 readings; every figure in this paper that uses $z$ has a $t$ counterpart
 there that is higher.
 
-All intervals resample papers rather than comparisons. With an intraclass
-correlation of \nIcc{} and \nMeanCluster{} comparisons per paper, the design
-effect is \nDesignEffect{}, so treating comparisons as independent would report
-intervals \nDeffRoot{} times too narrow; a paper asking the field to print
+All intervals resample papers rather than comparisons, with replacement,
+\nBootReplicates{} draws, percentile intervals. With an intraclass correlation
+of \nIcc{} for the fail-or-survive indicator (the one-way analysis-of-variance
+estimator over papers) and \nMeanCluster{} testable comparisons per paper, the
+design effect is \nDesignEffect{}, so treating comparisons as independent
+would report intervals \nDeffRoot{} times too narrow; a paper asking the field to print
 dispersions cannot print point estimates of its own.
 
 Figure~\ref{fig:gapsurvival} shows where the failures sit, and the pattern is
@@ -319,37 +323,41 @@ leaderboard are the ones that cannot be supported.
 \label{sec:power}
 
 That failing comparisons have smaller margins is close to tautological. The
-next question is whether a reported gap is large relative to the noise a
-design of that size can be expected to have. The noise level must not come
-from the paper being judged: a minimum detectable effect computed from the
-paper's own error bar is its $z$ statistic rescaled, and reading it as a
-separate finding is the observed-power fallacy \citep{hoenig2001abuse}. We
-therefore take the run count from the paper and the noise from everyone
-else. Each value is bucketed by magnitude, $(0, 1]$ or $(1, 100]$; the noise
-level is the median standard deviation printed by other papers on the same
-benchmark in the same bucket where a caption names one and ten cells from
-three papers exist (\nDesignPctBenchmarkSd{} of comparisons), and otherwise
-the median across the corpus in that bucket (\nDesignMedianSd{} points on the
-percentage scale, \nDesignMedianSdUnit{} on the unit scale). The statistic is
-then the imputed standard error of the difference, and we report the share of
-gaps below $1.96$ of it, the ordinary $5\%$ threshold, and below $2.80$ of it,
-the smallest gap a design of that size would detect at \nPowerLevel{} power. This is
-a comparison against typical noise, not a test on the paper's own numbers.
+next question is whether a reported gap is large relative to the noise other
+papers report at that run count. \citet{christodoulou2024confidence} asked it
+of MICCAI papers by hand, imputing a dispersion where none was printed; this
+is that design carried out by machine. The noise level must not come from the
+paper being judged: a threshold computed from the paper's own error bar is its
+$z$ statistic rescaled, and reading it as a separate finding is the
+observed-power fallacy \citep{hoenig2001abuse}. We therefore take the run
+count from the paper and the noise from everyone else. Each value is bucketed
+by magnitude, $(0, 1]$ or $(1, 100]$; the noise level is the median standard
+deviation printed by other papers on the same benchmark in that bucket where a
+caption names one and ten cells from three papers exist
+(\nDesignPctBenchmarkSd{} of comparisons), else on the paper's own subfield
+(\nDesignPctSubfieldSd{}), else across the corpus. The statistic is the gap
+over the imputed standard error of the difference, reported below one
+cut-point, $1.96$, with $2.80$ (the $80\%$-power threshold) as the same
+statistic at a stricter one. It is a comparison against typical noise, not a
+test on the paper's own numbers, and the imputed noise is crude: one median
+per subfield and scale, whatever the metric.
 
 It can be asked of every comparison with a stated run count and two values in
 one bucket, error bars or not: \nDesignMdeN{} comparisons from
 \nDesignMdePapers{} papers (\nDesignExcludedNoN{} lack a run count and
 \nDesignExcludedScale{} fall outside or across the buckets). At a median of
 \nDesignMedianRuns{} runs, \nPctBelowAlphaThreshold{} of reported gaps fall
-below the $5\%$ threshold and \nPctBelowDesignMde{} below the \nPowerLevel{}-power
-threshold; on the \nDesignMdeNoBarsN{} comparisons that print no error bar at
-all, the shares are \nPctBelowAlphaThresholdNoBars{} and
-\nPctBelowDesignMdeNoBars{}, the first statement this paper can make about
-that population. It is \nDesignBelowBenchmarkMatched{} where the noise level
-comes from the same benchmark (\nDesignBelowPercent{} and \nDesignBelowUnit{}
-on the two scales), and on the testable subset the paper's own dispersion
-gives \nPctBelowOwnMde{} at the power threshold, close enough to say the
-borrowed noise level is not distorting the result.
+below $1.96$ imputed standard errors and \nPctBelowDesignMde{} below $2.80$;
+on the \nDesignMdeNoBarsN{} comparisons that print no error bar at all,
+\nPctBelowAlphaThresholdNoBars{}, the first figure in this paper that covers
+that population. The calibration is on the identical comparisons: on the
+\nDesignSameN{} testable ones, the imputed noise puts \nDesignSameBorrowed{}
+below the cut-point and the paper's own printed noise \nDesignSameOwn{}, with
+per-comparison agreement of \nDesignSameAgree{} and the disagreements evenly
+split; the rates match, the individual verdicts often do not, which is what a
+crude noise level should produce. By subfield the share runs from
+\nDesignLmBelow{} in language-model papers to \nDesignRlBelow{} in
+reinforcement learning.
 
 \section{How large a test set would these gaps need?}
 \label{sec:binomial}
@@ -395,10 +403,9 @@ comparisons from \nResolutionPapers{} papers, the median reported gap is
 \nResolutionMedianGap{} points against a median resolution of
 \nResolutionMedianRes{}, and \nResolutionPctBelow{} of the gaps fall below what
 the benchmark can resolve. Treating the two systems as independent makes that
-resolution coarser than it is, so the figure is an upper bound; under paired
+resolution coarser than it is, so the figure is an upper bound; here the two systems really are scored on the same items, so under paired
 scoring it is \nResolutionPctBelowRhoHalf{} at $\rho = \nRhoHalf{}$ and
-\nResolutionPctBelowRhoNine{} at $\rho = \nRhoNine{}$, the range
-Section~\ref{sec:sensitivity} uses for seed variance, and the truth lies
+\nResolutionPctBelowRhoNine{} at $\rho = \nRhoNine{}$, and the truth lies
 between.
 
 \input{resolution_table.tex}
@@ -417,11 +424,11 @@ more than sampling does. Table~\ref{tab:span} gives the failure rate under each,
 with the population each row is computed on. Over the rows that share the full
 population of \nSpanN{} testable comparisons the span is \nSpanLow{} to
 \nSpanHigh{}, against a bootstrap interval of \nCiFail{} that captures sampling
-alone: definitional uncertainty is about twice the statistical kind.
+alone: definitional uncertainty is larger than the statistical kind.
 
 The headline sits at a definite place in that span. It reads unlabelled bars as
 standard deviations, takes the two values as independent, and uses $z$ rather
-than $t$; the first and third favour the field, the second does not. The check
+than $t$; the first and third favour the field. The check
 on it is the subset where authors state what their error bar means, which fails
 at \nLabelledOnlyFail{}. The span is wide because the papers do not print which convention they used,
 which is the paper's thesis applied to itself.
@@ -441,6 +448,8 @@ As reported: two-sided $z$, Holm within table & \nSpanN{} & \nPctFail{} & \nPctF
 Welch's $t$ at the stated run count & \nSpanN{} & \nFailWelchT{} & \nFailWelchTHolm{} \\
 One-sided $z$ & \nSpanN{} & \nFailOneSided{} & \nHolmOneSided{} \\
 Unlabelled bars read as standard errors & \nSpanN{} & \nUnlabelledAsSemFull{} & \nHolmUnlabelledAsSemFull{} \\
+Run count from the caption or the table's page & \nLocalN{} & \nLocalFail{} & \nHolmLocal{} \\
+\multicolumn{4}{l}{\emph{Matched-seed hypothetical, outside the span}} \\
 Compared values correlated at $\rho = \nRhoHalf{}$ & \nSpanN{} & \nFailRhoHalf{} & \nHolmRhoHalf{} \\
 Compared values correlated at $\rho = \nRhoNine{}$ & \nSpanN{} & \nFailRhoNine{} & \nHolmRhoNine{} \\
 Holm family the paper, not the table & \nSpanN{} & \nPctFail{} & \nFailHolmPaper{} \\
@@ -473,17 +482,13 @@ alone). We use the deviation reading, the more conservative; the subset whose
 authors do say fails at \nLabelledOnlyFail{}, close to the headline.
 
 \paragraph{Whether the two values are independent.} Our test treats the winner
-and the runner-up as independent samples. They are not: the two methods are almost
-always evaluated on the same fixed test set, so the difference is a paired
-quantity, with
-$\mathrm{Var}(A - B) = \sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B$.
-Assuming $\rho = 0$ inflates the standard error of the difference and so makes
-\emph{our own} failure rate too high. Papers do not print the covariance, so we
-report the range: at $\rho = \nRhoHalf{}$ the failure rate is \nFailRhoHalf{}
-rather than \nPctFail{}, and even at $\rho = \nRhoNine{}$ it is
-\nFailRhoNine{}. The independent figure is the one the source papers' reporting
-supports; under every assumption we can defend, more than a quarter of
-checkable improvements are indistinguishable from zero.
+and the runner-up as independent samples of run-to-run variation. Sharing a
+test set does not by itself correlate two methods' seed-to-seed fluctuations;
+matched seeds or shared initialisations would, and print cannot say whether
+they were. Table~\ref{tab:span} therefore carries the paired reading, with
+$\mathrm{Var}(A - B) = \sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B$ at
+$\rho = \nRhoHalf{}$ (\nFailRhoHalf{}) and $\rho = \nRhoNine{}$
+(\nFailRhoNine{}), as a matched-seed hypothetical, outside the span.
 
 \paragraph{Checkability moves further than survival does.} The share that can be
 checked is the more convention-dependent headline. A standard error is already
@@ -513,17 +518,19 @@ cannot be checked from what the table prints.
 that matters. Checking by eye on a handful of tables, against a second
 extractor or against author self-report does not measure what the failure rate
 rests on, which is whether the pipeline read the right two cells, the right two
-error bars and the right run count. So we built a gold set
+error bars and the right run count. So we built a reference set
 (Table~\ref{tab:gold}, Appendix~\ref{app:gold}): draws of claims and tables,
 each rendered from the PDF with the pipeline's chosen cell boxed and nothing
 else, and read with the pipeline's values hidden. The reader recorded the
 winner, the best unbolded rival, both means, both error bars, what the bars
-are, and the run count a reader of the whole paper would attach to the table.
-The reader was the vision-language model named in the AI use statement, so
-these figures are agreement between two extractors of different technology,
-one on the text layer and one on the rendered image, not precision against a
-human reference; no human labelled any item, and the renderings, labels and
-scoring script are released so that anyone can.
+are, and the run count found in the paper's seed, run and trial sentences,
+which it received in full. The reader was the vision-language model named in
+the AI use statement, so these figures are agreement between two extractors of
+different technology, one on the text layer and one on the rendered image, not
+precision against a human reference; the marked cell anchors the reader on the
+pipeline's choice of winner, though not on its values. No human labelled any
+item, and the renderings, labels and scoring script are released so that
+anyone can.
 
 The development set of \nGoldDevN{} testable comparisons, read against the
 pipeline as it stood after the first six bugs of Appendix~\ref{app:bugs},
@@ -541,15 +548,19 @@ claims no longer extracted, of which \nGoldDevDroppedRightly{} and
 \nGoldHeldDroppedRightly{} the reader had marked as not a single claim; those
 post-fix figures are optimistic in the way a set that chose the fixes must be.
 The pipeline's own verdict on the held-out items fails \nGoldHeldPipeFailAll{},
-against \nPctFail{} in the population. Where reader and pipeline disagree on
-a verdict, the pipeline more often calls a comparison significant that the
-reader does not (Appendix~\ref{app:gold} prints all four scorings): the
-headline failure rate is, if anything, a floor.
+against \nPctFail{} in the population. Appendix~\ref{app:gold} prints all
+four scorings: in three of them the pipeline calls fewer comparisons
+non-significant than the reader does, by a few points, because the reader
+attaches run counts and bar meanings stated elsewhere in the paper; on the
+released pipeline's held-out row the difference is one item the other way.
+Instrument error, not sampling, is the larger uncertainty on the failure rate,
+and a set of this size bounds it to roughly ten points.
 
 The weakest fields are the ones read from the paper rather than the table.
-The run count agrees in \nGoldHeldRunsFrac{} held-out items where the reader
-found one, and the reader found none in \nGoldHeldNotTestable{} of
-\nGoldHeldN{}; a third draw of \nGoldNoNN{} comparisons with both bars but no
+On the held-out items the reader found no run count in the paper in
+\nGoldHeldNoRunsFrac{}; where it found one, the pipeline's agreed in
+\nGoldHeldRunsFoundFrac{}, and the remaining disagreements are counts the
+pipeline attached from another experiment in the same paper. A third draw of \nGoldNoNN{} comparisons with both bars but no
 run count found by the pipeline showed the paper stating one in words the
 pattern had not matched in \nGoldNoNFoundFrac{} (\nGoldNoNFound{}), a
 recall loss on checkability that the released pattern now closes for the
@@ -572,14 +583,19 @@ into ``neither value has an error bar''. We therefore rendered
 for any error bar at all. The audit found \nRecallFoundThen{} misses, three of
 them bars written without a leading zero ($0.444 \pm .003$) and one a table
 whose winning column the block-cut heuristic had dropped; both are fixed
-(Appendix~\ref{app:bugs}), and of the \nRecallStill{} judged tables the
-released pipeline still calls empty it misses \nRecallMissed{} (recall
-\nRecallCi{}). An earlier round of the same audit found the sixth bug, and
-correcting it moved the headline by \nHeadlineMoveSixth{}. Propagating the
-interval, the share of comparisons carrying no error bar is
-\nHeadlineWithExtraction{} rather than the \nCiNeitherSide{} that sampling
-alone would suggest; we quote both, because a paper about omitted uncertainty
-cannot omit its own.
+(Appendix~\ref{app:bugs}). Under the released pipeline \nRecallReadsBarNow{}
+of the \nRecallJudged{} now read a bar (the four), \nRecallDropped{} yield no
+claim any more, and of the \nRecallStill{} still called empty it misses
+\nRecallMissed{} (recall \nRecallCi{}). That figure is conditional on a table
+being detected and its bars being in its cells: the comparison-level audit of
+the same stratum found \nGoldNoBarAbsent{} truly bar-less, the exceptions
+being dispersions printed in a separate column, which the cell grammar cannot
+pair with a mean. Scaled by that rate the share carrying no error bar is
+\nHeadlineWithComparisonAudit{}, beside the \nHeadlineWithExtraction{} from
+the table-level audit. An earlier round of the same audit found the sixth bug, and correcting it
+moved the headline by \nHeadlineMoveSixth{}. We quote the propagated
+intervals beside the sampling interval \nCiNeitherSide{}, because a paper
+about omitted uncertainty cannot omit its own.
 
 \paragraph{Against the LaTeX source.} A check that depends on neither the PDF
 nor the reader (Appendix~\ref{app:latex}): for the \nLatexWithTables{} papers
@@ -587,9 +603,11 @@ of a \nLatexSampled{}-paper draw whose arXiv source has table environments,
 source and pipeline agree on whether any table prints an error bar in
 \nLatexPaperAgree{} of papers, and on \nLatexTablesMatched{} tables paired by
 caption in \nLatexTableBarAgree{}; of the \nLatexPaperSourceBar{} papers
-whose source prints a bar, the pipeline finds one in \nLatexPaperRecall{}.
-The arXiv version is not always the proceedings version, so these bound the
-extractor's error from above.
+whose source prints a bar, the pipeline finds one in \nLatexPaperRecall{},
+the misses being \nLatexMissMatched{} tables it read as empty,
+\nLatexMissUndetected{} it never detected in papers within its page window,
+and \nLatexMissWindow{} in papers beyond it. The arXiv version is not always
+the proceedings version, so these bound the extractor's error from above.
 
 \paragraph{The testable subset is small and may be unrepresentative.} The
 \nNTestable{} testable comparisons come from \nPapersContributing{} distinct
@@ -689,7 +707,7 @@ one command from the open proceedings; a second command regenerates every
 analysis, figure and number from the extraction files, deterministically.
 Every number in this paper is a macro generated from a recorded run; a number
 typed into the LaTeX by hand fails the build. The extraction pipeline, the
-analysis, the per-comparison database, the gold-set renderings with their
+analysis, the per-comparison database, the reference-set renderings with their
 labels and scoring script, and a regression test for every extractor bug
 described in this paper are released.
 
@@ -699,7 +717,7 @@ revise the extraction and analysis code, to draft and edit prose, and to search
 the literature. Every empirical number in the paper was produced by the
 released code and checked against its run record. The rendered-table audits of
 Section~\ref{sec:threats}---the recall audit, the rejected-table audit and the
-gold set---were read from the images by the assistant (Claude Opus 5,
+reference set---were read from the images by the assistant (Claude Opus 5,
 reading PNG renderings, with the prompt given in Appendix~\ref{app:gold}),
 with the pipeline's output hidden from it; the renderings and labels are
 released so that any reader can re-score them, and the authors are responsible
@@ -785,13 +803,13 @@ reaching the comparison stage: of the \nPapersTablesNoComparison{} papers whose
 tables yield no comparison, \nPapersTablesNoComparisonWithBar{} are correctly
 credited with an error bar. Only papers with no detected table are scored blind.
 
-\section{The gold set}
+\section{The reference set}
 \label{app:gold}
 
 \begin{table}[h]
 \centering
 \small
-\caption{The gold set. Each item is rendered from the PDF with the pipeline's
+\caption{The reference set. Each item is rendered from the PDF with the pipeline's
 chosen cell circled and read blind to its output; a cell the circle covered was
 recorded as unreadable and left out of that field. The development set found
 the bugs of Appendix~\ref{app:bugs}; the held-out set, drawn from papers the
@@ -841,7 +859,13 @@ left out of that field's denominator. An earlier rendering drew a circle over
 the cell, which covered the digits in a third of the items; those were
 re-rendered with the box and re-read. Every field is scored against the
 pipeline's value by exact match, and a verdict is recomputed from the reader's
-values with the paper's own test.
+values with the paper's own test. The reader's instruction, verbatim: ``For
+this item record: results\_table (y/n); bold\_ok (y/n: the boxed cell is bold
+and the only bold cell in its group); orientation (row/column); direction
+(higher/lower); winner\_mean, winner\_disp, runner\_mean, runner\_disp as
+printed, `none' if absent, `unclear' if you cannot read a digit; disp\_type
+(sd/se/ci/unlabelled) from the caption or the paper; n\_runs and n\_source
+(caption/page/paper/none) from the sentences supplied; a note.''
 
 \paragraph{All four scorings.} Table~\ref{tab:goldscores} prints every
 comparison of the reader's verdicts with the pipeline's, before and after the
@@ -854,7 +878,7 @@ makes the headline a floor.
 \begin{table}[h]
 \centering
 \small
-\caption{Reader against pipeline on the gold sets. ``Claim'' is agreement on
+\caption{Reader against pipeline on the reference sets. ``Claim'' is agreement on
 the bold cell, the rival and all four values on fully readable items;
 ``verdict'' is per-item agreement on fail or survive among items both sides
 could test; the last two columns are the failure rate on those items from each
@@ -919,7 +943,8 @@ narrowest.
 \centering
 \caption{Audits of reporting practice. Each earlier study labels papers by
 hand, at the scale of a person; this one labels comparisons by machine, and
-Section~\ref{sec:threats} measures the instrument against tables read by hand.}
+Section~\ref{sec:threats} measures the instrument against rendered tables read
+by a second, image-based reader and against LaTeX source.}
 \label{tab:audits}
 \footnotesize
 \setlength{\tabcolsep}{3pt}
@@ -992,8 +1017,8 @@ reading code. Each has a regression test in the released code.
   untestable.
 \end{enumerate}
 
-Bugs seven to eleven were found by the development gold set, twelve by the
-recall audit, thirteen and fourteen by the held-out gold set, and fifteen by
+Bugs seven to eleven were found by the development reference set, twelve by the
+recall audit, thirteen and fourteen by the held-out reference set, and fifteen by
 the run-count audit (Section~\ref{sec:threats}). Together
 they moved the 2025 headline from \nPrefixNeither{} to \nPctNeitherSide{}
 comparisons without an error bar and the failure rate from \nPrefixFail{} to
@@ -1143,6 +1168,15 @@ is sought in the caption first, then on the table's page, then anywhere in the
 paper; the caption wins if present, and the smallest count on the page is taken
 when several appear, after a row label reading ``top 100'' was once read as a
 count. Table~\ref{tab:span} gives the result under the caption-only reading.
+
+\paragraph{Conversions and the test.} A bar labelled a standard deviation is
+divided by $\sqrt{n}$; a standard error is used as printed; a confidence
+interval's half-width is divided by $1.96$; an interquartile range is not
+converted and its comparison is not testable. A rival that carries no bar
+makes the comparison untestable, whatever the winner carries. Welch's $t$
+uses the Satterthwaite degrees of freedom
+$(s_A^2 + s_B^2)^2 / \big((s_A^4 + s_B^4)/(n-1)\big)$ with the stated $n$ on
+both arms, which at three runs is between two and four.
 
 \paragraph{Groups, orientation, direction.} Cells are grouped into columns by
 horizontal position and into rows by vertical position. The orientation is the

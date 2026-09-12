@@ -1,0 +1,33 @@
+For the largest ones we utilized H100 with 80Gb vram to run the experiments of Sth-Sth
+---
+Lastly, all of our experiments run on single GPU with different nodes being used for different
+---
+Our std is derived from three random seeds on the same test set
+---
+The reported std is derived from three random seeds on the same test set
+---
+based on three random seeds on the same validation set
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+can vary across different training runs and datasets
+---
+combination, we conduct a brief hyperparameter search, ensuring an equitable number of trials across
+---
+experimental runs as well as estimate the total compute
+---
+folds which involve cross validation in the datasets without fixed test set and multiple runs
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+run with given experimental conditions)
+---
+text modalities, from a training run on the MOSI V-T dataset
+---
+which required the longest of all up to 48 hours per run
+---
+with different seeds in the case of fixed test set
+---
+• The instructions should contain the exact command and environment needed to run to

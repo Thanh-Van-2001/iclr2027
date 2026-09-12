@@ -353,8 +353,12 @@ def design_mde(comparisons: list, records: list, power: float = 0.8, alpha: floa
         a = abs(v)
         return "unit" if a <= 1.0 else ("percent" if a <= 100.0 else None)
 
+    from extra_stats import topic_of
+
     captions = {}
+    topic = {r["id"]: topic_of(r.get("title", "")) for r in records}
     sd_by_key: dict = {}      # (benchmark, scale) -> [(paper, sd)]
+    sd_by_topic: dict = {}    # (subfield, scale) -> [(paper, sd)]
     sd_by_scale: dict = {}    # scale -> [(paper, sd)]
     for r in records:
         for t in r.get("tables", []):
@@ -370,14 +374,28 @@ def design_mde(comparisons: list, records: list, power: float = 0.8, alpha: floa
                 if sc is None:
                     continue
                 sd_by_scale.setdefault(sc, []).append((r["id"], c["dispersion"]))
+                sd_by_topic.setdefault((topic[r["id"]], sc), []).append((r["id"], c["dispersion"]))
                 for b in benches:
                     sd_by_key.setdefault((b, sc), []).append((r["id"], c["dispersion"]))
 
+    def _pool(store, key, paper):
+        rows_ = store.get(key, [])
+        pool = [sd for (p_, sd) in rows_ if p_ != paper]
+        if len(pool) >= min_cells and len({p_ for (p_, _) in rows_ if p_ != paper}) >= min_papers:
+            return statistics.median(pool)
+        return None
+
     def external_sd(paper, benches, sc):
+        # Same benchmark first, then the paper's own subfield, then the corpus:
+        # the corpus pool is written by whoever prints deviations, which is a
+        # different mix of subfields from the population that prints none.
         for b in benches:
-            pool = [sd for (p_, sd) in sd_by_key.get((b, sc), []) if p_ != paper]
-            if len(pool) >= min_cells and len({p_ for (p_, _) in sd_by_key[(b, sc)] if p_ != paper}) >= min_papers:
-                return statistics.median(pool), "benchmark"
+            v = _pool(sd_by_key, (b, sc), paper)
+            if v is not None:
+                return v, "benchmark"
+        v = _pool(sd_by_topic, (topic.get(paper, "other"), sc), paper)
+        if v is not None:
+            return v, "subfield"
         pool = [sd for (p_, sd) in sd_by_scale.get(sc, []) if p_ != paper]
         return (statistics.median(pool), "corpus") if pool else (None, None)
 
@@ -403,9 +421,14 @@ def design_mde(comparisons: list, records: list, power: float = 0.8, alpha: floa
             continue
         se_diff = sd * math.sqrt(2.0 / n)
         mde = k * se_diff
+        own = None
+        if c.get("test"):
+            own = c["test"]["z"] < k_alpha   # the paper's own numbers, same threshold
         rows.append({"gap": c["gap"], "mde": mde, "below": c["gap"] < mde,
                      "below_alpha": c["gap"] < k_alpha * se_diff,
+                     "own_below_alpha": own,
                      "source": source, "testable": bool(c.get("test")),
+                     "topic": topic.get(c["paper"], "other"),
                      "no_bars": c["winner_dispersion"] is None and c["runner_dispersion"] is None,
                      "paper": c["paper"], "n": n, "scale": sc, "sd": sd})
     if not rows:
@@ -420,7 +443,25 @@ def design_mde(comparisons: list, records: list, power: float = 0.8, alpha: floa
     sds_pct = [r["sd"] for r in rows if r["scale"] == "percent"]
     unit = [r for r in rows if r["scale"] == "unit"]
     sds_unit = [r["sd"] for r in unit]
+    # Borrowed against own noise on the identical comparisons, at the same
+    # threshold: the calibration a reviewer asked for, as a 2x2.
+    same = [r for r in testable if r["own_below_alpha"] is not None]
+    agree = sum(1 for r in same if r["below_alpha"] == r["own_below_alpha"])
+    by_topic = {}
+    for name in sorted({r["topic"] for r in rows}):
+        sub = [r for r in rows if r["topic"] == name]
+        by_topic[name] = {"n": len(sub), "pct_below_alpha": pct(sub, "below_alpha"),
+                          "pct_no_bars_below_alpha": pct([r for r in sub if r["no_bars"]], "below_alpha")}
     return {
+        "same_subset": {"n": len(same),
+                        "borrowed_below_alpha": pct(same, "below_alpha"),
+                        "own_below_alpha": pct(same, "own_below_alpha"),
+                        "per_comparison_agreement": round(100 * agree / len(same), 1) if same else None,
+                        "both_below": sum(1 for r in same if r["below_alpha"] and r["own_below_alpha"]),
+                        "borrowed_only": sum(1 for r in same if r["below_alpha"] and not r["own_below_alpha"]),
+                        "own_only": sum(1 for r in same if r["own_below_alpha"] and not r["below_alpha"])},
+        "by_subfield": by_topic,
+        "pct_sd_from_subfield": round(100 * sum(1 for r in rows if r["source"] == "subfield") / len(rows), 1),
         "n": len(rows),
         "n_papers": len(set(r["paper"] for r in rows)),
         "excluded": excluded,

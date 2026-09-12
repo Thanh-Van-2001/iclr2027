@@ -1,0 +1,29 @@
+All CURLY-FM and baseline experiments are run using lr = 10−4 learning rate and Adam
+---
+Justification: We report 1-sigma standard deviation across three chosen seeds across all
+---
+The results are averaged over five seeds
+---
+The results are averaged over three seeds
+---
+TrajectoryNet was run with 250 epochs with the Euler integrator with 20 timesteps per
+---
+We use (*) to denote runs that did not finish within
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+optimizer with default β1, β2, and ϵ values across three seeds and with 1,000 epochs split into 500
+---
+results are averaged over three seeds
+---
+run with given experimental conditions)
+---
+standard deviation over three seeds
+---
+• The instructions should contain the exact command and environment needed to run to
