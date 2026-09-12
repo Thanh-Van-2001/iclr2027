@@ -256,6 +256,19 @@ def _caption_extent(spans: list, anchor: dict, span_points: float = 60.0) -> tup
     return min(a for a, _ in xs), max(b for _, b in xs)
 
 
+def _grid_rows(cells: list, tol: float = 3.0) -> int:
+    """How many rows of these cells hold at least two numbers."""
+    rows = 0
+    cur = []
+    for c in sorted(cells, key=lambda c: c.y):
+        if cur and c.y - cur[-1].y > tol:
+            rows += len(cur) >= 2
+            cur = []
+        cur.append(c)
+    rows += len(cur) >= 2
+    return rows
+
+
 def _contiguous_run(cells: list) -> list:
     """Keep the rows that actually belong to the table.
 
@@ -663,21 +676,25 @@ def extract_paper(pdf_path=None, max_pages: int = 40, *, blob: bytes = None) -> 
         # sampled ICML table came out with the page number 8 as its runner-up.
         # Constrain to the caption's own horizontal band, then keep only the run
         # of rows contiguous with the caption.
-        below = [c for c in numeric
-                 if c.page == cap["page"] and cap["y"] <= c.y < y_stop
-                 and cap["x0"] - COLUMN_MARGIN <= c.x <= cap["x1"] + COLUMN_MARGIN]
+        in_band = [c for c in numeric
+                   if c.page == cap["page"] and cap["x0"] - COLUMN_MARGIN <= c.x <= cap["x1"] + COLUMN_MARGIN]
+        below = [c for c in in_band if cap["y"] <= c.y < y_stop]
+        above = [c for c in in_band if cap["y"] - WINDOW_UP <= c.y < cap["y"]]
         # The small window above the caption exists for venues that caption
         # underneath the table. When the caption sits above its table, that
         # window reaches into the table before it and sweeps in its last rows,
-        # whose bold cells then outranked the real winner. Found by the
-        # held-out gold set. So the window above is used only when nothing
-        # sits below.
-        if len(below) >= MIN_CELLS:
+        # whose bold cells then outranked the real winner (held-out gold set).
+        # Taking the cells below whenever there were enough of them fixed that
+        # and broke the other case: a table captioned underneath and followed
+        # by a figure was read as the figure's axis ticks (LaTeX cross-check).
+        # So the two sides compete on how much like a table each looks, which
+        # is how many rows hold more than one number; ticks are one per row.
+        if len(below) >= MIN_CELLS and _grid_rows(below) >= _grid_rows(above):
             cells = below
+        elif _grid_rows(above) > _grid_rows(below):
+            cells = above + [c for c in below if c.y < cap["y"] + 2.0]
         else:
-            cells = [c for c in numeric
-                     if c.page == cap["page"] and cap["y"] - WINDOW_UP <= c.y < y_stop
-                     and cap["x0"] - COLUMN_MARGIN <= c.x <= cap["x1"] + COLUMN_MARGIN]
+            cells = above + below
         cells.sort(key=lambda c: (c.y, c.x))
         cells = _contiguous_run(cells)
         if len(cells) < MIN_CELLS:

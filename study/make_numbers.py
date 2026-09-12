@@ -602,6 +602,28 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("recall ci", rf"95\% CI [{rc['wilson_95'][0]:.2f}, {rc['wilson_95'][1]:.2f}]",
             provenance="recall_audit_v4")
 
+    # The LaTeX-source cross-check: independent of the PDF and of the reader.
+    lx = _j("latex_crosscheck")
+    lrun = "latex_crosscheck"
+    reg.add("latex sampled", lx["papers_sampled"], provenance=lrun)
+    reg.add("latex matched", lx["matched_to_arxiv"], provenance=lrun)
+    reg.add("latex with tables", lx["source_with_table_environment"], provenance=lrun)
+    pl, tb, tbold = lx["paper_level"], lx["table_level_error_bar"], lx["table_level_bold"]
+    reg.add("latex paper agree", rf"{pl['pct']}\% [{pl['ci'][0]}, {pl['ci'][1]}]", provenance=lrun)
+    reg.add("latex paper recall", rf"{pl['pipeline_recall_of_source_bar']}\% "
+            rf"[{pl['pipeline_recall_ci'][0]}, {pl['pipeline_recall_ci'][1]}]", provenance=lrun)
+    reg.add("latex paper source only", pl["source_only"], provenance=lrun)
+    reg.add("latex paper pipeline only", pl["pipeline_only"], provenance=lrun)
+    reg.add("latex paper source bar", pl["both_bar"] + pl["source_only"], provenance=lrun)
+    reg.add("latex tables matched", tb["n"], provenance=lrun)
+    reg.add("latex table bar agree", rf"{tb['pct']}\% [{tb['ci'][0]}, {tb['ci'][1]}]", provenance=lrun)
+    reg.add("latex table source only", tb["source_only"], provenance=lrun)
+    reg.add("latex table pipeline only", tb["pipeline_only"], provenance=lrun)
+    reg.add("latex table bold agree", rf"{tbold['pct']}\% [{tbold['ci'][0]}, {tbold['ci'][1]}]",
+            provenance=lrun)
+    reg.add("latex table bold source only", tbold["source_only"], provenance=lrun)
+    reg.add("latex table bold pipeline only", tbold["pipeline_only"], provenance=lrun)
+
     # Extractor validation
     with open(crosscheck_path, encoding="utf-8") as fh:
         cc = json.load(fh)["summary"]

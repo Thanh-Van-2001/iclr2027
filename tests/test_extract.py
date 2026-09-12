@@ -188,3 +188,16 @@ def test_run_counts_in_other_phrasings():
     assert extract._n_runs("", "test accuracies over three randomly seeded runs")[0] == 3
     assert extract._n_runs("", "For Table 2, we average over seeds 32, 33, and 34")[0] == 3
     assert extract._n_runs("", "which is almost 10 times higher than the baseline") == (None, None)
+
+
+def test_caption_window_prefers_the_grid_not_the_ticks():
+    # Bug 16: a table captioned underneath and followed by a figure was read
+    # as the figure's axis ticks once the window above was used only when
+    # nothing sat below. Rows with two or more numbers decide the side.
+    grid = [extract.Cell(text=f"{v}", mean=v, dispersion=None, dispersion_style="none",
+                         bold=False, page=0, y=100 + 12 * (i // 3), x=100 + 60 * (i % 3))
+            for i, v in enumerate([81.7, 71.1, 5.8, 81.5, 66.5, 5.7, 83.8, 58.0, 3.7])]
+    ticks = [extract.Cell(text=f"{v}", mean=v, dispersion=None, dispersion_style="none",
+                          bold=False, page=0, y=160 + 15 * i, x=100)
+             for i, v in enumerate([0.7, 0.5, 0.4, 0.3, 0.2, 0.1, 0.05])]
+    assert extract._grid_rows(grid) == 3 and extract._grid_rows(ticks) == 0

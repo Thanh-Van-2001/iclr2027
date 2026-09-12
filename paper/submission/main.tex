@@ -581,6 +581,16 @@ interval, the share of comparisons carrying no error bar is
 alone would suggest; we quote both, because a paper about omitted uncertainty
 cannot omit its own.
 
+\paragraph{Against the LaTeX source.} A check that depends on neither the PDF
+nor the reader (Appendix~\ref{app:latex}): for the \nLatexWithTables{} papers
+of a \nLatexSampled{}-paper draw whose arXiv source has table environments,
+source and pipeline agree on whether any table prints an error bar in
+\nLatexPaperAgree{} of papers, and on \nLatexTablesMatched{} tables paired by
+caption in \nLatexTableBarAgree{}; of the \nLatexPaperSourceBar{} papers
+whose source prints a bar, the pipeline finds one in \nLatexPaperRecall{}.
+The arXiv version is not always the proceedings version, so these bound the
+extractor's error from above.
+
 \paragraph{The testable subset is small and may be unrepresentative.} The
 \nNTestable{} testable comparisons come from \nPapersContributing{} distinct
 papers. Papers that report uncertainty are not a random sample of papers; if
@@ -606,12 +616,9 @@ audit: most of those justifications do not claim an error bar in a table.
 
 \paragraph{The instrument reads table cells and nothing else.} Uncertainty
 printed in a figure, in a table rendered as an image, or signalled by shading
-or colour is invisible to it and is counted as absent; every headline in this
-paper is a statement about table cells. The checklist justifications that
-point to a figure (\nJustFigure{}) or an appendix (\nJustAppendix{}) are a
-reminder of how much of the field's reporting lives outside them. A size cap
-also excludes a few image-heavy papers; Appendix~\ref{app:pipeline} reports
-that count and how many figure captions mention uncertainty at all.
+or colour is invisible to it and counted as absent; every headline here is a
+statement about table cells, and Appendix~\ref{app:pipeline} counts what lies
+outside them.
 
 \section{Related work}
 \label{sec:related}
@@ -864,6 +871,40 @@ Held-out & released & \nGoldHeldPostClaimFrac{} & \nGoldHeldPostAgree{} & \nGold
 \bottomrule
 \end{tabular}
 \end{table}
+
+\section{The LaTeX-source cross-check}
+\label{app:latex}
+
+We matched \nLatexSampled{} papers of the 2025 sample to arXiv by title,
+downloaded the source of the \nLatexMatched{} that matched, and read
+\verb|\pm| and \verb|\textbf| inside every table environment of the
+\nLatexWithTables{} that have one. At the paper level the source and the
+pipeline agree on whether any table prints an error bar in
+\nLatexPaperAgree{}; of the \nLatexPaperSourceBar{} papers whose source
+prints one, the pipeline finds it in \nLatexPaperRecall{}, the rest being
+tables the pipeline did not detect or an appendix beyond its page window.
+Matching tables by caption gives \nLatexTablesMatched{} pairs, on which the
+two agree about the presence of an error bar in \nLatexTableBarAgree{}
+(\nLatexTableSourceOnly{} tables where the source has one and the PDF read
+none, \nLatexTablePipelineOnly{} the reverse) and about the presence of a
+bold number in \nLatexTableBoldAgree{}.
+
+The script \texttt{latex\_crosscheck.py} queries the arXiv API with each
+paper's title, accepts a match whose title agrees at similarity $0.9$ or
+better, downloads the e-print, inlines \verb|\input| files, strips comments,
+and reads every \verb|\begin{table}| environment: its caption, whether the
+tabular body contains \verb|\pm| (or \verb|\mp|, or the glyph), and whether
+it contains \verb|\textbf| or \verb|\mathbf| applied to a number, which is
+the event the pipeline reads; a header set in bold is not. Source tables and
+PDF tables are paired by caption similarity at $0.6$ or better. Disagreement
+counts every table that differs between the arXiv and proceedings versions,
+every table the PDF pipeline failed to anchor on a caption, and every macro
+that hides a \verb|\pm| behind a name, so it is an upper bound on the
+extractor's error. Of the \nLatexTableBoldSourceOnly{} tables where the
+source bolds a number and the PDF read no bold cell, most are the
+\verb|\mathbf| and colour-coded conventions Section~\ref{sec:threats}
+already counts as invisible; \nLatexTableBoldPipelineOnly{} run the other
+way. The cached source tables are released with the audits.
 
 \section{Prior audits}
 \label{app:audits}

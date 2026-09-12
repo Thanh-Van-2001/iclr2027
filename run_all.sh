@@ -12,6 +12,8 @@ python study/gold_set.py score --items audits/gold_b/items.json --labels audits/
 python study/gold_set.py score --items audits/gold_b/items.json --labels audits/gold_b/labels.csv \
     --rescore-with out/analysis_2025.json --out out/gold_set_heldout_final.json > /dev/null
 python study/extra_stats.py > out/extra_stats.log
+# LaTeX-source cross-check, from the cached arXiv sources (network to refresh).
+python study/latex_crosscheck.py --offline > /dev/null
 python study/binomial_check.py
 python study/benchmark_resolution.py
 python study/resolution_table.py

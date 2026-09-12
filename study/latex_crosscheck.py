@@ -115,6 +115,9 @@ def _strip_comments(text: str) -> str:
 TABLE_ENV = re.compile(r"\\begin\{table\*?\}(.*?)\\end\{table\*?\}", re.S)
 CAPTION = re.compile(r"\\caption\s*(?:\[[^\]]*\])?\s*\{")
 BOLD = re.compile(r"\\(?:textbf|mathbf|bm|boldsymbol)\s*\{|\\bf(?:series)?\b|\\B\{")
+# Bold applied to a number, which is what the pipeline reads; every header
+# row is bold, so "any \textbf in the table" is not the same event.
+BOLD_NUMBER = re.compile(r"\\(?:textbf|mathbf|bm|boldsymbol)\s*\{\s*\$?\s*-?\d|\{\s*\\bf(?:series)?\s+-?\d")
 PM = re.compile(r"\\pm\b|\\mp\b|±|\\scriptsize\s*\\pm|\\stdv|\\std\{")
 
 
@@ -152,6 +155,7 @@ def source_tables(files: dict) -> list:
                 "has_pm": bool(PM.search(body)),
                 "n_pm": len(PM.findall(body)),
                 "has_bold": bool(BOLD.search(body)),
+                "has_bold_number": bool(BOLD_NUMBER.search(body)),
                 "n_cells": body.count("&"),
             })
     return tables
@@ -198,7 +202,7 @@ def compare(records: list, matched: dict) -> dict:
                 continue
             n_tables_matched += 1
             for d, a, b in ((tab_pm, st["has_pm"], best["has_pm"]),
-                            (tab_bold, st["has_bold"], best["has_bold"])):
+                            (tab_bold, st.get("has_bold_number", st["has_bold"]), best["has_bold"])):
                 if a and b:
                     d["both"] += 1
                 elif not a and not b:
@@ -235,25 +239,41 @@ def main(argv=None) -> int:
     ap.add_argument("--extracted", default="data/extracted_2025.jsonl")
     ap.add_argument("--n", type=int, default=300)
     ap.add_argument("--seed", type=int, default=0)
-    ap.add_argument("--cache", default="out/latex_crosscheck_cache.json")
+    ap.add_argument("--cache", default="audits/latex_source/cache.json")
     ap.add_argument("--out", default="out/latex_crosscheck.json")
+    ap.add_argument("--offline", action="store_true",
+                    help="compare from the cached source tables only; no network")
     args = ap.parse_args(argv)
 
     records = load_records(args.extracted)
     with_tables = [r for r in records if r.get("n_tables_detected", 0) > 0]
-    sample = random.Random(args.seed).sample(with_tables, min(args.n, len(with_tables)))
     cache = {}
     if os.path.exists(args.cache):
         with open(args.cache, encoding="utf-8") as fh:
             cache = json.load(fh)
+    if args.offline:
+        # The draw is fixed by the cache, not redrawn: the order of records in
+        # a re-extracted file follows download completion and is not stable.
+        by_id = {r["id"]: r for r in records}
+        sample = [by_id[i] for i in cache if i in by_id]
+    else:
+        sample = random.Random(args.seed).sample(with_tables, min(args.n, len(with_tables)))
 
+    os.makedirs(os.path.dirname(args.cache) or ".", exist_ok=True)
     for i, r in enumerate(sample, 1):
-        if r["id"] in cache:
+        if args.offline:
+            break
+        entry = cache.get(r["id"])
+        stale = bool(entry and entry.get("tables") and "has_bold_number" not in entry["tables"][0])
+        if entry and not stale:
             continue
-        entry = {"title": r["title"]}
-        aid, sim = arxiv_match(r["title"])
-        entry["arxiv_id"], entry["title_similarity"] = aid, round(sim, 3)
-        time.sleep(PAUSE)
+        if entry and stale:
+            aid = entry["arxiv_id"]
+        else:
+            entry = {"title": r["title"]}
+            aid, sim = arxiv_match(r["title"])
+            entry["arxiv_id"], entry["title_similarity"] = aid, round(sim, 3)
+            time.sleep(PAUSE)
         if aid:
             try:
                 files = fetch_source(aid)
