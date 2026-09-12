@@ -64,6 +64,7 @@ def main(argv=None) -> int:
         by_page.setdefault((c["paper"], c["page"]), []).append(c)
 
     per_page = []
+    m_g = m_n = u_g = u_n = 0   # reader groups the pipeline also has / does not
     r_groups = r_neither = r_testable = r_onebar = 0
     p_groups = p_neither = p_testable = 0
     r_found = p_found = 0
@@ -97,9 +98,33 @@ def main(argv=None) -> int:
         r_groups += page["n_groups"]; r_neither += page["neither"]; r_testable += page["testable"]
         r_onebar += sum(1 for g in groups if g["wb"] != g["rb"])
         p_groups += page["pipe_groups"]; p_neither += page["pipe_neither"]; p_testable += page["pipe_testable"]
+        for g in groups:
+            if any(_eq(g["w"], c["winner"]) for c in pc):
+                m_g += 1; m_n += (not g["wb"] and not g["rb"])
+            else:
+                u_g += 1; u_n += (not g["wb"] and not g["rb"])
         r_found += sum(1 for g in groups if any(_eq(g["w"], c["winner"]) for c in pc))
         p_found += sum(1 for c in pc if any(_eq(g["w"], c["winner"]) for g in groups))
+    # The corpus weighted as the page draw is: one page with comparisons per
+    # paper, pooled, averaged over draws.
+    by_paper: dict = {}
+    for (paper, page), cs in by_page.items():
+        by_paper.setdefault(paper, []).append(cs)
+    rng = random.Random(0)
+    nei, tes = [], []
+    for _ in range(200):
+        g = n_ = t_ = 0
+        for cs_list in by_paper.values():
+            cs = cs_list[rng.randrange(len(cs_list))]
+            g += len(cs)
+            n_ += sum(1 for c in cs if c["winner_dispersion"] is None and c["runner_dispersion"] is None)
+            t_ += sum(1 for c in cs if c.get("test"))
+        nei.append(100 * n_ / g); tes.append(100 * t_ / g)
     out = {
+        "corpus_one_page_per_paper": {"pct_neither": round(sum(nei) / len(nei), 1),
+                                      "pct_testable": round(sum(tes) / len(tes), 1)},
+        "reader_groups_matched": {"groups": m_g, "pct_neither": round(100 * m_n / m_g, 1) if m_g else None},
+        "reader_groups_unmatched": {"groups": u_g, "pct_neither": round(100 * u_n / u_g, 1) if u_g else None},
         "n_pages": len(per_page),
         "n_tables_listed": n_tables, "n_results_tables": n_results,
         "pct_results_tables_with_any_bar": round(100 * n_tables_bar / n_results, 1) if n_results else None,

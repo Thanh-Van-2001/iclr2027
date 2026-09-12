@@ -120,10 +120,10 @@ results table claims in, the comparison.
   appropriate information about statistical significance, \nCheckYesNoTable{}
   print no error bar in any results table; \nJustSeeds{} of those justify the
   answer by having used several seeds, which is averaging, not reporting.
-\item \textbf{An instrument scored against a reference set}, field by field,
-  on rendered tables read with the pipeline's values hidden and its chosen
-  cell marked, and against the LaTeX source of the papers where arXiv has it;
-  released with the per-comparison database and the renderings.
+\item \textbf{An instrument scored against reference sets}, field by field,
+  on rendered tables read with its values hidden, boxed and unboxed, on random
+  pages read end to end, and against arXiv LaTeX source; released with the
+  per-comparison database and the renderings.
 \end{itemize}
 
 \section{What a results table claims}
@@ -162,10 +162,10 @@ exact, is the reading most favourable to the field, and we report it alongside
 (Section~\ref{sec:survival}). Both cells are maxima of noisy values, and the
 winner is the maximum of more of them, so under any one convention the
 printed gap is if anything inflated and the failure rate computed on it if
-anything low. Two assumptions run the other way: independence of the two
-values, which overstates the rate wherever seeds were matched
-(Section~\ref{sec:sensitivity}), and a rival copied from another paper, which
-rests on a run count the page does not state (Section~\ref{sec:threats}).
+anything low. Two assumptions run the other way: independence, which
+overstates the rate wherever seeds were matched (Section~\ref{sec:sensitivity}),
+and a copied rival, whose run count the page does not state
+(Section~\ref{sec:threats}).
 
 \section{Corpus}
 \label{sec:corpus}
@@ -255,8 +255,7 @@ The pattern is not one community's, though its size is: by subfield of the
 title (Appendix~\ref{app:topics}) the share without an error bar runs from
 \nRlNeither{} in reinforcement learning to \nLmNeither{} in language-model
 papers, while the failure rate among what can be tested stays between
-\nTopicFailLow{} and \nTopicFailHigh{} wherever fifty or more comparisons can
-be.
+\nTopicFailLow{} and \nTopicFailHigh{}.
 
 Of whole papers, \nPctWithErrorBar{} print an explicit error bar in any
 results table and \nPctStatingN{} state a number of runs anywhere. Among
@@ -321,18 +320,18 @@ deviation printed by other papers on the same benchmark in that bucket where
 a caption names one and ten cells from three papers exist
 (\nDesignPctBenchmarkSd{} of comparisons), else on the paper's subfield
 (\nDesignPctSubfieldSd{}), else across the corpus. The statistic is the gap
-over the imputed standard error of the difference, reported below $1.96$ and
-below $2.80$ (the \nPowerLevel{}-power threshold). It is a comparison against
-typical noise, not a test on the paper's own numbers, and the noise is crude:
-one median per subfield and scale, whatever the metric.
+over the imputed standard error of the difference, reported below $1.96$. It
+is a comparison against typical noise, not a test on the paper's own numbers,
+and the noise is crude: one median per subfield and scale, whatever the
+metric.
 
 It can be asked of every comparison with a stated run count and two values in
 one bucket, error bars or not: \nDesignMdeN{} comparisons from
 \nDesignMdePapers{} papers (\nDesignExcludedNoN{} lack a run count,
 \nDesignExcludedScale{} fall outside or across the buckets). At a median of
 \nDesignMedianRuns{} runs, \nPctBelowAlphaThreshold{} of reported gaps fall
-below $1.96$ imputed standard errors and \nPctBelowDesignMde{} below $2.80$;
-on the \nDesignMdeNoBarsN{} comparisons that print no error bar at all,
+below $1.96$ imputed standard errors; on the \nDesignMdeNoBarsN{} comparisons
+that print no error bar at all,
 \nPctBelowAlphaThresholdNoBars{}, the first figure in this paper that covers
 that population, and the least secure: the noise is transferred from papers
 that print deviations to papers that do not, and the two need not share it;
@@ -566,10 +565,10 @@ marks every valid method rather than a winner; on the verdict in
 \nGoldFrozenFailReader{} and the pipeline \nGoldFrozenFailPipe{} of them; and
 the pipeline fails \nGoldFrozenPipeFailAll{} of all \nGoldFrozenN{}, against
 \nPctFail{} in the population. Of the no-bar items
-\nGoldFrozenNoBarAbsentFrac{} carry none; of the no-run-count items the paper
-states a count somewhere in \nGoldFrozenNoNFoundFrac{} (restored to the
-checkable share in Table~\ref{tab:span}); the runner-up carries a citation or
-dagger in \nGoldFrozenRivalCopiedFrac{}. Because the box anchors the reader on the pipeline's
+\nGoldFrozenNoBarAbsentFrac{} carry none, the paper states a run count
+somewhere for \nGoldFrozenNoNFoundFrac{} of the no-run-count items
+(Table~\ref{tab:span} restores them), and the runner-up is a copied number in
+\nGoldFrozenRivalCopiedFrac{}. Because the box anchors the reader on the pipeline's
 choice of cell, the same \nNoboxN{} crops were read again with nothing marked,
 the reader listing every single-bold group it could find: the pipeline's
 winner is among them in \nNoboxWinnerFoundFrac{}, with the same rival in
@@ -592,11 +591,15 @@ in view (Appendix~\ref{app:gold}). From its labels alone,
 \nPagesReaderNeither{} of \nPagesReaderGroups{} groups carry no error bar on
 either side and \nPagesReaderTestable{} are testable; the pipeline's
 comparisons on the same pages give \nPagesPipeNeither{} and
-\nPagesPipeTestable{} of \nPagesPipeGroups{}. The instruments agree on the
-shares and disagree on the census: the reader lists \nPagesPipeFoundPct{} of
-the pipeline's groups, the pipeline only \nPagesReaderFoundPct{} of the
-reader's, so the corpus holds more highlighted comparisons than the pipeline
-counts, printing the same things.
+\nPagesPipeTestable{} of \nPagesPipeGroups{}; the draw carries fewer bars
+than the corpus (weighted one page per paper, the corpus gives
+\nPagesCorpusPaperWeightedNeither{}), not a different weighting. The
+instruments agree on the shares and disagree on the census: the reader lists
+\nPagesPipeFoundPct{} of the pipeline's groups, the pipeline only
+\nPagesReaderFoundPct{} of the reader's, and the groups it misses print bars
+more often (\nPagesUnmatchedNeither{} bar-less against
+\nPagesMatchedNeither{}), so the corpus holds more highlighted comparisons
+than the pipeline counts, with a no-bar share a few points lower.
 
 
 The weakest field is the run count, read from the paper rather than the table.
@@ -627,10 +630,10 @@ them bars written without a leading zero ($0.444 \pm .003$) and one a table
 whose winning column the block-cut heuristic had dropped; both are fixed
 (Appendix~\ref{app:bugs}). The recall nothing was fixed on is the pre-fix
 one, \nRecallPreFix{}. Under the released pipeline \nRecallReadsBarNow{} of
-the \nRecallJudged{} now read a bar (the four), \nRecallDropped{} yield no
-claim any more, and of the \nRecallStill{} still called empty it misses
-\nRecallMissed{} (recall \nRecallCi{}), a figure on the same tables the fixes
-came from. Both are conditional on a table
+the \nRecallJudged{} now read a bar, \nRecallDropped{} yield no claim any
+more, and of the \nRecallStill{} still called empty it misses \nRecallMissed{}
+(recall \nRecallCi{}, on the tables the fixes came from). Both are
+conditional on a table
 being detected and its bars being in its cells: the comparison-level audit of
 the same stratum on the held-out draw found \nGoldNoBarAbsent{} truly
 bar-less (\nGoldFrozenNoBarAbsentFrac{} on the frozen draw), the exceptions
@@ -661,10 +664,9 @@ claim no bound.
 in a figure, in a table rendered as an image, or signalled by shading is
 invisible to it and counted as absent (Appendix~\ref{app:pipeline} counts what
 lies outside the cells); tie-marked tables are in Appendix~\ref{app:ties}
-(removing them gives \nFailExcludingTie{}); and Appendix~\ref{app:checklist}
-reconciles the \nCheckYesNoTable{} NeurIPS papers whose checklist reports
-error bars we cannot find with the recall audit: most do not claim one in a
-table.
+(removing them gives \nFailExcludingTie{}); Appendix~\ref{app:checklist} reads
+the \nCheckYesNoTable{} NeurIPS checklists that report error bars we cannot
+find: most do not claim one in a table.
 
 \section{Related work}
 \label{sec:related}
@@ -699,16 +701,17 @@ named-benchmark comparison in two venues, and \citet{madaan2024quantifying}
 measure the benchmark variance it rests on.
 \citet{reimers2017reporting}, \citet{agarwal2021deep},
 \citet{ulmer2022experimental}, \citet{marie2021scientific} and
-\citet{tang2020showing} study one subfield's practice by hand. The nearest
-ancestor in method is outside machine learning: \citet{nuijten2016prevalence}
-recompute the $p$-values printed in psychology papers from the statistics
-beside them. \citet{hou2019identification}, \citet{kardas2020axcell} and
+\citet{tang2020showing} study one subfield's practice by hand; outside
+machine learning, \citet{nuijten2016prevalence} recompute the $p$-values
+printed in psychology papers from the statistics beside them. \citet{hou2019identification}, \citet{kardas2020axcell} and
 \citet{park2025can} extract result tables at scale to populate leaderboards,
 the same mechanics with the opposite purpose, and \citet{bianchi2025err} audit
 published papers for errors with a language model whose flags were then
 verified by hand, the protocol whose human half Section~\ref{sec:threats}
-still lacks. No released annotation of error-bar presence exists to score an
-extractor against, so Section~\ref{sec:threats} builds one.
+still lacks. No released comparison-level annotation of error-bar presence
+exists to score an extractor against; the nearest is the paper-level
+confidence-interval label of \citet{kirly2018nips}, whose event, an interval
+anywhere in a paper, is not ours, so Section~\ref{sec:threats} builds one.
 
 \section{Discussion}
 \label{sec:discussion}
@@ -717,9 +720,9 @@ The cheapest fix is not more statistics. It is printing three quantities that
 authors already have: a dispersion on each value in the main comparison, and
 the number of runs behind them. A paper that prints those is checkable by
 anyone, forever, at no cost. A second fix applies before the experiment:
-Appendix~\ref{app:mde} tabulates what each benchmark can resolve from its
-split size alone, and an author who consults it first will sometimes find the
-sentence cannot be written, which is the point.
+Appendix~\ref{app:mde} tabulates what each benchmark can resolve, and an
+author who consults it first will sometimes find the sentence cannot be
+written, which is the point.
 
 % The mandatory statements below do not count toward the nine-page limit,
 % so the main text ends here.

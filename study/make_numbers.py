@@ -759,6 +759,12 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("pages reader found pct", rf"{pg['reader_groups_found_by_pipeline']['pct']}\%", provenance=prun)
     reg.add("pages pipe found", _pct_ci(pg["pipeline_groups_found_by_reader"]), provenance=prun)
     reg.add("pages pipe found pct", rf"{pg['pipeline_groups_found_by_reader']['pct']}\%", provenance=prun)
+    reg.add("pages corpus paper weighted neither", rf"{pg['corpus_one_page_per_paper']['pct_neither']}\%", provenance=prun)
+    reg.add("pages corpus paper weighted testable", rf"{pg['corpus_one_page_per_paper']['pct_testable']}\%", provenance=prun)
+    reg.add("pages matched neither", rf"{pg['reader_groups_matched']['pct_neither']}\%", provenance=prun)
+    reg.add("pages unmatched neither", rf"{pg['reader_groups_unmatched']['pct_neither']}\%", provenance=prun)
+    reg.add("pages matched groups", pg["reader_groups_matched"]["groups"], provenance=prun)
+    reg.add("pages unmatched groups", pg["reader_groups_unmatched"]["groups"], provenance=prun)
 
     # the run-count recall audit
     gc = _j("gold_set_no_n")["no_n"]
