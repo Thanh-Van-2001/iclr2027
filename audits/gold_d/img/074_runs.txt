@@ -1,0 +1,33 @@
+1 that all experiments are conducted 5 times
+---
+All experiment results are the averages of five random runs on a single A100 80G GPU
+---
+For one-stage baselines, we run 15 epochs to fully train the model
+---
+For two-stage baselines, we run 5 epochs for stage one and run 10 epochs for
+---
+We run 5 epochs for stage one to obtain the prior
+---
+We run experiments to verify this
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+knowledge about wrong event for each sample, and run 10 epochs for stage two to fully robust train
+---
+only tested on a few datasets or with a few runs
+---
+run with given experimental conditions)
+---
+times a model forgets a prediction of given labels
+---
+which counts how many times a model forgets a prediction of given labels
+---
+with random seed to confirm the statistical significance
+---
+• The instructions should contain the exact command and environment needed to run to

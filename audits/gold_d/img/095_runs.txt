@@ -1,0 +1,63 @@
+3, we report the variance across trials using one standard
+---
+Figure 6: Average and one standard deviation of episode reward throughout training for the five runs
+---
+Figure 8: Average and one standard deviation of episode reward throughout training for the five runs
+---
+For each seed, we evaluated the final policy in 16 randomly initialized episodes
+---
+S(q1) = S(q2) = 1, meaning that the safety condition is trivially satisfied at all times in those states
+---
+across 16 simulated rollouts, and we successfully deployed this same policy to the real UR5e robot
+---
+actions suboptimal by either terminating rollouts [8, 12, 36, 37] or applying negative reward shaping
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+components are treated as terminal states, implementing a rollout-terminating strategy to enforce
+---
+constraints clearly demonstrate that rollout termination in CRM-RS and the reward shaping used
+---
+environment interactions and 5 seeds
+---
+episodes lasting 1000 steps
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+five different seeds
+---
+goals due to its hierarchical structure and achieves high robustness for most rollouts
+---
+instead compute the success rate by examining the proportion of rollouts that are never unsafe and
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+maximizing velocity in each of the four cardinal directions and would run for 4 consecutive steps
+---
+ments, tasks (except the loop task), and seeds from
+---
+of 225 runs for the comparative analysis and 90 runs for the ablations, amounting to approximately 315
+---
+of many LTL specifications [11], and typically rely on ad-hoc mechanisms, such as halting rollouts
+---
+only tested on a few datasets or with a few runs
+---
+represents the full space of possible subgoal lists up to a task-dependent length n and Gi is the i-fold
+---
+rollouts for the final “Loop” task cannot be meaningfully evaluated over a finite trajectory [58], we
+---
+rollouts that completely satisfied the task specification for all 1000 steps
+---
+run required approximately 30 minutes of compute time on the GPU
+---
+run with given experimental conditions)
+---
+runs per ablation group that are summarized in Table 2 in our main paper
+---
+runs per method that are summarized in Table 1 in our main paper
+---
+success rate in 16 evaluation episodes lasting 1000 steps over seeds for policies at the end of training
+---
+• The instructions should contain the exact command and environment needed to run to

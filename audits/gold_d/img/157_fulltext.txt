@@ -1,0 +1,4041 @@
+End-to-End Learning Framework for Solving
+Non-Markovian Optimal Control
+Xiaole Zhang * 1 Peiyu Zhang * 1 Xiongye Xiao * 1 2 Shixuan Li 1
+Vasileios Tzoumas 3 Vijay Gupta 4 Paul Bogdan 1
+Abstract
+Integer-order calculus fails to capture the long-
+range dependence (LRD) and memory effects
+found in many complex systems. Fractional calcu-
+lus addresses these gaps through fractional-order
+integrals and derivatives, but fractional-order dy-
+namical systems pose substantial challenges in
+system identification and optimal control tasks.
+In this paper, we theoretically derive the opti-
+mal control via linear quadratic regulator (LQR)
+for fractional-order linear time-invariant (FOLTI)
+systems and develop an end-to-end deep learning
+framework based on this theoretical foundation.
+Our approach establishes a rigorous mathematical
+model, derives analytical solutions, and incorpo-
+rates deep learning to achieve data-driven optimal
+control of FOLTI systems. Our key contributions
+include: (i) proposing a novel method for sys-
+tem identification and optimal control strategy in
+FOLTI systems, (ii) developing the first end-to-
+end data-driven learning framework, Fractional-
+Order Learning for Optimal Control (FOLOC),
+that learns control policies from observed trajec-
+tories, and (iii) deriving theoretical bounds on the
+sample complexity for learning accurate control
+policies under fractional-order dynamics. Experi-
+mental results indicate that our method accurately
+approximates fractional-order system behaviors
+without relying on Gaussian noise assumptions,
+pointing to promising avenues for advanced opti-
+mal control.
+*Equal contribution 1Ming Hsieh Department of Electrical and
+Computer Engineering, University of Southern California, Los
+Angeles, CA 90089, USA 2Min H. Kao Department of Electri-
+cal Engineering and Computer Science, University of Tennessee,
+Knoxville, TN 37996, USA 3Department of Aerospace Engineer-
+ing, University of Michigan, Ann Arbor, MI 48109, USA 4Elmore
+Family School of Electrical and Computer Engineering, Purdue
+University, West Lafayette, IN 47907, USA. Correspondence to:
+Xiaole Zhang <xiaolezh@usc.edu>.
+Proceedings of the 42 nd International Conference on Machine
+Learning, Vancouver, Canada. PMLR 267, 2025. Copyright 2025
+by the author(s).
+1. Introduction
+Many real-world systems, including biological systems, neu-
+ronal networks, organ networks, financial markets, and
+cyber-physical systems, exhibit long-range dependence
+(LRD) and memory effects that traditional integer-order
+models struggle to capture (Lundstrom et al., 2008; Ivanov
+et al., 1999; Ghorbani & Bogdan, 2013; Ghorbani et al.,
+2018). Fractional-order linear time-invariant (FOLTI) sys-
+tems extend classical integer-order models through frac-
+tional calculus, providing a more flexible framework for
+modeling such complex behaviors. Due to their ability to
+represent non-local dependencies and history-dependent dy-
+namics, FOLTI systems have found broad applications in
+control systems (Baleanu et al., 2011; Monje et al., 2010;
+Reed et al., 2023b), bioengineering (Magin, 2004; 2010;
+Ghorbani & Bogdan, 2013), neuroscience (Pequito et al.,
+2015; Gupta et al., 2019; Reed et al., 2022; 2023a), cyber-
+physical systems (Xue & Bogdan, 2017), and financial mod-
+eling (Granger & Joyeux, 1980). However, the practical
+deployment of FOLTI systems faces significant challenges
+in system identification and optimal control. Unlike Marko-
+vian systems, where the current state depends solely on the
+immediate past state, FOLTI systems exhibit non-Markovian
+properties, meaning their evolution is influenced by a wide
+range of past states. This memory effect introduces addi-
+tional complexities, making it difficult for traditional meth-
+ods to generalize effectively to FOLTI systems.
+Despite their advantages, FOLTI systems present signifi-
+cant challenges in both modeling and control. Identifying
+system parameters for fractional-order dynamical systems
+remains an open research problem. One major difficulty in
+system identification arises from the non-Markovian nature
+of fractional-order systems, where the state evolution is not
+solely determined by recent states but depends on an entire
+history of past observations. Additionally, the fractional
+derivative operators, such as the Gr¨unwald–Letnikov frac-
+tional derivative (Hilfer, 2000; Monje et al., 2010; Oldham
+& Spanier, 1974), introduce combinatorial complexity and
+nonlinearities, making standard parameter estimation tech-
+niques ineffective. Existing methods often rely on strong
+assumptions, such as noiseless data or constrained data gen-
+1
+
+End-to-End Learning Framework for Solving Non-Markovian Optimal Control
+eration processes, limiting their applicability in practical
+scenarios.
+Beyond system identification, optimal control of FOLTI
+systems remains a major challenge. Unlike integer-order
+systems, where well-established control frameworks exist,
+fractional-order systems exhibit long-range dependencies
+and memory effects, making classical control strategies
+inadequate. In particular, the lack of analytical solutions for
+optimal control in FOLTI systems requires new approaches
+that account for their unique dynamics. Addressing these
+challenges is crucial for enabling real-world applications of
+FOLTI systems in control systems.
+A well-established framework for optimal control in integer-
+order systems is the Linear Quadratic Regulator (LQR),
+introduced by Rudolf Kalman in 1960 (Kalman et al., 1960).
+LQR determines an optimal control policy that minimizes
+a quadratic cost function defined over the system state and
+control input, subject to weighing matrices, for systems
+governed by linear dynamics. The traditional integer-order
+LQR problem has been extensively studied over the decades
+(Dean et al., 2018; 2020; Tu & Recht, 2019). For linear
+time-invariant (LTI) systems with known parameters, the
+LQR problem has a closed-form solution on the infinite
+time horizon and can be solved efficiently using dynamic
+programming on finite horizons (Anderson & Moore, 2007).
+Furthermore, numerous researchers have developed end-to-
+end guarantees for LQR in the context of LTI systems. These
+guarantees often involve a two-step process: (i) estimating
+the unknown system parameters, and (ii) designing robust
+controllers to account for model uncertainties.
+While the LQR problem for integer-order LTI systems is
+well understood (see related work in Appendix B), far less
+attention has been devoted to the case of fractional-order dy-
+namical systems (Monje et al., 2010). These systems, which
+originate from fractional calculus (Hilfer, 2000; Ionescu
+et al., 2017), differ significantly from their integer-order
+counterparts. Unlike Markovian systems, where the current
+state depends solely on the immediate past state, fractional-
+order systems exhibit a non-Markovian behavior, with the
+current state influenced by a memory effect spanning a
+broad range of past states. This memory effect makes the
+analysis and control of fractional-order dynamical systems
+particularly challenging. Estimation of unknown parame-
+ters in fractional-order dynamical systems remains an open
+problem (Yaghooti & Sinopoli, 2023; Chatterjee & Pequito,
+2022; Zhang et al., 2025), even under the assumption of lin-
+ear fractional operators. For finite horizons, optimal control
+problems have been addressed under specific assumptions
+(Li & Chen, 2008), but no comprehensive results exist for
+infinite horizons. Moreover, achieving end-to-end guaran-
+tees for fractional-order systems is particularly challenging,
+as both system identification (Yaghooti & Sinopoli, 2023;
+Zhang et al., 2025) and robust control present significant
+technical difficulties.
+To address these challenges, this work establishes a the-
+oretical framework for fractional-order LQR, deriving a
+principled end-to-end learning approach for FOLTI optimal
+control. Specifically, we formulate the mathematical struc-
+ture of FOLTI systems, enabling a rigorous extension of
+LQR to the fractional-order setting. Given the diagonal ele-
+ments of the system matrix, we propose a method to estimate
+the unknown system parameters from multiple observed tra-
+jectories. Using this estimated model, we derive the optimal
+control policy using LQR, leveraging least squares optimiza-
+tion and Lagrange multipliers to obtain analytically tractable
+solutions despite the inherent complexities introduced by
+fractional-order dynamics. We further analyze the sample
+complexity of this learning process, quantifying the number
+of samples required for the estimated LQR loss to converge
+to the true LQR loss under unknown input conditions.
+Beyond theoretical derivations, we develop an end-to-end
+data-driven learning framework, fractional-order learning
+for optimal control (FOLOC), that jointly performs system
+identification and optimal control. In contrast to classical
+control methods that require pre-specified system dynamics,
+our approach learns both the system parameters and control
+policies directly from observed trajectories. Unlike classical
+approaches that assume structured noise distributions, our
+framework is designed to operate in realistic, noisy envi-
+ronments. Specifically, we incorporate deep learning-based
+modeling techniques to ensure that the control policy re-
+mains robust under non-Gaussian noise, distributional shifts,
+and real-world uncertainties.
+In summary, this work makes the following key contribu-
+tions: (i) We provide theoretical foundations for optimal
+control of fractional-order linear time-invariant (FOLTI) sys-
+tems. (ii) We develop a principled end-to-end data-driven
+learning framework, FOLOC, that jointly optimizes system
+identification loss and control policies, ensuring robustness
+to non-Gaussian noise and real-world uncertainties. (iii)
+We analyze the theoretical sample complexity, providing
+convergence guarantees for learned control policies under
+unknown system dynamics. (iv) We conduct extensive ex-
+periments, demonstrating the FOLOC’s robustness across
+noise distributions, scalability to different system complexi-
+ties, and computational efficiency in real-time control tasks.
+2. Preliminaries and Problem Formulation
+In this section,
+we introduce key theoretical foun-
+dations
+from
+fractional
+calculus,
+focusing
+on
+the
+Gr¨unwald–Letnikov fractional-order derivative and its role
+in modeling FOLTI systems. By extending LQR to FOLTI
+systems, we then formulate the end-to-end learning problem,
+2
+
+End-to-End Learning Framework for Solving Non-Markovian Optimal Control
+where the objective is to identify system parameters and op-
+timize control policies directly from data. This formulation
+integrates system identification and control optimization,
+addressing challenges arising from memory effects and non-
+Markovian dynamics in FOLTI systems.
+2.1. Fractional-Order Derivative
+Definition 2.1 (Gr¨unwald–Letnikov fractional-order deriva-
+tive). The left-side and right-side Gr¨unwald–Letnikov
+fractional-order derivatives of order α on the finite inter-
+val I = [a, b] are defined as follows:
+ GLDα
+a+f
+
+(x) = lim
+h→0+
+1
+hα
+⌊x−a
+h ⌋
+X
+k=0
+(−1)k
+α
+k
+
+f(x −kh),
+(1)
+ GLDα
+b−f
+
+(x) = lim
+h→0−
+1
+hα
+⌊b−x
+h ⌋
+X
+k=0
+(−1)k
+α
+k
+
+f(x + kh),
+(2)
+where x ∈R, 0 < h < b −a, and α > 0. Here,
+ α
+k
+
+denotes the generalized binomial coefficient, defined as
+ α
+k
+
+=
+Γ(α+1)
+Γ(k+1)Γ(α−k+1), where Γ(·) denotes the gamma
+function, which is defined as Γ(z) =
+R ∞
+0
+tz−1e−t dt for
+z > 0.
+2.2. Gr¨unwald–Letnikov Difference Operator
+The fractional-order Gr¨unwald–Letnikov difference opera-
+tor allows to discretize the fractional-order derivative and
+represent it as a finite difference as follows:
+∆αxk :=
+k
+X
+j=0
+D(α, j)xk−j,
+(3)
+where xk ∈Rn, α = [α1, α2, . . . , αn]⊤∈Rn represents
+the order of the difference operator, and D(α, j) ∈Rn×n is
+an n × n diagonal matrix defined as
+D(α, j) := diag
+ ψ(α1, j), ψ(α2, j), . . . , ψ(αn, j)
+
+, (4)
+with
+ψ(αi, j) :=
+Γ(j −αi)
+Γ(−αi)Γ(j + 1),
+i = 1, 2, . . . , n.
+(5)
+2.3. Fractional-Order Linear Time Invariant System
+The
+state-space
+representation
+of
+the
+discrete-time
+fractional-order linear time invariant system reads:
+∆αxk+1 = Axk + Buk,
+(6)
+where xk ∈Rn is the state vector, uk ∈Rm is the system
+input, matrices A and B are constant matrices with size
+n × n and n × m, respectively.
+Using the Gr¨unwald–Letnikov difference operator, we can
+write the system as follows:
+xk+1 = Axk + Buk −
+k+1
+X
+j=1
+D(α, j)xk+1−j.
+(7)
+The last term in Eq. 7 represents the memory-dependent
+nature of fractional-order dynamical systems, making them
+suitable for modeling non-Markovian and long-range depen-
+dent processes.
+2.4. Linear Quadratic Regulator for FOLTI systems
+The linear quadratic regulator (LQR) problem concerns the
+optimal control of a dynamical system given known and
+fixed quadratic costs. Formally, the goal of LQR is to find
+the optimal control ut that minimizes the quadratic loss
+fitting in the FOLTI systems, which in turn solves the fol-
+lowing optimization problem.
+Definition 2.2 (LQR for FOLTI systems). The LQR prob-
+lem for FOLTI systems is defined as follows:
+min
+{ui}T −1
+i=0
+JT (u) :=
+T −1
+X
+k=0
+ x⊤
+k Qxk + u⊤
+k Ruk
+
++ x⊤
+T QfxT
+(8)
+s. t. ∆αxk+1 = Axk + Buk,
+(9)
+where Q ∈Rn×n and Qf ∈Rn×n are positive semi-
+definite matrices representing the state cost and terminal
+state cost, respectively, where n is the dimension of the
+state vector xk. Similarly, R ∈Rm×m is a positive semi-
+definite matrix representing the control cost, where m is the
+dimension of the control input vector uk.
+2.5. Problem Formulation
+Consider a fractional-order linear time-invariant system de-
+fined using the Gr¨unwald–Letnikov difference operator. The
+goal is to find an optimal control sequence via solving LQR
+problem based on system identification from observed data.
+Specifically, we are given N trajectories, each tra-
+jectory consisting of T
+time steps,
+sampled from
+a
+joint
+distribution
+Π
+over
+initial
+states,
+process
+noise,
+system
+parameters
+and
+cost
+matrices,
+i.e.,
+{x0, {wk}T −1
+k=0 , {uk}T −1
+k=0 , {A, B, α}, {Q, R}}
+∼
+Π.
+Thus,
+we
+can
+represent
+the
+dataset
+as
+D
+=
+{{xi
+k}T
+k=0, {ui
+k}T −1
+k=0 , Qi, Ri, {ui
+k
+o(xi
+0, A, B, α)}T −1
+k=0 }N
+i=1,
+where ui
+k
+o denotes the optimal control input. We aim to
+solve the following two-step problem:
+(i) System Identification.
+The fractional-order system
+dynamics are parameterized by Θ := {A, B, α}, where
+A ∈Rn×n and B ∈Rn×m are system matrices, and
+3
+
+End-to-End Learning Framework for Solving Non-Markovian Optimal Control
+α ∈(0, 1)n is the fractional order. The system identifi-
+cation problem is posed as:
+ˆΘ = arg min
+Θ
+N
+X
+i=1
+T
+X
+k=1
+ˆxi
+k(Θ) −xi
+k
+2
+2 ,
+(10)
+where ˆxi
+k(Θ) represents the predicted state at time k for the
+i-th trajectory, obtained using the identified parameters Θ.
+(ii) Optimal Control. Once ˆΘ = { ˆA, ˆB, ˆα} is estimated,
+the optimal control problem is formulated as:
+min
+{uk}T −1
+k=0
+ˆJT (u) :=
+T −1
+X
+k=0
+ x⊤
+k Qxk + u⊤
+k Ruk
+
++ x⊤
+T QfxT ,
+(11)
+subject to the identified system dynamics:
+∆ˆαxk+1 = ˆAxk + ˆBuk.
+(12)
+Deep Learning-Based Reformulation. The optimal con-
+trol problem can be framed in a deep learning context as
+learning an operator L : D →U, where U represents
+the set of optimal control inputs. Formally, the operator
+L : D →U computes the optimal control policy {uo
+t}T −1
+t=0
+directly from the observed trajectory, while simultaneously
+uncovering the system parameters Θ = {A, B, α} that en-
+capsulate the dynamics of the fractional-order system.
+3. Methodology
+3.1. Mathematical Foundations for Fractional-Order
+Learning and Control
+Lemma 3.1 (Discrete-time FOLTI system solution). The
+solution to the discrete-time FOLTI system is given by (Guer-
+mah et al., 2012):
+xk = Gkx0 +
+k−1
+X
+j=0
+Gk−1−jBuj,
+(13)
+where the matrices Gk are defined recursively as:
+Gk =
+(
+I
+for k = 0,
+Pk−1
+j=0 AjGk−1−j
+for k ≥1,
+(14)
+and the matrices Aj are given by:
+Aj =
+(
+A −diag(α1, . . . , αn)
+if j = 0,
+−D(α, j + 1)
+if j ≥1.
+(15)
+The proof is provided in Appendix D.2. The first compo-
+nent of the FOLTI system solution represents the unforced
+response of the system. The term Gk exhibts the particular-
+ity of being time-varying, attributed to the fractional-order
+α which inherently accounts for all the past states. The
+second component takes the role of the convolution sum
+corresponding to the forced response.
+Theorem 3.2 (LQR solution for FOLTI systems). The least-
+squares optimal control solution for the LQR problem of a
+FOLTI system is given by:
+U = −
+ G⊤¯QG + ¯R
+−1 G⊤¯Q⊤Hx0,
+(16)
+whereas the Lagrange multiplier optimal control solution
+is:
+U = −R−1B⊤⊗(I −Gλ)−1Hλx0.
+(17)
+Here, U, G, Gλ, H, Hλ, ¯R, and ¯Q are defined in Appendix
+D.3, and ⊗denotes the Kronecker product. Notably, U =
+
+u⊤
+0
+u⊤
+1
+· · ·
+u⊤
+T −1
+⊤.
+Using the optimal control solution via LQR, a natural ques-
+tion arises: given a system identification algorithm and a
+threshold error ϵ, how many samples are required for the
+system identification process to ensure that the error be-
+tween the estimated LQR loss ˆJ and the true LQR loss J
+(computed with the true system parameters) remains within
+the threshold d( ˆJ −J) ≤ϵ, where d(·) denotes the metric.
+We derive the following sample complexity results.
+Theorem 3.3 (Sample Complexity for FOLTI systems).
+Consider a FOLTI system with a known matrix A, fractional
+order α, and an unknown matrix B. The following sample
+complexity bounds hold using the system identification in
+Appendix D.1: Let
+KB = 1
+N (ϕ⊤ϕ)−1ϕ⊤Kwϕ(ϕ⊤ϕ)−1,
+(a) Least-squares solution.
+E
+h ˆJ −J
+
+i
+≤∥z∥2
+2∥R−1∥2
+ 1 + ∥B∥2
+2∥R−1∥2∥S∥2
+
+·
+ Tr(KB) + 2∥B∥2
+p
+Tr(KB)
+
+, (18)
+(b) Lagrange multiplier solution. Assume L−1
+QG(I −Lu) ⪰
+0,
+E
+h ˆJ −J
+
+i
+≤∥z∥2∥Hλx0∥2∥R−1∥2∥L∥2
+ 1 + ∥B∥2
+2
+· ∥R−1∥2∥L∥2∥LQG∥2
+ Tr(KB)+
+2∥B∥2
+p
+Tr(KB)
+
+,
+(19)
+where z
+=
+G⊤
+d ¯Q⊤Hx0,
+S
+=
+G⊤
+d ¯QGd,
+∥L∥2
+=
+∥(LQG)−1∥2∥LQG∥2, and Gd, ¯Q, and H are system matri-
+ces as defined in Appendix D.4.
+Corollary 3.4 (Simplified Sample Complexity for FOLTI
+systems). Let Kw = σ2
+wI and ui
+0 ∼N(0, I). For p >
+m + 1, then:
+Tr(KB) =
+nmσ2
+w
+N (p −m −1),
+(20)
+4
+
+End-to-End Learning Framework for Solving Non-Markovian Optimal Control
+where p denotes the number of initial conditions, and N
+denotes the number of trials adding Gaussian noise to
+fractional-order dynamics from these p initial conditions,
+and m is the dimension of control inputs (see Appendix
+D.5).
+The sample complexity results demonstrate that the overall
+convergence rates of the least-squares solution and the La-
+grange multiplier solution are both O(
+1
+√
+N ), differing only
+in their constant factors.
+3.2. Theoretical Approach for Fractional-Order System
+Identification and Optimal Control
+Our end-to-end theoretical learning method follows a similar
+strategy to those used in Markovian processes, specifically
+for LTI systems. The learning procedure can be summarized
+in two main steps. Given N noisy trajectories, each of T
+time steps, and assuming the diagonal elements of the sys-
+tem matrix A are known, we first formulate a least-squares
+problem to identify the system parameters by using the lin-
+earity of the Gr¨unwald–Letnikov difference operator. The
+state evolution with noise can be represented as
+∆αxk+1 = Axk + Buk + wk,
+(21)
+where {wk}T −1
+k=0 is an independent and identically dis-
+tributed (i.i.d) Gaussian noise process. Using the linearity
+of the fractional difference operator, the state evolution for
+each trajectory can be expressed as:
+x1 = Ax0 + Bu0 + Cαx0 + w0
+(22)
+Using this formulation, we define the following optimization
+problem across N trajectories
+ˆθ = arg min
+θ
+∥X −ξθ∥2
+2,
+(23)
+with the closed-form solution
+ˆθ =
+ ξ⊤ξ
+−1 ξ⊤X,
+(24)
+where system parameters Cα, θ and feature matrices X, ξ
+are detailed in Appendix D.1.
+In the second step, the derived system parameters are used
+to compute the optimal control solution as described in The-
+orem 3.2. For a given identified FOLTI system and a time
+horizon T, the optimal control sequence can be derived for
+any cost matrices Q and R, along with the initial condition
+x0.
+Remark. Knowing the diagonal elements of the system
+matrix A is a strong assumption and represents a limitation
+of the theoretical system identification approach. It serves
+a similar role to assumptions commonly made in classical
+system identification, where the exact (integer) order of the
+system is often presumed known in advance. In the context
+of fractional-order dynamical systems, estimating the sys-
+tem order—i.e., the fractional derivatives—is substantially
+more challenging, and to the best of our knowledge, no
+existing method provides theoretical guarantees in a gen-
+eral setting. To address this limitation, we propose FOLOC
+framework, which can give accurate optimal control policies
+without this assumption.
+3.3. Fractional-Order Learning for Optimal Control
+Framework
+Our end-to-end deep learning framework FOLOC is guided
+by the mathematical derivation of the optimal control pol-
+icy for FOLTI systems (see Methodology 3.1). Generally,
+FOLOC framework can be structured into two main compo-
+nents.
+System Identification Module: Inspired by traditional LTI
+and our proposed FOLTI system identification, we use deep
+learning based time-series models to estimate system param-
+eters and approximate intermediate variables. The objective
+is to learn the underlying function that maps trajectories to
+the variables required for solving the LQR problem.
+Theoretical system identification for both LTI and FOLTI
+systems predominantly relies on least-squares methods,
+which can be viewed as operators learning a function that
+maps from the trajectory and control input space X to the
+system parameter space S. Consider the temporal nature
+of the trajectory, we choose a recurrent neural network to
+estimate the system parameters. The mapping is defined
+as Rθ : X ∈RT ×(n+m) →S ∈Rn2+nm+n such that
+vectorize( ˆAθ, ˆBθ, ˆαθ) = Rθ({xi, ui}T −1
+i=0 ). From Lemma
+3.1, the function mapping between the system parameters to
+the time-varying matrices Ak and then to the matrices Gk
+can be represented as follows respectively
+Ak = gk(A, α; Γ),
+Gk = fk(A0, · · · , Ak−1),
+(25)
+where gk(·; Γ) is obtained as a function of the Gamma
+function, which governs the fractional-order dynamics. To
+model the first mapping, we use MLPs with injecting time
+embeddings to approximate the function Rg : S →H ∈
+RT ×h such that { ˆAig}T −1
+i=0 = Rg( ˆAθ, ˆαθ, {ei}T −1
+i=0 ), where
+h can be chosen based on the dynamics complexity and
+{ei}T −1
+i=0 represents an embedding of a specific timestamp
+i. The second mapping is approximated by an Encoder-
+only Transformer Rf
+: H →G ∈RT ×n such that
+{ ˆGif }T −1
+i=0
+= Rf({ ˆAig}T −1
+i=0 ), where ˆGif represents the
+learned approximation of the intermediate parameters Gk.
+Optimal Control Module: Building upon the mathematical
+derivation of the LQR problem using Lagrange multipliers,
+we use a neural operator to learn the mapping between the
+5
+
+End-to-End Learning Framework for Solving Non-Markovian Optimal Control
+Stack MLP
+
+0
+1
+2
+T-1
+T-2
+Tokens 𝑮𝒊
+Input X  
+RNN
+MLP
+SEQ Model
+SEQ Encoder
+
+0
+1
+2
+T-1
+T-2
+Tokens 𝑨𝒊
+Identification Loss
+෡𝑈𝑜
+𝑈𝑜
+Optimal Control Loss
+NO
+መ𝐴
+𝐴
+ො𝛼
+𝛼
+෠𝐵
+𝐵
+Total Loss
+𝑄
+𝑅
+Time Encoding
+Figure 1. Overview of FOLOC framework architecture. The pipeline first infers fractional-order system parameters (A, α, B) from input
+X using an RNN+MLP based system identification module. These parameters are then encoded as embeddings of sequential tokens Ai
+for time-dependent modeling. An attention-based Sequence Encoder processes these embeddings to obtain latent representations, which
+along with cost matrices Q, R, estimated system matrix ˆB are fed to the Stack MLPs (see Appendix E.1.4) with residual connection input
+X for Fourier Neural Operator to predict optimal control signals. Finally, a composite loss function unifies system identification and
+control prediction, enabling end-to-end training of both system parameter estimation and control law synthesis.
+input space (variable required for solving the LQR problem)
+and the output space {uo
+i }T −1
+i=0 (optimal control sequence).
+The core of optimal control module mirrors the process of
+solving the linear system derived from the LQR problem
+through Lagrange multipliers. The mathematical formula-
+tion of the linear system is expressed as:
+(I −Gλ)λ = 2Hλx0,
+(26)
+where λ is defined in Appendix D.3 and I −Gλ ∈RT n×T n
+is a block Toeplitz matrix (see Definition D.2). Using the
+solution of the Lagrange multipliers, the optimal control
+sequence {uo
+i }T −1
+i=0 can be given by:
+U = −R−1B⊤⊗(I −Gλ)−1Hλx0.
+(27)
+Luo et al. (2024) has demonstrated that solving linear sys-
+tems via Krylov iterations can be significantly accelerated
+by using the Fourier Neural Operator (FNO) (Li et al.,
+2021). Specifically, FNO learns the mapping from the
+linear system to its corresponding invariant subspace, us-
+ing the predicted subspace to guide iterative solvers. In-
+spired by this approach, we use a neural operator to directly
+learn the mapping between two Hilbert spaces, denoted as
+T : A →U ∈RT ×n. Due to the block Toeplitz structure of
+the linear system, the input to FNO is the reduced relevant
+function variables a ∈RT ×da. The transformation opera-
+tor L first lifts the input a to a higher dimensional channel
+space v0 ∈Rdv×c, where c is the number of channels. Then
+iteratively applying several Fourier layer to update the repre-
+sentation vi →vi+1, we have the final vT ∈Rdv×c, which
+has the same dimensionality as v0. The FNO outputs opti-
+mal control sequence U = Q(vT ) through the projection
+of vT by the transformation operator Q : Rdv×c →RT ×n.
+This design enables efficient computation of the optimal
+control sequence by leveraging the special properties of the
+block Toeplitz linear system and the expressive capabilities
+of the FNO.
+The loss function used in the training process is defined as
+follows:
+Lt(θ) = λwLs(θ) + (1 −λw) Lo(θ),
+(28)
+where Ls quantifies the loss due to system identification
+errors, and Lo quantifies the loss due to optimal control
+errors. Specifically,
+Ls(θ) = ∥A −ˆAθ∥2
+2 + ∥B −ˆBθ∥2
+2 + ∥α −ˆαθ∥2
+2,
+Lo(θ) = ∥U o −ˆU o
+θ ∥2
+2.
+(29)
+Note that λw ∈[0, 1] is a user-defined weighting parameter
+that determines the balance between system identification
+and optimal control errors during the learning process.
+Joint optimization pipeline: The system identification loss
+Ls is a physical constraint for FOLOC framework that en-
+courages the model to accurately identify system dynamics,
+further ensuring accurate control—the ultimate goal of our
+method. During training, we use system parameters as guid-
+ance to ensure accurate system identification, and we do not
+6
+
+End-to-End Learning Framework for Solving Non-Markovian Optimal Control
+need these parameters in testing. Some methods, such as
+PINN (Raissi et al., 2019), couple multiple loss terms by
+incorporating physical constraint losses. This helps the sys-
+tem learn representations that are both physically grounded
+and task-relevant, reducing error propagation and avoiding
+reliance on purely minimizing prediction error. For real-
+world datasets where the system parameters are unknown,
+we can first pretrain the model on synthetic datasets with
+known parameters (A, B, α). Then, we do not need sys-
+tem parameters (set λw = 0) and finetune the model on
+the real-world dataset. We provide results for λw = 0 for
+comparison in Appendix H.2.
+Remark. The fractional-order dynamical system param-
+eters A, B and α can be extracted from an intermediate
+layer in the network because of the underlying loss func-
+tion. Though our end-to-end deep learning framework is
+guided by the theoretical optimal control solution derived
+by using Lagrange multipliers, certain learned parameters
+do not directly correspond one-to-one with their theoretical
+counterparts (see Appendix E.1 for details).
+4. Experiments
+In this section, we empirically evaluate the proposed sys-
+tem identification algorithm and FOLOC framework using
+both synthetic and real-world system dynamics. The syn-
+thetic data is categorized into two primary types: (i) data
+generated from a single FOLTI system with fixed system pa-
+rameters A, B, and α; and (ii) data generated from multiple
+FOLTI systems, where A, B are fixed, and α vary across
+systems. The real-world data is simulated from cart-pole
+and quadrotor dynamical systems.
+4.1. Performance Evaluation on Synthetic Data
+We evaluate our theoretical end-to-end learning approach
+and FOLOC framework using synthetic data. Due to the
+strict assumptions required for the theoretical learning pro-
+cess, we test it using synthetic data generated from a single
+underlying FOLTI system, with data corrupted by Gaussian
+noise. Our empirical analysis examines the performance of
+FOLOC framework from different perspectives.
+The underlying fractional-order dynamics used to generate
+the data for our model are defined as follows:
+xk+1 = Axk + Buk −
+k+1
+X
+j=1
+D(α, j)xk+1−j + wk,
+(30)
+where wk represents the process noise.
+Theoretical approach validation. By varying the number
+of trajectories used in the system identification process, we
+empirically validate Lagrange multiplier based sample com-
+plexity results presented in Theorem 3.3 as shown in Fig. 2.
+We also compare our method with the traditional end-to-end
+learning framework for LTI systems (see Appendix I). The
+mean MSE of FOLTI system learning framework decreases
+by 81.36% compared to LTI system learning framework.
+0.01
+0.02
+0.03
+1
+p
+0.015
+0.025
+0.035
+0.045
+|J
+J|
+Mean L1 Loss 
+(LQR Loss)
+0.01
+0.02
+0.03
+1
+N
+0.004
+0.006
+0.008
+0.010
+Mean L1 Loss 
+(LQR Loss)
+Figure 2. Lagrange multiplier based sample complexity simula-
+tion.
+0
+10
+20
+30
+t
+5.0
+2.5
+0.0
+2.5
+5.0
+xt
+XLTI
+XFOLTI
+Xtrue
+0
+10
+20
+30
+t
+0.0
+2.5
+5.0
+MSE
+XLTI
+XFOLTI
+Figure 3. Numerical simulation of theoretical approaches for learn-
+ing fractional-order dynamics.
+FOLOC framework evaluation. We evaluate our proposed
+data-driven approach by varying different variables. Our
+main findings are as follows: (i) FOLOC framework ef-
+fectively captures the underlying system dynamics with
+high accuracy and remains robust to variations in fractional
+orders, system dimensions, noise types, noise scales, and
+training samples. (ii) The model’s ability to learn the sys-
+tem dynamics improves as the time horizon increases. (iii)
+FOLOC framework can be trained using a small number of
+samples.
+Varying fractional orders. By varying the fractional order
+α, we observe that FOLOC framework effectively captures
+long-term dependencies. The results of our experiments
+on commensurate FOLTI systems (see Appendix C) with
+different fractional orders α = 0.1, 0.3, 0.5, 0.7, 0.9
+are shown in Table 1. As the fractional order α increases,
+we observe that the MSE and MAE remain approximately
+the same, with an overall mean MSE of 0.40% (standard
+deviation: 0.21%) and an overall mean MAE of 0.95%
+(standard deviation: 0.55%).
+Varying time horizons. We show the results of learn-
+ing fractional-order dynamics with different time horizons
+T = 8, 16, 32, 64, 128 in Table 1. As the time hori-
+zon increases, FOLOC framework demonstrates improved
+ability to capture the fractional-order dynamics. Compared
+with at T = 8, the MSE and MAE at T = 128 of FOLOC
+framework decrease by 97.37% and 92.23%, respectively.
+7
+
+End-to-End Learning Framework for Solving Non-Markovian Optimal Control
+Table 1. Experimental results on synthetic FOLTI system under varying input conditions. All reported values are in units of 10−3. Bolded
+values represent the minimum in each row.
+Metrics
+MSE/MAE
+MSE/MAE
+MSE/MAE
+MSE/MAE
+MSE/MAE
+Fractional
+alpha = 0.1
+alpha = 0.3
+alpha = 0.5
+alpha = 0.7
+alpha = 0.9
+Order
+3.39±0.52/8.04±0.42
+5.04±1.82/12.5±1.11
+5.61±0.84/16.5±0.61
+5.18±0.06/9.22±0.08
+4.94±0.09/10.5±0.09
+State
+n = 1
+n = 2
+n = 4
+n = 6
+n = 8
+Dimension
+1.98±0.08/6.60±0.13
+5.61±0.84/16.5±0.61
+5.84±0.71/13.4±0.55
+4.88±0.34/13.4±0.26
+4.26±0.22/12.3±0.14
+Time
+T = 8
+T = 16
+T = 32
+T = 64
+T = 128
+Horizon
+101±18.4/111±4.40
+43.2±8.20/59.1±1.12
+14.2±2.96/31.5±1.70
+5.61±0.84/16.5±0.61
+2.66±0.64/8.62±0.70
+Noise Type
+Cauchy
+Gamma
+Sinc-squared
+Uniform
+Poisson
+6.98±1.89/17.0±0.71
+5.84±1.15/16.7±1.16
+6.87±1.46/17.6±0.75
+6.46±1.29/17.0±1.30
+6.59±1.59/16.5±0.90
+Noise Scale
+σ = 0.0001
+σ = 0.001
+σ = 0.01
+σ = 0.1
+σ = 1
+(Gaussian)
+5.85±0.65/16.9±0.65
+6.09±0.74/17.4±0.87
+5.74±0.83/16.7±0.86
+5.65±0.70/16.0±0.39
+10.2±8.11/20.5±7.37
+Training Size
+NT = 1000
+NT = 2000
+NT = 4000
+NT = 6000
+NT = 8000
+5.18±1.13/12.9±0.80
+4.44±1.30/11.4±0.38
+3.98±0.89/10.9±1.01
+4.79±2.11/10.4±0.58
+5.22±2.31/10.1±0.78
+Varying state dimensions. We vary the system state di-
+mension n = 1, 2, 4, 6, 8 to evaluate its impact on the
+learning process (assume n = m). Increasing the state di-
+mension significantly raises the learning complexity due
+to the larger number of variables and the interactions or
+couplings between the states. Despite this, FOLOC frame-
+work demonstrates consistent performance, with an overall
+mean MSE of 0.45% (standard deviation: 0.15%) and an
+overall mean MAE of 1.24% (standard deviation: 0.36%).
+Compared with at n = 2, the MSE (MAE) of FOLOC
+framework decreases by 13.01% (18.79%) at n = 6 and
+24.06% (25.45%) at n = 8. This experiment demonstrates
+the scalability of our model on moderate-dimensional sys-
+tems. We further evaluate the scalability of the FOLOC
+framework in high-dimensional settings (n = m), as shown
+in Table 2. The results verify its ability to capture inter-
+actions within the fractional dynamics of the state as the
+system dimensionality increases.
+Table 2. Experiments on high-dimensional systems.
+Metrics
+MSE/MAE
+Dimension 16
+3.85 ± 0.05/12.7 ± 0.08
+Dimension 32
+2.8 ± 0.04/11.0 ± 0.07
+Dimension 64
+1.8 ± 0.001/8.39 ± 0.007
+Dimension 128
+1.43 ± 0.01/7.27 ± 0.03
+Varying training samples. We show the model perfor-
+mance with different number of training samples N =
+1000, 2000, 4000, 6000, 8000. Compared with at N =
+8000, the MSE only decreases by 1.65% at N = 1000. This
+demonstrates that FOLOC framework is sample-efficient
+and capable of learning the underlying fractional-order dy-
+namics with a limited number of samples.
+Varying noise distributions. By varying the distribution of
+23
+24
+25
+26
+27
+Time Steps
+0.00
+0.05
+0.10
+MSE
+MSE
+MAE
+0.00
+0.05
+0.10
+MAE
+Figure 4. Vary time horizons.
+process noise, we demonstrate the robustness and effective-
+ness of FOLOC framework. We evaluate the model’s per-
+formance by simulating the noise from the following prob-
+ability distribution functions: Gaussian, Poisson, Uniform,
+Gamma, Sinc-squared (Adigun & Kosko, 2023; Zhang et al.,
+2024), and Cauchy. Compared with using Gaussian noise,
+the maximal increases of MSE/MAE by 24.42%/6.67%
+(Cauchy/Sinc-squared). The empirical results (Table 1)
+show that FOLOC framework can not only predict an ap-
+proximately accurate optimal control sequence but also ef-
+fectively estimate the system parameters.
+Varying noise scales. FOLOC framework shows the abil-
+ity to learning the fractional-order dynamics with data cor-
+rupted by different Gaussian noise scales. As data is cor-
+rupted by different scales of Gaussian noise, FOLOC frame-
+work demonstrates consistent performance, with an overall
+mean MSE of 0.67% (standard deviation: 0.19%) and an
+overall mean MAE of 1.75% (standard deviation: 0.18%).
+The additional results also demonstrate that the FOLOC
+framework is computationally efficient (see Appendix J.3)
+and capable of learning from multiple FOLTI systems (see
+Apendix J.2). We also evaluate the performance by vary-
+ing the weight parameter λw in the loss function (28) (see
+8
+
+End-to-End Learning Framework for Solving Non-Markovian Optimal Control
+Appendix H.2).
+4.2. Performance Evaluation on Real-World Systems
+To demonstrate that our deep learning model can effectively
+capture complex system dynamics, we evaluate it on two
+practical scenarios: cart-pole dynamics and quadrotor dy-
+namics (Zhou & Tzoumas, 2024). The details of the system
+dynamics are given in the Appendix E.3.
+Cart Pole. The empirical experiments show that FOLOC
+framework can correctly capture the underlying system dy-
+namics even when we add some large-scale Gaussian noise.
+The overall mean MSE is less than 3.99 × 10−5 and the
+overal mean MAE is less than 3.39 × 10−3.
+Table 3. Model performance in the cart pole experiment.
+Metrics
+Noise Scale (σ)
+No
+noise
+1
+10−1
+10−2
+10−3
+MSE (10−5)
+4.0
+3.9
+4.1
+3.9
+3.9
+MAE (10−3)
+3.4
+3.4
+3.4
+3.3
+3.3
+Table 4. Baseline Model Evaluation on cart-pole dynamics.
+Bolded values represent the minimum in each column.
+Metrics
+MSE/MAE
+Run Time (s)
+MBRL
+0.195/0.411
+0.045
+CMA-ES
+0.237/0.472
+16.405
+MPC
+0.237/0.473
+0.674
+PID
+0.254/0.499
+0.001
+iLQR
+0.238/0.474
+0.263
+FOLOC
+0.00004/0.0034
+0.0004
+Quadrotor. The empirical experiments show that FOLOC
+framework is robust to different Gaussian noise scales when
+learning the Quadrotor dynamics. The overall mean MSE
+is 0.13 (standard deviation: 0.052), and the overall mean
+MAE is 0.21 (standard deviation: 0.086).
+Table 5. Model performance in the quadrotor experiment.
+Metrics
+Noise Scale (σ)
+No
+noise
+1
+10−1
+10−2
+10−3
+MSE (10−1)
+1.27
+1.27
+1.25
+1.32
+1.23
+MAE (10−1)
+2.10
+2.14
+2.08
+2.13
+2.06
+Baseline Comparisons. We compare the proposed FOLOC
+framework against several existing control methods, includ-
+ing model-based reinforcement learning (MBRL), covari-
+ance matrix adaptation evolution strategy (CMA-ES), model
+predictive control (MPC), proportional–integral–derivative
+(PID) control, and the iterative linear quadratic regulator
+(iLQR), evaluated on both cart-pole and quadrotor dynam-
+ics. For each method, we report predictive performance
+and runtime. FOLOC framework consistently achieves the
+Table 6. Baseline Model Evaluation on quadrotor dynamics.
+Bolded values represent the minimum in each column.
+Metrics
+MSE/MAE
+Run Time (s)
+MBRL
+0.489/0.546
+0.385
+CMA-ES
+0.613/0.590
+115.151
+MPC
+0.612/0.552
+71.943
+PID
+1.143/0.909
+0.0053
+iLQR
+0.628/0.570
+3.387
+FOLOC
+0.211/0.127
+0.00027
+highest accuracy and the lowest computational cost across
+both tasks. Notably, FOLOC framework reduces the mean
+squared error (MSE) by up to 99.99% and the mean abso-
+lute error (MAE) by up to 99.32% compared to existing
+baselines on the cart-pole dynamics task. All experimental
+code is available at the link provided in Appendix A.
+Remark. The FOLOC framework, an end-to-end learning-
+based LQR in FOLTI systems, offers several key advantages:
+(i) FOLOC framework generalizes across different FOLTI
+systems (see Appendix J.2), predicting system parameters
+and optimal control policies directly from trajectories. No-
+tably, system parameters are not used during testing on
+synthetic data, and are not used entirely during both training
+and testing on real-world dynamics. (ii) FOLOC framework
+enables fast and accurate real-time control. While closed-
+form solutions (Eqs. 16 and 17) are available given full sys-
+tem knowledge, they require large-scale matrix inversions
+and become computationally infeasible for long horizons
+or high-dimensional systems. MPC, though an alternative,
+also struggles with the memory effects in fractional-order
+dynamics. FOLOC framework addresses these challenges
+by learning a direct mapping from observed trajectories and
+cost matrices to optimal control solutions.
+5. Conclusion
+This paper introduces a theoretical learning framework for
+optimal control of FOLTI systems, addressing key chal-
+lenges in system identification, control design, and sample
+complexity analysis. By extending LQR to the fractional-
+order setting, we derive analytical solutions and provide
+sample complexity guarantees. Based on this theoretical
+foundation, we propose FOLOC, an end-to-end framework
+that jointly estimates system parameters and learns opti-
+mal control policies from noisy trajectories. Unlike clas-
+sical methods, FOLOC framework is designed to operate
+effectively in real-world, noisy environments, ensuring ro-
+bustness against non-Gaussian noise and limited training
+samples. Extensive simulations and real-world applications
+demonstrate the scalability, robustness, and computational
+efficiency of our approach.
+9
+
+End-to-End Learning Framework for Solving Non-Markovian Optimal Control
+Acknowledgements
+The authors acknowledge the support by the U.S. Army
+Research Office (ARO) under Grant No. W911NF-23-1-
+0111, the National Science Foundation (NSF) under the
+Career Award CPS-1453860, Career Award 2337412, MCB-
+1936775, CNS-1932620 and the NSF Award 2243104 under
+the Center for Complex Particle Systems (COMPASS), the
+Defense Advanced Research Projects Agency (DARPA)
+Young Faculty Award and DARPA Director Fellowship
+Award under Grant Number N66001-17-1-4044, Intel fac-
+ulty awards and a Northrop Grumman grant. P.B. is also
+grateful to National Institute of Health (NIH) for the grants
+R01 AG 079957 “Interpretable machine learning to syner-
+gize brain age estimation and neuroimaging genetics” and
+RF1 AG 082201 “Neurovascular calcification and ADRD
+in two nonindustrial Native American populations”. It was
+a wonderful experience designing and writing the grant ap-
+plication entitled “Neurovascular calcification and ADRD
+in two nonindustrial Native American populations” and
+awarded under RF1 AG 082201.
+The views, opinions,
+and/or findings in this article are those of the authors and
+should not be interpreted as official views or policies of the
+Department of Defense, the National Institute of Health or
+the National Science Foundation. The authors would like
+to thank Zehao Zhao and Zonglin Zhang for their insightful
+discussions during the course of this project.
+Impact Statement
+Fractional-order dynamical systems can model complex
+dynamical behaviors characterized by long-range dependen-
+cies and memory effects, yet their practical implementation
+remains challenging due to the lack of system identifica-
+tion and control strategies. This work advances the field by
+formulating both theoretical and deep learning frameworks
+for solving fractional-order optimal control via the LQR.
+For theoretical learning, we provide a new fractional-order
+system identification and a new sample complexity analysis
+that gives guarantees on the number of samples required for
+achieving reliable control performance. Beyond theoretical
+contributions, we develop a novel end-to-end data-driven
+learning framework that jointly estimates system parame-
+ters and optimizes control policies directly from observed
+trajectories. Unlike traditional methods that rely on strong
+assumptions (e.g., noiseless data or structured disturbances),
+our approach remains robust under realistic, noisy environ-
+ments with non-Gaussian uncertainties.
+By bridging theoretical foundations with deep learning tech-
+niques, our work enables scalable and efficient optimal con-
+trol for fractional-order dynamical systems in domains such
+as biomedical engineering, neuroscience, and financial mod-
+eling. Experimental results validate the effectiveness of our
+approach, demonstrating accurate system identification and
+control policy learning across various noise distributions
+and system complexities.
+This research lays the groundwork for future advance-
+ments in learning-based control of fractional-order dynami-
+cal systems, paving the way for real-world deployment of
+fractional-order optimal controllers in autonomous systems,
+robotics, and large-scale networks.
+References
+Adigun, O. and Kosko, B. Hidden priors for bayesian bidi-
+rectional backpropagation. In 2023 IEEE International
+Conference on Systems, Man, and Cybernetics (SMC), pp.
+445–451. IEEE, 2023.
+Anderson, B. D. and Moore, J. B. Optimal control: linear
+quadratic methods. Courier Corporation, 2007.
+Aronszajn, N. Theory of reproducing kernels. Transactions
+of the American mathematical society, 68(3):337–404,
+1950.
+Baleanu, D., Machado, J. A. T., and Luo, A. C. Fractional
+dynamics and control.
+Springer Science & Business
+Media, 2011.
+Chan, R. H.-F. and Jin, X.-Q. An introduction to iterative
+Toeplitz solvers. SIAM, 2007.
+Chandrasekaran, S. and Sayed, A. H. A fast stable solver
+for nonsymmetric toeplitz and quasi-toeplitz systems of
+linear equations. SIAM Journal on Matrix Analysis and
+Applications, 19(1):107–139, 1998.
+Chatterjee, S. and Pequito, S. On learning discrete-time
+fractional-order dynamical systems. In 2022 American
+Control Conference (ACC), pp. 4335–4340. IEEE, 2022.
+Chen, S., Billings, S. A., and Grant, P. Non-linear sys-
+tem identification using neural networks. International
+journal of control, 51(6):1191–1214, 1990.
+Cho, K., van Merrienboer, B., Gulcehre, C., Bahdanau,
+D., Bougares, F., Schwenk, H., and Bengio, Y. Learn-
+ing phrase representations using rnn encoder-decoder
+for statistical machine translation, 2014. URL https:
+//arxiv.org/abs/1406.1078.
+Cho, Y. and Saul, L. Kernel methods for deep learning.
+Advances in neural information processing systems, 22,
+2009.
+Dean, S., Mania, H., Matni, N., Recht, B., and Tu, S. Regret
+bounds for robust adaptive control of the linear quadratic
+regulator, 2018. URL https://arxiv.org/abs/
+1805.09388.
+10
+
+End-to-End Learning Framework for Solving Non-Markovian Optimal Control
+Dean, S., Mania, H., Matni, N., Recht, B., and Tu, S. On
+the sample complexity of the linear quadratic regulator.
+Foundations of Computational Mathematics, 20(4):633–
+679, 2020.
+Dinuzzo, F. and Sch¨olkopf, B. The representer theorem
+for hilbert spaces: a necessary and sufficient condition.
+Advances in neural information processing systems, 25,
+2012.
+Faradonbeh, M. K. S., Tewari, A., and Michailidis, G. Finite
+time identification in unstable linear systems, 2018. URL
+https://arxiv.org/abs/1710.01852.
+Gedon, D., Wahlstr¨om, N., Sch¨on, T. B., and Ljung, L. Deep
+state space models for nonlinear system identification.
+IFAC-PapersOnLine, 54(7):481–486, 2021.
+Ghorbani, M. and Bogdan, P. A cyber-physical system ap-
+proach to artificial pancreas design. In 2013 International
+Conference on Hardware/Software Codesign and System
+Synthesis (CODES+ ISSS), pp. 1–10. IEEE, 2013.
+Ghorbani, M., Jonckheere, E. A., and Bogdan, P. Gene
+expression is not random: scaling, long-range cross-
+dependence, and fractal characteristics of gene regulatory
+networks. Frontiers in physiology, 9:1446, 2018.
+Granger, C. W. and Joyeux, R. An introduction to long-
+memory time series models and fractional differencing.
+Journal of time series analysis, 1(1):15–29, 1980.
+Guermah, S., Djennoune, S., and Bettayeb, M. Discrete-
+time fractional-order systems: Modeling and stability
+issues. Advances in Discrete Time Systems, pp. 183–212,
+2012.
+Gupta, G., Pequito, S., and Bogdan, P. Learning latent
+fractional dynamics with unknown unknowns. In 2019
+American Control Conference (ACC), pp. 217–222. IEEE,
+2019.
+Gupta, G., Xiao, X., and Bogdan, P. Multiwavelet-based
+operator learning for differential equations. Advances in
+neural information processing systems, 34:24048–24062,
+2021.
+Gupta, G., Xiao, X., Balan, R., and Bogdan, P. Non-linear
+operator approximations for initial value problems. In
+International Conference on Learning Representations
+(ICLR), 2022.
+Hendriks, J. N., Gustafsson, F. K., Ribeiro, A. H., Wills,
+A. G., and Sch¨on, T. B. Deep energy-based narx mod-
+els, 2020. URL https://arxiv.org/abs/2012.
+04136.
+Hilfer, R. Applications of fractional calculus in physics.
+World scientific, 2000.
+Hochreiter, S. Long short-term memory. Neural Computa-
+tion MIT-Press, 1997.
+Ionescu, C., Lopes, A., Copot, D., Machado, J. T., and
+Bates, J. H. The role of fractional calculus in modeling
+biological phenomena: A review. Communications in
+Nonlinear Science and Numerical Simulation, 51:141–
+159, 2017.
+Ivanov, P. C., Amaral, L. A. N., Goldberger, A. L., Havlin,
+S., Rosenblum, M. G., Struzik, Z. R., and Stanley, H. E.
+Multifractality in human heartbeat dynamics. Nature, 399
+(6735):461–465, 1999.
+Jelich, C., Karimi, M., Kessissoglou, N., and Marburg, S.
+Efficient solution of block toeplitz systems with multiple
+right-hand sides arising from a periodic boundary ele-
+ment formulation. Engineering Analysis with Boundary
+Elements, 130:135–144, 2021.
+Kalman, R. E. et al. Contributions to the theory of optimal
+control. Bol. soc. mat. mexicana, 5(2):102–119, 1960.
+Kalouptsidis, N., Carayannis, G., and Manolakis, D. Fast
+algorithms for block toeplitz matrices with toeplitz entries.
+Signal Processing, 6(1):77–81, 1984.
+Langley, P. Crafting papers on machine learning. In Langley,
+P. (ed.), Proceedings of the 17th International Conference
+on Machine Learning (ICML 2000), pp. 1207–1216, Stan-
+ford, CA, 2000. Morgan Kaufmann.
+Li, Y. and Chen, Y. Fractional order linear quadratic regu-
+lator. In 2008 IEEE/ASME International Conference on
+Mechtronic and Embedded Systems and Applications, pp.
+363–368. IEEE, 2008.
+Li, Z., Kovachki, N., Azizzadenesheli, K., Liu, B., Bhat-
+tacharya, K., Stuart, A., and Anandkumar, A. Fourier
+neural operator for parametric partial differential equa-
+tions, 2021.
+URL https://arxiv.org/abs/
+2010.08895.
+Lundstrom, B. N., Higgs, M. H., Spain, W. J., and Fairhall,
+A. L. Fractional differentiation by neocortical pyramidal
+neurons. Nature neuroscience, 11(11):1335–1342, 2008.
+Luo, J., Wang, J., Wang, H., huanshuo dong, Geng, Z.,
+Chen, H., and Kuang, Y. Neural krylov iteration for
+accelerating linear system solving. In The Thirty-eighth
+Annual Conference on Neural Information Processing
+Systems, 2024. URL https://openreview.net/
+forum?id=cqfE9eYMdP.
+Lusch, B., Kutz, J. N., and Brunton, S. L. Deep learning
+for universal linear embeddings of nonlinear dynamics.
+Nature communications, 9(1):4950, 2018.
+11
+
+End-to-End Learning Framework for Solving Non-Markovian Optimal Control
+Magin, R. Fractional calculus in bioengineering, part 1.
+Critical Reviews™in Biomedical Engineering, 32(1),
+2004.
+Magin, R. L. Fractional calculus models of complex dynam-
+ics in biological tissues. Computers & Mathematics with
+Applications, 59(5):1586–1593, 2010.
+Masti, D. and Bemporad, A. Learning nonlinear state–space
+models using autoencoders. Automatica, 129:109666,
+2021.
+Monje, C. A., Chen, Y., Vinagre, B. M., Xue, D., and Feliu-
+Batlle, V. Fractional-order systems and controls: funda-
+mentals and applications. Springer Science & Business
+Media, 2010.
+Narendra, K. and Parthasarathy, K. Identification and con-
+trol of dynamical systems using neural networks. IEEE
+Transactions on Neural Networks, 1(1):4–27, 1990. doi:
+10.1109/72.80202.
+Oldham, K. and Spanier, J. The fractional calculus the-
+ory and applications of differentiation and integration to
+arbitrary order. Elsevier, 1974.
+Pequito, S., Bogdan, P., and Pappas, G. J. Minimum number
+of probes for brain dynamics observability. In 2015 54th
+IEEE Conference on Decision and Control (CDC), pp.
+306–311. IEEE, 2015.
+Raissi, M., Perdikaris, P., and Karniadakis, G. E. Physics-
+informed neural networks: A deep learning framework for
+solving forward and inverse problems involving nonlinear
+partial differential equations. Journal of Computational
+physics, 378:686–707, 2019.
+Reed, E., Chatterjee, S., Ramos, G., Bogdan, P., and Pe-
+quito, S. Fractional cyber-neural systems—a brief survey.
+Annual Reviews in Control, 54:386–408, 2022.
+Reed, E. A., Ramos, G., Bogdan, P., and Pequito, S. Mitigat-
+ing epilepsy by stabilizing linear fractional-order systems.
+In 2023 American Control Conference (ACC), pp. 2228–
+2233. IEEE, 2023a.
+Reed, E. A., Ramos, G., Bogdan, P., and Pequito, S. The
+role of long-term power-law memory in controlling large-
+scale dynamical networks.
+Scientific Reports, 13(1):
+19502, 2023b.
+Saad, Y. and Schultz, M. H. Gmres: A generalized mini-
+mal residual algorithm for solving nonsymmetric linear
+systems. SIAM Journal on scientific and statistical com-
+puting, 7(3):856–869, 1986.
+Sarkar, T., Rakhlin, A., and Dahleh, M. A. Finite time
+lti system identification. Journal of Machine Learning
+Research, 22(26):1–61, 2021.
+URL http://jmlr.
+org/papers/v22/19-725.html.
+Simchowitz, M., Mania, H., Tu, S., Jordan, M. I., and Recht,
+B. Learning without mixing: Towards a sharp analysis
+of linear system identification, 2018. URL https://
+arxiv.org/abs/1802.08334.
+Strang, G. A proposal for toeplitz matrix calculations. Stud-
+ies in Applied Mathematics, 74(2):171–176, 1986.
+Trench, W. F. Solution of systems with toeplitz matrices
+generated by rational functions. Linear algebra and its
+applications, 74:191–211, 1986.
+Tu, S. and Recht, B. The gap between model-based and
+model-free methods on the linear quadratic regulator: An
+asymptotic viewpoint. In Beygelzimer, A. and Hsu, D.
+(eds.), Proceedings of the Thirty-Second Conference on
+Learning Theory, volume 99 of Proceedings of Machine
+Learning Research, pp. 3036–3083. PMLR, 25–28 Jun
+2019. URL https://proceedings.mlr.press/
+v99/tu19a.html.
+Wishart, J.
+The generalised product moment distribu-
+tion in samples from a normal multivariate population.
+Biometrika, pp. 32–52, 1928.
+Xiao, X., Cao, D., Yang, R., Gupta, G., Liu, G., Yin, C.,
+Balan, R., and Bogdan, P. Coupled multiwavelet oper-
+ator learning for coupled differential equations. In The
+Eleventh International Conference on Learning Repre-
+sentations, 2022.
+Xue, Y. and Bogdan, P. Constructing compact causal math-
+ematical models for complex dynamics. In Proceedings
+of the 8th International Conference on Cyber-Physical
+Systems, pp. 97–107, 2017.
+Yaghooti, B. and Sinopoli, B. Inferring dynamics of discrete-
+time, fractional-order control-affine nonlinear systems. In
+2023 American Control Conference (ACC), pp. 935–940.
+IEEE, 2023.
+Zancato, L. and Chiuso, A. A novel deep neural network
+architecture for non-linear system identification, 2021.
+URL https://arxiv.org/abs/2106.03078.
+Zhang, X., Zuo, J., and Shao, X. Efficient neural decoder:
+Mixture-regularized bidirectional gru with attention. In
+2024 International Joint Conference on Neural Networks
+(IJCNN), pp. 1–7, 2024. doi: 10.1109/IJCNN60899.2024.
+10651174.
+Zhang, X., Gupta, V., and Bogdan, P.
+A sampling
+complexity-aware framework for discrete-time fractional-
+order dynamical system identification, 2025.
+URL
+https://arxiv.org/abs/2501.17499.
+12
+
+End-to-End Learning Framework for Solving Non-Markovian Optimal Control
+Zhou, H. and Tzoumas, V. Simultaneous system identifi-
+cation and model predictive control with no dynamic re-
+gret, 2024. URL https://arxiv.org/abs/2407.
+04143.
+13
+
+End-to-End Learning Framework for Solving Non-Markovian Optimal Control
+Limitation: While our framework is effective for FOLTI systems, its LTI-based design requires further validation in non-LTI
+settings. Future work will extend the framework to non-LTI dynamics, enhancing its applicability to more complex systems.
+A. Code Availability
+The source code is available at https://github.com/zpykillcc/Fractional-Order-Learning-for-Optimal-Control-Framework.
+B. Related Work
+While research on system identification and optimal control for FOLTI systems remains limited, significant progress has
+been made in LTI systems. Estimating unknown parameters of linear dynamical systems is a well-established subfield
+of system identification in control theory (Sarkar et al., 2021; Faradonbeh et al., 2018; Simchowitz et al., 2018), where
+the task is to estimate parameters from input-output time series generated by the underlying system. With the increasing
+interest in machine learning and deep learning, many researchers use different deep learning based modeling techniques to
+solve general nonlinear system identification. Chen et al. (1990) shows a single hidden layer neural network can identify
+discrete time nonlinear systems and derives new parameter estimation algorithms based on a prediction error formulation.
+Narendra & Parthasarathy (1990) demonstrates that neural networks can be used effectively for both identification and
+control of nonlinear dynamical systems. The hierarchical structures of multilayer feedforward neural networks can include
+dynamic systems features (Zancato & Chiuso, 2021) and bring extra flexibility for probablistic approaches (Hendriks et al.,
+2020). Kernel-based methods also have been studied in system identification. Linear system identification can be seen as an
+application of learning the impulse response function, which can be approximated by kernels (Aronszajn, 1950; Dinuzzo
+& Sch¨olkopf, 2012; Cho & Saul, 2009). Deep state-space models (Gedon et al., 2021) like recurrent neural networks
+(Hochreiter, 1997; Cho et al., 2014) and autoencoders (Masti & Bemporad, 2021; Lusch et al., 2018) are also gaining in
+popularity for system identification. For Another critical aspect of optimal control via LQR is the design of control inputs,
+which are typically formulated as linear combinations of disturbance processes (Dean et al., 2020).
+Solving the optimal control problem via LQR involves addressing a potentially large linear system with a block Toeplitz
+matrix of size RT n×T n. While solutions for Toeplitz and block Toeplitz systems have been extensively studied (Trench,
+1986; Kalouptsidis et al., 1984; Chandrasekaran & Sayed, 1998), they still present significant computational challenges.
+Direct solution methods for Toeplitz systems typically exhibit a computational complexity of O(N 2), where N represents the
+degrees of freedom. However, the high memory requirements of these methods often limit their applicability to large-scale
+problems. Iterative solvers (Chan & Jin, 2007; Strang, 1986) are more memory-efficient and can achieve a complexity
+of O(N log2(N)) for a single linear block Toeplitz system. Advanced approaches, such as global and block variants of
+the generalized minimal residual (GMRES) method (Saad & Schultz, 1986), can efficiently address sequences of block
+Toeplitz systems with multiple right-hand sides (Jelich et al., 2021). Machine learning-based methods, such as neural
+operators (Li et al., 2021; Gupta et al., 2021; 2022; Xiao et al., 2022), offer a promising alternative for accelerating the
+solution of linear systems. Neural operator-assisted Krylov iterations (Luo et al., 2024), for example, have demonstrated
+significant computational advantages, achieving up to a 5.5× speedup in computation time and a 16.1× reduction in the
+number of iterations. These advancements underscore the potential of machine learning techniques to address computational
+bottlenecks in optimal control for FOLTI systems.
+C. Why Fractional Order?
+According to the well-known definition, the first-order derivative of the function f(t), denoted by D1f(t), is defined by
+D1f(t) = df(t)
+dt
+= lim
+h→0
+f(t) −f(t −h)
+h
+,
+(31)
+that is, as the limit of a backward difference. Similarly,
+D2f(t) = d2f(t)
+dt2
+= lim
+h→0
+1
+h2
+
+f(t) −2f(t −h) + f(t −2h)
+
+(32)
+and
+D3f(t) = d3f(t)
+dt3
+= lim
+h→0
+1
+h3
+
+f(t) −3f(t −h) + 3f(t −2h) −f(t −3h)
+
+.
+(33)
+14
+
+End-to-End Learning Framework for Solving Non-Markovian Optimal Control
+Iterating n-times, we can obtain
+Dnf(t) = dnf(t)
+dtn
+= lim
+h→0
+1
+hn
+n
+X
+k=0
+(−1)n
+n
+k
+
+f(t −kh),
+(34)
+where
+n
+k
+
+= n(n −1)(n −2) · · · (n −k + 1)
+k!
+.
+(35)
+Naturally we can extend the common binomial coefficients for any n ∈R+ by letting (n −1)! = Γ(n). So the Riemann-
+Liouville fractional-order integral can be defined as a consequence of Cauchy’s formula for repeated integrals.
+Definition C.1 (Riemann-Liouville fractional-order integral). Given a positive real number α, the Riemann-Liouville
+fractional-order integral is defined as
+Iα
+c f(t) :=
+1
+Γ(α)
+Z t
+c
+(t −τ)α−1f(τ) dτ,
+t > c, α ∈R+.
+(36)
+Consider an integer-order derivative operator Dn (n ∈N). The derivative operator Dn is only a left-inverse of the
+integral operator In such that DnIn = I and InDn ̸= I. In order to generalize integer-order derivatives, the fractional-
+order derivative operator Dα should follow the same left-inverse rule. We show the definition of the Riemann-Liouville
+fractional-order derivative as follows.
+Definition C.2 (Riemann–Liouville fractional-order derivative). Let f : R →R be a function and let I = [a, b] be a finite
+interval on the real axis R. The left-side and right-side fractional-order derivatives RLDα
+a+f and RLDα
+b−f of order α ∈R
+are defined by
+ RLDα
+a+f
+
+(x) =
+1
+Γ(n −α)
+ d
+dx
+n Z x
+a
+f(t) dt
+(x −t)α−n+1 ,
+(37)
+ RLDα
+b−f
+
+(x) =
+1
+Γ(n −α)
+
+−d
+dx
+n Z b
+x
+f(t) dt
+(t −x)α−n+1 ,
+(38)
+where n −1 ≤α ≤n, x > a in (37), and x < b in (38).
+The Gr¨unwald–Letnikov fractional-order derivative is defined as the limit of finite differences and is mathematically
+equivalent to the Riemann–Liouville fractional-order derivative. The Gr¨unwald–Letnikov fractional-order derivative plays
+an important role establishing fractional-order dynamical systems. The equations for a continuous-time fractional-order
+dynamical system can be written as follows:
+H (Dα0α1α2···αn) (y1, y2, · · · , yl) = G
+ Dβ0β1β2···βm
+(u1, u2, · · · , uk),
+(39)
+where yi, ui are functions of time and H(·), G(·) are the combination laws of the fractional-order derivative operator.
+A single-input single-output LTI fractional-order system can be described by a fractional differential equation of the form
+n
+X
+k=0
+akDαky(t) =
+m
+X
+k=0
+bkDβku(t),
+(40)
+with a corresponding transfer function of the form:
+G(s) = Y (s)
+U(s) =
+Pm
+k=0 bksβk
+Pn
+k=0 aksαk ,
+(41)
+where ak, bk ∈R. The system is said to be commensurate if αk = βk = kα, where α ∈R+, otherwise the system is
+non-commensurate.
+We can use the Gr¨unwald–Letnikov fractional-order derivative to rewrite the fractional-order differential equation as follows
+in the discrete-time case:
+n
+X
+k=0
+ak∆αk
+h y(t) =
+m
+X
+k=0
+bk∆βk
+h u(t),
+(42)
+15
+
+End-to-End Learning Framework for Solving Non-Markovian Optimal Control
+with a corresponding transfer function of the following form:
+G(z) =
+Pm
+k=0 bk
+ ω(z−1)
+βk
+Pn
+k=0 ak (ω(z−1))αk ,
+(43)
+where ω(z−1) is the Z transform of the operator ∆1
+h.
+D. Theorems and Proofs
+D.1. System Identification
+We aim to estimate the parameters Θ = {A, B, α} of the following FOLTI system:
+xk+1 = Axk + Buk −
+k+1
+X
+j=1
+ψ(α, j)xk+1−j.
+(44)
+To note, we can not identify Θ jointly so we make some assumptions during the system identification.
+D.1.1. DATA GENERATION
+In this step, we generate data following the procedure outlined below:
+x1
+1 = Ax1
+0 + Bu1
+0 −ψ(α, 1)x1
+0 + w1
+0
+= Ax1
+0 + Bu1
+0 + Cαx1
+0 + w1
+0
+(45)
+x2
+1 = Ax2
+0 + Bu2
+0 −ψ(α, 1)x2
+0 + w2
+0
+= Ax2
+0 + Bu2
+0 + Cαx2
+0 + w2
+0
+(46)
+...
+xp
+1 = Axp
+0 + Bup
+0 −ψ(α, 1)xp
+0 + wp
+0
+= Axp
+0 + Bup
+0 + Cαxp
+0 + wp
+0
+(47)
+where xi
+0 are the i-th initial conditions, xi
+1 represents the corresponding state at the second time step generated from the
+initial condition, and wi
+0 are independent and identically distributed (i.i.d.) white Gaussian noise for i = 1, . . . , p, and
+Cα = diag(α1, α2, . . . , αn).
+D.1.2. ESTIMATION
+We can write (86) as follows
+xi
+1 = Axi
+0 + Bui
+0 + Cαxi
+0 + wi
+0
+=
+
+
+γ1
+1 + α1
+γ1
+2
+· · ·
+γ1
+n
+γ2
+1
+γ2
+2 + α2
+· · ·
+γ2
+n
+...
+...
+· · ·
+...
+γn
+1
+γn
+2
+· · ·
+γn
+n + αn
+
+
+|
+{z
+}
+Aα
+xi
+0 +
+
+
+β1
+1
+β1
+2
+· · ·
+β1
+m
+β2
+1
+β2
+2
+· · ·
+β2
+m
+...
+...
+· · ·
+...
+βn
+1
+βn
+2
+· · ·
+βn
+m
+
+
+|
+{z
+}
+B
+ui
+0 + wi
+0
+=
+
+
+xi
+0
+⊤
+0
+· · ·
+· · ·
+0
+xi
+0
+⊤
+0
+· · ·
+...
+...
+...
+...
+0
+· · ·
+· · ·
+xi
+0
+⊤
+
+
+|
+{z
+}
+πi
+
+
+γ1
+...
+γn
+
++
+
+
+ui
+0
+⊤
+0
+· · ·
+· · ·
+0
+ui
+0
+⊤
+0
+· · ·
+...
+...
+...
+...
+0
+· · ·
+· · ·
+ui
+0
+⊤
+
+
+|
+{z
+}
+ϕi
+
+
+β1
+...
+βn
+
++ wi
+0
+(48)
+16
+
+End-to-End Learning Framework for Solving Non-Markovian Optimal Control
+Thus, given the generated data, we solve the following least squares problem:
+
+
+x1
+1
+...
+xp
+1
+
+
+| {z }
+X
+=
+
+
+π1
+...
+πp
+
+
+| {z }
+π
+
+
+γ1
+...
+γn
+
+
+| {z }
+γ
++
+
+
+ϕ1
+...
+ϕp
+
+
+| {z }
+ϕ
+
+
+β1
+...
+βn
+
+
+| {z }
+β
++
+
+
+w1
+0
+...
+wp
+0
+
+
+| {z }
+ω
+,
+(49)
+X = πγ + ϕβ + w =
+
+π
+ϕ
+ γ
+β
+
++ w.
+(50)
+Then we have the following optimization problem
+ˆθ = arg min
+θ
+∥X −ξθ∥2
+2,
+(51)
+with the solution
+ˆθ =
+ ξ⊤ξ
+−1 ξ⊤X,
+(52)
+where θ = [γ⊤, β⊤]⊤, and ξ = [π, ϕ].
+Follow (Zhang et al., 2025), we can revise the above strategy and formulate the sample complexity problem as follows:
+θt+1 = θt,
+Xt = ξθt + wt,
+(53)
+where the state vector θt = [γ⊤, β⊤]⊤, and wk is a white Gaussian noise vector wt ∼N(0, Kw), where Kw is a diagonal
+covariance matrix, and t = 1, 2, . . . , N. Thus, the solution ˆθ has the following Gaussian distribution:
+ˆθ ∼N
+
+θ, 1
+N (ξ⊤ξ)−1ξ⊤Kwξ(ξ⊤ξ)−1
+
+.
+(54)
+Notice that the matrix A and the fractional order α are coupled. Therefore, if the diagonal elements of A are known, the
+fractional order α can be identified by subtracting these constant values from the corresponding positions in the estimated
+parameter vector ˆθ.
+D.2. Proof of Lemma 3.1
+Proof. By mathematical induction as follows:
+(1) When t = 0, x[0] = G0x[0] = x[0]. When t = 1, x[1] = G1x[0] + Bu[0]
+(2) Assume we have x[k] = Gkx[0] + Pk−1
+j=0 Gk−1−jBu[j], when t = k.
+When t = k + 1,
+x[k + 1] =
+k
+X
+j=0
+Ajx[k −j] + Bu[k]
+=
+k
+X
+j=0
+(Aj(Gk−jx[0] +
+k−j−1
+X
+i=0
+Gk−1−i−jBu[i])) + Bu[k]
+=
+k
+X
+j=0
+AjGk−jx[0] +
+k
+X
+j=0
+Aj(
+k−j−1
+X
+i=0
+Gk−1−i−jBu[i]) + Bu[k]
+= Gk+1x[0] +
+k
+X
+j=0
+k−j−1
+X
+i=0
+Aj(Gk−1−i−jBu[i]) + Bu[k]
+(55)
+By expanding the second term, thus
+x[k + 1] = Gk+1x[0] +
+k
+X
+j=0
+Gk−jBu[j].
+(56)
+□
+17
+
+End-to-End Learning Framework for Solving Non-Markovian Optimal Control
+D.3. Proof of Theorem 3.2
+Proof of least-squares solution. Rewrite as follows:
+
+
+x0
+x1
+x2
+x3
+...
+xT
+
+
+=
+
+
+0
+0
+0
+0
+· · ·
+0
+G0B
+0
+0
+0
+· · ·
+0
+G1B
+G0B
+0
+0
+· · ·
+0
+G2B
+G1B
+G0B
+0
+· · ·
+0
+...
+...
+...
+...
+...
+...
+GT −1B
+GT −2B
+GT −3B
+GT −4B
+· · ·
+G0B
+
+
+|
+{z
+}
+G
+
+
+u0
+u1
+u2
+u3
+...
+uT −1
+
+
++
+
+
+I
+G1
+G2
+G3
+...
+GT
+
+
+| {z }
+H
+x0.
+(57)
+X = GU + Hx0
+(58)
+Rewrite as follows:
+JT (U) = min
+U
+
+X⊤¯QX + U ⊤¯RU
+	
+(59)
+where
+¯Q =
+
+
+Q
+0
+0
+0
+· · ·
+0
+0
+Q
+0
+0
+· · ·
+0
+0
+0
+Q
+0
+· · ·
+0
+0
+0
+0
+Q
+· · ·
+0
+...
+...
+...
+...
+...
+...
+0
+0
+0
+0
+· · ·
+Qf
+
+
+¯R =
+
+
+R
+0
+0
+0
+· · ·
+0
+0
+R
+0
+0
+· · ·
+0
+0
+0
+R
+0
+· · ·
+0
+0
+0
+0
+R
+· · ·
+0
+...
+...
+...
+...
+...
+...
+0
+0
+0
+0
+· · ·
+R
+
+
+(60)
+Substitute (59) using (58):
+min
+U JT (U) = min
+U
+
+(GU + Hx0)⊤¯Q(GU + Hx0) + U ⊤¯RU
+	
+(61)
+The solution for the least squares problem is
+(G⊤¯QG + ¯R)U = −G⊤¯Q⊤Hx0
+U = −(G⊤¯QG + ¯R)−1G⊤¯Q⊤Hx0
+(62)
+□
+Proof of Lagrange multiplier solution.
+Lemma D.1 (Lagrange multiplier condition). The Lagrangian function L is given by:
+L(x, u, λ) =
+T −1
+X
+k=0
+ x⊤
+k Qxk + u⊤
+k Ruk + λ⊤
+k+1(Axk + Buk −∆αxk+1)
+
++ x⊤
+T QfxT .
+(63)
+and the solution is given by:
+uk = −1
+2R−1B⊤λk+1,
+λk = 2Qxk + A⊤λk+1 −
+T
+X
+i=k+1
+D(α, i −k)λi
+(64)
+18
+
+End-to-End Learning Framework for Solving Non-Markovian Optimal Control
+with x0 = x0 and λT = 2QfxT .
+Proof of Lemma 1. Taking the partial derivative with respect to uk, xk, λk, we have
+∂L
+∂uk
+= 2Ruk + B⊤λk+1 = 0 =⇒uk = −1
+2R−1B⊤λk+1,
+(65)
+∂L
+∂xk
+= 2Qxk + A⊤λk+1 −
+T
+X
+i=k
+D(α, i −k)λi = 0,
+(66)
+=⇒λk = 2Qxk + A⊤λk+1 −
+T
+X
+i=k+1
+D(α, i −k)λi
+(67)
+∂L
+∂λk
+= Axk + Buk −∆αxk+1 = 0.
+(68)
+Explanation for Eq. (66): From Eq. (3), we have
+∆αxk =
+k
+X
+j=0
+D(α, j)x[k −j]
+(69)
+Then, we have
+∂
+∂xk
+ λ⊤
+k ∆αxk
+
+= D(α, 0)λk
+∂
+∂xk
+ λ⊤
+k+1∆αxk+1
+
+= D(α, 1)λk+1
+...
+∂
+∂xk
+ λ⊤
+T ∆αxT
+
+= D(α, T −k)λT
+(70)
+□
+Solve the λ jointly and then substitute in (65) to get uk.
+Note we have the following equations by (56), (65) and (66):
+uk = −1
+2R−1B⊤λk+1,
+λk = 2Qxk + A⊤λk+1 −
+T
+X
+i=k+1
+D(α, i −k)λi
+x[k] = Gkx[0] +
+k−1
+X
+j=0
+Gk−1−jBu[j]
+(71)
+Obeserve that
+λk =
+
+2QGk
+−QGk−1BR−1B⊤
+· · ·
+−QG0BR−1B⊤
+A⊤−D(α, 1)
+· · ·
+−D(α, T −k)
+
+
+
+x0
+λ1
+...
+λk
+λk+1
+...
+λT
+
+
+(72)
+19
+
+End-to-End Learning Framework for Solving Non-Markovian Optimal Control
+We have the following matrix form, where Gλ and I −Gλ are block Toeplitz matrices (see Definition D.2).
+
+
+λ1
+λ2
+λ3
+...
+λT
+
+
+=
+
+
+−QG0BR−1B⊤
+A⊤−D(α, 1)
+−D(α, 2)
+· · ·
+−D(α, T −1)
+−QG1BR−1B⊤
+−QG0BR−1B⊤
+A⊤−D(α, 1)
+· · ·
+−D(α, T −2)
+−QG2BR−1B⊤
+−QG1BR−1B⊤
+−QG0BR−1B⊤
+· · ·
+−D(α, T −3)
+...
+...
+...
+...
+...
+−QGT −1BR−1B⊤
+−QGT −2BR−1B⊤
+· · ·
+· · ·
+−QG0BR−1B⊤
+
+
+|
+{z
+}
+Gλ
+
+
+λ1
+λ2
+λ3
+...
+λT
+
+
++ 2
+
+
+QG1
+QG2
+QG3
+...
+QGT
+
+
+|
+{z
+}
+Hλ
+x0.
+(73)
+λ = Gλλ + 2Hλx0
+(I −Gλ)λ = 2Hλx0
+λ = 2(I −Gλ)−1Hλx0
+(74)
+Definition D.2 (Block Toeplitz matrix). A block Toeplitz matrix is a block matrix where the block structure follows a
+Toeplitz pattern. Specifically, let T ∈Rmn×mn be partitioned into m × m blocks, each of size n × n. The matrix T is
+defined as:
+T =
+
+
+A0
+A−1
+· · ·
+A−(m−1)
+A1
+A0
+· · ·
+A−(m−2)
+...
+...
+...
+...
+Am−1
+Am−2
+· · ·
+A0
+
+,
+where each Ak ∈Rn×n represents a block matrix.
+Using (65), we have
+U = −R−1B⊤⊗(I −Gλ)−1Hλx0
+(75)
+□
+D.4. Proof of Theorem 3.3
+Proof of least-squares sample complexity result. If we know A and α, then θ will reduce to vectorize(B) and the distribution
+reduces to the following:
+ˆθ = vectorize( ˆB) ∼N
+
+vectorize(B), 1
+N (ϕ⊤ϕ)−1ϕ⊤Kwϕ(ϕ⊤ϕ)−1
+
+.
+(76)
+Then
+E
+h
+| ˆJ −J|
+i
+= E
+h
+∥ˆJ −J∥2
+i
+= E [∥ˆa −a∥2]
+= E
+
+∥z⊤
+
+
+
+ˆP
+
+ˆP ⊤S ˆP + ¯R
+−1 ˆP ⊤
+|
+{z
+}
+F ( ˆ
+P )
+−P
+ P ⊤SP + ¯R
+−1 P ⊤
+|
+{z
+}
+F (P )
+
+
+
+z∥2
+
+
+≤E
+h
+∥F( ˆP) −F(P)∥2
+i
+∥z∥2
+2
+(77)
+20
+
+End-to-End Learning Framework for Solving Non-Markovian Optimal Control
+We rewrite F( ˆP) −F(P) as follows:
+F( ˆP) −F(P) = ˆP( ˆP ⊤S ˆP + ¯R)−1( ˆP ⊤−P ⊤)
++
+
+ˆP( ˆP ⊤S ˆP + ¯R)−1 −P(P ⊤SP + ¯R)−1
+P ⊤
+= ˆP
+
+ˆP ⊤S ˆP + ¯R
+−1 
+ˆP ⊤−P ⊤
++
+
+( ˆP −P)( ˆP ⊤S ˆP + ¯R)−1 + P
+
+ˆP ⊤S ˆP + ¯R
+−1
+−
+ P ⊤SP + ¯R
+−1
+P ⊤
+= ˆP
+
+ˆP ⊤S ˆP + ¯R
+−1 
+ˆP ⊤−P ⊤
++ ( ˆP −P)( ˆP ⊤S ˆP + ¯R)−1P ⊤+ P
+
+ˆP ⊤S ˆP + ¯R
+−1
+−
+ P ⊤SP + ¯R
+−1
+P ⊤
+(78)
+Then we have
+E
+h
+| ˆJ −J|
+i
+≤E
+h
+∥F( ˆP) −F(P)∥2
+i
+∥z∥2
+2
+≤E
+ ˆP
+
+ˆP ⊤S ˆP + ¯R
+−1 
+ˆP ⊤−P ⊤
+2
+
+|
+{z
+}
+(i)
+∥z∥2
+2
++ E
+h( ˆP −P)( ˆP ⊤S ˆP + ¯R)−1P ⊤
+2
+i
+|
+{z
+}
+(ii)
+∥z∥2
+2
++ E
+P
+
+ˆP ⊤S ˆP + ¯R
+−1
+−
+ P ⊤SP + ¯R
+−1
+P ⊤
+
+2
+
+|
+{z
+}
+(iii)
+∥z∥2
+2
+(79)
+We bound term (i) as follows:
+(i)
+E
+ ˆP
+
+ˆP ⊤S ˆP + ¯R
+−1 
+ˆP ⊤−P ⊤
+2
+
+≤E
+ ˆP
+
+2
+
+
+ˆP ⊤S ˆP + ¯R
+−1
+2
+ ˆP −P
+
+2
+
+≤
+ ¯R−1
+2 E
+h ˆP
+
+2
+ ˆP −P
+
+2
+i
+.
+(80)
+We now use the following:
+
+
+
+ ˆP
+
+2 =
+ ˆP −P + P
+
+2 ≤
+ ˆP −P
+
+2 + ∥P∥2 ,
+ ˆP
+
+2
+ ˆP −P
+
+2 ≤(
+ ˆP −P
+
+2 + ∥P∥2)
+ ˆP −P
+
+2 =
+ ˆP −P
+
+2
+2 + ∥P∥2
+ ˆP −P
+
+2 .
+≤
+ ¯R−1
+2 E
+ ˆP −P
+
+2
+2 + ∥P∥2
+ ˆP −P
+
+2
+
+=
+ ¯R−1
+2 E
+ ˆB −B
+
+2
+2 + ∥P∥2
+ ˆB −B
+
+2
+
+≤
+ ¯R−1
+2 E
+ ˆB −B
+
+2
+F + ∥P∥2
+ ˆB −B
+
+F
+
+≤
+ ¯R−1
+2
+
+Tr(KB) + ∥P∥2
+p
+Tr(KB)
+
+=
+ ¯R−1
+2
+
+Tr(KB) + ∥B∥2
+p
+Tr(KB)
+
+.
+(81)
+21
+
+End-to-End Learning Framework for Solving Non-Markovian Optimal Control
+We bound (ii) as follows:
+(ii)
+E
+h( ˆP −P)( ˆP ⊤S ˆP + ¯R)−1P ⊤
+2
+i
+≤
+ ¯R−1
+2 E
+h ˆP −P
+
+2
+i
+∥B∥2
+=
+ ¯R−1
+2 E
+h ˆB −B
+
+2
+i
+∥B∥2
+≤
+ ¯R−1
+2 E
+h ˆB −B
+
+F
+i
+∥B∥2
+≤
+ ¯R−1
+2
+p
+Tr(KB) ∥B∥2 .
+(82)
+We bound (iii) as follows:
+(3)
+E
+P
+
+ˆP ⊤S ˆP + ¯R
+−1
+−
+ P ⊤SP + ¯R
+−1
+P ⊤
+
+2
+
+≤∥P∥2
+2 E
+
+
+ˆP ⊤S ˆP + ¯R
+−1
+−
+ P ⊤SP + ¯R
+−1
+2
+
+≤∥P∥2
+2 E
+−
+ P ⊤SP + ¯R
+−1 
+ˆP ⊤S ˆP −P ⊤SP
+ 
+ˆP ⊤S ˆP + ¯R
+−1
+2
+
+≤∥P∥2
+2
+ ¯R−12
+2 E
+h ˆP ⊤S ˆP −P ⊤SP
+
+2
+i
+= ∥P∥2
+2
+ ¯R−12
+2 E
+h ˆP ⊤S( ˆP −P) +
+
+ˆP ⊤−P ⊤
+SP)
+
+2
+i
+= ∥P∥2
+2
+ ¯R−12
+2 E
+h
+
+ˆP ⊤−P ⊤
+S( ˆP −P) + P ⊤S( ˆP −P) +
+
+ˆP ⊤−P ⊤
+SP
+
+2
+i
+≤∥P∥2
+2
+ ¯R−12
+2 E
+h
+
+ˆP ⊤−P ⊤
+S( ˆP −P)
+
+2 +
+P ⊤S( ˆP −P)
+
+2 +
+
+
+ˆP ⊤−P ⊤
+SP
+
+2
+i
+≤∥P∥2
+2
+ ¯R−12
+2
+
+∥S∥2 Tr(KB) + ∥B∥2 ∥S∥2
+p
+Tr(KB) + ∥S∥2 ∥B∥2
+p
+Tr(KB)
+
+= ∥B∥2
+2
+ ¯R−12
+2
+
+∥S∥2 Tr(KB) + 2 ∥B∥2 ∥S∥2
+p
+Tr(KB)
+
+.
+(83)
+Put everything together, we have the following bound:
+E
+h ˆJ −J
+
+i
+≤∥z∥2
+2
+"
+ ¯R−1
+2
+
+Tr(KB) + ∥B∥2
+p
+Tr(KB)
+
++
+ ¯R−1
+2
+p
+Tr(KB) ∥B∥2
++ ∥B∥2
+2
+ ¯R−12
+2
+
+∥S∥2 Tr(KB) + 2 ∥B∥2 ∥S∥2
+p
+Tr(KB)
+ #
+= ∥z∥2
+2
+"  ¯R−1
+2 + ∥B∥2
+2
+ ¯R−12
+2 ∥S∥2
+
+Tr(KB)
++
+
+2
+ ¯R−1
+2 ∥B∥2 + 2 ∥B∥3
+2
+ ¯R−12
+2 ∥S∥2
+ p
+Tr(KB)
+#
+= ∥z∥2
+2∥R−1∥2
+ 1 + ∥B∥2
+2∥R−1∥2∥S∥2
+ 
+Tr(KB) + 2∥B∥2
+p
+Tr(KB)
+
+.
+(84)
+□
+22
+
+End-to-End Learning Framework for Solving Non-Markovian Optimal Control
+Proof of Lagrange multiplier sample complexity result.
+U = −R−1B⊤⊗(I −Gλ)−1Hλx0
+= −
+
+
+R−1B⊤
+...
+...
+R−1B⊤
+
+
+|
+{z
+}
+DRB
+(I −Gλ)−1Hλx0
+= −DRB(I −Gλ)−1Hλx0
+= −
+
+
+R−1
+...
+...
+R−1
+
+
+|
+{z
+}
+¯
+R−1
+
+
+B⊤
+...
+...
+B⊤
+
+
+|
+{z
+}
+P ⊤
+(I −Gλ)−1Hλx0
+= −¯R−1P ⊤(I −Gλ)−1Hλx0
+(85)
+J = x⊤
+0 H⊤¯QGU + x⊤
+0 H⊤¯QHx0
+= −x⊤
+0 H⊤¯QGDRB (I −Gλ)−1 Hλx0 + x⊤
+0 H⊤¯QHx0
+= −x⊤
+0 H⊤¯QGdP ¯R−1P ⊤(I −Gλ)−1 Hλx0
+|
+{z
+}
+a
++ x⊤
+0 H⊤¯QHx0
+|
+{z
+}
+b
+(86)
+E
+h
+| ˆJ −J|
+i
+= E
+h
+∥ˆJ −J∥2
+i
+= E [∥ˆa −a∥2]
+(87)
+Then
+E [∥ˆa −a∥2] = E
+h
+∥x⊤
+0 H⊤¯QGd ˆP ¯R−1 ˆP ⊤(I −ˆGλ)−1Hλx0 −x⊤
+0 H⊤¯QGdP ¯R−1P ⊤(I −Gλ)−1Hλx0∥2
+i
+= E
+h
+∥x⊤
+0 H⊤¯QGd
+
+ˆP ¯R−1 ˆP ⊤(I −ˆGλ)−1 −P ¯R−1P ⊤(I −Gλ)−1
+Hλx0∥2
+i
+≤∥x⊤
+0 H⊤¯QGd∥2∥Hλx0∥2 E
+h
+∥ˆP ¯R−1 ˆP ⊤(I −ˆGλ)−1 −P ¯R−1P ⊤(I −Gλ)−1∥2
+i
+.
+(88)
+Then
+E
+h
+∥ˆP ¯R−1 ˆP ⊤(I −ˆGλ)−1 −P ¯R−1P ⊤(I −Gλ)−1∥2
+i
+= E
+h
+∥( ˆP −P) ¯R−1 ˆP ⊤(I −ˆGλ)−1 + P ¯R−1 
+ˆP ⊤(I −ˆGλ)−1 −P ⊤(I −Gλ)−1
+∥2
+i
+= E
+h
+∥( ˆP −P) ¯R−1 ˆP ⊤(I −ˆGλ)−1 + P ¯R−1 
+( ˆP ⊤−P ⊤)(I −ˆGλ)−1 + P ⊤(I −ˆGλ)−1 −P ⊤(I −Gλ)−1
+∥2
+i
+= E
+h
+∥( ˆP −P) ¯R−1 ˆP ⊤(I −ˆGλ)−1 + P ¯R−1( ˆP ⊤−P ⊤)(I −ˆGλ)−1 + P ¯R−1P ⊤
+(I −ˆGλ)−1 −(I −Gλ)−1
+∥2
+i
+≤E
+h
+∥( ˆP −P) ¯R−1 ˆP ⊤(I −ˆGλ)−1∥2
+i
+|
+{z
+}
+(i)
++ E
+h
+∥P ¯R−1( ˆP ⊤−P ⊤)(I −ˆGλ)−1∥2
+i
+|
+{z
+}
+(ii)
++ E
+h
+∥P ¯R−1P ⊤
+(I −ˆGλ)−1 −(I −Gλ)−1
+∥2
+i
+|
+{z
+}
+(iii)
+(89)
+23
+
+End-to-End Learning Framework for Solving Non-Markovian Optimal Control
+Let us rewrite Gλ as follows:
+Gλ = Ld + Lu
+= −
+
+
+QG0
+0
+. . .
+0
+QG1
+QG0
+. . .
+0
+...
+...
+...
+...
+QGT −1
+QGT −2
+. . .
+QG0
+
+
+|
+{z
+}
+LQG
+
+
+BR−1B⊤
+...
+...
+BR−1B⊤
+
+
+|
+{z
+}
+DBRB
++Lu
+= −
+
+
+Q
+...
+...
+Q
+
+
+|
+{z
+}
+DQ
+
+
+G0
+0
+. . .
+0
+G1
+G0
+. . .
+0
+...
+...
+...
+...
+GT −1
+GT −2
+. . .
+G0
+
+
+|
+{z
+}
+LG
+DBRB + Lu
+= −DQLGDBRB + Lu,
+(90)
+where
+Lu =
+
+
+0
+A⊤−D(α, 1)
+−D(α, 2)
+· · ·
+−D(α, T −1)
+0
+0
+A⊤−D(α, 1)
+· · ·
+−D(α, T −2)
+0
+0
+0
+· · ·
+−D(α, T −3)
+...
+...
+...
+...
+...
+0
+0
+· · ·
+· · ·
+0
+
+
+(91)
+Then using the psd assumption L−1
+QG(I −Lu) ⪰0,
+∥(I −Gλ)−1∥2 = ∥(I −Lu + DQLGDBRB)−1∥2
+= ∥
+
+DQLG
+ (DQLG)−1(I −Lu) + DBRB
+−1 ∥2
+≤∥(DQLG)−1∥2∥
+ (DQLG)−1(I −Lu) + DBRB
+−1 ∥2
+≤∥(DQLG)−1∥2∥
+ (DQLG)−1(I −Lu)
+−1 ∥2
+≤∥(LQG)−1∥2∥LQG∥2∥(I −Lu)−1∥2.
+(92)
+We bound (i) as follows:
+E
+h
+∥( ˆP −P) ¯R−1 ˆP ⊤(I −ˆGλ)−1∥2
+i
+≤E
+h
+∥ˆP −P∥2∥¯R−1∥2∥ˆP ⊤∥2∥(I −ˆGλ)−1∥2
+i
+≤∥¯R−1∥2E
+h
+∥ˆP −P∥2
+
+∥ˆP −P∥2 + ∥P∥2
+
+∥(I −ˆGλ)−1∥2
+i
+≤∥¯R−1∥2E
+h
+∥ˆP −P∥2
+
+∥ˆP −P∥2 + ∥P∥2
+i
+∥(LQG)−1∥2∥LQG∥2∥(I −Lu)−1∥2
+≤∥¯R−1∥2∥(LQG)−1∥2∥LQG∥2∥(I −Lu)−1∥2
+
+E
+h
+∥ˆB −B∥2
+2
+i
++ E
+h
+∥ˆB −B∥2
+i
+∥B∥2
+
+≤∥¯R−1∥2∥(LQG)−1∥2∥LQG∥2∥(I −Lu)−1∥2
+
+Tr(KB) +
+p
+Tr(KB)∥B∥2
+
+.
+(93)
+We bound (ii) as follows:
+E
+h
+∥P ¯R−1( ˆP ⊤−P ⊤)(I −ˆGλ)−1∥2
+i
+≤∥B∥2∥¯R−1∥2∥(LQG)−1∥2∥LQG∥2∥(I −Lu)−1∥2
+p
+Tr(KB).
+(94)
+24
+
+End-to-End Learning Framework for Solving Non-Markovian Optimal Control
+We Bound (iii) as follows:
+(iii)
+E
+h
+∥P ¯R−1P ⊤
+(I −ˆGλ)−1 −(I −Gλ)−1
+∥2
+i
+≤∥P∥2
+2∥¯R−1∥2E
+h
+∥(I −ˆGλ)−1 −(I −Gλ)−1∥2
+i
+= ∥P∥2
+2∥¯R−1∥2E
+h
+∥(I −ˆGλ)−1 
+ˆGλ −Gλ
+
+(I −Gλ)−1∥2
+i
+≤∥P∥2
+2∥¯R−1∥2∥(LQG)−1∥2
+2∥LQG∥2
+2∥(I −Lu)−1∥2
+2E
+h
+∥ˆGλ −Gλ∥2
+i
+= ∥P∥2
+2∥¯R−1∥2∥(LQG)−1∥2
+2∥LQG∥2
+2∥(I −Lu)−1∥2
+2E
+h
+∥LQG( ˆDBRB −DBRB)∥2
+i
+≤∥P∥2
+2∥¯R−1∥2∥(LQG)−1∥2
+2∥LQG∥3
+2∥(I −Lu)−1∥2
+2E
+h
+∥ˆBR−1 ˆB⊤−BR−1B⊤∥2
+i
+= ∥P∥2
+2∥¯R−1∥2∥(LQG)−1∥2
+2∥LQG∥3
+2∥(I −Lu)−1∥2
+2E
+"
+∥( ˆB −B)R−1( ˆB −B)⊤
++ ( ˆB −B)R−1B⊤+ BR−1( ˆB −B)⊤∥2
+#
+≤∥B∥2
+2∥¯R−1∥2
+2∥(LQG)−1∥2
+2∥LQG∥3
+2∥(I −Lu)−1∥2
+2
+
+Tr(KB) + 2∥B∥2
+p
+Tr(KB)
+
+.
+(95)
+Using ∥(I −Lu)−1∥2 = 1 and putting everything together we have
+E
+h
+| ˆJ −J|
+i
+≤∥z∥2∥Hλx0∥2∥R−1∥2∥L∥2
+ 1 + ∥B∥2
+2∥R−1∥2∥L∥2∥LQG∥2
+
+"
+Tr(KB) + 2∥B∥2
+p
+Tr(KB)
+#
+,
+where ∥L∥2 = ∥(LQG)−1∥2∥LQG∥2.
+(96)
+□
+D.5. Proof of Corollary 3.4
+Proof. We first expand KB as follows
+KB = 1
+N
+ ϕ⊤ϕ
+−1 ϕ⊤σ2
+wIϕ
+ ϕ⊤ϕ
+−1
+= σ2
+w
+N
+ ϕ⊤ϕ
+−1
+= σ2
+w
+N
+" p
+X
+i=1
+ϕ⊤
+i ϕi
+#−1
+,
+(97)
+where
+p
+X
+i=1
+ϕ⊤
+i ϕi =
+
+
+Pp
+i=1 ui
+0ui
+0
+⊤
+· · ·
+0
+...
+...
+...
+0
+· · ·
+Pp
+i=1 ui
+0ui
+0
+⊤
+
+.
+(98)
+Then we have
+25
+
+End-to-End Learning Framework for Solving Non-Markovian Optimal Control
+Trace(KB) = σ2
+w
+N E
+
+Trace
+
+
+" p
+X
+i=1
+ϕ⊤
+i ϕi
+#−1
+
+
+
+= nσ2
+w
+N E
+
+Trace
+
+
+ p
+X
+i=1
+ui
+0ui
+0
+⊤
+!−1
+
+
+
+= nσ2
+w
+N
+Trace
+
+E
+
+
+ p
+X
+i=1
+ui
+0ui
+0
+⊤
+!−1
+
+
+.
+(99)
+(1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ui
+0 ∼N(0, I) =⇒
+p
+X
+i=1
+ui
+0ui
+0
+⊤∼W(I, p), Wishart Distribution (Wishart, 1928)
+=⇒
+ p
+X
+i=1
+ui
+0ui
+0
+⊤
+!−1
+∼W−1(I, p), Inverse Wishart Distribution
+=⇒E
+
+
+ p
+X
+i=1
+ui
+0ui
+0
+⊤
+!−1
+=
+I
+p −m −1,
+for p > m + 1.
+Trace(KB)
+(1)
+= nσ2
+w
+N
+Trace
+
+I
+p −m −1
+
+=
+nmσ2
+w
+N(p −m −1),
+for p > m + 1.
+(100)
+□
+E. Experiment Details
+E.1. Model Architecture
+Our proposed Fractional-Order Learning for Optimal Control Framework (FOLOC) is a deep learning framework designed
+for fractional-order optimal control tasks, combining the strengths of nerual operater, sequential modeling, and parameter
+regression. The architecture is structured into four key components, enabling end-to-end learning of complex control
+dynamics from system states and parameters. Fig. 1 illustrates the overall pipeline.
+E.1.1. SYSTEM IDENTIFICATION
+The system identification module is designed to infer fractional-order time-invariant system parameters, including the
+fractional-order α of size n and the constant matrices A and B of sizes n × n and n × m respectively, as introduced in Eq.
+6. These parameters are directly inferred from the observed control input space X, which is formed by concatenating xk and
+uk, where xk ∈Rn is the state vector and uk ∈Rm is the system input. This component leverages a hybrid architecture to
+accommodate both static and temporally correlated systems. Specifically, we use an MLP with residual skip connections
+and a Sequence Model (e.g., Recurrent Neural Networks, Gated Recurrent Unit Networks, or Long Short-Term Memory
+Networks) as the backbone of system identification module.
+For non-Markovian systems with long-range temporal temporal dependencies, sequential encoders—such as bidirectional
+LSTMs, GRUs, or RNNs—are adopted. These models process the input sequence autoregressively, capturing latent temporal
+patterns through hidden state evolution. Bidirectional processing further enables context aggregation from both past and
+future observations within the horizon T. The regressor outputs a flattened tensor, which is decomposed into A, B and α via
+learned linear projections, ensuring dimensional consistency with the underlying physical system. We formalize this module
+as follows
+26
+
+End-to-End Learning Framework for Solving Non-Markovian Optimal Control
+For non-Markovian systems, bidirectional LSTMs model temporal dependencies:
+ht, ct = LSTM
+ [xt; ut], (ht−1, ct−1)
+
+,
+(101)
+where ht ∈R2d (bidirectional hidden states). The final state hT aggregates sequence information.
+Then we apply a stack of residual MLP blocks processes final state hT :
+h(0) = hT , h(l) = BatchNorm
+
+σ
+ W (l) h(l−1) + b(l)
++ h(l−1)
+,
+(102)
+where σ is an activation function (e.g., ReLU) and 1, ..., L indexes the residual blocks.
+The regressor outputs a flattened tensor θ ∈Rn2+nm+n, which can be decomposed into A, B and α
+θ = Wouth(L),
+(103)
+A = Reshape(θ1:n2), B = Reshape(θn2+1:n2+nm), α = θn2+nm+1:n2+nm+n
+(104)
+The module minimizes a multi-task regression loss:
+Ls = ∥A −A∗∥2
+2 + ∥B −B∗∥2
+2 + ∥α −α∗∥2
+2.
+(105)
+This module is trained under a multi-task objective, jointly optimizing the reconstruction of system parameters while
+preserving their interpretable structure (e.g., enforcing A as a state transition matrix). By unifying static and sequential
+modeling paradigms, the regressor adapts to diverse dynamical regimes, laying a foundation for downstream control
+synthesis.
+E.1.2. TEMPORAL EMBEDDING FOR A MATRIX EVOLUTION
+In order to obtain the temporal embedding of matrix A, we propose an embedding estimation module that transforms
+the estimated fractional-order system parameters into time-aware representations. These representations capture both the
+spectral properties of the dynamics and their temporal evolution. By addressing the challenge of modeling parameter drift in
+partially observed systems, this approach maintains physical consistency throughout.
+Our architecture implements a novel parameterization of the system matrix A, explicitly encoding hierarchical damping
+effects. This allows for both stability guarantees and adaptive temporal evolution. Building on Eq. 15, the module constructs
+time-dependent embeddings Aemb
+t
+∈Rd through a dual-branch architecture.
+Let A ∈Rn×n and α ∈Rn denote the estimated constant matrix and fractional-order from the system identification module.
+To compute the embedding of the first token A0, we decompose the system matrix Aα = A −diag(a) through spectral
+analysis:
+Aα =V ΛV −1,
+Λ = diag(λ1, . . . , λn),
+(106)
+hspec = σ
+ Wγ
+
+Re(Λ), Im(Λ)
+
+,
+(107)
+where λi ∈C are eigenvalues encoding system stability. A residual MLP processes the concatenated real/imaginary
+components [Re(Λ), Im(Λ)] to produce base embeddings A0.
+In parallel, time embeddings et are generated via an embedding layer that encodes sequential time indices. These are
+concatenated with embeddings derived from α, enabling the model to capture both temporal and parametric variations:
+hstate = ϕx(et) ⊕ϕα(α),
+ϕx, ϕα : Linear Projections.
+(108)
+Next, the adaptive fused embeddings pass through a series of stacked residual multi-layer perceptron (MLP) blocks with
+normalization and an activation function (e.g., ReLU or GELU). This produces the final embeddings that serve as inputs to
+the temporal processor. This residual architecture enhances the model’s capacity to learn complex representations while
+preserving information from earlier layers:
+Aemb = ResMLP
+ [hspec ⊕hstate]; Wl, bl
+L
+l=1
+
+, Aemb ∈RT ×hidden size
+(109)
+27
+
+End-to-End Learning Framework for Solving Non-Markovian Optimal Control
+This embedding mechanism enables the model to generate time-dependent parameter representations without directly relying
+on the input state vector x. By encoding dynamic properties through eigenvalues and temporal embeddings, the model
+effectively captures system behavior over time, making it suitable for tasks such as time-series forecasting and control
+parameter prediction.
+E.1.3. SEQUENCE ENCODER PROCESSOR
+The Sequence Processor translates spectral-temporal embeddings Aemb
+t
+into latent states Genc
+t
+that encode the system’s
+temporal evolution, enabling adaptive control under time-varying dynamics. The sequence processor computes latent states
+Genc
+t
+through a recursive hierarchical structure, enabling efficient modeling of temporal dependencies while preserving
+stability, rooted in the governing Eq. 14.
+we implements this recurrence through a deep encoder architecture, which projects the raw recursive computation into a
+latent space. For systems requiring global temporal context, we use Transformer as backbone:
+Genc
+k
+= TransformerEncoder(Aemb
+k
++ Pk),
+(110)
+where Pk is a positional encoding encoding the step k. Multi-head self-attention layers implicitly approximate the summation
+in Eq. 14 by learning attention weights that mirror the hierarchy Aj.
+E.1.4. STACK MLPS FOR FOURIER NEURAL OPERATOR
+The final stage of our architecture synthesizes hierarchical system representations into spatiotemporal control signals through
+a two-step process: feature unification via the Stack MLPs and spectral control synthesis via the Fourier Neural Operator
+(FNO). This combination enables efficient learning of distributed control laws while preserving physical consistency.
+Given temporal states Genc
+k
+, system parameters B, LQR cost matrices Q,R, and residual skip connection input [x; u], the
+transformation constructs an enriched input tensor X ∈RT ×d for the FNO:
+χt = ϕG(Gt) ⊕ϕB(B) ⊕ϕQ(Q) ⊕ϕR(R) ⊕xt ⊕ut
+(111)
+where ϕ are a series of stacked residual multi-layer perceptron (MLP) blocks and ⊕denotes channel-wise concatenation.
+Next, The FNO processes X through spectral convolutions and residual connections as we introduced in Section 3.3:
+F(χ)(k) = W(k) · χ(k) + b(k),
+k ∈Zd
+(112)
+where χ(k) = F(χ) is the Fourier transform of the input, and W, b are learnable parameters in frequency space. Only
+low-frequency modes ∥k∥≤kmax are retained, enforcing spectral sparsity.
+Then, we apply the inverse transformation to predict the optimal control U:
+U = F−1
+ L
+Y
+l=1
+
+(Wl F + Kl) F(χ)
+!
++ MLP(χ),
+(113)
+where Kl are local kernel integrations in physical space.
+The module minimizes the deviations between predicted Ut and optimal control trajectories U ∗
+t :
+Lu =
+1
+Tm
+T
+X
+t=1
+Ut −U ∗
+t
+2
+2.
+(114)
+E.1.5. COMPOSITE LOSS FORMULATION
+The training objective combines fractional-order system parameter regression and control prediction errors through a
+multi-task loss function, enabling joint optimization of system identification and control synthesis:
+Ltotal =
+Ls
+|{z}
+System Identification
++
+Lu
+|{z}
+Control Prediction
+.
+(115)
+28
+
+End-to-End Learning Framework for Solving Non-Markovian Optimal Control
+This unified framework successfully marries physics-guided feature engineering with data-driven spectral learning, enabling
+real-time optimal control in high-dimensional dynamical systems and the unified loss formulation enables end-to-end learning
+of control policies while maintaining physically consistent parameter estimates—a critical requirement for deployment in
+safety-critical dynamical systems.
+remark: Specifically, the system parameters A, B and α can be extracted from an intermediate layer in the network because
+of the underlying loss function. The intermediate variable Ak is approximated using a shallow neural network P such
+that Ak = P(A, α, t) and the variable Gk is reduced to Rn instead of Rn×n. Similarly, the cost matrices Q and R are
+transformed into reduced representations via local transformation operators NQ : Rn×n →RdQ and NR : Rn×m →RdR.
+The block Toeplitz structure of Gλ indicates that it can be fully represented using the parameters Q, R, A, B, α, x0 and
+{Gk}T
+k=0. Using this property, the input dimension of the FNO is determined as da = T ×(2n+m+dQ +dR +dB), where
+the extra terms n and m correspond to the trajectory and control input dimensions, respectively. These additional features
+empirically enhance the performance of the FNO by providing more comprehensive representations of the underlying
+dynamics.
+E.2. Synthetic Data
+The synthetic data is generated as follows:
+State Transition Matrix (A): Rondomly sampled from a uniform distribution and normalized to ensure stability by scaling
+with its spectral radius.
+Control Input Matrix (B): Randomly sampled from a uniform distribution.
+Initial State (x0): Randomly sampled from a standard normal distribution.
+Control Inputs (u): Sequence of uniformly random inputs.
+Cost Matrices (Q, R): Symmetric positive semi-definite matrices constructed via M ⊤M for some uniformly random M.
+E.3. Real-World System Dynamics
+In our experiments, we simulate the system dynamics to generate trajectories and optimal control sequences by randomly
+choosing an initial state and control inputs and then using model predictive control (MPC) to find the optimal control
+sequence given the quadratic cost matrices Q and R.
+E.3.1. CART POLE SYSTEM DYNAMICS
+The dynamics of the cart pole is as follows:
+¨x =
+mpl
+
+˙θ2 sin θ −¨θ cos θ
+
++ F
+mc + mp
+,
+¨θ =
+g sin θ + cos θ
+
+−mpl ˙θ2 sin θ−F
+mc+mp
+
+l
+
+4
+3 −mp cos2 θ
+mc+mp
+
+,
+(116)
+where ¨x is the horizontal acceleration of the cart, ¨θ is the acceleration of the pole, mc is the mass of the cart, mp is the mass
+of the pole, and g is the acceleration due to gravity. The control input is the external force F applied to the center of mass of
+the cart.
+E.3.2. QUADROTOR SYSTEM DYNAMICS
+The quadrotor dynamics is as follows:
+˙p = v,
+˙q = 1
+2q ⊗
+
+0
+ω
+
+,
+m˙v = mg + f + fa,
+J ˙ω = −ω × J ω + τ.
+(117)
+29
+
+End-to-End Learning Framework for Solving Non-Markovian Optimal Control
+Here, p ∈R3 and v ∈R3 represent the position and velocity in the inertial frame, ω ∈R3 is the angular velocity, and the
+quaternion q describes the orientation with ⊗denoting quaternion multiplication. The mass of the quadrotor is given by m,
+and J denotes the inertia matrix. Gravity is denoted by g, the aerodynamic force is denoted by fa ∈R3, the total thrust and
+body torques are denoted by f ∈R3 and τ ∈R3.
+F. Training Parameters
+The experiments utilizing GPU acceleration on an NVIDIA A100 80GB PCIe GPU. The experiments are conducted on a
+machine running Ubuntu 22.04.5 LTS with an Intel(R) Xeon(R) Platinum 8358 CPU (2.60 GHz), featuring 128 cores and
+support for 256 concurrent threads.
+The training process is configured to optimize model performance using the Adam optimizer with a learning rate of 10−3. The
+model is trained for 300 epochs with a batch size of 128, Learning rate scheduling is managed by a ReduceLROnPlateau
+scheduler, which monitors validation loss and reduces the learning rate by a factor of 0.1 after 5 epochs without improvement.
+The scheduler uses a relative threshold of 0.0001 to detect improvement. The minimum learning rate is set to zero, and early
+learning stabilization is facilitated by an epsilon value of 1 × 10−8. The loss function based on the Lp-norm.
+To ensure robust training, data normalization is applied, with both the input data and control signals (U) included in the
+modeling process. The architecture supports both encoder-only and sequence-to-sequence configurations; however, in this
+setup, the sequence-to-sequence mode is disabled.
+G. Metrics
+Mean Squared Error (MSE). The Mean Squared Error is given by
+LMSE(ˆy, y) = 1
+n
+n
+X
+i=1
+(yi −ˆyi)2,
+(118)
+where n denotes the number of samples, yi ∈R is the ground truth value, and ˆyi ∈R is the predicted value for the i-th
+sample.
+Mean Absolute Error (MAE). The Mean Absolute Error is given by
+LMAE(ˆy, y) = 1
+n
+n
+X
+i=1
+|yi −ˆyi| ,
+(119)
+where n, yi, and ˆyi are defined as in the MSE formulation.
+H. Ablation Study
+In this section, we provide further analyses to uncover how the choice of encoder models and weight of identification loss
+affect the performance of the FOLOC framework.
+H.1. Varying Sequence Encoder Module
+To investigate the performance of different encoder layers on fractional-order system, we choose four sequence encoder
+variants—Transformer, RNN, LSTM, and GRU. We also test FOLOC framework by replacing the sequence encoder module
+with a MLP. Our analysis of sequence encoder architectures reveals statistically significant differences in performance and
+stability across models. The results are given in Table 7. The Transformer encoder demonstrates superior performance,
+achieving the lowest mean squared error (MSE = 0.00495 ± 0.00010) with minimal variance, underscoring its robustness to
+initialization. These results highlight the ability of our model’s self-attention mechanisms to handle tasks involving global
+temporal dependencies. Based on our experiments, the Transformer architecture mitigates the risk of gradient vanishing or
+explosion by distributing information through attention, effectively stabilizing the optimization process and demonstrating
+strong suitability for safety-critical control tasks.
+30
+
+End-to-End Learning Framework for Solving Non-Markovian Optimal Control
+Table 7. Ablation study of different sequence encoders.
+Model
+MSE (10-3)
+MAE (10-2)
+Transformer
+4.95 ± 0.10
+1.05 ± 0.10
+RNN
+6.00 ± 1.46
+1.15 ± 0.17
+LSTM
+5.54 ± 1.49
+1.12 ± 0.18
+GRU
+6.78 ± 2.36
+1.29 ± 0.34
+MLP
+5.91 ± 1.57
+1.20 ± 0.21
+Table 8. Varying identification weight. All reported values are in units of 10−3.
+Metrics
+λw = 0
+λw = 0.1
+λw = 0.2
+λw = 0.3
+λw = 0.4
+λw = 0.5
+MSE
+7.54±3.11
+4.95±0.10
+4.89±0.14
+5.19±0.65
+5.84±1.36
+5.08±0.29
+MAE
+14.1±0.39
+10.5±0.10
+10.3±0.07
+11.0±0.83
+11.4±1.69
+11.1±0.54
+H.2. Varying Identification Weight
+We evaluate the performance of the FOLOC framework by varying the system identification weight λw over the values
+{0, 0.1, 0.2, 0.3, 0.4, 0.5}. Experimental results show that FOLOC’s performance remains approximately the same, with a
+mean MSE of 0.56% (standard deviation: 0.10%) and a mean MAE of 1.14% (standard deviation: 0.14%). The results are
+given in Table 8.
+I. Baseline
+To the best of our knowledge, no existing end-to-end deep learning framework addresses the optimal control problem under
+fractional-order dynamical systems, nor is there a theoretical framework that integrates end-to-end learning with FOLTI
+system identification and optimal control laws. Due to the principle that fractional-order calculus generalizes integer-order
+calculus, we did some experiments to compare our proposed methods with the traditional theoretical end-to-end approach
+for optimal control in LTI systems. The end-to-end learning framework for LTI systems involves system identification using
+ordinary least squares, followed by solving the optimal control problem through dynamic programming (Anderson & Moore,
+2007).
+J. Additional Results
+J.1. Test Loss of Different Time Horizons
+We present the MSE test loss across different time horizons as shown in Fig. 5, reveals critical insights into its temporal
+generalization capabilities. With performance steadily improving as the horizon extends, it reflects the FOLOC framework
+capacity to suppress high-frequency errors through spectral filtering while gradually resolving low-frequency dynamics.
+T = 128 not only shows a smooth reduction in MSE but also achieves the lowest MSE loss among all tested horizons,
+indicating that the model better captures long-range temporal dependencies when provided with more context. The finding
+that extending the prediction window enhances both model robustness and accuracy confirms that, when given sufficient
+historical information, our approach is better equipped to handle complex dynamics of fractional-order systems.
+J.2. Results of Different Fractional-Order Systems
+To evaluate the model’s robustness across diverse fractional-order systems, we tested FOLOC framework on a dataset
+constructed from 10,000 unique systems with varying parameters. Our approach demonstrates consistent performance on
+this heterogeneous evaluation set, achieving a mean squared error (MSE) of (8.0025 ± 1.1420) × 10−3 and mean absolute
+error (MAE) of (9.4546 ± 0.7698) × 10−3, indicating stable generalization despite substantial system diversity. These
+results reflect the architecture’s capacity to adapt to different fractional-order systems without task-specific fine-tuning. Such
+findings align with theoretical expectations, as the spectral-temporal embeddings and the FOLOC framework inherently
+decouple system-specific features from control synthesis, enabling robust out-of-distribution operation.
+31
+
+End-to-End Learning Framework for Solving Non-Markovian Optimal Control
+0
+25
+50
+75
+100
+125
+150
+175
+200
+Epoch
+10
+2
+10
+1
+100
+Loss
+T=8
+T=16
+T=32
+T=64
+T=128
+Figure 5. Test MSE loss under each epochs.
+J.3. Comparison of Inference Time
+The experimental results demonstrate that FOLOC framework achieves superior computational efficiency compares to LTI
+model. Specifically, FOLOC framework requires only 1.215 ms per sample for inference, which represents a significant
+44.6% reduction in processing time compared to LTI model’s 2.1935 ms per sample.
+Table 9. Model inference time comparison.
+Model
+Inference time (ms/sample)
+LTI Model
+2.1935
+FOLOC
+1.215
+32

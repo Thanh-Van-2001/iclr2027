@@ -1,0 +1,23 @@
+2021), which requires training multiple models (3-folds in
+---
+Define the optimal seed
+---
+Histogram of learning times on CIFAR-100 dataset
+---
+Histogram of learning times on the ImageNet dataset
+---
+This process is repeated for both subsets to cover the entire dataset
+---
+We applied 3-fold cross-validation to compute
+---
+forward passes and 1 backward pass, repeated n times over the entire dataset for each epoch
+---
+leads to shorter learning times
+---
+learning times
+---
+learning times), their expected memorization will also be
+---
+subset is bounded by their learning times
+---
+to their expected learning times

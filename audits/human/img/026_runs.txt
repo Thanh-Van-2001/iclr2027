@@ -1,21 +1,17 @@
-Specifically, the objective of Ant Morphology is to make the Ant robot run quickly and that
+BANYAN performance over four random seeds
 ---
-To generate diverse task trials, Wang et al
+Repeated application of the diagonal
 ---
-We set the random seed of the data generation procedure as 1 by default
+Scores are the average of four random seeds
 ---
-are deterministically generated based on random seeds, allowing different seeds to map to distinct task
+XLM-R runs at batch size 128 across 4xA40 cards
 ---
-averaging 16 independent trials
+deviation across four random initialisations
 ---
-design, we run robotic simulation in MuJoCo for 100 timesteps,
+initialisations
 ---
-one seed for one task for evaluation (100 for LunarLander, 100 for RobotPush, and 150 for Rover)
+model performs, although in our case we keep things stable between seeds whereas before simplification caused issues with
 ---
-optimize the morphology of an ant-shaped robot, to run as fast as
+structure through repeated application
 ---
-reduce stochasticity and allow the simulator to run in a minimal
----
-seeds, which exceeds our computation resources
----
-to run as fast as possible
+students learn better: The impact of student initialization

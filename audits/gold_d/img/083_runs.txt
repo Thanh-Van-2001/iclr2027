@@ -1,0 +1,41 @@
+Cheetah Run
+---
+Experiments on Noisy Environment Dynamics We evaluate our model’s performance on the Walker Run and Cheetah Run
+---
+IQL+SAC (Visual) in the Cheetah Run and Walker Run, and it has comparable performance in the Walker Walk task
+---
+Quadruped Run
+---
+Run, Quadruped Run, and Walker Run tasks
+---
+This experiment is conducted on the Cheetah Run task with state-based observations from DMControl
+---
+Walker Run
+---
+We present results on the Walker Run, Cheetah Run,
+---
+We show the results by averaging over 100 trajectories and evaluating over 3 random seeds
+---
+We visualize each task using the random initialization state of an episode
+---
+and IQ-MPC in the Hopper Hop, Cheetah Run, Quadruped Run, and Walker Run tasks
+---
+averaging over 100 trajectories and evaluating over 3 random seeds
+---
+duct this experiment on the DMControl Cheetah Run task and decode rewards via r(z, a) = Qθ(z, a)−γEz′∼dθ(·|z,a)V π(z′)
+---
+high-dimensional cases like the Humanoid Walk and Dog Run task
+---
+ics and the suboptimality of model rollout data relative to
+---
+in the Walker Run task
+---
+is averaged over 3 seeds per task
+---
+seeds regarding the performance for each task
+---
+st, H: current state, rollout horizon
+---
+the Quadruped Run and Cheetah Run tasks, while outper-
+---
+• We iterate 6 times during MPPI planning

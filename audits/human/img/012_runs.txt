@@ -1,21 +1,3 @@
-Specifically, the objective of Ant Morphology is to make the Ant robot run quickly and that
+Here, we repeat the same experiment on the credit-card
 ---
-To generate diverse task trials, Wang et al
----
-We set the random seed of the data generation procedure as 1 by default
----
-are deterministically generated based on random seeds, allowing different seeds to map to distinct task
----
-averaging 16 independent trials
----
-design, we run robotic simulation in MuJoCo for 100 timesteps,
----
-one seed for one task for evaluation (100 for LunarLander, 100 for RobotPush, and 150 for Rover)
----
-optimize the morphology of an ant-shaped robot, to run as fast as
----
-reduce stochasticity and allow the simulator to run in a minimal
----
-seeds, which exceeds our computation resources
----
-to run as fast as possible
+Here, we replicate the experiments on the credit-card and

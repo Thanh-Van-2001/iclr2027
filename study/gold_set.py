@@ -49,7 +49,7 @@ RUN_SENTENCE = re.compile(
 FIELDS = {
     "testable": ["results_table", "bold_ok", "orientation", "direction", "winner_mean",
                  "winner_disp", "runner_mean", "runner_disp", "disp_type", "n_runs",
-                 "n_source", "note"],
+                 "n_source", "rival_copied", "note"],
     "no_bar": ["results_table", "bold_ok", "orientation", "direction", "winner_mean",
                "runner_mean", "error_bar_present", "note"],
     "discarded": ["results_table", "cause", "note"],
@@ -189,9 +189,29 @@ def render(items: list, sources: list, out_dir: str, zoom: float = 2.0) -> None:
             sents = sorted({m.group(0).strip() for m in RUN_SENTENCE.finditer(text)})
             with open(os.path.join(img_dir, f"{it['id']}_runs.txt"), "w", encoding="utf-8") as fh:
                 fh.write("\n---\n".join(sents[:40]))
+            if it["stratum"] == "no_n":
+                # The residual run-count miss is measured against the whole paper,
+                # not against the sentences the pattern already selects.
+                with open(os.path.join(img_dir, f"{it['id']}_fulltext.txt"), "w", encoding="utf-8") as fh:
+                    fh.write(text)
         doc.close()
         title = rec["title"][:50].encode("ascii", "replace").decode()
         print(f"  {it['id']} {it['stratum']:12s} {title}")
+
+
+def _pipeline_test(it: dict):
+    p = it.get("pipeline") or {}
+    if p.get("winner") is None or p.get("runner_up") is None:
+        return it.get("pipeline_test")
+    c = {"gap": abs(p["winner"] - p["runner_up"]),
+         "winner_dispersion": p.get("winner_dispersion"),
+         "runner_dispersion": p.get("runner_dispersion"),
+         "dispersion_kind": p.get("dispersion_kind") or "unknown",
+         "n_runs": p.get("n_runs")}
+    try:
+        return test_comparison(c)
+    except Exception:  # noqa: BLE001
+        return it.get("pipeline_test")
 
 
 def _num(x):
@@ -295,6 +315,32 @@ def score(items_path: str, labels_path: str) -> dict:
                  and all(_match(_num(lb[f]), it["pipeline"][k]) for f, k in value_fields))
     fields["claim_and_values"] = rate(all_ok, len(readable),
                                       "bold cell, rival and all four values at once, on fully readable items")
+    # The same agreement with an interval that resamples papers, because a
+    # draw of comparisons lands several items in one paper, and the largest
+    # share of disagreements any single paper contributes.
+    def _claim_ok(it, lb):
+        return (lb["bold_ok"].lower().startswith("y")
+                and all(_match(_num(lb[f]), it["pipeline"][k]) for f, k in value_fields))
+    by_paper: dict = {}
+    for it, lb in readable:
+        by_paper.setdefault(it["paper"], []).append(_claim_ok(it, lb))
+    papers = list(by_paper.values())
+    rng = random.Random(0)
+    boots = []
+    for _ in range(2000):
+        draw = [papers[rng.randrange(len(papers))] for _ in papers]
+        flat = [x for pp in draw for x in pp]
+        boots.append(100 * sum(flat) / max(len(flat), 1))
+    boots.sort()
+    fields["claim_and_values"]["paper_ci"] = [round(boots[50], 1), round(boots[1949], 1)]
+    fields["claim_and_values"]["n_papers"] = len(papers)
+    dis = {k: sum(1 for x in v if not x) for k, v in by_paper.items()}
+    fields["claim_and_values"]["n_disagreements"] = sum(dis.values())
+    fields["claim_and_values"]["max_disagreements_one_paper"] = max(dis.values()) if dis else 0
+    if "rival_copied" in (T[0][1] if T else {}):
+        fields["rival_copied"] = rate(sum(1 for it, lb in T if lb["rival_copied"].lower().startswith("y")),
+                                      sum(1 for it, lb in T if lb["rival_copied"].lower() in ("y", "n")),
+                                      "the runner-up carries a citation, dagger or 'from' marker")
     fields["claim_or_unreadable"] = rate(
         sum(1 for it, lb in T if lb["bold_ok"].lower().startswith("y")
             and all(_unclear(lb[f]) or _match(_num(lb[f]), it["pipeline"][k]) for f, k in value_fields)),
@@ -305,6 +351,10 @@ def score(items_path: str, labels_path: str) -> dict:
     # marginal rates can match while every verdict flips.
     fail_reader = fail_pipe = n_both = 0
     both_fail = both_pass = reader_fail_only = pipe_fail_only = 0
+    for it, _ in T:
+        # The verdict is recomputed from the pipeline's values with the paper's
+        # current test, so a change of test (z to Welch) reaches the audit too.
+        it["pipeline_test"] = _pipeline_test(it)
     pipe_fail_all = sum(1 for it, lb in T if it.get("pipeline_test") and it["pipeline_test"]["p"] >= 0.05)
     pipe_tested_all = sum(1 for it, lb in T if it.get("pipeline_test"))
     for it, lb in T:
@@ -539,8 +589,8 @@ def main(argv=None) -> int:
     s.add_argument("--non-extremal", type=int, default=40)
     s.add_argument("--no-n", type=int, default=0)
     s.add_argument("--out-dir", default="out/gold")
-    s.add_argument("--exclude-items", default=None,
-                   help="items.json of an earlier draw whose papers are held out")
+    s.add_argument("--exclude-items", action="append", default=None,
+                   help="items.json of an earlier draw whose papers are held out (repeatable)")
     sc = sub.add_parser("score")
     sc.add_argument("--items", default="out/gold/items.json")
     sc.add_argument("--labels", default="out/gold/labels.csv")
@@ -571,9 +621,9 @@ def main(argv=None) -> int:
                  "discarded": args.discarded, "non_extremal": args.non_extremal,
                  "no_n": args.no_n}
         exclude = set()
-        if args.exclude_items:
-            with open(args.exclude_items, encoding="utf-8") as fh:
-                exclude = {it["paper"] for it in json.load(fh)}
+        for path in args.exclude_items or []:
+            with open(path, encoding="utf-8") as fh:
+                exclude |= {it["paper"] for it in json.load(fh)}
         items = sample(args.extracted, args.analysis, sizes, args.seed, exclude)
         os.makedirs(args.out_dir, exist_ok=True)
         render(items, args.source, args.out_dir)

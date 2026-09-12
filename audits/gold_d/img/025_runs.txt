@@ -1,0 +1,65 @@
+, different random seeds for Dirichlet distributions)
+---
+1 Client Number:K = 10, Client Sampling Rate: 50% Total Communication Round:R = 200 Local Epochs:E = 5 with 3 different random seeds for training
+---
+1 Client Number:K = 10, Client Sampling Rate: 50% Total Communication Round:R = 500 Local Epochs:E = 1 with 3 different random seeds for training
+---
+1, but vary the random seed
+---
+1, but vary the random seed to produce different heterogeneous distributions
+---
+24/SCI/02, and the seed funding for collaborative research grants RC-SFCRG/23-24/R2/SCI/10
+---
+5 times the communication overhead than
+---
+6), and multiple training seeds to ensure robustness against variations in training initialization
+---
+Different Random Training Seeds
+---
+E = 1 and total client number K = 10under 3 different training random seeds
+---
+E = 5 and total client number K = 10 under 3 different training random seeds
+---
+Initialization: all clients initialize the model θ0
+---
+The choice of random training seeds impacts model initialization and the random client sampling
+---
+across the same heterogeneous scenarios using three distinct random seeds to control for this ran-
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+clients; 11) FedInit [55] improves the local consistency by related initialization; 12) NUCFL [56]
+---
+different random seeds under identical settings and data distribution
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+federated learning via partial initialization
+---
+heterogeneous data distributions but also in handling variability from model initialization and random
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+learning via stage-wise relaxed initialization
+---
+method across multiple independent runs or datasets and computes a "critical distance" (CD) thresh-
+---
+only tested on a few datasets or with a few runs
+---
+run with given experimental conditions)
+---
+seed 0
+---
+seed 1
+---
+seed 2
+---
+test (a non-parametric analog to repeated-measures ANOVA)
+---
+to assess the robustness of FedGPS under different training seeds, we initialize the model with three
+---
+total of iteration times of parameter summation operations
+---
+• The instructions should contain the exact command and environment needed to run to

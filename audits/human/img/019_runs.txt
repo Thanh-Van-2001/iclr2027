@@ -1,21 +1,17 @@
-Justification: All the experiments listed are averaged over five different random seeds, and
+BANYAN performance over four random seeds
 ---
-Specifically, we first replicate the
+Repeated application of the diagonal
 ---
-We also replicate the Matern to RQ experiment from § 4
+Scores are the average of four random seeds
 ---
-all results are averaged over five different random seeds represented with1-sigma error bars
+XLM-R runs at batch size 128 across 4xA40 cards
 ---
-detailed instructions for how to replicate the results, access to a hosted model (e
+deviation across four random initialisations
 ---
-experimental runs as well as estimate the total compute
+initialisations
 ---
-it may be necessary to either make it possible for others to replicate the model with
+model performs, although in our case we keep things stable between seeds whereas before simplification caused issues with
 ---
-only tested on a few datasets or with a few runs
+structure through repeated application
 ---
-run with given experimental conditions)
----
-target log-likelihood across five random seeds
----
-• The instructions should contain the exact command and environment needed to run to
+students learn better: The impact of student initialization

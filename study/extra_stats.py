@@ -229,7 +229,79 @@ def _fail_rate(rows: list, p_key: str = "_p", family: str = "table") -> dict:
             "pct_fail_holm": round(100 * fail_holm / n, 1)}
 
 
-def headline_span(comparisons: list) -> dict:
+ABLATION = re.compile(r"(?i)\bablat|\bw/o\b|\bwithout\b|\bcomponent|\bvariant|\bremov|\beffect of\b")
+
+
+def _paper_bootstrap_fail(rows: list, reps: int = 1000, seed: int = 0) -> list:
+    """Percentile interval for the failure rate, resampling papers."""
+    import random
+    by_paper: dict = {}
+    for c in rows:
+        by_paper.setdefault(c["paper"], []).append(c["_p"] >= 0.05)
+    papers = list(by_paper.values())
+    rng = random.Random(seed)
+    vals = []
+    for _ in range(reps):
+        draw = [papers[rng.randrange(len(papers))] for _ in papers]
+        flat = [x for p in draw for x in p]
+        vals.append(100 * sum(flat) / max(len(flat), 1))
+    vals.sort()
+    return [round(vals[int(0.025 * reps)], 1), round(vals[int(0.975 * reps) - 1], 1)]
+
+
+def subset_direction(records: list, comparisons: list) -> dict:
+    """Which way the testable subset is selected, measured two ways.
+
+    (1) The failure rate reweighted to the population's subfield mix, so a
+    subfield that reports bars more often does not dominate. (2) Ablation
+    tables, flagged from the caption, against the rest: the share reporting a
+    bar and the failure rate among the testable, with paper-resampled
+    intervals. Neither settles the direction of the selection; both are
+    reported so that no bound is asserted.
+    """
+    testable = [dict(c) for c in comparisons if c.get("test")]
+    for c in testable:
+        c["_p"] = c["test"]["p"]
+    # (1) reweighting by subfield of the paper title
+    topic = {r["id"]: topic_of(r.get("title", "")) for r in records}
+    by_topic_all: dict = {}
+    by_topic_test: dict = {}
+    for c in comparisons:
+        t = topic[c["paper"]]
+        by_topic_all[t] = by_topic_all.get(t, 0) + 1
+    for c in testable:
+        t = topic[c["paper"]]
+        d = by_topic_test.setdefault(t, [0, 0])
+        d[0] += 1
+        d[1] += c["_p"] >= 0.05
+    n_all = len(comparisons)
+    covered = sum(n for t, n in by_topic_all.items() if t in by_topic_test)
+    reweighted = sum(by_topic_all[t] / covered * (d[1] / d[0]) for t, d in by_topic_test.items())
+    # (2) ablation tables
+    abl = [c for c in comparisons if ABLATION.search(c.get("caption") or "")]
+    main = [c for c in comparisons if not ABLATION.search(c.get("caption") or "")]
+    def neither(rows):
+        return round(100 * sum(1 for c in rows if c["winner_dispersion"] is None
+                                and c["runner_dispersion"] is None) / max(len(rows), 1), 1)
+    abl_t = [c for c in testable if ABLATION.search(c.get("caption") or "")]
+    main_t = [c for c in testable if not ABLATION.search(c.get("caption") or "")]
+    def fr(rows):
+        return round(100 * sum(1 for c in rows if c["_p"] >= 0.05) / max(len(rows), 1), 1)
+    return {
+        "reweighted_to_population_subfields": {"pct_fail": round(100 * reweighted, 1),
+                                               "n": len(testable),
+                                               "pct_population_covered": round(100 * covered / n_all, 1)},
+        "ablation": {"n_all": len(abl), "pct_of_comparisons": round(100 * len(abl) / n_all, 1),
+                     "pct_neither": neither(abl), "n_testable": len(abl_t),
+                     "pct_testable": round(100 * len(abl_t) / max(len(abl), 1), 1),
+                     "pct_fail": fr(abl_t), "ci_fail": _paper_bootstrap_fail(abl_t)},
+        "main": {"n_all": len(main), "pct_neither": neither(main), "n_testable": len(main_t),
+                 "pct_testable": round(100 * len(main_t) / max(len(main), 1), 1),
+                 "pct_fail": fr(main_t), "ci_fail": _paper_bootstrap_fail(main_t)},
+    }
+
+
+def headline_span(comparisons: list, records: list = None) -> dict:
     """Every row of the conventions table, each on a stated population.
 
     A reviewer pointed out that the span quoted in an earlier draft ran from a
@@ -240,17 +312,18 @@ def headline_span(comparisons: list) -> dict:
     population rows only.
     """
     import math
-    from analyze import test_comparison, _standard_error
-    from paperengine.stats import norm_cdf
+    from analyze import test_comparison, _standard_error, p_value
 
     testable = [dict(c) for c in comparisons if c.get("test")]
     for c in testable:
         c["_p"] = c["test"]["p"]
-        c["_pt"] = c["test"].get("p_t", c["test"]["p"])
+        c["_pz"] = c["test"]["p_z"]
     rows = {}
     rows["as_reported"] = _fail_rate(testable)
     rows["holm_family_paper"] = _fail_rate(testable, family="paper")
-    rows["welch_t_where_defined"] = _fail_rate(testable, p_key="_pt")
+    # The two-sample z on every testable comparison: the bars taken as exact,
+    # the reading most favourable to the field.
+    rows["z_two_sided"] = _fail_rate(testable, p_key="_pz")
 
     # Unlabelled bars read as standard errors, labelled bars as stated.
     se_rows = []
@@ -292,14 +365,21 @@ def headline_span(comparisons: list) -> dict:
             kind = c["dispersion_kind"]
             se_w = _standard_error(c["winner_dispersion"], kind, c["n_runs"])
             se_r = _standard_error(c["runner_dispersion"], kind, c["n_runs"])
-            var = se_w ** 2 + se_r ** 2 - 2 * rho * se_w * se_r
-            if var <= 0:
+            r = p_value(c["gap"], se_w, se_r, c["n_runs"], rho=rho)
+            if r is None:
                 continue
-            d = dict(c); d["_p"] = 2 * (1 - norm_cdf(abs(c["gap"] / math.sqrt(var)))); rr.append(d)
+            d = dict(c); d["_p"] = r["p"]; rr.append(d)
         rows[f"rho_{rho}"] = _fail_rate(rr)
 
     one_sided = [dict(c, _p=c["test"]["p"] / 2) for c in testable]
     rows["one_sided"] = _fail_rate(one_sided)
+
+    # The same comparisons reweighted to the population's subfield mix, so a
+    # subfield that reports bars more often does not dominate the rate.
+    if records is not None:
+        sd = subset_direction(records, comparisons)["reweighted_to_population_subfields"]
+        rows["reweighted_subfields"] = {"n": len(testable), "pct_fail": sd["pct_fail"],
+                                        "pct_fail_holm": None}
 
     # The rho rows are a matched-seed hypothetical: run-to-run fluctuations of
     # two methods are independent unless the seeds were matched, which print
@@ -472,11 +552,12 @@ def compute(records: list, comparisons: list, pct_neither: float,
         "headline_with_comparison_audit": headline_with_comparison_audit(
             pct_neither, json.load(open("out/gold_set_heldout.json", encoding="utf-8"))["no_bar"]["error_bar_truly_absent"]),
         "failure_by_gap_band": failure_by_gap_band(comparisons),
-        "headline_span": headline_span(comparisons),
+        "headline_span": headline_span(comparisons, records),
         "venue_counts": venue_counts(records, comparisons),
         "other_routes": other_routes(records, comparisons),
         "topic_breakdown": topic_breakdown(records, comparisons),
         "holm_families": holm_families(comparisons),
+        "subset_direction": subset_direction(records, comparisons),
     }
 
 

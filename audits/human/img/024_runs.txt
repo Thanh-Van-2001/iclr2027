@@ -1,4 +1,14 @@
+Means of Components For generating means of the components, we first sample K −1 times from
+---
+The average scores over 5 runs are reported with
+---
+We repeat this procedure for 5 times with different
+---
+We run the methods for 5 different seeds, corresponding to 5
+---
 be necessary to either make it possible for others to replicate the model with the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
 ---
 experimental runs as well as estimate the total compute
 ---
@@ -8,6 +18,6 @@ only tested on a few datasets or with a few runs
 ---
 run with given experimental conditions)
 ---
-standard deviation over five independent runs
+seeds for the random number generator
 ---
 • The instructions should contain the exact command and environment needed to run to

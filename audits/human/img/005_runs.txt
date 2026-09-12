@@ -1,9 +1,25 @@
-(e) Seeds
+Episodes
 ---
-Seeds
+Impact of Training Episodes Number on RL
 ---
-edu/dataset/236/seeds
+Training Episodes
 ---
-the ground truth (We use Seeds dataset for this experiment)
+We plot the average training curves over three runs with
 ---
-trix of seed dataset
+different seeds
+---
+different training episodes and report the Hallu-Rate and
+---
+episodes
+---
+episodes from 2000 to 10000, and the LLM-Judge scores
+---
+further improved with more training episodes, indicating
+---
+model with different training episodes on the MMMC dataset
+---
+response length experiences a jump at around 300 episodes
+---
+responses with tedious, repeated, and irrelevant information
+---
+results of SFT and RL are averaged across three runs with different seeds, and the standard deviations are reported in parentheses

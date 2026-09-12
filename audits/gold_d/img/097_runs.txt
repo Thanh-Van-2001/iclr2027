@@ -1,0 +1,79 @@
+5000 seeds for both UCB1 and Greedy for each α and p
+---
+Each line in these figures corresponds to the cumulative regret for a particular seed
+---
+Figure 9 shows a typical run of epistemic variance (EV) and total variance (TV) for a particular
+---
+Figure 9: Example Run (p = 0
+---
+For all the bandit experiments, we run the algorithm for T = 200 trials
+---
+For each α and p, we run 10 seeds
+---
+For the 3 LLMs that we consider, we consistently observe that Repeated has the
+---
+Given T runs, J seeds, and
+---
+Here, we seed that in general, the algorithm that uses the epistemic variance estimate generally has
+---
+In a bandit problem, we have multiple trials (or equivalently rounds), where the agent must choose an
+---
+LLM seed
+---
+REPEATED TASK
+---
+Repeated
+---
+Repeated returns the lowest variational aleatoric uncertainty estimate
+---
+Since we repeat the covariates, we only
+---
+So far you have played 7 times with your past choices and rewards
+---
+The Repeated sampling method
+---
+To mitigate the cost of increases prompt size and the number of test data points, we use Repeated
+---
+Trial
+---
+We also plot the average cumulative regret across different seeds for p = 0
+---
+We denote run or seed to refer to a particular chain of trials
+---
+We run
+---
+We use mean regret and worst-case mean regret (from the 30% of worst performing seeds)
+---
+Z that repeats x∗or are perturbations of x∗
+---
+a single y∗(varying the LLM seed for every permutation) and fit a normal distribution to these
+---
+auxiliary examples (with the exception of the Repeated where we have a single auxiliary example)
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+blue button: pressed 3 times with average reward 0
+---
+chosen in the trials [t, T]
+---
+decrease in epistemic uncertainty with the number of trials is significantly faster, and therefore, we
+---
+each α and p, we run 10 seeds
+---
+example to create Z; Repeated, where Z is chosen to be the test example itself; Random, where Z
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+for the first token that is generated, which remains constant with respect to the choice of LLM seed
+---
+frequency and K · MinFrac are metrics introduced in [49] to assess the performance of bandit runs
+---
+green button: pressed 2 times with average reward 0
+---
+i=1 is the prior action, reward pairs already observed in a run
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+mean and standard deviation across the different seeds

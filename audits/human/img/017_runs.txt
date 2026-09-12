@@ -1,8 +1,10 @@
-Justification: We repeat all experiments five times with different random seeds and report
+Justification: We report the mean and standard deviation across five random trials
 ---
-Values are averaged over five runs
+The mean and standard deviation are calculated over five independent runs
 ---
 be necessary to either make it possible for others to replicate the model with the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
 ---
 experimental runs as well as estimate the total compute
 ---
@@ -10,10 +12,6 @@ instructions for how to replicate the results, access to a hosted model (e
 ---
 only tested on a few datasets or with a few runs
 ---
-repeated five times with different random seeds for statistical robustness
----
 run with given experimental conditions)
----
-with different random seeds and report the mean and standard deviation
 ---
 • The instructions should contain the exact command and environment needed to run to

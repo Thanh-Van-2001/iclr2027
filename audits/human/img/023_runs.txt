@@ -1,39 +1,39 @@
-, cells that no longer replicate)
+A cosine annealing scheduler with warm restarts (T0 = 10, Tmult = 2) is also used
 ---
-Each value is averaged over five runs
+For external validation, each of the 5 fold-specific models trained on
 ---
-For additional scenarios with nleaves = 128 and 256, as well as per-run standard
+In each fold, patients are stratified by label
 ---
-Mid datasets, we report the mean and standard deviation over three independent runs
+Inference times per WSI are 4
 ---
-The cells replicate
+Results are reported as AUC (mean ±95% CI from 5-fold cross-validation)
 ---
-The reported values are means across ten runs, with standard
+Sgdr: Stochastic gradient descent with warm restarts
 ---
-The reported values are means across ten runs, with standard deviations in parentheses
+Training times for BLCA are 12 hours for UNI, 21 hours for Gigapath, and 24 hours for H-Optimus-0
 ---
-The reported values are means across three runs, with
+as concordance index (C-index) with 95% confidence intervals from 5-fold cross-validation
 ---
-This creates a replicate of the
+be necessary to either make it possible for others to replicate the model with the same
 ---
-across 25 trails (5 distinct model tree × 5 replicate sample tree per model tree
+cation tasks in terms of AUC (mean ± 95% CI from 5-fold cross-validation)
 ---
-across five runs, with standard deviations in parentheses
+evaluated under 5-fold cross-validation at the patient level
 ---
-across ten runs, with standard deviations in parentheses
+example, train/test split, initialization, random drawing of some parameter, or overall
 ---
-did not run any experiment on C
+experimental runs as well as estimate the total compute
 ---
-elegans Large are run once due to the high computational
+fication tasks in terms of AUPRC (mean ± 95% CI from 5-fold cross-validation)
 ---
-fault, which runs in time O(n3) for n taxa
+in terms of AUPRC (mean ± 95% CI from 5-fold cross-validation)
 ---
-he reported values are means across three runs, with standard
+instructions for how to replicate the results, access to a hosted model (e
 ---
-runs, with standard deviations in parentheses
+only tested on a few datasets or with a few runs
 ---
-tree, a small amount of Gaussian noise is added to create a replicate set of signal features
+run with given experimental conditions)
 ---
-values are means across five runs, with standard deviations in
+the fold-specific validation set
 ---
-we report results from a single run due to the high computational cost—stemming from both the large number of training
+• The instructions should contain the exact command and environment needed to run to

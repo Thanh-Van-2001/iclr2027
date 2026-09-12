@@ -1,31 +1,47 @@
-All results are obtained by averaging over three independent runs
+(n = 3 seeds)
 ---
-Due to multiple local minima, Optuna identified several optimal hyper-parameter sets in each run
+Lines indicate mean top-1 accuracy and error bars represent SD (n = 3 seeds)
 ---
-The code used to run our experiments builds upon the recent work (Fu et al
+Neuronal responses in the primate visual system exhibit trial-to-trial variability
 ---
-The results are obtained as an average over three different random seeds for the initial velocity
+Trial-by-Trial Behaviour of CNNs and Humans by Measuring Error Consistency”
 ---
-The results are obtained by averaging over three independent runs
+Values indicate mean ± SD (n = 2 seeds)
 ---
-TiO2 dataset and are obtained by averaging over three independent runs
+Values indicate mean ± SD (n = 3 seeds)
 ---
-To select the hyperparameters in Table A13, a series of MD simulations with a fixed random number seed for the initial
+We run PGD for N = 64 iterations, where each step
 ---
-are obtained by averaging over three independent runs
+We trained three random seeds for
 ---
-averaging over three independent runs
+accurately replicate the response-property studies used for tuning (see Table B1 for the reference
 ---
-by averaging over three independent runs
+be necessary to either make it possible for others to replicate the model with the same
 ---
-errors are obtained by averaging over three independent runs
+example, train/test split, initialization, random drawing of some parameter, or overall
 ---
-main focus is training general-purpose MLIPs that can be used to run molecular dynamics (MD) simulations and geometry
+experimental runs as well as estimate the total compute
 ---
-obtained by averaging over three independent runs
+indicate mean ± SD (n = 2 seeds)
 ---
-original datasets using a random seed and selected the training datasets of predefined sizes
+indicate the mean accuracy and shaded error bars denote SD (n = 3 seeds)
 ---
-random seeds for velocities and the selected hyperparameters was used
+instructions for how to replicate the results, access to a hosted model (e
 ---
-three independent runs
+mean ± SD (n = 2 seeds)
+---
+only tested on a few datasets or with a few runs
+---
+partial least squares (PLS) regression under a 10-fold cross-validation scheme
+---
+run with given experimental conditions)
+---
+seeds)
+---
+six targeted ablations and one architectural addition (two seeds each)
+---
+the unit level to maintain an overall variability with a unit Fano factor, while trial-to-trial activations
+---
+top-1 accuracy and error bars denote SD (n = 3 seeds)
+---
+• The instructions should contain the exact command and environment needed to run to

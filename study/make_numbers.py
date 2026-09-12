@@ -30,20 +30,25 @@ def _write_resolution_table(br: dict, path: str) -> None:
     generated fragment carries the environment with it and is included at the
     point where the table belongs.
     """
-    order = ["ImageNet", "CIFAR-10", "CIFAR-100", "MMLU", "GSM8K",
-             "SST-2", "WinoGrande", "TruthfulQA"]
+    # Every benchmark with thirty or more matched comparisons, largest split
+    # first; an earlier version listed a hand-picked eight, which a reviewer
+    # rightly called a selection.
+    MIN_N = 30
+    order = sorted((k for k, d in br["by_benchmark"].items() if d["n"] >= MIN_N),
+                   key=lambda k: -br["by_benchmark"][k]["size"])
     rows = []
     for name in order:
-        d = br["by_benchmark"].get(name)
-        if not d:
-            continue
+        d = br["by_benchmark"][name]
         size = format(d["size"], ",").replace(",", "{,}")
         rows.append(name + " & " + size + " & " + str(d["n"]) + " & "
+                    + f"{d['median_gap']:.1f}" + " & " + f"{d['median_resolution']:.1f}" + " & "
                     + str(d["pct_below"]) + chr(92) + "%")
     caption = ("Reported gaps against the resolution of the benchmark they are "
-               "measured on. The pattern is the check on the method: the largest "
-               "evaluation split has the smallest share of unresolvable gaps, and "
-               "the smallest splits have nearly all of them.")
+               "measured on, for every benchmark with thirty or more matched "
+               "comparisons. Gap and resolution are medians in points at the "
+               "comparison's own pooled accuracy. The share below resolution is "
+               "not a function of split size alone: it depends on the gaps a "
+               "field reports on that benchmark.")
     nl = chr(10)
     rowsep = " " + chr(92) * 2 + nl
     b = chr(92)
@@ -53,9 +58,9 @@ def _write_resolution_table(br: dict, path: str) -> None:
         b + "centering",
         b + "caption{" + caption + "}",
         b + "label{tab:resolution}",
-        b + "begin{tabular}{lrrr}",
+        b + "begin{tabular}{lrrrrr}",
         b + "toprule",
-        "Benchmark & Split size & Comparisons & Gap below resolution " + b * 2,
+        "Benchmark & Split size & Comparisons & Gap & Resolution & Below " + b * 2,
         b + "midrule",
         rowsep.join(rows) + " " + b * 2,
         b + "bottomrule",
@@ -325,6 +330,10 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     br = _j("benchmark_resolution")
     brun = "benchmark_resolution-70df59d3"
     reg.add("resolution comparisons", br["n_comparisons"], provenance=brun)
+    cu = br["checkable_union"]
+    reg.add("checkable item route", rf"{cu['pct_item_route']}\%", provenance=brun)
+    reg.add("checkable union", rf"{cu['pct_union']}\%", provenance=brun)
+    reg.add("checkable overlap", cu["overlap"], provenance=brun)
     reg.add("resolution papers", br["n_papers"], provenance=brun)
     reg.add("resolution median gap", f"{br['median_gap']}", provenance=brun)
     reg.add("resolution median res", f"{br['median_resolution']}", provenance=brun)
@@ -365,9 +374,8 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("span low", rf"{span['span'][0]}\%", provenance="headline_span")
     reg.add("span high", rf"{span['span'][1]}\%", provenance="headline_span")
     reg.add("span n", span["n_full_population"], provenance="headline_span")
-    reg.add("fail welch t", rf"{hs['welch_t_where_defined']['pct_fail']}\%", provenance="headline_span")
-    reg.add("fail welch t holm", rf"{hs['welch_t_where_defined']['pct_fail_holm']}\%",
-            provenance="headline_span")
+    reg.add("fail z", rf"{hs['z_two_sided']['pct_fail']}\%", provenance="headline_span")
+    reg.add("fail z holm", rf"{hs['z_two_sided']['pct_fail_holm']}\%", provenance="headline_span")
     for key, name in (("as_reported", "as reported"), ("one_sided", "one sided"),
                       ("unlabelled_as_sem", "unlabelled as sem full"), ("rho_0.5", "rho half"),
                       ("rho_0.9", "rho nine"), ("labelled_only", "labelled only"),
@@ -377,6 +385,17 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("fail holm paper", rf"{hs['holm_family_paper']['pct_fail_holm']}\%", provenance="headline_span")
     reg.add("unlabelled as sem full", rf"{hs['unlabelled_as_sem']['pct_fail']}\%", provenance="headline_span")
     reg.add("labelled only n", hs["labelled_only"]["n"], provenance="headline_span")
+    sd = _j("extra_stats")["subset_direction"]
+    reg.add("reweighted fail", rf"{sd['reweighted_to_population_subfields']['pct_fail']}\%", provenance="extra_stats")
+    reg.add("ablation share", rf"{sd['ablation']['pct_of_comparisons']}\%", provenance="extra_stats")
+    reg.add("ablation neither", rf"{sd['ablation']['pct_neither']}\%", provenance="extra_stats")
+    reg.add("main neither", rf"{sd['main']['pct_neither']}\%", provenance="extra_stats")
+    reg.add("ablation n testable", sd["ablation"]["n_testable"], provenance="extra_stats")
+    reg.add("main n testable", sd["main"]["n_testable"], provenance="extra_stats")
+    reg.add("ablation fail", rf"{sd['ablation']['pct_fail']}\% [{sd['ablation']['ci_fail'][0]}, {sd['ablation']['ci_fail'][1]}]",
+            provenance="extra_stats")
+    reg.add("main fail", rf"{sd['main']['pct_fail']}\% [{sd['main']['ci_fail'][0]}, {sd['main']['ci_fail'][1]}]",
+            provenance="extra_stats")
     reg.add("strict n", hs["caption_run_count_only"]["n"], provenance="headline_span")
 
     wt = _j("analysis_2025")["welch_t"]
@@ -387,7 +406,7 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("runs q one", wt["runs_quartiles"][0], provenance="analysis_2025")
     reg.add("runs q three", wt["runs_quartiles"][2], provenance="analysis_2025")
     reg.add("pct runs le three", rf"{wt['pct_runs_le_3']}\%", provenance="analysis_2025")
-    reg.add("fail welch t twenty four", rf"{_j('analysis_2024')['welch_t']['pct_fail_t']}\%",
+    reg.add("fail z twenty four", rf"{_j('analysis_2024')['welch_t']['pct_fail_z_all']}\%",
             provenance="analysis_2024")
 
 
@@ -495,6 +514,7 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("max pdf mb", ps["max_pdf_bytes"] // 1_000_000, provenance="pipeline_stats")
     reg.add("skipped large", ps["skipped_large"], provenance="pipeline_stats")
     reg.add("download failed", ps["download_failed"] + ps["parse_failed"], provenance="pipeline_stats")
+    reg.add("drawn twenty five", ps["drawn"], provenance="pipeline_stats")
 
     # The gold set: the instrument scored field by field against tables read
     # blind. Development set (found the bugs), the same set re-scored after
@@ -554,6 +574,41 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("gold held no runs frac", _frac(h0["fields"]["reader_found_no_run_count"]), provenance=grun)
     reg.add("gold held kind", rf"{h0['fields']['disp_treatment']['pct']}\%", provenance=grun)
     reg.add("gold held kind literal", rf"{h0['fields']['disp_type']['pct']}\%", provenance=grun)
+
+    # The run-count adjudication: every held-out item where the reader found no
+    # run count and the released pipeline attaches one was re-read with the
+    # whole paper (audits/gold_b/run_count_adjudication.json).
+    from paperengine.stats import wilson_interval
+    with open("audits/gold_b/run_count_adjudication.json", encoding="utf-8") as fh:
+        adj = json.load(fh)
+    verdicts = [a["verdict"] for a in adj["adjudicated"]]
+    n_adj = len(verdicts)
+    n_miss = verdicts.count("reader_miss")
+    n_not = sum(1 for v in verdicts if v != "reader_miss")
+    found = h0["fields"]["n_runs_when_reader_found_one"]
+    prec_ok, prec_n = found["correct"] + n_miss, found["n"] + n_adj
+    lo, hi = wilson_interval(prec_ok, prec_n)
+    arun = "run_count_adjudication"
+    reg.add("adj reader no count", adj["reader_no_count_items"], provenance=arun)
+    reg.add("adj pipeline has count", n_adj, provenance=arun)
+    reg.add("adj reader miss", n_miss, provenance=arun)
+    reg.add("adj not run count", n_not, provenance=arun)
+    reg.add("adj papers not run count", len({a["id"] for a in adj["adjudicated"] if a["verdict"] != "reader_miss"}), provenance=arun)
+    reg.add("run count precision frac", f"{prec_ok} of {prec_n}", provenance=arun)
+    reg.add("run count precision", rf"{100 * prec_ok / prec_n:.1f}\% [{100 * lo:.1f}, {100 * hi:.1f}]", provenance=arun)
+    reg.add("run count precision pct", rf"{100 * prec_ok / prec_n:.1f}\%", provenance=arun)
+    # The checkable share if every wrongly attached run count is removed:
+    # comparisons testable without a count keep their status, the rest are
+    # scaled by the measured precision.
+    a25 = _j("analysis_2025")
+    n_with = a25["welch_t"]["n_with_t"]
+    n_test = a25["comparisons"]["n_testable"]
+    total = a25["comparisons"]["n_total"]
+    def _scaled(pr):
+        return 100 * (n_test - n_with + pr * n_with) / total
+    reg.add("testable scaled by precision", rf"{_scaled(prec_ok / prec_n):.1f}\%", provenance=arun)
+    reg.add("testable scaled by precision low", rf"{_scaled(lo):.1f}\%", provenance=arun)
+    reg.add("testable scaled by precision high", rf"{_scaled(hi):.1f}\%", provenance=arun)
     reg.add("gold held bold", rf"{h0['fields']['bold_cell']['pct']}\%", provenance=grun)
     reg.add("gold held orientation", rf"{h0['fields']['orientation']['pct']}\%", provenance=grun)
     reg.add("gold held not testable", h0["reader_says_not_testable"], provenance=grun)
@@ -566,6 +621,55 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("gold held post both n", ht["n_testable_under_both"], provenance=grun)
     reg.add("gold held dropped", ht["no_longer_extracted"], provenance=grun)
     reg.add("gold held dropped rightly", ht["no_longer_extracted_and_reader_agreed"], provenance=grun)
+
+    # The frozen set: drawn after the released pipeline was tagged, from papers
+    # no earlier set touched, and nothing was fixed on it. This is the estimate
+    # the paper stands on.
+    gf = _j("gold_set_frozen")
+    gft = gf["testable"]
+    frun = "gold_set_frozen"
+    cl = gft["fields"]["claim_and_values"]
+    reg.add("gold frozen n", gft["n_labelled"], provenance=frun)
+    reg.add("gold frozen papers", cl["n_papers"], provenance=frun)
+    reg.add("gold frozen claim frac", _frac(cl), provenance=frun)
+    reg.add("gold frozen claim", _pct_ci(cl), provenance=frun)
+    reg.add("gold frozen claim pct", rf"{cl['pct']}\%", provenance=frun)
+    reg.add("gold frozen claim paper ci", f"[{cl['paper_ci'][0]}, {cl['paper_ci'][1]}]", provenance=frun)
+    reg.add("gold frozen disagreements", cl["n_disagreements"], provenance=frun)
+    reg.add("gold frozen one paper", cl["max_disagreements_one_paper"], provenance=frun)
+    reg.add("gold frozen agree", _agree(gft), provenance=frun)
+    reg.add("gold frozen agree pct", rf"{gft['verdict_2x2']['per_item_agreement']}\%", provenance=frun)
+    reg.add("gold frozen both n", gft["n_testable_under_both"], provenance=frun)
+    reg.add("gold frozen not testable", gft["reader_says_not_testable"], provenance=frun)
+    reg.add("gold frozen fail reader", rf"{gft['failure_rate_reader_values']}\%", provenance=frun)
+    reg.add("gold frozen fail pipe", rf"{gft['failure_rate_pipeline_values_same_items']}\%", provenance=frun)
+    reg.add("gold frozen pipe fail all", rf"{gft['pipeline_fail_rate_all_items']}\%", provenance=frun)
+    for key, name in (("bold_cell", "bold"), ("orientation", "orientation"), ("direction", "direction"),
+                      ("winner_mean", "winner"), ("winner_disp", "winner disp"), ("runner_mean", "runner"),
+                      ("runner_disp", "runner disp"), ("disp_treatment", "kind"), ("n_runs", "runs")):
+        reg.add(f"gold frozen {name}", rf"{gft['fields'][key]['pct']}\%", provenance=frun)
+    reg.add("gold frozen runs found frac", _frac(gft["fields"]["n_runs_when_reader_found_one"]), provenance=frun)
+    reg.add("gold frozen no runs frac", _frac(gft["fields"]["reader_found_no_run_count"]), provenance=frun)
+    rc_ = gft["fields"]["rival_copied"]
+    reg.add("gold frozen rival copied", _pct_ci(rc_), provenance=frun)
+    reg.add("gold frozen rival copied frac", _frac(rc_), provenance=frun)
+    fnb = gf["no_bar"]
+    reg.add("gold frozen no bar n", fnb["n"], provenance=frun)
+    reg.add("gold frozen no bar absent", _pct_ci(fnb["error_bar_truly_absent"]), provenance=frun)
+    reg.add("gold frozen no bar absent frac", _frac(fnb["error_bar_truly_absent"]), provenance=frun)
+    fnn = gf["no_n"]
+    reg.add("gold frozen no n n", fnn["n"], provenance=frun)
+    reg.add("gold frozen no n found", _pct_ci(fnn["reader_found_a_run_count"]), provenance=frun)
+    reg.add("gold frozen no n found frac", _frac(fnn["reader_found_a_run_count"]), provenance=frun)
+    # The checkable share if the run counts the pattern still misses were
+    # restored at the audited rate: comparisons with both bars and no count,
+    # scaled by the share whose paper states one.
+    _f = fnn["reader_found_a_run_count"]
+    _flo, _fhi = _f["ci"][0] / 100, _f["ci"][1] / 100
+    _pn = y25["pct_no_n"]
+    reg.add("testable with missed counts", rf"{y25['pct_testable'] + _f['pct'] / 100 * _pn:.1f}\%", provenance=frun)
+    reg.add("testable with missed counts low", rf"{y25['pct_testable'] + _flo * _pn:.1f}\%", provenance=frun)
+    reg.add("testable with missed counts high", rf"{y25['pct_testable'] + _fhi * _pn:.1f}\%", provenance=frun)
 
     # the run-count recall audit
     gc = _j("gold_set_no_n")["no_n"]
@@ -606,6 +710,13 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
         provenance="recall_audit_v4")
     reg.add("recall ci", rf"95\% CI [{rc['wilson_95'][0]:.2f}, {rc['wilson_95'][1]:.2f}]",
             provenance="recall_audit_v4")
+    # The pre-fix miss rate is the estimate nothing was fixed on; the post-fix
+    # figure on the same tables is not.
+    from paperengine.stats import wilson_interval as _wi
+    _ok, _n = rc["n_judged"] - rc["missed_in_the_audited_version"], rc["n_judged"]
+    _lo, _hi = _wi(_ok, _n)
+    reg.add("recall pre fix", rf"{100 * _ok / _n:.1f}\% [{100 * _lo:.1f}, {100 * _hi:.1f}]",
+            provenance="recall_audit_v4")
 
     # The LaTeX-source cross-check: independent of the PDF and of the reader.
     lx = _j("latex_crosscheck")
@@ -644,6 +755,17 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("design same borrowed", rf"{ss['borrowed_below_alpha']}\%", provenance=drun)
     reg.add("design same own", rf"{ss['own_below_alpha']}\%", provenance=drun)
     reg.add("design same agree", rf"{ss['per_comparison_agreement']}\%", provenance=drun)
+    # Chance agreement of two verdicts with these marginals, and Cohen's kappa
+    # above it; a constant verdict would agree with the own-bar one at the
+    # larger marginal.
+    _pb, _po = ss["borrowed_below_alpha"] / 100, ss["own_below_alpha"] / 100
+    _pe = _pb * _po + (1 - _pb) * (1 - _po)
+    _pa = ss["per_comparison_agreement"] / 100
+    reg.add("design same kappa", f"{(_pa - _pe) / (1 - _pe):.2f}", provenance=drun)
+    reg.add("design same constant", rf"{100 * max(_po, 1 - _po):.1f}\%", provenance=drun)
+    reg.add("design same both below", ss["both_below"], provenance=drun)
+    reg.add("design same borrowed only", ss["borrowed_only"], provenance=drun)
+    reg.add("design same own only", ss["own_only"], provenance=drun)
     reg.add("design pct subfield sd", rf"{dm['pct_sd_from_subfield']}\%", provenance=drun)
     bt = dm["by_subfield"]
     reg.add("design rl below", rf"{bt['reinforcement learning']['pct_below_alpha']}\%", provenance=drun)

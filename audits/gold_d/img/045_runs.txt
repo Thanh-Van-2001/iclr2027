@@ -1,0 +1,31 @@
+Among the alternatives, random initialization leads to the most significant degradation, which can be
+---
+Justification: the experiments were conducted over 5 runs, and we present the averaged
+---
+The detailed initialization of e0
+---
+We repeat all experiments 5 times and report the average
+---
+attributed to the noise introduced by the semantically void initialization strategy
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+computation time for node-level attention is approximately 5 times that of relation-level attention in
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+is greater in HTGNN, where it is 8 times
+---
+only tested on a few datasets or with a few runs
+---
+paper proposes a novel initialization method based on large language models (LLMs)
+---
+run with given experimental conditions)
+---
+the w/o LLM, we replace the original LLM initialization with Random, Average, Zero initializations
+---
+• The instructions should contain the exact command and environment needed to run to

@@ -1,29 +1,51 @@
-All CURLY-FM and baseline experiments are run using lr = 10−4 learning rate and Adam
+(averaged across 5 trials with depth budget 5)
 ---
-Justification: We report 1-sigma standard deviation across three chosen seeds across all
+1 and with caching repeated sub-
 ---
-The results are averaged over five seeds
+1 and with caching repeated subproblems, Algorithm 2 saves a factor of O
 ---
-The results are averaged over three seeds
+2 (Optimal Lookahead Depth for Minimal Run-
 ---
-TrajectoryNet was run with 250 epochs with the Euler integrator with 20 timesteps per
+Bike dataset, SPLIT has training times of ∼10 seconds,
 ---
-We use (*) to denote runs that did not finish within
+Blossom run for approximately the same amount of time as LicketySPLIT (i
 ---
-be necessary to either make it possible for others to replicate the model with the same
+For most of these datasets, RID with TreeFARMS failed to run in reasonable time
 ---
-experimental runs as well as estimate the total compute
+For this variant, we set λ = 1e −5 and ran our algorithms over 5 trials
 ---
-instructions for how to replicate the results, access to a hosted model (e
+From Table 5, we see that, despite being allowed to run to completion (taking over 10× longer in many cases), Blossom
 ---
-only tested on a few datasets or with a few runs
+If we cache repeated
 ---
-optimizer with default β1, β2, and ϵ values across three seeds and with 1,000 epochs split into 500
+Murtree and GOSDT are not included in the comparison as they take much longer to run for deeper trees
 ---
-results are averaged over three seeds
+Sketch: Running lookahead for a single step involves k different potential splits, and a full run of a standard greedy
 ---
-run with given experimental conditions)
+This is again to ensure that the TreeFARMS algorithm runs in a reasonable amount of time
 ---
-standard deviation over three seeds
+This process is repeated until a termination
 ---
-• The instructions should contain the exact command and environment needed to run to
+We run at most d layers of recursion
+---
+We then run SPLIT and
+---
+averaging results over 3 trials for 3 different values of the hyperparameters α and β, arranged in a grid-based configuration
+---
+because at each level and each feature, LicketySPLIT needs to compute the split (O(|D|) time), then run greedy on the left
+---
+configuration (after grid-search across λ) that yielded the best test loss on that dataset (averaged across 5 trials with depth budget 5)
+---
+l is indeed the minimum by evaluating the second derivative of the run-
+---
+repeat line 14-16 {fetch pj
+---
+right subproblems —we run LicketySPLIT recursively on
+---
+the bar plots that RESPLIT is also able to generate a large number of trees - often times as many as TreeFARMS
+---
+to cache repeated sub-problems
+---
+we cache repeated subproblems, the runtime reduces to
+---
+while GOSDT runs for ∼103 seconds

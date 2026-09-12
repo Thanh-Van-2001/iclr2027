@@ -233,7 +233,8 @@ def correlation_sensitivity(comparisons: list, rhos=(0.0, 0.3, 0.5, 0.7, 0.9)) -
     """
     import math
     from analyze import _standard_error
-    from paperengine.stats import holm_bonferroni, norm_cdf
+    from paperengine.stats import holm_bonferroni
+    from analyze import p_value
 
     out = {}
     for rho in rhos:
@@ -244,11 +245,10 @@ def correlation_sensitivity(comparisons: list, rhos=(0.0, 0.3, 0.5, 0.7, 0.9)) -
             se_r = _standard_error(c["runner_dispersion"], kind, c.get("n_runs"))
             if se_w is None or se_r is None:
                 continue
-            var = se_w ** 2 + se_r ** 2 - 2 * rho * se_w * se_r
-            if var <= 0:
+            r = p_value(c["gap"], se_w, se_r, c.get("n_runs"), rho=rho)
+            if r is None:
                 continue
-            z = c["gap"] / math.sqrt(var)
-            tested.append((c, 2 * (1 - norm_cdf(abs(z)))))
+            tested.append((c, r["p"]))
         if not tested:
             out[str(rho)] = {"n": 0}
             continue

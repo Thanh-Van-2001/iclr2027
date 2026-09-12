@@ -1,0 +1,19 @@
+, 2018) runs in around
+---
+For MNIST, we run the flow for 18K steps, and plot samples every 1200
+---
+On Figure 3, we also replicate this experiment from SVHN to CIFAR10 which are composed of 32 × 32 × 3 dimensional
+---
+We did not manage to replicate
+---
+We optimize it using AdamW with a learning rate of τ = 1e−3 and run it for 5K iterations for k ∈{1, 5, 10, 100}
+---
+We run
+---
+We run the flow for 100K steps, and plot samples every 6667 steps
+---
+We use here n = 100 samples by class, and run the
+---
+step, while for CIFAR10, we run it for 150K steps and plot samples every 10K step
+---
+the ConvNet includes three repeated convolutional blocks, and each block involves a 128-kernel convolution layer, instance

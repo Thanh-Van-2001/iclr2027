@@ -1,0 +1,127 @@
+{
+ "protocol": "Held-out testable items where the reader recorded no run count. For each item where the released pipeline attaches a count, a second reader with the whole paper decided whether the paper states a count that applies to the boxed table.",
+ "reader_no_count_items": 20,
+ "neither_side_has_count": [
+  "001",
+  "007",
+  "013",
+  "016",
+  "029",
+  "047"
+ ],
+ "adjudicated": [
+  {
+   "id": "003",
+   "applicable_n": null,
+   "pipeline_n": 16,
+   "pipeline_n_correct": false,
+   "verdict": "not_a_run_count",
+   "evidence": "Boxed cell: Table 1 (p.7), D'Kitty / UniSO-T cell 243.428 +- 20.137. The pipeline's '16' comes from Appendix G (p.35), inside a quoted EoH prompt that paraphrases the Design-Bench task description of Ant/D'Kitty: \"To evaluate the ground-truth value for a given design, we run robotic simulation in MuJoCo for 100 timesteps, averaging 16 independent trials. These parameters are chosen to reduce stochasticity and allow the simulator to run in a minimal amount of time.\" The same value recurs only as oracle metadata in the JSON on p.44: \"evaluation_trials\": 16, \"simulation_length\": 100. This is the number of MuJoCo rollouts the ORACLE averages to score ONE design in the two robot-morphology tasks; it is not the number of seeds/runs that produced the mean +- std in this table (and it would not apply to Superconductor, TF Bind or GTOPX rows at all). No run/seed count is stated anywhere for the results tables: Sec. 4.1 'Detailed settings' (p.6) gives only epochs (200), batch size (128), BO iterations (200) and 128 final solutions; Appendix B (pp.18-20) gives hyper-parameters only; the only other 'seed' mentions are 'random seed of the data generation procedure as 1' (p.21, dataset generation), 'exact evaluation over multiple seeds' (p.21, reason for excluding NAS), and the real-world task seeds '100 for LunarLander, 100 for RobotPush, and 150 for Rover' (p.22, task-instance seeds, not repetitions). No caption or sentence says 'averaged over N runs/seeds'."
+  },
+  {
+   "id": "005",
+   "applicable_n": 20,
+   "pipeline_n": 20,
+   "pipeline_n_correct": true,
+   "verdict": "reader_miss",
+   "evidence": "Page 7, Section 6 (comparative experiments): \"For each dataset, we repeat the experiments 20 times and compute the average performance. The true number of clustering class is chosen as k for each dataset. Three performance metrics are selected to evaluate the methods: NMI, ARI, and Purity, and larger value indicates better performance. Table 1 reports the comparisons based on the NMI metric, while the results for ARI and Purity are provided in Appendix E.3.\" Appendix E.3 (page 24) confirms Table 4 is those ARI results: \"In the appendix, we continue to demonstrate the performance of the algorithm on ARI and Purity. As can be seen in Table 4 and Table 5, on both ARI and Purity, our method consistently leads against the compared methods across all datasets.\" No other seed/run/trial count appears anywhere in the paper; the only other numeric settings are ensemble size m (e.g. m=10 base clusterings, E.6), which is not a run count. The mean\u00b1std cells in Table 4 (boxed D5 = 67.5\u00b15) are therefore over the same 20 repetitions as Table 1."
+  },
+  {
+   "id": "008",
+   "applicable_n": 3,
+   "pipeline_n": 3,
+   "pipeline_n_correct": true,
+   "verdict": "reader_miss",
+   "evidence": "Table 8 (Appendix K, p.25; caption p.25, text p.24) has no run statement of its own -- Appendix K only says 'We set the number of ensembles to 1 for all different configurations (light-tailed kernel, heavy-tailed kernel, dual-tailed kernel). Our findings (Table 8) reveal ...' (p.24). It therefore inherits the paper-wide protocol, stated twice: Sec. 8.1, p.9: 'Each experiment is repeated on three splits and averaged, with performance measured by AUC-ROC and AUC-PR ... five seeds ({0,1,2,100,1000}) are used for stochastic methods'; Appendix H 'Experiment Setup', p.19: 'We repeat all experiments on three different splits and report average results. ... For stochastic methods, five random seeds {0,1,2,100,1000} are used'. 'All experiments' covers the Appendix K ablation, so each Table 8 cell is an average over 3 splits -> applicable_n = 3. Caveats: (a) the only '3' among the pipeline's pattern matches is p.23 'Each size is run three times with different random seeds, and we report the average wall-clock time' -- that sentence belongs to the Appendix J scalability/runtime experiment (Figure 2), not Table 8, so the pipeline reached the right number via the wrong sentence (the applicable 'three splits' sentence was not among its matches); (b) WSAD-DT is a stochastic deep method, so the 'five seeds for stochastic methods' clause also applies, and the paper never says whether the reported average additionally spans the 5 seeds (3 splits x 5 seeds = 15 runs per cell) -- the explicitly 'averaged' repetition count is the 3 splits, which is what is reported here.",
+   "parenthesised_values_are": "ranks (1)/(2)/(3) per row across the three kernel configurations, not error bars; the table reports point averages only (no std/CI), and the bottom rows are 'AVG Rank' and Wilcoxon p-values -- so a variance-based per-cell test is not supportable regardless of n"
+  },
+  {
+   "id": "009",
+   "applicable_n": 10,
+   "pipeline_n": 10,
+   "pipeline_n_correct": true,
+   "verdict": "reader_miss",
+   "evidence": "Sec. 5.1 Experimental Settings, 'Benchmarks' paragraph, page 6 (the only run-count statement in the paper; it precedes Sec. 5.2 Main Results and Sec. 5.3 Ablation Study and is stated for all experiments): \"In addition, we evaluated DCS under complex attacks by Expectation over Transformations PGD (EOTPGD). All the experiments were repeated 10 times to get the mean value.\" Table 4 (page 8, 'Effectiveness of DCS over different k w/o GSAT', boxed cell = Natural Acc for k=7*7, 90.63 +/- 0.10) is introduced in Sec. 5.3.1 (page 7): \"We evaluate the impact of the initial kernel size on the robustness of DCS under PGD20 attacks, given a fixed receptive field. The results are shown in Table. 4.\" Sec. 5.3.1 states no separate run count, and the mean +/- std format of every Table 4 cell matches the 10-repeat setting. No seed/trial statement exists anywhere else in the paper or appendix."
+  },
+  {
+   "id": "012",
+   "applicable_n": null,
+   "pipeline_n": 16,
+   "pipeline_n_correct": false,
+   "verdict": "not_a_run_count",
+   "evidence": "Boxed cell: Table 13 (p.26), GTOPX 2 / UniSO-N + T5-Small cell -124.995 +- 56.170. The pipeline's '16' comes from Appendix G (p.35), inside a quoted EoH prompt that paraphrases the Design-Bench task description of Ant/D'Kitty: \"To evaluate the ground-truth value for a given design, we run robotic simulation in MuJoCo for 100 timesteps, averaging 16 independent trials. These parameters are chosen to reduce stochasticity and allow the simulator to run in a minimal amount of time.\" The same value recurs only as oracle metadata in the JSON on p.44: \"evaluation_trials\": 16, \"simulation_length\": 100. This is the number of MuJoCo rollouts the ORACLE averages to score ONE design in the two robot-morphology tasks; it is not the number of seeds/runs that produced the mean +- std in this table (and it would not apply to Superconductor, TF Bind or GTOPX rows at all). No run/seed count is stated anywhere for the results tables: Sec. 4.1 'Detailed settings' (p.6) gives only epochs (200), batch size (128), BO iterations (200) and 128 final solutions; Appendix B (pp.18-20) gives hyper-parameters only; the only other 'seed' mentions are 'random seed of the data generation procedure as 1' (p.21, dataset generation), 'exact evaluation over multiple seeds' (p.21, reason for excluding NAS), and the real-world task seeds '100 for LunarLander, 100 for RobotPush, and 150 for Rover' (p.22, task-instance seeds, not repetitions). No caption or sentence says 'averaged over N runs/seeds'."
+  },
+  {
+   "id": "014",
+   "applicable_n": 3,
+   "pipeline_n": 3,
+   "pipeline_n_correct": true,
+   "verdict": "reader_miss",
+   "evidence": "Appendix B 'Implementation Details' (page 15): \"For each task we report mean\u00b1sd over three random initializations. Each model is trained for up to 400 epochs with early stopping (patience=100), and efficiency was assessed by the epoch at which each model achieved its best performance.\" Section 4.1 (page 7) directs the main-results tables to this appendix: \"Please refer to appendix B for details of implementation and appendix C for computational efficiency comparison.\" Table 4 (page 9, copolymer EA/IP) reports mean\u00b1sd cells, matching this statement. The second pipeline match on page 19 (\"we apply RepAug with 3 repeating units to the GCN and GIN baselines\") is a repeat-unit count, not a run count, and concerns Tables 13-14, not Table 4. No other seed/run/trial count appears anywhere in the paper."
+  },
+  {
+   "id": "015",
+   "applicable_n": 10,
+   "pipeline_n": 10,
+   "pipeline_n_correct": true,
+   "verdict": "reader_miss",
+   "evidence": "Boxed cell: Table 7 (p.23), ISO (S) Direction block, CRRL (Ours), [20,40) column = 54.5\u00b1 0.237. Appendix A.4 Dataset Split (p.21) describes exactly the five time-period columns of Tables 2/7 and states: \"To investigate the decoder's performance changes over different time periods, we divide all the datasets into five time periods: [5, 10), [10, 20), [20, 40), [40, 65), [65, 100). ... For each time period, we compute the average of all data performance in the time period. We average performance across 10 random seeds for each data point.\" Table 7 is tied to this setup by the sentence immediately preceding it (p.22): \"The results of main experiment with error intervals (the standard deviation) are as follow:\" and by the Figure 4 caption (p.22): \"We divide the different time phases with blue dashed lines, which correspond to the time phases of Table 2, 7.\" The other pipeline matches do not apply: \"800 trials total (100 per direction)\" (p.20) is the simulation dataset size, not a run count; \"each method was trained 10 times with different random seeds\" (B.7, p.25) is the handwriting-dataset ANOVA, a different experiment (though the same number). No other seed/run count is stated anywhere in the paper; the checklist only says \"Yes, we report error bar in our experiment results.\""
+  },
+  {
+   "id": "021",
+   "applicable_n": 10,
+   "pipeline_n": 10,
+   "pipeline_n_correct": true,
+   "verdict": "reader_miss",
+   "evidence": "Boxed cell: Table 7 (p.23), ISO (J) Trajectory block, CRRL (Ours), [20,40) column = 0.43\u00b1 0.205. Same table and same evidence as item 015. Appendix A.4 Dataset Split (p.21): \"we divide all the datasets into five time periods: [5, 10), [10, 20), [20, 40), [40, 65), [65, 100). ... For each time period, we compute the average of all data performance in the time period. We average performance across 10 random seeds for each data point.\" Table 7 is introduced on p.22 as \"The results of main experiment with error intervals (the standard deviation) are as follow:\" and the Figure 4 caption (p.22) says the time phases \"correspond to the time phases of Table 2, 7.\" The \"800 trials\" match (p.20) is dataset size, not runs; the \"trained 10 times with different random seeds\" sentence (B.7, p.25) concerns the handwriting ANOVA, not Table 7. No other run count is stated."
+  },
+  {
+   "id": "024",
+   "applicable_n": 5,
+   "pipeline_n": 5,
+   "pipeline_n_correct": true,
+   "verdict": "reader_miss",
+   "evidence": "Section 4 'Experimental Setup' (page 7): \"We use the official implementations or public benchmarks [36] of baselines whenever possible. We follow [36] or their configurations to tune the hyperparameters for better performance. We report the mean and standard deviation over five independent runs.\" This is the paper's only run-count statement and is stated as the protocol for the whole evaluation (17 datasets, all baselines). The boxed cell is the 'Ours' Roman-Empire entry of appendix Table 6 (page 24), 93.03 +/- 0.33; the entire 'Ours' row of Table 6 (45.53+/-1.76, 44.34+/-4.39, 55.86+/-0.13, 93.03+/-0.33, 99.45+/-0.12, 79.55+/-0.31) is numerically identical to the G2Former row of main-text Table 2 (page 7), which is directly governed by the five-run statement. Appendix B.4 (page 23) introduces Table 6 only as additional baselines under the same evaluation: \"In addition to H2GCN [71] and FAGCN [3], we also provide experimental results (In Table 6, ...) of CPGNN [72], GPRGNN [9], FSGNN [38], and GloGNN [31].\" No separate protocol, and no statement that any Table 6 number was copied from other papers."
+  },
+  {
+   "id": "025",
+   "applicable_n": 3,
+   "pipeline_n": 3,
+   "pipeline_n_correct": true,
+   "verdict": "reader_miss",
+   "evidence": "Appendix B 'Implementation Details' (page 15): \"For each task we report mean\u00b1sd over three random initializations. Each model is trained for up to 400 epochs with early stopping (patience=100), and efficiency was assessed by the epoch at which each model achieved its best performance.\" Section 4.1 (page 7) directs the main-results tables to this appendix: \"Please refer to appendix B for details of implementation and appendix C for computational efficiency comparison.\" Table 2 (page 8, GlassTemp/MeltingTemp) reports mean\u00b1sd cells, matching this statement. The second pipeline match on page 19 (\"we apply RepAug with 3 repeating units to the GCN and GIN baselines\") is a repeat-unit count, not a run count, and concerns Tables 13-14, not Table 2. No other seed/run/trial count appears anywhere in the paper."
+  },
+  {
+   "id": "026",
+   "applicable_n": null,
+   "pipeline_n": 16,
+   "pipeline_n_correct": false,
+   "verdict": "not_a_run_count",
+   "evidence": "Boxed cell: Table 18 (p.30), Avg. Rank / UniSO-T cell 1.889 +- 1.100. The pipeline's '16' comes from Appendix G (p.35), inside a quoted EoH prompt that paraphrases the Design-Bench task description of Ant/D'Kitty: \"To evaluate the ground-truth value for a given design, we run robotic simulation in MuJoCo for 100 timesteps, averaging 16 independent trials. These parameters are chosen to reduce stochasticity and allow the simulator to run in a minimal amount of time.\" The same value recurs only as oracle metadata in the JSON on p.44: \"evaluation_trials\": 16, \"simulation_length\": 100. This is the number of MuJoCo rollouts the ORACLE averages to score ONE design in the two robot-morphology tasks; it is not the number of seeds/runs that produced the mean +- std in this table (and it would not apply to Superconductor, TF Bind or GTOPX rows at all). No run/seed count is stated anywhere for the results tables: Sec. 4.1 'Detailed settings' (p.6) gives only epochs (200), batch size (128), BO iterations (200) and 128 final solutions; Appendix B (pp.18-20) gives hyper-parameters only; the only other 'seed' mentions are 'random seed of the data generation procedure as 1' (p.21, dataset generation), 'exact evaluation over multiple seeds' (p.21, reason for excluding NAS), and the real-world task seeds '100 for LunarLander, 100 for RobotPush, and 150 for Rover' (p.22, task-instance seeds, not repetitions). No caption or sentence says 'averaged over N runs/seeds'."
+  },
+  {
+   "id": "030",
+   "applicable_n": 3,
+   "pipeline_n": 3,
+   "pipeline_n_correct": true,
+   "verdict": "reader_miss",
+   "evidence": "Appendix B.1 'LVLMs and Evaluation Setup' (page 24): \"For evaluation, we use NVIDIA RTX A6000 GPUs. All evaluation results are reported as the mean and standard deviation over three independent runs, using each model's default generation settings.\" Section 4.1 (page 6) points to this appendix for the experimental settings (\"Detailed model specifications, experimental settings, as well as system and user prompt templates are provided in Appendices B.1 and E.2.\"), and Section 4.2 (page 7) describes Table 2 as the CoT comparison on GPT-4o and Gemini 2.0 Flash on the same E3VQA benchmark. The NeurIPS checklist (page 17) confirms Table 2's +/- values are the error bars: \"We include error bars (+/-) alongside all main accuracy results-capturing variability across test samples or repeated runs-in Table 1 and Table 2\". 'Three independent runs' is the only run count in the paper (no seeds/trials/other counts appear), and 'All evaluation results' covers the boxed M3CoT Gemini 2.0 Flash Pose&Action Ego cell (57.80 +/- 0.20) in Table 2 (page 8)."
+  },
+  {
+   "id": "039",
+   "applicable_n": 3,
+   "pipeline_n": 3,
+   "pipeline_n_correct": true,
+   "verdict": "reader_miss",
+   "evidence": "Appendix B 'Implementation Details' (page 15): \"For each task we report mean\u00b1sd over three random initializations. Each model is trained for up to 400 epochs with early stopping (patience=100), and efficiency was assessed by the epoch at which each model achieved its best performance.\" Section 4.1 (page 7) directs the main-results tables to this appendix: \"Please refer to appendix B for details of implementation and appendix C for computational efficiency comparison.\" Table 3 (page 8, PolyDensity/O2Perm) reports mean\u00b1sd cells, matching this statement. The second pipeline match on page 19 (\"we apply RepAug with 3 repeating units to the GCN and GIN baselines\") is a repeat-unit count, not a run count, and concerns Tables 13-14, not Table 3. No other seed/run/trial count appears anywhere in the paper."
+  },
+  {
+   "id": "044",
+   "applicable_n": 10,
+   "pipeline_n": 10,
+   "pipeline_n_correct": true,
+   "verdict": "reader_miss",
+   "evidence": "Sec. 5.1 Experimental Settings, 'Benchmarks' paragraph, page 6 (the only run-count statement in the paper; it precedes Sec. 5.2 Main Results and Sec. 5.3 Ablation Study and is stated for all experiments): \"In addition, we evaluated DCS under complex attacks by Expectation over Transformations PGD (EOTPGD). All the experiments were repeated 10 times to get the mean value.\" Table 5 (page 8, 'GSAT over different receptive fields with a normal test against the test that canceled X^u', boxed cell = AA for n=2 without X^u, 66.14 +/- 1.60) is introduced in Sec. 5.3.4 (page 8), which explicitly inherits the main-experiment settings: \"Specifically, we use ResNet 18 as the baseline for this ablation study and follow the settings of the major experiments.\" ... \"The results are shown in the last four lines in Table. 5.\" Sec. 5.3.4 states no separate run count, and every Table 5 cell is mean +/- std. No seed/trial statement exists anywhere else in the paper or appendix."
+  }
+ ]
+}

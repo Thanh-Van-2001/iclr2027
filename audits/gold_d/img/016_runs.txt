@@ -1,0 +1,27 @@
+(ARGRE w/o iter) runs nearly as fast as the original LLM (8
+---
+In each fold, we use the ground-truth label of each sample and create a contrastive pair by
+---
+Justification: As described in the Experimental Setup, we perform three runs with different
+---
+To mitigate the effect of randomness, we perform three runs with different
+---
+We perform 2-fold cross-validation on the 654 samples using Mistral-7B and report the average
+---
+[6] Zonghao Ying, Siyang Wu, Run Hao, Peng Ying, Shixuan Sun, Pengyu Chen, Junze Chen, Hao Du,
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+fold cross-validation on the 654 samples using Mistral 7B and report the average accuracy,
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+run with given experimental conditions)
+---
+• The instructions should contain the exact command and environment needed to run to

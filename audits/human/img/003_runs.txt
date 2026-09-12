@@ -1,21 +1,53 @@
-Specifically, the objective of Ant Morphology is to make the Ant robot run quickly and that
+Adversarial Initialization
 ---
-To generate diverse task trials, Wang et al
+Back to adversarial initialization
 ---
-We set the random seed of the data generation procedure as 1 by default
+Diverse Adversarial Initialization
 ---
-are deterministically generated based on random seeds, allowing different seeds to map to distinct task
+In Table 9 and Table 10, reverse predictions with adversarial initializations exhibit greater deviation
 ---
-averaging 16 independent trials
+This validates Adv-BMT’s design of collision initialization + reverse predictions, which couldn’t
 ---
-design, we run robotic simulation in MuJoCo for 100 timesteps,
+Upon reviewing the collisions detected in reverse predictions with real initializations, we found that
 ---
-one seed for one task for evaluation (100 for LunarLander, 100 for RobotPush, and 150 for Rover)
+We design Adv-BMT to have diverse initializations, which do
 ---
-optimize the morphology of an ant-shaped robot, to run as fast as
+We train a Twin Delayed DDPG (TD3) agent for 1 million steps using 8 random seeds
 ---
-reduce stochasticity and allow the simulator to run in a minimal
+adversarial agent attacks the current ego agent based on its recent rollout trajectory records
 ---
-seeds, which exceeds our computation resources
+be necessary to either make it possible for others to replicate the model with the same
 ---
-to run as fast as possible
+catenated and repeated a number of times
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+free-form texts as inputs and extract embeddings to parameterize scene initializations and agent
+---
+from sampled collision initializations, the ADV is added into the scene together with existing traffic
+---
+initializations modify the terminal positions and headings of selected agents, which propagates
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+mechanism is used for selecting collision initializations
+---
+only tested on a few datasets or with a few runs
+---
+physically implausible collision initializations
+---
+prediction enables open-loop rollouts of future behaviors, whereas reverse prediction traces from a
+---
+prediction to generate the adversarial agent, then runs an additional forward prediction pass
+---
+run with given experimental conditions)
+---
+sion initializations for different opponent inter-
+---
+staged pipeline: it first conducts adversarial initializations and then inverse motion
+---
+times for forward prediction and reverse prediction are similar (10E6 and 15E6 steps, respectively)
+---
+• The instructions should contain the exact command and environment needed to run to

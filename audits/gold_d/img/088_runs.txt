@@ -1,0 +1,29 @@
+0005 for all runs
+---
+ERM and SAM run the same numbers of epochs
+---
+ESAM1 denotes the baseline of letting SAM run longer until it reaches the same
+---
+Each run starts from the same initialization θ = 0
+---
+N > 1 requires N times more gradient evaluations to generate a single perturbation ϵ (Eq
+---
+Repeating the above for enough times would
+---
+Run normalized SGD on the mini-batch data at θi
+---
+We let PGN and RSAM run the same amount of time as
+---
+best SAM and TSAM runs based on the final accuracies on validation data
+---
+principle, we can run Eq
+---
+procedure in parallel for s times to get s samples
+---
+sampling step, we run the following steps for N iterations
+---
+simply run the vanilla SAM algorithm for more iterations
+---
+under the same computational budget as TSAM runs
+---
+updating rule in our problem, and run the aforementioned

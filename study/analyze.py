@@ -327,31 +327,49 @@ def _unrank(c: dict) -> dict:
     return c
 
 
+def p_value(gap: float, se_w: float, se_r: float, n, rho: float = 0.0) -> Optional[dict]:
+    """The paper's test: Welch's t at the stated run count, the normal limit without one.
+
+    A standard deviation from three runs is a rough estimate of the true one,
+    and a z test pretends it is exact. Welch's t with Satterthwaite degrees of
+    freedom is what a reader with the same numbers should compute, so it is the
+    headline wherever a run count is printed. A standard error or interval
+    with no run count has no degrees of freedom to attach and is tested in the
+    normal limit, which is what Welch's t becomes as n grows. The z p-value is
+    kept beside it as the reading most favourable to the field.
+    """
+    var = se_w ** 2 + se_r ** 2 - 2 * rho * se_w * se_r
+    if var <= 0:
+        return None
+    se = math.sqrt(var)
+    z = gap / se
+    out = {"z": z, "p_z": 2 * (1 - norm_cdf(abs(z))), "se": se}
+    if n and n >= 2:
+        # A standard error or interval with a stated run count also has
+        # n - 1 degrees of freedom per arm; the earlier version applied Welch
+        # only to deviations, which a reviewer rightly called unnecessary.
+        df = (se_w ** 2 + se_r ** 2) ** 2 / ((se_w ** 4 + se_r ** 4) / (n - 1))
+        out["df"] = df
+        out["p_t"] = 2 * (1 - t_cdf(abs(z), df))
+        out["p"] = out["p_t"]
+        out["test"] = "welch"
+    else:
+        out["p"] = out["p_z"]
+        out["test"] = "z"
+    return out
+
+
 def test_comparison(cmp: dict, kind_override: Optional[str] = None) -> Optional[dict]:
-    """Two-sample z test from the numbers the authors themselves printed."""
+    """The paper's test from the numbers the authors themselves printed."""
     kind = kind_override or cmp["dispersion_kind"]
     se_w = _standard_error(cmp["winner_dispersion"], kind, cmp["n_runs"])
     se_r = _standard_error(cmp["runner_dispersion"], kind, cmp["n_runs"])
     if se_w is None or se_r is None:
         return None
-    se = math.sqrt(se_w ** 2 + se_r ** 2)
-    if se <= 0:
+    out = p_value(cmp["gap"], se_w, se_r, cmp["n_runs"])
+    if out is None:
         return None
-    z = cmp["gap"] / se
-    out = {"z": z, "p": 2 * (1 - norm_cdf(abs(z))), "se": se, "kind_used": kind}
-    # A standard deviation from three runs is a rough estimate of the true one,
-    # and the z test pretends it is exact. Welch's t with Satterthwaite degrees
-    # of freedom is what a reader with the same numbers should compute. It is
-    # only defined when the run count is printed; the z figure is kept as the
-    # headline because it is the reading more favourable to the field.
-    n = cmp["n_runs"]
-    if n and n >= 2:
-        # A standard error or interval with a stated run count also has
-        # n - 1 degrees of freedom per arm; the earlier version applied Welch
-        # only to deviations, which a reviewer rightly called unnecessary.
-        df = se ** 4 / ((se_w ** 4 + se_r ** 4) / (n - 1))
-        out["df"] = df
-        out["p_t"] = 2 * (1 - t_cdf(abs(z), df))
+    out["kind_used"] = kind
     return out
 
 
@@ -405,13 +423,15 @@ def analyse(records: list) -> dict:
 
     with_t = [c for c in testable if "p_t" in c["test"]]
     n_survive_t = sum(1 for c in with_t if c["test"]["p_t"] < 0.05)
-    n_survive_z_same = sum(1 for c in with_t if c["test"]["p"] < 0.05)
+    n_survive_z_same = sum(1 for c in with_t if c["test"]["p_z"] < 0.05)
+    n_survive_z_all = sum(1 for c in testable if c["test"]["p_z"] < 0.05)
     runs_stated = sorted(c["n_runs"] for c in testable if c.get("n_runs"))
     t_test = {
         "n_with_t": len(with_t),
         "survives_t": n_survive_t,
         "pct_fail_t": round(100 * (1 - n_survive_t / max(len(with_t), 1)), 1),
         "pct_fail_z_same_subset": round(100 * (1 - n_survive_z_same / max(len(with_t), 1)), 1),
+        "pct_fail_z_all": round(100 * (1 - n_survive_z_all / max(len(testable), 1)), 1),
         "median_stated_runs": statistics.median(runs_stated) if runs_stated else None,
         "pct_runs_le_3": round(100 * sum(1 for n in runs_stated if n <= 3) / max(len(runs_stated), 1), 1),
         "pct_runs_le_5": round(100 * sum(1 for n in runs_stated if n <= 5) / max(len(runs_stated), 1), 1),

@@ -1,0 +1,6733 @@
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+Cl´ement Bonet * 1 Christophe Vauthier * 2 Anna Korba 1
+Abstract
+Many applications in machine learning involve
+data represented as probability distributions. The
+emergence of such data requires radically novel
+techniques to design tractable gradient flows on
+probability distributions over this type of (infinite-
+dimensional) objects. For instance, being able to
+flow labeled datasets is a core task for applica-
+tions ranging from domain adaptation to transfer
+learning or dataset distillation. In this setting, we
+propose to represent each class by the associated
+conditional distribution of features, and to model
+the dataset as a mixture distribution supported on
+these classes (which are themselves probability
+distributions), meaning that labeled datasets can
+be seen as probability distributions over proba-
+bility distributions. We endow this space with a
+metric structure from optimal transport, namely
+the Wasserstein over Wasserstein (WoW) distance,
+derive a differential structure on this space, and
+define WoW gradient flows. The latter enables to
+design dynamics over this space that decrease a
+given objective functional. We apply our frame-
+work to transfer learning and dataset distillation
+tasks, leveraging our gradient flow construction
+as well as novel tractable functionals that take
+the form of Maximum Mean Discrepancies with
+Sliced-Wasserstein based kernels between proba-
+bility distributions.
+1. Introduction
+Probability measures provide a powerful way to represent
+many data types. For instance, they allow to naturally repre-
+sent documents (Kusner et al., 2015), genes (Bellazzi et al.,
+2021), point clouds (Qi et al., 2017; Geuter et al., 2025),
+images (Sodini et al., 2025), or single-cell data (Persad et al.,
+*Equal contribution
+1ENSAE, CREST, IP Paris 2Universit´e
+Paris-Saclay, Laboratoire de Math´ematique d’Orsay. Correspon-
+dence to: Cl´ement Bonet <clement.bonet@ensae.fr>, Chrisophe
+Vauthier <christophe.vauthier@universite-paris-saclay.fr>.
+Proceedings of the 42 nd International Conference on Machine
+Learning, Vancouver, Canada. PMLR 267, 2025. Copyright 2025
+by the author(s).
+2023; Haviv et al., 2024b). Remarkably, it has been shown
+that one can embed any finite dataset with little or no distor-
+tion (Andoni et al., 2018; Kratsios et al., 2023) in the Wasser-
+stein space, i.e., the space of probability distributions (e.g.,
+over a Euclidean space) equipped with the Wasserstein-2 dis-
+tance from Optimal Transport (OT). This has motivated the
+use of this space to embed many types of data ranging from
+words (Vilnis & McCallum, 2015) to knowledge graphs
+(He et al., 2015; Wang et al., 2022), graphs (Bojchevski &
+G¨unnemann, 2018; Petric Maretic et al., 2019), or neuro-
+science data (Bonet et al., 2023). Therefore, it is essential to
+develop tools to work on the space of probability measures
+over probability measures, also known as random measures.
+In particular, they provide a natural way to represent labeled
+datasets as mixtures (Alvarez-Melis & Fusi, 2020).
+A natural distance on this space is the Wasserstein over
+Wasserstein distance (WoW) (Nguyen, 2016; Catalano
+& Lavenant, 2024), also known as the Hierarchical OT
+distance, which lifts the Wasserstein distance between prob-
+ability distributions as a ground cost, to define a Wasserstein
+distance between random measures. The latter has been used
+for generative modeling applications (Dukler et al., 2019),
+domain adaptation tasks (El Hamri et al., 2022), comparing
+documents (Yurochkin et al., 2019) or multilevel clustering
+(Ho et al., 2017). It has also been used to compare Gaussian
+mixtures (Chen et al., 2018; Delon & Desolneux, 2020;
+Wilson et al., 2024) or generic mixtures (Dusson et al., 2023;
+Chen & Zhang, 2024). However, its poor sample complexity
+has motivated the development of alternative distance mea-
+sures, such as those based on Integral Probability Metrics
+(Catalano & Lavenant, 2024). Nonetheless, this space pos-
+sesses a rich Riemannian structure, enabling the definition
+of concepts like geodesics. This has been leveraged recently
+by Haviv et al. (2024a) to perform generative modeling over
+the space of probability distributions with Flow Matchings.
+While this space naturally supports a range of machine learn-
+ing tasks, optimization methods tailored to it have received
+limited attention. Yet, this is important for multiple ap-
+plications, including variational inference with a Gaussian
+mixture family (Lambert et al., 2022; Huix et al., 2024),
+computing barycenters (Delon & Desolneux, 2020), or flow-
+ing datasets (Alvarez-Melis & Fusi, 2021), e.g., for domain
+adaptation, transfer learning (Alvarez-Melis & Fusi, 2021;
+Hua et al., 2023) or dataset distillation (Wang et al., 2018).
+1
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+In this paper, we propose to leverage the Riemannian struc-
+ture of random measures equipped with the WoW distance,
+by defining and simulating gradient flows, i.e., paths of ran-
+dom measures that follow the steepest descent of a given
+objective functional.
+Related works.
+An elegant and popular way to perform
+optimization over probability distributions (over a manifold)
+is to leverage the Riemannian structure of the Wasserstein
+space (Otto, 2001), and to use Wasserstein gradient flows
+(Ambrosio et al., 2008; Santambrogio, 2017). Several time
+discretizations of these flows have been studied (Jordan
+et al., 1998; Salim et al., 2020; Bonet et al., 2024), and
+they have been applied to simulate the flow dynamics of
+multiple objectives such as the Kullback-Leibler divergence
+(Wibisono, 2018; Salim et al., 2020; Diao et al., 2023), the
+Maximum Mean Discrepancy (MMD) (Arbel et al., 2019;
+Altekr¨uger et al., 2023; Hertrich et al., 2024a;b) and variants
+thereof (Glaser et al., 2021; Chen et al., 2024; Neumayer
+et al., 2024; Chazal et al., 2024) or the Sliced-Wasserstein
+distance (Liutkus et al., 2019; Du et al., 2023; Bonet et al.,
+2025). Yet, all these works focus on the case where the prob-
+ability distributions are defined over a finite-dimensional
+manifold, e.g.
+Rd.
+In practice, simulating these flows
+often boils down to simulating a particle system in Rd.
+Hence, these works do not address probability distributions
+defined on infinite-dimensional spaces, such as the space
+of probability measures, which is the focus of this work.
+The closest works to ours are the ones of Alvarez-Melis &
+Fusi (2021) and Hua et al. (2023). These papers cast labeled
+datasets as measures over a product space of the features
+and the conditional distributions (i.e., the distributions of
+the features of a given class). However, they circumvent the
+issue of designing gradient flows on this space by modeling
+the conditional probabilities as Gaussian distributions, hence
+parametrized by a mean and covariance, which are finite-
+dimensional objects. While this enables them to leverage
+standard Wasserstein gradient flows, this Gaussian modeling
+of mixture components is a strong assumption that may not
+capture the true shape of many labeled datasets in practice.
+Contributions.
+In this work, we introduce a principled
+framework for optimizing functionals over the space of
+probability measures on probability measures, leveraging
+the Riemannian structure of this space to develop Wasser-
+stein over Wasserstein (WoW) gradient flows. We provide
+a theoretical construction of the flows, and then a practical
+implementation through time discretization using a forward
+Euler scheme. We also propose a novel functional objective,
+that writes as an MMD with kernel between distributions
+based on the Sliced-Wasserstein distance, and whose gradi-
+ent flow simulation is tractable. We then apply this scheme
+to flow datasets viewed as random measures; specifically, as
+mixtures of probability distributions corresponding to the
+class-conditional distributions. We focus on image datasets,
+and show that the flow enables structured transitions of
+classes toward other classes, with applications to transfer
+learning and dataset distillation.
+Notations.
+For a Riemannian manifold M, d : M ×
+M →R+ is its geodesic distance. For x ∈M, we denote
+by TxM the tangent space at x, and by ∥· ∥x the Rieman-
+nian metric. We define by TM = {(x, v), x ∈M and v ∈
+TxM} the tangent bundle. We define for (x, v) ∈TM
+the projections πM(x, v) = x and πv(x, v) = v. exp :
+TM →M is the exponential map.
+For x ∈M, if
+expx : TxM →M is invertible, we note logx its inverse.
+∇and div refer to the Riemannian gradient and divergence
+on M. For a metric space (X, d), P2(X) denotes the space
+of probability distributions on X with second finite mo-
+ments, i.e., P2(X) = {µ ∈P(X),
+R
+d(x, o)2dµ(x) < ∞}
+with o ∈X some arbitrary origin. For any µ ∈P2(M),
+L2(µ, TM) is the set of functions v : M →TM
+such that
+R
+∥v(x)∥2
+xdµ(x) < ∞. For a measurable map
+T : M →M, we note by T#µ the pushforward measure.
+Id denotes the identity map on M. P2,ac(M) ⊂P2(M) is
+the space of measures absolutely continuous w.r.t. the vol-
+ume measure on M. For µ, ν ∈P(X), we denote µ ≪ν if
+µ is absolutely continuous w.r.t. ν. Π(µ, ν) = {γ ∈P(X ×
+X), π1
+#γ = µ, π2
+#γ = ν} with πi : (x1, x2) 7→xi, is the
+set of couplings, and Πo(µ, ν) the set of optimal couplings.
+2. Background
+We begin by introducing some background on Optimal
+Transport (OT) and on Wasserstein Gradient Flows. For the-
+oretical purposes, we provide background on the geometry
+of (P2(M), W2) with M a Riemannian manifold, as in the
+next section, we will rely on results which hold on compact
+Riemannian manifolds (without boundary). Nonetheless,
+the applications will be done for M = Rd. The reader may
+refer to Appendix A for more details.
+Optimal Transport.
+The Wasserstein distance between
+µ, ν ∈P2(M) is defined as
+W2
+2(µ, ν) =
+inf
+˜γ∈Π(µ,ν)
+Z
+d(x, y)2 d˜γ(x, y).
+(1)
+The metric space (P2(M), W2) has a Riemannian
+structure (Otto, 2001; Erbar, 2010).
+In particular, if
+the log map is well defined µ-almost everywhere (a.e.),
+(constant-speed) geodesics between µ, ν are defined as
+µt =
+ expπ1 ◦(t logπ1 ◦π2)
+
+#˜γ with ˜γ ∈Πo(µ, ν) an op-
+timal coupling. If µ ∈P2,ac(M), there is a map T, namely
+the OT map, such that T#µ = ν and ˜γ = (Id, T)#µ by
+McCann’s theorem for a wide range of manifolds (McCann,
+2001; Figalli, 2007). In particular, T = expId ◦(−∇φµ,ν)
+2
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+with φµ,ν a Kantorovich potential between µ and ν,
+and geodesics become µt = expId ◦(−t∇φµ,ν)#µ. At
+any µ
+∈
+P2,ac(M), we can define a tangent space
+TµP2(M)
+=
+{∇φ, φ ∈C∞
+c (M)}
+L2(µ,T M)
+with
+C∞
+c (M) the space of smooth compactly supported
+functions on M (Erbar, 2010; Gigli, 2011).
+This is
+a Hilbert space endowed with the L2(µ, TM) inner
+product. The exponential map on P2(M) is then defined as
+expµ(v) = (expId ◦v)#µ for µ ∈P2(M), v ∈TµP2(M).
+For instance, when M = Rd with d(x, y)2 = ∥x−y∥2
+2, then
+expx(y) = x + y and logx(y) = y −x for all x, y ∈Rd.
+Let P2(TM)
+:=
+{γ
+∈
+P(TM),
+R
+(d(x, o)2 +
+∥v∥2
+x)dγ(x, v) < ∞} where o ∈M is any reference point.
+Following (Gigli, 2011), we define for every µ, ν ∈P2(M),
+exp−1
+µ (ν) :=
+
+γ ∈P2(TM), πM
+# γ = µ, exp# γ = ν,
+Z
+∥v∥2
+xdγ(x, v) = W2
+2(µ, ν)
+	
+(2)
+the set of plans γ ∈P2(TM) such that (πM, exp)#γ is
+an OT plan between µ and ν. This allows one to avoid
+using the logarithm map, which might not be well defined
+everywhere, e.g. being multivalued. This space carries more
+information than the set of optimal couplings as it precises
+which geodesic was chosen to move the mass, as µt =
+ expπM ◦(tπv)
+
+#γ are constant speed geodesics between
+µ and ν (Gigli, 2011, Theorem 1.11). On P2(Rd), this trans-
+lates as exp−1
+µ (ν) = {(π1, π2 −π1)#˜γ, ˜γ ∈Πo(µ, ν)}
+(Gigli, 2004; Hertrich et al., 2024a). We show in the next
+proposition, whose proof can be found in Appendix C.1, that
+we can build a surjective map from exp−1
+µ (ν) to Πo(µ, ν).
+Proposition 2.1. Let µ, ν ∈P2(M). A surjective map from
+exp−1
+µ (ν) to Πo(µ, ν) is given by γ 7→(πM, exp)#γ. In
+particular, exp−1
+µ (ν) is not empty, and if γ ∈exp−1
+µ (ν),
+then d
+ x, expx(v)
+
+= ∥v∥x for γ-a.e. (x, v) ∈TM.
+Additionally, if M is compact and connected, and µ ∈
+P2,ac(M), then there exists a unique γ ∈exp−1
+µ (ν), of the
+form γ = (Id, −∇φµ,ν)#µ.
+Wasserstein Gradient Flows.
+Let F : P2(M) →R be
+a lower semi-continuous functional. We briefly introduce
+the differential structure on (P2(M), W2), i.e., probabil-
+ity measures on manifolds, inspired by (Erbar, 2010) and
+(Lanzetti et al., 2025).
+Let µ ∈P2(M). We say that ∇W2F(µ) ∈L2(µ, TM) is
+a Wasserstein gradient of F at µ if for any ν ∈P2(M) and
+any γ ∈exp−1
+µ (ν), we have the Taylor expansion
+F(ν) = F(µ) +
+Z
+⟨∇W2F(µ)(x), v⟩x dγ(x, v)
++ o
+ W2(µ, ν)
+
+.
+(3)
+If such a gradient exists, then we say that F is Wasser-
+stein differentiable at µ. There is a unique gradient be-
+longing to TµP2(M) and we restrict to this gradient. In-
+formally, the Wasserstein gradient of F can be computed
+as ∇W2F(µ) = ∇δF
+δµ (µ), with δF
+δµ (µ) the first variation
+defined, when it exists, as the unique function (up to an
+additive constant) such that, for χ satisfying
+R
+dχ = 0,
+d
+dtF(µ + tχ)
+
+t=0 =
+R δF
+δµ (µ) dχ (Ambrosio et al., 2008,
+Lemma 10.4.1). Examples of differentiable functionals in-
+clude potential energies V(µ) =
+R
+V dµ and interaction en-
+ergies W(µ) =
+RR
+W(x, y)dµ(x)dµ(y) for V : M →R
+and W : M × M →R twice differentiable with bounded
+Hessian, for which ∇W2V(µ) = ∇V and ∇W2W(µ)(x) =
+R  ∇1W(x, y)+∇2W(y, x)
+
+dµ(y). Moreover, if the func-
+tional F : P2(Rd) →R has a closed-form over dis-
+crete measures, i.e., there exists F : (Rd)n →R such
+that F
+  1
+n
+Pn
+i=1 δxi
+
+= F(x1, . . . , xn), then we can use
+backpropagation on F and find the Wasserstein gradi-
+ent of F using the relation ∇W2F( 1
+n
+Pn
+i=1 δxi)(xi) =
+n∇iF(x1, . . . , xn) (see Proposition A.9).
+A Wasserstein gradient flow of a differentiable functional
+F is a curve t 7→µt which is a (weak) solution of the
+continuity equation ∂tµt = div
+ µt∇W2F(µt)
+
+. A possi-
+ble discretization is the Riemannian Wasserstein gradient
+descent (Bonnabel, 2013; Bonet et al., 2025), defined as
+µk+1 = expId
+ −τ∇W2F(µk)
+
+#µk. For discrete distri-
+butions µk =
+1
+n
+Pn
+i=1 δxk
+i , it translates as, for all k ≥0,
+i ∈{1, . . . , n}, xk+1
+i
+= expxk
+i
+ −τ∇W2F(µk)(xk
+i )
+
+. For
+M = Rd, this is simply xk+1
+i
+= xk
+i −τ∇W2F(µk)(xk
+i ),
+which corresponds to Wasserstein gradient descent.
+3. Wasserstein over Wasserstein Space
+We introduce in this section the Wasserstein over Wasser-
+stein space (P2
+ P2(M)
+
+, WW2),
+i.e.,
+the space of
+probability distributions over probability distributions
+P2
+ P2(M)
+
+, endowed with the OT distance with the
+squared Wasserstein distance on P2(M) as groundcost.
+We first state some properties of this distance, and then
+introduce a differential structure on this space which will be
+used in the next sections to develop suitable optimization
+methods. In the following, M is a compact and connected
+manifold. The proofs can be found in Appendix C.
+3.1. OT Distance and Riemannian Structure
+The WoW distance is defined as the OT problem with the
+squared Wasserstein distance on P2(M) as groundcost, i.e.,
+for P, Q ∈P2
+ P2(M)
+
+,
+WW2(P, Q)2 =
+inf
+Γ∈Π(P,Q)
+Z
+W2
+2(µ, ν) dΓ(µ, ν).
+(4)
+This defines a distance (Nguyen, 2016). Analogously to
+P2(M) and Brenier-McCann’s theorem, it has been shown
+3
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+that there exists an OT map from P to Q under absolute
+continuity of P with respect to a suitable reference measure
+P0 ∈P2
+ P2(M)
+
+(Emami & Pass, 2025), which has no
+atom and satisfies an integration by part formula (Dello Schi-
+avo, 2020). We refer to Appendix B for more details.
+Now, let us denote for any γ ∈P2(TM), the projections
+ϕM(γ) = πM
+# γ, ϕexp(γ) = exp# γ and ϕv(γ) = πv
+#γ.
+For any P, Q ∈P2
+ P2(M)
+
+, let us also define
+exp−1
+P (Q) :=
+
+Γ ∈P2
+ P2(TM)
+
+, ϕM
+# Γ = P, ϕexp
+# Γ = Q,
+ZZ
+∥v∥2
+xdγ(x, v)dΓ(γ) = W2
+W2(P, Q)
+	
+.
+(5)
+Relying on Proposition 2.1, we can define for any P, Q ∈
+P2
+ P2(M)
+
+a surjective map from exp−1
+P (Q) to Πo(P, Q).
+Proposition 3.1. Let P, Q ∈P2
+ P2(M)
+
+. Then, Γ 7→
+(ϕM, ϕexp)#Γ is a surjective map from exp−1
+P (Q) to
+Πo(P, Q).
+In particular, exp−1
+P (Q) is not empty and if
+Γ ∈exp−1
+P (Q), γ ∈exp−1
+πM
+# γ(exp# γ) for Γ-a.e. γ.
+Additionally, if P ≪P0, there exists a unique Γ ∈
+exp−1
+P (Q), of the form (µ 7→(Id, −∇φµ,T(µ))#µ)#P with
+T the unique transport map from P to Q and φµ,T(µ) a
+Kantorovich potential between µ, T(µ) ∈P2(M).
+The proof of Proposition 3.1 can be found in Appendix C.2.
+The previous construction enables us to formalize the Rie-
+mannian structure of (P2
+ P2(M)
+
+, WW2), without having
+to define a notion of logarithm map on P2(M), which might
+be ill-defined when the OT plan is not unique. Between
+P, Q ∈P2
+ P2(M)
+
+, we can define for Γ ∈exp−1
+P (Q)
+a geodesic t 7→Pt = expϕM ◦(tϕv)#Γ, which satisfies
+for all s, t ∈[0, 1], WW2(Ps, Pt) = |t −s|WW2(P, Q),
+see Appendix B. For P ≪P0, using Proposition 3.1,
+the curve simplifies as Pt
+=
+expId ◦(−t∇φId,T)#P.
+Moreover, for M = Rd, this reads as Pt =
+ µ 7→
+(Id −t∇φµ,T(µ))#µ
+
+#P.
+3.2. Differential Structure
+We
+now
+provide
+a
+differential
+structure
+to
+(P2
+ P2(M)
+
+, WW2),
+following the one of (Ambro-
+sio et al., 2008; Erbar, 2010; Lanzetti et al., 2025) for
+(P2(M), W2). In this section, let F : P2
+ P2(M)
+
+→R be
+a lower semi-continuous functional. We define formally the
+Hilbert space L2(P, TP2(M)) of functions from P2(M)
+to TP2(M) in Appendix B.1. First, we define the notions
+of (extended) sub- and super-differential.
+Definition 3.2. ξ ∈L2(P, TP2(M)) belongs to the sub-
+differential ∂−F(P) of F at P if for all Q ∈P2
+ P2(M)
+
+,
+F(Q) ≥F(P)+sup
+Γ
+ZZ
+⟨ξ(πM
+# γ)(x), v⟩x dγ(x, v)dΓ(γ)
++ o
+ WW2(P, Q)
+
+,
+(6)
+where the Γ in the sup are selected in exp−1
+P (Q). Simi-
+larly, ξ ∈L2(P, TP2(M)) belongs to the super-differential
+∂+F(P) of F at P if −ξ ∈∂−(−F)(P).
+If the functional admits a sub- and super-differential, which
+coincide, we can define a gradient.
+Definition 3.3. F is Wasserstein differentiable at P ∈
+P2
+ P2(M)
+
+if ∂+F(P) ∩∂−F(P) ̸= ∅. In this case, we
+say that ξ ∈∂−F(P) ∩∂+F(P) is a WoW gradient of F at
+P, and it satisfies for any Q ∈P2
+ P2(M)
+
+, Γ ∈exp−1
+P (Q),
+F(Q) = F(P) +
+ZZ
+⟨ξ(πM
+# γ)(x), v⟩x dγ(x, v)dΓ(γ)
++ o
+ WW2(P, Q)
+
+.
+(7)
+In the following, we note ∇WW2F(P) such a gradient.
+We can also define a notion of strong sub- and super-
+differential, as well as gradient, by allowing the coupling Γ
+to be non-optimal, in contrast with the previous definitions.
+Definition 3.4. ξ ∈L2(P, TP2(M)) is a strong subd-
+ifferential of F at P if for all Q ∈P2(P2(M)), for all
+Γ ∈P2
+ P2(TM)
+
+s.t. ϕM
+# Γ = P, ϕexp
+# Γ = Q,
+F(Q) ≥F(P) +
+ZZ
+⟨ξ(πM
+# γ)(x), v⟩x dγ(x, v)dΓ(γ)
++ o
+ sZZ
+∥v∥2xdγ(x, v)dΓ(γ)
+!
+.
+(8)
+Strong superdifferentials and gradients are defined similarly.
+The latter definition is particularly useful when perturbing a
+measure along a non-optimal direction, as in the case of the
+forward Euler schemes we will compute in the next section.
+We now turn to examples of functional on P2
+ P2(M)
+
+that take the form of free energies. Given F : P2(M) →R,
+we define a potential energy V : P2
+ P2(M)
+
+→R
+as V(P)
+=
+R
+F(µ)dP(µ).
+Analogously to classical
+Wasserstein gradients, its WoW gradient is obtained
+as ∇WW2V(P)(µ)
+=
+∇W2F(µ).
+Given a kernel
+W
+: P2(Rd) × P2(Rd) →R, we define interaction
+energies as W(P)
+=
+RR
+W(µ, ν) dP(µ)dP(ν), and
+their WoW gradients are obtained as ∇WW2W(P)(µ) =
+R  ∇W2,1W(µ, ν) + ∇W2,2W(ν, µ)
+
+dP(ν). We refer to
+Appendix B.4 for more details.
+Let us now define cylinder functions, which provide a class
+of Wasserstein differentiable functionals (von Renesse &
+Sturm, 2009; Dello Schiavo, 2020; Fornasier et al., 2023).
+Definition 3.5. A functional F : P2(M) →R is a cylinder
+if there exists k ≥0, F ∈C∞
+c (Rk) and V1, . . . , Vk ∈
+C∞
+c (M) such that, for all µ ∈P2(M),
+F(µ) = F
+Z
+V1dµ, . . . ,
+Z
+Vkdµ
+
+.
+(9)
+4
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+In this case, we note F
+∈Cyl
+ P2(M)
+
+.
+Similarly,
+for I an interval, we note F ∈Cyl
+ I × P2(M)
+
+, if
+F(t, µ) = F
+ t,
+R
+V1dµ, . . . ,
+R
+Vkdµ
+
+for every t ∈I and
+µ ∈P2(M), this time for some F ∈C∞
+c (I × Rk).
+Using the chain rule, any F ∈Cyl
+ P2(M)
+
+is Wasserstein
+differentiable and for all µ ∈P2(M),
+∇W2F(µ) =
+k
+X
+i=1
+∂
+∂xi
+F
+Z
+V1dµ, · · · ,
+Z
+Vkdµ
+
+∇Vi.
+(10)
+This provides the main building block for defining a tangent
+space, in which we will show that WoW gradients reside.
+Definition 3.6. The tangent space at P ∈P2
+ P2(M)
+
+is
+TPP2
+ P2(M)
+
+= {∇W2φ, φ ∈Cyl
+ P2(M)
+
+}
+(11)
+where the closure is taken in the space L2(P, TP2(M)).
+We now justify the definition of this tangent space. We
+show the existence of velocity fields (vt)t belonging to
+the latter, associated to any absolutely continuous curves
+(Pt)t, such that the pair (vt, Pt)t satisfy a continuity
+equation.
+We recall that a curve (Pt)t∈[0,1] is abso-
+lutely continuous if there exists g ∈L1([0, 1]) such that
+WW2(Ps, Pt) ≤
+R t
+s g(u)du, and its metric derivative
+is |P′|(t) = limh→0 1
+hWW2(Pt+h, Pt), which exists a.e.
+(Ambrosio et al., 2008, Th. 1.1.2).
+Proposition 3.7. Let (Pt)t∈I be an absolutely continuous
+curve on P2
+ P2(M)
+
+. Then, for a.e. t ∈I, there ex-
+ists vt ∈TPtP2
+ P2(M)
+
+such that ∥vt∥L2(Pt,T P2(M)) ≤
+|P′|(t) and for all φ ∈Cyl(I × P2(M)),
+ZZ  ∂tφt(µ) + ⟨∇W2φt(µ), vt(µ)⟩L2(µ)
+
+dPt(µ)dt = 0.
+(12)
+The proof of Proposition 3.7 is deferred to Appendix C.3.
+We leave the investigation of the converse implication to fu-
+ture work, i.e. that satisfying the (weak) continuity equation
+(12) implies absolute continuity of the curve (Pt)t. We then
+have the following properties, which show that elements of
+the tangent space are strong gradients and are unique. Their
+proofs are deferred to Appendix C.4 and Appendix C.5.
+Proposition 3.8. Let ξ ∈∂−F(P) ∩TPP2
+ P2(M)
+
+. Then
+ξ is a strong subdifferential of F at P.
+Proposition 3.9. There is at most one element in ∂−F(P) ∩
+∂+F(P) ∩TPP2
+ P2(M)
+
+.
+As L2(P, TP2(M)) and the tangent space are Hilbert
+spaces, one can always decompose a WoW gradient with
+a part in TPP2
+ P2(M)
+
+and another part orthogonal to it.
+We show in Appendix C.5 that under technical assumptions,
+this orthogonal part has a null contribution in the Taylor
+expansion given in (7). Thus, in this case, we can restrict
+ourselves to the unique WoW gradient belonging to the
+tangent space, in particular to write optimization schemes.
+4. WoW Gradient Flows
+In this section, we aim at minimizing F : P2
+ P2(Rd)
+
+→R
+some functional. We first show the existence of the WoW
+gradient flow of this functional as the limit of the JKO
+scheme (Jordan et al., 1998) for F convex along generalized
+geodesics (Ambrosio et al., 2008). Then, building on the
+differentiable structure of the space introduced earlier, we
+propose a forward (explicit) scheme that is computationally
+more efficient in practice than the implicit JKO scheme, and
+tractable for relevant functionals.
+4.1. Optimization Schemes on P2
+ P2(Rd)
+
+JKO Scheme.
+Let P0 ∈P2
+ P2,ac(Rd)
+
+. The JKO sheme
+of F is defined, for all k ≥0 and τ > 0, as
+Pk+1 ∈
+argmin
+P∈P2(Pac(Rd))
+1
+2τ WW2(P, Pk)2 + F(P).
+(13)
+Its Wasserstein gradient flow is defined as the limit when
+τ →0.
+Leveraging (Ambrosio et al., 2008, Theorem
+4.0.4), we show in the next Proposition the existence of
+the flow for functionals F that are λ-convex along gen-
+eralized geodesics Pt =
+  (1 −t)Tπ2
+π1 + tTπ3
+π1
+
+#π1
+#Γ
+between Q, O ∈P2
+ P2(Rd)
+
+, where Γ ∈Π(P, Q, O)
+satisfies π1,2
+# Γ ∈Πo(P, Q), π1,3
+# Γ ∈Πo(P, O) with
+π1,2 : (x, y, z) 7→(x, y), π1,3 : (x, y, z) 7→(x, z) and
+P ∈P2
+ P2,ac(Rd)
+
+. Since P ∈P2
+ P2,ac(Rd)
+
+, there
+is always an OT map starting from µ ∼P towards any
+ν ∈P2(Rd), which we write Tν
+µ.
+Proposition 4.1. Let λ ≥0. Let F : P2
+ P2(Rd)
+
+→R be
+proper, coercive, lower-semi continuous and λ-convex along
+generalized geodesics, i.e., satisfying for all t ∈[0, 1],
+F(Pt) ≤(1−t)F(P0)+tF(P1)−λt(1 −t)
+2
+W2
+W2(P0, P1),
+(14)
+for Pt =
+  (1 −t)Tπ2
+π1 + tTπ3
+π1
+
+#π1
+#Γ, Γ ∈Π(P, Q, O)
+that satisfies π1,2
+# Γ ∈Πo(P, Q), π1,3
+# Γ ∈Πo(P, O) and
+P ∈P2
+ P2,ac(Rd)
+
+. Then, the gradient flow of F exists and
+is unique.
+The proof of Proposition 4.1 can be found in Appendix C.6.
+Examples of λ-convex F on P2(P2(Rd)) include potential
+energies for any F λ-convex along generalized geodesics on
+P2(Rd), and interaction energies for λ = 0 and W jointly
+convex along generalized geodesics, see Appendix B.5.
+5
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+Forward Scheme.
+Given the existence of the WoW gradi-
+ent of F, as established in the previous section, we propose
+an alternative to the implicit JKO scheme: a forward scheme,
+commonly referred to as Wasserstein gradient descent, de-
+fined as follows
+∀k ≥0, Pk+1 = expPk
+ −τ∇WW2F(Pk)
+
+.
+(15)
+At the “distribution particle” level in P2(M), this means
+that for each distribution µk ∼Pk, we update it as
+µk+1 = expµk
+ −τ∇WW2F(Pk)(µk)
+
+.
+(16)
+In practice, we will mostly focus on distributions of the form
+P =
+1
+C
+PC
+c=1 δµc with µc =
+1
+n
+Pn
+i=1 δxc
+i , which notably
+include labeled datasets (assuming for simplicity now that
+all classes c = 1, . . . , C contain n examples). Thus, we
+apply to each particle in M = Rd the update
+xc
+i,k+1 = expxc
+i,k
+ −τ∇WW2F(Pk)(µc
+k)(xc
+i,k)
+
+= xc
+i,k −τ∇WW2F(Pk)(µc
+k)(xc
+i,k).
+(17)
+We see that there are two levels of interactions for each
+particle in M: one “intra-class” through the dependence
+in the distribution µc and one “inter-class” between the
+distributions µc ∼P through the dependence in Pk in the
+gradient. Thus, we expect to observe an interaction between
+particles of each distribution µc, but also between each
+distribution µc.
+4.2. Examples of Discrepancies
+Classical functionals in the study of Wasserstein gradient
+flows are obtained as linear combinations of potential en-
+ergies, interaction energies and internal energies (Santam-
+brogio, 2015). We focus here on potential energies and
+interaction energies. We leave the study of internal ener-
+gies on this space for future works. We refer to e.g. (von
+Renesse & Sturm, 2009; Sturm, 2024) for discussions of
+entropy functionals on this space.
+A classical discrepancy to compare probability distributions,
+which can be written as a sum of a potential energy and
+an interaction energy, is the Maximum Mean Discrepancy
+(MMD) (Gretton et al., 2012). Given a positive definite
+kernel K : P2(Rd) × P2(Rd) →R, P, Q ∈P2
+ P2(Rd)
+
+,
+let F(P) = 1
+2MMD2(P, Q) be defined as
+F(P) = 1
+2
+ZZ
+K(µ, ν) d(P −Q)(µ)d(P −Q)(ν)
+= V(P) + W(P) + cst,
+(18)
+where V(P) =
+R
+V(µ)dP(µ), V(µ) = −
+R
+K(µ, ν)dQ(ν),
+W(P) = 1
+2
+RR
+K(µ, ν) dP(µ)dP(ν) and the constant only
+depends on Q that is fixed. For K, we will use kernels based
+on the Sliced-Wasserstein (SW) (Rabin et al., 2012; Bonneel
+et al., 2015), defined between µ, ν ∈P2(Rd) as
+SW2
+2(µ, ν) =
+Z
+Sd−1 W2
+2(P θ
+#µ, P θ
+#ν) dσ(θ),
+(19)
+with Sd−1 = {θ ∈Rd, ∥θ∥2 = 1} the sphere, P θ(x) =
+⟨x, θ⟩the coordinate of the projection of x ∈Rd on the
+line θR for θ ∈Sd−1, and σ the uniform measure on Sd−1.
+For instance, positive definite kernels include the Gaussian
+SW kernel K(µ, ν) = e−SW2
+2(µ,ν)/h (Kolouri et al., 2016;
+Carriere et al., 2017; Meunier et al., 2022). We also exper-
+iment with the Riesz SW kernel K(µ, ν) = −SW2(µ, ν)
+in analogy with the Riesz kernel (sometimes referred to as
+negative distance kernel), k(x, y) = −∥x−y∥2 on Rd ×Rd,
+which is not positive definite, but which has demonstrated
+very good results in practice (Hertrich et al., 2024b) and
+does not require tuning a bandwidth h.
+WoW gradient of the MMD.
+Given ν ∈P2(Rd), if
+Kν : µ 7→K(µ, ν) is a Wasserstein differentiable func-
+tional, then F is differentiable, and its WoW gradient at
+P ∈P2
+ P2(Rd)
+
+is of the form, for all µ ∈P2(Rd),
+∇WW2F(P)(µ) =
+Z
+∇W2Kν(µ) d(P −Q)(ν).
+(20)
+For the Gaussian SW kernel K(µ, ν) = e−1
+2h SW2
+2(µ,ν), de-
+noting F(µ) = 1
+2SW2
+2(µ, ν), its gradient can be obtained
+by the chain rule as
+∇W2Kν(µ) = −1
+he−1
+2h SW2
+2(µ,ν)∇W2F(µ),
+(21)
+where ∇W2F(µ) =
+R
+Sd−1 ψ′
+θ(⟨x, θ⟩)θ dσ(θ) with ψθ the
+Kantorovich potential between P θ
+#µ and P θ
+#ν (Bonnotte,
+2013, Proposition 5.1.7). In practice, the Sliced-Wasserstein
+distance, involving an integral over the sphere, is approxi-
+mated through Monte Carlo. Moreover, for discrete mea-
+sures P =
+1
+C
+PC
+c=1 δµc,n and Q =
+1
+C
+PC
+c=1 δνc,n with
+µc,n =
+1
+n
+Pn
+i=1 δxc
+i and νc,n =
+1
+n
+Pn
+i=1 δyc
+i , we use au-
+todifferentiation over x := (xc
+i)i,c of F(x) = F(P), and
+rescale the Euclidean gradient of F by n × C to obtain
+the WoW gradient ∇WW2F(P)(µc,n)(xc
+i) = nC∇i,cF(x).
+This is analogous to the Wasserstein gradient case, and
+coincides with the WoW gradient for functionals with a
+closed-form over discrete measures (see Proposition B.7).
+5. Applications
+In this section, we minimize the MMD on P2
+ P2(Rd)
+
+to
+solve various tasks1. We represent labeled datasets with
+C classes as distributions P = 1
+C
+PC
+c=1 δµc,n, where each
+1Code available at https://github.com/clbonet/
+Flowing_Datasets_with_WoW_Gradient_Flows.
+6
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+Gaussian
+Iter 0
+Iter 10
+Iter 25
+Iter 100
+Riesz
+Figure 1: Minimization of F(P) = 1
+2MMD2(P, Q) with Q a mixture of 3 rings, and with kernels either the Gaussian SW
+kernel with bandwidth h = 0.05 or Riesz SW kernel, for a learning rate of τ = 0.1. We observe that they first form a ring
+for each distribution, and then each ring converges to a target ring.
+µc,n = 1
+n
+Pn
+i=1 δxc
+i is the distribution of samples belonging
+to class c. We emphasize that we are the first to represent
+labeled datasets this way. We first verify on synthetic data
+and datasets of images that minimizing such distance allows
+to transport classes between the source and target. Then, we
+leverage this property on a dataset distillation and a transfer
+learning task. We focus here on learning target distributions
+of the form Q = 1
+C
+PC
+k=1 δνc,n where νc,n = 1
+n
+Pn
+i=1 δyc
+i
+are empirical distributions, each νc,n has the same number
+of particles n and the number of class C is supposed to be
+known. Similarly as (Hertrich et al., 2024b), we add a mo-
+mentum to accelerate the scheme for image-based datasets.
+We refer to Appendix D for more details about the experi-
+ments, as well as additional experiments using other kernels
+and an ablation study for the number of projections to ap-
+proximate SW. Related works (Alvarez-Melis & Fusi, 2021;
+Hua et al., 2023) are described in detail in Appendix E.
+Synthetic Data.
+We illustrate on Figure 1 the evolu-
+tion of particles when minimizing the MMD with kernels
+K(µ, ν) = e−SW2
+2(µ,ν)/(2h) and K(µ, ν) = −SW2(µ, ν),
+for a target being the three-ring dataset. Each ring repre-
+sents a distribution νc,n with n = 80, and the target is thus
+a mixture of three Dirac, i.e., Q = 1
+3
+P3
+c=1 δνc,n. We learn
+a distribution P of the same form, with the same number of
+particles for each distribution. We observe for both kernels
+that the particles of each distribution µc,n (i.e., the different
+point clouds) form a ring early in the gradient flow dynam-
+ics, and then move in a structured manner towards the target.
+This illustrates the two level of interactions at the intra and
+inter distributions levels. In Appendix D.2, we add compar-
+isons with other hyperparameters and other kernels. Overall,
+the kernel K(µ, ν) = −SW2(µ, ν) is the simplest to use, as
+it does not require tuning a bandwidth, and converges well in
+general. Thus, in the following experiments, we restrict our-
+selves to this kernel, and name the resulting loss MMDSW.
+Domain Adaptation.
+We now focus on the case where
+both the source P0 and the target Q are distributions of im-
+Figure 2: Samples along the flow from MNIST to FMNIST
+(Left), KMNIST (Middle) and USPS (Right).
+ages with C classes. Thus, we have P0 =
+1
+C
+PC
+c=1 δµc,n
+and Q =
+1
+C
+PC
+c=1 δνc,n, and νc,n, µc,n represent the em-
+pirical distribution of images belonging to the class c. We
+consider the *NIST datasets, i.e., MNIST (LeCun & Cortes,
+2010), Fashion-MNIST (FMNIST) (Wang et al., 2018), KM-
+NIST (Clanuwat et al., 2018) and USPS (Hull, 1994). These
+datasets all have C = 10 classes and are of size 28 × 28
+(except for USPS which is upscaled to 28 × 28). We also
+consider CIFAR10 (Krizhevsky et al., 2009) and SVHN
+(Netzer et al., 2011) which are of size 32 × 32 × 3. We
+first show in Figure 2 examples of trajectories starting from
+MNIST to the other *NIST datasets (with step size τ = 0.05,
+momentum m = 0.9 and n = 200). We see that samples
+from MNIST are sent to samples of the target dataset, i.e.
+that the flow converges well. We also observe that images
+from each class are mapped one-to-one to images within the
+same class (see Figure 11 in the Appendix), without overlap
+or collapse across classes.
+To verify this quantitatively, we perform a domain adapta-
+tion task as in (Alvarez-Melis & Fusi, 2021, Section 7.3).
+Here, we first train a classifier on 5000 samples of MNIST
+with n = 500 images by class. Then, we flow the other
+7
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+Table 1: Accuracy of the classifier on synthetic datasets. We compare Distribution Matching (DM) with the MMD with
+Riesz SW kernel on MNIST and Fashion MNIST, using p ∈{1, 10, 50} synthetic images by class.
+Dataset
+p
+ψθ = Aω = Id
+ψθ = Id
+Aw = Id
+Aw + ψθ
+Baselines
+DM
+MMDSW
+DM
+MMDSW
+DM
+MMDSW
+DM
+MMDSW
+Random
+Full data
+MNIST
+1
+61.1±6.5
+66.5±5.5
+-
+66.8±5.3
+87.8±0.6
+60.3±3.4
+87.7±0.5
+60.9±3.3
+55.8±2.0
+10
+88.2±2.8
+93.2±0.7
+88.7±3.3
+93.8±0.7
+97.0±0.1
+96.4±0.2
+97.0±0.1
+96.4±0.3
+92.2±1.1
+99.4
+50
+95.9±0.9
+97.0±0.2
+95.3±1.4
+97.5±0.1
+98.4±0.1
+98.4±0.1
+98.4±0.1
+98.4±0.1
+97.6±0.2
+FMNIST
+1
+54.4±3.2
+60.0±4.1
+-
+60.6±3.6
+58.7±0.4
+60.9±2.6
+58.7±0.5
+60.8±2.2
+49.0±7.5
+10
+74.6±1.0
+76.7±1.0
+74.7±0.8
+76.6±1.1
+81.2±2.3
+78.0±0.9
+82.5±0.3
+78.9±1.2
+75.3±0.7
+92.4
+50
+81.3±0.5
+84.2±0.1
+81.4±1.0
+85.0±0.2
+87.6±0.2
+87.6±0.2
+87.5±0.1
+87.6±0.2
+83.2±0.2
+0
+5 104
+105
+1.5 105 2 105 2.5 105
+Iterations
+85
+90
+95
+100
+Accuracy
+FMNIST to MNIST
+MMDSW
+OTDD (final)
+0
+5 104
+105
+1.5 105 2 105 2.5 105
+Iterations
+50
+100
+SVHN to CIFAR10
+Figure 3: Accuracy of the pretrained classifiers along the
+flow from FMNIST (Left) and SVHN (Right) towards
+MNIST and CIFAR10.
+datasets to MNIST (with τ = 0.1 and momentum m = 0.9),
+and measure the accuracy of the pretrained classifier on the
+flowed dataset. Note that while we use the class labels of the
+flowed dataset to perform the gradient flow dynamics, we
+do not know a priori which class in the flowed dataset cor-
+responds to which class in MNIST, yet it is needed for the
+evaluation of domain adaptation. To perform this alignment,
+we solve an OT problem with W2
+2 as groundcost between
+P and Q (i.e., the WoW OT problem) with P the distribu-
+tions obtained at the end of the flow dynamic and Q the
+ones of the target dataset. Since these distributions have a
+finite support of the same size (C), solving this OT problem
+provides such an alignment: we can associate a prediction
+of the pretrained model to an image and a “true class” of
+the flowed dataset. We also perform this experiment with
+a pretrained neural network on CIFAR10, flowing SVHN
+toward CIFAR10, with n = 100 samples by class, step size
+τ = 0.1 and momentum m = 0.9.
+On Figure 3, we report the accuracy of the pretrained clas-
+sifier on the data flowed starting from FMNIST towards
+MNIST and from SVHN towards CIFAR10, over the iter-
+ations (averaged over 3 flows started at different splits of
+the source data). We also report the value from (Alvarez-
+Melis & Fusi, 2021) using OTDD on the MNIST dataset.
+We observe that the classifier converges to 100% accuracy
+for a sufficient number of iterations. This demonstrates
+that the flow is able to perfectly match one class from the
+source dataset with a class of the target dataset, on which
+the classifier has been trained.
+We note that in a realistic setting of unsupervised domain
+adaptation, we would not have access to the labels of the
+source dataset (Courty et al., 2016). Thus, to flow the data as
+we did just earlier, we would need first to find pseudo-labels
+on the source datasets, e.g. with clustering (Alvarez-Melis
+& Fusi, 2021; El Hamri et al., 2022). However, this is not
+the goal of the paper.
+Dataset Distillation.
+Dataset distillation or condensation
+(Wang et al., 2018) seeks to produce a compact synthetic
+dataset derived from a large training set, such that training
+a neural network on the synthetic data yields performance
+close to that obtained with the full dataset. Zhao & Bilen
+(2023) proposed to learn the synthetic dataset by performing
+Distribution Matching, i.e., denoting νc the distribution of
+each class c of the target dataset, they minimize
+F
+ (µc)c
+
+= Eθ,ω
+" C
+X
+c=1
+MMD2
+k
+ ψθ
+#Aω
+#µc, ψθ
+#Aω
+#νc)
+#
+,
+(22)
+with k the linear kernel k(x, y) = ⟨x, y⟩, Aω : Rd →Rd
+a random data augmentation (e.g. rotation, cropping, see
+(Zhao & Bilen, 2021)) and ψθ : Rd →Rd′ with d′ ≪d a
+randomly initialized neural network used to embed the data.
+Let Q =
+1
+C
+PC
+c=1 δνc be the target dataset, ϕθ,ω(µ) =
+ψθ
+#Aω
+#µ and P =
+1
+C
+PC
+c=1 δµc.
+Note that ϕθ,ω
+# P =
+1
+C
+PC
+c=1 δψθ
+#Aω
+#µc. We propose to minimize
+˜F(P) = Eθ,ω
+h
+MMD2
+K(ϕθ,ω
+# P, ϕθ,ω
+# Q)
+i
+,
+(23)
+with Riesz SW kernel K between distributions. We com-
+pare on Table 1 the accuracy of a classifier on a test set
+of MNIST and FMNIST, trained on the synthetic dataset
+with p ∈{1, 10, 50} samples by class, either generated with
+MMD with Riesz SW kernel (MMDSW) or with Distribu-
+tion Matching (DM), in 4 scenarios: in the ambient space
+with (ψθ = Id) and without augmentation (ψθ = Aω = Id),
+and with an embedding with (Aω + ψθ) and without an
+augmentation (Aω = Id). We solve it with a stochastic gra-
+dient descent, sampling one augmentation and embedding at
+each step, for 20K iterations and initializing the samples on
+true data. The results are averaged over 3 synthetic datasets
+obtained initializing the flow at different samples, and 5
+8
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+Table 2: Accuracy of classifier on augmented datasets for
+k ∈{1, 10, 10, 100}. M refers to MNIST, F to Fashion
+MNIST, K to KMNIST and U to USPS.
+Dataset
+k
+Train on Q
+MMDSW
+OTDD
+(Hua et al., 2023)
+M to F
+1
+26.0±5.3
+40.5±4.7
+30.5±4.2
+36.4±3.3
+5
+38.5±6.7
+61.5±4.6
+59.7±1.8
+62.7±1.1
+10
+53.9±7.9
+65.4±1.5
+64.0±1.4
+66.2±1.0
+100
+71.1±1.5
+74.7±0.8
+-
+73.5±0.7
+M to K
+1
+18.4±3.1
+20.9±2.0
+18.8±2.1
+19.4±1.9
+5
+25.9±4.0
+37.4±2.2
+31.3±1.4
+39.0±1.0
+10
+30.9±4.6
+44.7±1.8
+34.1±0.9
+44.1±1.2
+100
+60.1±1.1
+66.8±0.8
+66.3±0.9
+62.4±1.2
+M to U
+1
+32.4±7.9
+37.4±6.1
+39.5±7.9
+35.0±5.6
+5
+51.4±9.8
+73.0±1.0
+73.3±1.4
+69.6±1.3
+10
+60.3±10.1
+77.2±1.2
+72.7±2.7
+75.6±1.2
+100
+87.5±0.7
+89.7±0.4
+-
+88.1±0.6
+training of the classifier. On a Nvidia v100 GPU, the flow
+implemented in Jax (Bradbury et al., 2018) runs in around
+10 minutes with the embedding and in 30 seconds without
+it. The baseline “random” refers to the classifier trained on
+data sampled randomly from the original training set, and
+“full data” to the classifier trained on the full training set. We
+observe on Table 1 that MMDSW consistently outperforms
+DM when flowing in the ambient space, and is competitive
+when adding an embedding. This indicates that adding inter-
+actions between classes appears to improve the results, possi-
+bly by distributing the samples more effectively and mitigat-
+ing the presence of ambiguous samples near class borders.
+Transfer Learning.
+We now focus on the task of k-shot
+learning. In this setting, we are interested in training a
+classifier for datasets which have k samples by class, where
+k is typically small. Following (Alvarez-Melis & Fusi,
+2021; Hua et al., 2023), we propose to augment the dataset
+by generating new synthetic samples for each class. To
+do this, we will flow a larger source dataset, with possibly
+different classes, towards the small target dataset, and
+then concatenate the synthetic and true samples to train
+the classifier on it. More precisely, let Q = 1
+C
+PC
+c=1 δνc,k
+the target dataset, with νc,k =
+1
+k
+Pk
+i=1 δyc
+i an empirical
+distribution with k samples, representing the distribution
+of the class c. Let P0 = 1
+C
+PC
+c=1 δµc,n be a source dataset,
+with µc,n = 1
+n
+Pn
+i=1 δxc
+i and n = 200. Then, the goal is to
+flow P0 towards Q by minimizing F(P) = 1
+2MMD2(P, Q)
+with kernel K(µ, ν) = −SW2(µ, ν).
+We expect to
+augment each class c of Q with n samples. Then, we train a
+classifier with a LeNet5 architecture on the dataset obtained
+as ˆQ =
+1
+C
+PC
+c=1 δηc,n+k with ηc,n+k =
+1
+n+k
+Pn+k
+i=1 δzc
+i
+where zc
+i = xc
+i for i ≤n and zc
+i = yc
+i−n for i > n.
+We report the results for MNIST as P0 and FMNIST,
+KMNIST and USPS as Q on Table 2 for k ∈{1, 5, 10, 100},
+compared with the baseline where we train directly on
+Q, and the baselines where we trained on the synthetic
+Table 3: Runtime in seconds for the transfer learning experi-
+ment from MNIST to Fashion MNIST.
+Dataset
+k-shot
+MMDSW
+OTDD
+(Hua et al., 2023)
+M to F
+1
+13.95 ± 1.37
+294.53 ± 5.21
+131.77 ± 2
+5
+14.12 ± 0.30
+1130.89 ± 108
+132.98 ± 1.1
+10
+14.30 ± 0.29
+2294.13 ± 48
+134.35 ± 0.75
+100
+47.75 ± 0.27
+-
+164.19 ± 0.6
+data obtained by minimizing OTDD (Alvarez-Melis &
+Fusi, 2021) or the MMD with product kernel as in (Hua
+et al., 2023). The results are averaged over 5 training of
+the networks, and 3 outputs of the flows. Both methods
+have been reimplemented and we add more details in
+Appendix D.6. We observe that all three methods improve
+upon the baseline, with a slight advantage for MMDSW.
+Complexity.
+Given P
+=
+1
+C
+PC
+c=1 δµc,n and Q
+=
+1
+C
+PC
+c=1 δνc,n with µc,n and νc,n discrete distributions with
+n samples each, the MMD with a Sliced-Wasserstein based
+kernel requires to compute C2 Sliced-Wasserstein distances,
+which has a total complexity of O
+ C2Ln(log n + d)
+
+using
+L projections to approximate SW. We report on Table 3
+the runtimes for the transfer learning experiment, averaged
+over 3 outputs of the flows and trained for 5K epochs for
+each method. MMDSW is much faster than both OTDD
+and the MMD with product kernel, at least with our imple-
+mentations in jax detailed in Appendix D.6. Both OTDD
+and the method of Hua et al. (2023) are implemented us-
+ing a dimension reduction technique in 2D and a Gaussian
+approximation to embed the conditional distributions.
+6. Conclusion
+This work provides the first theoretical framework and prac-
+tical implementation of gradient flows of a suitable MMD
+objective over the space of random measures, endowed with
+the Wasserstein over Wasserstein distance. On the theoret-
+ical side, we provided a rigorous differential structure on
+that space and showed that these flows are well-posed. On
+the numerical side, our results demonstrate that this novel
+approach provides meaningful dynamics for interpolating
+between random measures.
+There are many possible
+extensions of our study. For instance, it would be interesting
+to investigate the minimization of alternative functionals
+over the space of random measures, e.g., MMD with other
+kernels (Bachoc et al., 2023; Kachaiev & Recanatesi, 2024),
+integral probability metrics (M¨uller, 1997; Catalano &
+Lavenant, 2024) or f-divergences (Csisz´ar, 1967). Future
+work could also address the theoretical treatment of
+non-compact manifolds or derive a continuity equation for
+Wasserstein over Wasserstein (WoW) gradient flows. Then,
+another topic of future research would be to provide quan-
+titative guarantees on the convergence of these schemes.
+9
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+Acknowledgements
+We thank the anonymous reviewers for their valuable com-
+ments. We also thank Quentin M´erigot for fruitful discus-
+sions, and David Alvarez-Melis for his help on the trans-
+fer learning experiment. This work was granted access to
+the HPC resources of IDRIS under the allocation 2024-
+AD011015891 made by GENCI. CB and AK acknowledge
+the support of the Agence nationale de la recherche, through
+the PEPR PDE-AI project (ANR-23-PEIA-0004) and also
+thank Apple for their academic support through a research
+funding. CV acknowledges the support of R´egion ˆIle-de-
+France through the DIM AI4IDF project.
+Impact Statement
+This paper presents work whose goal is to advance the field
+of Machine Learning. There are many potential societal
+consequences of our work, none which we feel must be
+specifically highlighted here.
+References
+Altekr¨uger, F., Hertrich, J., and Steidl, G. Neural Wasser-
+stein Gradient Flows for Discrepancies with Riesz Ker-
+nels. In International Conference on Machine Learning,
+pp. 664–690. PMLR, 2023. (Cited on p. 2)
+Altschuler, J., Chewi, S., Gerber, P. R., and Stromme, A. Av-
+eraging on the Bures-Wasserstein manifold: dimension-
+free convergence of gradient descent. Advances in Neural
+Information Processing Systems, 34:22132–22145, 2021.
+(Cited on p. 52, 55)
+Alvarez-Melis, D. and Fusi, N. Geometric Dataset Distances
+via Optimal Transport. Advances in Neural Information
+Processing Systems, 33:21428–21439, 2020. (Cited on p.
+1, 51, 54)
+Alvarez-Melis, D. and Fusi, N. Dataset Dynamics via Gra-
+dient Flows in Probability Space. In International con-
+ference on machine learning, pp. 219–230. PMLR, 2021.
+(Cited on p. 1, 2, 7, 8, 9, 51, 54)
+Ambrosio, L., Gigli, N., and Savar´e, G. Gradient Flows: in
+Metric Spaces and in the Space of Probability Measures.
+Springer Science & Business Media, 2008. (Cited on p.
+2, 3, 4, 5, 19, 20, 24, 25, 26, 27, 29, 33)
+Andoni, A., Naor, A., and Neiman, O. Snowflake universal-
+ity of Wasserstein spaces. Ann. Sci. ´Ec. Norm. Sup´er.(4),
+51(3):657–700, 2018. (Cited on p. 1)
+Arbel, M., Korba, A., Salim, A., and Gretton, A. Maximum
+Mean Discrepancy Gradient Flow. Advances in Neural
+Information Processing Systems, 32, 2019. (Cited on p.
+2, 52)
+Bachoc, F., B´ethune, L., Gonzalez-Sanz, A., and Loubes,
+J.-M. Gaussian Processes on Distributions based on Reg-
+ularized Optimal Transport. In International Conference
+on Artificial Intelligence and Statistics, pp. 4986–5010.
+PMLR, 2023. (Cited on p. 9)
+Ballu, M. and Berthet, Q. Mirror Sinkhorn: Fast Online Op-
+timization on Transport Polytopes. In International Con-
+ference on Machine Learning, pp. 1595–1613. PMLR,
+2023. (Cited on p. 53)
+Bellazzi, R., Codegoni, A., Gualandi, S., Nicora, G.,
+and Vercesi, E. The Gene Mover’s Distance: Single-
+cell similarity via Optimal Transport. arXiv preprint
+arXiv:2102.01218, 2021. (Cited on p. 1)
+Bojchevski, A. and G¨unnemann, S. Deep Gaussian Em-
+bedding of Graphs: Unsupervised Inductive Learning
+via Ranking. In International Conference on Learning
+Representations, 2018. (Cited on p. 1)
+Bonet, C., Mal´ezieux, B., Rakotomamonjy, A., Drumetz,
+L., Moreau, T., Kowalski, M., and Courty, N. Sliced-
+Wasserstein on Symmetric Positive Definite Matrices for
+M/EEG Signals. In International Conference on Machine
+Learning, pp. 2777–2805. PMLR, 2023. (Cited on p. 1)
+Bonet, C., Uscidda, T., David, A., Aubin-Frankowski, P.-
+C., and Korba, A. Mirror and Preconditioned Gradient
+Descent in Wasserstein Space. In Thirty-eight Conference
+on Neural Information Processing Systems, 2024. (Cited
+on p. 2)
+Bonet, C., Drumetz, L., and Courty, N. Sliced-Wasserstein
+Distances and Flows on Cartan-Hadamard Manifolds.
+Journal of Machine Learning Research, 26(32):1–76,
+2025. (Cited on p. 2, 3, 19, 54)
+Bonnabel, S. Stochastic Gradient Descent on Riemannian
+Manifolds. IEEE Transactions on Automatic Control, 58
+(9):2217–2229, 2013. (Cited on p. 3, 19)
+Bonneel, N., Rabin, J., Peyr´e, G., and Pfister, H. Sliced and
+Radon Wasserstein Barycenters of Measures. Journal
+of Mathematical Imaging and Vision, 51:22–45, 2015.
+(Cited on p. 6)
+Bonnet, B. A Pontryagin Maximum Principle in Wasser-
+stein Spaces for Constrained Optimal Control Problems.
+ESAIM: Control, Optimisation and Calculus of Varia-
+tions, 25:52, 2019. (Cited on p. 17)
+Bonnotte, N. Unidimensional and Evolution Methods for
+Optimal Transportation. PhD thesis, Universit´e Paris Sud-
+Paris XI; Scuola normale superiore (Pise, Italie), 2013.
+(Cited on p. 6, 44)
+10
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+Boumal, N. An Introduction to Optimization on Smooth
+Manifolds. Cambridge University Press, 2023. (Cited on
+p. 35, 36, 37)
+Bradbury, J., Frostig, R., Hawkins, P., Johnson, M. J., Leary,
+C., Maclaurin, D., Necula, G., Paszke, A., VanderPlas, J.,
+Wanderman-Milne, S., and Zhang, Q. JAX: composable
+transformations of Python+NumPy programs, 2018. URL
+http://github.com/jax-ml/jax. (Cited on p.
+9, 52)
+Carriere, M., Cuturi, M., and Oudot, S. Sliced Wasserstein
+Kernel for Persistence Diagrams. In International con-
+ference on machine learning, pp. 664–673. PMLR, 2017.
+(Cited on p. 6, 44)
+Catalano, M. and Lavenant, H.
+Hierarchical Integral
+Probability Metrics: A distance on random probability
+measures with low sample complexity. arXiv preprint
+arXiv:2402.00423, 2024. (Cited on p. 1, 9)
+Chazal, C., Bach, F., and Korba, A. Statistical and Geometri-
+cal properties of the Kernel Kullback-Leibler divergence.
+In The Thirty-eighth Annual Conference on Neural Infor-
+mation Processing Systems, 2024. (Cited on p. 2)
+Chen, K. and Zhang, Y. Optimal Transport for Mixtures
+of Radial Functions. arXiv preprint arXiv:2404.08383,
+2024. (Cited on p. 1)
+Chen, Y., Georgiou, T. T., and Tannenbaum, A. Optimal
+Transport for Gaussian Mixture Models. IEEE Access, 7:
+6269–6278, 2018. (Cited on p. 1, 55)
+Chen, Z., Mustafi, A., Glaser, P., Korba, A., Gretton,
+A., and Sriperumbudur, B. K. (De)-regularized Maxi-
+mum Mean Discrepancy Gradient Flow. arXiv preprint
+arXiv:2409.14980, 2024. (Cited on p. 2)
+Choi, J., Choi, J., and Kang, M. Scalable Wasserstein Gra-
+dient Flow for Generative Modeling through Unbalanced
+Optimal Transport. In Forty-first International Confer-
+ence on Machine Learning, 2024. (Cited on p. 52)
+Clanuwat, T., Bober-Irizar, M., Kitamoto, A., Lamb, A.,
+Yamamoto, K., and Ha, D. Deep Learning for Classical
+Japanese Literature. arXiv preprint arXiv:1812.01718,
+2018. (Cited on p. 7)
+Courty, N., Flamary, R., Tuia, D., and Rakotomamonjy,
+A. Optimal Transport for Domain Adaptation. IEEE
+transactions on pattern analysis and machine intelligence,
+39(9):1853–1865, 2016. (Cited on p. 8)
+Csisz´ar, I. Information-Type Measures of Difference of
+Probability Distributions and Indirect Observations. Stu-
+dia Sci. Math. Hungar., 2:299–318, 1967. (Cited on p.
+9)
+Cuturi, M. Sinkhorn Distances: Lightspeed Computation
+of Optimal Transport. Advances in neural information
+processing systems, 26, 2013. (Cited on p. 51)
+Cuturi, M., Meng-Papaxanthos, L., Tian, Y., Bunne, C.,
+Davis, G., and Teboul, O. Optimal Transport Tools (OTT):
+A Jax Toolbox for all things Wasserstein. arXiv preprint
+arXiv:2201.12324, 2022. (Cited on p. 51)
+Dello Schiavo, L.
+A Rademacher-type theorem on L2-
+Wasserstein spaces over closed Riemannian manifolds.
+Journal of Functional Analysis, 278(6):108397, 2020.
+(Cited on p. 4, 21, 32, 33)
+Delon, J. and Desolneux, A. A Wasserstein-type distance in
+the space of Gaussian Mixture Models. SIAM Journal on
+Imaging Sciences, 13(2):936–970, 2020. (Cited on p. 1,
+55)
+Diao, M. Z., Balasubramanian, K., Chewi, S., and Salim,
+A. Forward-Backward Gaussian Variational Inference
+via JKO in the Bures-Wasserstein Space. In Interna-
+tional Conference on Machine Learning, pp. 7960–7991.
+PMLR, 2023. (Cited on p. 2, 57)
+Du, C., Li, T., Pang, T., Yan, S., and Lin, M. Nonpara-
+metric Generative Modeling with Conditional Sliced-
+Wasserstein Flows. In International Conference on Ma-
+chine Learning, pp. 8565–8584. PMLR, 2023. (Cited on
+p. 2)
+Dukler, Y., Li, W., Lin, A., and Mont´ufar, G. Wasserstein
+of Wasserstein Loss for Learning Generative Models. In
+International conference on machine learning, pp. 1716–
+1725. PMLR, 2019. (Cited on p. 1)
+Dusson, G., Ehrlacher, V., and Nouaime, N. A Wasserstein-
+type metric for generic mixture models, including
+location-scatter and group invariant measures.
+arXiv
+preprint arXiv:2301.07963, 2023. (Cited on p. 1)
+Dvurechensky, P., Gasnikov, A., and Kroshnin, A. Com-
+putational Optimal Transport: Complexity by Acceler-
+ated Gradient Descent is Better than by Sinkhorn’s Algo-
+rithm. In International conference on machine learning,
+pp. 1367–1376. PMLR, 2018. (Cited on p. 54)
+El Hamri, M., Bennani, Y., and Falih, I. Hierarchical Op-
+timal Transport for Unsupervised Domain Adaptation.
+Machine Learning, 111(11):4159–4182, 2022. (Cited on
+p. 1, 8)
+Emami, P. and Pass, B. Optimal transport with optimal trans-
+port cost: the Monge–Kantorovich problem on Wasser-
+stein spaces. Calculus of Variations and Partial Differ-
+ential Equations, 64(2):43, 2025. (Cited on p. 4, 21, 26,
+33)
+11
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+Erbar, M. The heat equation on manifolds as a gradient flow
+in the wasserstein space. In Annales de l’IHP Probabilit´es
+et statistiques, volume 46, pp. 1–23, 2010. (Cited on p. 2,
+3, 4, 16, 17, 18, 19, 26)
+Figalli, A. Existence, Uniqueness, and Regularity of Op-
+timal Transport Maps. SIAM journal on mathematical
+analysis, 39(1):126–137, 2007. (Cited on p. 2, 16)
+Flamary, R., Courty, N., Gramfort, A., Alaya, M. Z., Bois-
+bunon, A., Chambon, S., Chapel, L., Corenflos, A., Fatras,
+K., Fournier, N., et al. POT: Python Optimal Transport.
+Journal of Machine Learning Research, 22(78):1–8, 2021.
+(Cited on p. 48, 51)
+Fornasier, M., Savar´e, G., and Sodini, G. E. Density of sub-
+algebras of Lipschitz functions in metric Sobolev spaces
+and applications to Wasserstein Sobolev spaces. Journal
+of Functional Analysis, 285(11):110153, 2023. (Cited on
+p. 4)
+Gallou¨et, T. and Monsaingeon, L. A JKO Splitting Scheme
+for Kantorovich–Fisher–Rao Gradient Flows. SIAM Jour-
+nal on Mathematical Analysis, 49(2):1100–1130, 2017.
+(Cited on p. 52)
+Geuter, J., Bonet, C., Korba, A., and Alvarez-Melis,
+D. DDEQs: Distributional Deep Equilibrium Models
+through Wasserstein Gradient Flows. In The 28th Interna-
+tional Conference on Artificial Intelligence and Statistics,
+2025. (Cited on p. 1)
+Gigli, N. On the geometry of the space of probability mea-
+sures in Rn endowed with the quadratic optimal transport
+distance. PhD thesis, Scuola Normale Superiore, 2004.
+(Cited on p. 3)
+Gigli, N. On the inverse implication of Brenier-McCann
+theorems and the structure of (P2(M), W2). Methods and
+Applications of Analysis, 18(2):127–158, 2011. (Cited on
+p. 3, 16, 17, 18, 25)
+Glaser, P., Arbel, M., and Gretton, A. KALE Flow: A
+Relaxed KL Gradient Flow for Probabilities with Disjoint
+Support. Advances in Neural Information Processing
+Systems, 34:8018–8031, 2021. (Cited on p. 2, 47)
+Gretton, A., Borgwardt, K. M., Rasch, M. J., Sch¨olkopf, B.,
+and Smola, A. A kernel two-sample test. The Journal
+of Machine Learning Research, 13(1):723–773, 2012.
+(Cited on p. 6)
+Haviv, D., Pooladian, A.-A., Pe’er, D., and Amos,
+B.
+Wasserstein Flow Matching:
+Generative mod-
+eling over families of distributions.
+arXiv preprint
+arXiv:2411.00698, 2024a. (Cited on p. 1)
+Haviv, D., Remˇs´ık, J., Gatie, M., Snopkowski, C., Takizawa,
+M., Pereira, N., Bashkin, J., Jovanovich, S., Nawy, T.,
+Chaligne, R., et al. The covariance environment defines
+cellular niches for spatial inference. Nature Biotechnol-
+ogy, pp. 1–12, 2024b. (Cited on p. 1)
+He, S., Liu, K., Ji, G., and Zhao, J. Learning to Represent
+Knowledge Graphs with Gaussian Embedding. In Pro-
+ceedings of the 24th ACM international on conference on
+information and knowledge management, pp. 623–632,
+2015. (Cited on p. 1)
+Hertrich, J., Gr¨af, M., Beinert, R., and Steidl, G. Wasser-
+stein Steepest Descent Flows of Discrepancies with Riesz
+Kernels. Journal of Mathematical Analysis and Applica-
+tions, 531(1):127829, 2024a. (Cited on p. 2, 3)
+Hertrich, J., Wald, C., Altekr¨uger, F., and Hagemann, P.
+Generative Sliced MMD Flows with Riesz Kernels. In
+The Twelfth International Conference on Learning Repre-
+sentations, 2024b. (Cited on p. 2, 6, 7, 47)
+Ho, N., Nguyen, X., Yurochkin, M., Bui, H. H., Huynh,
+V., and Phung, D. Multilevel Clustering via Wasserstein
+Means. In International conference on machine learning,
+pp. 1501–1509. PMLR, 2017. (Cited on p. 1)
+Hua, X., Nguyen, T., Le, T., Blanchet, J., and Nguyen,
+V. A. Dynamic Flows on Curved Space Generated by
+Labeled Data. In Elkind, E. (ed.), Proceedings of the
+Thirty-Second International Joint Conference on Artifi-
+cial Intelligence, IJCAI-23, pp. 3803–3811. International
+Joint Conferences on Artificial Intelligence Organization,
+8 2023. Main Track. (Cited on p. 1, 2, 7, 9, 51, 52, 54,
+55)
+Huix, T., Korba, A., Durmus, A. O., and Moulines, E. The-
+oretical Guarantees for Variational Inference with Fixed-
+Variance Mixture of Gaussians. In Forty-first Interna-
+tional Conference on Machine Learning, 2024. (Cited on
+p. 1, 57)
+Hull, J. J. A Database for Handwritten Text Recognition
+Research. IEEE Transactions on pattern analysis and
+machine intelligence, 16(5):550–554, 1994. (Cited on p.
+7)
+Jordan, R., Kinderlehrer, D., and Otto, F. The Variational
+Formulation of the Fokker–Planck Equation. SIAM jour-
+nal on mathematical analysis, 29(1):1–17, 1998. (Cited
+on p. 2, 5, 19)
+Kachaiev, O. and Recanatesi, S. Learning to Embed Dis-
+tributions via Maximum Kernel Entropy. In The Thirty-
+eighth Annual Conference on Neural Information Pro-
+cessing Systems, 2024. (Cited on p. 9)
+12
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+Kidger, P. and Garcia, C. Equinox: neural networks in JAX
+via callable PyTrees and filtered transformations. Differ-
+entiable Programming workshop at Neural Information
+Processing Systems 2021, 2021. (Cited on p. 48)
+Kolouri, S., Zou, Y., and Rohde, G. K. Sliced Wasserstein
+Kernels for Probability Distributions. In Proceedings of
+the IEEE Conference on Computer Vision and Pattern
+Recognition, pp. 5258–5267, 2016. (Cited on p. 6, 44)
+Kratsios, A., Debarnot, V., and Dokmani´c, I. Small Trans-
+formers Compute Universal Metric Embeddings. Jour-
+nal of Machine Learning Research, 24(170):1–48, 2023.
+(Cited on p. 1)
+Krizhevsky, A., Hinton, G., et al. Learning Multiple Layers
+of Features from Tiny Images. 2009. (Cited on p. 7)
+Kusner, M., Sun, Y., Kolkin, N., and Weinberger, K. From
+Word Embeddings to Document Distances.
+In Inter-
+national conference on machine learning, pp. 957–966.
+PMLR, 2015. (Cited on p. 1)
+Lambert, M., Chewi, S., Bach, F., Bonnabel, S., and Rigol-
+let, P. Variational inference via Wasserstein gradient flows.
+Advances in Neural Information Processing Systems, 35:
+14434–14447, 2022. (Cited on p. 1, 55, 57)
+Lanzetti, N., Bolognani, S., and D¨orfler, F. First-Order
+Conditions for Optimization in the Wasserstein Space.
+SIAM Journal on Mathematics of Data Science, 7(1):
+274–300, 2025. (Cited on p. 3, 4, 16, 17, 37)
+LeCun, Y. and Cortes, C. MNIST handwritten digit database.
+2010. (Cited on p. 7)
+Lee, J. M. Riemannian Manifolds: An Introduction to Cur-
+vature, volume 176. Springer Science & Business Media,
+2006. (Cited on p. 36)
+Lim, J. N. and Johansen, A. Particle Semi-Implicit Varia-
+tional Inference. Advances in Neural Information Pro-
+cessing Systems, 37:123954–123990, 2024. (Cited on p.
+57)
+Liu, X., Bai, Y., Lu, Y., Soltoggio, A., and Kolouri, S.
+Wasserstein Task Embedding for Measuring Task Simi-
+larities. Neural Networks, 181:106796, 2025. (Cited on
+p. 51, 54)
+Liutkus, A., Simsekli, U., Majewski, S., Durmus, A., and
+St¨oter, F.-R. Sliced-Wasserstein Flows: Nonparametric
+Generative Modeling via Optimal Transport and Diffu-
+sions. In International Conference on Machine Learning,
+pp. 4104–4113. PMLR, 2019. (Cited on p. 2)
+Loshchilov, I. and Hutter, F. Decoupled Weight Decay
+Regularization. In International Conference on Learning
+Representations, 2019. (Cited on p. 48)
+Lu, Y., Lu, J., and Nolen, J. Accelerating Langevin Sam-
+pling with Birth-Death. arXiv preprint arXiv:1905.09863,
+2019. (Cited on p. 52)
+Lu, Y., Slepˇcev, D., and Wang, L. Birth–death dynamics for
+sampling: global convergence, approximations and their
+asymptotics. Nonlinearity, 36(11):5731, 2023. (Cited on
+p. 52)
+Manupriya, P., Jagarlapudi, S., and Jawanpuria, P. MMD-
+Regularized Unbalanced Optimal Transport. Transactions
+on Machine Learning Research, 2024. ISSN 2835-8856.
+(Cited on p. 53)
+McCann, R. J. Polar factorization of maps on Riemannian
+manifolds. Geometric & Functional Analysis GAFA, 11
+(3):589–608, 2001. (Cited on p. 2, 16)
+Meunier, D., Pontil, M., and Ciliberto, C. Distribution
+Regression with Sliced Wasserstein Kernels. In Inter-
+national Conference on Machine Learning, pp. 15501–
+15523. PMLR, 2022. (Cited on p. 6, 44)
+M¨uller, A. Integral Probability Metrics and Their Generating
+Classes of Functions. Advances in applied probability,
+29(2):429–443, 1997. (Cited on p. 9)
+Netzer, Y., Wang, T., Coates, A., Bissacco, A., Wu, B.,
+Ng, A. Y., et al. Reading Digits in Natural Images with
+Unsupervised Feature Learning. In NIPS workshop on
+deep learning and unsupervised feature learning, volume
+2011, pp. 4. Granada, 2011. (Cited on p. 7)
+Neumayer, S., Stein, V., Steidl, G., and Rux, N. Wasserstein
+Gradient Flows for Moreau Envelopes of f-Divergences
+in Reproducing Kernel Hilbert Spaces. arXiv preprint
+arXiv:2402.04613, 2024. (Cited on p. 2)
+Nguyen, K. and Ho, N. Hierarchical Hybrid Sliced Wasser-
+stein: A Scalable Metric for Heterogeneous Joint Dis-
+tributions. In The Thirty-eighth Annual Conference on
+Neural Information Processing Systems, 2024. (Cited on
+p. 54)
+Nguyen, K., Nguyen, H., Pham, T., and Ho, N. Lightspeed
+Geometric Dataset Distance via Sliced Optimal Transport.
+arXiv preprint arXiv:2501.18901, 2025. (Cited on p. 54)
+Nguyen, X.
+Borrowing strengh in hierarchical Bayes:
+Posterior concentration of the Dirichlet base measure.
+Bernoulli, 22(3):1535 – 1571, 2016. (Cited on p. 1, 3)
+Otto, F.
+The Geometry of Dissipative Evolution Equa-
+tions: The Porous Medium Equation. Communications
+in Partial Differential Equations, 26(1-2):101–174, 2001.
+(Cited on p. 2)
+13
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+Pedregosa, F., Varoquaux, G., Gramfort, A., Michel, V.,
+Thirion, B., Grisel, O., Blondel, M., Prettenhofer, P.,
+Weiss, R., Dubourg, V., Vanderplas, J., Passos, A., Cour-
+napeau, D., Brucher, M., Perrot, M., and Duchesnay, E.
+Scikit-learn: Machine Learning in Python. Journal of
+Machine Learning Research, 12:2825–2830, 2011. (Cited
+on p. 52)
+Persad, S., Choo, Z.-N., Dien, C., Sohail, N., Masilionis, I.,
+Chalign´e, R., Nawy, T., Brown, C. C., Sharma, R., Pe’er,
+I., et al. SEACells infers transcriptional and epigenomic
+cellular states from single-cell genomics data. Nature
+Biotechnology, 41(12):1746–1757, 2023. (Cited on p. 1)
+Petric Maretic, H., El Gheche, M., Chierchia, G., and
+Frossard, P. GOT: an Optimal Transport framework for
+Graph comparison. Advances in Neural Information Pro-
+cessing Systems, 32, 2019. (Cited on p. 1)
+Qi, C. R., Su, H., Mo, K., and Guibas, L. J. PointNet:
+Deep learning on Point Sets for 3D Classification and
+Segmentation. In Proceedings of the IEEE conference on
+computer vision and pattern recognition, pp. 652–660,
+2017. (Cited on p. 1)
+Rabin, J., Peyr´e, G., Delon, J., and Bernot, M. Wasserstein
+Barycenter and its Application to Texture Mixing. In
+Scale Space and Variational Methods in Computer Vision:
+Third International Conference, SSVM 2011, Ein-Gedi,
+Israel, May 29–June 2, 2011, Revised Selected Papers 3,
+pp. 435–446. Springer, 2012. (Cited on p. 6, 44)
+Rønning, O., Nalisnick, E., Ley, C., Smyth, P., and Hamel-
+ryck, T. ELBOing Stein: Variational Bayes with Stein
+Mixture Inference. In The Thirteenth International Con-
+ference on Learning Representations, 2025. (Cited on p.
+57)
+Rudin, W. Real and Complex Analysis. McGraw-Hill Sci-
+ence/Engineering/Math, 1986. ISBN 0070542341. (Cited
+on p. 17)
+Salim, A., Korba, A., and Luise, G. The Wasserstein Proxi-
+mal Gradient Algorithm. Advances in Neural Information
+Processing Systems, 33:12356–12366, 2020. (Cited on p.
+2)
+Santambrogio, F. Optimal Transport for Applied Mathe-
+maticians. Birk¨auser, NY, 55(58-63):94, 2015. (Cited on
+p. 6, 22)
+Santambrogio, F. {Euclidean, Metric, and Wasserstein}
+Gradient Flows: an overview. Bulletin of Mathematical
+Sciences, 7:87–154, 2017. (Cited on p. 2)
+S´ejourn´e, T., Peyr´e, G., and Vialard, F.-X. Unbalanced
+Optimal Transport, from Theory to Numerics. Handbook
+of Numerical Analysis, 24:407–471, 2023. (Cited on p.
+53)
+Sodini, G. E., Fornasier, M., and Heid, P. Approximation
+Theory, Computing, and Deep Learning on the Wasser-
+stein Space. Mathematical Models and Methods in Ap-
+plied Sciences, 2025. (Cited on p. 1)
+Sturm, K.-T. Wasserstein Diffusion on Multidimensional
+Spaces. arXiv preprint arXiv:2401.12721, 2024. (Cited
+on p. 6)
+Villani, C. Topics in Optimal Transportation, volume 58.
+American Mathematical Soc., 2003. (Cited on p. 56)
+Villani, C. et al. Optimal Transport: Old and New, volume
+338. Springer, 2009. (Cited on p. 16, 24, 34)
+Vilnis, L. and McCallum, A. Word Representations via
+Gaussian Embedding. In Bengio, Y. and LeCun, Y. (eds.),
+3rd International Conference on Learning Representa-
+tions, ICLR 2015, San Diego, CA, USA, May 7-9, 2015,
+Conference Track Proceedings, 2015. (Cited on p. 1)
+von Renesse, M.-K. and Sturm, K.-T. Entropic Measure and
+Wasserstein Diffusion. The Annals of Probability, 37(3):
+1114–1191, 2009. ISSN 00911798. (Cited on p. 4, 6)
+Wang, F., Zhang, Z., Sun, L., Ye, J., and Yan, Y. DiriE:
+Knowledge Graph Embedding with Dirichlet Distribution.
+In Proceedings of the ACM Web Conference 2022, pp.
+3082–3091, 2022. (Cited on p. 1)
+Wang, T., Zhu, J.-Y., Torralba, A., and Efros, A. A. Dataset
+Distillation.
+arXiv preprint arXiv:1811.10959, 2018.
+(Cited on p. 1, 7, 8)
+Wibisono, A. Sampling as optimization in the space of
+measures: The Langevin dynamics as a composite opti-
+mization problem. In Conference on Learning Theory,
+pp. 2093–3027. PMLR, 2018. (Cited on p. 2)
+Wilson, M., Needham, T., Park, C., Kundu, S., and Sri-
+vastava, A. A Wasserstein-Type Distance for Gaussian
+Mixtures on Vector Bundles with Applications to Shape
+Analysis. SIAM Journal on Imaging Sciences, 17(3):
+1433–1466, 2024. (Cited on p. 1)
+Yan, Y., Wang, K., and Rigollet, P. Learning Gaussian
+Mixtures Using the Wasserstein–Fisher–Rao Gradient
+Flow. The Annals of Statistics, 52(4):1774–1795, 2024.
+(Cited on p. 52)
+Yurochkin, M., Claici, S., Chien, E., Mirzazadeh, F., and
+Solomon, J. M. Hierarchical Optimal Transport for Doc-
+ument Representation. Advances in neural information
+processing systems, 32, 2019. (Cited on p. 1)
+Zhao, B. and Bilen, H. Dataset Condensation with Differ-
+entiable Siamese Augmentation. In International Con-
+ference on Machine Learning, pp. 12674–12685. PMLR,
+2021. (Cited on p. 8, 50)
+14
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+Zhao, B. and Bilen, H. Dataset Condensation with Dis-
+tribution Matching. In Proceedings of the IEEE/CVF
+Winter Conference on Applications of Computer Vision,
+pp. 6514–6523, 2023. (Cited on p. 8, 50)
+15
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+A. Background on Optimal Transport
+A.1. Optimal Transport on P2(M)
+Let M be a Riemannian manifold, and denote by d : M × M →R+ the associated geodesic distance. We recall that for
+any µ, ν ∈P2(M), the Wasserstein distance is defined as
+W2
+2(µ, ν) =
+inf
+˜γ∈Π(µ,ν)
+Z
+d(x, y)2 d˜γ(x, y).
+(24)
+Let φ : M →R. For a cost c : M × M →R, we recall that its c-transform is defined as φc(y) = infx∈M c(x, y) −φ(x).
+φ is said to be c-concave if there exists ϕ : M →R such that φ = ϕc. Here, we focus on c(x, y) = 1
+2d(x, y)2. Then, the
+Wasserstein distance can be written through its dual (see e.g. (Villani et al., 2009, Theorem 5.10)) as
+W2
+2(µ, ν) =
+sup
+f∈L1(µ)
+Z
+fdµ +
+Z
+f cdν,
+(25)
+with L1(µ) = {f : M →R,
+R
+|f|dµ < ∞}. The optimal f is called the Kantorovich potential, is noted φµ,ν, and is a
+c-concave map.
+We now recall McCann’s theorem, which provides a sufficient condition for the existence of an OT map provided that µ
+is absolutely continuous with respect to the volume measure. We state the result for a connected compact Riemannian
+manifold. But, note that this result was then extended to other manifolds, see e.g. (Figalli, 2007, Proposition 3.1) for a
+similar result on complete Riemannian manifolds.
+Theorem A.1 (Theorem 9 in (McCann, 2001)). Let M be a connected compact Riemannian manifold. Let µ ∈P2,ac(M)
+and ν ∈P2(M). Then, the optimal coupling ˜γ ∈Π(µ, ν) is unique and of the form ˜γ = (Id, T)#µ with T(x) =
+expx
+ −∇φµ,ν(x)
+
+for all x ∈M, where φµ,ν is a Kantorovich potential for the pair µ, ν.
+For any x ∈M, recall that the exponential map exp : TM →M maps tangent vectors v ∈TxM back to the manifold at
+the point reached at time t = 1 by the geodesic starting at x with initial velocity v. Moreover, when it is well defined, its
+inverse is the logarithm map logx : M →M, which satisfies, for any x ∈M, y = expx(v) where v ∈TxM, logx(y) = v.
+However, the exponential map is not always invertible. For instance, on the sphere Sd−1, there are an infinite number of
+geodesics, and thus of directions v ∈TxM, between x ∈M and its antipodal point −x (see Figure 4). Therefore, the
+logarithm map logx(−x) is multivalued.
+Let µ, ν ∈P2(M). When the exponential map is invertible at µ-almost every x ∈M, then a (constant-speed) geodesic
+between µ and ν can be defined for all t ∈[0, 1] as µt = expπ1 ◦(t logπ1 ◦π2)#˜γ where ˜γ ∈Πo(µ, ν), i.e. it satisfies
+W2(µs, µt) = |t −s|W2(µ, ν) for all s, t ∈[0, 1]. However, the exponential map might not always be invertible, as
+described in the last paragraph. One way to circumvent this problem is to consider the space
+exp−1
+µ (ν) = {γ ∈P2(TM), πM
+# γ = µ, exp# γ = ν,
+Z
+∥v∥2
+x dγ(x, v) = W2
+2(µ, ν)}.
+(26)
+This space carries more information than the set of optimal couplings as it precises which geodesic was chosen to move the
+mass from µ to ν (Gigli, 2011). Indeed, regarding the previous example on the sphere, for x ∈Sd−1, µ = δx and ν = δ−x,
+and any v ∈TxM such that −x = expx(v), we have δ(x,v) ∈exp−1
+µ (ν), while the optimal coupling would simply be given
+by the map T(x) = −x. Moreover, it allows to define geodesics as t 7→µt = expπM ◦(tπv)#γ for any γ ∈exp−1
+µ (ν)
+(Gigli, 2011, Theorem 1.11). By Proposition 2.1, if µ ∈P2,ac(M), then there exists a unique γ ∈exp−1
+µ (ν), which is of
+the form γ = (Id, −∇φµ,ν)#µ. In this case, the geodesic between µ and ν is of the form µt = expId ◦(−t∇φµ,ν)#µ.
+A.2. Wasserstein Gradient Flows on P2(M)
+We provide in this Section some background on Wasserstein gradient flows on P2(M), with M a Riemannian manifold
+with geodesic distance d. This presentations follows the one from (Lanzetti et al., 2025) on P2(Rd), adapted to P2(M)
+using results of (Erbar, 2010).
+Differential Structure.
+First, we recall sub- and super differentiability on this space.
+16
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+Figure 4: On the sphere, there are an infinite number of geodesics between x and −x (here 3 are represented). Thus, the
+logarithm map would be multivalued.
+Definition A.2 (Wasserstein sub- and super-differentiability). Let F : P2(M) →R a lower semi-continuous functional. A
+map ξ : M →TM ∈L2(µ, TM) belongs to the subdifferential ∂−F(µ) of F at µ if for all ν ∈P2(M),
+F(ν) ≥F(µ) +
+sup
+γ∈exp−1
+µ (ν)
+Z
+⟨ξ(x), v⟩x dγ(x, v) + o
+ W2(µ, ν)
+
+.
+(27)
+Similarly, ξ ∈L2(µ, TM) belongs to the superdifferential ∂+F(µ) of F at µ if −ξ ∈∂−(−F)(µ).
+Similarly as on P2(Rd) (Bonnet, 2019; Lanzetti et al., 2025), we say that a functional is Wasserstein differentiable if it
+admits sub- and super-differentials which coincide.
+Definition A.3 (Wasserstein differentiability). A functional F : P2(M) →R is Wasserstein differentiable at µ ∈P2(M)
+if ∂−F(µ) ∩∂+F(µ) ̸= ∅. In this case, we say that ∇W2F(µ) ∈∂−F(µ) ∩∂+F(µ) is a Wasserstein gradient of F at µ,
+and it satisfies for any ν ∈P2(M), γ ∈exp−1
+µ (ν),
+F(ν) = F(µ) +
+Z
+⟨∇W2F(µ)(x), v⟩x dγ(x, v) + o
+ W2(µ, ν)
+
+.
+(28)
+If µ ∈P2,ac(M), then by Proposition 2.1, γ ∈exp−1
+µ (ν) is unique and of the form γ = (Id, −∇φµ,ν)#µ. Thus, in that
+case, (28) translates as
+F(ν) = F(µ) +
+Z
+⟨∇W2F(µ)(x), −∇φµ,ν(x)⟩x dµ(x) + o
+ W2(µ, ν)
+
+,
+(29)
+which coincides with (Erbar, 2010, Definition 3.1) (for the subdifferential, and up to a sign as they use c-convex maps, and
+we use φµ,ν a c-concave map).
+If we take t 7→µt = (expπM ◦(tπv))#γ, for γ ∈exp−1
+µ (ν), a geodesic between µ, ν, then necessarily (πM, tπv)#γ ∈
+exp−1
+µ (µt) (Gigli, 2011, Theorem 1.11), and thus
+F(µt) = F(µ) + t
+Z
+⟨∇W2F(µ)(x), v⟩x dγ(x, v) + o
+ W2(µ, µt)
+
+,
+(30)
+which implies d
+dtF(µt)
+
+t=0 =
+R
+⟨∇W2F(µ)(x), v⟩x dγ(x, v).
+A priori, the Wasserstein gradient is not unique. Nevertheless, we can always restrict ourselves to a unique gradient
+belonging to a tangent space whenever it is an Hilbert space. This is the case for µ absolutely continuous (Gigli, 2011,
+Corollary 6.6). So, we now focus on P2,ac(M) ⊂P2(M). In this case, the tangent space can be defined as TµP2(M) =
+{∇φ, φ ∈C∞
+c (M)}
+L2(µ,T M). This is a closed linear subspace of L2(µ, TM) and we can uniquely decompose any
+ξ ∈L2(µ, TM) as ξ = ϕ + ψ with ϕ ∈TµP2(M) and ψ ∈TµP2(M)⊥(Rudin, 1986, Theorem 4.11). Since
+µ ∈P2,ac(M), then by Proposition 2.1, the optimal γ is equal to (Id, −∇φµ,ν)#µ with φµ,ν a Kantorovich potential
+between µ and ν. In this case, it can be shown that
+Z
+⟨ψ(x), v⟩x dγ(x, v) =
+Z
+⟨ψ(x), −∇φµ,ν(x)⟩x dµ(x) = 0,
+(31)
+17
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+since ∇φµ,ν ∈TµP2(M) (Erbar, 2010, Lemma 2.6). Thus the only part of the gradient that matters is ϕ, and we can show
+that it is unique.
+Proposition A.4. Let F : P2(M) →R. Its gradient at µ ∈P2,ac(M), if it is exists, is the unique element of TµP2(M) ∩
+∂+F(µ) ∩∂−F(µ).
+Proof. See Appendix C.7.
+Another interesting property of gradients belonging to the tangent space is that they are actually strong differentials, meaning
+that they satisfy the Taylor expansion along any coupling, i.e., for any ν ∈P2(M) and γ ∈P2(TM) such that πM
+# γ = µ
+and exp# γ = ν, ∇W2F(µ) ∈TµP2(M) satisfies
+F(ν) = F(µ) +
+Z
+⟨∇W2F(µ)(x), v⟩x dγ(x, v) + o
+ sZ
+∥v∥2x dγ(x, v)
+!
+.
+(32)
+Erbar (2010, Lemma 3.2) showed this property for couplings obtained through maps. We extend it for any coupling in
+the next Proposition. First, for µ ∈P2(M) fixed, we define P2(TM)µ := {γ ∈P2(TM) | πM
+# γ = µ}. For every
+γ ∈P2(TM)µ, we define ∥γ∥2
+µ :=
+R
+∥v∥2
+xdγ(x, v), and we further define its barycentric projection to be the unique vector
+field B(γ) ∈L2(µ, TM) such that for every ξ ∈L2(µ, TM),
+Z
+⟨ξ(x), v⟩x dγ(x, v) =
+Z
+⟨ξ(x), B(γ)(x)⟩xdµ(x) = ⟨ξ, B(γ)⟩L2(µ),
+(33)
+(see (Gigli, 2011, Chapter 6)). Note that the barycentric projection satisfies ∥B(γ)∥L2(µ) ≤∥γ∥µ.
+Proposition A.5. Let ξ ∈∂−F(µ) ∩TµP2(M). Then ξ is an (extended) strong subdifferential of F at µ, i.e. for every
+γ ∈P2(TM)µ,
+F(exp# γ) ≥F(µ) +
+Z
+⟨ξ(x), v⟩x dγ(x, v) + o(∥γ∥µ).
+(34)
+By symmetry of the arguments, it also holds for superdifferentials and gradients.
+Proof. See Appendix C.8.
+We now derive the Wasserstein gradients of well known functionals such as potential energies and interaction energies.
+Proposition A.6. Let V : M →R be twice differentiable with Hessian bounded in operator norm by L for all x ∈M,
+i.e. ∥HessMV (x)∥= maxv∈TxM,∥v∥x=1 ∥HessMV (x)[v]∥x ≤L, and V : µ 7→
+R
+V dµ. Then V is differentiable with
+gradient ∇W2V(µ) = ∇MV for any µ ∈P2(M).
+Proof. See Appendix C.9.
+Proposition A.7. Let W : M × M →R be twice differentiable with Hessian for both arguments bounded in operator
+norm, and W : µ 7→
+RR
+W(x, y)dµ(x)dµ(y). Then W is differentiable with gradient ∇W2W(µ)(x) =
+R  ∇1W(x, y) +
+∇2W(y, x)
+
+dµ(y) for any µ ∈P2(M), x ∈M.
+Proof. See Appendix C.10.
+We also introduce the notion of Hessian on the Wasserstein space, which will be useful to derive smoothness assumptions
+for the WoW gradients to be well defined.
+Definition A.8. Let F : P2(M) →R. Let µ ∈P2(M). The Wasserstein Hessian of F at γ ∈exp−1
+µ (ν) for some
+ν ∈P2(M), is a map HFγ : TM →TM verifying
+d2
+dt2 F(µt)
+
+t=0 =
+R
+⟨HFγ(x, v), v⟩x dγ(x, v) for a constant-speed
+geodesic µt =
+ expπM ◦(tπv)
+
+#γ with γ ∈exp−1
+µ (ν).
+18
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+Wasserstein Gradient Flows.
+A Wasserstein gradient flow of F : P2(M) →R is defined as a curve t 7→µt on an
+interval I, which is a weak solution of the continuity equation
+∂tµt = div
+ µt∇W2F(µt)
+
+,
+(35)
+i.e., which satisfies for any φ ∈C∞
+c (I × M),
+Z
+I
+Z
+M
+ ∂tφt(x) −⟨∇Mφt(x), ∇W2F(µt)(x)⟩x
+
+dµt(x)dt = 0.
+(36)
+Usually, such equation needs to be approximated by a scheme discretized in time. A common way to do it is through the
+Jordan-Kinderlehrer-Otto (JKO) scheme introduced in (Jordan et al., 1998), which is of the form
+∀k ≥0, µk+1 ∈argmin
+µ∈P2(M)
+W2
+2(µ, µk)
+2τ
++ F(µ).
+(37)
+Under suitable conditions, this scheme converges towards the Wasserstein gradient flow of F (Ambrosio et al., 2008; Erbar,
+2010). However, this scheme is generally costly to compute, as it requires to solve an optimization problem at each iteration.
+In practice, it is more convenient to rely on an explicit discretization, which can be seen as a Riemannian Wasserstein
+gradient descent (Bonnabel, 2013; Bonet et al., 2025), which is of the form
+∀k ≥0, µk+1 = expµk
+ −τ∇W2F(µk)
+
+.
+(38)
+We note that this scheme can be obtained by linearizing the objective in (37). Indeed, if µk ∈P2,ac(M), (37) can be written
+as
+(
+Tk+1 = argminT∈L2(µk,T M)
+1
+2τ
+R
+∥T(x)∥2
+x dµk(x) + F
+ (exp ◦T)#µk
+
+µk+1 = (exp ◦Tk+1)#µk.
+(39)
+Using the coupling γ = (Id, exp ◦T)#µk ∈Π(µk, (exp ◦T)#µk) and that ∇W2F(µk) is a strong differential, then we
+have that
+F
+ (exp ◦T)#µk
+
+= F(µk) +
+Z
+⟨∇W2F(µk)(x), T(x)⟩x dµk(x) + o
+ sZ
+∥T(x)∥2x dµk(x)
+!
+.
+(40)
+Plugging this linearization in (39), we obtain
+Tk+1 ∈
+argmin
+T∈L2(µk,T M)
+1
+2τ ∥T∥2
+L2(µk,T M) + ⟨∇W2F(µk), T⟩L2(µk,T M).
+(41)
+Taking the first order condition, we recover (38) as Tk+1 = −τ∇W2F(µk).
+Wasserstein Gradient Descent.
+In practice, we usually work with particles, i.e. we start at µ0 = 1
+n
+Pn
+i=1 δxi,0, and
+update each particle at each iteration k ≥0 as
+∀i ∈{1, . . . , n}, xi,k+1 = expxi,k
+ −τ∇W2F(µk)(xi,k)
+
+(42)
+for µk = 1
+n
+Pn
+i=1 δxi,k. In particular, for M = Rd, the scheme is obtained as
+∀i ∈{1, . . . , n}, xi,k+1 = xi,k −τ∇W2F(µk)(xi,k).
+(43)
+Moreover, if the functional F : P2(Rd) →R has a closed-form over discrete measures, i.e., there exists F : (Rd)n →R such
+that F
+  1
+n
+Pn
+i=1 δxi
+
+= F(x1, . . . , xn), then we can use backpropagation on F and use that ∇W2F( 1
+n
+Pn
+i=1 δxi,k)(xi,k) =
+n∇iF(x1, . . . , xn).
+Proposition A.9. Let F : P2(Rd) →R a Wasserstein differentiable functional, and F : (Rd)n →R such that for any
+x = (x1, . . . , xn) /∈∆n := {x ∈(Rd)n | ∃i ̸= j, xi = xj} and µn = 1
+n
+Pn
+i=1 δxi, F(µn) = F(x1, . . . , xn). Then, for all
+i ∈{1, . . . , n},
+∇W2F(µn)(xi) = n∇iF(x1, . . . , xn).
+(44)
+Proof. See Appendix C.11.
+19
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+B. Wasserstein over Wasserstein Space
+B.1. Function Spaces on P2(M)
+In this section we fix P
+∈
+P2(P2(M)).
+Recall that we define the tangent space to P2(M) at µ by
+TµP2(M) := {∇φ, φ ∈C∞
+c (M)}
+L2(µ,T M) for every µ ∈P2(M).
+We also define the larger tangent space
+T DerP2(M) by T Der
+µ
+P2(M) := Γ(M, TM)
+L2(µ,T M) where Γ(M, TM) is the space of smooth vector fields on M, i.e.
+smooth maps from M to TM. Our goal is to rigorously define the space L2(P, TP2(M)) and to show that it is indeed a
+Hilbert space.
+Let B ⊆M open, then the map µ ∈P2(M) 7→µ(B) is Borel, indeed, it is lower semicontinuous by (Ambrosio et al.,
+2008, Equation (5.1.16)). Thus, the map µ ∈X 7→µ ∈P2(Y ) with X = P2(M) and Y = M is a Borel map (in the sense
+of measure-valued maps), and the formula
+˜P(f) =
+Z
+P2(M)
+Z
+M
+f(µ, x)dµ(x)dP(µ)
+(45)
+defines a probability measure ˜P on P2(M) × M (we follow the same reasoning as in (Ambrosio et al., 2008, Section 5.3)).
+We then define L2(P, TM) to be the quotient of the space of measurable functions f : P2(M) × M →TM, such
+that f(µ, x) ∈TxM for every (µ, x) ∈P2(M) × M, by the equivalence relation corresponding to equality ˜P-almost
+everywhere, and we equip it with the norm ∥· ∥L2(P) defined by
+∥f∥2
+L2(P) :=
+Z
+P2(M)
+∥f(µ)∥2
+L2(µ)dP(µ)
+(46)
+(we view f
+∈
+L2(P, TM) interchangeably as a function with signatures P2(M) × M
+→
+TM and
+P2(M) →(M →TM), hence the notation f(µ)). It is a Hilbert space: indeed, if M is an open set U ⊆Rn,
+then since TU = U × Rn, L2(P, TU) is a Hilbert space as it is the direct sum of n copies of the Hilbert space L2(˜P), and
+in the general case, we can show that L2(P, TM) is complete by showing that Cauchy sequences converge, by using local
+charts and a partition of unity of M to fall back on the case where M is an open of Rn.
+We can now define L2(P, TP2(M)) as the space of functions f ∈L2(P, TM) such that f(µ) ∈TµP2(M) for P-ae
+µ. It is closed in L2(P, TM) and is therefore a Hilbert space. Indeed, if {fn}∞
+n=1 ⊆L2(P, TP2(M)) converges to
+f ∈L2(P, TM),
+lim
+n→∞
+Z
+∥fn(µ) −f(µ)∥2
+L2(µ)dP(µ) = 0.
+(47)
+This implies that, up to extracting a subsequence, we have ∥fn(µ) −f(µ)∥L2(µ) →0 for P-ae µ2. But since the TµP2(M)
+are Hilbert spaces, this implies that f(µ) ∈TµP2(M) for P-ae µ, and f indeed belongs to L2(P, TP2(M)). We define
+similarly L2(P, T DerP2(M)) and show that it is a Hilbert space. This latter space T DerP2(M) is useful in that it allows us
+to define a notion of differential for W2-Lipschitz functions on P2(M), as we will see in the next subsection.
+B.2. Lipschitz Functions and Rademacher Property
+For every smooth vector field w ∈Γ(M, TM), let (ψw,t)t∈R be its flow on M, that is, the diffeomorphic flow solution of
+(
+∀(t, x) ∈R × M,
+d
+dtψw,t(x) = w
+ ψw,t(x)
+
+ψ0 = Id,
+(48)
+2We recall the argument. For every ε > 0, we have P[∥f(µ) −fn(µ)∥L2(µ) ≥ε] →0 as P[∥f(µ) −fn(µ)∥L2(µ) ≥ε] ≤
+1
+ε2
+R
+∥f(µ) −fn(µ)∥2
+L2(µ)dP(µ). So, up to extracting a subsequence, we may assume that for every n, P[∥f(µ) −fn(µ)∥L2(µ) ≥
+n−1] ≤
+1
+n2 . Then, we can check that the set A = T
+N
+S
+n≥N{∥f(µ) −fn(µ)∥L2(µ) ≥n−1} has null P-measure and that for any
+µ /∈A, fn(µ) →f(µ) in L2(µ).
+20
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+and denote Ψw,t the map P2(M) 7→P2(M) induced by the pushforward by ψw,t.
+The following definition is taken from (Emami & Pass, 2025, Definition 9).
+Definition B.1. (Emami and Pass, 2024) We say that a measure P0 ∈P2
+ P2(M)
+
+satisfies the Rademacher property
+if for every W2-Lipschitz function U : P2(M) 7→R, there exists DP0U ∈L2(P0, T DerP2(TM)) such that for every
+w ∈Γ(M, TM),
+lim
+t→0
+U
+ Ψw,t(·)
+
+−U(·)
+t
+= ⟨DP0U(·), w⟩L2(·) in L2(P0).
+(49)
+Thus, every time we have a reference measure P0 ∈P2
+ P2(M)
+
+satisfying the Rademacher property, we can define
+for every W2-Lipschitz function U a measurable section DP0U of T DerP2(M) that acts as a “differential” of sorts, for
+perturbations given by smooth vector fields on M.
+B.3. Wasserstein Geometry of P2(P2(M))
+We recall that the WoW distance between P, Q ∈P2
+ P2(M)
+
+is defined as
+WW2(P, Q)2 =
+inf
+Γ∈Π(P,Q)
+Z
+W2
+2(µ, ν) dΓ(µ, ν).
+(50)
+A natural question is to find the conditions under which this problem admits an OT map. Emami & Pass (2025) showed it is
+the case for M a compact connected Riemannian manifold, for absolutely continuous measures w.r.t a reference measure P0
+satisfying the following assumption:
+Assumption B.2.
+• P0 has no atoms
+• P0 satisfies the following integration by parts formula: for any F, G ∈Cyl
+ P2(M)
+
+, and any smooth vector field
+w ∈Γ(M, TM), there exists a measurable map µ 7→∇∗
+wG(µ) ∈T Der
+µ
+P2(M) such that
+Z
+P2(M)
+⟨∇W2F(µ), w⟩L2(µ) · G(µ) dP0(µ) =
+Z
+P2(M)
+F(µ) · ∇∗
+wG(µ) dP0(µ).
+(51)
+• P0 is quasi-invariant with respect to the action of the flows generated by smooth vector fields, i.e. for any smooth
+vector field w ∈Γ(M, TM), P0 and Pt,w
+0
+:= Ψw,t
+# P0 are mutually absolutely continuous for every t ∈R, and the
+Radon-Nikodym derivative
+Rw
+r = dPt,w
+0
+⊗dr
+dP0 ⊗dr ,
+r ∈R
+(52)
+satisfies, for P0-a.e. µ, L1 −essinfr∈(s,t) Rw
+r (µ) > 0 for all s, t ∈R with s ≤t.
+These assumptions were first proposed by Dello Schiavo (2020), and we refer to (Dello Schiavo, 2020) for examples of
+measures satisfying them. By (Dello Schiavo, 2020, Theorem 2.10), any P0 satisfying Assumption B.2 also satisfies the
+Rademacher property, which Emami & Pass (2025) leveraged to show the existence of an OT map. In all the following, we fix
+a reference measure P0 ∈P2
+ P2(M)
+
+satisfying Assumption B.2, and when there is no ambiguity, the “differentials” of a
+W2-Lipschitz function U will be denoted DU. Moreover, by (Dello Schiavo, 2020, Theorem 2.10 (2)), if U ∈Cyl
+ P2(M)
+
+,
+then its differential coincides with the usual Wasserstein gradient, i.e., DU = ∇W2U.
+Theorem B.3 (Theorem 13 in (Emami & Pass, 2025)). Let P ∈P2
+ P2,ac(M)
+
+such that P ≪P0 and Q ∈P2
+ P2(M)
+
+.
+Then, there is a unique optimal plan Γ, which is of the form Γ = (Id, T)#P with T : P2(M) →P2(M) satisfying
+T#P = Q. Moreover, T is of the form T(µ) = exp
+ −DP0U(µ)
+
+#µ, where U is a ( 1
+2W2
+2-concave) Kantorovich potential
+for P, Q. In fact, for P-a.e. µ, DP0U(µ) = ∇φµ,T(µ), where φµ,T(µ) is a ( 1
+2d2-concave) Kantorovich potential for µ, T(µ).
+Note that the last two statements on the form of T are not part of the statement of the theorem in (Emami & Pass, 2025), but
+can be found in its proof.
+21
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+Geodesics on P2
+ P2(M)
+
+.
+We recall that a constant-speed geodesic between P, Q ∈P2
+ P2(M)
+
+is a curve t 7→Pt
+defined on [0, 1], which satisfies P0 = P, P1 = Q and for all s, t ∈[0, 1], WW2(Ps, Pt) = |t −s|WW2(P, Q) (see e.g.
+(Santambrogio, 2015, Box 5.2)).
+As we work on manifolds, we introduce similarly as on P2(M) a generalized inverse of the exponential map, which allows
+to characterize geodesics even when the optimal coupling is not unique. The multivalued inverse of the exponential map
+between P, Q ∈P2
+ P2(M)
+
+is then
+exp−1
+P (Q) =
+
+Γ ∈P2
+ P2(TM)
+
+, ϕM
+# Γ = P, ϕexp
+# Γ = Q,
+ZZ
+∥v∥2
+x dγ(x, v)dΓ(γ) = WW2(P, Q)2
+
+,
+(53)
+where for any γ ∈P2(TM), ϕM(γ) = πM
+# γ and ϕexp(γ) = exp# γ.
+Proposition B.4. Let Γ ∈exp−1
+P (Q). Then the curve t 7→Pt = expϕM ◦(tϕv)#Γ defines a geodesic between P and Q.
+Proof. See Appendix C.12.
+B.4. Differentiability on P2
+ P2(M)
+
+We recall that by Section 3.2, if F is Wasserstein differentiable at P, then the WoW gradient ∇WW2F(P) satisfies for any
+Γ ∈exp−1
+P (Q),
+F(Q) = F(P) +
+ZZ
+⟨∇WW2F(P)(πM
+# γ)(x), v⟩x dγ(x, v)dΓ(γ) + o
+ WW2(P, Q)
+
+.
+(54)
+Using this formula, we now derive the gradient of potential and interaction energies.
+Proposition B.5. Let M be a compact and connected Riemannian manifold, F
+:
+P2(M)
+→
+R a twice
+Wasserstein differentiable functional with Hessian bounded in operator norm for all γ
+∈
+P2(TM),
+i.e.
+sup(x,v)∈supp(γ), ∥v∥x=1 ∥HFγ(x, v)∥x ≤L, and F(P) =
+R
+F(µ) dP(µ) for P ∈P2
+ P2(M)
+
+. Then, F is Wasser-
+stein differentiable, and its gradient is ∇WW2F(P) = ∇W2F.
+Proof. See Appendix C.13.
+Proposition B.6. Let M be a compact and connected Riemannian manifold, W : P2(M) × P2(M) →R be
+Wasserstein differentiable with respect to each of its argument and with bounded Hessian in operator norm for all
+γ ∈P2(TM) as in Proposition B.5. Let P ∈P2
+ P2(M)
+
+and F(P) =
+RR
+W(µ, ν) dP(µ)dP(ν). Then, ∇WW2F(P)(µ) =
+R  ∇W2,1W(µ, ν) + ∇W2,2W(ν, µ)
+
+dP(ν).
+Proof. See Appendix C.14.
+Relation with first variation.
+The gradients of the potential and interaction energies derived in the last two propositions
+are computed by showing that they satisfy the definition of the WoW gradients thanks to coupling arguments. Similarly
+to the case on P2(M), we expect that they can also be computed as the gradient of the first variation, which is a much
+simpler way to compute Wasserstein gradient of generic functionals. Let F : Pac
+ P2(M)
+
+→R. Then the first variation
+δF
+δP(P) : P2(M) →R at P is defined as the unique function (up to a constant) satisfying
+lim
+ε→0
+F(P + εχ) −F(P)
+ε
+=
+Z δF
+δP(P) dχ,
+(55)
+where
+R
+dχ = 0 and P + εχ ∈Pac
+ P2(M)
+
+for ε small. Then, we expect that the WoW gradient of F can be computed as
+∇WW2F(P) = ∇W2
+δF
+δP(P).
+(56)
+We leave for future work to show formally this formula. Nonetheless, we verify that it holds for potential and interaction
+energies. Indeed, for V(P) =
+R
+F(µ) dP(µ), we have δV
+δP(P) = F since
+V(P + εχ) =
+Z
+F(µ)dP(µ) + ε
+Z
+F(µ)dχ(µ),
+(57)
+22
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+and thus the WoW gradient derived in Proposition B.5 coincides well with ∇W2
+δV
+δP(P).
+Similarly, for W(P) =
+RR
+W(µ, ν) dP(µ)dP(ν),
+W(P + tχ) −W(P)
+t
+= 1
+t
+
+W(P) + t
+ZZ
+W(µ, ν) dP(µ)dχ(ν) + t
+ZZ
+W(µ, ν) dχ(µ)dP(ν)
++t2
+ZZ
+W(µ, ν) dχ(µ)dχ(ν) −W(P)
+
+−−−→
+t→0
+Z Z
+W(µ, ν) dP(µ) +
+Z
+W(ν, µ) dP(µ)
+
+dχ(ν).
+(58)
+Thus, the first variation is δW
+δP (P)(ν) =
+R
+W(µ, ν) dP(µ) +
+R
+W(ν, µ) dP(µ), and its Wasserstein gradient coincides well
+with the WoW gradient derived in Proposition B.6.
+Relation with Euclidean gradient.
+We provide now the analog of Proposition A.9 for WoW gradients, which we use in
+practice to compute them.
+We fix here a number of classes C > 0 and a number of samples n > 0, and we consider the class of (fully) discrete
+measures of P2(P2(Rd)) defined by
+Px := 1
+C
+C
+X
+c=1
+δµxc ,
+x ∈(Rd)C×n,
+µxc := 1
+n
+n
+X
+i=1
+δxc
+i ,
+xc ∈(Rd)n.
+(59)
+We also define the space
+X := {x ∈(Rd)C×n | ∀c, xc /∈∆n and ∀c ̸= c′, µxc ̸= µxc′}.
+(60)
+where ∆n := {x ∈(Rd)n | ∃i ̸= j, xi = xj} is the generalized diagonal of (Rd)n. Informally, X is the space of vectors x
+such that the empirical measures µxc in the support of Px are all distinct, and are each supported on n distinct points of Rd.
+Proposition B.7. Let F : P2(P2(Rd)) 7→R a functional, and F : (Rd)C×n 7→R such that for every x ∈X, F(Px) = F(x).
+If F is Wasserstein differentiable at Px and F is differentiable at x for some x ∈X, then for every c ∈{1, . . . , C} and
+i ∈{1, . . . , n},
+∇WW2F(Px)(µxc)(xc
+i) = Cn∇c,iF(x).
+(61)
+Proof. See Appendix C.15.
+B.5. Convexity on P2
+ P2(M)
+
+In this section, we focus on P2
+ P2,ac(Rd)
+
+, and we show the convexity along generalized geodesics of potential energies
+and interaction energies. Hence, Proposition 4.1 can be applied to these functionals.
+We recall that on P2(Rd), a generalized geodesic between µ, ν ∈P2(Rd) is of the form t 7→µt =
+ (1 −t)π1,2 + tπ1,3
+#γ
+with γ ∈Π(η, µ, ν) such that π1,2
+# γ ∈Πo(η, µ) and π1,3
+# γ ∈Πo(η, ν). Then a functional F : P2(Rd) →R λ-convex along
+this curve satisfies for all t ∈[0, 1],
+F(µt) ≤(1 −t)F(µ) + tF(ν) −λt(1 −t)
+2
+W2
+2(µ, ν).
+(62)
+When η ∈P2,ac(Rd), by Brenier’s theorem, there are OT maps Tµ
+η between η and µ and Tν
+η between η and ν, and the
+generalized geodesic translates as µt =
+ (1 −t)Tµ
+η + tTν
+η
+
+#η.
+We define similarly a generalized geodesic between Q, O ∈P2
+ P2,ac(Rd)
+
+as t 7→Pt =
+  (1 −t)Tπ2
+π1 + tTπ3
+π1
+
+#π1
+#Γ
+where Γ ∈Π(P, Q, O), π1,2
+# Γ ∈Πo(P, Q) and π1,3
+# Γ ∈Πo(P, O). We provide sufficient conditions for potential and
+interaction energies to be λ-convex along generalized geodesics in P2
+ P2,ac(Rd)
+
+.
+Proposition B.8. Let λ ≥0 and F : P2(Rd) →R be λ-convex along generalized geodesics of P2(Rd). Then, the potential
+energy F(P) =
+R
+F(µ)dP(µ) is λ-convex along generalized geodesics on P2
+ P2,ac(Rd)
+
+.
+23
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+Proof. See Appendix C.16.
+Proposition B.9. Let W : P2(Rd) × P2(Rd) →R be joint convex along generalized geodesics of P2(Rd). Then, the
+interaction energy W(P) = 1
+2
+RR
+W(µ, ν) dP(µ)dP(ν) is convex along generalized geodesics on P2
+ P2,ac(Rd)
+
+.
+Proof. See Appendix C.17.
+We can also show that F : Q 7→1
+2WW2(Q, P)2 is 1-convex along particular generalized geodesics, which have as anchor
+point P.
+Proposition B.10. Let P, Q, O ∈P2
+ P2,ac(Rd)
+
+. Define the generalized geodesic t 7→Pt =
+  (1−t)Tπ2
+π1 +tTπ3
+π1
+
+#π1
+#Γ
+where Γ ∈Π(P, Q, O), π1,2
+# Γ ∈Πo(P, Q) and π1,3
+# Γ ∈Πo(P, O). Then F : Q 7→1
+2WW2(Q, P)2 is 1-convex along this
+generalized geodesic, i.e., it satisfies for all t ∈[0, 1],
+F(Pt) ≤(1 −t)F(Q) + tF(O) −t(1 −t)
+2
+WW2(Q, O)2.
+(63)
+Proof. See Appendix C.18.
+In particular, Proposition B.10 is the main result allowing to show Proposition 4.1, which can be applied for λ-convex
+potential energies with λ ≥0 (or more generally, for any λ ∈R such that 1
+τ +λ ≥0, see (Ambrosio et al., 2008, Assumption
+4.0.1 and Theorem 4.0.4)), and for convex interaction energies.
+C. Proofs
+C.1. Proof of Proposition 2.1
+In the forthcoming proofs, we will make use of the following selection theorem, whose statement can be found in (Villani
+et al., 2009, Chapter 5, Bibliographical notes) :
+Theorem C.1. If f : A 7→B is a Borel surjective map between Polish spaces (i.e. separable complete metric spaces), such
+that all the fibers f −1(y), y ∈B are compact, then f admits a Borel right-inverse.
+This allows us to prove
+Lemma C.2. There exists a measurable selection s : M2 7→TM of the map
+f :
+
+A = {(x, v) ∈TM, d
+ x, expx(v)
+
+= ∥v∥x}
+→
+M × M
+(x, v)
+7→
+ x, expx(v)
+
+.
+(64)
+Proof. First, A ⊆TM is a Polish space, as a closed subset of TM which is Polish. Second, for every (x, y) ∈M2, the
+fiber f −1(x, y) is compact. Indeed, if we let {(xn, vn)}∞
+n=1 ⊆f −1(x, y), then we have for every n, xn = x, y = expx(vn)
+and ∥vn∥x = d(x, y), so by compactness of the spheres in the tangent space TxM, up to extracting a subsequence there
+exists v ∈TxM such that vn →v, and by continuity y = expx(v) so that (x, v) ∈f −1(x, y). We can thus apply
+Theorem C.1 to f to deduce the existence of s.
+Now, we can prove Proposition 2.1. If γ ∈exp−1
+µ (ν), we have (πM, exp)#γ ∈Π(µ, ν) by definition of exp−1
+µ (ν).
+Furthermore
+Z
+M2 d(x, y)2d(πM, exp)#γ(x, y) =
+Z
+T M
+d(x, expx(v))2dγ(x, v)
+(65)
+≤
+Z
+T M
+∥v∥2
+xdγ(x, v) = W2
+2(µ, ν),
+(66)
+so this transport plan is optimal. In particular the inequality is an equality, and we find that d(x, expx(v)) = ∥v∥x for
+γ-a.e. (x, v). The map is thus well defined. To show that it is surjective, take γ ∈Πo(µ, ν), and set ˜γ := s(π1, π2)#γ,
+24
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+where s : M2 7→TM is the selection map defined in Lemma C.2. Then ˜γ ∈exp−1
+µ (ν). Indeed, by construction,
+(πM, exp)#˜γ = γ ∈Π(µ, ν), and also
+W2
+2(µ, ν) =
+Z
+M2 d(x, y)2dγ(x, y) =
+Z
+T M
+d(x, expx(v))2d˜γ(x, v) =
+Z
+T M
+∥v∥2
+xd˜γ(x, v).
+(67)
+This proves the surjectivity of the map.
+Now, assume that µ is absolutely continuous, and that M is compact and connected. Let γ ∈exp−1
+µ (ν) and ˜γ :=
+(πM, exp)#γ ∈Πo(µ, ν). By Theorem A.1, ˜γ is of the form (Id, T)#µ where T is the unique optimal transport map from
+µ to ν. Furthermore T itself is of the form T(x) = expx(−∇φ(x)) where φ is a c-concave function M →R (in fact a
+Kantorovich potential for the pair µ, ν). Furthermore, we have, for µ-a.e. x ∈M, T(x) belongs to
+∂cφ(x) := {y ∈M, φ(x) + φc(y) = 1
+2d(x, y)2}.
+(68)
+This implies, by (Gigli, 2011, Theorem 1.8), that for µ-a.e. x ∈M, exp−1
+x (T(x)) ⊆−∂+φ(x), where ∂+φ(x) is the
+superdifferential of φ. However, since M is compact, φ is Lipschitz and is thus differentiable almost everywhere, so that
+∂+φ(x) = {∇φ(x)} almost everywhere (in particular this holds µ-a.e. as µ is absolutely continuous). From this, we
+conclude that for γ-a.e. (x, v), we have T(x) = expx(v) with exp−1
+x (T(x)) = {−∇φ(x)}, so that v = −∇φ(x). Thus,
+we have proved that
+γ = (Id, −∇φ)#µ.
+(69)
+This finishes the proof.
+C.2. Proof of Proposition 3.1
+We first state and prove another selection result:
+Lemma C.3. There exists a measurable selection s : P2(M)2 7→P2(TM) of the map
+f : A =
+(
+{γ ∈P2(TM)|γ ∈exp−1
+πM
+# γ(exp# γ)}
+→
+P2(M) × P2(M)
+γ
+7→
+(πM
+# γ, exp# γ).
+(70)
+Proof. We first prove that A ⊆P2(TM) is a Polish space. All we need to do is to prove that it is closed : indeed, since
+TM is a connected Riemannian manifold (with the Sasaki metric), (P2(TM), W2) is a Polish space. (See (Ambrosio
+et al., 2008, Proposition 7.1.5). Similarly P2(M) is a Polish space.) Note first that if γ ∈A, it is supported on the
+compact set K = {(x, v) ∈TM, ∥v∥x ≤diam(M)} ⊆TM, as ∥v∥x = d(x, expx(v)) γ-almost everywhere. Let
+{γn}∞
+n=1 ⊆A converging to γ ∈P2(TM) in the W2 metric. Then γ is also supported on K, and for every n, since
+γn ∈exp−1
+πM
+# γn(exp# γn), we have
+Z
+∥v∥2
+xdγn(x, v) = W2
+2(πM
+# γn, exp# γn).
+(71)
+Letting n →∞, we find
+Z
+∥v∥2
+xdγ(x, v) = W2
+2(πM
+# γ, exp# γ).
+(72)
+Indeed, W2(γn, γ) →0 implies weak convergence of γn to γ, and thus of πM
+# γn and exp# γn to respectively πM
+# γ and
+exp# γ, and since M is compact, weak convergence on P2(M) is the same as W2 convergence, which in turn implies the
+convergence of the right-hand side. The left-hand side converges similarly in virtue of the weak convergence of γn to γ
+(recall that they are supported on the compact set K on which the function (x, v) →∥v∥2
+x is bounded). Therefore, (72)
+implies that γ ∈exp−1
+πM
+# γ(exp# γ), so that γ ∈A, and A is thus closed in P2(TM), and a Polish space.
+Now, we prove that the fibers of f are compact. Let µ, ν ∈P2(M) and {γn}∞
+n=1 ⊆f −1(µ, ν). Since they are supported
+on K, and P(K) is compact by compactness of K, there exists γ ∈P(K) ⊆P2(TM) such that, up to extracting a
+subsequence, γn converges to γ, both weakly and in the W2 metric. We then check as above that γ ∈A, with πM
+# γ = µ
+and exp# γ = ν. This proves that the fibers of f are compact. Now, the existence of s follows again from Theorem C.1.
+25
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+The proof of Proposition 3.1 is pretty much similar to the previous one. If Γ ∈exp−1
+P (Q), we have (ϕM, ϕexp)#Γ ∈Π(P, Q)
+by definition of exp−1
+P (Q). Furthermore,
+Z
+P2(M)2 W2
+2(µ, ν)d(ϕM, ϕexp)#Γ(µ, ν) =
+Z
+P2(T M)
+W2
+2(πM
+# γ, exp# γ)dΓ(γ)
+(73)
+≤
+Z
+P2(T M)
+Z
+M2 d(x, y)2d(πM, exp)#γ(x, y)dΓ(γ)
+(74)
+≤
+Z
+P2(T M)
+Z
+T M
+d(x, expx(v))2dγ(x, v)dΓ(γ)
+(75)
+≤
+Z
+P2(T M)
+Z
+T M
+∥v∥2
+xdγ(x, v)dΓ(γ) = WW2(P, Q)2,
+(76)
+so this transport plan is optimal.
+In particular all the inequalities are equalities, and we find that for Γ-a.e.
+γ,
+W2
+2(πM
+# γ, exp# γ) =
+R
+∥v∥2
+xdγ(x, v) hence γ ∈exp−1
+πM
+# γ(exp# γ). The map is thus well defined. To show that it
+is surjective, take Γ ∈Πo(P, Q), and set ˜Γ := s(π1, π2)#Γ, where s : P2(M)2 7→P2(TM) is the selection map defined
+in Lemma C.3. Then ˜Γ ∈exp−1
+P (Q) as, by construction, (ϕM, ϕexp)#˜Γ = Γ ∈Π(P, Q), and also
+WW2(P, Q)2 =
+Z
+P2(M)2 W2
+2(µ, ν)dΓ(µ, ν)
+(77)
+=
+Z
+P2(T M)
+W2
+2(πM
+# γ, exp# γ)d˜Γ(γ)
+(78)
+=
+Z
+P2(T M)
+Z
+T M
+∥v∥2
+xdγ(x, v)d˜Γ(γ).
+(79)
+This proves the surjectivity of the map.
+Now, assume that P is absolutely continuous with respect to P0, and that M is compact and connected. Let Γ ∈exp−1
+P (Q)
+and ˜Γ := (ϕM, ϕexp)#Γ ∈Πo(P, Q). By (Emami & Pass, 2025, Theorem 13), ˜Γ is of the form (Id, T)#P where T is
+the unique optimal transport map from P to Q. Furthermore, for Γ-a.e. γ, we have γ ∈exp−1
+µγ (νγ), with µγ := πM
+# γ,
+and νγ := exp# γ. Since ˜Γ = (Id, T)#P and P is concentrated on absolutely continuous measures (as P ≪P0),
+we also have that for Γ-a.e. γ, µγ is absolutely continuous and νγ = T(µγ). Thus, by Proposition 2.1, we have
+γ = (Id, −∇φµγ,T (µγ))#µγ =
+ µ →(Id, −∇φµ,T (µ))
+
+◦ϕM(γ) for Γ-a.e. γ. Therefore, we have proved that
+Γ =
+ µ →(Id, −∇φµ,T (µ))
+
+#ϕM
+# Γ =
+ µ →(Id, −∇φµ,T (µ))#µ
+
+#P.
+(80)
+This finishes the proof.
+Remark C.4. As a side note, there exists a more explicit expression for the unique Γ ∈exp−1
+P (Q). Let indeed U : P2(M) 7→
+R be a Kantorovich potential for P, Q (i.e. a 1
+2W2
+2-concave function solving the dual problem). Then, by the same reasoning
+as in the proof of (Emami & Pass, 2025, Theorem 13), for P-almost every µ ∈P2(M), we have ∇φµ,T (µ) = DU(µ).
+Thus, we have
+Γ =
+ µ →(Id, −DU(µ))#µ
+
+#P.
+(81)
+C.3. Proof of Proposition 3.7
+The proof is inspired from (Erbar, 2010, Proposition 2.5) and (Ambrosio et al., 2008, Theorem 8.3.1).
+First, fix φ ∈Cyl
+ P2(M)
+
+, such that φ(µ) := F
+ R
+V1dµ, . . . ,
+R
+Vmdµ
+
+with F ∈C∞
+c (Rm) and V1, . . . , Vm ∈C∞
+c (M).
+Let us define H : P2(M) × P2(M) →R as
+H(µ, ν) :=
+( |φ(µ)−φ(ν)|
+W2(µ,ν)
+if µ ̸= ν
+∥∇W2φ(µ)∥L2(µ)
+if µ = ν.
+(82)
+We show in Lemma C.5 that H is upper semicontinuous. We want to prove that t →Pt(φ) =
+R
+φdPt is absolutely
+26
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+continuous and bound its metric derivative. For every s, t ∈I, let Γs,t ∈Πo(Ps, Pt). Then
+1
+|h||Ps+h(φ) −Ps(φ)| ≤1
+|h|
+Z
+P(M)2 |φ(µ) −φ(ν)| dΓs+h,s(µ, ν)
+≤1
+|h|
+Z
+P(M)2 W2(µ, ν)H(µ, ν) dΓs+h,s(µ, ν)
+≤WW2(Ps+h, Ps)
+|h|
+sZ
+P(M)2 H2(µ, ν) dΓs+h,s(µ, ν).
+(83)
+Now, we have Γs+h,s ⇀(Id, Id)#Ps when h →0, so, since H is upper semicontinuous, by (Ambrosio et al., 2008, Lemma
+5.1.7), we have
+lim sup
+h→0
+Z
+P(M)2 H2(µ, ν) dΓs+h,s(µ, ν) ≤
+Z
+P(M)
+H2(µ, µ) dPs(µ) =
+Z
+P(M)
+∥∇W2φ(µ)∥2
+L2(µ) dPs(µ),
+(84)
+and thus s 7→Ps(φ) is absolutely continuous, with metric derivative bounded from above by
+|P′|(s)∥∇W2φ∥L2(Ps,T P2(P2(M))).
+(85)
+Let now φ ∈Cyl
+ I × P2(M)
+
+, Q = I × P2(M), and λ =
+R
+I dPtdt. Then, for any interval J ⊆I such that
+spt(φ) ⊆J × P2(M),
+
+Z
+Q
+∂tφ dλ
+ =
+ lim
+h→0+
+Z
+Q
+φ(t, µ) −φ(t −h, µ)
+h
+dλ(t, µ)
+
+≤lim sup
+h→0+
+
+Z
+J
+Pt(φt) −Pt+h(φt)
+h
+dt
+
+≤
+Z
+J
+lim sup
+h→0+
+|Pt(φt) −Pt+h(φt)|
+|h|
+dt
+≤
+Z
+J
+|P′|(t)∥∇W2φt∥L2(Pt) dt
+≤
+sZ
+J
+|P′|2(t) dt
+sZ
+J
+∥∇W2φt∥2
+L2(Pt) dt.
+(86)
+From this, we infer that the linear form
+L(∇W2φ) := −
+Z
+Q
+∂tφ dλ
+(87)
+is well-defined and Lipschitz continuous. In particular, there exists v ∈{∇W2φ, φ ∈Cyl
+ I × P2(M)
+
+}
+L2(λ,T P2(M))
+such that for every φ ∈Cyl
+ I × P2(M)
+
+,
+L(∇W2φ) = ⟨v, ∇W2φ⟩L2(λ) =
+Z
+I
+Z
+P2(M)
+⟨vt(µ), ∇W2φ(µ)⟩L2(µ) dPt(µ)dt,
+(88)
+and we have the continuity equation.
+Moreover, for a.e. t ∈I, vt ∈{∇W2φ, φ ∈Cyl
+ I × P2(M)
+
+}
+L2(Pt,T P2(M))
+, and for every interval J ⊆I, there exists a
+sequence (∇W2φn)n supported in J × P2(M) such that ∇W2φn →vt1J. For all n,
+L(∇W2φn) ≤
+Z
+J
+|P′|(t)2 dt
+ 1
+2 Z
+J
+∥∇W2φn∥2
+L2(Pt,T P2(M)) dt
+ 1
+2
+(89)
+and letting n →∞, we find
+Z
+J
+∥vt∥2
+L2(Pt,T P2(M)) dt ≤
+Z
+J
+|P′|(t)2 dt
+ 1
+2 Z
+J
+∥vt∥2
+L2(Pt,T P2(M)) dt
+ 1
+2
+Z
+J
+∥vt∥2
+L2(Pt,T P2(M)) dt ≤
+Z
+J
+|P′|(t)2 dt.
+(90)
+27
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+We thus conclude that for a.e. t ∈I,
+∥vt∥L2(Pt,T P2(M)) ≤|P′|(t).
+(91)
+We now show that H is upper semicontinuous.
+Lemma C.5. Let φ ∈Cyl
+ P2(M)
+
+. The function H : P2(M) × P2(M) →R defined as
+H(µ, ν) :=
+( |φ(µ)−φ(ν)|
+W2(µ,ν)
+if µ ̸= ν
+∥∇W2φ(µ)∥L2(µ)
+if µ = ν,
+(92)
+is upper semicontinuous.
+Proof. We want to show that the function H : P2(M) × P2(M) →R defined by
+H(µ, ν) :=
+( |φ(µ)−φ(ν)|
+W2(µ,ν)
+if µ ̸= ν
+∥∇W2φ(µ)∥L2(µ)
+if µ = ν
+(93)
+is upper semicontinuous. Let µ, ν ∈P2(M), and let (µt)t∈[0,1] be the constant speed geodesic from µ to ν with velocity
+field vt ∈L2(µt). Then, we have
+φ(ν) −φ(µ) =
+Z 1
+0
+d
+dtφ(µt) dt
+(94)
+=
+Z 1
+0
+d
+dtF
+Z
+V1dµt, . . . ,
+Z
+Vmdµt
+
+dt
+(95)
+=
+Z 1
+0
+m
+X
+i=1
+∂F
+∂xi
+Z
+V1dµt, . . . ,
+Z
+Vmdµt
+ d
+dt
+Z
+Vidµt dt
+(96)
+=
+Z 1
+0
+m
+X
+i=1
+∂F
+∂xi
+Z
+V1dµt, . . . ,
+Z
+Vmdµt
+ Z
+⟨∇Vi, vt⟩dµtdt
+(97)
+=
+Z 1
+0
+⟨∇W2φ(µt), vt⟩L2(µt)dt
+(98)
+≤
+sZ 1
+0
+∥vt∥2
+L2(µt) dt
+sZ 1
+0
+∥∇W2φ(µt)∥2
+L2(µt)dt
+(99)
+≤W2(µ, ν)
+sZ 1
+0
+∥∇W2φ(µt)∥2
+L2(µt)dt.
+(100)
+Hence,
+H(µ, ν) ≤
+sZ 1
+0
+∥∇W2φ(µt)∥2
+L2(µt)dt < ∞
+(101)
+as the right-hand side is finite because the F, Vi have compact support. Note that this inequality is also true when µ = ν as
+µt = µ for every t.
+Furthermore, notice that the map f : µ 7→∥∇W2φ(µ)∥2
+L2(µ) is continuous. Indeed, we can check that we have
+f(µ) =
+Z
+G
+Z
+V1dµ, . . . ,
+Z
+Vmdµ, x
+
+dµ(x)
+(102)
+28
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+for some Lipschitz function G with Lipschitz constant L, so that if µn ⇀µ, we have
+|f(µn) −f(µ)| =
+
+Z
+G
+Z
+V1dµn, . . . ,
+Z
+Vmdµn, x
+
+dµn(x) −
+Z
+G
+Z
+V1dµ, . . . ,
+Z
+Vmdµ, x
+
+dµ(x)
+
+(103)
+≤
+
+Z
+G
+Z
+V1dµn, . . . ,
+Z
+Vmdµn, x
+
+dµn(x) −
+Z
+G
+Z
+V1dµ, . . . ,
+Z
+Vmdµ, x
+
+dµn(x)
+
+(104)
++
+
+Z
+G
+Z
+V1dµ, . . . ,
+Z
+Vmdµ, x
+
+dµn(x) −
+Z
+G
+Z
+V1dµ, . . . ,
+Z
+Vmdµ, x
+
+dµ(x)
+
+(105)
+≤L
+m
+X
+i=1
+
+Z
+Vi d(µn −µ)
+ +
+
+Z
+G
+Z
+V1dµ, . . . ,
+Z
+Vmdµ, x
+
+d(µn −µ) (x)
+ →0.
+(106)
+Now, if µn ⇀µ and νn ⇀µ, then µn
+t ⇀µ for every t (indeed W2(µn
+t , µ) ≤W2(µn
+t , µn) + W2(µn, µ) = tW2(νn, µn) +
+W2(µn, µ) →0), and thus by what precedes ∥∇W2φ(µn
+t )∥2
+L2(µt) 7→∥∇W2φ(µ)∥2
+L2(µ) for every t. Therefore, by (101),
+we deduce
+lim sup
+n
+H(µn, νn) ≤∥∇W2φ(µ)∥L2(µ) = H(µ, µ).
+(107)
+This proves the upper semicontinuity of H.
+C.4. Proof of Proposition 3.8
+Let P ∈P2
+ P2(M)
+
+, and define P2
+ P2(TM)
+
+P := {Γ ∈P2
+ P2(TM)
+
+, ϕM
+# Γ = P}. Fix Γ ∈P2
+ P2(TM)
+
+P, we
+define
+∥Γ∥2
+P :=
+ZZ
+∥v∥2
+xdγ(x, v)dΓ(γ).
+(108)
+By the disintegration theorem (see for example (Ambrosio et al., 2008, Theorem 5.3.1)), there exists a P-a.e. unique family
+of probability measures (Γµ)µ∈P2(M) such that Γµ is supported on P2(TM)µ and, for every measurable test function
+f : P2(TM) 7→R+,
+Z
+f(γ)dΓ(γ) =
+ZZ
+f(γ)dΓµ(γ)dP(µ).
+(109)
+We can use this family of measures to define the barycentric projection of Γ:
+Definition C.6. The barycentric projection of Γ is the vector field B(Γ) ∈L2(P, TM) defined by
+B(Γ)(µ) :=
+Z
+B(γ)dΓµ(γ) ∈L2(µ, TM).
+(110)
+Note that we work here in the space L2(P, TM), which is defined in Appendix B.1. It is a larger space than L2(P, TP2(M)),
+with which it should not be confused. The barycentric projection satisfies the following properties:
+Proposition C.7. For every ξ ∈L2(P, TM), it holds
+ZZ
+⟨ξ(πM
+# γ)(x), v⟩xdγ(x, v)Γ(γ) =
+Z
+⟨ξ(µ), B(Γ)(µ)⟩L2(µ)dP(µ) = ⟨ξ, B(Γ)⟩L2(P).
+(111)
+Furthermore ∥B(Γ)∥L2(P) ≤∥Γ∥P.
+Proof. For every ξ ∈L2(P, TM), we have
+ZZ
+⟨ξ(πM
+# γ)(x), v⟩xdγ(x, v)Γ(γ) =
+ZZZ
+⟨ξ(πM
+# γ)(x), v⟩xdγ(x, v)dΓµ(γ)dP(µ)
+(112)
+=
+ZZZ
+⟨ξ(µ)(x), v⟩xdγ(x, v)dΓµ(γ)dP(µ)
+(113)
+=
+ZZ
+⟨ξ(µ), B(γ)⟩L2(µ)dΓµ(γ)dP(µ)
+(114)
+=
+Z
+⟨ξ(µ), B(Γ)(µ)⟩L2(µ)dP(µ) = ⟨ξ, B(Γ)⟩L2(P).
+(115)
+29
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+Furthermore,
+∥B(Γ)∥2
+L2(P) =
+ZZ 
+Z
+B(γ)(x)dΓµ(γ)
+
+2
+x
+dµ(x)dP(µ)
+(116)
+≤
+ZZZ
+∥B(γ)(x)∥2
+xdΓµ(γ)dµ(x)dP(µ)
+(117)
+≤
+ZZ
+∥B(γ)∥2
+L2(µ)dΓµ(γ)dP(µ)
+(118)
+≤
+ZZZ
+∥v∥2
+xdγ(x, v)dΓµ(γ)dP(µ)
+(119)
+≤
+ZZ
+∥v∥2
+xdγ(x, v)dΓ(γ) = ∥Γ∥2
+P,
+(120)
+where we used ∥B(γ)∥2
+L2(µ) ≤∥γ∥2
+µ =
+R
+∥v∥2
+xdγ(x, v) to obtain the fourth line.
+We now show Proposition 3.8.
+Assume by contradiction that ξ is not a strong subdifferential of F at P. Then, there exists δ > 0 and a sequence
+{Γn}∞
+n=1 ⊆P2
+ P2(TM)
+
+P such that εn := ∥Γn∥P −−−−→
+n→∞0, and, for every n,
+F(Pn) −F(P) −
+ZZ
+⟨ξ(πM
+# γ), v⟩xdγ(x, v)dΓn(γ) ≤−δεn
+(121)
+with Pn := ϕexp
+# Γn. Now, for every n, fix Υn ∈exp−1
+P (Pn). Since ξ ∈∂−F(P), there exists N > 0 such that for every
+n > N,
+F(Pn) −F(P) ≥
+ZZ
+⟨ξ(πM
+# γ)(x), v⟩xdγ(x, v)dΥn(γ) −δ
+2WW2(Pn, P).
+(122)
+Denoting Ψn := B(Γn) and Φn := B(Υn), we have, combining (121) and (122), that
+⟨ξ, Ψn⟩L2(P) −δεn ≥⟨ξ, Φn⟩L2(P) −δ
+2WW2(Pn, P).
+(123)
+Furthermore, we have WW2(Pn, P) ≤εn, since
+WW2(Pn, P)2 ≤
+Z
+W2
+2(πM
+# γ, exp# γ)dΓn(γ)
+(124)
+≤
+ZZ
+d2(x, expx(v))dγ(x, v)dΓn(γ)
+(125)
+≤
+ZZ
+∥v∥2
+xdγ(x, v)dΓn(γ) = ∥Γn∥2
+P = ε2
+n.
+(126)
+Thus, we find for every n > N
+⟨ξ, Φn −Ψn⟩L2(P) ≤−δ
+2εn.
+(127)
+Now, since ∥Ψn∥L2(P) ≤∥Γn∥P = εn and (by optimality of Υn) ∥Φn∥L2(P) ≤∥Υn∥P = WW2(Pn, P) ≤εn for every
+n, it ensues that, up to extracting a subsequence, there exists Ψ, Φ ∈L2(P, TM)) towards which ε−1
+n Ψn and ε−1
+n Φn
+respectively converge weakly in L2(P, TM). Therefore, dividing (127) by εn and passing to the limit, we find
+⟨ξ, Φ −Ψ⟩L2(P) ≤−δ
+2.
+(128)
+Now, fix F ∈Cyl
+ P2(M)
+
+. By applying Lemma C.8 to Γn and Υn, we find
+Z
+FdPn =
+Z
+FdP + ⟨∇W2F, Φn⟩L2(P) + O(ε2
+n),
+(129)
+Z
+FdPn =
+Z
+FdP + ⟨∇W2F, Ψn⟩L2(P) + O(ε2
+n).
+(130)
+30
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+Subtracting these two equations, dividing by εn and passing to the limit, we thus find
+⟨∇W2F, Φ −Ψ⟩L2(P) = 0,
+(131)
+and this holds for any F ∈Cyl
+ P2(M)
+
+. However, by assumption, ξ ∈TPP2
+ P2(M)
+
+, and we recall that
+TPP2
+ P2(M)
+
+= {∇W2F, F ∈Cyl
+ P2(M)
+
+}
+L2(P,T P2(P2(M)))
+.
+(132)
+This implies immediately that ⟨ξ, Φ −Ψ⟩L2(P) = 0, which contradicts (128).
+Lemma C.8. Let F ∈Cyl
+ P2(M)
+
+, then, for every P ∈P2
+ P2(M)
+
+and Γ ∈P2
+ P2(TM)
+
+P,
+
+Z
+F d
+
+ϕexp
+# Γ
+
+−
+Z
+FdP −
+ZZ
+⟨∇W2F(πM
+# γ)(x), v⟩xdγ(x, v)dΓ(γ)
+ ≤C∥Γ∥2
+P
+(133)
+for some constant C depending only on F.
+Proof. Let F ∈C∞
+c (Rm) and V1, . . . , Vm ∈C∞
+c (M) be such that
+F(µ) = F
+Z
+V1dµ, . . . ,
+Z
+Vmdµ
+
+,
+µ ∈P2(M).
+(134)
+Since F is compactly supported, there exists C > 0 which only depends on F such that for every x, h ∈Rm,
+|F(x + h) −F(x) −⟨∇F(x), h⟩| ≤C∥h∥2.
+(135)
+Fix γ ∈P2(TM), and let µ := πM
+# γ and ν := exp# γ. Since the Vi are compactly supported, we know by Lemma C.12
+that there exists some constant L > 0, which depends only on the Vi, such that for every i,
+
+Z
+Vidν −
+Z
+Vidµ −
+Z
+⟨∇Vi(x), v⟩dγ(x, v)
+ ≤L∥γ∥2
+µ.
+(136)
+Now, we have
+F(ν) −F(µ) −
+Z
+⟨∇W2F(µ)(x), v⟩xdγ(x, v)
+
+(137)
+=
+F(ν) −F(µ) −
+m
+X
+i=1
+∂F
+∂xi
+Z
+⟨∇Vi(x), v⟩xdγ(x, v)
+
+(138)
+≤
+F(ν) −F(µ) −
+m
+X
+i=1
+∂F
+∂xi
+Z
+Vidν −
+Z
+Vidµ
+
+(139)
++
+
+m
+X
+i=1
+∂F
+∂xi
+Z
+Vidν −
+Z
+Vidµ −
+Z
+⟨∇Vi(x), v⟩xdγ(x, v)
+
+(140)
+≤C
+m
+X
+i=1
+
+Z
+Vidν −
+Z
+Vidµ
+
+2
++ C
+m
+X
+i=1
+
+Z
+Vidν −
+Z
+Vidµ −
+Z
+⟨∇Vi(x), v⟩dγ(x, v)
+
+(141)
+≤C
+m
+X
+i=1
+
+Z
+Vidν −
+Z
+Vidµ
+
+2
++ C∥γ∥2
+µ
+(142)
+≤C
+m
+X
+i=1
+
+Z
+Vidν −
+Z
+Vidµ −
+Z
+⟨∇Vi(x), v⟩dγ(x, v)
+
+2
++
+
+Z
+⟨∇Vi(x), v⟩dγ(x, v)
+
+2
++ C∥γ∥2
+µ
+(143)
+≤C∥γ∥4
+µ + C∥γ∥2
+µ,
+(144)
+where we used (135) in the fifth line, with xi =
+R
+Vidµ and hi =
+R
+Vidν −
+R
+Vidµ, we used (136) in the sixth and eighth
+lines, and we used the Cauchy-Schwarz inequality in the eight line. Throughout the derivation, C denotes a constant that
+31
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+may change between lines but which only depends on F and the Vi. In particular, there exists a constant C which only
+depends on F and the Vi such that for every γ ∈P2(TM) with µ = πM
+# γ and ∥γ∥µ ≤diam(M),
+F(exp# γ) −F(µ) −
+Z
+⟨∇W2F(µ)(x), v⟩xdγ(x, v)
+ ≤C∥γ∥2
+µ.
+(145)
+Now, if γ ∈P2(TM) is such that ∥γ∥µ > diam(M) with µ := πM
+# γ, let ν := exp# γ and η ∈exp−1
+µ (ν). Since
+∥η∥µ = W2(µ, ν) ≤diam(M), this implies
+F(ν) −F(µ) −
+Z
+⟨∇W2F(µ)(x), v⟩xdγ(x, v)
+ ≤
+F(ν) −F(µ) −
+Z
+⟨∇W2F(µ)(x), v⟩xdη(x, v)
+
+(146)
++
+
+Z
+⟨∇W2F(µ)(x), v⟩x d(η −γ) (x, v)
+
+(147)
+≤C∥η∥2
+µ + |⟨∇W2F(µ), B(η) −B(γ)⟩L2(µ)|
+(148)
+≤C∥η∥2
+µ + C(∥B(η)∥L2(µ) + ∥B(γ)∥L2(µ))
+(149)
+≤C(∥η∥2
+µ + ∥η∥µ + ∥γ∥µ)
+(150)
+≤C(∥γ∥2
+µ + ∥γ∥µ)
+(151)
+≤C∥γ∥2
+µ,
+(152)
+where we used (145) in the third line, and we obtain the fourth line using the Cauchy-Schwarz inequality and the fact that
+supµ∈P2(M) ∥∇W2F(µ)∥L2(µ) < +∞(since the F and Vi are compactly supported). Again the C’s denote a constant
+depending only on F and the Vi (and diam(M)). Thus, we have shown that there exists a constant C depending only on F
+such that for every γ ∈P2(TM),
+F(exp# γ) −F(πM
+# γ) −
+Z
+⟨∇W2F(πM
+# γ)(x), v⟩xdγ(x, v)
+ ≤C∥γ∥2
+µ.
+(153)
+Hence for every Γ ∈P2
+ P2(TM)
+
+, noting P := ϕM
+# Γ and Q := ϕexp
+# Γ,
+
+Z
+FdQ −
+Z
+FdP −
+ZZ
+⟨∇W2F(πM
+# γ)(x), v⟩xdγ(x, v)dΓ(γ)
+
+(154)
+=
+
+Z
+F(exp# γ) −F(πM
+# γ) −⟨∇W2F(πM
+# γ)(x), v⟩xdγ(x, v)dΓ(γ)
+
+(155)
+≤C
+Z
+∥γ∥2
+πM
+# γdΓ(γ) = C∥Γ∥2
+P.
+(156)
+This finishes the proof.
+C.5. Proof of Proposition 3.9, and existence of gradients in the tangent space
+First, we prove Proposition 3.9. Let ξ1, ξ2 ∈∂−F(P) ∩∂+F(P) ∩TPP2
+ P2(M)
+
+. Using Proposition 3.8, we know that
+they are also strong gradients of F at P. Therefore, letting ξ = ξ1 −ξ2, for every Ψ ∈L2(P, TP2(M)), we have
+Z
+⟨ξ(µ), Ψ(µ)⟩L2(µ)dP(µ) = o(∥Ψ∥L2(P)).
+(157)
+that is, ⟨ξ, Ψ⟩L2(P) = o(∥Ψ∥L2(P)). Considering Ψ = εξ, we obtain ε∥ξ∥2
+L2(P) = o(ε) that is ∥ξ∥2
+L2(P) = o(1), and this
+implies ξ = ξ1 −ξ2 = 0, and this finishes the proof.
+Now, a natural question is to ask whether there is a gradient in TPP2
+ P2(M)
+
+whenever there exists a gradient ξ ∈
+∂−F(P) ∩∂+F(P). While a complete answer to this question is out of the scope of this article, a partial answer can be
+provided using results laid out in (Dello Schiavo, 2020). First, we consider the following assumption:
+Assumption C.9. (Smooth transport property, (Dello Schiavo, 2020, Assumption 2.9)) We say that M satisfies the smooth
+transport property if, whenever µ, ν ∈P2(M) are absolutely continuous with smooth nowhere vanishing densities, then
+there exists a smooth optimal transport map T : M 7→M from µ to ν (in the sense of Theorem A.1).
+32
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+This is a relatively restrictive assumption on M. By (Dello Schiavo, 2020, Theorem 5.9), it holds whenever M satisfies
+the strong Ma-Trudinger-Wang condition MTW(K) for some K > 0 (we refer to (Dello Schiavo, 2020, Section 5.2) for
+further details). Under this assumption, we can prove the following result on the existence of a gradient in the tangent space:
+Proposition C.10. Assume that M satisfies Assumption C.9, and that P satisfies Assumption B.2. Then, if F admits
+a WoW gradient at P (i.e. ∂−F(P) ∩∂+F(P) is not empty), then it admits a WoW gradient in TPP2
+ P2(M)
+
+(i.e.,
+∂−F(P) ∩∂+F(P) ∩TPP2
+ P2(M)
+
+is not empty).
+Proof. All we need to do is to prove that for every ξ ∈TPP2
+ P2(M)
+⊥, Q ∈P2
+ P2(M)
+
+and Γ ∈exp−1
+P (Q),
+ZZ
+⟨ξ(πM
+# γ)(x), v⟩xdγ(x, v)dΓ(γ) = 0.
+(158)
+Indeed, this ensures that if ξ ∈∂−F(P) ∩∂+F(P) is a WoW gradient of F at P, then its orthogonal projection on
+TPP2
+ P2(M)
+
+is also a WoW gradient.
+We thus fix ξ ∈TPP2
+ P2(M)
+⊥, Q ∈P2
+ P2(M)
+
+and Γ ∈exp−1
+P (Q). Since P satisfies Assumption B.2, by Remark C.4,
+Γ is of the form (µ 7→(Id, −DPU)#µ)#P where U is a Kantorovich potential for the pair P, Q. However, since M satisfies
+Assumption C.9, and U is W2-Lipschitz (by (Emami & Pass, 2025, Lemma 12)), (Dello Schiavo, 2020, Theorem 2.10(3))
+implies that DPU ∈TPP2
+ P2(M)
+
+(as a limit in L2(P, TP2(M)) of functions of the form ∇W2F, F ∈Cyl
+ P2(M)
+
+),
+so that
+ZZ
+⟨ξ(πM
+# γ)(x), v⟩xdγ(x, v)dΓ(γ) = −
+Z
+⟨ξ(µ), DPU(µ)⟩L2(µ)dP(µ) = 0.
+(159)
+This finishes the proof.
+Note that for this proposition to hold, P must not simply be absolutely continuous w.r.t P0, but must itself satisfy Assump-
+tion B.2. According to (Dello Schiavo, 2020, Proposition 5.2), this is the case whenever, for instance, P = φ2P0 where φ is
+a strictly positive W2-Lipschitz function on P2(M).
+C.6. Proof of Proposition 4.1
+We aim at applying (Ambrosio et al., 2008, Theorem 4.0.4). Since by hypothesis, F is λ-convex along the curve Pt =
+  (1 −t)Tπ2
+π1 + tTπ3
+π1
+
+#π1
+#Γ for Γ ∈Π(P, Q, O) and P ∈P2
+ P2,ac(Rd)
+
+, we need to show that G : Q 7→1
+2WW2(Q, P)2
+is 1-convex along Pt (see e.g. (Ambrosio et al., 2008, Lemma 9.2.7)). This is well the case by Proposition B.10.
+Now, let Pk ∈P2
+ P2,ac(Rd)
+
+and J(P) =
+1
+2τ WW2(P, Pk)2 + F(P) the functional solved at each step of the JKO scheme.
+Then, we have
+J(Pt) = 1
+2τ WW2(Pt, Pk)2 + F(Pt)
+= 1
+τ G(P) + F(P)
+≤1
+τ
+ (1 −t)G(Q) + tG(O) −t(1 −t)
+2
+WW2(Q, O)2
++ (1 −t)F(Q) + tF(O) −λt(1 −t)
+2
+WW2(Q, O)2
+= (1 −t)J(Q) + tJ(O) −λτ + 1
+2τ
+t(1 −t)WW2(Q, O)2.
+(160)
+Thus, we conclude that J satisfies well (Ambrosio et al., 2008, Assumption (4.0.1)), and then apply (Ambrosio et al., 2008,
+Theorem 4.0.4).
+C.7. Proof of Proposition A.4
+Let ξ, ξ′ ∈TµP2(M) ∩∂+F(µ) ∩∂−F(µ). By density, for any ε > 0, there exist φε, φ′
+ε ∈C∞
+c (M) such that
+∥ξ −∇φε∥L2(µ,T M) ≤ε
+2 and ∥ξ′ −∇φ′∥L2(µ,T M) ≤ε
+2.
+We rely on the following Lemma, which provides an OT map for any ψ ∈C∞
+c (M) for s small enough.
+33
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+Lemma C.11. Let µ ∈P2(M) and ψ ∈C∞
+c (M). Then, there exists ¯s such that x 7→expx(s∇ψ(x)) is an OT map
+between µ and
+ exp ◦(s∇ψ)
+
+#µ for all s ∈] −¯s, ¯s[.
+Proof. Suppose ψ ̸= 0. Let ε > 0 and ¯s =
+ε
+maxx ∥∇2ψ(x)∥. It exists as ψ is supported on a compact. Then, for any
+s ∈(−¯s, ¯s), ∥s∇2ψ∥≤¯s∥∇2ψ∥≤ε. Then, by (Villani et al., 2009, Theorem 13.5), sψ is d2/2 convex, and by McCann’s
+theorem, exp(s∇ψ) is an OT map.
+By Lemma C.11, there exists s > 0 such that γ = (Id, s∇φε)#µ ∈exp−1
+µ (ν) and γ′ = (Id, s∇φ′
+ε)#µ ∈exp−1
+µ (ν′) with
+ν =
+ exp ◦(s∇φε)
+
+#µ and ν′ =
+ exp ◦(s∇φ′
+ε)
+
+#µ. Thus, we have using the definitions of sub-differentials that
+(
+F(ν) ≥F(µ) + s
+R
+⟨ξ(x), ∇φε(x)⟩x dµ(x) + o(s)
+F(ν′) ≥F(µ) + s
+R
+⟨ξ′(x), ∇φ′
+ε(x)⟩x dµ(x) + o(s).
+(161)
+Likewise, by the definition of the super-differentials, we have
+(
+F(ν′) ≤F(µ) + s
+R
+⟨ξ(x), ∇φ′
+ε(x)⟩x dµ(x) + o(s)
+F(ν) ≤F(µ) + s
+R
+⟨ξ′(x), ∇φε(x)⟩x dµ(x) + o(s).
+(162)
+Dividing by s > 0 and rearranging the terms, we have
+
+
+
+
+
+
+
+
+
+F(ν)−F(µ)
+s
+≥⟨ξ, ∇φε⟩L2(µ,T M) + o(1)
+F(ν′)−F(µ)
+s
+≥⟨ξ′, ∇φ′
+ε⟩L2(µ,T M) + o(1)
+F(µ)−F(ν′)
+s
+≥⟨−ξ, ∇φ′
+ε⟩L2(µ,T M) + o(1)
+F(µ)−F(ν)
+s
+≥⟨−ξ′, ∇φε⟩L2(µ,T M) + o(1).
+(163)
+Summing them, we get,
+0 ≥⟨ξ −ξ′, ∇φε⟩L2(µ,T M) + ⟨ξ′ −ξ, ∇φ′
+ε⟩L2(µ,T M) + o(1) = ⟨ξ −ξ′, ∇φε −∇φ′
+ε⟩L2(µ,T M) + o(1).
+(164)
+Then, we have
+∥ξ −ξ′∥L2(µ,T M) ≤
+q
+∥ξ −ξ′∥2
+L2(µ,T M) −2⟨ξ −ξ′, ∇φε −∇φ′ε⟩L2(µ,T M) + ∥∇φε −∇φ′ε∥2
+L2(µ,T M)
+= ∥ξ −ξ′ −(∇φε −∇φ′
+ε)∥L2(µ,T M)
+≤∥ξ −∇φε∥L2(µ,T M) + ∥ξ′ −∇φ′
+ε∥L2(µ,T M)
+≤ε.
+(165)
+Taking the limit ε →0, we conclude that ξ = ξ′.
+C.8. Proof of Proposition A.5
+We assume by contradiction that ξ is not an extended strong subdifferential. Then there exists a sequence {γn}∞
+n=1 ⊆
+P2(TM)µ and δ > 0 such that εn := ∥γn∥µ →0 and for every n, denoting µn := exp# γn,
+F(µn) −F(µ) −
+Z
+⟨ξ(x), v⟩xdγn(x, v) ≤−δεn.
+(166)
+Now, let ηn ∈exp−1
+µ (µn). Since ξ is a subdifferential, there exists N such that for every n > N,
+F(µn) −F(µ) −
+Z
+⟨ξ(x), v⟩xdηn(x, v) ≥−δ
+2W2(µ, µn).
+(167)
+Since, by optimality of ηn, we have ∥ηn∥µ = W2(µ, µn) ≤∥γn∥µ = εn, combining these inequalities, we find
+Z
+⟨ξ(x), v⟩xdηn(x, v) −
+Z
+⟨ξ(x), v⟩xdγn(x, v) ≤−δ
+2εn
+(168)
+34
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+that is
+⟨ξ, Φn −Ψn⟩L2(µ) ≤−δ
+2εn
+(169)
+for every n > N, where we have defined Ψn := B(γn) and Φn := B(ηn). Since we have ∥Ψn∥L2(µ) ≤∥γn∥µ = εn and
+likewise ∥Φn∥L2(µ) ≤∥ηn∥µ ≤εn, up to extracting a subsequence we can assume that there exists Ψ, Φ ∈L2(µ, TM)
+towards which ε−1
+n Ψn and ε−1
+n Φn respectively converge weakly in L2(µ, TM). Thus, dividing (169) by εn and passing to
+the limit, we find
+⟨ξ, Φ −Ψ⟩L2(µ) ≤−δ
+2.
+(170)
+Now, fix some φ ∈C∞
+c (M). By Lemma C.12, we have
+Z
+φdµn =
+Z
+φdµ +
+Z
+⟨∇φ(x), v⟩xdηn(x, v) + O(∥ηn∥2
+µ)
+(171)
+=
+Z
+φdµ + ⟨∇φ, Φn⟩L2(µ) + O(ε2
+n),
+(172)
+and similarly
+Z
+φdµn =
+Z
+φdµ + ⟨∇φ, Ψn⟩L2(µ) + O(ε2
+n).
+(173)
+Subtracting these two equations, dividing by εn and passing to the limit, we find
+⟨∇φ, Φ −Ψ⟩L2(µ) = 0
+(174)
+and this holds for any φ ∈C∞
+c (M). However, by assumption, ξ ∈TµP2(M) = {∇φ, φ ∈C∞
+c (M)}
+L2(µ,T M). This
+implies immediately that ⟨ξ, Φ −Ψ⟩L2(µ) = 0, which contradicts (170).
+Lemma C.12. Let φ ∈C∞
+c (M), then, for every µ ∈P2(M) and γ ∈P2(TM)µ,
+
+Z
+φ d
+ exp# γ
+
+−
+Z
+φdµ −
+Z
+⟨∇φ(x), v⟩xdγ(x, v)
+ ≤1
+2L∥γ∥2
+µ
+(175)
+where L := max(x,v)∈T M,∥v∥x=1 ∥HessM φ(x)[v]∥< ∞.
+Proof. Let (x, v) ∈TM. Applying (Boumal, 2023, Exercise 5.40) to the geodesic given by c(t) = expx(tv), it ensues that
+there exists t ∈(0, 1) such that
+φ(expx(v)) = φ(x) + ⟨∇φ(x), v⟩x + 1
+2⟨Hess φ(c(t))[c′(t)], c′(t)⟩c(t)
+(176)
+so that, since ∥c′(t)∥c(t) = ∥v∥x,
+|φ(expx(v)) −φ(x) −⟨∇φ(x), v⟩x| ≤1
+2L∥v∥2
+x.
+(177)
+This immediately implies
+
+Z
+φ d
+ exp# γ
+
+−
+Z
+φdµ −
+Z
+⟨∇φ(x), v⟩dγ(x, v)
+ =
+
+Z
+φ(expx(v)) −φ(x) −⟨∇φ(x), v⟩dγ(x, v)
+
+(178)
+≤1
+2L
+Z
+∥v∥2
+xdγ(x, v) = 1
+2L∥γ∥2
+µ.
+(179)
+35
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+C.9. Proof of Proposition A.6
+Let ν, µ ∈P2(M), and γ ∈exp−1
+µ (ν). For any x ∈M, v ∈TxM, let us note cx,v(t) = expx(tv) the geodesic starting
+from x with direction v. By (Boumal, 2023, Exercise 5.40), we have that there exists t ∈[0, 1] such that
+V
+ expx(v)
+
+= V (x) + ⟨∇MV (x), v⟩x + 1
+2⟨HessV
+ cx,v(t)
+
+[c′
+x,v(t)], c′
+x,v(t)⟩cx,v(t).
+(180)
+Then,
+V(ν) −V(µ) =
+Z  V (expx(v)) −V (x)
+
+dγ(x, v)
+=
+Z
+⟨∇MV (x), v⟩x + 1
+2⟨HessV
+ cx,v(t)
+
+[c′
+x,v(t)], c′
+x,v(t)⟩cx,v(t) dγ(x, v)
+=
+Z
+⟨∇MV (x), v⟩x dγ(x, v) + 1
+2
+Z
+⟨HessV
+ cx,v(t)
+
+[c′
+x,v(t)], c′
+x,v(t)⟩cx,v(t) dγ(x, v).
+(181)
+Moreover, using that V has bounded Hessian and that geodesics are constant speed and thus satisfy ∥c′
+x,v(t)∥cx,v(t) =
+∥c′
+x,v(0)∥cx,v(0) = ∥v∥x (Lee, 2006, Lemma 5.5), we have that the last term is bounded by W2
+2(µ, ν) as
+
+Z
+⟨HessV
+ cx,v(t)
+
+[c′
+x,v(t)], c′
+x,v(t)⟩cx,v(t) dγ(x, v)
+ ≤L
+Z
+∥c′
+x,v(t)∥2
+cx,v(t) dγ(x, v)
+= L
+Z
+∥v∥2
+x dγ(x, v) = LW2
+2(µ, ν).
+(182)
+Thus, we conclude
+V(ν) = V(µ) +
+Z
+⟨∇MV (x), v⟩x dγ(x, v) + o
+ W2(µ, ν)
+
+.
+(183)
+Now, let us verify that ∇MV ∈L2(µ). We denote by PTx→y the parallel transport between TxM and TyM along the
+geodesic between x and y (see (Boumal, 2023, Definition 10.35) for the definition). By (Boumal, 2023, Corollary 10.48, 3.),
+V having its Hessian bounded in operator norm by L is equivalent with having for all x, y ∈M, for all (x, v) ∈TM,
+∥∇MV (x) −PTexpx(v)→x∇MV
+ expx(v)
+
+∥x ≤L∥v∥x.
+(184)
+Thus, let µ ∈P2(M), o some origin, and γ ∈exp−1
+µ (δo). Then, we have by using sequentially the definition of γ,
+∥x + y∥2 ≤2∥x∥2 + 2∥y∥2, (184), that for any (x, v) ∈supp(γ), expx(v) = o and PTo→x is an isometry (Boumal, 2023,
+Proposition 10.36), and γ ∈P2(TM),
+∥∇MV ∥2
+L2(µ) =
+Z
+∥∇MV (x)∥2
+x dµ(x)
+=
+Z
+∥∇MV (x)∥2
+x dγ(x, v)
+≤2
+Z
+∥∇MV (x) −PTexpx(v)→x∇MV
+ expx(v)
+
+∥2
+x dγ(x, v)
++ 2
+Z
+∥PTexpx(v)→x∇MV
+ expx(v)
+
+∥2
+x dγ(x, v)
+≤2
+Z
+L∥v∥2
+x dγ(x, v) + 2∥∇MV (o)∥2
+o
+< +∞.
+(185)
+Therefore, we can conclude that ∇W2V(µ) = ∇MV by Definition A.3.
+36
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+C.10. Proof of Proposition A.7
+Let ν, µ ∈P2(M), and γ ∈exp−1
+µ (ν). First, we recall that the product space M × M is a Riemannian manifold
+with tangent space TM × TM. For any (x, v), (x′, v′) ∈TM and note cx(t) = expx(tv), cx′,v′(t) = expx′(tv′) and
+cx,x′,v,v′(t) = (cx,v(t), cx′,v′(t)) the geodesics starting at (x, x′) with direction (v, v′). Then, by (Boumal, 2023, Exercise
+5.40), there exists t ∈]0, 1[ such that
+W
+ expx(v), expx′(v′)
+
+= W(x, x′) + ⟨∇1W(x, x′), v⟩x + ⟨∇2W(x, x′), v′⟩x′
++ 1
+2⟨HessW(cx,v(t), cx′,v′(t))[c′
+x,v(t), c′
+x′,v′(t)], [c′
+x,v(t), c′
+x′,v′(t)]⟩cx,x′,v,v′(t).
+(186)
+Moreover, by the same argument as (182) in Proposition A.6, we have
+
+ZZ
+⟨HessW(cx,v,x′,v′(t))[c′
+x,v(t), c′
+x′,v′(t)], [c′
+x,v(t), c′
+x′,v′(t)]⟩cx,x′,v,v′(t) dγ(x, v)dγ(x′, v′)
+ ≤2LW2
+2(µ, ν).
+(187)
+Then, we have
+W(ν) −W(µ) =
+ZZ
+W(y, y′) dν(y)dν(y′) −
+ZZ
+W(x, x′) dµ(x)dµ(x′)
+=
+ZZ  W(expx(v), expx′(v′)) −W(x, x′)
+
+dγ(x, v)dγ(x′, v′)
+=
+Z  ⟨∇1W(x, x′), v⟩x + ⟨∇2W(x, x′), v′⟩x′
++ 1
+2⟨HessW(cx,v(t), cx′,v′(t))[c′
+x,v(t), cx′,v′(t)], [c′
+x,v(t), cx′,v′(t′)]⟩cx,x′,v,v′(t)
+
+dγ(x, v)dγ(x′, v′)
+=
+Z
+⟨
+Z
+∇1W(x, x′)dµ(x′), v⟩x dγ(x, v) +
+Z
+⟨
+Z
+∇2W(x, x′)dµ(x), v′⟩x′ dγ(x′, v′) + o
+ W2(µ, ν)
+
+=
+Z Z  ∇1W(x, x′) + ∇2W(x′, x)
+
+dµ(x′), v
+
+x
+dγ(x, v) + o
+ W2(µ, ν)
+
+.
+(188)
+Now, let ∇W2W(µ) =
+R  ∇1W(·, x) + ∇2(x, ·)
+
+dµ(x). Using that by Jensen’s inequality,
+∥∇W2W∥2
+L2(µ) =
+Z 
+Z  ∇1W(x, x′) + ∇2W(x′, x)
+
+dµ(x′)
+
+2
+x
+dµ(x)
+≤2
+ZZ  ∥∇1W(x, x′)∥2
+x + ∥∇2W(x, x′)∥2
+x′
+
+dµ(x)dµ(x′),
+(189)
+and a similar reasoning of (185), we find that ∇W2W ∈L2(µ), and we can conclude that ∇W2W is a Wasserstein gradient
+by Definition A.3.
+C.11. Proof of Proposition A.9
+Let ν ∈P2(Rd) and µn = 1
+n
+Pn
+i=1 δxi. Since F is Wasserstein differentiable, the Wasserstein gradient ∇W2F(µn) satisfies
+for any coupling γ ∈Π(µn, ν) (Lanzetti et al., 2025, Proposition 2.12),
+F(ν) = F(µn) +
+Z
+⟨∇W2F(µn)(x), y −x⟩dγ(x, y) + o
+ sZ
+∥x −y∥2
+2 dγ(x, y)
+!
+.
+(190)
+37
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+Let h1, . . . , hn ∈Rd, νn = 1
+n
+Pn
+i=1 δxi+hi and γn = 1
+n
+Pn
+i=1 δ(xi,xi+hi) ∈Π(µn, νn). Then, since F(x1, . . . , xn) =
+F(µn) and F(x1 + h1, . . . , xn + hn) = F(νn), we get
+F(x1 + h1, . . . , xn + hn) = F(νn)
+= F(µn) +
+Z
+⟨∇W2F(µn)(x), y −x⟩dγn(x, y) + o
+ sZ
+∥x −y∥2
+2 dγn(x, y)
+!
+= F(µn) + 1
+n
+n
+X
+i=1
+⟨∇W2F(µn)(xi), hi⟩+ o
+
+
+v
+u
+u
+t
+n
+X
+i=1
+∥hi∥2
+2
+
+
+= F(x1, . . . , xn) +
+n
+X
+i=1
+
+ 1
+n∇W2F(µn)(xi), hi
+
++ o
+
+
+v
+u
+u
+t
+n
+X
+i=1
+∥hi∥2
+2
+
+.
+(191)
+Thus, by definition of the gradient of F, we deduce that ∇iF(x1, . . . , xn) = 1
+n∇W2F(µn)(xi).
+C.12. Proof of Proposition B.4
+Let Γ ∈exp−1
+P (Q). Let s, t ∈[0, 1], and ϕs(γ) = (expπM ◦(sπv))#γ for γ ∈P2(TM). Then, (ϕs, ϕt)#Γ ∈Π(Ps, Pt).
+Therefore,
+WW2(Ps, Pt)2 ≤
+Z
+W2
+2
+ ϕs(γ), ϕt(γ)
+
+dΓ(γ).
+(192)
+Moreover, since for Γ-a.e. γ,
+ expπM ◦(sπv), expπM ◦(tπv)
+
+#γ ∈Π(ϕs(γ), ϕt(γ)), we have the following inequality:
+WW2(Ps, Pt)2 ≤
+Z
+W2
+2
+ ϕs(γ), ϕt(γ)
+
+dΓ(γ)
+≤
+ZZ
+d
+ expx(sv), expx(tv)
+2 dγ(x, v)dΓ(γ)
+= |t −s|2
+ZZ
+∥v∥2
+x dγ(x, v)dΓ(γ)
+= |t −s|2WW2(P, Q)2,
+(193)
+where we used that Γ ∈exp−1
+P (Q) and that d
+ expx(tv), expx(sv)
+
+= |t −s|∥v∥x.
+For the other inequality, we have for any 0 ≤s < t ≤1, using the triangle inequality and the previous inequality,
+WW2(P, Q) ≤WW2(P, Ps) + WW2(Ps, Pt) + WW2(Pt, Q)
+≤sWW2(P, Q) + WW2(Ps, Pt) + (1 −t)WW2(P, Q).
+(194)
+This is equivalent with
+(t −s)WW2(P, Q) ≤WW2(Ps, Pt).
+(195)
+Thus, we can conclude that WW2(Ps, Pt) = |t −s|WW2(P, Q) and thus t 7→Pt is a constant-speed geodesic between P
+and Q.
+C.13. Proof of Proposition B.5
+We first state a lemma showing a relation between γ ∈exp−1
+µ (ν) and a specifically constructed γt ∈exp−1
+µγ(t)(ν), with
+t 7→µγ(t) a geodesic between µ and ν.
+Lemma C.13. Let µ, ν ∈P2(M), γ ∈exp−1
+µ (ν) and the geodesic between µ and ν defined for all t ∈[0, 1] as
+µγ(t) =
+ expπM ◦(tπv)
+
+#γ. Let γt =
+ expπM ◦(tπv), (1 −t)PTπM→expπM ◦(tπv) ◦πv
+#γ. Then, γt ∈exp−1
+µγ(t)(ν),
+and, for every s ∈[0, 1], µγt(s) =
+ expπM ◦(sπv)
+
+#γt = µγ(t + (1 −t)s).
+38
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+Proof. First, we verify the equality µγt(s) = µγ(t + s(1 −t)). Fix s ∈[0, 1] and let h : M →R be a bounded measurable
+map. Then,
+Z
+h(y) d(µγt(s)) (y) =
+Z
+h
+ expxt(svt)
+
+dγt(xt, vt)
+=
+Z
+h
+ expexpx(tv)
+ s(1 −t)PTx→expx(tv)(v)
+
+dγ(x, v).
+(196)
+Fixing (x, v) ∈TM, let c(t) = expx(tv), t ∈[0, 1] be the unique geodesic starting from x with ˙c(0) = v. Then, we have
+PTx→c(t)(v) = ˙c(t) by the properties of the parallel transport3. Furthermore, by definition of the exponential map, for
+every u ∈[0, 1],
+expexpx(tv)
+ uPTx→expx(tv)(v)
+
+= expc(t)
+ u˙c(t)
+
+= c2(u)
+(197)
+where c2 is the unique geodesic such that c2(0) = c(t) and ˙c2(0) = ˙c(t). By uniqueness of the geodesics, we thus have
+c2(u) = c(t + u) = expx((t + u)v) for every 0 ≤u ≤1 −t. From this, we obtain
+Z
+h(y) d(µγt(s)) (y) =
+Z
+h
+ expexpx(tv)
+ s(1 −t)PTx→expx(tv)(v)
+
+dγ(x, v)
+=
+Z
+h
+ expx((t + s(1 −t))v)
+
+dγ(x, v)
+=
+Z
+h(y) d(µγ(t + s(1 −t))) (y),
+(198)
+and thus we have proved µγt(s) = µγ(t + (1 −s)t). In particular, we have πM
+# γt = µγt(0) = µγ(t), and exp# γt =
+µγt(1) = µγ(1) = exp# γ = ν, so γt has the correct marginals. Moreover, it is optimal as
+Z
+∥vt∥2
+xt dγt(xt, vt) =
+Z
+∥(1 −t)PTx→expx(tv)(v)∥2
+expx(tv) dγ(x, v)
+= (1 −t)2
+Z
+∥v∥2
+x dγ(x, v) = (1 −t)2W2
+2(µ, ν) = W2
+2(µγ(t), ν),
+(199)
+where we used in the last line that γ ∈exp−1
+µ (ν) and µγ is a geodesic such that µγ(0) = µ and µγ(1) = ν, and in particular,
+W2
+2(µγ(t), ν) = W2
+2
+ µγ(t), µγ(1)
+
+= (1 −t)2W2
+2
+ µγ(0), µγ(1)
+
+.
+Now, we state a second lemma providing a Taylor remainder theorem on P2(M).
+Lemma C.14. Let F : P2(M) →R a twice Wasserstein differentiable functional, µ, ν ∈P2(M) and γ ∈exp−1
+µ (ν), and
+note µγ : [0, 1] →M the geodesic between µ and ν defined as µγ(t) =
+ expπM ◦(tπv)
+
+#γ, and γt ∈exp−1
+µγ(t)(ν) given
+by Lemma C.13. Then, there exists t ∈]0, 1[ such that
+F(ν) = F(µ) +
+Z
+⟨∇W2F(µ)(x), v⟩x dγ(x, v) +
+1
+2(1 −t)2
+Z
+⟨HFγt(xt, vt), vt⟩xt dγt(xt, vt).
+(200)
+Proof. First, let us note that
+F
+ µγ(1)
+
+−F
+ µγ(0)
+
+=
+Z 1
+0
+d
+dtF
+ µγ(t)
+
+dt
+= d
+dtF
+ µγ(t)
+
+t=0 +
+Z 1
+0
+ d
+dtF
+ µγ(t)
+
+−d
+dtF
+ µγ(t)
+
+t=0
+
+dt
+= d
+dtF
+ µγ(t)
+
+t=0 +
+Z 1
+0
+Z t
+0
+d2
+ds2 F
+ µγ(s)
+
+dsdt
+= d
+dtF
+ µγ(t)
+
+t=0 +
+Z 1
+0
+(1 −s) d2
+ds2 F
+ µγ(s)
+
+ds.
+(201)
+3Recall that a vector field X along a smooth curve c is said to be parallel if DtX = 0, where Dt is the covariant derivative along
+c, and that for every s, t, the parallel transport operator PTc(t)→c(s) sends every v ∈Tc(t)M to X(s) where X is the unique parallel
+vector field along c such that X(t) = v. Then, since the condition for c to be a geodesic is that Dt ˙c = 0, if c is a geodesic, we have
+PTc(t)→c(s) ˙c(t) = ˙c(s) for every s, t.
+39
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+For the first term, we get by the chain rule (see (30)) d
+dtF
+ µγ(t)
+
+t=0 =
+R
+⟨∇W2F(µ)(x), v⟩x dγ(x, v).
+For the second term, using the mean value theorem (since s 7→
+d2
+ds2 F
+ µγ(s)
+
+is continuous, and 1 −s ≥0 for all s ∈[0, 1]),
+there exists t ∈]0, 1[ such that
+Z 1
+0
+(1 −s) d2
+ds2 F
+ µγ(s)
+
+ds = d2
+dt2 F
+ µγ(t)
+ Z 1
+0
+(1 −s)ds = 1
+2
+d2
+dt2 F
+ µγ(t)
+
+.
+(202)
+Since, by Lemma C.13, we have µγt(s) = µγ(t + s(1 −t)) for every s ∈[0, 1], we have by Definition A.8
+Z
+⟨HFγt(xt, vt), vt⟩xtdγt(xt, vt) = d2
+ds2 F(µγt(s))
+
+s=0
+(203)
+= d2
+ds2 F(µγ(t + (1 −t)s))
+
+s=0
+(204)
+= (1 −t)2 d2
+ds2 F(µγ(s))
+
+s=t.
+(205)
+This finishes the proof.
+Let P, Q ∈P2
+ P2(M)
+
+. Let F : P2(M) →R a Wasserstein differentiable functional, F(P) =
+R
+F(µ) dP(µ) and
+Γ ∈exp−1
+P (Q). Let γ in the support of Γ, then we know that (Γ-almost surely), γ ∈exp−1
+µ (ν) where µ = πM
+# γ and
+ν = exp# γ. In particular, by Lemma C.14, there exists some t ∈]0, 1[ and γt ∈exp−1
+µγ(t)(ν) such that
+F(ν) = F(µ) +
+Z
+⟨∇W2F(µ)(x), v⟩x dγ(x, v) +
+1
+2(1 −t)2
+Z
+⟨HFγt(xt, vt), vt⟩xt dγt(xt, vt),
+(206)
+so that, by the assumption on the Hessian of F,
+F(ν) −F(µ) −
+Z
+⟨∇W2F(µ)(x), v⟩x dγ(x, v)
+ ≤
+1
+2(1 −t)2
+Z
+|⟨HFγt(xt, vt), vt⟩xt| dγt(xt, vt)
+(207)
+≤
+1
+2(1 −t)2 L
+Z
+∥vt∥2
+xt dγt(xt, xt)
+(208)
+≤
+1
+2(1 −t)2 LW2
+2(µγ(t), ν) = 1
+2LW2
+2(µ, ν)
+(209)
+≤L
+2
+Z
+∥v∥2
+x dγ(x, v).
+(210)
+From this, we deduce that
+F(Q) −F(P) −
+ZZ
+⟨∇W2F(πM
+# γ)(x), v⟩xdγ(x, v)dΓ(γ)
+
+(211)
+=
+
+Z 
+F(exp# γ) −F(πM
+# γ) −
+Z
+⟨∇W2F(πM
+# γ)(x), v⟩xdγ(x, v)
+
+dΓ(γ)
+
+(212)
+≤L
+2
+ZZ
+∥v∥2
+xdγ(x, v)dΓ(γ) = L
+2 WW2(P, Q)2.
+(213)
+Thus, we can conclude that
+F(Q) = F(P) +
+ZZ
+⟨∇W2F(πM
+# γ)(x), v⟩x dγ(x, v)dΓ(γ) + o
+ WW2(P, Q)
+
+.
+(214)
+Moreover, as we assumed M compact, ∇W2F(µ) is bounded for any µ and thus
+R
+∥∇W2F(µ)∥2
+L2(µ) dP(µ) < +∞.
+Therefore, by Definition 3.3, ∇WW2F(P) = ∇W2F ∈L2(P).
+40
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+C.14. Proof of Proposition B.6
+Let P, Q ∈P2
+ P2(M)
+
+.
+Let W : P2(M) × P2(M) →R a Wasserstein differentiable functional, W(P) =
+RR
+W(µ, ν) dP(µ)dP(ν) and Γ ∈exp−1
+P (Q). Let γ and γ′ be in the support of Γ, then γ ∈exp−1
+µ (ν) and γ′ ∈exp−1
+µ′ (ν′)
+where µ = πM
+# γ, µ′ = πM
+# γ′ and ν = exp# γ, ν′ = exp# γ′. For notation simplicity, we write ∇1 and ∇2 instead of
+∇W2,1 and ∇W2,2. By the remainder Taylor theorem (Lemma C.14) applied on the product space P2(M) × P2(M), we
+get that there exists t ∈]0, 1[ such that
+W(ν, ν′) = W(µ, µ′)+
+Z
+⟨∇1W(µ, µ′)(x), v⟩x dγ(x, v)+
+Z
+⟨∇2W(µ, µ′)(x), v⟩x dγ′((x, v)+ 1
+2
+d2
+dt2 W
+ µγ(t), µγ′(t)
+
+.
+(215)
+The
+last
+term
+is
+a
+Hessian
+term,
+which
+can
+be
+written
+as
+d2
+dt2 W
+ µγ(t), µγ′(t)
+
+=
+1
+(1−t)2
+R
+⟨HWγt,γ′
+t[(xt, vt), (x′
+t, v′
+t)], (vt, v′
+t)⟩(xt,x′
+t) dγt(xt, vt)dγ′
+t(x′
+t, v′
+t), where we define HWγ,γ′ : TM × TM →
+TM × TM the Hessian operator at (γ, γ′) similarly as in Definition A.8. By the assumption on the Hessian, we thus have
+W(ν, ν′) −W(µ, µ′) −
+Z
+⟨∇1W(µ, µ′)(x), v⟩x dγ(x, v) −
+Z
+⟨∇2W(µ, µ′)(x′), v′⟩x′ dγ′(x′, v′)
+
+≤
+1
+2(1 −t)2
+Z
+|⟨HWγt,γ′
+t[(xt, vt), (x′
+t, v′
+t)], (vt, v′
+t)⟩(xt,x′
+t)| dγt(xt, vt)dγ′
+t(x′
+t, v′
+t)
+≤
+1
+2(1 −t)2 L
+Z
+∥vt∥2
+xt dγt(xt, vt) +
+Z
+∥v′
+t∥2
+x′
+t dγ′
+t(x′
+t, v′
+t)
+
+=
+L
+2(1 −t)2
+ W2
+2(µγ(t), ν) + W2
+2(µ′
+γ(t), ν)
+
+= L
+2
+Z
+∥v∥2
+x dγ(x, v) +
+Z
+∥v′∥2
+x′ dγ′(x′, v′)
+
+.
+(216)
+Then, let us bound
+W(P) −W(Q) −
+ZZ Z  ∇1W
+ ϕM(γ), η
+
+(x) + ∇2W
+ η, ϕM(γ)
+
+dP(η), v
+
+x
+dγ(x, v)dΓ(γ)
+
+≤
+
+ZZ  W
+ ϕexp(γ), ϕexp(γ′)
+
+−W
+ ϕM(γ), ϕM(γ′)
+
+dΓ(γ)dΓ(γ′)
+−
+ZZZ
+⟨∇1W
+ ϕM(γ), η
+
+(x), v⟩xdP(η)dγ(x, v)dΓ(γ)
+−
+ZZZ
+⟨∇2W
+ η, ϕM(γ′)
+
+(x′), v′⟩x′ dP(η)dγ′(x′, v′)dΓ(γ′)
+
+=
+
+ZZ  W
+ ϕexp(γ), ϕexp(γ′)
+
+−W
+ ϕM(γ), ϕM(γ′)
+
+dΓ(γ)dΓ(γ′)
+−
+ZZZZ
+⟨∇1W
+ ϕM(γ), ϕM(γ′)
+
+(x), v⟩x + ⟨∇2W
+ ϕM(γ), ϕM(γ′)
+
+(x′), v′⟩x′ dγ(x, v)dγ′(x′, v′)dΓ(γ)dΓ(γ′)
+
+≤
+ZZ W
+ ϕexp(γ), ϕexp(γ′)
+
+−W
+ ϕM(γ), ϕM(γ′)
+
+−
+Z
+⟨∇1W
+ ϕM(γ), ϕM(γ′)
+
+(x), v⟩x dγ(x, v) −
+Z
+⟨∇2W
+ ϕM(γ), ϕM(γ′)
+
+(x′), v′⟩x′ dγ(x′, v′)
+ dΓ(γ)dΓ(γ′)
+≤L
+2
+ZZ
+∥v∥2
+x dγ(x, v)dΓ(γ) +
+ZZ
+∥v′∥2
+x dγ′(x′, v′)dΓ(γ′)
+
+by (216)
+= LW2
+W2(P, Q)
+since Γ ∈exp−1
+P (Q).
+(217)
+This allows to conclude by Definition 3.3 that
+∇WW2W(P)(µ) =
+Z  ∇1W(µ, ν) + ∇2W(ν, µ)
+
+dP(ν).
+(218)
+41
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+C.15. Proof of Proposition B.7
+We note P := Px and µc = µxc for every c. Let h ∈(Rd)C×n, for every t ∈R, we define Pt := Px+th, and for every
+c, µc
+t := µxc+thc, so that Pt = 1
+C
+PC
+c=1 δµc
+t. We also consider the transport plan γc
+t = 1
+n
+Pn
+i=1 δ(xc
+i ,thc
+i ) (which satisfies
+πRd
+# γc
+t = µc and exp# γt = µc
+t), and the plan Γt = 1
+C
+PC
+c=1 δγc
+t (which satisfies ϕRd
+# Γ = P and ϕexp
+# Γ = Pt).
+It is not difficult to see that for t small enough, for every c, γc
+t is actually optimal between µc and µc
+t (that is, γc
+t ∈exp−1
+µc (µc
+t)),
+and therefore
+W2
+2(µc, µc
+t) =
+Z
+∥v∥2dγc
+t (x, v) = t2
+n
+n
+X
+i=1
+∥hc
+i∥2.
+(219)
+Moreover, it is also the case that for t small enough, Γt ∈exp−1
+P (Pt). Indeed, since for every c, c′, W2
+2(µc, µc′
+t ) −−−→
+t→0
+W2
+2(µc, µc′) which is zero if and only if c = c′, it ensues that for t small enough, for every c,
+W2
+2(µc, µc
+t) = min
+c′
+W2
+2(µc, µc′
+t ).
+(220)
+Thus, for any Γ ∈Π(P, Pt), represented by the matrix (Γc,c′)c,c′=1,...,C, we have
+Z
+W2
+2(µ, ν)dΓ(µ, ν) =
+C
+X
+c,c′=1
+W2
+2(µc, µc′
+t )Γc,c′
+(221)
+≥
+C
+X
+c,c′=1
+W2
+2(µc, µc
+t)Γc,c′
+(222)
+= 1
+C
+C
+X
+c=1
+W2
+2(µc, µc
+t)
+(223)
+= t2
+Cn
+C
+X
+c=1
+n
+X
+i=1
+∥hc
+i∥2 =
+ZZ
+∥v∥2dγ(x, v)dΓt(γ),
+(224)
+so that, by taking the minimum over Γ, we find
+RR
+∥v∥2dγ(x, v)dΓt(γ) ≤WW2(P, Pt)2. Since the reverse inequality
+always hold, we find that
+WW2(P, Pt)2 =
+ZZ
+∥v∥2dγ(x, v)dΓt(γ) = t2
+Cn
+C
+X
+c=1
+n
+X
+i=1
+∥hc
+i∥2,
+(225)
+and we conclude that Γt is optimal, with WW2(P, Pt) = O(t). Plugging Γt into the definition of the WoW gradient, we
+find that
+F(Pt) = F(P) +
+ZZ
+⟨∇WW2F(P)(µ)(x), x⟩dγ(x, v)dΓt(x, v) + o(t),
+(226)
+that is (since x + th ∈X for t small enough),
+F(x + th) = F(x) + 1
+nC
+C
+X
+c=1
+n
+X
+i=1
+⟨∇WW2F(P)(µc)(xc
+i), hc
+i⟩+ o(t).
+(227)
+From the definition of the gradient, we deduce that for every c, i,
+∇WW2F(P)(µc)(xc
+i) = Cn∇c,iF(x).
+(228)
+This finishes the proof.
+42
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+C.16. Proof of Proposition B.8
+Let Pt =
+  (1 −t)Tπ2
+π1 + tTπ3
+π1
+
+#π1
+#Γ where Γ ∈Π(P, Q, O), π1,2
+# Γ ∈Πo(P, Q) a,d π1,3
+# Γ ∈Πo(P, O). Then, we have
+V(Pt) =
+Z
+F
+  (1 −t)Tµ
+η + tTν
+η
+
+#η
+
+dΓ(η, µ, ν)
+=
+Z
+F(µt) dΓ(η, µ, ν)
+for µt = expη
+ (1 −t)Tµ
+η + tTν
+η
+
+=
+ (1 −t)Tµ
+η + tTν
+η
+
+#η
+≤(1 −t)
+Z
+F(µ) dQ(µ) + t
+Z
+F(ν) dO(ν) −λt(1 −t)
+2
+Z
+W2
+2(µ, ν) dΓ(η, µ, ν)
+≤(1 −t)V(Q) + tV(O) −λt(1 −t)
+2
+WW2(Q, O)2,
+(229)
+where we used in the last two lines that F is λ-convex along t 7→µt, and WW2(Q, O)2 ≤
+R
+W2
+2(µ, ν) dΓ(η, µ, ν).
+C.17. Proof of Proposition B.9
+Let Pt =
+  (1 −t)Tπ2
+π1 + tTπ3
+π1
+
+#π1
+#Γ where Γ ∈Π(P, Q, O), π1,2
+# Γ ∈Πo(P, Q) a,d π1,3
+# Γ ∈Πo(P, O). Then, we have
+W(Pt) = 1
+2
+ZZ
+W
+  (1 −t)Tµ
+η + tTν
+η
+
+#η,
+ (1 −t)Tµ′
+η′ + tTν′
+η′
+
+#η′
+dΓ(η, µ, ν)dΓ(η′, µ′, ν′)
+≤(1 −t)1
+2
+ZZ
+W(µ, µ′)dQ(µ)dQ(µ′) + t1
+2
+ZZ
+W(ν, ν′) dO(ν)dO(ν′)
+= (1 −t)W(Q) + tW(O).
+(230)
+C.18. Proof of Proposition B.10
+Let P, Q, O ∈P2
+ P2,ac(Rd)
+
+. Define the generalized geodesic t 7→Pt =
+  (1 −t)Tπ2
+π1 + tTπ3
+π1
+
+#π1
+#Γ where Γ ∈
+Π(P, Q, O), π1,2
+# Γ ∈Πo(P, Q) and π1,3
+# Γ ∈Πo(P, O). Let us show that F : Q 7→1
+2WW2(Q, P)2 is convex along this curve.
+To do this, first note that ˜Γ =
+ π1, ((1 −t)Tπ2
+π1 + tTπ3
+π1)#π1
+#Γ ∈Π(P, Pt). Then, we have
+F(Pt) = 1
+2WW2(Pt, P)2
+≤1
+2
+Z
+W2
+2
+ µ, ((1 −t)Tν
+µ + tTη
+µ)#µ
+
+dΓ(µ, ν, η).
+(231)
+Note that T = (1 −t)Tπ2
+π1 + tTπ3
+π1 is an OT map by Brenier’s theorem since it is the gradient of a convex function (as
+a nonnegative weighted sum of convex functions). Thus, for Γ-almost every (µ, ν, η), W2
+2
+ µ, ((1 −t)Tν
+µ + tTη
+µ)#µ
+
+=
+∥(1 −t)Tν
+µ + tTη
+µ −Id∥2
+L2(µ). Then, applying the parallelogram identity on the Hilbert space L2(µ), we get
+F(Pt) ≤1
+2
+Z
+∥(1 −t)Tν
+µ + tTη
+µ −Id∥2
+L2(µ) dΓ(µ, ν, η)
+= 1
+2
+Z
+∥(1 −t)(Tν
+µ −Id) + t(Tη
+µ −Id)∥2
+L2(µ) dΓ(µ, ν, η)
+= (1 −t)
+2
+Z
+∥Tν
+µ −Id∥2
+L2(µ) dΓ(µ, ν, η) + t
+2
+Z
+∥Tη
+µ −Id∥2
+L2(µ) dΓ(µ, ν, η)
+−t(1 −t)
+2
+Z
+∥Tν
+µ −Tη
+µ∥2
+L2(µ) dΓ(µ, ν, η)
+= (1 −t)
+2
+WW2(P, Q)2 + t
+2WW2(P, O)2 −t(1 −t)
+2
+Z
+∥Tν
+µ −Tη
+µ∥2
+L2(µ) dΓ(µ, ν, η)
+= (1 −t)F(Q) + tF(O) −t(1 −t)
+2
+Z
+∥Tν
+µ −Tη
+µ∥2
+L2(µ) dΓ(µ, ν, η).
+(232)
+43
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+Finally, since (Tν
+µ, Tη
+µ)#µ ∈Π(ν, η), we also have W2
+2(ν, η) ≤∥Tη
+µ −Tν
+µ∥2
+L2(µ). Thus, we have
+Z
+∥Tν
+µ −Tη
+µ∥2
+L2(µ) dΓ(µ, ν, η) ≥
+Z
+W2
+2(ν, η) dΓ(µ, ν, η) ≥WW2(Q, O)2,
+(233)
+where we applied that π2,3
+# Γ ∈Π(Q, O) for the last inequality. Plugging this result in (232), we get
+F(Pt) ≤(1 −t)F(Q) + tF(O) −t(1 −t)
+2
+WW2(Q, O)2.
+(234)
+D. Additional Details and Experiments
+D.1. Minimization of the MMD
+We want to minimize F(P) =
+1
+2MMD2(P, Q) for P, Q ∈P2
+ P2(Rd)
+
+and a kernel K : P2(Rd) × P2(Rd) →R.
+Recall that F(P) = V(P) + W(P) + cst with V(P) =
+R
+V(µ) dP(µ) and V(µ) = −
+R
+K(µ, ν) dQ(ν), and W(P) =
+1
+2
+RR
+K(µ, ν) dP(µ)dP(ν). If Kν(µ) = K(µ, ν) is a differentiable functional, then the gradient of F is given for all
+P ∈P2
+ P2(Rd)
+
+, µ ∈P2(Rd) by
+∇WW2F(P)(µ) = ∇WW2V(P)(µ) + ∇WW2W(P)(µ)
+= ∇W2V(µ) + (∇W2W ∗P)(µ)
+= −
+Z
+∇W2Kν(µ) dQ(ν) +
+Z
+∇W2Kν(µ) dP(ν).
+(235)
+We can choose different kernels, giving different discrepancies. We compare here different kernels based on the Sliced-
+Wasserstein distance (Rabin et al., 2012). Let p ≥1. We recall that the Sliced-Wasserstein distance is defined between
+µ, ν ∈P2(Rd) as
+SWp
+p(µ, ν) =
+Z
+Sd−1 Wp
+2(P θ
+#µ, P θ
+#ν) dσ(θ),
+(236)
+where Sd−1 = {θ ∈Rd, ∥θ∥2 = 1} is the sphere, P θ(x) = ⟨θ, x⟩and σ is the uniform measure on the sphere. The
+Sliced-Wasserstein distance allows defining a Gaussian positive definite kernel K(µ, ν) = e−1
+2 SW2
+2(µ,ν)/h (Kolouri et al.,
+2016; Carriere et al., 2017) and a Laplace positive definite kernel K(µ, ν) = e−SW1(µ,ν)/h (Meunier et al., 2022). We also
+propose in practice to use the Riesz SW kernel K(µ, ν) = −SW2(µ, ν)r for r ∈(0, 2) and inverse multiquadric kernel
+(IMQ) K(µ, ν) =
+1
+√
+c+SW2
+2(µ,ν). Note however that the Riesz SW kernel is not positive definite (but conditionally positive
+definite), and that showing that the IMQ kernel is positive definite is an open question.
+The Wasserstein gradient of the Sliced-Wasserstein distance F(µ) = 1
+2SW2
+2(µ, ν) can be computed as (Bonnotte, 2013,
+Proposition 5.1.7)
+∇W2F(µ) =
+Z
+Sd−1 ψ′
+θ(⟨x, θ⟩)θ dσ(θ),
+(237)
+with ψθ the Kantorovich potential between P θ
+#µ and P θ
+#ν, and thus ψ′
+θ(u) = u −F −1
+P θ
+#ν
+ FP θ
+#µ(u)
+
+for all u ∈R. For the
+Gaussian kernel, by the chain rule, we have ∇W2Kν(µ) = −1
+he−1
+2 SW2
+2(µ,ν)/h∇W2F(µ).
+In practice, the integral w.r.t. σ is approximated using a Monte-Carlo approximation, i.e., we draw θ1, . . . , θL ∼σ L
+independent directions, and approximate the Sliced-Wasserstein distance and its gradient as
+d
+SW
+2
+2(µ, ν) = 1
+L
+L
+X
+ℓ=1
+W2
+2(P θℓ
+# µ, P θℓ
+# ν),
+\
+∇W2F(µ) = 1
+L
+L
+X
+ℓ=1
+ψ′
+θℓ(⟨x, θℓ⟩)θℓ.
+(238)
+The Wasserstein gradient can also be computed using backpropagation as shown in Proposition A.9.
+44
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+h = 0.005
+Iter 0
+Iter 10
+Iter 25
+Iter 100
+h = 0.05
+h = 0.5
+Figure 5: Gradient flow of MMD with SW Gaussian kernel K(µ, ν) = e−SW2
+2(µ,ν)/(2h).
+h = 0.05
+Iter 0
+Iter 10
+Iter 25
+Iter 100
+h = 0.5
+h = 1
+Figure 6: Gradient flow of MMD with SW Laplace kernel K(µ, ν) = e−SW1(µ,ν)/h.
+c = 0.01
+Iter 0
+Iter 10
+Iter 25
+Iter 100
+c = 0.05
+c = 0.5
+Figure 7: Gradient flow of MMD with SW IMQ kernel K(µ, ν) = (c + SW2
+2(µ, ν))−1
+2 .
+45
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+r = 0.5
+Iter 0
+Iter 10
+Iter 25
+Iter 100
+r = 1
+r = 1.5
+Figure 8: Gradient flow of MMD with SW Riesz kernel K(µ, ν) = −SW2(µ, ν)r.
+Iter 0
+Iter 2
+Iter 25
+Iter 100
+Figure 9: Gradient flow of MMD with Riesz kernel k(x, y) = −∥x −y∥2.
+Figure 10: Ablation of the number of projections L for the approximation of the Sliced-Wasserstein distance (with the SW
+Riesz kernel and r = 1).
+46
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+Figure 11: Images along the trajectory of the flow from MNIST to Fashion MNIST. We see that images belonging to the
+same class in the source dataset are flowed towards images from the same class in the target dataset.
+D.2. Ablation of Hyperparameters on Rings
+Additionally to Figure 1, we compare in the following figures trajectories of the minimization of the MMD with various
+kernels and with different hyperparameters. To recall the setting here, the target is a mixture of rings (Glaser et al., 2021),
+and each ring is seen through an empirical distribution ˆνc,n = 1
+n
+Pn
+i=1 δyc
+i . Thus, the target is a mixture of three Dirac:
+Q = 1
+3δˆν1 + 1
+3δˆν2 + 1
+3δˆν3. Each distribution ˆνc contains n = 80 samples. We learn a distribution P = 1
+3δµ1 + 1
+3δµ2 + 1
+3δµ3,
+modeling each µc as µc = 1
+n
+Pn
+i=1 δxc
+i . In practice, the distributions Q and P are seen as tensors of size (3, 80, 2).
+To compute the gradients of the MMD, we use L = 500 projections, and τ = 0.1 as learning rate. We plot on Figure 5
+results with the Gaussian SW kernel K(µ, ν) = e−SW2
+2(µ,ν)/(2h), on Figure 6 results with the Laplace SW kernel K(µ, ν) =
+e−SW1(µ,ν)/h, on Figure 7 results with the IMQ kernel K(µ, ν) = (c + SW2
+2(µ, ν))−1
+2 and on Figure 8 results with the
+Riesz SW kernel K(µ, ν) = −SW2(µ, ν)r. We also add on Figure 9 a comparison with the flow of the MMD with Riesz
+kernel k(x, y) = −∥x −y∥2 as in (Hertrich et al., 2024b), where the structure of the rings is not taken into account.
+On Figure 10, we report an ablation of the the trajectories with different number of projections for the SW Riesz kernel.
+More precisely, we show the results for L ∈{1, 5, 10, 100, 500}. This demonstrates that for low dimensional problems such
+as 2d rings, L = 100 projections already provides good results. However, the scheme is more sensitive to the number of
+projections in higher dimension as we show on Figure 14.
+D.3. Domain Adaptation
+We first add on Figure 11 more samples of the flows of the MMD with K(µ, ν) = −SW2(µ, ν) between MNIST and
+FashionMNIST. In this experiment, we recall that the flow starts from P0 =
+1
+C
+PC
+c=1 δµc,n, where µc,n is the uniform
+empirical distribution of samples belonging to the class c ∈{1, . . . 10} of MNIST, and targets Q = 1
+C
+PC
+c=1 δνc,n. We used
+n = 200 samples for each class of the datasets. The Sliced-Wasserstein distance is approximated with L = 500 projections.
+To speed up the flow, similarly as (Hertrich et al., 2024b), we add a momentum m ∈[0, 1), i.e., at each iteration k ≥0, the
+update for each particle i ∈{1, . . . , n} in class c ∈{1, . . . , C} is of the form
+(
+vi,k+1 = ∇WW2F(Pk)(µc,n
+k )(xc
+i,k) + mvi,k
+xc
+i,k+1 = xc
+i,k −τvi,k+1,
+(239)
+with vi,0 = 0. We choose a step size of τ = 0.05 and m = 0.9.
+Complementary to Figure 2, we see on Figure 11 that images from a same class are flowed towards images from a same
+class in the target dataset. To verify this intuition, we applied a domain adaptation experiment which we describe now.
+47
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+Figure 12: Samples of trajectories starting from Gaussian noise towards MNIST (Left) and CIFAR10 (Right).
+Figure 13: Samples of trajectories starting from Gaussian noise towards MNIST with momentum m = 0.9 (Left) and no
+momentum (Right). We run the flow for 100K steps, and plot samples every 6667 steps.
+We first train a classifier on the training set of the MNIST dataset (using n = 500 samples by class). The classifier is the
+CNN used in the examples of the equinox library4 (Kidger & Garcia, 2021). It is trained for 5000 steps with the AdamW
+optimizer (Loshchilov & Hutter, 2019) and a batch size of 64. After the training, it has an accuracy of 96% on the test set,
+and of 100% on the training set.
+Then, we flow the dataset FMNIST towards MNIST by minimizing the MMD with kernel K(µ, ν) = −SW2(µ, ν). We run
+the scheme for 500K steps with a step size of τ = 0.1 and a momentum of m = 0.9. To match the labels of the flowed
+dataset with the labels of MNIST, we solve an OT problem between P the flowed dataset and Q the target dataset with the
+squared 2-Wasserstein distance as groundcost, i.e. with P = 1
+C
+PC
+c=1 δµc,n and Q = 1
+C
+PC
+c=1 δνc,n, we solve the problem
+min
+Γ∈Π(P,Q) ⟨
+ W2
+2(µk,n, νℓ,n)
+
+1≤k,ℓ≤C, Γ⟩F
+(240)
+using the Python Optimal Transport library (Flamary et al., 2021).
+We plot on Figure 3 the accuracy of the pretrained classifier along the flow starting from FMNIST. We observe that the
+accuracy converges to 100% for a sufficient number of iterations. Thus, it shows that the classes of the sources datasets
+are perfectly flowed towards classes of the target dataset, on which the pretrained neural network is trained, and thus has
+perfect accuracy.
+On Figure 3, we also replicate this experiment from SVHN to CIFAR10 which are composed of 32 × 32 × 3 dimensional
+images. The neural network used is the same convolutional network used in Appendix D.5, and is pretrained on CIFAR10
+during 5000 steps with the AdamW optimizer and a batch size of 64. We use here n = 100 samples by class, and run the
+scheme for 500K steps with a step size of τ = 0.1 and m = 0.9. We also observe that the accuracy converges to 100%,
+indicating that it also works in moderately high dimensions.
+D.4. Generative Modeling
+In this experiment, we generate samples from different datasets starting from Gaussian noise.
+We show on Figure 12 trajectories starting from Gaussian noise towards MNIST and CIFAR10. For both datasets, we use a
+4https://docs.kidger.site/equinox/examples/mnist/
+48
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+(a) L = 10
+(b) L = 50
+(c) L = 100
+(d) L = 200
+(e) L = 300
+(f) L = 500
+(g) L = 1000
+(h) L = 2000
+Figure 14: Ablation over the number of projections for generative modeling on MNIST.
+49
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+(a) ψθ = Id
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+(b) Aω + ψθ
+Top
+Trouser Pull
+Dress
+Coat Sandal Shirt Sneaker Bag
+Ankle
+(c) ψθ = Id
+Top
+Trouser Pull
+Dress
+Coat Sandal Shirt Sneaker Bag
+Ankle
+(d) Aω + ψθ
+Figure 15: Synthetic data for the dataset distillation task on MNIST (Left) and FMNIST (Right) with or without embedding.
+momentum of m = 0.9 and a step size of τ = 1. For MNIST, we run the flow for 18K steps, and plot samples every 1200
+step, while for CIFAR10, we run it for 150K steps and plot samples every 10K step. We used n = 200 samples for each
+class for MNIST and n = 50 for CIFAR10. We also compare trajectories on Figure 13 with using a momentum m = 0.9 or
+no momentum for MNIST, running the flow for 100K steps and showing samples every 6667 step.
+In Figure 14, we present an ablation study over the number of projections used to approximate the Sliced-Wasserstein
+distance on the MNIST dataset (with the same setting with momentum, i.e. m = 0.9, τ = 1 for 18K steps). We observe that
+to generate sufficiently clear images, we need at least 300 projections. This may be because a higher number of projections
+provides a better approximation of the gradients.
+D.5. Dataset Distillation
+In this task, we aim at generating a new dataset allowing to approximate a target distribution Q = 1
+C
+P
+c=1 δνc,n with a
+distribution P = 1
+C
+PC
+c=1 δµc,p for p ≪n, in order to be able to train more efficiently neural networks on it. In Table 1, we
+take Q as the MNIST and Fashion MNIST dataset, with n = 5000 samples by class, and C = 10 classes, and report the results
+for p ∈{1, 10, 50}. We report the accuracy of a ConvNet trained on the synthetic dataset and evaluated on a test set, averaged
+over 5 trainings of the neural network, and 3 synthetic datasets. We use a similar architecture as (Zhao & Bilen, 2023), i.e.
+the ConvNet includes three repeated convolutional blocks, and each block involves a 128-kernel convolution layer, instance
+normalization layer, ReLU activation function and average pooling. This forms the backbone part of the network, and the full
+classifier is followed by a linear layer. For the initial distribution P0 = 1
+C
+PC
+c=1 δµc,p, each µc,p is chosen as a random subset
+of the samples of νc,n. The results reported in the column “Random” correspond to the ConvNet trained on the initial data.
+Zhao & Bilen (2023) proposed to solve the problem by minimizing
+F
+ (µc)c
+
+=
+C
+X
+c=1
+Eθ,ω
+"
+Z
+ψθ Aω(x)
+
+d(µc −νc)(x)
+
+2#
+= Eθ,ω
+" C
+X
+c=1
+MMD2
+k
+ ψθ
+#Aω
+#µc, ψθ
+#Aω
+#νc)
+#
+,
+(241)
+with linear kernel k(x, y) = ⟨x, y⟩, where Aω : Rd →Rd is some data augmentation and ψθ : Rd →Rd′ with d′ ≪d is a
+randomly initialized neural network used to embed the data. This loss does not take into account the interaction between
+the classes and just learn any set of synthetic samples for each class. In this work, we propose to take into account the
+interaction between the classes, and thus minimize
+˜F(P) = 1
+2Eθ,ω
+
+MMD2
+K(ϕθ,ω
+# P, ϕθ,ω
+# Q)
+
+,
+(242)
+with K(µ, ν) = −SW2(µ, ν).
+In practice, for ψθ, we use the backbone part of the ConvNet, and for Aω, we follow the same strategy as (Zhao & Bilen,
+2021) (i.e. we sample one augmentation among color jittering, cropping, cutout, scaling and a rotation for MNIST, and also
+add flipping for Fashion MNIST). We optimize (241) by stochastic gradient descent over the particles, sampling one random
+network and one random augmentation at each step. We trained it for 20K iterations, a learning rate of τ = 1 and a momentum
+of m = 0.9. In practice, we observed numerical instabilities when optimizing in the ambient space with augmentations.
+50
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+Figure 16: Examples of images output by flows for the transfer learning task with k = 10 for Fashion MNIST (Left),
+KMNIST (Middle) and USPS (Right).
+To optimize (242), we also performed a stochastic gradient descent, sampling one random neural network and one random
+augmentation at each step. We used also 20K iterations, a learning rate of τ = 1 and a momentum m = 0.9. Then, we
+assign the classes using an OT matching as explained in Appendix D.3. We add on Figure 15 samples learned with this
+loss, with and without embedding. We observe that images are slightly clearer when using an embedding. To compute the
+gradient of ˜F in practice, we use autodifferentiation.
+D.6. Transfer Learning
+We describe the details for the experiment of transfer learning. We recall that the target dataset is of the form Q =
+1
+C
+PC
+c=1 δνc,k with νc,k a uniform empirical distribution of k samples of the class c. In Table 2, the targets datasets
+are Fashion-MNIST, KMNIST and USPS. Thus, C = 10, and we choose k ∈{1, 5, 10, 100}. For the source dataset
+P = 1
+C
+PC
+c=1 δµc,n, we used the MNIST dataset with n = 200 samples in each class.
+We augment the target dataset by flowing the samples of MNIST on the target. For MMDSW, we minimize F(P) =
+1
+2MMD2
+K(P, Q) with kernel K(µ, ν) = −SW2(µ, ν), by running the forward scheme for 5K steps for k ∈{1, 5, 10} and
+20K steps for k = 100, with step size τ = 1 and momentum m = 0.9. Finally, we align the labels using an OT matching
+between the flowed samples P and the target Q, as for the dataset distillation experiment.
+We compare it with training directly on the small dataset, and with two other methods. The first one, called OTDD (Alvarez-
+Melis & Fusi, 2020), represents the dataset as a probability distribution on Rd × P2(Rd), where the labels are embedded
+in P2(Rd) by considering the conditional distribution, i.e., a feature-label pair (x, c) is represented as (x, µc). Then, they
+compare datasets using Optimal Transport with cost d
+ (x, c), (x′, c′)
+2 = ∥x −x′∥2
+2 + W2
+2(µc, µc′). The flow of OTDD
+then minimizes the OT distance with this cost, i.e., the objective is F(µ) = 1
+2OTDD(µ, ν) for µ, ν ∈P2(Rd × P2(Rd)),
+with
+OTDD(µ, ν) =
+inf
+γ∈Π(µ,ν)
+Z  ∥x −x′∥2
+2 + W2
+2(µc, µc′)
+
+dγ
+ (x, c), (x, c′)
+
+.
+(243)
+For big datasets, the conditional distributions µc can be approximated by Gaussian distributions. Alvarez-Melis & Fusi
+(2021) proposed several schemes to optimize this loss using Wasserstein gradient flows. We did not manage to replicate
+their results with their code. Thus, we reimplemented it with some differences. First, similarly as (Hua et al., 2023), we used
+an embedding in dimension 2 of the data to approximate the conditional distributions with Gaussian distributions. Thus, we
+model the datasets as distributions over Rd × R2 × S++
+2
+(R), with S++
+2
+(R) the space of symmetric positive definite matrices.
+This helps avoiding memory issues and scaling to higher dimensional datasets as it reduces a lot the dimension of the samples
+to flow. For this embedding, we used a Principal Component Analysis (but note that we could use other embedding methods
+such as TSNE (Hua et al., 2023) or Multidimensional Scaling (Liu et al., 2025)). In practice, we approximate OTDD using
+an entropic regularization, which we compute using the Sinkhorn algorithm (Cuturi, 2013) and ott-jax (Cuturi et al.,
+2022). We optimize it using AdamW with a learning rate of τ = 1e−3 and run it for 5K iterations for k ∈{1, 5, 10, 100}.
+To get the labels, we use an OT matching as in (Hua et al., 2023), which we solve using POT (Flamary et al., 2021). More
+precisely, for each class c ∈{1, . . . , C} of the target distribution, we can compute a mean ¯mc and a covariance ¯Σc, and a
+51
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+weight ωc = nc
+n with n the number of samples in the target dataset, and nc the number of samples belonging to class c.
+After flowing n samples, we have tuples (xi, mi, Σi)n
+i=1 and we want to associate to each sample a class. To do this, they
+propose to solve the discrete OT problem between Q = PC
+c=1 ωcδN( ¯mc,¯Σc) and P = 1
+n
+Pn
+i=1 δN(mi,Σi):
+min
+P ∈Π(P,Q)
+n
+X
+i=1
+C
+X
+c=1
+PicW2
+2
+ N(mi, Σi), N(mc, Σc)
+
+,
+(244)
+and then use as distribution µn = 1
+n
+Pn
+i=1 δ(xi,yi) with yi = PC
+c=1 c1{P ∗
+ic=max P ∗
+i }.
+The second baseline we use is the one proposed in (Hua et al., 2023). In this work, they first observe that the Gaussian
+approximation for high dimensional datasets might not scale well in memory. Thus, they propose to use an embedding in a
+lower dimension space of the conditional distributions, before doing the Gaussian approximation. The datasets are then
+represented as probability distributions on Rd × Rp × S++
+p
+(R) with p ≪d. Instead of using an OT cost to compare the
+datasets, they used the MMD with a kernel obtained as a product of Gaussian kernel. Then, they applied a Wasserstein
+gradient flow of the MMD (Arbel et al., 2019) to minimize it, with a Bures-Wasserstein gradient descent step (Altschuler
+et al., 2021) for the symmetric positive definite covariance matrix. We note that in contrast with our proposed MMD, it
+requires many hyperparameters to tune (3 bandwidth of Gaussian kernels and noise to add to make the flow converge). We
+reimplemented it in jax (Bradbury et al., 2018), used p = 2 and a Principal Component Analysis (using scikit-learn
+(Pedregosa et al., 2011)) for the lifting of the conditional distribution (instead of TSNE in (Hua et al., 2023)). The Gaussian
+of each class is then obtained by computing the mean and variance of each class. We used as bandwidth h = 100 for the
+feature part, h = 50 for the mean part and h = 1000 for the covariance part. We ran the flow for 20K steps with a step size
+of τ = 10, and momentum m = 0.9. To get the final labels, we solved (244) as explained in the last paragraph.
+In Table 2, we report the accuracy obtained by training a LeNet-5 neural network for 50 epochs with a AdamW optimizer
+and a learning rate of 3 · 10−4. Moreover, we average the results for 5 trainings of the neural network, and 3 outputs of the
+flows. We add on Figure 16 examples of images returned at the end of the flow of the MMD with K(µ, ν) = −SW2(µ, ν).
+D.7. Handling Different Number of Distributions between the Source and Target
+Let P = 1
+N
+PN
+k=1 δµk,n and Q =
+1
+M
+PM
+k=1 δνk,n with M < N. In this situation, the flow might not converge well towards
+the target distribution since they have a different number of Dirac. This is illustrated on Figure 17, where the target is
+composed of M = 3 rings νk,n, and the source is initialized with N = 4 distributions, and we minimize the MMD with a
+Gaussian SW kernel K(µ, ν) = e−SW2
+2(µ,ν)/h2. We see that the flow does not converge to 3 rings, as it cannot split the
+mass because the Wasserstein gradient descent allow only changing the position of particles.
+This problem could be solved by different solutions. For instance, one could use a Wasserstein-Fisher-Rao gradient flow
+instead of a Wasserstein gradient flow (Gallou¨et & Monsaingeon, 2017). This flow can be approximated e.g. by using Birth
+death Langevin algorithms (Lu et al., 2019; 2023) where the Langevin step approximates the Wasserstein gradient flow part,
+and the Birth death part approximates the Fisher-Rao gradient flow part. The birth death consists at killing and duplicating ran-
+domly particles at each step. Another solution to approximate the Fisher-Rao flow is to change the weights (Yan et al., 2024).
+We propose to perform the Wasserstein gradient flow, but allowing to change the weights of the particles, which is not
+possible for the Wasserstein gradient descent. Ideally, one would want to solve directly the JKO scheme
+(
+γk+1 = argminγ∈P2(Rd×Rd), π1
+#γ=µk
+R
+∥x −y∥2
+2 dγ(x, y) + τF(π2
+#γ)
+µk+1 = π2
+#γk+1.
+(245)
+However, if we do not fix the support, it is not possible to directly solve this problem, except if we use neural networks.
+Note that (245) can be seen as a semi-relaxed unbalanced optimal transport problem, where the first marginal is fixed. This
+has been leveraged to solve the JKO scheme e.g. in (Choi et al., 2024).
+We propose instead to alternate between a Wasserstein gradient descent step, which allows moving the particles without
+changing the weights, and a backward step for which we optimize over the coupling while fixing its support, which allows
+then to change the weights.
+For simplicity, let us describe the procedure more precisely on P(Rd). Let ν ∈P2(Rd) be a target distribution, and suppose
+at step k, µk = Pn
+i=1 αk
+i δxi with αk
+i ≥0, Pn
+i=1 αk
+i = 1. Let D be a divergence we want to minimize w.r.t. ν, i.e. we want
+52
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+Iter 0
+Target
+Iter 2
+Iter 25
+Iter 50
+Iter 100
+Iter 200
+Iter 250
+Iter 500
+Figure 17: MMD with Gaussian SW kernel and 4 distributions flowed towards 3 rings. The flow does not converge to the 3
+rings.
+to minimize F(µ) = D(µ, ν). Then, our update is
+
+
+
+
+
+
+
+µk+ 1
+2 =
+ Id −τ∇W2F(µk)
+
+#µk
+γk+1 = argminγ∈P(Rd×Rd),supp(γ)⊂supp(µk+ 1
+2 )×supp(µk+ 1
+2 ), π1
+#γ=µk+ 1
+2
+1
+2
+R
+∥x −y∥2
+2 dγ(x, y) + τD(π2
+#γ, ν)
+µk+1 = π2
+#γk+1.
+(246)
+The first step is a regular forward step, which moves the position of the particles. The second step learns a coupling
+γ ∈P2(Rd × Rd) which satisfies π1
+#γ = µk+ 1
+2 , and such that π2
+#γ is supported on the same set of particles. This step can
+be seen as solving a semi-relaxed Unbalanced Optimal Transport problem if the support for both distributions is the same.
+Suppose that γ = Pn
+i,j=1 Pijδ(xi,xj), and note C ∈Rn×n the matrix distance. Then, the second step can be rewritten as
+min
+P ∈Rn×n
++
+,⟨P,1{n×n}⟩=1,P 1n=α
+⟨C, P⟩+ τD
+ n
+X
+i=1
+[P T 1n]iδxi, ν
+!
+.
+(247)
+For D(µ, ν) = KL(µ||ν), this can be solved using the Sinkhorn algorithm for the semi-relaxed UOT problem, i.e. with
+φ1 = ι{1} (S´ejourn´e et al., 2023). For D = MMD2, one can use different algorithms to solve it such as a Projected
+Mirror Descent or an Accelerated Gradient Descent (Manupriya et al., 2024). Here, we propose to use the half step of the
+Mirror Sinkhorn algorithm (Ballu & Berthet, 2023), which performs first a Mirror Descent step with Bregman potential
+ϕ(P) = ⟨P, log P⟩(for which Pk+1 = ∇ϕ∗(∇ϕ(Pk)−τ∇f(Pk)) = Pk ⊙e−τ∇f(Pk)), and then perform a (Sinkhorn-like)
+projection on the constraint, i.e., noting
+f(P) = ⟨C, P⟩+ τMMD2
+ n
+X
+i=1
+[P T 1n]iδxi, ν
+!
+(248)
+the objective, the algorithm becomes
+(
+P ′
+k+1 = Pk ⊙e−τ∇f(Pk)
+Pk+1 = diag
+ α ⊘(P ′
+k+11n)
+
+P ′
+k+1.
+(249)
+We show on Figure 18 the results on the rings experiment. We observe that the weight of the 4th ring is set to 0, and thus
+that the scheme converges to the target.
+53
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+Iter 0
+Target
+Iter 2
+Iter 25
+Iter 50
+Iter 100
+Iter 200
+Iter 250
+Iter 500
+Figure 18: MMD with Gaussian SW kernel and 4 distributions flowed towards 3 rings using the proposed algorithm. The
+flow converges to the 3 rings by setting the weights of one of the ring to 0.
+E. Related Works
+E.1. Optimal Transport Distance for Datasets
+Alvarez-Melis & Fusi (2020) first proposed to compare datasets with a dedicated discrepancy, which takes into account
+features and labels. They proposed to do it by representing datasets as uniform empirical distributions over Rd × P2(Rd),
+embedding the labels in P2(Rd) by considering the conditional distributions, i.e., a feature-label pair (x, c) is represented as
+(x, µc) with µc the distribution of samples belonging to the class c. They proposed to compare datasets using an optimal
+transport distance with cost d
+ (x, c), (x′, c′)
+2 = ∥x −x′∥2
+2 + W2
+2(µc, µc′). To summarize, they consider as distance
+between µ, ν ∈P2(Rd × P2(Rd)),
+OTDD(µ, ν) =
+inf
+γ∈Π(µ,ν)
+Z  ∥x −x′∥2
+2 + W2
+2(µc, νc′)
+
+dγ
+ (x, c), (x, c′)
+
+.
+(250)
+In practice, Alvarez-Melis & Fusi (2020) approximated the conditional distributions µc by Gaussians to be able to compute
+the Wasserstein distance in closed-form, which leads to a complexity of O
+ Cnd2 + C2d3 + n3C3 log(nC)
+
+as it requires
+to estimate C means and covariance matrices from n samples, to compute C2 Bures-Wasserstein distances, and an OT
+problem between Cn samples. The final OT problem can be approximated using an entropic regularization, which reduces
+the complexity to O
+ Cnd2 + C2d3 + ε−2n2C2 log(nC)
+
+(Dvurechensky et al., 2018).
+Liu et al. (2025) instead embedded the labels in Rd using a Multidimensional Scaling, and further approximated the resulting
+squared Wasserstein distance with a Wasserstein embedding. Bonet et al. (2025) proposed to embed the labels in a hyperbolic
+space, and used a Sliced-Wasserstein distance to compare distributions on the product space Rd × H. Nguyen & Ho (2024)
+used a similar embedding, and a hierarchical hybrid Sliced-Wasserstein distance. More recently, Nguyen et al. (2025)
+introduced a sliced optimal transport dataset distance using a dedicated projection from Rd × P2(Rd) to R.
+Concerning the task of flowing datasets, Alvarez-Melis & Fusi (2021); Hua et al. (2023) both modeled conditional
+distributions as Gaussian, and solved flows on Rd × Rp × S++
+p
+(R). More precisely, Alvarez-Melis & Fusi (2021) minimized
+OTDD on Rd × Rd × S++
+d
+(R), while Hua et al. (2023) minimized an MMD over Rd × R2 × S++
+2
+(R) with a product of
+Gaussian kernels, and using an embedding on R2 for the conditional distributions. In contrast to these works, we encode the
+labels directly into the discrepancy by using a MMD on the space of probability distributions with a suitable kernel.
+Alvarez-Melis & Fusi (2021) proposed several ways of minimizing F(µ) = OTDD(µ, ν) for µ = 1
+n
+Pn
+i=1 δ(xi,µci). Let
+us note µk =
+1
+n
+Pn
+i=1 δ(xi,k,µ
+ci
+k ) the dataset at step k, and assume ci ∈{1, . . . , C}. For small datasets for which the
+Wasserstein distance between conditional distributions can be computed efficiently, they just proposed to flow the samples,
+i.e. computing xi,k+1 = xi,k −τ∇xiOTDD(µk, ν) and updating the conditional distributions at each step. When using the
+Gaussian approximation, they proposed to update the mean and covariance at each step (feature driven), or to do a gradient
+descent step for the C means and covariances (joint-driven-fixed-label). They also considered the joint-driven-variable-
+54
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+label, where they decoupled at time 0 the Gaussian, and flowed one mean mi and covariance Σi by Gaussian, i.e., for all
+i ∈{1, . . . , n} and k ≥0,
+
+
+
+
+
+xi,k+1 = xi,k −τ∇xiOTDD(µk, ν)
+mi,k+1 = mi,k −τ∇miOTDD(µk, ν)
+Σi,k+1 = Σi,k −τ∇ΣiOTDD(µk, ν).
+(251)
+This however requires to cluster the pairs (mi, Σi) to recover labels.
+Hua et al. (2023) observed that the embedding of the conditional distribution as Gaussian can be very costly in practice for
+high-dimensional datasets. Thus, they first proposed to embed the features in R2 using TSNE, in order to embed the labels as
+Gaussian in R2, and therefore represented the datasets as empirical distributions over Rd×R2×S++
+2
+(R). Then, they proposed
+to minimize the MMD on this space with kernel k
+ (x, m, Σ), (x′, m′, Σ′)
+
+= e−∥x−x′∥2
+2/hxe−∥m−m′∥2
+2/hme−∥Σ−Σ′∥2
+2/hΣ.
+For µ, ν ∈P2
+ Rd × R2 × S++
+2
+(R)
+
+, let F(µ) = 1
+2MMD2(µ, ν) =
+R
+V dµ + 1
+2
+RR
+k(x, y) dµ(x)dµ(y), with V (x) =
+−
+R
+k(x, y)dν(x). Its Wasserstein gradient is then for all (x, m, Σ),
+∇W2F(µ)
+ (x, m, Σ)
+
+= ∇V
+ (x, m, Σ)
+
++
+Z
+∇1k
+ (x, m, Σ), (x′, m′, Σ′)
+
+dµ
+ (x′, m′, Σ′)
+
+∈Rd×R2×S2(R). (252)
+Using the Bures-Wasserstein geometry for the covariance part, their updates are given by
+
+
+
+
+
+xi,k+1 = xi,k −τ[∇W2F(µk)
+ (xi,k, mi,k, Σi,k)
+
+]1
+mi,k+1 = mi,k −τ[∇W2F(µk)
+ (xi,k, mi,k, Σi,k)
+
+]2
+Σi,k+1 = expΣi,k
+ −τ[∇W2F(µk)
+ (xi,k, mi,k, Σi,k)
+
+]3
+
+,
+(253)
+with expΣ(S) = (Id + S)Σ(Id + S) for Σ ∈S++
+d
+(R), S ∈Sd(R) the exponential map on the Bures-Wasserstein space,
+see e.g. (Altschuler et al., 2021, Appendix A.1).
+E.2. Variational Inference with Mixture of Gaussians
+Lambert et al. (2022) considered to do Variational Inference with a family of Gaussian mixtures. Let’s note BW(Rd) ⊂
+P2(Rd) the Bures-Wasserstein space, i.e., the space of Gaussian distributions endowed with the Wasserstein distance.
+Observing that there is an identification between BW(Rd) and Rd × S++
+d
+(R) (Chen et al., 2018; Delon & Desolneux, 2020),
+this amounts at solving the problem, for π ∈P2,ac(Rd),
+min
+µ∈P2(Rd×S++
+d
+(R))
+KL
+Z
+pθdµ(θ)||π
+
+,
+(254)
+where pθ = N(·; m, Σ) for θ = (m, Σ) ∈Rd × S++
+d
+(R). Equivalently, it can be framed as an optimization problem over
+P2(BW(Rd)), by solving
+min
+P∈P2(BW(Rd)) KL
+Z
+µ dP(µ)||π
+
+.
+(255)
+Note that the KL here is the usual Kullback-Leibler divergence, defined between µ, ν ∈P2,ac(Rd) as
+KL(µ||ν) =
+Z
+log
+pµ(x)
+pν(x)
+
+dµ(x),
+(256)
+where we note pµ and pν the densities of µ and ν w.r.t the Lebesgue measure.
+They address the problem by solving an ODE on the means and covariances, which characterizes the trajectory of the
+gradient flow in (P2(BW(Rd)), WBW2). Alternatively, they propose to solve the JKO scheme between particles by solving
+for all k ≥0,
+(θ(1)
+k+1, . . . , θ(n)
+k+1) = argmin
+θ(1),...,θ(n) F
+ 
+1
+n
+n
+X
+i=1
+δN(m(i),Σ(i))
+!
++ 1
+τ W2
+W2
+ 
+1
+n
+n
+X
+i=1
+δN(m(i),Σ(i)), 1
+n
+n
+X
+i=1
+δN(m(i)
+k ,Σ(i)
+k )
+!
+. (257)
+We now derive the gradient of this functional using our framework, and make the connections with the formula derived in
+(Lambert et al., 2022, Appendix F).
+55
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+Computation of the gradient.
+Let P ∈P2
+ P2(Rd)
+
+and ξ ∈TPP2
+ P2(Rd)
+
+. We want to do the Taylor expansion of
+F(expP(tξ)) = F
+ (µ 7→(Id + tξ(µ))#µ)#P
+
+:
+F
+ expP(tξ)
+
+= KL
+Z
+µ d
+ expP(tξ)
+
+(µ)||π
+
+= KL
+Z
+(Id + tξ(µ))#µ dP(µ)||π
+
+=
+ZZ
+log
+R
+p(Id+tξ(ν))#ν(x) dP(ν)
+pπ(x)
+
+p(Id+tξ(µ))#µ(x) dP(µ)dx.
+(258)
+By a Taylor expansion, we can write for all x ∈Rd,
+p(Id+tξ(µ))#µ(x) = pµ(x) + t∂tp(Id+tξ(µ))#µ(x) + o(t) = pµ(x) −tdiv
+ pµ(x)ξ(µ)(x)
+
++ o(t),
+(259)
+where we used (Villani, 2003, Theorem 5.34) for ∂tp(Id+tξ(µ))#µ = −tdiv
+ pµξ(µ)
+
+. Plugging this in (258), we get
+F
+ expP(tξ)
+
+=
+ZZ
+log
+ R
+pν(x)dP(ν) −t
+R
+div
+ pν(x)ξ(ν)(x)
+
+dP(ν) + o(t)
+pπ(x)
+!
+p(Id+tξ(µ))#µ(x) dP(µ)dx
+=
+ZZ  log
+Z
+pν(x)dP(ν)
+
+−t
+R
+div
+ pν(x)ξ(ν)(x)
+
+dP(ν)
+R
+pν(x)dP(ν)
++ o(t)
+−log pπ(x)
+
+p(Id+tξ(µ))#µ(x) dP(µ)dx
+=
+ZZ  
+log
+R
+pν(x)dP(ν)
+pπ(x)
+
+−t
+R
+div
+ pν(x)ξ(ν)(x)
+
+dP(ν)
+R
+pν(x)dP(ν)
++ o(t)
+!
+p(Id+tξ(µ))#µ(x) dP(µ)dx.
+(260)
+Performing the Taylor expansion of the second density, we get
+F
+ expP(tξ)
+
+=
+ZZ  
+log
+R
+pν(x)dP(ν)
+pπ(x)
+
+−t
+R
+div
+ pν(x)ξ(ν)(x)
+
+dP(ν)
+R
+pν(x)dP(ν)
++ o(t)
+!
+(pµ(x) −tdiv
+ pµ(x)ξ(µ)(x)
+
++ o(t)) dP(µ)dx
+= F(P) −t
+ZZ
+log
+R
+pν(x)dP(ν)
+pπ(x)
+
+· div
+ pµ(x)ξ(µ)(x)
+
+dxdP(µ)
+−t
+Z R
+div
+ pν(x)ξ(ν)(x)
+
+dP(ν)
+R
+pν(x)dP(ν)
+Z
+pµ(x)dP(µ)dx + o(t)
+= F(P) + t
+ZZ 
+∇log
+R
+pν(x)dP(ν)
+pπ(x)
+
+, ξ(µ)(x)
+
+dµ(x)dP(µ) + o(t).
+(261)
+We used in the last line the integration by part formula, and
+R
+div
+ pν(x)ξ(ν)(x)
+
+dx = 0. We can conclude that
+∇WW2F(P)(µ) = ∇VP, where VP(x) = log
+  R
+pν(x)dP(ν)
+
+−log pπ(x).
+Computation with 1st variation.
+We now verify that we would recover the same result by computing the first variation,
+as conjectured in Appendix B.4.
+Let π ∈P2,ac(Rd), π ∝e−V with V : Rd →R a potential. Denote Fπ : P2,ac(Rd) →R, Fπ(µ) = KL(µ||π) for all
+µ ∈P2,ac(Rd), and for all P ∈P2
+ Pac(Rd)
+
+,
+F(P) = KL
+Z
+µ dP(µ)
+
+π
+
+= Fπ
+Z
+µ dP(µ)
+
+.
+(262)
+We will now derive the 1st variation of F. First, recall that δFπ
+δµ (µ) = 1 + log µ −log π = 1 + log µ + V . Thus, we have,
+56
+
+Flowing Datasets with Wasserstein over Wasserstein Gradient Flows
+noting ˜µ =
+R
+µ dP(µ), p˜µ(x) =
+R
+pµ(x) dP(µ) and ˜χ =
+R
+µ dχ(µ),
+dF
+dt (P + tχ)
+
+t=0 = dFπ
+dt
+Z
+µ dP(µ) + t
+Z
+µ dχ(µ)
+ 
+t=0
+= dFπ
+dt (˜µ + t˜χ)
+
+t=0
+=
+Z δFπ
+δµ (˜µ)(x) d˜χ(x)
+by definition of the 1st variation of Fπ
+=
+Z  1 + log p˜µ(x) −log pπ(x)
+
+d˜χ(x)
+=
+Z
+Rd
+ 1 + log
+Z
+pµ(x) dP(µ)
+
+−log pπ(x)
+ Z
+P2(Rd)
+pµ(x) dχ(µ)dx
+=
+Z
+P2(Rd)
+Z
+Rd
+
+1 + log
+Z
+pν(x) dP(ν)
+
+−log pπ(x)
+
+dµ(x) dχ(µ).
+(263)
+Therefore, the first variation of F at P is,
+∀µ ∈P2(Rd), δF
+δP(P)(µ) =
+Z
+Rd
+
+1 + log
+Z
+pν(x) dP(ν)
+
+−log pπ(x)
+
+dµ(x).
+(264)
+We note that this coincides with the formula of the 1st variation provided in (Lambert et al., 2022, Appendix F) (in the
+particular case of mixture of Gaussian).
+Now, noting VP(x) = 1 + log
+ R
+pν(x) dP(ν)
+
+−log pπ(x), the first variation is a potential energy δF
+δP(P)(µ) =
+R
+VP dµ.
+Thus, the gradient of F at P ∈P2
+ P2(Rd)
+
+is obtained by the conjecture in Appendix B.4 as, for all µ ∈P2(Rd) x ∈Rd,
+∇WW2F(P)(µ)(x) = ∇W2
+δF
+δP(P)(µ)(x) = ∇VP(x).
+(265)
+This is well the same formula obtained by computing the Taylor expansion.
+If we want to compute the gradient on P2
+ BW(Rd)
+
+, we can take the Bures-Wasserstein gradient of the first variation instead
+of the Wasserstein gradient. Since it is a potential energy, by (Diao et al., 2023, Lemma 3.1), for any P ∈P2
+ BW(Rd)
+
+and
+µ ∈BW(Rd), x ∈Rd,
+∇WBWF(P)(µ)(x) = ∇BW
+δF
+δP(P)(µ)(x) =
+Z
+∇VP dµ +
+Z
+∇2VP dµ
+
+(x −mµ),
+(266)
+with mµ =
+R
+xdµ(x). Since the tangent space of the Bures-Wasserstein space is of the form TµBW(Rd) = {x 7→
+m + S(x −mµ), m ∈Rd, S ∈Sd(R)} (see e.g. (Diao et al., 2023, Appendix A)), then we can identify the mean and
+covariance part of the gradient as (
+R
+∇VP dµ,
+R
+∇2VP dµ), which coincides well with the formula derived in (Lambert
+et al., 2022, Appendix F).
+Lambert et al. (2022) experimented with F in practice by evolving Gaussian particles. Note however that they observed that,
+even though the KL divergence is (geodesically) convex in P2(Rd) for V convex, F is not convex in P2
+ BW(Rd)
+
+as the
+negative entropy is not.
+Also related, Huix et al. (2024) considered optimizing the KL over mixtures of Gaussian, but with fixed covariance observing
+that the objective can be seen as the KL between a mollified distribution and the target. They minimized it using Wasserstein
+gradient flows over the means of each mixture. Moreover, their scheme in that case can be seen as a particular case of the
+one of (Lambert et al., 2022), as described in (Huix et al., 2024, Appendix B).
+Also to solve Variational Inference problems, Lim & Johansen (2024) considered the family qθ,µ =
+R
+kθ(·|z)dµ(z) with
+parametric kernels kθ satisfying
+R
+kθ(x|z)dx = 1 for all z ∈Rdz. They solved this problem by minimizing the KL
+divergence with a regularizer, using a gradient flow over Rdθ × P2(Rdz). Rønning et al. (2025) considered a mixture family
+of the form q(x|µm) =
+1
+m
+Pm
+ℓ=1 k(x|zℓ) with µm =
+1
+m
+Pm
+ℓ=1 δzℓ, and minimized an ELBO using the Stein Variational
+Gradient Descent.
+57

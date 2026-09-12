@@ -1,39 +1,35 @@
-Each trial
+Justification: Our main results do not contain randomness as we fixed the seed
 ---
-Each trial began with the monkey resting its hand on a touchpad for a
+Large language monkeys: Scaling inference compute with repeated
 ---
-The simulation dataset consists of: 1) 100 neurons, 2) 50 timepoints per trial, 3) 800 trials total (100
+Repeat: Go back to Step 2 and iterate until termination criteria are met
 ---
-Trial lengths varied as no temporal
+Standard Deviation with Multiple Trials
 ---
-Trials were extracted from the ’go
+Table 5: Mean accuracy ± standard deviation over 3 runs with different seeds on MATH-500
 ---
-Trials were extracted from the ’go cue time’ to the ’trial end’, as
+To evaluate the robustness of our results, we conducted experiments over multiple trials using
 ---
-We simulate an 8-direction center-out reaching task, and each trial corresponds to a reach toward one
+Will we run out of data? limits of llm scaling based on human-generated data
 ---
 be necessary to either make it possible for others to replicate the model with the same
 ---
-cue time’ to the ’trial end’, as the monkeys remained stationary before the go cue
+different random seeds
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
 ---
 experimental runs as well as estimate the total compute
 ---
 instructions for how to replicate the results, access to a hosted model (e
 ---
-method is conducted as multiple full training runs on different monkeys, but all runs share the same
----
-on the handwriting dataset, where each method was trained 10 times with different random seeds
+multiple trials are consistent with our original findings, demonstrating the stability of the observed
 ---
 only tested on a few datasets or with a few runs
 ---
-performance across 10 random seeds for each data point
+repeated sampling efficiently scale test-time compute
 ---
 run with given experimental conditions)
 ---
-training run aligns Day k to Day 0 within the same subject
----
-trial began with the monkey moving to the center of the workspace, followed by a random
----
-trials across all classes
+runs
 ---
 • The instructions should contain the exact command and environment needed to run to

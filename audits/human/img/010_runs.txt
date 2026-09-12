@@ -1,5 +1,17 @@
-Figure 1: Absolute prediction error on ﬁnal 200 predictions averaged over 10 independent runs for
+All results are averaged over 10 runs with different random seeds,
 ---
-across 200 runs
+be necessary to either make it possible for others to replicate the model with the same
 ---
-each run
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+repeated for deg(i) times to sample the labels for deg(i) neighbors
+---
+run with given experimental conditions)
+---
+• The instructions should contain the exact command and environment needed to run to

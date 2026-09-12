@@ -116,7 +116,7 @@ def main(argv=None) -> int:
         gap = abs(w - r_)
         res = resolvable_gap(size, p)
         rows.append({"benchmark": name, "size": size, "gap": gap, "resolution": res,
-                     "below": gap < res, "paper": c["paper"]})
+                     "below": gap < res, "paper": c["paper"], "testable": bool(c.get("test"))})
 
     if not rows:
         print("no comparisons could be matched to a named benchmark")
@@ -128,8 +128,22 @@ def main(argv=None) -> int:
         d = by_bench.setdefault(r["benchmark"], {"n": 0, "below": 0, "size": r["size"]})
         d["n"] += 1
         d["below"] += r["below"]
-    for d in by_bench.values():
+    for name, d in by_bench.items():
         d["pct_below"] = round(100 * d["below"] / d["n"], 1)
+        d["median_gap"] = round(statistics.median(r["gap"] for r in rows if r["benchmark"] == name), 2)
+        d["median_resolution"] = round(statistics.median(r["resolution"] for r in rows
+                                                         if r["benchmark"] == name), 2)
+
+    # The two routes to a check: the seed route (both bars and a run count) and
+    # the item route (an accuracy on a named benchmark of known size). Their
+    # union is the share checkable by either.
+    n_testable = sum(1 for c in cs if c.get("test"))
+    overlap = sum(1 for r in rows if r["testable"])
+    union = n_testable + len(rows) - overlap
+    checkable_union = {"n_seed_route": n_testable, "n_item_route": len(rows), "overlap": overlap,
+                       "n_union": union, "n_all": len(cs),
+                       "pct_item_route": round(100 * len(rows) / len(cs), 1),
+                       "pct_union": round(100 * union / len(cs), 1)}
 
     # The independence assumption makes the resolution coarser than reality, so
     # the headline is an upper bound. The whole range is emitted here rather
@@ -143,6 +157,7 @@ def main(argv=None) -> int:
 
     res = {
         "n_comparisons": len(rows),
+        "checkable_union": checkable_union,
         "correlation_sensitivity": corr,
         "n_papers": len(set(r["paper"] for r in rows)),
         "n_below_resolution": len(below),

@@ -1,3 +1,43 @@
-conducted with three random seeds and then aggregated
+As illustrated in Figure 5, FLUX shows training times comparable to FedAvg, with
 ---
-excluded the ”sit” and ”stand up” activities from our experiments; adopted the ”trial” split strategy; used only the magnitudes
+At test time, clients repeat Steps S1–S2 and execute only the
+---
+Continual Local Training For Better Initialization Of Federated
+---
+Figure 8: Impact of clustering initialization round on model performance
+---
+For 100 clients, datasets are duplicated four times (size after partition ×8)
+---
+Table 63 reports results on MNIST, averaged across shift types, heterogeneity levels, and seeds
+---
+The FL process runs for 10 communication rounds on MNIST,
+---
+The clustering process can be repeated whenever a drift occurs within
+---
+The process repeats iteratively until no further clusters are formed
+---
+Using a shared random seed, all clients generate
+---
+We adopt a 5-fold cross-validation strategy to evaluate model performance, using fixed random
+---
+and the process repeats until convergence to θ∗, minimizing the overall risk across client distributions:
+---
+baseline, FeSEM, is more than 4 times that of FLUX, while the slowest, FedDrift, requires over 300
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+only tested on a few datasets or with a few runs
+---
+run with given experimental conditions)
+---
+seeds (42, 43, 44, 45, and 46) to ensure reproducibility
+---
+times the computational time of FLUX
+---
+• The instructions should contain the exact command and environment needed to run to

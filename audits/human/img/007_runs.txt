@@ -1,3 +1,39 @@
-If posteriors are unimodal, we run a single chain
+A-NeSI + RLOO, we obtained performance on 10 individual runs from the authors to compute the
 ---
-We run SGLD with
+All our experiments were run
+---
+For all experiments, we repeat runs with 10 different random seeds
+---
+For repeating our runs and hyperparameter tuning, we further
+---
+For the runs with the unconditional entropy, we used the
+---
+These runs do not balance the maximisation of entropy as the weight is too low, resulting in models
+---
+We found all 10 runs moved past
+---
+We obtained results of the 5 individual runs used for each method in [55] and re-evaluated
+---
+We tune with this split, then again train 10 times
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+obtained performance on 10 individual runs from the authors to compute the Mann-Whitney U test
+---
+on the MNIST-Half dataset with three repeated runs
+---
+only tested on a few datasets or with a few runs
+---
+run with given experimental conditions)
+---
+strategy, and repeated the evaluation of the models using different strategies, which we describe here
+---
+this effectively samples K times from pθ(˜c0 | ct, x) and chooses the sample that violates the fewest
+---
+• The instructions should contain the exact command and environment needed to run to

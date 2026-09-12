@@ -1,31 +1,71 @@
-2) using ResNet-34, rank r = 25, and 1500 ImageNet images (classwise run)
+(b) Per event log-likelihood of the event times (higher is better)
 ---
-Mean ± std across 5 runs
+, 2022] for ˜B, ˜C, and ˜E, based off the HiPPO initialization scheme [Gu et al
 ---
-Values are mean across 5 runs
+Event times are normalized to be in hours
 ---
-Values are mean ± std across 5 runs
+Note that for datasets that contain concurrent events or effectively discrete times (e
 ---
-Values are mean ±std across 5 runs
+On the parameterization and initialization
 ---
-We replicate our KL regularization ablation for MobileNetV2 [28] by sweeping the regularization
+THP runs out of memory or IFTPP throws an error
+---
+To evaluate an SSM, we first discretize the continuous-time system at appropriate times to yield
+---
+We use the same initialization strategies as S5 [Smith
 ---
 be necessary to either make it possible for others to replicate the model with the same
 ---
-deviation computed over five independent runs with different random seeds
+computing intensities at both event times t1:N and at randomly sampled times t∼U(0, T)
+---
+datasets we consider, averaged over 5 random seeds
+---
+describing the spread over five different random seeds
+---
+desired evaluation times
+---
+event times (as with any neural intensity-based MTPP model) and is not able to model point masses
+---
+example test sequences are plotted; the locations of colored bars ||| indicate the true event times
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
 ---
 experimental runs as well as estimate the total compute
 ---
-ing consists of computing encoder activations and NNDSVD initialization; optimization runs PGD
+first compute the right limits of the hidden states at event times, x(1:L)
+---
+input assumption) efficiently evaluate the linear recurrence at subsequent times t′
 ---
 instructions for how to replicate the results, access to a hosted model (e
 ---
+joint distribution of these sequences of event times and marks
+---
+l=1, Event times t1:N, mark types k1:N, nonlinearity σ,
+---
+on a sequence (Algorithm 1) and for likelihood evaluation (Algorithm 3) over 20 random seeds
+---
 only tested on a few datasets or with a few runs
 ---
-run per class; hence, the computational cost scales with the number of images analyzed for that
+positive), and event times do not lie on grid points that are effectively discrete-time events
 ---
 run with given experimental conditions)
 ---
-runs
+seeds (i
+---
+set evaluated across five random training seeds (std
+---
+spaced event times and times used to compute the integral term
+---
+such as THP, MHP, IFTPP, only have latent states h(tj) at discrete event times tj∈{1:N}
+---
+then runs out of memory
+---
+times
+---
+times are not on a fixed intervals
+---
+times so that events do not lie on a fixed grid
+---
+times, that can also be efficiently computed
 ---
 • The instructions should contain the exact command and environment needed to run to

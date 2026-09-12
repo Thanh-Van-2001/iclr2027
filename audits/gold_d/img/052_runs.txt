@@ -1,0 +1,51 @@
+(initialization)
+---
+5 runs
+---
+All experiments are run on a single NVIDIA GeForce GTX 1080 Ti GPU, with
+---
+Both procedures start from the same initialization (e
+---
+However, since the node and edge cover times for a random walk can scale as O(|V ||E|) [18],
+---
+Monotonicity in the initialization π0
+---
+Random Walk Cover Times
+---
+Specifically, we compare training times across varying sample
+---
+The DFS runs one for s loop that updates a single adjacency-encoding
+---
+These repeated list allocations and Python-level
+---
+To compare two graphs G and H, run 1-WL on each
+---
+W ∈{0, 1}(ℓ+1)×s marks node repetitions within a sliding window
+---
+We lastly review random walk cover times, highlighting how RWNNs require prohibitively
+---
+are as long as cover times
+---
+be necessary to either make it possible for others to replicate the model with the same
+---
+empirically reduce cover times on graphs [5, 6]
+---
+example, train/test split, initialization, random drawing of some parameter, or overall
+---
+experimental runs as well as estimate the total compute
+---
+generation algorithm, including initialization, neighbor selection, and PE encoding
+---
+instructions for how to replicate the results, access to a hosted model (e
+---
+number of refinement rounds t, the maximum walk length ℓ, and the initialization π(0) (i
+---
+only tested on a few datasets or with a few runs
+---
+review results on random walk node cover times, CV (G), the expected number of steps a walk takes
+---
+run with given experimental conditions)
+---
+x, draw a uniformly random permutation πx of its neighbors; run depth-first search that, upon first
+---
+• The instructions should contain the exact command and environment needed to run to
