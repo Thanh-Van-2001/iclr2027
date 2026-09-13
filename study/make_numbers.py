@@ -394,6 +394,11 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("fail one sided", rf"{hs['one_sided']['pct_fail']}\%", provenance="headline_span")
     reg.add("fail holm paper", rf"{hs['holm_family_paper']['pct_fail_holm']}\%", provenance="headline_span")
     reg.add("fail holm all groups", rf"{hs['holm_family_all_groups']['pct_fail_holm']}\%", provenance="headline_span")
+    for key in ("caption", "page", "paper", "none"):
+        reg.add(f"n runs from {key}", hs[f"run_count_from_{key}"]["n"], provenance="headline_span")
+        reg.add(f"fail runs from {key}", rf"{hs[f'run_count_from_{key}']['pct_fail']}\%", provenance="headline_span")
+    reg.add("pct runs from paper", rf"{100 * hs['run_count_from_paper']['n'] / hs['as_reported']['n']:.1f}\%",
+            provenance="headline_span")
     reg.add("unlabelled as sem full", rf"{hs['unlabelled_as_sem']['pct_fail']}\%", provenance="headline_span")
     reg.add("labelled only n", hs["labelled_only"]["n"], provenance="headline_span")
     sd = _j("extra_stats")["subset_direction"]
@@ -449,6 +454,7 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("pct tie testable", rf"{tm['pct_of_testable_tie_marked']}\%", provenance="extra_stats")
     reg.add("fail among tie marked", rf"{tm['fail_rate_among_tie_marked']}\%", provenance="extra_stats")
     reg.add("fail excluding tie", rf"{tm['fail_rate_excluding_tie_marked']}\%", provenance="extra_stats")
+    reg.add("n excluding tie", tm.get("n_testable_excluding_tie_marked", ""), provenance="extra_stats")
 
     reg.add("just seeds", rf"{cj['pct_seeds']}\%", provenance="extra_stats")
     reg.add("just test", rf"{cj['pct_test']}\%", provenance="extra_stats")
@@ -621,6 +627,13 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     # comparisons testable without a count keep their status, the rest are
     # scaled by the measured precision.
     a25 = _j("analysis_2025")
+    # The residual slice of Figure 1: both bars present and a run count stated,
+    # yet no test, because both bars are printed as zero or are interquartile
+    # ranges the conversion refuses.
+    _cs = a25["_comparisons"]
+    _other = sum(1 for c in _cs if not c.get("test") and c["winner_dispersion"] is not None
+                 and c["runner_dispersion"] is not None and c.get("n_runs"))
+    reg.add("pct both zero", rf"{100 * _other / len(_cs):.1f}\%", provenance="analysis_2025")
     n_with = a25["welch_t"]["n_with_t"]
     n_test = a25["comparisons"]["n_testable"]
     total = a25["comparisons"]["n_total"]
@@ -715,6 +728,9 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     # the population rate scaled by the frozen set's ratio.
     ratio = gft["failure_rate_pipeline_values_same_items"] / gft["pipeline_fail_rate_all_items"]
     reg.add("fail reader testable scaled", rf"{y25['pct_fail'] * ratio:.1f}\%", provenance=frun)
+    _pp = y25["pct_fail"] / 100
+    _lo, _hi = _pp * (1 - u), max(_pp + u * (1 - _pp), _pp * ratio)
+    reg.add("fail instrument wide", rf"{100 * _lo:.1f}--{100 * _hi:.1f}\%", provenance=frun)
     # A copied rival is tested at the table's own run count; removing every
     # such comparison at both extremes bounds what it can do.
     s_c = rc_["pct"] / 100
@@ -795,6 +811,11 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("pages reader only fails", vs["reader_only"]["fails"], provenance=prun)
     reg.add("pages pipe only n", vs["pipeline_only"]["n"], provenance=prun)
     reg.add("pages pipe only fails", vs["pipeline_only"]["fails"], provenance=prun)
+    _pp_pages = pg["verdicts_same_pages"]
+    _pipe_n = _pp_pages["shared"]["n"] + _pp_pages["pipeline_only"]["n"]
+    _pipe_f = _pp_pages["shared"]["pipeline_fails"] + _pp_pages["pipeline_only"]["fails"]
+    reg.add("pages pipe fail", rf"{100 * _pipe_f / _pipe_n:.1f}\%", provenance=prun)
+    reg.add("pages pipe testable n", _pipe_n, provenance=prun)
     rf_ = pg.get("reader_failure")
     if rf_:
         reg.add("pages reader testable groups", rf_["n"], provenance=prun)

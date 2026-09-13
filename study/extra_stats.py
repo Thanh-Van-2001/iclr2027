@@ -77,6 +77,7 @@ def tie_marking(records: list, comparisons: list) -> dict:
         "pct_tables_marking_second_best": round(100 * n_second / max(n_tables, 1), 1),
         "papers_affected": len(tie_papers),
         "pct_of_testable_tie_marked": round(100 * len(tie) / max(len(testable), 1), 2),
+        "n_testable_excluding_tie_marked": len(keep),
         "fail_rate_all": fail_rate(testable),
         "fail_rate_excluding_tie_marked": fail_rate(keep),
         "fail_rate_among_tie_marked": fail_rate(tie),
@@ -425,6 +426,17 @@ def headline_span(comparisons: list, records: list = None) -> dict:
         fail_h += len(g) - rejected
     rows["holm_family_all_groups"] = {"n": len(testable), "pct_fail": rows["as_reported"]["pct_fail"],
                                       "pct_fail_holm": round(100 * fail_h / len(testable), 1)}
+
+    # By where the run count came from: the caption, the table's page, the
+    # smallest count anywhere in the paper, or none (a standard error or
+    # interval tested in the normal limit).
+    def _src(c):
+        if not c.get("n_runs"):
+            return "none"
+        return c.get("n_runs_source") or "paper"
+    for key in ("caption", "page", "paper", "none"):
+        sub = [c for c in testable if _src(c) == key]
+        rows[f"run_count_from_{key}"] = _fail_rate(sub) if sub else {"n": 0}
 
     # The same comparisons reweighted to the population's subfield mix, so a
     # subfield that reports bars more often does not dominate the rate.

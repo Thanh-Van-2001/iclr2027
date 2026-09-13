@@ -38,8 +38,8 @@ propagated, and \nPctTestable{} can be tested from what is printed.
 Of those that can be tested, which come from \nPapersContributing{} papers,
 \nPctFail{} are not distinguishable from zero by Welch's $t$ at the stated run
 counts on the authors' own numbers (\nFailZ{} by a two-sample $z$ that takes
-the printed deviations as exact; \nFailInstrumentBand{} once the instrument's
-measured verdict error is propagated), and \nPctFailHolm{} (\nFailZHolm{})
+the printed deviations as exact; \nFailInstrumentWide{} once the instrument's
+measured verdict and testability error is propagated), and \nPctFailHolm{} (\nFailZHolm{})
 once the other comparisons in the same table are accounted for. Where a
 caption names its benchmark, the split size alone says what is significant on
 it: \nResolutionPctBelowSig{} of those gaps are not, under independence,
@@ -235,10 +235,10 @@ slice is the small one at the bottom.}
 
 
 Table~\ref{tab:funnel} (Appendix~\ref{app:pipeline}) gives the funnel from
-PDF to analysed comparison. The population we measure is not all results tables but the tables that mark a
-winner, and within those the groups where the mark is a claim of victory rather
-than a label on the authors' own row: the right population for the question,
-but a filtered one. Whatever the filter selects for, it is not the absence of
+PDF to analysed comparison. The population we measure is the tables that
+mark a winner and, within those, the groups where the mark is a claim of
+victory rather than a label on the authors' own row: right for the question,
+but filtered. Whatever the filter selects for, it is not the absence of
 uncertainty: tables that survive it carry an error bar \nPctErrorBarRetained{}
 of the time, the tables it discards \nPctErrorBarDiscarded{}
 (Section~\ref{sec:threats} reads a sample of them).
@@ -246,8 +246,9 @@ of the time, the tables it discards \nPctErrorBarDiscarded{}
 Figure~\ref{fig:untestable} gives the decomposition. Of
 \nComparisonsTwentyFive{} highlighted comparisons in 2025, \nPctNeitherSide{}
 have no error bar on either value, \nPctOneSideOnly{} have one on only one
-side, and \nPctNoNStated{} carry error bars whose number of runs is never
-stated, leaving \nPctTestable{}. The 2024 sample gives
+side, \nPctNoNStated{} carry error bars whose number of runs is never
+stated, and \nPctBothZero{} carry bars that are both zero or interquartile
+ranges, leaving \nPctTestable{}. The 2024 sample gives
 \nPctNeitherSideTwentyFour{} and \nPctTestableTwentyFour{}, within a point
 and inside either bootstrap interval.
 
@@ -279,10 +280,13 @@ printed. Holm--Bonferroni within each table raises this to \nCiFailHolm{}; the
 correction moves \nCiHolmDelta{} of testable comparisons from significant to
 not, a paired quantity estimated far more precisely than either level.
 
-A two-sample $z$ on the same comparisons, each printed deviation taken as
-exact, fails \nFailZ{}, \nFailZHolm{} after Holm within table: the reading
-most favourable to the field among readings of what the page prints; only
-the matched-seed hypothetical of Section~\ref{sec:sensitivity} goes lower. The gap
+A failure here says the printed evidence does not support the claim at the
+stated run count, not that the claim is false; at three runs the test has
+little power, and that is the point. A two-sample $z$ on the same
+comparisons, each printed deviation taken as exact, fails \nFailZ{},
+\nFailZHolm{} after Holm within table: the reading most favourable to the
+field among readings of what the page prints; only the matched-seed
+hypothetical of Section~\ref{sec:sensitivity} goes lower. The gap
 between the two is the run count: Welch's critical value at three runs is
 $2.78$ against $1.96$, and \nPctRunsLeThree{} of testable comparisons rest on
 three runs or fewer. Table~\ref{tab:span} carries both readings.
@@ -324,8 +328,7 @@ the noise is crude: one median per subfield and scale, whatever the metric.
 
 It can be asked of every comparison with a stated run count and two values in
 one bucket, error bars or not: \nDesignMdeN{} comparisons from
-\nDesignMdePapers{} papers (\nDesignExcludedNoN{} lack a run count,
-\nDesignExcludedScale{} fall outside or across the buckets). At a median of
+\nDesignMdePapers{} papers. At a median of
 \nDesignMedianRuns{} runs, \nPctBelowAlphaThreshold{} of reported gaps fall
 below that cut on the imputed noise; on the \nDesignMdeNoBarsN{} comparisons
 that print no error bar at all,
@@ -367,10 +370,9 @@ subset whose caption or column header names an accuracy-like metric:
 The median reported gap is \nBinomMedianGap{} points, and detecting it at
 \nPowerLevel{} power would require about \nBinomMedianN{} test items;
 \nBinomOverGsm{} of these comparisons would need a test set larger than GSM8K,
-and \nBinomOverMmlu{} one larger than MMLU. On the subset naming an
-accuracy-like metric the median gap is \nBinomNamedMedianGap{} points and the
-requirement \nBinomNamedMedianN{} items, with \nBinomNamedOverGsm{} needing
-more than GSM8K: the filter changes the population and not the answer.
+and \nBinomOverMmlu{} one larger than MMLU. On the accuracy-like subset the median gap is \nBinomNamedMedianGap{} points
+and the requirement \nBinomNamedMedianN{} items (\nBinomNamedOverGsm{} above
+GSM8K): the filter changes the population, not the answer.
 Treating the two values as independent binomials is conservative, since systems
 scored on the same items are positively correlated, so the true requirement is
 at most what we state. Widening the range filter to $(0, 100]$ moves the GSM8K
@@ -426,7 +428,7 @@ The headline reads unlabelled bars as standard deviations, which favours the
 field, takes the two values as independent, which does not, and uses Welch's
 $t$ at the stated run count; the subset where authors state what their bar
 means fails at \nLabelledOnlyFail{}. The span is wide because the papers do
-not print which convention they used, which is the thesis applied to itself.
+not print which convention they used.
 
 \begin{table}[t]
 \centering
@@ -450,7 +452,7 @@ Holm family the paper, not the table & \nSpanN{} & \nPctFail{} & \nFailHolmPaper
 Holm family every highlighted comparison in the table & \nSpanN{} & \nPctFail{} & \nFailHolmAllGroups{} \\
 Only bars whose meaning is stated & \nLabelledOnlyN{} & \nLabelledOnlyFail{} & \nHolmLabelledOnly{} \\
 Run count taken from the caption only & \nStrictN{} & \nStrictFail{} & \nHolmStrict{} \\
-Tie-marked comparisons removed & & \nFailExcludingTie{} & \\
+Tie-marked comparisons removed & \nNExcludingTie{} & \nFailExcludingTie{} & \\
 Reweighted to the population's subfield mix & \nSpanN{} & \nReweightedFail{} & \\
 Reweighted to the population's gap distribution & \nSpanN{} & \nReweightedGapsFail{} & \\
 Every copied rival removed, both extremes & & \nFailCopiedRemovedLow{}--\nFailCopiedRemovedHigh{} & \\
@@ -475,23 +477,29 @@ Either route & \nComparisonsTwentyFive{} & \nCheckableUnion{} & \\
 \end{table}
 
 \paragraph{Where a run count comes from, and what a bar means.} A caption
-sometimes states how many runs produced its means; more often the count appears
-once in the setup. Counting only captions
-gives \nStrictTestable{} testable and \nStrictFail{} failing; a count stated
-anywhere in the paper gives \nPctTestable{} and \nPctFail{}, which we report.
+sometimes states how many runs produced its means; more often the count
+appears once in the setup, and the pipeline then takes the smallest count
+stated anywhere in the paper (Appendix~\ref{app:pipeline}). Counting only
+captions gives \nStrictTestable{} testable and \nStrictFail{} failing; a
+count stated anywhere gives \nPctTestable{} and \nPctFail{}, which we
+report. By source the rate is \nFailRunsFromCaption{} on the
+\nNRunsFromCaption{} comparisons whose count is in the caption,
+\nFailRunsFromPage{} on the \nNRunsFromPage{} from the table's page,
+\nFailRunsFromPaper{} on the \nNRunsFromPaper{} from elsewhere in the paper
+and \nFailRunsFromNone{} on the \nNRunsFromNone{} standard errors and
+intervals that need none: the paper-wide count, \nPctRunsFromPaper{} of the
+testable set, is the one convention whose direction we cannot sign.
 Of the papers that print an explicit error bar, only
 \nPctErrorBarPapersStatingRuns{} state a run count anywhere. Nor do most say
 what the bar is: reading every unlabelled bar as a standard error rather than a
 standard deviation moves the failure rate to \nUnlabelledAsSemFull{}
-(Appendix~\ref{app:secondary} gives both readings on the unlabelled subset
-alone). We use the deviation reading, the more conservative; the subset whose
-authors do say fails at \nLabelledOnlyFail{}, close to the headline.
+(Appendix~\ref{app:secondary}); we use the deviation reading, the more
+conservative.
 
 \paragraph{Whether the two values are independent.} Our test treats the winner
-and the runner-up as independent samples of run-to-run variation. Sharing a
-test set does not by itself correlate two methods' seed-to-seed fluctuations;
-matched seeds or shared initialisations would, and print cannot say whether
-they were. Table~\ref{tab:span} therefore carries the paired reading, with
+and the runner-up as independent samples of run-to-run variation; matched
+seeds or shared initialisations would correlate them, and print cannot say
+whether they were. Table~\ref{tab:span} therefore carries the paired reading, with
 $\mathrm{Var}(A - B) = \sigma_A^2 + \sigma_B^2 - 2\rho\sigma_A\sigma_B$ at
 $\rho = \nRhoHalf{}$ (\nFailRhoHalf{}) and $\rho = \nRhoNine{}$
 (\nFailRhoNine{}), as a matched-seed hypothetical that reads nothing off the
@@ -527,13 +535,12 @@ each rendered from the PDF with the pipeline's chosen cell boxed and nothing
 else, and read with the pipeline's values hidden. The reader recorded the
 winner, the rival, both means and bars, the bar kind, and the run count found
 in the paper's seed, run and trial sentences, supplied in full. The reader was
-the vision-language model named in
-the AI use statement, so these figures are agreement between two extractors of
-different technology, one on the text layer and one on the rendered image,
-not precision against a human reference; the marked cell anchors the reader on
-the pipeline's choice of winner, though not on its values. No human labelled
-any item, and the renderings, labels and scoring script are released
-(\nReleaseUrl{}) so that anyone can.
+the vision-language model named in the AI use statement: these figures are
+agreement between two extractors of different technology, not precision
+against a human reference, and the box anchors the reader on the pipeline's
+choice of winner, though not on its values. No human labelled any item, and
+the renderings, labels and scoring script are released (\nReleaseUrl{}) so
+that anyone can.
 
 The development set of \nGoldDevN{} testable comparisons, read against the
 pipeline as it stood after the first six bugs of Appendix~\ref{app:bugs},
@@ -545,7 +552,7 @@ papers the first set never touched agreed on the claim in
 \nGoldHeldAgree{}, and found two more. After the fixes the same items
 agree in \nGoldDevPostClaimFrac{} and \nGoldHeldPostClaimFrac{}, figures
 optimistic in the way a set that chose the fixes must be; Appendix~\ref{app:gold}
-prints all four scorings.
+prints every scoring.
 
 A fourth draw was made after the released pipeline was tagged, from papers no
 earlier set touched, and nothing was fixed on it: \nGoldFrozenN{} testable
@@ -580,7 +587,7 @@ run one way, the pipeline surviving where the reader fails, which puts it at
 \nFailInstrumentPoint{}, or \nFailReaderTestableScaled{} dropping the
 \nFrozenUntestableN{} items the reader could not test (\nFrozenNotClaimN{}
 not a single-bold claim to it, \nFrozenNoUsableN{} without a usable run
-count; Appendix~\ref{app:gold} gives the pipeline's verdicts on each). The
+count; Appendix~\ref{app:gold}). The
 claim disagreement of a third is mostly in what the pipeline compares, not in
 the values it reads.
 
@@ -599,10 +606,13 @@ instruments agree on the shares and disagree on the census: the reader lists
 \nPagesReaderFoundPct{} of the reader's; the groups it misses print bars
 more often (\nPagesUnmatchedNeither{} bar-less against
 \nPagesMatchedNeither{}), yet over every group the reader finds the share is
-\nPagesCensusRatio{} times the pipeline's on the same pages, scaling the
-headline to \nNeitherCensusScaled{}. On the verdict the two agree on every one of the \nPagesSharedAgree{} groups
-both can test (\nPagesSharedReaderFails{} fail) and part company where they
-cannot: the reader tests \nPagesReaderOnlyN{} groups the pipeline does not
+\nPagesCensusRatio{} times the pipeline's (\nNeitherCensusScaled{} for the
+headline). From its own labels the reader fails \nPagesReaderFail{} of the
+\nPagesReaderTestableGroups{} groups it can test, the pipeline
+\nPagesPipeFail{} of its \nPagesPipeTestableN{} on the same pages, and the
+difference is entirely in which groups are testable: the two agree on every
+one of the \nPagesSharedAgree{} groups both can test
+(\nPagesSharedReaderFails{} fail) and part company where they cannot: the reader tests \nPagesReaderOnlyN{} groups the pipeline does not
 and fails \nPagesReaderOnlyFails{}; the pipeline tests \nPagesPipeOnlyN{} the
 reader does not, on a run count read from elsewhere in the paper, and fails
 \nPagesPipeOnlyFails{}. Which run counts one accepts decides the failure rate
@@ -619,15 +629,16 @@ reading with the whole paper adjudicated the \nAdjPipelineHasCount{} of those
 paper) an oracle's trial count quoted in a prompt. Where the pipeline attaches
 a run count it is the paper's in \nRunCountPrecisionFrac{}
 (\nRunCountPrecision{}); Table~\ref{tab:span} scales the checkable share by
-that precision. A third draw of \nGoldNoNN{} comparisons with both bars but no
-count found showed the paper stating one in \nGoldNoNFoundFrac{}, a recall
-loss the released pattern closes for the phrasings found.
+that precision, and restores the counts a third draw of \nGoldNoNN{} bar-carrying
+comparisons found stated in words the pattern had missed (\nGoldNoNFoundFrac{}).
 
-\paragraph{Recall.} Bold is an imperfect proxy for a claim, and
-Appendix~\ref{app:gold} reads what the filter discards
-(\nGoldDiscardedFault{} and \nGoldNonExtFault{} of two strata are the
-pipeline's fault). Precision does not bound the quantity the headline rests
-on, which is recall: an error bar present in the PDF and missed falls silently
+\paragraph{Recall.} The instrument reads table cells and nothing else:
+uncertainty in a figure, an image table or shading is invisible to it and
+counted as absent (Appendix~\ref{app:pipeline} counts what lies outside the
+cells, Appendix~\ref{app:ties} tie-marked tables, Appendix~\ref{app:checklist}
+the \nCheckYesNoTable{} NeurIPS checklists reporting error bars we cannot
+find). Precision does not bound the quantity the headline rests on, which is
+recall: an error bar present in the PDF and missed falls silently
 into ``neither value has an error bar''. We rendered
 \nRecallJudged{} tables the extractor called empty and looked for any error
 bar at all. The audit found \nRecallFoundThen{} misses, three of
@@ -665,25 +676,18 @@ by stated run count the rate is \nFailRunsLeThree{} at three or fewer,
 \nFailRunsFourFive{} at four or five and \nFailRunsGeSix{} at six or more. We
 claim no bound.
 
-\paragraph{The instrument reads table cells and nothing else.} Uncertainty
-in a figure, an image table or shading is invisible to it and counted as
-absent (Appendix~\ref{app:pipeline} counts what lies outside the cells,
-Appendix~\ref{app:ties} tie-marked tables, Appendix~\ref{app:checklist} the
-\nCheckYesNoTable{} NeurIPS checklists reporting error bars we cannot find).
-
 \section{Related work}
 \label{sec:related}
 
 Appendix~\ref{app:related} discusses each line of prior work in detail.
 
-\paragraph{Reporting and re-running.} One line of work tells authors what they
-should print \citep{dodge2019show,bouthillier2021accounting,miller2024adding,bowyer2025position};
+\paragraph{Reporting, re-running, and hand audits.} One line of work tells
+authors what they should print
+\citep{dodge2019show,bouthillier2021accounting,miller2024adding,bowyer2025position};
 another re-runs a literature and finds the gains smaller than claimed
-\citep{henderson2017deep,musgrave2020metric,dacrema2019really,saidi2024unraveling}.
-We measure how often any interval is printed at all.
-
-\paragraph{Hand audits of reporting practice.} Table~\ref{tab:audits} sets the
-closest studies beside this one
+\citep{henderson2017deep,musgrave2020metric,dacrema2019really,saidi2024unraveling};
+we measure how often any interval is printed at all. Table~\ref{tab:audits}
+sets the closest hand audits beside this one
 \citep{bergkirkpatrick2012empirical,dror2018hitchhiker,gundersen2018state,kirly2018nips,pham2020problems,hutchinson2022evaluation,christodoulou2024confidence,christodoulou2025false}.
 Their figures are not ours on a larger corpus: an error bar anywhere in a
 paper, several runs, a significance test, and an interval in a results table
@@ -971,12 +975,12 @@ the pipeline they agree on the whole claim in \nReaderTwoClaimFrac{} and
 of two vendors agreeing narrows the shared blind spot but is not a human
 reference; the kit is released for one.
 
-\paragraph{All four scorings.} Table~\ref{tab:goldscores} prints every
+\paragraph{Every scoring.} Table~\ref{tab:goldscores} prints every
 comparison of the reader's verdicts with the pipeline's, before and after the
-fixes each set prompted, with the number of items both sides could test. In
-three of four the pipeline calls fewer comparisons non-significant than the
-reader does, because the reader attaches run counts and bar meanings stated
-elsewhere in the paper; on the released pipeline's held-out row the
+fixes each set prompted, with the number of items both sides could test. On
+the development and frozen sets the pipeline calls fewer comparisons
+non-significant than the reader does, because the reader attaches run counts
+and bar meanings stated elsewhere in the paper; on the two held-out rows the
 difference is one item the other way.
 
 \begin{table}[h]
@@ -1250,15 +1254,18 @@ evaluation practice and find the field's conventions drifting; they establish
 what careful manual annotation can see, at the scale manual annotation permits.
 \citet{tang2020showing} show that the reporting practice proposed by
 \citet{dodge2019show} can itself mislead as usually implemented. We differ from
-all three in unit and scale: every highlighted comparison in \nPapersTotal{}
-papers, at the cost of reading only what is printed.
+all three in unit and scale: every highlighted comparison the pipeline
+recovers in \nPapersTotal{} papers, at the cost of reading only what is
+printed.
 
 \paragraph{Extracting results from papers.} \citet{hou2019identification} and
 \citet{kardas2020axcell} extract result tables from machine learning PDFs to
 populate leaderboards: the same mechanics, the opposite purpose, since
 leaderboard extraction wants the winning number and can ignore a missing error
-bar. We know of no released annotation of error-bar presence against which an
-extractor could be scored, so Section~\ref{sec:threats} builds one.
+bar. We know of no released comparison-level annotation of error-bar
+presence against which an extractor could be scored; the paper-level
+confidence-interval label of \citet{kirly2018nips} counts an interval anywhere
+in a paper, a different event, so Section~\ref{sec:threats} builds one.
 
 \section{The pipeline, specified}
 \label{app:pipeline}
@@ -1301,9 +1308,11 @@ to the field.
 
 \paragraph{Run count.} A sentence of the form ``$k$ (random) seeds/runs/trials''
 is sought in the caption first, then on the table's page, then anywhere in the
-paper; the caption wins if present, and the smallest count on the page is taken
-when several appear, after a row label reading ``top 100'' was once read as a
-count. Table~\ref{tab:span} gives the result under the caption-only reading.
+paper; the caption wins if present, and the smallest count on the page, or
+the smallest anywhere in the paper, is taken when several appear, after a row
+label reading ``top 100'' was once read as a count. Table~\ref{tab:span}
+gives the result under the caption-only reading and
+Section~\ref{sec:sensitivity} the failure rate by source.
 
 \paragraph{Conversions and the test.} A bar labelled a standard deviation is
 divided by $\sqrt{n}$; a standard error is used as printed; a confidence
