@@ -1,42 +1,43 @@
-# Bộ 60 item để anh tự chấm (human reference, set D — pipeline đã đóng băng)
+# Chấm 60 item — hướng dẫn nhanh (≈ 1 giờ, làm dở được, tự lưu)
 
-Mục đích: reviewer nào cũng đòi **nhãn do người** chấm. Set D được rút *sau khi*
-pipeline đóng băng (git tag `frozen-v1`), từ các paper mà set A/B/C chưa đụng tới,
-và **không sửa bug nào theo nó**. 60 item này = 40 item `testable` đầu tiên
-(001–040) + 20 item `no_bar` đầu tiên (101–120) của set D. Mỗi item ~1–3 phút.
-Làm được nhiều hơn 60 (cả set D là 180 item trong `audits/gold_d/img`) thì càng tốt:
-chỉ cần thêm dòng vào `labels.csv`.
+Mở file **`D:\iclr2027\audits\human\label.html`** bằng Edge/Chrome (double-click). Hết.
+Mọi thứ cần thiết (ảnh bảng, câu seed/run trích từ paper, form) nằm trong trang đó.
 
-## Cách làm
-Mở lần lượt `img/NNN_testable.png` hoặc `img/NNN_no_bar.png` (bảng đã cắt, ô mà
-pipeline chọn làm "winner" được đóng **khung đỏ**). Điền vào dòng tương ứng trong
-`labels.csv`:
+## Làm gì
+1. Nhìn ảnh bên trái: bảng đã cắt, ô **khung đỏ** = ô mà máy cho là "winner".
+2. Trả lời các câu bên phải theo thứ tự. **Enter** = câu tiếp; Enter ở câu cuối = lưu & sang item sau.
+   Câu chọn: gõ chữ đầu rồi Enter (`y`/`n`, `c`olumn/`r`ow, `h`igher/`l`ower, `sd`/`se`/`ci`/`u`nlabelled).
+3. Không đọc được số nào → gõ `unclear`. Không có ± → gõ `none`.
+4. Số run/seed: xem caption bảng trước, không có thì xem hộp "Câu có seed/run/trial" (đã trích từ cả paper).
+   Paper nói nhiều số khác nhau → lấy số áp dụng cho bảng này; không thấy → `none`.
+5. Xong (hoặc nghỉ giữa chừng) bấm **Xuất labels.csv** → lưu đè vào `D:\iclr2027\audits\human\labels.csv`.
+   Trang tự lưu trong trình duyệt sau mỗi phím, mở lại là tiếp tục; đổi máy thì "Nhập CSV cũ".
 
-| cột | điền gì |
-|---|---|
-| results_table | `y` nếu đây là bảng kết quả thí nghiệm, `n` nếu không |
-| bold_ok | `y` nếu ô trong khung **in đậm** và là ô đậm **duy nhất** trong nhóm của nó (cột hoặc hàng); `n` nếu không |
-| orientation | `column` nếu nhóm so sánh là cột (các method xếp theo hàng), `row` nếu là hàng |
-| direction | `higher` nếu giá trị cao hơn là tốt hơn, `lower` nếu ngược lại |
-| winner_mean | số in trong ô khung (không có ±) |
-| winner_disp | phần sau ± (hoặc trong ngoặc) của ô khung; `none` nếu không có |
-| runner_mean | giá trị **tốt nhất trong các ô KHÔNG đậm** cùng nhóm |
-| runner_disp | phần ± của ô đó; `none` nếu không có |
-| disp_type | `sd` / `se` / `ci` / `unlabelled` theo caption hoặc `NNN_runs.txt` (các câu trong paper có chữ seed/run/trial) |
-| n_runs | số lần chạy/seed áp dụng cho bảng này, tìm trong caption hoặc `NNN_runs.txt`; `none` nếu không có |
-| n_source | `caption` / `page` / `paper` / `none` |
-| rival_copied | `y` nếu hàng/cột của runner-up có trích dẫn, dấu †/*, hoặc chữ "from"/"reported in" (số chép từ paper khác); `n` nếu không; `unclear` nếu không rõ |
-| error_bar_present | (chỉ item `no_bar`) `y` nếu bảng in **bất kỳ** độ lệch nào cho ô khung hoặc runner-up (trong ô, hoặc cột/hàng riêng, hoặc ± ở đâu đó trong bảng); `n` nếu không |
-| note | ghi chú tuỳ ý |
+Thứ tự hiển thị: 20 item `no_bar` trước (mỗi cái ~30 giây: hai số + "có ± nào không"), rồi 40 item
+`testable` (~1–2 phút: bốn số + loại ± + số run). Có thể làm 2–3 lần, không cần một mạch.
 
-Item `no_bar` chỉ cần: results_table, bold_ok, orientation, direction, winner_mean,
-runner_mean, error_bar_present, note.
+**Không mở** `audits/gold_d/labels.csv` hay `items.json` (kết quả máy — cần giữ mù để số có giá trị).
 
-Không đọc được chữ số nào thì ghi `unclear` cho ô đó. **Không xem** `audits/gold_d/items.json`
-hay `audits/gold_d/labels.csv` (kết quả pipeline và LLM, cần giữ mù).
+## Xong rồi thì
+Nhắn "chấm xong" — em chạy:
 
-## Khi xong
     python study/gold_set.py score --items audits/gold_d/items.json --labels audits/human/labels.csv --out out/gold_set_human.json
     python study/gold_set.py agree --a audits/gold_d/labels.csv --b audits/human/labels.csv
-Lệnh thứ nhất chấm pipeline theo nhãn của anh; lệnh thứ hai in độ đồng thuận
-giữa anh và LLM theo từng trường. Sau đó em nối số vào paper (macro), không gõ tay.
+
+rồi nối số vào paper qua macro (không gõ tay), thay câu "No human labelled any item".
+
+## Ý nghĩa các cột (chỉ để tra khi lưỡng lự)
+| cột | điền gì |
+|---|---|
+| results_table | `y` nếu là bảng kết quả thí nghiệm, `n` nếu không (bảng hyperparameter, thống kê dataset...) |
+| bold_ok | `y` nếu ô khung **in đậm** và là ô đậm **duy nhất** trong nhóm của nó (cột hoặc hàng); `n` nếu không đậm, hoặc có ≥2 ô đậm trong nhóm |
+| orientation | `column` nếu các method xếp theo hàng và so sánh dọc theo cột; `row` nếu ngược lại |
+| direction | `higher` nếu cao hơn là tốt (accuracy, F1...), `lower` nếu thấp hơn là tốt (loss, FID, error...) — nhìn mũi tên ↑↓ hoặc tên metric |
+| winner_mean / winner_disp | số trong ô khung, và phần sau ± (hoặc trong ngoặc); dán nguyên `85.2 ± 0.3` vào ô mean cũng được, trang tự tách |
+| runner_mean / runner_disp | ô **tốt nhất trong các ô không đậm** cùng nhóm (theo direction), và phần ± của nó |
+| disp_type | `sd` / `se` / `ci` nếu caption hoặc câu trích nói rõ; `unlabelled` nếu chỉ có ± mà không nói là gì |
+| n_runs / n_source | số run/seed và tìm thấy ở đâu: `caption` (caption bảng), `page` (cùng trang), `paper` (chỗ khác trong paper), `none` |
+| rival_copied | `y` nếu hàng/cột runner-up có trích dẫn [12], dấu †/*, hoặc chữ "from"/"reported in" (số chép từ paper khác); `n` nếu không; `unclear` nếu không rõ |
+| error_bar_present | (chỉ item no_bar) `y` nếu bảng in **bất kỳ** ± / SD / CI nào cho ô khung hoặc runner-up — trong ô, cột riêng, hay chú thích; `n` nếu không |
+
+Tạo lại trang (nếu cần): `python study/human_kit_html.py`.

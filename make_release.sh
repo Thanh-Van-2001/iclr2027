@@ -25,7 +25,7 @@ cp run_all.sh requirements.txt "$DEST/"
 # hand-judged audits (renderings, labels, scoring inputs); full paper texts are not shipped
 cp -r audits "$DEST/audits"
 find "$DEST/audits" -name "*_fulltext.txt" -delete
-rm -rf "$DEST/audits/human/img"
+rm -rf "$DEST/audits/human"   # Vietnamese-language labelling kit; re-add with an English README once labels exist
 
 # extraction files: everything downstream regenerates from these two
 cp data/extracted_2025.jsonl data/extracted_2024.jsonl "$DEST/data/"
