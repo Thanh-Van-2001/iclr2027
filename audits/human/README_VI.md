@@ -2,8 +2,9 @@
 
 Mở **`D:\iclr2027\audits\human\label_simple.html`** (double-click, mở bằng Edge/Chrome).
 
-Mỗi item chỉ có **một câu hỏi**: máy đọc bảng như ghi trong khung xanh nhạt bên phải
-(ô đỏ = winner, ô xanh = đối thủ tốt nhất không đậm, số, ±, số run). Nhìn ảnh:
+Mỗi item: bên trái là **dải phóng to** đúng nhóm ô mà máy so sánh (một hàng hoặc một cột, thường 3–8 số),
+ô đỏ = winner máy chọn, ô xanh = đối thủ máy chọn. Bên phải là 3 ý máy khẳng định:
+① số đỏ đúng và in đậm duy nhất, ② số xanh đúng và tốt nhất trong số không đậm, ③ ± / số run đúng. Nhìn dải:
 
 - đúng hết → bấm phím **1**
 - sai bất kỳ điểm nào → bấm **2** (ghi chú sai gì vào ô ghi chú nếu tiện, không bắt buộc)

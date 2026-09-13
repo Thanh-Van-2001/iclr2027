@@ -16,7 +16,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(__file__))
 import fitz  # noqa: E402
-from analyze import load_records  # noqa: E402
+from analyze import COLUMN_TOL, ROW_TOL, _columns, _rows, load_records  # noqa: E402
 from harvest import SOURCES, _get  # noqa: E402
 
 KIT = "audits/human"
@@ -74,6 +74,24 @@ if RENDER:
         pix = page.get_pixmap(matrix=fitz.Matrix(2.0, 2.0), clip=clip)
         name = f"{it['id']}_verify.png"
         pix.save(os.path.join(KIT, "img", name))
+        # A strip holding only the compared row or column, enlarged: the
+        # person then reads five to ten numbers rather than a whole table.
+        m = it.get("mark")
+        if m and t:
+            # The strip is the pipeline's own group (a row or column, cut into
+            # its dataset block the way analyze.py cuts it), so the person
+            # judges "unique bold" and "best non-bold" over exactly the cells
+            # the pipeline compared. The whole table stays on the page below.
+            groups = _columns(t["cells"]) if pl["orientation"] == "column" else _rows(t["cells"])
+            grp = next((g for g in groups if any(abs(c["x"] - m["x"]) <= COLUMN_TOL and abs(c["y"] - m["y"]) <= ROW_TOL for c in g)), None)
+            xs = [c["x"] for c in (grp or [m])]
+            ys = [c["y"] for c in (grp or [m])]
+            if pl["orientation"] == "row":
+                strip = fitz.Rect(max(0, min(xs) - 110), min(ys) - 7, min(page.rect.width, max(xs) + 48), max(ys) + 15)
+            else:
+                strip = fitz.Rect(max(0, min(xs) - 16), max(0, min(ys) - 9), min(page.rect.width, max(xs) + 58), min(page.rect.height, max(ys) + 16))
+            zoom = min(3.5, max(2.0, 560.0 / max(strip.height, 1.0)))
+            page.get_pixmap(matrix=fitz.Matrix(zoom, zoom), clip=strip).save(os.path.join(KIT, "img", f"{it['id']}_strip.png"))
         print(it["id"], "rival box" if rival else "NO RIVAL CELL FOUND")
     with open(os.path.join(KIT, "verify_marks.json"), "w", encoding="utf-8") as fh:
         json.dump({it["id"]: it.get("rival_mark") for it in items}, fh)
@@ -97,24 +115,23 @@ for it in items:
     runs = open(runs_path, encoding="utf-8").read() if os.path.exists(runs_path) else ""
     better = "cao hơn là tốt" if str(pl["direction"]).startswith("higher") else "thấp hơn là tốt"
     group = "cùng cột" if pl["orientation"] == "column" else "cùng hàng"
-    lines = [f"<b style='color:#c00'>Ô đỏ</b> = <b>{fmt(pl['winner'])}</b>"
-             + (f" ± {pl['winner_dispersion']}" if pl["winner_dispersion"] is not None else "")
-             + " — in đậm, và là ô đậm duy nhất trong nhóm",
-             f"<b style='color:#04c'>Ô xanh</b> = <b>{fmt(pl['runner_up'])}</b>"
-             + (f" ± {pl['runner_dispersion']}" if pl["runner_dispersion"] is not None else "")
-             + f" — ô tốt nhất trong các ô KHÔNG đậm {group} ({better})"]
+    wd = f" ± {pl['winner_dispersion']}" if pl["winner_dispersion"] is not None else ""
+    rd = f" ± {pl['runner_dispersion']}" if pl["runner_dispersion"] is not None else ""
+    lines = [f"① Số trong ô <b style='color:#c00'>đỏ</b> là <b>{fmt(pl['winner'])}{wd}</b> và <b>in đậm</b>, số đậm duy nhất trong dải?",
+             f"② Số trong ô <b style='color:#04c'>xanh</b> là <b>{fmt(pl['runner_up'])}{rd}</b> và là số <b>tốt nhất trong các số không đậm</b> của dải? ({better})"]
     if it["stratum"] == "testable":
-        lines.append("± là " + KIND.get(pl["dispersion_kind"], pl["dispersion_kind"]))
+        third = "③ ± là " + KIND.get(pl["dispersion_kind"], pl["dispersion_kind"])
         if pl["n_runs"]:
             src = SRC.get(pl["n_runs_source"])
-            lines.append(f"Số run/seed cho bảng này = <b>{pl['n_runs']}</b>" + (f" (máy lấy từ {src})" if src else ""))
+            third += f"; số run/seed = <b>{pl['n_runs']}</b>" + (f" ({src})" if src else "") + " — có thấy số này trong caption hoặc câu trích bên dưới?"
         else:
-            lines.append("Không cần số run (± là SE hoặc CI)" if pl["dispersion_kind"] in ("sem", "ci")
-                         else "Số run/seed: máy không tìm thấy")
+            third += "; không cần số run" if pl["dispersion_kind"] in ("sem", "ci") else "; máy không tìm thấy số run"
+        lines.append(third)
     else:
-        lines.append("Không ô nào trong hai ô này có ± / SD / CI ở bất kỳ đâu trong bảng")
+        lines.append("③ Không số nào trong dải có ± / SD / CI?")
     page_items.append({"id": it["id"], "stratum": it["stratum"], "image": f"img/{it['id']}_verify.png",
                        "title": it.get("title", ""), "table": it.get("table"), "page": it.get("page"),
+                       "strip": f"img/{it['id']}_strip.png" if os.path.exists(os.path.join(KIT, "img", f"{it['id']}_strip.png")) else None,
                        "claim": lines, "runs": runs, "n_runs": pl["n_runs"], "no_rival_box": not marks.get(it["id"])})
 page_items.sort(key=lambda x: (x["stratum"] != "no_bar", x["id"]))
 
@@ -129,6 +146,9 @@ button{padding:5px 10px;font-size:13px;cursor:pointer}
 #left{flex:1 1 60%;min-width:0;background:#fff;border:1px solid #ddd;padding:6px;max-height:88vh;overflow:auto}
 #left img{max-width:100%;cursor:zoom-in;display:block}
 #left img.zoom{max-width:none;cursor:zoom-out}
+#strip{border:2px solid #888;margin-bottom:8px;background:#fff}
+#strip img{max-width:100%;display:block}
+.cap{font-size:12px;color:#555;margin:2px 0 4px}
 #right{flex:0 0 480px;background:#fff;border:1px solid #ddd;padding:12px;max-height:88vh;overflow:auto}
 #claim{font-size:15px;line-height:1.6;background:#f3f7ff;border:1px solid #cfe0ff;padding:10px;margin:8px 0}
 #claim div{margin:3px 0}
@@ -148,12 +168,10 @@ button{padding:5px 10px;font-size:13px;cursor:pointer}
 <button onclick="copyCsv()">Copy CSV</button>
 <button onclick="if(confirm('Xoá toàn bộ?')){localStorage.removeItem(KEY);labels={};go(0)}">Xoá hết</button>
 </header>
-<div id="guide"><b>Một câu hỏi mỗi item:</b> máy đọc bảng như ghi trong ô xanh nhạt bên phải. Nhìn ảnh, thấy <b>đúng hết</b> thì bấm <b>1</b>,
-<b>sai bất kỳ điểm nào</b> (ô đỏ không đậm / có ô đậm khác cùng nhóm / ô xanh không phải tốt nhất trong ô không đậm / số hoặc ± lệch / số run không đúng bảng này) bấm <b>2</b>,
-không nhìn rõ bấm <b>3</b>. Bấm số là tự sang item sau; muốn ghi chú thì gõ vào ô ghi chú rồi Enter. <b>Alt+←/→</b> lùi/tiến, click ảnh phóng to.
+<div id="guide"><b>Cách làm:</b> nhìn dải phóng to bên trái, kiểm tra 3 ý ①②③ bên phải. Cả ba đúng → bấm <b>1</b>. Ý nào sai → bấm <b>2</b>. Không nhìn rõ → bấm <b>3</b>. Bấm số là tự sang item sau; muốn ghi chú thì gõ vào ô ghi chú rồi Enter. <b>Alt+←/→</b> lùi/tiến, click ảnh phóng to.
 Xong bấm <b>Xuất verify.csv</b>, lưu vào <code>audits/human/</code>. Tự lưu trong trình duyệt, nghỉ giữa chừng được.</div>
 <div id="wrap">
-<div id="left"><img id="img" src="" alt="" onclick="this.classList.toggle('zoom')"></div>
+<div id="left"><div class="cap">Dải so sánh (phóng to):</div><div id="strip"><img id="stripimg" src="" alt=""></div><div class="cap">Cả bảng (click để phóng to):</div><img id="img" src="" alt="" onclick="this.classList.toggle('zoom')"></div>
 <div id="right">
 <div class="meta" id="meta"></div>
 <div id="claim"></div>
@@ -186,6 +204,7 @@ function hl(s, n) {
 function render() {
   const it = ITEMS[cur]; const lb = labels[it.id] || {};
   document.getElementById('img').src = it.image; document.getElementById('img').classList.remove('zoom');
+  document.getElementById('strip').style.display = it.strip ? 'block' : 'none'; document.getElementById('stripimg').src = it.strip || '';
   document.getElementById('meta').innerHTML = '<b>Item ' + it.id + '</b> (' + (cur + 1) + '/' + ITEMS.length + ') — ' + esc(it.title) + ' — Table ' + esc(it.table) + ' &nbsp; <a href="' + it.image + '" target="_blank">ảnh gốc</a>';
   document.getElementById('claim').innerHTML = it.claim.map(l => '<div>' + l + '</div>').join('') + (it.no_rival_box ? '<div class="warn">(không vẽ được ô xanh: tự tìm ô tốt nhất không đậm cùng nhóm)</div>' : '');
   const rb = document.getElementById('runsbox'); rb.style.display = (it.stratum === 'testable' && it.runs) ? 'block' : 'none';
