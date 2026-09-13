@@ -7,8 +7,10 @@ import json
 import os
 import sys
 
-KIT = sys.argv[1] if len(sys.argv) > 1 else "audits/human"
-ITEMS = sys.argv[2] if len(sys.argv) > 2 else "audits/gold_d/items.json"
+QUICK = "--quick" in sys.argv
+argv = [a for a in sys.argv[1:] if a != "--quick"]
+KIT = argv[0] if argv else "audits/human"
+ITEMS = argv[1] if len(argv) > 1 else "audits/gold_d/items.json"
 
 with open(ITEMS, encoding="utf-8") as fh:
     meta = {it["id"]: it for it in json.load(fh)}
@@ -22,9 +24,27 @@ for r in rows:
     it = meta[r["id"]]
     runs_path = os.path.join(KIT, "img", f"{r['id']}_runs.txt")
     runs = open(runs_path, encoding="utf-8").read() if os.path.exists(runs_path) else ""
-    items.append({"id": r["id"], "stratum": r["stratum"], "image": "img/" + it["image"],
-                  "title": it.get("title", ""), "page": it.get("page"), "table": it.get("table"),
-                  "runs": runs})
+    rec = {"id": r["id"], "stratum": r["stratum"], "image": "img/" + it["image"],
+           "title": it.get("title", ""), "page": it.get("page"), "table": it.get("table"),
+           "runs": runs}
+    if QUICK:
+        # Verification design: the pipeline's reading is shown and the person
+        # confirms or corrects it. Disclosed as such wherever the labels are used.
+        pl = it["pipeline"]
+        kind = {"std": "sd", "sem": "se", "ci": "ci", "unknown": "unlabelled", "none": "none"}.get(pl.get("dispersion_kind"), "unlabelled")
+        num = lambda v: "none" if v is None else str(v)
+        pre = {"results_table": "y", "bold_ok": "y",
+               "orientation": pl.get("orientation", ""),
+               "direction": "higher" if str(pl.get("direction", "")).startswith("higher") else "lower",
+               "winner_mean": num(pl.get("winner")), "runner_mean": num(pl.get("runner_up"))}
+        if r["stratum"] == "testable":
+            pre.update({"winner_disp": num(pl.get("winner_dispersion")), "runner_disp": num(pl.get("runner_dispersion")),
+                        "disp_type": kind, "n_runs": num(pl.get("n_runs")),
+                        "n_source": pl.get("n_runs_source") or "none", "rival_copied": "n"})
+        else:
+            pre["error_bar_present"] = "n"
+        rec["prefill"] = pre
+    items.append(rec)
 # Warm-up order: the 20 quick no_bar items first, then the 40 testable ones.
 items.sort(key=lambda x: (x["stratum"] != "no_bar", x["id"]))
 
@@ -56,6 +76,12 @@ FIELDS = {
     ],
 }
 
+GUIDE_QUICK = """
+<b>Chế độ kiểm tra:</b> mọi ô đã được điền sẵn theo máy đọc. Anh nhìn ảnh, đối chiếu 4 số + ± + số run;
+<b>đúng thì Enter liên tục</b> cho hết form (Enter ở câu cuối = lưu &amp; item tiếp), <b>sai thì sửa</b> rồi Enter.
+Riêng hai câu đầu (bảng kết quả? ô khung in đậm và đậm duy nhất?) máy luôn điền <code>y</code> — anh phải tự nhìn.
+Không đọc được → <code>unclear</code>. Xong bấm <b>Xuất labels_quick.csv</b>, lưu vào <code>audits/human/</code>. <b>Alt+←/→</b> lùi/tiến, click ảnh phóng to.
+"""
 GUIDE = """
 <b>Cách làm (đọc 1 lần):</b> ảnh bên trái là bảng đã cắt, ô <span style="color:#c00">khung đỏ</span> là ô pipeline
 cho là "winner". Anh chỉ cần trả lời các câu bên phải theo thứ tự; <b>Enter</b> = sang câu tiếp, ở câu cuối
@@ -92,7 +118,7 @@ button{padding:5px 10px;font-size:13px;cursor:pointer}
 .done{color:#080}
 #ta{width:100%;height:120px;font-size:11px;display:none}
 </style></head><body>
-<header><b>Chấm set D</b> <span id="prog"></span>
+<header><b>Chấm set D__MODE__</b> <span id="prog"></span>
 <button onclick="exportCsv()">Xuất labels.csv</button>
 <label style="font-size:13px">Nhập CSV cũ <input type="file" id="imp" accept=".csv" style="font-size:12px"></label>
 <button onclick="copyCsv()">Copy CSV</button>
@@ -114,7 +140,8 @@ button{padding:5px 10px;font-size:13px;cursor:pointer}
 const ITEMS = __ITEMS__;
 const FIELDS = __FIELDS__;
 const COLUMNS = __COLUMNS__;
-const KEY = 'iclr_human_labels_v1';
+const QUICK = __QUICK__;
+const KEY = QUICK ? 'iclr_human_labels_quick_v1' : 'iclr_human_labels_v1';
 let labels = {};
 try { labels = JSON.parse(localStorage.getItem(KEY) || '{}'); } catch (e) { labels = {}; }
 let cur = 0;
@@ -128,7 +155,7 @@ function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;');
 function hl(s) { return esc(s).replace(/(\b\d+\b|seeds?|runs?|trials?|repetitions?|repeat\w*|folds?|restarts?|independent)/gi, '<mark>$1</mark>'); }
 
 function render() {
-  const it = ITEMS[cur]; const lb = labels[it.id] || {};
+  const it = ITEMS[cur]; const lb = labels[it.id] || (QUICK ? Object.assign({}, it.prefill) : {});
   document.getElementById('img').src = it.image; document.getElementById('img').classList.remove('zoom');
   document.getElementById('meta').innerHTML = '<b>Item ' + it.id + '</b> (' + it.stratum + ', ' + (cur + 1) + '/' + ITEMS.length + ') — ' + esc(it.title) + ' — Table ' + esc(it.table) + ', trang ' + esc(it.page) + ' &nbsp; <a href="' + it.image + '" target="_blank">ảnh gốc</a>';
   document.getElementById('runs').innerHTML = it.runs ? hl(it.runs) : '<i>(không có câu nào — với item no_bar không cần run count)</i>';
@@ -208,7 +235,7 @@ function buildCsv() {
 function exportCsv() {
   store();
   const blob = new Blob([buildCsv()], { type: 'text/csv' });
-  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = 'labels.csv'; document.body.appendChild(a); a.click(); a.remove();
+  const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = QUICK ? 'labels_quick.csv' : 'labels.csv'; document.body.appendChild(a); a.click(); a.remove();
 }
 function copyCsv() {
   store(); const ta = document.getElementById('ta'); ta.style.display = 'block'; ta.value = buildCsv(); ta.select();
@@ -245,11 +272,13 @@ document.getElementById('imp').addEventListener('change', ev => {
 render();
 </script></body></html>
 """
-html = (html.replace("__GUIDE__", GUIDE)
+html = (html.replace("__GUIDE__", GUIDE_QUICK if QUICK else GUIDE)
         .replace("__ITEMS__", json.dumps(items, ensure_ascii=False))
         .replace("__FIELDS__", json.dumps(FIELDS, ensure_ascii=False))
-        .replace("__COLUMNS__", json.dumps(columns)))
-out = os.path.join(KIT, "label.html")
+        .replace("__COLUMNS__", json.dumps(columns))
+        .replace("__QUICK__", "true" if QUICK else "false")
+        .replace("__MODE__", " — chế độ kiểm tra (máy điền sẵn, anh sửa)" if QUICK else ""))
+out = os.path.join(KIT, "label_quick.html" if QUICK else "label.html")
 with open(out, "w", encoding="utf-8", newline="\n") as fh:
     fh.write(html)
 print("wrote", out, len(items), "items")
