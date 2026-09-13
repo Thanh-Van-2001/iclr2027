@@ -16,6 +16,10 @@ python study/gold_set.py score --items audits/gold_e/items.json --labels audits/
 python study/pages_score.py --items audits/gold_f/items.json --labels audits/gold_f/labels.json     --analysis out/analysis_2025.json --out out/gold_set_pages.json > /dev/null
 python study/gold_set.py score --items audits/gold_d/items.json --labels audits/gold_d_reader2/labels.csv     --out out/gold_set_reader2.json > /dev/null
 python study/gold_set.py agree --a audits/gold_d/labels.csv --b audits/gold_d_reader2/labels.csv > out/reader_agreement.json
+if [ -f audits/gold_d_gemini/labels.csv ]; then
+python study/gold_set.py score --items audits/gold_d/items.json --labels audits/gold_d_gemini/labels.csv     --out out/gold_set_gemini.json > /dev/null
+python study/gold_set.py agree --a audits/gold_d/labels.csv --b audits/gold_d_gemini/labels.csv > out/reader_agreement_gemini.json
+fi
 python study/nobox_score.py --items audits/gold_d/items.json --labels audits/gold_d_nobox/labels.json     --analysis out/analysis_2025.json --out out/gold_set_nobox.json > /dev/null
 python study/extra_stats.py > out/extra_stats.log
 # LaTeX-source cross-check, from the cached arXiv sources (network to refresh).

@@ -13,8 +13,10 @@
 #   221          a corpus size from Christodoulou et al., quoted in related
 #                work. Not our measurement, and checkable by the reader through
 #                the citation next to it.
+#   3.1          the version in a model's name (Gemini 3.1 Pro), named in the
+#                AI use statement and Appendix D. A product name, not a number.
 #
 # Every other number in the paper is a macro generated from a run record.
 exec python -m paperengine.cli check \
   --dir paper/submission --main main.tex \
-  --allow "82.4,0.3,76.63,3.98,221" "$@"
+  --allow "82.4,0.3,76.63,3.98,221,3.1" "$@"

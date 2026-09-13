@@ -820,6 +820,23 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
     reg.add("reader two fail pipe", rf"{r2t['failure_rate_pipeline_values_same_items']}\%", provenance=rrun)
     reg.add("reader two no bar absent frac", _frac(r2["no_bar"]["error_bar_truly_absent"]), provenance=rrun)
 
+    # A third reader from a different vendor (Google's Gemini) on the same kit.
+    if os.path.exists("out/gold_set_gemini.json"):
+        r3 = _j("gold_set_gemini")
+        ra3 = _j("reader_agreement_gemini")
+        r3run = "gold_set_gemini"
+        for f, name in (("bold_ok", "bold"), ("orientation", "orientation"), ("winner_mean", "winner"),
+                        ("winner_disp", "winner disp"), ("runner_mean", "runner"), ("runner_disp", "runner disp"),
+                        ("n_runs", "runs"), ("disp_type", "kind")):
+            reg.add(f"readers three agree {name}", f"{ra3[f]['agree']} of {ra3[f]['n']}", provenance=r3run)
+        r3t = r3["testable"]
+        reg.add("reader three claim frac", _frac(r3t["fields"]["claim_and_values"]), provenance=r3run)
+        reg.add("reader three claim", _pct_ci(r3t["fields"]["claim_and_values"]), provenance=r3run)
+        reg.add("reader three agree", _agree(r3t), provenance=r3run)
+        reg.add("reader three fail reader", rf"{r3t['failure_rate_reader_values']}\%", provenance=r3run)
+        reg.add("reader three fail pipe", rf"{r3t['failure_rate_pipeline_values_same_items']}\%", provenance=r3run)
+        reg.add("reader three no bar absent frac", _frac(r3["no_bar"]["error_bar_truly_absent"]), provenance=r3run)
+
     # the run-count recall audit
     gc = _j("gold_set_no_n")["no_n"]
     reg.add("gold no n n", gc["n"], provenance=grun)

@@ -565,9 +565,10 @@ somewhere for \nGoldFrozenNoNFoundFrac{} of the no-run-count items
 \nGoldFrozenRivalCopiedFrac{}. Read again with nothing marked, so that the box cannot anchor it, the
 reader lists the pipeline's winner among the single-bold groups it finds in
 \nNoboxWinnerFoundFrac{}, with the same rival in \nNoboxRivalSameFrac{} of
-those (\nNoboxClaim{} of all); a second reader, a smaller model, agrees with
-the first on the rival in \nReadersAgreeRunner{} of a sixty-item subset and
-with the pipeline on the verdict in \nReaderTwoAgree{}
+those (\nNoboxClaim{} of all); two further readers, a smaller model of the same family and one from
+another vendor, agree with the first on the rival in \nReadersAgreeRunner{}
+and \nReadersThreeAgreeRunner{} of a sixty-item subset and with the pipeline
+on the verdict in \nReaderTwoAgree{} and \nReaderThreeAgree{}
 (Appendix~\ref{app:gold}). The
 failure modes this set exposed are listed in Appendix~\ref{app:bugs} and left
 unfixed, so that the set stays what it is. Instrument error, not sampling, is the larger uncertainty on the failure
@@ -747,8 +748,8 @@ released code and checked against its run record. The rendered-table audits of
 Section~\ref{sec:threats}---the recall audit, the rejected-table audit and the
 reference set---were read from the images by the assistant (Claude Opus 5,
 reading PNG renderings, with the prompt given in Appendix~\ref{app:gold};
-the second reader of Appendix~\ref{app:gold} is Claude Sonnet 5), with the
-pipeline's output hidden from it; the renderings and labels are
+the other readers of Appendix~\ref{app:gold} are Claude Sonnet 5 and
+Gemini 3.1 Pro), with the pipeline's output hidden from them; the renderings and labels are
 released so that any reader can re-score them, and the authors are responsible
 for the protocol, the labels and every claim in the paper.
 
@@ -952,21 +953,23 @@ on the rest, \nPagesTablesWithBar{} print any dispersion. Groups are matched
 to pipeline comparisons on the same page by the winner's printed value;
 intervals resample pages.
 
-\paragraph{A second reader.} The sixty-item labelling kit released with the
-frozen set (its first \nGoldFrozenN{} testable items' first forty and the
-first twenty no-bar items) was also read blind by a smaller model of the same
-family (Claude Sonnet 5), under the same prompt. Against the first reader it
-agrees on the bold cell in \nReadersAgreeBold{} items both could judge, the
-orientation in \nReadersAgreeOrientation{}, the winner in
-\nReadersAgreeWinner{} and its bar in \nReadersAgreeWinnerDisp{}, the
-runner-up in \nReadersAgreeRunner{} and its bar in \nReadersAgreeRunnerDisp{},
-the bar kind in \nReadersAgreeKind{} and the run count in
-\nReadersAgreeRuns{}. Against the pipeline it agrees on the whole claim in
-\nReaderTwoClaimFrac{} and on the verdict in \nReaderTwoAgree{}, failing
-\nReaderTwoFailReader{} of those items where the pipeline fails
-\nReaderTwoFailPipe{}, and finds no bar on \nReaderTwoNoBarAbsentFrac{} of
-the no-bar items. Two models agreeing is not a human reference; the kit is
-released for one.
+\paragraph{Other readers.} The sixty-item labelling kit released with the
+frozen set (the first forty testable items and the first twenty no-bar items)
+was also read blind, under the same prompt, by a smaller model of the same
+family (Claude Sonnet 5) and by a model from another vendor (Gemini 3.1 Pro).
+Against the first reader the two agree on the bold cell in
+\nReadersAgreeBold{} and \nReadersThreeAgreeBold{} of the items both could
+judge, the winner in \nReadersAgreeWinner{} and \nReadersThreeAgreeWinner{},
+its bar in \nReadersAgreeWinnerDisp{} and \nReadersThreeAgreeWinnerDisp{},
+the runner-up in \nReadersAgreeRunner{} and \nReadersThreeAgreeRunner{}, its
+bar in \nReadersAgreeRunnerDisp{} and \nReadersThreeAgreeRunnerDisp{}, and
+the run count in \nReadersAgreeRuns{} and \nReadersThreeAgreeRuns{}. Against
+the pipeline they agree on the whole claim in \nReaderTwoClaimFrac{} and
+\nReaderThreeClaimFrac{} and on the verdict in \nReaderTwoAgree{} and
+\nReaderThreeAgree{}, and both find no bar on every no-bar item
+(\nReaderTwoNoBarAbsentFrac{}, \nReaderThreeNoBarAbsentFrac{}). Three models
+of two vendors agreeing narrows the shared blind spot but is not a human
+reference; the kit is released for one.
 
 \paragraph{All four scorings.} Table~\ref{tab:goldscores} prints every
 comparison of the reader's verdicts with the pipeline's, before and after the
