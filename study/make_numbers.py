@@ -858,6 +858,20 @@ def build(both_years_path: str, crosscheck_path: str, out_path: str,
         reg.add("reader three fail pipe", rf"{r3t['failure_rate_pipeline_values_same_items']}\%", provenance=r3run)
         reg.add("reader three no bar absent frac", _frac(r3["no_bar"]["error_bar_truly_absent"]), provenance=r3run)
 
+    # One author's four-minute verification pass over the same kit, kept and
+    # not used: the counts, its agreement with the machine majority, its time.
+    if os.path.exists("out/human_verify_pass1.json"):
+        hv = _j("human_verify_pass1")
+        hrun = "human_verify_pass1"
+        reg.add("human pass n", hv["n_answered"], provenance=hrun)
+        reg.add("human pass correct", hv["verdicts"]["correct"], provenance=hrun)
+        reg.add("human pass wrong", hv["verdicts"]["wrong"], provenance=hrun)
+        reg.add("human pass unclear", hv["verdicts"]["unclear"], provenance=hrun)
+        am = hv["agreement_with_machine_majority"]
+        reg.add("human pass agree frac", f"{am['correct']} of {am['n']}", provenance=hrun)
+        reg.add("human pass agree", rf"{am['pct']}\%", provenance=hrun)
+        reg.add("human pass minutes", str(hv["timing"]["elapsed_minutes"]), provenance=hrun)
+
     # the run-count recall audit
     gc = _j("gold_set_no_n")["no_n"]
     reg.add("gold no n n", gc["n"], provenance=grun)

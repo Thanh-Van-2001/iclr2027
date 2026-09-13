@@ -14,6 +14,10 @@ python study/gold_set.py score --items audits/gold_b/items.json --labels audits/
 python study/gold_set.py score --items audits/gold_d/items.json --labels audits/gold_d/labels.csv     --out out/gold_set_frozen.json > /dev/null
 python study/gold_set.py score --items audits/gold_e/items.json --labels audits/gold_e/labels.csv     --out out/gold_set_nobar_n.json > /dev/null
 python study/pages_score.py --items audits/gold_f/items.json --labels audits/gold_f/labels.json     --analysis out/analysis_2025.json --out out/gold_set_pages.json > /dev/null
+# One author's verification pass over the human kit, kept as a record and not
+# used as a reference: page published at the commit time, file saved at its mtime.
+python study/human_verify_score.py audits/human/verify_pass1.csv audits/gold_d/items.json out/human_verify_pass1.json \
+    --started=2026-09-14T03:32:36+07:00 --saved=2026-09-14T03:36:29+07:00 > /dev/null
 python study/gold_set.py score --items audits/gold_d/items.json --labels audits/gold_d_reader2/labels.csv     --out out/gold_set_reader2.json > /dev/null
 python study/gold_set.py agree --a audits/gold_d/labels.csv --b audits/gold_d_reader2/labels.csv > out/reader_agreement.json
 if [ -f audits/gold_d_gemini/labels.csv ]; then

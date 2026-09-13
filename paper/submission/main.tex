@@ -538,9 +538,10 @@ in the paper's seed, run and trial sentences, supplied in full. The reader was
 the vision-language model named in the AI use statement: these figures are
 agreement between two extractors of different technology, not precision
 against a human reference, and the box anchors the reader on the pipeline's
-choice of winner, though not on its values. No human labelled any item, and
-the renderings, labels and scoring script are released (\nReleaseUrl{}) so
-that anyone can.
+choice of winner, though not on its values. No usable human labels exist
+(Appendix~\ref{app:gold} records the one attempt), and the renderings, labels
+and scoring script are released (\nReleaseUrl{}) so that anyone can make
+them.
 
 The development set of \nGoldDevN{} testable comparisons, read against the
 pipeline as it stood after the first six bugs of Appendix~\ref{app:bugs},
@@ -973,7 +974,14 @@ the pipeline they agree on the whole claim in \nReaderTwoClaimFrac{} and
 \nReaderThreeAgree{}, and both find no bar on every no-bar item
 (\nReaderTwoNoBarAbsentFrac{}, \nReaderThreeNoBarAbsentFrac{}). Three models
 of two vendors agreeing narrows the shared blind spot but is not a human
-reference; the kit is released for one.
+reference. One author made a single pass over the \nHumanPassN{} items with
+the pipeline's reading shown and one key per item, in \nHumanPassMinutes{}
+minutes, marking \nHumanPassCorrect{} correct, \nHumanPassWrong{} wrong and
+\nHumanPassUnclear{} unclear, and reported no confidence in the result
+before it was scored; its judgements agree with the majority of the three
+machine readers on \nHumanPassAgreeFrac{} items (\nHumanPassAgree{}), near
+chance. The pass is released as a record and no number in this paper rests
+on it; the kit is released for a reader with time to look.
 
 \paragraph{Every scoring.} Table~\ref{tab:goldscores} prints every
 comparison of the reader's verdicts with the pipeline's, before and after the

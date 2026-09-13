@@ -14,9 +14,11 @@ sys.path.insert(0, os.path.join(HERE, ".."))
 from paperengine.stats import wilson_interval  # noqa: E402
 from gold_set import _pipeline_test  # noqa: E402
 
-VERIFY = sys.argv[1] if len(sys.argv) > 1 else "audits/human/verify.csv"
-ITEMS = sys.argv[2] if len(sys.argv) > 2 else "audits/gold_d/items.json"
-OUT = sys.argv[3] if len(sys.argv) > 3 else "out/human_verify.json"
+argv = [a for a in sys.argv[1:] if not a.startswith("--")]
+opts = dict(a[2:].split("=", 1) for a in sys.argv[1:] if a.startswith("--") and "=" in a)
+VERIFY = argv[0] if argv else "audits/human/verify.csv"
+ITEMS = argv[1] if len(argv) > 1 else "audits/gold_d/items.json"
+OUT = argv[2] if len(argv) > 2 else "out/human_verify.json"
 
 with open(ITEMS, encoding="utf-8") as fh:
     items = {it["id"]: it for it in json.load(fh)}
@@ -80,6 +82,14 @@ out["agreement_with_machine_majority"] = rate(agree, len(judged))
 out["agreement_with_machine_majority"]["readers"] = len([p for p in READERS if os.path.exists(p)])
 papers = {items[r["id"]]["paper"] for r in rows}
 out["n_papers"] = len(papers)
+out["verdicts"] = {v: sum(r["verdict"] == v for r in rows) for v in ("correct", "wrong", "unclear")}
+if "started" in opts and "saved" in opts:
+    # --started: when the page was published (git commit time); --saved: the
+    # exported file's modification time. Both ISO 8601 with offset.
+    from datetime import datetime
+    t0, t1 = datetime.fromisoformat(opts["started"]), datetime.fromisoformat(opts["saved"])
+    out["timing"] = {"started": opts["started"], "saved": opts["saved"],
+                     "elapsed_minutes": round((t1 - t0).total_seconds() / 60, 1)}
 os.makedirs(os.path.dirname(OUT), exist_ok=True)
 with open(OUT, "w", encoding="utf-8") as fh:
     json.dump(out, fh, indent=1, ensure_ascii=False)
