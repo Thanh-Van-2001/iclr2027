@@ -53,7 +53,19 @@ if RENDER:
     for it in items:
         t = tables.get((it["paper"], it["table"], it["page"]))
         pl = it["pipeline"]
-        rival = find_cell(t, pl["runner_up"], pl["runner_dispersion"], False) if t else None
+        m = it.get("mark")
+        grp = None
+        if m and t:
+            groups = _columns(t["cells"]) if pl["orientation"] == "column" else _rows(t["cells"])
+            grp = next((g for g in groups if any(abs(c["x"] - m["x"]) <= COLUMN_TOL and abs(c["y"] - m["y"]) <= ROW_TOL for c in g)), None)
+        # The rival is looked for inside the pipeline's own group first: a
+        # table can print the same value in another column, and a table-wide
+        # search once boxed that one.
+        rival = None
+        if grp:
+            rival = find_cell({"cells": grp}, pl["runner_up"], pl["runner_dispersion"], False)
+        if rival is None and t:
+            rival = find_cell(t, pl["runner_up"], pl["runner_dispersion"], False)
         it["rival_mark"] = {"x": rival["x"], "y": rival["y"]} if rival else None
         rec = index[it["paper"]]
         if it["paper"] not in cache:
@@ -65,10 +77,17 @@ if RENDER:
         clip = fitz.Rect(max(0, b["x_min"] - pad * 5.0), max(0, b["y_min"] - pad * 2.8),
                          min(page.rect.width, b["x_max"] + pad * 5.0),
                          min(page.rect.height, b["y_max"] + pad * 1.6))
+        # Boxes sized to the cell: rows in a dense table sit 9pt apart, and a
+        # fixed 14pt box then overlapped its neighbour and hid the blue one.
+        ys_all = sorted({round(c["y"]) for c in (t["cells"] if t else [])})
+        gap = min((b2 - a2 for a2, b2 in zip(ys_all, ys_all[1:]) if b2 - a2 > 2), default=12)
+        half = min(6.5, max(3.5, gap / 2 - 0.5))
         shape = page.new_shape()
-        for mark, color in ((it.get("mark"), (1, 0, 0)), (it.get("rival_mark"), (0, 0.3, 1))):
+        for mark, cell, color in ((m, find_cell(t, pl["winner"], pl["winner_dispersion"], True) if t else None, (1, 0, 0)),
+                                  (it.get("rival_mark"), rival, (0, 0.3, 1))):
             if mark:
-                shape.draw_rect(fitz.Rect(mark["x"] - 4, mark["y"] - 3, mark["x"] + 30, mark["y"] + 11))
+                width = min(70, max(20, 4.6 * len((cell or {}).get("text", "") or "12.34") + 4))
+                shape.draw_rect(fitz.Rect(mark["x"] - 2.5, mark["y"] + 4 - half, mark["x"] + width, mark["y"] + 4 + half))
                 shape.finish(color=color, width=0.9)
         shape.commit()
         pix = page.get_pixmap(matrix=fitz.Matrix(2.0, 2.0), clip=clip)
@@ -76,20 +95,18 @@ if RENDER:
         pix.save(os.path.join(KIT, "img", name))
         # A strip holding only the compared row or column, enlarged: the
         # person then reads five to ten numbers rather than a whole table.
-        m = it.get("mark")
         if m and t:
             # The strip is the pipeline's own group (a row or column, cut into
             # its dataset block the way analyze.py cuts it), so the person
             # judges "unique bold" and "best non-bold" over exactly the cells
             # the pipeline compared. The whole table stays on the page below.
-            groups = _columns(t["cells"]) if pl["orientation"] == "column" else _rows(t["cells"])
-            grp = next((g for g in groups if any(abs(c["x"] - m["x"]) <= COLUMN_TOL and abs(c["y"] - m["y"]) <= ROW_TOL for c in g)), None)
             xs = [c["x"] for c in (grp or [m])]
             ys = [c["y"] for c in (grp or [m])]
+            cell_w = max(4.6 * len(c.get("text", "") or "") for c in (grp or [{"text": "12.34"}])) + 12
             if pl["orientation"] == "row":
-                strip = fitz.Rect(max(0, min(xs) - 110), min(ys) - 7, min(page.rect.width, max(xs) + 48), max(ys) + 15)
+                strip = fitz.Rect(max(0, min(xs) - 110), min(ys) - 7, min(page.rect.width, max(xs) + cell_w + 8), max(ys) + 15)
             else:
-                strip = fitz.Rect(max(0, min(xs) - 16), max(0, min(ys) - 9), min(page.rect.width, max(xs) + 58), min(page.rect.height, max(ys) + 16))
+                strip = fitz.Rect(max(0, min(xs) - 16), max(0, min(ys) - 9), min(page.rect.width, max(xs) + cell_w + 8), min(page.rect.height, max(ys) + 16))
             zoom = min(3.5, max(2.0, 560.0 / max(strip.height, 1.0)))
             page.get_pixmap(matrix=fitz.Matrix(zoom, zoom), clip=strip).save(os.path.join(KIT, "img", f"{it['id']}_strip.png"))
         print(it["id"], "rival box" if rival else "NO RIVAL CELL FOUND")
