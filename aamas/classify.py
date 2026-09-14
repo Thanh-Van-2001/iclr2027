@@ -41,7 +41,7 @@ First page:
 {page}
 """
 
-URL = os.environ.get("RELAY_URL", "https://proxy.dev.beetrade.com/v1/chat/completions")
+URL = os.environ.get("RELAY_URL", "")
 MODEL = os.environ.get("RELAY_MODEL", "gemini/gemini-3.1-pro-preview")
 
 
@@ -87,8 +87,8 @@ def parse(answer: str) -> dict:
 
 def main():
     key = os.environ.get("RELAY_API_KEY")
-    if not key:
-        sys.exit("RELAY_API_KEY not set")
+    if not key or not URL:
+        sys.exit("set RELAY_URL (an OpenAI-compatible chat completions endpoint) and RELAY_API_KEY")
     out_path = sys.argv[sys.argv.index("--out") + 1] if "--out" in sys.argv else "out/aamas/communities.csv"
     os.makedirs(os.path.dirname(out_path), exist_ok=True)
     done = {}

@@ -38,7 +38,7 @@ VENDORS = {
     "gemini": {"url": "https://generativelanguage.googleapis.com/v1beta/openai/chat/completions",
                "key": "GEMINI_API_KEY", "model": "gemini-2.5-pro"},
     # an OpenAI-compatible relay carrying several vendors; pass --model
-    "relay": {"url": os.environ.get("RELAY_URL", "https://proxy.dev.beetrade.com/v1/chat/completions"),
+    "relay": {"url": os.environ.get("RELAY_URL", ""),
               "key": "RELAY_API_KEY", "model": "gemini/gemini-3.1-pro-preview"},
 }
 
