@@ -113,6 +113,7 @@ def build(out_path: str) -> dict:
     reg.add("ml comparisons per table", int(ml["median_comparisons_per_table"]), provenance="survivability_both_years")
     ml24 = ex["side_by_side"]["neurips_icml_2024"]
     reg.add("ml papers twenty four", ml24["papers"], provenance="survivability_both_years")
+    reg.add("ml testable papers", ml["papers_testable"], provenance="survivability_both_years")
 
     # conventions: the headline span
     hs = ex["headline_span"]
@@ -182,6 +183,7 @@ def build(out_path: str) -> dict:
         key = "env " + name.split(" (")[0].split(",")[0].lower()
         reg.add(f"{key} comparisons", d["comparisons"], provenance=run)
         reg.add(f"{key} papers", d["papers"], provenance=run)
+        reg.add(f"{key} testable papers", d["testable_papers"], provenance=run)
         reg.add(f"{key} neither", _pct(d["pct_neither"]), provenance=run)
         reg.add(f"{key} testable", d["testable"], provenance=run)
         reg.add(f"{key} fail", _pct(d["pct_fail"]) if d["testable"] >= 20 else "--", provenance=run)
@@ -207,8 +209,74 @@ def build(out_path: str) -> dict:
         reg.add("comm agree frac", f"{ca['agree']} of {ca['n']}", provenance=run)
         reg.add("comm agree", f"{ca['pct']}\\% [{ca['ci'][0]}, {ca['ci'][1]}]", provenance=run)
         reg.add("comm kappa", f"{ca['kappa']:.2f}", provenance=run)
+    rd = ex["readings"]
+    for key, d in (("dup removed", rd["without_duplicates"]), ("dup only", rd["duplicates"]),
+                   ("own row removed", rd["without_own_row"]), ("own row only", rd["own_row_tables"]),
+                   ("zero removed", rd["zero_deviation"]["without_zero"])):
+        reg.add(f"r {key} n", d["n"], provenance=run)
+        reg.add(f"r {key} testable n", d["n_testable"], provenance=run)
+        reg.add(f"r {key} testable papers", d["testable_papers"], provenance=run)
+        reg.add(f"r {key} neither", _pct(d["pct_neither"]), provenance=run)
+        reg.add(f"r {key} testable", _pct(d["pct_testable"]), provenance=run)
+        reg.add(f"r {key} fail", _pct(d["pct_fail"]) if d["pct_fail"] is not None else "--", provenance=run)
+    reg.add("r own row tables", rd["own_row_tables"]["tables"], provenance=run)
+    z = rd["zero_deviation"]
+    reg.add("r zero n", z["n_testable_with_a_zero"], provenance=run)
+    reg.add("r zero both", z["n_both_zero"], provenance=run)
+    reg.add("r zero fail", _pct(z["pct_fail_among_zero"]) if z["pct_fail_among_zero"] is not None else "--", provenance=run)
+    fc = rd["figure_caption_uncertainty"]
+    reg.add("fig caption unc papers pct", _pct(fc["pct_papers"]), provenance=run)
+    reg.add("fig caption unc testable papers", fc["testable_papers"], provenance=run)
+    mm = ex.get("ml_main_text", {})
+    if mm:
+        m = mm["main_text"]
+        reg.add("ml main comparisons", m["n"], provenance="analysis_2025")
+        reg.add("ml main neither", _pct(m["pct_neither"]), provenance="analysis_2025")
+        reg.add("ml main testable", _pct(m["pct_testable"]), provenance="analysis_2025")
+        reg.add("ml main fail", _pct(m["pct_fail"]), provenance="analysis_2025")
+        reg.add("ml main fail holm", _pct(m["pct_fail_holm"]), provenance="analysis_2025")
+        reg.add("ml main testable papers", m["testable_papers"], provenance="analysis_2025")
+        if "papers_with_main_text_bar_pct" in mm:
+            reg.add("ml main papers err", _pct(mm["papers_with_main_text_bar_pct"]), provenance="analysis_2025")
+    mlb = json.load(open("out/bootstrap_ci.json", encoding="utf-8"))["2025"]
+    reg.add("ml pct neither ci", _ci(mlb["pct_neither"]), provenance="bootstrap_ci")
+    reg.add("ml pct testable ci", _ci(mlb["pct_testable"]), provenance="bootstrap_ci")
+    reg.add("ml pct fail ci", _ci(mlb["pct_fail"]), provenance="bootstrap_ci")
+    reg.add("ml pct fail holm ci", _ci(mlb["pct_fail_holm"]), provenance="bootstrap_ci")
+    mps = json.load(open("out/pipeline_stats_extracted_2025.json", encoding="utf-8"))
+    reg.add("ml drawn", mps["drawn"], provenance="pipeline_stats_2025")
+    reg.add("ml listed", sum(mps["listed"].values()) if isinstance(mps.get("listed"), dict) else mps.get("listed", 0), provenance="pipeline_stats_2025")
+    ps_ = ex["protocol_span"]
+    for name, d in ps_.items():
+        if not isinstance(d, dict):
+            continue
+        key = name.replace("_", " ")
+        reg.add(f"pspan {key} n", d["n_with_episode_count"], provenance=run)
+        reg.add(f"pspan {key} papers", d["n_papers"], provenance=run)
+        reg.add(f"pspan {key} below", _pct(d["pct_below"]) if d["pct_below"] is not None else "--", provenance=run)
+    reg.add("pspan largest paper share", _pct(ps_["largest_paper_share_pct"]), provenance=run)
+    reg.add("pspan per paper lo", _pct(ps_["per_paper_pct_below"][0]), provenance=run)
+    reg.add("pspan per paper hi", _pct(ps_["per_paper_pct_below"][-1]), provenance=run)
+    rb = ex.get("recall_breakdown", {})
+    if rb:
+        reg.add("rb pages reader groups", rb.get("pages_both", 0) + rb.get("pages_no_parser_table", 0) + rb.get("pages_parser_table_no_groups", 0), provenance=run)
+        reg.add("rb pages no parser table", rb.get("pages_no_parser_table", 0), provenance=run)
+        reg.add("rb pages parser no groups", rb.get("pages_parser_table_no_groups", 0), provenance=run)
+        reg.add("rb pages both", rb.get("pages_both", 0), provenance=run)
+        reg.add("rb groups no parser table", rb.get("groups_no_parser_table", 0), provenance=run)
+        reg.add("rb groups parser no groups", rb.get("groups_parser_table_no_groups", 0), provenance=run)
+        reg.add("rb groups both", rb.get("groups_both", 0), provenance=run)
+        reg.add("rb top five share", _pct(rb["top5_pages_share_pct"]), provenance=run)
+        reg.add("rb pages at cap", rb["pages_at_cap"], provenance=run)
+    tb = ex["table_retention_bias"]
+    reg.add("tb kept with bar", _pct(tb["pct_kept_with_bar"]), provenance=run)
+    reg.add("tb discarded with bar", _pct(tb["pct_discarded_with_bar"]), provenance=run)
+    bw = ex["protocol_resolution"]["below_among_barred"]
+    reg.add("res barred welch pass", bw["welch_pass"], provenance=run)
+    reg.add("res barred welch pass below", bw["welch_pass_below"], provenance=run)
     dr = ex["duplicate_table_records"]
     reg.add("a dup keys", dr["duplicate_keys"], provenance=run)
+    reg.add("a dup identical", dr["identical_records"], provenance=run)
     reg.add("a dup comparisons", dr["comparisons_in_duplicates"], provenance=run)
     reg.add("a dup pct", _pct(dr["pct_of_comparisons"]), provenance=run)
     reg.add("a table keys", dr["table_keys"], provenance=run)
@@ -291,12 +359,19 @@ def build(out_path: str) -> dict:
         reg.add("pages pipe testable", _pct(pg["pipeline_same_pages"]["pct_testable"]), provenance=prun)
         reg.add("pages reader found pct", _pct(pg["reader_groups_found_by_pipeline"]["pct"]), provenance=prun)
         reg.add("pages reader found", _pct_ci(pg["reader_groups_found_by_pipeline"]), provenance=prun)
+        pc_ = pg["reader_groups_found_by_pipeline"].get("page_ci")
+        if pc_:
+            reg.add("pages reader found page ci", f"[{pc_[0]}, {pc_[1]}]", provenance=prun)
         reg.add("pages pipe found pct", _pct(pg["pipeline_groups_found_by_reader"]["pct"]), provenance=prun)
         reg.add("pages matched neither", _pct(pg["reader_groups_matched"]["pct_neither"]), provenance=prun)
         reg.add("pages unmatched neither", _pct(pg["reader_groups_unmatched"]["pct_neither"]), provenance=prun)
         ratio = pg["reader"]["pct_neither"] / pg["pipeline_same_pages"]["pct_neither"]
         reg.add("pages census ratio", f"{ratio:.2f}", provenance=prun)
         reg.add("a neither census scaled", _pct(round(s["pct_neither"] * ratio, 1)), provenance=prun)
+        lo_r = pg["reader"]["ci_neither"][0] / pg["pipeline_same_pages"]["pct_neither"]
+        hi_r = pg["reader"]["ci_neither"][1] / pg["pipeline_same_pages"]["pct_neither"]
+        reg.add("a neither census scaled lo", _pct(round(s["pct_neither"] * lo_r, 1)), provenance=prun)
+        reg.add("a neither census scaled hi", _pct(round(s["pct_neither"] * hi_r, 1)), provenance=prun)
         vs = pg["verdicts_same_pages"]
         reg.add("pages shared", vs["shared"]["n"], provenance=prun)
         reg.add("pages shared agree", vs["shared"]["agree"], provenance=prun)

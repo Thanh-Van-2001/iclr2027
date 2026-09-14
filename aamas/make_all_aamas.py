@@ -63,7 +63,7 @@ def rate_like(c: dict) -> str | None:
     return None
 
 
-def protocol_resolution(comparisons: list, protocol: dict, alpha: float = 0.05) -> dict:
+def protocol_resolution(comparisons: list, protocol: dict, alpha: float = 0.05, seed_mode: str = "or_one") -> dict:
     """For rate-like comparisons, the gap a two-proportion test could resolve
     at the paper's stated number of evaluation episodes times seeds, against
     the printed gap. This is the binomial resolution of the evaluation
@@ -81,7 +81,12 @@ def protocol_resolution(comparisons: list, protocol: dict, alpha: float = 0.05) 
         if not k:
             no_k += 1
             continue
-        n = k * (s or 1)
+        if seed_mode == "stated" and not s:
+            no_k += 1
+            continue
+        if seed_mode == "one":
+            s = None
+        n = k * (s or (5 if seed_mode == "or_five" else 1))
         scale = 100.0 if kind == "percent" else 1.0
         pw, pr = c["winner"] / scale, c["runner_up"] / scale
         se = math.sqrt(max(pw * (1 - pw), 1e-9) / n + max(pr * (1 - pr), 1e-9) / n)
@@ -89,6 +94,7 @@ def protocol_resolution(comparisons: list, protocol: dict, alpha: float = 0.05) 
         rows.append({"paper": c["paper"], "table": c["table"], "k": k, "seeds": s, "n": n,
                      "gap": round(gap, 4), "resolvable": round(z * se, 4), "below": gap < z * se,
                      "has_bars": c["winner_dispersion"] is not None and c["runner_dispersion"] is not None,
+                     "welch_pass": bool(c.get("test")) and c["survives_raw"],
                      "seed_assumed_one": s is None})
     below = sum(r["below"] for r in rows)
     lo, hi = wilson_interval(below, len(rows)) if rows else (0, 0)
@@ -120,7 +126,9 @@ def protocol_resolution(comparisons: list, protocol: dict, alpha: float = 0.05) 
                 "below": sum(1 for r in rows if not r["has_bars"] and r["below"])},
             "below_among_barred": {
                 "n": sum(1 for r in rows if r["has_bars"]),
-                "below": sum(1 for r in rows if r["has_bars"] and r["below"])},
+                "below": sum(1 for r in rows if r["has_bars"] and r["below"]),
+                "welch_pass": sum(1 for r in rows if r["welch_pass"]),
+                "welch_pass_below": sum(1 for r in rows if r["welch_pass"] and r["below"])},
             "rows": rows}
 
 
@@ -194,6 +202,156 @@ def community_agreement(comm_path: str, second_path: str) -> dict:
             "disagreements": [{"first": a, "second": b, "n": c} for (a, b), c in confusion.most_common() if a != b][:10]}
 
 
+def _rates(cs: list) -> dict:
+    t = [c for c in cs if c.get("test")]
+    return {"n": len(cs), "papers": len({c["paper"] for c in cs}),
+            "pct_neither": round(100 * sum(1 for c in cs if c["winner_dispersion"] is None and c["runner_dispersion"] is None) / max(len(cs), 1), 1),
+            "pct_testable": round(100 * len(t) / max(len(cs), 1), 1), "n_testable": len(t),
+            "testable_papers": len({c["paper"] for c in t}),
+            "pct_fail": round(100 * sum(1 for c in t if not c["survives_raw"]) / max(len(t), 1), 1) if t else None,
+            "pct_fail_holm": round(100 * sum(1 for c in t if not c["survives_holm"]) / max(len(t), 1), 1) if t else None}
+
+
+def readings(records: list, comparisons: list) -> dict:
+    """Readings of the corpus a reviewer asked for, each a filter on the
+    parser's comparisons rather than a change to the parser: duplicate table
+    records removed; tables whose bold cells all lie on one line (the authors'
+    row) removed; comparisons with a zero deviation counted."""
+    from analyze import ROW_TOL, COLUMN_TOL
+    keys = collections.defaultdict(list)
+    for r in records:
+        for t in r.get("tables", []):
+            keys[(r["id"], t.get("number"), t.get("page"))].append(t)
+    dup_keys = {k for k, ts in keys.items() if len(ts) > 1}
+    in_dup = [c for c in comparisons if (c["paper"], c["table"], c["page"]) in dup_keys]
+    not_dup = [c for c in comparisons if (c["paper"], c["table"], c["page"]) not in dup_keys]
+    # own-row tables: every bold cell on one line
+    own_keys = set()
+    for k, ts in keys.items():
+        for t in ts:
+            bold = [c for c in t["cells"] if c["bold"]]
+            if len(bold) >= 3:
+                ys = sorted(c["y"] for c in bold)
+                xs = sorted(c["x"] for c in bold)
+                if ys[-1] - ys[0] <= ROW_TOL or xs[-1] - xs[0] <= COLUMN_TOL:
+                    own_keys.add(k)
+    own = [c for c in comparisons if (c["paper"], c["table"], c["page"]) in own_keys]
+    not_own = [c for c in comparisons if (c["paper"], c["table"], c["page"]) not in own_keys]
+    t = [c for c in comparisons if c.get("test")]
+    zero = [c for c in t if c["winner_dispersion"] == 0 or c["runner_dispersion"] == 0]
+    both_zero = [c for c in t if c["winner_dispersion"] == 0 and c["runner_dispersion"] == 0]
+    return {"duplicates": _rates(in_dup), "without_duplicates": _rates(not_dup),
+            "own_row_tables": {"tables": len(own_keys), **_rates(own)}, "without_own_row": _rates(not_own),
+            "zero_deviation": {"n_testable_with_a_zero": len(zero), "n_both_zero": len(both_zero),
+                               "pct_fail_among_zero": round(100 * sum(1 for c in zero if not c["survives_raw"]) / max(len(zero), 1), 1) if zero else None,
+                               "without_zero": _rates([c for c in comparisons if c not in zero])},
+            "figure_caption_uncertainty": {
+                "papers": sum(1 for r in records if r.get("n_figure_captions_with_uncertainty", 0) > 0),
+                "pct_papers": round(100 * sum(1 for r in records if r.get("n_figure_captions_with_uncertainty", 0) > 0) / len(records), 1),
+                "testable_papers": sum(1 for r in records if r.get("n_figure_captions_with_uncertainty", 0) > 0
+                                       and r["id"] in {c["paper"] for c in t}),
+                "n_testable_papers": len({c["paper"] for c in t})}}
+
+
+def ml_main_text(analysis_path: str = "out/analysis_2025.json", extracted_path: str = "data/extracted_2025.jsonl") -> dict:
+    """The NeurIPS/ICML 2025 sample restricted to main-text pages (the first
+    nine pages of a NeurIPS paper, eight of an ICML paper, zero-indexed), so
+    that the side-by-side does not count appendix tables the AAMAS format has
+    no room for."""
+    if not os.path.exists(analysis_path):
+        return {}
+    with open(analysis_path, encoding="utf-8") as fh:
+        cs = json.load(fh)["_comparisons"]
+    limit = {"NeurIPS": 9, "ICML": 8}
+    main = [c for c in cs if c["page"] < limit.get(c["venue"], 9)]
+    out = {"all_pages": _rates(cs), "main_text": _rates(main), "page_limits": limit}
+    recs = load_records(extracted_path) if os.path.exists(extracted_path) else []
+    if recs:
+        with_bar = sum(1 for r in recs if any(c.get("dispersion_style") == "pm" and t.get("page", 99) < limit.get(r["venue"], 9)
+                                             for t in r.get("tables", []) for c in t["cells"]))
+        out["papers_with_main_text_bar_pct"] = round(100 * with_bar / len(recs), 1)
+        out["papers"] = len(recs)
+    return out
+
+
+def protocol_span(comparisons: list, protocol: dict) -> dict:
+    """The below-resolution share under each reading of the seed count."""
+    rows = {}
+    for name, mode in (("seeds_stated_or_one", "or_one"), ("seeds_stated_only", "stated"), ("seeds_one_for_all", "one"),
+                       ("seeds_stated_or_five", "or_five")):
+        pr = protocol_resolution(comparisons, protocol, seed_mode=mode)
+        rows[name] = {k: pr[k] for k in ("n_with_episode_count", "n_papers", "below_resolution", "pct_below", "ci", "paper_ci")}
+    base = protocol_resolution(comparisons, protocol)
+    by_paper = collections.Counter(r["paper"] for r in base["rows"])
+    top = by_paper.most_common(1)[0] if by_paper else (None, 0)
+    per_paper = {}
+    for r in base["rows"]:
+        per_paper.setdefault(r["paper"], []).append(r["below"])
+    rows["largest_paper_share_pct"] = round(100 * top[1] / max(len(base["rows"]), 1), 1)
+    rows["per_paper_pct_below"] = sorted(round(100 * sum(v) / len(v), 1) for v in per_paper.values())
+    return rows
+
+
+def recall_breakdown(records: list, items_path: str = "audits/aamas_pages/items.json",
+                     labels_path: str = "audits/aamas_pages/labels.json") -> dict:
+    """Where the reader's groups on random pages fall relative to the parser:
+    on pages where the parser detected no table (a detection failure), on
+    pages where it detected a table but produced no comparison (its rules), or
+    on pages where both list groups. Also the concentration of the reader's
+    groups across pages."""
+    if not (os.path.exists(items_path) and os.path.exists(labels_path)):
+        return {}
+    from analyze import comparisons_from_table
+    items = {it["id"]: it for it in json.load(open(items_path, encoding="utf-8"))}
+    labels = {p["id"]: p for p in json.load(open(labels_path, encoding="utf-8"))}
+    recs = {r["id"]: r for r in records}
+    out = collections.Counter()
+    per_page = []
+    for i, it in items.items():
+        lb = labels.get(i)
+        if not lb:
+            continue
+        rtabs = [t for t in lb["tables"] if str(t.get("results_table", "")).lower().startswith("y")]
+        rg = sum(len(t.get("groups", [])) for t in rtabs)
+        per_page.append(rg)
+        if rg == 0:
+            out["pages_reader_no_groups"] += 1
+            continue
+        ptabs = [t for t in recs[it["paper"]]["tables"] if t.get("page") == it["page"]]
+        pg = sum(len(comparisons_from_table(t)) for t in ptabs)
+        if not ptabs:
+            out["pages_no_parser_table"] += 1
+            out["groups_no_parser_table"] += rg
+        elif pg == 0:
+            out["pages_parser_table_no_groups"] += 1
+            out["groups_parser_table_no_groups"] += rg
+        else:
+            out["pages_both"] += 1
+            out["groups_both"] += rg
+    per_page.sort(reverse=True)
+    total = sum(per_page)
+    return {**out, "reader_groups_total": total,
+            "top5_pages_share_pct": round(100 * sum(per_page[:5]) / max(total, 1), 1),
+            "pages_at_cap": sum(1 for x in per_page if x >= 40)}
+
+
+def table_retention_bias(records: list) -> dict:
+    """Share of detected tables with any +/- cell, among tables that yield a
+    comparison and among those that do not: whether the parser's rules keep
+    bar-carrying tables preferentially."""
+    from analyze import comparisons_from_table
+    kept = disc = kept_bar = disc_bar = 0
+    for r in records:
+        for t in r.get("tables", []):
+            bar = any(c.get("dispersion_style") == "pm" for c in t["cells"])
+            if comparisons_from_table(t):
+                kept += 1; kept_bar += bar
+            else:
+                disc += 1; disc_bar += bar
+    return {"tables_kept": kept, "pct_kept_with_bar": round(100 * kept_bar / max(kept, 1), 1),
+            "tables_discarded": disc, "pct_discarded_with_bar": round(100 * disc_bar / max(disc, 1), 1)}
+
+
 def duplicate_table_records(records: list) -> dict:
     """Tables the parser recorded more than once under one (paper, number,
     page): a two-column artefact in which a caption is attached to a body
@@ -206,9 +364,12 @@ def duplicate_table_records(records: list) -> dict:
         for t in r.get("tables", []):
             keys[(r["id"], t.get("number"), t.get("page"))].append(t)
     dup = {k: ts for k, ts in keys.items() if len(ts) > 1}
+    identical = sum(1 for ts in dup.values()
+                    if len({tuple((c["x"], c["y"], c["mean"]) for c in t["cells"]) for t in ts}) < len(ts))
     n_cmp = sum(len(comparisons_from_table(t)) for ts in dup.values() for t in ts)
     total = sum(len(comparisons_from_table(t)) for ts in keys.values() for t in ts)
-    return {"table_keys": len(keys), "duplicate_keys": len(dup), "tables_in_duplicates": sum(len(ts) for ts in dup.values()),
+    return {"table_keys": len(keys), "duplicate_keys": len(dup), "identical_records": identical,
+            "tables_in_duplicates": sum(len(ts) for ts in dup.values()),
             "comparisons_in_duplicates": n_cmp, "pct_of_comparisons": round(100 * n_cmp / max(total, 1), 1)}
 
 
@@ -280,6 +441,11 @@ def main() -> int:
         "environment_families": environment_families(cs),
         "example_three_seeds": example_three_seeds(cs),
         "community_agreement": community_agreement(f"{OUT}/communities.csv", "audits/aamas_comm_check/labels_sonnet.json"),
+        "readings": readings(records, cs),
+        "recall_breakdown": recall_breakdown(records),
+        "table_retention_bias": table_retention_bias(records),
+        "ml_main_text": ml_main_text(),
+        "protocol_span": protocol_span(cs, protocol),
         "protocol_stats": {
             "papers_scanned": len(protocol),
             "state_eval_episodes": sum(1 for p in protocol.values() if p.get("eval_episodes")),
