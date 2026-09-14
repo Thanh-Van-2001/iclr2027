@@ -1,0 +1,17 @@
+Lastly for MU and MR, we run a stochastic version of Algorithm 1,
+---
+We run each training procedure
+---
+across runs)
+---
+are trained with an identical setup, differing only in their seed
+---
+by resorting to sampling scenarios and performing policy rollouts
+---
+metrics over the training set (averaged over 3 runs)
+---
+on three different seeds (solely Btrain and Btest remain consistent
+---
+seeds
+---
+since it is often impractical to perfectly replicate the true set, the

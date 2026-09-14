@@ -1,0 +1,13 @@
+2 times of the parameters as unseen tasks to evaluate the
+---
+The performance is averaged over 5 random seeds
+---
+We adopt the branch rollout approach [19] to mitigate the influence
+---
+augments data with rollouts from random policies
+---
+penalty for rollouts in the models to prevent the policy from
+---
+times of their original values for each environment
+---
+𝑖𝐷𝑖to enhance the coverage of rollout

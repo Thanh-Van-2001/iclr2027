@@ -8,7 +8,7 @@
 #   python aamas/protocol.py ; RELAY_API_KEY=... python aamas/classify.py
 set -e
 python aamas/make_all_aamas.py
-python study/gold_set.py score --items audits/aamas_gold/items.json --labels audits/aamas_gold/labels.csv --out out/aamas/gold_set.json > /dev/null
+python study/gold_set.py score --items audits/aamas_gold/items.json --labels audits/aamas_gold/labels.csv --exclude-unboxed --out out/aamas/gold_set.json > /dev/null
 python study/pages_score.py --items audits/aamas_pages/items.json --labels audits/aamas_pages/labels.json \
     --analysis out/aamas/analysis.json --out out/aamas/gold_set_pages.json > /dev/null
 python aamas/figures.py

@@ -1,0 +1,77 @@
+\documentclass[sigconf,anonymous]{aamas}
+\usepackage{booktabs}
+\usepackage{verbatim}
+\input{numbers}
+\makeatletter
+\gdef\@copyrightpermission{}
+\makeatother
+\setcopyright{ifaamas}
+\acmConference[AAMAS 2027]{Proc.\@ of the 26th International Conference
+on Autonomous Agents and Multiagent Systems (AAMAS 2027)}{3--7 May 2027}{Hanoi, Vietnam}{M.~Baldoni, F.~Fang, W.~Yeoh, N.~Yorke-Smith (eds.)}
+\copyrightyear{2027}
+\acmYear{2027}
+\acmDOI{}
+\acmISBN{}
+\acmSubmissionID{<<OpenReview submission id>>}
+\submissionType{Research Paper Track}
+\title{Supplementary material: Bold Without Bars}
+\author{Anonymous}
+\affiliation{\institution{Anonymous}\city{}\country{}}
+\begin{document}
+\maketitle
+
+\section{Contents of the supplementary archive}
+\begin{itemize}
+\item \texttt{study/}: the instrument at its frozen commit (parser, comparison
+  rules, tests, reference-set tooling), unchanged from the tag it was frozen at.
+\item \texttt{aamas/}: the AAMAS-specific scripts: the proceedings index, the
+  analysis driver, the protocol scan, the community classifier, the macro
+  generator, the figure.
+\item \texttt{data/extracted\_aamas.jsonl}: every table cell the parser read
+  from the \nAPapers{} papers, with position, bold flag, mean and bar.
+\item \texttt{out/aamas/}: every run record a number in the paper comes from,
+  including the per-comparison database (\texttt{analysis.json}), the
+  community labels, the protocol sentences, and the reference-set scores.
+\item \texttt{audits/aamas\_gold/}: the \nGTestableN{} testable and
+  \nGNoBarN{} bar-less reference items, rendered, with the reader's labels.
+\item \texttt{audits/aamas\_pages/}: the \nPagesRead{} random pages with the
+  reader's end-to-end labels.
+\item \texttt{run\_all\_aamas.sh}: regenerates every number and the macros.
+\end{itemize}
+
+\section{The reader protocol}
+\label{app:protocol}
+The vision-language reader received, per item, the rendered crop with the
+audited cell boxed in red and the paper's sentences mentioning seeds, runs,
+trials, times or repetitions, and the following instructions verbatim. It had
+no access to the parser's output.
+
+{\footnotesize\verbatiminput{protocol_reader.txt}}
+
+\section{The random-page protocol}
+\label{app:pages}
+{\footnotesize\verbatiminput{protocol_pages.txt}}
+
+\section{The community classifier}
+\label{app:classifier}
+Model: Gemini 3.1 Pro (Google), temperature 0, one call per paper with the
+title and the first page's text (up to 3500 characters). Prompt verbatim:
+{\footnotesize\verbatiminput{protocol_classify.txt}}
+
+\section{Evaluation-protocol patterns}
+\label{app:patterns}
+The sentences that state an evaluation episode count or a seed count were
+found with the regular expressions in \texttt{aamas/protocol.py}; every match
+is in \texttt{out/aamas/protocol.json} with its sentence. A count is the
+smallest stated in the paper; a paper stating none is counted as not stating
+one, which under-counts protocols described in words the patterns miss.
+
+\section{Every scoring of the reference set}
+\label{app:scores}
+\input{scores_table.tex}
+
+\section{What the reference set exposed, and was not fixed}
+\label{app:bugs}
+\input{bugs.tex}
+
+\end{document}

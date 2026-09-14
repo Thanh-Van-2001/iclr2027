@@ -1,0 +1,13 @@
+In other words, each experimental result is derived from 100 runs
+---
+We repeat 10 training
+---
+We repeat this process 100
+---
+including edge augmentation and model initialisation
+---
+is repeated 300 epochs to obtain a robust partition
+---
+iterations with different random seeds and report the average per-
+---
+tion of data, and set same seeds for all places involving randomness,

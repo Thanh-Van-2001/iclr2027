@@ -1,0 +1,3822 @@
+[
+ {
+  "id": "001",
+  "tables": [
+   {
+    "caption_start": "Table 1: Approaches for MAPF-RO. (*) PIBT is complete for bi-connected graphs. (**) CBS_RO is solution-complete.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Qualitative property table (columns Approach / Sound / Complete / Optimal; cells are Yes/No/n/a/Partially), not experimental measurements. No bold cells; the last two rows (LaCAM_RO, PIE_RO) are shaded yellow, not bolded. No dispersion values. Runs file has no seed/run/trial count sentence."
+   }
+  ],
+  "note": "Paper: MAPF-RO (AAMAS 2026, page 1167). Only one table body on the page (Table 1), and it is a properties comparison, not a results table. No experimental-results table present."
+ },
+ {
+  "id": "002",
+  "tables": [
+   {
+    "caption_start": "Table 3: Agent's utility functions in the proof of Lemma 5.4.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Construction table used inside an NP-hardness proof (rows r1*..r4*, columns b, c, d; symbolic entries 2v, v, 0). Not experimental results. No bold cells, no dispersion. Runs file is empty."
+   }
+  ],
+  "note": "Paper: esw-EF-PA hardness (AAMAS 2025, page 396). The only table on the page (Table 3) is a proof gadget, not experimental results. No experimental-results table present."
+ },
+ {
+  "id": "003",
+  "tables": [
+   {
+    "caption_start": "Table 1: Summary of the campaigner's budget upper bounds for different learning tasks.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Table of theoretical asymptotic bounds (columns Learning task / Observation budget / Intervention budget; entries O(n^2), O(n^3), O(n), O(n^2), O(n), O(n)). Not experimental results. No bold cells, no dispersion. The runs file mentions 'run of The Windmill' but that refers to a proof construction, not an experimental run count."
+   }
+  ],
+  "note": "Paper: campaigner's network-learning problem (AAMAS 2024, page 364). The only table on the page (Table 1) summarises theoretical upper bounds; Figure 1 is a diagram. No experimental-results table present."
+ },
+ {
+  "id": "004",
+  "tables": [
+   {
+    "caption_start": "Table 1: The MC of A, B, C in all joining orders in Example 3.9.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Worked toy example (marginal contributions of players A, B, C for the 6 arrival orders of Example 3.9), not experimental results. No bold cells, no dispersion values. Run sentences in 004_runs.txt (RFC run) do not apply to this table."
+   }
+  ],
+  "note": "Page 653 of an AAMAS 2024 paper (online value-sharing mechanisms). Only one table on the page and it is an illustrative example, not experimental results."
+ },
+ {
+  "id": "005",
+  "tables": [
+   {
+    "caption_start": "Table 1: The maximum, minimum, and average convergence time on different networks. (The suffix of BA stands for the number of nodes.)",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "300",
+    "n_source": "page",
+    "groups": [],
+    "note": "Experimental results: columns Maximum, Minimum, Average, 4D\u0394+ log2 n over 17 networks (6 Undirected, 7 Directed, 4 Synthetic BA). No cell is bold, so no winner groups. No +/-, parenthesised, or std columns. Run count 300 comes from the page body text 'For each node v in the graph, we ran the process for 300 times' (also present in 005_runs.txt); the caption itself gives no run count."
+   }
+  ],
+  "note": "Page 2054 of an AAMAS 2024 paper on convergence time of the Random Pick process. Figures 3 and 4 are scatter plots, not tables."
+ },
+ {
+  "id": "006",
+  "tables": [
+   {
+    "caption_start": "Table 2: Illustration of the lower bound construction for binary additive valuations in the proof of Theorem 4.5.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Proof illustration (agent-item valuation matrix with red/green cells and circled allocations), not experimental results. Only the header cells (Phase, P1, P2, P3, P4) are bold; no data cell is bold and there are no dispersion values. The single run sentence in 006_runs.txt is unrelated."
+   }
+  ],
+  "note": "Page 354 of an AAMAS 2026 paper on online envy-freeness with subsidies. Figure 1 is a bar illustration, not a table."
+ },
+ {
+  "id": "007",
+  "note": "AAMAS 2026 SafeQIL page (p.1907). Three comparative-results tables (Tables 2, 3, 4) plus Figure 2 (learning curves). In every table the bold is an ENTIRE ROW (the algorithm the authors pick as best trade-off), not a per-column max/min: e.g. Table 2 bold Reward 26.29 is below SafeQIL 27.06, ICRL2 28.36 and SAC 58.81; Table 4 bold Cost 87.97 is above SafeQIL 57.20 and VICRL 55.80. Each table has a mid-rule separating constrained methods (SafeQIL, ICRL2, ICRL7, VICRL, SAC-GAIL) from unconstrained/reference rows (SAC, PPO2, PPO7, Human Demonstrator); runner values below use the whole column literally, with the within-constrained-block runner given in each table note. Caption gives no run count and does not name the bar; runs.txt says '3 independent random seeds ... mean \u00b1 std' and '40 evaluation episodes per method'. Table 5 (ablation) is referenced but not on this page.",
+  "tables": [
+   {
+    "caption_start": "Table 2: SafetyPointCircle2-v0: Comparative results.",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "3",
+    "n_source": "paper",
+    "groups": [
+     {
+      "label": "Reward \u2191",
+      "direction": "higher",
+      "winner_mean": "26.29",
+      "winner_disp": "0.69",
+      "runner_mean": "58.81",
+      "runner_disp": "0.70"
+     },
+     {
+      "label": "Cost \u2193",
+      "direction": "lower",
+      "winner_mean": "5.49",
+      "winner_disp": "0.81",
+      "runner_mean": "0.00",
+      "runner_disp": "0.00"
+     }
+    ],
+    "note": "Bold = whole VICRL row (name + both cells). All cells mean \u00b1 value; caption silent on bar kind (paper text: std over 3 seeds). Whole-column runners: Reward = SAC 58.81 \u00b1 0.70; Cost = Human Demonstrator 0.00 \u00b1 0.00. Within constrained block (above mid-rule): Reward best non-bold = ICRL2 28.36 \u00b1 17.37 (SafeQIL 27.06 \u00b1 4.10 also > 26.29); Cost best non-bold = SafeQIL 29.28 \u00b1 8.41. Full column: SafeQIL 27.06 \u00b1 4.10 / 29.28 \u00b1 8.41; ICRL2 28.36 \u00b1 17.37 / 177.88 \u00b1 6.70; ICRL7 8.21 \u00b1 17.07 / 34.07 \u00b1 16.74; VICRL 26.29 \u00b1 0.69 / 5.49 \u00b1 0.81 (bold); SAC-GAIL 11.89 \u00b1 9.55 / 33.95 \u00b1 28.02; SAC 58.81 \u00b1 0.70 / 392.20 \u00b1 4.38; PPO2 43.24 \u00b1 12.01 / 250.40 \u00b1 217.83; PPO7 32.57 \u00b1 1.26 / 408.74 \u00b1 2.76; Human Demonstrator 24.28 \u00b1 3.98 / 0.00 \u00b1 0.00."
+   },
+   {
+    "caption_start": "Table 3: SafetyCarButton1-v0: Comparative results.",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "3",
+    "n_source": "paper",
+    "groups": [
+     {
+      "label": "Reward \u2191",
+      "direction": "higher",
+      "winner_mean": "-3.81",
+      "winner_disp": "3.05",
+      "runner_mean": "19.49",
+      "runner_disp": "3.50"
+     },
+     {
+      "label": "Cost \u2193",
+      "direction": "lower",
+      "winner_mean": "70.11",
+      "winner_disp": "72.96",
+      "runner_mean": "0.00",
+      "runner_disp": "0.00"
+     }
+    ],
+    "note": "Bold = whole SafeQIL row. Whole-column runners: Reward = SAC 19.49 \u00b1 3.50; Cost = Human Demonstrator 0.00 \u00b1 0.00. Within constrained block: Reward best non-bold = ICRL2 0.31 \u00b1 2.23 (> bold -3.81); Cost best non-bold = VICRL 34.65 \u00b1 23.36 (< bold 70.11). Full column: SafeQIL -3.81 \u00b1 3.05 / 70.11 \u00b1 72.96 (bold); ICRL2 0.31 \u00b1 2.23 / 222.01 \u00b1 173.61; ICRL7 -15.83 \u00b1 12.98 / 145.94 \u00b1 23.54; VICRL -14.12 \u00b1 10.83 / 34.65 \u00b1 23.36; SAC-GAIL 0.14 \u00b1 4.72 / 98.15 \u00b1 81.54; SAC 19.49 \u00b1 3.50 / 299.27 \u00b1 20.61; PPO2 11.70 \u00b1 1.90 / 460.47 \u00b1 6.61; PPO7 11.71 \u00b1 1.16 / 431.77 \u00b1 40.23; Human Demonstrator 14.11 \u00b1 5.67 / 0.00 \u00b1 0.00."
+   },
+   {
+    "caption_start": "Table 4: SafetyCarPush2-v0: Comparative results.",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "3",
+    "n_source": "paper",
+    "groups": [
+     {
+      "label": "Reward \u2191",
+      "direction": "higher",
+      "winner_mean": "0.76",
+      "winner_disp": "0.92",
+      "runner_mean": "7.46",
+      "runner_disp": "1.77"
+     },
+     {
+      "label": "Cost \u2193",
+      "direction": "lower",
+      "winner_mean": "87.97",
+      "winner_disp": "10.57",
+      "runner_mean": "0.00",
+      "runner_disp": "0.00"
+     }
+    ],
+    "note": "Bold = whole SAC-GAIL row (not the proposed method). Whole-column runners: Reward = Human Demonstrator 7.46 \u00b1 1.77 (SAC 1.50 \u00b1 0.01 also > bold 0.76); Cost = Human Demonstrator 0.00 \u00b1 0.00. Within constrained block: Reward best non-bold = ICRL7 1.15 \u00b1 0.49 (> bold 0.76); Cost best non-bold = VICRL 55.80 \u00b1 71.45 (SafeQIL 57.20 \u00b1 30.02 also < bold 87.97). Full column: SafeQIL -0.62 \u00b1 0.65 / 57.20 \u00b1 30.02; ICRL2 0.00 \u00b1 1.73 / 203.10 \u00b1 37.24; ICRL7 1.15 \u00b1 0.49 / 178.81 \u00b1 60.69; VICRL -9.05 \u00b1 8.58 / 55.80 \u00b1 71.45; SAC-GAIL 0.76 \u00b1 0.92 / 87.97 \u00b1 10.57 (bold); SAC 1.50 \u00b1 0.01 / 245.36 \u00b1 28.52; PPO2 0.44 \u00b1 0.52 / 316.50 \u00b1 52.84; PPO7 0.72 \u00b1 0.64 / 238.63 \u00b1 23.33; Human Demonstrator 7.46 \u00b1 1.77 / 0.00 \u00b1 0.00."
+   }
+  ]
+ },
+ {
+  "id": "008",
+  "note": "AAMAS 2025 overdetermination/causality page (p.1846). The only table is Table 1, a formal typology (Allen's interval algebra relations \u00d7 case categories: Early Preemption, Late Preemption/Durative, Synchronous/Asynchronous Duplicative, Symmetric, Trumping, with * / ** incoherence markers and grey cells). No numeric experimental results, no bold cells, no dispersions. Figure 3 is a diagram. runs.txt hits ('runs its whole course', 'run to completion') are not experiment-run sentences.",
+  "tables": [
+   {
+    "caption_start": "Table 1: Formal typology of overdetermination cases given all possible time relations between two causal paths.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Definitional/typology table (categorical text cells only); listed for completeness, not an experimental results table."
+   }
+  ]
+ },
+ {
+  "id": "009",
+  "note": "AAMAS 2024 SynMS page (p.568). One results table (Table 4) plus Figure 1 (four subplots, ignored). Tables 2 and 3 named in runs.txt are on other pages and are worked examples ('a run of synthesizing'), not repetition counts; no seeds/trials sentence exists, so n_runs none. Structure: rows Sub/Nim/Welter/Wythoff/Chomp/Total \u00d7 columns Formula{Solved,Time,Size} and Strategy{Solved,Time,Size}, each split Enum vs SynMS. Per the text on this page: parentheses in Solved = number solved by that approach only; parentheses in Time/Size = average on test cases solved by BOTH approaches; 'The optimal data of each group are in bold'. Parenthesised values are therefore NOT dispersions.",
+  "tables": [
+   {
+    "caption_start": "Table 4: Results of synthesizing winning formulas and strategies",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [
+     {
+      "label": "Sub \u00b7 Formula \u00b7 Solved (bold SynMS vs Enum)",
+      "direction": "higher",
+      "winner_mean": "363(240)",
+      "winner_disp": "none",
+      "runner_mean": "124(1)",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Nim \u00b7 Formula \u00b7 Solved (bold SynMS vs Enum)",
+      "direction": "higher",
+      "winner_mean": "73(43)",
+      "winner_disp": "none",
+      "runner_mean": "59(29)",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Welter \u00b7 Formula \u00b7 Solved (bold SynMS vs Enum)",
+      "direction": "higher",
+      "winner_mean": "4(2)",
+      "winner_disp": "none",
+      "runner_mean": "3(1)",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Wythoff \u00b7 Formula \u00b7 Solved (bold SynMS vs Enum)",
+      "direction": "higher",
+      "winner_mean": "2287(661)",
+      "winner_disp": "none",
+      "runner_mean": "1715(89)",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Total \u00b7 Formula \u00b7 Solved (bold SynMS vs Enum)",
+      "direction": "higher",
+      "winner_mean": "2729(946)",
+      "winner_disp": "none",
+      "runner_mean": "1903(120)",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Sub \u00b7 Formula \u00b7 Time (bold on paren value; SynMS vs Enum)",
+      "direction": "lower",
+      "winner_mean": "61.16(14.26)",
+      "winner_disp": "none",
+      "runner_mean": "138.50(136.93)",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Nim \u00b7 Formula \u00b7 Time (bold on paren value; Enum vs SynMS)",
+      "direction": "lower",
+      "winner_mean": "131.26(22.37)",
+      "winner_disp": "none",
+      "runner_mean": "51.82(24.73)",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Welter \u00b7 Formula \u00b7 Time (bold on paren value; Enum vs SynMS)",
+      "direction": "lower",
+      "winner_mean": "3.07(2.71)",
+      "winner_disp": "none",
+      "runner_mean": "7.03(6.13)",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Wythoff \u00b7 Formula \u00b7 Time (bold on paren value; SynMS vs Enum)",
+      "direction": "lower",
+      "winner_mean": "24.52(8.11)",
+      "winner_disp": "none",
+      "runner_mean": "47.63(44.61)",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Chomp \u00b7 Formula \u00b7 Time (bold on paren value; Enum vs SynMS)",
+      "direction": "lower",
+      "winner_mean": "1.53(1.53)",
+      "winner_disp": "none",
+      "runner_mean": "8.18(8.18)",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Total \u00b7 Formula \u00b7 Time (bold on paren value; SynMS vs Enum)",
+      "direction": "lower",
+      "winner_mean": "30.54(12.28)",
+      "winner_disp": "none",
+      "runner_mean": "64.40(41.63)",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Sub \u00b7 Formula \u00b7 Size (bold on paren value; Enum vs SynMS)",
+      "direction": "lower",
+      "winner_mean": "10.89(10.80)",
+      "winner_disp": "none",
+      "runner_mean": "61.00(26.03)",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Nim \u00b7 Formula \u00b7 Size (bold on paren value; Enum vs SynMS)",
+      "direction": "lower",
+      "winner_mean": "9.98(8.20)",
+      "winner_disp": "none",
+      "runner_mean": "96.90(37.33)",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Welter \u00b7 Formula \u00b7 Size (bold on paren value; Enum vs SynMS)",
+      "direction": "lower",
+      "winner_mean": "8.67(8.50)",
+      "winner_disp": "none",
+      "runner_mean": "76.50(88.00)",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Wythoff \u00b7 Formula \u00b7 Size (bold on paren value; Enum vs SynMS)",
+      "direction": "lower",
+      "winner_mean": "8.31(8.29)",
+      "winner_disp": "none",
+      "runner_mean": "75.76(32.40)",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Total \u00b7 Formula \u00b7 Size (bold on paren value; Enum vs SynMS)",
+      "direction": "lower",
+      "winner_mean": "8.87(8.46)",
+      "winner_disp": "none",
+      "runner_mean": "63.33(38.05)",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Sub \u00b7 Strategy \u00b7 Solved (bold SynMS vs Enum)",
+      "direction": "higher",
+      "winner_mean": "274(195)",
+      "winner_disp": "none",
+      "runner_mean": "84(5)",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Nim \u00b7 Strategy \u00b7 Solved (bold SynMS vs Enum)",
+      "direction": "higher",
+      "winner_mean": "43(30)",
+      "winner_disp": "none",
+      "runner_mean": "22(9)",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Welter \u00b7 Strategy \u00b7 Solved (bold SynMS vs Enum)",
+      "direction": "higher",
+      "winner_mean": "1(1)",
+      "winner_disp": "none",
+      "runner_mean": "0(0)",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Wythoff \u00b7 Strategy \u00b7 Solved (bold SynMS vs Enum)",
+      "direction": "higher",
+      "winner_mean": "1266(1060)",
+      "winner_disp": "none",
+      "runner_mean": "308(102)",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Chomp \u00b7 Strategy \u00b7 Solved (bold Enum vs SynMS)",
+      "direction": "higher",
+      "winner_mean": "2(2)",
+      "winner_disp": "none",
+      "runner_mean": "0(0)",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Total \u00b7 Strategy \u00b7 Solved (bold SynMS vs Enum)",
+      "direction": "higher",
+      "winner_mean": "1584(1286)",
+      "winner_disp": "none",
+      "runner_mean": "416(118)",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Sub \u00b7 Strategy \u00b7 Time (bold on paren value; SynMS vs Enum)",
+      "direction": "lower",
+      "winner_mean": "11.50(7.06)",
+      "winner_disp": "none",
+      "runner_mean": "39.67(31.63)",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Nim \u00b7 Strategy \u00b7 Time (bold on paren value; Enum vs SynMS)",
+      "direction": "lower",
+      "winner_mean": "8.36(0.91)",
+      "winner_disp": "none",
+      "runner_mean": "294.57(266.84)",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Wythoff \u00b7 Strategy \u00b7 Time (bold on paren value; Enum vs SynMS)",
+      "direction": "lower",
+      "winner_mean": "0.24(0.33)",
+      "winner_disp": "none",
+      "runner_mean": "11.26(10.02)",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Total \u00b7 Strategy \u00b7 Time (bold on paren value; Enum vs SynMS)",
+      "direction": "lower",
+      "winner_mean": "12.20(10.96)",
+      "winner_disp": "none",
+      "runner_mean": "86.64(94.64)",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Sub \u00b7 Strategy \u00b7 Size (bold on paren value; Enum vs SynMS)",
+      "direction": "lower",
+      "winner_mean": "77.92(77.40)",
+      "winner_disp": "none",
+      "runner_mean": "216.84(110.55)",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Nim \u00b7 Strategy \u00b7 Size (bold on paren value; Enum vs SynMS)",
+      "direction": "lower",
+      "winner_mean": "15.45(8.46)",
+      "winner_disp": "none",
+      "runner_mean": "300.21(168.31)",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Wythoff \u00b7 Strategy \u00b7 Size (bold on paren value; Enum vs SynMS)",
+      "direction": "lower",
+      "winner_mean": "4.16(5.75)",
+      "winner_disp": "none",
+      "runner_mean": "197.64(97.69)",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Total \u00b7 Strategy \u00b7 Size (bold on paren value; Enum vs SynMS)",
+      "direction": "lower",
+      "winner_mean": "27.63(30.53)",
+      "winner_disp": "none",
+      "runner_mean": "195.42(125.51)",
+      "runner_disp": "none"
+     }
+    ],
+    "note": "Grouping is row \u00d7 metric (each row \u00d7 each of 6 metrics = a 2-cell Enum-vs-SynMS group), so each row holds up to 6 bold cells; 'row' is the nearest label. No dispersions anywhere: parentheses are (Solved) count solved only by that method, (Time/Size) average over commonly-solved cases. In Solved groups the bold is the leading count; in Time/Size groups ONLY the parenthesised commonly-solved average is bold, so the compared numbers are the parenthesised ones in both cells (e.g. Wythoff Strategy Time: bold 0.33 vs 10.02, even though leading 0.24 vs 11.26). 30 single-bold groups listed. Excluded groups: Chomp Formula Solved (both '2(0)' bold, tie), Chomp Formula Size (both '6.50(6.50)' bold, tie), Welter Strategy Time ('-(-)' vs '29.22(-)', no bold), Welter Strategy Size ('-(-)' vs '67.00(-)', no bold), Chomp Strategy Time ('0.52(-)' vs '-(-)', no bold), Chomp Strategy Size ('13.00(-)' vs '-(-)', no bold). Test-case counts: Sub 479, Nim 302, Welter 7, Wythoff 2924, Chomp 8, Total 3720. Text confirms Total: Enum 1,903 vs SynMS 2,729 solved (946 unique); commonly solved 1,783 cases, SynMS 12.28 s vs Enum 41.63 s."
+   }
+  ]
+ },
+ {
+  "id": "010",
+  "tables": [
+   {
+    "caption_start": "Table 1: Comparison Algorithms",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Descriptive listing of baseline frameworks/features/details (FACMAC, MAPPO, MADDPG, RACE, QMIX, NQMIX, QPLEX, ROMA, EMC, G2ANet, LTSCG) with no numeric results; no bold cells. Not an experimental-results table."
+   }
+  ],
+  "note": "Page 1628 of an AAMAS 2025 paper (EECG). Only two tables on the page: Table 1 'Comparison Algorithms' (algorithm descriptions, listed above as non-results) and Table 2 'Parameter setting' (hyperparameter table, ignored per instructions). The remaining results on this page are Figure 2 win-rate curves (SMACv1: 1c3s5z, 5m_vs_6m, MMM2 and ablations), not a table. Page run sentence: 'We ran the experiments with 5 random seeds and performed 5 independent runs, averaging the final performance with 95% confidence intervals' -- applies to the figures, no results table on this page."
+ },
+ {
+  "id": "011",
+  "tables": [
+   {
+    "caption_start": "Table 1: Descriptive statistics of the scores by interaction control policy (random or learned) and data set.",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "4",
+    "n_source": "paper",
+    "groups": [
+     {
+      "label": "mean",
+      "direction": "higher",
+      "winner_mean": "23.4",
+      "winner_disp": "5.7",
+      "runner_mean": "25.6",
+      "runner_disp": "5.0"
+     },
+     {
+      "label": "std",
+      "direction": "lower",
+      "winner_mean": "5.7",
+      "winner_disp": "none",
+      "runner_mean": "5.0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "min",
+      "direction": "higher",
+      "winner_mean": "14.0",
+      "winner_disp": "none",
+      "runner_mean": "9.0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "25%",
+      "direction": "higher",
+      "winner_mean": "18.5",
+      "winner_disp": "none",
+      "runner_mean": "25.3",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Median",
+      "direction": "higher",
+      "winner_mean": "24.0",
+      "winner_disp": "none",
+      "runner_mean": "27.0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "75%",
+      "direction": "higher",
+      "winner_mean": "28.8",
+      "winner_disp": "none",
+      "runner_mean": "29.3",
+      "runner_disp": "none"
+     },
+     {
+      "label": "max",
+      "direction": "higher",
+      "winner_mean": "39.0",
+      "winner_disp": "none",
+      "runner_mean": "37.0",
+      "runner_disp": "none"
+     }
+    ],
+    "note": "Columns: mean, std, min, 25%, Median, 75%, max. Rows: Random (D) 22.1/10.0/1.0/12.8/26.5/29.3/36.0; Random (D_val) 17.9/9.6/4.0/8.3/20.0/26.8/32.0; MDP (D_val) 22.7/7.6/6.0/18.0/22.5/[28.8]/[39.0]; POMDP (D_val) [23.4]/[5.7]/[14.0]/[18.5]/[24.0]/27.5/37.0; FA (D_val) italic 25.6/5.0/9.0/25.3/27.0/28.0/32.0 (brackets = bold). Caption: 'Best value per metric is displayed in bold' -> one bold per column. Dispersion: no +/- values; the 'std' column is a separate std column (hence any_error_bar=y, kind sd from the column header 'std', the caption itself does not name it). winner_disp/runner_disp given only for the 'mean' group (row std); other statistics have no bar. Runner values above are the LITERAL best non-bold cell in each column, which is often the italic FA row or the Random (D) row (FA and Random (D) are separated by rules and excluded from the bold comparison: text says FA comparison 'is outside the scope of this work'; Random (D) is a different data set). Best non-bold cell restricted to the three D_val comparison rows (Random/MDP/POMDP): mean 22.7 (MDP, std 7.6); std 7.6 (MDP); min 6.0 (MDP); 25% 18.0 (MDP); Median 22.5 (MDP); 75% 27.5 (POMDP); max 37.0 (POMDP). Direction for std inferred as lower-is-better from the bolding (5.7 is the lowest of the three comparison rows). n_runs: caption gives none; run sentences say '4 pseudo-randomized runs' (per participant, across conditions) and a '10-fold Group Shuffle Split cross-validation' for classifier training; page text says 'After the four iterations' and 'approximately 1 hour and 30 minutes per participant, totaling 39 hours' (~26 participants); per-row sample sizes are not printed. Mann-Whitney U = 686.0, p < 0.05 reported in text for Random (D) vs Random (D_val)."
+   }
+  ],
+  "note": "Page 63 of an AAMAS 2024 paper (HITL-ORL, POMDP risk-sensitive policy). One results table (Table 1) on the page; Figure 3 is a belief-of-performance trace, not a table."
+ },
+ {
+  "id": "012",
+  "tables": [
+   {
+    "caption_start": "Table 1: Comprehensive per-task results. Normalized reward (higher is better) and normalized cost (lower is better).",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "5",
+    "n_source": "page",
+    "groups": [],
+    "note": "One table with two panels (Safety Gym: 7 tasks; Bullet Gym: 5 tasks), columns Reference policy (pi_ref) Reward/Cost, then BC, PPL, SafeDICE, CPQ, PREFINE (Ours) each with Reward (up) and Cost (down). Every non-reference cell prints 'mean +/- value'; caption does not say what +/- is (unlabelled). Bold does NOT mark a single winner: caption says 'bold marks agents with cost less than the cost threshold < 1' (both reward and cost cells of every safe agent are bold, several per row), and 'Blue indicates the highest-reward safe agent per task' (blue cells are also bold). Hence orientation none and no single-bold groups. For reference, the blue (winner) reward +/- per task and the next-best safe (bold) agent's reward: Safety Gym -- AntVelocity PREFINE 0.93 +/- 0.04 vs PPL 0.90 +/- 0.04; CarGoal PREFINE 0.38 +/- 0.01 vs SafeDICE 0.32 +/- 0.05; HalfCheetahVelocity PREFINE 0.86 +/- 0.05 vs SafeDICE 0.70 +/- 0.05; HopperVelocity PREFINE 0.66 +/- 0.03 (only safe agent); PointGoal PPL 0.46 +/- 0.01 vs PREFINE 0.40 +/- 0.03; SwimmerVelocity PREFINE 0.62 +/- 0.09 vs SafeDICE 0.50 +/- 0.04; Walker2dVelocity PREFINE 0.75 +/- 0.01 vs SafeDICE 0.68 +/- 0.03. Bullet Gym -- BallCircle BC 0.72 +/- 0.07 vs PREFINE 0.71 +/- 0.04; BallRun PREFINE 0.41 +/- 0.08 vs BC 0.32 +/- 0.04; CarRun PREFINE 0.93 +/- 0.04 vs BC 0.86 +/- 0.05; CarCircle SafeDICE 0.62 +/- 0.03 vs CPQ 0.19 +/- 0.06; DroneRun PREFINE 0.57 +/- 0.08 vs BC 0.55 +/- 0.07. Minor rendering inconsistencies: CarGoal PPL reward -0.01 +/- 0.05 and CarRun CPQ reward -0.18 +/- 0.01 appear regular weight while their cost cells appear bold. n_runs: caption silent; page text 'we run each algorithm on every dataset under three separate cost thresholds and across five random seeds' (elsewhere: '12 tasks averaged over 5 seeds and 3 cost thresholds', '100 rollouts at each evaluation step')."
+   }
+  ],
+  "note": "Page 1009 of an AAMAS 2026 paper (PREFINE). One results table (Table 1, two panels) on the page; Figure 3 is a scatter of the same reward/cost data."
+ },
+ {
+  "id": "013",
+  "note": "Page 626 of a text-to-image (LGR-AD) paper. Three results tables (Tables 5, 6, 7) in the left column below Figure 2. In all three the entire proposed-method row (LGR-AD (Our) / Ours) is bold including the name cell, so each numeric column has exactly one bold cell. No dispersion anywhere; no run count in captions and 013_runs.txt is empty.",
+  "tables": [
+   {
+    "caption_start": "Table 5: Comparison of the SOTA text-to-image generation models on LN-COCO.",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [
+     {
+      "label": "FID \u2193",
+      "direction": "lower",
+      "winner_mean": "9.44",
+      "winner_disp": "none",
+      "runner_mean": "9.50",
+      "runner_disp": "none"
+     },
+     {
+      "label": "IS \u2191",
+      "direction": "higher",
+      "winner_mean": "149",
+      "winner_disp": "none",
+      "runner_mean": "135",
+      "runner_disp": "none"
+     },
+     {
+      "label": "CLIP Score \u2191",
+      "direction": "higher",
+      "winner_mean": "0.45",
+      "winner_disp": "none",
+      "runner_mean": "0.43",
+      "runner_disp": "none"
+     }
+    ],
+    "note": "8 model rows (StableDiffusion, LatteGAN, DALL-E 2, Stable Diffusion v2, LDM, Imagen, MagicFusion, LGR-AD (Our)); bold = whole LGR-AD row. Runner-up FID is Stable Diffusion v2 (9.50); runner-up IS and CLIP is Imagen (135, 0.43)."
+   },
+   {
+    "caption_start": "Table 6: Comparison of the SOTA text-to-image generation models on MM CelebA-HQ.",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [
+     {
+      "label": "FID \u2193",
+      "direction": "lower",
+      "winner_mean": "9.50",
+      "winner_disp": "none",
+      "runner_mean": "9.57",
+      "runner_disp": "none"
+     },
+     {
+      "label": "IS \u2191",
+      "direction": "higher",
+      "winner_mean": "190",
+      "winner_disp": "none",
+      "runner_mean": "185",
+      "runner_disp": "none"
+     },
+     {
+      "label": "CLIP Score \u2191",
+      "direction": "higher",
+      "winner_mean": "0.57",
+      "winner_disp": "none",
+      "runner_mean": "0.54",
+      "runner_disp": "none"
+     }
+    ],
+    "note": "Same 8 rows as Table 5; bold = whole LGR-AD (Our) row. Runner-up FID is Stable Diffusion v2 (9.57), IS is Imagen (185), CLIP Score is DALL-E 2 (0.54)."
+   },
+   {
+    "caption_start": "Table 7: Comparison of Methods on Diversity Metric",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [
+     {
+      "label": "Diversity\u2191",
+      "direction": "higher",
+      "winner_mean": "0.67",
+      "winner_disp": "none",
+      "runner_mean": "0.65",
+      "runner_disp": "none"
+     }
+    ],
+    "note": "Columns Method / Backbone / Dataset / Diversity\u2191; only one numeric column. Bold = whole 'Ours' row (ViT-L, COCO, 0.67). Runner-up 0.65 is Stable Diffusion [31] (ViT-L, FashionGen). Rows are on different datasets, so the comparison is not like-for-like."
+   }
+  ]
+ },
+ {
+  "id": "014",
+  "note": "Page 1432 of an attribute-recognition (AR) / goal-recognition paper. The only table with its body on this page is Table 3 (item recipes in Craft World), a text-only environment-description table with no numbers, no bold body cells and no dispersion. Tables 1 and 2 (DKL scores, BI probabilities) are referenced in the text but their bodies are not on this page. Run sentences in 014_runs.txt: 'averaged over 1000 episodes' and 'episodes terminate after 100 timesteps'; the page text also says 'All results are averaged over 1000 trajectories on the evaluation point', but no results table is present to apply it to.",
+  "tables": [
+   {
+    "caption_start": "Table 3: Item recipes in Craft World domain.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Environment/recipe description (Item / Ingredients / Craft Location), 7 text rows; not experimental results. Listed only for completeness."
+   }
+  ]
+ },
+ {
+  "id": "015",
+  "note": "Page 1798 of an RS-SDA* (semi-decentralized Dec-POMDP planning) paper, AAMAS 2026. The only table on the page is Table 1, a closed-form search-tree size table (levels and nodes per stage computed from the formulas in its header, e.g. n|O*|^t, |O*|^{tn}|A*|^n) for t = 0..8; it is an analytic bound comparison, not measured experimental results. No bold body cells (only the group headers RS-MAA*/RS-SDA*/Classical MAA* are bold), no dispersion. Run sentences in 015_runs.txt ('distribution over sojourn times collapse to one') are unrelated to any run count. Figure 4 (MaritimeMEDEVAC exact optimal values) is a plot, not a table.",
+  "tables": [
+   {
+    "caption_start": "Table 1: SDec-Tiger levels and nodes by stage for RS-MAA*, RS-SDA*, and MAA*. |A*| = 3, |O*| = 2, and n = 2.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Analytic (formula-derived) node/level counts per stage t = 0..8 for three planners; values such as 2/6, 4/12 ... 512/1536 (RS-MAA*), 1/9 ... 65,536/589,824 (RS-SDA*), 1/9, 1/81, 1/6,561, then >1E6 (Classical MAA*). No bold body cells, no error bars. Marked n because it is a complexity bound table rather than an experimental measurement; if the auditor counts it as results, orientation is still 'none'."
+   }
+  ]
+ },
+ {
+  "id": "016",
+  "tables": [
+   {
+    "caption_start": "Table 1: FF (top) MVC (bottom). For 10 random seeds, number of clusters obtained and frequency (L), representativeness (REPR), coherence for each value (CHR), conciseness (CONC), and Ray-Turi index ...",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "10",
+    "n_source": "caption",
+    "groups": [
+     {
+      "label": "FF: REPR \u2191",
+      "direction": "higher",
+      "winner_mean": "0.968",
+      "winner_disp": "\u00b10.010",
+      "runner_mean": "0.922",
+      "runner_disp": "\u00b10.008"
+     },
+     {
+      "label": "FF: Prof. CHR \u2191",
+      "direction": "higher",
+      "winner_mean": "0.967",
+      "winner_disp": "\u00b10.014",
+      "runner_mean": "0.863",
+      "runner_disp": "\u00b10.009"
+     },
+     {
+      "label": "FF: Prox. CHR \u2191",
+      "direction": "higher",
+      "winner_mean": "0.951",
+      "winner_disp": "\u00b10.009",
+      "runner_mean": "0.920",
+      "runner_disp": "\u00b10.012"
+     },
+     {
+      "label": "FF: CONC \u2191",
+      "direction": "higher",
+      "winner_mean": "0.163",
+      "winner_disp": "\u00b10.055",
+      "runner_mean": "0.067",
+      "runner_disp": "\u00b10.047"
+     },
+     {
+      "label": "FF: Ray-Turi \u2193",
+      "direction": "lower",
+      "winner_mean": "0.03",
+      "winner_disp": "\u00b10.010",
+      "runner_mean": "0.074",
+      "runner_disp": "\u00b10.010"
+     },
+     {
+      "label": "FF: HV. (all) \u2191",
+      "direction": "higher",
+      "winner_mean": "38.98",
+      "winner_disp": "\u00b10.170",
+      "runner_mean": "40.52",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FF: HV (cls.) \u2191",
+      "direction": "higher",
+      "winner_mean": "38.83",
+      "winner_disp": "\u00b11.454",
+      "runner_mean": "40.52",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FF: MUL \u2193 (all)",
+      "direction": "lower",
+      "winner_mean": "0.117",
+      "winner_disp": "\u00b10.150",
+      "runner_mean": "0.0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FF: MUL \u2193 (cls.)",
+      "direction": "lower",
+      "winner_mean": "0.174",
+      "winner_disp": "\u00b10.293",
+      "runner_mean": "0.0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MVC: REPR \u2191",
+      "direction": "higher",
+      "winner_mean": "0.908",
+      "winner_disp": "\u00b10.013",
+      "runner_mean": "0.890",
+      "runner_disp": "\u00b10.013"
+     },
+     {
+      "label": "MVC: Ach. CHR \u2191",
+      "direction": "higher",
+      "winner_mean": "0.886",
+      "winner_disp": "\u00b10.015",
+      "runner_mean": "0.884",
+      "runner_disp": "\u00b10.038"
+     },
+     {
+      "label": "MVC: Safe. CHR \u2191",
+      "direction": "higher",
+      "winner_mean": "0.883",
+      "winner_disp": "\u00b10.009",
+      "runner_mean": "0.750",
+      "runner_disp": "\u00b10.044"
+     },
+     {
+      "label": "MVC: Comf. CHR \u2191",
+      "direction": "higher",
+      "winner_mean": "0.748",
+      "winner_disp": "\u00b10.023",
+      "runner_mean": "0.649",
+      "runner_disp": "\u00b10.043"
+     },
+     {
+      "label": "MVC: CONC \u2191",
+      "direction": "higher",
+      "winner_mean": "0.051",
+      "winner_disp": "\u00b10.031",
+      "runner_mean": "0.044",
+      "runner_disp": "\u00b10.012"
+     },
+     {
+      "label": "MVC: Ray-Turi \u2193",
+      "direction": "lower",
+      "winner_mean": "0.088",
+      "winner_disp": "\u00b10.013",
+      "runner_mean": "0.130",
+      "runner_disp": "\u00b10.014"
+     },
+     {
+      "label": "MVC: HV (all) \u2191",
+      "direction": "higher",
+      "winner_mean": "1.217",
+      "winner_disp": "\u00b10.011",
+      "runner_mean": "1.233",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MVC: HV (cls.) \u2191",
+      "direction": "higher",
+      "winner_mean": "1.191",
+      "winner_disp": "\u00b10.024",
+      "runner_mean": "1.233",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MVC: MUL \u2193 (all)",
+      "direction": "lower",
+      "winner_mean": "1.102",
+      "winner_disp": "\u00b10.387",
+      "runner_mean": "0.0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MVC: MUL \u2193 (cls.)",
+      "direction": "lower",
+      "winner_mean": "1.522",
+      "winner_disp": "\u00b10.644",
+      "runner_mean": "0.0",
+      "runner_disp": "none"
+     }
+    ],
+    "note": "One table with two stacked panels (FF top, MVC bottom), rows = EQL, SVSL, PbMORL, SVSL-P; each metric column has one bold cell among the three learned methods, so orientation = column. Caption: '10 random seeds' and 'Results indicate the average values and standard deviations' -> sd, n=10. Every learned-method cell prints \u00b1sd on a second line. EQL row is a reference/oracle (equal weights with ground-truth reward), printed as a single value with no bar and '-' in the REPR/CHR/CONC/Ray-Turi columns; it is never bolded. In the HV and MUL columns the EQL value is literally the best non-bold cell and is what runner_mean reports (EQL beats the bold winner there); the best non-bold LEARNED method in those columns is: FF HV.(all) PbMORL 35.35 \u00b10.934; FF HV(cls.) PbMORL 31.39 \u00b12.98; FF MUL(all) PbMORL 0.670 \u00b10.154; FF MUL(cls.) PbMORL 1.240 \u00b10.579; MVC HV(all) SVSL-P 1.197 \u00b10.017; MVC HV(cls.) SVSL-P 1.175 \u00b10.026; MVC MUL(all) SVSL-P 1.152 \u00b10.542; MVC MUL(cls.) PbMORL 1.784 \u00b10.668. FF Ray-Turi runner is a tie on mean: PbMORL 0.074 \u00b10.010 (reported) and SVSL 0.074 \u00b10.024. Winners: FF REPR/Prof/Prox/Ray-Turi/HV/MUL = SVSL-P, FF CONC = SVSL; MVC REPR/Ach/Safe/Comf/Ray-Turi/MUL(cls.) = SVSL-P, MVC CONC = SVSL, MVC HV(all)/HV(cls.)/MUL(all) = PbMORL. 'PF size (all) ~' and 'PF size (cls.) ~' columns have no bold and no direction arrow (excluded). The L (histogram) column is a bar chart of cluster counts, not numeric. 19 single-bold groups total."
+   }
+  ],
+  "note": "Page 474 of an AAMAS 2026 paper (SVSL / SVSL-P / PbMORL value-system learning). Only one table body on the page (Table 1). Run sentences: 'We run the algorithms 10 times (different seeds)' agrees with caption n=10."
+ },
+ {
+  "id": "017",
+  "tables": [
+   {
+    "caption_start": "Table 1: PIC and POIC values with N = 10^4 samples (random policies). High PIC and POIC values correspond to easier tasks, while low values correspond to harder tasks.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "10^4",
+    "n_source": "caption",
+    "groups": [],
+    "note": "No bold cells anywhere in the table, so no winner groups. 6 rows (Dense/Sparse x 1-link [1.0], 1-link [1.65], 2-link [0.95,1.7]) x 2 metric columns PIC (x10^-3) and POIC (x10^-3); every cell prints 'mean \u00b1 value' (e.g. Dense 1-link [1.0]: 4005 \u00b1 8.5, 2.628 \u00b1 0.056; Sparse 2-link: 45.95 \u00b1 0.0, 0.946 \u00b1 0.0079). The caption does not say what the \u00b1 is; the body text on this page says the values' uncertainty was quantified with bootstrapped confidence intervals from 1,000 resamples with replacement of the 10^4 random-policy episodic returns, and that Welch t-test p-values are ~1e-5. n_runs '10^4' is the caption's sample count of random policies (N), not a seed/run count; the run sentence '5 runs' refers to the RL training evaluation, not this table."
+   }
+  ],
+  "note": "Page 3047 of an AAMAS 2026 paper on PIC/POIC task-complexity metrics (RWG random policies). One table body on the page."
+ },
+ {
+  "id": "018",
+  "tables": [
+   {
+    "caption_start": "Table 1: Alice, Bob and their fruits. We assume the initial endowment for TTC is A : a, B : b.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Illustrative worked example (4 preference profiles for two agents, SD vs TTC outcomes and ranks), not experimental results; no numeric means, no bold, no bars. Listed only so it is accounted for."
+   }
+  ],
+  "note": "Page 795 of an AAMAS 2025 paper on order symmetry / order bias in assignment mechanisms. No experimental results table on this page; the only table is a toy example. Run sentences contain no seed/run counts (only 'replicate all results for 3-approval utilities' in the full version)."
+ },
+ {
+  "id": "019",
+  "tables": [
+   {
+    "caption_start": "Table 2: Main experimental results showing accuracy (%) on three commonsense reasoning benchmarks.",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [
+     {
+      "label": "Gemini-2.5-Flash / CommonSenseQA",
+      "direction": "higher",
+      "winner_mean": "81.63",
+      "winner_disp": "none",
+      "runner_mean": "90.75",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Gemini-2.5-Flash / StrategyQA",
+      "direction": "higher",
+      "winner_mean": "78.66",
+      "winner_disp": "none",
+      "runner_mean": "83.42",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Gemini-2.5-Flash / TruthfulQA",
+      "direction": "higher",
+      "winner_mean": "75.12",
+      "winner_disp": "none",
+      "runner_mean": "92.54",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Gemini-2.5-Flash / Mean",
+      "direction": "higher",
+      "winner_mean": "78.47",
+      "winner_disp": "none",
+      "runner_mean": "88.90",
+      "runner_disp": "none"
+     },
+     {
+      "label": "LLaMA3.1-8B-It / CommonSenseQA",
+      "direction": "higher",
+      "winner_mean": "81.05",
+      "winner_disp": "none",
+      "runner_mean": "87.36",
+      "runner_disp": "none"
+     },
+     {
+      "label": "LLaMA3.1-8B-It / StrategyQA",
+      "direction": "higher",
+      "winner_mean": "77.44",
+      "winner_disp": "none",
+      "runner_mean": "79.86",
+      "runner_disp": "none"
+     },
+     {
+      "label": "LLaMA3.1-8B-It / TruthfulQA",
+      "direction": "higher",
+      "winner_mean": "71.85",
+      "winner_disp": "none",
+      "runner_mean": "86.19",
+      "runner_disp": "none"
+     },
+     {
+      "label": "LLaMA3.1-8B-It / Mean",
+      "direction": "higher",
+      "winner_mean": "76.78",
+      "winner_disp": "none",
+      "runner_mean": "84.47",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Qwen2.5-7B-It / CommonSenseQA",
+      "direction": "higher",
+      "winner_mean": "81.62",
+      "winner_disp": "none",
+      "runner_mean": "89.11",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Qwen2.5-7B-It / StrategyQA",
+      "direction": "higher",
+      "winner_mean": "77.57",
+      "winner_disp": "none",
+      "runner_mean": "73.81",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Qwen2.5-7B-It / TruthfulQA",
+      "direction": "higher",
+      "winner_mean": "69.24",
+      "winner_disp": "none",
+      "runner_mean": "88.61",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Qwen2.5-7B-It / Mean",
+      "direction": "higher",
+      "winner_mean": "76.14",
+      "winner_disp": "none",
+      "runner_mean": "83.84",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Qwen2.5-1.5B-It / CommonSenseQA",
+      "direction": "higher",
+      "winner_mean": "80.60",
+      "winner_disp": "none",
+      "runner_mean": "85.19",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Qwen2.5-1.5B-It / StrategyQA",
+      "direction": "higher",
+      "winner_mean": "75.14",
+      "winner_disp": "none",
+      "runner_mean": "71.79",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Qwen2.5-1.5B-It / TruthfulQA",
+      "direction": "higher",
+      "winner_mean": "73.92",
+      "winner_disp": "none",
+      "runner_mean": "72.68",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Qwen2.5-1.5B-It / Mean",
+      "direction": "higher",
+      "winner_mean": "76.55",
+      "winner_disp": "none",
+      "runner_mean": "76.55",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Qwen3-30B-A3B-It-2507 / CommonSenseQA",
+      "direction": "higher",
+      "winner_mean": "80.09",
+      "winner_disp": "none",
+      "runner_mean": "79.77",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Qwen3-30B-A3B-It-2507 / StrategyQA",
+      "direction": "higher",
+      "winner_mean": "78.39",
+      "winner_disp": "none",
+      "runner_mean": "82.53",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Qwen3-30B-A3B-It-2507 / TruthfulQA",
+      "direction": "higher",
+      "winner_mean": "71.68",
+      "winner_disp": "none",
+      "runner_mean": "68.53",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Qwen3-30B-A3B-It-2507 / Mean",
+      "direction": "higher",
+      "winner_mean": "76.72",
+      "winner_disp": "none",
+      "runner_mean": "76.94",
+      "runner_disp": "none"
+     }
+    ],
+    "note": "Bold marks the entire 'SocraticAgent (ours)' row (method name + all 4 numbers) in each of the 5 zero-shot model blocks; it highlights the proposed method, NOT the column maximum. Groups recorded as model-block x metric column (each such column holds exactly one bold cell). The best non-bold cell is 'Oracle RAG (w/ Ref)' in every group. Bold cell is lower than the best non-bold cell in 14/20 groups, tied in 1 (Qwen2.5-1.5B-It Mean 76.55 = 76.55), higher in 5. The two 'SOTA Parametric Method (from [9])' rows (LLaMA3.1-8B Fine-Tuned: 78.0/82.3/86.6/82.3; Qwen2.5-7B Fine-Tuned: 78.6/83.2/81.2/81.0) are a separate block with no bold and are excluded from the groups. No +/- or std anywhere; caption mentions no runs; runs file has no run-count sentence."
+   }
+  ],
+  "note": "Single table (Table 2) at top of page spanning both columns; rest is text (Sec 5.4 Analysis, Sec 6 Discussion). Page number 1983, AAMAS 2026."
+ },
+ {
+  "id": "020",
+  "tables": [
+   {
+    "caption_start": "Table 1: Simulation variables.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Parameter/settings table (UAV, battery, charger, swarm, orders, other constants with values and units), not experimental results; listed only for completeness with results_table=n. No bold cells. Page text states 'Each experimental condition is repeated over 20 random runs' and figures use 'over 20 runs', but no results table is on this page (results are in Figure 3)."
+   }
+  ],
+  "note": "Only table on page is Table 1 'Simulation variables' (left column) \u2014 a hyperparameter/simulation-parameter table. Remaining content is text: order arrival/processing, Sec 5 RESULTS intro, Sec 5.1 Effect of Winner Selection Rule (refers to Figure 3, not on this page). Page number 2019, AAMAS 2025."
+ },
+ {
+  "id": "021",
+  "tables": [
+   {
+    "caption_start": "Table 1: Ablation Performance. The values in parentheses represent the percentage relative to the S2AN method.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Columns: Method | Test Reward | Converge TimeStep/10^3. Rows: S2AN 17.77 / 45.5; no Entropy **7.53(-57%\u2193)** / 21.8; No Target Matrix **7.13(-59%\u2193)** / 16.7; No Harmful 17.12(-4%\u2193) / **73.0(+60%\u2191)**; Random 3 / None. Three bold cells: two in the Test Reward column (7.53, 7.13) and one in the Converge TimeStep column (73.0). Bold marks the largest ablation degradations (lowest rewards, slowest convergence), not winners: the best Test Reward (17.77, S2AN) and fastest convergence (16.7, No Target Matrix) are NOT bold, and the Test Reward column has two bold cells, so orientation=none and no winner groups are recorded. Parenthesised values are relative % change vs S2AN per the caption, not dispersion, hence any_error_bar=n. No run count in caption or runs file (runs file sentences refer to algorithm repetition / 'run over' failures, not experimental repetitions)."
+   }
+  ],
+  "note": "Single small table (Table 1 Ablation Performance) top-left; rest is text (Sec 5.3 Priority Learning Paradigm Effectiveness referencing Figure 7, Sec 5.4 Ablation Study, Sec 6 Conclusion, Acknowledgments). Page number 2000, AAMAS 2024."
+ },
+ {
+  "id": "022",
+  "tables": [
+   {
+    "caption_start": "Table 1: Results for the voting benchmark with n voters and c candidates. All times in seconds.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Model-checking running times (seconds) for n=1..6 voters x c=1..6 candidates; several cells are 'memout' (merged cells for n=5 c=3..6 and n=6 c=2..6). No cell in the body is bold; no dispersion anywhere; caption gives no run count and the run sentences file has no seed/run-count sentence (only 'Run IMITATOR'/'Run PRISM' algorithm steps and complexity bounds)."
+   }
+  ],
+  "note": "Page 1058 of an AAMAS 2025 paper on PTATL model checking (IMITATOR + PRISM). One results table (Table 1) on the page; no bold winners, no error bars, no run count stated."
+ },
+ {
+  "id": "023",
+  "tables": [
+   {
+    "caption_start": "Table 1: Arm wrestling parameters.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Setup/parameter table for the running example (subtables (a) Actions: action symbols and descriptions; (b) Capacities: agent, capacity name, action set, probability). Not experimental results; listed only for completeness with results_table=n."
+   }
+  ],
+  "note": "Page 215 of an AAMAS 2025 paper on ATL-SA (stochastic agents). The only table on the page is a parameter table for the arm-wrestling example; there is no experimental results table on this page. Runs file contains only 'repeat the action' (not a run count)."
+ },
+ {
+  "id": "024",
+  "tables": [
+   {
+    "caption_start": "Table 2: Mean performance metrics depending on the agent number. \"S\" refers to standard scenario without optimization, numbers \"1\", \"2\", \"3\" represent the number of ACAs.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "10",
+    "n_source": "paper",
+    "groups": [],
+    "note": "Rows: distance, m / time, s / fuel, g / # teleportations; columns: grid S,1,2,3 and InTAS S,1,2,3. Means only, no dispersion in any cell, no cell bold. Run count 10 comes from the paper-level run sentence 'repeated 10 times to account for the randomness in the simulations' (not in the caption and not on this page)."
+   },
+   {
+    "caption_start": "Table 3: Mean runtimes of MCSPS for singular ACAs",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "10",
+    "n_source": "paper",
+    "groups": [],
+    "note": "Rows # agents 1/2/3; columns grid (0.006, 0.002, 0.001) and InTAS (4.250, 1.073, 0.308). Means only, no dispersion, no bold cells. Run count 10 assigned from the same paper-level 'repeated 10 times' sentence; the caption itself gives no count, so the mapping of that sentence to this table is inferred."
+   }
+  ],
+  "note": "Page 2892 of an AAMAS 2026 paper on multi-agent traffic routing (ACAs, MCSPS) in SUMO. Two results tables (Table 2, Table 3); neither marks winners in bold and neither prints any dispersion. Figure 2 (grid/InTAS maps) is not a table."
+ },
+ {
+  "id": "025",
+  "tables": [
+   {
+    "caption_start": "Table 1: Overview of our computational results. Cells with a question mark indicate that the question is still open.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Theoretical complexity table (NP-complete / coNP-hard / O(nm) etc. with theorem references), not experimental measurements. No bold data cells (only the 'Restricted domains' header row is bold). Runs file is empty."
+   }
+  ],
+  "note": "Page 830 of an AAMAS 2026 proportionality/voting paper. Only table is a theoretical results overview; no experimental tables."
+ },
+ {
+  "id": "026",
+  "tables": [
+   {
+    "caption_start": "Table 1: Testing performance. The testing performance is evaluated for 10 episodes based on the model that has the best episodic performance",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "4 seeds",
+    "n_source": "caption",
+    "groups": [
+     {
+      "label": "Testing performance / Order \u2191",
+      "direction": "higher",
+      "winner_mean": "237.2",
+      "winner_disp": "3.4",
+      "runner_mean": "232.1",
+      "runner_disp": "5.7"
+     },
+     {
+      "label": "Testing performance / Distance \u2193(km)",
+      "direction": "lower",
+      "winner_mean": "7.0",
+      "winner_disp": "1.3",
+      "runner_mean": "15.5",
+      "runner_disp": "2.4"
+     },
+     {
+      "label": "IID generalization / Order \u2191",
+      "direction": "higher",
+      "winner_mean": "234.0",
+      "winner_disp": "3.9",
+      "runner_mean": "229.1",
+      "runner_disp": "5.8"
+     },
+     {
+      "label": "IID generalization / Distance \u2193(km)",
+      "direction": "lower",
+      "winner_mean": "7.0",
+      "winner_disp": "1.3",
+      "runner_mean": "15.1",
+      "runner_disp": "2.3"
+     }
+    ],
+    "note": "Caption: 'results are averaged over the 10 episodes and four seeds'; the \u00b1 is never labelled as sd/se/ci. All four bold cells are on the RLD3 (Our Algorithm) row, one per column. Runner-ups: VPS [17] for both Order columns, Deep-dispatch [23] for both Distance columns. The two Optimization-based rows (Myopic-dispatch 229.8/73.2/228.8/73.1; Myopic-dispatch with PO 225.4/29.1/221.8/29.3) print no \u00b1 at all. Runs file also mentions 'repeated with 4 different seeds' and Figure 6 'four seeds along with the confidence intervals' (figure, not table)."
+   }
+  ],
+  "note": "Page 1066 of an AAMAS 2025 taxi-dispatch DRL paper (RLD3). One results table plus a training-curve figure."
+ },
+ {
+  "id": "027",
+  "tables": [
+   {
+    "caption_start": "Table 5: Description of the partitions obtained in the EVS case study. Average distances are computed as the mean pair-wise distances",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Descriptive output of the case study (Number of Groups 11/2/1; Decision Matrices Avg. Distance 0.10/0.52/0.84; Weight Vectors Avg. Distance 0.02/0.16/0.33 for Q1/Q2/Q3). No bold data cells (only row/column headers are bold), no dispersion, no run count. Marked results 'y' because it reports method outputs, though it is descriptive rather than a method comparison. Runs file is empty."
+   }
+  ],
+  "note": "Page 2149 of an AAMAS 2026 value-system aggregation paper. One small descriptive table; Figures 3 and 4 and Eq. 9 are not tables."
+ },
+ {
+  "id": "028",
+  "tables": [
+   {
+    "caption_start": "Table 1: An overview of the price of detection in different settings.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Table of theoretical asymptotic bounds (Omega/O bounds with theorem references), not experimental measurements. Bold appears only on header/section labels (Trees, General, Consistent, Obliviously dynamic); no data cell is bold. Some cells are printed in grey to mark transferred results (superscripts a/b/c). No dispersion values. Run sentences mention 'seed infections' in the theoretical sense only, no run count."
+   }
+  ],
+  "note": "Only one table on the page (theory overview). Rest of page is introduction/related-work text."
+ },
+ {
+  "id": "029",
+  "tables": [
+   {
+    "caption_start": "Table 1: Example test scenarios, in terms of critical property identities and onsets, and the sequences generated by our models.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Qualitative example table: 4 scenarios (A-D), each showing the Top Sequence for U*_B = Baseline (d-RSA) and U*_F = Full (d-RSA++) with a sum r_t (up arrow = higher better) column. Sum r_t values: (A) 9.65 / 12.29; (B) 5.29 / 11.24; (C) 13.74 / 19.08; (D) 8.98 / 13.47. No score cell is bold; bold in the first column marks critical properties the user is unaware of (e.g. (D3_Dist, 4), (D4_NoFly, 5)), not a winner, so orientation = none. No dispersion printed. Run sentences say the paper evaluates 800 simulated trials, but this table shows individual example scenarios (one trial each), so no run count applies to it."
+   }
+  ],
+  "note": "Page also has Figure 3 (a)(b) with error bars on plots (95% CI mentioned in text) but that is a figure, not a table. Only one table body on the page."
+ },
+ {
+  "id": "030",
+  "tables": [
+   {
+    "caption_start": "Table 4: Distribution of experiments with respect to the effect of maintaining coherence (S3) compared to not maintaining it (S2) on eb^T and eo^T",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "3x3 contingency table of experiment counts (rows eo^T: decreased / did not change / increased; columns eb^T: decreased / did not change / increased). Cells: 258 (18.4%), 29 (2.07%), 3 (0.21%); 6 (0.43%), 482 (34.4%), 61 (4.36%); 0, 3 (0.21%), 558 (39.9%). Parenthesised values are percentages of the total (counts sum to 1400 experiment pairs), NOT dispersion, so any_error_bar = n. No data cell is bold; bold only on the axis labels eb^T and eo^T. Run sentences mention 'different seeds' and 'the same seed' (figure caption) but give no run count."
+   }
+  ],
+  "note": "Only one table on the page; rest is conclusion text and Figure 3 network plots."
+ },
+ {
+  "id": "031",
+  "tables": [
+   {
+    "caption_start": "Table 1: Computational profile of the teacher model. The Encoder and LSTM modules are identified as the primary bottlenecks.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Profiling/model-statistics table (FLOPs (M), Params (M), FLOPs(%), Params(%) per module: All / Encoder / LSTM / CNN / Others), not a comparison of methods. Bold marks the entire Encoder and LSTM rows (all four cells of each), i.e. two bold cells per column and four per row, so no group has exactly one bold cell. No dispersion printed. Caption gives no run count; the run sentences in 031_runs.txt (repeated three times with mean and standard deviation; independent runs of 1,000 games) describe latency/win-rate measurements elsewhere in the paper, not this table."
+   }
+  ],
+  "note": "Only one table body on this page (Table 1, left column). The rest is Figure 1 (pipeline overview) and text for Sections 4.2 and 4.3."
+ },
+ {
+  "id": "032",
+  "tables": [
+   {
+    "caption_start": "Table 1: We compare HyMASMC and MCMAS-SL[1G] on the scheduler problem from [24].",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [
+     {
+      "label": "n = 2 (|S| = 72, |S_reach| = 9), time in seconds",
+      "direction": "lower",
+      "winner_mean": "0.1",
+      "winner_disp": "none",
+      "runner_mean": "0.4",
+      "runner_disp": "none"
+     },
+     {
+      "label": "n = 3 (|S| = 432, |S_reach| = 21), time in seconds",
+      "direction": "lower",
+      "winner_mean": "1.9",
+      "winner_disp": "none",
+      "runner_mean": "6.71",
+      "runner_disp": "none"
+     },
+     {
+      "label": "n = 4 (|S| = 2592, |S_reach| = 49), time in seconds",
+      "direction": "lower",
+      "winner_mean": "24.5",
+      "winner_disp": "none",
+      "runner_mean": "313.7",
+      "runner_disp": "none"
+     },
+     {
+      "label": "n = 5 (|S| = 15552, |S_reach| = 113), time in seconds",
+      "direction": "lower",
+      "winner_mean": "332.1",
+      "winner_disp": "none",
+      "runner_mean": "TO",
+      "runner_disp": "none"
+     }
+    ],
+    "note": "Columns: n, |S|, |S_reach|, t_MCMAS-SL[1G], t_HyMASMC. Each row has exactly one bold cell among the two time columns. Row n=2 winner is MCMAS-SL[1G] (0.1 vs HyMASMC 0.4); rows n=3,4,5 winner is HyMASMC (runner-up MCMAS-SL[1G]: 6.71, 313.7, TO). For n=5 the only non-bold competitor is a timeout ('TO', timeout set to 1 h), not a numeric mean. No dispersion values anywhere; caption says nothing about repetitions, and the run sentences in 032_runs.txt refer to automaton/run-tree semantics, not repeated experimental runs."
+   }
+  ],
+  "note": "Only one table body on this page (Table 1, top of right column). Left column holds Algorithm 2 (pseudocode) and proof text."
+ },
+ {
+  "id": "033",
+  "tables": [
+   {
+    "caption_start": "Table 3: The average reward per timestep on the UR5-VisualReacher task during the last 10% of steps in an episode.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "five",
+    "n_source": "paper",
+    "groups": [],
+    "note": "Columns: Reward per step, SAC, RAD, SVEA, MaDi. Rows: Training env. = 1.38 \u00b10.09 / 1.32 \u00b10.11 / 1.18 \u00b10.37 / 1.95 \u00b10.09; Testing env. = 0.32 \u00b10.04 / 0.24 \u00b10.07 / 0.47 \u00b10.14 / 0.74 \u00b10.07. No cell is bold (verified at enlarged crop), so no single-winner groups; the caption states in prose that MaDi receives higher rewards. Every cell prints a \u00b1 value, but the table caption does not say what the \u00b1 denotes. Run count from the paper's run sentences ('undiscounted return over five random seeds during the last 10% of', and repeated 'mean and standard error over five seeds'); the Figure 7 caption on this same page also says 'mean and standard error over five seeds' for the same task, which suggests the \u00b1 is SE, but this is not stated in the table caption itself."
+   }
+  ],
+  "note": "Only one table body on this page (Table 3, left column). Also on the page: Figure 7 (learning curves, mean and standard error over five seeds) and Figure 8 (observation and mask images)."
+ },
+ {
+  "id": "034",
+  "tables": [
+   {
+    "caption_start": "Table 1: Price of fairness and welfare approximation results.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Theoretical summary table (price-of-fairness bounds with Thm./Prop./Cor. references), not experimental measurements. Only bold body cell is the word 'Incompatible' (Prop. 4.7), which is not a numeric winner. Rows: Det. UW/EW, Rand. UW/EW; columns: Price of Fairness 2-IFS, 2-UFS, Best Known 2-UFS SP Approx. Values: 2, 2, Incompatible; 1, n-1; 12/11, 1.094..., 1.5; 1, 1, 1. No dispersion, no bars. runs.txt is empty."
+   }
+  ],
+  "note": "Page 1076 of an AAMAS 2024 paper on the obnoxious facility location problem. Only one table on the page; it summarizes theoretical results, so no experimental results table is present."
+ },
+ {
+  "id": "035",
+  "tables": [
+   {
+    "caption_start": "Table 1: Summary of our results. Here, Delta is the maximum degree of the graph in question, and the lower bounds assume P != NP.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Theoretical summary table titled 'Approximations for Graphical House Allocation' listing asymptotic upper/lower bounds per graph class with Prop./Thm./Cor. references. Only the header cells (Graph Class, Upper Bound, Lower Bound) are bold; no body cell is bold. The word 'open' (Conj. 6.1) is printed in red. No dispersion, no bars. runs.txt sentences ('5 times the optimal value', 'consecutive runs', 'subroutine several times') are not run counts."
+   }
+  ],
+  "note": "Page 827 of an AAMAS 2024 paper on Graphical House Allocation. The single table is a summary of theoretical approximation bounds, not experimental results."
+ },
+ {
+  "id": "036",
+  "tables": [
+   {
+    "caption_start": "Table 1: Performance of various YOLOv10 models and input sizes.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Experimental results table, 6 rows (Model X/M at sizes 1080/960/640) x columns Model, Size, TP, FP, FN, Precision, Recall, F1 Score. No cell is bold anywhere in the body, so no winner groups. No +/-, parentheses, intervals, or std columns. Footnote: 'Note. TP = True Positive, FP = False Positive, and FN = False Negative.' Caption gives no run count; runs.txt sentences (survey frequencies, webcam, 'multiple times') do not give a run/seed count for this table. Values: X 1080: 1260 0 0 1.000 1.000 1.000; M 1080: 1246 2 12 0.998 0.991 0.994; X 960: 1233 10 17 0.992 0.986 0.989; M 960: 1231 10 19 0.992 0.985 0.988; X 640: 1219 9 32 0.993 0.974 0.984; M 640: 1131 37 92 0.968 0.925 0.946."
+   }
+  ],
+  "note": "Page 227 of an AAMAS 2025 paper (Schnauz card-game agent). One experimental results table (YOLOv10 detection performance) with no bold cells and no error bars; also a figure (Figure 2) and an equation, no other tables."
+ },
+ {
+  "id": "037",
+  "tables": [],
+  "note": "Page (AAMAS 2024, p.1643) holds Figures 20-22 (adversarial-example screenshots from Google Research Football) and 'Table 1: Hyperparameters used for finding adversarial examples in Google Research Football' (Parameter/value list: steps 5000, game duration 128, 4 CMA-ME emitters, 4 repeats per level, sigma 0.1, ranker improvement, QD score offset -2). That is a hyperparameter table, so it is excluded per instructions. No experimental results table on this page. Run sentences file mentions 'Standard error over 3 random seeds' and '4 repetitions', but they apply to tables elsewhere in the paper."
+ },
+ {
+  "id": "038",
+  "tables": [
+   {
+    "caption_start": "Table 1: Stability and optimality guarantees in vertex-weighted online assignment games.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Theoretical (analytic) guarantee table, not experimental: rows kappa / J / lambda, columns ex-post / ex-ante / avg. Cells: kappa 1/2 (bold), 1/2 (bold), 1-1/e; J 1/2 (bold), ?, 1-1/e (bold); lambda 1/2, 1-1/e, 1-1/e. Caption states bold = the authors' contributions and non-bold = reformulated literature results, so bold does not mark a per-group winner (ex-post column has two bold cells, kappa and J rows each have two bold cells). No dispersion, no runs."
+   },
+   {
+    "caption_start": "Table 2: Stability and optimality guarantees in edge-weighted with free disposal online assignment games.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Theoretical guarantee table, not experimental: rows kappa / J / lambda, columns ex-post / ex-ante / avg. Cells: kappa 0 (bold), 0 (bold), ?; J >= 1/4 (bold), >= 0.268 (bold), >= 0.268 (bold); lambda 1/2, >= 0.536, >= 0.536. Caption: inequality values are lower bounds whose tightness is open; bold = the authors' contributions, others = literature reformulations. Bold marks contributions, not a per-group winner. No dispersion, no runs."
+   }
+  ],
+  "note": "Page (AAMAS 2026, p.890) is the theory + conclusions page of the online assignment games paper. Both tables are summaries of proved bounds, not experiment outputs; recorded with results_table = n for completeness. Runs file contains only 'Stability in repeated matching markets' (a reference title), no seed/run counts."
+ },
+ {
+  "id": "039",
+  "tables": [],
+  "note": "Page (AAMAS 2024, p.436) holds 'Table 1: Overview of the properties composing the Team Diagnostic Survey and examples of statements [77] characterizing each property' \u2014 a descriptive table (Category / Property group / Property / Example statement) with no numbers, so it is not an experimental results table and is excluded. Rest of page is Section 4 User Study text. Runs file contains one unrelated sentence fragment ('adaptation of agents at run-time ...'), no run counts."
+ },
+ {
+  "id": "040",
+  "tables": [
+   {
+    "caption_start": "Table 1: Results for the Ideal Scenario",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "3-row table (Peers / Transactions / Global Trust: 5/10/1, 10/100/1, 20/1000/1). No cell is bold, no dispersion values, no run count in caption or text; the runs file is empty."
+   }
+  ],
+  "note": "Only one table body on the page (Table 1). Table 2 is referenced in the text but its body is not on this page. Page is an AAMAS 2024 paper on Shapley-value trust computation (EigenTrust comparison)."
+ },
+ {
+  "id": "041",
+  "tables": [
+   {
+    "caption_start": "Table 3: Overview on osm for the top five cities.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "minmax",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Dataset-statistics table (city network sizes: vertices, connections, diameter, theta, d, c), not experimental results; listed only for completeness. No bold cells. The theta/d/c columns print bracketed [min, max] ranges next to the mean (caption: 'we give the mean along with [min, max]'), which is a range rather than sd/se/ci. Run sentences in the runs file concern traversal/arrival times, not run counts."
+   }
+  ],
+  "note": "Only Table 3 has its body on this page; the rest of the page is text (Section 5 Experiments, 5.1 Data) and Figure 5. Text mentions 10 instances per constellation (1920 stars, 7680 paths instances) but that is an instance count, not a repeated-run count."
+ },
+ {
+  "id": "042",
+  "tables": [
+   {
+    "caption_start": "Table 1: Expected discounted rewards for all environments using different configurations for MCTS, RATS, and ADA-MCTS.",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [
+     {
+      "label": "Cliff Walking 0.4",
+      "direction": "higher",
+      "winner_mean": "0.778",
+      "winner_disp": "0.02",
+      "runner_mean": "0.650",
+      "runner_disp": "0.04"
+     },
+     {
+      "label": "Cliff Walking 0.5",
+      "direction": "higher",
+      "winner_mean": "0.815",
+      "winner_disp": "0.02",
+      "runner_mean": "0.664",
+      "runner_disp": "0.04"
+     },
+     {
+      "label": "Cliff Walking 0.6",
+      "direction": "higher",
+      "winner_mean": "0.830",
+      "winner_disp": "0.01",
+      "runner_mean": "0.670",
+      "runner_disp": "0.04"
+     },
+     {
+      "label": "Cliff Walking 0.8",
+      "direction": "higher",
+      "winner_mean": "0.871",
+      "winner_disp": "0.01",
+      "runner_mean": "0.680",
+      "runner_disp": "0.04"
+     },
+     {
+      "label": "Cliff Walking 0.9",
+      "direction": "higher",
+      "winner_mean": "0.883",
+      "winner_disp": "0.01",
+      "runner_mean": "0.758",
+      "runner_disp": "0.02"
+     },
+     {
+      "label": "Cliff Walking 1.0",
+      "direction": "higher",
+      "winner_mean": "0.947",
+      "winner_disp": "0.00",
+      "runner_mean": "0.951",
+      "runner_disp": "0.00"
+     },
+     {
+      "label": "NS Bridge 0.4",
+      "direction": "higher",
+      "winner_mean": "-0.642",
+      "winner_disp": "0.03",
+      "runner_mean": "-0.660",
+      "runner_disp": "0.03"
+     },
+     {
+      "label": "NS Bridge 0.5",
+      "direction": "higher",
+      "winner_mean": "-0.499",
+      "winner_disp": "0.08",
+      "runner_mean": "-0.436",
+      "runner_disp": "0.13"
+     },
+     {
+      "label": "NS Bridge 0.6",
+      "direction": "higher",
+      "winner_mean": "-0.384",
+      "winner_disp": "0.14",
+      "runner_mean": "-0.429",
+      "runner_disp": "0.09"
+     },
+     {
+      "label": "NS Bridge 0.8",
+      "direction": "higher",
+      "winner_mean": "-0.075",
+      "winner_disp": "0.10",
+      "runner_mean": "0.030",
+      "runner_disp": "0.16"
+     },
+     {
+      "label": "NS Bridge 0.9",
+      "direction": "higher",
+      "winner_mean": "0.135",
+      "winner_disp": "0.15",
+      "runner_mean": "0.245",
+      "runner_disp": "0.15"
+     },
+     {
+      "label": "NS Bridge 1.0",
+      "direction": "higher",
+      "winner_mean": "0.729",
+      "winner_disp": "0.00",
+      "runner_mean": "0.729",
+      "runner_disp": "0.00"
+     },
+     {
+      "label": "Frozen Lake 0.4",
+      "direction": "higher",
+      "winner_mean": "0.426",
+      "winner_disp": "0.12",
+      "runner_mean": "0.401",
+      "runner_disp": "0.16"
+     },
+     {
+      "label": "Frozen Lake 0.5",
+      "direction": "higher",
+      "winner_mean": "0.446",
+      "winner_disp": "0.13",
+      "runner_mean": "0.422",
+      "runner_disp": "0.16"
+     },
+     {
+      "label": "Frozen Lake 0.6",
+      "direction": "higher",
+      "winner_mean": "0.528",
+      "winner_disp": "0.14",
+      "runner_mean": "0.500",
+      "runner_disp": "0.13"
+     },
+     {
+      "label": "Frozen Lake 0.8",
+      "direction": "higher",
+      "winner_mean": "0.516",
+      "winner_disp": "0.11",
+      "runner_mean": "0.514",
+      "runner_disp": "0.06"
+     },
+     {
+      "label": "Frozen Lake 0.9",
+      "direction": "higher",
+      "winner_mean": "0.490",
+      "winner_disp": "0.12",
+      "runner_mean": "0.689",
+      "runner_disp": "0.16"
+     },
+     {
+      "label": "Frozen Lake 1.0",
+      "direction": "higher",
+      "winner_mean": "0.988",
+      "winner_disp": "0.00",
+      "runner_mean": "0.988",
+      "runner_disp": "0.00"
+     }
+    ],
+    "note": "Columns: MCTS-P_k, RATS-P_k (know ground truth), MCTS-Phat_{k-1}, RATS-P_{k-1}, RATS-Phat_{k-1}, ADA-MCTS. All cells print 'mean \u00b1 value' except NS Bridge 0.6 RATS-P_{k-1} which prints '-0.512' with no bar. Caption does not say whether \u00b1 is sd/se/ci. Every one of the 18 rows has exactly one bold cell. Bold winners: ADA-MCTS in Cliff Walking 0.4-0.9, NS Bridge 0.4/0.5/0.8, Frozen Lake 0.4/0.5/0.8/0.9; MCTS-Phat_{k-1} in Cliff Walking 1.0, NS Bridge 0.6/0.9/1.0, Frozen Lake 1.0; RATS-P_{k-1} in Frozen Lake 0.6. In 6 rows the bold cell is NOT the row maximum: the ground-truth MCTS-P_k column is higher (Cliff Walking 1.0: 0.951 vs bold 0.947; NS Bridge 0.5: -0.436 vs -0.499; NS Bridge 0.8: 0.030 vs -0.075; NS Bridge 0.9: 0.245 vs 0.135; Frozen Lake 0.9: 0.689 vs 0.490) or ties it (NS Bridge 1.0 and Frozen Lake 1.0: both 0.729 / 0.988 \u00b1 0.00) \u2014 bold appears to mark the best among approaches without ground-truth access. Runner values reported are the best non-bold cell in the row regardless of column group. No run/seed count in caption, page text (30000 iterations refers to MCTS tree iterations), or runs file."
+   }
+  ],
+  "note": "One table body on the page (Table 1, top of page, spanning both columns). Table 2 (computation time) and Figure 2 (ablation) are referenced but not on this page."
+ },
+ {
+  "id": "043",
+  "tables": [
+   {
+    "caption_start": "Table 1: Scenario name and line-up illustration for each benchmark scenario",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Table body is eight pitch diagrams with scenario names (3v1, pass, run, 5 vs 5, corner, ct-e, ct-h, 11 vs 11); no numeric results, no bold cells. Run sentences (five/three random seeds) belong to later results tables, not this one."
+   }
+  ],
+  "note": "Page 1774 of a GRF multi-agent benchmark paper (AAMAS 2024): Sections 2-4.1 text plus Table 1 scenario illustrations. No experimental results table on this page."
+ },
+ {
+  "id": "044",
+  "tables": [
+   {
+    "caption_start": "Table 1: Summary of results: axioms and rules in bold are newly presented in this paper.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Theoretical summary: rows = sharing rules (DMC, SV, eRFC, MES, NDMES, ULMES, eULMES, IR-eULMES), columns = axioms (IR*, Part, EA, Stay, S-Stay, OD, SF, Poly-time) with check marks / dashes (some dashes carry dagger/double-dagger footnotes). Bold marks the newly proposed rules and axioms per the caption, not a per-group winner. No numeric cells, no dispersion."
+   }
+  ],
+  "note": "Page 479 of an online cooperative games paper (AAMAS 2026): Sections 1.1-2.1 text plus Table 1 axiom summary. Run sentences file only contains complexity statements (O(n), O(n^2)), no seed/run counts. No experimental results table on this page."
+ },
+ {
+  "id": "045",
+  "tables": [
+   {
+    "caption_start": "Table 3: Performance Test. Each matchup evaluated for 1000 games, with errors \u00b10.03.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "unlabelled",
+    "n_runs": "1000",
+    "n_source": "caption",
+    "groups": [],
+    "note": "4x4 cross-play win-rate matrix; rows and columns labelled 1 (BCSP), 4 (BCSP), 16 (BCDO), 64 (BCSP) (row labels printed as '1 (BCSP)', '4 (BCSP' [missing paren], '16 (BCDO)', '64 (BCSP)'); diagonal is '\u2013'. Values: row 1: \u2013, 0.699, 0.74, 0.698; row 4: 0.301, \u2013, 0.594, 0.672; row 16: 0.26, 0.406, \u2013, 0.644; row 64: 0.302, 0.328, 0.356, \u2013. Only header/row-label text is bold; no numeric cell is bold, so no winner groups. No cell prints a bar; the caption states a single global 'errors \u00b10.03' without saying sd/se/ci, hence bar_kind unlabelled. n_runs = 1000 games per matchup from caption; run sentences also mention 5 training seeds."
+   },
+   {
+    "caption_start": "Table 4: Generalization Test. Each matchup evaluated for 1000 games, with errors \u00b10.03.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "unlabelled",
+    "n_runs": "1000",
+    "n_source": "caption",
+    "groups": [],
+    "note": "Same 4x4 layout as Table 3 (row labels printed '1 (BCSP' [missing paren], '4 (BCSP)', '16 (BCDO)', '64 (BCSP)'). Values: row 1: \u2013, 0.405, 0.375, 0.331; row 4: 0.595, \u2013, 0.453, 0.422; row 16: 0.625, 0.547, \u2013, 0.436; row 64: 0.669, 0.578, 0.564, \u2013. No numeric cell is bold; no per-cell bar; global 'errors \u00b10.03' in caption only, kind not named. n_runs = 1000 games per matchup from caption."
+   },
+   {
+    "caption_start": "Table 5: Team Similarity Score Statistics. Comparison between the \u2264 64 seen teams and the 72 unseen teams.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "5",
+    "n_source": "page",
+    "groups": [],
+    "note": "Descriptive statistics of the experimental setup (team similarity between seen and unseen teams), not a performance result, so marked n; parent may reclassify. Columns Run, Mean, Median, Min, Max; rows Run 1-5: 1: 0.508, 0.513, 0.268, 0.946; 2: 0.522, 0.526, 0.221, 0.947; 3: 0.530, 0.524, 0.221, 0.948; 4: 0.557, 0.554, 0.260, 0.947; 5: 0.526, 0.526, 0.238, 0.948. No bold numeric cells, no dispersion. n_runs 5 from the five Run rows and page sentences 'all 5 training seeds' / 'across all training seeds'."
+   }
+  ],
+  "note": "Page 2305 of a Pok\u00e9mon-style team-battle MARL paper (AAMAS 2026): Figure 3 heatmaps, Tables 3-5, Figure 4, Sections 5.3-5.4 text. No table on this page has any bold numeric cell, so no winner/runner-up groups are recorded."
+ },
+ {
+  "id": "046",
+  "tables": [
+   {
+    "caption_start": "Table 1: Comparison of the original PRIMAL and CACTUS w.r.t. various numbers in our experiments.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "10",
+    "n_source": "page",
+    "groups": [],
+    "note": "Table body: rows Training Time (\u2248 20 days | \u2248 1 day | \u2248 5%), # Training Episodes (\u2248 3.8 million | 160,000 | \u2248 4.2%), # Parameters (\u2248 13 million | 579,979 | \u2248 4.5%), # Reward Penalties (4 | 1 | 25%); columns PRIMAL (original [30]) / CACTUS / Rel. to PRIMAL. No cell is bold, no dispersion printed anywhere. Borderline results table: it is a training-cost/complexity comparison placed in Section 7 RESULTS (7.1 Simplicity of CACTUS); PRIMAL numbers are taken from [30]. Caption gives no run count; the page text says 'For each experiment, all respective algorithms are run 10 times to report the average progress and the 95% confidence interval', but the table's values are single quantities (episodes = 5000 epochs x 32, parameter count) rather than averages with CIs, so the 10-run statement may not really apply to this table."
+   }
+  ],
+  "note": "One table on the page (Table 1, right column). Page also contains Sections 6 Experimental Setup and 7 Results text; the 10-runs / 95% CI statement is the paper's generic results-section protocol."
+ },
+ {
+  "id": "047",
+  "tables": [
+   {
+    "caption_start": "Table 1: Entities and attributes used in the simulation",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Descriptive/notation table listing simulation entities (Household agent, Energy data, Price signal) and their attributes; no numeric results, no bold cells in the body (only the header row 'Entities' / 'Attributes' is bold), no bars. Listed only for completeness and marked as not a results table."
+   }
+  ],
+  "note": "No experimental results table on this page. The only table is a setup/notation table (entities and attributes). Run sentences mention simulation runs and seed-set runs but no numeric run count applies to any table here."
+ },
+ {
+  "id": "048",
+  "tables": [
+   {
+    "caption_start": "Table 1: Properties of specific veto core consistent voting rules.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Axiomatic (theoretical) Yes/No property table: rows Anonymity, Neutrality, Monotonicity, P. responsiveness, Independence of UL, Voter adaptability, P. involvement, N. involvement, S. n. involvement; columns VCore, S_Iter, R_Lex, R_GA, VbC, VbC_GA. Entries are Yes/No proven properties, not experimental measurements; no bold cells, no dispersion, no bars. Marked n because it is not experimental results (theory paper). If the audit counts it as a results table, orientation would still be none (no bold)."
+   }
+  ],
+  "note": "Theory paper page (veto core consistent voting rules); the single table is a Yes/No property summary from propositions, not an experiment. Run sentences on file refer to 'plurality with run-off' and 'a run of veto by consumption', not to repeated experimental runs."
+ },
+ {
+  "id": "049",
+  "tables": [
+   {
+    "caption_start": "Table 1: Summary of complexity results.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Theoretical complexity-class summary (rows General/Myopic/k-bounded/Memoryless; columns E-Nash/Membership with entries Undecidable, 2EXPTIME, PSPACE). No numeric measurements, no bold cells, no dispersion. Runs file sentences refer to counter-machine loop counts, not experimental runs."
+   }
+  ],
+  "note": "AAMAS 2024 page 872 (preliminaries of a stochastic-games complexity paper). Only table on the page is a non-experimental complexity summary."
+ },
+ {
+  "id": "050",
+  "tables": [
+   {
+    "caption_start": "Table 1: Related work overview",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Related-work comparison table (Reference / Formal framework / Belief update / Algebraic equation with checkmarks and dashes). No numeric results, no bold cells. Runs file is empty."
+   }
+  ],
+  "note": "AAMAS 2026 page 1503 (belief-revision / abelian group epistemic states paper). Only table is a related-work overview, not experimental."
+ },
+ {
+  "id": "051",
+  "tables": [
+   {
+    "caption_start": "Table 1: Summary of results.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Theoretical parameterized-complexity summary for Kidney Exchange (rows: t; t+l_p+l_c; pathwidth; pathwidth; DFVS+l_p+l_c; entries FPT / No poly kernel / W[1]-hard / Para-NP Hard with theorem references). No experimental numbers, no bold body cells (caption text is bold as a whole), no dispersion. Runs-file sentences concern algorithm running time, not repeated experimental runs."
+   }
+  ],
+  "note": "AAMAS 2026 page 2709 (Kidney Exchange parameterized complexity paper, Section 1.1 Our Contribution). Only table is a theoretical results summary, not experimental."
+ },
+ {
+  "id": "052",
+  "note": "Page 2241 of an AAMAS 2025 paper (RBQL). One results table (Table 1) plus Figures 3-5 (bar chart and rule-visualization heatmaps, not tables). Bold winners are printed in red bold.",
+  "tables": [
+   {
+    "caption_start": "Table 1: Performance of RBQL and Benchmarks.",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "10",
+    "n_source": "paper",
+    "groups": [
+     {
+      "label": "Taxi",
+      "direction": "higher",
+      "winner_mean": "10.60",
+      "winner_disp": "3.26",
+      "runner_mean": "3.27",
+      "runner_disp": "3.25"
+     },
+     {
+      "label": "Postman5",
+      "direction": "higher",
+      "winner_mean": "35.75",
+      "winner_disp": "0.11",
+      "runner_mean": "33.84",
+      "runner_disp": "1.05"
+     },
+     {
+      "label": "Postman7",
+      "direction": "higher",
+      "winner_mean": "28.60",
+      "winner_disp": "1.12",
+      "runner_mean": "28.23",
+      "runner_disp": "4.89"
+     }
+    ],
+    "note": "Rows: Q-tabular, DQN, A2C, PPO, RBQL(OURS); columns: Mountain-Car, Cliff-Walk, Taxi, Blackjack, Postman4, Postman5, Postman7. Every cell is mean +/- value; caption names no bar kind, but the paper's run sentence (not on this page) reads 'The results, averaged over 10 runs with standard devia[tion]', so bars are SD by paper text. Columns with more than one bold cell (excluded): Mountain-Car (DQN -147.51 +/- 11.44 and RBQL -147.65 +/- 9.45 both bold), Cliff-Walk (Q-tabular, DQN, RBQL all -13.00 +/- 0.00 bold), Blackjack (Q-tabular 0.464 +/- 0.05, DQN 0.464 +/- 0.12, RBQL 0.464 +/- 0.06 bold), Postman4 (Q-tabular 34.83 +/- 1.58 and RBQL 34.25 +/- 1.02 bold). Taxi winner is Q-tabular, runner DQN; Postman5 winner Q-tabular, runner DQN; Postman7 winner RBQL(OURS), runner Q-tabular. A2C Taxi cell is a dash."
+   }
+  ]
+ },
+ {
+  "id": "053",
+  "note": "Page 193 of an AAMAS 2025 paper (TSP neural solver, Our(U)/Our(UCM)/Our(UCM-CSize)). Whole page is one results table; run sentences only mention x8 instance augmentation, no seed/run count.",
+  "tables": [
+   {
+    "caption_start": "Table 1: Empirical results on all test tasks with various distributions and problem sizes. Each task includes 1K instances.",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [
+     {
+      "label": "Uniform TSP-100 Gap",
+      "direction": "lower",
+      "winner_mean": "0.01%",
+      "winner_disp": "none",
+      "runner_mean": "0.01%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Uniform TSP-150 Gap",
+      "direction": "lower",
+      "winner_mean": "0.09%",
+      "winner_disp": "none",
+      "runner_mean": "0.12%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Uniform TSP-200 Gap",
+      "direction": "lower",
+      "winner_mean": "0.27%",
+      "winner_disp": "none",
+      "runner_mean": "0.78%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Uniform TSP-300 Gap",
+      "direction": "lower",
+      "winner_mean": "0.99%",
+      "winner_disp": "none",
+      "runner_mean": "3.08%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Cluster TSP-100 Gap",
+      "direction": "lower",
+      "winner_mean": "0.03%",
+      "winner_disp": "none",
+      "runner_mean": "0.03%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Cluster TSP-150 Gap",
+      "direction": "lower",
+      "winner_mean": "0.15%",
+      "winner_disp": "none",
+      "runner_mean": "0.25%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Cluster TSP-200 Gap",
+      "direction": "lower",
+      "winner_mean": "0.45%",
+      "winner_disp": "none",
+      "runner_mean": "1.08%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Cluster TSP-300 Gap",
+      "direction": "lower",
+      "winner_mean": "1.63%",
+      "winner_disp": "none",
+      "runner_mean": "3.52%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Mixed TSP-100 Gap",
+      "direction": "lower",
+      "winner_mean": "0.03%",
+      "winner_disp": "none",
+      "runner_mean": "0.04%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Mixed TSP-150 Gap",
+      "direction": "lower",
+      "winner_mean": "0.17%",
+      "winner_disp": "none",
+      "runner_mean": "0.21%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Mixed TSP-200 Gap",
+      "direction": "lower",
+      "winner_mean": "0.39%",
+      "winner_disp": "none",
+      "runner_mean": "0.81%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Mixed TSP-300 Gap",
+      "direction": "lower",
+      "winner_mean": "1.16%",
+      "winner_disp": "none",
+      "runner_mean": "3.05%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Explosion TSP-100 Gap",
+      "direction": "lower",
+      "winner_mean": "0.01%",
+      "winner_disp": "none",
+      "runner_mean": "0.01%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Explosion TSP-150 Gap",
+      "direction": "lower",
+      "winner_mean": "0.09%",
+      "winner_disp": "none",
+      "runner_mean": "0.14%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Explosion TSP-200 Gap",
+      "direction": "lower",
+      "winner_mean": "0.31%",
+      "winner_disp": "none",
+      "runner_mean": "0.84%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Explosion TSP-300 Gap",
+      "direction": "lower",
+      "winner_mean": "1.42%",
+      "winner_disp": "none",
+      "runner_mean": "3.14%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Expansion TSP-100 Gap",
+      "direction": "lower",
+      "winner_mean": "0.15%",
+      "winner_disp": "none",
+      "runner_mean": "0.18%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Expansion TSP-150 Gap",
+      "direction": "lower",
+      "winner_mean": "0.58%",
+      "winner_disp": "none",
+      "runner_mean": "0.73%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Expansion TSP-200 Gap",
+      "direction": "lower",
+      "winner_mean": "1.17%",
+      "winner_disp": "none",
+      "runner_mean": "1.56%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Expansion TSP-300 Gap",
+      "direction": "lower",
+      "winner_mean": "2.79%",
+      "winner_disp": "none",
+      "runner_mean": "3.14%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Rotation TSP-100 Gap",
+      "direction": "lower",
+      "winner_mean": "0.02%",
+      "winner_disp": "none",
+      "runner_mean": "0.02%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Rotation TSP-150 Gap",
+      "direction": "lower",
+      "winner_mean": "0.09%",
+      "winner_disp": "none",
+      "runner_mean": "0.15%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Rotation TSP-200 Gap",
+      "direction": "lower",
+      "winner_mean": "0.29%",
+      "winner_disp": "none",
+      "runner_mean": "0.83%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Rotation TSP-300 Gap",
+      "direction": "lower",
+      "winner_mean": "1.15%",
+      "winner_disp": "none",
+      "runner_mean": "3.34%",
+      "runner_disp": "none"
+     }
+    ],
+    "note": "Table has 6 distribution blocks (Uniform, Cluster, Mixed, Explosion, Expansion, Rotation) x 4 sizes (TSP-100/150/200/300) x (Gap, Time). Bold appears only in Gap columns, exactly one bold per Gap column per block = 24 groups (all listed). Time columns have no bold. Concorde row (exact solver, 0.00% gap in every column by definition) is excluded from runner-up; runner-up is the best non-bold learned method. Winners: Uniform TSP-100 = Our(U) (Our(UCM) and Our(UCM-CSize) also print 0.01% unbolded); Cluster/Mixed/Explosion TSP-100 = Our(UCM) (Explosion: Our(U) and Our(UCM-CSize) also 0.01% unbolded; Cluster: Our(UCM-CSize) also 0.03% unbolded); all other 20 groups = Our(UCM-CSize) (Rotation TSP-100: Our(UCM) also 0.02% unbolded). Runners: TSP-150 groups are Our(U) (Uniform) or Our(UCM) (others); TSP-200 runner is Our(UCM) except Expansion (ELG## 1.56%); TSP-300 runner is ELG## except Rotation (INViT-V3 3.12%) -- correction: Rotation TSP-300 runner is INViT-V3 3.12%, not ELG## 3.34%; use 3.12%. No dispersion anywhere. '1K instances' in the caption is test-set size, not a run/seed count; run sentences mention only x8 instance augmentation."
+   }
+  ]
+ },
+ {
+  "id": "054",
+  "note": "Page 2823 of an AAMAS 2026 paper (2-task allocation game, SA-X mechanism). Only table is Table 2, a worked analytical example (workloads/subsidies in Example 3 as closed-form fractions with epsilon), not experimental results; no bold cells, rows (7,3) and (8,2) shaded grey to mark the NE, red text marks subsidy terms. Remainder of page is propositions and proofs.",
+  "tables": [
+   {
+    "caption_start": "Table 2: The workload of each agent in Example 3 by using SA-X.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Analytical example table (Initializing s_i=1 / s_i=2, Tuning s_i=1 / s_i=2, S_k) for strategy profiles (0,10) to (10,0); symbolic fractions, no experiments, no bold winners, no dispersion."
+   }
+  ]
+ },
+ {
+  "id": "055",
+  "tables": [
+   {
+    "caption_start": "Table 1: Binary features F to describe the fundamental motions and high-level actions of vehicles (including ego).",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Feature-definition / notation table (Feature, Calculation, Explanation columns; e.g. Acceleration a^i > delta_a -> Accelerate). No numeric results, no bold cells, no dispersion. Not a results table."
+   }
+  ],
+  "note": "Page 775 of an AAMAS 2024 paper (CEMA). Only table on the page is the feature-definition Table 1; text mentions K = 100 counterfactual worlds and alpha = 0.1; runs file mentions '5-fold cross-validation repeated 7 times' and 'sequences 50 times' but no results table is on this page. Figures 3-4 referenced but not on this page."
+ },
+ {
+  "id": "056",
+  "tables": [
+   {
+    "caption_start": "Table 1: Analyses",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Study-design table: Part # (1, 2), Analyses (Explanation Types (visual only); Explanation Modality), Cohort Groups (Control (CAI), LIME, SALMAP, SHAP, FAU-V; Control (CAI), FAU-T, FAU-V, FAU-VT). No numeric results, no bold cells, no dispersion. Not a results table."
+   }
+  ],
+  "note": "Page 1514 of an AAMAS 2025 paper on FER explanations / trust. Only table is the analyses-design Table 1; Figure 2 shows masked image explanations. No experimental results table on this page."
+ },
+ {
+  "id": "057",
+  "tables": [
+   {
+    "caption_start": "Table 1: Overview of key complexity results. Here, d denotes the maximum preference list length",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Theoretical complexity-classification table (rows MinBP, MinBA, Minimax*, Preferential*; columns SRI, Max-SMI; cells are P / NP-h / W[1]-h / FPT / XP statements with citations and theorem refs). Contributions coloured blue, no bold cells, no numeric means, no dispersion. Not an experimental results table."
+   }
+  ],
+  "note": "Page 2525 of an AAMAS 2026 paper on almost-stable matchings. Only table is the complexity overview Table 1 (theoretical, not experimental). Runs file lines refer to algorithm running times, not repeated experimental runs."
+ },
+ {
+  "id": "058",
+  "note": "Page holds one results table (Table 2, dm_control, 500K steps). Figure references only otherwise. Caption gives no run count; runs.txt has 'reported by averaging five random seeds' (not on this page), so n_source = paper; unclear whether it covers the MPO/DMPO/D4PG/DreamerV3 columns copied from the DreamerV3 paper.",
+  "tables": [
+   {
+    "caption_start": "Table 2: The performance of CPQL and SOTA baselines on dm_control tasks under 500K environment steps.",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "5",
+    "n_source": "paper",
+    "note": "Plain means, no dispersion anywhere. Row 'Cartpole Balance Sparse' has two bold cells (PPO 1000.0 and CPQL 1000.0) so it is excluded from the single-bold groups. 16 rows total incl. shaded Average row; 15 single-bold groups listed. Columns: TD3, SAC, PPO, MPO, DMPO, D4PG, DreamerV3, CPQL.",
+    "groups": [
+     {
+      "label": "Acrobot Swingup",
+      "direction": "higher",
+      "winner_mean": "183.1",
+      "winner_disp": "none",
+      "runner_mean": "154.5",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Cartpole Balance",
+      "direction": "higher",
+      "winner_mean": "999.2",
+      "winner_disp": "none",
+      "runner_mean": "998.8",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Cartpole Swingup",
+      "direction": "higher",
+      "winner_mean": "874.6",
+      "winner_disp": "none",
+      "runner_mean": "860.7",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Cheetah Run",
+      "direction": "higher",
+      "winner_mean": "727.6",
+      "winner_disp": "none",
+      "runner_mean": "623.5",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Finger Spin",
+      "direction": "higher",
+      "winner_mean": "965.4",
+      "winner_disp": "none",
+      "runner_mean": "937.2",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Finger Turn Easy",
+      "direction": "higher",
+      "winner_mean": "874.1",
+      "winner_disp": "none",
+      "runner_mean": "745.4",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Finger Turn Hard",
+      "direction": "higher",
+      "winner_mean": "864.6",
+      "winner_disp": "none",
+      "runner_mean": "841.0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Hopper Hop",
+      "direction": "higher",
+      "winner_mean": "130.1",
+      "winner_disp": "none",
+      "runner_mean": "111.0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Hopper Stand",
+      "direction": "higher",
+      "winner_mean": "902.1",
+      "winner_disp": "none",
+      "runner_mean": "755.4",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Reacher Easy",
+      "direction": "higher",
+      "winner_mean": "981.2",
+      "winner_disp": "none",
+      "runner_mean": "973.4",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Reacher Hard",
+      "direction": "higher",
+      "winner_mean": "965.7",
+      "winner_disp": "none",
+      "runner_mean": "963.6",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Walker Run",
+      "direction": "higher",
+      "winner_mean": "683.8",
+      "winner_disp": "none",
+      "runner_mean": "632.7",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Walker Stand",
+      "direction": "higher",
+      "winner_mean": "983.6",
+      "winner_disp": "none",
+      "runner_mean": "973.4",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Walker Walk",
+      "direction": "higher",
+      "winner_mean": "965.1",
+      "winner_disp": "none",
+      "runner_mean": "952.6",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Average",
+      "direction": "higher",
+      "winner_mean": "804.9",
+      "winner_disp": "none",
+      "runner_mean": "745.6",
+      "runner_disp": "none"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "id": "059",
+  "note": "Page holds Figure 4, Figure 5 and one results table (Table 1, GACG vs BVME on SMAC maps). Page body text states 'All experiments are conducted on three cooperative MARL benchmarks with results averaged over 5 random seeds.'",
+  "tables": [
+   {
+    "caption_start": "Table 1: Comparison of GACG at full budget (r = 0.30) with BVME at reduced ratios on SMAC maps.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "5",
+    "n_source": "page",
+    "note": "No cell is bold; plain AUC and Win values with no dispersion. Two map blocks (3s5z, 8m_vs_9m) x 4 rows (GACG-0.30, BVME-0.05, BVME-0.075, BVME-0.10). Run count comes from the page text ('averaged over 5 random seeds'), not the caption.",
+    "groups": []
+   }
+  ]
+ },
+ {
+  "id": "060",
+  "note": "Page holds Figure 4 (bar chart, caption says mean episodic return \u00b1 standard error) and one results table (Table 2, Blackjack). Caption of Table 2 gives no run count; runs.txt sentences (32 runs / 25 runs / 26 remaining runs / 10 ProbLog evaluations) refer to other environments, not to this Blackjack table, so no run count is assigned.",
+  "tables": [
+   {
+    "caption_start": "Table 2: Blackjack: performance of MLP actors, neural DNF-MT actors, and the extracted ProbLog programs.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "none",
+    "n_source": "none",
+    "note": "No cell is bold. Every numeric cell prints a \u00b1 value (e.g. -0.050 \u00b1 0.001, 42.94% \u00b1 0.00%); the table caption does not say what the \u00b1 is. The Figure 4 caption on the same page labels its bars as standard error, but that is the figure, not this table. Policy Divergence column has NA for Q-table and merged cells spanning MLP*/MLP\u2021 (15.87% \u00b1 0.30%) and NDNF-MT*/NDNF-MT\u2021 (20.66% \u00b1 0.56%).",
+    "groups": []
+   }
+  ]
+ },
+ {
+  "id": "061",
+  "tables": [
+   {
+    "caption_start": "Table 4: Payoff matrix with a system interference term D",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Game-theoretic payoff matrix in symbolic form ((B, T), (Z, T), (B, T - C), (-S - alpha beta D, delta S - C)); no numeric experimental results, no bold cells, no dispersion. Rest of page is proof text, Figures 4-6 (line plots of system loss vs S, B, n) and start of references."
+   }
+  ],
+  "note": "Only one table (Table 4) on the page and it is a symbolic payoff matrix, not experimental results. Runs file is empty."
+ },
+ {
+  "id": "062",
+  "tables": [
+   {
+    "caption_start": "Table 3: Atari: Average Generalized Top-k ranking error, AGRE",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "ci",
+    "n_runs": "100",
+    "n_source": "paper",
+    "groups": [
+     {
+      "label": "AGRE(k = 3)",
+      "direction": "lower",
+      "winner_mean": "0.019031",
+      "winner_disp": "none",
+      "runner_mean": "0.025931",
+      "runner_disp": "none"
+     },
+     {
+      "label": "AGRE(k = 8)",
+      "direction": "lower",
+      "winner_mean": "0.008095",
+      "winner_disp": "none",
+      "runner_mean": "0.009034",
+      "runner_disp": "none"
+     }
+    ],
+    "note": "Table has 16 algorithm rows x 2 columns; BatchSCO is the single bold row (bold in both columns), so each column holds exactly one bold cell. No cell prints a dispersion; the caption only states a blanket '95% confidence intervals for each entry was < 10^-3' (hence bar_kind ci but any_error_bar n). Caption gives no run count; the run sentence 'mean over the same 100 seeds with 95% confidence intervals' is the only run count in the paper and appears to come from the synthetic-data section, so its applicability to this Atari table is inferred, not stated. Runner-up in both columns is OnlineSCO. Table caption is placed below the table body."
+   }
+  ],
+  "note": "One results table (Table 3) on the page, body fully on page. Remainder of page is text (Related Work, Conclusion, Acknowledgments)."
+ },
+ {
+  "id": "063",
+  "tables": [
+   {
+    "caption_start": "Table 1: Overview of the best known upper and lower bounds on the metric distortion",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Theoretical table of proven lower/upper bounds (RSCF LB/UB, SCF LB/UB for All, Tops-only, Pairwise, Majoritarian). Caption says 'The bold numbers are proven in this paper' -- bold marks provenance (Majoritarian RSCF LB 4 and UB 4 appear bold), not a per-group winner, so orientation none. No experimental results, no dispersion."
+   }
+  ],
+  "note": "Only one table (Table 1) on the page and it is a theory/bounds overview, not experimental results. Runs file is empty."
+ },
+ {
+  "id": "064",
+  "tables": [
+   {
+    "caption_start": "Table 1: Summary of Experimental Parameters by Study",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "10 (Scalability, Comm. Robustness); 1 (Fault Severity, Cascade Timeline); 3 (Zero-Delay); 5 (Ablation)",
+    "n_source": "page",
+    "groups": [],
+    "note": "Experimental-setup table, not results: columns Study | Agent Count (N) | Fault Rate | Duration (s) | Seeds | Key Varied Parameter. Rows: Scalability 30-120 (Steps of 10) / 25% / 20 / 10 / Swarm Size (N); Fault Severity 60 / \u224820% / 15 / 1 / Fault Profile (Minor/Severe); Cascade Timeline 60 / 50% / 30 / 1 / Temporal Resolution; Comm. Robustness 120 / 30% / 15 / 10 / Packet Loss (0-100%); Zero-Delay 60 / 30% / 30 / 3 / Fault Timing Gap (= 0); Ablation 120 / 30% / 20 / 5 / Detection Logic. No bold cells, no dispersion. Seeds per study come from the table's Seeds column and the page text (Sec. 4.2: '10 random seeds for scalability and packet-loss studies, 5 seeds for the ablation study, 3 seeds for zero-delay robustness tests'). Listed only so the caller knows it was seen; excluded per the ignore-hyperparameter-tables rule."
+   }
+  ],
+  "note": "AAMAS 2026 page 2557 (hormone-based fault detection in swarms). Page holds Sec. 3.4-3.5, Algorithm 1 (Adaptive Emission and Quarantine Logic), Sec. 4 Experimental Setup, 4.1, start of 4.2. Only table is the parameters summary (Table 1); no results tables on this page. Runs file mentions 'mean \u00b1 standard error over 10 seeds' for later results tables, but none of those are on this page."
+ },
+ {
+  "id": "065",
+  "tables": [
+   {
+    "caption_start": "Table 1: Syntax of Cupid [15].",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Notation/grammar table (Event, LifeEvent, Expr, Time, ComSpec productions). No numeric cells, no bold, no dispersion. Listed only so the caller knows it was seen; excluded per the ignore-notation-tables rule."
+   }
+  ],
+  "note": "AAMAS 2025 page 493 (Azorus: Chopra, Baldoni, Christie, Singh). Page holds Cupid syntax discussion, Figure 3 (Azorus architecture and programming model), Sec. 4 Programming Model, 4.1 Protocol Adapter. No experimental results tables on this page; runs file has no seed/run counts."
+ },
+ {
+  "id": "066",
+  "tables": [
+   {
+    "caption_start": "Table 1: Running example of Algorithm 2, inputs: \u03b1 = 0.25, \u03b2 = 0.5, d = {1 : 3, 2 : 0}",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Worked trace of GuidedGreedy (Algorithm 2), not experimental results. Columns Iter | |S| | d | c (L5) | c_d (L6) | L8 Check | Action; 3 iterations. Bold appears only on the condition outcomes 'No'/'Yes' in the L8 Check column (e.g. '0 > 0? No', '4 \u2265 0.5 \u00b7 10? No', '1 > 0? Yes', '2 > 0? Yes'), which marks branch outcomes rather than a winner per group. No dispersion. Listed only so the caller knows it was seen."
+   }
+  ],
+  "note": "AAMAS 2026 page 933 (LLM-enhanced district resource allocation, Ethiopia). Page holds Table 1 running example, Step 5 prompt optimization (Eqs. 6-7), Algorithm 1 (LLM-Enhanced District Resource Allocation), Remark 2, Algorithm 2 (GuidedGreedy), Sec. 4.2 Theoretical Guarantee with Theorem 4.1. No experimental results tables; runs file has no seed/run counts."
+ },
+ {
+  "id": "067",
+  "tables": [
+   {
+    "caption_start": "Table 1: Existence of fair and strategyproof mechanism",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Theoretical existence table: cells are check/cross marks with citations or theorem references (rows: Pareto efficiency, nonwastefulness, cut-off nonwastefulness, weak nonwastefulness, no vacant college, no empty matching; columns: maximum quotas, hereditary & M-natural-convex set, hereditary). Red marks denote new results. No numeric results, no bold, no bars."
+   }
+  ],
+  "note": "AAMAS 2024 paper page 376 (matching under distributional constraints). Only table on page is a theoretical existence/compatibility table, not experimental results. Runs file contains only a fragment ('... and run') with no run count."
+ },
+ {
+  "id": "068",
+  "tables": [
+   {
+    "caption_start": "Table 2: Desirable properties for diffusion matching mechanisms.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Theoretical property/implication diagram in table form (IR, IC, Stable -> Stable-wcc -> Stable-cc, PO -> Optimal-wcc -> Optimal-cc; boundaries in red). No numeric results, no bold, no bars."
+   }
+  ],
+  "note": "AAMAS 2025 paper page 1961 (networked housing market / diffusion matching). Only table is a theoretical property table; Figure 1 is a social-network example. Runs file contains algorithm-description fragments only, no run count."
+ },
+ {
+  "id": "069",
+  "tables": [
+   {
+    "caption_start": "Table 1: Mean Feature Value Differences",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Columns: Feature, Maia Mean, Leela Mean, A_w (16 feature rows: Ply 50.1/39.1/0.55; Material Points 28.2/28.7/0.52; Adversary Material Pts. 22.7/27.7/0.59; Pawn Islands 2.5/2.6/0.51; Adversary Pawn Islands 2.4/2.7/0.58; Defended Pieces 0.76/0.77/0.53; Adversary Defended Pcs. 0.61/0.72/0.57; Concentration 3.2/3.0/0.55; Adversary Concentration 2.7/3.0/0.58; Legal moves 35.1/33.1/0.54; Adversary Legal Moves 26.7/32.5/0.60; Attacks 24.6/22.8/0.55; Adversary Attacks 18.5/22.5/0.61; King Freedom 3.0/2.4/0.57; Adversary King Freedom 2.6/2.6/0.50). No cell is bold; no +/- , parentheses, intervals, or std column. Caption gives no run count; run sentences ('Our experiments are repeated', 'We repeated the above experiment for three different levels of asymmetry') give no numeric run count applicable to this table."
+   }
+  ],
+  "note": "AAMAS 2025 paper page 1946 (Maia/Leela chess team synergy, RL manager). Figure 7 is box plots (not a table). The single results table is a descriptive means/effect-size table with no winners marked and no dispersion."
+ },
+ {
+  "id": "070",
+  "tables": [
+   {
+    "caption_start": "Table 2: Testing campaign with ROS simulations. As the first task to be scheduled, SSDB sync is not impacted by previous tasks",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Checkmark coverage matrix (rows SSDB Sync / Team Planning / Formation / Exploration / Stop / Sleep vs columns Nominal / Starts late / Runs late / Ends early / Fails) listing which off-nominal scenarios were tested per task; no numeric results, no bold cells, no dispersion. Not a quantitative results table."
+   }
+  ],
+  "note": "CADRE (NASA JPL) planning/scheduling/execution paper, AAMAS 2025, page 1734. Only Table 2 (test-campaign checkmark matrix) plus Figure 6 photos on this page; no numeric experimental table. Run sentences give no seed/run count."
+ },
+ {
+  "id": "071",
+  "tables": [
+   {
+    "caption_start": "Table 2: Quantitative comparison of target selections in PP, results are shown as mean \u00b1 standard deviation",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Columns Method / Reward / Comm%. Rows: abl:p_1 \u22128.1 \u00b1 0.4, 28% \u00b1 1.6%; abl:p_m \u22127.3 \u00b1 1.0, 47% \u00b1 2.5%; abl:p_K \u22126.5 \u00b1 0.9, 71% \u00b1 1.9%; COBE \u22127.2 \u00b1 0.7, 38% \u00b1 2.1%. No cell is bold (only header row bold), so no single-bold groups. Caption names standard deviation but gives no run count; runs.txt has no seed/run count either."
+   },
+   {
+    "caption_start": "Table 3: Quantitative comparison of dual- and single-objective approaches in CN, results are shown as mean \u00b1 standard deviation",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Columns Method / Reward / Comm%. Rows: \u03b5=0.4 \u22127.8 \u00b1 0.7, 40% \u00b1 0.3%; \u03b5=0.8 \u22127.4 \u00b1 0.9, 80% \u00b1 0.5%; \u03bb = 0.5 \u22127.5 \u00b1 1.0, 89% \u00b1 5.1%; \u03bb = 1 \u22127.9 \u00b1 1.1, 47% \u00b1 3.2%; COBE \u22126.2 \u00b1 0.6, 39% \u00b1 1.9%. No cell is bold (only header row bold), so no single-bold groups. No run count in caption or run sentences."
+   }
+  ],
+  "note": "COBE (multi-agent communication, cost-benefit) paper, AAMAS 2026, page 1282. Two results tables (Table 2 in PP, Table 3 in CN), both mean \u00b1 std with no bold winners; Figure 5 learning curves with shaded bands also present. Runs sentences mention rollout buffer/rollout length only, no seed count."
+ },
+ {
+  "id": "072",
+  "tables": [
+   {
+    "caption_start": "Table 1: Our polynomial-time approximate MMS guarantees and the best-known inapproximability bounds (implied by the unconstrained problem) for n heterogeneous agents with additive valuations.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Theoretical bounds table with subtables (a) Goods and (b) Chores: entries are symbolic approximation ratios (2n/(3n\u22121) [Thm. 1], n/(2n\u22121) [Thm. 3], (2n\u22121)/n [Thm. 4]) and cited inapproximability bounds (39/40 for n=3, 1\u2212n^\u22124 for n\u22654, 44/43 for n=3 [38]). No empirical results, no bold cells, no dispersion."
+   }
+  ],
+  "note": "Fair division / MMS with lower quotas paper (theory), AAMAS 2026, page 624. Only Table 1 (theoretical guarantees summary) on this page; runs.txt sentences are about algorithm running time (ApproxGoods runs in time O(...)), not experimental runs."
+ },
+ {
+  "id": "073",
+  "tables": [
+   {
+    "caption_start": "Table 1: Comparison of corrupted bandits algorithms",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Theoretical comparison table (columns: Algorithm / Known C / Combinatorial / Regret Bound with big-O expressions), not experimental results. The entire SAMBA [20] (with our analysis) row is bold as the proposed method, not a per-group winner. No numeric cells, no dispersion."
+   }
+  ],
+  "note": "Only one table body on this page (Table 1, theoretical regret-bound comparison). Runs file mentions '100 times' and a Table 2 (average single-run time and standard...) but Table 2's body is not on this page. Rest of page is text (Sections 2.2 Corrupted Bandits, 2.3 SAMBA Algorithm)."
+ },
+ {
+  "id": "074",
+  "tables": [
+   {
+    "caption_start": "Table 1: Comparison of different models on different data sets in the GCIL setting.",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [
+     {
+      "label": "CoraFull AA%(\u2191)",
+      "direction": "higher",
+      "winner_mean": "92.5",
+      "winner_disp": "0.0",
+      "runner_mean": "88.9",
+      "runner_disp": "0.8"
+     },
+     {
+      "label": "CoraFull AF%(\u2193)",
+      "direction": "lower",
+      "winner_mean": "0.0",
+      "winner_disp": "0.0",
+      "runner_mean": "0.0",
+      "runner_disp": "0.0"
+     },
+     {
+      "label": "Arxiv AA%(\u2191)",
+      "direction": "higher",
+      "winner_mean": "88.6",
+      "winner_disp": "0.4",
+      "runner_mean": "84.4",
+      "runner_disp": "1.0"
+     },
+     {
+      "label": "Arxiv AF%(\u2193)",
+      "direction": "lower",
+      "winner_mean": "0.0",
+      "winner_disp": "0.0",
+      "runner_mean": "0.0",
+      "runner_disp": "0.0"
+     },
+     {
+      "label": "Reddit AA%(\u2191)",
+      "direction": "higher",
+      "winner_mean": "99.0",
+      "winner_disp": "0.0",
+      "runner_mean": "98.5",
+      "runner_disp": "0.2"
+     },
+     {
+      "label": "Reddit AF%(\u2193)",
+      "direction": "lower",
+      "winner_mean": "0.0",
+      "winner_disp": "0.0",
+      "runner_mean": "0.0",
+      "runner_disp": "0.0"
+     },
+     {
+      "label": "Products AA%(\u2191)",
+      "direction": "higher",
+      "winner_mean": "92.9",
+      "winner_disp": "0.5",
+      "runner_mean": "84.9",
+      "runner_disp": "0.2"
+     },
+     {
+      "label": "Products AF%(\u2193)",
+      "direction": "lower",
+      "winner_mean": "0.0",
+      "winner_disp": "0.0",
+      "runner_mean": "0.0",
+      "runner_disp": "0.0"
+     },
+     {
+      "label": "Photo AA%(\u2191)",
+      "direction": "higher",
+      "winner_mean": "96.2",
+      "winner_disp": "0.4",
+      "runner_mean": "94.6",
+      "runner_disp": "0.3"
+     },
+     {
+      "label": "Photo AF%(\u2193)",
+      "direction": "lower",
+      "winner_mean": "0.0",
+      "winner_disp": "0.0",
+      "runner_mean": "0.0",
+      "runner_disp": "0.0"
+     },
+     {
+      "label": "WikiCS AA%(\u2191)",
+      "direction": "higher",
+      "winner_mean": "92.8",
+      "winner_disp": "0.3",
+      "runner_mean": "84.2",
+      "runner_disp": "0.5"
+     },
+     {
+      "label": "WikiCS AF%(\u2193)",
+      "direction": "lower",
+      "winner_mean": "0.0",
+      "winner_disp": "0.0",
+      "runner_mean": "0.0",
+      "runner_disp": "0.0"
+     },
+     {
+      "label": "Computer AA%(\u2191)",
+      "direction": "higher",
+      "winner_mean": "97.5",
+      "winner_disp": "0.6",
+      "runner_mean": "91.4",
+      "runner_disp": "0.8"
+     },
+     {
+      "label": "Computer AF%(\u2193)",
+      "direction": "lower",
+      "winner_mean": "0.0",
+      "winner_disp": "0.0",
+      "runner_mean": "3.1",
+      "runner_disp": "0.8"
+     },
+     {
+      "label": "Citeseer AA%(\u2191)",
+      "direction": "higher",
+      "winner_mean": "83.5",
+      "winner_disp": "1.0",
+      "runner_mean": "77.7",
+      "runner_disp": "1.6"
+     },
+     {
+      "label": "Citeseer AF%(\u2193)",
+      "direction": "lower",
+      "winner_mean": "0.0",
+      "winner_disp": "0.0",
+      "runner_mean": "0.0",
+      "runner_disp": "0.0"
+     }
+    ],
+    "note": "16 columns (8 datasets x AA%/AF%); every bold cell lies in the single TAAM (Ours) row, so each column has exactly one bold cell. Cells print mean\u00b1value but caption does not say whether \u00b1 is sd/se/ci. Caption states bold = best EXCLUDING Joint and Oracle (upper bounds), so runner-up values above exclude those two rows; note that Oracle (non-bold) exceeds TAAM on CoraFull AA% (94.3\u00b10.3), Reddit AA% (99.2\u00b10.0), Products AA% (94.0\u00b10.6), Photo AA% (97.0\u00b10.1), WikiCS AA% (92.9\u00b10.2), Computer AA% (97.7\u00b10.1), Citeseer AA% (85.2\u00b10.2). Runner-ups are TPP(2024) for CoraFull/Arxiv/Reddit/Products/Citeseer AA%, PDGNNs(2024) for Photo/WikiCS/Computer AA%, SSM(2022) for Computer AF%; all AF%(\u2193) columns except Computer are exact ties 0.0\u00b10.0 between TAAM and TPP(2024). Joint/Oracle AF% cells are '-'. Runs file only says 'We use the same set of random seeds for all experiments' (no count)."
+   }
+  ],
+  "note": "Page also has Table 2: Statistics of the datasets (Nodes/Edges/Feats./Classes/Tasks) \u2014 dataset statistics, ignored per instructions. Text refers to Table 3, Table 4 and Figures 3-5 whose bodies are not on this page."
+ },
+ {
+  "id": "075",
+  "tables": [
+   {
+    "caption_start": "Table 1: Comparison on different shapes: Efficiency ratio G(x)/G(x^CGR)",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "3 method columns (SOTA, VVP, NBO) x 9 shape rows (1D Chains, Stars, Trees, Simualed indoor, Random (w = 1), Random (w = 2), Small bridge, 3D structure, OR library); every cell is mean \u00b1 standard deviation per caption ('Larger values mean better results'). No cell is bold, so no single-bold groups. NBO has the highest mean in every row but is not marked. Values for reference: 1D Chains 0.686\u00b10.045/0.515\u00b10.052/0.903\u00b10.050; Stars 0.983\u00b10.008/0.962\u00b10.010/1.017\u00b10.006; Trees 0.952\u00b10.009/0.935\u00b10.009/0.980\u00b10.004; Simualed indoor 0.895\u00b10.007/0.841\u00b10.010/0.917\u00b10.013; Random (w=1) 0.932\u00b10.010/0.904\u00b10.008/0.963\u00b10.009; Random (w=2) 0.936\u00b10.008/0.901\u00b10.007/0.976\u00b10.009; Small bridge 0.975\u00b10.007/0.955\u00b10.012/1.000\u00b10.002; 3D structure 0.960\u00b10.006/0.937\u00b10.007/0.982\u00b10.010; OR library 0.843\u00b10.126/0.963\u00b10.014/0.978\u00b10.006. Runs file mentions 'different seeds for each run of the simulation' but no run count."
+   }
+  ],
+  "note": "Page also contains Figure 7 (environment shapes) and Figure 8 (bar chart of efficiency ratio with error bars, N = 5 agents \u2014 not a run count), Section 4.2 Scalability text, Conclusion, Acknowledgments. No other table bodies."
+ },
+ {
+  "id": "076",
+  "tables": [
+   {
+    "caption_start": "Table 1: Average prediction errors (\u00d710^-2)",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [
+     {
+      "label": "Agent 1",
+      "direction": "lower",
+      "winner_mean": "0.044",
+      "winner_disp": "none",
+      "runner_mean": "0.734",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Agent 2",
+      "direction": "lower",
+      "winner_mean": "22.13",
+      "winner_disp": "none",
+      "runner_mean": "22.25",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Agent 3",
+      "direction": "lower",
+      "winner_mean": "0.002",
+      "winner_disp": "none",
+      "runner_mean": "0.048",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Agent 4",
+      "direction": "lower",
+      "winner_mean": "0.032",
+      "winner_disp": "none",
+      "runner_mean": "0.958",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Sum",
+      "direction": "lower",
+      "winner_mean": "22.37",
+      "winner_disp": "none",
+      "runner_mean": "24.34",
+      "runner_disp": "none"
+     }
+    ],
+    "note": "8 method rows (Pri-GP c=1, Pri-GP c=1/2, POE, GPOE, BCM, RBCM, MOE, IGP) x 5 columns; exactly one bold cell per column. Bold winners: Agent 1 = Pri-GP (c=1); Agent 2 = Pri-GP (c=1/2); Agent 3 = IGP; Agent 4 = Pri-GP (c=1); Sum = Pri-GP (c=1). Runner-ups: Agent 1/Agent 4/Sum = Pri-GP (c=1/2); Agent 2 = Pri-GP (c=1); Agent 3 = Pri-GP (c=1). Body text says values are the average of 1000 prediction errors per agent (test points, not runs); no seed/run count given. Run sentence fragment ('...times for Monte-Carlo simulations, with a time step of 0...') is truncated and refers to Section 4.2, not this table."
+   }
+  ],
+  "note": "AAMAS 2024 page 2026 (Pri-GP paper). One results table (Table 1). Figures 1-2 are plots, not tables."
+ },
+ {
+  "id": "077",
+  "tables": [
+   {
+    "caption_start": "Table 1: Means for both conditions with SD in parentheses",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "No bold cells anywhere in the body; no winner marking. Columns: Scale, ResUli-RL (Pre, Post, n), ExpertApp (Pre, Post, n). Rows: Reading competence 0-100: 38.22(26.32), 52.78(28.49), n=27 | 33.50(19.72), 51.23(23.14), n=26; Motivation 1-5: 4.61(0.37), 4.08(0.70), 26 | 4.49(0.60), 4.17(0.72), 25; Facilitating learning 1-5: Post 3.70(1.01), 28 | 4.03(0.88), 25; Credibility 1-5: 4.10(0.84), 29 | 4.21(0.75), 26; Human likeness 1-5: 3.64(1.07), 28 | 3.78(1.06), 24; Engagement 1-5: 3.85(1.22), 27 | 3.95(1.02), 26. The n columns are participant counts (children) per cell, not repeated runs; caption and run sentences give no seed/run count (text mentions n=29 children, 544 training episodes per child)."
+   }
+  ],
+  "note": "AAMAS 2025 page 1770 (ResUli-RL reading app study). One results table (Table 1, human-subject means with SD). Figures 5-6 are plots."
+ },
+ {
+  "id": "078",
+  "tables": [
+   {
+    "caption_start": "Table 1: Performance on the offline goal-condtioned benchmarks. We show that ESD either matches or outperforms",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "se",
+    "n_runs": "8",
+    "n_source": "caption",
+    "groups": [],
+    "note": "No data cell is bold (only the 'Average' row labels and the column headers are bold). Winners are marked by cell SHADING per row: dark blue = top score, light blue = second (caption: 'The top two scores per task are highlighted in dark blue and light blue'). Caption: 'mean and the standard error over 8 random seeds'. \u00b1 bars appear only in the ESD-Gauss and ESD columns; baseline columns (GCBC, HGCBC, GC-IQL, GC-POR, TT, CRL, RvS-G, HIQL) print bare means; '-' = not available. Higher is better. Dark-blue (top) / light-blue (second) per row: AntMaze-Umaze TT 100.0 / ESD-Gauss 97.5\u00b13.2; AntMaze-Umaze-Diverse ESD-Gauss 93.3\u00b15.8 / ESD 92.9\u00b14.2; AntMaze-Medium-Play TT 100.0 / ESD 90.8\u00b16.4; AntMaze-Medium-Diverse TT 93.3 / ESD 88.3\u00b16.0; AntMaze-Large-Play ESD-Gauss 89.6\u00b14.2 / ESD 88.8\u00b16.0; AntMaze-Large-Diverse ESD 87.9\u00b15.0 / HIQL 86.1; AntMaze-Ultra-Play ESD 56.7\u00b19.1 / HIQL 52.9; AntMaze-Ultra-Diverse ESD 55.8\u00b111.3 / ESD-Gauss 50.6\u00b124.1; AntMaze Average ESD 82.3 / ESD-Gauss 80.2; Kitchen-Partial ESD 69.8\u00b12.1 / ESD-Gauss 66.2\u00b15.6; Kitchen-Mixed ESD-Gauss 68.7\u00b17.3 / HIQL 67.7; Kitchen Average ESD 68.5 / ESD-Gauss 67.5; AntSoccer-Arena-Navigate ESD 77.5\u00b18.3 / ESD-Gauss 62.5\u00b112.7; AntSoccer-Arena-Stitch ESD 39.6\u00b110.3 / ESD-Gauss 17.1\u00b12.6; AntSoccer Average ESD 58.6 / ESD-Gauss 39.8; Scene-Play ESD 64.2\u00b18.9 / ESD-Gauss 60.0\u00b17.8; Scene-Noisy ESD 47.1\u00b17.7 / ESD-Gauss 29.6\u00b16.8; Scene Average ESD 55.7 / ESD-Gauss 44.8; Procgen-Maze-500-Train ESD 84.2\u00b15.0 / HIQL 82.5; Procgen-Maze-500-Test ESD 72.2\u00b18.5 / ESD-Gauss 70.8\u00b110.0; Procgen-Maze-1000-Train HIQL 87.0 / ESD 86.3\u00b114.8; Procgen-Maze-1000-Test ESD 87.5\u00b110.8 / ESD-Gauss 78.8\u00b16.2; Procgen Average ESD 82.6 / ESD-Gauss 79.0; CALVIN ESD 63.9\u00b127.9 / ESD-Gauss 50.5\u00b120.9; CALVIN Average ESD 63.9 / ESD-Gauss 50.5. Some shaded 'winners' are not numerically the best in their row (e.g., AntMaze-Umaze-Diverse dark blue ESD-Gauss 93.3 vs ESD 92.9 is correct, but Procgen-Maze-500-Train HIQL 82.5 light vs ESD-Gauss 80.8 unshaded; AntMaze-Large-Play ESD-Gauss 89.6 vs HIQL 88.2 unshaded and ESD 88.8 light) \u2014 shading is generally consistent with top-two by mean."
+   }
+  ],
+  "note": "AAMAS 2025 page 2342 (ESD offline GCRL paper). One results table (Table 1) spanning full width; winners marked by colour shading, not bold, so no bold groups recorded."
+ },
+ {
+  "id": "079",
+  "tables": [
+   {
+    "caption_start": "Table 1: Summary of model checking complexity results for PATL and PATL*.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Theoretical complexity-class summary (Delta_2^P-c [9], PSPACE-c (new), in EXPTIME (new), ?), not experimental results. Bold on EXPTIME/PSPACE is notation for complexity classes, not a winner mark. No numeric cells, no dispersion."
+   }
+  ],
+  "note": "Only one table on the page (Table 1, top-left); it is a complexity summary, not experimental. Run sentences file contains no seed/run counts (only incidental uses of 'run'/'repeated')."
+ },
+ {
+  "id": "080",
+  "tables": [],
+  "note": "No table body on this page. Text references Table 1 (planner induction), Table 2 (scenario statistics) and Table 3 (average path lengths, best per row in bold) but none of their bodies appear here. Hardware/solver descriptions and Section 5.2 Evaluation prose only."
+ },
+ {
+  "id": "081",
+  "tables": [
+   {
+    "caption_start": "Table 1: Case study 3 benchmark",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "300",
+    "n_source": "page",
+    "groups": [
+     {
+      "label": "Average time to cross [s]",
+      "direction": "lower",
+      "winner_mean": "1.489",
+      "winner_disp": "0.035",
+      "runner_mean": "1.497",
+      "runner_disp": "0.043"
+     }
+    ],
+    "note": "Columns: Method | Failure rate | Average control effort [m/s^2] | Average time to cross [s]. Rows: Complete game 0.0% (bold) / 5.00 / 1.497 \u00b1 0.043; Expert peer assumption 4.33% / 4.92 / 1.593 \u00b1 0.044; N-PACE 1.33% / 4.86 / 1.599 \u00b1 0.054; N-PACE + eta = 0.1 0.33% / 5.42 / 1.521 \u00b1 0.009; N-PACE + eta = 1.0 0.0% (bold) / 5.44 / 1.499 \u00b1 0.029; N-PACE + eta = 10.0 0.0% (bold) / 5.45 / 1.489 \u00b1 0.035 (bold); Minmax 0.66% / 6.23 / 1.651 \u00b1 0.165. Failure rate column has three bold cells (tie at 0.0%) so excluded as a single-bold group; Average control effort column has no bold cell. Only the time-to-cross column carries \u00b1 bars; caption does not say what they are. Winner is N-PACE + eta = 10.0; best non-bold is Complete game (1.497 \u00b1 0.043), which is the full-information reference. Run count 300 comes from body text on this page ('we ran the game 300 times under five different scenarios'), not the caption."
+   }
+  ],
+  "note": "One results table (Table 1, bottom-right). Figure 5 caption also states 300 Monte Carlo simulations, consistent with the body text."
+ },
+ {
+  "id": "082",
+  "tables": [
+   {
+    "caption_start": "Table 1: Win rates of the best final Main Agents generated by all four different Exploiters, averaged over 1000 duels against each other.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "1000",
+    "n_source": "caption",
+    "groups": [],
+    "note": "4x4 win-rate matrix (rows/cols: Vanilla, Minimax, Defensive, Aggressive; diagonal is '-'). Bold marks the ENTIRE Minimax row (row label, 80.26%, '-', 70.31%, 66.25%) as the caption states ('The Minimax Main Agent (bold font)'); it is a row highlight of the proposed agent, not a per-group winner mark: in the Defensive column the bold 70.31% is not the column max (Aggressive 79.07%), and in the Minimax column the bold cell is a dash. Mechanically each column holds one bold cell; per-column values for reference: Vanilla col 80.26% (bold) vs 75.61%; Defensive col 70.31% (bold) vs 79.07% / 66.86%; Aggressive col 66.25% (bold) vs 24.39% / 20.93%; Minimax col '-' (bold) vs 33.75% / 29.69% / 19.74%. Higher is better (win rate). No dispersion anywhere. n=1000 in caption refers to evaluation duels, not training seeds; runs.txt mentions 'three seeds' (For Honor, 24 hour training) and 'five seeds' for other environments, and 'best seed' phrasing suggests these are best-seed agents. Figure 7 on this page is a bar chart, not a table."
+   }
+  ],
+  "note": "Page 120 of an AAMAS 2024 paper (Minimax Exploiter). One results table (Table 1) at top spanning both columns; Figure 7 and Discussion/References fill the rest."
+ },
+ {
+  "id": "083",
+  "tables": [],
+  "note": "Page 1593 of an AAMAS 2025 paper (MRTAgent). Text-only page: discusses Tables 1-5 (TRTO/TTGT components, 30-robot, 25-robot, 2005-task scenarios) but no table body appears on this page. Body text says the standard deviations in Table 1 come from evaluation with different random seeds, and runs.txt says 'four independent runs with different random seeds' -- relevant to tables on other pages only."
+ },
+ {
+  "id": "084",
+  "tables": [
+   {
+    "caption_start": "Table 1: Success rate and average cost on 32 \u00d7 32 grids.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "25",
+    "n_source": "page",
+    "groups": [],
+    "note": "Caption sits BELOW the table. Upper block: success rate for k = 5,10,20,50,100,150,200,250 under SOC (CBSs(LC), CBSs(LC)+) and MKS (CBSm(LC), CBSm(LC)+); values: k5 100/100/100/100; k10 100/100/100/100; k20 100/100/100/100; k50 0%/88%/100%/100%; k100 0/0/100/100; k150 0%/0%/100%/88%; k200 0%/0%/36%/12%; k250 0/0/0/0. Lower block 'Cost' for k=5,10,20,50: SOC 118, 225, 449, 1,136; MKS 38, 40, 43, 47. No data cell is bold (only the k row-label column and headers are bold). No dispersion printed. n=25 is the number of random problem instances stated in the body text on this page ('25 random problem instances with a time limit of 60 seconds'), not a seed count; runs.txt gives no run/seed count and the caption gives none."
+   }
+  ],
+  "note": "Page 1421 of an AAMAS 2025 paper (BCS / CBS for MKS). One results table (Table 1) in the right column; rest is text (Sections 3.2, 4, 4.1)."
+ },
+ {
+  "id": "085",
+  "tables": [
+   {
+    "caption_start": "Table 1: Complexity results of control in hedonic games, by either adding (AddAg) or deleting agents (DelAg)",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Theoretical complexity-classification table (entries are P, NPc, imm, imm*, W[2]h, XP, coNPc, Sigma_2^P-c, never, with theorem/proposition/observation references), not experimental measurements. Caption says 'Results in bold are our contributions'; many cells per row/column are bold (e.g. NPc, imm*, W[2]h, XP, coNPc, P), so bold does not mark a single winner per group. No numeric means, no dispersion, no bars. Runs file only mentions running-time expressions (|W|^k |V|^O(1), f(k)\u00b7|V|^O(1)), not a run count."
+   }
+  ],
+  "note": "Page 922 of a hedonic-games control paper. Only one table on the page (Table 1, full-width at top); it is a complexity-results table, not an experimental-results table. Remainder of page is definitions, an example figure, and prose."
+ },
+ {
+  "id": "086",
+  "tables": [
+   {
+    "caption_start": "Table 1: Statistics of the Constructed Bias-Induced Dataset",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Dataset-statistics table (Category / Class / Count / Percentage: navigate 1000 26.7%, sports_understanding 1000 26.7%, web_of_lies 1000 26.7%, causal_judgement 748 20.0%; yes 1756 46.9%, no 1992 53.1%; unbiased/Acquies_biased/Avail_biased/Band_biased 937 25.0% each; Total Instances 3748). No bold winner cells (only header/category labels and the total row are bold), no dispersion. Runs file is empty."
+   },
+   {
+    "caption_start": "Table 2 (referenced in text: 'Table 2 summarizes the prompt structures used for each bias type')",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Body NOT on this page; only referenced in prose. Listed for completeness; it is a prompt-template table, not results."
+   }
+  ],
+  "note": "Page 1457 of a cognitive-bias-in-LLMs paper (Proposed Approach section). The only table with its body on the page is Table 1 (dataset statistics). No experimental results tables on this page. 086_runs.txt is empty."
+ },
+ {
+  "id": "087",
+  "tables": [
+   {
+    "caption_start": "Table 1: Notation table for the ACE framework",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Notation table (Symbol / Description for SP and Routing Pool, Master Problem Variables, KKT Variables and Conditions). No numeric results, no bold cells beyond headers, no dispersion. Runs file mentions 'across repeated runs', 'experimental runs', 'decision computation times during the planning phase', 'times in a day' but gives no count."
+   }
+  ],
+  "note": "Page 508 of a bike-rebalancing bilevel optimization (PREDICT / ACE) paper: Figure 1 (closed-loop structure) plus Methodology prose. The only table on the page is a notation table; no experimental results tables."
+ },
+ {
+  "id": "088",
+  "tables": [
+   {
+    "caption_start": "Table 1: Base agent's decision and bidding rules based on given preferences.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Setup/rules table (Preference 1-5 -> Decision -> Bid); no experimental results, no bold cells, no dispersion. Runs file mentions 'Each simulation runs for 1000 rounds' but that is rounds per simulation, not a run count, and no results table is on this page."
+   }
+  ],
+  "note": "AAMAS 2025 page 700. Only Table 1 (Base agent decision/bidding rules) plus Algorithm 6 are on the page; no experimental results table."
+ },
+ {
+  "id": "089",
+  "tables": [
+   {
+    "caption_start": "Table 1: Summary of the satisfiability and complexity for combinations of various fairness and credibility conditions.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Theoretical summary table (Exists Y/N, Unique Y/N, P-Satisfiability and P-Makespan complexity bounds such as O(n), O(n log n), NP-complete). No numeric experimental results, no bold cells, no dispersion."
+   }
+  ],
+  "note": "AAMAS 2026 page 432. Only Table 1 (complexity summary) on the page; it is not an experimental results table. Runs file contains one algorithm-description sentence with no run/seed count."
+ },
+ {
+  "id": "090",
+  "tables": [
+   {
+    "caption_start": "Table 1: Prediction accuracy of the proposed pxpGP and dec-pxpGP frameworks across fleet size M = 16, 49, 64, 100, using a training dataset of size N = 30,000",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [
+     {
+      "label": "N39W106 M=16 Centralized NRMSE (pxpGP vs gapxGP)",
+      "direction": "lower",
+      "winner_mean": "0.058",
+      "winner_disp": "\u00b1 0.012",
+      "runner_mean": "0.071",
+      "runner_disp": "\u00b1 0.001"
+     },
+     {
+      "label": "N39W106 M=16 Centralized NLPD (pxpGP vs gapxGP)",
+      "direction": "lower",
+      "winner_mean": "0.265",
+      "winner_disp": "\u00b1 0.057",
+      "runner_mean": "0.437",
+      "runner_disp": "\u00b1 0.009"
+     },
+     {
+      "label": "N39W106 M=16 Decentralized NRMSE (dec-pxpGP vs dec-gapxGP)",
+      "direction": "lower",
+      "winner_mean": "0.067",
+      "winner_disp": "\u00b1 0.001",
+      "runner_mean": "0.072",
+      "runner_disp": "\u00b1 0.007"
+     },
+     {
+      "label": "N39W106 M=16 Decentralized NLPD (dec-pxpGP vs dec-gapxGP)",
+      "direction": "lower",
+      "winner_mean": "0.305",
+      "winner_disp": "\u00b1 0.009",
+      "runner_mean": "0.311",
+      "runner_disp": "\u00b1 0.093"
+     },
+     {
+      "label": "N39W106 M=49 Centralized NRMSE (gapxGP bold vs pxpGP)",
+      "direction": "lower",
+      "winner_mean": "0.076",
+      "winner_disp": "\u00b1 0.002",
+      "runner_mean": "0.080",
+      "runner_disp": "\u00b1 0.002"
+     },
+     {
+      "label": "N39W106 M=49 Centralized NLPD (pxpGP vs gapxGP)",
+      "direction": "lower",
+      "winner_mean": "0.414",
+      "winner_disp": "\u00b1 0.033",
+      "runner_mean": "0.487",
+      "runner_disp": "\u00b1 0.014"
+     },
+     {
+      "label": "N39W106 M=49 Decentralized NRMSE (dec-pxpGP vs dec-gapxGP)",
+      "direction": "lower",
+      "winner_mean": "0.061",
+      "winner_disp": "\u00b1 0.002",
+      "runner_mean": "0.062",
+      "runner_disp": "\u00b1 0.003"
+     },
+     {
+      "label": "N39W106 M=49 Decentralized NLPD (dec-pxpGP vs dec-gapxGP)",
+      "direction": "lower",
+      "winner_mean": "0.153",
+      "winner_disp": "\u00b1 0.038",
+      "runner_mean": "0.213",
+      "runner_disp": "\u00b1 0.076"
+     },
+     {
+      "label": "N39W106 M=64 Centralized NRMSE (gapxGP bold vs pxpGP)",
+      "direction": "lower",
+      "winner_mean": "0.076",
+      "winner_disp": "\u00b1 0.002",
+      "runner_mean": "0.081",
+      "runner_disp": "\u00b1 0.003"
+     },
+     {
+      "label": "N39W106 M=64 Centralized NLPD (pxpGP vs gapxGP)",
+      "direction": "lower",
+      "winner_mean": "0.422",
+      "winner_disp": "\u00b1 0.037",
+      "runner_mean": "0.492",
+      "runner_disp": "\u00b1 0.018"
+     },
+     {
+      "label": "N39W106 M=64 Decentralized NRMSE (dec-pxpGP vs dec-gapxGP)",
+      "direction": "lower",
+      "winner_mean": "0.062",
+      "winner_disp": "\u00b1 0.002",
+      "runner_mean": "0.062",
+      "runner_disp": "\u00b1 0.003"
+     },
+     {
+      "label": "N39W106 M=64 Decentralized NLPD (dec-pxpGP vs dec-gapxGP)",
+      "direction": "lower",
+      "winner_mean": "0.170",
+      "winner_disp": "\u00b1 0.029",
+      "runner_mean": "0.204",
+      "runner_disp": "\u00b1 0.056"
+     },
+     {
+      "label": "N39W106 M=100 Centralized NRMSE (gapxGP bold vs pxpGP)",
+      "direction": "lower",
+      "winner_mean": "0.081",
+      "winner_disp": "\u00b1 0.003",
+      "runner_mean": "0.086",
+      "runner_disp": "\u00b1 0.003"
+     },
+     {
+      "label": "N39W106 M=100 Centralized NLPD (gapxGP bold vs pxpGP)",
+      "direction": "lower",
+      "winner_mean": "0.521",
+      "winner_disp": "\u00b1 0.019",
+      "runner_mean": "0.562",
+      "runner_disp": "\u00b1 0.021"
+     },
+     {
+      "label": "N39W106 M=100 Decentralized NRMSE (dec-pxpGP vs dec-gapxGP)",
+      "direction": "lower",
+      "winner_mean": "0.067",
+      "winner_disp": "\u00b1 0.008",
+      "runner_mean": "0.068",
+      "runner_disp": "\u00b1 0.006"
+     },
+     {
+      "label": "N39W106 M=100 Decentralized NLPD (dec-pxpGP vs dec-gapxGP)",
+      "direction": "lower",
+      "winner_mean": "0.219",
+      "winner_disp": "\u00b1 0.084",
+      "runner_mean": "0.272",
+      "runner_disp": "\u00b1 0.139"
+     },
+     {
+      "label": "N37W120 M=16 Centralized NRMSE (pxpGP vs gapxGP)",
+      "direction": "lower",
+      "winner_mean": "0.067",
+      "winner_disp": "\u00b1 0.012",
+      "runner_mean": "0.069",
+      "runner_disp": "\u00b1 0.002"
+     },
+     {
+      "label": "N37W120 M=16 Centralized NLPD (gapxGP bold vs pxpGP)",
+      "direction": "lower",
+      "winner_mean": "0.381",
+      "winner_disp": "\u00b1 0.057",
+      "runner_mean": "0.387",
+      "runner_disp": "\u00b1 0.130"
+     },
+     {
+      "label": "N37W120 M=16 Decentralized NRMSE (dec-pxpGP vs dec-gapxGP)",
+      "direction": "lower",
+      "winner_mean": "0.067",
+      "winner_disp": "\u00b1 0.005",
+      "runner_mean": "0.071",
+      "runner_disp": "\u00b1 0.001"
+     },
+     {
+      "label": "N37W120 M=16 Decentralized NLPD (dec-pxpGP vs dec-gapxGP)",
+      "direction": "lower",
+      "winner_mean": "0.202",
+      "winner_disp": "\u00b1 0.029",
+      "runner_mean": "0.235",
+      "runner_disp": "\u00b1 0.070"
+     },
+     {
+      "label": "N37W120 M=49 Centralized NRMSE (gapxGP bold vs pxpGP)",
+      "direction": "lower",
+      "winner_mean": "0.074",
+      "winner_disp": "\u00b1 0.003",
+      "runner_mean": "0.076",
+      "runner_disp": "\u00b1 0.004"
+     },
+     {
+      "label": "N37W120 M=49 Centralized NLPD (pxpGP vs gapxGP)",
+      "direction": "lower",
+      "winner_mean": "0.281",
+      "winner_disp": "\u00b1 0.135",
+      "runner_mean": "0.421",
+      "runner_disp": "\u00b1 0.067"
+     },
+     {
+      "label": "N37W120 M=49 Decentralized NRMSE (dec-gapxGP bold vs dec-pxpGP)",
+      "direction": "lower",
+      "winner_mean": "0.061",
+      "winner_disp": "\u00b1 0.003",
+      "runner_mean": "0.062",
+      "runner_disp": "\u00b1 0.002"
+     },
+     {
+      "label": "N37W120 M=49 Decentralized NLPD (dec-pxpGP vs dec-gapxGP)",
+      "direction": "lower",
+      "winner_mean": "0.061",
+      "winner_disp": "\u00b1 0.101",
+      "runner_mean": "0.151",
+      "runner_disp": "\u00b1 0.114"
+     },
+     {
+      "label": "N37W120 M=64 Centralized NRMSE (gapxGP bold vs pxpGP)",
+      "direction": "lower",
+      "winner_mean": "0.075",
+      "winner_disp": "\u00b1 0.003",
+      "runner_mean": "0.077",
+      "runner_disp": "\u00b1 0.004"
+     },
+     {
+      "label": "N37W120 M=64 Centralized NLPD (pxpGP vs gapxGP)",
+      "direction": "lower",
+      "winner_mean": "0.292",
+      "winner_disp": "\u00b1 0.133",
+      "runner_mean": "0.432",
+      "runner_disp": "\u00b1 0.062"
+     },
+     {
+      "label": "N37W120 M=64 Decentralized NRMSE (dec-gapxGP bold vs dec-pxpGP)",
+      "direction": "lower",
+      "winner_mean": "0.063",
+      "winner_disp": "\u00b1 0.003",
+      "runner_mean": "0.064",
+      "runner_disp": "\u00b1 0.004"
+     },
+     {
+      "label": "N37W120 M=64 Decentralized NLPD (dec-pxpGP vs dec-gapxGP)",
+      "direction": "lower",
+      "winner_mean": "0.084",
+      "winner_disp": "\u00b1 0.094",
+      "runner_mean": "0.133",
+      "runner_disp": "\u00b1 0.093"
+     },
+     {
+      "label": "N37W120 M=100 Centralized NRMSE (gapxGP bold vs pxpGP)",
+      "direction": "lower",
+      "winner_mean": "0.078",
+      "winner_disp": "\u00b1 0.003",
+      "runner_mean": "0.083",
+      "runner_disp": "\u00b1 0.004"
+     },
+     {
+      "label": "N37W120 M=100 Centralized NLPD (pxpGP vs gapxGP)",
+      "direction": "lower",
+      "winner_mean": "0.392",
+      "winner_disp": "\u00b1 0.040",
+      "runner_mean": "0.457",
+      "runner_disp": "\u00b1 0.066"
+     },
+     {
+      "label": "N37W120 M=100 Decentralized NRMSE (dec-pxpGP vs dec-gapxGP)",
+      "direction": "lower",
+      "winner_mean": "0.066",
+      "winner_disp": "\u00b1 0.005",
+      "runner_mean": "0.068",
+      "runner_disp": "\u00b1 0.006"
+     },
+     {
+      "label": "N37W120 M=100 Decentralized NLPD (dec-pxpGP vs dec-gapxGP)",
+      "direction": "lower",
+      "winner_mean": "0.106",
+      "winner_disp": "\u00b1 0.129",
+      "runner_mean": "0.204",
+      "runner_disp": "\u00b1 0.123"
+     },
+     {
+      "label": "N43W080 M=16 Centralized NRMSE (pxpGP vs gapxGP)",
+      "direction": "lower",
+      "winner_mean": "0.057",
+      "winner_disp": "\u00b1 0.016",
+      "runner_mean": "0.065",
+      "runner_disp": "\u00b1 0.005"
+     },
+     {
+      "label": "N43W080 M=16 Centralized NLPD (gapxGP bold vs pxpGP)",
+      "direction": "lower",
+      "winner_mean": "0.314",
+      "winner_disp": "\u00b1 0.105",
+      "runner_mean": "0.327",
+      "runner_disp": "\u00b1 0.139"
+     },
+     {
+      "label": "N43W080 M=16 Decentralized NRMSE (dec-gapxGP bold vs dec-pxpGP)",
+      "direction": "lower",
+      "winner_mean": "0.062",
+      "winner_disp": "\u00b1 0.005",
+      "runner_mean": "0.065",
+      "runner_disp": "\u00b1 0.008"
+     },
+     {
+      "label": "N43W080 M=16 Decentralized NLPD (dec-gapxGP bold vs dec-pxpGP)",
+      "direction": "lower",
+      "winner_mean": "0.161",
+      "winner_disp": "\u00b1 0.091",
+      "runner_mean": "0.123",
+      "runner_disp": "\u00b1 0.055"
+     },
+     {
+      "label": "N43W080 M=49 Centralized NRMSE (pxpGP bold vs gapxGP)",
+      "direction": "lower",
+      "winner_mean": "0.071",
+      "winner_disp": "\u00b1 0.005",
+      "runner_mean": "0.071",
+      "runner_disp": "\u00b1 0.008"
+     },
+     {
+      "label": "N43W080 M=49 Centralized NLPD (pxpGP vs gapxGP)",
+      "direction": "lower",
+      "winner_mean": "0.193",
+      "winner_disp": "\u00b1 0.169",
+      "runner_mean": "0.371",
+      "runner_disp": "\u00b1 0.095"
+     },
+     {
+      "label": "N43W080 M=49 Decentralized NRMSE (dec-pxpGP vs dec-gapxGP)",
+      "direction": "lower",
+      "winner_mean": "0.054",
+      "winner_disp": "\u00b1 0.008",
+      "runner_mean": "0.061",
+      "runner_disp": "\u00b1 0.004"
+     },
+     {
+      "label": "N43W080 M=49 Decentralized NLPD (dec-pxpGP vs dec-gapxGP)",
+      "direction": "lower",
+      "winner_mean": "-0.086",
+      "winner_disp": "\u00b1 0.178",
+      "runner_mean": "0.091",
+      "runner_disp": "\u00b1 0.131"
+     }
+    ],
+    "note": "Grouping: each of the 12 data rows (3 datasets x M=16/49/64/100) holds exactly 4 bold cells, one per (Centralized|Decentralized) x (NRMSE|NLPD) 2-method subgroup (pxpGP vs gapxGP [18]; dec-pxpGP vs dec-gapxGP [18]); both metrics marked with a down-arrow (lower is better). Every cell prints 'mean \u00b1 value'; caption does not say what the \u00b1 is (no std/SE/CI wording), no run/seed count in caption or runs file. 48 single-bold groups in total; the 40 above are in reading order, the 8 omitted (all N43W080, bold first / non-bold second): M=64 Cen NRMSE 0.072 \u00b1 0.004 vs 0.072 \u00b1 0.009 (tie of means, pxpGP bold); M=64 Cen NLPD 0.206 \u00b1 0.165 vs 0.397 \u00b1 0.077; M=64 Dec NRMSE 0.057 \u00b1 0.007 (dec-gapxGP bold) vs 0.060 \u00b1 0.006; M=64 Dec NLPD 0.005 \u00b1 0.130 vs 0.067 \u00b1 0.124; M=100 Cen NRMSE 0.075 \u00b1 0.005 (gapxGP bold) vs 0.082 \u00b1 0.004; M=100 Cen NLPD 0.343 \u00b1 0.035 vs 0.432 \u00b1 0.065; M=100 Dec NRMSE 0.060 \u00b1 0.008 vs 0.067 \u00b1 0.006; M=100 Dec NLPD 0.005 \u00b1 0.182 vs 0.178 \u00b1 0.128. Anomalies: N43W080 M=16 Decentralized NLPD bold is on 0.161 \u00b1 0.091 although non-bold 0.123 \u00b1 0.055 is lower; ties of printed means where one cell is bold: N39W106 M=64 Dec NRMSE (0.062 vs 0.062), N43W080 M=49 Cen NRMSE (0.071 vs 0.071), N43W080 M=64 Cen NRMSE (0.072 vs 0.072)."
+   },
+   {
+    "caption_start": "Table 2: Computational and Communication Complexity Comparison of Distributed GP Methods",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Big-O complexity expressions (Time/Space/Comms) for apxGP, gapxGP, pxpGP (Ours), dec-gapxGP, dec-pxpGP (Ours); not experimental numbers. Bold appears only on the column headers 'pxpGP (Ours)' and 'dec-pxpGP (Ours)', not on any cell."
+   }
+  ],
+  "note": "AAMAS 2026 page 2399. Table 1 is the only experimental results table; Table 2 is a theoretical complexity comparison. Runs file lines ('11: repeat', 'initialization', 'warm-start initialization') carry no seed/run/trial count."
+ },
+ {
+  "id": "091",
+  "tables": [
+   {
+    "caption_start": "Table 2: Quantitative evaluations of ensembling methods on three datasets, heloc, compas, and credit.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "No data cell in the body is bold (only the column headers acc./simp./size M/C/c val. (fail)/mv are bold). Dispersion appears only in the three |M|=10/20/30 rows per dataset as average single-model accuracy with +/- (heloc .709+/-.003, .710+/-.003, .710+/-.003; compas .856+/-.001, .855+/-.001, .855+/-.001; credit .664+/-.008, .663+/-.004, .663+/-.004); caption does not say what the +/- is. The parenthesised values in 'c val. (fail)' are failure rates, not dispersion. Methods per block: S^n, S^v, S^a, S^a-A, S^a-S, S^a-AS. Run sentences mention 'At each run, we randomly sample ... sets M' and 'different random seeds' but give no count."
+   }
+  ],
+  "note": "Page 961 of an AAMAS 2024 paper (argumentative ensembling / recourse under model multiplicity). Only Table 2 is on this page; rest is discussion, conclusions, acknowledgments."
+ },
+ {
+  "id": "092",
+  "tables": [
+   {
+    "caption_start": "Table 1: Example Rules Mined From Historical Data",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Two example mined rules (multi-hop and single-hop) with natural-language explanations; no numeric experimental results. Body text says 'The average performance of three random generators is reported' for the RND baseline, but no results table is on this page."
+   }
+  ],
+  "note": "Page 265 of an AAMAS 2025 paper (dark vessel / AIS maritime abductive reasoning). Only a non-results example-rules table is on the page; the run sentence ('...Markov Model to run out of memory...') gives no run count."
+ },
+ {
+  "id": "093",
+  "tables": [
+   {
+    "caption_start": "Table 1: Base delay for different network configurations.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Configuration table: Network Setting vs Base Delay (ms) ranges (Local 0.021 - 0.1; Global 21 - 53; Very Wide Network 10 - 100). Header cells bold, no result values."
+   }
+  ],
+  "note": "Page 1676 of an AAMAS 2025 paper (indifferentially private dark pool auction, ABIDES simulator). No results table on this page; run sentences mention simulations on a PC and run-times but no run count."
+ },
+ {
+  "id": "094",
+  "tables": [
+   {
+    "caption_start": "Table 1: Average Performance Comparison Across All Datasets",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [
+     {
+      "label": "llama-3.2-1b / Accuracy (\u2191)",
+      "direction": "higher",
+      "winner_mean": "55.6",
+      "winner_disp": "8.1",
+      "runner_mean": "27.4",
+      "runner_disp": "17.2"
+     },
+     {
+      "label": "llama-3.2-1b / Unknown (\u2193)",
+      "direction": "lower",
+      "winner_mean": "35.9",
+      "winner_disp": "5.4",
+      "runner_mean": "69.2",
+      "runner_disp": "19.4"
+     },
+     {
+      "label": "llama-3.2-1b / Tokens (\u2193)",
+      "direction": "lower",
+      "winner_mean": "3.8",
+      "winner_disp": "0.8",
+      "runner_mean": "4.9",
+      "runner_disp": "0.2"
+     },
+     {
+      "label": "llama-3.2-1b / Time (\u2193)",
+      "direction": "lower",
+      "winner_mean": "1.5",
+      "winner_disp": "0.6",
+      "runner_mean": "2.0",
+      "runner_disp": "0.4"
+     },
+     {
+      "label": "llama3-8b / Accuracy (\u2191)",
+      "direction": "higher",
+      "winner_mean": "90.6",
+      "winner_disp": "2.3",
+      "runner_mean": "46.1",
+      "runner_disp": "15.0"
+     },
+     {
+      "label": "llama3-8b / Unknown (\u2193)",
+      "direction": "lower",
+      "winner_mean": "0.9",
+      "winner_disp": "0.9",
+      "runner_mean": "47.9",
+      "runner_disp": "16.6"
+     },
+     {
+      "label": "llama3-8b / Tokens (\u2193)",
+      "direction": "lower",
+      "winner_mean": "4.8",
+      "winner_disp": "0.2",
+      "runner_mean": "5.0",
+      "runner_disp": "0.1"
+     },
+     {
+      "label": "llama3-8b / Time (\u2193)",
+      "direction": "lower",
+      "winner_mean": "1.1",
+      "winner_disp": "0.1",
+      "runner_mean": "3.6",
+      "runner_disp": "2.6"
+     },
+     {
+      "label": "llama3-70b / Accuracy (\u2191)",
+      "direction": "higher",
+      "winner_mean": "92.3",
+      "winner_disp": "1.5",
+      "runner_mean": "59.0",
+      "runner_disp": "9.0"
+     },
+     {
+      "label": "llama3-70b / Unknown (\u2193)",
+      "direction": "lower",
+      "winner_mean": "0.0",
+      "winner_disp": "0.0",
+      "runner_mean": "32.5",
+      "runner_disp": "12.6"
+     },
+     {
+      "label": "llama3-70b / Tokens (\u2193)",
+      "direction": "lower",
+      "winner_mean": "4.0",
+      "winner_disp": "0.9",
+      "runner_mean": "4.3",
+      "runner_disp": "1.0"
+     },
+     {
+      "label": "llama3-70b / Time (\u2193)",
+      "direction": "lower",
+      "winner_mean": "12.5",
+      "winner_disp": "5.2",
+      "runner_mean": "21.2",
+      "runner_disp": "2.2"
+     },
+     {
+      "label": "gpt-4o-mini / Accuracy (\u2191)",
+      "direction": "higher",
+      "winner_mean": "90.6",
+      "winner_disp": "3.1",
+      "runner_mean": "74.3",
+      "runner_disp": "6.8"
+     },
+     {
+      "label": "gpt-4o-mini / Unknown (\u2193)",
+      "direction": "lower",
+      "winner_mean": "0.0",
+      "winner_disp": "0.0",
+      "runner_mean": "19.7",
+      "runner_disp": "9.5"
+     },
+     {
+      "label": "gpt-4o-mini / Tokens (\u2193)",
+      "direction": "lower",
+      "winner_mean": "4.5",
+      "winner_disp": "1.1",
+      "runner_mean": "4.8",
+      "runner_disp": "0.8"
+     },
+     {
+      "label": "gpt-4o-mini / Time (\u2193)",
+      "direction": "lower",
+      "winner_mean": "19.1",
+      "winner_disp": "3.6",
+      "runner_mean": "23.9",
+      "runner_disp": "2.9"
+     }
+    ],
+    "note": "Columns: CAMA, Standard, CoT, Reflection, React, S.Discover, P.Execute. Every cell is 'mean \u00b1 value'; caption and page text never say whether \u00b1 is sd/se/ci. Bold cells: CAMA wins all Accuracy and Unknown rows; Tokens rows won by CoT (1b, 8b, 4o-mini) or Standard (70b); Time rows won by Standard in all four models. Runner-up identity per row: 1b Acc=React, 1b Unk=React, 1b Tok=Standard, 1b Time=CoT; 8b Acc=P.Execute, 8b Unk=P.Execute, 8b Tok=Standard, 8b Time=CoT; 70b Acc=CoT and Reflection tied at 59.0 \u00b1 9.0, 70b Unk=Reflection, 70b Tok=CoT, 70b Time=React; 4o-mini Acc=CoT, 4o-mini Unk=CoT, 4o-mini Tok=Standard, 4o-mini Time=CoT. Runs file only says 'multiple runs' with no count."
+   }
+  ],
+  "note": "Page 387 of AAMAS 2025 (CAMA paper). One results table (Table 1) at top of page; the rest is Sections 5.2-5.5 text. Table 2 (ablation) is referenced but not on this page."
+ },
+ {
+  "id": "095",
+  "tables": [],
+  "note": "Page 2002 of AAMAS 2025. No table body on this page: contains Figure 2 (neural network architecture diagram) and Figure 3 (map of obstacles) plus text. Text says 'we used 5-fold cross validation ... results are presented in Table 1' and runs file gives caption 'Table 1: Results achieved using 5-fold cross validation', but that table body is on a different page."
+ },
+ {
+  "id": "096",
+  "tables": [
+   {
+    "caption_start": "Table 1: Payoff bi-matrices of the games considered in our experiments.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Six 2x2 / 3x3 payoff bi-matrices (Prisoner's Dilemma, Stag Hunt, Hawk-Dove, standard/good/bad RPS). Game definitions, not experimental results; no bold cells, no error bars."
+   },
+   {
+    "caption_start": "Table 2: Nash equilibria of the games considered in our experiments.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [],
+    "note": "Analytical Nash-equilibrium listing per game (pure strategy NE, non-pure strategy NE). Not experimental results; no bold cells, no error bars."
+   }
+  ],
+  "note": "Page 1106 of AAMAS 2024 (stochastic policy-gradient dynamics paper). Both tables on the page are experimental-setup tables (game payoffs and their Nash equilibria), listed here flagged results_table=n; no experimental results table body on this page. Page text mentions 100 simulations (random matching, 1,000 agents, 500 iterations) and 1,000 simulations (self-play, 1,000 iterations) for the figures, but these counts do not apply to either table."
+ },
+ {
+  "id": "097",
+  "tables": [
+   {
+    "caption_start": "Table 3: Overall performance of policies with different weights and rule templates in the Land scenario.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "5",
+    "n_source": "paper",
+    "groups": [],
+    "note": "18 rows (6 weight configs x None/Light/Struct) x 5 metric columns (Resp., Rebuttal, Non-rep., Evid., Stance); every cell is mean with a +/- subscript (e.g. 0.86_{+/-0.34}). No data cell is bold, so no winner groups. Caption does not name the bar; the paper's run sentences elsewhere say 'mean +/- std of 5 runs experiments' and '5 runs each' / 'five independent runs per query', which is the source of n_runs=5 (not stated on this page or in this caption). Figure 2 (95% CI curves) is a figure, not a table."
+   }
+  ],
+  "note": "One results table (Table 3) on the page; Figure 2 is a plot."
+ },
+ {
+  "id": "098",
+  "tables": [
+   {
+    "caption_start": "Table 1: The runtime (HH:MM:SS) descriptive statistics [mean (std)] for ten capability types by algorithm, collective size, number of tasks, and number of capabilities per robot.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "450 trials per algorithm",
+    "n_source": "paper",
+    "groups": [],
+    "note": "Grid of 18 conditions (1 or 2 Cap/R x 1%/10%/50% tasks x 1000/5000/10000 robots) x 3 algorithms (GRAPE-S, LeaderGRAPE-S, LN-GRAPE-S); each cell is mean (std) in HH:MM:SS, e.g. '03:36:36 (:01:32)', '107:13:18 (27:36:33)'. Only header/section labels are bold; no data cell is bold, so no winner groups. Caption names 'mean (std)' -> sd. Run count not in caption or on this page; the paper's run sentence says 'resulting in a total of 450 trials per algorithm' (450/18 conditions = 25 trials per cell, derived, not printed)."
+   }
+  ],
+  "note": "One results table (Table 1) on the page; rest is text."
+ },
+ {
+  "id": "099",
+  "tables": [
+   {
+    "caption_start": "Table 4: Metrics and downstream task performance",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "5 random seeds",
+    "n_source": "paper",
+    "groups": [
+     {
+      "label": "R",
+      "direction": "higher",
+      "winner_mean": "-0.467",
+      "winner_disp": "none",
+      "runner_mean": "-0.340",
+      "runner_disp": "none"
+     },
+     {
+      "label": "SC",
+      "direction": "higher",
+      "winner_mean": "2271.13",
+      "winner_disp": "none",
+      "runner_mean": "2501.23",
+      "runner_disp": "none"
+     },
+     {
+      "label": "PMI",
+      "direction": "higher",
+      "winner_mean": "132.54",
+      "winner_disp": "none",
+      "runner_mean": "248.15",
+      "runner_disp": "none"
+     },
+     {
+      "label": "LSEPIN",
+      "direction": "higher",
+      "winner_mean": "26.71",
+      "winner_disp": "none",
+      "runner_mean": "29.91",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MSEPIN",
+      "direction": "higher",
+      "winner_mean": "36.64",
+      "winner_disp": "none",
+      "runner_mean": "71.81",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Correlation efficient (row; bold in LSEPIN column)",
+      "direction": "higher",
+      "winner_mean": "0.99",
+      "winner_disp": "none",
+      "runner_mean": "0.96",
+      "runner_disp": "none"
+     }
+    ],
+    "note": "Rows: DADS (origin), UMOC, Random, SMM, ICM, APT; columns R | SC, PMI, LSEPIN, MSEPIN (headers SC/PMI/LSEPIN/MSEPIN bold, R not). Every cell of the UMOC row (the proposed method) is bold: -0.467, 2271.13, 132.54, 26.71, 36.64 -> exactly one bold cell per column, but in every column the bold cell is NOT the column maximum (DADS (origin) is higher in all five: -0.340, 2501.23, 248.15, 29.91, 71.81); bold appears to mark the proposed method rather than the best value. Separate final row 'Correlation efficient' (0.91, 0.96, 0.99 bold, 0.88) has a single bold cell that is the row maximum; it is listed as the sixth group (row orientation) and it makes the LSEPIN column hold two bold cells if that row is counted. Two cells print '\u2248 0' (Random and ICM under LSEPIN). No dispersion anywhere. Run count not in caption or on this page; run sentences say 'series of 5 random seeds'."
+   }
+  ],
+  "note": "One results table (Table 4) on the page; Figures 6, 7 (radar chart), 8 are plots."
+ },
+ {
+  "id": "100",
+  "note": "Single results table on page (Table 1). Figure 3 (grid maps) and Figure 4 (per-instance exploration ratio plot) are figures, not tables. Runs file has no seed/run/trial count; body text mentions 'over 36.5k problem instances' (instance count, not repeated runs), so n_runs = none. Table has no error bars of any kind.",
+  "tables": [
+   {
+    "caption_start": "Table 1: Average number of explorations for A* and MXA*, without and with LE, on 4-connected and 8-connected maps.",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "groups": [
+     {
+      "label": "4 / Game",
+      "direction": "lower",
+      "winner_mean": "3,602",
+      "winner_disp": "none",
+      "runner_mean": "4,143",
+      "runner_disp": "none"
+     },
+     {
+      "label": "4 / Maze",
+      "direction": "lower",
+      "winner_mean": "10,347",
+      "winner_disp": "none",
+      "runner_mean": "11,458",
+      "runner_disp": "none"
+     },
+     {
+      "label": "4 / Random",
+      "direction": "lower",
+      "winner_mean": "3,330",
+      "winner_disp": "none",
+      "runner_mean": "4,695",
+      "runner_disp": "none"
+     },
+     {
+      "label": "4 / Room",
+      "direction": "lower",
+      "winner_mean": "5,195",
+      "winner_disp": "none",
+      "runner_mean": "6,516",
+      "runner_disp": "none"
+     },
+     {
+      "label": "4 / City",
+      "direction": "lower",
+      "winner_mean": "3,151",
+      "winner_disp": "none",
+      "runner_mean": "4,133",
+      "runner_disp": "none"
+     },
+     {
+      "label": "8 / Game",
+      "direction": "lower",
+      "winner_mean": "3,536",
+      "winner_disp": "none",
+      "runner_mean": "4,128",
+      "runner_disp": "none"
+     },
+     {
+      "label": "8 / Maze",
+      "direction": "lower",
+      "winner_mean": "5,616",
+      "winner_disp": "none",
+      "runner_mean": "6,197",
+      "runner_disp": "none"
+     },
+     {
+      "label": "8 / Random",
+      "direction": "lower",
+      "winner_mean": "3,447",
+      "winner_disp": "none",
+      "runner_mean": "5,585",
+      "runner_disp": "none"
+     },
+     {
+      "label": "8 / Room",
+      "direction": "lower",
+      "winner_mean": "5,111",
+      "winner_disp": "none",
+      "runner_mean": "6,347",
+      "runner_disp": "none"
+     },
+     {
+      "label": "8 / City",
+      "direction": "lower",
+      "winner_mean": "6,149",
+      "winner_disp": "none",
+      "runner_mean": "7,453",
+      "runner_disp": "none"
+     }
+    ],
+    "note": "Columns: A*, A*+LE, MXA*, MXA*+LE. Every row's single bold cell is in the MXA*+LE column; runner-up in every row is MXA*. Metric is number of explorations (state expansions), lower is better. No +/-, parentheses, intervals, or std columns anywhere. Caption names no run count or bar kind."
+   }
+  ]
+ }
+]

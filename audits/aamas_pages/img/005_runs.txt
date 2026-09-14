@@ -1,0 +1,53 @@
+3, the run time of Algorithm 1 in ˜O(𝑘3𝑛2𝑚𝐷Δ+/𝜖2)
+---
+Consider an arbitrary seed set 𝐴
+---
+For each node 𝑣in the graph, we ran the process for 300 times
+---
+Minimum cost seed set for compet-
+---
+Output: Selected seed nodes
+---
+Run Time on Real-world Networks
+---
+The problem of finding a seed set of
+---
+The problem of finding a seed set of size 𝑘which maximizes
+---
+We observe that the reported convergence times are always
+---
+We repeated this process 300 times and
+---
+While the maximum convergence times do not match 4Δ+𝐷log2 𝑛,
+---
+algorithm runs in ˜O(𝑛3)
+---
+each node is uncolored (inactive), except a set of seed nodes which
+---
+each seed node 𝑣has a given cost 𝑐(𝑣))
+---
+even with 1 red seed node it can win almost 70% of the customers at
+---
+gorithm runs in ˜O(𝑛3) on real-world networks (since 𝑚= Θ(𝑛)
+---
+just blue) and we again simply add red seed nodes
+---
+number of red nodes by selecting 𝑘red seed nodes in the Random
+---
+of red nodes given the budget to select 𝑘red seed nodes? After
+---
+output of A is not smaller than the optimal solution times 𝜌for
+---
+selecting 𝑘colored seed nodes cannot be approximated within
+---
+the end and with 10 red seed nodes, it wins over 90% of the whole
+---
+the overall run time of the algorithm is in O(𝑘𝑅𝑛𝑚𝑇) w
+---
+the seed nodes according to some centrality measure for an instance
+---
+the selection of a set of red seed nodes
+---
+we run a community detection algorithm [45] to find at least 2𝑘
+---
+which run in nearly linear time as a potential avenue for future

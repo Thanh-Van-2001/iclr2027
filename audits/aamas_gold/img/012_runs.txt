@@ -1,0 +1,41 @@
+After learning, each method is evaluated for 30 episodes per
+---
+Policies are trained once and evaluated over 3 seeds (30 episodes per seed)
+---
+aggregated with 3 seeds
+---
+allow agents to interact for up to 60 episodes per scenario, which is
+---
+autonomous robots do not employ trial-and-error optimization;
+---
+either report the "solved" result, or otherwise, the last run for each
+---
+episodes, we utilize two key metrics:
+---
+eration times between 100 ms and 470 ms on an NVIDIA A40 GPU,
+---
+highest estimated success rate across learning trials—into a unified
+---
+learning success in a scenario as 20 consecutive successful episodes
+---
+mean ± standard error across seeds
+---
+optimize communication strategies through trial-and-error multi-
+---
+random seeds and 30 evaluation episodes per seed
+---
+scenario configuration per seed
+---
+seed
+---
+state indicator, defined by 20 consecutive successful training episodes in this work
+---
+through trial and error and multi-agent debriefing
+---
+tion dataset is aggregated from all successful evaluation episodes
+---
+tion is enabled during episodes, and the message dialog is included
+---
+tion+RAG method records successful episodes to preserve success-
+---
+trol policies through trial-and-error interactions with confederate

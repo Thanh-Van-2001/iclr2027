@@ -1,0 +1,33 @@
+(3) “Self-play”: all agents run the same planner as every one is
+---
+1) it is no longer repeated games, instead, involves complex state
+---
+Belief Initialization and Update
+---
+For other planners that may not be suitable for a multi-run evalu-
+---
+For repeated games, much of the liter-
+---
+In fact, repeated games cannot fully reflect the complex-
+---
+agents, the golden standard is to run each proposed planner against
+---
+artificial problems such as repeated games with one state transiting
+---
+ers (ILs) [16] in repeated games, which evaluate the accumulated
+---
+in repeated games to the ones that act under the same principle
+---
+ing repeated interaction
+---
+it is impossible to run each proposed planner against all possible
+---
+over repeated online replanning during the game play
+---
+random Monte-Carlo rollouts as value estimates, since they usually
+---
+rollouts
+---
+two reasons: (1) it is no longer repeated games, instead, involves
+---
+value backup on repeated states

@@ -44,7 +44,7 @@ def build(out_path: str) -> dict:
     # corpus and census
     reg.add("a papers", s["papers"], provenance=run)
     reg.add("a comparisons", s["comparisons"], provenance=run)
-    reg.add("a comparisons per table", s["median_comparisons_per_table"], provenance=run)
+    reg.add("a comparisons per table", int(s["median_comparisons_per_table"]), provenance=run)
     reg.add("a pct neither", _pct(s["pct_neither"]), provenance=run)
     reg.add("a pct neither ci", _ci(b["pct_neither"]), provenance=run)
     reg.add("a pct one side", _pct(s["pct_one"]), provenance=run)
@@ -59,7 +59,7 @@ def build(out_path: str) -> dict:
     reg.add("a pct fail holm ci", _ci(b["pct_fail_holm"]), provenance=run)
     reg.add("a pct papers err", _pct(s["pct_err"]), provenance=run)
     reg.add("a pct papers runs", _pct(s["pct_n"]), provenance=run)
-    reg.add("a median runs", s["median_runs"], provenance=run)
+    reg.add("a median runs", int(s["median_runs"]), provenance=run)
     reg.add("a gap fail", _pct(s["gap_fail"]), provenance=run)
     reg.add("a gap pass", _pct(s["gap_pass"]), provenance=run)
     reg.add("a design effect", f"{b['deff']['design_effect']:.1f}", provenance=run)
@@ -94,7 +94,7 @@ def build(out_path: str) -> dict:
             reg.add(f"c {name} neither", _pct(cs_["pct_neither"]), provenance=run)
             reg.add(f"c {name} testable", _pct(cs_["pct_testable"]), provenance=run)
             reg.add(f"c {name} n testable", cs_["n_testable"], provenance=run)
-            reg.add(f"c {name} fail", _pct(cs_["pct_fail"]) if cs_["n_testable"] else "--", provenance=run)
+            reg.add(f"c {name} fail", _pct(cs_["pct_fail"]) if cs_["n_testable"] >= 20 else "--", provenance=run)
             reg.add(f"c {name} papers err", _pct(cs_["pct_err"]), provenance=run)
     if "_unlabelled_papers" in comm:
         reg.add("c unlabelled papers", comm["_unlabelled_papers"], provenance=run)
@@ -109,8 +109,8 @@ def build(out_path: str) -> dict:
     reg.add("ml pct fail holm", _pct(ml["pct_fail_holm"]), provenance="survivability_both_years")
     reg.add("ml pct papers err", _pct(ml["pct_err"]), provenance="survivability_both_years")
     reg.add("ml pct papers runs", _pct(ml["pct_n"]), provenance="survivability_both_years")
-    reg.add("ml median runs", ml["median_runs"], provenance="survivability_both_years")
-    reg.add("ml comparisons per table", ml["median_comparisons_per_table"], provenance="survivability_both_years")
+    reg.add("ml median runs", int(ml["median_runs"]), provenance="survivability_both_years")
+    reg.add("ml comparisons per table", int(ml["median_comparisons_per_table"]), provenance="survivability_both_years")
     ml24 = ex["side_by_side"]["neurips_icml_2024"]
     reg.add("ml papers twenty four", ml24["papers"], provenance="survivability_both_years")
 
@@ -151,6 +151,7 @@ def build(out_path: str) -> dict:
     reg.add("power papers", pa["n_papers"], provenance=run)
     reg.add("power underpowered", _pct(pa["pct_underpowered"]), provenance=run)
     reg.add("power median ratio", f"{pa['median_gap_over_mde']:.2f}", provenance=run)
+    reg.add("power level", _pct(int(round(100 * pa["power"]))), provenance=run)
 
     fn = ex["funnel"]
     reg.add("a tables detected", fn["tables_detected"], provenance=run)
@@ -173,6 +174,38 @@ def build(out_path: str) -> dict:
     reg.add("holm median family", hf["median_family_size"], provenance=run)
     reg.add("holm pct family one", _pct(hf["pct_family_size_1"]), provenance=run)
     reg.add("holm pct in families over five", _pct(hf["pct_testable_in_families_over_5"]), provenance=run)
+
+    ef = ex["environment_families"]
+    for name, d in ef.items():
+        if name.startswith("_"):
+            continue
+        key = "env " + name.split(" (")[0].split(",")[0].lower()
+        reg.add(f"{key} comparisons", d["comparisons"], provenance=run)
+        reg.add(f"{key} papers", d["papers"], provenance=run)
+        reg.add(f"{key} neither", _pct(d["pct_neither"]), provenance=run)
+        reg.add(f"{key} testable", d["testable"], provenance=run)
+        reg.add(f"{key} fail", _pct(d["pct_fail"]) if d["testable"] >= 20 else "--", provenance=run)
+    reg.add("env named testable pct", _pct(ef["_any_named"]["pct_of_testable"]), provenance=run)
+    reg.add("env named comparisons", ef["_any_named"]["comparisons"], provenance=run)
+    exm = ex.get("example_three_seeds", {})
+    if exm:
+        def _g(v):
+            return f"{v:g}"
+        reg.add("ex winner", _g(exm["winner"]), provenance=run)
+        reg.add("ex winner sd", _g(exm["winner_sd"]), provenance=run)
+        reg.add("ex runner", _g(exm["runner_up"]), provenance=run)
+        reg.add("ex runner sd", _g(exm["runner_sd"]), provenance=run)
+        reg.add("ex gap", _g(exm["gap"]), provenance=run)
+        reg.add("ex relative gap", _pct(exm["relative_gap_pct"]), provenance=run)
+        reg.add("ex t", f"{exm['t']:.2f}", provenance=run)
+        reg.add("ex df", f"{exm['df']:.1f}", provenance=run)
+        reg.add("ex p", f"{exm['p']:.2f}", provenance=run)
+        reg.add("ex n three seed failing", exm["n_three_seed_failing"], provenance=run)
+    dr = ex["duplicate_table_records"]
+    reg.add("a dup keys", dr["duplicate_keys"], provenance=run)
+    reg.add("a dup comparisons", dr["comparisons_in_duplicates"], provenance=run)
+    reg.add("a dup pct", _pct(dr["pct_of_comparisons"]), provenance=run)
+    reg.add("a table keys", dr["table_keys"], provenance=run)
 
     # evaluation protocol
     ps = ex["protocol_stats"]
@@ -207,6 +240,8 @@ def build(out_path: str) -> dict:
         gt = g["testable"]
         f = gt["fields"]
         reg.add("g testable n", gt["n_labelled"], provenance="aamas_gold_set")
+        reg.add("g unboxed n", gt["n_unboxed"] + g["no_bar"]["n_unboxed"], provenance="aamas_gold_set")
+        reg.add("g drawn n", gt["n_labelled"] + gt["n_unboxed"] + g["no_bar"]["n"] + g["no_bar"]["n_unboxed"], provenance="aamas_gold_set")
         reg.add("g claim frac", _frac(f["claim_and_values"]), provenance="aamas_gold_set")
         reg.add("g claim", _pct_ci(f["claim_and_values"]), provenance="aamas_gold_set")
         reg.add("g claim paper ci", f"[{f['claim_and_values']['paper_ci'][0]}, {f['claim_and_values']['paper_ci'][1]}]", provenance="aamas_gold_set")
@@ -229,26 +264,38 @@ def build(out_path: str) -> dict:
         reg.add("g no bar absent frac", _frac(nb["error_bar_truly_absent"]), provenance="aamas_gold_set")
         reg.add("g rival copied", _pct_ci(f["rival_copied"]) if "rival_copied" in f else "--", provenance="aamas_gold_set")
     if os.path.exists("out/aamas/gold_set_pages.json"):
-        p = _j("gold_set_pages")
+        pg = _j("gold_set_pages")
         prun = "aamas_gold_set_pages"
-        reg.add("pages read", p["pages_read"], provenance=prun)
-        reg.add("pages papers", p["papers"], provenance=prun)
-        reg.add("pages declined", p.get("pages_declined", 0), provenance=prun)
-        rs = p["reader"]
-        reg.add("pages reader groups", rs["groups"], provenance=prun)
-        reg.add("pages reader neither", f"{rs['pct_neither']}\\% [{rs['ci_neither'][0]}, {rs['ci_neither'][1]}]", provenance=prun)
-        reg.add("pages reader testable", _pct(rs["pct_testable"]), provenance=prun)
-        pp = p["pipeline_same_pages"]
-        reg.add("pages pipe groups", pp["groups"], provenance=prun)
-        reg.add("pages pipe neither", _pct(pp["pct_neither"]), provenance=prun)
-        reg.add("pages pipe testable", _pct(pp["pct_testable"]), provenance=prun)
-        ov = p["group_overlap"]
-        reg.add("pages reader found pct", _pct(ov["pct_reader_groups_pipeline_lists"]), provenance=prun)
-        reg.add("pages census ratio", f"{p['census']['ratio']:.2f}", provenance=prun)
-        if "verdicts_same_pages" in p:
-            vs = p["verdicts_same_pages"]
-            reg.add("pages shared", vs["shared"]["n"], provenance=prun)
-            reg.add("pages shared agree", vs["shared"]["agree"], provenance=prun)
+        items = json.load(open("audits/aamas_pages/items.json", encoding="utf-8"))
+        reg.add("pages read", pg["n_pages"], provenance=prun)
+        reg.add("pages drawn", len(items), provenance=prun)
+        reg.add("pages papers", len({it["paper"] for it in items}), provenance=prun)
+        reg.add("pages tables", pg["n_results_tables"], provenance=prun)
+        reg.add("pages tables with bar", _pct(pg["pct_results_tables_with_any_bar"]), provenance=prun)
+        reg.add("pages reader groups", pg["reader"]["groups"], provenance=prun)
+        reg.add("pages reader neither", f"{pg['reader']['pct_neither']}\\% [{pg['reader']['ci_neither'][0]}, {pg['reader']['ci_neither'][1]}]", provenance=prun)
+        reg.add("pages reader testable", f"{pg['reader']['pct_testable']}\\% [{pg['reader']['ci_testable'][0]}, {pg['reader']['ci_testable'][1]}]", provenance=prun)
+        reg.add("pages pipe groups", pg["pipeline_same_pages"]["groups"], provenance=prun)
+        reg.add("pages pipe neither", _pct(pg["pipeline_same_pages"]["pct_neither"]), provenance=prun)
+        reg.add("pages pipe testable", _pct(pg["pipeline_same_pages"]["pct_testable"]), provenance=prun)
+        reg.add("pages reader found pct", _pct(pg["reader_groups_found_by_pipeline"]["pct"]), provenance=prun)
+        reg.add("pages reader found", _pct_ci(pg["reader_groups_found_by_pipeline"]), provenance=prun)
+        reg.add("pages pipe found pct", _pct(pg["pipeline_groups_found_by_reader"]["pct"]), provenance=prun)
+        reg.add("pages matched neither", _pct(pg["reader_groups_matched"]["pct_neither"]), provenance=prun)
+        reg.add("pages unmatched neither", _pct(pg["reader_groups_unmatched"]["pct_neither"]), provenance=prun)
+        ratio = pg["reader"]["pct_neither"] / pg["pipeline_same_pages"]["pct_neither"]
+        reg.add("pages census ratio", f"{ratio:.2f}", provenance=prun)
+        reg.add("a neither census scaled", _pct(round(s["pct_neither"] * ratio, 1)), provenance=prun)
+        vs = pg["verdicts_same_pages"]
+        reg.add("pages shared", vs["shared"]["n"], provenance=prun)
+        reg.add("pages shared agree", vs["shared"]["agree"], provenance=prun)
+        reg.add("pages reader only n", vs["reader_only"]["n"], provenance=prun)
+        reg.add("pages reader only fails", vs["reader_only"]["fails"], provenance=prun)
+        reg.add("pages pipe only n", vs["pipeline_only"]["n"], provenance=prun)
+        reg.add("pages pipe only fails", vs["pipeline_only"]["fails"], provenance=prun)
+        rf_ = pg["reader_failure"]
+        reg.add("pages reader fail", f"{rf_['pct_fail']}\\% [{rf_['ci'][0]}, {rf_['ci'][1]}]", provenance=prun)
+        reg.add("pages reader fail n", rf_["n"], provenance=prun)
     reg.write(out_path)
     return reg.manifest()
 

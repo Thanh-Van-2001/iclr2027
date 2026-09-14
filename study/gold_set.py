@@ -247,7 +247,7 @@ def _unclear(v) -> bool:
     return str(v).strip().lower() == "unclear"
 
 
-def score(items_path: str, labels_path: str) -> dict:
+def score(items_path: str, labels_path: str, exclude_unboxed: bool = False) -> dict:
     with open(items_path, encoding="utf-8") as fh:
         items = {it["id"]: it for it in json.load(fh)}
     labels = {}
@@ -267,6 +267,12 @@ def score(items_path: str, labels_path: str) -> dict:
     labels = {i: lb for i, lb in labels.items() if i in items}
     T = [(items[i], labels[i]) for i in labels if items[i]["stratum"] == "testable"
          and labels[i].get("results_table", "").lower().startswith("y")]
+    # An item the kit rendered without a box (the parser held two records for
+    # one table on the page and the cell was looked up in the wrong one) is
+    # marked bold_ok = unclear by the reader and left out of every field
+    # denominator; it is counted here so the paper can say how many.
+    unboxed = [(it, lb) for it, lb in T if exclude_unboxed and it.get("mark") is None]
+    T = [(it, lb) for it, lb in T if not (exclude_unboxed and it.get("mark") is None)]
     fields = {}
     n = len(T)
     fields["results_table"] = rate(n, sum(1 for i in labels if items[i]["stratum"] == "testable"),
@@ -403,7 +409,7 @@ def score(items_path: str, labels_path: str) -> dict:
             pipe_fail_only += pf and not rf
     for d_ in untestable.values():
         d_["papers"] = len(d_["papers"])
-    out["testable"] = {"n_labelled": len(T), "fields": fields,
+    out["testable"] = {"n_labelled": len(T), "n_unboxed": len(unboxed), "fields": fields,
                        "reader_untestable": untestable,
                        "verdict_2x2": {"both_fail": both_fail, "both_survive": both_pass,
                                        "reader_fail_pipeline_survive": reader_fail_only,
@@ -423,9 +429,11 @@ def score(items_path: str, labels_path: str) -> dict:
 
     # --- no_bar
     B = [(items[i], labels[i]) for i in labels if items[i]["stratum"] == "no_bar"]
+    unboxed_b = [(it, lb) for it, lb in B if exclude_unboxed and it.get("mark") is None]
+    B = [(it, lb) for it, lb in B if not (exclude_unboxed and it.get("mark") is None)]
     Br = [(it, lb) for it, lb in B if lb.get("results_table", "").lower().startswith("y")]
     out["no_bar"] = {
-        "n": len(B),
+        "n": len(B), "n_unboxed": len(unboxed_b),
         "results_table": rate(len(Br), len(B), "results table"),
         "error_bar_truly_absent": rate(sum(1 for it, lb in Br
                                            if not lb["error_bar_present"].lower().startswith("y")),
@@ -647,6 +655,8 @@ def main(argv=None) -> int:
     s.add_argument("--exclude-items", action="append", default=None,
                    help="items.json of an earlier draw whose papers are held out (repeatable)")
     sc = sub.add_parser("score")
+    sc.add_argument("--exclude-unboxed", action="store_true",
+                    help="leave out items the kit rendered without a box (the reader's answers on them are void)")
     sc.add_argument("--items", default="out/gold/items.json")
     sc.add_argument("--labels", default="out/gold/labels.csv")
     sc.add_argument("--out", default="out/gold_set.json")
@@ -694,7 +704,7 @@ def main(argv=None) -> int:
         print(f"{len(items)} items -> {args.out_dir}")
         return 0
     res = (rescore(args.items, args.labels, args.rescore_with) if args.rescore_with
-           else score(args.items, args.labels))
+           else score(args.items, args.labels, exclude_unboxed=args.exclude_unboxed))
     with open(args.out, "w", encoding="utf-8") as fh:
         json.dump(res, fh, indent=1)
     print(json.dumps(res, indent=1))

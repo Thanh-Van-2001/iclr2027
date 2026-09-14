@@ -1,0 +1,79 @@
+Context Challenge: During a trial, after 𝑘episodes, the co-
+---
+Each trial contains 𝐸episodes
+---
+Figure 1: Evaluation results over a single trial (with co-player) compromising over 100 seeds for the CoinGame
+---
+Figure 3: Evaluation results over a single trial (with co-player) compromising over 100 seeds for the IPDitM
+---
+Figure 4: Hardstop Challenge: Average reward per timestep over an evaluation trial for Shaper (a) and GS (b) against a Naive
+---
+If the meta-agent cannot adapt their policy within a trial, a co-
+---
+Initialise trial reward ¯𝐽= 0
+---
+Mean and standard deviation reported across 100 seeds
+---
+Table 4: Episodic reward for in a single evaluation trial
+---
+This process is repeated over 𝐸episodes in a trial
+---
+We report mean and std over 5 seeds
+---
+When a trial
+---
+a meta-agent to adapt its meta-policy within a trial since it only
+---
+a sequence of 𝑇trials (denoted “meta-episodes” in the original
+---
+a trajectory of a batched (partial) trial ¯𝝉𝑡= (𝝉0,
+---
+across different episodes
+---
+agents against new co-player (NL) initialisation 𝜙−𝑖
+---
+and context as a trajectory of a (partial) trial t, ¯𝜏𝑡= (𝜏0,
+---
+cooperation requires a repeated commitment to a cooperative strat-
+---
+different episodes
+---
+episodes
+---
+episodes to achieve a score of at least 0
+---
+game many times
+---
+in the grid in the first 20 episodes (≈3
+---
+memory that only updates after each trial
+---
+number of inner-episodes (𝑒= 2), we expect meta-agents with-
+---
+over all episodes) at the end of a trial 𝑡using any model-free optimi-
+---
+retains its hidden state over episodes and only resets after each trial
+---
+seeds
+---
+that CS is visited more often than DS in early episodes (18%, 15%
+---
+the beginning of a trial
+---
+the episodes
+---
+trial
+---
+trial and potentially achieve a better meta-return, which we show in
+---
+trial or need to be inferred from the changing policy itself across
+---
+trial reward, ¯𝐽= Í𝐸𝑒𝐽𝑒
+---
+trial, co-players 𝜙−𝑖∼𝜌𝜙are sampled, where 𝜌𝜙is the respective
+---
+tween episodes, removing its ability to use context to shape (Shaper
+---
+updates parameters after a trial
+---
+within a trial 𝑡, conditioned on both agent’s policies, the co-players

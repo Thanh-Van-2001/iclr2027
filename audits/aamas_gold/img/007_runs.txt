@@ -1,0 +1,23 @@
+10 rollout steps under identical environmental conditions
+---
+In the experiments, we set the rollout horizon to 15 steps
+---
+Rollout horizon selection
+---
+Table 7: Performance of different rollout horizon and one-
+---
+dation when using a long rollout horizon (e
+---
+generate synthetic state-action pairs via pessimistic rollouts while
+---
+outperforms baseline methods across multiple rollout horizons
+---
+parative experiments using rollout horizons of 5, 10, 15, and 20
+---
+propagate during policy rollouts, degrading policy performance
+---
+rollout from three candidate actions proposed by the policy network
+---
+tion through model rollouts
+---
+with policy rollouts in world models

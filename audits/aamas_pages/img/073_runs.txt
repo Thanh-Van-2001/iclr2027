@@ -1,0 +1,17 @@
+, SAMBA runs more than 500x faster than
+---
+100 times, except the one on the OMD algorithm which runs very
+---
+Each experiment runs for
+---
+Table 2: The average single-run time (in seconds) and stan-
+---
+Thus, we do not require pulling each arm 𝑂(log𝑇) times in
+---
+and CBARBAR are implemented by selecting 𝑛𝑎(𝑚) times of arm 𝑎
+---
+is upper bounded by 𝐶, then we need to run the algorithm for an
+---
+pulled 𝑂(log𝑇) times in each phase (so that the empirical mean is
+---
+there is no corruption, every arm is pulled Θ(log𝑇) times, which is

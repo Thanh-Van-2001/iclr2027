@@ -1,0 +1,15 @@
+35: function Rollout(𝑠)
+---
+of executing action 𝑎in state 𝑠, 𝑁(𝑠) denotes the number of times
+---
+repeat
+---
+repeated over time—as the agent gathers more data, its estimates of
+---
+return 𝑟+ 𝛾· Rollout(𝑠′)
+---
+run regular MCTS with updated ground-truth dynamics
+---
+state 𝑠has been visited, 𝑁(𝑠,𝑎) signifies the number of times action
+---
+Δ ←Rollout(𝑣𝑙

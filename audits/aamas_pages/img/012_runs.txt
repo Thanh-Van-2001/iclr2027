@@ -1,0 +1,25 @@
+(Right) Rollouts of 𝜋𝜃(blue)
+---
+(𝜋𝑟𝑒𝑓) rollouts show that it achieves high rewards but exhibits un-
+---
+12 tasks averaged over 5 seeds and 3 cost thresholds
+---
+It runs an order of magnitude faster than the
+---
+Specifically, we run each algorithm on every dataset under three separate
+---
+and 100 rollouts at each evaluation step
+---
+and random seeds, and shared implementation-level settings (matched
+---
+cost thresholds and across five random seeds, allowing for a fair comparison
+---
+it is evident from the rollouts that 𝜋𝑠𝑎𝑓𝑒avoids high-cost regions
+---
+publications; code and seeds are fixed across methods to ensure fair compar-
+---
+run on an NVIDIA A100 GPU
+---
+sampled datasets across 3 values of the cost threshold (𝜏), five random seeds
+---
+shift into the low-cost, high-reward region, retaining the performance of original 𝜋ref rollouts (black) and avoiding unsafe behaviors (red)

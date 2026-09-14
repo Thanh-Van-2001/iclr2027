@@ -1,0 +1,53 @@
+24 hour training period over three seeds
+---
+Crucially, long training times can prevent CSP-MARL from being
+---
+For Connect 4, rather than letting the Minimax algorithm run
+---
+MARL) – is extremely expensive to run, despite recent efforts to
+---
+Minimax Exploiter can achieve gains in overall run-time efficiency
+---
+We run four different league setups, with varying Main Exploiters
+---
+We run the league framework on
+---
+and average over three seeds rather than five
+---
+and use the Pettingzoo library [16] to run the game in two player
+---
+averaged over five seeds
+---
+averaged over five seeds, which we illustrate in Figure 4
+---
+best seed
+---
+dense agent, averaged over five seeds
+---
+different seeds
+---
+expensive and time intensive to be run in iterative workflows that
+---
+exploiters with 9 converged generations at their best seed
+---
+from a random initialization
+---
+gorithm to run to completion – representing the optimal policy
+---
+median seed
+---
+ments, we only utilise a single machine to run the game clients
+---
+multiple times before allowing its opponent to act
+---
+productions to run CSP-MARL for their use-cases
+---
+strategies, and so convergence times become a training bottleneck
+---
+times completely infeasible for many use cases in the development
+---
+training over three hours and averaged over five seeds
+---
+with 11 converged generations at each seed
+---
+worst seed

@@ -1,0 +1,45 @@
+2 per run
+---
+3 times
+---
+30% fault rate across five seeds
+---
+5] in calibration trials and held fixed for all reported
+---
+8) relative to baseline runs, penalizing
+---
+A subset of agents experience faults either at initialization or
+---
+Ablation (120 agents, 30% faults, 5 seeds):
+---
+Hormone (120 agents, 30% faults, 10 seeds):
+---
+Hormone (60 agents, 30% faults, 3 seeds):
+---
+Random seeds were fixed, ensuring identical fault
+---
+Seeds
+---
+and ablation studies used 3 and 5 seeds, respectively; severity and
+---
+and single seeds for severity and cascade timeline studies, which
+---
+are reported as mean ± standard error over 10 seeds; zero-delay
+---
+cumulative damage exposure over the run duration:
+---
+faults, with three seeds per condition and 15s runs
+---
+ize the onboard adaptive mechanisms, which handle local run-time
+---
+seeds (mean ± SE)
+---
+seeds for the ablation study, 3 seeds for zero-delay robustness tests,
+---
+tics to achieve practical response times
+---
+timeline runs use a single deterministic seed for detailed trajectory
+---
+used 10 random seeds for scalability and packet-loss studies, 5
+---
+were assigned at initialization in the fixed arena, producing agent

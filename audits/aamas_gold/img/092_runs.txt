@@ -1,0 +1,57 @@
+(c) Centralized rollout within the imagination
+---
+MAG [35] extends MAMBA by treating model rollout as a multi-
+---
+Menv, serving as starting points for imagination rollouts
+---
+Perform counterfactual rollout for 𝐴MACD
+---
+Perform imagination rollout for pseudo interaction;
+---
+The mean and error bars are calculated from 256 random episodes
+---
+The start points of one rollout should use the observation
+---
+Times
+---
+We follow the Dreamer series to establish a world model to replicate
+---
+agent policy optimization with adaptive opponent-wise rollouts
+---
+ciency via adaptive opponent-wise rollouts
+---
+corporating considerations of multi-step model rollout errors
+---
+derive from real-world interaction data, while the following images stem from imagination rollout
+---
+dicted rewards, and model states via an additional rollout
+---
+eraging five repeated experiments
+---
+identical action sequences and start from the same initial states and random seeds
+---
+in some trials
+---
+local world model, enabling decentralized rollouts based on latent
+---
+model only replicates the transition of its local observations
+---
+ning rates and standard deviations (std) derived from five repeated
+---
+of the learned world model to conduct imagination rollouts
+---
+policy 𝝅within the counterfactual rollout
+---
+rollout process, the rewards and continuation flags are predicted in
+---
+rollout starts from 𝒙𝑡, and the first action executed in the imagina-
+---
+rollouts [9, 30]
+---
+runs over 5 different random seeds, and shaded regions correspond to the confidence intervals
+---
+training time for the same timesteps is five times longer than when
+---
+varying the counterfactual rollout horizon 𝐻𝑐
+---
+world models, leading to the low efficiency of the rollout in the

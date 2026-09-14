@@ -87,6 +87,29 @@ def main():
     fig.savefig("out/aamas/fig_census.png", dpi=160, bbox_inches="tight")
     print("wrote", os.path.join(OUT, "fig_census.pdf"))
 
+    # protocol resolution: printed gap against what K episodes x seeds resolve
+    rows = _j("out/aamas/protocol_resolution_rows.json")
+    fig, ax = plt.subplots(figsize=(3.3, 2.6))
+    for has_bars, color, label in ((False, "#1f4e79", "no error bar printed"), (True, "#e67e22", "error bar printed")):
+        xs = [r["resolvable"] * 100 for r in rows if r["has_bars"] == has_bars]
+        ys = [r["gap"] * 100 for r in rows if r["has_bars"] == has_bars]
+        ax.scatter(xs, ys, s=12, color=color, alpha=0.75, label=label, edgecolor="none")
+    lim = max(max(r["resolvable"] for r in rows), max(r["gap"] for r in rows)) * 100 * 1.1
+    ax.plot([0, lim], [0, lim], color="black", linewidth=0.6, linestyle="--")
+    ax.set_xlim(0, lim)
+    ax.set_ylim(0, lim)
+    ax.set_xlabel("gap the stated episodes can resolve (points)", fontsize=7.5)
+    ax.set_ylabel("printed gap (points)", fontsize=7.5)
+    ax.tick_params(labelsize=7)
+    ax.text(lim * 0.55, lim * 0.08, "below resolution", fontsize=7, color="#555")
+    ax.legend(fontsize=6.5, frameon=False, loc="upper left")
+    for s_ in ("top", "right"):
+        ax.spines[s_].set_visible(False)
+    fig.tight_layout()
+    fig.savefig(os.path.join(OUT, "fig_protocol.pdf"), bbox_inches="tight")
+    fig.savefig("out/aamas/fig_protocol.png", dpi=160, bbox_inches="tight")
+    print("wrote", os.path.join(OUT, "fig_protocol.pdf"))
+
 
 if __name__ == "__main__":
     main()

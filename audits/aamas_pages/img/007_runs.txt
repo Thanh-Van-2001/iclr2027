@@ -1,0 +1,13 @@
+After training, we run 40 evaluation episodes per method
+---
+Online rollouts are stored in 𝐵and demonstrations in 𝐷
+---
+We repeat this with 3
+---
+independent random seeds and report mean and standard devia-
+---
+of policy rollouts and 𝐷the demonstration buffer
+---
+rollouts for safer recovery planning
+---
+tion (in the form mean ± std) over seeds, following recommended

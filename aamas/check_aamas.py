@@ -16,10 +16,14 @@ from paperengine import provenance, refcheck, style  # noqa: E402
 D = "paper/aamas"
 MAIN = "main.tex"
 PAGE_LIMIT = 8
-ALLOW = sys.argv[1] if len(sys.argv) > 1 else ""
+# Literals that are legitimately hand-written: the CC licence version (4.0), the
+# conference ordinal (26th), the CCS concept ids and significance (10010147...,
+# 500) from the ACM template, and the version in a model's name (Gemini 3.1).
+ALLOW = sys.argv[1] if len(sys.argv) > 1 else "4.0,26,10010147.10010919,10010177,500,3.1"
 
 
 def build() -> bool:
+    subprocess.run(["latexmk", "-C", MAIN], cwd=D, capture_output=True, text=True)
     r = subprocess.run(["latexmk", "-pdf", "-interaction=nonstopmode", "-halt-on-error", MAIN],
                        cwd=D, capture_output=True, text=True)
     open(os.path.join(D, "build.log"), "w", encoding="utf-8").write(r.stdout + r.stderr)
@@ -32,7 +36,7 @@ def page_check() -> tuple:
     last_text_page = None
     for i in range(len(doc)):
         t = doc[i].get_text()
-        if re.search(r"^\s*REFERENCES\s*$", t, re.M):
+        if re.search(r"(?im)^\s*references\s*$", t) or "\n[1] " in t:
             last_text_page = i + 1
             break
     return len(doc), last_text_page

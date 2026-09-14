@@ -1,0 +1,53 @@
+24 times, leading to a total of 960 training episodes
+---
+After every 40 episodes, the roles of
+---
+The RL model is trained over 960 episodes,
+---
+This average is derived from four independent runs with
+---
+This cycle is repeated
+---
+different random seeds
+---
+dinates, along with the task generation times, are provided to the
+---
+exhaustive evaluation significantly amplifies the run-time, posing
+---
+explains the minor fluctuations in rewards across episodes as the
+---
+for episodes 𝑘= 0, 1, 2, · · · 𝐾2 do
+---
+hold true, and accounting for realistic loading and unloading times
+---
+information between task origin and destination {𝑘𝑖}, (d) times-
+---
+ity, we run experiments with varying numbers of robots during
+---
+mance when the model is evaluated using different random seeds
+---
+other operates in evaluation mode, alternating every 40 episodes
+---
+rewards across episodes, even as the agent gradually develops a
+---
+rival times to ensure timely task execution while considering prac-
+---
+run Executor policy 𝜋𝐸𝑘= 𝜋(𝜃𝐸𝑘) to
+---
+run Planner policy 𝜋𝑃𝑘= 𝜋(𝜃𝑃𝑘) in the
+---
+sequential flow of tasks without considering their generation times
+---
+tasks based on their arrival times, required completion deadlines,
+---
+tasks simultaneously, incorporating load/unload times, integrating
+---
+the planner undergoes training for 40 episodes, while the executor
+---
+times adhere to N (600, 50), where 600 represents the mean task
+---
+times within the LA window
+---
+• Normally distributed task arrival times
+---
+• Uniformly distributed task arrival times

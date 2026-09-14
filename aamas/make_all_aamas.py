@@ -124,6 +124,69 @@ def protocol_resolution(comparisons: list, protocol: dict, alpha: float = 0.05) 
             "rows": rows}
 
 
+ENV_FAMILIES = [
+    ("StarCraft (SMAC, SMACv2)", r"smac|starcraft|(?:3s5z|2s3z|5m_vs_6m|corridor|mmm2|protoss|terran|zerg)"),
+    ("Multi-agent particle (MPE)", r"mpe|particle|simple_spread|simple spread|cooperative navigation|predator"),
+    ("Google Research Football", r"football|grf"),
+    ("Overcooked, Hanabi, LBF, RWARE", r"overcooked|hanabi|level-based foraging|lbf|rware|warehouse"),
+    ("MuJoCo, D4RL, control", r"mujoco|d4rl|halfcheetah|hopper|walker|ant|humanoid|mamujoco|control suite|dmc"),
+    ("Atari, Procgen, games", r"atari|procgen|pong|breakout|melting pot|meltingpot"),
+    ("Path finding, routing, scheduling", r"mapf|path[- ]finding|routing|scheduling|vehicle|traffic|warehouse"),
+]
+
+
+def environment_families(comparisons: list) -> dict:
+    """Where the testable comparisons come from, by the environment family the
+    caption or header names, with the failure rate in each."""
+    out = {}
+    t = [c for c in comparisons if c.get("test")]
+    for name, pat in ENV_FAMILIES:
+        rx = re.compile(pat, re.I)
+        sel = [c for c in comparisons if rx.search(f"{c.get('caption', '')} {c.get('header_text', '')}")]
+        st = [c for c in sel if c.get("test")]
+        out[name] = {"comparisons": len(sel), "papers": len({c["paper"] for c in sel}),
+                     "pct_neither": round(100 * sum(1 for c in sel if c["winner_dispersion"] is None and c["runner_dispersion"] is None) / max(len(sel), 1), 1),
+                     "testable": len(st), "testable_papers": len({c["paper"] for c in st}),
+                     "pct_fail": round(100 * sum(1 for c in st if not c["survives_raw"]) / max(len(st), 1), 1) if st else None}
+    named = [c for c in comparisons if any(re.search(p, f"{c.get('caption', '')} {c.get('header_text', '')}", re.I) for _, p in ENV_FAMILIES)]
+    out["_any_named"] = {"comparisons": len(named), "testable": sum(1 for c in named if c.get("test")),
+                         "pct_of_testable": round(100 * sum(1 for c in named if c.get("test")) / max(len(t), 1), 1)}
+    return out
+
+
+def example_three_seeds(comparisons: list) -> dict:
+    """The largest gap, in points of a rate, among three-seed rate comparisons
+    that still fail Welch's t: the worked example of what three seeds show."""
+    sel = [c for c in comparisons if c.get("test") and c["n_runs"] == 3 and not c["survives_raw"]
+           and c["dispersion_kind"] in ("std", "unknown") and rate_like(c) == "percent"]
+    if not sel:
+        return {}
+    c = max(sel, key=lambda c: abs(c["winner"] - c["runner_up"]))
+    return {"paper": c["paper"], "table": c["table"], "winner": c["winner"], "winner_sd": c["winner_dispersion"],
+            "runner_up": c["runner_up"], "runner_sd": c["runner_dispersion"], "n_runs": c["n_runs"],
+            "gap": round(abs(c["winner"] - c["runner_up"]), 4), "relative_gap_pct": round(100 * c["relative_gap"], 1),
+            "t": round(c["test"]["z"], 2), "df": round(c["test"].get("df", 0.0), 1), "p": round(c["test"]["p"], 3),
+            "n_three_seed_failing": len(sel)}
+
+
+def duplicate_table_records(records: list) -> dict:
+    """Tables the parser recorded more than once under one (paper, number,
+    page): a two-column artefact in which a caption is attached to a body
+    from the neighbouring column, or a table is split. The reference-set kit
+    could not box a cell in such a table, and the comparisons they hold are
+    counted here so the paper can say how much of the corpus they are."""
+    from analyze import comparisons_from_table
+    keys = collections.defaultdict(list)
+    for r in records:
+        for t in r.get("tables", []):
+            keys[(r["id"], t.get("number"), t.get("page"))].append(t)
+    dup = {k: ts for k, ts in keys.items() if len(ts) > 1}
+    n_cmp = sum(len(comparisons_from_table(t)) for ts in dup.values() for t in ts)
+    total = sum(len(comparisons_from_table(t)) for ts in keys.values() for t in ts)
+    return {"table_keys": len(keys), "duplicate_keys": len(dup), "tables_in_duplicates": sum(len(ts) for ts in dup.values()),
+            "comparisons_in_duplicates": n_cmp, "pct_of_comparisons": round(100 * n_cmp / max(total, 1), 1)}
+
+
 def main() -> int:
     os.makedirs(OUT, exist_ok=True)
     records = load_unique(EXTRACTED)
@@ -188,6 +251,9 @@ def main() -> int:
         "funnel": extraction_funnel(records),
         "checklist": checklist_agreement(records),
         "bold_semantics": make_all.bold_semantics(records),
+        "duplicate_table_records": duplicate_table_records(records),
+        "environment_families": environment_families(cs),
+        "example_three_seeds": example_three_seeds(cs),
         "protocol_stats": {
             "papers_scanned": len(protocol),
             "state_eval_episodes": sum(1 for p in protocol.values() if p.get("eval_episodes")),

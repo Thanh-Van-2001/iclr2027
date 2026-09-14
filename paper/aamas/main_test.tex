@@ -1,0 +1,581 @@
+\documentclass[sigconf,anonymous]{aamas}
+\usepackage{balance}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{xcolor}
+\input{numbers}
+\input{numbers_stub}
+
+\makeatletter
+\gdef\@copyrightpermission{
+  \begin{minipage}{0.2\columnwidth}
+   \href{https://creativecommons.org/licenses/by/4.0/}{\includegraphics[width=0.90\textwidth]{by}}
+  \end{minipage}\hfill
+  \begin{minipage}{0.8\columnwidth}
+   \href{https://creativecommons.org/licenses/by/4.0/}{This work is licensed under a Creative Commons Attribution International 4.0 License.}
+  \end{minipage}
+  \vspace{5pt}
+}
+\makeatother
+\setcopyright{ifaamas}
+\acmConference[AAMAS 2027]{Proc.\@ of the 26th International Conference
+on Autonomous Agents and Multiagent Systems (AAMAS 2027)}{3--7 May 2027}{Hanoi, Vietnam}{M.~Baldoni, F.~Fang, W.~Yeoh, N.~Yorke-Smith (eds.)}
+\copyrightyear{2027}
+\acmYear{2027}
+\acmDOI{}
+\acmISBN{}
+\acmSubmissionID{<<OpenReview submission id>>}
+\submissionType{Research Paper Track}
+
+\title{Bold Without Bars: What Three Years of AAMAS Tables Let a Reader Check}
+
+\author{Anonymous}
+\affiliation{\institution{Anonymous}\city{}\country{}}
+
+\begin{document}
+
+\begin{abstract}
+A results table marks a winner in bold and asks the reader to believe it. We
+ask how often the page prints what checking would need. From every main-track
+paper in the AAMAS proceedings of 2024, 2025 and 2026 (\nAPapers{} papers) we
+extract the results tables that mark a winner, identify the claim each bold
+cell makes against the best value the authors did not mark, and record whether
+both values carry an error bar and whether the paper states how many runs
+produced them. Of \nAComparisons{} highlighted comparisons, \nAPctNeither{}
+print no error bar on either side and \nAPctTestable{} can be tested from the
+page. Of those that can, \nAPctFail{} are not distinguishable from zero by
+Welch's $t$ at the authors' own run counts, \nRunsLeThreeFail{} where three
+seeds or fewer are stated and \nRunsGeSixFail{} at six or more. The same
+instrument, run unchanged on \nMlPapers{} NeurIPS and ICML papers of 2025,
+finds \nMlPctNeither{} bar-less, \nMlPctTestable{} testable and
+\nMlPctFail{} failing: the highlighted comparisons of AAMAS carry uncertainty
+more often than those of the machine-learning mainstream, and the uncertainty
+they carry supports the claim no more often. Win and success rates have a
+second resolution that needs no error bar, the binomial noise of the
+evaluation protocol; only \nProtoStateEpisodesPct{} of papers state how many
+evaluation episodes a rate averages over, and where one does,
+\nResBelowPct{} of its highlighted gaps fall below what that many episodes
+can resolve. The instrument was frozen before it met this corpus: on a
+reference set drawn from it, an image-based reader agrees with the parser on
+the whole claim in \nGClaim{} of comparisons and on the verdict in
+\nGVerdict{}, and a reading of random pages shows what the parser misses on
+two-column pages. We release the pipeline, the per-comparison database and
+the rendered reference set.
+\end{abstract}
+
+\begin{CCSXML}
+<ccs2012>
+<concept><concept_id>10010147.10010919.10010177</concept_id><concept_desc>Computing methodologies~Multi-agent systems</concept_desc><concept_significance>500</concept_significance></concept>
+</ccs2012>
+\end{CCSXML}
+\ccsdesc[500]{Computing methodologies~Multi-agent systems}
+\keywords{empirical methodology; reproducibility; statistical significance; multi-agent reinforcement learning; evaluation protocols; error bars}
+
+\maketitle
+
+\section{Introduction}
+\label{sec:intro}
+
+Multi-agent research decides what works by comparing numbers in tables. A
+method is trained under a handful of seeds, evaluated over some number of
+episodes, and its mean is set in bold beside the means of its rivals. The bold
+is the claim. Whether a reader can check it depends on two things the page
+either prints or does not: a measure of run-to-run spread for both values, and
+the number of runs behind them. Without the first, the gap between two means
+is a gap between two draws; without the second, an error bar has no scale.
+
+The community knows this. Recommendations on how many seeds to run, how to
+report intervals, and how to evaluate cooperative multi-agent learning in
+particular have been published and are cited
+\cite{henderson2017deep,colas2018how,agarwal2021deep,gorsane2022towards,patterson2024empirical}.
+What has not been measured is how often the proceedings follow them: not a
+sample of papers read by hand, but every results table in a conference, with
+one rule applied to each. This paper measures it for AAMAS.
+
+We take every main-track paper in the IFAAMAS proceedings of 2024, 2025 and
+2026, \nAPapers{} papers in all, and extract from each the results tables
+whose bold marks a winner. In every row or column with exactly one bold cell
+we take the comparison the bold makes: the marked value against the best
+value the authors did not mark. For each we record whether the two values
+carry error bars, what the bars are said to be, and how many runs the paper
+states produced them. Where all three are present we ask whether the gap is
+distinguishable from zero at that run count, by Welch's $t$ on the printed
+means and deviations. The instrument is a parser and a set of rules. It was
+written for a study of NeurIPS and ICML tables, validated there against an
+image-based reader on reference sets drawn after it was frozen, and run here
+without change, so that the two literatures can be compared under one
+definition.
+
+The findings are these. \nAPctNeither{} of the \nAComparisons{} highlighted
+comparisons in AAMAS carry no error bar on either side, and \nAPctTestable{}
+can be tested from the page. On the mainstream sample the same instrument
+finds \nMlPctNeither{} and \nMlPctTestable{}. The difference is not that
+AAMAS authors print uncertainty more often (\nAPctPapersErr{} of AAMAS
+papers print any error bar, against \nMlPctPapersErr{}) but that its
+highlighted comparisons are concentrated in the learning community, whose
+tables carry a deviation as a matter of habit. What the deviations then show
+is no better: \nAPctFail{} of the testable comparisons do not survive the
+test at the stated run count, against \nMlPctFail{} in the mainstream, and
+\nRunsLeThreeFail{} of those resting on three seeds or fewer. A second,
+venue-specific resolution comes from the evaluation protocol itself: a win
+rate over $K$ episodes has a binomial standard error whether or not anyone
+prints one, and \nResBelowPct{} of the win-rate gaps whose papers state $K$
+fall below what $K$ episodes can resolve. Only \nProtoStateEpisodesPct{} of
+papers state $K$.
+
+None of these numbers is exact, and the paper says how inexact. Conventions
+the source papers leave unstated move the failure rate across the span of
+Table~\ref{tab:span}; a reference set drawn from this corpus after the
+instrument was frozen puts its agreement with an image-based reader at
+\nGClaim{} on the whole claim and \nGVerdict{} on the verdict; and a reading
+of \nPagesRead{} random pages shows that on two-column pages the parser lists
+\nPagesReaderFoundPct{} of the single-bold groups the reader lists, and that
+the ones it misses print bars less often than the ones it keeps. The
+instrument is not a substitute for reading a paper. It is a way of asking one
+question of \nATablesDetected{} tables at once, with an error that is
+measured rather than assumed.
+
+\section{What is measured}
+\label{sec:what}
+
+\paragraph{The unit.} A \emph{comparison} is one bold cell in a results table
+set against the best non-bold cell in its group, where the group is the row or
+the column within which the table marks winners. Orientation is decided per
+table by which axis carries exactly one bold cell per line, with a cut into
+dataset blocks where the lines agree on one; tables whose bold cells fall
+several to a line, captions announcing first, second and third best marking,
+and cells tied with their rival are left out (Section~\ref{sec:instrument}
+counts them). Direction is read from the header's arrows and metric names,
+and a bold cell that is not the extreme of its group in that direction is
+discarded rather than guessed at.
+
+\paragraph{Testability.} A comparison is \emph{testable} when both cells carry
+an error bar and a run count is available: from the caption, from the table's
+page, or, failing both, the smallest count stated anywhere in the paper.
+Standard errors and confidence intervals need no count. An unlabelled bar is
+read as a standard deviation, the reading that makes the claim easiest to
+support; Section~\ref{sec:support} gives the other reading.
+
+\paragraph{The test.} On a testable comparison we compute Welch's $t$ from the
+two means, the two deviations and the run count, and call the comparison
+\emph{failing} when $p \geq 0.05$ two-sided. A failure says the printed
+evidence does not support the claim at the stated run count, not that the
+claim is false; with three seeds the test has little power, and that is the
+point. A two-sample $z$ that takes the printed deviations as exact gives a
+lower rate and is reported beside it; Holm's correction within a table, where
+several comparisons share one family, gives a higher one.
+
+\paragraph{What the instrument cannot see.} It reads the text layer of the
+PDF, so a table rendered as an image, uncertainty drawn in a figure, and
+shading that encodes significance are invisible to it and counted as absent.
+It cannot tell whether two methods share seeds, so the test treats them as
+independent; Table~\ref{tab:span} carries a paired reading. It does not re-run
+anything: everything here is a statement about the page.
+
+\paragraph{Frozen.} The parser and every rule above were fixed and tagged
+before this corpus was downloaded. Whatever the reference set of
+Section~\ref{sec:instrument} exposed is reported there and left in place, so
+that the precision figures describe the instrument that produced the numbers.
+
+\section{Corpus}
+\label{sec:corpus}
+
+The IFAAMAS proceedings are open. From their tables of contents we take every
+paper listed under the main track (``Full Papers'' in 2024, ``Research Paper
+Track'' in 2025 and 2026) and leave out extended abstracts, demonstrations,
+the doctoral consortium, JAAMAS and Blue Sky papers: \nAPapersTwentyFour{},
+\nAPapersTwentyFive{} and \nAPapersTwentySix{} papers, \nAPapers{} in all.
+Every one is an eight-page ACM two-column document with an unlimited
+reference list and no appendix in the proceedings PDF, which matters for what
+follows: whatever a reader can check has to be on those eight pages.
+
+The comparison sample is the \nMlPapers{} NeurIPS and ICML papers of 2025,
+single-column with appendices, extracted by the same code and reported
+beside AAMAS throughout.
+
+To read the AAMAS corpus by community, a language model assigned each paper
+one of eight labels from its title and first page: learning; game theory and
+social choice; LLM-based agents; simulation; planning and search; reasoning,
+norms and verification; robotics and human--agent interaction; other. The
+prompt, the model and every answer are released, and Table~\ref{tab:community}
+gives the split. The label is a reading of a first page, not the area the
+authors submitted to.
+
+\section{What AAMAS tables print}
+\label{sec:print}
+
+\begin{figure}[t]
+\centering
+\includegraphics[width=\columnwidth]{fig_census}
+\caption{(a) What the page prints beside a bold cell, in AAMAS 2024--2026
+and in NeurIPS/ICML 2025, as a share of highlighted comparisons. (b) The
+share of testable comparisons failing Welch's $t$ at the stated run count, by
+run count, with Wilson intervals; $n$ is the number of comparisons in the
+band.}
+\label{fig:census}
+\end{figure}
+
+\begin{table}[t]
+\caption{The census. Highlighted comparisons in the AAMAS main track
+2024--2026 and in NeurIPS/ICML 2025, under one definition. Intervals are 95\%
+cluster bootstraps over papers.}
+\label{tab:census}
+\small
+\begin{tabular}{@{}lrr@{}}
+\toprule
+ & AAMAS 2024--26 & NeurIPS/ICML 2025 \\
+\midrule
+Papers & \nAPapers{} & \nMlPapers{} \\
+Papers printing any error bar & \nAPctPapersErr{} & \nMlPctPapersErr{} \\
+Papers stating a run count & \nAPctPapersRuns{} & \nMlPctPapersRuns{} \\
+Median stated run count & \nAMedianRuns{} & \nMlMedianRuns{} \\
+Highlighted comparisons & \nAComparisons{} & \nMlComparisons{} \\
+Median comparisons per table & \nAComparisonsPerTable{} & \nMlComparisonsPerTable{} \\
+No bar on either side & \nAPctNeitherCi{} & \nMlPctNeither{} \\
+Bar on one side only & \nAPctOneSide{} & -- \\
+Bars but no run count & \nAPctNoN{} & -- \\
+Testable from the page & \nAPctTestableCi{} & \nMlPctTestable{} \\
+\quad of which fail, Welch & \nAPctFailCi{} & \nMlPctFail{} \\
+\quad fail after Holm & \nAPctFailHolmCi{} & \nMlPctFailHolm{} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Table~\ref{tab:census} and Figure~\ref{fig:census}a are the census. Of
+\nAComparisons{} comparisons in \nATablesYielding{} tables, \nAPctNeither{}
+carry no error bar on either side, \nAPctOneSide{} on one side only, and
+\nAPctNoN{} carry bars on both sides but no run count anywhere in the paper;
+\nAPctTestable{} can be tested. The bar-less share is \nAPctNeitherCi{} once
+the bootstrap resamples papers rather than comparisons, because comparisons
+come in clusters: a mean of \nAMeanCluster{} per paper and a design effect of
+\nADesignEffect{}. Every interval in this paper is of that kind.
+
+\paragraph{Against the mainstream.} On the 2025 NeurIPS and ICML sample the
+same code finds \nMlPctNeither{} bar-less and \nMlPctTestable{} testable.
+The gap is not a difference in habit at the level of the paper: fewer AAMAS
+papers print any error bar (\nAPctPapersErr{} against \nMlPctPapersErr{}) or
+state a run count (\nAPctPapersRuns{} against \nMlPctPapersRuns{}), and the
+median stated count is \nAMedianRuns{} in both. It is a difference in who
+prints the tables. The highlighted comparisons of AAMAS come from a narrow
+slice of the proceedings: \nAPapersTestable{} papers hold every testable
+comparison, and Table~\ref{tab:community} shows that the learning community
+holds most of the highlighted ones and prints a deviation beside them as a
+matter of course, while the game-theoretic and social-choice papers, a third
+of the proceedings, rarely mark a winner in a table at all. The eight-page
+limit cuts the other way: an ML paper's appendix tables, often the ones with
+seeds and deviations, have no counterpart here, and the AAMAS figures
+describe main text alone.
+
+\paragraph{By year.} Bar-less shares of \nANeitherTwentyFourCi{},
+\nANeitherTwentyFiveCi{} and \nANeitherTwentySixCi{} in 2024, 2025 and 2026,
+and failure rates of \nAFailTwentyFourCi{}, \nAFailTwentyFiveCi{} and
+\nAFailTwentySixCi{}, lie within each other's intervals. Whatever 2025 did
+differently, three years and \nAPapersTestable{} papers cannot separate a
+trend from the papers that happened to be accepted.
+
+\begin{table}[t]
+\caption{By community, from a language-model reading of title and first page.
+``Claim'' is the share of papers with at least one highlighted comparison;
+``Bar'' the share printing any error bar; the failure rate is over testable
+comparisons and is omitted where fewer than twenty exist.}
+\label{tab:community}
+\small
+\setlength{\tabcolsep}{3.5pt}
+\begin{tabular}{@{}lrrrrrr@{}}
+\toprule
+Community & Papers & Claim & Bar & No bar & Testable & Fail \\
+\midrule
+Learning & \nCLearningPapers{} & \nCLearningClaimPapers{} & \nCLearningPapersErr{} & \nCLearningNeither{} & \nCLearningTestable{} & \nCLearningFail{} \\
+Game theory, social choice & \nCGameTheorySocialChoicePapers{} & \nCGameTheorySocialChoiceClaimPapers{} & \nCGameTheorySocialChoicePapersErr{} & \nCGameTheorySocialChoiceNeither{} & \nCGameTheorySocialChoiceTestable{} & \nCGameTheorySocialChoiceFail{} \\
+LLM agents & \nCLlmAgentsPapers{} & \nCLlmAgentsClaimPapers{} & \nCLlmAgentsPapersErr{} & \nCLlmAgentsNeither{} & \nCLlmAgentsTestable{} & \nCLlmAgentsFail{} \\
+Simulation & \nCSimulationPapers{} & \nCSimulationClaimPapers{} & \nCSimulationPapersErr{} & \nCSimulationNeither{} & \nCSimulationTestable{} & \nCSimulationFail{} \\
+Planning, search & \nCPlanningSearchPapers{} & \nCPlanningSearchClaimPapers{} & \nCPlanningSearchPapersErr{} & \nCPlanningSearchNeither{} & \nCPlanningSearchTestable{} & \nCPlanningSearchFail{} \\
+Reasoning, norms & \nCReasoningNormsPapers{} & \nCReasoningNormsClaimPapers{} & \nCReasoningNormsPapersErr{} & \nCReasoningNormsNeither{} & \nCReasoningNormsTestable{} & \nCReasoningNormsFail{} \\
+Robotics, HAI & \nCRoboticsHaiPapers{} & \nCRoboticsHaiClaimPapers{} & \nCRoboticsHaiPapersErr{} & \nCRoboticsHaiNeither{} & \nCRoboticsHaiTestable{} & \nCRoboticsHaiFail{} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{By community.} Table~\ref{tab:community} splits the corpus by the
+label a model gave each paper. The learning papers contribute
+\nCLearningComparisons{} of the \nAComparisons{} comparisons and nearly all
+of the testable ones; \nCLearningClaimPapers{} of them mark a winner in a
+table, against \nCGameTheorySocialChoiceClaimPapers{} of the game-theoretic
+and social-choice papers, whose tables, where they exist, compare running
+times or solution quality over instances without a spread. The audit that
+follows is therefore, in effect, an audit of how multi-agent learning is
+reported at AAMAS; the other communities are counted, but their claims live
+in theorems and figures the instrument does not read.
+
+\section{What the printed evidence supports}
+\label{sec:support}
+
+Of the \nANTestable{} testable comparisons, from \nAPapersTestable{} papers,
+\nAPctFail{} are not distinguishable from zero by Welch's $t$ at the stated
+run count (\nAPctFailCi{} over papers), and \nAPctFailHolm{} after Holm's
+correction within the table. The median relative gap among the failing
+comparisons is \nAGapFail{}, among the surviving ones \nAGapPass{}. A
+two-sample $z$ on the same comparisons, each printed deviation taken as
+exact, fails \nSpanZTwoSidedFail{}. On the mainstream sample the
+corresponding rates are \nMlPctFail{} and \nMlPctFailHolm{}: the AAMAS
+interval covers both, and the claim that AAMAS does better once it prints a
+deviation is not one the data support.
+
+\paragraph{Seeds.} The failure rate follows the run count
+(Figure~\ref{fig:census}b). At three seeds or fewer (\nRunsLeThreeN{}
+comparisons) \nRunsLeThreeFail{} fail; at four or five (\nRunsFourToFiveN{})
+\nRunsFourToFiveFail{}; at six or more (\nRunsGeSixN{}) \nRunsGeSixFail{}.
+Part of this is the arithmetic of the $t$ distribution: at $n=3$ a gap must
+exceed about two and a half pooled deviations to reach $p<0.05$, and few of
+the gaps here do. It is also the pattern the seed-count literature predicted
+\cite{colas2018how,agarwal2021deep} and the reason
+\citet{gorsane2022towards} asked for ten. A power reading says the same
+thing from the other side: for \nPowerUnderpowered{} of the \nPowerN{}
+comparisons with a deviation and a count, the reported gap is smaller than
+the minimum detectable difference at 80\% power for that design, whichever
+way the test came out.
+
+\paragraph{Environments.} The captions name where \nEnvNamedTestablePct{}
+of the testable comparisons come from. The StarCraft family (SMAC and
+SMACv2) holds \nEnvStarcraftTestable{} testable comparisons from
+\nEnvStarcraftPapers{} papers and \nEnvStarcraftFail{} of them fail; the
+MuJoCo, D4RL and control tables, which multi-agent papers share with
+single-agent RL, hold \nEnvMujocoTestable{} from \nEnvMujocoPapers{} papers
+at \nEnvMujocoFail{}; the Atari and game tables \nEnvAtariTestable{} at
+\nEnvAtariFail{}. These are a handful of papers each and the rates are
+theirs, not the environments'; what they share is win rates and returns
+averaged over few seeds with deviations of the same order as the gaps.
+
+\begin{table}[t]
+\caption{The span of the failure rate across conventions the papers leave
+unstated. Each row changes one reading of the page and keeps the rest.}
+\label{tab:span}
+\small
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Reading & $n$ & Fail \\
+\midrule
+Welch's $t$ at the stated run count (reported) & \nSpanAsReportedN{} & \nSpanAsReportedFail{} \\
+Two-sample $z$, deviations exact & \nSpanZTwoSidedN{} & \nSpanZTwoSidedFail{} \\
+One-sided & \nSpanOneSidedN{} & \nSpanOneSidedFail{} \\
+Holm within table & \nSpanAsReportedN{} & \nSpanAsReportedFailHolm{} \\
+Holm within paper & \nSpanHolmFamilyPaperN{} & \nSpanHolmFamilyPaperFailHolm{} \\
+Unlabelled bars read as standard errors & \nSpanUnlabelledAsSemN{} & \nSpanUnlabelledAsSemFail{} \\
+Labelled bars only & \nSpanLabelledOnlyN{} & \nSpanLabelledOnlyFail{} \\
+Run count from the caption only & \nStrictN{} & \nStrictFail{} \\
+Run count from caption or page & \nSpanCaptionOrPageN{} & \nSpanCaptionOrPageFail{} \\
+Methods paired, $\rho = 0.5$ & \nSpanRhoHalfN{} & \nSpanRhoHalfFail{} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Conventions.} Table~\ref{tab:span} moves one reading at a time.
+The run count matters most for how much can be tested: counting only
+captions leaves \nStrictN{} comparisons testable (\nStrictTestable{} of the
+corpus) with \nStrictFail{} failing, and a count taken from anywhere in the
+paper, which the headline uses, more than doubles the testable set at almost
+the same rate. What the bar means matters most for the rate:
+\nBarsUnlabelledPct{} of the bars that reach the test are unlabelled, and
+reading them as standard errors rather than deviations moves their failure
+rate from \nBarsAsStdFail{} to \nBarsAsSemFail{}; the labelled bars alone
+fail at \nBarsLabelledFail{}. Across the rows the rate spans \nSpanLo{} to
+\nSpanHi{}, as wide as the sampling interval: the pages do not say enough to
+pin down their own claims.
+
+\paragraph{Families.} Comparisons come in tables, and
+\nHolmPctInFamiliesOverFive{} of the testable ones sit in a table with more
+than five others; the median family has \nHolmMedianFamily{}. Holm within
+the table is a conservative reading, since not every bold cell in a table is
+a separate claim; it is reported, not preferred.
+
+\section{The resolution of the evaluation protocol}
+\label{sec:protocol}
+
+A win rate or a success rate is a proportion, and a proportion measured over
+$K$ episodes has a standard error of $\sqrt{p(1-p)/K}$ whether or not anyone
+prints it. Two rates measured over $K$ episodes each cannot be told apart
+when their gap is below $1.96\sqrt{p_1(1-p_1)/K + p_2(1-p_2)/K}$, and no
+bold face changes that. This resolution is a property of the protocol, and
+it is the one quantity in this paper that can be computed for a bar-less
+comparison from what the page prints, provided the page prints $K$.
+
+\paragraph{What the papers state.} We searched every paper's text for a
+statement of the number of evaluation episodes, rollouts or test games a
+reported rate averages over, and for a statement of the number of seeds.
+\nProtoStateEpisodes{} of the \nProtoPapersScanned{} papers
+(\nProtoStateEpisodesPct{}) state the former in a form the patterns match
+and \nProtoStateSeeds{} (\nProtoStateSeedsPct{}) the latter; the commonest
+stated episode count is \nProtoModeEpisodes{}, in \nProtoModeEpisodesN{}
+papers. The patterns and every matched sentence are released, and both
+counts are lower bounds on what a reader could find, since a protocol
+described in words the patterns do not match is missed.
+
+\paragraph{Gaps below resolution.} \nResRateLike{} highlighted comparisons
+are of rates, by the words in their caption or header (win, success, solved)
+and their range; \nResWithK{} of them come from papers that state $K$, and
+those from only \nResPapers{} papers. Taking $K$ episodes per seed times the
+stated seeds, or one seed where none is stated (\nResSeedAssumedOne{} of
+these comparisons, a reading that favours the claim), \nResBelowPct{} of the
+gaps fall below the resolution of the protocol that produced them
+(\nResBelowCi{} over comparisons, \nResBelowPaperCi{} over papers). Among the
+\nResBarlessN{} that print no error bar, \nResBarlessBelow{} are below it;
+among the \nResBarredN{} that do, \nResBarredBelow{}. Seven papers are too
+few to carry a rate for the venue, and we do not offer one; the finding is
+that the quantity can be computed at all, that where it can it fails about
+half the claims it meets, and that for nine papers in ten it cannot be
+computed because the page does not say how many episodes were played.
+
+\section{How far to trust the instrument here}
+\label{sec:instrument}
+
+The instrument was built and validated on single-column NeurIPS and ICML
+PDFs. AAMAS papers are two-column ACM documents with narrower tables, tables
+that span both columns, and captions that sit beside another column's text.
+The precision figures from the earlier corpus do not transfer; they have to
+be measured again, and so does recall.
+
+\paragraph{Reference set.} After the parser was frozen we drew \nGDrawnN{}
+comparisons from the AAMAS corpus at random, \nGTestableN{} testable and
+\nGNoBarN{} bar-less after the exclusion below, rendered each table at twice
+its printed size with the cell under audit boxed in red, and had an
+image-based reader (a vision-language model, named in the AI use statement)
+record, blind to the parser's output, whether the region is a results table,
+whether the boxed cell is bold and alone in its group, the orientation and
+direction, both means and bars, the kind of bar, and the run count from the
+paper's seed and run sentences supplied in full. The reader agrees with the
+parser on the whole claim---bold cell, rival and all four values---in
+\nGClaimFrac{} fully readable items (\nGClaim{}; \nGClaimPaperCi{}
+resampling papers), on the bold cell in \nGBoldCellFrac{}, the winner's mean
+in \nGWinnerMeanFrac{}, its bar in \nGWinnerDispFrac{}, the runner-up in
+\nGRunnerMeanFrac{}, its bar in \nGRunnerDispFrac{}, and the run count in
+\nGNRunsFrac{}. On the verdict, which is what the headline rests on, the two
+agree on \nGVerdictFrac{} of the comparisons both can test (\nGVerdict{});
+from the reader's own values the failure rate on those items is
+\nGFailReader{} against \nGFailPipe{} from the parser's. The reader could
+not test \nGUntestableN{} of the parser's testable items, mostly for want of
+a run count it would accept. Of the \nGNoBarN{} comparisons the parser found
+bar-less, the reader finds no bar for either cell anywhere in the table in
+\nGNoBarAbsentFrac{} (\nGNoBarAbsent{}).
+
+\paragraph{What the reference set exposed.} \nGUnboxedN{} of the
+\nGDrawnN{} items could not be rendered with a box: the parser holds two
+records for one table on the page, a body attached to the neighbouring
+column's text as its caption or a table split in two, and the kit looked up
+the cell in the wrong record. The reader's answers on those items are void
+and they are excluded above. The artefact is not confined to the kit:
+\nADupKeys{} of the \nATableKeys{} table records in the corpus are such
+duplicates, holding \nADupComparisons{} comparisons (\nADupPct{} of the
+corpus), and it is left in place, as the frozen rule requires. Where the
+reader and parser disagree on a claim, the reasons are the ones the earlier
+corpus showed---a table that bolds every entry of the authors' row, a tie
+between two bold cells the parser resolved and the reader did not, a rival
+taken from a reference column---and are listed in the supplement.
+
+These are agreements between two extractors of different technology, one on
+the text layer and one on the rendered image, not precision against a human
+reference, and the box anchors the reader on the parser's choice of winner
+though not on its values.
+
+\paragraph{Random pages.} Precision does not bound recall. We drew one page
+holding a table caption at random from each of \nPagesPapers{} papers
+outside the reference set and had the reader list, with nothing marked, every
+results table on the page, every row or column with exactly one bold cell,
+and for each the bars and run count. \nPagesTables{} of the tables it lists
+are results tables and \nPagesTablesWithBar{} of those print any bar. The
+reader finds \nPagesReaderGroups{} single-bold groups, of which
+\nPagesReaderNeither{} are bar-less and \nPagesReaderTestable{} testable;
+the parser lists \nPagesPipeGroups{} on the same pages, \nPagesPipeNeither{}
+bar-less and \nPagesPipeTestable{} testable. The parser lists
+\nPagesReaderFoundPct{} of the reader's groups (\nPagesReaderFound{}), less
+than half of what it managed on single-column pages, and the reader lists
+\nPagesPipeFoundPct{} of the parser's. On most pages where the parser misses
+the reader's groups it has detected the table and produced no comparison
+from it, by its own rules: bold that is not the extreme of its line, lines
+with more than one bold cell, a block cut the columns do not agree on. The
+groups it misses print bars less often than the groups it keeps
+(\nPagesUnmatchedNeither{} bar-less against \nPagesMatchedNeither{}), so
+the census headline, taken over what the parser reads, understates the
+bar-less share: over every group the reader finds, the share is
+\nPagesCensusRatio{} times the parser's on the same pages, which would put
+the headline at \nANeitherCensusScaled{}. The testable share moves the other
+way. Every number in Sections~\ref{sec:print} and~\ref{sec:support} is
+therefore a statement about the \nAComparisons{} comparisons the parser
+reads, with a precision measured on the reference set and a coverage
+measured here.
+
+\paragraph{What the funnel discards.} Of \nATablesDetected{} tables
+detected, \nATablesYielding{} yield at least one comparison. Among
+\nAGroupsCandidate{} candidate groups, \nAGroupsUsablePct{} have exactly one
+bold cell and a rival; \nABoldNotExtremalPct{} of single-bold groups have a
+bold cell that is not the extreme of its group in the read direction and are
+dropped, and \nABoldTied{} groups tie with their rival.
+\nAEmptyTablesCaptionUncertainty{} of the \nAEmptyTables{} tables without a
+cell-level bar have a caption that mentions uncertainty, which the parser
+cannot use.
+
+\section{Related work}
+\label{sec:related}
+
+The case for seeds and intervals in reinforcement learning was made by
+\citet{henderson2017deep}, \citet{islam2017reproducibility},
+\citet{colas2018how,colas2019hitchhiker}, \citet{jordan2020evaluating},
+\citet{chan2020measuring} and \citet{agarwal2021deep}, and for cooperative
+multi-agent learning by \citet{gorsane2022towards}, who read the evaluation
+sections of MARL papers by hand and found most reporting a handful of seeds
+without intervals. Benchmarks and libraries followed
+\cite{papoudakis2021benchmarking,ellis2023smacv2,bettini2024benchmarl}, and
+\citet{patterson2024empirical} set out what an empirical design in RL should
+contain. The recommendations are settled; this paper measures their uptake in
+a whole proceedings rather than a sample, and asks the further question of
+whether the evidence that is printed supports the claim it sits beside.
+
+Studies of reporting practice in machine learning at large
+\cite{dodge2019show,bouthillier2021accounting,christodoulou2025false,hutchinson2022evaluation}
+read papers by hand in the hundreds; the instrument here reads tables by the
+thousand and pays for it in a measured error. Re-running literatures
+\cite{henderson2017deep,musgrave2020metric,dacrema2019really} asks whether
+gains hold up; we ask only whether the page lets a reader tell. The
+evaluation-overfitting and protocol literature
+\cite{whiteson2011protecting,machado2018revisiting,balduzzi2018reevaluating}
+concerns what is measured; this paper concerns what is printed about it. The
+instrument itself, its bugs and its validation on the machine-learning
+mainstream are described in a concurrent submission; this paper is its first
+use on another field's proceedings, its first measurement on a two-column
+format, and the first measurement of protocol resolution.
+
+\section{What to print}
+\label{sec:conclusion}
+
+Three lines would make most of these tables checkable. The number of seeds,
+in the caption of every table that averages over them. A deviation or a
+standard error beside every mean, labelled as one or the other. The number of
+evaluation episodes behind every rate. The learning papers at AAMAS do the
+second more often than the mainstream, and the test then shows how thin the
+evidence is at three or five seeds; the third is stated by fewer than one
+paper in ten, though it is the one quantity that resolves a win rate with no
+error bar at all. A reader who finds a bold cell in these proceedings can
+check it on the page less than one time in three, and when the check can be
+made, it fails about as often as it passes.
+
+\section*{AI use statement}
+A vision-language model (Claude Opus 5, Anthropic) served as the image-based
+reader of Section~\ref{sec:instrument} under the released protocol, and a
+language model (Gemini 3.1 Pro, Google) assigned the community labels of
+Section~\ref{sec:corpus} under the released prompt; both are measurement
+instruments whose every answer is released, not authors. Language models
+assisted with code and with editing the text. No hypothesis or experimental
+design was generated by a model.
+
+\section*{Reproducibility}
+The pipeline at its frozen commit, the proceedings index, the per-comparison
+database, the community labels, the protocol sentences, the rendered
+reference set and random pages with the reader's labels, and every script
+that produced a number in this paper are in the supplementary material and
+will be archived on acceptance. Every number in the text is a macro generated
+from a run record.
+
+\balance
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{refs}
+
+\end{document}

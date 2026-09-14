@@ -1,0 +1,23 @@
+Comparison of training times
+---
+Table 11: Average (wall-clock) training times over all tasks of each benchmark for all 11 algorithms
+---
+ferent seeds
+---
+ing of all algorithms, we conducted 100 test episodes at every
+---
+multiple past episodes
+---
+on the mean returns from the best policy across different seeds
+---
+received the best return of the last 50 test episodes
+---
+test episodes, we record the episode returns, i
+---
+times for MARL algorithms, as detailed in Table 10
+---
+to report the training times of algorithms as a further measure of
+---
+where 𝑁= 100 is the number of test episodes, and 𝑅𝑡,𝑖,𝑗is the
+---
+• MARL evaluation does not often report the training times of
