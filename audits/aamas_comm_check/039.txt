@@ -1,0 +1,75 @@
+Title: EduQate: Generating Adaptive Curricula through RMABs in Education Settings
+
+First page:
+EduQate: Generating Adaptive Curricula through RMABs in
+Education Settings
+Sidney Tio†,∗
+Singapore Management University
+Singapore
+sidney.tio.2021@phdcs.smu.edu.sg
+Dexun Li ∗
+Singapore Management University
+Singapore
+dexunli.2019@phdcs.smu.edu.sg
+Pradeep Varakantham
+Singapore Management University
+Singapore
+pradeepv@smu.edu.sg
+ABSTRACT
+There has been significant interest in the development of personal-
+ized and adaptive educational tools that cater to a student’s individ-
+ual learning progress. A crucial aspect in developing such tools is in
+exploring how mastery can be achieved across a diverse yet related
+range of content in an efficient manner. While Reinforcement Learn-
+ing and Multi-armed Bandits have shown promise in educational
+settings, existing works often assume the independence of learn-
+ing content, neglecting the prevalent interdependencies between
+such content. In response, we introduce Education Network Restless
+Multi-armed Bandits (EdNetRMABs), utilizing a network to repre-
+sent the relationships between interdependent arms. Subsequently,
+we propose EduQate, a method employing interdependency-aware
+Q-learning to make informed decisions on arm selection at each
+time step. We establish the optimality guarantee of EduQate and
+demonstrate its efficacy compared to baseline policies, using stu-
+dents modeled from both synthetic and real-world data.
+KEYWORDS
+Restless Multi-Armed Bandits; Agents in Education; Networked
+RMABs; Q-Learning
+ACM Reference Format:
+Sidney Tio†,∗, Dexun Li ∗, and Pradeep Varakantham. 2025. EduQate: Gen-
+erating Adaptive Curricula through RMABs in Education Settings. In Proc.
+of the 24th International Conference on Autonomous Agents and Multiagent
+Systems (AAMAS 2025), Detroit, Michigan, USA, May 19 – 23, 2025, IFAAMAS,
+9 pages.
+1
+INTRODUCTION
+The COVID-19 pandemic has accelerated the adoption of educa-
+tional technologies, especially on eLearning platforms. Despite
+abundant data and advancements in modeling student learning,
+effectively capturing the learning process with interdependent con-
+tent remains a significant challenge [9]. The conventional rules-
+based approach to creating personalized learning curricula is im-
+practical due to its labor-intensive nature and need for expert knowl-
+edge. Machine learning-based systems offer a scalable alternative,
+automatically generating personalized content to optimize learning
+[22, 25].
+∗Equal contribution.
+‡Corresponding author.
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowe (eds.), May 19 – 23, 2025, Detroit, Michigan,
+USA. © 2025 International Foundation for Autonomous Agents and Multiagent Systems
+(www.ifaamas.org).
+One possible approach to model the learning process is the Rest-
+less Multi-Armed Bandits (RMAB, [27]), where a teacher agent
+selects a subset of arms (concepts) to teach each round. However,
+RMAB’s assumption that arms are independent is unrealistic in
+educational settings. For example, solving a math question on the
+area of a triangle requires knowledge of algebra, arithmetic, and
+geometry. Practicing this question should enhance proficiency in
+all three areas. Models that ignore such interdependencies may
+inaccurately predict knowledge levels by assuming each exercise
+impacts only a single area.
+In response to this challenge, we introduce an interdependency-
+aware RMAB

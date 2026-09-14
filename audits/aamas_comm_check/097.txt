@@ -1,0 +1,103 @@
+Title: Towards Failure-Resilient Lifelong Learning Agents through Scene Graph-Guided Proactive Replanning
+
+First page:
+Towards Failure-Resilient Lifelong Learning Agents through
+Scene Graph-Guided Proactive Replanning
+Che Rin Yu
+Korea University
+Seoul, South Korea
+eyucherin@korea.ac.kr
+Daewon Chae
+University of Michigan - Ann Arbor
+Ann Arbor, USA
+daewon@umich.edu
+Dabin Seo
+Korea University
+Seoul, South Korea
+lemonstar99@korea.ac.kr
+Sangwon Lee
+Korea Telecom Research
+Seoul, South Korea
+lee.sangwon@kt.com
+Hyeongwoo IM
+Korea Telecom Research
+Seoul, South Korea
+im.hyeongwoo@kt.com
+Jinkyu Kim
+Korea University
+Seoul, South Korea
+jinkyukim@korea.ac.kr
+ABSTRACT
+When humans perform everyday tasks, we naturally adjust our ac-
+tions based on the current state of the environment. For example, if
+we plan to heat a bowl of soup in the microwave and see that there’s
+already a plate inside, we first remove it before proceeding. How-
+ever, many autonomous robots lack this adaptive awareness. They
+often follow pre-planned actions that may overlook subtle yet criti-
+cal changes in the scene, which can result in actions being executed
+under outdated assumptions and eventual failure. While replanning
+is critical for robust autonomy, most existing methods respond only
+after failures occur, when recovery may be inefficient or infeasible.
+In this work, we present a proactive replanning framework that
+anticipates and prevents failures before action execution.The key
+idea is to learn visual preconditions from successful demonstra-
+tions. Before each subtask, the system builds a scene graph from
+RGB-D observations and compares it with an expanding buffer of
+reference graphs from successful trials. When the similarity falls
+below a threshold, a lightweight reasoning module diagnoses the
+discrepancy and generates a corrective sub-plan. As the experience
+buffer grows, the system scales and generalizes more efficiently,
+highlighting a progressive path toward more autonomous and effec-
+tive replanning. Experiments in both the AI2-THOR simulator and
+real-world platforms show that our approach improves task success
+and execution performance compared to baselines.
+KEYWORDS
+Failure Detection and Reasoning; Replanning; Large Language Mod-
+els; Symbolic Representations
+ACM Reference Format:
+Che Rin Yu, Daewon Chae, Dabin Seo, Sangwon Lee, Hyeongwoo IM,
+and Jinkyu Kim. 2026. Towards Failure-Resilient Lifelong Learning Agents
+through Scene Graph-Guided Proactive Replanning. In Proc. of the 25th
+International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), Paphos, Cyprus, May 25 – 29, 2026, IFAAMAS, 9 pages.
+https://doi.org/10.65109/V1X2Y3Z4
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29,
+2026, Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org). https://doi.org/10.65109/V1X2Y3Z4
+Current Observation
+[G1]
+[Gk]
+Match Found: 
+Resume
+Else: ProacGve 
+Replanning
+#1 Reasoning
+#2 Replanning
+Based on Comparison,
+ …
+(pickup, apple), 
+(place, apple, countertop)
+….
+Apple on Pot deviates 
+from initial expectation
+!
+Task : Boil Water 
+Subplan: pick up Pot
+Task :Water Plant
+Subplan: pick up Pot
+[G3]
+Task :Water Plant
+Subplan: pick up Pot
+Task :Boil Water
+Subplan: pick up Pot
+….
+….
+Scene-Graph Generator
+Scene-Graph Generator
+Target Precondition Buffer
+[Gi]
+[G2]
+Check  similarity with successful demonstrations BEFORE executi

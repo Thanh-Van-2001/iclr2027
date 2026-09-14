@@ -1,0 +1,79 @@
+Title: Tighter Value-Function Approximations for POMDPs
+
+First page:
+Tighter Value-Function Approximations for POMDPs
+Merlijn Krale
+Radboud University
+Nijmegen, The Netherlands
+merlijn.krale@ru.nl
+Wietze Koops
+Lund University, Sweden
+University of Copenhagen, Denmark
+wietze.koops@cs.lth.se
+Sebastian Junges
+Radboud University
+Nijmegen, The Netherlands
+sebastian.junges@ru.nl
+Thiago D. Simão
+Eindhoven University of Technology
+The Netherlands
+t.simao@tue.nl
+Nils Jansen
+Ruhr-University Bochum, Germany
+Radboud University
+Nijmegen, The Netherlands
+n.jansen@rub.de
+ABSTRACT
+Solving partially observable Markov decision processes (POMDPs)
+typically requires reasoning about the values of exponentially many
+state beliefs. Towards practical performance, state-of-the-art solvers
+use value bounds to guide this reasoning. However, sound upper
+value bounds are often computationally expensive to compute,
+and there is a tradeoff between the tightness of such bounds and
+their computational cost. This paper introduces new and provably
+tighter upper value bounds than the commonly used fast informed
+bound. Our empirical evaluation shows that, despite their additional
+computational overhead, the new upper bounds accelerate state-of-
+the-art POMDP solvers on a wide range of benchmarks.
+CCS CONCEPTS
+• Computing methodologies →Artificial intelligence; Plan-
+ning under uncertainty.
+KEYWORDS
+POMDPs, Heuristic Search, Value Bounds, Planning
+ACM Reference Format:
+Merlijn Krale, Wietze Koops, Sebastian Junges, Thiago D. Simão, and Nils
+Jansen. 2025. Tighter Value-Function Approximations for POMDPs. In Proc.
+of the 24th International Conference on Autonomous Agents and Multiagent
+Systems (AAMAS 2025), Detroit, Michigan, USA, May 19 – 23, 2025, IFAAMAS,
+9 pages.
+1
+INTRODUCTION
+Partially observable Markov decision processes (POMDPs) are a
+versatile modeling framework for stochastic environments where
+the decision maker (the agent) cannot fully observe the current
+state of its environment [26]. Finding optimal policies for POMDPs
+is generally undecidable [38]. Yet, in recent years, methods like
+POMCP [45], DESPOT [58], and AdaOPS [57] have been able to
+find policies for increasingly large POMDPs.
+Although such methods often provide a (statistical) lower bound
+on the value of the policy, they are typically unable to find an upper
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowé (eds.), May 19 – 23, 2025, Detroit, Michigan,
+USA. © 2025 International Foundation for Autonomous Agents and Multiagent Systems
+(www.ifaamas.org).
+bound on the optimal value. Such further certification of the quality
+of a policy may be essential for safety-critical problems. For exam-
+ple, planning medical treatments [24], scheduling infrastructure
+maintenance [39, 40] or computing safe flight paths [52] require us
+not only to know how well our policy will perform, but also that
+we cannot (reasonably) do any better.
+So-called 𝜖-optimal solvers such as SARSOP [33] and HSVI [49]
+compute both a policy and an upper bound. These algorithms make
+use of heuristic search to find good policies quickly. However, they
+often struggle to find upper bounds that are reasonably tight, since
+this requires reasoning over all possible policies.
+Both HSVI and SARSOP use the fast informed bound, or FIB [23],
+to initialize their upper bound computations. Intuitively, FIB com-
+putes values in a simplified POMDP, where the

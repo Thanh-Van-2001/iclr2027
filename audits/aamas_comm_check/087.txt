@@ -1,0 +1,83 @@
+Title: Bilevel Policy Optimization with Nyström Hypergradients
+
+First page:
+Bilevel Policy Optimization with Nyström Hypergradients
+Arjun Prakash∗
+Brown University
+Providence, RI, USA
+arjun_prakash@brown.edu
+Naicheng He∗
+Brown University
+Providence, RI, USA
+naicheng_he@brown.edu
+Denizalp Goktas
+Simulacrum
+New York City, NY, USA
+deni@smlcrm.com
+Amy Greenwald
+Brown University
+Providence, RI, USA
+amy_greenwald@brown.edu
+ABSTRACT
+The dependency of the actor on the critic in actor-critic (AC)
+reinforcement learning means that AC can be characterized as a
+bilevel optimization (BLO) problem, also called a Stackelberg game.
+This characterization motivates two modifications to vanilla AC
+algorithms. First, the critic’s update should be nested to learn a
+best response to the actor’s policy. Second, the actor should update
+according to a hypergradient that accounts for changes in the critic.
+Computing this hypergradient involves finding an inverse Hessian
+vector product, a process that can be numerically unstable. We
+thus propose a new algorithm, Bilevel Policy Optimization with
+Nyström Hypergradients (BLPO), which uses nesting to account
+for the nested structure of BLO, and leverages the Nyström method
+to compute the hypergradient. Theoretically, we prove BLPO con-
+verges to (a point that satisfies the necessary conditions for) a local
+strong Stackelberg equilibrium in polynomial time with high prob-
+ability, assuming a linear parametrization of the critic’s objective.
+Empirically, we demonstrate that BLPO performs on par with or
+better than PPO on a variety of discrete and continuous control
+tasks.
+KEYWORDS
+Reinforcement Learning; Bilevel Optimization; Actor-Critic
+ACM Reference Format:
+Arjun Prakash, Naicheng He, Denizalp Goktas, and Amy Greenwald. 2026.
+Bilevel Policy Optimization with Nyström Hypergradients. In Proc. of the
+25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), Paphos, Cyprus, May 25 – 29, 2026, IFAAMAS, 9 pages. https:
+//doi.org/10.65109/NETG3616
+1
+INTRODUCTION
+Bilevel optimization (BLO) is a class of hierarchical optimiza-
+tion problems with two objectives, an outer one and an inner one.
+Crucially, the objective and the variables of the outer problem
+depend on the solution to the inner problem. An active area of
+research, bilevel optimization has applications in myriad areas of
+∗Equal contribution.
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29,
+2026, Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org). https://doi.org/10.65109/NETG3616
+machine learning and beyond. Examples include reinforcement
+learning [7, 45], hyperparameter optimization [27], meta-learning
+[33], energy markets [1], agriculture [2], and security [40], to name
+a few. Given functions 𝑓: R𝑛× R𝑚→R and 𝑔: R𝑚→R, a(n
+unconstrained) bilevel opmization problem can be formulated as
+follows:
+min
+𝒙∈R𝑛Φ(𝒙) .= 𝑓(𝒙,𝒚∗(𝒙))
+s.t.
+𝒚∗(𝒙) ∈Y∗
+𝒙
+.= arg min
+𝒚∈R𝑚𝑔𝒙(𝒚).
+(1)
+A solution to a BLO comprises a pair (𝒙∗,𝒚∗) ∈(R𝑛, R𝑚) s.t. 𝒙
+optimizes Φ(𝒙) subject to the constraint that 𝒚∗optimizes 𝑔𝒙(𝒚).
+The notation 𝑔𝒙allows the optimal value of 𝑔(and the correspond-
+ing solution set Y∗𝒙) to vary with 𝒙. In this paper, we assume 𝑓and
+𝑔are differentiable functions, so they can be represented by neural
+networks, with 𝒙and 𝒚as the network parameters.
+Bi-level opti

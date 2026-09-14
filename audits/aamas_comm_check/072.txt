@@ -1,0 +1,75 @@
+Title: Planning Ahead with RSA: Efficient Signalling in Dynamic Environments by Projecting User Awareness across Future Timesteps
+
+First page:
+Planning Ahead with RSA: Efficient Signalling in Dynamic
+Environments by Projecting User Awareness across Future
+Timesteps
+Anwesha Das
+Saarland University
+Saarbrücken, Germany
+adas@lst.uni-saarland.de
+John Duff
+UCLA
+Los Angeles, USA
+duff@ucla.edu
+Jörg Hoffmann
+Saarland University
+Saarbrücken, Germany
+hoffmann@cs.uni-saarland.de
+Vera Demberg
+Saarland University
+Saarbrücken, Germany
+vera@lst.uni-saarland.de
+ABSTRACT
+Adaptive agent design offers a way to improve human-AI collabo-
+ration on time-sensitive tasks in rapidly changing environments.
+In such cases, to ensure the human maintains an accurate under-
+standing of critical task elements, an assistive agent must not only
+identify the highest priority information but also estimate how
+and when this information can be communicated most effectively,
+given that human attention represents a zero-sum cognitive re-
+source where focus on one message diminishes awareness of other
+or upcoming information. We introduce a theoretical framework
+for adaptive signalling which meets these challenges by using prin-
+ciples of rational communication, formalised as Bayesian reference
+resolution using the Rational Speech Act (RSA) modelling frame-
+work, to plan a sequence of messages which optimise timely align-
+ment between user belief and a dynamic environment. The agent
+adapts message specificity and timing to the particulars of a user
+and scenario based on projections of how prior-guided interpre-
+tation of messages will influence attention to the interface and
+subsequent belief update, across several timesteps out to a fixed
+horizon. In a comparison to baseline methods, we show that this
+effectiveness depends crucially on combining multi-step planning
+with a realistic model of user awareness. As the first application of
+RSA for communication in a dynamic environment, and for human-
+AI interaction in general, we establish theoretical foundations for
+pragmatic communication in human-agent teams, highlighting how
+insights from cognitive science can be capitalised to inform the
+design of assistive agents.
+KEYWORDS
+Pragmatic Reasoning; Human-Aware Planning; Rational Speech
+Acts Framework; AI Assistance; Adaptive Agents
+ACM Reference Format:
+Anwesha Das, John Duff, Jörg Hoffmann, and Vera Demberg. 2026. Plan-
+ning Ahead with RSA: Efficient Signalling in Dynamic Environments by
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29,
+2026, Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org). https://doi.org/10.65109/BRGK2754
+Projecting User Awareness across Future Timesteps. In Proc. of the 25th
+International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), Paphos, Cyprus, May 25 – 29, 2026, IFAAMAS, 9 pages.
+https://doi.org/10.65109/BRGK2754
+1
+INTRODUCTION
+In high-stakes environments, multiple critical events often unfold
+simultaneously, making it difficult for human overseers to maintain
+situational awareness of rapidly evolving scenes. Consider an air
+traffic controller managing several aircraft during a storm, or a
+power grid control room, as illustrations. In such settings where
+human perceptual lapses (due to overload and eroding situational
+awareness) carry high risk, assistive AI agents can support oper-
+ators who must multit

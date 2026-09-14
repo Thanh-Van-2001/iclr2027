@@ -1,0 +1,73 @@
+Title: Altruism and Fair Objective in Mixed-Motive Markov Games
+
+First page:
+Altruism and Fair Objective in Mixed-Motive Markov Games
+Franck Yao-hua Xu
+Orange Labs Lannion
+Lannion, France
+franck.xu@orange.com
+Tayeb Lemlouma
+IRISA
+Lannion, France
+tayeb.lemlouma@irisa.fr
+Arnaud Braud
+Orange Labs Lannion
+Lannion, France
+arnaud.braud@orange.com
+Jean-Marie Bonnin
+IRISA
+Rennes, France
+jean-marie.bonnin@irisa.fr
+ABSTRACT
+Cooperation is fundamental for society’s viability, as it enables
+the emergence of structure within heterogeneous groups that seek
+collective well-being. However, individuals are inclined to defect in
+order to benefit from the group’s cooperation without contributing
+the associated costs, thus leading to unfair situations. In game
+theory, social dilemmas entail this dichotomy between individual
+interest and collective outcome. The most dominant approach to
+multi-agent cooperation is the utilitarian welfare which can produce
+efficient highly inequitable outcomes.
+This paper proposes a novel framework to foster fairer coop-
+eration by replacing the standard utilitarian objective with Pro-
+portional Fairness. We introduce a fair altruistic utility for each
+agent, defined on the individual log-payoff space and derive the an-
+alytical conditions required to ensure cooperation in classic social
+dilemmas. We then extend this framework to sequential settings by
+defining a Fair Markov Game and deriving novel fair Actor-Critic
+algorithms to learn fair policies. Finally, we evaluate our method in
+various social dilemma environments.
+KEYWORDS
+Social Dilemma; Game Theory; Markov Game; Multi-agent Rein-
+forcement Learning; Reinforcement Learning; Fairness
+ACM Reference Format:
+Franck Yao-hua Xu, Tayeb Lemlouma, Arnaud Braud, and Jean-Marie Bon-
+nin. 2026. Altruism and Fair Objective in Mixed-Motive Markov Games. In
+Proc. of the 25th International Conference on Autonomous Agents and Multia-
+gent Systems (AAMAS 2026), Paphos, Cyprus, May 25 – 29, 2026, IFAAMAS,
+9 pages. https://doi.org/10.65109/MPMP3285
+1
+INTRODUCTION
+Cooperation is a fundamental mechanism that underpins the stabil-
+ity and success of nearly all multi-agent systems, from biological
+ecosystems to complex human societies and artificial intelligence. It
+is the process by which independent agents coordinate their actions
+to pursue shared objectives, thus facilitating the emergence of com-
+plex structures and achieving a collective well-being that would
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29,
+2026, Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org). https://doi.org/10.65109/MPMP3285
+be unreachable for any single agent acting alone. The capacity for
+effective cooperation is not merely advantageous; it is often crucial
+for survival, advancement, and the efficient use of resources.
+Despite its critical importance, sustained cooperation is noto-
+riously difficult to achieve. The primary obstacle is the inherent
+tension between individual self-interest and the collective good—a
+conflict formally studied in game theory as a social dilemma [7].
+In these scenarii, rational agents are frequently incentivized to de-
+fect from the group effort to pursue personal gain. This individual
+rationality can paradoxically culminate in collective failure, a phe-
+nomenon often described as a tragedy of t

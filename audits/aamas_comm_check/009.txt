@@ -1,0 +1,75 @@
+Title: Trust in Shapley: A Cooperative Quest for Global Trust in P2P Network
+
+First page:
+Trust in Shapley: A Cooperative Quest for Global Trust in P2P
+Network
+Arti Bandhana
+Artificial Intelligence Center
+Department of Computer Science
+Faculty of Electrical Engineering
+Czech Technical University in Prague
+Prague, Czech Republic
+bandhart@fel.cvut.cz
+Tomáš Kroupa
+Artificial Intelligence Center
+Department of Computer Science
+Faculty of Electrical Engineering
+Czech Technical University in Prague
+Prague, Czech Republic
+tomas.kroupa@fel.cvut.cz
+Sebastián García
+Artificial Intelligence Center
+Department of Computer Science
+Faculty of Electrical Engineering
+Czech Technical University in Prague
+Prague, Czech Republic
+garciseb@fel.cvut.cz
+ABSTRACT
+Modeling the trust of peers in peer-to-peer networks is pivotal in
+maintaining the security and functionality of the network. This
+trust is commonly perceived as a peer’s reliability based on past in-
+teractions and is generally classified as local and global trust values.
+In a traditional client-server network, the responsibility of main-
+taining the integrity of the network falls on the central authority
+responsible for enforcing the security protocols and safeguarding
+the network against adversarial activities. In contrast, peer-to-peer
+networks may lack a central authority due to their decentralized
+nature, needing innovative mechanisms to maintain network trust.
+Incorporating a trust mechanism that considers peer interactions
+within peer groups becomes convenient in the absence of central
+authority. This paper introduces a novel approach to global trust
+computation. We propose a transferable utility coalitional game
+that pools local trust values between peers. The coalitions of peers
+aggregate the local trust values by considering internal and external
+trust. Internal trust is defined as the sum of the local trust values
+of the peers in the coalition, and external trust is constituted by
+the minimal trustworthiness of peers in the coalition to the peers
+outside. The resulting trust game is superadditive, monotone, and
+has a non-empty core. The global trust values of individual peers
+are the Shapley values in the trust game. Our numerical experi-
+ments in three different settings show that the resulting global trust
+captures the peer behavior faithfully, and we compared our method
+to Eigentrust.
+KEYWORDS
+Reputation management; peer-to-peer network; Global trust; Coali-
+tional game; Shapley value
+ACM Reference Format:
+Arti Bandhana, Tomáš Kroupa, and Sebastián García. 2024. Trust in Shapley:
+A Cooperative Quest for Global Trust in P2P Network. In Proc. of the 23rd
+International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), Auckland, New Zealand, May 6 – 10, 2024, IFAAMAS, 9 pages.
+This work is licensed under a Creative Commons Attribution
+International 4.0 License.
+Proc. of the 23rd International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), N. Alechina, V. Dignum, M. Dastani, J.S. Sichman (eds.), May 6 – 10, 2024,
+Auckland, New Zealand. © 2024 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org).
+1
+INTRODUCTION
+The domain of digital networking has witnessed a lot of advance-
+ments, one of which is peer-to-peer (P2P) networks for file sharing.
+These networks gained significant traction with the success of
+Napster, BitTorrent, Gnutella, and Kazaa [13]. P2P networks offer
+enhanced scalability and resilience by eliminating the need to go
+through a server [24]. While the P2P network has transformed the
+file-shari

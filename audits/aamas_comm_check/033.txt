@@ -1,0 +1,77 @@
+Title: Beyond Goal Recognition: A Reinforcement Learning-based Approach to Inferring Agent Behaviour
+
+First page:
+Beyond Goal Recognition: A Reinforcement Learning-based
+Approach to Inferring Agent Behaviour
+Sheryl Mantik
+RMIT University
+Melbourne, Australia
+sheryl.mantik@student.rmit.edu.au
+Michael Dann
+viewa.com
+Melbourne, Australia
+michaeltdann@gmail.com
+Minyi Li
+jahan.ai
+Melbourne, Australia
+liminyi0709@gmail.com
+Huong Ha
+RMIT University
+Melbourne, Australia
+huong.ha@rmit.edu.au
+Julie Porteous
+RMIT University
+Melbourne, Australia
+julie.porteous@rmit.edu.au
+ABSTRACT
+Goal recognition (GR) involves inferring an agent’s goals based on
+observed actions. In addition to goals, however, in various cases it
+may be useful to infer additional agent attributes, such as prefer-
+ences, beliefs, and ability level, so as to gain deeper insights into
+the agent’s decision-making process. Recent advances in GR have
+incorporated Reinforcement Learning (RL), which provides greater
+practicality and adaptability, especially in stochastic environments.
+This adaptability creates the opportunity to extend RL-based frame-
+works beyond goal recognition. In this work, we build upon a recent
+RL-based GR framework to propose a generalised approach capable
+of inferring a wider range of agent attributes. By integrating these
+attributes within the problem formulation, we demonstrate how
+off-the-shelf RL techniques can be applied to infer them effectively.
+Our results show that this extended framework accurately distin-
+guishes fine-grained differences in agent attributes across diverse
+scenarios. Moreover, we show that recognising these additional
+attributes can in turn improve goal recognition accuracy.
+KEYWORDS
+Agent Modelling; Reinforcement Learning; Goal Recognition; Be-
+havioural Attributes
+ACM Reference Format:
+Sheryl Mantik, Michael Dann, Minyi Li, Huong Ha, and Julie Porteous. 2025.
+Beyond Goal Recognition: A Reinforcement Learning-based Approach to
+Inferring Agent Behaviour. In Proc. of the 24th International Conference on
+Autonomous Agents and Multiagent Systems (AAMAS 2025), Detroit, Michigan,
+USA, May 19 – 23, 2025, IFAAMAS, 9 pages.
+1
+INTRODUCTION
+Goal Recognition (GR) refers to the task of a recogniser inferring the
+goal of an agent, whether human or robotic, based on its observable
+trajectory within a given environment [8, 15, 19, 23]. Earlier works
+in GR have relied on the assumption of a complete domain model,
+which is a specification of the environment and possible actions in
+certain conditions [19, 21]. However, constructing accurate domain
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowé (eds.), May 19 – 23, 2025, Detroit, Michigan,
+USA. © 2025 International Foundation for Autonomous Agents and Multiagent Systems
+(www.ifaamas.org).
+theories is often costly and impractical in real-world applications
+that involve dynamic and uncertain environments, limiting the
+effectiveness of model-based GR [3]. Recently, there has been a shift
+towards data-driven or learning-based frameworks. In particular,
+Reinforcement Learning (RL) has been used to approximate domain
+theories through learnt policies, thereby alleviating the need to
+construct an explicit domain specification [2]. RL’s flexibility in
+learning from interactions with the environment makes it a more
+scalable and adaptable framework. This work focuses on extending
+RL-based frameworks beyond traditional GR to infer a broader set
+of agent attr

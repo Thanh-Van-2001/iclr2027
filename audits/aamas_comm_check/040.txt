@@ -1,0 +1,70 @@
+Title: Safe Pareto Improvements for Expected Utility Maximizers in Program Games
+
+First page:
+Safe Pareto Improvements for
+Expected Utility Maximizers in Program Games
+Anthony DiGiovanni
+Center on Long-Term Risk
+London, United Kingdom
+anthony.digiovanni@longtermrisk.org
+Jesse Clifton
+Center on Long-Term Risk
+London, United Kingdom
+jesse.clifton@longtermrisk.org
+Nicolas Macé
+Center on Long-Term Risk
+London, United Kingdom
+nicolas.mace@longtermrisk.org
+ABSTRACT
+Agents in mixed-motive coordination problems such as Chicken
+may fail to coordinate on a Pareto-efficient outcome. Safe Pareto
+improvements (SPIs) were originally proposed to mitigate miscoor-
+dination in cases where players lack probabilistic beliefs as to how
+their agents will play a game; agents are instructed to behave so
+as to guarantee a Pareto improvement on how they would play by
+default. More generally, SPIs may be defined as transformations of
+strategy profiles such that all players are necessarily better off un-
+der the transformed profile. In this work, we investigate the extent
+to which SPIs can reduce downsides of miscoordination between
+expected utility-maximizing agents. We consider games in which
+players submit computer programs that can condition their deci-
+sions on each other’s code, and use this property to construct SPIs
+using programs capable of renegotiation. We first show that under
+mild conditions on players’ beliefs, each player always prefers to
+use renegotiation. Next, we show that under similar assumptions,
+each player always prefers to be willing to renegotiate at least to
+the point at which they receive the lowest payoff they can attain in
+any efficient outcome. Thus subjectively optimal play guarantees
+players at least these payoffs, without the need for coordination on
+specific Pareto improvements.
+KEYWORDS
+program equilibrium; bargaining; Pareto efficiency; Cooperative AI
+ACM Reference Format:
+Anthony DiGiovanni, Jesse Clifton, and Nicolas Macé. 2025. Safe Pareto
+Improvements for Expected Utility Maximizers in Program Games. In Proc.
+of the 24th International Conference on Autonomous Agents and Multiagent
+Systems (AAMAS 2025), Detroit, Michigan, USA, May 19 – 23, 2025, IFAAMAS,
+9 pages.
+1
+INTRODUCTION
+Artificially intelligent (AI) systems will increasingly advise or make
+decisions on behalf of humans, including in interactions with other
+agents. Thus there is a need for research on cooperative AI [2, 5]:
+How can we design AI systems that are capable of interacting with
+other players in ways that lead to high social welfare? One way
+that AI systems assisting humans could fail to cooperate is by fail-
+ing to coordinate on one of several Pareto-efficient equilibria. This
+risk is especially large in bargaining problems, where players have
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowé (eds.), May 19 – 23, 2025, Detroit, Michigan,
+USA. © 2025 International Foundation for Autonomous Agents and Multiagent Systems
+(www.ifaamas.org).
+different preferences over Pareto-efficient equilibria (think of the
+game of Chicken). These problems are particularly prone to misco-
+ordination, where each player uses a strategy that is part of some
+Pareto-efficient equilibrium, but collectively the players’ strategies
+are not an equilibrium. Bargaining problems are ubiquitous, in-
+cluding in high-stakes negotiations over climate change, nuclear
+proliferation, or military disputes, making them a

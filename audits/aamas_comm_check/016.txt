@@ -1,0 +1,77 @@
+Title: Reinforcement Learning Interventions on Boundedly Rational Human Agents in Frictionful Tasks
+
+First page:
+Reinforcement Learning Interventions on Boundedly Rational
+Human Agents in Frictionful Tasks
+Eura Nofshin
+Harvard University
+Cambridge, USA
+eurashin@g.harvard.edu
+Siddharth Swaroop
+Harvard University
+Cambridge, USA
+siddharth@seas.harvard.edu
+Weiwei Pan
+Harvard University
+Cambridge, USA
+weiweipan@g.harvard.edu
+Susan Murphy
+Harvard University
+Cambridge, USA
+samurphy@fas.harvard.edu
+Finale Doshi-Velez
+Harvard University
+Cambridge, USA
+finale@seas.harvard.edu
+ABSTRACT
+Many important behavior changes are frictionful; they require indi-
+viduals to expend effort over a long period with little immediate
+gratification. Here, an artificial intelligence (AI) agent can provide
+personalized interventions to help individuals stick to their goals.
+In these settings, the AI agent must personalize rapidly (before
+the individual disengages) and interpretably, to help us understand
+the behavioral interventions. In this paper, we introduce Behavior
+Model Reinforcement Learning (BMRL), a framework in which an
+AI agent intervenes on the parameters of a Markov Decision Pro-
+cess (MDP) belonging to a boundedly rational human agent. Our
+formulation of the human decision-maker as a planning agent al-
+lows us to attribute undesirable human policies (ones that do not
+lead to the goal) to their maladapted MDP parameters, such as an
+extremely low discount factor. Furthermore, we propose a class of
+tractable human models that captures fundamental behaviors in
+frictionful tasks. Introducing a notion of MDP equivalence specific
+to BMRL, we theoretically and empirically show that AI planning
+with our human models can lead to helpful policies on a wide range
+of more complex, ground-truth humans.
+KEYWORDS
+Reinforcement learning; Personalization; Agent-based modeling of
+humans; Bounded rationality
+ACM Reference Format:
+Eura Nofshin, Siddharth Swaroop, Weiwei Pan, Susan Murphy, and Finale
+Doshi-Velez. 2024. Reinforcement Learning Interventions on Boundedly
+Rational Human Agents in Frictionful Tasks. In Proc. of the 23rd International
+Conference on Autonomous Agents and Multiagent Systems (AAMAS 2024),
+Auckland, New Zealand, May 6 – 10, 2024, IFAAMAS, 10 pages.
+1
+INTRODUCTION
+In many AI+human applications of behavior change, AI agents
+assist the human in performing frictionful tasks, where making
+progress toward the human’s goal requires sustained effort over
+This work is licensed under a Creative Commons Attribution
+International 4.0 License.
+Proc. of the 23rd International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), N. Alechina, V. Dignum, M. Dastani, J.S. Sichman (eds.), May 6 – 10, 2024,
+Auckland, New Zealand. © 2024 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org).
+time with little immediate gratification. Examples include phys-
+ical therapy (PT) programs, adherence to scheduled medication,
+or passing an online course. Two key challenges for AI agents in
+these settings are rapid personalization [26, 35, 43] and learning
+interpretable policies for intervention [41, 44]. In frictionful tasks,
+since effort exerted by the human does not reap immediate benefits,
+the AI agent must learn a personalized intervention policy for each
+human in a small number of interactions, or risk disengagement.
+These policies must also be interpretable to experts in behavioral
+science so that they can discover which interventions work for
+which individuals, and investigate why.
+Grounded in behavioral literature that treats humans a

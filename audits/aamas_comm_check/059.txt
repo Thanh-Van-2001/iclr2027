@@ -1,0 +1,81 @@
+Title: Temporal Network Creation Games: The Impact of Non-Locality and Terminals
+
+First page:
+Temporal Network Creation Games:
+The Impact of Non-Locality and Terminals
+Davide Bilò
+University of L’Aquila
+L’Aquila, Italy
+davide.bilo@univaq.it
+Sarel Cohen
+Hasso Plattner Institute
+Potsdam, Germany
+sarel.cohen@hpi.de
+Tobias Friedrich
+Hasso Plattner Institute
+Potsdam, Germany
+tobias.friedrich@hpi.de
+Hans Gawendowicz
+Hasso Plattner Institute
+Potsdam, Germany
+hans.gawendowicz@hpi.de
+Nicolas Klodt
+Hasso Plattner Institute
+Potsdam, Germany
+nicolas.klodt@hpi.de
+Pascal Lenzner
+University of Augsburg
+Augsburg, Germany
+pascal.lenzner@uni-a.de
+George Skretas
+Hasso Plattner Institute
+Potsdam, Germany
+george.skretas@hpi.de
+ABSTRACT
+We live in a world full of networks where our economy, our commu-
+nication, and even our social life crucially depends on them. These
+networks typically emerge from the interaction of many entities,
+which is why researchers study agent-based models of network
+formation. While traditionally static networks with a fixed set of
+links were considered, a recent stream of works focuses on net-
+works whose behavior may change over time. In particular, Bilò
+et al. (IJCAI 2023) recently introduced a game-theoretic network
+formation model that embeds temporal aspects in networks. More
+precisely, a network is formed by selfish agents corresponding to
+nodes in a given host network with edges having labels denoting
+their availability over time. Each agent strategically selects local, i.e.,
+incident, edges to ensure temporal reachability towards everyone
+at low cost.
+In this work we set out to explore the impact of two novel con-
+ceptual features: agents are no longer restricted to creating incident
+edges, called the global setting, and agents might only want to
+ensure that they can reach a subset of the other nodes, called the
+terminal model. For both, we study the existence, structure, and qual-
+ity of equilibrium networks. For the terminal model, we prove that
+many core properties crucially depend on the number of terminals.
+We also develop a novel tool that allows translating equilibrium
+constructions from the non-terminal model to the terminal model.
+For the global setting, we show the surprising result that equilibria
+in the global and the local model are incomparable and we establish
+a high lower bound on the Price of Anarchy of the global setting
+that matches the upper bound of the local model. This shows the
+counter-intuitive fact that allowing agents more flexibility in edge
+creation does not improve the quality of equilibrium networks.
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowé (eds.), May 19 – 23, 2025, Detroit, Michigan,
+USA. © 2025 International Foundation for Autonomous Agents and Multiagent Systems
+(www.ifaamas.org).
+Finally, in contrast to Bilò et al. (IJCAI 2023) where the authors
+restrict the model to single labels per connection, all of our results
+hold for the restricted case and the generalized case where every
+edge can have multiple labels.
+KEYWORDS
+network creation games; temporal graphs; nash equilibria; price of
+anarchy; temporal spanner; reachability
+ACM Reference Format:
+Davide Bilò, Sarel Cohen, Tobias Friedrich, Hans Gawendowicz, Nicolas
+Klodt, Pascal Lenzner, and George Skretas. 2025. Temporal Network Cre-
+ation Games: The Impact of Non-Locality and Terminals. In Proc. of the
+24th International Conference on Autonomous Agents 

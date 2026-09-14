@@ -1,0 +1,66 @@
+Title: Reasoning about Bias in Multi-Agent Systems Verification
+
+First page:
+Reasoning about Bias in Multi-Agent Systems Verification
+Vadim Malvone
+Télécom Paris
+Paris, France
+Vadim.Malvone@telecom-paris.fr
+Chunyan Mu∗
+University of Aberdeen
+Aberdeen, United Kingdom
+Chunyan.Mu@abdn.ac.uk
+ABSTRACT
+This paper investigates formal analysis of bias properties in Multi-
+Agent Systems. We present a formal framework to reason about
+bias properties within these models. We propose a novel definition
+of bias based on attribute interference and formalise the notion of
+bias by trace equivalence regarding bias-sensitive lattice. Intuitively,
+a model is considered unbiased or fair if the input values of bias-
+sensitive attributes will not affect the system’s output, ensuring
+that the system treats all bias-sensitive attributes equitably. To ef-
+fectively capture and specify bias and fairness properties, we extend
+Alternating-time Temporal Logic (ATL) with new bias operators as
+bATL. Using model checking techniques, we propose algorithm to
+rigorously verify these properties within the game structure.
+KEYWORDS
+Multi-Agent Systems, Strategic Logics, Model Checking, Bias
+ACM Reference Format:
+Vadim Malvone and Chunyan Mu. 2026. Reasoning about Bias in Multi-
+Agent Systems Verification. In Proc. of the 25th International Conference on
+Autonomous Agents and Multiagent Systems (AAMAS 2026), Paphos, Cyprus,
+May 25 – 29, 2026, IFAAMAS, 9 pages. https://doi.org/10.65109/RTAL7233
+1
+INTRODUCTION
+As intelligent systems become increasingly integrated into decision-
+making processes, ranging from hiring and lending to criminal jus-
+tice and healthcare, the need for fair and transparent Multi-Agent
+Systems (MASs) is more critical than ever. These systems often
+involve interactions among humans, AI agents, and institutions,
+where bias can emerge from model assumptions or strategic be-
+haviours. Formal analysis provides a principled and rigorous way
+to specify, detect, and reason about bias, enabling system designers
+to verify whether certain outcomes or behaviours are fair across dif-
+ferent groups. However, this task is highly non-trivial: bias can be
+subtle, context-dependent, and temporally dynamic, and arises not
+just from individual actions but from complex agent interactions.
+Addressing these challenges requires expressive formal tools that
+can capture strategic behaviour, temporal evolution, and structured
+notions of fairness, which motivates the development of notions
+and formal specification tailored to bias reasoning in MASs.
+We introduce a formal definition of bias in MASs, based on the
+concept of interference between bias-sensitive inputs and the public
+∗Corresponding author.
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29,
+2026, Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org). https://doi.org/10.65109/RTAL7233
+outputs of the system. Intuitively, a system is considered unbiased or
+fair if its outputs remain consistent when bias-sensitive attributes
+are varied, provided that non-bias attributes are held constant. This
+ensures that changes in bias-sensitive inputs, such as gender or race,
+do not influence the system’s intermediate behaviours and/or final
+outcomes, thereby guaranteeing equitable treatment of all such
+attributes. Our definition, inspired by the notion

@@ -1,0 +1,75 @@
+Title: Assessing Fairness of Residential Dynamic Pricing for Electricity using Active Learning with Agent-based Simulation
+
+First page:
+Assessing Fairness of Residential Dynamic Pricing for Electricity
+using Active Learning with Agent-based Simulation
+Swapna Thorve
+University of Virginia
+Charlottesville, United States
+st6ua@virginia.edu
+Henning Mortveit
+University of Virginia
+Charlottesville, United States
+henning.mortveit@virginia.edu
+Anil Vullikanti
+University of Virginia
+Charlottesville, United States
+vsakumar@virginia.edu
+Madhav Marathe
+University of Virginia
+Charlottesville, United States
+marathe@virginia.edu
+Samarth Swarup
+University of Virginia
+Charlottesville, United States
+swarup@virginia.edu
+ABSTRACT
+Extreme weather events and fast-paced adoption of green energy
+technologies have led to new challenges in demand-side manage-
+ment, maintaining grid reliability, and fulfilling variable consumer
+demands One of the effective ways to address these difficulties is
+by introducing economic incentives – replacing the flat rate tariffs
+with dynamic tariffs. However, dynamic pricing schemes need to be
+designed carefully to consider fairness and benefits for consumers
+as well as power companies. This paper describes an ML-based sim-
+ulation framework for exploring two fairness constructs of dynamic
+pricing for residential electricity with behavioral agent-based mod-
+els based on social theory combined with active learning. As an
+example, we simulate behavior adaptations in response to changes
+in electricity prices to study cost savings through monthly bills and
+peak demand reduction in synthetic household agents in a Time Of
+Use (TOU) pricing scheme in Virginia, USA. Further, we can show
+that there exists a region in the parameter space that corresponds
+to a fair TOU pricing scheme for both entities: all income-stratified
+communities and power companies.
+KEYWORDS
+fairness; active learning; agent behavior simulation; UN SDG; dy-
+namic pricing; complex systems; smart grid
+ACM Reference Format:
+Swapna Thorve, Henning Mortveit, Anil Vullikanti, Madhav Marathe, and Samarth
+Swarup. 2024. Assessing Fairness of Residential Dynamic Pricing for Elec-
+tricity using Active Learning with Agent-based Simulation. In Proc. of the
+23rd International Conference on Autonomous Agents and Multiagent Sys-
+tems (AAMAS 2024), Auckland, New Zealand, May 6 – 10, 2024, IFAAMAS,
+10 pages.
+1
+INTRODUCTION
+Efforts for meeting climate change goals through the residential
+energy sector are increasingly focusing on incentivizing green en-
+ergy adoption, decreasing GHG emissions, and conserving overall
+This work is licensed under a Creative Commons Attribution
+International 4.0 License.
+Proc. of the 23rd International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), N. Alechina, V. Dignum, M. Dastani, J.S. Sichman (eds.), May 6 – 10, 2024,
+Auckland, New Zealand. © 2024 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org).
+usage. In this context, the U.S. Energy Information Administra-
+tion (EIA) and the U.S. Agency for International Development (US-
+AID)1 describe three popular demand-side energy use management
+strategies – peak shaving, load shifting, and promoting conser-
+vation/efficiency. One way of incentivizing the reduction and/or
+shifting of household energy use from peak demand times (e.g.,
+evening hours) to non-peak hours is by varying the price of elec-
+tricity at short intervals throughout the day. This type of pricing
+scheme is ‘dynamic grid tariff’ and can be beneficial to electricity
+providers2 as well as the consumers. Power companies ar

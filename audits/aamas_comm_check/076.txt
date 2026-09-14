@@ -1,0 +1,81 @@
+Title: Diverse Mini-Batch Selection in Reinforcement Learning for Efficient Chemical Exploration in de novo Drug Design
+
+First page:
+Diverse Mini-Batch Selection in Reinforcement Learning for
+Efficient Chemical Exploration in de novo Drug Design
+Hampus Gummesson Svensson
+Chalmers University of Technology
+and University of Gothenburg
+Molecular AI, Discovery Sciences,
+R&D, AstraZeneca
+Gothenburg, Sweden
+hampusgs@gmail.com
+Ola Engkvist
+Chalmers University of Technology
+and University of Gothenburg
+Molecular AI, Discovery Sciences,
+R&D, AstraZeneca
+Gothenburg, Sweden
+ola.engkvist@astrazeneca.com
+Jon Paul Janet
+Molecular AI, Discovery Sciences,
+R&D, AstraZeneca
+Gothenburg, Sweden
+jonpaul.janet@astrazeneca.com
+Christian Tyrchan
+Medicinal Chemistry, Research and
+Early Development, Respiratory and
+Immunology (R&I),
+BioPharmaceuticals R&D,
+AstraZeneca
+Gothenburg, Sweden
+christian.tyrchan@astrazeneca.com
+Morteza Haghir Chehreghani
+Chalmers University of Technology
+and University of Gothenburg
+Gothenburg, Sweden
+morteza.chehreghani@chalmers.se
+ABSTRACT
+In many real-world applications, evaluating the quality of instances
+is costly and time-consuming, e.g., human feedback and physics
+simulations, in contrast to proposing new instances. In particular,
+this is even more critical in reinforcement learning, since it relies on
+interactions with the environment (i.e., new instances) that must be
+evaluated to provide a reward signal for learning. At the same time,
+performing sufficient exploration is crucial in reinforcement learn-
+ing to find high-rewarding solutions, meaning that the agent should
+observe and learn from a diverse set of experiences to find different
+solutions. Thus, we argue that learning from a diverse mini-batch
+of experiences can have a large impact on the exploration and help
+mitigate mode collapse. In this paper, we introduce mini-batch di-
+versification for on-policy reinforcement learning and study this
+framework in the context of a real-world problem, namely, drug
+discovery. We extensively evaluate how our proposed framework
+can enhance the effectiveness of chemical exploration in de novo
+drug design, where finding diverse and high-quality solutions is
+crucial. Our experiments demonstrate that our proposed diverse
+mini-batch selection framework can substantially enhance the di-
+versity of solutions while maintaining high-quality solutions. In
+drug discovery, such an outcome can potentially lead to fulfilling
+unmet medical needs faster.
+KEYWORDS
+Reinforcement Learning; de novo Drug Design; Exploration
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29,
+2026, Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org). https://doi.org/10.65109/LHWU6232
+ACM Reference Format:
+Hampus Gummesson Svensson, Ola Engkvist, Jon Paul Janet, Christian Tyr-
+chan, and Morteza Haghir Chehreghani. 2026. Diverse Mini-Batch Selection
+in Reinforcement Learning for Efficient Chemical Exploration in de novo
+Drug Design. In Proc. of the 25th International Conference on Autonomous
+Agents and Multiagent Systems (AAMAS 2026), Paphos, Cyprus, May 25 – 29,
+2026, IFAAMAS, 10 pages. https://doi.org/10.65109/LHWU6232
+1
+INTRODUCTION
+In recent years, utilizing reinforcement learning (RL) for fine-tuning
+of pre-trained generative models has shown great success in vari-
+ous applications [16, 63], including de novo drug design [4, 36]. De
+novo 

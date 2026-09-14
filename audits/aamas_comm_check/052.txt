@@ -1,0 +1,74 @@
+Title: Robin Hood Reachability Bidding Games
+
+First page:
+ℜobin Hood Reachability Bidding Games
+Shaull Almagor
+Technion
+Haifa, Israel
+shaull@technion.ac.il
+Guy Avni
+University of Haifa
+Haifa, Israel
+gavni@cs.haifa.ac.il
+Neta Dafni
+Technion
+Haifa, Israel
+netad@campus.technion.ac.il
+ABSTRACT
+Two-player graph games are a fundamental model for reasoning
+about the interaction of agents. These games are played between
+two players who move a token along a graph. In bidding games,
+the players have some monetary budget, and at each step they bid
+for the privilege of moving the token. Typically, the winner of the
+bid either pays the loser or the bank, or a combination thereof.
+We introduce Robin Hood bidding games, where at the beginning
+of every step the richer player pays the poorer a fixed fraction of
+the difference of their wealth. After the bid, the winner pays the
+loser. Intuitively, this captures the setting where a regulating entity
+prevents the accumulation of wealth to some degree.
+We show that the central property of bidding games, namely the
+existence of a threshold function, is retained in Robin Hood bidding
+games. We show that finding the threshold can be formulated as
+a Mixed-Integer Linear Program. Surprisingly, we show that the
+games are not always determined exactly at the threshold, unlike
+their standard counterpart.
+KEYWORDS
+Bidding Games; Discounting; Reachability Games; Wealth Regula-
+tion
+ACM Reference Format:
+Shaull Almagor, Guy Avni, and Neta Dafni. 2025. ℜobin Hood Reachability
+Bidding Games. In Proc. of the 24th International Conference on Autonomous
+Agents and Multiagent Systems (AAMAS 2025), Detroit, Michigan, USA, May
+19 – 23, 2025, IFAAMAS, 9 pages.
+1
+INTRODUCTION
+A reachability game is a 2-player game played on a graph, by plac-
+ing a token on one of the vertices and moving it along the edges
+according to some predefined rules, where the goal of Player 1
+(denoted y1) is to reach a set of target vertices, and the goal of
+Player 2 (denoted x2) is to prevent that. Reachability games are
+fundamental in automated synthesis of systems [15], where a sys-
+tem plays against an environment (e.g., controller synthesis [10],
+robotic planning [8], network routing [6], etc.).
+In bidding games [2, 3, 11, 12], each player has a budget (a real
+value in [0, 1], where the sum of the budgets is assumed to be
+normalized to 1) at any given moment, and the movement of the
+token in each step is determined by an auction, resulting in the
+higher bidder moving the token. We focus on Richman games [11],
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowé (eds.), May 19 – 23, 2025, Detroit, Michigan,
+USA. © 2025 International Foundation for Autonomous Agents and Multiagent Systems
+(www.ifaamas.org).
+where the winner of the auction pays their bid to the loser (see
+e.g., [4] for other bidding mechanisms).
+Bidding games are useful for modelling settings where agents
+compete for some resource (e.g., money, computational resources,
+etc.) and use these resources to direct the interaction.
+A common phenomenon in bidding games is that if one of the
+players accumulates a high-enough portion of the budget, that
+player can force the game to reach any desired location. In loose
+terms, “the rich can do whatever they want”. In some settings
+this phenomenon is desirable, e.g., when modelling the interaction
+between an attacker and defender of a secu

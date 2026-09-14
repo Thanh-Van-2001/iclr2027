@@ -1,0 +1,74 @@
+Title: Enhancing Graph-based Coordination with Evolutionary Algorithms for Episodic Multi-agent Reinforcement Learning
+
+First page:
+Enhancing Graph-based Coordination with Evolutionary
+Algorithms for Episodic Multi-agent Reinforcement Learning
+Kexing Peng
+School of Computer Science, Nanjing
+University of Information Science &
+Technology
+Jiangsu, Nanjing, China
+pengkx@nuist.edu.cn
+Pengyi Li
+College of Intelligence and
+Computing, Tianjin University
+Tianjin, China
+lipengyi@tju.edu.cn
+Jianye Hao
+College of Intelligence and
+Computing, Tianjin University
+Tianjin, China
+jianye.hao@tju.edu.cn
+ABSTRACT
+Multi-agent Reinforcement Learning (MARL) has made signifi-
+cant progress in addressing coordination problems, but two key
+challenges persist in environments with partial observability: lim-
+ited exploration and inaccurate evaluation of individual agents. To
+address these challenges, we propose a novel MARL framework
+that integrates Evolutionary Algorithms (EAs), episodic learning,
+and curiosity-driven exploration to optimize the coordination of
+joint policies using graph-based methods, named EECG. EAs are
+employed for their global optimization capabilities, particularly
+through population diversity and a gradient-free search mecha-
+nism, to enhance policy exploration. Initially, multiple agent teams
+explore and learn independently while sharing a common expe-
+rience pool to enable data diversity. During the evolution phase,
+new joint policies are generated through crossover, mutation, and
+pareto-based selection. During the RL phase, diverse data is used
+to model and update the relationships among agents via Graph
+Neural Networks (GNNs), which help evaluate the effectiveness of
+individual agents’ behaviors. GNNs treat agents as nodes and their
+interactions as edges, capturing coordination relationships effec-
+tively while dynamically assigning representations to nodes and
+edges. Furthermore, curiosity-based exploration motivates teams
+to discover new states, while a memory system stores high-reward
+experiences. We evaluated EECG on several benchmarks, includ-
+ing StarCraft II, SUMO autonomous driving, and the Multi-Agent
+Particle Environment. Our empirical results show that EECG con-
+sistently outperforms current baselines, with its components sig-
+nificantly contributing to faster convergence, especially by im-
+proving exploration and agent coordination. Our code is available:
+https://github.com/MercyM/EECG.
+KEYWORDS
+Multi-agent Reinforcement Learning; Graph Coordination; Evolu-
+tionary Algorithms
+ACM Reference Format:
+Kexing Peng, Pengyi Li, and Jianye Hao. 2025. Enhancing Graph-based Coor-
+dination with Evolutionary Algorithms for Episodic Multi-agent Reinforce-
+ment Learning. In Proc. of the 24th International Conference on Autonomous
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowé (eds.), May 19 – 23, 2025, Detroit, Michigan,
+USA. © 2025 International Foundation for Autonomous Agents and Multiagent Systems
+(www.ifaamas.org).
+Agents and Multiagent Systems (AAMAS 2025), Detroit, Michigan, USA, May
+19 – 23, 2025, IFAAMAS, 9 pages.
+1
+INTRODUCTION
+Multi-agent Reinforcement Learning (MARL) [27] has emerged as a
+key solution for tackling complex coordination tasks across various
+domains, such as autonomous driving [33], smart grids [36], and
+traffic signal control [34]. The widely adopted Centralized Train-
+ing with Decentralized Execution (CTDE) framework [21] [35] [9]
+has proven effective by allowing agents

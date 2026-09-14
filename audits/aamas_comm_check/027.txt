@@ -1,0 +1,71 @@
+Title: Efficient Public Health Intervention Planning Using Decomposition-Based Decision-focused Learning
+
+First page:
+Efficient Public Health Intervention Planning Using
+Decomposition-Based Decision-Focused Learning
+Sanket Shah∗
+Harvard University
+sanketshah@g.harvard.edu
+Arun Suggala
+Google Research India
+arunss@google.com
+Milind Tambe
+Google Research
+milindtambe@google.com
+Aparna Taneja
+Google Research India
+aparnataneja@google.com
+ABSTRACT
+The declining participation of beneficiaries over time is a key con-
+cern in public health programs. A popular strategy for improving
+retention is to have health workers ‘intervene’ on beneficiaries at
+risk of dropping out. However, the availability and time of these
+health workers are limited resources. As a result, there has been a
+line of research on optimizing these limited intervention resources
+using Restless Multi-Armed Bandits (RMABs). The key technical
+barrier to using this framework in practice lies in the need to es-
+timate the beneficiaries’ RMAB parameters from historical data.
+Recent research has shown that Decision-Focused Learning (DFL),
+which focuses on maximizing the beneficiaries’ adherence rather
+than predictive accuracy, improves the performance of intervention
+targeting using RMABs. Unfortunately, these gains come at a high
+computational cost because of the need to solve and evaluate the
+RMAB in each DFL training step. In this paper, we provide a princi-
+pled way to exploit the structure of RMABs to speed up intervention
+planning by cleverly decoupling the planning for different benefi-
+ciaries. We use real-world data from an Indian NGO, ARMMAN, to
+show that our approach is up to two orders of magnitude faster than
+the state-of-the-art approach while also yielding superior model
+performance. This would enable the NGO to scale up deployments
+using DFL to potentially millions of mothers, ultimately advancing
+progress toward UNSDG 3.1.
+KEYWORDS
+AI for Social Good, Public Health, Predict-Then-Optimize, Decision-
+Focused Learning, Restless Multi-Armed Bandits, Optimization
+ACM Reference Format:
+Sanket Shah, Arun Suggala, Milind Tambe, and Aparna Taneja. 2024. Ef-
+ficient Public Health Intervention Planning Using Decomposition-Based
+Decision-Focused Learning. In Proc. of the 23rd International Conference on
+Autonomous Agents and Multiagent Systems (AAMAS 2024), Auckland, New
+Zealand, May 6 – 10, 2024, IFAAMAS, 12 pages.
+1
+INTRODUCTION
+A pervasive challenge faced by public health programs is one of
+beneficiary retention. To combat the declining engagement of ben-
+eficiaries over time, a common strategy has been to use ‘interven-
+tions’ (e.g., personalized service calls) to encourage participation
+∗Work done as an intern at Google Research India
+This work is licensed under a Creative Commons Attribution
+International 4.0 License.
+Proc. of the 23rd International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), N. Alechina, V. Dignum, M. Dastani, J.S. Sichman (eds.), May 6 – 10, 2024,
+Auckland, New Zealand. © 2024 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org).
+and address concerns. This has been employed in a variety of do-
+mains such as medication adherence [20], chronic illness manage-
+ment [17], treatment prioritization [7], and mobile health [21]. How-
+ever, despite their effectiveness, such interventions are expensive
+and, thus, effectively limited resources. Consequently, optimizing
+the selection of beneficiaries for these interventions is crucial.
+Towards this end, there has been a recent line of research on us-
+ing Restless Multi-Arm

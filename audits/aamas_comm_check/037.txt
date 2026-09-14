@@ -1,0 +1,78 @@
+Title: Contrastive Explainable Clustering with Differential Privacy
+
+First page:
+Contrastive Explainable Clustering with Differential Privacy
+AAAI Track
+D˜ung Nguyen∗
+Department of Computer Science,
+and Biocomplexity Institute,
+University of Virginia
+Charlottesville, VA, USA
+dungn@virginia.edu
+Ariel Vetzler∗
+Department of Computer Science,
+Bar-Ilan University
+Ramat Gan, Israel
+arielvetzler1@gmail.com
+Sarit Kraus
+Department of Computer Science,
+Bar-Ilan University
+Ramat Gan, Israel
+sarit@cs.biu.ac.il
+Anil Vullikanti
+Department of Computer Science,
+and Biocomplexity Institute,
+University of Virginia
+Charlottesville, VA, USA
+vsakumar@virginia.edu
+ABSTRACT
+This paper presents a novel approach to Explainable AI (XAI) that
+combines contrastive explanations with differential privacy for clus-
+tering algorithms. Focusing on k-median and k-means problems,
+we calculate contrastive explanations as the utility difference be-
+tween original clustering and clustering with a centroid fixed to
+a specific data point. This method provides personalized insights
+into centroid placement. Our key contribution is demonstrating
+that these differentially private explanations achieve essentially
+the same utility bounds as non-private explanations. Experiments
+across various datasets show that our approach offers meaningful,
+privacy-preserving, and individually relevant explanations without
+significantly compromising clustering utility. This work advances
+privacy-aware machine learning by balancing data protection, ex-
+planation quality, and personalization in clustering tasks.
+KEYWORDS
+Explainable AI; Differential Privacy; Clustering
+ACM Reference Format:
+D˜ung Nguyen, Ariel Vetzler, Sarit Kraus, and Anil Vullikanti. 2025. Con-
+trastive Explainable Clustering with Differential Privacy: AAAI Track. In
+Proc. of the 24th International Conference on Autonomous Agents and Mul-
+tiagent Systems (AAMAS 2025), Detroit, Michigan, USA, May 19 – 23, 2025,
+IFAAMAS, 22 pages.
+1
+INTRODUCTION
+Different notions of clustering are fundamental primitives in sev-
+eral areas, including machine learning, data science, and operations
+research [34]. 𝑘-means and 𝑘-median clustering remain among the
+most important and widely used approaches, as demonstrated by
+∗These authors contributed equally.
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowé (eds.), May 19 – 23, 2025, Detroit, Michigan,
+USA. © 2025 International Foundation for Autonomous Agents and Multiagent Systems
+(www.ifaamas.org).
+recent advances in explainability, privacy, fairness, and contrastive
+learning [12, 25, 26, 42]. These problems often involve significant
+trade-offs between accessibility, resource allocation, and overall
+cost. For example, in emergency response planning, authorities
+must decide the optimal locations for ambulance stations to mini-
+mize response times across a city. Residents might question why
+an ambulance station isn’t located closer to their neighborhood,
+especially if they feel imbalances in resource distribution. Similarly,
+in retail, customers might wonder why a new store is not placed
+near their area, despite being part of a high-demand demographic.
+Explainability in these contexts provides transparency into how and
+why certain decisions are made, addressing questions like: "Why
+was this location chosen instead of another?" This is particularly
+important in applications where the consequences of clustering
+de

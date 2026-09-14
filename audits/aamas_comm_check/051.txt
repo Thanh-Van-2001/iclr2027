@@ -1,0 +1,71 @@
+Title: LTL Verification of Memoryful Neural Agents
+
+First page:
+LTL Verification of Memoryful Neural Agents
+Mehran Hosseini
+King’s College London
+London, United Kingdom
+mehran.hosseini@kcl.ac.uk
+Alessio Lomuscio
+Imperial College London
+London, United Kingdom
+a.lomuscio@imperial.ac.uk
+Nicola Paoletti
+King’s College London
+London, United Kingdom
+nicola.paoletti@kcl.ac.uk
+ABSTRACT
+We present a framework for verifying Memoryful Neural Multi-
+Agent Systems (MN-MAS) against full Linear Temporal Logic (LTL)
+specifications. In MN-MAS, agents interact with a non-deterministic,
+partially observable environment. Examples of MN-MAS include
+multi-agent systems based on feed-forward and recurrent neu-
+ral networks or state-space models. Different from previous ap-
+proaches, we support the verification of both bounded and un-
+bounded LTL specifications. We leverage well-established bounded
+model checking techniques, including lasso search and invariant
+synthesis, to reduce the verification problem to that of constraint
+solving. To solve these constraints, we develop efficient methods
+based on bound propagation, mixed-integer linear programming,
+and adaptive splitting. We evaluate the effectiveness of our algo-
+rithms in single and multi-agent environments from the Gymna-
+sium and PettingZoo libraries, verifying unbounded specifications
+for the first time and improving the verification time for bounded
+specifications by an order of magnitude compared to the SoA.
+KEYWORDS
+Formal Verification; Neural Net Verification; Recurrent Neural Nets;
+Verification of Multi-Agent Systems; Safe Reinforcement Learning
+ACM Reference Format:
+Mehran Hosseini, Alessio Lomuscio, and Nicola Paoletti. 2025. LTL Ver-
+ification of Memoryful Neural Agents. In Proc. of the 24th International
+Conference on Autonomous Agents and Multiagent Systems (AAMAS 2025),
+Detroit, Michigan, USA, May 19 – 23, 2025, IFAAMAS, 10 pages.
+1
+INTRODUCTION
+With the rise of machine learning, we are increasingly witness-
+ing applications of neural networks (NNs) to autonomous systems.
+While neural agents may solve significantly more complex tasks
+than traditionally programmed counterparts [44, 51], NNs suffer
+from fragilities [45], which is a concern in safety-critical applica-
+tions. Thus, they require rigorous guarantees, as those offered by
+formal verification.
+In this paper, we develop the methodology for verifying systems
+comprising multiple memoryful neural agents that interact with
+an uncertain environment over time in a closed loop. We refer to
+such systems as Memoryful Neural Multi-Agent System (MN-MAS).
+The verification of MN-MAS is more challenging than the verifi-
+cation of individual predictions made by NNs, due to the presence of
+multiple networks, multiple time steps, and temporal dependencies
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowé (eds.), May 19 – 23, 2025, Detroit, Michigan,
+USA. © 2025 International Foundation for Autonomous Agents and Multiagent Systems
+(www.ifaamas.org).
+between predictions. Several methods for the verification of sys-
+tems with NNs “in the loop” have been recently proposed [16, 28].
+Nevertheless, these are limited by at least two of the following:
+they only consider single-agent systems; are limited to the analysis
+of (time-)bounded reachability; do not account for uncertainty in
+the environment; or the agents are implemented by feedforward
+models, 

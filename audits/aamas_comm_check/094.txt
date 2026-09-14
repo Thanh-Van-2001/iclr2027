@@ -1,0 +1,76 @@
+Title: Functional Multi-armed Bandit and the Best Function Identification Problems
+
+First page:
+Functional Multi-armed Bandit and the Best Function
+Identification Problems
+Yuriy Dorn
+AI Center & IAI MSU
+Lomonosov Moscow State University
+Moscow, Russia
+dornyv@my.msu.ru
+Aleksandr Katrutsa
+AI Center
+Lomonosov Moscow State University
+Moscow, Russia
+amkatrutsa@gmail.com
+Ilgam Latypov
+AI Center & IAI MSU
+Lomonosov Moscow State University
+Moscow, Russia
+i.latypov@iai.msu.ru
+Anastasia Soboleva
+AI Center & IAI MSU
+Lomonosov Moscow State University
+Moscow, Russia
+a.soboleva@iai.msu.ru
+ABSTRACT
+We consider the model selection problem, where we have a set
+of candidate parametric functions and need to identify the func-
+tion with the smallest minimum and corresponding minimizer.
+This problem arises in the competitive training of neural networks,
+where a set of candidates is given, and the limited computational
+budget prevents the use of a brute-force search. To address this prob-
+lem, we propose generalizations of the classical multi-armed bandit
+(MAB) and best arm identification (BAI) setups, since using classical
+MAB and BAI setups leads to infeasible computational costs. We
+refer to the proposed setups as the functional multi-armed bandit
+problem (FMAB) and the best function identification (BFI) problems,
+respectively. For these problems, we establish lower regret bounds
+for different classes of candidate functions. To solve FMAB and BFI
+problems, we propose a novel reduction scheme to construct the
+F-LCB algorithm, which is a UCB-type algorithm based on basic
+algorithms for nonlinear optimization with known convergence
+rates. The F-LCB algorithm combines the arm selection step and the
+update of the current optimum approximation. We provide regret
+upper bounds for F-LCB based on the known convergence rates of
+the underlying base algorithms. The regret upper bounds match
+with the derived lower bounds up to the logarithmic factor. Nu-
+merical experiments confirm that the proposed approach correctly
+identifies the optimal function and provides the minimizer for it in
+both smooth and non-smooth convex cases. Similarly, F-LCB con-
+verges faster than SuccessiveHalving and Hyperband algorithms
+for the model selection problem, where the candidate functions are
+neural networks and only a stochastic gradient estimate is available.
+KEYWORDS
+Multi-armed bandits; functional multi-armed bandits; best function
+identification
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29,
+2026, Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org). https://doi.org/10.65109/SFMN9947
+ACM Reference Format:
+Yuriy Dorn, Aleksandr Katrutsa, Ilgam Latypov, and Anastasia Soboleva.
+2026. Functional Multi-armed Bandit and the Best Function Identification
+Problems. In Proc. of the 25th International Conference on Autonomous Agents
+and Multiagent Systems (AAMAS 2026), Paphos, Cyprus, May 25 – 29, 2026,
+IFAAMAS, 9 pages. https://doi.org/10.65109/SFMN9947
+1
+INTRODUCTION
+The stochastic MAB problem could be defined as follows: an agent
+chooses arm 𝐴𝑡at each time step 𝑡= 1, . . . ,𝑇from the given set of
+arms 𝑆= {𝑎1, . . . ,𝑎𝑘} and observes loss 𝑙𝑡(𝐴𝑡). The agent can ob-
+serve losses only for the chosen action at each step. This is referred
+to as bandit feedback. For each arm 𝑎, the loss distribution D𝑎with
+expectation E𝑥∼D𝑎[𝑥

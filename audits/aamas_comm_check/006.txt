@@ -1,0 +1,78 @@
+Title: Memory-Based Resilient Control Against Non-cooperation in Multi-agent Flocking
+
+First page:
+Memory-Based Resilient Control
+Against Non-cooperation in Multi-agent Flocking
+Mingyue Zhang
+School of Computer and Information
+Science, Southwest University
+Chongqing, China
+myzhangswu@swu.edu.cn
+Nianyu LiB
+ZGC Lab
+Beijing, China
+li_nianyu@pku.edu.cn
+Jialong Li
+Waseda University
+Tokyo, Japan
+lijialong@fuji.waseda.jp
+Jiachun Liao
+Nanhu Lab
+Zhejiang, China
+jliao@nanhulab.ac.cn
+Jiamou Liu
+University of Auckland
+Auckland, New Zealand
+jiamou.liu@auckland.ac.nz
+ABSTRACT
+Inspired by natural flocking behaviors, researchers aim to develop a
+distributed control approach for artificial agents to mimic these be-
+haviors. The main challenge lies in maintaining the resilience of the
+artificial flock, as some agents inevitably display non-cooperative
+behavior, thereby deviating from the flocking objective. Existing
+control approaches, especially those based on learning algorithm,
+are susceptible to forgetting issues that non-cooperative agents
+can exploit to disrupt the flock formation. To address this problem,
+this study introduces a memory-based resilient control approach
+that strategically analyzes historical data across three distinct time
+scales (long, short, and periodic). The implementation of a long
+short periodic-term memory (LSP) algorithm employs accumula-
+tive discounted credibility evaluated by Q-learning to recognize
+long-term non-cooperation, utilizes a filtering rule to establish a
+trusted set excluding short-term non-cooperation, and integrates
+fast Fourier transform to refine the trusted set against periodic
+inconsistency. We assess the effectiveness of this approach through
+extensive experiments. The results highlight the potential and ad-
+vantages of using LSP in flocking, enhancing the resilience of multi-
+agent flocking against complex non-cooperative threats.
+KEYWORDS
+Flocking; Multi-agent System; Collective Behaviour; Resilient Con-
+sensus Control
+ACM Reference Format:
+Mingyue Zhang
+, Nianyu LiB , Jialong Li , Jiachun Liao , and Jiamou
+Liu . 2024. Memory-Based Resilient Control Against Non-cooperation in
+Multi-agent Flocking. In Proc. of the 23rd International Conference on Au-
+tonomous Agents and Multiagent Systems (AAMAS 2024), Auckland, New
+Zealand, May 6 – 10, 2024, IFAAMAS, 10 pages.
+Nianyu Li (li_nianyu@pku.edu.cn) is corresponding author. This work is supported by
+the Fundamental Research Funds for the Central Universities (No. SWU-KQ23005), and
+the youth project of science and technology research program of Chongqing Education
+Commission of China (No. KJQN20230).
+This work is licensed under a Creative Commons Attribution
+International 4.0 License.
+Proc. of the 23rd International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), N. Alechina, V. Dignum, M. Dastani, J.S. Sichman (eds.), May 6 – 10, 2024,
+Auckland, New Zealand. © 2024 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org).
+1
+INTRODUCTION
+The natural flocking behaviors refer to the collective behavior of
+a large number of individuals (e.g., birds, fish, and insects), form-
+ing a group where the distance between every pair of individuals
+remains within an appropriate range (i.e., separation & cohesion)
+and maintaining motion consensus (i.e., alignment) through local
+information exchange [37]. Over the years, the natural phenome-
+non has attracted widespread attention in the academic community,
+leading to various theories and methods for explaining or simu-
+lating this collective behavior [27, 44], which als

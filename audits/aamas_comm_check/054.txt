@@ -1,0 +1,77 @@
+Title: Agent-based Modeling and Simulation of Ambiguity in Catastrophe Insurance Markets
+
+First page:
+Agent-based Modeling and Simulation of Ambiguity in
+Catastrophe Insurance Markets
+Yu Bi
+King’s College London
+London, United Kingdom
+teresa.bi@kcl.ac.uk
+Lingxiao Zhao
+King’s College London
+London, United Kingdom
+lingxiao.zhao@kcl.ac.uk
+Jinyun Tong
+King’s College London
+London, United Kingdom
+jinyun.tong@kcl.ac.uk
+Zhe Feng
+Ki Insurance
+London, United Kingdom
+zhe.feng@ki-insurance.com
+Carmine Ventre
+King’s College London
+London, United Kingdom
+carmine.ventre@kcl.ac.uk
+ABSTRACT
+Pricing covers for catastrophes is challenging for insurers due to
+uncertainty in loss probabilities. This paper addresses this so-called
+ambiguity problem in competitive catastrophe insurance markets
+through three key approaches. First, it introduces ambiguity in pre-
+mium pricing and capital holdings. Second, it develops an Agent-
+based Model simulator to mimic general insurance markets and
+the Lloyd’s market. Third, it applies Empirical Game-Theoretical
+Analysis to explore insurers’ ambiguity preferences in different
+markets. The study evaluates the effects of ambiguity by analyzing
+their impact on individual companies, differences between small
+and large companies, and overall market performance. Simulation
+results reveal that the simulator effectively captures underwriting
+cycles and insurers’ strategic shifts following catastrophes. In mar-
+kets with equally sized insurers, competition mitigates the negative
+effects of ambiguity by stabilizing premiums and increasing the
+number of underwritten risks. In markets with varying-sized insur-
+ers, large insurers gain market power while small insurers adopt
+aggressive ambiguity strategies to compete. In contrast, Lloyd’s
+lead-follow mechanism encourages conservative ambiguity strate-
+gies and reduces bankruptcy.
+KEYWORDS
+Insurance Markets; Agent-based Modeling; Agent-based Simula-
+tion; Empirical Game-Theoretic Analysis
+ACM Reference Format:
+Yu Bi, Lingxiao Zhao, Jinyun Tong, Zhe Feng, and Carmine Ventre. 2025.
+Agent-based Modeling and Simulation of Ambiguity in Catastrophe Insur-
+ance Markets. In Proc. of the 24th International Conference on Autonomous
+Agents and Multiagent Systems (AAMAS 2025), Detroit, Michigan, USA, May
+19 – 23, 2025, IFAAMAS, 9 pages.
+1
+INTRODUCTION
+Catastrophes, such as hurricanes, terrorist attacks, and financial
+crises, are low frequency and high impact risks [16, 27]. Over recent
+decades, due to various reasons such as climate change and unstable
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowé (eds.), May 19 – 23, 2025, Detroit, Michigan,
+USA. © 2025 International Foundation for Autonomous Agents and Multiagent Systems
+(www.ifaamas.org).
+geopolitics, their frequency and the resulting losses have increased
+significantly [1, 13, 20, 34]. This rise of catastrophes has led to more
+victims needing compensation. Among diverse compensations, the
+insurance industry plays an important role. For example, in 2007,
+the property damage in the United States caused by 335 catastrophes
+amounted to over $70 billion, with insurance covering about one-
+third [13]. Consequently, a great deal of attention is increasingly
+paid to catastrophe insurance [13].
+The catastrophe insurance market faces the unique challenge
+of the rare historical data to get an accurate estimation of the loss
+probability distribution [5, 9, 16]. This market is charact

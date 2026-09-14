@@ -1,0 +1,84 @@
+Title: Multimodal Pretrained Models for Verifiable Sequential Decision-Making: Planning, Grounding, and Perception
+
+First page:
+Multimodal Pretrained Models for Verifiable Sequential
+Decision-Making: Planning, Grounding, and Perception
+Yunhao Yang
+University of Texas at Austin
+Austin, TX, United States
+yunhaoyang234@utexas.edu
+Cyrus Neary
+University of Texas at Austin
+Austin, TX, United States
+cneary@utexas.edu
+Ufuk Topcu
+University of Texas at Austin
+Austin, TX, United States
+utopcu@utexas.edu
+ABSTRACT
+Recently developed pretrained models can encode rich world knowl-
+edge expressed in multiple modalities, such as text and images.
+However, the outputs of these models cannot be integrated into
+algorithms to solve sequential decision-making tasks. We develop
+an algorithm that utilizes the knowledge from pretrained models
+to construct and verify controllers for sequential decision-making
+tasks, and to ground these controllers to task environments through
+visual observations with formal guarantees. In particular, the al-
+gorithm queries a pretrained model with a user-provided, text-
+based task description and uses the model’s output to construct an
+automaton-based controller that encodes the model’s task-relevant
+knowledge. It allows formal verification of whether the knowledge
+encoded in the controller is consistent with other independently
+available knowledge, which may include abstract information on
+the environment or user-provided specifications. Next, the algo-
+rithm leverages the vision and language capabilities of pretrained
+models to link the observations from the task environment to the
+text-based control logic from the controller (e.g., actions and condi-
+tions that trigger the actions). We propose a mechanism to provide
+probabilistic guarantees on whether the controller satisfies the
+user-provided specifications under perceptual uncertainties. We
+demonstrate the algorithm’s ability to construct, verify, and ground
+automaton-based controllers through a suite of real-world tasks,
+including daily life and robot manipulation tasks.
+KEYWORDS
+Multimodal Pretrained Model; Sequential Decision-Making; Automaton-
+Based Representation; Formal Methods; Verification; Perception
+ACM Reference Format:
+Yunhao Yang, Cyrus Neary, and Ufuk Topcu. 2024. Multimodal Pretrained
+Models for Verifiable Sequential Decision-Making: Planning, Grounding,
+and Perception. In Proc. of the 23rd International Conference on Autonomous
+Agents and Multiagent Systems (AAMAS 2024), Auckland, New Zealand, May
+6 – 10, 2024, IFAAMAS, 9 pages.
+1
+INTRODUCTION
+While the rapidly emerging capabilities of multimodal pretrained
+models (also referred to as foundation models or base models) in
+question answering, code synthesis, and image generation offer new
+This work is licensed under a Creative Commons Attribution
+International 4.0 License.
+Proc. of the 23rd International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), N. Alechina, V. Dignum, M. Dastani, J.S. Sichman (eds.), May 6 – 10, 2024,
+Auckland, New Zealand. © 2024 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org).
+Remove all the 
+red blocks.
+Multimodal 
+Pretrained 
+Model
+1.
+Target a block.
+2.
+Classify color.
+3.
+If red, place block.
+LLM2Automata
+Automata2Env
+FSA
+observation
+action
+Figure 1: A real-world example that applies the proposed
+pipeline to a robot arm manipulation task.
+opportunities for autonomous systems, a gap exists between the
+text-based and image-based outputs of these models and algorithms
+for solving sequential decision-making tasks. Additional methods
+are required to in

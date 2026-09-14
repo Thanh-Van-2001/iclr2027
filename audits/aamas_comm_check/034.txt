@@ -1,0 +1,69 @@
+Title: Self-Supervised Multi-Agent Diversity with Nonparametric Entropy Maximization
+
+First page:
+Self-Supervised Multi-Agent Diversity with Nonparametric
+Entropy Maximization
+Tianxu Li
+College of Computer Science and Technology,
+Nanjing University of Aeronautics and Astronautics
+Nanjing, China
+tianxuli@nuaa.edu.cn
+Kun Zhu∗
+College of Computer Science and Technology,
+Nanjing University of Aeronautics and Astronautics
+Nanjing, China
+zhukun@nuaa.edu.cn
+ABSTRACT
+Learning decentralized policies for agents has drawn increasing
+interest in recent works to solve the scalability issue that arises in
+Multi-Agent Reinforcement Learning (MARL), where all agents may
+share the parameters of a policy network to make action decisions.
+However, such parameter sharing can hinder efficient exploration,
+as some agents may learn similar behaviors. Unlike previous fully-
+supervised mutual information-based methods that encourages
+multi-agent diversity, in this paper, we propose a novel multi-agent
+exploration method called Contrastive Trajectory Entropy Maxi-
+mization (CTEM). Our method adopts a non-parametric entropy
+estimator to maximize the entropy of trajectories of different agents
+in a self-supervised contrastive representation space, leading to
+diverse policies and sufficient exploration. Such an entropy esti-
+mator avoids complex density modeling and scales well in high-
+dimensional multi-agent environments. We deploy our method in
+MARL by introducing an intrinsic reward for agents to achieve
+entropy maximization. To demonstrate the effectiveness of our
+method, we conduct experiments on multiple challenging MARL
+benchmark tasks. Our method yields superior performance than
+existing state-of-the-art methods.
+KEYWORDS
+Multi-Agent Reinforcement Learning, Exploration, Multi-agent di-
+versity, Trajectory Entropy Maximization
+ACM Reference Format:
+Tianxu Li and Kun Zhu. 2025. Self-Supervised Multi-Agent Diversity with
+Nonparametric Entropy Maximization. In Proc. of the 24th International
+Conference on Autonomous Agents and Multiagent Systems (AAMAS 2025),
+Detroit, Michigan, USA, May 19 – 23, 2025, IFAAMAS, 9 pages.
+1
+INTRODUCTION
+Multi-Agent Reinforcement Learning (MARL) has shown promise in
+solving various multi-agent tasks such as multiplayer video games
+[30] and traffic light control [35], which has drawn increasing atten-
+tion in recent years. MARL enables efficient cooperation by jointly
+training multiple agents to maximize the team returns. However,
+learning efficient cooperative policies for agents in challenging
+∗Corresponding author. The authors are also with Collaborative Innovation Center of
+Novel Software Technology and Industrialization.
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowé (eds.), May 19 – 23, 2025, Detroit, Michigan,
+USA. © 2025 International Foundation for Autonomous Agents and Multiagent Systems
+(www.ifaamas.org).
+multi-agent tasks still remains a challenge due to the partial obser-
+vation constraint and the high scalability demand. A common-used
+framework in recent works to resolve these issues is Centralized
+Training with Decentralized Execution (CTDE) [17], where each
+agent makes action decisions based on its local observation us-
+ing a decentralized policy that is jointly trained leveraging global
+information in order to achieve robust and stable performance.
+The CTDE framework learns an individual decentralized policy
+for each agent. However, trainin

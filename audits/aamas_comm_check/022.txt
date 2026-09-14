@@ -1,0 +1,67 @@
+Title: A Cloud-Based Microservices Solution for Multi-Agent Traffic Control Systems
+
+First page:
+A Cloud-Based Microservices Solution for
+Multi-Agent Traffic Control Systems
+Chikadibia Ihejimba
+The University of Texas at Dallas
+Richardson, United States
+cki100020@utdallas.edu
+Rym Z. Wenkstern
+The University of Texas at Dallas
+Richardson, United States
+rymw@utdallas.edu
+ABSTRACT
+In this paper, we present MATS-Cloud, a cloud-based microservices
+architecture designed for multi-agent-based Traffic Control Systems
+(TCS). This architecture facilitates decentralized control, real-time
+responsiveness, and dynamic scalability. To validate our approach,
+we have transitioned DALI, a multi-agent collaborative TCS, from
+its current server-based architecture to the cloud, implementing
+this new architecture. Experimental results demonstrate significant
+improvements in latency reduction and system adaptability when
+compared to the traditional server-based model.
+KEYWORDS
+Multi-Agent Traffic Control Systems; Intelligent Transportation
+Systems; Cloud-Native; Microservices; Serverless
+ACM Reference Format:
+Chikadibia Ihejimba and Rym Z. Wenkstern. 2024. A Cloud-Based Microser-
+vices Solution for Multi-Agent Traffic Control Systems. In Proc. of the 23rd
+International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), Auckland, New Zealand, May 6 – 10, 2024, IFAAMAS, 9 pages.
+1
+INTRODUCTION
+Traffic congestion is a rising concern in urban areas across the globe,
+resulting in longer commute times, decreased productivity, and
+increased air pollution due to greenhouse gas emissions from idling
+vehicles. As a result, the development of effective Traffic Control
+Systems (TCS) has gained increasing significance, aligning with the
+Sustainable Development Goals (SDGs) [5, 22], particularly SDG
+11, which underscores the importance of sustainable urbanization
+and the promotion of safe, inclusive, and resilient cities.
+Over the years, the literature has seen numerous papers address-
+ing agent-based Traffic Control Systems [1–4, 7, 13, 20, 21, 24, 39,
+41]. However, the primary emphasis in Multi-Agent Traffic control
+System (MATS) research has been on traffic control algorithms,
+often neglecting the challenges associated with deployment. As
+a result, due to the extremely limited number of real-world im-
+plementations of MATS, most traffic lights are still managed by
+intersection controllers directly or indirectly connected to a higher-
+level central traffic management unit [26, 30, 37, 38]. In the US, the
+transportation community has recognized the much-needed con-
+cepts of distribution, intelligence, autonomy, and collaboration, but
+This work is licensed under a Creative Commons Attribution
+International 4.0 License.
+Proc. of the 23rd International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), N. Alechina, V. Dignum, M. Dastani, J.S. Sichman (eds.), May 6 – 10, 2024,
+Auckland, New Zealand. © 2024 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org).
+only a few very MATSs have been successfully deployed [32, 36],
+and their implementations have predominantly utilized conven-
+tional server-based architectures.
+This paper introduces MATS-Cloud, a novel cloud-native ar-
+chitecture for multi-agent TCS. We present MATS-Cloud’s archi-
+tecture and discuss its implementation through DALI [33–36], a
+multi-agent, collaborative traffic control system currently operating
+in the US. In DALI, an agent that serves as the ’brain’ of a controller
+executes in a server-based infrastructure and connects to its c

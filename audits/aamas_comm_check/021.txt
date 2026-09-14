@@ -1,0 +1,69 @@
+Title: Higher Order Reasoning under Intent Uncertainty Reinforces the Hobbesian Trap
+
+First page:
+Higher-Order Reasoning under Intent Uncertainty Reinforces the
+Hobbesian Trap
+Otto Kuusela
+University of Amsterdam
+Amsterdam, The Netherlands
+otto.kuusela@outlook.com
+Debraj Roy
+University of Amsterdam
+Amsterdam, The Netherlands
+d.roy@uva.nl
+ABSTRACT
+Civilisations in the universe face the difficulty of communicating
+and trying to understand others’ intentions. Moreover, advanced
+civilisations could develop weapons to pre-emptively eliminate any
+civilisations that present a future threat – this is known as the
+Hobbesian trap. Here, we present a multi-agent simulation model
+to investigate conditions for such pre-emptive attacks. We design a
+novel algorithm for solving Interactive Partially Observable Markov
+Decision Processes (I-POMDPs) with continuous state and observa-
+tion spaces; it enables civilisations to perform higher-order reason-
+ing. The algorithm builds a nested hierarchy of search forests using
+Monte Carlo simulations, determining updated beliefs by weight-
+ing existing particles. Our experiments reveal interesting insights
+into the behaviour of rational civilisations under varying levels of
+reasoning, morality and uncertainty. We find that selfish civilisa-
+tions always create a war-like universe. Even good, universalist
+civilisations can initiate pre-emptive attacks if they are uncertain
+about others’ intentions. Finally, our findings have important im-
+plications for international peace and security and may explain
+persistent conflicts and the fragility of ceasefires. Under such con-
+ditions a well-coordinated international approach, facilitated by
+international alliances such as the United Nations, is paramount.
+KEYWORDS
+Hobbesian trap; pre-emptive action; I-POMDP; higher-order rea-
+soning; civilisations
+ACM Reference Format:
+Otto Kuusela and Debraj Roy. 2024. Higher-Order Reasoning under Intent
+Uncertainty Reinforces the Hobbesian Trap. In Proc. of the 23rd International
+Conference on Autonomous Agents and Multiagent Systems (AAMAS 2024),
+Auckland, New Zealand, May 6 – 10, 2024, IFAAMAS, 9 pages.
+1
+INTRODUCTION
+There is at least one civilisation in the universe. What if there
+are more? This is a possibility that is rooted in credible academic
+discourse. For example, in [25], the authors estimate the number of
+communicating extraterrestrial civilisations based on astronomical
+data and under a range of different assumptions. The existence
+of other civilisations cannot be ruled out, although it remains a
+hypothesis in the absence of data.
+This work is licensed under a Creative Commons Attribution
+International 4.0 License.
+Proc. of the 23rd International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), N. Alechina, V. Dignum, M. Dastani, J.S. Sichman (eds.), May 6 – 10, 2024,
+Auckland, New Zealand. © 2024 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org).
+Our goal is to investigate the interaction of civilisations in the
+universe. This is an interesting problem to study for two reasons.
+First, the environment of space does not make finding and making
+friends easy. Distances are incomprehensibly large and travelling
+takes time. Even sending messages using the seemingly instant
+electromagnetic radiation is slow. The second reason is that the
+civilisations do not know who they are interacting with. The uncer-
+tainty about the intentions of the counterpart is one of the defining
+features of this problem.
+The main argument motivating our work is presented in [12].
+Civilis

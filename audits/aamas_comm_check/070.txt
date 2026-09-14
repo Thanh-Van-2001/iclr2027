@@ -1,0 +1,80 @@
+Title: Learning Hierarchical Procedural Memory for LLM Agents through Bayesian Selection and Contrastive Refinement
+
+First page:
+Learning Hierarchical Procedural Memory for LLM Agents
+through Bayesian Selection and Contrastive Refinement
+Saman Forouzandeh
+School of Engineering, Royal
+Melbourne Institute of Technology
+University
+Melbourne, Australia
+saman.forouzandeh@rmit.edu.au
+Wei Peng
+School of Engineering, Royal
+Melbourne Institute of Technology
+University
+Melbourne, Australia
+wei.peng3@rmit.edu.au
+Parham Moradi
+College of Arts, Business, Law
+Education, and Information
+Technology, Victoria University
+Melbourne, Australia
+parham.moradi@vu.edu.au
+Xinghuo Yu
+School of Engineering, Royal
+Melbourne Institute of Technology
+University
+Melbourne, Australia
+xinghuo.yu@rmit.edu.au
+Mahdi Jalili
+School of Engineering, Royal
+Melbourne Institute of Technology
+University
+Melbourne, Australia
+mahdi.jalili@rmit.edu.au
+ABSTRACT
+We present MACLA, a framework that decouples reasoning from
+learning by maintaining a frozen large language model (LLM) while
+performing all adaptation in an external hierarchical procedural
+memory. MACLA extracts reusable procedures from trajectories,
+tracks reliability via Bayesian posteriors, selects actions through
+expected-utility scoring, and refines procedures by contrasting suc-
+cesses vs. failures. Across four benchmarks (ALFWorld, WebShop,
+TravelPlanner, InterCodeSQL), MACLA achieves 78.1% average
+performance, outperforming all baselines. On ALFWorld unseen
+tasks, MACLA reaches 90.3% with +3.1% positive generalization.
+The system constructs memory in 56 seconds (2,800× faster than
+the state-of-the-art LLM parameter-training baseline), compresses
+2,851 trajectories into 187 procedures (15:1). Experimental re-
+sults demonstrate that structured external memory with Bayesian
+selection and constrastive refinement enable sample-efficient, in-
+terpretable and continually improving agents without LLM param-
+eter updates. Code is publicly available at https://github.com/S-
+Forouzandeh/MACLA-LLM-Agents-AAMAS-Conference.
+KEYWORDS
+Memory-augmented agents; Procedural memory; Bayesian decision
+making; Contrastive learning; LLM agents
+ACM Reference Format:
+Saman Forouzandeh, Wei Peng, Parham Moradi, Xinghuo Yu, and Mahdi
+Jalili. 2026. Learning Hierarchical Procedural Memory for LLM Agents
+through Bayesian Selection and Contrastive Refinement. In Proc. of the
+25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), Paphos, Cyprus, May 25 – 29, 2026, IFAAMAS, 9 pages. https:
+//doi.org/10.65109/FKYO8341
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29,
+2026, Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org). https://doi.org/10.65109/FKYO8341
+Large language model (LLM) agents can solve complex, interactive
+tasks such as web shopping [25] and embodied AI housekeeping [9],
+by transforming natural-language instructions into sequences of
+environment actions [26]. In these settings, agents navigate step-by-
+step through partially observable environments to pursue subgoals
+and ultimately complete the task [9, 22]. The resulting trajectory is
+the ordered record of an episode’s interaction, typically written as
+(𝑇,𝐴,𝑂, 𝑅), where 𝑇represents a task to complete, 𝐴are actions,
+𝑂stand for observations for the outcome of corresponding actions,
+and 𝑅records step-level outcomes or r

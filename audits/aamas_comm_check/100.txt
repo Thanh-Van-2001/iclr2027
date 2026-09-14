@@ -1,0 +1,87 @@
+Title: Beyond Outcome-Based Imperfect-Recall: Higher-Resolution Abstractions for Imperfect-Information Games
+
+First page:
+Beyond Outcome-Based Imperfect-Recall: Higher-Resolution
+Abstractions for Imperfect-Information Games
+Yanchang Fu∗
+School of Artificial Intelligence
+University of Chinese Academy of
+Sciences
+Beijing, China
+fuyanchang2020@ia.ac.cn
+Qiyue Yin†
+National Key Laboratory of Cognition
+and Decision Intelligence for
+Complex Systems
+Institution of Automation, Chinese
+Academy of Sciences
+Beijing, China
+qyyin@nlpr.ia.ac.cn
+Sengda Liu
+National Key Laboratory of Cognition
+and Decision Intelligence for
+Complex Systems
+Institution of Automation, Chinese
+Academy of Sciences
+Beijing, China
+shengda.liu@ia.ac.cn
+Pei Xu
+National Key Laboratory of Cognition
+and Decision Intelligence for
+Complex Systems
+Institution of Automation, Chinese
+Academy of Sciences
+Beijing, China
+pei.xu@ia.ac.cn
+Kaiqi Huang‡
+National Key Laboratory of Cognition
+and Decision Intelligence for
+Complex Systems
+Institution of Automation, Chinese
+Academy of Sciences
+Beijing, China
+kaiqi.huang@nlpr.ia.ac.cn
+ABSTRACT
+Hand abstraction is crucial for scaling imperfect-information games
+(IIGs) such as Texas Hold’em, yet progress is limited by the lack
+of a formal task model and by evaluations that require resource-
+intensive strategy solving. We introduce signal observation or-
+dered games (SOOGs), a subclass of IIGs tailored to hold’em-style
+games that cleanly separates signal from player action sequences,
+providing a precise mathematical foundation for hand abstrac-
+tion. Within this framework, we define a resolution bound-an
+information-theoretic upper bound on achievable performance un-
+der a given abstraction algorithm. Using the bound, we show that
+mainstream outcome-based imperfect-recall algorithms suffer sub-
+stantial losses by arbitrarily discarding historical information; we
+formalize this behavior via potential-aware outcome Isomor-
+phism (PAOI) and prove that PAOI characterizes their resolution
+bound. To overcome this limitation, we propose full-recall out-
+come isomorphism (FROI), which integrates historical informa-
+tion to raise the bound and improve policy quality. Experiments
+on a hold’em game benchmark confirm that FROI consistently out-
+performs outcome-based imperfect-recall baselines. Our research
+provides practical guidance for further designing higher-resolution
+abstraction algorithms in IIGs.
+∗Also with , National Key Laboratory of Cognition and Decision Intelligence for
+Complex Systems, Institution of Automation, Chinese Academy of Sciences.
+†Corresponding author
+‡Also with , School of Artificial Intelligence, University of Chinese Academy of
+Sciences.
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29,
+2026, Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org). https://doi.org/10.65109/AKDO5185
+KEYWORDS
+Game Theory; Imperfect-Information Games; Hand Abstraction
+ACM Reference Format:
+Yanchang Fu, Qiyue Yin, Sengda Liu, Pei Xu, and Kaiqi Huang. 2026. Be-
+yond Outcome-Based Imperfect-Recall: Higher-Resolution Abstractions for
+Imperfect-Information Games. In Proc. of the 25th International Conference on
+Autonomous Agents and Multiagent Systems (AAMAS 2026), Paphos, Cyprus,
+May 25 – 29, 2026, IFAAMAS, 9 pages. https://doi.org/10.65109/AKDO5185
+1
+INTRODUCTION
+In recent years, artificial intelligence (AI) for heads-

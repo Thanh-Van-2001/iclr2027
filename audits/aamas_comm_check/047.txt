@@ -1,0 +1,83 @@
+Title: $Socratic:$ Enhancing Human Teamwork via AI-enabled Coaching
+
+First page:
+Socratic: Enhancing Human Teamwork via AI-enabled Coaching
+Sangwon Seo
+Rice University
+Houston, TX, USA
+sangwon.seo@rice.edu
+Bing Han
+Rice University
+Houston, TX, USA
+bing.han@rice.edu
+Rayan E. Harari
+Harvard Medical School
+Boston, MA, USA
+rharari@bwh.harvard.edu
+Roger D. Dias
+Harvard Medical School
+Boston, MA, USA
+rdias@bwh.harvard.edu
+Marco A. Zenati
+Harvard Medical School
+Boston, MA, USA
+marco_zenati@hms.harvard.edu
+Eduardo Salas
+Rice University
+Houston, TX, USA
+eduardo.salas@rice.edu
+Vaibhav Unhelkar
+Rice University
+Houston, TX, USA
+vaibhav.unhelkar@rice.edu
+ABSTRACT
+Coaches are vital for effective collaboration, but cost and resource
+constraints often limit their availability during real-world tasks.
+This limitation poses serious challenges in life-critical domains
+that rely on effective teamwork, such as healthcare and disaster
+response. To address this gap, we propose and realize an innovative
+application of AI: task-time team coaching. Specifically, we intro-
+duce Socratic, a novel AI system that complements human coaches
+by providing real-time guidance during task execution. Socratic
+monitors team behavior, detects misalignments in team members’
+shared understanding, and delivers automated interventions to
+improve team performance. We validated Socratic through two
+human subject experiments involving dyadic collaboration. The
+results demonstrate that the system significantly enhances team per-
+formance with minimal interventions. Participants also perceived
+Socratic as helpful and trustworthy, supporting its potential for
+adoption. Our findings also suggest promising directions both for AI
+research and its practical applications to enhance human teamwork.
+CCS CONCEPTS
+• Human-centered computing →Interactive systems and
+tools; • Computing methodologies →Intelligent agents; Plan-
+ning under uncertainty; Multi-agent planning; Machine learning.
+KEYWORDS
+Teamwork, Mental Models, Decision Support, Imitation Learning
+ACM Reference Format:
+Sangwon Seo, Bing Han, Rayan E. Harari, Roger D. Dias, Marco A. Zenati,
+Eduardo Salas, and Vaibhav Unhelkar. 2025. Socratic: Enhancing Human
+Teamwork via AI-enabled Coaching. In Proc. of the 24th International Confer-
+ence on Autonomous Agents and Multiagent Systems (AAMAS 2025), Detroit,
+Michigan, USA, May 19 – 23, 2025, IFAAMAS, 10 pages.
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowé (eds.), May 19 – 23, 2025, Detroit, Michigan,
+USA. © 2025 International Foundation for Autonomous Agents and Multiagent Systems
+(www.ifaamas.org).
+1
+INTRODUCTION
+Consider your favorite sports team — whether it is soccer, cricket,
+basketball, or another team sport — working together to achieve
+a common goal. Even though all the team members are trained
+professionals, some teams consistently outperform others. Indeed,
+a team of individual experts does not necessarily make for an expert
+team [3]; building a successful team requires the confluence of
+multiple factors [40]. Human factors research has identified key
+drivers of team effectiveness, including capability, coordination,
+communication, and coaching [82]. Through targeted training and
+interventions, human teams can significantly improve coordination
+and enhance their performance in collaborative tasks.
+Coaches play a crucial role in both team training and inter-
+ventions. Rather than performin

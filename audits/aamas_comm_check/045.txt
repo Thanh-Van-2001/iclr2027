@@ -1,0 +1,87 @@
+Title: Tackling Sparsity in Designated Driver Dispatch with Multi-Agent Reinforcement Learning
+
+First page:
+Tackling Sparsity in Designated Driver Dispatch with Multi-Agent
+Reinforcement Learning
+Jiaxuan Jiang
+Tsinghua University
+Beijing, China
+Shanghai Qi Zhi Institute
+Shanghai, China
+jjx21@mails.tsinghua.edu.cn
+Ling Pan
+Hong Kong University of Science and
+Technology
+Hong Kong, China
+lingpan@ust.hk
+Lin Zhou
+DiDi Chuxing Technology Co.
+Beijing, China
+realzhoulin@DiDiglobal.com
+Longbo Huang
+Tsinghua University
+Beijing, China
+longbohuang@tsinghua.edu.cn
+Zhixuan Fang
+Tsinghua University
+Beijing, China
+Shanghai Qi Zhi Institute
+Shanghai, China
+zfang@mail.tsinghua.edu.cn
+ABSTRACT
+Designated driving service is a fast-growing market that provides
+drivers to transport customers in their own cars. The key technical
+challenge in this business lies in the design of driver repositioning
+due to the far distances between drivers and orders, which is caused
+by complex moving constraints of drivers and the “hub-and-spoke"
+structure of orders. To address these challenges, this paper proposes
+Reinforcement Learning for Designated Driver Dispatch (RLD3),
+a Multi-Agent Reinforcement Learning (MARL) algorithm based
+on the Partially Observed Markov Decision Process (POMDP) for-
+mulation. Our algorithm considers group-sharing structures and
+frequent potential rewards with heterogeneous costs to achieve
+a trade-off between heterogeneity and sparsity. Additionally, our
+algorithm addresses long-term agent cross-effects through window-
+lasting policy ensembles. We also implement a simulator to train
+and evaluate our algorithm using real-world data. Extensive exper-
+iments demonstrate that our algorithm achieves superior perfor-
+mance compared to existing Deep Reinforcement Learning (DRL)
+and taxi-reposition methods.
+KEYWORDS
+Multi-agent reinforcement learning; Fleet management
+ACM Reference Format:
+Jiaxuan Jiang, Ling Pan, Lin Zhou, Longbo Huang, and Zhixuan Fang. 2025.
+Tackling Sparsity in Designated Driver Dispatch with Multi-Agent Rein-
+forcement Learning. In Proc. of the 24th International Conference on Au-
+tonomous Agents and Multiagent Systems (AAMAS 2025), Detroit, Michigan,
+USA, May 19 – 23, 2025, IFAAMAS, 10 pages.
+Corresponding authors: Zhixuan Fang (zfang@mail.tsinghua.edu.cn).
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowé (eds.), May 19 – 23, 2025, Detroit, Michigan,
+USA. © 2025 International Foundation for Autonomous Agents and Multiagent Systems
+(www.ifaamas.org).
+Control 
+center
+Dispatch
+Pick-up
+Passenger who can’t drive
+Designated driver
+Destination
+Designated driving service
+Figure 1: Designated driving.
+1
+INTRODUCTION
+Designated driving, also known as chauffeur service, represents
+an emerging online platform service wherein professional drivers
+transport customers who are unable to drive for various reasons,
+such as intoxication or inexperience. In this service model, the
+designated driver arrives on an electric scooter and subsequently
+drives the customer’s vehicle to the desired destination, as illus-
+trated in Figure 1. The platform manages the driver dispatching
+behaviors to improve customers’ experience and drivers’ income.
+Designated driving has already become a significant and promising
+industry, with a market size of over 4 billion in China [4].
+As such, one of the critical challenges in this industry is the
+design of driver dispatch, including matching and repositioning.

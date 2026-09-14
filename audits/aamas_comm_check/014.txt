@@ -1,0 +1,73 @@
+Title: Preventing Deadlocks for Multi-Agent Pickup and Delivery in Dynamic Environments
+
+First page:
+Preventing Deadlocks for Multi-Agent Pickup and Delivery
+in Dynamic Environments
+Benedetta Flammini
+Politecnico di Milano
+Milan, Italy
+benedetta.flammini@polimi.it
+Davide Azzalini
+Politecnico di Milano
+Milan, Italy
+davide.azzalini@polimi.it
+Francesco Amigoni
+Politecnico di Milano
+Milan, Italy
+francesco.amigoni@polimi.it
+ABSTRACT
+The Multi-Agent Pickup and Delivery (MAPD) problem, in which a
+team of agents has to plan paths to accomplish incoming pickup and
+delivery tasks without collisions, has recently attracted significant
+attention both from academia and industry. In this paper, we con-
+sider a MAPD setting in which the environment is dynamic, namely
+it is populated by other moving agents, beyond those belonging
+to the team. For instance, in a warehouse, moving agents could
+be humans or cleaning robots. We assume that the team agents
+cannot communicate with the moving agents and cannot interfere
+with their tasks and paths, which are a priori unknown and cannot
+be modified. As a consequence, team agents have to reactively try
+to solve potential collisions when they appear. However, it can
+happen that some conflicts are not solvable without affecting the
+moving agents, resulting in deadlocks. Since deadlocks can become
+rather frequent, especially in crowded environments, in this paper
+we propose an approach that, by imposing minor constraints on
+the environment and the movements of the agents, solves poten-
+tial collisions and prevents the formation of deadlocks by design.
+Experimental results show that our approach prevents deadlocks,
+even in very crowded environments, with negligible impact on the
+performance of task completion.
+KEYWORDS
+Multi-Agent Pickup and Delivery; Multi-Agent Systems; Deadlock
+Prevention
+ACM Reference Format:
+Benedetta Flammini, Davide Azzalini, and Francesco Amigoni. 2024. Pre-
+venting Deadlocks for Multi-Agent Pickup and Delivery in Dynamic En-
+vironments. In Proc. of the 23rd International Conference on Autonomous
+Agents and Multiagent Systems (AAMAS 2024), Auckland, New Zealand, May
+6 – 10, 2024, IFAAMAS, 9 pages.
+1
+INTRODUCTION
+The Multi-Agent Pickup and Delivery (MAPD) problem, in which
+multiple agents plan collision-free paths to accomplish incoming
+tasks, has gained significant attention within both academia and
+industry due to its several real-world applications. One of the most
+relevant applications is in automated warehouses [30]. Beyond logis-
+tics, other MAPD applications are in aircraft-towing vehicles [23],
+This work is licensed under a Creative Commons Attribution
+International 4.0 License.
+Proc. of the 23rd International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), N. Alechina, V. Dignum, M. Dastani, J.S. Sichman (eds.), May 6 – 10, 2024,
+Auckland, New Zealand. © 2024 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org).
+office robots [29], and automated control of non-player characters
+in video games [27]. Usually, the agents addressing the MAPD prob-
+lem are considered the only moving entities in the environment,
+and several algorithms have been proposed to plan coordinated
+paths that avoid collisions [19]. However, in some application set-
+tings, other moving agents could be present in the environment,
+either humans or robots [9]. For example, in a warehouse, cleaning
+robots can operate in the same environment as logistics robots, but
+the two groups of agents can belong to different companies and
+operate independently.
+In this paper,

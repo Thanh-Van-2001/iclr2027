@@ -1,0 +1,99 @@
+Title: Cost-aware Offline Safe Meta Reinforcement Learning with Robust In-Distribution Online Task Adaptation
+
+First page:
+Cost-aware Offline Safe Meta Reinforcement Learning with
+Robust In-Distribution Online Task Adaptation
+Cong Guan
+National Key Laboratory for
+Novel Software Technology,
+Nanjing University
+School of Artificial Intelligence,
+Nanjing University
+Nanjing, China
+guanc@lamda.nju.edu.cn
+Ruiqi Xue
+National Key Laboratory for
+Novel Software Technology,
+Nanjing University
+School of Artificial Intelligence,
+Nanjing University
+Nanjing, China
+ruiqixue@smail.nju.edu.cn
+Ziqian Zhang
+National Key Laboratory for
+Novel Software Technology,
+Nanjing University
+School of Artificial Intelligence,
+Nanjing University
+Nanjing, China
+zhangzq@lamda.nju.edu.cn
+Lihe Li
+National Key Laboratory for
+Novel Software Technology,
+Nanjing University
+School of Artificial Intelligence,
+Nanjing University
+Nanjing, China
+lilh@lamda.nju.edu.cn
+Yi-Chen Li
+National Key Laboratory for
+Novel Software Technology,
+Nanjing University
+School of Artificial Intelligence,
+Nanjing University
+Nanjing, China
+liyc@lamda.nju.edu.cn
+Lei Yuan
+National Key Laboratory for
+Novel Software Technology,
+Nanjing University
+School of Artificial Intelligence,
+Nanjing University;
+Polixir Technologies
+Nanjing, China
+yuanl@lamda.nju.edu.cn
+Yang Yu∗
+National Key Laboratory for
+Novel Software Technology,
+Nanjing University
+School of Artificial Intelligence,
+Nanjing University;
+Polixir Technologies
+Nanjing, China
+yuy@nju.edu.cn
+ABSTRACT
+Despite the gained prominence made by reinforcement learning
+(RL) in various domains, ensuring safety in real-world applications
+remains a significant challenge. Offline safe RL, which learns safe
+policies from pre-collected data, has emerged to address these con-
+cerns. However, existing approaches assume a single constraint
+mode and lack adaptability to diverse safety constraints. In real-
+world scenarios, we often find ourselves working with datasets
+gathered from various tasks, with the aim of developing a general-
+ized policy capable of handling unknown tasks during testing. To
+deal with such offline safe meta RL problem, we introduce a novel
+framework called COSTA, which is designed to facilitate the learn-
+ing of a safe generalized policy that can adapt and be transferred
+∗Yang Yu is the corresponding author.
+This work is licensed under a Creative Commons Attribution
+International 4.0 License.
+Proc. of the 23rd International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), N. Alechina, V. Dignum, M. Dastani, J.S. Sichman (eds.), May 6 – 10, 2024,
+Auckland, New Zealand. © 2024 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org).
+to unknown tasks during testing. COSTA addresses two key chal-
+lenges in offline safe meta RL: First, it develops a cost-aware task
+inference module using contrastive learning to distinguish tasks
+based on safety constraints, mitigating the MDP ambiguity prob-
+lem. Second, COSTA introduces a novel metric, Safe In-Distribution
+Score (SIDS), to assess the in-distribution degree of trajectories, out
+of the consideration of both reward maximization and cost con-
+straint satisfaction. Trajectories collected with a safe exploration
+policy are filtered using SIDS for robust online task adaptation.
+Experimental results in a tailored benchmark suite within the Mu-
+joco environments demonstrate that COSTA consistently balances
+safety and reward maximization, outperforming multiple baselines.
+KEYWORDS
+Offline Reinforcement Learning; Meta Learning; Safe Reinforcement
+Learning; Task Adaptation
+ACM Reference 

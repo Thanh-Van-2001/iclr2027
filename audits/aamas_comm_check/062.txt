@@ -1,0 +1,72 @@
+Title: Policy Abstraction and Nash Refinement in Tree-Exploiting PSRO
+
+First page:
+Policy Abstraction and Nash Refinement in Tree-Exploiting PSRO
+Christine Konicki∗
+Michigan Tech Research Institute
+Ann Arbor, USA
+ckonicki@mtu.edu
+Mithun Chakraborty
+University of Michigan
+Ann Arbor, USA
+dcsmc@umich.edu
+Michael P. Wellman
+University of Michigan
+Ann Arbor, USA
+wellman@umich.edu
+ABSTRACT
+Policy Space Response Oracles (PSRO) interleaves empirical game-
+theoretic analysis with deep reinforcement learning (DRL) to solve
+games too complex for traditional analytic methods. Tree-exploiting
+PSRO (TE-PSRO) is a variant of this approach that iteratively builds
+a coarsened empirical game model in extensive form using data
+obtained from querying a simulator that represents a detailed de-
+scription of the game. We make two main methodological advances
+to TE-PSRO that enhance its applicability to complex games of
+imperfect information. First, we introduce a scalable representation
+for the empirical game tree where edges correspond to implicit
+policies learned through DRL. These policies cover conditions in
+the underlying game abstracted in the game model, supporting
+sustainable growth of the tree over epochs. Second, we leverage
+extensive form in the empirical model by employing refined Nash
+equilibria to direct strategy exploration. To enable this, we give
+a modular and scalable algorithm based on generalized backward
+induction for computing a subgame perfect equilibrium (SPE) in
+an imperfect-information game. We experimentally evaluate our
+approach on a suite of games including an alternating-offer bar-
+gaining game with outside offers; our results demonstrate that
+TE-PSRO converges toward equilibrium faster when new strategies
+are generated based on SPE rather than Nash equilibrium, and with
+reasonable time/memory requirements for the growing empirical
+model.
+KEYWORDS
+Game Theory, Extensive-form Games, PSRO
+ACM Reference Format:
+Christine Konicki∗, Mithun Chakraborty, and Michael P. Wellman. 2025.
+Policy Abstraction and Nash Refinement in Tree-Exploiting PSRO. In Proc.
+of the 24th International Conference on Autonomous Agents and Multiagent
+Systems (AAMAS 2025), Detroit, Michigan, USA, May 19 – 23, 2025, IFAAMAS,
+9 pages.
+1
+INTRODUCTION
+Empirical game-theoretic analysis (EGTA) [16, 18] reasons about
+complex game scenarios through empirical game models esti-
+mated from simulation data. A popular form of EGTA is the policy
+space response oracles (PSRO) framework [9] (Fig. 1), in which
+the empirical game is iteratively extended by adding best responses
+∗Konicki worked on this paper while a PhD student at the University of Michigan.
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowé (eds.), May 19 – 23, 2025, Detroit, Michigan,
+USA. © 2025 International Foundation for Autonomous Agents and Multiagent Systems
+(www.ifaamas.org).
+(BRs) derived from deep reinforcement learning (DRL). The vast
+majority of prior work on EGTA and PSRO [1, 19] represents the
+empirical game in normal form even though the real underlying
+game consists of agents’ strategies interacting via sequential de-
+cisions under various unknowns. McAleer et al. [12] introduced
+XDO as an alternative to PSRO that maintains an empirical game
+in extensive form, to capture a combinatorial space of strategies
+with the choice of actions at each decision point in the game tree.
+We originally proposed and evaluated 

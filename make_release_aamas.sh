@@ -23,6 +23,7 @@ cp data/extracted_aamas.jsonl "$DEST/data/"
 # the NeurIPS/ICML side-by-side is read from these two records
 cp out/both_years.json out/extra_stats.json "$DEST/out/"
 cp out/aamas/*.json out/aamas/communities.csv "$DEST/out/aamas/"
+cp -r audits/aamas_comm_check "$DEST/audits/"
 cp paper/aamas/numbers.tex "$DEST/paper/aamas/"
 cp README_RELEASE_AAMAS.md "$DEST/README.md"
 cp LICENSE "$DEST/LICENSE"

@@ -1,0 +1,72 @@
+Title: Evaluation-Time Policy Switching for Offline Reinforcement Learning
+
+First page:
+Evaluation-Time Policy Switching for Offline Reinforcement
+Learning
+AAAI Track
+Natinael Solomon Neggatu
+University of Warwick
+Coventry, United Kingdom
+nati.neggatu@warwick.ac.uk
+Jeremie Houssineau
+Nanyang Technological University
+Singapore
+jeremie.houssineau@ntu.edu.sg
+Giovanni Montana
+University of Warwick
+Coventry, United Kingdom
+g.montana@warwick.ac.uk
+ABSTRACT
+Offline reinforcement learning (RL) looks at learning how to opti-
+mally solve tasks using a fixed dataset of interactions from the envi-
+ronment. Many off-policy algorithms developed for online learning
+struggle in the offline setting as they tend to over-estimate the
+behaviour of out of distributions actions. Existing offline RL algo-
+rithms adapt off-policy algorithms, employing techniques such as
+constraining the policy or modifying the value function to achieve
+good performance on individual datasets but struggle to adapt
+to different tasks or datasets of different qualities without tuning
+hyper-parameters. We introduce a policy switching technique that
+dynamically combines the behaviour of a pure off-policy RL agent,
+for improving behaviour, and a behavioural cloning (BC) agent, for
+staying close to the data. We achieve this by using a combination
+of epistemic uncertainty, quantified by our RL model, and a metric
+for aleatoric uncertainty extracted from the dataset. We show em-
+pirically that our policy switching technique can outperform not
+only the individual algorithms used in the switching process but
+also compete with state-of-the-art methods on numerous bench-
+marks. Our use of epistemic uncertainty for policy switching also
+allows us to naturally extend our method to the domain of offline to
+online fine-tuning allowing our model to adapt quickly and safely
+from online data, either matching or exceeding the performance of
+current methods that typically require additional modification or
+hyper-parameter fine-tuning.
+KEYWORDS
+Offline Reinforcement learning; Offline-to-online reinforcement
+learning; Machine learning
+ACM Reference Format:
+Natinael Solomon Neggatu, Jeremie Houssineau, and Giovanni Montana.
+2025. Evaluation-Time Policy Switching for Offline Reinforcement Learning:
+AAAI Track. In Proc. of the 24th International Conference on Autonomous
+Agents and Multiagent Systems (AAMAS 2025), Detroit, Michigan, USA, May
+19 – 23, 2025, IFAAMAS, 9 pages.
+1
+INTRODUCTION
+Reinforcement learning (RL) is a powerful framework for solving
+sequential decision-making problems. Recent advancements in-
+tegrating deep learning have shown RL’s success across various
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowé (eds.), May 19 – 23, 2025, Detroit, Michigan,
+USA. © 2025 International Foundation for Autonomous Agents and Multiagent Systems
+(www.ifaamas.org).
+domains, e.g., game playing [25, 30], recommendation systems [40],
+and protein folding [15]. While online RL involves an agent inter-
+acting directly with an environment to learn optimal behaviour,
+offline RL focuses on extracting effective policies from fixed datasets
+without environmental interaction. This approach is particularly
+valuable in domains where exploration or data collection can be
+costly or dangerous, such as robotics [7, 22], healthcare [28, 31],
+and autonomous driving [23, 29].
+A primary challenge in offline RL is safely generalising behaviour

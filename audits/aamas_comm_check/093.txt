@@ -1,0 +1,74 @@
+Title: A Semi-Decentralized Approach to Multiagent Control
+
+First page:
+A Semi-Decentralized Approach to Multiagent Control
+Mahdi Al-Husseini
+Stanford University
+Stanford, United States
+mah9@stanford.edu
+Mykel J. Kochenderfer
+Stanford University
+Stanford, United States
+mykel@stanford.edu
+Kyle H. Wray
+Northeastern University
+Boston, United States
+k.wray@northeastern.edu
+ABSTRACT
+We introduce an expressive framework and algorithms for the semi-
+decentralized control of cooperative agents in environments with
+communication uncertainty. Whereas semi-Markov control admits
+a distribution over time for agent actions, semi-Markov commu-
+nication, or what we refer to as semi-decentralization, gives a dis-
+tribution over time for what actions and observations agents can
+store in their histories. We extend semi-decentralization to the par-
+tially observable Markov decision process (POMDP). The resulting
+SDec-POMDP unifies decentralized and multiagent POMDPs and
+several existing explicit communication mechanisms. We present
+recursive small-step semi-decentralized A* (RS-SDA*), an exact al-
+gorithm for generating optimal SDec-POMDP policies. RS-SDA*
+is evaluated on semi-decentralized versions of several standard
+benchmarks and a maritime medical evacuation scenario. This pa-
+per provides a well-defined theoretical foundation for exploring
+many classes of multiagent communication problems through the
+lens of semi-decentralization.
+KEYWORDS
+Semi-decentralization; Semi-Markov process; Multiagent commu-
+nication; Admissible heuristic search; Planning
+ACM Reference Format:
+Mahdi Al-Husseini
+, Mykel J. Kochenderfer
+, and Kyle H. Wray
+. 2026.
+A Semi-Decentralized Approach to Multiagent Control. In Proc. of the 25th
+International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), Paphos, Cyprus, May 25 – 29, 2026, IFAAMAS, 9 pages. https:
+//doi.org/10.65109/IFSK7108
+1
+INTRODUCTION
+Many complex real-world problems require the coordination of
+multiple cooperative agents to solve, but feature limited opportuni-
+ties for information exchange. The decentralized partially observ-
+able Markov decision process (Dec-POMDP) formalizes multi-agent
+planning and control in settings where explicit communication is
+impossible [1, 4, 5]. Several model variants take advantage of exist-
+ing, if limited, information structures and extend the Dec-POMDP
+to explicitly incorporate costly [10], delayed [19, 20], lossy [31], or
+intermittent [32] communication.
+In this paper we pursue a general framework that unifies several
+multiagent communication mechanisms. We are interested in prob-
+lems whose communication dynamics are conditioned with some
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29, 2026,
+Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and Multia-
+gent Systems (www.ifaamas.org). https://doi.org/10.65109/IFSK7108
+Figure 1: A semi-decentralized multiagent evacuation sce-
+nario with probabilistic restrictions on communication. Air-
+craft and watercraft must coordinate under communication
+constraints to move patients from aid stations to hospitals.
+probability on the state, joint actions, or joint observations. An ex-
+ample domain is area-wide Global Positioning System (GPS) denial
+via jamming [11]. As seen in the evacuation scenario depicted in
+Figure 1, agents need to coordinate joint tasks in envi

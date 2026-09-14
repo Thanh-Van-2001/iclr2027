@@ -1,0 +1,103 @@
+Title: Heterogeneity in Multi-Agent Reinforcement Learning
+
+First page:
+Heterogeneity in Multi-Agent Reinforcement Learning
+Tianyi Hu
+National Key Laboratory of Cognition
+and Decision Intelligence for
+Complex Systems, CASIA
+Beijing, China
+School of Artificial Intelligence, UCAS
+Beijing, China
+hutianyi2021@ia.ac.cn
+Zhiqiang Pu
+National Key Laboratory of Cognition
+and Decision Intelligence for
+Complex Systems, CASIA
+Beijing, China
+School of Artificial Intelligence, UCAS
+Beijing, China
+zhiqiang.pu@ia.ac.cn
+Yuan Wang
+National Key Laboratory of Cognition
+and Decision Intelligence for
+Complex Systems, CASIA
+Beijing, China
+School of Artificial Intelligence, UCAS
+Beijing, China
+wangyuan2025@ia.ac.cn
+Tenghai Qiu
+National Key Laboratory of Cognition
+and Decision Intelligence for
+Complex Systems, CASIA
+Beijing, China
+tenghai.qiu@ia.ac.cn
+Min Chen
+National Key Laboratory of Cognition
+and Decision Intelligence for
+Complex Systems, CASIA
+Beijing, China
+min.chen@ia.ac.cn
+Xin Yu
+National Key Laboratory of Cognition
+and Decision Intelligence for
+Complex Systems, CASIA
+Beijing, China
+xin.yu@ia.ac.cn
+ABSTRACT
+Heterogeneity is a fundamental property in multi-agent reinforce-
+ment learning (MARL), which is closely related not only to the
+functional differences of agents, but also to policy diversity and en-
+vironmental interactions. However, the MARL field currently lacks a
+rigorous definition and deeper understanding of heterogeneity. This
+paper systematically discusses heterogeneity in MARL from the
+perspectives of definition, quantification, and utilization. First, based
+on an agent-level modeling of MARL, we categorize heterogeneity
+into five types and provide mathematical definitions. Second, we
+define the concept of heterogeneity distance and propose a practi-
+cal quantification method. Third, we design a heterogeneity-based
+multi-agent dynamic parameter sharing algorithm as an example
+of the application of our methodology. Case studies demonstrate
+that our method can effectively identify and quantify various types
+of agent heterogeneity. Experimental results show that the pro-
+posed algorithm, compared to other parameter sharing baselines,
+has better interpretability and stronger adaptability. The proposed
+methodology will help the MARL community gain a more compre-
+hensive and profound understanding of heterogeneity, and further
+promote the development of practical algorithms.1
+KEYWORDS
+Multi-Agent Reinforcement Learning; Heterogeneity
+ACM Reference Format:
+Tianyi Hu, Zhiqiang Pu, Yuan Wang, Tenghai Qiu, Min Chen, and Xin
+Yu. 2026. Heterogeneity in Multi-Agent Reinforcement Learning. In Proc.
+of the 25th International Conference on Autonomous Agents and Multiagent
+Systems (AAMAS 2026), Paphos, Cyprus, May 25 – 29, 2026, IFAAMAS, 9 pages.
+https://doi.org/10.65109/10.65109/HFKR5027
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29,
+2026, Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org). https://doi.org/10.65109/10.65109/HFKR5027
+1
+INTRODUCTION
+Defining Heterogeneity
+· Observation-Het
+· Response-Het
+· Policy-Het
+· Objective-Het
+· Effect-Het
+Het
+in MARL
+Quantifying Heterogeneity
+Utilizing Heterogeneity 
+· Het-based Dynamic
+Parameter Sharing
+· Heterogeneity
+Distance
+· Model-based / free
+Measuring
+· Representation
+Learning
+· Other Approaches…
+Figure 1: Our Phil

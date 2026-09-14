@@ -1,0 +1,74 @@
+Title: Flexibility-Based Traffic Flow Optimisation in Lifelong Multi-Agent Path Finding
+
+First page:
+Flexibility-Based Traffic Flow Optimisation in Lifelong
+Multi-Agent Path Finding
+Peiqian Lin
+Monash University
+Melbourne, Australia
+lpq66632@gmail.com
+Zhe Chen
+Monash University
+Melbourne, Australia
+zhe.chen@monash.edu
+David L. Dowe
+Monash University
+Melbourne, Australia
+david.dowe@monash.edu
+Daniel Harabor
+Monash University
+Melbourne, Australia
+daniel.harabor@monash.edu
+ABSTRACT
+Lifelong Multi-Agent Path Finding (LMAPF) is a coordination prob-
+lem where a team of agents works continuously to complete tasks in
+a shared environment. Recent approaches for LMAPF combine fast
+myopic planners with high-level congestion-aware path guidance;
+they can coordinate thousands of agents in real-time. A main draw-
+back is that congestion estimates assume each agent will follow one
+specific, pre-computed, time-independent path. This overlooks the
+existence of multiple cost-equivalent paths, leading to potentially
+inaccurate predictions and low-quality guidance. In this paper, we
+propose a novel method for computing congestion-aware guidance
+that reasons about this ambiguity. Instead of committing to a single
+route, our approach calculates a probabilistic traffic flow by consid-
+ering the likelihood of travelling across all cost-equivalent paths. By
+reasoning over probability distributions to determine expected con-
+gestion we generate more robust and accurate guidance heuristics,
+which in turn enable planners to make more informed decisions.
+We conduct extensive experiments on large-scale LMAPF bench-
+marks with up to 16,000 agents. Results show that our approach
+consistently outperforms baseline algorithms in system throughput.
+KEYWORDS
+Heuristic Search; Flexibility; Multi-Agent Path Finding; Lifelong
+MAPF; Combinatorial Optimisation
+ACM Reference Format:
+Peiqian Lin, Zhe Chen, David L. Dowe, and Daniel Harabor. 2026. Flexibility-
+Based Traffic Flow Optimisation in Lifelong Multi-Agent Path Finding. In
+Proc. of the 25th International Conference on Autonomous Agents and Multia-
+gent Systems (AAMAS 2026), Paphos, Cyprus, May 25 – 29, 2026, IFAAMAS,
+9 pages. https://doi.org/10.65109/IRBO1733
+1
+INTRODUCTION
+Many large-scale industrial applications, such automated ware-
+houses and computer games, require coordinating hundreds or
+even thousands of simultaneous agents. The agents navigate a
+shared physical space and must complete a stream of continuously
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29,
+2026, Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org). https://doi.org/10.65109/IRBO1733
+arriving tasks. The core problem at the heart of these applications
+is known as Lifelong Multi-Agent Path Finding (LMAPF).
+A substantial body of research in this area focuses on comput-
+ing optimal [13, 16, 18] or bounded-suboptimal solutions [1, 3].
+These works provide strong solution quality guarantees but are
+generally considered too slow for the dynamic/online nature of
+LMAPF. Other works, such as Rolling-Horizon Collision Resolution
+(RHCR) [14], decompose the problem into a sequence of smaller,
+more manageable instances. Yet even these approaches struggle
+to manage teams with thousands of agents, which are required by
+modern industrial applications.
+To achieve greater scalability recent work has sug

@@ -1,0 +1,76 @@
+Title: Smooth Information Gathering in Two-Player Noncooperative Games
+
+First page:
+Smooth Information Gathering in Two-Player Noncooperative
+Games
+Fernando Palafox
+University of Texas at Austin
+Austin, TX, United States
+fernandopalafox@utexas.edu
+Jesse Milzman
+DEVCOM Army Research Laboratory
+Adelphi, MD, United States
+jesse.m.milzman.civ@army.mil
+Dong Ho Lee
+University of Texas at Austin
+Austin, TX, United States
+Ryan Park
+University of Texas at Austin
+Austin, TX, United States
+David Fridovich-Keil
+University of Texas at Austin
+Austin, TX, United States
+ABSTRACT
+We present a mathematical framework for modeling two-player
+noncooperative games in which one player is uncertain of the other
+player’s costs but can preemptively allocate information-gathering
+resources to reduce this uncertainty. We refer to the players as the
+uncertain player (UP) and the certain player (CP), respectively. We
+obtain UP’s decisions by solving a two-stage problem where, in
+Stage 1, UP allocates information-gathering resources that smoothly
+transform the information structure in the second stage. Then,
+in Stage 2, a signal (that is, a function of the Stage 1 allocation)
+informs UP about CP’s costs, and both players execute strategies
+which depend upon the signal’s value. This framework allows for a
+smooth resource allocation, in contrast to existing literature on the
+topic. We also identify conditions under which the gradient of UP’s
+overall cost with respect to the information-gathering resources
+is well-defined. We then provide a gradient-based algorithm to
+solve the two-stage game. Finally, we apply our framework to a
+tower-defense game which can be interpreted as a variant of a
+Colonel Blotto game with smooth payoff functions and uncertainty
+over battlefield valuations. We include an analysis of how optimal
+decisions shift with changes in information-gathering allocations
+and perturbations in the cost functions.
+CCS CONCEPTS
+• Mathematics of computing →Stochastic optimization and
+control; • Theory of computation →Solution concepts in
+game theory.
+KEYWORDS
+Noncooperative game theory; incomplete information; information
+asymmetry; information-gathering
+ACM Reference Format:
+Fernando Palafox, Jesse Milzman, Dong Ho Lee, Ryan Park, and David
+Fridovich-Keil. 2025. Smooth Information Gathering in Two-Player Nonco-
+operative Games. In Proc. of the 24th International Conference on Autonomous
+Agents and Multiagent Systems (AAMAS 2025), Detroit, Michigan, USA, May
+19 – 23, 2025, IFAAMAS, 9 pages.
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowé (eds.), May 19 – 23, 2025, Detroit, Michigan,
+USA. © 2025 International Foundation for Autonomous Agents and Multiagent Systems
+(www.ifaamas.org).
+1
+INTRODUCTION
+Incomplete information games provide a mathematical formalism
+for understanding the behavior of rational agents who lack perfect
+knowledge of one another’s objectives or other aspects of the game
+[7]. In real-world scenarios, agents often attempt to preemptively
+gather information before such interactions in order to reduce
+their uncertainty and gain a strategic advantage. However, any
+player gaining new information may have to contend with other
+players shifting their strategies in response. Traditionally, such
+rational information-gathering activities are framed as a discrete
+choice, e.g., whether or not to pay for costly information with
+a pre-defined structure [22]. In contrast

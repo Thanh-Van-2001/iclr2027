@@ -1,0 +1,72 @@
+Title: Together We Rise: Optimizing Real-Time Multi-Robot Task Allocation using Coordinated Heterogeneous Plays
+
+First page:
+Together We Rise: Optimizing Real-Time Multi-Robot Task
+Allocation using Coordinated Heterogeneous Plays
+AAAI Track
+Aritra Pal
+TCS Research
+Mumbai, India
+p.aritra@tcs.com
+Anandsingh Chauhan
+TCS Research
+Mumbai, India
+anandsingh.chauhan@tcs.com
+Mayank Baranwal
+TCS Research
+Mumbai, India
+baranwal.mayank@tcs.com
+ABSTRACT
+Efficient task allocation among multiple robots is crucial for opti-
+mizing productivity in modern warehouses, particularly in response
+to the increasing demands of online order fulfillment. This paper
+addresses the real-time multi-robot task allocation (MRTA) prob-
+lem in dynamic warehouse environments, where tasks emerge with
+specified start and end locations. The objective is to minimize both
+the total travel distance of robots and delays in task completion,
+while also considering practical constraints such as battery manage-
+ment and collision avoidance. We introduce MRTAgent, a dual-agent
+Reinforcement Learning (RL) framework inspired by self-play, de-
+signed to optimize task assignments and robot selection to ensure
+timely task execution. For safe navigation, a modified linear qua-
+dratic controller (LQR) approach is employed. To the best of our
+knowledge, MRTAgent is the first framework to address all critical
+aspects of practical MRTA problems while supporting continuous
+robot movements.
+KEYWORDS
+Multi-Robot Task Allocation; Self-Play; Reinforcement Learning;
+Linear Quadratic Controller
+ACM Reference Format:
+Aritra Pal, Anandsingh Chauhan, and Mayank Baranwal. 2025. Together
+We Rise: Optimizing Real-Time Multi-Robot Task Allocation using Coordi-
+nated Heterogeneous Plays: AAAI Track. In Proc. of the 24th International
+Conference on Autonomous Agents and Multiagent Systems (AAMAS 2025),
+Detroit, Michigan, USA, May 19 – 23, 2025, IFAAMAS, 9 pages.
+1
+INTRODUCTION
+Cooperative multi-robot systems are increasingly being utilized
+across various domains, including transportation and logistics [7],
+search and rescue operations [25], environmental monitoring [19],
+precision agriculture [6], construction [27], and warehouse automa-
+tion [10, 13]. These systems, characterized by the collaboration
+of multiple robots to achieve shared objectives, offer substantial
+benefits such as enhanced scalability & efficiency, and greater fault
+tolerance, making them indispensable in dynamic environments.
+Intricacies of Warehouse Management: Automating warehouse
+operations with multi-robot systems presents a unique set of chal-
+lenges, stemming from the complexities of spatial layouts, diverse
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowé (eds.), May 19 – 23, 2025, Detroit, Michigan,
+USA. © 2025 International Foundation for Autonomous Agents and Multiagent Systems
+(www.ifaamas.org).
+task demands, varying robot capabilities, and the critical need for
+safe robotic navigation [4, 31]. These challenges can be broadly
+divided into three key objectives: (a) Task Allocation, (b) Real-Time
+Robot Assignment, and (c) Path Planning. While these objectives are
+interrelated, each introduces distinct sub-problems that must be
+resolved to achieve optimal warehouse performance. In a dynamic
+warehouse setting, real-time task generation is vital because tasks
+cannot be fully anticipated in advance. This unpredictability com-
+plicates the planning process, necessitating the prioritizatio

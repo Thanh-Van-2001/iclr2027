@@ -1,0 +1,73 @@
+Title: Certified Guidance for Planning with Deep Generative Models
+
+First page:
+Certified Guidance for Planning with Deep Generative Models
+Francesco Giacomarra
+University of Trieste
+Trieste, Italy
+francesco.giacomarra@phd.units.it
+Mehran Hosseini
+King’s Colledge London
+London, United Kingdom
+mehran.hosseini@kcl.ac.uk
+Nicola Paoletti
+King’s Colledge London
+London, United Kingdom
+nicola.paoletti@kcl.ac.uk
+Francesca Cairoli
+University of Trieste
+Trieste, Italy
+francesca.cairoli@units.it
+ABSTRACT
+Deep generative models, such as generative adversarial networks
+(GANs) and score-based diffusion models, have recently emerged
+as powerful tools for planning tasks and behavior synthesis in
+autonomous systems. Various guidance strategies have been intro-
+duced to steer the generative process toward outputs that are more
+likely to satisfy the planning objectives. These strategies avoid the
+need for model retraining but do not provide any guarantee that the
+generated outputs will satisfy the desired planning objectives. To
+address this limitation, we introduce certified guidance, an approach
+that modifies a generative model – without retraining it – into a
+new model guaranteed to satisfy a given specification with prob-
+ability 1. We focus on Signal Temporal Logic (STL) specifications,
+which are rich enough to describe non-trivial planning tasks. Our
+approach leverages neural network verification techniques to sys-
+tematically explore the generative models’ latent spaces, identifying
+latent regions that are certifiably correct w.r.t. the STL property of
+interest. We evaluate the effectiveness of our method on four plan-
+ning benchmarks using GANs and diffusion models. Our results
+confirm that certified guidance produces generative models that are
+always correct, unlike existing (non-certified) guidance methods.
+KEYWORDS
+Neural Network Verification, Deep Generative Models, Guided-
+sampling, Safe Planning, Certified Planning
+ACM Reference Format:
+Francesco Giacomarra, Mehran Hosseini, Nicola Paoletti, and Francesca
+Cairoli. 2025. Certified Guidance for Planning with Deep Generative Models.
+In Proc. of the 24th International Conference on Autonomous Agents and
+Multiagent Systems (AAMAS 2025), Detroit, Michigan, USA, May 19 – 23,
+2025, IFAAMAS, 9 pages.
+1
+INTRODUCTION
+Deep generative models (DMG) have become increasingly power-
+ful and popular for tasks like data augmentation, planning, and
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowé (eds.), May 19 – 23, 2025, Detroit, Michigan,
+USA. © 2025 International Foundation for Autonomous Agents and Multiagent Systems
+(www.ifaamas.org).
+behaviour synthesis. These models operate by transforming a stan-
+dard distribution over a latent space into a more complex distri-
+bution over the target space, allowing for efficient sampling of
+high-dimensional data. Notable examples of state-of-the-art DGMs
+include Generative Adversarial Networks (GANs), Variational Au-
+toencoders, and Score-based Diffusion Models.
+A key advantage of DGMs is their ability to generate samples
+that meet desired criteria, e.g., a planning task specification, without
+explicitly encoding these constraints or retraining the model. This is
+achieved by so-called guidance strategies, which use a differentiable
+reward function to express the desired conditions and guide the
+generative process by optimizing the gradient of this reward. This
+technique paralle

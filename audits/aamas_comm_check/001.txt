@@ -1,0 +1,73 @@
+Title: Reducing Optimism Bias in Incomplete Cooperative Games
+
+First page:
+Reducing Optimism Bias in Incomplete Cooperative Games
+Filip Úradník
+Charles University
+Prague, Czechia
+uradnik@kam.mff.cuni.cz
+David Sychrovský
+Charles University
+Prague, Czechia
+sychrovsky@kam.mff.cuni.cz
+Jakub Černý
+Columbia University
+New York, USA
+cerny@disroot.org
+Martin Černý
+Charles University
+Prague, Czechia
+cerny@kam.mff.cuni.cz
+ABSTRACT
+Cooperative game theory has diverse applications in contemporary
+artificial intelligence, including domains like interpretable machine
+learning, resource allocation, and collaborative decision-making.
+However, specifying a cooperative game entails assigning values to
+exponentially many coalitions, and obtaining even a single value
+can be resource-intensive in practice. Yet simply leaving certain
+coalition values undisclosed introduces ambiguity regarding indi-
+vidual contributions to the collective grand coalition. This ambigu-
+ity often leads to players holding overly optimistic expectations,
+stemming from either inherent biases or strategic considerations,
+frequently resulting in collective claims exceeding the actual grand
+coalition value. In this paper, we present a framework aimed at
+optimizing the sequence for revealing coalition values, with the
+overarching goal of efficiently closing the gap between players’
+expectations and achievable outcomes in cooperative games. Our
+contributions are threefold: (i) we study the individual players’ op-
+timistic completions of games with missing coalition values along
+with the arising gap, and investigate its analytical characteristics
+that facilitate more efficient optimization; (ii) we develop methods
+to minimize this gap over classes of games with a known prior by
+disclosing values of additional coalitions in both offline and online
+fashion; and (iii) we empirically demonstrate the algorithms’ per-
+formance in practical scenarios, together with an investigation into
+the typical order of revealing coalition values.
+KEYWORDS
+incomplete cooperative games; superadditive set functions; active
+learning; value querying; Shapley value
+ACM Reference Format:
+Filip Úradník, David Sychrovský, Jakub Černý, and Martin Černý. 2024.
+Reducing Optimism Bias in Incomplete Cooperative Games. In Proc. of the
+23rd International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), Auckland, New Zealand, May 6 – 10, 2024, IFAAMAS, 9 pages.
+This work is licensed under a Creative Commons Attribution
+International 4.0 License.
+Proc. of the 23rd International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), N. Alechina, V. Dignum, M. Dastani, J.S. Sichman (eds.), May 6 – 10, 2024,
+Auckland, New Zealand. © 2024 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org).
+1
+INTRODUCTION
+Cooperative game theory provides a versatile framework for mod-
+eling coalition formation and collective payoff distributions in
+multiagent interactions. Its far-reaching applications span diverse
+fields, including supply chain management [16], communication
+networks [19], logistics and resource allocation [12], or environ-
+mental agreements [7]. However, beneath its promising facade lies
+a fundamental challenge – specifying a cooperative game requires
+assigning a value to each possible coalition, i.e., a subset of players,
+which can be a daunting process as the number of coalitions is
+exponential in the number of interacting agents.
+In practice, acquiring even a single value for a single coalition can
+be a resource-intensive endea

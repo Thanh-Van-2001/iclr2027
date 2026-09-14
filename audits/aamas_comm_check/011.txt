@@ -1,0 +1,74 @@
+Title: Minimizing State Exploration While Searching Graphs with Unknown Obstacles
+
+First page:
+Minimizing State Exploration While Searching Graphs with
+Unknown Obstacles
+Daniel Koyfman
+Ben-Gurion University
+Beer Sheva, Israel
+koyfdan@post.bgu.ac.il
+Shahaf S. Shperberg
+Ben-Gurion University
+Beer Sheva, Israel
+shperbsh@bgu.ac.il
+Dor Atzmon
+Bar-Ilan University
+Ramat Gan, Israel
+dor.atzmon@biu.ac.il
+Ariel Felner
+Ben-Gurion University
+Beer Sheva, Israel
+felner@bgu.ac.il
+ABSTRACT
+We address the challenge of finding a shortest path in a graph with
+unknown obstacles where the exploration cost to detect whether a
+state is free or blocked is very high (e.g., due to sensor activation
+for obstacle detection). The main objective is to solve the problem
+while minimizing the number of explorations. To achieve this, we
+propose MXA∗, a novel heuristic search algorithm based on A∗. The
+key innovation in MXA∗lies in modifying the heuristic calculation
+to avoid obstacles that have already been revealed. Furthermore,
+this paper makes a noteworthy contribution by introducing the
+concept of a dynamic heuristic. In contrast to the conventional static
+heuristic, a dynamic heuristic leverages information that emerges
+during the search process and adapts its estimations accordingly.
+By employing a dynamic heuristic, we suggest enhancements to
+MXA∗based on real-time information obtained from both the open
+and closed lists. We demonstrate empirically that MXA∗finds the
+shortest path while significantly reducing the number of explored
+states compared to traditional A∗. The code is available at https:
+//github.com/bernuly1/MXA-Star.
+KEYWORDS
+A*, Minimizing Exploration, Unknown Obstacles
+ACM Reference Format:
+Daniel Koyfman, Shahaf S. Shperberg, Dor Atzmon, and Ariel Felner. 2024.
+Minimizing State Exploration While Searching Graphs with Unknown Ob-
+stacles. In Proc. of the 23rd International Conference on Autonomous Agents
+and Multiagent Systems (AAMAS 2024), Auckland, New Zealand, May 6 – 10,
+2024, IFAAMAS, 9 pages.
+1
+INTRODUCTION
+The well-known A∗algorithm [6] optimally solves the shortest path
+problem by executing a best-first search, guided by a heuristic that
+estimates the cost to the goal. In this paper, we focus on finding a
+shortest path in a special type of graphs, denoted as graphs with un-
+known obstacles (GUO). In GUO, the structure of the graph is known,
+This work is licensed under a Creative Commons Attribution
+International 4.0 License.
+Proc. of the 23rd International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), N. Alechina, V. Dignum, M. Dastani, J.S. Sichman (eds.), May 6 – 10, 2024,
+Auckland, New Zealand. © 2024 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org).
+but some states might be blocked. For example, some junctions in a
+roadmap might be closed due to weather conditions, construction,
+or accidents. Similarly, some servers/switches/hubs may be unavail-
+able when routing files over a network. Another example is grids
+(of different dimensions and connectivity) where the size of the
+grid is known, but it is not known which cells are free and which
+are blocked. Naturally, all incident edges of a blocked state are also
+blocked and can all be removed from the graph for our search task.
+We assume that the status of a state (blocked/free) remains fixed
+for the entire duration of the search and the execution.
+Identifying whether a state is free or blocked in a GUO requires
+an exploration operation, which may come with a cost. For instance,
+exploring a location using sensors in robotic 

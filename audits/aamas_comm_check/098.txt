@@ -1,0 +1,73 @@
+Title: Utility-Based Soft Masking for Continual Multi-Objective Reinforcement Learning
+
+First page:
+Utility-Based Soft Masking for Continual Multi-Objective
+Reinforcement Learning
+Timon Deschamps
+Universite Claude Bernard Lyon 1, CNRS, INSA Lyon,
+LIRIS, UMR5205
+Villeurbanne, France
+timon.deschamps@univ-lyon1.fr
+Rémy Chaput
+CPE Lyon, Universite Claude Bernard Lyon 1, CNRS, INSA
+Lyon, LIRIS, UMR 5205
+Villeurbanne, France
+remy.chaput@cpe.fr
+Mathieu Guillermin
+UCLy, UR CONFLUENCE : Sciences et Humanités (EA
+1598)
+Lyon, France
+mguillermin@univ-catholyon.fr
+Laëtitia Matignon
+Universite Claude Bernard Lyon 1, CNRS, INSA Lyon,
+LIRIS, UMR5205
+Villeurbanne, France
+laetitia.matignon@univ-lyon1.fr
+ABSTRACT
+Real-world decision-making usually involves balancing multiple,
+sometimes conflicting objectives, according to user preferences that
+can be complex and potentially non-linear. These preferences, or
+utilities, can also be subject to change over time, requiring contin-
+ual adaptation. This challenge is at the center of continual multi-
+objective reinforcement learning (CMORL), and remains vastly
+understudied, with existing work limited to linear utilities. In this
+paper, we take a first step towards CMORL with non-linear utilities
+by proposing utility-based soft masking (UBSM). By generating a
+discretized representation of the utility and using it to soft-mask the
+policy’s parameters, UBSM harnesses the structure of utility func-
+tions, allowing for greater knowledge transfer among them and sup-
+porting the learning of policies that adapt to dynamic preferences.
+We evaluate UBSM on classic multi-objective reinforcement learn-
+ing environments, demonstrating its improvements over baselines
+and providing insights on the evaluation of CMORL algorithms.
+KEYWORDS
+Multi-objective reinforcement learning; continual learning
+ACM Reference Format:
+Timon Deschamps, Rémy Chaput, Mathieu Guillermin, and Laëtitia Matignon.
+2026. Utility-Based Soft Masking for Continual Multi-Objective Reinforce-
+ment Learning. In Proc. of the 25th International Conference on Autonomous
+Agents and Multiagent Systems (AAMAS 2026), Paphos, Cyprus, May 25 – 29,
+2026, IFAAMAS, 9 pages. https://doi.org/10.65109/FXDN3629
+1
+INTRODUCTION
+Most real-world problems are multi-objective in essence, requir-
+ing to solve complex trade-offs between multiple criterion, e.g.,
+lowering costs and workloads when routing vehicles [10], minimiz-
+ing both electrical peak load and electricity cost in a residential
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29,
+2026, Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org). https://doi.org/10.65109/FXDN3629
+smart grid [28], or developing human and ethically-aligned arti-
+ficial intelligence [6, 34]. Multi-objective reinforcement learning
+(MORL) [8, 26] is the standard framework to handle multi-objective
+sequential decision making tasks. MORL agents learn to solve these
+problems by optimizing a policy based on a utility function, which
+captures the preferences of the decision maker over the objectives.
+Most works in MORL focus on linear utility functions, which are
+insufficient to model nuanced behaviors (minima [25], thresholds
+[31, 38], risk-averseness [9], fairness [29] etc.). For example, the
+user of an autonomous vehicle for daily commute is likely to have
+non-linear preferences, such as 

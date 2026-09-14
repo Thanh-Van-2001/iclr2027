@@ -1,0 +1,76 @@
+Title: Selecting Interlacing Committees
+
+First page:
+Selecting Interlacing Committees
+Chris Dong
+Technical University of Munich
+Munich, Germany
+chris.dong@tum.de
+Martin Bullinger
+University of Oxford
+Oxford, United Kingdom
+martin.bullinger@cs.ox.ac.uk
+Tomasz Wąs
+University of Oxford
+Oxford, United Kingdom
+tomasz.was@cs.ox.ac.uk
+Larry Birnbaum
+Northwestern University
+Evanston, United States
+l-birnbaum@northwestern.edu
+Edith Elkind
+Northwestern University
+Evanston, United States
+edith.elkind@northwestern.edu
+ABSTRACT
+Polarization is a major concern for a well-functioning society. Of-
+ten, mass polarization of a society is driven by polarizing political
+representation, even when the latter is easily preventable. The exist-
+ing computational social choice methods for the task of committee
+selection are not designed to address this issue. We enrich the stan-
+dard approach to committee selection by defining two quantitative
+measures that evaluate how well a given committee interconnects
+the voters. Maximizing these measures aims at avoiding polarizing
+committees. While the corresponding maximization problems are
+NP-complete in general, we obtain efficient algorithms for profiles
+in the voter-candidate interval domain. Moreover, we analyze the
+compatibility of our goals with other representation objectives,
+such as excellence, diversity, and proportionality. We identify trade-
+offs between approximation guarantees, and describe algorithms
+that achieve simultaneous constant-factor approximations.
+KEYWORDS
+Computational Social Choice; Approval-Based Committee Voting;
+Polarization
+ACM Reference Format:
+Chris Dong, Martin Bullinger, Tomasz Wąs, Larry Birnbaum, and Edith
+Elkind. 2025. Selecting Interlacing Committees. In Proc. of the 24th Interna-
+tional Conference on Autonomous Agents and Multiagent Systems (AAMAS
+2025), Detroit, Michigan, USA, May 19 – 23, 2025, IFAAMAS, 9 pages.
+1
+INTRODUCTION
+In recent years, the increasing prevalence of polarization has been a
+major concern, discussed not just by social scientists, but by society
+at large, and accompanied by extensive media coverage [20, 27].
+Polarization is commonly defined as the division of a group into
+clusters of completely different opinions or ideologies. It is a major
+concern for the modern society, which has to work towards a con-
+sensus when resolving global challenges, such as fighting poverty,
+climate change, or pandemics (see [28] and the references therein).
+Importantly, polarization can occur as a phenomenon concerning
+an entire society or only at the level of political representation, e.g.,
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowé (eds.), May 19 – 23, 2025, Detroit, Michigan,
+USA. © 2025 International Foundation for Autonomous Agents and Multiagent Systems
+(www.ifaamas.org).
+when considering the distribution of opinions among the delegates
+in a parliament. The former is often referred to as mass polarization,
+while the latter is known as elite polarization, see, e.g., [1].
+Academic literature broadly agrees that the phenomenon of
+elite polarization is on the rise. For example, when depicting the
+members of the US Congress in terms of their ideology on a scale
+ranging from the most liberal to the most conservative, one can
+observe a significant shift when comparing the 87th Congress in
+the 1960s and the 111th Congress around 2010, see Figure 2.1 in the
+b

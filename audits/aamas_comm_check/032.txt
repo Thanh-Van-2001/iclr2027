@@ -1,0 +1,71 @@
+Title: On the Effective Horizon of Inverse Reinforcement Learning
+
+First page:
+On the E!ective Horizon of Inverse Reinforcement Learning
+Yiqing Xu
+National University of Singapore
+School of Computing, Singapore
+xuyiqing@comp.nus.edu.sg
+Finale Doshi-Velez
+Harvard University
+Department of Computer Science
+Cambridge, USA
+!nale@seas.harvard.edu
+David Hsu
+National University of Singapore
+School of Computing, Smart System
+Institute, Singapore
+dyhsu@comp.nus.edu.sg
+ABSTRACT
+Inverse reinforcement learning (IRL) algorithms often rely on (for-
+ward) reinforcement learning or planning, over a given time hori-
+zon, to compute an approximately optimal policy for a hypothesized
+reward function; they then match this policy with expert demon-
+strations. The time horizon plays a critical role in determining both
+the accuracy of reward estimates and the computational e"ciency
+of IRL algorithms. Interestingly, an e!ective time horizon shorter
+than the ground-truth value often produces better results faster.
+This work formally analyzes this phenomenon and provides an
+explanation: the time horizon controls the complexity of an in-
+duced policy class and mitigates over!tting with limited data. This
+analysis provides a guide for the principled choice of the e#ective
+horizon for IRL. It also prompts us to re-examine the classic IRL
+formulation: it is more natural to learn jointly the reward and the
+e#ective horizon rather than the reward alone with a given horizon.
+To validate our! ndings, we implement a cross-validation extension
+and the experimental results support the theoretical analysis. The
+project page and code are publicly available.
+KEYWORDS
+Inverse Reinforcement Learning; Imitation Learning
+ACM Reference Format:
+Yiqing Xu, Finale Doshi-Velez, and David Hsu. 2025. On the E#ective Hori-
+zon of Inverse Reinforcement Learning. In Proc. of the 24th International
+Conference on Autonomous Agents and Multiagent Systems (AAMAS 2025),
+Detroit, Michigan, USA, May 19 – 23, 2025, IFAAMAS, 18 pages.
+1
+INTRODUCTION
+Inverse reinforcement learning (IRL) [23] aims to infer the underly-
+ing task objective from expert demonstrations. One common ap-
+proach is to estimate a reward function that induces a policy match-
+ing closely the demonstrated data. This model-based approach holds
+the promise of generalizing the learned reward function and the
+associated policy over states not seen in the demonstrations [25].
+Many existing IRL algorithms follow the classic formulation and
+assume a known ground-truth discount factor (or equivalently, time
+horizon) for the expert demonstrations [1, 3–6, 11, 12, 15, 18, 21,
+23, 24, 27–29, 32, 34]. They estimate the reward function based on
+this speci!ed time horizon. However, we do have the$ exibility to
+choose a di#erent time horizon when learning the reward function
+and optimizing the policy.
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowé (eds.), May 19 – 23, 2025, Detroit, Michigan,
+USA. © 2025 International Foundation for Autonomous Agents and Multiagent Systems
+(www.ifaamas.org).
+Surprisingly, we! nd that using a horizon shorter than the ground-
+truth value often produces better results faster, especially when
+expert data is scarce. Why? Intuitively, the time horizon controls the
+complexity of an induced policy class. With limited data, a shorter
+time horizon is preferred, as the induced policy class is simpler and
+mitigates over!tting. We 

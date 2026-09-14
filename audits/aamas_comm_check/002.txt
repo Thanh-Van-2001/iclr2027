@@ -1,0 +1,66 @@
+Title: Majority-based Preference Diffusion on Social Networks
+
+First page:
+Majority-based Preference Diffusion on Social Networks
+Ahad N. Zehmakan
+The Australian National University
+Canberra, Australia
+ahadn.zehmakan@anu.edu.au
+ABSTRACT
+We study a majority based preference diffusion model in which the
+members of a social network update their preferences based on
+those of their connections. Consider an undirected graph where
+each node has a strict linear order over a set of 𝛼alternatives. At
+each round, a node randomly selects two adjacent alternatives and
+updates their relative order with the majority view of its neighbors.
+We bound the convergence time of the process in terms of the
+number of nodes/edges and 𝛼. Furthermore, we study the minimum
+cost to ensure that a desired alternative will “win” the process,
+where occupying each position in a preference order of a node has
+a cost. We prove tight bounds on the minimum cost for general
+graphs and graphs with strong expansion properties.
+Furthermore, we investigate a more light-weight process where
+each node chooses one of its neighbors uniformly at random and
+copies its order fully with some fixed probability and remains un-
+changed otherwise. We characterize the convergence properties
+of this process, namely convergence time and stable states, using
+Martingale and reversible Markov chain analysis.
+Finally, we present the outcomes of our experiments conducted
+on different synthetic random graph models and graph data from
+online social platforms. These experiments not only support our
+theoretical findings, but also shed some light on some other funda-
+mental problems, such as designing powerful countermeasures.
+KEYWORDS
+Social Networks, Opinion Diffusion, Graph Algorithms
+ACM Reference Format:
+Ahad N. Zehmakan. 2024. Majority-based Preference Diffusion on Social
+Networks. In Proc. of the 23rd International Conference on Autonomous Agents
+and Multiagent Systems (AAMAS 2024), Auckland, New Zealand, May 6 – 10,
+2024, IFAAMAS, 9 pages.
+1
+INTRODUCTION
+Humans constantly form and update their preferences on different
+topics. In the process of making such decisions, we tend to rely
+not only on our own personal judgment and knowledge, but also
+that of others, especially those whose opinion we value and trust.
+As a result, opinion diffusion, influence propagation, and (mis)-
+information spreading can affect different aspects of our lives from
+economy and defense to fashion and personal affairs.
+This work is licensed under a Creative Commons Attribution
+International 4.0 License.
+Proc. of the 23rd International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), N. Alechina, V. Dignum, M. Dastani, J.S. Sichman (eds.), May 6 – 10, 2024,
+Auckland, New Zealand. © 2024 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org).
+Recent years have witnessed a booming development of online
+social networking platforms. The enormous popularity of these
+platforms has led to fundamental changes in how humans share
+and form opinions. Social phenomena such as disagreement and
+polarization that have existed in human societies for millennia, are
+now taking place in an online virtual world and are tightly woven
+into everyday life, with a substantial impact on society.
+The motive to gain insights on how opinions are shaped and
+evolved in multi-agent systems has been the driving force behind
+an interdisciplinary research effort in diverse areas such as sociol-
+ogy [26], economics [18], political science [24], mathematics [3],
+physics [14], and 

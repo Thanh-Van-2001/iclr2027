@@ -1,0 +1,86 @@
+Title: Adaptive Primal-Dual Method for Safe Reinforcement Learning
+
+First page:
+Adaptive Primal-Dual Method for Safe Reinforcement Learning
+Weiqin Chen
+Rensselaer Polytechnic Institute
+Troy, NY, USA
+chenw18@rpi.edu
+James Onyejizu
+Rensselaer Polytechnic Institute
+Troy, NY, USA
+onyejj@rpi.edu
+Long Vu
+IBM T.J. Watson Research Center
+Yorktown Heights, NY, USA
+lhvu@us.ibm.com
+Lan Hoang
+IBM Research
+Daresbury, Warrington, UK
+lan.hoang@ibm.com
+Dharmashankar Subramanian
+IBM T.J. Watson Research Center
+Yorktown Heights, NY, USA
+dharmash@us.ibm.com
+Koushik Kar
+Rensselaer Polytechnic Institute
+Troy, NY, USA
+kark@rpi.edu
+Sandipan Mishra
+Rensselaer Polytechnic Institute
+Troy, NY, USA
+mishrs2@rpi.edu
+Santiago Paternain
+Rensselaer Polytechnic Institute
+Troy, NY, USA
+paters@rpi.edu
+ABSTRACT
+Primal-dual methods have a natural application in Safe Reinforce-
+ment Learning (SRL), posed as a constrained policy optimization
+problem. In practice however, applying primal-dual methods to
+SRL is challenging, due to the inter-dependency of the learning
+rate (LR) and Lagrangian multipliers (dual variables) each time an
+embedded unconstrained RL problem is solved. In this paper, we
+propose, analyze and evaluate adaptive primal-dual (APD) methods
+for SRL, where two adaptive LRs are adjusted to the Lagrangian
+multipliers so as to optimize the policy in each iteration. We theo-
+retically establish the convergence, optimality and feasibility of the
+APD algorithm. Finally, we conduct numerical evaluation of the
+practical APD algorithm with four well-known environments in
+Bullet-Safey-Gym employing two state-of-the-art SRL algorithms:
+PPO-Lagrangian and DDPG-Lagrangian. All experiments show that
+the practical APD algorithm outperforms (or achieves comparable
+performance) and attains more stable training than the constant
+LR cases. Additionally, we substantiate the robustness of selecting
+the two adaptive LRs by empirical evidence.
+KEYWORDS
+Safe Reinforcement Learning; Adaptive Primal-Dual; Adaptive Learn-
+ing Rates
+ACM Reference Format:
+Weiqin Chen, James Onyejizu, Long Vu, Lan Hoang, Dharmashankar Sub-
+ramanian, Koushik Kar, Sandipan Mishra, and Santiago Paternain. 2024.
+Adaptive Primal-Dual Method for Safe Reinforcement Learning. In Proc.
+of the 23rd International Conference on Autonomous Agents and Multiagent
+Systems (AAMAS 2024), Auckland, New Zealand, May 6 – 10, 2024, IFAAMAS,
+9 pages.
+This work is licensed under a Creative Commons Attribution
+International 4.0 License.
+Proc. of the 23rd International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), N. Alechina, V. Dignum, M. Dastani, J.S. Sichman (eds.), May 6 – 10, 2024,
+Auckland, New Zealand. © 2024 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org).
+1
+INTRODUCTION
+Reinforcement learning (RL) has a rich history of solving a wide
+range of decision-making problems. Recently, RL has succeeded in
+training large language models such as ChatGPT [1], playing video
+games at superhuman level [2–4], mastering Go [5, 6], and manip-
+ulating robotics [7, 8]. RL problems, in general, are formulated as
+Markov Decision Processes (MDPs). In this work, we are interested
+in conditions where the underlying dynamics are unknown, the
+optimal policy thus needs to be learned from data (samples). The
+goal for an agent is to explore the environment so that it is able to
+maximize the expected cumulative reward.
+Nevertheless, classical RL techniques might lead to risky/unsafe
+actions [9–11], if they are only concerned with the reward. There-
+fore, safety constit

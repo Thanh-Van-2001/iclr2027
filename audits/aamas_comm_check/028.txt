@@ -1,0 +1,83 @@
+Title: TaxAI: A Dynamic Economic Simulator and Benchmark for Multi-agent Reinforcement Learning
+
+First page:
+TaxAI: A Dynamic Economic Simulator and Benchmark for
+Multi-Agent Reinforcement Learning
+Qirui Mi
+Institute of Automation, CAS
+School of Artificial Intelligence, UCAS
+Beijing, China
+miqirui2021@ia.ac.cn
+Siyu Xia
+Institute of Automation, CAS
+School of Artificial Intelligence, UCAS
+Beijing, China
+xiasiyu2023@ia.ac.cn
+Yan Song
+Institute of Automation, CAS
+Beijing, China
+yan.song@ia.ac.cn
+Haifeng Zhang*
+Institute of Automation, CAS
+School of Artificial Intelligence, UCAS
+Nanjing Artificial Intelligence
+Research of IA
+Beijing, China
+haifeng.zhang@ia.ac.cn
+Shenghao Zhu
+University of International
+Business and Economics
+Beijing, China
+zhushenghao@yahoo.com
+Jun Wang
+University College London
+London, United Kingdom
+jun.wang@cs.ucl.ac.uk
+ABSTRACT
+Taxation and government spending are crucial tools for govern-
+ments to promote economic growth and maintain social equity.
+However, the difficulty in accurately predicting the dynamic strate-
+gies of diverse self-interested households presents a challenge for
+governments to implement effective tax policies. Given its profi-
+ciency in modeling other agents in partially observable environ-
+ments and adaptively learning to find optimal policies, Multi-Agent
+Reinforcement Learning (MARL) is highly suitable for solving dy-
+namic games between the government and numerous households.
+Although MARL shows more potential than traditional methods
+such as the genetic algorithm and dynamic programming, there is
+a lack of large-scale multi-agent reinforcement learning economic
+simulators. Therefore, we propose a MARL environment, named
+TaxAI, for dynamic games involving 𝑁households, government,
+firms, and financial intermediaries based on the Bewley-Aiyagari
+economic model. Our study benchmarks 2 traditional economic
+methods with 7 MARL methods on TaxAI, demonstrating the effec-
+tiveness and superiority of MARL algorithms. Moreover, TaxAI’s
+scalability in simulating dynamic interactions between the govern-
+ment and 10,000 households, coupled with real-data calibration,
+grants it a substantial improvement in scale and reality over ex-
+isting simulators. Therefore, TaxAI is the most realistic economic
+simulator for optimal tax policy, which aims to generate feasible
+recommendations for governments and individuals.
+KEYWORDS
+Multi-agent reinforcement learning; optimal tax policy; dynamic
+economic simulator; benchmark; tax evasion behavior
+*Corresponding to Haifeng Zhang ⟨haifeng.zhang@ia.ac.cn⟩.
+This work is licensed under a Creative Commons Attribution
+International 4.0 License.
+Proc. of the 23rd International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), N. Alechina, V. Dignum, M. Dastani, J.S. Sichman (eds.), May 6 – 10, 2024,
+Auckland, New Zealand. © 2024 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org).
+ACM Reference Format:
+Qirui Mi, Siyu Xia, Yan Song, Haifeng Zhang*, Shenghao Zhu, and Jun Wang.
+2024. TaxAI: A Dynamic Economic Simulator and Benchmark for Multi-
+Agent Reinforcement Learning. In Proc. of the 23rd International Conference
+on Autonomous Agents and Multiagent Systems (AAMAS 2024), Auckland,
+New Zealand, May 6 – 10, 2024, IFAAMAS, 18 pages.
+1
+INTRODUCTION
+The invisible hand [69, 70] of the market is not omnipotent, and in
+reality, all countries rely on government intervention to promote
+economic development and maintain social fairness. The extent
+of government intervention varies from country to country, such
+as a free market economy [8, 73]

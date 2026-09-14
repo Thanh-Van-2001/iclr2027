@@ -1,0 +1,70 @@
+Title: Rational Capability in Concurrent Games
+
+First page:
+Rational Capability in Concurrent Games
+Yinfeng Li
+IRIT, CNRS, University of Toulouse
+Toulouse, France
+yinfeng.li@irit.fr
+Emiliano Lorini
+IRIT, CNRS, University of Toulouse
+Toulouse, France
+emiliano.lorini@irit.fr
+Munyque Mittelmann
+University of Naples Federico II
+Naples, Italy
+munyque.mittelmann@unina.it
+ABSTRACT
+We extend concurrent game structures (CGSs) with a simple no-
+tion of preference over computations and define a minimal notion
+of rationality for agents based on the concept of dominance. We
+use this notion to interpret a CL and an ATL languages that extend
+the basic CL and ATL languages with modalities for rational capa-
+bility, namely, a coalition’s capability to rationally enforce a given
+property. For each of these languages, we provide results about the
+complexity of satisfiability checking and model checking as well as
+about axiomatization.
+KEYWORDS
+Logics for Multi-Agent Systems; Rationality; Strategic Reasoning
+ACM Reference Format:
+Yinfeng Li, Emiliano Lorini, and Munyque Mittelmann. 2025. Rational Ca-
+pability in Concurrent Games. In Proc. of the 24th International Conference
+on Autonomous Agents and Multiagent Systems (AAMAS 2025), Detroit, Michi-
+gan, USA, May 19 – 23, 2025, IFAAMAS, 9 pages.
+1
+INTRODUCTION
+The field of logics for multi-agent systems has been very active
+in the last twenty years. Different logics have been proposed and
+their proof-theoretic, complexity and algorithmic aspects for satis-
+fiability and model checking studied in detail. The list of logics in
+this area is long. It includes alternating-time temporal logic (ATL)
+[2, 21], its “next”-fragment called coalition logic (CL) [19, 41], the
+logic of agency STIT [10, 12], and the more expressive strategy
+logic (SL) [15, 38]. A widely used semantics for interpreting these
+logics is based on concurrent game structures (CGSs), transition
+systems in which state-transitions are labeled by joint actions of
+agents. A CGS allows us to represent the repeated interaction be-
+tween multiple agents in a natural way as well as their choices and
+strategies. It is similar to the game-theoretic concept of dynamic
+game in which players move sequentially or repeatedly. But an el-
+ement that is missing from CGSs compared to dynamic games is
+the preference of the agents. Indeed, most logics for multi-agent
+systems including ATL, CL, SL and STIT abstract away from the
+agents’ preferences as they are only interested in representing and
+reasoning about the game form, namely, the way an outcome is
+determined based on the agents’ concurrent choices over time.
+In this paper we extend CGSs with a basic concept of preference.
+This is in order to have a semantics that allows us to represent a
+game in its entirety, capturing both its aspects (the game form and
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Sys-
+tems (AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowé (eds.), May 19 – 23, 2025, Detroit,
+Michigan, USA. © 2025 International Foundation for Autonomous Agents and Multi-
+agent Systems (www.ifaamas.org).
+the agents’ preferences), and consequently to reason about ratio-
+nal choices and strategies in the game. Specifically, we introduce
+a new class of structures called CGS with preferences (CGSP) that
+includes one preference ordering for each agent at each state in the
+underlying CGS. An agent’s preference at a given state is relative
+to the set of computat

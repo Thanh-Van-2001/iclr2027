@@ -1,0 +1,89 @@
+Title: Incentivizing Truth Exploration and Honest Reporting: A Contract Design Approach
+
+First page:
+Incentivizing Truth Exploration and Honest Reporting: A
+Contract Design Approach
+Yuming Shao
+Tsinghua University
+Beijing, China
+shaoym21@mails.tsinghua.edu.cn
+Zhixuan Fang
+Tsinghua University
+Beijing, China
+Shanghai Qi Zhi Institute
+Shanghai, China
+zfang@mail.tsinghua.edu.cn
+ABSTRACT
+In this paper, we study a Principal-Agent problem in which a prin-
+cipal incentivizes an agent by establishing a payment contract that
+encourages the agent to exert costly effort in exploring the true
+state of the environment, which is of interest to the principal, and
+then report the findings. We consider two feedback setups: (1) the
+true state is ultimately observable by the principal, and (2) only
+some noisy feedback related to the true state is observable. In the
+first setup, we demonstrate that the optimal contract is the one that
+pays the agent only when the report matches the ground truth, and
+we derive an efficient algorithm to compute this optimal contract.
+In the second setup, we design a BDD contract and show its ap-
+proximate optimality with respect to the optimal honest-reporting
+incentivizing contract, both theoretically and empirically. Further-
+more, we introduce a sufficient condition under which the optimal
+contract encourages honest reporting.
+KEYWORDS
+Contract Theory; Stackelberg Game; Information Acquisition
+ACM Reference Format:
+Yuming Shao and Zhixuan Fang. 2025. Incentivizing Truth Exploration
+and Honest Reporting: A Contract Design Approach. In Proc. of the 24th
+International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Detroit, Michigan, USA, May 19 – 23, 2025, IFAAMAS, 9 pages.
+1
+INTRODUCTION
+In real life, delegating the task of truth investigation is common.
+In business consulting, business owners may hire firms like McK-
+insey or Boston Consulting Group to conduct market research
+and develop strategic plans for them. In human resource manage-
+ment, companies lacking expertise in recruitment or performance
+evaluation may engage HR management firms to evaluate their
+candidates and employees. These scenarios can be modeled as a
+Principal-Agent interaction problem, where the principal values
+certain information that she cannot access directly due to a lack of
+expertise. She seeks assistance from an agent capable of uncovering
+this information. The difficulty she faces when implementing this
+Corresponding authors: Zhixuan Fang (zfang@mail.tsinghua.edu.cn).
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowé (eds.), May 19 – 23, 2025, Detroit, Michigan,
+USA. © 2025 International Foundation for Autonomous Agents and Multiagent Systems
+(www.ifaamas.org).
+
+¹
+Æ
+¹
+Æ
+¹
+Æ
+contract
+explore
+observe
+report
+feedback
+pay
+Step I
+Step II
+Step III
+Æ
+Agent
+¹
+Principal
+ Environment
+Figure 1: The Principal-Agent interaction process considered
+in this paper.
+delegation is that the information acquisition process typically re-
+mains opaque to her, which may result in insufficient incentives for
+the agent to conduct diligent research (known as the moral hazard
+issue, [16]). Since the truth investigation can be quite costly for the
+agent, such as requiring detailed industry surveys, he may choose
+to reduce his level of effort and be strategic about what to report,
+e.g., merely providing superficial, unsubstantiated guesses while
+claiming they were obtained from tho

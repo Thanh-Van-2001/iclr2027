@@ -1,0 +1,76 @@
+Title: VGC-Bench: Towards Mastering Diverse Team Strategies in Competitive Pokémon
+
+First page:
+VGC-Bench: Towards Mastering Diverse Team Strategies
+in Competitive Pokémon
+Cameron L. Angliss
+The University of Texas at Austin
+Austin, TX, United States
+cangliss@utexas.edu
+Jiaxun Cui∗
+The University of Texas at Austin
+Austin, TX, United States
+cuijiaxun@utexas.edu
+Jiaheng Hu∗
+The University of Texas at Austin
+Austin, TX, United States
+jiahengh@utexas.edu
+Arrasy Rahman
+The University of Texas at Austin
+Austin, TX, United States
+arrasy@cs.utexas.edu
+Peter Stone†
+The University of Texas at Austin
+Austin, TX, United States
+pstone@cs.utexas.edu
+ABSTRACT
+Developing AI agents that can robustly adapt to varying strategic
+landscapes without retraining is a central challenge in multi-agent
+learning. Pokémon Video Game Championships (VGC) is a domain
+with a vast space of approximately 10139 team configurations. The
+combinatorial nature of team building in Pokémon VGC causes
+optimal strategies to vary substantially depending on both the
+controlled team and the opponent’s team, making generalization
+uniquely challenging. To advance research on this problem, we in-
+troduce VGC-Bench: a benchmark that provides critical infrastruc-
+ture, standardizes evaluation protocols, and supplies a human-play
+dataset of over 700,000 battle logs and a range of baseline agents
+based on heuristics, large language models, behavior cloning, and
+multi-agent reinforcement learning with empirical game-theoretic
+methods such as self-play, fictitious play, and double oracle. In
+the restricted setting where an agent is trained and evaluated in
+a mirror match with a single team configuration, our methods
+can win against a professional VGC competitor. We repeat this
+training and evaluation with progressively larger team sets and
+find that as the number of teams increases, the best-performing
+algorithm in the single-team setting has worse performance and
+is more exploitable, but has improved generalization to unseen
+teams. Our code, dataset, and baseline models are open-sourced at
+https://github.com/cameronangliss/vgc-bench.
+KEYWORDS
+Multi-Agent Learning; Reinforcement Learning; Benchmarking
+ACM Reference Format:
+Cameron L. Angliss, Jiaxun Cui, Jiaheng Hu, Arrasy Rahman, and Peter
+Stone. 2026. VGC-Bench: Towards Mastering Diverse Team Strategies in
+Competitive Pokémon. In Proc. of the 25th International Conference on Au-
+tonomous Agents and Multiagent Systems (AAMAS 2026), Paphos, Cyprus,
+May 25 – 29, 2026, IFAAMAS, 9 pages. https://doi.org/10.65109/fp1262BOUG5148
+∗Equal contribution
+†Sony AI
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29,
+2026, Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org). https://doi.org/10.65109/fp1262BOUG5148
+1
+INTRODUCTION
+Pokémon is the highest-grossing media franchise in the world, with
+an estimated total revenue exceeding $100 billion and a global player
+base numbering in the millions. In 2008, the Pokémon Company
+launched the Video Game Championships (VGC), a competitive
+series of tournaments featuring significant cash prizes and interna-
+tional prestige. The largest tournament to date, EUIC 2025, featured
+1,257 competitors. Despite this popularity and competitive depth,
+to the best of our knowledge, no AI system has yet achieved super-
+human performance in competitive Pokémon 

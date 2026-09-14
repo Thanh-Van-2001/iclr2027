@@ -1,0 +1,87 @@
+Title: PMAT: Optimizing Action Generation Order in Multi-Agent Reinforcement Learning
+
+First page:
+PMAT: Optimizing Action Generation Order in Multi-Agent
+Reinforcement Learning
+Kun Hu
+National University of Defense
+Technology
+Changsha, China
+khu@nudt.edu.cn
+Muning Wen
+Shanghai Jiao Tong University
+Shanghai, China
+muningwen@sjtu.edu.cn
+Xihuai Wang
+Shanghai Jiao Tong University
+Shanghai, China
+leoxhwang@sjtu.edu.cn
+Shao Zhang
+Shanghai Jiao Tong University
+Shanghai, China
+shaozhang@sjtu.edu.cn
+Yiwei Shi
+University of Bristol
+Bristol, United Kingdom
+yiwei.shi@bristol.ac.uk
+Minne Li
+Intelligent Game and Decision Lab
+Beijing, China
+lmn.2011@tsinghua.org.cn
+Minglong Li∗
+National University of Defense
+Technology
+Changsha, China
+liminglong10@nudt.edu.cn
+Ying Wen∗
+Shanghai Jiao Tong University
+Shanghai, China
+ying.wen@sjtu.edu.cn
+ABSTRACT
+Multi-Agent Reinforcement Learning (MARL) faces challenges in
+coordinating agents due to complex interdependencies within multi-
+agent systems. Most MARL algorithms use the simultaneous decision-
+making paradigm but ignore the action-level dependencies among
+agents, which reduces coordination efficiency. In contrast, the se-
+quential decision-making paradigm provides finer-grained supervi-
+sion for agent decision order, presenting the potential for handling
+dependencies via better decision order management. However, de-
+termining the optimal decision order remains a challenge. In this
+paper, we introduce Action Generation with Plackett-Luce Sam-
+pling (AGPS), a novel mechanism for agent decision order opti-
+mization. We model the order determination task as a Plackett-Luce
+sampling process to address issues such as ranking instability and
+vanishing gradient during the network training process. AGPS re-
+alizes credit-based decision order determination by establishing a
+bridge between the significance of agents’ local observations and
+their decision credits, thus facilitating order optimization and de-
+pendency management. Integrating AGPS with the Multi-Agent
+Transformer, we propose the Prioritized Multi-Agent Trans-
+former (PMAT), a sequential decision-making MARL algorithm
+with decision order optimization. Experiments on benchmarks in-
+cluding StarCraft Multi-Agent Challenge, Google Research Football,
+and Multi-Agent MuJoCo show that PMAT outperforms state-of-
+the-art algorithms, greatly enhancing coordination efficiency.
+∗Correspondence to Minglong Li <liminglong10@nudt.edu.cn> and Ying Wen
+<ying.wen@sjtu.edu.cn>.
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowé (eds.), May 19 – 23, 2025, Detroit, Michigan,
+USA. © 2025 International Foundation for Autonomous Agents and Multiagent Systems
+(www.ifaamas.org).
+KEYWORDS
+Multi-agent reinforcement learning; Action generation order
+ACM Reference Format:
+Kun Hu, Muning Wen, Xihuai Wang, Shao Zhang, Yiwei Shi, Minne Li, Min-
+glong Li, and Ying Wen. 2025. PMAT: Optimizing Action Generation Order
+in Multi-Agent Reinforcement Learning. In Proc. of the 24th International
+Conference on Autonomous Agents and Multiagent Systems (AAMAS 2025),
+Detroit, Michigan, USA, May 19 – 23, 2025, IFAAMAS, 9 pages.
+1
+INTRODUCTION
+In a multi-agent system (MAS), the optimal action of one agent is
+often affected by the behavior of others [39], creating complex inter-
+agent dependency relationships [4, 12]. Therefore, a key challenge
+of Multi-Agent Reinforcement Learning (MARL) [33, 38] algorithms
+is handling the inter-ag

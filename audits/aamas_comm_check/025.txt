@@ -1,0 +1,83 @@
+Title: LLM-Powered Hierarchical Language Agent for Real-time Human-AI Coordination
+
+First page:
+LLM-Powered Hierarchical Language Agent for Real-time
+Human-AI Coordination
+Jijia Liu∗
+Tsinghua University, SIGS
+Beijing, China
+liujj23@mails.tsinghua.edu.cn
+Chao Yu∗
+Tsinghua University
+Beijing, China
+zoeyuchao@gmail.com
+Jiaxuan Gao∗
+Tsinghua University
+Beijing, China
+samjia2000@gmail.com
+Yuqing Xie
+Tsinghua University
+Beijing, China
+xieyq22@mails.tsinghua.edu.cn
+Qingmin Liao
+Tsinghua University, SIGS
+Beijing, China
+liaoqm@tsinghua.edu.cn
+Yi Wu
+Tsinghua & Shanghai Qi Zhi Institute
+Beijing, China
+jxwuyi@gmail.com
+Yu Wang
+Tsinghua University
+Beijing, China
+yu-wang@mail.tsinghua.edu.cn
+ABSTRACT
+AI agents powered by Large Language Models (LLMs) have made
+significant advances, enabling them to assist humans in diverse
+complex tasks and leading to a revolution in human-AI coordina-
+tion. LLM-powered agents typically require invoking LLM APIs
+and employing artificially designed complex prompts, which results
+in high inference latency. While this paradigm works well in sce-
+narios with minimal interactive demands, such as code generation,
+it is unsuitable for highly interactive and real-time applications,
+such as gaming. Traditional gaming AI often employs small models
+or reactive policies, enabling fast inference but offering limited
+task completion and interaction abilities. In this work, we consider
+Overcooked as our testbed where players could communicate with
+natural language and cooperate to serve orders. We propose a Hi-
+erarchical Language Agent (HLA) for human-AI coordination that
+provides both strong reasoning abilities while keeping real-time
+execution. In particular, HLA adopts a hierarchical framework and
+comprises three modules: a proficient LLM, referred to as Slow Mind,
+for intention reasoning and language interaction, a lightweight
+LLM, referred to as Fast Mind, for generating macro actions, and
+a reactive policy, referred to as Executor, for transforming macro
+actions into atomic actions. Human studies show that HLA outper-
+forms other baseline agents, including slow-mind-only agents and
+fast-mind-only agents, with stronger cooperation abilities, faster
+responses, and more consistent language communications.
+KEYWORDS
+Large Language Models; Language Agents; Real-time Human-AI
+Coordination; Hierarchical Reasoning and Planning
+This work is licensed under a Creative Commons Attribution
+International 4.0 License.
+Proc. of the 23rd International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), N. Alechina, V. Dignum, M. Dastani, J.S. Sichman (eds.), May 6 – 10, 2024,
+Auckland, New Zealand. © 2024 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org).
+ACM Reference Format:
+Jijia Liu∗, Chao Yu∗, Jiaxuan Gao∗, Yuqing Xie, Qingmin Liao, Yi Wu, and Yu
+Wang. 2024. LLM-Powered Hierarchical Language Agent for Real-time
+Human-AI Coordination. In Proc. of the 23rd International Conference on
+Autonomous Agents and Multiagent Systems (AAMAS 2024), Auckland, New
+Zealand, May 6 – 10, 2024, IFAAMAS, 10 pages.
+1
+INTRODUCTION
+Developing Artificial Intelligence (AI) agents that can attain human-
+level performance has been a long-standing goal for AI research [20,
+60]. Large Language Models (LLMs) [41] have emerged as promis-
+ing tools in this endeavor, owing to their strong reasoning and
+generalization abilities. LLM-powered AI agents have exhibited
+significant potential across diverse domains, including code gen-
+eration [30, 34, 46, 50], content creation [42, 44, 45], tool utiliza-
+tion [37, 43

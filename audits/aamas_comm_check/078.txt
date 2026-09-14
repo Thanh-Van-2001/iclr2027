@@ -1,0 +1,75 @@
+Title: Majoritarian Assignment Rules
+
+First page:
+Majoritarian Assignment Rules
+Felix Brandt
+Technical University of Munich
+Munich, Germany
+brandt@tum.de
+Haoyuan Chen
+Technical University of Munich
+Munich, Germany
+ge85hud@tum.de
+Chris Dong
+HPI, University of Potsdam
+Potsdam, Germany
+chrisshuyu.dong@hpi.de
+Patrick Lederer
+ILLC, University of Amsterdam
+Amsterdam, The Netherlands
+p.lederer@uva.nl
+Alexander Schlenga
+Technical University of Munich
+Munich, Germany
+alexander.schlenga@tum.de
+ABSTRACT
+A central problem in multiagent systems is the fair assignment of
+objects to agents. In this paper, we initiate the analysis of classic
+majoritarian social choice functions in assignment. Exploiting the
+special structure of the assignment domain, we show a number of
+surprising results with no counterparts in general social choice. In
+particular, we establish a near one-to-one correspondence between
+preference profiles and majority graphs. This correspondence im-
+plies that key properties of assignments—such as Pareto-optimality,
+least unpopularity, and mixed popularity—can be determined solely
+by the associated majority graph. We further show that all Pareto-
+optimal assignments are semi-popular and belong to the top cycle.
+Elements of the top cycle can thus easily be found via serial dicta-
+torships. Our main result is a complete characterization of the top
+cycle, which implies the top cycle can only consist of one, two, all
+but two, all but one, or all assignments. By contrast, we find that
+the uncovered set contains only very few assignments.
+KEYWORDS
+House Allocation; Social Choice Theory; Top Cycle; Uncovered Set
+ACM Reference Format:
+Felix Brandt, Haoyuan Chen, Chris Dong, Patrick Lederer, and Alexan-
+der Schlenga. 2026. Majoritarian Assignment Rules. In Proc. of the 25th
+International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), Paphos, Cyprus, May 25 – 29, 2026, IFAAMAS, 9 pages.
+https://doi.org/10.65109/QERE1891
+1
+INTRODUCTION
+Assigning objects to individual agents is a fundamental problem
+that has received considerable attention by computer scientists
+as well as economists [e.g., 8, 18, 36, 44]. The problem is known
+as the assignment problem, the house allocation problem, or two-
+sided matching with one-sided preferences. In its simplest form, there
+are 𝑛agents, 𝑛houses, and each house needs to be allocated to
+exactly one agent based on the strict preferences of each agent over
+the houses. Applications are diverse and include assigning jobs to
+applicants, apartments to tenants, and offices to employees.
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29,
+2026, Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org). https://doi.org/10.65109/QERE1891
+A natural way to compare two assignments 𝜇and 𝜆in such set-
+tings is to check whether a majority of agents prefer the house they
+receive under 𝜇to the one they receive under 𝜆. This idea leads
+to the notion of popular assignments, which are assignments for
+which there is no other assignment that is preferred by a strict ma-
+jority of the agents [27]. However, as Gärdenfors [27] pointed out,
+such popular assignments may not exist, as the majority relation
+over assignments can be cyclic. This observation has led to an ex-
+tensive stream of follow-up work [e.g., 2,

@@ -1,0 +1,76 @@
+Title: Aligning Credit for Multi-Agent Cooperation via Model-based Counterfactual Imagination
+
+First page:
+Aligning Credit for Multi-Agent Cooperation via Model-based
+Counterfactual Imagination
+Jiajun Chai
+Institute of Automation, Chinese Academy of Sciences
+School of Artificial Intelligence, University of Chinese
+Academy of Sciences
+Beijing, China
+chaijiajun2020@ia.ac.cn
+Yuqian Fu
+Institute of Automation, Chinese Academy of Sciences
+School of Artificial Intelligence, University of Chinese
+Academy of Sciences
+Beijing, China
+fuyuqian2022@ia.ac.cn
+Dongbin Zhao
+Institute of Automation, Chinese Academy of Sciences
+School of Artificial Intelligence, University of Chinese
+Academy of Sciences
+Beijing, China
+dongbin.zhao@ia.ac.cn
+Yuanheng Zhu
+Institute of Automation, Chinese Academy of Sciences
+School of Artificial Intelligence, University of Chinese
+Academy of Sciences
+Beijing, China
+yuanheng.zhu@ia.ac.cn
+ABSTRACT
+Recent years have witnessed considerable progress in model-based
+reinforcement learning research. Inspired by the significant im-
+provement in sample efficiency, researchers have explored its ap-
+plication in multi-agent scenarios to mitigate the huge demands
+in training data of multi-agent reinforcement learning (MARL)
+approaches. However, existing methods retain the training frame-
+work designed for single-agent settings, resulting in inadequate
+promotion of multi-agent cooperation. In this work, we propose a
+novel model-based MARL method called Multi-Agent Counterfac-
+tual Dreamer (MACD). MACD introduces a centralized imagina-
+tion with decentralized execution (CIDE) framework to generate
+higher-quality pseudo data for policy learning, thus further im-
+proving the algorithm’s sample efficiency. Moreover, we address
+the credit assignment and non-stationary challenges by perform-
+ing an additional counterfactual trajectory based on the learned
+world model. We provide a theoretical proof that this counterfactual
+policy update rule maximizes the multi-agent learning objective.
+Empirical studies validate the superiority of our method in terms
+of sample efficiency, training stability, and final cooperation perfor-
+mance when compared with several state-of-the-art model-free and
+model-based MARL algorithms. Ablation studies and visualization
+demonstration further underscore the significance of both the CIDE
+framework and the counterfactual module in our approach.
+KEYWORDS
+Model-based reinforcement learning; Multi-agent reinforcement
+learning; Credit assignment; Counterfactual advantage
+This work is licensed under a Creative Commons Attribution
+International 4.0 License.
+Proc. of the 23rd International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), N. Alechina, V. Dignum, M. Dastani, J.S. Sichman (eds.), May 6 – 10, 2024,
+Auckland, New Zealand. © 2024 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org).
+ACM Reference Format:
+Jiajun Chai, Yuqian Fu, Dongbin Zhao, and Yuanheng Zhu. 2024. Aligning
+Credit for Multi-Agent Cooperation via Model-based Counterfactual Imagi-
+nation. In Proc. of the 23rd International Conference on Autonomous Agents
+and Multiagent Systems (AAMAS 2024), Auckland, New Zealand, May 6 – 10,
+2024, IFAAMAS, 9 pages.
+1
+INTRODUCTION
+Multi-agent reinforcement learning (MARL) has received a signifi-
+cant amount of attention to address the multi-agent cooperation
+challenge [13, 22]. Numerous algorithms have been proposed to
+solve intrinsic problems of multi-agent learning, including credit
+assignment [17], non-stationary training [41], and, notably, the
+huge demand for trai

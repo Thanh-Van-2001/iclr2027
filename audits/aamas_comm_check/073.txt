@@ -1,0 +1,78 @@
+Title: Everyone Contributes! Incentivizing Strategic Cooperation in Multi-LLM Systems via Sequential Public Goods Games
+
+First page:
+Everyone Contributes! Incentivizing Strategic Cooperation in
+Multi-LLM Systems via Sequential Public Goods Games
+Yunhao Liang
+The University of Hong Kong
+Hong Kong, China
+yunhao8@hku.hk
+Yuan Qu
+The University of Hong Kong
+Hong Kong, China
+yuanqu@hku.hk
+Jingyuan Yang
+George Mason University
+Fairfax, VA, USA
+jyang53@gmu.edu
+Shaochong Lin
+The University of Hong Kong
+Hong Kong, China
+shaoclin@hku.hk
+Zuo-Jun Max Shen
+The University of Hong Kong
+Hong Kong, China
+maxshen@hku.hk
+ABSTRACT
+Coordinating multiple large language models (LLMs) to solve com-
+plex tasks collaboratively poses a fundamental trade-off between
+computational costs and collective performance when compared
+with individual models. We introduce a novel, game-theoretically
+grounded reinforcement learning (RL) framework, the Multi-Agent
+Cooperation Sequential Public Goods Game (MAC-SPGG), to sys-
+tematically incentivize cooperation in multi-LLM ensembles. In
+MAC-SPGG, LLM agents move in sequence, observing predecessors’
+outputs and updating beliefs to condition their own contributions.
+By redesigning the public-goods reward, effortful contributions
+become the unique Subgame Perfect Nash Equilibrium (SPNE),
+which eliminates free-riding under traditional SPGG or PGG. Its
+sequential protocol replaces costly round-based information ex-
+changes with a streamlined decision flow, cutting communication
+overhead while retaining strategic depth. We prove the existence
+and uniqueness of the SPNE under realistic parameters and empiri-
+cally demonstrate that MAC-SPGG-trained ensembles outperform
+single-agent baselines, chain-of-thought prompting, and other coop-
+erative methods, achieving comparable performance to large-scale
+models across various tasks, including reasoning, math, code gen-
+eration, and NLP. Our results highlight the power of structured,
+incentive-aligned MAC-SPGG cooperation for scalable and robust
+multi-agent language generation. Appendix and code can be found
+at https://github.com/YunhaoLiang/MAC-SPGG.
+KEYWORDS
+Multi-LLM Collaboration; Public Goods Games; Reinforcement
+Learning
+ACM Reference Format:
+Yunhao Liang, Yuan Qu, Jingyuan Yang, Shaochong Lin, and Zuo-Jun Max
+Shen. 2026. Everyone Contributes! Incentivizing Strategic Cooperation in
+Multi-LLM Systems via Sequential Public Goods Games. In Proc. of the 25th
+International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), Paphos, Cyprus, May 25 – 29, 2026, IFAAMAS, 19 pages.
+https://doi.org/10.65109/SJPO2377
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29,
+2026, Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org). https://doi.org/10.65109/SJPO2377
+1
+INTRODUCTION
+Recent advancements in large language models (LLMs) have demon-
+strated impressive capabilities across various reasoning and decision-
+making tasks, especially within multi-agent scenarios. Emerging
+research [59] explores diverse interaction paradigms among multi-
+ple LLMs, from competitive debating and strategic reasoning [14,
+19, 31, 41, 67] to cooperative decision-making and collaborative
+problem-solving [9, 33, 38, 39, 49, 65]. Multi-LLM ensembles are
+promising because they combine complementary reasoning strate-
+gies, diversify knowledge sources, and enhance robustness and
+ac

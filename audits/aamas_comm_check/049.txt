@@ -1,0 +1,72 @@
+Title: Causes and Strategies in Multiagent Systems
+
+First page:
+Causes and Strategies in Multiagent Systems
+Sylvia S. Kerkhove
+Utrecht University
+Utrecht, The Netherlands
+s.s.kerkhove@uu.nl
+Natasha Alechina
+Open University
+Heerlen, The Netherlands
+Utrecht University
+Utrecht, The Netherlands
+natasha.alechina@ou.nl
+Mehdi Dastani
+Utrecht University
+Utrecht, The Netherlands
+m.m.dastani@uu.nl
+ABSTRACT
+Causality plays an important role in daily processes, human reason-
+ing, and artificial intelligence. There has however not been much
+research on causality in multi-agent strategic settings. In this work,
+we introduce a systematic way to build a multi-agent system model,
+represented as a concurrent game structure, for a given structural
+causal model. In the obtained so-called causal concurrent game
+structure, transitions correspond to interventions on agent vari-
+ables of the given causal model. The Halpern and Pearl framework
+of causality is used to determine the effects of a certain value for
+an agent variable on other variables. The causal concurrent game
+structure allows us to analyse and reason about causal effects of
+agents’ strategic decisions. We formally investigate the relation be-
+tween causal concurrent game structures and the original structural
+causal models.
+KEYWORDS
+Causality, Multi-Agent Systems, Strategic Behaviour
+ACM Reference Format:
+Sylvia S. Kerkhove, Natasha Alechina, and Mehdi Dastani. 2025. Causes
+and Strategies in Multiagent Systems. In Proc. of the 24th International
+Conference on Autonomous Agents and Multiagent Systems (AAMAS 2025),
+Detroit, Michigan, USA, May 19 – 23, 2025, IFAAMAS, 9 pages.
+1
+INTRODUCTION
+Causality plays an important role in Artificial Intelligence [16, 21].
+A specific type of causality, called ‘actual causality’, concerns causal
+relations between concrete events (e.g. throwing a specific rock
+shatters a specific bottle) [16]. There is still discussion on what
+the best definition of actual causality is (see [13, 15, 16] and [7] for
+some of those definitions). However, most approaches like [13] and
+[7] use Pearl’s [21] structural model framework. In this structural
+model framework, the world is modelled through variables, which
+are divided in exogenous and endogenous variables. The former
+are variables whose values are determined by causes outside of the
+model and the latter are variables whose values are determined by
+the variables inside the model (both exogenous and endogenous
+variables). The functional dependencies between variables are for-
+malised through structural equations. There also exists a rule-based
+approach that uses logical language to capture causal relations (see
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowé (eds.), May 19 – 23, 2025, Detroit, Michigan,
+USA. © 2025 International Foundation for Autonomous Agents and Multiagent Systems
+(www.ifaamas.org).
+[8] and [20]), but we focus on the structural model framework due
+to its prominence in the literature [1, 7, 10, 12].
+While causal models can in principle depict multi-agent systems
+by making a distinction between agent and environment events,
+they are less appropriate for reasoning about the abilities and strate-
+gies of agents. Concurrent game structures (CGS) have been pro-
+posed to reason about agent interactions and strategies [2]. These
+structures are graphs where nodes correspond to states of the world
+and edges, la

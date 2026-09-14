@@ -1,0 +1,80 @@
+Title: Learning Real-Life Approval Elections
+
+First page:
+Learning Real-Life Approval Elections
+Piotr Faliszewski
+AGH University
+Kraków, Poland
+faliszew@agh.edu.pl
+Łukasz Janeczko
+AGH University
+Kraków, Poland
+ljaneczk@agh.edu.pl
+Andrzej Kaczmarczyk
+Department of Computer Science,
+The University of Chicago
+Chicago, USA
+akaczmarczyk@uchicago.edu
+Marcin Kurdziel
+AGH University
+Kraków, Poland
+kurdziel@agh.edu.pl
+Grzegorz Pierczyński
+AGH University
+Kraków, Poland
+g.pierczynski@gmail.com
+Stanisław Szufa
+CNRS, LAMSADE, Université Paris
+Dauphine – PSL
+Paris, France
+s.szufa@gmail.com
+ABSTRACT
+We study the independent approval model (IAM) for approval elec-
+tions, where each candidate has its own approval probability and is
+approved independently of the other ones. This model generalizes,
+e.g., the impartial culture, the Hamming noise model, and the resam-
+pling model. We propose algorithms for learning IAMs and their
+mixtures from data, using either maximum likelihood estimation
+or Bayesian learning. We then apply these algorithms to a large
+set of elections from the Pabulib database. In particular, we find
+that single-component models are rarely sufficient to capture the
+complexity of real-life data, whereas their mixtures perform well.
+KEYWORDS
+elections; approvals; learning; Pabulib; MLE; Bayesian methods
+ACM Reference Format:
+Piotr Faliszewski, Łukasz Janeczko, Andrzej Kaczmarczyk, Marcin Kurdziel,
+Grzegorz Pierczyński, and Stanisław Szufa. 2025. Learning Real-Life Ap-
+proval Elections. In Proc. of the 24th International Conference on Autonomous
+Agents and Multiagent Systems (AAMAS 2025), Detroit, Michigan, USA, May
+19 – 23, 2025, IFAAMAS, 9 pages.
+1
+INTRODUCTION
+The goal of this paper is to design algorithms that take an approval
+election as input and produce simple probabilistic models for gen-
+erating similar elections (models of generating random elections
+are often called statistical cultures). We form such algorithms using
+maximum likelihood estimation (MLE) and Bayesian learning ap-
+proaches, and evaluate them on the data from the Pabulib collection
+of real-life participatory budgeting elections [8]. Consequently, we
+also get an insight into the nature of Pabulib data.1
+More formally, an approval election consists of a set of candidates
+and a collection of voters. Each voter indicates which candidates
+he or she finds appealing, i.e., which ones he or she approves, and
+which ones he or she does not. One particularly natural model
+1We disregard the costs of the projects (candidates) present in participatory budgeting.
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowé (eds.), May 19 – 23, 2025, Detroit, Michigan,
+USA. © 2025 International Foundation for Autonomous Agents and Multiagent Systems
+(www.ifaamas.org).
+of generating such elections is to provide for each candidate 𝑐a
+probability 𝑝𝑐, so that each voter approves 𝑐with this probability,
+independently from the other candidates and voters. We refer to
+this model as the independent approval model (IAM). For a positive
+integer 𝑡, by a 𝑡-parameter IAM we mean an IAM where each
+candidate has one of at most 𝑡different approval probabilities, and
+we often write full IAM when no such restriction applies. While
+full IAM is not widely used in computational social choice—indeed,
+it does not appear in the recent overview of Boehmer et al. [3]—its
+restricted variants are quite popula

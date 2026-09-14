@@ -1,0 +1,70 @@
+Title: Symbolic Computation of Sequential Equilibria
+
+First page:
+Symbolic Computation of Sequential Equilibria
+Moritz Graf
+University of Freiburg
+Freiburg, Germany
+grafm@cs.uni-freiburg.de
+Thorsten Engesser
+IRIT
+Toulouse, France
+thorsten.engesser@irit.fr
+Bernhard Nebel
+University of Freiburg
+Freiburg, Germany
+nebel@uni-freiburg.de
+ABSTRACT
+The sequential equilibrium is a standard solution concept for ex-
+tensive-form games with imperfect information that includes an
+explicit representation of the players’ beliefs. An assessment con-
+sisting of a strategy and a belief is a sequential equilibrium if it
+satisfies the properties of sequential rationality and consistency.
+Our main result is that both properties together can be written
+as a single finite system of polynomial equations and inequalities.
+The solutions to this system are exactly the sequential equilibria
+of the game. We construct this system explicitly and describe an
+implementation that solves it using cylindrical algebraic decom-
+position. To write consistency as a finite system of equations, we
+need to compute the extreme directions of a set of polyhedral cones.
+We propose a modified version of the double description method,
+optimized for this specific purpose. To the best of our knowledge,
+our implementation is the first to symbolically solve general finite
+imperfect information games for sequential equilibria.1
+KEYWORDS
+game theory; extensive-form games; sequential equilibrium
+ACM Reference Format:
+Moritz Graf, Thorsten Engesser, and Bernhard Nebel. 2024. Symbolic Com-
+putation of Sequential Equilibria. In Proc. of the 23rd International Conference
+on Autonomous Agents and Multiagent Systems (AAMAS 2024), Auckland,
+New Zealand, May 6 – 10, 2024, IFAAMAS, 9 pages.
+1
+INTRODUCTION
+The sequential equilibrium was proposed by Kreps and Wilson [9]
+as a solution concept for extensive-form games with imperfect in-
+formation. In extensive-form games, players have multiple decision
+points in sequence, at which they must decide how to act. A strat-
+egy for a player specifies what action the player takes at each of
+their decision points. When an extensive-form game has imperfect
+information, it means that the players do not always know the exact
+state of the game. The reason is that there may be actions of other
+players (or random events) that the players do not observe.
+The sequential equilibrium is a generalization of subgame perfect
+equilibrium, which is the standard solution concept for extensive-
+form games with perfect information. In addition to a strategy,
+1Our implementation is based on the open source Game Theory Explorer [18] and can
+be downloaded at https://github.com/tengesser/GTE-sequential. See also our system
+demonstration paper [6].
+This work is licensed under a Creative Commons Attribution
+International 4.0 License.
+Proc. of the 23rd International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), N. Alechina, V. Dignum, M. Dastani, J.S. Sichman (eds.), May 6 – 10, 2024,
+Auckland, New Zealand. © 2024 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org).
+a sequential equilibrium specifies a set of beliefs for each player,
+assigning probabilities to states that the player cannot distinguish
+between. Intuitively, two properties must be satisfied: strategies
+should be rational given the players’ beliefs (sequential rational-
+ity), and beliefs should be reasonable given the players’ strategies
+(consistency). Having beliefs as an explicit part of the game’s equi-
+libria can provide addi

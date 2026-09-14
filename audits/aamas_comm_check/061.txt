@@ -1,0 +1,82 @@
+Title: Who Am I Dealing With? Explaining the Designer's Hidden Intentions
+
+First page:
+Who Am I Dealing With? Explaining the Designer’s Hidden
+Intentions
+Turgay Caglar
+Colorado State University
+Fort Collins, USA
+turgay.caglar@colostate.edu
+Sarath Sreedharan
+Colorado State University
+Fort Collins, USA
+sarath.sreedharan@colostate.edu
+Mor Vered
+Monash University
+Melbourne, Australia
+mor.vered@monash.edu
+ABSTRACT
+Explainable AI (XAI) methods are generally seen as tools that allow
+users a greater level of visibility into why certain decisions were
+made by an AI system or agent. However, by the very choice of
+current works to focus on merely explaining why the AI system
+chose to perform an action in their environment, the explanation is
+withholding any information about the role played by the designer
+of said system and environment in determining the final behav-
+ior. This information could be particularly significant when the
+underlying designer objectives may differ from those of the user.
+In this paper we propose a new explanation generation paradigm,
+built on the concept of model reconciliation, and show how it can
+support the generation of explanations that include the designer’s
+goals. We define and study the formal properties of this new form
+of explanation and introduce an algorithm to generate it over a
+classical planning domain. We evaluate how this new explanation
+influences user performance, understanding and trust in an AI agent
+and further instantiate the new algorithm on standard planning
+benchmarks to evaluate its computational characteristics.
+KEYWORDS
+XAI, Transparency, Designer Explanations, Model Reconciliation
+ACM Reference Format:
+Turgay Caglar, Sarath Sreedharan, and Mor Vered. 2025. Who Am I Dealing
+With? Explaining the Designer’s Hidden Intentions. In Proc. of the 24th
+International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Detroit, Michigan, USA, May 19 – 23, 2025, IFAAMAS, 9 pages.
+1
+INTRODUCTION
+Human agent collaboration enables a varied, distributed set of ac-
+tors to work together to address problems of greater complexity
+than those able to be addressed by each actor alone. However, the
+field of user-agent interaction presents several challenges, including
+issues related to trust, utilization, and varying degrees of reliance,
+which can hinder effective collaborations [8, 24, 25]. The problem of
+eXplanaining AI (XAI), often equated with interpretable AI [11], has
+been developed to address these challenges by enhancing users’ un-
+derstanding of AI systems and fostering more optimal interactions
+[2, 19]. XAI approaches have aimed to improve people’s understand-
+ing of the agent model, help people recognize model uncertainty,
+and support people’s calibrated trust in the agent [15, 27].
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowé (eds.), May 19 – 23, 2025, Detroit, Michigan,
+USA. © 2025 International Foundation for Autonomous Agents and Multiagent Systems
+(www.ifaamas.org).
+Environment/Agent 
+Design
+!!
+ℳ"
+ℳ#
+Robot 
+Explanations
+Designer 
+Explanations
+Designer
+Robot
+User
+Task environment
+Figure 1: An overview of the interactions captured in our
+framework. The designer tries to modify the environment
+so that the robot’s behavior achieves its underlying goal GD.
+One XAI approach that aims to bridge this gap is through apply-
+ing model-reconciliation, ascribing the agents with an approxima-
+tion of the huma

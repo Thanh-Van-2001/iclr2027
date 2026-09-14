@@ -1,0 +1,91 @@
+Title: Sim2Sea: Sim-to-Real Policy Transfer for Maritime Vessel Navigation in Congested Waters
+
+First page:
+Sim2Sea: Sim-to-Real Policy Transfer for Maritime Vessel
+Navigation in Congested Waters
+Xinyu Cui
+Institute of Automation, CAS
+School of Artificial Intelligence, UCAS
+Beijing, China
+cuixinyu2021@ia.ac.cn
+Xuanfa Jin
+Institute of Automation, CAS
+School of Artificial Intelligence, UCAS
+Beijing, China
+jinxuanfa2022@ia.ac.cn
+Xue Yan
+Institute of Automation, CAS
+School of Artificial Intelligence, UCAS
+Beijing, China
+yanxue2021@ia.ac.cn
+Yongcheng Zeng
+Institute of Automation, CAS
+Beijing, China
+zengyongcheng2022@ia.ac.cn
+Luoyang Sun
+Institute of Automation, CAS
+Beijing, China
+sunluoyang2022@ia.ac.cn
+Siying Wei
+Institute of Automation, CAS
+Beijing, China
+weisiying2022@ia.ac.cn
+Ruizhi Zhang
+Institute of Automation, CAS
+Beijing, China
+ruizhi.zhang@ia.ac.cn
+Jian Zhao
+Zhongguancun Academy
+Beijing, China
+jianzhao@zgci.ac.cn
+Haifeng Zhang∗
+Institute of Automation, CAS
+Beijing, China
+haifeng.zhang@ia.ac.cn
+Jun Wang
+University College London
+London, United Kingdom
+jun.wang@cs.ucl.ac.uk
+ABSTRACT
+Autonomous navigation in congested maritime environments is
+a critical capability for a wide range of real-world applications.
+However, it remains an unresolved challenge due to complex vessel
+interactions and significant environmental uncertainties. Existing
+methods often fail in practical deployment due to a substantial sim-
+to-real gap, which stems from imprecise simulation, inadequate
+situational awareness, and unsafe exploration strategies. To address
+these, we propose Sim2Sea, a comprehensive framework designed
+to bridge simulation and real-world execution. Sim2Sea advances
+in three key aspects. First, we develop a GPU-accelerated parallel
+simulator for scalable and accurate maritime scenario simulation.
+Second, we design a dual-stream spatiotemporal policy that handles
+complex dynamics and multi-modal perception, augmented with a
+velocity-obstacle-guided action masking mechanism to ensure safe
+and efficient exploration. Finally, a targeted domain randomization
+scheme helps bridge the sim-to-real gap. Simulation results demon-
+strate that our method achieves faster convergence and safer tra-
+jectories than established baselines. In addition, our policy trained
+purely in simulation successfully transfers zero-shot to a 17-ton
+unmanned vessel operating in real-world congested waters. These
+results validate the effectiveness of Sim2Sea in achieving reliable
+sim-to-real transfer for practical autonomous maritime navigation.
+∗Corresponding to Haifeng Zhang <haifeng.zhang@ia.ac.cn>.
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29,
+2026, Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org). https://doi.org/10.65109/CMRP6518
+KEYWORDS
+Sim-to-Real Transfer, Maritime Autonomous Navigation, Reinforce-
+ment Learning, Innovative Applications
+ACM Reference Format:
+Xinyu Cui, Xuanfa Jin, Xue Yan, Yongcheng Zeng, Luoyang Sun, Siying Wei,
+Ruizhi Zhang, Jian Zhao, Haifeng Zhang, and Jun Wang. 2026. Sim2Sea:
+Sim-to-Real Policy Transfer for Maritime Vessel Navigation in Congested
+Waters. In Proc. of the 25th International Conference on Autonomous Agents
+and Multiagent Systems (AAMAS 2026), Paphos, Cyprus, May 25 – 29, 2026,
+IFAAMAS, 9 pages. https://doi.org/10.65109/CMRP6518
+1
+INTRODUCTION
+As global maritime trade

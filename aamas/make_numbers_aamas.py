@@ -201,6 +201,12 @@ def build(out_path: str) -> dict:
         reg.add("ex df", f"{exm['df']:.1f}", provenance=run)
         reg.add("ex p", f"{exm['p']:.2f}", provenance=run)
         reg.add("ex n three seed failing", exm["n_three_seed_failing"], provenance=run)
+    ca = ex.get("community_agreement", {})
+    if ca:
+        reg.add("comm agree n", ca["n"], provenance=run)
+        reg.add("comm agree frac", f"{ca['agree']} of {ca['n']}", provenance=run)
+        reg.add("comm agree", f"{ca['pct']}\\% [{ca['ci'][0]}, {ca['ci'][1]}]", provenance=run)
+        reg.add("comm kappa", f"{ca['kappa']:.2f}", provenance=run)
     dr = ex["duplicate_table_records"]
     reg.add("a dup keys", dr["duplicate_keys"], provenance=run)
     reg.add("a dup comparisons", dr["comparisons_in_duplicates"], provenance=run)
@@ -260,6 +266,11 @@ def build(out_path: str) -> dict:
         reg.add("g untestable n", sum(d["n"] for d in un.values()), provenance="aamas_gold_set")
         nb = g["no_bar"]
         reg.add("g no bar n", nb["n"], provenance="aamas_gold_set")
+        reg.add("g no bar results table frac", _frac(nb["results_table"]), provenance="aamas_gold_set")
+        reg.add("g no bar not table", nb["results_table"]["n"] - nb["results_table"]["correct"], provenance="aamas_gold_set")
+        reg.add("g no bar bold frac", _frac(nb["bold_cell"]), provenance="aamas_gold_set")
+        reg.add("g no bar winner frac", _frac(nb["winner_mean"]), provenance="aamas_gold_set")
+        reg.add("g no bar runner frac", _frac(nb["runner_mean"]), provenance="aamas_gold_set")
         reg.add("g no bar absent", _pct_ci(nb["error_bar_truly_absent"]), provenance="aamas_gold_set")
         reg.add("g no bar absent frac", _frac(nb["error_bar_truly_absent"]), provenance="aamas_gold_set")
         reg.add("g rival copied", _pct_ci(f["rival_copied"]) if "rival_copied" in f else "--", provenance="aamas_gold_set")

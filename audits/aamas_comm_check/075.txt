@@ -1,0 +1,91 @@
+Title: GLEAR: A Graph Logic-Enhanced RAG Framework for Legal QA
+
+First page:
+GLEAR: A Graph Logic-Enhanced RAG Framework for Legal QA
+Jingyun Sun
+Northeast Forestry University
+Harbin, China
+sunjingyun@nefu.edu.cn
+Jiaming Tian
+Northeast Forestry University
+Harbin, China
+minigenepig@nefu.edu.cn
+Jie Shi
+Northeast Forestry University
+Harbin, China
+shi_jie@nefu.edu.cn
+Yixin Zhang
+iFLYTEK Co., Ltd.
+Harbin, China
+yxzhang26@iflytek.com
+Wenxi Sheng
+Northeast Forestry University
+Harbin, China
+shengwenxi@nefu.edu.cn
+Yang Li∗
+Northeast Forestry University
+Harbin, China
+yli@nefu.edu.cn
+ABSTRACT
+Existing Legal Large Language Models (3LMs) can answer user
+queries due to their parameterized ability to understand and gener-
+ate legal text. However, they lack effective utilization of logical legal
+knowledge, limiting their performance in legal Question Answering
+(QA). To leverage the semantic understanding capability of 3LMs
+while effectively capturing the logical relationships between legal
+knowledge, we propose a graph logic-enhanced RAG framework
+for legal QA, named GLEAR. The framework first structures vari-
+ous legal knowledge into a multi-source heterogeneous knowledge
+graph, and then enhances the model’s response quality through
+three core processes: dual-driven legal knowledge retrieval, key
+logical path mining, and inference enhancement. Experimental re-
+sults show that GLEAR outperforms the baselines by an average
+of 14 percentage points across five traditional legal NLP tasks. In
+the free-form legal QA task, GLEAR also significantly surpasses
+the baselines in terms of response accuracy, professionalism, and
+comprehensiveness. Additionally, experiments demonstrate that
+GLEAR outperforms the standard RAG method in both performance
+and computational efficiency.
+CCS CONCEPTS
+• Computing methodologies →Natural language processing;
+Knowledge representation and reasoning; • Information systems
+→Information retrieval; • Applied computing →Law.
+KEYWORDS
+Legal AI; Graph RAG; Knowledge Graph; Legal Reasoning; GAAI
+ACM Reference Format:
+Jingyun Sun, Jiaming Tian, Jie Shi, Yixin Zhang, Wenxi Sheng, and Yang Li.
+2026. GLEAR: A Graph Logic-Enhanced RAG Framework for Legal QA. In
+Proc. of the 25th International Conference on Autonomous Agents and Multia-
+gent Systems (AAMAS 2026), Paphos, Cyprus, May 25 – 29, 2026, IFAAMAS,
+9 pages. https://doi.org/10.65109/ZNVM5881
+∗Corresponding author.
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29,
+2026, Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org). https://doi.org/10.65109/ZNVM5881
+1
+INTRODUCTION
+Recently, Large Legal Language Models (3LMs) have gained wide-
+spread academic attention for their ability to understand and gen-
+erate legal text [7, 32]. Research shows that they demonstrate sig-
+nificant value in tasks such as legal charge prediction [20], legal
+information retrieval [17], and contract review [10, 21]. Addition-
+ally, their potential in legal consulting services [13] and judicial
+decision-making support has further advanced the development of
+legal intelligence.
+Legal Q&A based solely on the model’s parametric reasoning.
+(a)
+Retrieve and Reason
+logical relationships
+between legal knowledge
+Legal QA based on the graph 
+logic-enhanced RAG
+The response is more 
+specific and relevant.
+(b)
+Input
+user
+Respond
+lack of l

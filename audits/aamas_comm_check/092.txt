@@ -1,0 +1,70 @@
+Title: Epistemic Modal Logic Meets Algebraic Model Counting
+
+First page:
+Epistemic Modal Logic Meets Algebraic Model Counting
+Daxin Liu
+National Key Laboratory for Novel Software Technology &
+School of Artificial Intelligence,
+Nanjing University
+Nanjing, China
+daxin.liu@nju.edu.cn
+Vaishak Belle
+School of Informatics
+The University of Edinburgh
+Edinburgh, United Kingdom
+vbelle@ed.ac.uk
+ABSTRACT
+Algebraic model counting (AMC) generalizes weighted model count-
+ing to the semiring setting and supports various types of labels
+(or weights), including numerical ones as used in weighted model
+counting, but also sets, boolean formulae, polynomials, and many
+more. One merit of algebraic model counting is that it can be evalu-
+ated efficiently in a succinct form of representation by using knowl-
+edge compilation, hence, providing a robust and useful framework
+that covers many different tasks from a variety of different fields. In
+this paper, we show that a type of epistemic entailment reasoning
+in a modal logic of only knowing can be solved by recursively call-
+ing a series of algebraic model counting tasks. We show that this
+approach is not limited to the qualitative setting, but is also appli-
+cable to the quantitative modal logic of only-believing. Lastly, we
+propose an AMC-based regression operator that lifts the approach
+to even dynamic epistemic reasoning.
+CCS CONCEPTS
+• Theory of computation →Modal and temporal logics; •
+Computing methodologies →Reasoning about belief and
+knowledge.
+KEYWORDS
+Reasoning about knowledge and beliefs; Reasoning about probabil-
+ity; Weight model counting; Knowledge compilation
+ACM Reference Format:
+Daxin Liu and Vaishak Belle. 2026. Epistemic Modal Logic Meets Algebraic
+Model Counting. In Proc. of the 25th International Conference on Autonomous
+Agents and Multiagent Systems (AAMAS 2026), Paphos, Cyprus, May 25 – 29,
+2026, IFAAMAS, 10 pages. https://doi.org/10.65109/MSKZ1140
+1
+INTRODUCTION
+Epistemic logic is a growing and important area in philosophy,
+computer science, game theory, and artificial intelligence. Among
+other applications, epistemic formalisms play a key role in robot
+programming, agent-oriented design, and automated planning. In
+recent years, epistemic notions have become increasingly prevalent
+in user modeling for explanation and planning, particularly in coun-
+terfactual and contrastive plan construction [3], where the popular
+logic S5 and its variants play a central role [11, 48]. However, as is
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29,
+2026, Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org). https://doi.org/10.65109/MSKZ1140
+well known, reasoning (i.e., validity checking) in epistemic logic
+is computationally hard. For instance, the complexity of reasoning
+about knowledge in S5, where knowing a proposition also implies
+its truth, is NP-complete in the single-agent case and PSPACE-
+complete in the multi-agent case (see Section 3.6 in [22]). If one
+models the beliefs of a knowledge base (KB) using notions such as
+minimal knowledge [28] or only-knowing [35], the complexity in-
+creases further: even in the single-agent case, it reaches the second
+level of the polynomial hierarchy [45].
+Putting complexity considerations aside, which often reflect
+worst-case scenarios, there has been relatively little

@@ -1,0 +1,72 @@
+Title: Willy Wonka Mechanisms
+
+First page:
+Willy Wonka Mechanisms
+Thomas Archbold
+King’s College London
+London, United Kingdom
+thomas.archbold@kcl.ac.uk
+Bart de Keijzer
+King’s College London
+London, United Kingdom
+bart.de_keijzer@kcl.ac.uk
+Carmine Ventre
+King’s College London
+London, United Kingdom
+carmine.ventre@kcl.ac.uk
+ABSTRACT
+Bounded rationality in mechanism design aims to ensure incentive-
+compatibility for agents who are cognitively limited. These agents
+lack the contingent reasoning skills that traditional mechanism
+design assumes, and depending on how these cognitive limitations
+are modelled this alters the class of incentive-compatible mecha-
+nisms. In this work we design mechanisms without any “obvious”
+manipulations for several auction settings that aim to either max-
+imise revenue or minimise the compensation paid to the agents.
+A mechanism without obvious manipulations is said to be not ob-
+viously manipulable (NOM), and assumes agents act truthfully as
+long as the maximum and minimum utilities from doing so are no
+worse than the maximum and minimum utilities from lying, with
+the extremes taken over all possible actions of the other agents.
+We exploit the definition of NOM by introducing the concept of
+golden tickets and wooden spoons, which designate bid profiles en-
+suring the mechanism’s incentive-compatibility for each agent. We
+then characterise these “Willy Wonka” mechanisms, and by care-
+fully choosing the golden tickets and wooden spoons we use this
+to design revenue-maximising auctions and frugal procurement
+auctions.
+KEYWORDS
+Algorithmic Mechanism Design; Bounded Rationality; Revenue
+Maximization; Frugality.
+ACM Reference Format:
+Thomas Archbold, Bart de Keijzer, and Carmine Ventre. 2024. Willy Wonka
+Mechanisms. In Proc. of the 23rd International Conference on Autonomous
+Agents and Multiagent Systems (AAMAS 2024), Auckland, New Zealand, May
+6 – 10, 2024, IFAAMAS, 9 pages.
+1
+INTRODUCTION
+In algorithmic mechanism design we are tasked with designing
+systems that elicit some information from a set of agents in order
+to return an outcome from some feasible set. Each agent holds
+some piece of private information reflecting the true state of the
+world, and agents are assumed to be selfish, meaning that they may
+lie about their piece of information (also known as their type) if
+it is beneficial to do so. The mechanisms we design must there-
+fore be robust against the selfish actions of the agents and care-
+fully consider the agents’ incentives. These incentives are mod-
+elled by solution concepts. Strategyproofness, otherwise known as
+This work is licensed under a Creative Commons Attribution
+International 4.0 License.
+Proc. of the 23rd International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), N. Alechina, V. Dignum, M. Dastani, J.S. Sichman (eds.), May 6 – 10, 2024,
+Auckland, New Zealand. © 2024 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org).
+dominant-strategy incentive-compatibility, is a solution concept
+which stipulates that for each agent it is a dominant strategy to
+report her true type to the mechanism over any deviation. This
+is desirable from a theoretical standpoint since if a mechanism is
+strategyproof then it guarantees that regardless of the joint action
+profile of the other players an agent will always maximise her utility
+by reporting her type truthfully rather than by lying to the mech-
+anism. Strategyproofness is a viable solution concept only when
+agents are perfectly rational: i

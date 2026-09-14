@@ -1,0 +1,73 @@
+Title: Tackling Uncertainties in Multi-Agent Reinforcement Learning through Integration of Agent Termination Dynamics
+
+First page:
+Tackling Uncertainties in Multi-Agent Reinforcement Learning
+through Integration of Agent Termination Dynamics
+Somnath Hazra
+IIT Kharagpur
+Kharagpur, India
+somnathhazra@kgpian.iitkgp.ac.in
+Pallab Dasgupta
+Synopsys
+Santa Clara, USA
+pallabd@synopsys.com
+Soumyajit Dey
+IIT Kharagpur
+Kharagpur, India
+soumya@cse.iitkgp.ac.in
+ABSTRACT
+Multi-Agent Reinforcement Learning (MARL) has gained signifi-
+cant traction for solving complex real-world tasks, but the inherent
+stochasticity and uncertainty in these environments pose substan-
+tial challenges to efficient and robust policy learning. While Dis-
+tributional Reinforcement Learning has been successfully applied
+in single-agent settings to address risk and uncertainty, its applica-
+tion in MARL is substantially limited. In this work, we propose a
+novel approach that integrates distributional learning with a safety-
+focused loss function to improve convergence in cooperative MARL
+tasks. Specifically, we introduce a Barrier Function based loss that
+leverages safety metrics, identified from inherent faults in the sys-
+tem, into the policy learning process. This additional loss term
+helps mitigate risks and encourages safer exploration during the
+early stages of training. We evaluate our method in the StarCraft II
+micromanagement benchmark, where our approach demonstrates
+improved convergence and outperforms state-of-the-art baselines
+in terms of both safety and task completion. Our results suggest
+that incorporating safety considerations can significantly enhance
+learning performance in complex, multi-agent environments.
+CCS CONCEPTS
+• Theory of computation →Multi-agent reinforcement learn-
+ing; Multi-agent learning.
+KEYWORDS
+Multi-Agent Reinforcement Learning, Distributional RL, Barrier
+Function
+ACM Reference Format:
+Somnath Hazra, Pallab Dasgupta, and Soumyajit Dey. 2025. Tackling Un-
+certainties in Multi-Agent Reinforcement Learning through Integration
+of Agent Termination Dynamics. In Proc. of the 24th International Confer-
+ence on Autonomous Agents and Multiagent Systems (AAMAS 2025), Detroit,
+Michigan, USA, May 19 – 23, 2025, IFAAMAS, 9 pages.
+1
+INTRODUCTION
+Multi-Agent Systems (MAS) remain a highly challenging domain,
+owing to the inherent stochasticity in the environment, and con-
+currently learning agents; resulting in uncertain reward outcomes.
+Therefore the contemporary Multi-Agent Reinforcement Learning
+(MARL) literature has shifted from point estimates derived from
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowé (eds.), May 19 – 23, 2025, Detroit, Michigan,
+USA. © 2025 International Foundation for Autonomous Agents and Multiagent Systems
+(www.ifaamas.org).
+expected global rewards [24, 36] to distributional analysis over re-
+turns [4, 8] which provide a more informed understanding of the
+variability in future returns. However, the predicted distributions
+are prone to errors at the initial phases of training because the
+policy has not yet explored and trained enough to predict accurate
+distributions. In the context of MARL, the prediction errors become
+even more critical due to the collective uncertainty from multiple
+agents, where each agent’s decisions can drastically impact both
+individual and collective outcomes. Our focus lies specifically on
+cooperative MARL, where a team of agents collaborates to achieve
+a shared

@@ -1,0 +1,76 @@
+Title: PI-NeuGODE: Physics-Informed Graph Neural Ordinary Differential Equations for Spatiotemporal Trajectory Prediction
+
+First page:
+PI-NeuGODE: Physics-Informed Graph Neural Ordinary
+Differential Equations for Spatiotemporal Trajectory Prediction
+Zhaobin Mo
+zm2302@columbia.edu
+Department of Civil Engineering and
+Engineering Mechanics, Columbia
+University
+New York, USA
+Yongjie Fu
+yf2578@columbia.edu
+Department of Civil Engineering and
+Engineering Mechanics, Columbia
+University
+New York, USA
+Xuan Di∗
+sharon.di@columbia.edu
+Department of Civil Engineering and
+Engineering Mechanics, Columbia
+University
+New York, USA
+ABSTRACT
+It is challenging to predict a group of individuals’ spatiotemporal
+trajectories in continuous time and space, due to various environ-
+mental and intrinsic factors. Especially, social dynamics such as
+driving or crowding behaviors could be hard to predict due to het-
+erogeneous and complex mapping from high-dimensional inputs to
+an output driven by the decision-making processes of other agents.
+To tackle this challenge, neural ordinary differential equations (neu-
+ral ODEs) have been developed to predict continuous-time long-
+term dynamics with constant memory cost and high computational
+efficiency. Furthermore, scientific communities have developed a
+rich set of physics models to describe how individuals interac-
+tively make decisions. With a rapidly growing trend of employing
+physics-informed deep learning (PIDL) for dynamical systems in
+science and engineering, its application to social dynamics is un-
+derstudied. This paper aims to develop an integrated framework,
+named “PI-NeuGODE,” that encodes physics models, complemented
+by symbolic regression, into neural ODEs. In the proposed model,
+physics informs the training of neural ODEs, while neural ODEs
+guide knowledge discovery. Symbolic regression is used to uncover
+physics knowledge from complex data. We further use graph neural
+networks to learn the topological interaction of individuals. The
+proposed method is tested on two applications, human driving and
+platooning, as well as crowding, which demonstrate the algorithmic
+accuracy and efficiency against baselines including existing social
+deep learning models.
+KEYWORDS
+Neural Ordinary Differential Equations; Physics-Informed Deep
+Learning; Graph Neural Network; Symbolic Regression
+ACM Reference Format:
+Zhaobin Mo, Yongjie Fu, and Xuan Di. 2024. PI-NeuGODE: Physics-Informed
+Graph Neural Ordinary Differential Equations for Spatiotemporal Trajectory
+Prediction. In Proc. of the 23rd International Conference on Autonomous Agents
+and Multiagent Systems (AAMAS 2024), Auckland, New Zealand, May 6 – 10,
+2024, IFAAMAS, 9 pages.
+∗This author is also affiliated with the Data Science Institute of Columbia University,
+New York, USA.
+This work is licensed under a Creative Commons Attribution
+International 4.0 License.
+Proc. of the 23rd International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), N. Alechina, V. Dignum, M. Dastani, J.S. Sichman (eds.), May 6 – 10, 2024,
+Auckland, New Zealand. © 2024 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org).
+Figure 1: Physics-informed graph neural ordinary differen-
+tial equations (PI-NeuGODE). The multi-agent dynamics are
+captured by graph neural networks (for spatial interaction)
+and neural ordinary equations (for temporal evolution). The
+symbolic regression is used to infer the underlying physics
+that informs the training of the data-driven counterpart.
+1
+INTRODUCTION
+Prediction of a group of interacting individuals’ dynamic trajecto-
+ries has various appli

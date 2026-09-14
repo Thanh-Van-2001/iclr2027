@@ -1,0 +1,82 @@
+Title: Learning Truthful Mechanisms without Discretization
+
+First page:
+Learning Truthful Mechanisms without Discretization
+Yunxuan Ma
+CFCS, School of Computer Science
+Peking University
+Beijing, China
+yunxuanma@pku.edu.cn
+Steven (Siqiang) Wang
+Foster School of Business
+University of Washington
+Seattle, USA
+siqiaw2@uw.edu
+Zhijian Duan
+CFCS, School of Computer Science
+Peking University
+Beijing, China
+zjduan@pku.edu.cn
+Yukun Cheng*
+School of Business
+Jiangnan University
+Wuxi, China
+ykcheng@amss.ac.cn
+Xiaotie Deng*
+CFCS, School of Computer Science
+& CMAR, Institute for AI
+Peking University
+Beijing, China
+xiaotie@pku.edu.cn
+ABSTRACT
+This paper introduces TEDI (Truthful, Expressive, and Dimension-
+Insensitive approach), the first discretization-free algorithm to learn
+truthful mechanisms. Existing learning-based algorithms rely on
+discretization of outcome spaces to ensure truthfulness, which suf-
+fers from inefficiency as problem size increases. To address this
+limitation, we formalize the concept of pricing rules, defined as func-
+tions that map outcomes to prices. We then parameterize pricing
+rules using Partial GroupMax Network, a novel network architec-
+ture designed to universally approximate partial convex functions.
+To enable optimization, we develop two training techniques: co-
+variance trick and continuous sampling, to derive unbiased gradi-
+ent estimators compatible with first-order optimization. Together,
+these design choices ensure the truthfulness, expressiveness and
+dimension-insensitivity of TEDI, and our experiments show that it
+consistently outperforms state-of-the-art methods in medium-to-
+large scale problems. 1
+KEYWORDS
+Automated Mechanism Design; Differentiable Economics; Deep
+Learning; First-Order Algorithm
+ACM Reference Format:
+Yunxuan Ma, Steven (Siqiang) Wang, Zhijian Duan, Yukun Cheng*, and Xi-
+aotie Deng*. 2026. Learning Truthful Mechanisms without Discretization. In
+Proc. of the 25th International Conference on Autonomous Agents and Multia-
+gent Systems (AAMAS 2026), Paphos, Cyprus, May 25 – 29, 2026, IFAAMAS,
+9 pages. https://doi.org/10.65109/JTXL5273
+1
+INTRODUCTION
+Mechanism design is a crucial topic with broad applications in
+multi-agent systems and microeconomics. It examines how one
+1Full version and codes can be found at Ma et al. [33].
+* Corresponding author.
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29,
+2026, Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org). https://doi.org/10.65109/JTXL5273
+mechanism designer can incentivize participants truthfully report-
+ing their private information, while achieving better resources
+allocations. Mechanism design problems have been widely stud-
+ied in variable contexts, including multiple goods monopolists
+[11, 21, 34, 39, 52], digital goods auctions [8, 22, 23], mechanism
+design for LLMs [16, 45, 46] and many other applications.
+Meanwhile, differentiable economics—a technical paradigm de-
+veloped recently [10, 19, 32, 49]—employs differentiable functions
+(e.g., neural networks) and gradient-based optimization to represent
+and to learn economic solutions. Within this framework, notable
+progress has been made in various mechanism design problems,
+including unit-supply auctions [9, 19, 47, 50], facility location [24],
+social choice [38], and stable matching [41].
+However, 

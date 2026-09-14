@@ -1,0 +1,71 @@
+Title: Dynamic Epistemic Logic of Resource Bounded Information Mining Agents
+
+First page:
+Dynamic Epistemic Logic of Resource Bounded Information
+Mining Agents
+Vitaliy Dolgorukov
+HSE University
+Moscow, Russian Federation
+vdolgorukov@hse.ru
+Rustam Galimullin
+University of Bergen
+Bergen, Norway
+rustam.galimullin@uib.no
+Maksim Gladyshev
+Utrecht University
+Utrecht, Netherlands
+m.gladyshev@uu.nl
+ABSTRACT
+Logics for resource-bounded agents have been getting more and
+more attention in recent years since they provide us with more re-
+alistic tools for modelling and reasoning about multi-agent systems.
+While many existing approaches are based on the idea of agents as
+imperfect reasoners, who must spend their resources to perform
+logical inference, this is not the only way to introduce resource
+constraints into logical settings. In this paper we study agents as
+perfect reasoners, who may purchase a new piece of information
+from a trustworthy source. For this purpose we propose dynamic
+epistemic logic for semi-public queries for resource-bounded agents.
+In this logic (groups of) agents can perform a query (ask a question)
+about whether some formula is true and receive a correct answer.
+These queries are called semi-public, because the very fact of the
+query is public, while the answer is private. We also assume that
+every query has a cost and every agent has a budget constraint.
+Finally, our framework allows us to reason about group queries, in
+which agents may share resources to obtain a new piece of informa-
+tion together. We demonstrate that our logic is complete, decidable
+and has an efficient model checking procedure.
+KEYWORDS
+Resource Bounded Agents; Dynamic Epistemic Logic; Epistemic
+Logic; Group Queries; Common Knowledge
+ACM Reference Format:
+Vitaliy Dolgorukov, Rustam Galimullin, and Maksim Gladyshev. 2024. Dy-
+namic Epistemic Logic of Resource Bounded Information Mining Agents.
+In Proc. of the 23rd International Conference on Autonomous Agents and Mul-
+tiagent Systems (AAMAS 2024), Auckland, New Zealand, May 6 – 10, 2024,
+IFAAMAS, 9 pages.
+1
+INTRODUCTION
+In our paper we present a logic for reasoning about resource bounded
+agents who might purchase new information from a reliable source
+but do not necessarily have enough budget resources.
+From a technical perspective, we propose a multi-agent Kripke-
+style semantics, in which propositional formulas have (non-negative)
+costs and agents have (non-negative) budgets, i.e. amounts of avail-
+able resources. In order to deal with costs and budgets in our lan-
+guage, we use linear inequalities initially introduced in [33] for
+This work is licensed under a Creative Commons Attribution
+International 4.0 License.
+Proc. of the 23rd International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), N. Alechina, V. Dignum, M. Dastani, J.S. Sichman (eds.), May 6 – 10, 2024,
+Auckland, New Zealand. © 2024 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org).
+reasoning about probabilities. These inequalities allow us to formu-
+late statements about formulas’ costs, agents’ budgets, and their
+comparisons explicitly as formulas of our language. We also use
+standard epistemic primitives for individual and common knowl-
+edge [34]. Combined with linear inequalities, these primitives allow
+us to express statements of the form “agent 𝑖knows that her budget
+is at least 𝑘", “agent 𝑗knows that the cost of 𝐴is lower than the cost
+of 𝐵, but 𝑗does not know the cost of 𝐴", “it is common knowledge
+among group 𝐺that the joint budget of another group 𝐷is lower

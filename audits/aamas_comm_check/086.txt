@@ -1,0 +1,76 @@
+Title: Probing Dec-POMDP Reasoning in Cooperative MARL
+
+First page:
+Probing Dec-POMDP Reasoning in Cooperative MARL
+Kale-ab Abebe Tessera
+University of Edinburgh
+Edinburgh, United Kingdom
+k.tessera@ed.ac.uk
+Leonard Hinckeldey
+University of Edinburgh
+Edinburgh, United Kingdom
+l.hinckeldey@ed.ac.uk
+Riccardo Zamboni
+Politecnico di Milano
+Milan, Italy
+riccardo.zamboni@polimi.it
+David Abel
+University of Edinburgh
+Edinburgh, United Kingdom
+david.abel@ed.ac.uk
+Amos Storkey
+University of Edinburgh
+Edinburgh, United Kingdom
+a.storkey@ed.ac.uk
+ABSTRACT
+Cooperative multi-agent reinforcement learning (MARL) is typi-
+cally framed as a decentralised partially observable Markov deci-
+sion process (Dec-POMDP), a setting whose hardness stems from
+two key challenges: partial observability and decentralised coordina-
+tion. Genuinely solving such tasks requires Dec-POMDP reasoning,
+where agents use history to infer hidden states and coordinate
+based on local information. Yet it remains unclear whether popu-
+lar benchmarks actually demand this reasoning or permit success
+via simpler strategies. We introduce a diagnostic suite combining
+statistically grounded performance comparisons and information-
+theoretic probes to audit the behavioural complexity of baseline
+policies (IPPO and MAPPO) across 37 scenarios spanning MPE,
+SMAX, Overcooked, Hanabi, and MaBrax. Our diagnostics reveal
+that success on these benchmarks rarely requires genuine Dec-
+POMDP reasoning. Reactive policies match the performance of
+memory-based agents in over half the scenarios, and emergent co-
+ordination frequently relies on brittle, synchronous action coupling
+rather than robust temporal influence. These findings suggest that
+some widely used benchmarks may not adequately test core Dec-
+POMDP assumptions under current training paradigms, potentially
+leading to over-optimistic assessments of progress. We release our
+diagnostic tooling to support more rigorous environment design
+and evaluation in cooperative MARL.1
+KEYWORDS
+Multi-Agent Reinforcement Learning, Cooperative Multi-Agent
+Reinforcement Learning, Dec-POMDPs
+ACM Reference Format:
+Kale-ab Abebe Tessera, Leonard Hinckeldey, Riccardo Zamboni, David Abel,
+and Amos Storkey. 2026. Probing Dec-POMDP Reasoning in Cooperative
+MARL. In Proc. of the 25th International Conference on Autonomous Agents
+and Multiagent Systems (AAMAS 2026), Paphos, Cyprus, May 25 – 29, 2026,
+IFAAMAS, 25 pages. https://doi.org/10.65109/ECCJ1033
+1The code is available at https://github.com/KaleabTessera/probing-dec-pomdps.
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29,
+2026, Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org). https://doi.org/10.65109/ECCJ1033
+1
+INTRODUCTION
+The widespread deployment of autonomous multi-agent systems is
+bounded by their ability to coordinate under uncertainty. In such
+settings, no single agent possesses a complete view of the world,
+yet outcomes depend on joint behaviour. This tension lies at the
+heart of cooperative multi-agent reinforcement learning [MARL,
+2]. The standard formalism for these problems, decentralised par-
+tially observable Markov decision processes [Dec-POMDPs, 5, 21],
+capture this intrinsic hardness through two fundamental character-
+istics: partial observability, where agents cannot directly observe
+the full gl

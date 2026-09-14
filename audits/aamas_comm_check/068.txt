@@ -1,0 +1,68 @@
+Title: Fairness Dynamics in Digital Economy Platforms with Biased Ratings
+
+First page:
+Fairness Dynamics in Digital Economy Platforms with Biased
+Ratings
+Martin Smit
+University of Amsterdam
+Amsterdam, Netherlands
+j.m.m.smit@uva.nl
+Fernando P. Santos
+University of Amsterdam
+Amsterdam, Netherlands
+f.p.santos@uva.nl
+ABSTRACT
+The digital services economy consists of online platforms that facil-
+itate interactions between service providers and consumers. This
+ecosystem is characterized by short-term, often one-off, transac-
+tions between parties that have no prior familiarity. To establish
+trust among users, platforms employ rating systems which allow
+users to report on the quality of their previous interactions. How-
+ever, while arguably crucial for these platforms to function, rating
+systems can perpetuate negative biases against marginalised groups.
+This paper investigates how to design platforms around biased rep-
+utation systems, reducing discrimination while maintaining incen-
+tives for all service providers to offer high quality service for users.
+We introduce an evolutionary game theoretical model to study how
+digital platforms can perpetuate or counteract rating-based discrim-
+ination. We focus on the platforms’ decisions to promote service
+providers who have high reputations or who belong to a specific
+protected group. Our results demonstrate a fundamental trade-
+off between user experience and fairness: promoting highly-rated
+providers benefits users, but lowers the demand for marginalised
+providers against which the ratings are biased. Our results also
+provide evidence that intervening by tuning the demographics of
+the search results is a highly effective way of reducing unfairness
+while minimally impacting users. Furthermore, we show that even
+when precise measurements on the level of rating bias affecting
+marginalised service providers is unavailable, there is still potential
+to improve upon a recommender system which ignores protected
+characteristics. Altogether, our model highlights the benefits of
+proactive anti-discrimination design in systems where ratings are
+used to promote cooperative behaviour.
+KEYWORDS
+Fairness; Cooperation; Evolutionary Game Theory; Recommender
+Systems; Digital Platforms; Indirect Reciprocity
+ACM Reference Format:
+Martin Smit and Fernando P. Santos. 2026. Fairness Dynamics in Digital
+Economy Platforms with Biased Ratings. In Proc. of the 25th International
+Conference on Autonomous Agents and Multiagent Systems (AAMAS 2026),
+Paphos, Cyprus, May 25 – 29, 2026, IFAAMAS, 9 pages. https://doi.org/10.
+65109/CEJT6762
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29,
+2026, Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org). https://doi.org/10.65109/CEJT6762
+1
+INTRODUCTION
+Evidence of discrimination against marginalised communities on
+online platforms is widespread in both the academic community
+and beyond. Research has found that guests on Airbnb with Black-
+sounding names are accepted 16% less often than guests with White-
+sounding names [11] and Black Airbnb hosts in the United States
+charge 5-7% less than White hosts for equivalent properties [16].
+On Uber, users with Black-sounding names experience twice the
+cancellation rate than White-sounding names [12]. On eBay, af-
+ter accounting for reviews, it was found that listings w

@@ -1,0 +1,72 @@
+Title: Atlas-X Equity Financing: Unlocking New Methods to Securely Obfuscate Axe Inventory Data Based on Differential Privacy
+
+First page:
+Atlas-X Equity Financing: Unlocking New Methods to Securely
+Obfuscate Axe Inventory Data Based on Differential Privacy
+Antigoni Polychroniadou
+J.P. Morgan AI Research, AlgoCRYPT CoE
+New York, USA
+antigoni.polychroniadou@jpmorgan.com
+Gabriele Cipriani
+J.P. Morgan Quantitative Research
+London, United Kingdom
+gabriele.cipriani@jpmorgan.com
+Richard Hua
+J.P. Morgan Quantitative Research
+New York, USA
+richard.hua@jpmorgan.com
+Tucker Balch
+J.P. Morgan AI Research
+New York, USA
+tucker.balch@jpmchase.com
+ABSTRACT
+Banks publish daily a list of available securities/assets (axe list) to
+selected clients to help them effectively locate Long (buy) or Short
+(sell) trades at reduced financing rates. This reduces costs for the
+bank, as the list aggregates the bank’s internal firm inventory per
+asset for all clients of long as well as short trades. However, this
+is somewhat problematic: (1) the bank’s inventory is revealed; (2)
+trades of clients who contribute to the aggregated list, particularly
+those deemed large, are revealed to other clients. Clients conduct-
+ing sizable trades with the bank and possessing a portion of the
+aggregated asset exceeding 50% are considered to be concentrated
+clients. This could potentially reveal a trading concentrated client’s
+activity to their competitors, thus providing an unfair advantage
+over the market.
+Atlas-X Axe Obfuscation, powered by new differential private
+methods, enables a bank to obfuscate its published axe list on a
+daily basis while under continual observation, thus maintaining an
+acceptable inventory Profit and Loss (P&L) cost pertaining to the
+noisy obfuscated axe list while reducing the clients’ trading activity
+leakage. Our main differential private innovation is a differential
+private aggregator for streams (time series data) of both positive
+and negative integers under continual observation.
+For the last two years, the Atlas-X system has been live in pro-
+duction across three major regions—USA, Europe, and Asia—at
+J.P. Morgan, a major financial institution. To our knowledge, it is
+the first differential privacy solution to be deployed in the finan-
+cial sector. We also report benchmarks of our algorithm based on
+(anonymous) real and synthetic data to showcase the quality of our
+obfuscation and its success in production.
+KEYWORDS
+Differential privacy; Time-series data; Markets; privacy under con-
+tinuous observation
+This work is licensed under a Creative Commons Attribution
+International 4.0 License.
+Proc. of the 23rd International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), N. Alechina, V. Dignum, M. Dastani, J.S. Sichman (eds.), May 6 – 10, 2024,
+Auckland, New Zealand. © 2024 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org).
+ACM Reference Format:
+Antigoni Polychroniadou, Gabriele Cipriani, Richard Hua, and Tucker Balch.
+2024. Atlas-X Equity Financing: Unlocking New Methods to Securely Ob-
+fuscate Axe Inventory Data Based on Differential Privacy. In Proc. of the
+23rd International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), Auckland, New Zealand, May 6 – 10, 2024, IFAAMAS, 8 pages.
+1
+INTRODUCTION
+An axe is an interest in a particular security that a firm is looking
+to buy or sell1. In general, a firm providing an axe to external
+counterparties has a strong interest in keeping such information
+private as it provides an indication of the direction (buy or sell)
+they want to trade a particular security. If other m

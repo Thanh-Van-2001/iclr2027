@@ -1,0 +1,71 @@
+Title: Continual Optimistic Initialization for Value-Based Reinforcement Learning
+
+First page:
+Continual Optimistic Initialization for Value-Based
+Reinforcement Learning
+Sheelabhadra Dey
+Texas A&M University
+College Station, USA
+sheelabhadra@tamu.edu
+James Ault
+Texas A&M University
+College Station, USA
+jault@tamu.edu
+Guni Sharon
+Texas A&M University
+College Station, USA
+guni@tamu.edu
+ABSTRACT
+Comprehensive state-action exploration is essential for reinforce-
+ment learning (RL) algorithms. It enables them to find optimal
+solutions and avoid premature convergence. In value-based RL,
+optimistic initialization of the value function ensures sufficient ex-
+ploration for finding the optimal solution. Optimistic values lead to
+curiosity-driven exploration enabling visitation of under-explored
+regions. However, optimistic initialization has limitations in sto-
+chastic and non-stationary environments due to its inability to
+explore “infinitely-often”. To address this limitation, we propose
+a novel exploration strategy for value-based RL, denoted COIN,
+based on recurring optimistic initialization. By injecting a continual
+exploration bonus, we overcome the shortcoming of optimistic ini-
+tialization (sensitivity to environment noise). We provide a rigorous
+theoretical comparison of COIN versus existing popular exploration
+strategies and prove it provides a unique set of attributes (coverage,
+infinite-often, no visitation tracking, and curiosity). We demon-
+strate the superiority of COIN over popular existing strategies on a
+designed toy domain as well as present results on common bench-
+mark tasks. We observe that COIN outperforms existing exploration
+strategies in four out of six benchmark tasks while performing on
+par with the best baseline on the other two tasks.
+KEYWORDS
+Reinforcement Learning; Exploration Strategies; Optimistic Initial-
+ization
+ACM Reference Format:
+Sheelabhadra Dey, James Ault, and Guni Sharon. 2024. Continual Optimistic
+Initialization for Value-Based Reinforcement Learning. In Proc. of the 23rd
+International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), Auckland, New Zealand, May 6 – 10, 2024, IFAAMAS, 10 pages.
+1
+INTRODUCTION
+Sequential decision problems are commonly modeled as Markov
+decision processes (MDP) [49]. A solution to an MDP is a pol-
+icy that maps states to actions such that the resulting sequential
+behavior is optimal with respect to a given utility function. Re-
+inforcement learning (RL) algorithms [61] are designed to solve
+MDPs via interactions with the underlying environment. RL algo-
+rithms were shown to be effective on a variety of applications such
+This work is licensed under a Creative Commons Attribution
+International 4.0 License.
+Proc. of the 23rd International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), N. Alechina, V. Dignum, M. Dastani, J.S. Sichman (eds.), May 6 – 10, 2024,
+Auckland, New Zealand. © 2024 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org).
+as robotics [2, 37], autonomous driving [25, 29, 36], traffic signal
+control [9, 10, 72], and drilling operations [5, 35, 68]. An RL agent
+commonly explores the environment by executing actions and ob-
+serving outcomes. The acquired knowledge enables the RL agent to
+reason about the optimal policy. RL algorithms commonly require
+that the Cartesian product of the state and action spaces is suffi-
+ciently explored. Consequently, Exploration strategies are usually
+designed to provide some theoretical assurances regarding the state-
+action visitation distributi

@@ -1,0 +1,70 @@
+Title: DEpiABS: Differentiable Epidemic Agent-Based Simulator
+
+First page:
+DEpiABS: Differentiable Epidemic Agent-Based Simulator
+Zhijian Gao
+Nanyang Technological University
+Singapore, Singapore
+zhijian001@e.ntu.edu.sg
+Shuxin Li*
+Nanyang Technological University
+Singapore, Singapore
+shuxin.li@ntu.edu.sg
+Bo An
+Nanyang Technological University
+Singapore, Singapore
+boan@ntu.edu.sg
+ABSTRACT
+The COVID-19 pandemic highlighted the limitations of existing
+epidemic simulation tools. These tools provide information that
+guides non-pharmaceutical interventions (NPIs), yet many struggle
+to capture complex dynamics while remaining computationally
+practical and interpretable. We introduce DEpiABS, a scalable, dif-
+ferentiable agent-based model (DABM) that balances mechanistic
+detail, computational efficiency and interpretability. DEpiABS cap-
+tures individual-level heterogeneity in health status, behaviour, and
+resource constraints, while also modelling epidemic processes like
+viral mutation and reinfection dynamics. The model is fully differ-
+entiable, enabling fast simulation and gradient-based parameter
+calibration. Building on this foundation, we introduce a z-score-
+based scaling method that maps small-scale simulations to any
+real-world population sizes with negligible loss in output granu-
+larity, reducing the computational burden when modelling large
+populations. We validate DEpiABS through sensitivity analysis and
+calibration to COVID-19 and flu data from ten regions of varying
+scales. Compared to the baseline, DEpiABS is more detailed, fully
+interpretable, and has reduced the average normal deviation in fore-
+casting from 0.97 to 0.92 on COVID-19 mortality data and from 0.41
+to 0.32 on influenza-like-illness data. Critically, these improvements
+are achieved without relying on auxiliary data, making DEpiABS
+a reliable, generalisable, and data-efficient framework for future
+epidemic response modelling.
+KEYWORDS
+Epidemiology; Differentiable Agent-Based Model
+ACM Reference Format:
+Zhijian Gao, Shuxin Li*, and Bo An. 2026. DEpiABS: Differentiable Epidemic
+Agent-Based Simulator. In Proc. of the 25th International Conference on
+Autonomous Agents and Multiagent Systems (AAMAS 2026), Paphos, Cyprus,
+May 25 – 29, 2026, IFAAMAS, 10 pages. https://doi.org/10.65109/IEON9331
+1
+INTRODUCTION
+The COVID-19 pandemic exposed critical vulnerabilities in global
+public health systems, demonstrated by delayed and inappropriate
+implementation of non-pharmaceutical interventions (NPIs) [61].
+The effectiveness of interventions depends fundamentally on the
+*Corresponding author.
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29,
+2026, Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org). https://doi.org/10.65109/IEON9331
+quality of information available to policymakers, such as the ex-
+pected infection and mortality trends, to which epidemic mod-
+elling methods contribute immensely. To provide insightful, timely,
+and trustworthy information, epidemic models must represent real-
+world epidemic dynamics faithfully [40], expeditiously [10], and
+transparently [71]. Given the inadequacies in the control and miti-
+gation of COVID-19 recorded in multiple countries [30, 38, 49], the
+development of epidemic models with comprehensive advantages
+over existing models in all 3 criteria, namel

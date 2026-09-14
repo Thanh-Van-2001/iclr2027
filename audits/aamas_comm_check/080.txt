@@ -1,0 +1,75 @@
+Title: Equitable Core Imputations for Max-Flow, MST and b-Matching Games
+
+First page:
+Equitable Core Imputations for
+Max-Flow, MST and 𝑏-Matching Games
+Rohith Reddy Gangam
+University of California, Irvine
+Irvine, USA
+rgangam@uci.edu
+Naveen Garg∗
+Indian Institute of Technology Delhi
+Delhi, India
+naveen@cse.iitd.ac.in
+Parnian Shahkar
+University of California, Irvine
+Irvine, USA
+shahkarp@uci.edu
+Vijay V. Vazirani
+University of California, Irvine
+Irvine, USA
+vazirani@ics.uci.edu
+ABSTRACT
+We study fair allocation of profit (or cost) for three central problems
+from combinatorial optimization: Max-Flow, MST and 𝑏-matching.
+The essentially unequivocal choice of solution concept for this pur-
+pose would be the core, because of its highly desirable properties.
+However, recent work observed that for the assignment game, an
+arbitrary core imputation makes no fairness guarantee at the level
+of individual agents. To rectify this deficiency, special core imputa-
+tions, called equitable core imputations, were defined — there are two
+such imputations, leximin and leximax — and efficient algorithms
+were given for finding them.
+For all three games, we start by giving examples to show that
+an arbitrary core imputation can be excessively unfair to certain
+agents. This led us to seek equitable core imputations for our three
+games as well. However, the ubiquitous tractable vs intractable
+schism separates the assignment game from our three games. As is
+usual in the presence of intractability, we resorted to defining the
+Owen set for each game and algorithmically relating it to the set
+of optimal dual solutions of the underlying combinatorial problem.
+We then give polynomial time algorithms for finding equitable
+imputations in the Owen set.
+The motivation for this work is two-fold: the emergence of auto-
+mated decision-making, with a special emphasis on fairness, and
+the plethora of industrial applications of our three games.
+KEYWORDS
+Cooperative games; Core; Fairness
+ACM Reference Format:
+Rohith Reddy Gangam, Naveen Garg, Parnian Shahkar, and Vijay V. Vazi-
+rani. 2026. Equitable Core Imputations for Max-Flow, MST and 𝑏-Matching
+Games. In Proc. of the 25th International Conference on Autonomous Agents
+and Multiagent Systems (AAMAS 2026), Paphos, Cyprus, May 25 – 29, 2026,
+IFAAMAS, 9 pages. https://doi.org/10.65109/VJNO3737
+∗Work done while the author was visiting the University of Warwick on a Royal Society
+Visiting Fellowship.
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29,
+2026, Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org). https://doi.org/10.65109/VJNO3737
+1
+INTRODUCTION
+With automated decision-making emerging as the norm, the design
+of algorithms which ensure fair allocations to agents has become
+increasingly important; these are not only ethical, but also lead
+to customer satisfaction, and hence loyalty, to businesses paying
+attention to this issue. In this vein, our paper studies the fair al-
+location of profit or cost for three problems: Max-Flow, MST and
+𝑏-matching. All three are central to combinatorial optimization,
+with a plethora of industrial applications, e.g., see [16], [1] and [10].
+The corresponding games, which distribute profit (or cost), have
+also received considerable attention in economics and computer
+science, e.g., see Moulin [7].
+As an example, assu

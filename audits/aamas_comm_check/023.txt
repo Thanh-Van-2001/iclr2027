@@ -1,0 +1,74 @@
+Title: Act as You Learn: Adaptive Decision-Making in Non-Stationary Markov Decision Processes
+
+First page:
+Act as You Learn: Adaptive Decision-Making in Non-Stationary
+Markov Decision Processes
+Baiting Luo
+Vanderbilt University
+Nashville, USA
+baiting.luo@Vanderbilt.Edu
+Yunuo Zhang
+Vanderbilt University
+Nashville, USA
+yunuo.zhang@vanderbilt.edu
+Abhishek Dubey
+Vanderbilt University
+Nashville, USA
+abhishek.dubey@vanderbilt.edu
+Ayan Mukhopadhyay
+Vanderbilt University
+Nashville, USA
+ayan.mukhopadhyay@vanderbilt.edu
+ABSTRACT
+A fundamental challenge in sequential decision-making is deal-
+ing with non-stationary environments, where exogenous environ-
+mental conditions change over time. Such problems are tradition-
+ally modeled as non-stationary Markov decision processes (NS-
+MDP). However, existing approaches for decision-making in NS-
+MDPs have two major shortcomings: first, they assume that the
+updated environmental dynamics at the current time are known
+(although future dynamics can change); and second, planning is
+largely pessimistic. We argue that both these assumptions are in-
+valid in practice—updated environmental conditions are rarely
+known, and as the agent interacts with the environment, it can
+learn about the updated dynamics and avoid being pessimistic, at
+least in states whose dynamics it is confident about. We present a
+heuristic search algorithm called Adaptive Monte Carlo Tree Search
+(ADA-MCTS) that addresses these challenges. We show that the
+agent can learn the updated dynamics of the environment over time
+and then act as it learns, i.e., if the agent is in a region of the state
+space about which it has updated knowledge, it can avoid being
+pessimistic. To quantify “updated knowledge,” we disintegrate the
+aleatoric and epistemic uncertainty in the agent’s updated belief and
+show how the agent can use these estimates for decision-making.
+We compare the proposed approach with multiple state-of-the-art
+approaches in decision-making across multiple well-established
+open-source problems and show that our approach is faster and
+more adaptive without sacrificing safety.
+KEYWORDS
+Sequential Decision-Making; Non-Stationary Environments; Online
+Planning; Monte Carlo Tree Search
+ACM Reference Format:
+Baiting Luo, Yunuo Zhang, Abhishek Dubey, and Ayan Mukhopadhyay. 2024.
+Act as You Learn: Adaptive Decision-Making in Non-Stationary Markov De-
+cision Processes. In Proc. of the 23rd International Conference on Autonomous
+Agents and Multiagent Systems (AAMAS 2024), Auckland, New Zealand, May
+6 – 10, 2024, IFAAMAS, 9 pages.
+This work is licensed under a Creative Commons Attribution
+International 4.0 License.
+Proc. of the 23rd International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), N. Alechina, V. Dignum, M. Dastani, J.S. Sichman (eds.), May 6 – 10, 2024,
+Auckland, New Zealand. © 2024 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org).
+1
+INTRODUCTION
+Sequential decision-making under uncertainty is present in many
+real-world problems, such as vehicle routing, emergency manage-
+ment, medical diagnosis, and autonomous driving [2, 11, 12, 14]. A
+fundamental problem in such domains is to model and optimize
+the ability of an agent to adapt to changing environmental dynam-
+ics [15, 17–19]. For example, consider the dispatch of emergency
+responders in a city; once a policy is learned, a first responder
+agency can optimally dispatch resources. However, the city’s traffic
+conditions can change, rendering the learned policy stale. Our goal
+is to systematically model, investigate, and optimize how

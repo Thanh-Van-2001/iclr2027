@@ -1,0 +1,79 @@
+Title: Forecasting and Mitigating Disruptions in Public Bus Transit Services
+
+First page:
+Forecasting and Mitigating Disruptions in
+Public Bus Transit Services
+Chaeeun Han
+Pennsylvania State University
+University Park, PA, USA
+cfh5554@psu.edu
+Jose Paolo Talusan
+Vanderbilt University
+Nashville, TN, USA
+jose.paolo.talusan@vanderbilt.edu
+Dan Freudberg
+WeGo Public Transit
+Nashville, TN, USA
+Dan.Freudberg@nashville.gov
+Ayan Mukhopadhyay
+Vanderbilt University
+Nashville, TN, USA
+ayan.mukhopadhyay@vanderbilt.edu
+Abhishek Dubey
+Vanderbilt University
+Nashville, TN, USA
+abhishek.dubey@vanderbilt.edu
+Aron Laszka
+Pennsylvania State University
+University Park, PA, USA
+alaszka@psu.edu
+ABSTRACT
+Public transportation systems often suffer from unexpected fluctu-
+ations in demand and disruptions, such as mechanical failures and
+medical emergencies. These fluctuations and disruptions lead to
+delays and overcrowding, which are detrimental to the passengers’
+experience and to the overall performance of the transit service.
+To proactively mitigate such events, many transit agencies station
+substitute (reserve) vehicles throughout their service areas, which
+they can dispatch to augment or replace vehicles on routes that
+suffer overcrowding or disruption. However, determining the op-
+timal locations where substitute vehicles should be stationed is a
+challenging problem due to the inherent randomness of disrup-
+tions and due to the combinatorial nature of selecting locations
+across a city. In collaboration with the transit agency of Nashville,
+TN, we address this problem by introducing data-driven statisti-
+cal and machine-learning models for forecasting disruptions and
+an effective randomized local-search algorithm for selecting loca-
+tions where substitute vehicles are to be stationed. Our research
+demonstrates promising results in proactive disruption manage-
+ment, offering a practical and easily implementable solution for
+transit agencies to enhance the reliability of their services. Our
+results resonate beyond mere operational efficiency—by advanc-
+ing proactive strategies, our approach fosters more resilient and
+accessible public transportation, contributing to equitable urban
+mobility and ultimately benefiting the communities that rely on
+public transportation the most.
+KEYWORDS
+Public transportation, Data-driven optimization, Disruption fore-
+casting, Simulation, Metaheuristic optimization
+ACM Reference Format:
+Chaeeun Han, Jose Paolo Talusan, Dan Freudberg, Ayan Mukhopadhyay,
+Abhishek Dubey, and Aron Laszka. 2024. Forecasting and Mitigating Dis-
+ruptions in Public Bus Transit Services. In Proc. of the 23rd International
+Conference on Autonomous Agents and Multiagent Systems (AAMAS 2024),
+Auckland, New Zealand, May 6 – 10, 2024, IFAAMAS, 9 pages.
+This work is licensed under a Creative Commons Attribution
+International 4.0 License.
+Proc. of the 23rd International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), N. Alechina, V. Dignum, M. Dastani, J.S. Sichman (eds.), May 6 – 10, 2024,
+Auckland, New Zealand. © 2024 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org).
+1
+INTRODUCTION
+Modern urban ecosystems are dependent on public transit, which
+gives millions of people access to mobility, influences settlements,
+and encourages sustainable growth. Despite their necessity, public
+transportation systems frequently struggle to strike a balance be-
+tween available infrastructure and constantly shifting demand [1].
+This presents a particular challenge for mid-size U.S. cities, which
+typically hav

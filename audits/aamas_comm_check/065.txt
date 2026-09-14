@@ -1,0 +1,76 @@
+Title: Multi-objective Reinforcement Learning with Nonlinear Preferences: Provable Approximation for Maximizing Expected Scalarized Return
+
+First page:
+Multi-objective Reinforcement Learning with Nonlinear
+Preferences: Provable Approximation for Maximizing Expected
+Scalarized Return
+Nianli Peng∗
+Harvard University
+Cambridge, MA, USA
+nianli_peng@g.harvard.edu
+Muhang Tian∗
+Duke University
+Durham, NC, USA
+muhang.tian@duke.edu
+Brandon Fain
+Duke University
+Durham, NC, USA
+btfain@cs.duke.edu
+ABSTRACT
+We study multi-objective reinforcement learning with nonlinear
+preferences over trajectories. That is, we maximize the expected
+value of a nonlinear function over accumulated rewards (expected
+scalarized return or ESR) in a multi-objective Markov Decision Pro-
+cess (MOMDP). We derive an extended form of Bellman optimality
+for nonlinear optimization that explicitly considers time and cur-
+rent accumulated reward. Using this formulation, we describe an
+approximation algorithm for computing an approximately optimal
+non-stationary policy in pseudopolynomial time for smooth scalar-
+ization functions with a constant number of rewards. We prove the
+approximation analytically and demonstrate the algorithm experi-
+mentally, showing that there can be a substantial gap between the
+optimal policy computed by our algorithm and alternative baselines.
+KEYWORDS
+Multi-objective Reinforcement Learning, Nonlinear Optimization,
+Algorithmic Fairness, Approximation Algorithms
+ACM Reference Format:
+Nianli Peng∗, Muhang Tian∗, and Brandon Fain. 2025. Multi-objective Rein-
+forcement Learning with Nonlinear Preferences: Provable Approximation
+for Maximizing Expected Scalarized Return. In Proc. of the 24th International
+Conference on Autonomous Agents and Multiagent Systems (AAMAS 2025),
+Detroit, Michigan, USA, May 19 – 23, 2025, IFAAMAS, 9 pages.
+1
+INTRODUCTION
+Markov Decision Processes (MDPs) model goal-driven interaction
+with a stochastic environment, typically aiming to maximize a
+scalar-valued reward per time-step through a learned policy. Equiv-
+alently, this formulation asks the agent to maximize the expected
+value of a linear function of total reward. This problem can be
+solved with provable approximation guarantees in polynomial time
+with respect to the size of the MDP [2, 5, 6, 12, 20].
+We extend this framework to optimize a nonlinear function of
+vector-valued rewards in multi-objective MDPs (MOMDPs), aiming
+to maximize expected welfare E[𝑊(r)] where r is a total reward
+vector for 𝑑objectives. We note that this function is also called
+the utility or the scalarization function within the multi-objective
+∗Equal contribution.
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowé (eds.), May 19 – 23, 2025, Detroit, Michigan,
+USA. © 2025 International Foundation for Autonomous Agents and Multiagent Systems
+(www.ifaamas.org).
+optimization literature [18]. Unlike the deep neural networks com-
+monly used as function approximators for large state spaces, our
+nonlinearity lies entirely in the objective function.
+Motivation. Nonlinear welfare functions capture richer prefer-
+ences for agents, such as fairness or risk attitudes. For example,
+the Nash Social Welfare function
+
+𝑊Nash(r) = (Î
+𝑖𝑟𝑖)1/𝑑
+reflects
+a desire for fairness or balance across objectives and diminishing
+marginal returns [14]. Even single-objective decision theory uses
+nonlinear utility functions to model risk preferences, like risk aver-
+sion with the Von Neumann-Morgenstern utility functio

@@ -198,7 +198,10 @@ social choice; LLM-based agents; simulation; planning and search; reasoning,
 norms and verification; robotics and human--agent interaction; other. The
 prompt, the model and every answer are released, and Table~\ref{tab:community}
 gives the split. The label is a reading of a first page, not the area the
-authors submitted to.
+authors submitted to; a second model of another vendor, given the same prompt
+on a random hundred papers, agrees with the first on \nCommAgreeFrac{}
+(\nCommAgree{}, Cohen's $\kappa = \nCommKappa{}$), and the disagreements are
+between neighbouring labels.
 
 \section{What AAMAS tables print}
 \label{sec:print}
@@ -397,8 +400,11 @@ a separate claim; it is reported, not preferred.
 A win rate or a success rate is a proportion, and a proportion measured over
 $K$ episodes has a standard error of $\sqrt{p(1-p)/K}$ whether or not anyone
 prints it. Two rates measured over $K$ episodes each cannot be told apart
-when their gap is below $1.96\sqrt{p_1(1-p_1)/K + p_2(1-p_2)/K}$, and no
-bold face changes that. This resolution is a property of the protocol, and
+when their gap is below
+\begin{equation*}
+1.96\,\sqrt{p_1(1-p_1)/K + p_2(1-p_2)/K},
+\end{equation*}
+and no bold face changes that. This resolution is a property of the protocol, and
 it is the one quantity in this paper that can be computed for a bar-less
 comparison from what the page prints, provided the page prints $K$.
 
@@ -468,8 +474,11 @@ from the reader's own values the failure rate on those items is
 \nGFailReader{} against \nGFailPipe{} from the parser's. The reader could
 not test \nGUntestableN{} of the parser's testable items, mostly for want of
 a run count it would accept. Of the \nGNoBarN{} comparisons the parser found
-bar-less, the reader finds no bar for either cell anywhere in the table in
-\nGNoBarAbsentFrac{} (\nGNoBarAbsent{}).
+bar-less, \nGNoBarNotTable{} are not from a table at all (numbers in a
+pseudocode block, read as cells), and of the \nGNoBarResultsTableFrac{}
+that are, the reader finds no bar for either cell anywhere in the table in
+\nGNoBarAbsentFrac{} (\nGNoBarAbsent{}), the boxed cell bold and alone in
+\nGNoBarBoldFrac{}, and the parser's runner-up in \nGNoBarRunnerFrac{}.
 
 \paragraph{What the reference set exposed.} \nGUnboxedN{} of the
 \nGDrawnN{} items could not be rendered with a box: the parser holds two

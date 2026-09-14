@@ -1,0 +1,67 @@
+Title: Frugal Actor-Critic: Sample Efficient Off-Policy Deep Reinforcement Learning Using Unique Experiences
+
+First page:
+Frugal Actor-Critic: Sample Efficient Off-Policy Deep
+Reinforcement Learning Using Unique Experiences
+Nikhil Kumar Singh
+Indian Institute of Technology, Kanpur
+UP, India
+nksingh@cse.iitk.ac.in
+Indranil Saha
+Indian Institute of Technology, Kanpur
+UP, India
+isaha@cse.iitk.ac.in
+ABSTRACT
+Efficient utilization of the replay buffer plays a significant role in the
+off-policy actor-critic reinforcement learning (RL) algorithms used
+for model-free control policy synthesis for complex dynamical sys-
+tems. We propose a method for achieving sample efficiency, which
+focuses on selecting unique samples and adding them to the replay
+buffer during the exploration with the goal of reducing the buffer
+size and maintaining the independent and identically distributed
+(IID) nature of the samples. Our method is based on selecting an
+important subset of the set of state variables from the experiences
+encountered during the initial phase of random exploration, par-
+titioning the state space into a set of abstract states based on the
+selected important state variables, and finally selecting the expe-
+riences with unique state-reward combination by using a kernel
+density estimator. We formally prove that the off-policy actor-critic
+algorithm incorporating the proposed method for unique expe-
+rience accumulation converges faster than the vanilla off-policy
+actor-critic algorithm. Furthermore, we evaluate our method by
+comparing it with two state-of-the-art actor-critic RL algorithms
+on several continuous control benchmarks available in the Gym
+environment. Experimental results demonstrate that our method
+achieves a significant reduction in the size of the replay buffer for
+all the benchmarks while achieving either faster convergent or
+better reward accumulation compared to the baseline algorithms.
+KEYWORDS
+Sample efficiency, Reinforcement learning, Control policy synthesis,
+Off-policy actor-critic algorithm
+ACM Reference Format:
+Nikhil Kumar Singh and Indranil Saha. 2024. Frugal Actor-Critic: Sample
+Efficient Off-Policy Deep Reinforcement Learning Using Unique Experi-
+ences. In Proc. of the 23rd International Conference on Autonomous Agents
+and Multiagent Systems (AAMAS 2024), Auckland, New Zealand, May 6 – 10,
+2024, IFAAMAS, 9 pages.
+1
+INTRODUCTION
+The off-policy actor-critic reinforcement learning (RL) framework
+has proven to be a powerful mechanism for solving the model-free
+control policy synthesis problem for complex dynamical systems
+with continuous state and action space. Experience replay plays
+This work is licensed under a Creative Commons Attribution
+International 4.0 License.
+Proc. of the 23rd International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), N. Alechina, V. Dignum, M. Dastani, J.S. Sichman (eds.), May 6 – 10, 2024,
+Auckland, New Zealand. © 2024 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org).
+a crucial role in the off-policy actor-critic RL algorithms. The ex-
+periences in the form of a tuple containing the current state, the
+applied action, the next state, and the acquired reward are collected
+through off-policy exploration and stored in the replay buffer. These
+experiences are replayed to train the critic using optimization algo-
+rithms such as stochastic gradient descent (SGD) [1, 2], which in
+turn guides the training of the actor to improve the target policy.
+The performance of the target policy thus depends significantly on
+the quality of the experiences available in the re

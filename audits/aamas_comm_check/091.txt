@@ -1,0 +1,78 @@
+Title: ME-IGM: Individual-Global-Max in Maximum Entropy Multi-Agent Reinforcement Learning
+
+First page:
+ME-IGM: Individual-Global-Max in Maximum Entropy
+Multi-Agent Reinforcement Learning
+Wen-Tse Chen
+Carnegie Mellon University
+Pittsburgh, United States
+wentsec@andrew.cmu.edu
+Yuxuan Li
+Zhejiang University
+Hangzhou, China
+yuxuanli04@zju.edu.cn
+Shiyu Huang
+XPeng Inc.
+Beijing, China
+huangsy16@xiaopeng.com
+Jiayu Chen∗
+The University of Hong Kong
+INFIFORCE Intelligent Tech. Co., Ltd.
+Hong Kong, China
+jiayuc@hku.hk
+Jeff Schneider∗
+Carnegie Mellon University
+Pittsburgh, United States
+jeff4@andrew.cmu.edu
+ABSTRACT
+Multi-agent credit assignment is a fundamental challenge for coop-
+erative multi-agent reinforcement learning (MARL), where a team
+of agents learn from shared reward signals. The Individual-Global-
+Max (IGM) condition is a widely used principle for multi-agent
+credit assignment, requiring that the joint action determined by
+individual Q-functions maximizes the global Q-value. Meanwhile,
+the principle of maximum entropy has been leveraged to enhance
+exploration in MARL. However, we identify a critical limitation
+in existing maximum entropy MARL methods: a misalignment
+arises between local policies and the joint policy that maximizes
+the global Q-value, leading to violations of the IGM condition. To
+address this misalignment, we propose an order-preserving trans-
+formation. Building on it, we introduce ME-IGM, a novel maximum
+entropy MARL algorithm compatible with any credit assignment
+mechanism that satisfies the IGM condition while enjoying the ben-
+efits of maximum entropy exploration. We empirically evaluate two
+variants of ME-IGM: ME-QMIX and ME-QPLEX, in non-monotonic
+matrix games, and demonstrate their state-of-the-art performance
+across 17 scenarios in SMAC-v2 and Overcooked.
+KEYWORDS
+Multi Agent Reinforcement Learning; Maximum Entropy Reinforce-
+ment Learning; Centralized Training with Decentralized Execution
+ACM Reference Format:
+Wen-Tse Chen, Yuxuan Li, Shiyu Huang, Jiayu Chen, and Jeff Schneider.
+2026. ME-IGM: Individual-Global-Max in Maximum Entropy Multi-Agent
+Reinforcement Learning. In Proc. of the 25th International Conference on
+Autonomous Agents and Multiagent Systems (AAMAS 2026), Paphos, Cyprus,
+May 25 – 29, 2026, IFAAMAS, 19 pages. https://doi.org/10.65109/GYYC3346
+∗Co-supervision.
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29,
+2026, Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org). https://doi.org/10.65109/GYYC3346
+1
+INTRODUCTION
+Collaborative multi-agent tasks, where a team of agents works to-
+gether to complete a task and receives joint rewards, are inherently
+challenging for reinforcement learning (RL) agents. This difficulty
+arises due to the absence of individual reward signals for each agent
+and the significantly higher exploration requirements compared
+to single-agent scenarios. The challenge is further exacerbated by
+the exponential growth of the joint action space as the number of
+agents increases. In this work, we propose leveraging maximum
+entropy RL to promote exploration and adopting the individual-
+global-max (IGM) credit assignment mechanism [22] to effectively
+distribute joint rewards among the agents.
+Maximum entropy RL [14], recognized for promoting explo-
+ration [9], smoothing the objective landscape [1], and improving
+robustness

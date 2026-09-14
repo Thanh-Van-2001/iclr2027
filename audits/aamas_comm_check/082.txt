@@ -1,0 +1,83 @@
+Title: Approximating Nash Equilibria in General-Sum Games via Meta-Learning
+
+First page:
+Approximating Nash Equilibria in General-Sum Games via
+Meta-Learning
+David Sychrovský
+Charles University & EquiLibre
+Technologies
+Prague, Czechia
+sychrovsky@kam.mff.cuni.cz
+Christopher Solinas
+University of Alberta
+Edmonton, Canada
+solinas@ualberta.ca
+Revan MacQueen
+Alberta Machine Intelligence Institute
+Edmonton, Canada
+revan.macqueen@amii.ca
+Kevin Wang
+Brown University
+Providence, United States
+kevin_a_wang@brown.edu
+James R. Wright
+University of Alberta
+Edmonton, Canada
+james.wright@ualberta.ca
+Nathan R. Sturtevant
+University of Alberta
+Edmonton, Canada
+nathanst@ualberta.ca
+Michael Bowling
+University of Alberta
+Edmonton, Canada
+mbowling@ualberta.ca
+ABSTRACT
+Nash equilibrium is perhaps the best-known solution concept in
+game theory. Such a solution assigns a strategy to each player
+which offers no incentive to unilaterally deviate. While a Nash
+equilibrium is guaranteed to always exist, the problem of finding
+one in general-sum games is PPAD-complete, generally consid-
+ered intractable. Regret minimization is an efficient framework for
+approximating Nash equilibria in two-player zero-sum games. How-
+ever, in general-sum games, such algorithms are only guaranteed
+to converge to a coarse-correlated equilibrium (CCE), a solution
+concept where players can correlate their strategies. In this work,
+we use meta-learning to minimize the correlations in strategies
+produced by a regret minimizer. This encourages the regret mini-
+mizer to find strategies that are closer to a Nash equilibrium. The
+meta-learned regret minimizer is still guaranteed to converge to a
+CCE, but we give a bound on the distance to Nash equilibrium in
+terms of our meta-loss. We evaluate our approach in general-sum
+imperfect information games. Our algorithms provide significantly
+better approximations of Nash equilibria than state-of-the-art regret
+minimization techniques.
+KEYWORDS
+regret minimization; meta-learning; Nash equilibria
+ACM Reference Format:
+David Sychrovský, Christopher Solinas, Revan MacQueen, Kevin Wang,
+James R. Wright, Nathan R. Sturtevant, and Michael Bowling. 2026. Ap-
+proximating Nash Equilibria in General-Sum Games via Meta-Learning. In
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29,
+2026, Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org). https://doi.org/10.65109/
+Proc. of the 25th International Conference on Autonomous Agents and Multia-
+gent Systems (AAMAS 2026), Paphos, Cyprus, May 25 – 29, 2026, IFAAMAS,
+9 pages. https://doi.org/10.65109/
+1
+INTRODUCTION
+The Nash equilibrium is one of the most influential solution con-
+cepts in game theory. A strategy profile is a Nash equilibrium
+if it has the guarantee that no player can benefit by unilaterally
+deviating from it. The robustness of this guarantee means that
+Nash equilibria have applications in many domains ranging from
+economics [33, 47] to machine learning [22]. Finding an efficient
+algorithm for computing Nash equilibria has attracted much at-
+tention [11, 25, 31, 34, 41]. However, it was shown that, in its full
+generality, finding a Nash equilibrium is PPAD-complete [13, 39].
+Many related decision problems, such as ‘Is a given action in the
+support of a Nash equilibrium?’, are NP-complete [21].
+Despite these negative results, 

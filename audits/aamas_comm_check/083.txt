@@ -1,0 +1,84 @@
+Title: MAStitch: Unifying Local and Global Perspectives for Anomaly Detection in Multi-Agent Systems
+
+First page:
+MAStitch: Unifying Local and Global Perspectives for
+Anomaly Detection in Multi-Agent Systems
+Lior Vaknin
+Ben-Gurion University of the Negev
+Beer Sheva, Israel
+liorva@post.bgu.ac.il
+Yarin Yerushalmi Levi
+Ben-Gurion University of the Negev
+Beer Sheva, Israel
+yarinye@post.bgu.ac.il
+Ron Solomon
+Ben-Gurion University of the Negev
+Beer Sheva, Israel
+ronso@post.bgu.ac.il
+Jaidip Kotak
+Ben-Gurion University of the Negev
+Beer Sheva, Israel
+jaidip@post.bgu.ac.il
+Amit Giloni
+Fujitsu Research of Europe
+Modiin, Israel
+amit.giloni@fujitsu.com
+Chiara Picardi
+Fujitsu Research of Europe
+York, UK
+chiara.picardi@fujitsu.com
+Roman Vainshtein
+Fujitsu Research of Europe
+Beer Sheva, Israel
+roman.vainshtein@fujitsu.com
+Yuval Elovici
+Ben-Gurion University of the Negev
+Beer Sheva, Israel
+elovici@bgu.ac.il
+Asaf Shabtai
+Ben-Gurion University of the Negev
+Beer Sheva, Israel
+shabtaia@bgu.ac.il
+ABSTRACT
+Large language model (LLM)-based multi-agent systems (MASs)
+increasingly serve as decision-making and automation pipelines in
+diverse application domains. Although these systems are highly re-
+lied upon in many settings, they have been shown to be vulnerable
+to various threats, including threats exploited by malicious actors
+(e.g., adversarial attacks) and threats stemming from dangerous be-
+havior of the system (e.g., insecure code generation). Those threats
+can be viewed as deviations from normal behavior (anomalies),
+requiring a robust anomaly detection solution. Most approaches
+for detecting such anomalies concentrate on individual agents, spe-
+cific failure scenarios, or particular use cases, and often require
+additional training phases, limiting their applicability and ease of
+adoption across diverse MASs. To address these limitations, we
+introduce MAStitch, a platform- and threat-agnostic method for
+threat detection in MASs that does not require any training, mak-
+ing it well-suited for diverse environments and scenarios requiring
+plug-and-play detection capabilities. MAStitch leverages local and
+global perspectives, enabling comprehensive analysis of inter-agent
+interactions and intra-agent processes to detect anomalies. These
+perspectives are acquired by a pair of LLM-based agents: a Local
+Analyzer Agent (LAA), which evaluates each agent’s execution
+process, and a Global Analyzer Agent (GAA), which aggregates
+evidence from multiple agents to detect cross-agent failures. The
+GAA summarizes the anomalous patterns identified, classifies the
+entire execution log, and provides an explanation when threats are
+detected. We evaluate our method’s detection performance on six
+different MAS applications which were developed on two widely
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29,
+2026, Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org). https://doi.org/10.65109/BMJZ4532
+used MAS platforms. The evaluation results demonstrate MAS-
+titch’s ability to detect a variety of threats, with an average F1 score
+of 0.9 and a minimal false positive rate of 0.078.
+KEYWORDS
+Multi-Agent Systems; LLM-based Agents; Anomaly Detection; Ad-
+versarial Attacks; Security Analysis
+ACM Reference Format:
+Lior Vaknin, Yarin Yerushalmi Levi, Ron Solomon, Jaidip Kotak, Amit Giloni,
+Chiara Picardi, Roman Vainshtein, Yuval Elovici

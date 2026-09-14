@@ -12,5 +12,6 @@ python study/gold_set.py score --items audits/aamas_gold/items.json --labels aud
 python study/pages_score.py --items audits/aamas_pages/items.json --labels audits/aamas_pages/labels.json \
     --analysis out/aamas/analysis.json --out out/aamas/gold_set_pages.json > /dev/null
 python aamas/figures.py
+python aamas/supplement_tables.py
 python aamas/make_numbers_aamas.py
 python aamas/check_aamas.py "$@"

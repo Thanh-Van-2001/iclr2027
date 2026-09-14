@@ -1,0 +1,80 @@
+Title: MaDi: Learning to Mask Distractions for Generalization in Visual Deep Reinforcement Learning
+
+First page:
+MaDi: Learning to Mask Distractions for
+Generalization in Visual Deep Reinforcement Learning
+Bram Grooten
+Eindhoven University of Technology
+Netherlands
+Tristan Tomilin
+Eindhoven University of Technology
+Netherlands
+Gautham Vasan
+University of Alberta
+Canada
+Matthew E. Taylor
+University of Alberta & Alberta
+Machine Intelligence Institute (Amii)
+Canada
+A. Rupam Mahmood
+University of Alberta & Alberta
+Machine Intelligence Institute (Amii)
+Canada
+Meng Fang
+University of Liverpool
+United Kingdom
+Mykola Pechenizkiy
+Eindhoven University of Technology
+Netherlands
+Decebal Constantin Mocanu
+University of Luxembourg
+Luxembourg
+ABSTRACT
+The visual world provides an abundance of information, but many
+input pixels received by agents often contain distracting stimuli.
+Autonomous agents need the ability to distinguish useful informa-
+tion from task-irrelevant perceptions, enabling them to generalize
+to unseen environments with new distractions. Existing works ap-
+proach this problem using data augmentation or large auxiliary
+networks with additional loss functions. We introduce MaDi, a
+novel algorithm that learns to mask distractions by the reward
+signal only. In MaDi, the conventional actor-critic structure of deep
+reinforcement learning agents is complemented by a small third sib-
+ling, the Masker. This lightweight neural network generates a mask
+to determine what the actor and critic receive, such that they can
+focus on learning the task. We run experiments on the DeepMind
+Control Generalization Benchmark, the Distracting Control Suite,
+and a real UR5 Robotic Arm. Our algorithm improves the agent’s
+focus with useful masks, while its efficient Masker network only
+adds 0.2% more parameters to the original structure, in contrast to
+previous work. MaDi consistently achieves generalization results
+better than or competitive to state-of-the-art methods.1
+KEYWORDS
+Deep Reinforcement Learning, Generalization, Robotics
+ACM Reference Format:
+Bram Grooten, Tristan Tomilin, Gautham Vasan, Matthew E. Taylor, A.
+Rupam Mahmood, Meng Fang, Mykola Pechenizkiy, and Decebal Constantin
+Mocanu. 2024. MaDi: Learning to Mask Distractions for Generalization
+in Visual Deep Reinforcement Learning. In Proc. of the 23rd International
+Conference on Autonomous Agents and Multiagent Systems (AAMAS 2024),
+Auckland, New Zealand, May 6 – 10, 2024, IFAAMAS, 23 pages.
+1Code: github.com/bramgrooten/mask-distractions and video: youtu.be/2oImF0h1k48.
+Corresponding author: b.j.grooten@tue.nl
+This work is licensed under a Creative Commons Attribution
+International 4.0 License.
+Proc. of the 23rd International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), N. Alechina, V. Dignum, M. Dastani, J.S. Sichman (eds.), May 6 – 10, 2024,
+Auckland, New Zealand. © 2024 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org).
+1
+INTRODUCTION
+Deep reinforcement learning (RL) has achieved remarkable success
+in a variety of complex tasks such as game playing [32, 37], robotics
+[2, 10, 17], nuclear fusion [7], and autonomous navigation [31, 60].
+However, one of the major challenges faced by RL agents is their
+limited ability to generalize to unseen environments, particularly in
+the presence of distracting visual noise, such as a video playing in
+the background [22, 39]. These distractions can lead to significant
+degradation in the performance of deep RL agents, thereby hinder-
+ing their applicability in the real world. To address this, we propose
+a nove

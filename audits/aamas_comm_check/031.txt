@@ -1,0 +1,69 @@
+Title: The Strong Core of Housing Markets with Partial Order Preferences
+
+First page:
+The Strong Core of Housing Markets with Partial Order
+Preferences
+Ildikó Schlotter
+HUN-REN Centre for Economic and Regional Studies
+Budapest, Hungary
+schlotter.ildiko@krtk.hun-ren.hu
+Lydia Mirabel Mendoza-Cadena
+MTA-ELTE Matroid Optimization Research Group,
+Department of Operations Research, Eötvös Loránd
+University
+Budapest, Hungary
+lyd21@student.elte.hu
+ABSTRACT
+We study the strong core of housing markets when agents’ pref-
+erences over houses are expressed as partial orders. We provide
+a structural characterization of the strong core, and propose an
+efficient and weakly group-strategyproof algorithm that finds an
+allocation in the strong core or decides that it is empty, even in the
+presence of forced and forbidden arcs. Additionally, we show that
+certain results known for the strong core in the case when agents’
+preferences are weak orders can be extended to the setting with
+partial order preferences; among others, we show that the strong
+core in such housing markets satisfies the property of respecting
+improvements.
+KEYWORDS
+housing market; strong core; partial orders; forced and forbidden
+arcs; strategyproofness; property of respecting improvement
+ACM Reference Format:
+Ildikó Schlotter and Lydia Mirabel Mendoza-Cadena. 2025. The Strong
+Core of Housing Markets with Partial Order Preferences. In Proc. of the
+24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Detroit, Michigan, USA, May 19 – 23, 2025, IFAAMAS, 9 pages.
+1
+INTRODUCTION
+A Shapley-Scarf housing market involves a set of agents, each
+endowed with exactly one unit of some indivisible good – a house –
+and having preferences over the houses owned by other agents in
+the market. Agents are assumed to trade among themselves without
+monetary transfers; hence, the outcome in such a market is an
+allocation that assigns to each agent exactly one house, possibly its
+own. Housing markets have been extensively studied in the fields of
+economics and computer science since the seminal work of Shapley
+and Scarf in 1974 [43]. Their most prominent motivation comes from
+kidney-exchange programs [10, 12, 37], but applications include
+various exchange markets1 ranging from time-sharing markets [45]
+and time banks [3] to on-campus housing [1].
+Two prominent solution concepts widely investigated in connec-
+tion to housing markets are the core and the strong core: the core of
+1For an online exchange market for board games, see https://boardgamegeek.com/
+wiki/page/Math_Trades.
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowé (eds.), May 19 – 23, 2025, Detroit, Michigan,
+USA. © 2025 International Foundation for Autonomous Agents and Multiagent Systems
+(www.ifaamas.org).
+a housing market contains allocations from which no coalition of
+agents can deviate so that each of them strictly improves their situ-
+ation by trading among themselves, while the strong core (or strict
+core) contains allocations that do not admit a coalition of agents
+who are able to weakly improve their situation, with at least one
+agent strictly improving as a result of the deviation. Shapley and
+Scarf described the Top Trading Cycle (TTC) mechanism, attributed
+to David Gale, that always finds an allocation in the core [43]. Roth
+and Postlewaite showed that if agents’ preferences are strict, then
+the TTC mechanism always ret

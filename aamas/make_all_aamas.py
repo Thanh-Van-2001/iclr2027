@@ -169,6 +169,31 @@ def example_three_seeds(comparisons: list) -> dict:
             "n_three_seed_failing": len(sel)}
 
 
+def community_agreement(comm_path: str, second_path: str) -> dict:
+    """Agreement between the two labellers (Gemini on every paper, Claude
+    Sonnet on a random hundred) under the same prompt: raw agreement and
+    Cohen's kappa over the papers both labelled."""
+    if not (os.path.exists(comm_path) and os.path.exists(second_path)):
+        return {}
+    with open(comm_path, encoding="utf-8", newline="") as fh:
+        first = {r["id"]: r["label"] for r in csv.DictReader(fh)}
+    second = {r["paper"]: r["label"] for r in json.load(open(second_path, encoding="utf-8"))}
+    pairs = [(first[p], second[p]) for p in second if p in first and first[p] != "parse_error"]
+    if not pairs:
+        return {}
+    n = len(pairs)
+    agree = sum(a == b for a, b in pairs)
+    labels = sorted({x for pr in pairs for x in pr})
+    pa = agree / n
+    pe = sum((sum(1 for a, _ in pairs if a == l) / n) * (sum(1 for _, b in pairs if b == l) / n) for l in labels)
+    kappa = (pa - pe) / (1 - pe) if pe < 1 else 1.0
+    lo, hi = wilson_interval(agree, n)
+    confusion = collections.Counter(pairs)
+    return {"n": n, "agree": agree, "pct": round(100 * pa, 1), "ci": [round(100 * lo, 1), round(100 * hi, 1)],
+            "kappa": round(kappa, 2),
+            "disagreements": [{"first": a, "second": b, "n": c} for (a, b), c in confusion.most_common() if a != b][:10]}
+
+
 def duplicate_table_records(records: list) -> dict:
     """Tables the parser recorded more than once under one (paper, number,
     page): a two-column artefact in which a caption is attached to a body
@@ -254,6 +279,7 @@ def main() -> int:
         "duplicate_table_records": duplicate_table_records(records),
         "environment_families": environment_families(cs),
         "example_three_seeds": example_three_seeds(cs),
+        "community_agreement": community_agreement(f"{OUT}/communities.csv", "audits/aamas_comm_check/labels_sonnet.json"),
         "protocol_stats": {
             "papers_scanned": len(protocol),
             "state_eval_episodes": sum(1 for p in protocol.values() if p.get("eval_episodes")),

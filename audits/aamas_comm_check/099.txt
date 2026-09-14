@@ -1,0 +1,74 @@
+Title: Hierarchical Reward Design from Language: Enhancing Alignment of Agent Behavior with Human Specifications
+
+First page:
+Hierarchical Reward Design from Language: Enhancing
+Alignment of Agent Behavior with Human Specifications
+Zhiqin Qian
+Rice University
+Houston, TX, USA
+bill.qian@rice.edu
+Ryan Diaz
+Rice University
+Houston, TX, USA
+ryandiaz@rice.edu
+Sangwon Seo
+Rice University
+Houston, TX, USA
+sangwon.seo@rice.edu
+Vaibhav Unhelkar
+Rice University
+Houston, TX, USA
+vaibhav.unhelkar@rice.edu
+ABSTRACT
+When training artificial intelligence (AI) to perform tasks, humans
+often care not only about whether a task is completed but also how it
+is performed. As AI agents tackle increasingly complex tasks, align-
+ing their behavior with human-provided specifications becomes
+critical for responsible AI deployment. Reward design provides a
+direct channel for such alignment by translating human expec-
+tations into reward functions that guide reinforcement learning
+(RL). However, existing methods are often too limited to capture
+nuanced human preferences that arise in long-horizon tasks. Hence,
+we introduce Hierarchical Reward Design from Language (HRDL):
+a problem formulation that extends classical reward design to en-
+code richer behavioral specifications for hierarchical RL agents.
+We further propose Language to Hierarchical Rewards (L2HR) as a
+solution to HRDL. Experiments show that AI agents trained with
+rewards designed via L2HR not only complete tasks effectively but
+also better adhere to human specifications. Together, HRDL and
+L2HR advance the research on human-aligned AI agents.
+KEYWORDS
+Reward Design; Human-Centered AI; Hierarchical RL
+ACM Reference Format:
+Zhiqin Qian, Ryan Diaz, Sangwon Seo, and Vaibhav Unhelkar. 2026. Hier-
+archical Reward Design from Language: Enhancing Alignment of Agent
+Behavior with Human Specifications. In Proc. of the 25th International Confer-
+ence on Autonomous Agents and Multiagent Systems (AAMAS 2026), Paphos,
+Cyprus, May 25 – 29, 2026, IFAAMAS, 10 pages. https://doi.org/10.65109/
+JTHG8732
+1
+Introduction
+Robots and other AI agents are increasingly being deployed in
+human-centric environments, such as homes, hospitals, and disaster
+zones [18, 28, 48, 51, 55, 56, 67, 68, 70]. Their usefulness depends not
+only on task completion, but also on respecting human intentions,
+operational rules, and safety requirements (collectively referred to
+as behavior specifications).
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29,
+2026, Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org). https://doi.org/10.65109/JTHG8732
+Aligning agent behavior with these specifications is central to
+their responsible deployment, with various paradigms being ac-
+tively explored for conveying such specifications [11]. This work
+focuses on reward design, a paradigm where humans convey specifi-
+cations through reward functions that guide reinforcement learning
+(RL), typically before AI deployment. This paradigm is particularly
+suitable for use cases where specifications are relatively stable and
+the costs of reward design can be amortized, such as during the
+repeated use of AI agents by humans in domain-specific contexts.
+As AI agents take on increasingly complex tasks, more advanced
+reward design methods are needed to capture equally complex
+specifications. Humans rarely reason about tasks and associated

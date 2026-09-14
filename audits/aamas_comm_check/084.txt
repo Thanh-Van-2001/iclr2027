@@ -1,0 +1,86 @@
+Title: KAN-Enhanced Graph Learning for Active Voltage Control in Dynamic Power Systems
+
+First page:
+KAN-Enhanced Graph Learning for Active Voltage Control in
+Dynamic Power Systems
+Liqian Sun
+School of Computer Science and
+Technology, Harbin Institute of
+Technology Shenzhen, 518055
+Shenzhen, China
+25s151073@stu.hit.edu.cn
+Hang Xiao
+School of Software, Northwestern
+Polytechnical University, 710072
+Xi’an, China
+shawh@mail.nwpu.edu.cn
+Shuhan Qi*
+School of Computer Science and
+Technology, Harbin Institute of
+Technology Shenzhen, 518055
+Shenzhen, China
+shuhanqi@cs.hitsz.edu.cn
+Huale Li*
+School of Information Science and
+Engineering, Lanzhou University,
+730000
+Lanzhou, China
+lihuale@lzu.edu.cn
+Jiajia Zhang
+School of Computer Science and
+Technology, Harbin Institute of
+Technology Shenzhen, 518055
+Shenzhen, China
+zhangjiajia@hit.edu.cn
+Xuan Wang
+School of Computer Science and
+Technology, Harbin Institute of
+Technology Shenzhen, 518055
+Shenzhen, China
+wangxuan@cs.hitsz.edu.cn
+ABSTRACT
+The large-scale integration of distributed energy resources has sig-
+nificantly increased the complexity of industrial power dispatch.
+While existing multi-agent reinforcement learning (MARL) meth-
+ods leverage graph neural networks for topology-aware voltage
+control, their ability to capture evolving grid topologies remains
+limited. Therefore, we propose GKAN-MA, a dual-enhanced MARL
+framework specifically designed to maintain voltage stability in
+power systems with highly dynamic topologies and strongly non-
+linear voltage-power dynamics. It achieves robust voltage regula-
+tion despite frequent grid reconfigurations, while precisely mod-
+eling complex relationships between reactive power and nodal
+voltages. Through persistent topology awareness and accurate non-
+linear function approximation, GKAN-MA ensures consistent per-
+formance during network changes. Experimental results on IEEE
+33-bus and 141-bus systems demonstrate superior controllability
+and operational efficiency, validating its adaptability to dynamic
+power system conditions.
+KEYWORDS
+Active Voltage Control; Multi-agent Reinforcement Learning; Graph
+Attention Networks; Kolmogorov-Arnold network
+ACM Reference Format:
+Liqian Sun, Hang Xiao, Shuhan Qi*, Huale Li*, Jiajia Zhang, and Xuan
+Wang. 2026. KAN-Enhanced Graph Learning for Active Voltage Control in
+Dynamic Power Systems. In Proc. of the 25th International Conference on
+Autonomous Agents and Multiagent Systems (AAMAS 2026), Paphos, Cyprus,
+May 25 – 29, 2026, IFAAMAS, 9 pages. https://doi.org/10.65109/WDUC5953
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29,
+2026, Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org). https://doi.org/10.65109/WDUC5953
+1
+INTRODUCTION
+In the context of global sustainable development, distributed en-
+ergy resources (DERs) utilizing clean energy, such as rooftop photo-
+voltaics (PV), are increasingly being integrated into power systems,
+demonstrating significant potential [1]. However, their inherent
+intermittency and volatility pose substantial challenges to power
+system operation and dispatch [2]. Effectively integrating rooftop
+PV into industrial power systems has become a critical issue de-
+manding urgent resolution.
+Active voltage control (AVC), as a key technique for ensuring
+grid stability, plays a crucial role in mitigating the challenges posed
+by r

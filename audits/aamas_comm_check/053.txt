@@ -1,0 +1,74 @@
+Title: Bottom-Up Reputation Promotes Cooperation with Multi-Agent Reinforcement Learning
+
+First page:
+Bottom-Up Reputation Promotes Cooperation with
+Multi-Agent Reinforcement Learning
+Tianyu Ren
+University of Manchester
+Manchester, United Kingdom
+tianyu.ren@manchester.ac.uk
+Xuan Yao
+Southeast University
+Nanjing, China
+shiny_yao@yeah.net
+Yang Li
+University of Manchester
+Manchester, United Kingdom
+yang.li-4@manchester.ac.uk
+Xiao-Jun Zeng
+University of Manchester
+Manchester, United Kingdom
+x.zeng@manchester.ac.uk
+ABSTRACT
+Reputation serves as a powerful mechanism for promoting cooper-
+ation in multi-agent systems, as agents are more inclined to cooper-
+ate with those of good social standing. While existing multi-agent
+reinforcement learning methods typically rely on predefined so-
+cial norms to assign reputations, the question of how a population
+reaches a consensus on judgement when agents hold private, inde-
+pendent views remains unresolved. In this paper, we propose a novel
+bottom-up reputation learning method, Learning with Reputation
+Reward (LR2), designed to promote cooperative behaviour through
+rewards shaping based on assigned reputation. Our agent archi-
+tecture includes a dilemma policy that determines cooperation by
+considering the impact on neighbours, and an evaluation policy
+that assigns reputations to affect the actions of neighbours while
+optimizing self-objectives. It operates using local observations and
+interaction-based rewards, without relying on centralized modules
+or predefined norms. Our findings demonstrate the effectiveness
+and adaptability of LR2 across various spatial social dilemma sce-
+narios. Interestingly, we find that LR2 stabilizes and enhances coop-
+eration not only with reward reshaping from bottom-up reputation
+but also by fostering strategy clustering in structured populations,
+thereby creating environments conducive to sustained cooperation.
+KEYWORDS
+Bottom-Up Reputation, Social Norm, Cooperative Intelligence, Multi-
+Agent Reinforcement Learning, Reward Shaping
+ACM Reference Format:
+Tianyu Ren, Xuan Yao, Yang Li, and Xiao-Jun Zeng. 2025. Bottom-Up Repu-
+tation Promotes Cooperation with Multi-Agent Reinforcement Learning. In
+Proc. of the 24th International Conference on Autonomous Agents and Mul-
+tiagent Systems (AAMAS 2025), Detroit, Michigan, USA, May 19 – 23, 2025,
+IFAAMAS, 10 pages.
+1
+INTRODUCTION
+Cooperation is ubiquitous in almost every form of social interaction
+and is arguably a key factor in the success of complex social systems,
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowé (eds.), May 19 – 23, 2025, Detroit, Michigan,
+USA. © 2025 International Foundation for Autonomous Agents and Multiagent Systems
+(www.ifaamas.org).
+such as economics [59], evolutionary biology [42], and multi-agent
+systems (MAS) [4]. With the rise of artificial intelligence (AI), au-
+tonomously operating learning agents within MAS are becoming
+increasingly common. A typical example is autonomous vehicles,
+which must share the road with both other vehicles and human
+drivers; without proper coordination, issues such as road conges-
+tion may arise [17]. However, achieving effective collective actions
+among self-interested agents remains a significant challenge.
+To address this challenge, mechanisms that facilitate correlated
+interactions among autonomous, decentralized learning agents are
+required [6]. These mechanisms shape the interaction structures
+or 

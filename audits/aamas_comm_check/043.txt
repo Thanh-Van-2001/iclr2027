@@ -1,0 +1,67 @@
+Title: The Metric Distortion of Randomized Social Choice Functions: C1 Maximal Lottery Rules and Simulations
+
+First page:
+The Metric Distortion of Randomized Social Choice Functions:
+C1 Maximal Lottery Rules and Simulations
+Fabian Frank
+Technical University of Munich
+Munich, Germany
+fabian_w.frank@tum.de
+Patrick Lederer
+University of New South Wales
+Sydney, Australia
+p.lederer@unsw.edu.au
+ABSTRACT
+The metric distortion of a randomized social choice function (RSCF)
+quantifies its worst-case approximation ratio to the optimal social
+cost when the voters’ costs for alternatives are given by distances in
+a metric space. This notion has recently attracted significant atten-
+tion as numerous RSCFs that aim to minimize the metric distortion
+have been suggested. Since such tailored voting rules have, however,
+little normative appeal other than their low metric distortion, we
+will study the metric distortion of well-established RSCFs. Specifi-
+cally, we first show that C1 maximal lottery rules, a well-known
+class of RSCFs, have a metric distortion of 4, which is optimal within
+the class of majoritarian RSCFs. Secondly, we conduct extensive
+computer experiments on the metric distortion of RSCFs to obtain
+insights into their average-case performance. These computer ex-
+periments are based on a new linear program for computing the
+metric distortion of a lottery and reveal that the average-case metric
+distortion of some classical RSCFs is often only slightly worse than
+that of RSCFs tailored to minimize the metric distortion. Finally, we
+also analytically study the expected metric distortion of RSCFs for
+the impartial culture distribution. Specifically, we show that, under
+this distribution, every reasonable RSCF has an expected metric
+distortion close to 2 when the number of voters is large.
+KEYWORDS
+Randomized Social Choice Functions; Metric Distortion; Simula-
+tions; Average-case Analysis; Maximal Lottery Rules
+ACM Reference Format:
+Fabian Frank and Patrick Lederer. 2025. The Metric Distortion of Random-
+ized Social Choice Functions: C1 Maximal Lottery Rules and Simulations.
+In Proc. of the 24th International Conference on Autonomous Agents and Mul-
+tiagent Systems (AAMAS 2025), Detroit, Michigan, USA, May 19 – 23, 2025,
+IFAAMAS, 9 pages.
+1
+INTRODUCTION
+An important challenge in multi-agent systems is collective
+decision-making: given the possibly conflicting preferences of a
+group of agents over some alternatives, a joint decision has to be
+made. To address this problem, researchers in the field of social
+choice theory try to identify desirable mechanisms to aggregate the
+agents’ preferences. In more detail, social choice theory is mainly
+concerned with social choice functions (SCFs) and randomized social
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowé (eds.), May 19 – 23, 2025, Detroit, Michigan,
+USA. © 2025 International Foundation for Autonomous Agents and Multiagent Systems
+(www.ifaamas.org).
+choice functions (RSCFs), which formalize deterministic and random-
+ized voting rules: an SCF maps the voters’ preferences (expressed
+as linear rankings of the alternatives) to a single winner, and an
+RSCF returns a probability distribution over the alternatives from
+which the final winner will eventually be chosen [6, 13].
+In an attempt to quantitatively measure the quality of SCFs and
+RSCFs, Procaccia and Rosenschein [47] introduced the distortion
+of voting rules. The idea of this notion is that voter

@@ -1,0 +1,115 @@
+Title: TriBand-BEV: Real-Time LiDAR-Only 3D Pedestrian Detection via Height-Aware BEV and High-Resolution Feature Fusion
+
+First page:
+TriBand-BEV: Real-Time LiDAR-Only 3D Pedestrian Detection via
+Height-Aware BEV and High-Resolution Feature Fusion
+Mohammad Khoshkdahan
+Karlsruhe Institute of Technology
+Karlsruhe, Germany
+mohammad.khoshkdahan@kit.edu
+Alexey Vinel
+Karlsruhe Institute of Technology
+Karlsruhe, Germany
+alexey.vinel@kit.edu
+ABSTRACT
+Safe autonomous agents and mobile robots need fast real time 3D
+perception, especially for vulnerable road users (VRUs) such as
+pedestrians. We introduce a new bird’s eye view (BEV) encoding,
+which maps the full 3D LiDAR point cloud into a light-weight 2D
+BEV tensor with three height bands. We explicitly reformulate 3D
+detection as a 2D detection problem and then reconstruct 3D boxes
+from the BEV outputs. A single network detects cars, pedestrians,
+and cyclists in one pass. The backbone uses area attention at deep
+stages, a hierarchical bidirectional neck over P1 to P4 fuses context
+and detail, and the head predicts oriented boxes with distribution
+focal learning for side offsets and a rotated IoU loss. Training applies
+a small vertical re bin and a mild reflectance jitter in channel space
+to resist memorization. We use an interquartile range (IQR) filter to
+remove noisy and outlier LiDAR points during 3D reconstruction.
+On KITTI dataset, TriBand-BEV attains 58.7/52.6/47.2 pedestrian
+BEV AP(%) for easy, moderate, and hard at 49 FPS on a single
+consumer GPU, surpassing Complex-YOLO, with gains of +12.6%,
++7.5%, and +3.1%. Qualitative scenes show stable detection under
+occlusion. The pipeline is compact and ready for real time robotic
+deployment. Our source code is publicly available on GitHub.1
+KEYWORDS
+LiDAR-only 3D Object Detection, Bird’s Eye View Representation,
+Real-Time Perception, Pedestrian Detection, Autonomous Robotics
+ACM Reference Format:
+Mohammad Khoshkdahan and Alexey Vinel. 2026. TriBand-BEV: Real-Time
+LiDAR-Only 3D Pedestrian Detection via Height-Aware BEV and High-
+Resolution Feature Fusion. In Proc. of the 25th International Conference on
+Autonomous Agents and Multiagent Systems (AAMAS 2026), Paphos, Cyprus,
+May 25 – 29, 2026, IFAAMAS, 10 pages. https://doi.org/10.65109/INST9866
+1
+INTRODUCTION
+Mobile robots and autonomous vehicles (AVs) rely on 360-degree,
+real-time environmental perception to safely navigate and interact
+within complex outdoor spaces. Meeting this fundamental require-
+ment demands sensors capable of high-frame-rate feedback and
+reliable operation in diverse environmental conditions, all while
+adhering to stringent compute and power budgets. While cameras
+offer rich semantic and appearance data, achieving full 360-degree
+1https://github.com/mohammadkhsh/TriBand-BEV
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29,
+2026, Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org). https://doi.org/10.65109/INST9866
+P1
+P2
+P3
+P4
+P5
+B16
+B8
+B4
+B2
+B2
+D4
+D8
+D16
+𝑥𝑐, 𝑦𝑐, ℎ, 𝑤, 𝜃
+TriBand
+Separation
+3D LiDAR Point Cloud
+Head
+Multi-scale area-attentive encoder
+Top-down lateral fusion
+Bottom-up path refinement
+Backbone
+Neck 
+BEV 
+Encoder
+2D BEV
+Projection
+to LiDAR
+2D Prediction
+IQR Filter
+℘𝒅
+℘
+Pre-processing (1)
+Post-processing (3)
+Detection (2)
+ℱ(𝒙)
+zb
+zt
+P1
+P2
+P3
+P4
+P5
+B16
+B8
+B4
+B2
+B2
+D4
+D8
+D16
+3D Prediction
+NMS
+(IoU = 0.5)
+700 × 800
+Figure 1: Detection

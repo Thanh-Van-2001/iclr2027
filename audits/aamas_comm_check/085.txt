@@ -1,0 +1,74 @@
+Title: PIQL: Projective Implicit Q-Learning with Support Constraint for Offline Reinforcement Learning
+
+First page:
+PIQL: Projective Implicit Q-Learning with Support Constraint for
+Offline Reinforcement Learning
+Xinchen Han
+SAMOVAR, Institut Polytechnique de
+Paris
+Palaiseau, France
+xinchen.han@telecom-sudparis.eu
+Hossam Afifi
+SAMOVAR, Institut Polytechnique de
+Paris
+Palaiseau, France
+hossam.afifi@telecom-sudparis.eu
+Michel Marot
+SAMOVAR, Institut Polytechnique de
+Paris
+Palaiseau, France
+michel.marot@telecom-sudparis.eu
+ABSTRACT
+Offline Reinforcement Learning (RL) faces a fundamental challenge
+of extrapolation errors caused by out-of-distribution (OOD) actions.
+Implicit Q-Learning (IQL) employs expectile regression to achieve
+in-sample learning. Nevertheless, IQL relies on a fixed expectile
+hyperparameter and a density-based policy improvement method,
+both of which impede its adaptability and performance. In this
+paper, we propose Projective IQL (PIQL), a projective variant of
+IQL enhanced with a support constraint. In the policy evaluation
+stage, PIQL substitutes the fixed expectile hyperparameter with a
+projection-based parameter and extends the one-step value estima-
+tion to a multi-step formulation. In the policy improvement stage,
+PIQL adopts a support constraint instead of a density constraint,
+ensuring closer alignment with the policy evaluation. Theoretically,
+we demonstrate that PIQL maintains the expectile regression and
+in-sample learning framework, guarantees monotonic policy im-
+provement, and introduces a progressively more rigorous criterion
+for advantageous actions. Experiments on D4RL and NeoRL2 bench-
+marks demonstrate robust gains across diverse domains, achieving
+state-of-the-art performance overall. 1
+KEYWORDS
+Offline RL; Support Constraint; Implicit Q-Learning; Vector Projec-
+tion
+ACM Reference Format:
+Xinchen Han, Hossam Afifi, and Michel Marot. 2026. PIQL: Projective Im-
+plicit Q-Learning with Support Constraint for Offline Reinforcement Learn-
+ing. In Proc. of the 25th International Conference on Autonomous Agents
+and Multiagent Systems (AAMAS 2026), Paphos, Cyprus, May 25 – 29, 2026,
+IFAAMAS, 9 pages. https://doi.org/10.65109/GZIN7614
+1
+INTRODUCTION
+Offline RL aims to learn policies from static datasets collected by
+unknown behavior policy, thereby avoiding costly or unsafe on-
+line interactions with the environment [20, 28]. This data-driven
+paradigm holds strong promise for real-world applications [14].
+However, removing continuous interaction also introduces sub-
+stantial challenges. A central difficulty is extrapolation error [9],
+1Full version on https://arxiv.org/abs/2501.08907
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 25th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2026), C. Amato, L. Dennis, V. Mascardi, J. Thangarajah (eds.), May 25 – 29,
+2026, Paphos, Cyprus. © 2026 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org). https://doi.org/10.65109/GZIN7614
+which arises from OOD actions that are not represented in the
+dataset. Such errors can be amplified through bootstrapped Bell-
+man backups and may distort value estimates for a wide range
+of state–action pairs, leading to degraded policy performance. To
+address this challenge, existing research has elaborated offline RL
+algorithms focusing on policy improvement and policy evaluation,
+respectively.
+In the policy improvement stage, policy constraint methods en-
+courage the learned policy to remain close to the behavior policy.
+Behavior cloning (

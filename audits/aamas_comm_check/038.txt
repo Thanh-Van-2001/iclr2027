@@ -1,0 +1,72 @@
+Title: Who Reviews The Reviewers? A Multi-Level Jury Problem
+
+First page:
+Who Reviews The Reviewers? A Multi-Level Jury Problem
+Ben Abramowitz
+Tulane University
+New Orleans, USA
+babramow@tulane.edu
+Omer Lev
+Ben-Gurion University of the Negev
+Beersheba, Israel
+omerlev@bgu.ac.il
+Nicholas Mattei
+Tulane University
+New Orleans, USA
+nsmattei@tulane.edu
+ABSTRACT
+We consider the problem of determining a binary ground truth using
+advice from a group of independent reviewers (experts) who express
+their guess about a ground truth correctly with some independent
+probability (competence) 𝑝𝑖. In this setting, when all reviewers
+are competent with 𝑝≥0.5, the Condorcet Jury Theorem tells us
+that adding more reviewers increases the overall accuracy, and if
+all 𝑝𝑖’s are known, then there exists an optimal weighting of the
+reviewers. However, in practical settings, reviewers may be noisy
+or incompetent, i.e., 𝑝𝑖≤0.5, and the number of experts may be
+small, so the asymptotic Condorcet Jury Theorem is not practically
+relevant. In such cases we explore appointing one or more chairs
+(judges) who determine the weight of each reviewer for aggregation,
+creating multiple levels. However, these chairs may be unable to
+correctly identify the competence of the reviewers they oversee,
+and therefore unable to compute the optimal weighting. We give
+conditions on when a set of chairs is able to weight the reviewers
+optimally, and depending on the competence distribution of the
+agents, give results about when it is better to have more chairs or
+more reviewers. Through simulations we show that in some cases
+it is better to have more chairs, but in many cases it is better to
+have more reviewers.
+KEYWORDS
+Peer Review, Peer Selection, Jury Theorem
+ACM Reference Format:
+Ben Abramowitz, Omer Lev, and Nicholas Mattei. 2025. Who Reviews The
+Reviewers? A Multi-Level Jury Problem. In Proc. of the 24th International
+Conference on Autonomous Agents and Multiagent Systems (AAMAS 2025),
+Detroit, Michigan, USA, May 19 – 23, 2025, IFAAMAS, 9 pages.
+1
+INTRODUCTION
+People have been struggling with finding the correct answer for
+millennia.1 In ancient times, when faced with a problem that re-
+quired discovering a ground truth, two main approaches dominated.
+The first, less common today, was to approach deities and either
+ask them to intervene on the randomness of the world (as in the
+Book of Joshua, Chapter 7), which is a bit akin to sortition [20]; or
+to ask the deity’s wisdom directly (e.g., the Oracle at Delphi). The
+second approach, still in widespread use today, is to try to assess
+the known information and draw a conclusion. This can either be
+1Fans of The Hitchhiker’s Guide to the Galaxy know it is 42.
+This work is licensed under a Creative Commons Attribution Inter-
+national 4.0 License.
+Proc. of the 24th International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2025), Y. Vorobeychik, S. Das, A. Nowé (eds.), May 19 – 23, 2025, Detroit, Michigan,
+USA. © 2025 International Foundation for Autonomous Agents and Multiagent Systems
+(www.ifaamas.org).
+done by laymen, the basic premise of the jury system as established
+by Magna Carta, or by people with expertise. In both cases, groups
+of people are used (instead of single individuals) to increase the
+reliability and accuracy of the answers, building on the “wisdom of
+the crowds”.
+Mathematical analysis of using a group of agents – a jury, or
+a set of experts – to assess information and make a decision has
+been done since at least Condorcet’s time, in the late 18th century,
+when he established th

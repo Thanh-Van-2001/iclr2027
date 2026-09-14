@@ -1,0 +1,73 @@
+Title: Obstruction Alternating-time Temporal Logic: A Strategic Logic to Reason about Dynamic Models
+
+First page:
+Obstruction Alternating-time Temporal Logic:
+a Strategic Logic to Reason about Dynamic Models
+Davide Catta
+Università di Napoli, Federico II
+Naples, Italy
+davidecatta2@gmail.com
+Jean Leneutre
+Télécom Paris
+Paris, France
+jean.leneutre@telecom-paris.fr
+Vadim Malvone
+Télécom Paris
+Paris, France
+vadim.malvone@telecom-paris.fr
+Aniello Murano
+Università di Napoli, Federico II
+Naples, Italy
+aniello.murano@unina.it
+ABSTRACT
+Multi-Agent Systems (MAS) operating within dynamic models have
+been extensively studied in various domains, including cyberse-
+curity and planning. In this paper, we introduce a dedicated logic
+for analyzing a specific category of MAS that involve strategic ob-
+jectives within dynamic models. Within these MAS, there exists
+an agent known as the “Demon”, which possesses the capability
+to modify the MAS model itself, while other agents operate as tra-
+ditional MAS entities. We demonstrate that the model-checking
+problem for our logic is solvable in polynomial time. Furthermore,
+we showcase how this logic can be effectively employed to articulate
+significant properties within the realm of cybersecurity.
+KEYWORDS
+Formal Verification, Dynamic Models, Concurrent Games
+ACM Reference Format:
+Davide Catta, Jean Leneutre, Vadim Malvone, and Aniello Murano. 2024.
+Obstruction Alternating-time Temporal Logic: a Strategic Logic to Reason
+about Dynamic Models. In Proc. of the 23rd International Conference on
+Autonomous Agents and Multiagent Systems (AAMAS 2024), Auckland, New
+Zealand, May 6 – 10, 2024, IFAAMAS, 10 pages.
+1
+INTRODUCTION
+System Verification. Over the course of the past half-century,
+researchers have been driven to create a multitude of verification
+techniques for software and hardware systems, all with the common
+aim of ensuring these systems align with their intended specifica-
+tions [34, 40, 45]. Within the realm of formal verification, model
+checking [15] has emerged as a verification technique due to its
+versatility and conceptual simplicity. In order to verify whether a
+system exhibits specific characteristics, a system’s representation is
+provided by a mathematical model 𝔐(typically a labeled directed
+graph). The desired property is expressed using a formula 𝜑writ-
+ten in some logical system characterized by precise mathematical
+This work is licensed under a Creative Commons Attribution
+International 4.0 License.
+Proc. of the 23rd International Conference on Autonomous Agents and Multiagent Systems
+(AAMAS 2024), N. Alechina, V. Dignum, M. Dastani, J.S. Sichman (eds.), May 6 – 10, 2024,
+Auckland, New Zealand. © 2024 International Foundation for Autonomous Agents and
+Multiagent Systems (www.ifaamas.org).
+semantics, such as the temporal logics LTL [39] and CTL [16]. As-
+suming that 𝔐faithfully represents the target system and 𝜑aptly
+encapsulates the desired property, the sole remaining task revolves
+around confirming that 𝔐complies with the semantic clauses
+dictating the truthfulness of 𝜑. The initial applications of model
+checking primarily focused on closed systems, which are defined
+by the fact that their behavior is entirely determined by their in-
+ternal states. Unfortunately, model checking techniques developed
+to address closed systems proved to be largely impractical, since
+real-world systems are often open and involve ongoing interactions
+with other systems. To address this challenge, model checking has
+been extended to Multi-Agent Systems (MAS). Multi-agent systems
+represent the behavior of two or more rational 
