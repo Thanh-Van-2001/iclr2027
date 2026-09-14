@@ -26,9 +26,23 @@ from analyze import p_value  # noqa: E402
 from paperengine.stats import wilson_interval  # noqa: E402
 
 
+def _bar_num(x):
+    """The reader writes a bar as printed: "0.7", "+/-0.7", "(+/-18)", "[0.048]".
+    Strip the sign and the brackets before parsing; an earlier version parsed
+    only the bare number and counted every "+/-0.7" as no bar at all, which a
+    reviewer of the AAMAS study caught."""
+    if x is None:
+        return None
+    s = str(x).strip().strip("()[]").strip()
+    for pre in ("±", "+/-", "+-"):
+        if s.startswith(pre):
+            s = s[len(pre):].strip()
+    return _num(s)
+
+
 def _se(disp, kind, n):
     """Standard error of one arm from the reader's bar and the caption's kind."""
-    d = _num(disp)
+    d = _bar_num(disp)
     if d is None:
         return None
     if kind == "se":
@@ -98,8 +112,8 @@ def main(argv=None) -> int:
             kind = t.get("bar_kind", "").lower()
             n = _num(t.get("n_runs"))
             for g in t.get("groups", []):
-                wb = _num(g.get("winner_disp")) is not None or str(g.get("winner_disp", "")).startswith("[")
-                rb = _num(g.get("runner_disp")) is not None or str(g.get("runner_disp", "")).startswith("[")
+                wb = _bar_num(g.get("winner_disp")) is not None or str(g.get("winner_disp", "")).startswith("[")
+                rb = _bar_num(g.get("runner_disp")) is not None or str(g.get("runner_disp", "")).startswith("[")
                 testable = wb and rb and (n is not None or kind in ("se", "ci"))
                 fail = None
                 if testable:
@@ -130,6 +144,7 @@ def main(argv=None) -> int:
                 "pipe_neither": sum(1 for c in pc if c["winner_dispersion"] is None and c["runner_dispersion"] is None),
                 "pipe_testable": sum(1 for c in pc if c.get("test"))}
         page["tested_groups"] = [g for g in groups if g["testable"] and g["fail"] is not None]
+        page["found"] = sum(1 for g in groups if any(_eq(g["w"], c["winner"]) for c in pc))
         per_page.append(page)
         r_groups += page["n_groups"]; r_neither += page["neither"]; r_testable += page["testable"]
         r_onebar += sum(1 for g in groups if g["wb"] != g["rb"])
@@ -199,7 +214,8 @@ def main(argv=None) -> int:
         "pipeline_same_pages": {"groups": p_groups,
                                 "pct_neither": round(100 * p_neither / p_groups, 1) if p_groups else None,
                                 "pct_testable": round(100 * p_testable / p_groups, 1) if p_groups else None},
-        "reader_groups_found_by_pipeline": _rate(r_found, r_groups, "reader groups whose winner the pipeline also has on that page"),
+        "reader_groups_found_by_pipeline": dict(_rate(r_found, r_groups, "reader groups whose winner the pipeline also has on that page"),
+                                                page_ci=_boot(per_page, "found")),
         "pipeline_groups_found_by_reader": _rate(p_found, p_groups, "pipeline comparisons whose winner the reader also lists"),
         "per_page": per_page,
     }

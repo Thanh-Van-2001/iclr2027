@@ -53,7 +53,8 @@ claims. On a reference set drawn after the pipeline was frozen, an
 image-based reader agrees with it on the verdict in \nGoldFrozenAgreePct{} of
 the comparisons both can test and on every field of the claim in
 \nGoldFrozenClaimPct{}; on random pages it finds about twice the highlighted
-comparisons the pipeline does, with the same shares. A second sample of \nPapersTwentyFour{} papers from
+comparisons the pipeline does, with a bar-less share \nPagesCensusRatio{}
+times the pipeline's. A second sample of \nPapersTwentyFour{} papers from
 2024 gives \nPctNeitherSideTwentyFour{} and \nPctFailTwentyFour{}. We release
 the pipeline, the per-comparison database, the rendered tables on which the
 instrument was scored, and the sixteen parser bugs that looking at them
@@ -602,18 +603,20 @@ comparisons on the same pages give \nPagesPipeNeither{} and
 \nPagesPipeTestable{} of \nPagesPipeGroups{}; the draw carries fewer bars
 than the corpus (weighted one page per paper, the corpus gives
 \nPagesCorpusPaperWeightedNeither{}), not a different weighting. The
-instruments agree on the shares and disagree on the census: the reader lists
+instruments disagree on the census and, less, on the shares: the reader lists
 \nPagesPipeFoundPct{} of the pipeline's groups, the pipeline only
 \nPagesReaderFoundPct{} of the reader's; the groups it misses print bars
 more often (\nPagesUnmatchedNeither{} bar-less against
-\nPagesMatchedNeither{}), yet over every group the reader finds the share is
+\nPagesMatchedNeither{}), so over every group the reader finds the share is
 \nPagesCensusRatio{} times the pipeline's (\nNeitherCensusScaled{} for the
 headline). From its own labels the reader fails \nPagesReaderFail{} of the
 \nPagesReaderTestableGroups{} groups it can test, the pipeline
-\nPagesPipeFail{} of its \nPagesPipeTestableN{} on the same pages, and the
-difference is entirely in which groups are testable: the two agree on every
-one of the \nPagesSharedAgree{} groups both can test
-(\nPagesSharedReaderFails{} fail) and part company where they cannot: the reader tests \nPagesReaderOnlyN{} groups the pipeline does not
+\nPagesPipeFail{} of its \nPagesPipeTestableN{} on the same pages, and most
+of the difference is in which groups are testable: the two agree on
+\nPagesSharedAgree{} of the \nPagesSharedN{} groups both can test
+(\nPagesSharedReaderFails{} fail by the reader's values,
+\nPagesSharedPipeFails{} by the pipeline's) and part company where they
+cannot: the reader tests \nPagesReaderOnlyN{} groups the pipeline does not
 and fails \nPagesReaderOnlyFails{}; the pipeline tests \nPagesPipeOnlyN{} the
 reader does not, on a run count read from elsewhere in the paper, and fails
 \nPagesPipeOnlyFails{}. Which run counts one accepts decides the failure rate
