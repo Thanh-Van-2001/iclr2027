@@ -159,8 +159,10 @@ def render(items: list, sources: list, out_dir: str, zoom: float = 2.0) -> None:
             it["image"] = None
             continue
         if it["paper"] not in cache:
+            # A corpus kept on disk by pipeline.py --cache-pdfs is read from there.
+            local = os.path.join("data", "corpus", f"{rec['venue']}{rec['year']}_{rec['id']}.pdf")
             try:
-                cache[it["paper"]] = _get(rec["pdf"])
+                cache[it["paper"]] = open(local, "rb").read() if os.path.exists(local) else _get(rec["pdf"])
             except Exception as exc:  # noqa: BLE001
                 print(f"  {it['id']} download failed: {exc}")
                 it["image"] = None

@@ -101,7 +101,36 @@ def pmlr_index(volume: str, venue: str, year: int) -> list[dict]:
     return out
 
 
+def aamas_index(year: int) -> list[dict]:
+    """Every main-track ("Research Paper Track") paper of one AAMAS year from
+    the open IFAAMAS proceedings. The contents page lists every track under
+    its own anchor; extended abstracts, demos, doctoral consortium, JAAMAS and
+    Blue Sky papers are left out, so the corpus holds full papers only.
+    """
+    base = f"https://www.ifaamas.org/Proceedings/aamas{year}/"
+    html = _get(base + "forms/contents.htm").decode("utf-8", "replace")
+    nav = {}
+    for m in re.finditer(r'href="#([^"]+)"[^>]*>(?:<font[^>]*>)?(?:<strong>)?([^<]+)', html):
+        nav[m.group(1)] = re.sub(r"\s+", " ", m.group(2)).strip()
+    key = next(k for k, v in nav.items() if v.startswith("Research Paper") or v.startswith("Full Papers"))
+    anchors = [(m.start(), m.group(1)) for m in re.finditer(r'<a name="([^"]+)"', html)]
+    start = next(pos for pos, name in anchors if name == key)
+    end = min((pos for pos, name in anchors if pos > start), default=len(html))
+    out = []
+    for m in re.finditer(r'<a href="\.\./pdfs/([^"]+)\.pdf"[^>]*>(.*?)</a>&nbsp;<font[^>]*>\(Page\s*(\d+)\)',
+                         html[start:end], re.S):
+        title = re.sub(r"\s+", " ", re.sub(r"<[^>]+>", "", m.group(2))).strip()
+        pdf = f"{base}pdfs/{m.group(1)}.pdf"
+        out.append({"venue": "AAMAS", "year": year, "id": hashlib.sha1(pdf.encode()).hexdigest()[:16],
+                    "title": title, "pdf": pdf, "abstract_page": base + "forms/contents.htm",
+                    "page": int(m.group(3))})
+    return out
+
+
 SOURCES = {
+    "aamas2026": lambda: aamas_index(2026),
+    "aamas2025": lambda: aamas_index(2025),
+    "aamas2024": lambda: aamas_index(2024),
     "neurips2025": lambda: neurips_index(2025),
     "neurips2024": lambda: neurips_index(2024),
     "neurips2023": lambda: neurips_index(2023),

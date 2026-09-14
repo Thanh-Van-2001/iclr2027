@@ -40,6 +40,8 @@ def main(argv=None) -> int:
     ap.add_argument("--exclude-items", action="append", default=None,
                     help="items.json of an earlier draw whose papers are skipped (repeatable)")
     ap.add_argument("--start-id", type=int, default=1, help="first item id, to continue an earlier draw")
+    ap.add_argument("--source", action="append", default=None,
+                    help="harvest sources to index (default: neurips2025, icml2025)")
     args = ap.parse_args(argv)
     exclude = set()
     for path in args.exclude_items or []:
@@ -50,7 +52,7 @@ def main(argv=None) -> int:
     rng = random.Random(args.seed)
     rng.shuffle(ids)
     index = {}
-    for s in ("neurips2025", "icml2025"):
+    for s in (args.source or ["neurips2025", "icml2025"]):
         for rec in SOURCES[s]():
             index[rec["id"]] = rec
     img_dir = os.path.join(args.out_dir, "img")
@@ -66,8 +68,9 @@ def main(argv=None) -> int:
         rec = index.get(pid)
         if rec is None:
             continue
+        local = os.path.join("data", "corpus", f"{rec['venue']}{rec['year']}_{rec['id']}.pdf")
         try:
-            blob = _get(rec["pdf"])
+            blob = open(local, "rb").read() if os.path.exists(local) else _get(rec["pdf"])
         except Exception as exc:  # noqa: BLE001
             print(f"  {pid[:8]} download failed: {exc}")
             continue

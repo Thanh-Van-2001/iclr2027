@@ -1,0 +1,5478 @@
+[
+ {
+  "stratum": "testable",
+  "paper": "a597930f52b5bfff",
+  "table": "2",
+  "page": 6,
+  "bbox": {
+   "y_min": 128.2,
+   "y_max": 363.5,
+   "x_min": 53.8,
+   "x_max": 508.8
+  },
+  "mark": {
+   "x": 307.5,
+   "y": 203.6
+  },
+  "pipeline": {
+   "winner": 3558.0,
+   "winner_dispersion": 40.0,
+   "runner_up": 3533.0,
+   "runner_dispersion": 39.0,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 3,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.7750928875302003,
+   "p_z": 0.438284774066789,
+   "se": 32.254198693090075,
+   "df": 3.9974387706755863,
+   "p_t": 0.4815810517026551,
+   "p": 0.4815810517026551,
+   "test": "welch",
+   "kind_used": "unknown"
+  },
+  "id": "001",
+  "image": "001_testable.png",
+  "title": "IDIL: Imitation Learning of Intent-Driven Expert Behavior"
+ },
+ {
+  "stratum": "testable",
+  "paper": "53229dd344894994",
+  "table": "2",
+  "page": 5,
+  "bbox": {
+   "y_min": 162.3,
+   "y_max": 422.4,
+   "x_min": 53.8,
+   "x_max": 543.3
+  },
+  "mark": {
+   "x": 234.4,
+   "y": 173.2
+  },
+  "pipeline": {
+   "winner": 573.4,
+   "winner_dispersion": 5.04,
+   "runner_up": 579.85,
+   "runner_dispersion": 9.08,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 3,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 1.0757572809273963,
+   "p_z": 0.2820358221442274,
+   "se": 5.99577629113473,
+   "df": 3.1255509424619348,
+   "p_t": 0.3579789440840788,
+   "p": 0.3579789440840788,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "002",
+  "image": "002_testable.png",
+  "title": "DELL: Dual-Knowledge Enhanced LLMs for Precise Decision Making in Healthcare"
+ },
+ {
+  "stratum": "testable",
+  "paper": "8e9bc7ce65405062",
+  "table": "2",
+  "page": 7,
+  "bbox": {
+   "y_min": 508.1,
+   "y_max": 602.1,
+   "x_min": 53.8,
+   "x_max": 236.5
+  },
+  "mark": {
+   "x": 235.1,
+   "y": 508.1
+  },
+  "pipeline": {
+   "winner": 0.8763,
+   "winner_dispersion": 0.0053,
+   "runner_up": 0.8332,
+   "runner_dispersion": 0.0064,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "sem",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 5.186751350582872,
+   "p_z": 2.1399413996370242e-07,
+   "se": 0.008309632964216891,
+   "p": 2.1399413996370242e-07,
+   "test": "z",
+   "kind_used": "sem"
+  },
+  "id": "003",
+  "image": "003_testable.png",
+  "title": "Mixed-Initiative Bayesian Sub-Goal Optimization in Hierarchical Reinforcement Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "2858971233508e59",
+  "table": "2",
+  "page": 7,
+  "bbox": {
+   "y_min": 192.4,
+   "y_max": 298.4,
+   "x_min": 53.5,
+   "x_max": 318.0
+  },
+  "mark": {
+   "x": 243.2,
+   "y": 214.3
+  },
+  "pipeline": {
+   "winner": 857.0,
+   "winner_dispersion": 0.8,
+   "runner_up": 778.0,
+   "runner_dispersion": 12.1,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "sem",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 6.514702332477582,
+   "p_z": 7.283396108448414e-11,
+   "se": 12.126417442921879,
+   "p": 7.283396108448414e-11,
+   "test": "z",
+   "kind_used": "sem"
+  },
+  "id": "004",
+  "image": "004_testable.png",
+  "title": "Continuous Monte Carlo Graph Search"
+ },
+ {
+  "stratum": "testable",
+  "paper": "eaaf5c6bef0e1d60",
+  "table": "4",
+  "page": 6,
+  "bbox": {
+   "y_min": 82.4,
+   "y_max": 276.8,
+   "x_min": 53.5,
+   "x_max": 506.3
+  },
+  "mark": {
+   "x": 504.7,
+   "y": 159.3
+  },
+  "pipeline": {
+   "winner": 0.75,
+   "winner_dispersion": 0.07,
+   "runner_up": 0.63,
+   "runner_dispersion": 0.17,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 3,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 1.1305337274383898,
+   "p_z": 0.2582513949765455,
+   "se": 0.1061445555206044,
+   "df": 2.659249086380671,
+   "p_t": 0.3498304246495554,
+   "p": 0.3498304246495554,
+   "test": "welch",
+   "kind_used": "unknown"
+  },
+  "id": "005",
+  "image": "005_testable.png",
+  "title": "Hierarchical Imitation Learning of Team Behavior from Heterogeneous Demonstrations"
+ },
+ {
+  "stratum": "testable",
+  "paper": "2be4fe346be914b5",
+  "table": "1",
+  "page": 4,
+  "bbox": {
+   "y_min": 157.6,
+   "y_max": 353.8,
+   "x_min": 53.8,
+   "x_max": 514.9
+  },
+  "mark": {
+   "x": 495.3,
+   "y": 212.6
+  },
+  "pipeline": {
+   "winner": 74.57,
+   "winner_dispersion": 2.13,
+   "runner_up": 80.94,
+   "runner_dispersion": 2.57,
+   "direction": "lower_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 100,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 19.08366363324414,
+   "p_z": 0.0,
+   "se": 0.33379334924470855,
+   "df": 191.40604466874655,
+   "p_t": 0.0,
+   "p": 0.0,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "006",
+  "image": "006_testable.png",
+  "title": "UAM-MARL: Uncertainty-Aware Modality-Enhanced Multi-Agent Reinforcement Learning with LLM-Guided Graph Policies"
+ },
+ {
+  "stratum": "testable",
+  "paper": "e778a6a2942e8792",
+  "table": "3",
+  "page": 7,
+  "bbox": {
+   "y_min": 137.3,
+   "y_max": 260.0,
+   "x_min": 104.6,
+   "x_max": 503.2
+  },
+  "mark": {
+   "x": 499.5,
+   "y": 137.3
+  },
+  "pipeline": {
+   "winner": 1659.1,
+   "winner_dispersion": 130.3,
+   "runner_up": 1412.36,
+   "runner_dispersion": 182.96,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 10,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 3.47374890730135,
+   "p_z": 0.0005132410808919019,
+   "se": 71.02988920165932,
+   "df": 16.261525472821504,
+   "p_t": 0.003069282599103662,
+   "p": 0.003069282599103662,
+   "test": "welch",
+   "kind_used": "unknown"
+  },
+  "id": "007",
+  "image": "007_testable.png",
+  "title": "Puzzle it Out: Local-to-Global World Model for Offline Multi-Agent Reinforcement Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "49a1820237d0f056",
+  "table": "1",
+  "page": 5,
+  "bbox": {
+   "y_min": 159.5,
+   "y_max": 289.7,
+   "x_min": 153.2,
+   "x_max": 529.0
+  },
+  "mark": {
+   "x": 423.4,
+   "y": 211.6
+  },
+  "pipeline": {
+   "winner": 101.3,
+   "winner_dispersion": 2.35,
+   "runner_up": 98.2,
+   "runner_dispersion": 1.33,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 2.5670908222720583,
+   "p_z": 0.01025557470727878,
+   "se": 1.2075926465493236,
+   "df": 6.324024466013342,
+   "p_t": 0.040568907425934775,
+   "p": 0.040568907425934775,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "008",
+  "image": "008_testable.png",
+  "title": "Evaluation-Time Policy Switching for Offline Reinforcement Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "276c1f2e146887a4",
+  "table": "3",
+  "page": 6,
+  "bbox": {
+   "y_min": 159.1,
+   "y_max": 255.4,
+   "x_min": 53.8,
+   "x_max": 508.3
+  },
+  "mark": {
+   "x": 376.5,
+   "y": 213.9
+  },
+  "pipeline": {
+   "winner": 60.12,
+   "winner_dispersion": 0.12,
+   "runner_up": 58.42,
+   "runner_dispersion": 0.13,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 8,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 27.178266077232607,
+   "p_z": 0.0,
+   "se": 0.06254998001598401,
+   "df": 13.911252206016592,
+   "p_t": 1.865174681370263e-13,
+   "p": 1.865174681370263e-13,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "009",
+  "image": "009_testable.png",
+  "title": "VLM-ReG : Vision-Language Models Enhanced via Reward-Refined GRPO in Remote Sensing Reasoning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "3579a3be66e0af6f",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 139.0,
+   "y_max": 320.5,
+   "x_min": 161.4,
+   "x_max": 523.1
+  },
+  "mark": {
+   "x": 445.7,
+   "y": 184.4
+  },
+  "pipeline": {
+   "winner": 25.47,
+   "winner_dispersion": 0.47,
+   "runner_up": 20.51,
+   "runner_dispersion": 0.48,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "sem",
+   "n_runs": 30,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 7.383274407099436,
+   "p_z": 1.545430450278218e-13,
+   "se": 0.6717886572427373,
+   "df": 57.97431070787803,
+   "p_t": 6.666702745405928e-10,
+   "p": 6.666702745405928e-10,
+   "test": "welch",
+   "kind_used": "sem"
+  },
+  "id": "010",
+  "image": "010_testable.png",
+  "title": "EduQate: Generating Adaptive Curricula through RMABs in Education Settings"
+ },
+ {
+  "stratum": "testable",
+  "paper": "f8b0f55bd407aeaa",
+  "table": "2",
+  "page": 7,
+  "bbox": {
+   "y_min": 308.9,
+   "y_max": 533.3,
+   "x_min": 53.5,
+   "x_max": 507.0
+  },
+  "mark": {
+   "x": 205.1,
+   "y": 429.6
+  },
+  "pipeline": {
+   "winner": 106.6,
+   "winner_dispersion": 0.6,
+   "runner_up": 106.1,
+   "runner_dispersion": 0.7,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 5,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 1.212678125181665,
+   "p_z": 0.22525290636065298,
+   "se": 0.412310562561766,
+   "df": 7.817149039761969,
+   "p_t": 0.2606247776886388,
+   "p": 0.2606247776886388,
+   "test": "welch",
+   "kind_used": "unknown"
+  },
+  "id": "011",
+  "image": "011_testable.png",
+  "title": "Leveraging Score-based Models for Generating Penalization in Model-based Offline Reinforcement Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "dcfa7320a7513eee",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 194.5,
+   "y_max": 281.7,
+   "x_min": 121.7,
+   "x_max": 524.7
+  },
+  "mark": {
+   "x": 158.2,
+   "y": 245.8
+  },
+  "pipeline": {
+   "winner": 94.4,
+   "winner_dispersion": 6.9,
+   "runner_up": 90.5,
+   "runner_dispersion": 1.2,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 3,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.9645077653175221,
+   "p_z": 0.3347914171164472,
+   "se": 4.043513323831147,
+   "df": 2.1208724120572517,
+   "p_t": 0.4315440295470332,
+   "p": 0.4315440295470332,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "012",
+  "image": "012_testable.png",
+  "title": "CoopReflect: Towards Natural Language Communication for Cooperative Autonomous Driving via Multi-Agent Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "3579a3be66e0af6f",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 139.0,
+   "y_max": 320.5,
+   "x_min": 161.4,
+   "x_max": 523.1
+  },
+  "mark": {
+   "x": 388.6,
+   "y": 184.4
+  },
+  "pipeline": {
+   "winner": 39.54,
+   "winner_dispersion": 3.74,
+   "runner_up": 12.25,
+   "runner_dispersion": 3.39,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "sem",
+   "n_runs": 30,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 5.406377668344367,
+   "p_z": 6.431211652113689e-08,
+   "se": 5.047742069480175,
+   "df": 57.448927859314715,
+   "p_t": 1.2946538738844993e-06,
+   "p": 1.2946538738844993e-06,
+   "test": "welch",
+   "kind_used": "sem"
+  },
+  "id": "013",
+  "image": "013_testable.png",
+  "title": "EduQate: Generating Adaptive Curricula through RMABs in Education Settings"
+ },
+ {
+  "stratum": "testable",
+  "paper": "c995f9de8ee9a46b",
+  "table": "3",
+  "page": 7,
+  "bbox": {
+   "y_min": 157.3,
+   "y_max": 239.1,
+   "x_min": 170.1,
+   "x_max": 518.0
+  },
+  "mark": {
+   "x": 474.4,
+   "y": 157.3
+  },
+  "pipeline": {
+   "winner": 224.9,
+   "winner_dispersion": 7.1,
+   "runner_up": 148.7,
+   "runner_dispersion": 9.1,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "sem",
+   "n_runs": 3,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 6.601919989322321,
+   "p_z": 4.058664515582677e-11,
+   "se": 11.542096863222037,
+   "df": 3.776615064085383,
+   "p_t": 0.0033316961998222094,
+   "p": 0.0033316961998222094,
+   "test": "welch",
+   "kind_used": "sem"
+  },
+  "id": "014",
+  "image": "014_testable.png",
+  "title": "A Minimax Approach to Ad Hoc Teamwork"
+ },
+ {
+  "stratum": "testable",
+  "paper": "e84c95fc44701a82",
+  "table": "1",
+  "page": 7,
+  "bbox": {
+   "y_min": 84.6,
+   "y_max": 295.3,
+   "x_min": 112.3,
+   "x_max": 536.4
+  },
+  "mark": null,
+  "pipeline": {
+   "winner": 38.1,
+   "winner_dispersion": 6.7,
+   "runner_up": 26.2,
+   "runner_dispersion": 9.2,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "unknown",
+   "n_runs": 100,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 10.45590860992511,
+   "p_z": 0.0,
+   "se": 1.1381124724736127,
+   "df": 180.95833131469487,
+   "p_t": 0.0,
+   "p": 0.0,
+   "test": "welch",
+   "kind_used": "unknown"
+  },
+  "id": "015",
+  "image": "015_testable.png",
+  "title": "Data Pricing for Graph Neural Networks without Pre-purchased Inspection"
+ },
+ {
+  "stratum": "testable",
+  "paper": "e778a6a2942e8792",
+  "table": "2",
+  "page": 6,
+  "bbox": {
+   "y_min": 367.7,
+   "y_max": 594.4,
+   "x_min": 174.9,
+   "x_max": 497.8
+  },
+  "mark": {
+   "x": 496.2,
+   "y": 410.1
+  },
+  "pipeline": {
+   "winner": 19.38,
+   "winner_dispersion": 0.98,
+   "runner_up": 19.07,
+   "runner_dispersion": 0.73,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 10,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.8022101660239065,
+   "p_z": 0.42243139676244823,
+   "se": 0.3864324002979046,
+   "df": 16.636543728743792,
+   "p_t": 0.4337418665492938,
+   "p": 0.4337418665492938,
+   "test": "welch",
+   "kind_used": "unknown"
+  },
+  "id": "016",
+  "image": "016_testable.png",
+  "title": "Puzzle it Out: Local-to-Global World Model for Offline Multi-Agent Reinforcement Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "7e809c1cdba25fb1",
+  "table": "2",
+  "page": 6,
+  "bbox": {
+   "y_min": 307.7,
+   "y_max": 395.4,
+   "x_min": 71.2,
+   "x_max": 484.7
+  },
+  "mark": {
+   "x": 484.7,
+   "y": 384.4
+  },
+  "pipeline": {
+   "winner": 5749.2,
+   "winner_dispersion": 599.0,
+   "runner_up": 4865.2,
+   "runner_dispersion": 710.8,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 2.126527171138396,
+   "p_z": 0.03345938932437642,
+   "se": 415.70124849463707,
+   "df": 7.7766325761112745,
+   "p_t": 0.06712934179908592,
+   "p": 0.06712934179908592,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "017",
+  "image": "017_testable.png",
+  "title": "Disentangling Policy from Offline Task Representation Learning via Adversarial Data Augmentation"
+ },
+ {
+  "stratum": "testable",
+  "paper": "f1332ed33108e6e2",
+  "table": "3",
+  "page": 6,
+  "bbox": {
+   "y_min": 386.3,
+   "y_max": 451.0,
+   "x_min": 53.5,
+   "x_max": 523.2
+  },
+  "mark": {
+   "x": 103.0,
+   "y": 386.3
+  },
+  "pipeline": {
+   "winner": 96.93,
+   "winner_dispersion": 0.27,
+   "runner_up": 94.92,
+   "runner_dispersion": 0.85,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "paren",
+   "runner_style": "paren"
+  },
+  "pipeline_test": {
+   "z": 5.039509477189377,
+   "p_z": 4.667265185442915e-07,
+   "se": 0.39884834210511644,
+   "df": 4.799062187322605,
+   "p_t": 0.004448914978972596,
+   "p": 0.004448914978972596,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "018",
+  "image": "018_testable.png",
+  "title": "ACORN: Acyclic Coordination with Reachability Network to Reduce Communication Redundancy in Multi-Agent Systems"
+ },
+ {
+  "stratum": "testable",
+  "paper": "e84c95fc44701a82",
+  "table": "1",
+  "page": 7,
+  "bbox": {
+   "y_min": 84.6,
+   "y_max": 295.3,
+   "x_min": 112.3,
+   "x_max": 536.4
+  },
+  "mark": null,
+  "pipeline": {
+   "winner": 44.2,
+   "winner_dispersion": 7.1,
+   "runner_up": 30.7,
+   "runner_dispersion": 11.7,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "unknown",
+   "n_runs": 100,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 9.864268381896897,
+   "p_z": 0.0,
+   "se": 1.368575902169843,
+   "df": 163.20682091568602,
+   "p_t": 0.0,
+   "p": 0.0,
+   "test": "welch",
+   "kind_used": "unknown"
+  },
+  "id": "019",
+  "image": "019_testable.png",
+  "title": "Data Pricing for Graph Neural Networks without Pre-purchased Inspection"
+ },
+ {
+  "stratum": "testable",
+  "paper": "7e809c1cdba25fb1",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 149.6,
+   "y_max": 262.4,
+   "x_min": 58.3,
+   "x_max": 489.0
+  },
+  "mark": {
+   "x": 484.7,
+   "y": 215.3
+  },
+  "pipeline": {
+   "winner": 6772.0,
+   "winner_dispersion": 649.5,
+   "runner_up": 5353.7,
+   "runner_dispersion": 869.6,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 2.921934191159306,
+   "p_z": 0.0034786503328603224,
+   "se": 485.3976534759928,
+   "df": 7.40361598017442,
+   "p_t": 0.02093182371355451,
+   "p": 0.02093182371355451,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "020",
+  "image": "020_testable.png",
+  "title": "Disentangling Policy from Offline Task Representation Learning via Adversarial Data Augmentation"
+ },
+ {
+  "stratum": "testable",
+  "paper": "ab0b21133f3bcb7d",
+  "table": "3",
+  "page": 5,
+  "bbox": {
+   "y_min": 549.9,
+   "y_max": 603.4,
+   "x_min": 53.8,
+   "x_max": 243.5
+  },
+  "mark": {
+   "x": 129.4,
+   "y": 595.3
+  },
+  "pipeline": {
+   "winner": 29243.837,
+   "winner_dispersion": 12.819,
+   "runner_up": 116.803,
+   "runner_dispersion": 33.556,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 3,
+   "n_runs_source": "caption",
+   "winner_style": "paren",
+   "runner_style": "paren"
+  },
+  "pipeline_test": {
+   "z": 1404.4496478208723,
+   "p_z": 0.0,
+   "se": 20.739108764200388,
+   "df": 2.571577988279709,
+   "p_t": 1.2271995197821184e-08,
+   "p": 1.2271995197821184e-08,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "021",
+  "image": "021_testable.png",
+  "title": "Mean Field Correlated Imitation Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "ab0b21133f3bcb7d",
+  "table": "3",
+  "page": 5,
+  "bbox": {
+   "y_min": 549.9,
+   "y_max": 603.4,
+   "x_min": 53.8,
+   "x_max": 243.5
+  },
+  "mark": {
+   "x": 131.1,
+   "y": 603.4
+  },
+  "pipeline": {
+   "winner": 3355.917,
+   "winner_dispersion": 12.819,
+   "runner_up": -417.833,
+   "runner_dispersion": 228.319,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 3,
+   "n_runs_source": "caption",
+   "winner_style": "paren",
+   "runner_style": "paren"
+  },
+  "pipeline_test": {
+   "z": 28.583030215870657,
+   "p_z": 0.0,
+   "se": 132.02763917957986,
+   "df": 2.0126089773224347,
+   "p_t": 0.0011808787697931145,
+   "p": 0.0011808787697931145,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "022",
+  "image": "022_testable.png",
+  "title": "Mean Field Correlated Imitation Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "2ff9dffbd7640d1e",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 146.2,
+   "y_max": 366.6,
+   "x_min": 225.0,
+   "x_max": 513.5
+  },
+  "mark": {
+   "x": 507.1,
+   "y": 332.9
+  },
+  "pipeline": {
+   "winner": 30.0,
+   "winner_dispersion": 13.0,
+   "runner_up": 29.0,
+   "runner_dispersion": 11.0,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 3,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.10170952554312156,
+   "p_z": 0.9189872410701654,
+   "se": 9.83192080250175,
+   "df": 3.8933382713763254,
+   "p_t": 0.924009179357353,
+   "p": 0.924009179357353,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "023",
+  "image": "023_testable.png",
+  "title": "Confounding Robust Continuous Control via Automatic Reward Shaping"
+ },
+ {
+  "stratum": "testable",
+  "paper": "88e581523c683d03",
+  "table": "1",
+  "page": 5,
+  "bbox": {
+   "y_min": 84.6,
+   "y_max": 255.9,
+   "x_min": 63.8,
+   "x_max": 487.2
+  },
+  "mark": {
+   "x": 482.6,
+   "y": 186.5
+  },
+  "pipeline": {
+   "winner": 1990.4,
+   "winner_dispersion": 288.6,
+   "runner_up": 1362.4,
+   "runner_dispersion": 522.9,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 2.351171687766861,
+   "p_z": 0.018714396608085604,
+   "se": 267.1008685871313,
+   "df": 6.23001524744091,
+   "p_t": 0.05541548917369199,
+   "p": 0.05541548917369199,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "024",
+  "image": "024_testable.png",
+  "title": "Offline Multi-Agent Reinforcement Learning with Global Moderate Generalization"
+ },
+ {
+  "stratum": "testable",
+  "paper": "7177e5123b653b89",
+  "table": "9",
+  "page": 5,
+  "bbox": {
+   "y_min": 621.8,
+   "y_max": 661.4,
+   "x_min": 79.6,
+   "x_max": 474.9
+  },
+  "mark": {
+   "x": 126.7,
+   "y": 639.7
+  },
+  "pipeline": {
+   "winner": 989.39,
+   "winner_dispersion": 0.64,
+   "runner_up": 982.57,
+   "runner_dispersion": 2.44,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "ci",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 5.299106637362165,
+   "p_z": 1.1637065711056493e-07,
+   "se": 1.2870093898308215,
+   "p": 1.1637065711056493e-07,
+   "test": "z",
+   "kind_used": "ci"
+  },
+  "id": "025",
+  "image": "025_testable.png",
+  "title": "An Extended Benchmarking of Multi-Agent Reinforcement Learning Algorithms in Complex Fully Cooperative Tasks"
+ },
+ {
+  "stratum": "testable",
+  "paper": "11cbad47f48357a6",
+  "table": "3",
+  "page": 7,
+  "bbox": {
+   "y_min": 139.3,
+   "y_max": 193.1,
+   "x_min": 194.5,
+   "x_max": 501.7
+  },
+  "mark": {
+   "x": 486.3,
+   "y": 150.0
+  },
+  "pipeline": {
+   "winner": 818.0,
+   "winner_dispersion": 32.0,
+   "runner_up": 812.0,
+   "runner_dispersion": 20.0,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 3,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.275395527612947,
+   "p_z": 0.7830123797443731,
+   "se": 21.786846184490926,
+   "df": 3.355644990468121,
+   "p_t": 0.799115311103354,
+   "p": 0.799115311103354,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "026",
+  "image": "026_testable.png",
+  "title": "Salience-Invariant Consistent Policy Learning for Generalization in Visual Reinforcement Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "f1332ed33108e6e2",
+  "table": "2",
+  "page": 6,
+  "bbox": {
+   "y_min": 134.9,
+   "y_max": 317.1,
+   "x_min": 183.8,
+   "x_max": 527.8
+  },
+  "mark": {
+   "x": 466.7,
+   "y": 283.4
+  },
+  "pipeline": {
+   "winner": 50.4,
+   "winner_dispersion": 1.3,
+   "runner_up": 48.4,
+   "runner_dispersion": 1.7,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "paren",
+   "runner_style": "paren"
+  },
+  "pipeline_test": {
+   "z": 2.0896918976428647,
+   "p_z": 0.03664548531022449,
+   "se": 0.9570788891204318,
+   "df": 7.486090540854017,
+   "p_t": 0.07242889924607598,
+   "p": 0.07242889924607598,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "027",
+  "image": "027_testable.png",
+  "title": "ACORN: Acyclic Coordination with Reachability Network to Reduce Communication Redundancy in Multi-Agent Systems"
+ },
+ {
+  "stratum": "testable",
+  "paper": "f1332ed33108e6e2",
+  "table": "5",
+  "page": 6,
+  "bbox": {
+   "y_min": 386.3,
+   "y_max": 650.2,
+   "x_min": 53.5,
+   "x_max": 557.4
+  },
+  "mark": {
+   "x": 103.0,
+   "y": 406.5
+  },
+  "pipeline": {
+   "winner": 95.69,
+   "winner_dispersion": 6.31,
+   "runner_up": 88.03,
+   "runner_dispersion": 4.15,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "paren",
+   "runner_style": "paren"
+  },
+  "pipeline_test": {
+   "z": 2.2679284191744897,
+   "p_z": 0.02333356987353552,
+   "se": 3.3775316430790103,
+   "df": 6.915009495158715,
+   "p_t": 0.05810758151143336,
+   "p": 0.05810758151143336,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "028",
+  "image": "028_testable.png",
+  "title": "ACORN: Acyclic Coordination with Reachability Network to Reduce Communication Redundancy in Multi-Agent Systems"
+ },
+ {
+  "stratum": "testable",
+  "paper": "67601132bd8b82b8",
+  "table": "3",
+  "page": 7,
+  "bbox": {
+   "y_min": 119.0,
+   "y_max": 143.9,
+   "x_min": 151.3,
+   "x_max": 501.9
+  },
+  "mark": {
+   "x": 151.3,
+   "y": 143.9
+  },
+  "pipeline": {
+   "winner": 8.92,
+   "winner_dispersion": 0.43,
+   "runner_up": 7.01,
+   "runner_dispersion": 0.21,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 8.924843888155559,
+   "p_z": 0.0,
+   "se": 0.21400934559032694,
+   "df": 5.805359227428138,
+   "p_t": 0.0001326148359674928,
+   "p": 0.0001326148359674928,
+   "test": "welch",
+   "kind_used": "unknown"
+  },
+  "id": "029",
+  "image": "029_testable.png",
+  "title": "Offline Multi-Agent Preference-based Reinforcement Learning with Agent-aware Direct Preference Optimization"
+ },
+ {
+  "stratum": "testable",
+  "paper": "276c1f2e146887a4",
+  "table": "3",
+  "page": 6,
+  "bbox": {
+   "y_min": 159.1,
+   "y_max": 255.4,
+   "x_min": 53.8,
+   "x_max": 508.3
+  },
+  "mark": {
+   "x": 262.7,
+   "y": 213.9
+  },
+  "pipeline": {
+   "winner": 35.65,
+   "winner_dispersion": 0.15,
+   "runner_up": 34.91,
+   "runner_dispersion": 0.18,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 8,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 8.932860276195186,
+   "p_z": 0.0,
+   "se": 0.08284020762890446,
+   "df": 13.559083810515354,
+   "p_t": 4.749390165592615e-07,
+   "p": 4.749390165592615e-07,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "030",
+  "image": "030_testable.png",
+  "title": "VLM-ReG : Vision-Language Models Enhanced via Reward-Refined GRPO in Remote Sensing Reasoning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "53229dd344894994",
+  "table": "1",
+  "page": 4,
+  "bbox": {
+   "y_min": 170.1,
+   "y_max": 444.3,
+   "x_min": 62.8,
+   "x_max": 481.2
+  },
+  "mark": {
+   "x": 229.8,
+   "y": 224.4
+  },
+  "pipeline": {
+   "winner": 626.7,
+   "winner_dispersion": 7.35,
+   "runner_up": 732.38,
+   "runner_dispersion": 0.0,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 3,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 24.90382712161617,
+   "p_z": 0.0,
+   "se": 4.243524478543749,
+   "df": 2.0,
+   "p_t": 0.0016084923173664833,
+   "p": 0.0016084923173664833,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "031",
+  "image": "031_testable.png",
+  "title": "DELL: Dual-Knowledge Enhanced LLMs for Precise Decision Making in Healthcare"
+ },
+ {
+  "stratum": "testable",
+  "paper": "fabf7aae0479a251",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 127.6,
+   "y_max": 377.2,
+   "x_min": 161.6,
+   "x_max": 476.2
+  },
+  "mark": {
+   "x": 254.4,
+   "y": 377.2
+  },
+  "pipeline": {
+   "winner": 3.4,
+   "winner_dispersion": 0.843,
+   "runner_up": 1.444,
+   "runner_dispersion": 1.423,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 10,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 3.7397648834425077,
+   "p_z": 0.0001841924598398048,
+   "se": 0.5230275327360884,
+   "df": 14.62437049413606,
+   "p_t": 0.0020513298641875455,
+   "p": 0.0020513298641875455,
+   "test": "welch",
+   "kind_used": "unknown"
+  },
+  "id": "032",
+  "image": "032_testable.png",
+  "title": "Multi-objective Reinforcement Learning with Nonlinear Preferences: Provable Approximation for Maximizing Expected Scalarized Return"
+ },
+ {
+  "stratum": "testable",
+  "paper": "11cbad47f48357a6",
+  "table": "4",
+  "page": 7,
+  "bbox": {
+   "y_min": 471.5,
+   "y_max": 609.4,
+   "x_min": 88.9,
+   "x_max": 260.7
+  },
+  "mark": {
+   "x": 252.5,
+   "y": 526.0
+  },
+  "pipeline": {
+   "winner": 181.0,
+   "winner_dispersion": 14.0,
+   "runner_up": 110.4,
+   "runner_dispersion": 44.3,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 3,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 2.632026805217313,
+   "p_z": 0.008487716598979844,
+   "se": 26.823435027353725,
+   "df": 2.3955470420741842,
+   "p_t": 0.09886622915938359,
+   "p": 0.09886622915938359,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "033",
+  "image": "033_testable.png",
+  "title": "Salience-Invariant Consistent Policy Learning for Generalization in Visual Reinforcement Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "53229dd344894994",
+  "table": "2",
+  "page": 5,
+  "bbox": {
+   "y_min": 162.3,
+   "y_max": 422.4,
+   "x_min": 53.8,
+   "x_max": 543.3
+  },
+  "mark": {
+   "x": 350.8,
+   "y": 195.2
+  },
+  "pipeline": {
+   "winner": 0.35,
+   "winner_dispersion": 0.01,
+   "runner_up": 0.34,
+   "runner_dispersion": 0.01,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 3,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 1.2247448713915832,
+   "p_z": 0.22067136191984904,
+   "se": 0.008164965809277261,
+   "df": 4.0,
+   "p_t": 0.2878641347266928,
+   "p": 0.2878641347266928,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "034",
+  "image": "034_testable.png",
+  "title": "DELL: Dual-Knowledge Enhanced LLMs for Precise Decision Making in Healthcare"
+ },
+ {
+  "stratum": "testable",
+  "paper": "fabf7aae0479a251",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 127.6,
+   "y_max": 377.2,
+   "x_min": 161.6,
+   "x_max": 476.2
+  },
+  "mark": {
+   "x": 254.4,
+   "y": 279.6
+  },
+  "pipeline": {
+   "winner": 2.145,
+   "winner_dispersion": 0.129,
+   "runner_up": 1.44,
+   "runner_dispersion": 0.511,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 10,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 4.230120137117866,
+   "p_z": 2.3356654106798658e-05,
+   "se": 0.16666193326611808,
+   "df": 10.142483288233858,
+   "p_t": 0.0016895072744580464,
+   "p": 0.0016895072744580464,
+   "test": "welch",
+   "kind_used": "unknown"
+  },
+  "id": "035",
+  "image": "035_testable.png",
+  "title": "Multi-objective Reinforcement Learning with Nonlinear Preferences: Provable Approximation for Maximizing Expected Scalarized Return"
+ },
+ {
+  "stratum": "testable",
+  "paper": "e84c95fc44701a82",
+  "table": "1",
+  "page": 7,
+  "bbox": {
+   "y_min": 84.6,
+   "y_max": 295.3,
+   "x_min": 112.3,
+   "x_max": 536.4
+  },
+  "mark": null,
+  "pipeline": {
+   "winner": 50.2,
+   "winner_dispersion": 16.7,
+   "runner_up": 30.2,
+   "runner_dispersion": 9.1,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "unknown",
+   "n_runs": 100,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 10.516125038101032,
+   "p_z": 0.0,
+   "se": 1.9018412131405713,
+   "df": 153.02813771509798,
+   "p_t": 0.0,
+   "p": 0.0,
+   "test": "welch",
+   "kind_used": "unknown"
+  },
+  "id": "036",
+  "image": "036_testable.png",
+  "title": "Data Pricing for Graph Neural Networks without Pre-purchased Inspection"
+ },
+ {
+  "stratum": "testable",
+  "paper": "c794bd1ebec4f17f",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 176.3,
+   "y_max": 212.5,
+   "x_min": 53.5,
+   "x_max": 474.7
+  },
+  "mark": {
+   "x": 293.2,
+   "y": 176.3
+  },
+  "pipeline": {
+   "winner": 31.0,
+   "winner_dispersion": 19.0,
+   "runner_up": 29.0,
+   "runner_dispersion": 27.0,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 3,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.10492461251740035,
+   "p_z": 0.916435628798298,
+   "se": 19.06130460732773,
+   "df": 3.5907169042646756,
+   "p_t": 0.9220306487134198,
+   "p": 0.9220306487134198,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "037",
+  "image": "037_testable.png",
+  "title": "MABL: Bi-Level Latent-Variable World Model for Sample-Efficient Multi-Agent Reinforcement Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "67601132bd8b82b8",
+  "table": "1",
+  "page": 5,
+  "bbox": {
+   "y_min": 123.1,
+   "y_max": 379.2,
+   "x_min": 181.0,
+   "x_max": 501.7
+  },
+  "mark": {
+   "x": 381.5,
+   "y": 133.4
+  },
+  "pipeline": {
+   "winner": 11.1,
+   "winner_dispersion": 2.6,
+   "runner_up": 10.6,
+   "runner_dispersion": 1.49,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.37309069700081,
+   "p_z": 0.7090809423451789,
+   "se": 1.3401567072547897,
+   "df": 6.371547327643326,
+   "p_t": 0.721180425228102,
+   "p": 0.721180425228102,
+   "test": "welch",
+   "kind_used": "unknown"
+  },
+  "id": "038",
+  "image": "038_testable.png",
+  "title": "Offline Multi-Agent Preference-based Reinforcement Learning with Agent-aware Direct Preference Optimization"
+ },
+ {
+  "stratum": "testable",
+  "paper": "7e809c1cdba25fb1",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 149.6,
+   "y_max": 262.4,
+   "x_min": 58.3,
+   "x_max": 489.0
+  },
+  "mark": {
+   "x": 484.7,
+   "y": 160.5
+  },
+  "pipeline": {
+   "winner": 1611.6,
+   "winner_dispersion": 288.0,
+   "runner_up": 1584.6,
+   "runner_dispersion": 361.4,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.13064564934313966,
+   "p_z": 0.896055629229171,
+   "se": 206.66589462221384,
+   "df": 7.620355874770061,
+   "p_t": 0.8994383420488723,
+   "p": 0.8994383420488723,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "039",
+  "image": "039_testable.png",
+  "title": "Disentangling Policy from Offline Task Representation Learning via Adversarial Data Augmentation"
+ },
+ {
+  "stratum": "testable",
+  "paper": "eaaf5c6bef0e1d60",
+  "table": "2",
+  "page": 6,
+  "bbox": {
+   "y_min": 346.6,
+   "y_max": 401.9,
+   "x_min": 103.4,
+   "x_max": 490.1
+  },
+  "mark": {
+   "x": 147.3,
+   "y": 401.9
+  },
+  "pipeline": {
+   "winner": 0.47,
+   "winner_dispersion": 0.06,
+   "runner_up": 0.13,
+   "runner_dispersion": 0.06,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "unknown",
+   "n_runs": 3,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 6.9402209378856705,
+   "p_z": 3.914868429433227e-12,
+   "se": 0.048989794855663564,
+   "df": 4.000000000000001,
+   "p_t": 0.0022636933971809103,
+   "p": 0.0022636933971809103,
+   "test": "welch",
+   "kind_used": "unknown"
+  },
+  "id": "040",
+  "image": "040_testable.png",
+  "title": "Hierarchical Imitation Learning of Team Behavior from Heterogeneous Demonstrations"
+ },
+ {
+  "stratum": "testable",
+  "paper": "5ad998cb52e53335",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 149.1,
+   "y_max": 405.5,
+   "x_min": 79.8,
+   "x_max": 495.6
+  },
+  "mark": {
+   "x": 482.6,
+   "y": 342.2
+  },
+  "pipeline": {
+   "winner": -5.1,
+   "winner_dispersion": 0.5,
+   "runner_up": 2129.7,
+   "runner_dispersion": 635.5,
+   "direction": "lower_better",
+   "orientation": "row",
+   "dispersion_kind": "sem",
+   "n_runs": 8,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 3.3592436494916464,
+   "p_z": 0.0007815612581048015,
+   "se": 635.5001966954849,
+   "df": 7.000008666364169,
+   "p_t": 0.012096804838325648,
+   "p": 0.012096804838325648,
+   "test": "welch",
+   "kind_used": "sem"
+  },
+  "id": "041",
+  "image": "041_testable.png",
+  "title": "Learning from Delay Distributions: A New Representation for Delay-Aware Reinforcement Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "b8e9f52dbaa7bde2",
+  "table": "1",
+  "page": 5,
+  "bbox": {
+   "y_min": 347.1,
+   "y_max": 482.6,
+   "x_min": 53.6,
+   "x_max": 263.1
+  },
+  "mark": {
+   "x": 239.9,
+   "y": 414.4
+  },
+  "pipeline": {
+   "winner": 0.219,
+   "winner_dispersion": 0.026,
+   "runner_up": 0.225,
+   "runner_dispersion": 0.026,
+   "direction": "lower_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 50,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 1.1538461538461549,
+   "p_z": 0.2485632482171818,
+   "se": 0.0052,
+   "df": 98.0,
+   "p_t": 0.2513694600449963,
+   "p": 0.2513694600449963,
+   "test": "welch",
+   "kind_used": "unknown"
+  },
+  "id": "042",
+  "image": "042_testable.png",
+  "title": "Predictability Awareness for Efficient and Robust Multi-Agent Coordination"
+ },
+ {
+  "stratum": "testable",
+  "paper": "9ac2952d1fcc82bc",
+  "table": "2",
+  "page": 6,
+  "bbox": {
+   "y_min": 172.7,
+   "y_max": 305.7,
+   "x_min": 160.7,
+   "x_max": 474.9
+  },
+  "mark": {
+   "x": 233.3,
+   "y": 184.8
+  },
+  "pipeline": {
+   "winner": 93.7,
+   "winner_dispersion": 1.0,
+   "runner_up": 8.8,
+   "runner_dispersion": 0.9,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 141.10857463050976,
+   "p_z": 0.0,
+   "se": 0.6016643582596529,
+   "df": 7.9128071976329935,
+   "p_t": 9.547918011776346e-15,
+   "p": 9.547918011776346e-15,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "043",
+  "image": "043_testable.png",
+  "title": "Generalized Per-Agent Advantage Estimation for Multi-Agent Policy Optimization"
+ },
+ {
+  "stratum": "testable",
+  "paper": "9a9a0ecdf48dd623",
+  "table": "2",
+  "page": 5,
+  "bbox": {
+   "y_min": 124.2,
+   "y_max": 289.9,
+   "x_min": 134.9,
+   "x_max": 511.5
+  },
+  "mark": {
+   "x": 457.9,
+   "y": 199.1
+  },
+  "pipeline": {
+   "winner": 0.889,
+   "winner_dispersion": 0.092,
+   "runner_up": 0.883,
+   "runner_dispersion": 0.061,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 10,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.17188519992489532,
+   "p_z": 0.8635277821624647,
+   "se": 0.03490701935141412,
+   "df": 15.631583125380027,
+   "p_t": 0.8657333328257804,
+   "p": 0.8657333328257804,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "044",
+  "image": "044_testable.png",
+  "title": "Deep Anomaly Detection via Active Anomaly Search"
+ },
+ {
+  "stratum": "testable",
+  "paper": "c995f9de8ee9a46b",
+  "table": "3",
+  "page": 7,
+  "bbox": {
+   "y_min": 157.3,
+   "y_max": 239.1,
+   "x_min": 170.1,
+   "x_max": 518.0
+  },
+  "mark": {
+   "x": 347.2,
+   "y": 157.3
+  },
+  "pipeline": {
+   "winner": 66.0,
+   "winner_dispersion": 6.8,
+   "runner_up": 65.1,
+   "runner_dispersion": 16.0,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "sem",
+   "n_runs": 3,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.051768614163289525,
+   "p_z": 0.9587130642731894,
+   "se": 17.385051049680584,
+   "df": 2.699672898380607,
+   "p_t": 0.9623009415222992,
+   "p": 0.9623009415222992,
+   "test": "welch",
+   "kind_used": "sem"
+  },
+  "id": "045",
+  "image": "045_testable.png",
+  "title": "A Minimax Approach to Ad Hoc Teamwork"
+ },
+ {
+  "stratum": "testable",
+  "paper": "2ff9dffbd7640d1e",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 146.2,
+   "y_max": 366.6,
+   "x_min": 225.0,
+   "x_max": 513.5
+  },
+  "mark": {
+   "x": 335.0,
+   "y": 205.6
+  },
+  "pipeline": {
+   "winner": 557.0,
+   "winner_dispersion": 244.0,
+   "runner_up": 460.0,
+   "runner_dispersion": 95.0,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 3,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.641643486428517,
+   "p_z": 0.5211046907560299,
+   "se": 151.17429234716684,
+   "df": 2.592735230314205,
+   "p_t": 0.5732676065045741,
+   "p": 0.5732676065045741,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "046",
+  "image": "046_testable.png",
+  "title": "Confounding Robust Continuous Control via Automatic Reward Shaping"
+ },
+ {
+  "stratum": "testable",
+  "paper": "008ca7f92464f38f",
+  "table": "1",
+  "page": 7,
+  "bbox": {
+   "y_min": 152.7,
+   "y_max": 484.2,
+   "x_min": 138.8,
+   "x_max": 477.9
+  },
+  "mark": {
+   "x": 472.6,
+   "y": 280.7
+  },
+  "pipeline": {
+   "winner": 147.43,
+   "winner_dispersion": 1.87,
+   "runner_up": 44.63,
+   "runner_dispersion": 0.95,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 109.59264068703752,
+   "p_z": 0.0,
+   "se": 0.9380191895691685,
+   "df": 5.93574901854054,
+   "p_t": 4.834888045479602e-11,
+   "p": 4.834888045479602e-11,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "047",
+  "image": "047_testable.png",
+  "title": "Feasible Constraint Policy Optimization for Safe Reinforcement Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "bcbfe93e27d30640",
+  "table": "7",
+  "page": 7,
+  "bbox": {
+   "y_min": 156.3,
+   "y_max": 257.8,
+   "x_min": 53.8,
+   "x_max": 492.0
+  },
+  "mark": {
+   "x": 157.7,
+   "y": 186.2
+  },
+  "pipeline": {
+   "winner": 0.99,
+   "winner_dispersion": 0.01,
+   "runner_up": 0.86,
+   "runner_dispersion": 0.01,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 128,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 104.00000000000001,
+   "p_z": 0.0,
+   "se": 0.0012499999999999998,
+   "df": 254.00000000000003,
+   "p_t": 0.0,
+   "p": 0.0,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "048",
+  "image": "048_testable.png",
+  "title": "Don't Blind Your VLA: Aligning Visual Representations for OOD Generalization"
+ },
+ {
+  "stratum": "testable",
+  "paper": "9a9a0ecdf48dd623",
+  "table": "1",
+  "page": 4,
+  "bbox": {
+   "y_min": 124.2,
+   "y_max": 334.6,
+   "x_min": 82.6,
+   "x_max": 531.8
+  },
+  "mark": {
+   "x": 140.4,
+   "y": 214.5
+  },
+  "pipeline": {
+   "winner": 0.729,
+   "winner_dispersion": 0.104,
+   "runner_up": 0.3,
+   "runner_dispersion": 0.133,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 10,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 8.03520145204972,
+   "p_z": 8.881784197001252e-16,
+   "se": 0.05339007398384085,
+   "df": 17.011034110516082,
+   "p_t": 3.422413510367761e-07,
+   "p": 3.422413510367761e-07,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "049",
+  "image": "049_testable.png",
+  "title": "Deep Anomaly Detection via Active Anomaly Search"
+ },
+ {
+  "stratum": "testable",
+  "paper": "3579a3be66e0af6f",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 139.0,
+   "y_max": 320.5,
+   "x_min": 161.4,
+   "x_max": 523.1
+  },
+  "mark": {
+   "x": 275.0,
+   "y": 184.4
+  },
+  "pipeline": {
+   "winner": 56.33,
+   "winner_dispersion": 3.1,
+   "runner_up": 17.75,
+   "runner_dispersion": 1.77,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "sem",
+   "n_runs": 30,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 10.807570714147879,
+   "p_z": 0.0,
+   "se": 3.5697198769651384,
+   "df": 46.091751995542204,
+   "p_t": 3.175237850427948e-14,
+   "p": 3.175237850427948e-14,
+   "test": "welch",
+   "kind_used": "sem"
+  },
+  "id": "050",
+  "image": "050_testable.png",
+  "title": "EduQate: Generating Adaptive Curricula through RMABs in Education Settings"
+ },
+ {
+  "stratum": "testable",
+  "paper": "c995f9de8ee9a46b",
+  "table": "3",
+  "page": 7,
+  "bbox": {
+   "y_min": 157.3,
+   "y_max": 239.1,
+   "x_min": 170.1,
+   "x_max": 518.0
+  },
+  "mark": {
+   "x": 304.8,
+   "y": 157.3
+  },
+  "pipeline": {
+   "winner": 195.7,
+   "winner_dispersion": 6.2,
+   "runner_up": 172.2,
+   "runner_dispersion": 15.4,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "sem",
+   "n_runs": 3,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 1.415559913735871,
+   "p_z": 0.15690439493249242,
+   "se": 16.601204775557708,
+   "df": 2.631741904896592,
+   "p_t": 0.2636917063986699,
+   "p": 0.2636917063986699,
+   "test": "welch",
+   "kind_used": "sem"
+  },
+  "id": "051",
+  "image": "051_testable.png",
+  "title": "A Minimax Approach to Ad Hoc Teamwork"
+ },
+ {
+  "stratum": "testable",
+  "paper": "c08021da3cf0cc59",
+  "table": "2",
+  "page": 6,
+  "bbox": {
+   "y_min": 262.6,
+   "y_max": 408.2,
+   "x_min": 216.5,
+   "x_max": 441.7
+  },
+  "mark": {
+   "x": 377.3,
+   "y": 361.6
+  },
+  "pipeline": {
+   "winner": 17.81,
+   "winner_dispersion": 1.14,
+   "runner_up": 16.02,
+   "runner_dispersion": 0.97,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 2.6740255896818934,
+   "p_z": 0.007494673241177363,
+   "se": 0.6694027188471823,
+   "df": 7.800072966410911,
+   "p_t": 0.028827494711732404,
+   "p": 0.028827494711732404,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "052",
+  "image": "052_testable.png",
+  "title": "Multi-Agent Decision S4: Leveraging State Space Models for Offline Multi-Agent Reinforcement Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "7e809c1cdba25fb1",
+  "table": "2",
+  "page": 6,
+  "bbox": {
+   "y_min": 307.7,
+   "y_max": 395.4,
+   "x_min": 71.2,
+   "x_max": 484.7
+  },
+  "mark": {
+   "x": 484.7,
+   "y": 340.6
+  },
+  "pipeline": {
+   "winner": 3274.5,
+   "winner_dispersion": 429.5,
+   "runner_up": 2594.3,
+   "runner_dispersion": 315.6,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 2.8536859998894744,
+   "p_z": 0.0043215221855530395,
+   "se": 238.35838982506993,
+   "df": 7.344493995198558,
+   "p_t": 0.023340232906640335,
+   "p": 0.023340232906640335,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "053",
+  "image": "053_testable.png",
+  "title": "Disentangling Policy from Offline Task Representation Learning via Adversarial Data Augmentation"
+ },
+ {
+  "stratum": "testable",
+  "paper": "8e9bc7ce65405062",
+  "table": "2",
+  "page": 7,
+  "bbox": {
+   "y_min": 508.1,
+   "y_max": 602.1,
+   "x_min": 53.8,
+   "x_max": 236.5
+  },
+  "mark": {
+   "x": 172.3,
+   "y": 508.1
+  },
+  "pipeline": {
+   "winner": 0.8904,
+   "winner_dispersion": 0.0044,
+   "runner_up": 0.8447,
+   "runner_dispersion": 0.0172,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "sem",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 2.5740862555014368,
+   "p_z": 0.010050521358529796,
+   "se": 0.01775387281693772,
+   "p": 0.010050521358529796,
+   "test": "z",
+   "kind_used": "sem"
+  },
+  "id": "054",
+  "image": "054_testable.png",
+  "title": "Mixed-Initiative Bayesian Sub-Goal Optimization in Hierarchical Reinforcement Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "bcbfe93e27d30640",
+  "table": "1",
+  "page": 5,
+  "bbox": {
+   "y_min": 147.4,
+   "y_max": 166.9,
+   "x_min": 109.3,
+   "x_max": 523.0
+  },
+  "mark": {
+   "x": 316.3,
+   "y": 166.9
+  },
+  "pipeline": {
+   "winner": 0.7,
+   "winner_dispersion": 0.02,
+   "runner_up": 0.67,
+   "runner_dispersion": 0.01,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 128,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 15.17893276880818,
+   "p_z": 0.0,
+   "se": 0.001976423537605237,
+   "df": 186.76470588235296,
+   "p_t": 0.0,
+   "p": 0.0,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "055",
+  "image": "055_testable.png",
+  "title": "Don't Blind Your VLA: Aligning Visual Representations for OOD Generalization"
+ },
+ {
+  "stratum": "testable",
+  "paper": "88e581523c683d03",
+  "table": "1",
+  "page": 5,
+  "bbox": {
+   "y_min": 84.6,
+   "y_max": 255.9,
+   "x_min": 63.8,
+   "x_max": 487.2
+  },
+  "mark": {
+   "x": 482.6,
+   "y": 146.9
+  },
+  "pipeline": {
+   "winner": 4656.6,
+   "winner_dispersion": 145.1,
+   "runner_up": 3889.7,
+   "runner_dispersion": 81.6,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 10.30114115719405,
+   "p_z": 0.0,
+   "se": 74.44806243281285,
+   "df": 6.3000354104113265,
+   "p_t": 3.5677444357284926e-05,
+   "p": 3.5677444357284926e-05,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "056",
+  "image": "056_testable.png",
+  "title": "Offline Multi-Agent Reinforcement Learning with Global Moderate Generalization"
+ },
+ {
+  "stratum": "testable",
+  "paper": "2ff9dffbd7640d1e",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 146.2,
+   "y_max": 366.6,
+   "x_min": 225.0,
+   "x_max": 513.5
+  },
+  "mark": {
+   "x": 435.2,
+   "y": 248.7
+  },
+  "pipeline": {
+   "winner": 7939.0,
+   "winner_dispersion": 851.0,
+   "runner_up": 1103.0,
+   "runner_dispersion": 216.0,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 3,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 13.485770703417787,
+   "p_z": 0.0,
+   "se": 506.9046590171897,
+   "df": 2.2566312738717778,
+   "p_t": 0.003333461357198697,
+   "p": 0.003333461357198697,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "057",
+  "image": "057_testable.png",
+  "title": "Confounding Robust Continuous Control via Automatic Reward Shaping"
+ },
+ {
+  "stratum": "testable",
+  "paper": "7e809c1cdba25fb1",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 149.6,
+   "y_max": 262.4,
+   "x_min": 58.3,
+   "x_max": 489.0
+  },
+  "mark": {
+   "x": 484.7,
+   "y": 226.3
+  },
+  "pipeline": {
+   "winner": 6130.8,
+   "winner_dispersion": 856.4,
+   "runner_up": 5419.6,
+   "runner_dispersion": 682.0,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 1.4526118581611545,
+   "p_z": 0.14633155177324197,
+   "se": 489.6008496724653,
+   "df": 7.61825082177018,
+   "p_t": 0.18624255173281412,
+   "p": 0.18624255173281412,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "058",
+  "image": "058_testable.png",
+  "title": "Disentangling Policy from Offline Task Representation Learning via Adversarial Data Augmentation"
+ },
+ {
+  "stratum": "testable",
+  "paper": "77c774505927be57",
+  "table": "3",
+  "page": 6,
+  "bbox": {
+   "y_min": 124.7,
+   "y_max": 261.2,
+   "x_min": 148.9,
+   "x_max": 528.3
+  },
+  "mark": {
+   "x": 526.2,
+   "y": 155.9
+  },
+  "pipeline": {
+   "winner": 860.0,
+   "winner_dispersion": 47.0,
+   "runner_up": 837.0,
+   "runner_dispersion": 107.0,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.44006748773557197,
+   "p_z": 0.6598882287205721,
+   "se": 52.26471084776036,
+   "df": 5.488142074772062,
+   "p_t": 0.6766848012496638,
+   "p": 0.6766848012496638,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "059",
+  "image": "059_testable.png",
+  "title": "DR2: Revisiting Visual Reinforcement Learning from the Dimensional Analysis Perspective"
+ },
+ {
+  "stratum": "testable",
+  "paper": "7177e5123b653b89",
+  "table": "9",
+  "page": 5,
+  "bbox": {
+   "y_min": 621.8,
+   "y_max": 661.4,
+   "x_min": 79.6,
+   "x_max": 474.9
+  },
+  "mark": {
+   "x": 421.5,
+   "y": 639.7
+  },
+  "pipeline": {
+   "winner": -88.44,
+   "winner_dispersion": 2.84,
+   "runner_up": 876.58,
+   "runner_dispersion": 1113.53,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "ci",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 1.6985919089103199,
+   "p_z": 0.08939610202235415,
+   "se": 568.1293987907192,
+   "p": 0.08939610202235415,
+   "test": "z",
+   "kind_used": "ci"
+  },
+  "id": "060",
+  "image": "060_testable.png",
+  "title": "An Extended Benchmarking of Multi-Agent Reinforcement Learning Algorithms in Complex Fully Cooperative Tasks"
+ },
+ {
+  "stratum": "testable",
+  "paper": "67601132bd8b82b8",
+  "table": "3",
+  "page": 7,
+  "bbox": {
+   "y_min": 119.0,
+   "y_max": 143.9,
+   "x_min": 151.3,
+   "x_max": 501.9
+  },
+  "mark": {
+   "x": 153.5,
+   "y": 137.5
+  },
+  "pipeline": {
+   "winner": 6.85,
+   "winner_dispersion": 0.17,
+   "runner_up": 4.78,
+   "runner_dispersion": 0.31,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 13.091829513097085,
+   "p_z": 0.0,
+   "se": 0.15811388300841897,
+   "df": 6.206295268717689,
+   "p_t": 9.415250379563034e-06,
+   "p": 9.415250379563034e-06,
+   "test": "welch",
+   "kind_used": "unknown"
+  },
+  "id": "061",
+  "image": "061_testable.png",
+  "title": "Offline Multi-Agent Preference-based Reinforcement Learning with Agent-aware Direct Preference Optimization"
+ },
+ {
+  "stratum": "testable",
+  "paper": "7651d582bfd32167",
+  "table": "1",
+  "page": 4,
+  "bbox": {
+   "y_min": 348.9,
+   "y_max": 454.5,
+   "x_min": 210.4,
+   "x_max": 474.3
+  },
+  "mark": {
+   "x": 281.8,
+   "y": 377.7
+  },
+  "pipeline": {
+   "winner": 233.0,
+   "winner_dispersion": 32.0,
+   "runner_up": 184.0,
+   "runner_dispersion": 18.0,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 2.984256414946338,
+   "p_z": 0.0028426843961137926,
+   "se": 16.41950060141903,
+   "df": 6.300900176151572,
+   "p_t": 0.02309932064279696,
+   "p": 0.02309932064279696,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "062",
+  "image": "062_testable.png",
+  "title": "Normalization Enhances Generalization in Visual Reinforcement Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "a8e4bc771fca1f0f",
+  "table": "1",
+  "page": 5,
+  "bbox": {
+   "y_min": 436.8,
+   "y_max": 469.7,
+   "x_min": 143.6,
+   "x_max": 472.4
+  },
+  "mark": {
+   "x": 143.6,
+   "y": 469.7
+  },
+  "pipeline": {
+   "winner": 1677.0,
+   "winner_dispersion": 697.0,
+   "runner_up": 1254.0,
+   "runner_dispersion": 710.0,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 10,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 1.3444440423612518,
+   "p_z": 0.17880483994720353,
+   "se": 314.62819326945254,
+   "df": 17.993856602606627,
+   "p_t": 0.19550974207231753,
+   "p": 0.19550974207231753,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "063",
+  "image": "063_testable.png",
+  "title": "Episodic Reinforcement Learning with Expanded State-reward Space"
+ },
+ {
+  "stratum": "testable",
+  "paper": "e84c95fc44701a82",
+  "table": "1",
+  "page": 7,
+  "bbox": {
+   "y_min": 84.6,
+   "y_max": 295.3,
+   "x_min": 112.3,
+   "x_max": 536.4
+  },
+  "mark": null,
+  "pipeline": {
+   "winner": 67.8,
+   "winner_dispersion": 3.3,
+   "runner_up": 61.2,
+   "runner_dispersion": 4.9,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "unknown",
+   "n_runs": 100,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 11.172007589581279,
+   "p_z": 0.0,
+   "se": 0.5907622195096771,
+   "df": 173.48268280618902,
+   "p_t": 0.0,
+   "p": 0.0,
+   "test": "welch",
+   "kind_used": "unknown"
+  },
+  "id": "064",
+  "image": "064_testable.png",
+  "title": "Data Pricing for Graph Neural Networks without Pre-purchased Inspection"
+ },
+ {
+  "stratum": "testable",
+  "paper": "88e581523c683d03",
+  "table": "1",
+  "page": 5,
+  "bbox": {
+   "y_min": 84.6,
+   "y_max": 255.9,
+   "x_min": 63.8,
+   "x_max": 487.2
+  },
+  "mark": {
+   "x": 487.2,
+   "y": 199.8
+  },
+  "pipeline": {
+   "winner": 2062.3,
+   "winner_dispersion": 3.8,
+   "runner_up": 2056.9,
+   "runner_dispersion": 5.9,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 1.7205830672683777,
+   "p_z": 0.08532650827134014,
+   "se": 3.138470965295043,
+   "df": 6.831369159944197,
+   "p_t": 0.13006403131240618,
+   "p": 0.13006403131240618,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "065",
+  "image": "065_testable.png",
+  "title": "Offline Multi-Agent Reinforcement Learning with Global Moderate Generalization"
+ },
+ {
+  "stratum": "testable",
+  "paper": "9a9a0ecdf48dd623",
+  "table": "1",
+  "page": 4,
+  "bbox": {
+   "y_min": 124.2,
+   "y_max": 334.6,
+   "x_min": 82.6,
+   "x_max": 531.8
+  },
+  "mark": {
+   "x": 140.4,
+   "y": 222.1
+  },
+  "pipeline": {
+   "winner": 0.877,
+   "winner_dispersion": 0.051,
+   "runner_up": 0.727,
+   "runner_dispersion": 0.043,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 10,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 7.110681947099661,
+   "p_z": 1.1546319456101628e-12,
+   "se": 0.02109502310972898,
+   "df": 17.500242046299675,
+   "p_t": 1.479039837049001e-06,
+   "p": 1.479039837049001e-06,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "066",
+  "image": "066_testable.png",
+  "title": "Deep Anomaly Detection via Active Anomaly Search"
+ },
+ {
+  "stratum": "testable",
+  "paper": "bbbb05bc5a29c0a8",
+  "table": "2",
+  "page": 5,
+  "bbox": {
+   "y_min": 165.3,
+   "y_max": 472.7,
+   "x_min": 53.5,
+   "x_max": 518.8
+  },
+  "mark": {
+   "x": 394.7,
+   "y": 214.0
+  },
+  "pipeline": {
+   "winner": 14.5,
+   "winner_dispersion": 9.6,
+   "runner_up": 13.1,
+   "runner_dispersion": 7.9,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.25179693211972987,
+   "p_z": 0.8011980287519522,
+   "se": 5.560035971106661,
+   "df": 7.714230333313781,
+   "p_t": 0.8077758768138188,
+   "p": 0.8077758768138188,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "067",
+  "image": "067_testable.png",
+  "title": "Reducing Overestimation by Measuring Critic Disagreement in Multi-Critics Architectures"
+ },
+ {
+  "stratum": "testable",
+  "paper": "62aad5318a8251e8",
+  "table": "1",
+  "page": 5,
+  "bbox": {
+   "y_min": 105.1,
+   "y_max": 140.5,
+   "x_min": 53.5,
+   "x_max": 488.9
+  },
+  "mark": {
+   "x": 473.8,
+   "y": 105.1
+  },
+  "pipeline": {
+   "winner": 91.2,
+   "winner_dispersion": 6.0,
+   "runner_up": 70.9,
+   "runner_dispersion": 2.0,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 7.177133829043456,
+   "p_z": 7.118750033896504e-13,
+   "se": 2.8284271247461903,
+   "df": 4.878048780487805,
+   "p_t": 0.0009056453277955789,
+   "p": 0.0009056453277955789,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "068",
+  "image": "068_testable.png",
+  "title": "Beyond Surprise: Improving Exploration Through Surprise Novelty"
+ },
+ {
+  "stratum": "testable",
+  "paper": "b427afba596fe349",
+  "table": "2",
+  "page": 5,
+  "bbox": {
+   "y_min": 356.0,
+   "y_max": 523.2,
+   "x_min": 57.6,
+   "x_max": 544.2
+  },
+  "mark": {
+   "x": 103.4,
+   "y": 356.0
+  },
+  "pipeline": {
+   "winner": -0.1,
+   "winner_dispersion": 0.02,
+   "runner_up": -0.6,
+   "runner_dispersion": 0.14,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 100,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 35.35533905932737,
+   "p_z": 0.0,
+   "se": 0.014142135623730952,
+   "df": 103.03913405495418,
+   "p_t": 0.0,
+   "p": 0.0,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "069",
+  "image": "069_testable.png",
+  "title": "Scaling Opponent Shaping to High Dimensional Games"
+ },
+ {
+  "stratum": "testable",
+  "paper": "c7205e179ed0190f",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 156.0,
+   "y_max": 490.2,
+   "x_min": 53.8,
+   "x_max": 504.6
+  },
+  "mark": {
+   "x": 346.2,
+   "y": 181.8
+  },
+  "pipeline": {
+   "winner": 0.38,
+   "winner_dispersion": 0.03,
+   "runner_up": 0.37,
+   "runner_dispersion": 0.03,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "ci",
+   "n_runs": 5,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.4619764303752115,
+   "p_z": 0.6440982227685972,
+   "se": 0.02164612595469023,
+   "df": 8.0,
+   "p_t": 0.6564016069901024,
+   "p": 0.6564016069901024,
+   "test": "welch",
+   "kind_used": "ci"
+  },
+  "id": "070",
+  "image": "070_testable.png",
+  "title": "Efficient Public Health Intervention Planning Using Decomposition-Based Decision-focused Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "e778a6a2942e8792",
+  "table": "2",
+  "page": 6,
+  "bbox": {
+   "y_min": 367.7,
+   "y_max": 594.4,
+   "x_min": 174.9,
+   "x_max": 497.8
+  },
+  "mark": {
+   "x": 496.2,
+   "y": 495.0
+  },
+  "pipeline": {
+   "winner": 17.14,
+   "winner_dispersion": 1.51,
+   "runner_up": 16.35,
+   "runner_dispersion": 0.91,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 10,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 1.4170090150077876,
+   "p_z": 0.15648029177393097,
+   "se": 0.5575123317021786,
+   "df": 14.775529708310344,
+   "p_t": 0.17722012643881713,
+   "p": 0.17722012643881713,
+   "test": "welch",
+   "kind_used": "unknown"
+  },
+  "id": "071",
+  "image": "071_testable.png",
+  "title": "Puzzle it Out: Local-to-Global World Model for Offline Multi-Agent Reinforcement Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "52ab476072117fca",
+  "table": "1",
+  "page": 4,
+  "bbox": {
+   "y_min": 145.3,
+   "y_max": 486.3,
+   "x_min": 53.8,
+   "x_max": 485.3
+  },
+  "mark": {
+   "x": 481.7,
+   "y": 251.3
+  },
+  "pipeline": {
+   "winner": 101.0,
+   "winner_dispersion": 16.8,
+   "runner_up": 98.3,
+   "runner_dispersion": 49.7,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.11507964523176639,
+   "p_z": 0.9083819934556945,
+   "se": 23.462011848944243,
+   "df": 4.902323569052905,
+   "p_t": 0.9129465566855732,
+   "p": 0.9129465566855732,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "072",
+  "image": "072_testable.png",
+  "title": "B3C: A Minimalist Approach to Offline Multi-Agent Reinforcement Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "2858971233508e59",
+  "table": "2",
+  "page": 7,
+  "bbox": {
+   "y_min": 192.4,
+   "y_max": 298.4,
+   "x_min": 53.5,
+   "x_max": 318.0
+  },
+  "mark": {
+   "x": 243.2,
+   "y": 225.2
+  },
+  "pipeline": {
+   "winner": 628.3,
+   "winner_dispersion": 16.6,
+   "runner_up": 615.8,
+   "runner_dispersion": 12.7,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "sem",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.5980587420136383,
+   "p_z": 0.5498007382733685,
+   "se": 20.900956915892632,
+   "p": 0.5498007382733685,
+   "test": "z",
+   "kind_used": "sem"
+  },
+  "id": "073",
+  "image": "073_testable.png",
+  "title": "Continuous Monte Carlo Graph Search"
+ },
+ {
+  "stratum": "testable",
+  "paper": "c08021da3cf0cc59",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 84.2,
+   "y_max": 193.9,
+   "x_min": 109.1,
+   "x_max": 453.9
+  },
+  "mark": {
+   "x": 292.0,
+   "y": 193.9
+  },
+  "pipeline": {
+   "winner": 17.29,
+   "winner_dispersion": 0.76,
+   "runner_up": 16.13,
+   "runner_dispersion": 1.21,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 1.8152942290634917,
+   "p_z": 0.06947870538937151,
+   "se": 0.639014866806712,
+   "df": 6.731020673789552,
+   "p_t": 0.11403626774191378,
+   "p": 0.11403626774191378,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "074",
+  "image": "074_testable.png",
+  "title": "Multi-Agent Decision S4: Leveraging State Space Models for Offline Multi-Agent Reinforcement Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "6655d201cf8c0ac6",
+  "table": "4",
+  "page": 6,
+  "bbox": {
+   "y_min": 283.5,
+   "y_max": 371.1,
+   "x_min": 160.9,
+   "x_max": 498.8
+  },
+  "mark": {
+   "x": 498.8,
+   "y": 283.5
+  },
+  "pipeline": {
+   "winner": 0.52,
+   "winner_dispersion": 0.07,
+   "runner_up": 0.31,
+   "runner_dispersion": 0.0,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "sem",
+   "n_runs": 3,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 3.0,
+   "p_z": 0.002699796063260207,
+   "se": 0.07,
+   "df": 1.9999999999999998,
+   "p_t": 0.095465966266709,
+   "p": 0.095465966266709,
+   "test": "welch",
+   "kind_used": "sem"
+  },
+  "id": "075",
+  "image": "075_testable.png",
+  "title": "A Model-Based Solution to the Offline Multi-Agent Reinforcement Learning Coordination Problem"
+ },
+ {
+  "stratum": "testable",
+  "paper": "1951015914b991f1",
+  "table": "3",
+  "page": 5,
+  "bbox": {
+   "y_min": 296.8,
+   "y_max": 412.1,
+   "x_min": 53.5,
+   "x_max": 467.6
+  },
+  "mark": {
+   "x": 356.9,
+   "y": 334.2
+  },
+  "pipeline": {
+   "winner": 40.8,
+   "winner_dispersion": 2.3,
+   "runner_up": 39.9,
+   "runner_dispersion": 0.1,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 5,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.8741572761215366,
+   "p_z": 0.3820326092369144,
+   "se": 1.0295630140986998,
+   "df": 4.015122819305179,
+   "p_t": 0.43120312782314474,
+   "p": 0.43120312782314474,
+   "test": "welch",
+   "kind_used": "unknown"
+  },
+  "id": "076",
+  "image": "076_testable.png",
+  "title": "PDiT: Interleaving Perception and Decision-making Transformers for Deep Reinforcement Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "f1332ed33108e6e2",
+  "table": "2",
+  "page": 6,
+  "bbox": {
+   "y_min": 134.9,
+   "y_max": 317.1,
+   "x_min": 183.8,
+   "x_max": 527.8
+  },
+  "mark": {
+   "x": 466.7,
+   "y": 261.0
+  },
+  "pipeline": {
+   "winner": 65.5,
+   "winner_dispersion": 2.3,
+   "runner_up": 62.5,
+   "runner_dispersion": 3.8,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "paren",
+   "runner_style": "paren"
+  },
+  "pipeline_test": {
+   "z": 1.5102286827167453,
+   "p_z": 0.13098508222048388,
+   "se": 1.9864541273334249,
+   "df": 6.583960858815964,
+   "p_t": 0.17739561132520465,
+   "p": 0.17739561132520465,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "077",
+  "image": "077_testable.png",
+  "title": "ACORN: Acyclic Coordination with Reachability Network to Reduce Communication Redundancy in Multi-Agent Systems"
+ },
+ {
+  "stratum": "testable",
+  "paper": "fabf7aae0479a251",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 127.6,
+   "y_max": 377.2,
+   "x_min": 161.6,
+   "x_max": 476.2
+  },
+  "mark": {
+   "x": 254.4,
+   "y": 257.9
+  },
+  "pipeline": {
+   "winner": 1.7,
+   "winner_dispersion": 0.483,
+   "runner_up": 0.634,
+   "runner_dispersion": 0.437,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 10,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 5.175379301081172,
+   "p_z": 2.2744843031219375e-07,
+   "se": 0.2059752412305906,
+   "df": 17.822661190509912,
+   "p_t": 6.560650729214856e-05,
+   "p": 6.560650729214856e-05,
+   "test": "welch",
+   "kind_used": "unknown"
+  },
+  "id": "078",
+  "image": "078_testable.png",
+  "title": "Multi-objective Reinforcement Learning with Nonlinear Preferences: Provable Approximation for Maximizing Expected Scalarized Return"
+ },
+ {
+  "stratum": "testable",
+  "paper": "88e581523c683d03",
+  "table": "2",
+  "page": 6,
+  "bbox": {
+   "y_min": 144.6,
+   "y_max": 347.9,
+   "x_min": 58.8,
+   "x_max": 554.2
+  },
+  "mark": {
+   "x": 127.7,
+   "y": 332.1
+  },
+  "pipeline": {
+   "winner": 28.7,
+   "winner_dispersion": 7.8,
+   "runner_up": 22.5,
+   "runner_dispersion": 9.4,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 1.1349906402042294,
+   "p_z": 0.25637924007620505,
+   "se": 5.4626001134990645,
+   "df": 7.736779662572107,
+   "p_t": 0.29031577926734986,
+   "p": 0.29031577926734986,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "079",
+  "image": "079_testable.png",
+  "title": "Offline Multi-Agent Reinforcement Learning with Global Moderate Generalization"
+ },
+ {
+  "stratum": "testable",
+  "paper": "e84c95fc44701a82",
+  "table": "1",
+  "page": 7,
+  "bbox": {
+   "y_min": 84.6,
+   "y_max": 295.3,
+   "x_min": 112.3,
+   "x_max": 536.4
+  },
+  "mark": null,
+  "pipeline": {
+   "winner": 46.7,
+   "winner_dispersion": 8.8,
+   "runner_up": 37.2,
+   "runner_dispersion": 11.0,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "unknown",
+   "n_runs": 100,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 6.743866990644352,
+   "p_z": 1.54225521242779e-11,
+   "se": 1.408687332235227,
+   "df": 188.89784335981838,
+   "p_t": 1.8259149747734682e-10,
+   "p": 1.8259149747734682e-10,
+   "test": "welch",
+   "kind_used": "unknown"
+  },
+  "id": "080",
+  "image": "080_testable.png",
+  "title": "Data Pricing for Graph Neural Networks without Pre-purchased Inspection"
+ },
+ {
+  "stratum": "testable",
+  "paper": "88e581523c683d03",
+  "table": "1",
+  "page": 5,
+  "bbox": {
+   "y_min": 84.6,
+   "y_max": 255.9,
+   "x_min": 63.8,
+   "x_max": 487.2
+  },
+  "mark": {
+   "x": 482.6,
+   "y": 138.1
+  },
+  "pipeline": {
+   "winner": 4422.8,
+   "winner_dispersion": 199.3,
+   "runner_up": 2855.0,
+   "runner_dispersion": 242.2,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 11.176847300145484,
+   "p_z": 0.0,
+   "se": 140.27211412108966,
+   "df": 7.714086205561017,
+   "p_t": 4.893780359394029e-06,
+   "p": 4.893780359394029e-06,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "081",
+  "image": "081_testable.png",
+  "title": "Offline Multi-Agent Reinforcement Learning with Global Moderate Generalization"
+ },
+ {
+  "stratum": "testable",
+  "paper": "008ca7f92464f38f",
+  "table": "1",
+  "page": 7,
+  "bbox": {
+   "y_min": 152.7,
+   "y_max": 484.2,
+   "x_min": 138.8,
+   "x_max": 477.9
+  },
+  "mark": {
+   "x": 468.4,
+   "y": 238.1
+  },
+  "pipeline": {
+   "winner": 3336.27,
+   "winner_dispersion": 11.3,
+   "runner_up": 3270.54,
+   "runner_dispersion": 297.76,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.49325303618916744,
+   "p_z": 0.6218338076478505,
+   "se": 133.2581761844278,
+   "df": 4.011521612415813,
+   "p_t": 0.6476168187140763,
+   "p": 0.6476168187140763,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "082",
+  "image": "082_testable.png",
+  "title": "Feasible Constraint Policy Optimization for Safe Reinforcement Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "77c774505927be57",
+  "table": "2",
+  "page": 5,
+  "bbox": {
+   "y_min": 251.7,
+   "y_max": 368.1,
+   "x_min": 133.7,
+   "x_max": 524.5
+  },
+  "mark": {
+   "x": 522.8,
+   "y": 251.7
+  },
+  "pipeline": {
+   "winner": 976.0,
+   "winner_dispersion": 6.0,
+   "runner_up": 974.0,
+   "runner_dispersion": 6.0,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": "page",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.5270462766947299,
+   "p_z": 0.5981614526835282,
+   "se": 3.794733192202055,
+   "df": 8.0,
+   "p_t": 0.6124593702800674,
+   "p": 0.6124593702800674,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "083",
+  "image": "083_testable.png",
+  "title": "DR2: Revisiting Visual Reinforcement Learning from the Dimensional Analysis Perspective"
+ },
+ {
+  "stratum": "testable",
+  "paper": "53229dd344894994",
+  "table": "1",
+  "page": 4,
+  "bbox": {
+   "y_min": 170.1,
+   "y_max": 444.3,
+   "x_min": 62.8,
+   "x_max": 481.2
+  },
+  "mark": {
+   "x": 401.0,
+   "y": 365.0
+  },
+  "pipeline": {
+   "winner": 0.67,
+   "winner_dispersion": 0.01,
+   "runner_up": 0.53,
+   "runner_dispersion": 0.0,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 3,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 24.24871130596428,
+   "p_z": 0.0,
+   "se": 0.005773502691896258,
+   "df": 2.0,
+   "p_t": 0.0016963540627903395,
+   "p": 0.0016963540627903395,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "084",
+  "image": "084_testable.png",
+  "title": "DELL: Dual-Knowledge Enhanced LLMs for Precise Decision Making in Healthcare"
+ },
+ {
+  "stratum": "testable",
+  "paper": "67601132bd8b82b8",
+  "table": "2",
+  "page": 7,
+  "bbox": {
+   "y_min": 119.0,
+   "y_max": 143.9,
+   "x_min": 151.3,
+   "x_max": 501.9
+  },
+  "mark": {
+   "x": 152.4,
+   "y": 119.0
+  },
+  "pipeline": {
+   "winner": 9.46,
+   "winner_dispersion": 0.07,
+   "runner_up": 6.82,
+   "runner_dispersion": 0.34,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 17.005734936981938,
+   "p_z": 0.0,
+   "se": 0.15524174696260024,
+   "df": 4.338492175834387,
+   "p_t": 3.8927100386443314e-05,
+   "p": 3.8927100386443314e-05,
+   "test": "welch",
+   "kind_used": "unknown"
+  },
+  "id": "085",
+  "image": "085_testable.png",
+  "title": "Offline Multi-Agent Preference-based Reinforcement Learning with Agent-aware Direct Preference Optimization"
+ },
+ {
+  "stratum": "testable",
+  "paper": "fabf7aae0479a251",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 127.6,
+   "y_max": 377.2,
+   "x_min": 161.6,
+   "x_max": 476.2
+  },
+  "mark": {
+   "x": 254.4,
+   "y": 365.8
+  },
+  "pipeline": {
+   "winner": 1.336,
+   "winner_dispersion": 0.24,
+   "runner_up": 0.874,
+   "runner_dispersion": 0.605,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 10,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 2.2446631898003617,
+   "p_z": 0.024789762835534468,
+   "se": 0.2058215246275277,
+   "df": 11.764141773911847,
+   "p_t": 0.044839893944536025,
+   "p": 0.044839893944536025,
+   "test": "welch",
+   "kind_used": "unknown"
+  },
+  "id": "086",
+  "image": "086_testable.png",
+  "title": "Multi-objective Reinforcement Learning with Nonlinear Preferences: Provable Approximation for Maximizing Expected Scalarized Return"
+ },
+ {
+  "stratum": "testable",
+  "paper": "53229dd344894994",
+  "table": "1",
+  "page": 4,
+  "bbox": {
+   "y_min": 170.1,
+   "y_max": 444.3,
+   "x_min": 62.8,
+   "x_max": 481.2
+  },
+  "mark": {
+   "x": 401.0,
+   "y": 294.7
+  },
+  "pipeline": {
+   "winner": 0.73,
+   "winner_dispersion": 0.01,
+   "runner_up": 0.68,
+   "runner_dispersion": 0.0,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 3,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 8.660254037844375,
+   "p_z": 0.0,
+   "se": 0.005773502691896258,
+   "df": 2.0,
+   "p_t": 0.013072457560346473,
+   "p": 0.013072457560346473,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "087",
+  "image": "087_testable.png",
+  "title": "DELL: Dual-Knowledge Enhanced LLMs for Precise Decision Making in Healthcare"
+ },
+ {
+  "stratum": "testable",
+  "paper": "49a1820237d0f056",
+  "table": "3",
+  "page": 7,
+  "bbox": {
+   "y_min": 325.5,
+   "y_max": 692.5,
+   "x_min": 53.5,
+   "x_max": 551.7
+  },
+  "mark": {
+   "x": 163.0,
+   "y": 429.2
+  },
+  "pipeline": {
+   "winner": 102.7,
+   "winner_dispersion": 0.68,
+   "runner_up": 96.8,
+   "runner_dispersion": 1.6,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 7.588589202038129,
+   "p_z": 3.241851231905457e-14,
+   "se": 0.7774831187877972,
+   "df": 5.399345796761213,
+   "p_t": 0.00044623649432917745,
+   "p": 0.00044623649432917745,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "088",
+  "image": "088_testable.png",
+  "title": "Evaluation-Time Policy Switching for Offline Reinforcement Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "5ad998cb52e53335",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 149.1,
+   "y_max": 405.5,
+   "x_min": 79.8,
+   "x_max": 495.6
+  },
+  "mark": {
+   "x": 482.6,
+   "y": 342.2
+  },
+  "pipeline": {
+   "winner": -5.1,
+   "winner_dispersion": 0.5,
+   "runner_up": 708.1,
+   "runner_dispersion": 60.6,
+   "direction": "lower_better",
+   "orientation": "row",
+   "dispersion_kind": "sem",
+   "n_runs": 8,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 11.768576325032061,
+   "p_z": 0.0,
+   "se": 60.602062671166564,
+   "df": 7.000953065599173,
+   "p_t": 7.237658731007457e-06,
+   "p": 7.237658731007457e-06,
+   "test": "welch",
+   "kind_used": "sem"
+  },
+  "id": "089",
+  "image": "089_testable.png",
+  "title": "Learning from Delay Distributions: A New Representation for Delay-Aware Reinforcement Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "b8e9f52dbaa7bde2",
+  "table": "2",
+  "page": 6,
+  "bbox": {
+   "y_min": 270.6,
+   "y_max": 380.8,
+   "x_min": 130.0,
+   "x_max": 318.0
+  },
+  "mark": {
+   "x": 236.4,
+   "y": 380.8
+  },
+  "pipeline": {
+   "winner": 0.0001,
+   "winner_dispersion": 0.0001,
+   "runner_up": 0.0009,
+   "runner_dispersion": 0.0006,
+   "direction": "lower_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 50,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 9.299811099505542,
+   "p_z": 0.0,
+   "se": 8.602325267042626e-05,
+   "df": 51.720123361603704,
+   "p_t": 1.262545623603728e-12,
+   "p": 1.262545623603728e-12,
+   "test": "welch",
+   "kind_used": "unknown"
+  },
+  "id": "090",
+  "image": "090_testable.png",
+  "title": "Predictability Awareness for Efficient and Robust Multi-Agent Coordination"
+ },
+ {
+  "stratum": "testable",
+  "paper": "ab0b21133f3bcb7d",
+  "table": "1",
+  "page": 4,
+  "bbox": {
+   "y_min": 161.2,
+   "y_max": 502.9,
+   "x_min": 53.5,
+   "x_max": 503.3
+  },
+  "mark": {
+   "x": 438.3,
+   "y": 197.4
+  },
+  "pipeline": {
+   "winner": 0.001,
+   "winner_dispersion": 0.001,
+   "runner_up": 0.045,
+   "runner_dispersion": 0.005,
+   "direction": "lower_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 3,
+   "n_runs_source": "caption",
+   "winner_style": "paren",
+   "runner_style": "paren"
+  },
+  "pipeline_test": {
+   "z": 14.946056850708663,
+   "p_z": 0.0,
+   "se": 0.002943920288775949,
+   "df": 2.159744408945687,
+   "p_t": 0.003213381324348674,
+   "p": 0.003213381324348674,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "091",
+  "image": "091_testable.png",
+  "title": "Mean Field Correlated Imitation Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "53ddd82b4c25025c",
+  "table": "1",
+  "page": 5,
+  "bbox": {
+   "y_min": 318.9,
+   "y_max": 383.5,
+   "x_min": 127.3,
+   "x_max": 382.1
+  },
+  "mark": {
+   "x": 127.3,
+   "y": 378.5
+  },
+  "pipeline": {
+   "winner": 48.0,
+   "winner_dispersion": 19.0,
+   "runner_up": 47.0,
+   "runner_dispersion": 12.0,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": "page",
+   "winner_style": "paren",
+   "runner_style": "paren"
+  },
+  "pipeline_test": {
+   "z": 0.09950371902099892,
+   "p_z": 0.9207383352044227,
+   "se": 10.04987562112089,
+   "df": 6.753079963192701,
+   "p_t": 0.923627459504464,
+   "p": 0.923627459504464,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "092",
+  "image": "092_testable.png",
+  "title": "Aligning Credit for Multi-Agent Cooperation via Model-based Counterfactual Imagination"
+ },
+ {
+  "stratum": "testable",
+  "paper": "728bb22e6fbfd5a5",
+  "table": "3",
+  "page": 7,
+  "bbox": {
+   "y_min": 131.9,
+   "y_max": 217.5,
+   "x_min": 93.3,
+   "x_max": 508.7
+  },
+  "mark": {
+   "x": 159.2,
+   "y": 169.6
+  },
+  "pipeline": {
+   "winner": 0.73,
+   "winner_dispersion": 0.1,
+   "runner_up": 0.64,
+   "runner_dispersion": 0.1,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "sem",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.6363961030678924,
+   "p_z": 0.5245182802130766,
+   "se": 0.14142135623730953,
+   "p": 0.5245182802130766,
+   "test": "z",
+   "kind_used": "sem"
+  },
+  "id": "093",
+  "image": "093_testable.png",
+  "title": "Integrating Counterfactual Simulations with Language Models for Explaining Multi-Agent Behaviour"
+ },
+ {
+  "stratum": "testable",
+  "paper": "b8e9f52dbaa7bde2",
+  "table": "1",
+  "page": 5,
+  "bbox": {
+   "y_min": 347.1,
+   "y_max": 482.6,
+   "x_min": 53.6,
+   "x_max": 263.1
+  },
+  "mark": {
+   "x": 239.9,
+   "y": 438.7
+  },
+  "pipeline": {
+   "winner": 0.112,
+   "winner_dispersion": 0.08,
+   "runner_up": 0.138,
+   "runner_dispersion": 0.09,
+   "direction": "lower_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 50,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 1.5267725707382296,
+   "p_z": 0.12681757448329156,
+   "se": 0.0170293863659264,
+   "df": 96.6712020268368,
+   "p_t": 0.13008287035122112,
+   "p": 0.13008287035122112,
+   "test": "welch",
+   "kind_used": "unknown"
+  },
+  "id": "094",
+  "image": "094_testable.png",
+  "title": "Predictability Awareness for Efficient and Robust Multi-Agent Coordination"
+ },
+ {
+  "stratum": "testable",
+  "paper": "11cbad47f48357a6",
+  "table": "1",
+  "page": 5,
+  "bbox": {
+   "y_min": 84.6,
+   "y_max": 391.8,
+   "x_min": 70.1,
+   "x_max": 541.4
+  },
+  "mark": {
+   "x": 511.9,
+   "y": 265.9
+  },
+  "pipeline": {
+   "winner": 675.0,
+   "winner_dispersion": 3.0,
+   "runner_up": 619.0,
+   "runner_dispersion": 24.0,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 3,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 4.010243294620824,
+   "p_z": 6.0656214548426846e-05,
+   "se": 13.964240043768942,
+   "df": 2.0624847449353187,
+   "p_t": 0.05407955732912639,
+   "p": 0.05407955732912639,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "095",
+  "image": "095_testable.png",
+  "title": "Salience-Invariant Consistent Policy Learning for Generalization in Visual Reinforcement Learning"
+ },
+ {
+  "stratum": "testable",
+  "paper": "67601132bd8b82b8",
+  "table": "3",
+  "page": 7,
+  "bbox": {
+   "y_min": 119.0,
+   "y_max": 143.9,
+   "x_min": 151.3,
+   "x_max": 501.9
+  },
+  "mark": {
+   "x": 416.5,
+   "y": 119.0
+  },
+  "pipeline": {
+   "winner": 8.37,
+   "winner_dispersion": 0.07,
+   "runner_up": 6.82,
+   "runner_dispersion": 0.34,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 9.984427709212872,
+   "p_z": 0.0,
+   "se": 0.15524174696260024,
+   "df": 4.338492175834387,
+   "p_t": 0.00037291898081592834,
+   "p": 0.00037291898081592834,
+   "test": "welch",
+   "kind_used": "unknown"
+  },
+  "id": "096",
+  "image": "096_testable.png",
+  "title": "Offline Multi-Agent Preference-based Reinforcement Learning with Agent-aware Direct Preference Optimization"
+ },
+ {
+  "stratum": "testable",
+  "paper": "fabf7aae0479a251",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 127.6,
+   "y_max": 377.2,
+   "x_min": 161.6,
+   "x_max": 476.2
+  },
+  "mark": {
+   "x": 474.2,
+   "y": 138.5
+  },
+  "pipeline": {
+   "winner": 4.065,
+   "winner_dispersion": 0.773,
+   "runner_up": 3.483,
+   "runner_dispersion": 0.894,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "unknown",
+   "n_runs": 10,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 1.5572606607153174,
+   "p_z": 0.11940861136392567,
+   "se": 0.37373319360206686,
+   "df": 17.63229121786443,
+   "p_t": 0.1371754446130229,
+   "p": 0.1371754446130229,
+   "test": "welch",
+   "kind_used": "unknown"
+  },
+  "id": "097",
+  "image": "097_testable.png",
+  "title": "Multi-objective Reinforcement Learning with Nonlinear Preferences: Provable Approximation for Maximizing Expected Scalarized Return"
+ },
+ {
+  "stratum": "testable",
+  "paper": "85d3379d58e4b4c3",
+  "table": "1",
+  "page": 5,
+  "bbox": {
+   "y_min": 488.5,
+   "y_max": 509.7,
+   "x_min": 420.2,
+   "x_max": 490.2
+  },
+  "mark": {
+   "x": 420.2,
+   "y": 488.5
+  },
+  "pipeline": {
+   "winner": 24.59,
+   "winner_dispersion": 1.5,
+   "runner_up": 41.05,
+   "runner_dispersion": 0.1,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "unknown",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 24.48277342725422,
+   "p_z": 0.0,
+   "se": 0.6723094525588644,
+   "df": 4.035554853237467,
+   "p_t": 1.5317586327556754e-05,
+   "p": 1.5317586327556754e-05,
+   "test": "welch",
+   "kind_used": "unknown"
+  },
+  "id": "098",
+  "image": "098_testable.png",
+  "title": "On the Limits of Agency in Agent-based Models"
+ },
+ {
+  "stratum": "testable",
+  "paper": "9a9a0ecdf48dd623",
+  "table": "2",
+  "page": 5,
+  "bbox": {
+   "y_min": 124.2,
+   "y_max": 289.9,
+   "x_min": 134.9,
+   "x_max": 511.5
+  },
+  "mark": {
+   "x": 134.9,
+   "y": 162.1
+  },
+  "pipeline": {
+   "winner": 0.824,
+   "winner_dispersion": 0.068,
+   "runner_up": 0.745,
+   "runner_dispersion": 0.088,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 10,
+   "n_runs_source": null,
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 2.2463496333587676,
+   "p_z": 0.024681621742509652,
+   "se": 0.03516816742453322,
+   "df": 16.923065545964622,
+   "p_t": 0.03832356321440278,
+   "p": 0.03832356321440278,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "099",
+  "image": "099_testable.png",
+  "title": "Deep Anomaly Detection via Active Anomaly Search"
+ },
+ {
+  "stratum": "testable",
+  "paper": "c08021da3cf0cc59",
+  "table": "2",
+  "page": 6,
+  "bbox": {
+   "y_min": 262.6,
+   "y_max": 408.2,
+   "x_min": 216.5,
+   "x_max": 441.7
+  },
+  "mark": {
+   "x": 325.9,
+   "y": 262.6
+  },
+  "pipeline": {
+   "winner": 8.25,
+   "winner_dispersion": 0.37,
+   "runner_up": 8.15,
+   "runner_dispersion": 0.63,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": "caption",
+   "winner_style": "pm",
+   "runner_style": "pm"
+  },
+  "pipeline_test": {
+   "z": 0.30605234922247015,
+   "p_z": 0.7595647879135694,
+   "se": 0.32674148802991027,
+   "df": 6.466000292049946,
+   "p_t": 0.7691816476968958,
+   "p": 0.7691816476968958,
+   "test": "welch",
+   "kind_used": "std"
+  },
+  "id": "100",
+  "image": "100_testable.png",
+  "title": "Multi-Agent Decision S4: Leveraging State Space Models for Offline Multi-Agent Reinforcement Learning"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "276c1f2e146887a4",
+  "table": "2",
+  "page": 5,
+  "bbox": {
+   "y_min": 185.5,
+   "y_max": 352.8,
+   "x_min": 58.5,
+   "x_max": 531.8
+  },
+  "mark": {
+   "x": 322.7,
+   "y": 340.7
+  },
+  "pipeline": {
+   "winner": 60.12,
+   "winner_dispersion": null,
+   "runner_up": 53.53,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": 8,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "101",
+  "image": "101_no_bar.png",
+  "title": "VLM-ReG : Vision-Language Models Enhanced via Reward-Refined GRPO in Remote Sensing Reasoning"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "aad6e9b8da87a9cd",
+  "table": "3",
+  "page": 7,
+  "bbox": {
+   "y_min": 134.1,
+   "y_max": 372.6,
+   "x_min": 115.7,
+   "x_max": 488.7
+  },
+  "mark": {
+   "x": 448.4,
+   "y": 288.4
+  },
+  "pipeline": {
+   "winner": 60.2,
+   "winner_dispersion": null,
+   "runner_up": 68.4,
+   "runner_dispersion": null,
+   "direction": "lower_better",
+   "orientation": "row",
+   "dispersion_kind": "none",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "102",
+  "image": "102_no_bar.png",
+  "title": "General Flexible f-divergence for Challenging Offline RL Datasets with Low Stochasticity and Diverse Behavior Policies"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "786c55632934e79a",
+  "table": "2",
+  "page": 6,
+  "bbox": {
+   "y_min": 116.9,
+   "y_max": 372.2,
+   "x_min": 53.8,
+   "x_max": 542.8
+  },
+  "mark": null,
+  "pipeline": {
+   "winner": 75.8,
+   "winner_dispersion": null,
+   "runner_up": 71.7,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": 100,
+   "n_runs_source": "page",
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "103",
+  "image": "103_no_bar.png",
+  "title": "Human-Inspired Context-Selective Multimodal Memory for Social Robots"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "0b4d808f060064c6",
+  "table": "1",
+  "page": 4,
+  "bbox": {
+   "y_min": 133.4,
+   "y_max": 247.7,
+   "x_min": 80.4,
+   "x_max": 463.7
+  },
+  "mark": {
+   "x": 349.4,
+   "y": 148.8
+  },
+  "pipeline": {
+   "winner": 1.0,
+   "winner_dispersion": null,
+   "runner_up": 1.62,
+   "runner_dispersion": null,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": 3,
+   "n_runs_source": "page",
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "104",
+  "image": "104_no_bar.png",
+  "title": "OGS-SLAM: Hybrid ORB-Gaussian Splatting SLAM"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "910637f87afd0ae7",
+  "table": "1",
+  "page": 4,
+  "bbox": {
+   "y_min": 142.9,
+   "y_max": 197.7,
+   "x_min": 110.8,
+   "x_max": 530.8
+  },
+  "mark": {
+   "x": 503.3,
+   "y": 186.7
+  },
+  "pipeline": {
+   "winner": 288.56,
+   "winner_dispersion": null,
+   "runner_up": 273.34,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "none",
+   "n_runs": 5,
+   "n_runs_source": "caption",
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "105",
+  "image": "105_no_bar.png",
+  "title": "Reinforcement Learning Based Simulated Annealing"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "786c55632934e79a",
+  "table": "2",
+  "page": 6,
+  "bbox": {
+   "y_min": 116.9,
+   "y_max": 372.2,
+   "x_min": 53.8,
+   "x_max": 542.8
+  },
+  "mark": null,
+  "pipeline": {
+   "winner": 68.2,
+   "winner_dispersion": null,
+   "runner_up": 61.8,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": 100,
+   "n_runs_source": "page",
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "106",
+  "image": "106_no_bar.png",
+  "title": "Human-Inspired Context-Selective Multimodal Memory for Social Robots"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "be9a555150724550",
+  "table": "5",
+  "page": 7,
+  "bbox": {
+   "y_min": 507.0,
+   "y_max": 542.1,
+   "x_min": 53.5,
+   "x_max": 240.7
+  },
+  "mark": {
+   "x": 172.2,
+   "y": 527.8
+  },
+  "pipeline": {
+   "winner": 0.95,
+   "winner_dispersion": null,
+   "runner_up": 0.833,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "107",
+  "image": "107_no_bar.png",
+  "title": "LLM-Powered Hierarchical Language Agent for Real-time Human-AI Coordination"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "8e3b11c1a16bb717",
+  "table": "1",
+  "page": 5,
+  "bbox": {
+   "y_min": 120.0,
+   "y_max": 432.2,
+   "x_min": 53.8,
+   "x_max": 412.4
+  },
+  "mark": {
+   "x": 317.7,
+   "y": 409.3
+  },
+  "pipeline": {
+   "winner": 10.0,
+   "winner_dispersion": null,
+   "runner_up": 1.0,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "108",
+  "image": "108_no_bar.png",
+  "title": "LTL Verification of Memoryful Neural Agents"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "c995f9de8ee9a46b",
+  "table": "2",
+  "page": 6,
+  "bbox": {
+   "y_min": 84.9,
+   "y_max": 319.4,
+   "x_min": 53.5,
+   "x_max": 552.6
+  },
+  "mark": {
+   "x": 190.5,
+   "y": 156.3
+  },
+  "pipeline": {
+   "winner": 3.0,
+   "winner_dispersion": null,
+   "runner_up": 2.26,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": 3,
+   "n_runs_source": "page",
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "109",
+  "image": "109_no_bar.png",
+  "title": "A Minimax Approach to Ad Hoc Teamwork"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "5c541fce811f3010",
+  "table": "2",
+  "page": 7,
+  "bbox": {
+   "y_min": 326.5,
+   "y_max": 448.8,
+   "x_min": 53.8,
+   "x_max": 538.0
+  },
+  "mark": {
+   "x": 277.9,
+   "y": 338.9
+  },
+  "pipeline": {
+   "winner": 72.27,
+   "winner_dispersion": null,
+   "runner_up": 70.73,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "110",
+  "image": "110_no_bar.png",
+  "title": "EG-RAG: Retrieval-Augmented Generation with Evidence Graph for Reliable Multi-Document Reasoning"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "86eac08c9e1568c2",
+  "table": "1",
+  "page": 7,
+  "bbox": {
+   "y_min": 414.4,
+   "y_max": 495.9,
+   "x_min": 53.8,
+   "x_max": 506.0
+  },
+  "mark": {
+   "x": 206.8,
+   "y": 438.7
+  },
+  "pipeline": {
+   "winner": 30.77,
+   "winner_dispersion": null,
+   "runner_up": 28.2,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "111",
+  "image": "111_no_bar.png",
+  "title": "On Diffusion Models for Multi-Agent Partial Observability: Shared Attractors, Error Bounds, and Composite Flow"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "eeee3646a213d9b3",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 183.9,
+   "y_max": 277.0,
+   "x_min": 191.9,
+   "x_max": 473.9
+  },
+  "mark": {
+   "x": 470.9,
+   "y": 241.0
+  },
+  "pipeline": {
+   "winner": 62.5,
+   "winner_dispersion": null,
+   "runner_up": 0.0,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "std",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "112",
+  "image": "112_no_bar.png",
+  "title": "Hierarchical Reward Design from Language: Enhancing Alignment of Agent Behavior with Human Specifications"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "c1687b5dc3b4d240",
+  "table": "2",
+  "page": 4,
+  "bbox": {
+   "y_min": 126.3,
+   "y_max": 499.9,
+   "x_min": 198.9,
+   "x_max": 532.0
+  },
+  "mark": {
+   "x": 446.1,
+   "y": 279.6
+  },
+  "pipeline": {
+   "winner": 98.2,
+   "winner_dispersion": null,
+   "runner_up": 96.6,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": 10,
+   "n_runs_source": "page",
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "113",
+  "image": "113_no_bar.png",
+  "title": "QDepth-VLA: Quantized Depth Prediction as Auxiliary Supervision for Vision-Language-Action Models"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "786c55632934e79a",
+  "table": "2",
+  "page": 6,
+  "bbox": {
+   "y_min": 116.9,
+   "y_max": 372.2,
+   "x_min": 53.8,
+   "x_max": 542.8
+  },
+  "mark": null,
+  "pipeline": {
+   "winner": 68.4,
+   "winner_dispersion": null,
+   "runner_up": 61.6,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": 100,
+   "n_runs_source": "page",
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "114",
+  "image": "114_no_bar.png",
+  "title": "Human-Inspired Context-Selective Multimodal Memory for Social Robots"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "c052f73e19ccfc73",
+  "table": "1",
+  "page": 5,
+  "bbox": {
+   "y_min": 232.9,
+   "y_max": 354.1,
+   "x_min": 53.5,
+   "x_max": 525.8
+  },
+  "mark": {
+   "x": 482.9,
+   "y": 340.8
+  },
+  "pipeline": {
+   "winner": 1.32,
+   "winner_dispersion": null,
+   "runner_up": 1.38,
+   "runner_dispersion": null,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "115",
+  "image": "115_no_bar.png",
+  "title": "Cross-Domain Alignment with Fine Geometric Perception for Detail-Preserving Point Cloud Completion"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "290f1a1b44ed3973",
+  "table": "3",
+  "page": 6,
+  "bbox": {
+   "y_min": 241.5,
+   "y_max": 320.9,
+   "x_min": 125.6,
+   "x_max": 479.1
+  },
+  "mark": {
+   "x": 255.0,
+   "y": 278.1
+  },
+  "pipeline": {
+   "winner": 0.88,
+   "winner_dispersion": null,
+   "runner_up": 0.68,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "116",
+  "image": "116_no_bar.png",
+  "title": "Rethinking Out-of-Distribution Detection for Reinforcement Learning: Advancing Methods for Evaluation and Detection"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "4c289d4863fadaf0",
+  "table": "2",
+  "page": 7,
+  "bbox": {
+   "y_min": 558.5,
+   "y_max": 624.3,
+   "x_min": 221.2,
+   "x_max": 501.0
+  },
+  "mark": {
+   "x": 221.2,
+   "y": 558.5
+  },
+  "pipeline": {
+   "winner": 6.52,
+   "winner_dispersion": null,
+   "runner_up": 6.55,
+   "runner_dispersion": null,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "117",
+  "image": "117_no_bar.png",
+  "title": "CAMP: Collaborative Attention Model with Profiles for Vehicle Routing Problems"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "9ac2952d1fcc82bc",
+  "table": "3",
+  "page": 7,
+  "bbox": {
+   "y_min": 174.4,
+   "y_max": 257.0,
+   "x_min": 103.7,
+   "x_max": 546.7
+  },
+  "mark": {
+   "x": 218.9,
+   "y": 219.7
+  },
+  "pipeline": {
+   "winner": 87.3,
+   "winner_dispersion": null,
+   "runner_up": 83.7,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": 5,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "118",
+  "image": "118_no_bar.png",
+  "title": "Generalized Per-Agent Advantage Estimation for Multi-Agent Policy Optimization"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "0b4d808f060064c6",
+  "table": "1",
+  "page": 4,
+  "bbox": {
+   "y_min": 133.4,
+   "y_max": 247.7,
+   "x_min": 80.4,
+   "x_max": 463.7
+  },
+  "mark": {
+   "x": 310.0,
+   "y": 221.3
+  },
+  "pipeline": {
+   "winner": 0.31,
+   "winner_dispersion": null,
+   "runner_up": 0.4,
+   "runner_dispersion": null,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": 3,
+   "n_runs_source": "page",
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "119",
+  "image": "119_no_bar.png",
+  "title": "OGS-SLAM: Hybrid ORB-Gaussian Splatting SLAM"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "08e69206fba7f880",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 570.5,
+   "y_max": 602.4,
+   "x_min": 317.7,
+   "x_max": 542.1
+  },
+  "mark": {
+   "x": 484.2,
+   "y": 580.0
+  },
+  "pipeline": {
+   "winner": 4620.0,
+   "winner_dispersion": null,
+   "runner_up": 100.0,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "120",
+  "image": "120_no_bar.png",
+  "title": "LLM-augmented Empirical Game Theoretic Simulation for Socio-ecological Systems"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "4701bc2495b64684",
+  "table": "3",
+  "page": 6,
+  "bbox": {
+   "y_min": 268.1,
+   "y_max": 431.3,
+   "x_min": 53.8,
+   "x_max": 493.8
+  },
+  "mark": {
+   "x": 488.0,
+   "y": 308.8
+  },
+  "pipeline": {
+   "winner": 0.001,
+   "winner_dispersion": null,
+   "runner_up": 0.06,
+   "runner_dispersion": null,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "121",
+  "image": "121_no_bar.png",
+  "title": "A Hypothesis-Driven Approach to Explainable Goal Recognition"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "16e2c23984e91e89",
+  "table": "1",
+  "page": 5,
+  "bbox": {
+   "y_min": 169.0,
+   "y_max": 433.9,
+   "x_min": 53.6,
+   "x_max": 529.9
+  },
+  "mark": {
+   "x": 383.0,
+   "y": 271.0
+  },
+  "pipeline": {
+   "winner": 0.17,
+   "winner_dispersion": null,
+   "runner_up": 0.18,
+   "runner_dispersion": null,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "122",
+  "image": "122_no_bar.png",
+  "title": "GUIDE-CoT: Goal-driven and User-Informed Dynamic Estimation for Pedestrian Trajectory using Chain-of-Thought"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "68c6e7928e03540f",
+  "table": "2",
+  "page": 6,
+  "bbox": {
+   "y_min": 126.3,
+   "y_max": 161.1,
+   "x_min": 77.9,
+   "x_max": 514.5
+  },
+  "mark": {
+   "x": 406.5,
+   "y": 161.1
+  },
+  "pipeline": {
+   "winner": 79.49,
+   "winner_dispersion": null,
+   "runner_up": 31.69,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "123",
+  "image": "123_no_bar.png",
+  "title": "MAStitch: Unifying Local and Global Perspectives for Anomaly Detection in Multi-Agent Systems"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "18a670d2ea4ee0cd",
+  "table": "3",
+  "page": 7,
+  "bbox": {
+   "y_min": 550.8,
+   "y_max": 683.9,
+   "x_min": 53.6,
+   "x_max": 525.5
+  },
+  "mark": {
+   "x": 524.9,
+   "y": 550.8
+  },
+  "pipeline": {
+   "winner": 90.3,
+   "winner_dispersion": null,
+   "runner_up": 85.7,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "124",
+  "image": "124_no_bar.png",
+  "title": "Learning Hierarchical Procedural Memory for LLM Agents through Bayesian Selection and Contrastive Refinement"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "51df432fcc6b04e9",
+  "table": "3",
+  "page": 6,
+  "bbox": {
+   "y_min": 435.5,
+   "y_max": 575.9,
+   "x_min": 105.0,
+   "x_max": 474.1
+  },
+  "mark": {
+   "x": 258.3,
+   "y": 554.0
+  },
+  "pipeline": {
+   "winner": 93.4,
+   "winner_dispersion": null,
+   "runner_up": 9.4,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "125",
+  "image": "125_no_bar.png",
+  "title": "Robust Policy Learning for Multi-UAV Collision Avoidance with Causal Feature Selection"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "93a61434cdbb6cc6",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 233.9,
+   "y_max": 327.9,
+   "x_min": 56.7,
+   "x_max": 540.0
+  },
+  "mark": {
+   "x": 57.5,
+   "y": 307.4
+  },
+  "pipeline": {
+   "winner": 6.0,
+   "winner_dispersion": null,
+   "runner_up": 3.0,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "126",
+  "image": "126_no_bar.png",
+  "title": "Adaptive Bi-Level Multi-Robot Task Allocation and Learning under Uncertainty with Temporal Logic Constraints"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "5c541fce811f3010",
+  "table": "2",
+  "page": 7,
+  "bbox": {
+   "y_min": 326.5,
+   "y_max": 448.8,
+   "x_min": 53.8,
+   "x_max": 538.0
+  },
+  "mark": {
+   "x": 488.7,
+   "y": 338.9
+  },
+  "pipeline": {
+   "winner": 31.12,
+   "winner_dispersion": null,
+   "runner_up": 30.4,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "127",
+  "image": "127_no_bar.png",
+  "title": "EG-RAG: Retrieval-Augmented Generation with Evidence Graph for Reliable Multi-Document Reasoning"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "f1dfada509e34819",
+  "table": "3",
+  "page": 7,
+  "bbox": {
+   "y_min": 202.7,
+   "y_max": 302.8,
+   "x_min": 53.3,
+   "x_max": 347.9
+  },
+  "mark": null,
+  "pipeline": {
+   "winner": 90.0,
+   "winner_dispersion": null,
+   "runner_up": 83.0,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "128",
+  "image": "128_no_bar.png",
+  "title": "UNCAP: Uncertainty-Guided Neurosymbolic Planning Using Natural Language Communication for Cooperative Autonomous Vehicles"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "4c289d4863fadaf0",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 135.8,
+   "y_max": 494.5,
+   "x_min": 118.0,
+   "x_max": 533.9
+  },
+  "mark": {
+   "x": 387.4,
+   "y": 305.7
+  },
+  "pipeline": {
+   "winner": 9.38,
+   "winner_dispersion": null,
+   "runner_up": 9.42,
+   "runner_dispersion": null,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "129",
+  "image": "129_no_bar.png",
+  "title": "CAMP: Collaborative Attention Model with Profiles for Vehicle Routing Problems"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "68c6e7928e03540f",
+  "table": "1",
+  "page": 5,
+  "bbox": {
+   "y_min": 141.6,
+   "y_max": 480.8,
+   "x_min": 255.2,
+   "x_max": 506.6
+  },
+  "mark": {
+   "x": 453.0,
+   "y": 233.5
+  },
+  "pipeline": {
+   "winner": 0.096,
+   "winner_dispersion": null,
+   "runner_up": 6.675,
+   "runner_dispersion": null,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "130",
+  "image": "130_no_bar.png",
+  "title": "MAStitch: Unifying Local and Global Perspectives for Anomaly Detection in Multi-Agent Systems"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "910637f87afd0ae7",
+  "table": "1",
+  "page": 4,
+  "bbox": {
+   "y_min": 142.9,
+   "y_max": 197.7,
+   "x_min": 110.8,
+   "x_max": 530.8
+  },
+  "mark": {
+   "x": 503.3,
+   "y": 175.8
+  },
+  "pipeline": {
+   "winner": 143.84,
+   "winner_dispersion": null,
+   "runner_up": 135.22,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "none",
+   "n_runs": 5,
+   "n_runs_source": "caption",
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "131",
+  "image": "131_no_bar.png",
+  "title": "Reinforcement Learning Based Simulated Annealing"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "0a7a6cef9a6f7a54",
+  "table": "7",
+  "page": 7,
+  "bbox": {
+   "y_min": 317.0,
+   "y_max": 356.5,
+   "x_min": 53.8,
+   "x_max": 538.7
+  },
+  "mark": {
+   "x": 84.2,
+   "y": 340.8
+  },
+  "pipeline": {
+   "winner": 2.1,
+   "winner_dispersion": null,
+   "runner_up": 1.54,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "132",
+  "image": "132_no_bar.png",
+  "title": "DiffVAS: Diffusion-Guided Visual Active Search in Partially Observable Environments"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "c995f9de8ee9a46b",
+  "table": "2",
+  "page": 6,
+  "bbox": {
+   "y_min": 84.9,
+   "y_max": 319.4,
+   "x_min": 53.5,
+   "x_max": 552.6
+  },
+  "mark": {
+   "x": 169.3,
+   "y": 178.4
+  },
+  "pipeline": {
+   "winner": 8.54,
+   "winner_dispersion": null,
+   "runner_up": 8.23,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": 3,
+   "n_runs_source": "page",
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "133",
+  "image": "133_no_bar.png",
+  "title": "A Minimax Approach to Ad Hoc Teamwork"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "4c289d4863fadaf0",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 135.8,
+   "y_max": 494.5,
+   "x_min": 118.0,
+   "x_max": 533.9
+  },
+  "mark": {
+   "x": 296.7,
+   "y": 305.7
+  },
+  "pipeline": {
+   "winner": 8.57,
+   "winner_dispersion": null,
+   "runner_up": 8.63,
+   "runner_dispersion": null,
+   "direction": "lower_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "134",
+  "image": "134_no_bar.png",
+  "title": "CAMP: Collaborative Attention Model with Profiles for Vehicle Routing Problems"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "738ea6edd71bc06f",
+  "table": "2",
+  "page": 5,
+  "bbox": {
+   "y_min": 166.0,
+   "y_max": 255.5,
+   "x_min": 274.8,
+   "x_max": 465.4
+  },
+  "mark": {
+   "x": 465.4,
+   "y": 244.0
+  },
+  "pipeline": {
+   "winner": 0.6,
+   "winner_dispersion": null,
+   "runner_up": 1.0,
+   "runner_dispersion": null,
+   "direction": "lower_better",
+   "orientation": "row",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "135",
+  "image": "135_no_bar.png",
+  "title": "RACCER: Towards Reachable and Certain Counterfactual Explanations for Reinforcement Learning"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "738ea6edd71bc06f",
+  "table": "2",
+  "page": 5,
+  "bbox": {
+   "y_min": 166.0,
+   "y_max": 255.5,
+   "x_min": 274.8,
+   "x_max": 465.4
+  },
+  "mark": {
+   "x": 338.0,
+   "y": 255.5
+  },
+  "pipeline": {
+   "winner": 0.18,
+   "winner_dispersion": null,
+   "runner_up": 0.99,
+   "runner_dispersion": null,
+   "direction": "lower_better",
+   "orientation": "row",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "136",
+  "image": "136_no_bar.png",
+  "title": "RACCER: Towards Reachable and Certain Counterfactual Explanations for Reinforcement Learning"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "7d3b158206753dfd",
+  "table": "1",
+  "page": 5,
+  "bbox": {
+   "y_min": 117.3,
+   "y_max": 323.0,
+   "x_min": 63.8,
+   "x_max": 485.2
+  },
+  "mark": {
+   "x": 482.9,
+   "y": 161.1
+  },
+  "pipeline": {
+   "winner": 0.84,
+   "winner_dispersion": null,
+   "runner_up": 0.75,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "none",
+   "n_runs": 10,
+   "n_runs_source": "page",
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "137",
+  "image": "137_no_bar.png",
+  "title": "&#946;-DQN: Improving Deep Q-Learning By Evolving the Behavior"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "8e3b11c1a16bb717",
+  "table": "1",
+  "page": 5,
+  "bbox": {
+   "y_min": 120.0,
+   "y_max": 432.2,
+   "x_min": 53.8,
+   "x_max": 412.4
+  },
+  "mark": {
+   "x": 318.1,
+   "y": 420.3
+  },
+  "pipeline": {
+   "winner": 11.0,
+   "winner_dispersion": null,
+   "runner_up": 4.0,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "row",
+   "dispersion_kind": "none",
+   "n_runs": null,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "138",
+  "image": "138_no_bar.png",
+  "title": "LTL Verification of Memoryful Neural Agents"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "786c55632934e79a",
+  "table": "2",
+  "page": 6,
+  "bbox": {
+   "y_min": 116.9,
+   "y_max": 372.2,
+   "x_min": 53.8,
+   "x_max": 542.8
+  },
+  "mark": null,
+  "pipeline": {
+   "winner": 69.0,
+   "winner_dispersion": null,
+   "runner_up": 61.6,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": 100,
+   "n_runs_source": "page",
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "139",
+  "image": "139_no_bar.png",
+  "title": "Human-Inspired Context-Selective Multimodal Memory for Social Robots"
+ },
+ {
+  "stratum": "no_bar",
+  "paper": "4228ef82e5831f3f",
+  "table": "1",
+  "page": 6,
+  "bbox": {
+   "y_min": 118.8,
+   "y_max": 265.3,
+   "x_min": 124.8,
+   "x_max": 530.7
+  },
+  "mark": {
+   "x": 420.8,
+   "y": 161.1
+  },
+  "pipeline": {
+   "winner": 29.34,
+   "winner_dispersion": null,
+   "runner_up": 22.49,
+   "runner_dispersion": null,
+   "direction": "higher_better",
+   "orientation": "column",
+   "dispersion_kind": "none",
+   "n_runs": 10,
+   "n_runs_source": null,
+   "winner_style": "none",
+   "runner_style": "none"
+  },
+  "pipeline_test": null,
+  "id": "140",
+  "image": "140_no_bar.png",
+  "title": "Developing a Multi-agent and Self-adaptive Framework with Deep Reinforcement Learning for Dynamic Portfolio Risk Management"
+ }
+]
