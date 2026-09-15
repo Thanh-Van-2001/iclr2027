@@ -81,6 +81,7 @@ def main(argv=None) -> int:
     ap.add_argument("--kit", required=True)
     ap.add_argument("--out", default=None)
     ap.add_argument("--shard", default=None, help="k/n: read only every n-th item starting at k (parallel runs)")
+    ap.add_argument("--reverse", action="store_true", help="read the shard from its end (a second worker meeting the first)")
     args = ap.parse_args(argv)
     vendor = dict(VENDORS[args.vendor])
     if args.model:
@@ -94,13 +95,25 @@ def main(argv=None) -> int:
     if args.shard:
         k, n = (int(x) for x in args.shard.split("/"))
         items = items[k::n]
-        suffix = f"_shard{k}"
+        suffix = f"_shard{k}" + ("r" if args.reverse else "")
+    if args.reverse:
+        items = list(reversed(items))
     out = args.out or os.path.join(args.kit, f"labels{suffix}.json")
     pages = json.load(open(out, encoding="utf-8")) if os.path.exists(out) else []
     done = {p["id"] for p in pages}
+    # a forward worker on the same shard writes its own file; skip what it has done
+    twin = out.replace("r.json", ".json") if args.reverse else out.replace("_shard", "_shard").replace(".json", "r.json")
+    if os.path.exists(twin):
+        done |= {p["id"] for p in json.load(open(twin, encoding="utf-8"))}
     for it in items:
         if it["id"] in done:
             continue
+        if os.path.exists(twin):
+            try:
+                if it["id"] in {p["id"] for p in json.load(open(twin, encoding="utf-8"))}:
+                    continue
+            except Exception:  # noqa: BLE001
+                pass
         img = os.path.join(args.kit, "img", f"{it['id']}_page.png")
         runs_path = os.path.join(args.kit, "img", f"{it['id']}_runs.txt")
         runs = open(runs_path, encoding="utf-8").read() if os.path.exists(runs_path) else "(none)"
