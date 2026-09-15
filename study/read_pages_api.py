@@ -27,18 +27,51 @@ group, e.g. every cell bold); any_error_bar (y/n: does ANY cell print a dispersi
 or subscript value, a bracketed interval, or a separate std/SE column); bar_kind (sd / se / ci / unlabelled if
 bars exist but nothing says what they are / none if no bars, from the caption); n_runs (the run count that
 applies to this table, from its caption first and otherwise from the run sentences below, or "none"); n_source
-(caption / page / paper / none); groups: EVERY group with exactly one bold cell (up to 40), each with label (its
+(caption / page / paper / none); bar_form (how bars are set in this table: pm / paren / bracket / subscript /
+separate_column / none); groups: EVERY group with exactly one bold cell (up to 40), each with label (its
 header label), direction (higher/lower), winner_mean, winner_disp, runner_mean, runner_disp (the bold cell's
 mean and bar, and the best NON-bold cell's mean and bar in that group; values exactly as printed; "none" for a
-value with no bar; "unclear" if you cannot read a digit); note.
+value with no bar; "unclear" if you cannot read a digit); note. At the page level also record
+figure_band_on_page (y/n: does any figure on this page draw shaded bands, error bars or intervals).
 
 Run sentences from the paper:
 {runs}
 
 Answer with ONE JSON object and nothing else: {{"tables": [{{"caption_start": "...", "results_table": "y",
 "orientation": "column", "any_error_bar": "y", "bar_kind": "sd", "n_runs": "5", "n_source": "caption",
-"groups": [{{"label": "...", "direction": "higher", "winner_mean": "...", "winner_disp": "...",
-"runner_mean": "...", "runner_disp": "..."}}], "note": "..."}}], "note": "..."}}"""
+"bar_form": "pm", "groups": [{{"label": "...", "direction": "higher", "winner_mean": "...", "winner_disp": "...",
+"runner_mean": "...", "runner_disp": "..."}}], "note": "..."}}], "figure_band_on_page": "n", "note": "..."}}"""
+
+
+STRICT = ("\n\nYour previous answer was not valid JSON. Output strictly valid JSON: every string in double quotes, "
+          "no double quotes inside strings (use single quotes instead), no trailing commas, no comments, no text "
+          "before or after the object.")
+
+
+def _parse(text: str) -> dict:
+    """Parse the model's JSON; strip code fences and any text around the
+    object, and repair a truncated array by closing it."""
+    s = text.strip()
+    if "```" in s:
+        parts = s.split("```")
+        s = max(parts, key=len)
+        if s.startswith("json"):
+            s = s[4:]
+    i, j = s.find("{"), s.rfind("}")
+    if i < 0:
+        raise ValueError("no JSON object")
+    s = s[i:j + 1]
+    try:
+        return json.loads(s)
+    except json.JSONDecodeError:
+        # a truncated answer: cut back to the last complete group and close
+        k = s.rfind("}")
+        while k > 0:
+            try:
+                return json.loads(s[:k + 1] + "]}]}")
+            except json.JSONDecodeError:
+                k = s.rfind("}", 0, k)
+        raise
 
 
 def main(argv=None) -> int:
@@ -65,20 +98,29 @@ def main(argv=None) -> int:
         img = os.path.join(args.kit, "img", f"{it['id']}_page.png")
         runs_path = os.path.join(args.kit, "img", f"{it['id']}_runs.txt")
         runs = open(runs_path, encoding="utf-8").read() if os.path.exists(runs_path) else "(none)"
-        try:
-            ans = ask(vendor, key, img, PROTO.format(runs=runs[:6000]))
-        except Exception as exc:  # noqa: BLE001
-            print(f"  {it['id']} failed: {exc}", flush=True)
-            ans = {"tables": [], "note": f"failed: {exc}"}
+        ans = None
+        prompt = PROTO.format(runs=runs[:6000])
+        for attempt in range(3):
+            try:
+                text = ask(vendor, key, img, prompt, max_tokens=12000, return_text=True)
+                ans = _parse(text)
+                break
+            except Exception as exc:  # noqa: BLE001
+                print(f"  {it['id']} attempt {attempt + 1} failed: {str(exc)[:120]}", flush=True)
+                prompt = PROTO.format(runs=runs[:6000]) + STRICT
+        if ans is None:
+            ans = {"tables": [], "note": "failed: no valid JSON after three attempts"}
         tables = ans.get("tables", []) if isinstance(ans, dict) else []
         for t in tables:
             t.setdefault("groups", [])
-            for k in ("caption_start", "results_table", "orientation", "any_error_bar", "bar_kind", "n_runs", "n_source", "note"):
+            for k in ("caption_start", "results_table", "orientation", "any_error_bar", "bar_kind", "n_runs", "n_source", "bar_form", "note"):
                 t[k] = str(t.get(k, "")).strip()
             for g in t["groups"]:
                 for k in ("label", "direction", "winner_mean", "winner_disp", "runner_mean", "runner_disp"):
                     g[k] = str(g.get(k, "")).strip()
-        pages.append({"id": it["id"], "tables": tables, "note": str(ans.get("note", "")) if isinstance(ans, dict) else ""})
+        pages.append({"id": it["id"], "tables": tables,
+                      "figure_band_on_page": str(ans.get("figure_band_on_page", "")).strip() if isinstance(ans, dict) else "",
+                      "note": str(ans.get("note", "")) if isinstance(ans, dict) else ""})
         json.dump(pages, open(out, "w", encoding="utf-8"), indent=1, ensure_ascii=False)
         print(f"  {it['id']} {len(tables)} tables, {sum(len(t['groups']) for t in tables)} groups", flush=True)
     print("wrote", out, len(pages), "pages")

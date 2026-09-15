@@ -316,6 +316,9 @@ def protocol_span(comparisons: list, protocol: dict) -> dict:
     for r in base["rows"]:
         per_paper.setdefault(r["paper"], []).append(r["below"])
     rows["largest_paper_share_pct"] = round(100 * top[1] / max(len(base["rows"]), 1), 1)
+    rest = [r for r in base["rows"] if r["paper"] != top[0]]
+    rows["without_largest_paper"] = {"n": len(rest), "papers": len({r["paper"] for r in rest}),
+                                     "pct_below": round(100 * sum(r["below"] for r in rest) / max(len(rest), 1), 1) if rest else None}
     rows["per_paper_pct_below"] = sorted(round(100 * sum(v) / len(v), 1) for v in per_paper.values())
     return rows
 
@@ -523,6 +526,93 @@ def single_column_reference(path: str = "out/gold_set_pages.json") -> dict:
             "pipe_pct_testable": d["pipeline_same_pages"]["pct_testable"]}
 
 
+def per_paper_failure(comparisons: list) -> dict:
+    """The failure rate with the paper as the unit: share of papers with a
+    testable comparison that have at least one failing one, the median and
+    quartiles of the per-paper failure share, and the ten largest papers'
+    rates."""
+    t = [c for c in comparisons if c.get("test")]
+    by = collections.defaultdict(list)
+    for c in t:
+        by[c["paper"]].append(not c["survives_raw"])
+    rates = sorted(100 * sum(v) / len(v) for v in by.values())
+    n = len(rates)
+    q = lambda f: rates[min(n - 1, int(f * n))] if n else None
+    top = sorted(by.items(), key=lambda kv: -len(kv[1]))[:10]
+    return {"papers": n,
+            "pct_papers_any_fail": round(100 * sum(1 for v in by.values() if any(v)) / max(n, 1), 1),
+            "pct_papers_all_fail": round(100 * sum(1 for v in by.values() if all(v)) / max(n, 1), 1),
+            "median_paper_rate": round(q(0.5), 1), "q1_paper_rate": round(q(0.25), 1), "q3_paper_rate": round(q(0.75), 1),
+            "mean_of_paper_rates": round(sum(rates) / max(n, 1), 1),
+            "top10": [{"paper": k[:8], "n": len(v), "pct_fail": round(100 * sum(v) / len(v), 1)} for k, v in top],
+            "top10_share": round(100 * sum(len(v) for _, v in top) / max(len(t), 1), 1)}
+
+
+FRAMEWORK_DEFAULT_K = {
+    # evaluation episodes per checkpoint in the framework's shipped configs
+    "pymarl": (r"\bpymarl\b|\bepymarl\b", 32),
+    "marllib": (r"\bmarllib\b", 20),
+    "benchmarl": (r"\bbenchmarl\b", 200),
+    "jaxmarl": (r"\bjaxmarl\b", 32),
+}
+
+
+def framework_defaults(records: list, comparisons: list, protocol: dict, corpus_dir: str = "data/corpus") -> dict:
+    """Among papers with a rate comparison and no stated K, which name a
+    framework whose shipped configuration fixes the evaluation episode
+    count, and the resolution reading with that default imputed."""
+    import fitz
+    recs = {r["id"]: r for r in records}
+    rate_papers = sorted({c["paper"] for c in comparisons if rate_like(c)})
+    named = {}
+    for pid in rate_papers:
+        r = recs[pid]
+        path = os.path.join(corpus_dir, f"{r['venue']}{r['year']}_{pid}.pdf")
+        if not os.path.exists(path):
+            continue
+        text = " ".join(pg.get_text() for pg in fitz.open(path))
+        for name, (pat, k) in FRAMEWORK_DEFAULT_K.items():
+            if re.search(pat, text, re.I):
+                named[pid] = (name, k)
+                break
+    imputed = {pid: dict(protocol.get(pid, {})) for pid in rate_papers}
+    n_imputed = 0
+    for pid, (name, k) in named.items():
+        if not imputed[pid].get("eval_episodes"):
+            imputed[pid]["eval_episodes"] = k
+            n_imputed += 1
+    res = protocol_resolution(comparisons, imputed)
+    return {"rate_papers": len(rate_papers), "naming_a_framework": len(named),
+            "stated_k": sum(1 for pid in rate_papers if protocol.get(pid, {}).get("eval_episodes")),
+            "imputed_k": n_imputed,
+            "with_imputed": {k: v for k, v in res.items() if k != "rows"}}
+
+
+def caption_assertion(comparisons: list) -> dict:
+    """Testable comparisons split by whether the table's caption asserts
+    superiority for the bold cell (outperform, best, significant, superior,
+    consistently, state of the art) or only describes what is shown."""
+    rx = re.compile(r"outperform|significant|superior|consistently|state[- ]of[- ]the[- ]art|surpass|"
+                    r"improves? (?:over|upon|on)|achieves? the (?:best|highest)", re.I)
+    t = [c for c in comparisons if c.get("test")]
+    asserting = [c for c in t if rx.search(c.get("caption", "") or "")]
+    plain = [c for c in t if not rx.search(c.get("caption", "") or "")]
+    return {"asserting": _rates(asserting), "describing": _rates(plain)}
+
+
+def uncertainty_anywhere(records: list) -> dict:
+    """Papers with any uncertainty statement the extraction can see: a +/-
+    or parenthesised cell in a table, or a figure caption naming a deviation,
+    interval or shaded band."""
+    n = len(records)
+    pm = sum(1 for r in records if r.get("reports_explicit_error_bar"))
+    anyd = sum(1 for r in records if r.get("reports_any_dispersion"))
+    fig = sum(1 for r in records if r.get("n_figure_captions_with_uncertainty", 0) > 0)
+    anyw = sum(1 for r in records if r.get("reports_any_dispersion") or r.get("n_figure_captions_with_uncertainty", 0) > 0)
+    return {"papers": n, "pct_pm_cell": round(100 * pm / n, 1), "pct_any_cell": round(100 * anyd / n, 1),
+            "pct_figure_caption": round(100 * fig / n, 1), "pct_anywhere": round(100 * anyw / n, 1)}
+
+
 def duplicate_table_records(records: list) -> dict:
     """Tables the parser recorded more than once under one (paper, number,
     page): a two-column artefact in which a caption is attached to a body
@@ -621,9 +711,14 @@ def main() -> int:
         "table_retention_bias": table_retention_bias(records),
         "ml_main_text": ml_main_text(),
         "protocol_span": protocol_span(cs, protocol),
+        "per_paper_failure": per_paper_failure(cs),
+        "framework_defaults": framework_defaults(records, cs, protocol),
+        "caption_assertion": caption_assertion(cs),
+        "uncertainty_anywhere": uncertainty_anywhere(records),
         "protocol_reader": (lambda pr_: {"stats": pr_[1],
                                          "resolution": {k: v for k, v in protocol_resolution(cs, pr_[0]).items() if k != "rows"},
-                                         "resolution_stated_seeds": {k: v for k, v in protocol_resolution(cs, pr_[0], seed_mode="stated").items() if k != "rows"}}
+                                         "resolution_stated_seeds": {k: v for k, v in protocol_resolution(cs, pr_[0], seed_mode="stated").items() if k != "rows"},
+                                         "span": protocol_span(cs, pr_[0])}
                             if pr_[0] else {})(reader_protocol()),
         "protocol_stats": {
             "papers_scanned": len(protocol),

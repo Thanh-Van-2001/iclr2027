@@ -258,7 +258,7 @@ def build(out_path: str) -> dict:
     reg.add("ml listed", sum(mps["listed"].values()) if isinstance(mps.get("listed"), dict) else mps.get("listed", 0), provenance="pipeline_stats_2025")
     ps_ = ex["protocol_span"]
     for name, d in ps_.items():
-        if not isinstance(d, dict):
+        if not isinstance(d, dict) or "n_with_episode_count" not in d:
             continue
         key = name.replace("_", " ")
         reg.add(f"pspan {key} n", d["n_with_episode_count"], provenance=run)
@@ -343,10 +343,48 @@ def build(out_path: str) -> dict:
             reg.add("prd res below ci", f"{rr['pct_below']}\\% [{rr['ci'][0]}, {rr['ci'][1]}]", provenance="aamas_protocol_reader")
             reg.add("prd res below paper ci", f"[{rr['paper_ci'][0]}, {rr['paper_ci'][1]}]", provenance="aamas_protocol_reader")
             reg.add("prd res seed assumed one", _pct(rr["pct_seed_assumed_one"]), provenance="aamas_protocol_reader")
+        rsp = prd.get("span", {})
+        if rsp:
+            reg.add("prd largest paper share", _pct(rsp["largest_paper_share_pct"]), provenance="aamas_protocol_reader")
+            wl2 = rsp["without_largest_paper"]
+            reg.add("prd without largest n", wl2["n"], provenance="aamas_protocol_reader")
+            reg.add("prd without largest papers", wl2["papers"], provenance="aamas_protocol_reader")
+            reg.add("prd without largest below", _pct(wl2["pct_below"]) if wl2["pct_below"] is not None else "--", provenance="aamas_protocol_reader")
+            reg.add("prd per paper lo", _pct(rsp["per_paper_pct_below"][0]), provenance="aamas_protocol_reader")
+            reg.add("prd per paper hi", _pct(rsp["per_paper_pct_below"][-1]), provenance="aamas_protocol_reader")
         rs_ = prd["resolution_stated_seeds"]
         reg.add("prd res stated n", rs_["n_with_episode_count"], provenance="aamas_protocol_reader")
         reg.add("prd res stated papers", rs_["n_papers"], provenance="aamas_protocol_reader")
         reg.add("prd res stated below", _pct(rs_["pct_below"]) if rs_["pct_below"] is not None else "--", provenance="aamas_protocol_reader")
+    pp = ex["per_paper_failure"]
+    reg.add("pp papers", pp["papers"], provenance=run)
+    reg.add("pp any fail", _pct(pp["pct_papers_any_fail"]), provenance=run)
+    reg.add("pp all fail", _pct(pp["pct_papers_all_fail"]), provenance=run)
+    reg.add("pp median", _pct(pp["median_paper_rate"]), provenance=run)
+    reg.add("pp q one", _pct(pp["q1_paper_rate"]), provenance=run)
+    reg.add("pp q three", _pct(pp["q3_paper_rate"]), provenance=run)
+    reg.add("pp mean", _pct(pp["mean_of_paper_rates"]), provenance=run)
+    reg.add("pp top ten share", _pct(pp["top10_share"]), provenance=run)
+    fd = ex["framework_defaults"]
+    reg.add("fd naming", fd["naming_a_framework"], provenance=run)
+    reg.add("fd imputed", fd["imputed_k"], provenance=run)
+    reg.add("fd res n", fd["with_imputed"]["n_with_episode_count"], provenance=run)
+    reg.add("fd res papers", fd["with_imputed"]["n_papers"], provenance=run)
+    reg.add("fd res below", _pct(fd["with_imputed"]["pct_below"]) if fd["with_imputed"]["pct_below"] is not None else "--", provenance=run)
+    ca_ = ex["caption_assertion"]
+    for key, d in (("asserting", ca_["asserting"]), ("describing", ca_["describing"])):
+        reg.add(f"cap {key} n", d["n_testable"], provenance=run)
+        reg.add(f"cap {key} papers", d["testable_papers"], provenance=run)
+        reg.add(f"cap {key} fail", _pct(d["pct_fail"]) if d["pct_fail"] is not None else "--", provenance=run)
+    ua = ex["uncertainty_anywhere"]
+    reg.add("ua pm cell", _pct(ua["pct_pm_cell"]), provenance=run)
+    reg.add("ua any cell", _pct(ua["pct_any_cell"]), provenance=run)
+    reg.add("ua figure caption", _pct(ua["pct_figure_caption"]), provenance=run)
+    reg.add("ua anywhere", _pct(ua["pct_anywhere"]), provenance=run)
+    wl = ps_.get("without_largest_paper", {})
+    if wl:
+        reg.add("pspan without largest n", wl["n"], provenance=run)
+        reg.add("pspan without largest below", _pct(wl["pct_below"]) if wl["pct_below"] is not None else "--", provenance=run)
     dr = ex["duplicate_table_records"]
     reg.add("a dup keys", dr["duplicate_keys"], provenance=run)
     reg.add("a dup identical", dr["identical_records"], provenance=run)
