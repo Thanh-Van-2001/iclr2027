@@ -97,6 +97,7 @@ def main(argv=None) -> int:
     r_groups = r_neither = r_testable = r_onebar = 0
     p_groups = p_neither = p_testable = 0
     r_found = p_found = 0
+    p_unconfirmed = p_unconfirmed_neither = 0
     n_tables = n_results = n_tables_bar = 0
     for iid, it in sorted(items.items()):
         pg = pages.get(iid)
@@ -144,18 +145,35 @@ def main(argv=None) -> int:
                 "pipe_neither": sum(1 for c in pc if c["winner_dispersion"] is None and c["runner_dispersion"] is None),
                 "pipe_testable": sum(1 for c in pc if c.get("test"))}
         page["tested_groups"] = [g for g in groups if g["testable"] and g["fail"] is not None]
-        page["found"] = sum(1 for g in groups if any(_eq(g["w"], c["winner"]) for c in pc))
         per_page.append(page)
         r_groups += page["n_groups"]; r_neither += page["neither"]; r_testable += page["testable"]
         r_onebar += sum(1 for g in groups if g["wb"] != g["rb"])
         p_groups += page["pipe_groups"]; p_neither += page["pipe_neither"]; p_testable += page["pipe_testable"]
-        for g in groups:
-            if any(_eq(g["w"], c["winner"]) for c in pc):
+        # One-to-one matching on the winner's value: a parser comparison can
+        # vouch for at most one reader group and vice versa. Matching on the
+        # value alone credited nine reader groups to two parser comparisons
+        # on a page of repeated values (a reviewer of the AAMAS study).
+        used = set()
+        matched_ids = set()
+        for gi, g in enumerate(groups):
+            for ci, c in enumerate(pc):
+                if ci not in used and _eq(g["w"], c["winner"]):
+                    used.add(ci); matched_ids.add(gi)
+                    break
+        for gi, g in enumerate(groups):
+            if gi in matched_ids:
                 m_g += 1; m_n += (not g["wb"] and not g["rb"])
             else:
                 u_g += 1; u_n += (not g["wb"] and not g["rb"])
-        r_found += sum(1 for g in groups if any(_eq(g["w"], c["winner"]) for c in pc))
-        p_found += sum(1 for c in pc if any(_eq(g["w"], c["winner"]) for g in groups))
+        r_found += len(matched_ids)
+        p_found += len(used)
+        page["found"] = len(matched_ids)
+        # the parser's groups the reader does not list, and how many of them
+        # carry no bar: the false positives' contribution to the census
+        for ci, c in enumerate(pc):
+            if ci not in used:
+                p_unconfirmed += 1
+                p_unconfirmed_neither += (c["winner_dispersion"] is None and c["runner_dispersion"] is None)
     # The corpus weighted as the page draw is: one page with comparisons per
     # paper, pooled, averaged over draws.
     by_paper: dict = {}
@@ -217,6 +235,8 @@ def main(argv=None) -> int:
         "reader_groups_found_by_pipeline": dict(_rate(r_found, r_groups, "reader groups whose winner the pipeline also has on that page"),
                                                 page_ci=_boot(per_page, "found")),
         "pipeline_groups_found_by_reader": _rate(p_found, p_groups, "pipeline comparisons whose winner the reader also lists"),
+        "pipeline_groups_unconfirmed": {"n": p_unconfirmed, "neither": p_unconfirmed_neither,
+                                        "pct_neither": round(100 * p_unconfirmed_neither / p_unconfirmed, 1) if p_unconfirmed else None},
         "per_page": per_page,
     }
     json.dump(out, open(args.out, "w", encoding="utf-8"), indent=1)
