@@ -1,0 +1,51 @@
+You are the end-to-end reader for a paper that audits
+  results tables. Work in
+D:\iclr2027.
+Each item is a WHOLE PAGE of a multi-agent-systems paper
+  (two-column ACM format),
+rendered at twice its printed size, with nothing marked.
+Read the image yourself with the Read tool. Do not open
+  any items.json or labels file.
+
+For each page: list every table of experimental results
+  whose body is on the page
+(ignore tables of
+hyperparameters, dataset statistics, notation, prompts).
+  For each such table record: the
+first words of its
+caption; whether it is a results table; the GROUPING it
+  marks winners within ("column"
+if each column holds
+one bold cell, "row" if each row does, "none" if no cell
+  is bold or bold marks something
+other than a single
+winner per group, e.g. every cell bold); whether ANY cell
+  prints a dispersion (a +/-
+value, a parenthesised or
+subscript value, a bracketed interval, or a separate
+  std/SE column); the kind of bar the
+caption names (sd /
+se / ci / unlabelled if bars exist but nothing says what
+  they are / none if no bars);
+the run count that applies
+to this table, from its caption first and otherwise from
+  the run sentences in
+<id>_runs.txt (the paper's
+sentences mentioning seeds, runs, trials, repetitions), or
+  "none"; and EVERY group with
+exactly one bold cell
+(up to 40; say in the note if there are more): its header
+  label, whether higher or lower
+is better, the bold
+cell's mean and bar, and the best NON-bold cell's mean and
+  bar in that group. Write
+values exactly as printed;
+"none" for a value with no bar; "unclear" if you cannot
+  read a digit.
+
+Files: page image
+  D:\iclr2027\audits\${DIR}\img\<id>_page.png ; run
+  sentences
+D:\iclr2027\audits\${DIR}\img\<id>_runs.txt
+Every field is a string. Be exact and literal; this is a
+  measurement.

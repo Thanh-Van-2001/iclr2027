@@ -42,6 +42,14 @@ def page_check() -> tuple:
     return len(doc), last_text_page
 
 
+def abstract_words() -> int:
+    """Words in the abstract as the PDF prints it; the call asks for 100 to 300."""
+    import fitz
+    t = fitz.open(os.path.join(D, "main.pdf"))[0].get_text()
+    i, j = t.find("Abstract"), t.find("CCS Concepts")
+    return len(t[i + len("Abstract"):j].split()) if 0 <= i < j else -1
+
+
 def main() -> int:
     ok = {}
     print("1. BUILD")
@@ -52,6 +60,9 @@ def main() -> int:
     n, ref_page = page_check()
     print(f"2. PAGES: {n} pages, references begin on page {ref_page} (main text limit {PAGE_LIMIT})")
     ok["pages"] = ref_page is not None and ref_page <= PAGE_LIMIT
+    aw = abstract_words()
+    print(f"   abstract: {aw} words (100 to 300)")
+    ok["abstract"] = 100 <= aw <= 300
     src = open(os.path.join(D, MAIN), encoding="utf-8").read()
     ok["anonymous"] = bool(re.search(r"\\documentclass\[[^\]]*anonymous", src))
     print("3. ANONYMOUS:", "yes" if ok["anonymous"] else "NO")

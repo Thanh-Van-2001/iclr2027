@@ -82,6 +82,10 @@ def main(argv=None) -> int:
     ap.add_argument("--out", default=None)
     ap.add_argument("--shard", default=None, help="k/n: read only every n-th item starting at k (parallel runs)")
     ap.add_argument("--reverse", action="store_true", help="read the shard from its end (a second worker meeting the first)")
+    ap.add_argument("--max-tokens", type=int, default=12000, help="output budget per call")
+    ap.add_argument("--reasoning-effort", default=None,
+                    help="sent as {'reasoning': {'effort': ...}}; the 15 census pages on which the relay timed out at "
+                         "the default were read at 'low', everything else identical")
     args = ap.parse_args(argv)
     vendor = dict(VENDORS[args.vendor])
     if args.model:
@@ -121,7 +125,8 @@ def main(argv=None) -> int:
         prompt = PROTO.format(runs=runs[:6000])
         for attempt in range(3):
             try:
-                text = ask(vendor, key, img, prompt, max_tokens=12000, return_text=True)
+                text = ask(vendor, key, img, prompt, max_tokens=args.max_tokens, return_text=True,
+                           extra={"reasoning": {"effort": args.reasoning_effort}} if args.reasoning_effort else None)
                 ans = _parse(text)
                 break
             except Exception as exc:  # noqa: BLE001

@@ -1,0 +1,2533 @@
+[
+ {
+  "id": "0083",
+  "tables": [
+   {
+    "caption_start": "Table 1: Comparison of ADE/FDE",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Multiple bold cells per column (e.g., ETH ADE has 0.36 bolded twice)."
+   },
+   {
+    "caption_start": "Table 2: Ablation study with",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Multiple bold cells per column in subtable (a)."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": ""
+ },
+ {
+  "id": "0180",
+  "tables": [
+   {
+    "caption_start": "Table 2: ARNO scenarios: Detector",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Cartpole Light Noise 1-step",
+      "direction": "higher",
+      "winner_mean": "0.81",
+      "winner_disp": "none",
+      "runner_mean": "0.69",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Cartpole Light Noise 2-step",
+      "direction": "higher",
+      "winner_mean": "0.85",
+      "winner_disp": "none",
+      "runner_mean": "0.69",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Cartpole Medium Noise 1-step",
+      "direction": "higher",
+      "winner_mean": "0.89",
+      "winner_disp": "none",
+      "runner_mean": "0.76",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Cartpole Medium Noise 2-step",
+      "direction": "higher",
+      "winner_mean": "0.9",
+      "winner_disp": "none",
+      "runner_mean": "0.75",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Cartpole Strong Noise 1-step",
+      "direction": "higher",
+      "winner_mean": "0.93",
+      "winner_disp": "none",
+      "runner_mean": "0.78",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Cartpole Strong Noise 2-step",
+      "direction": "higher",
+      "winner_mean": "0.9",
+      "winner_disp": "none",
+      "runner_mean": "0.73",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Acrobot Light Noise 1-step",
+      "direction": "higher",
+      "winner_mean": "0.74",
+      "winner_disp": "none",
+      "runner_mean": "0.64",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Acrobot Light Noise 2-step",
+      "direction": "higher",
+      "winner_mean": "0.71",
+      "winner_disp": "none",
+      "runner_mean": "0.65",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Acrobot Medium Noise 1-step",
+      "direction": "higher",
+      "winner_mean": "0.96",
+      "winner_disp": "none",
+      "runner_mean": "0.76",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Acrobot Medium Noise 2-step",
+      "direction": "higher",
+      "winner_mean": "0.91",
+      "winner_disp": "none",
+      "runner_mean": "0.76",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Acrobot Strong Noise 1-step",
+      "direction": "higher",
+      "winner_mean": "0.99",
+      "winner_disp": "none",
+      "runner_mean": "0.86",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Acrobot Strong Noise 2-step",
+      "direction": "higher",
+      "winner_mean": "0.95",
+      "winner_disp": "none",
+      "runner_mean": "0.79",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Reacher Light Noise 1-step",
+      "direction": "higher",
+      "winner_mean": "0.81",
+      "winner_disp": "none",
+      "runner_mean": "0.67",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Reacher Light Noise 2-step",
+      "direction": "higher",
+      "winner_mean": "0.6",
+      "winner_disp": "none",
+      "runner_mean": "0.51",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Reacher Medium Noise 1-step",
+      "direction": "higher",
+      "winner_mean": "0.91",
+      "winner_disp": "none",
+      "runner_mean": "0.84",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Reacher Medium Noise 2-step",
+      "direction": "higher",
+      "winner_mean": "0.63",
+      "winner_disp": "none",
+      "runner_mean": "0.52",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Reacher Strong Noise 1-step",
+      "direction": "higher",
+      "winner_mean": "0.97",
+      "winner_disp": "none",
+      "runner_mean": "0.87",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Reacher Strong Noise 2-step",
+      "direction": "higher",
+      "winner_mean": "0.61",
+      "winner_disp": "none",
+      "runner_mean": "0.53",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Cartpole Light Noise 1-step",
+      "direction": "lower",
+      "winner_mean": "23.2",
+      "winner_disp": "none",
+      "runner_mean": "138.8",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Cartpole Light Noise 2-step",
+      "direction": "lower",
+      "winner_mean": "15.2",
+      "winner_disp": "none",
+      "runner_mean": "143.2",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Cartpole Medium Noise 1-step",
+      "direction": "lower",
+      "winner_mean": "13.1",
+      "winner_disp": "none",
+      "runner_mean": "133.0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Cartpole Medium Noise 2-step",
+      "direction": "lower",
+      "winner_mean": "19.9",
+      "winner_disp": "none",
+      "runner_mean": "79.3",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Cartpole Strong Noise 1-step",
+      "direction": "lower",
+      "winner_mean": "14.85",
+      "winner_disp": "none",
+      "runner_mean": "199.1",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Cartpole Strong Noise 2-step",
+      "direction": "lower",
+      "winner_mean": "14.7",
+      "winner_disp": "none",
+      "runner_mean": "183.1",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Acrobot Light Noise 1-step",
+      "direction": "lower",
+      "winner_mean": "32.1",
+      "winner_disp": "none",
+      "runner_mean": "163.9",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Acrobot Light Noise 2-step",
+      "direction": "lower",
+      "winner_mean": "42.5",
+      "winner_disp": "none",
+      "runner_mean": "199.2",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Acrobot Medium Noise 1-step",
+      "direction": "lower",
+      "winner_mean": "12.7",
+      "winner_disp": "none",
+      "runner_mean": "79.7",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Acrobot Medium Noise 2-step",
+      "direction": "lower",
+      "winner_mean": "13.9",
+      "winner_disp": "none",
+      "runner_mean": "197.2",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Acrobot Strong Noise 1-step",
+      "direction": "lower",
+      "winner_mean": "8.0",
+      "winner_disp": "none",
+      "runner_mean": "177.2",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Acrobot Strong Noise 2-step",
+      "direction": "lower",
+      "winner_mean": "11.5",
+      "winner_disp": "none",
+      "runner_mean": "169.9",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Reacher Light Noise 1-step",
+      "direction": "lower",
+      "winner_mean": "21.3",
+      "winner_disp": "none",
+      "runner_mean": "60.9",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Reacher Light Noise 2-step",
+      "direction": "lower",
+      "winner_mean": "72.1",
+      "winner_disp": "none",
+      "runner_mean": "200.7",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Reacher Medium Noise 1-step",
+      "direction": "lower",
+      "winner_mean": "19.3",
+      "winner_disp": "none",
+      "runner_mean": "20.0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Reacher Medium Noise 2-step",
+      "direction": "lower",
+      "winner_mean": "193.6",
+      "winner_disp": "none",
+      "runner_mean": "197.1",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Reacher Strong Noise 1-step",
+      "direction": "lower",
+      "winner_mean": "12.4",
+      "winner_disp": "none",
+      "runner_mean": "18.1",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Reacher Strong Noise 2-step",
+      "direction": "lower",
+      "winner_mean": "110.6",
+      "winner_disp": "none",
+      "runner_mean": "200.8",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 3: ARNS scenarios: Detector",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Cartpole Light Noise 1-step",
+      "direction": "higher",
+      "winner_mean": "0.73",
+      "winner_disp": "none",
+      "runner_mean": "0.67",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Cartpole Light Noise 2-step",
+      "direction": "higher",
+      "winner_mean": "0.73",
+      "winner_disp": "none",
+      "runner_mean": "0.68",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Cartpole Medium Noise 1-step",
+      "direction": "higher",
+      "winner_mean": "0.88",
+      "winner_disp": "none",
+      "runner_mean": "0.68",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Cartpole Medium Noise 2-step",
+      "direction": "higher",
+      "winner_mean": "0.8",
+      "winner_disp": "none",
+      "runner_mean": "0.69",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Cartpole Strong Noise 1-step",
+      "direction": "higher",
+      "winner_mean": "0.84",
+      "winner_disp": "none",
+      "runner_mean": "0.68",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Cartpole Strong Noise 2-step",
+      "direction": "higher",
+      "winner_mean": "0.77",
+      "winner_disp": "none",
+      "runner_mean": "0.7",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Reacher Light Noise 1-step",
+      "direction": "higher",
+      "winner_mean": "0.56",
+      "winner_disp": "none",
+      "runner_mean": "0.52",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Reacher Light Noise 2-step",
+      "direction": "higher",
+      "winner_mean": "0.62",
+      "winner_disp": "none",
+      "runner_mean": "0.51",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Reacher Medium Noise 1-step",
+      "direction": "higher",
+      "winner_mean": "0.55",
+      "winner_disp": "none",
+      "runner_mean": "0.51",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Reacher Medium Noise 2-step",
+      "direction": "higher",
+      "winner_mean": "0.7",
+      "winner_disp": "none",
+      "runner_mean": "0.55",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Reacher Strong Noise 1-step",
+      "direction": "higher",
+      "winner_mean": "0.55",
+      "winner_disp": "none",
+      "runner_mean": "0.51",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Reacher Strong Noise 2-step",
+      "direction": "higher",
+      "winner_mean": "0.67",
+      "winner_disp": "none",
+      "runner_mean": "0.51",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Cartpole Light Noise 1-step",
+      "direction": "lower",
+      "winner_mean": "32.2",
+      "winner_disp": "none",
+      "runner_mean": "33.0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Cartpole Light Noise 2-step",
+      "direction": "lower",
+      "winner_mean": "16.9",
+      "winner_disp": "none",
+      "runner_mean": "44.5",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Cartpole Medium Noise 1-step",
+      "direction": "lower",
+      "winner_mean": "17.8",
+      "winner_disp": "none",
+      "runner_mean": "53.1",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Cartpole Medium Noise 2-step",
+      "direction": "lower",
+      "winner_mean": "37.8",
+      "winner_disp": "none",
+      "runner_mean": "50",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Cartpole Strong Noise 1-step",
+      "direction": "lower",
+      "winner_mean": "24.0",
+      "winner_disp": "none",
+      "runner_mean": "44.5",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Cartpole Strong Noise 2-step",
+      "direction": "lower",
+      "winner_mean": "27.4",
+      "winner_disp": "none",
+      "runner_mean": "125.3",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Reacher Light Noise 1-step",
+      "direction": "lower",
+      "winner_mean": "189.4",
+      "winner_disp": "none",
+      "runner_mean": "199.0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Reacher Light Noise 2-step",
+      "direction": "lower",
+      "winner_mean": "95.1",
+      "winner_disp": "none",
+      "runner_mean": "197.7",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Reacher Medium Noise 1-step",
+      "direction": "lower",
+      "winner_mean": "193.6",
+      "winner_disp": "none",
+      "runner_mean": "201.0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Reacher Medium Noise 2-step",
+      "direction": "lower",
+      "winner_mean": "61.1",
+      "winner_disp": "none",
+      "runner_mean": "201.0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Reacher Strong Noise 1-step",
+      "direction": "lower",
+      "winner_mean": "195.8",
+      "winner_disp": "none",
+      "runner_mean": "198.7",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Reacher Strong Noise 2-step",
+      "direction": "lower",
+      "winner_mean": "66.7",
+      "winner_disp": "none",
+      "runner_mean": "197.2",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 4: Benchmark scenarios: Detector",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Cartpole Action Fact. Minor",
+      "direction": "higher",
+      "winner_mean": "0.76",
+      "winner_disp": "none",
+      "runner_mean": "0.59",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Cartpole Action Fact. Severe",
+      "direction": "higher",
+      "winner_mean": "0.94",
+      "winner_disp": "none",
+      "runner_mean": "0.64",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Cartpole Action Noise Minor",
+      "direction": "higher",
+      "winner_mean": "0.75",
+      "winner_disp": "none",
+      "runner_mean": "0.66",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Cartpole Action Noise Severe",
+      "direction": "higher",
+      "winner_mean": "0.98",
+      "winner_disp": "none",
+      "runner_mean": "0.55",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Cartpole Action Offset Minor",
+      "direction": "higher",
+      "winner_mean": "0.82",
+      "winner_disp": "none",
+      "runner_mean": "0.76",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Cartpole Action Offset Severe",
+      "direction": "higher",
+      "winner_mean": "1.0",
+      "winner_disp": "none",
+      "runner_mean": "0.71",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Cartpole Body M. Fact. Minor",
+      "direction": "higher",
+      "winner_mean": "0.75",
+      "winner_disp": "none",
+      "runner_mean": "0.6",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Cartpole Body M. Fact. Severe",
+      "direction": "higher",
+      "winner_mean": "0.9",
+      "winner_disp": "none",
+      "runner_mean": "0.66",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Cartpole Force Vector Minor",
+      "direction": "higher",
+      "winner_mean": "0.72",
+      "winner_disp": "none",
+      "runner_mean": "0.59",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Cartpole Force Vector Severe",
+      "direction": "higher",
+      "winner_mean": "1.0",
+      "winner_disp": "none",
+      "runner_mean": "0.56",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Reacher Action Fact. Minor",
+      "direction": "higher",
+      "winner_mean": "0.73",
+      "winner_disp": "none",
+      "runner_mean": "0.62",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Reacher Action Fact. Severe",
+      "direction": "higher",
+      "winner_mean": "0.95",
+      "winner_disp": "none",
+      "runner_mean": "0.69",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Reacher Action Noise Minor",
+      "direction": "higher",
+      "winner_mean": "0.72",
+      "winner_disp": "none",
+      "runner_mean": "0.59",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Reacher Action Noise Severe",
+      "direction": "higher",
+      "winner_mean": "0.99",
+      "winner_disp": "none",
+      "runner_mean": "0.62",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Reacher Action Offset Minor",
+      "direction": "higher",
+      "winner_mean": "0.74",
+      "winner_disp": "none",
+      "runner_mean": "0.61",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Reacher Action Offset Severe",
+      "direction": "higher",
+      "winner_mean": "0.98",
+      "winner_disp": "none",
+      "runner_mean": "0.66",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Reacher Body M. Fact. Minor",
+      "direction": "higher",
+      "winner_mean": "0.71",
+      "winner_disp": "none",
+      "runner_mean": "0.64",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Reacher Body M. Fact. Severe",
+      "direction": "higher",
+      "winner_mean": "0.73",
+      "winner_disp": "none",
+      "runner_mean": "0.56",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Reacher Force Vector Minor",
+      "direction": "higher",
+      "winner_mean": "0.76",
+      "winner_disp": "none",
+      "runner_mean": "0.74",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Reacher Force Vector Severe",
+      "direction": "higher",
+      "winner_mean": "0.98",
+      "winner_disp": "none",
+      "runner_mean": "0.69",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Cartpole Action Fact. Minor",
+      "direction": "lower",
+      "winner_mean": "44.8",
+      "winner_disp": "none",
+      "runner_mean": "153.1",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Cartpole Action Fact. Severe",
+      "direction": "lower",
+      "winner_mean": "1.7",
+      "winner_disp": "none",
+      "runner_mean": "50.4",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Cartpole Action Noise Minor",
+      "direction": "lower",
+      "winner_mean": "42.1",
+      "winner_disp": "none",
+      "runner_mean": "76.3",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Cartpole Action Noise Severe",
+      "direction": "lower",
+      "winner_mean": "1.7",
+      "winner_disp": "none",
+      "runner_mean": "69.4",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Cartpole Action Offset Minor",
+      "direction": "lower",
+      "winner_mean": "44.0",
+      "winner_disp": "none",
+      "runner_mean": "200.0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Cartpole Action Offset Severe",
+      "direction": "lower",
+      "winner_mean": "1.1",
+      "winner_disp": "none",
+      "runner_mean": "52.8",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Cartpole Body M. Fact. Minor",
+      "direction": "lower",
+      "winner_mean": "46.2",
+      "winner_disp": "none",
+      "runner_mean": "151.3",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Cartpole Body M. Fact. Severe",
+      "direction": "lower",
+      "winner_mean": "2.9",
+      "winner_disp": "none",
+      "runner_mean": "50.9",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Cartpole Force Vector Minor",
+      "direction": "lower",
+      "winner_mean": "48.2",
+      "winner_disp": "none",
+      "runner_mean": "127.1",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Cartpole Force Vector Severe",
+      "direction": "lower",
+      "winner_mean": "1.1",
+      "winner_disp": "none",
+      "runner_mean": "200.0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Reacher Action Fact. Minor",
+      "direction": "lower",
+      "winner_mean": "53.6",
+      "winner_disp": "none",
+      "runner_mean": "199.6",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Reacher Action Fact. Severe",
+      "direction": "lower",
+      "winner_mean": "53.3",
+      "winner_disp": "none",
+      "runner_mean": "196.6",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Reacher Action Noise Minor",
+      "direction": "lower",
+      "winner_mean": "51.9",
+      "winner_disp": "none",
+      "runner_mean": "200.8",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Reacher Action Noise Severe",
+      "direction": "lower",
+      "winner_mean": "52.7",
+      "winner_disp": "none",
+      "runner_mean": "129.9",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Reacher Action Offset Minor",
+      "direction": "lower",
+      "winner_mean": "46.8",
+      "winner_disp": "none",
+      "runner_mean": "200.5",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Reacher Action Offset Severe",
+      "direction": "lower",
+      "winner_mean": "65.6",
+      "winner_disp": "none",
+      "runner_mean": "192.3",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Reacher Body M. Fact. Minor",
+      "direction": "lower",
+      "winner_mean": "53.7",
+      "winner_disp": "none",
+      "runner_mean": "199.3",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Reacher Body M. Fact. Severe",
+      "direction": "lower",
+      "winner_mean": "52.1",
+      "winner_disp": "none",
+      "runner_mean": "201.0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Reacher Force Vector Minor",
+      "direction": "lower",
+      "winner_mean": "44.0",
+      "winner_disp": "none",
+      "runner_mean": "200.1",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Det. Time Reacher Force Vector Severe",
+      "direction": "lower",
+      "winner_mean": "55.2",
+      "winner_disp": "none",
+      "runner_mean": "200.8",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": ""
+ },
+ {
+  "id": "0281",
+  "tables": [
+   {
+    "caption_start": "Table 1: NLPDtest and NRMSEtest",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "pm",
+    "groups": [
+     {
+      "label": "N17E073, 4, NLPDtest",
+      "direction": "lower",
+      "winner_mean": "0.75",
+      "winner_disp": "0.42",
+      "runner_mean": "0.84",
+      "runner_disp": "0.15"
+     },
+     {
+      "label": "N17E073, 4, NRMSEtest",
+      "direction": "lower",
+      "winner_mean": "0.10",
+      "winner_disp": "0.01",
+      "runner_mean": "0.18",
+      "runner_disp": "0.01"
+     },
+     {
+      "label": "N17E073, 8, NLPDtest",
+      "direction": "lower",
+      "winner_mean": "0.64",
+      "winner_disp": "0.38",
+      "runner_mean": "0.97",
+      "runner_disp": "0.13"
+     },
+     {
+      "label": "N17E073, 8, NRMSEtest",
+      "direction": "lower",
+      "winner_mean": "0.03",
+      "winner_disp": "0.006",
+      "runner_mean": "0.20",
+      "runner_disp": "0.01"
+     },
+     {
+      "label": "N17E073, 27, NLPDtest",
+      "direction": "lower",
+      "winner_mean": "0.50",
+      "winner_disp": "0.27",
+      "runner_mean": "1.15",
+      "runner_disp": "0.03"
+     },
+     {
+      "label": "N17E073, 27, NRMSEtest",
+      "direction": "lower",
+      "winner_mean": "0.09",
+      "winner_disp": "0.02",
+      "runner_mean": "0.21",
+      "runner_disp": "0.01"
+     },
+     {
+      "label": "N43W080, 4, NLPDtest",
+      "direction": "lower",
+      "winner_mean": "0.21",
+      "winner_disp": "0.24",
+      "runner_mean": "1.06",
+      "runner_disp": "0.03"
+     },
+     {
+      "label": "N43W080, 4, NRMSEtest",
+      "direction": "lower",
+      "winner_mean": "0.07",
+      "winner_disp": "0.02",
+      "runner_mean": "0.16",
+      "runner_disp": "0.01"
+     },
+     {
+      "label": "N43W080, 8, NLPDtest",
+      "direction": "lower",
+      "winner_mean": "0.36",
+      "winner_disp": "0.56",
+      "runner_mean": "1.14",
+      "runner_disp": "0.03"
+     },
+     {
+      "label": "N43W080, 8, NRMSEtest",
+      "direction": "lower",
+      "winner_mean": "0.07",
+      "winner_disp": "0.02",
+      "runner_mean": "0.18",
+      "runner_disp": "0.01"
+     },
+     {
+      "label": "N43W080, 27, NLPDtest",
+      "direction": "lower",
+      "winner_mean": "0.34",
+      "winner_disp": "0.38",
+      "runner_mean": "1.21",
+      "runner_disp": "0.03"
+     },
+     {
+      "label": "N43W080, 27, NRMSEtest",
+      "direction": "lower",
+      "winner_mean": "0.07",
+      "winner_disp": "0.02",
+      "runner_mean": "0.19",
+      "runner_disp": "0.01"
+     },
+     {
+      "label": "N45W123, 4, NLPDtest",
+      "direction": "lower",
+      "winner_mean": "0.79",
+      "winner_disp": "0.56",
+      "runner_mean": "1.05",
+      "runner_disp": "0.03"
+     },
+     {
+      "label": "N45W123, 4, NRMSEtest",
+      "direction": "lower",
+      "winner_mean": "0.16",
+      "winner_disp": "0.03",
+      "runner_mean": "0.17",
+      "runner_disp": "0.01"
+     },
+     {
+      "label": "N45W123, 8, NLPDtest",
+      "direction": "lower",
+      "winner_mean": "0.63",
+      "winner_disp": "0.31",
+      "runner_mean": "1.1",
+      "runner_disp": "0.03"
+     },
+     {
+      "label": "N45W123, 8, NRMSEtest",
+      "direction": "lower",
+      "winner_mean": "0.12",
+      "winner_disp": "0.02",
+      "runner_mean": "0.18",
+      "runner_disp": "0.01"
+     },
+     {
+      "label": "N45W123, 27, NLPDtest",
+      "direction": "lower",
+      "winner_mean": "0.78",
+      "winner_disp": "0.42",
+      "runner_mean": "1.15",
+      "runner_disp": "0.04"
+     },
+     {
+      "label": "N45W123, 27, NRMSEtest",
+      "direction": "lower",
+      "winner_mean": "0.12",
+      "winner_disp": "0.02",
+      "runner_mean": "0.19",
+      "runner_disp": "0.01"
+     },
+     {
+      "label": "N47W124, 4, NLPDtest",
+      "direction": "lower",
+      "winner_mean": "1.24",
+      "winner_disp": "0.39",
+      "runner_mean": "1.26",
+      "runner_disp": "0.05"
+     },
+     {
+      "label": "N47W124, 4, NRMSEtest",
+      "direction": "lower",
+      "winner_mean": "0.15",
+      "winner_disp": "0.02",
+      "runner_mean": "0.23",
+      "runner_disp": "0.02"
+     },
+     {
+      "label": "N47W124, 8, NLPDtest",
+      "direction": "lower",
+      "winner_mean": "1.35",
+      "winner_disp": "0.04",
+      "runner_mean": "1.41",
+      "runner_disp": "0.78"
+     },
+     {
+      "label": "N47W124, 8, NRMSEtest",
+      "direction": "lower",
+      "winner_mean": "0.15",
+      "winner_disp": "0.02",
+      "runner_mean": "0.26",
+      "runner_disp": "0.02"
+     },
+     {
+      "label": "N47W124, 27, NLPDtest",
+      "direction": "lower",
+      "winner_mean": "1.39",
+      "winner_disp": "0.05",
+      "runner_mean": "1.97",
+      "runner_disp": "0.66"
+     },
+     {
+      "label": "N47W124, 27, NRMSEtest",
+      "direction": "lower",
+      "winner_mean": "0.16",
+      "winner_disp": "0.01",
+      "runner_mean": "0.27",
+      "runner_disp": "0.02"
+     },
+     {
+      "label": "Set 1, 4, NLPDtest",
+      "direction": "lower",
+      "winner_mean": "-0.27",
+      "winner_disp": "0.21",
+      "runner_mean": "0.58",
+      "runner_disp": "0.26"
+     },
+     {
+      "label": "Set 1, 4, NRMSEtest",
+      "direction": "lower",
+      "winner_mean": "0.04",
+      "winner_disp": "0.006",
+      "runner_mean": "0.14",
+      "runner_disp": "0.03"
+     },
+     {
+      "label": "Set 1, 8, NLPDtest",
+      "direction": "lower",
+      "winner_mean": "-0.24",
+      "winner_disp": "0.25",
+      "runner_mean": "0.78",
+      "runner_disp": "0.27"
+     },
+     {
+      "label": "Set 1, 8, NRMSEtest",
+      "direction": "lower",
+      "winner_mean": "0.03",
+      "winner_disp": "0.006",
+      "runner_mean": "0.17",
+      "runner_disp": "0.03"
+     },
+     {
+      "label": "Set 1, 27, NLPDtest",
+      "direction": "lower",
+      "winner_mean": "-0.22",
+      "winner_disp": "0.15",
+      "runner_mean": "0.93",
+      "runner_disp": "0.24"
+     },
+     {
+      "label": "Set 1, 27, NRMSEtest",
+      "direction": "lower",
+      "winner_mean": "0.04",
+      "winner_disp": "0.006",
+      "runner_mean": "0.20",
+      "runner_disp": "0.04"
+     },
+     {
+      "label": "Set 2, 4, NLPDtest",
+      "direction": "lower",
+      "winner_mean": "-0.29",
+      "winner_disp": "0.19",
+      "runner_mean": "0.54",
+      "runner_disp": "0.25"
+     },
+     {
+      "label": "Set 2, 4, NRMSEtest",
+      "direction": "lower",
+      "winner_mean": "0.03",
+      "winner_disp": "0.006",
+      "runner_mean": "0.14",
+      "runner_disp": "0.02"
+     },
+     {
+      "label": "Set 2, 8, NLPDtest",
+      "direction": "lower",
+      "winner_mean": "-0.31",
+      "winner_disp": "0.15",
+      "runner_mean": "0.72",
+      "runner_disp": "0.27"
+     },
+     {
+      "label": "Set 2, 8, NRMSEtest",
+      "direction": "lower",
+      "winner_mean": "0.03",
+      "winner_disp": "0.006",
+      "runner_mean": "0.16",
+      "runner_disp": "0.02"
+     },
+     {
+      "label": "Set 2, 27, NLPDtest",
+      "direction": "lower",
+      "winner_mean": "-0.26",
+      "winner_disp": "0.18",
+      "runner_mean": "0.88",
+      "runner_disp": "0.25"
+     },
+     {
+      "label": "Set 2, 27, NRMSEtest",
+      "direction": "lower",
+      "winner_mean": "0.03",
+      "winner_disp": "0.01",
+      "runner_mean": "0.20",
+      "runner_disp": "0.02"
+     }
+    ],
+    "note": "Comparing distributed methods only, as Full-GP is a single agent method and not bolded."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": ""
+ },
+ {
+  "id": "0282",
+  "tables": [
+   {
+    "caption_start": "Table 2: NLPDtest and NRMSEtest",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "20",
+    "n_source": "page",
+    "bar_form": "pm",
+    "groups": [
+     {
+      "label": "N17E073, 4",
+      "direction": "lower",
+      "winner_mean": "1.11",
+      "winner_disp": "0.005",
+      "runner_mean": "1.28",
+      "runner_disp": "0.04"
+     },
+     {
+      "label": "N17E073, 8",
+      "direction": "lower",
+      "winner_mean": "1.20",
+      "winner_disp": "0.009",
+      "runner_mean": "1.38",
+      "runner_disp": "0.06"
+     },
+     {
+      "label": "N17E073, 27",
+      "direction": "lower",
+      "winner_mean": "1.23",
+      "winner_disp": "0.01",
+      "runner_mean": "1.59",
+      "runner_disp": "0.56"
+     },
+     {
+      "label": "N43W080, 4",
+      "direction": "lower",
+      "winner_mean": "-0.36",
+      "winner_disp": "0.23",
+      "runner_mean": "1.09",
+      "runner_disp": "0.009"
+     },
+     {
+      "label": "N43W080, 8",
+      "direction": "lower",
+      "winner_mean": "-0.34",
+      "winner_disp": "0.26",
+      "runner_mean": "1.17",
+      "runner_disp": "0.01"
+     },
+     {
+      "label": "N43W080, 27",
+      "direction": "lower",
+      "winner_mean": "-0.19",
+      "winner_disp": "0.37",
+      "runner_mean": "1.21",
+      "runner_disp": "0.01"
+     },
+     {
+      "label": "N45W123, 4",
+      "direction": "lower",
+      "winner_mean": "0.75",
+      "winner_disp": "0.49",
+      "runner_mean": "1.09",
+      "runner_disp": "0.008"
+     },
+     {
+      "label": "N45W123, 8",
+      "direction": "lower",
+      "winner_mean": "0.51",
+      "winner_disp": "0.51",
+      "runner_mean": "1.18",
+      "runner_disp": "0.01"
+     },
+     {
+      "label": "N45W123, 27",
+      "direction": "lower",
+      "winner_mean": "1.03",
+      "winner_disp": "0.67",
+      "runner_mean": "1.24",
+      "runner_disp": "0.02"
+     },
+     {
+      "label": "N47W124, 4",
+      "direction": "lower",
+      "winner_mean": "1.29",
+      "winner_disp": "0.009",
+      "runner_mean": "5.21",
+      "runner_disp": "0.86"
+     },
+     {
+      "label": "N47W124, 8",
+      "direction": "lower",
+      "winner_mean": "1.34",
+      "winner_disp": "0.009",
+      "runner_mean": "4.52",
+      "runner_disp": "1.31"
+     },
+     {
+      "label": "N47W124, 27",
+      "direction": "lower",
+      "winner_mean": "1.37",
+      "winner_disp": "0.01",
+      "runner_mean": "4.38",
+      "runner_disp": "0.89"
+     },
+     {
+      "label": "Set 1, 4",
+      "direction": "lower",
+      "winner_mean": "0.42",
+      "winner_disp": "0.33",
+      "runner_mean": "0.96",
+      "runner_disp": "0.19"
+     },
+     {
+      "label": "Set 1, 8",
+      "direction": "lower",
+      "winner_mean": "0.61",
+      "winner_disp": "0.34",
+      "runner_mean": "1.03",
+      "runner_disp": "0.19"
+     },
+     {
+      "label": "Set 1, 27",
+      "direction": "lower",
+      "winner_mean": "0.77",
+      "winner_disp": "0.34",
+      "runner_mean": "1.35",
+      "runner_disp": "0.19"
+     },
+     {
+      "label": "Set 2, 4",
+      "direction": "lower",
+      "winner_mean": "0.49",
+      "winner_disp": "0.21",
+      "runner_mean": "0.99",
+      "runner_disp": "0.24"
+     },
+     {
+      "label": "Set 2, 8",
+      "direction": "lower",
+      "winner_mean": "0.71",
+      "winner_disp": "0.20",
+      "runner_mean": "0.96",
+      "runner_disp": "0.16"
+     },
+     {
+      "label": "Set 2, 27",
+      "direction": "lower",
+      "winner_mean": "0.88",
+      "winner_disp": "0.22",
+      "runner_mean": "0.99",
+      "runner_disp": "0.19"
+     }
+    ],
+    "note": "The text says 'mean and standard deviation... evaluated over 20 replications', so n_runs=20. The table compares distributed methods, so I only compare within the distributed methods columns for the runner-up."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": ""
+ },
+ {
+  "id": "0321",
+  "tables": [
+   {
+    "caption_start": "Table 1: Benchmarks and results for PVRP-P",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "paren",
+    "groups": [],
+    "note": "Each column contains multiple bold cells (one for the greedy block and one for the sampling block), so orientation is none."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": ""
+ },
+ {
+  "id": "0341",
+  "tables": [
+   {
+    "caption_start": "TABLE 2: Performance comparison under different backgrounds.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": "The values with slashes are not error bars, they are likely mean/std or two different metrics, but without a clear indication of error bars, we treat them as none. Also, bolding is per column but there are multiple bold cells per column (one per scene)."
+   },
+   {
+    "caption_start": "TABLE 3: Scalability analysis experiments. ISR and SSR are",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": "The values in parentheses are improvements (up arrows), not error bars. Bolding is per row."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": ""
+ },
+ {
+  "id": "0355",
+  "tables": [
+   {
+    "caption_start": "Table 2: Results of FACMAC+B3C",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "5",
+    "n_source": "paper",
+    "bar_form": "pm",
+    "groups": [
+     {
+      "label": "Hop-e",
+      "direction": "higher",
+      "winner_mean": "3619.7",
+      "winner_disp": "1.6",
+      "runner_mean": "3621",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Hop-m",
+      "direction": "higher",
+      "winner_mean": "3242.7",
+      "winner_disp": "129.1",
+      "runner_mean": "2880",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Hop-mr",
+      "direction": "higher",
+      "winner_mean": "1380.2",
+      "winner_disp": "none",
+      "runner_mean": "774.2",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Hop-me",
+      "direction": "higher",
+      "winner_mean": "3328.0",
+      "winner_disp": "369.8",
+      "runner_mean": "3502",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Ant-e",
+      "direction": "higher",
+      "winner_mean": "2162.8",
+      "winner_disp": "46.0",
+      "runner_mean": "2201",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Ant-m",
+      "direction": "higher",
+      "winner_mean": "1516.5",
+      "winner_disp": "14.8",
+      "runner_mean": "1418.4",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Ant-mr",
+      "direction": "higher",
+      "winner_mean": "1259.8",
+      "winner_disp": "302.4",
+      "runner_mean": "1226",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Ant-me",
+      "direction": "higher",
+      "winner_mean": "2077.6",
+      "winner_disp": "194.2",
+      "runner_mean": "2174",
+      "runner_disp": "none"
+     },
+     {
+      "label": "HC-e",
+      "direction": "higher",
+      "winner_mean": "5403.5",
+      "winner_disp": "169.7",
+      "runner_mean": "4999.2",
+      "runner_disp": "none"
+     },
+     {
+      "label": "HC-m",
+      "direction": "higher",
+      "winner_mean": "4756.6",
+      "winner_disp": "56.3",
+      "runner_mean": "4667.7",
+      "runner_disp": "none"
+     },
+     {
+      "label": "HC-mr",
+      "direction": "higher",
+      "winner_mean": "4602.6",
+      "winner_disp": "150.2",
+      "runner_mean": "4538.6",
+      "runner_disp": "none"
+     },
+     {
+      "label": "HC-me",
+      "direction": "higher",
+      "winner_mean": "5413.7",
+      "winner_disp": "99.4",
+      "runner_mean": "5395.2",
+      "runner_disp": "none"
+     },
+     {
+      "label": "HC-k0-e",
+      "direction": "higher",
+      "winner_mean": "1396.8",
+      "winner_disp": "4.5",
+      "runner_mean": "1390.1",
+      "runner_disp": "none"
+     },
+     {
+      "label": "HC-k0-m1",
+      "direction": "higher",
+      "winner_mean": "1141.6",
+      "winner_disp": "18.9",
+      "runner_mean": "1158",
+      "runner_disp": "none"
+     },
+     {
+      "label": "HC-k0-m2",
+      "direction": "higher",
+      "winner_mean": "1195.0",
+      "winner_disp": "51.9",
+      "runner_mean": "1197",
+      "runner_disp": "none"
+     },
+     {
+      "label": "HC-k0-e-m1",
+      "direction": "higher",
+      "winner_mean": "1307.1",
+      "winner_disp": "27.3",
+      "runner_mean": "1209",
+      "runner_disp": "none"
+     },
+     {
+      "label": "HC-k0-e-m2",
+      "direction": "higher",
+      "winner_mean": "1230.0",
+      "winner_disp": "40.5",
+      "runner_mean": "1211",
+      "runner_disp": "none"
+     },
+     {
+      "label": "HC-k0-m1-m2",
+      "direction": "higher",
+      "winner_mean": "1210.1",
+      "winner_disp": "22.8",
+      "runner_mean": "1186.1",
+      "runner_disp": "none"
+     },
+     {
+      "label": "HC-k1-e",
+      "direction": "higher",
+      "winner_mean": "3760.8",
+      "winner_disp": "none",
+      "runner_mean": "3760.5",
+      "runner_disp": "24.2"
+     },
+     {
+      "label": "HC-k1-m1",
+      "direction": "higher",
+      "winner_mean": "2508.1",
+      "winner_disp": "55.7",
+      "runner_mean": "2413",
+      "runner_disp": "none"
+     },
+     {
+      "label": "HC-k1-m2",
+      "direction": "higher",
+      "winner_mean": "2187.8",
+      "winner_disp": "66.7",
+      "runner_mean": "1440.6",
+      "runner_disp": "none"
+     },
+     {
+      "label": "HC-k1-e-m1",
+      "direction": "higher",
+      "winner_mean": "2682.0",
+      "winner_disp": "175.4",
+      "runner_mean": "2611",
+      "runner_disp": "none"
+     },
+     {
+      "label": "HC-k1-e-m2",
+      "direction": "higher",
+      "winner_mean": "1102.8",
+      "winner_disp": "349.8",
+      "runner_mean": "1211",
+      "runner_disp": "none"
+     },
+     {
+      "label": "HC-k1-m1-m2",
+      "direction": "higher",
+      "winner_mean": "2222.6",
+      "winner_disp": "84.1",
+      "runner_mean": "2021",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Sw-e",
+      "direction": "higher",
+      "winner_mean": "430.7",
+      "winner_disp": "none",
+      "runner_mean": "430.3",
+      "runner_disp": "2.6"
+     },
+     {
+      "label": "Sw-m1",
+      "direction": "higher",
+      "winner_mean": "297.0",
+      "winner_disp": "none",
+      "runner_mean": "295.6",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Sw-m2",
+      "direction": "higher",
+      "winner_mean": "155.3",
+      "winner_disp": "1.7",
+      "runner_mean": "147.1",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Sw-e-m1",
+      "direction": "higher",
+      "winner_mean": "297.1",
+      "winner_disp": "53.8",
+      "runner_mean": "292.1",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Sw-e-m2",
+      "direction": "higher",
+      "winner_mean": "236.1",
+      "winner_disp": "none",
+      "runner_mean": "213",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Sw-m1-m2",
+      "direction": "higher",
+      "winner_mean": "228.4",
+      "winner_disp": "none",
+      "runner_mean": "226.4",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": ""
+ },
+ {
+  "id": "0382",
+  "tables": [
+   {
+    "caption_start": "Table 1: Comparison of Token Cost and Accuracy Between GD and Other Methods.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "pm",
+    "groups": [],
+    "note": "Bold marks highest accuracy, underline marks lowest token cost except CoT. Since bold does not mark a single winner per column (it marks accuracy only, and underline marks tokens), orientation is none."
+   },
+   {
+    "caption_start": "Table 2: Comparison of different group strategies within GD(6,4) on the MMLU dataset.",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "pm",
+    "groups": [
+     {
+      "label": "ACC(%)↑",
+      "direction": "higher",
+      "winner_mean": "76.1",
+      "winner_disp": "0.03",
+      "runner_mean": "75.3",
+      "runner_disp": "0.01"
+     },
+     {
+      "label": "Tokens(k)↓",
+      "direction": "lower",
+      "winner_mean": "18.6",
+      "winner_disp": "0.09",
+      "runner_mean": "20.3",
+      "runner_disp": "0.17"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": ""
+ },
+ {
+  "id": "0397",
+  "tables": [
+   {
+    "caption_start": "Table 1: Results of comparative experiments",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "se",
+    "n_runs": "8",
+    "n_source": "caption",
+    "bar_form": "pm",
+    "groups": [],
+    "note": "Multiple bold cells per column in some blocks (e.g., Reacher-v4 Gamma has -3.9 and -4.3 bolded)."
+   },
+   {
+    "caption_start": "Table 2: Results of comparative experiments",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "se",
+    "n_runs": "8",
+    "n_source": "caption",
+    "bar_form": "pm",
+    "groups": [],
+    "note": "Multiple bold cells per column in some blocks (e.g., Ant-v2 Uniform has 2006.0 and 1677.1 bolded? Wait, no, only 2006.0 is bolded. Let's check Table 2 carefully. Gamma: Walker2d-v2 D2AC bold, Hopper-v2 D2AC bold, Ant-v2 D2AC bold. Double Gaussian: Walker2d-v2 D2AC bold, Hopper-v2 D2AC bold, Ant-v2 DFBT bold. Uniform: Walker2d-v2 D2AC bold, Hopper-v2 D2AC bold, Ant-v2 DFBT bold. Constant 5: Walker2d-v2 D2AC bold, Hopper-v2 D2AC bold, Ant-v2 D2AC bold. Wait, Table 2 has exactly one bold cell per column per block. But the prompt says 'orientation (the grouping it marks winners within: \"column\" if each column holds one bold cell, \"row\" if each row does, \"none\" if no cell is bold or bold marks something other than a single winner per group, e.g. every cell bold)'. Since Table 2 has one bold cell per column per block, it's 'column' within blocks, but overall there are multiple bold cells per column. I will mark 'none' for both as they use 'within the range of S.E.M of the best' which implies multiple can be bold, even if Table 2 happens to have 1 per block."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": ""
+ },
+ {
+  "id": "0434",
+  "tables": [
+   {
+    "caption_start": "Table 1: Prediction accuracy of the proposed pxpGP and dec-pxpGP frameworks across fleet size",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "pm",
+    "groups": [],
+    "note": "Bold marks best in Centralized and best in Decentralized separately, so two bold cells per row for NRMSE and two for NLPD. Orientation is none."
+   },
+   {
+    "caption_start": "Table 2: Computational and Communication Complexity Comparison of Distributed GP Methods",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Complexity table"
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": ""
+ },
+ {
+  "id": "0463",
+  "tables": [
+   {
+    "caption_start": "Table 1: Cost",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "4",
+    "n_source": "paper",
+    "bar_form": "pm",
+    "groups": [
+     {
+      "label": "Similar",
+      "direction": "lower",
+      "winner_mean": "13.49",
+      "winner_disp": "0.44",
+      "runner_mean": "16.03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Similar",
+      "direction": "lower",
+      "winner_mean": "14.85",
+      "winner_disp": "0.15",
+      "runner_mean": "17.72",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Similar",
+      "direction": "lower",
+      "winner_mean": "13.72",
+      "winner_disp": "0.16",
+      "runner_mean": "15.75",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Similar",
+      "direction": "lower",
+      "winner_mean": "14.83",
+      "winner_disp": "0.26",
+      "runner_mean": "16.97",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Similar",
+      "direction": "lower",
+      "winner_mean": "14.47",
+      "winner_disp": "0.18",
+      "runner_mean": "15.95",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Similar",
+      "direction": "lower",
+      "winner_mean": "18.23",
+      "winner_disp": "0.47",
+      "runner_mean": "18.60",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Similar",
+      "direction": "lower",
+      "winner_mean": "18.66",
+      "winner_disp": "0.06",
+      "runner_mean": "19.06",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Similar",
+      "direction": "lower",
+      "winner_mean": "19.10",
+      "winner_disp": "0.01",
+      "runner_mean": "19.77",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Similar",
+      "direction": "lower",
+      "winner_mean": "18.40",
+      "winner_disp": "0.01",
+      "runner_mean": "19.83",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Similar",
+      "direction": "lower",
+      "winner_mean": "18.67",
+      "winner_disp": "0.09",
+      "runner_mean": "19.04",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Totally Different",
+      "direction": "lower",
+      "winner_mean": "18.89",
+      "winner_disp": "0.12",
+      "runner_mean": "19.06",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Totally Different",
+      "direction": "lower",
+      "winner_mean": "19.50",
+      "winner_disp": "0.67",
+      "runner_mean": "20.15",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Totally Different",
+      "direction": "lower",
+      "winner_mean": "18.88",
+      "winner_disp": "0.13",
+      "runner_mean": "19.04",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Totally Different",
+      "direction": "lower",
+      "winner_mean": "18.77",
+      "winner_disp": "0.24",
+      "runner_mean": "19.58",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Totally Different",
+      "direction": "lower",
+      "winner_mean": "18.53",
+      "winner_disp": "0.42",
+      "runner_mean": "20.43",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Totally Different",
+      "direction": "lower",
+      "winner_mean": "15.84",
+      "winner_disp": "0.56",
+      "runner_mean": "17.72",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Totally Different",
+      "direction": "lower",
+      "winner_mean": "14.84",
+      "winner_disp": "0.44",
+      "runner_mean": "17.25",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Totally Different",
+      "direction": "lower",
+      "winner_mean": "13.98",
+      "winner_disp": "0.43",
+      "runner_mean": "15.75",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Totally Different",
+      "direction": "lower",
+      "winner_mean": "14.37",
+      "winner_disp": "0.38",
+      "runner_mean": "16.92",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Totally Different",
+      "direction": "lower",
+      "winner_mean": "14.82",
+      "winner_disp": "0.38",
+      "runner_mean": "15.95",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 2: Cost",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "4",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Avg TRTO",
+      "direction": "lower",
+      "winner_mean": "8.44",
+      "winner_disp": "none",
+      "runner_mean": "8.48",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Avg TRTO",
+      "direction": "lower",
+      "winner_mean": "8.03",
+      "winner_disp": "none",
+      "runner_mean": "8.59",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Avg TRTO",
+      "direction": "lower",
+      "winner_mean": "7.59",
+      "winner_disp": "none",
+      "runner_mean": "8.62",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Avg TRTO",
+      "direction": "lower",
+      "winner_mean": "7.70",
+      "winner_disp": "none",
+      "runner_mean": "8.08",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Avg TRTO",
+      "direction": "lower",
+      "winner_mean": "8.20",
+      "winner_disp": "none",
+      "runner_mean": "8.49",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Avg TTGT",
+      "direction": "lower",
+      "winner_mean": "11.38",
+      "winner_disp": "none",
+      "runner_mean": "11.68",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Avg TTGT",
+      "direction": "lower",
+      "winner_mean": "11.09",
+      "winner_disp": "none",
+      "runner_mean": "11.18",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Avg TTGT",
+      "direction": "lower",
+      "winner_mean": "10.79",
+      "winner_disp": "none",
+      "runner_mean": "11.20",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Avg TTGT",
+      "direction": "lower",
+      "winner_mean": "10.90",
+      "winner_disp": "none",
+      "runner_mean": "10.96",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Avg TTGT",
+      "direction": "lower",
+      "winner_mean": "10.70",
+      "winner_disp": "none",
+      "runner_mean": "10.81",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 3: Cost",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "4",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Gaussian dist. data",
+      "direction": "lower",
+      "winner_mean": "8.41",
+      "winner_disp": "none",
+      "runner_mean": "8.64",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Gaussian dist. data",
+      "direction": "lower",
+      "winner_mean": "8.93",
+      "winner_disp": "none",
+      "runner_mean": "9.27",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Gaussian dist. data",
+      "direction": "lower",
+      "winner_mean": "8.19",
+      "winner_disp": "none",
+      "runner_mean": "8.34",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Gaussian dist. data",
+      "direction": "lower",
+      "winner_mean": "7.49",
+      "winner_disp": "none",
+      "runner_mean": "7.63",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Gaussian dist. data",
+      "direction": "lower",
+      "winner_mean": "8.19",
+      "winner_disp": "none",
+      "runner_mean": "8.43",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 4: Cost",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "4",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Gaussian dist. data",
+      "direction": "lower",
+      "winner_mean": "9.25",
+      "winner_disp": "none",
+      "runner_mean": "9.56",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Gaussian dist. data",
+      "direction": "lower",
+      "winner_mean": "10.05",
+      "winner_disp": "none",
+      "runner_mean": "10.37",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Gaussian dist. data",
+      "direction": "lower",
+      "winner_mean": "9.34",
+      "winner_disp": "none",
+      "runner_mean": "9.57",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Gaussian dist. data",
+      "direction": "lower",
+      "winner_mean": "8.95",
+      "winner_disp": "none",
+      "runner_mean": "9.42",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Gaussian dist. data",
+      "direction": "lower",
+      "winner_mean": "8.70",
+      "winner_disp": "none",
+      "runner_mean": "9.13",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 5: Cost",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "4",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Gaussian dist. data",
+      "direction": "lower",
+      "winner_mean": "223.44",
+      "winner_disp": "none",
+      "runner_mean": "237.2",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Gaussian dist. data",
+      "direction": "lower",
+      "winner_mean": "215.81",
+      "winner_disp": "none",
+      "runner_mean": "229.54",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Gaussian dist. data",
+      "direction": "lower",
+      "winner_mean": "218.44",
+      "winner_disp": "none",
+      "runner_mean": "230.08",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Gaussian dist. data",
+      "direction": "lower",
+      "winner_mean": "217.31",
+      "winner_disp": "none",
+      "runner_mean": "232.45",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Gaussian dist. data",
+      "direction": "lower",
+      "winner_mean": "214.67",
+      "winner_disp": "none",
+      "runner_mean": "227.45",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": ""
+ },
+ {
+  "id": "0490",
+  "tables": [
+   {
+    "caption_start": "Table 1: Empirical results",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Multiple bold cells per column (one per block)."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": ""
+ },
+ {
+  "id": "0578",
+  "tables": [
+   {
+    "caption_start": "Table 2: Average win rates of",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "4",
+    "n_source": "paper",
+    "bar_form": "pm",
+    "groups": [
+     {
+      "label": "Protoss 5_vs_5",
+      "direction": "higher",
+      "winner_mean": "75.9",
+      "winner_disp": "3.0",
+      "runner_mean": "78.7",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Protoss 10_vs_10",
+      "direction": "higher",
+      "winner_mean": "78.7",
+      "winner_disp": "3.4",
+      "runner_mean": "79.8",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Protoss 10_vs_11",
+      "direction": "higher",
+      "winner_mean": "50.4",
+      "winner_disp": "2.9",
+      "runner_mean": "48.7",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Protoss 20_vs_20",
+      "direction": "higher",
+      "winner_mean": "73.9",
+      "winner_disp": "3.0",
+      "runner_mean": "80.6",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Protoss 20_vs_23",
+      "direction": "higher",
+      "winner_mean": "23.4",
+      "winner_disp": "1.0",
+      "runner_mean": "24.2",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Terran 5_vs_5",
+      "direction": "higher",
+      "winner_mean": "70.2",
+      "winner_disp": "2.6",
+      "runner_mean": "70.0",
+      "runner_disp": "4.8"
+     },
+     {
+      "label": "Terran 10_vs_10",
+      "direction": "higher",
+      "winner_mean": "72.6",
+      "winner_disp": "1.8",
+      "runner_mean": "72.2",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Terran 10_vs_11",
+      "direction": "higher",
+      "winner_mean": "51.0",
+      "winner_disp": "0.4",
+      "runner_mean": "53.9",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Terran 20_vs_20",
+      "direction": "higher",
+      "winner_mean": "59.3",
+      "winner_disp": "1.3",
+      "runner_mean": "65.4",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Terran 20_vs_23",
+      "direction": "higher",
+      "winner_mean": "18.7",
+      "winner_disp": "0.7",
+      "runner_mean": "17.7",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Zerg 5_vs_5",
+      "direction": "higher",
+      "winner_mean": "52",
+      "winner_disp": "3.9",
+      "runner_mean": "55.0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Zerg 10_vs_10",
+      "direction": "higher",
+      "winner_mean": "49.4",
+      "winner_disp": "none",
+      "runner_mean": "57.6",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Zerg 10_vs_11",
+      "direction": "higher",
+      "winner_mean": "45.3",
+      "winner_disp": "0.6",
+      "runner_mean": "41.5",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Zerg 20_vs_20",
+      "direction": "higher",
+      "winner_mean": "42.1",
+      "winner_disp": "5.1",
+      "runner_mean": "43.3",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Zerg 20_vs_23",
+      "direction": "higher",
+      "winner_mean": "17.5",
+      "winner_disp": "3.2",
+      "runner_mean": "21.3",
+      "runner_disp": "none"
+     }
+    ],
+    "note": "The bolding seems to only apply to the MARL and ME-IGM columns, ignoring IL+MARL which often has higher values. I recorded the runner-up from all columns."
+   },
+   {
+    "caption_start": "Table 3: Our algorithm (+OPT) vs.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "4",
+    "n_source": "paper",
+    "bar_form": "pm",
+    "groups": [],
+    "note": "No bolding in Table 3."
+   }
+  ],
+  "figure_band_on_page": "y",
+  "note": ""
+ },
+ {
+  "id": "0635",
+  "tables": [
+   {
+    "caption_start": "Table 1: Throughput results across",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": "The parentheses contain relative improvement percentages, not error bars."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": ""
+ },
+ {
+  "id": "0842",
+  "tables": [
+   {
+    "caption_start": "Table 3: Detailed comparison across all planners.",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "paren",
+    "groups": [
+     {
+      "label": "Small2a Rational",
+      "direction": "lower",
+      "winner_mean": "4.74",
+      "winner_disp": "3.19",
+      "runner_mean": "4.76",
+      "runner_disp": "2.91"
+     },
+     {
+      "label": "Small2a Malicious",
+      "direction": "lower",
+      "winner_mean": "4.96",
+      "winner_disp": "2.79",
+      "runner_mean": "5.00",
+      "runner_disp": "2.84"
+     },
+     {
+      "label": "Small2a Self",
+      "direction": "lower",
+      "winner_mean": "4.96",
+      "winner_disp": "2.94",
+      "runner_mean": "5.20",
+      "runner_disp": "4.30"
+     },
+     {
+      "label": "Square2a Rational",
+      "direction": "lower",
+      "winner_mean": "7.13",
+      "winner_disp": "4.14",
+      "runner_mean": "7.14",
+      "runner_disp": "3.87"
+     },
+     {
+      "label": "Square2a Malicious",
+      "direction": "lower",
+      "winner_mean": "7.28",
+      "winner_disp": "3.58",
+      "runner_mean": "7.75",
+      "runner_disp": "4.41"
+     },
+     {
+      "label": "Square2a Self",
+      "direction": "lower",
+      "winner_mean": "7.05",
+      "winner_disp": "3.16",
+      "runner_mean": "7.61",
+      "runner_disp": "3.96"
+     },
+     {
+      "label": "Square4a Rational",
+      "direction": "lower",
+      "winner_mean": "8.26",
+      "winner_disp": "7.42",
+      "runner_mean": "8.44",
+      "runner_disp": "6.60"
+     },
+     {
+      "label": "Square4a Malicious",
+      "direction": "lower",
+      "winner_mean": "11.43",
+      "winner_disp": "10.68",
+      "runner_mean": "11.71",
+      "runner_disp": "11.47"
+     },
+     {
+      "label": "Square4a Self",
+      "direction": "lower",
+      "winner_mean": "9.56",
+      "winner_disp": "9.55",
+      "runner_mean": "11.59",
+      "runner_disp": "10.50"
+     },
+     {
+      "label": "Medium20a Rational",
+      "direction": "lower",
+      "winner_mean": "35.52",
+      "winner_disp": "40.65",
+      "runner_mean": "56.04",
+      "runner_disp": "52.59"
+     },
+     {
+      "label": "Medium20a Malicious",
+      "direction": "lower",
+      "winner_mean": "40.26",
+      "winner_disp": "48.63",
+      "runner_mean": "40.62",
+      "runner_disp": "49.03"
+     },
+     {
+      "label": "Medium20a Self",
+      "direction": "lower",
+      "winner_mean": "49.27",
+      "winner_disp": "28.73",
+      "runner_mean": "67.38",
+      "runner_disp": "51.92"
+     },
+     {
+      "label": "Large50a Rational",
+      "direction": "lower",
+      "winner_mean": "74.60",
+      "winner_disp": "78.27",
+      "runner_mean": "111.80",
+      "runner_disp": "95.58"
+     },
+     {
+      "label": "Large50a Malicious",
+      "direction": "lower",
+      "winner_mean": "79.42",
+      "winner_disp": "92.44",
+      "runner_mean": "79.84",
+      "runner_disp": "92.48"
+     },
+     {
+      "label": "Large50a Self",
+      "direction": "lower",
+      "winner_mean": "76.65",
+      "winner_disp": "5.30",
+      "runner_mean": "209.15",
+      "runner_disp": "82.39"
+     }
+    ],
+    "note": "The table is split into two parts, but it's one table. The first three columns are repeated in the lower part. I'll treat each row as a group, comparing across all columns in both parts for that row."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": ""
+ }
+]

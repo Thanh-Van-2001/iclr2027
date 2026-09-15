@@ -613,6 +613,44 @@ def uncertainty_anywhere(records: list) -> dict:
             "pct_figure_caption": round(100 * fig / n, 1), "pct_anywhere": round(100 * anyw / n, 1)}
 
 
+def census_cross_reader(a_items="audits/aamas_pages/items.json", a_labels="audits/aamas_pages/labels.json",
+                        c_items="audits/aamas_census/items.json", c_labels="audits/aamas_census/labels.json") -> dict:
+    """The two page readers on the pages both read: groups listed, bar-less
+    share, and the share of the first reader's groups the second lists (by
+    the winner's value, one to one)."""
+    if not all(os.path.exists(x) for x in (a_items, a_labels, c_items, c_labels)):
+        return {}
+    from pages_score import _bar_num
+    ai = {it["id"]: it for it in json.load(open(a_items, encoding="utf-8"))}
+    A = {(ai[p["id"]]["paper"], ai[p["id"]]["page"]): p for p in json.load(open(a_labels, encoding="utf-8"))}
+    ci = {it["id"]: it for it in json.load(open(c_items, encoding="utf-8"))}
+    C = {(ci[p["id"]]["paper"], ci[p["id"]]["page"]): p for p in json.load(open(c_labels, encoding="utf-8"))}
+    common = [k for k in A if k in C]
+
+    def groups(p):
+        out = []
+        for t in p["tables"]:
+            if not str(t.get("results_table", "")).lower().startswith("y"):
+                continue
+            for g in t["groups"]:
+                wb = _bar_num(g.get("winner_disp")) is not None or str(g.get("winner_disp", "")).startswith("[")
+                rb = _bar_num(g.get("runner_disp")) is not None or str(g.get("runner_disp", "")).startswith("[")
+                out.append({"wm": str(g.get("winner_mean", "")).strip(), "neither": not wb and not rb})
+        return out
+    ga = gc = na = nc = matched = 0
+    for k in common:
+        a, c = groups(A[k]), groups(C[k])
+        ga += len(a); gc += len(c); na += sum(g["neither"] for g in a); nc += sum(g["neither"] for g in c)
+        cw = [g["wm"] for g in c]
+        for g in a:
+            if g["wm"] in cw:
+                matched += 1
+                cw.remove(g["wm"])
+    return {"pages": len(common), "first_groups": ga, "second_groups": gc,
+            "first_pct_neither": round(100 * na / max(ga, 1), 1), "second_pct_neither": round(100 * nc / max(gc, 1), 1),
+            "first_matched_by_second": matched, "pct_first_matched": round(100 * matched / max(ga, 1), 1)}
+
+
 def duplicate_table_records(records: list) -> dict:
     """Tables the parser recorded more than once under one (paper, number,
     page): a two-column artefact in which a caption is attached to a body
@@ -712,6 +750,7 @@ def main() -> int:
         "ml_main_text": ml_main_text(),
         "protocol_span": protocol_span(cs, protocol),
         "per_paper_failure": per_paper_failure(cs),
+        "census_cross_reader": census_cross_reader(),
         "runs_band_papers": {band: len({c["paper"] for c in cs if c.get("test") and c.get("n_runs") and
                                         ((band == "le3" and c["n_runs"] <= 3) or (band == "4to5" and 4 <= c["n_runs"] <= 5) or (band == "ge6" and c["n_runs"] >= 6))})
                              for band in ("le3", "4to5", "ge6")},

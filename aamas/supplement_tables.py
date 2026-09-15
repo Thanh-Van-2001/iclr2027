@@ -127,8 +127,43 @@ def protocol_table():
     open(os.path.join(D, "protocol_table.tex"), "w", encoding="utf-8").write(chr(10).join(out) + chr(10))
 
 
+def census_protocol():
+    """The census reader's instructions, verbatim from the script that sent
+    them, so the supplement cannot drift from the code."""
+    import read_pages_api  # noqa: E402
+    with open(os.path.join(D, "protocol_census.txt"), "w", encoding="utf-8") as fh:
+        fh.write(read_pages_api.PROTO.replace("{runs}", "<the paper's run-count sentences>"))
+        fh.write(chr(10) + "--- appended when the previous answer was not valid JSON ---")
+        fh.write(read_pages_api.STRICT + chr(10))
+
+
+def wrap_protocols(width=58):
+    """Line-wrap the verbatim protocol files for a two-column page. Only line
+    breaks change; the words are the ones the models received."""
+    import textwrap
+    os.makedirs(os.path.join(D, "wrapped"), exist_ok=True)
+    for name in ("protocol_reader.txt", "protocol_pages.txt", "protocol_census.txt",
+                 "protocol_classify.txt", "protocol_reader_prompt.txt", "citation_patterns.txt"):
+        src = os.path.join(D, name)
+        if not os.path.exists(src):
+            continue
+        out = []
+        for line in open(src, encoding="utf-8").read().split(chr(10)):
+            if len(line) <= width:
+                out.append(line)
+            else:
+                indent = len(line) - len(line.lstrip(" "))
+                out.extend(textwrap.wrap(line, width=width, initial_indent=" " * indent,
+                                         subsequent_indent=" " * (indent + 2), break_long_words=True,
+                                         break_on_hyphens=False))
+        with open(os.path.join(D, "wrapped", name), "w", encoding="utf-8") as fh:
+            fh.write(chr(10).join(out) + chr(10))
+
+
 if __name__ == "__main__":
     scores_table()
     bugs()
     protocol_table()
+    census_protocol()
+    wrap_protocols()
     print("wrote scores_table.tex and bugs.tex")

@@ -23,6 +23,9 @@ def _ci(d: dict, digits: int = 1) -> str:
     return f"{d['point']:.{digits}f}\\% [{d['lo']:.{digits}f}, {d['hi']:.{digits}f}]"
 
 
+PCT = chr(92) + '%'
+
+
 def _pct(x) -> str:
     return f"{x}\\%"
 
@@ -391,6 +394,15 @@ def build(out_path: str) -> dict:
     if wl:
         reg.add("pspan without largest n", wl["n"], provenance=run)
         reg.add("pspan without largest below", _pct(wl["pct_below"]) if wl["pct_below"] is not None else "--", provenance=run)
+    ccr = ex.get("census_cross_reader", {})
+    if ccr:
+        reg.add("ccr pages", ccr["pages"], provenance=run)
+        reg.add("ccr first groups", ccr["first_groups"], provenance=run)
+        reg.add("ccr second groups", ccr["second_groups"], provenance=run)
+        reg.add("ccr first neither", _pct(ccr["first_pct_neither"]), provenance=run)
+        reg.add("ccr second neither", _pct(ccr["second_pct_neither"]), provenance=run)
+        reg.add("ccr matched", ccr["first_matched_by_second"], provenance=run)
+        reg.add("ccr matched pct", _pct(ccr["pct_first_matched"]), provenance=run)
     dr = ex["duplicate_table_records"]
     reg.add("a dup keys", dr["duplicate_keys"], provenance=run)
     reg.add("a dup identical", dr["identical_records"], provenance=run)
@@ -546,6 +558,44 @@ def build(out_path: str) -> dict:
         rf2 = tp["reader_failure"]
         reg.add("tp reader fail", f"{rf2['pct_fail']}\\% [{rf2['ci'][0]}, {rf2['ci'][1]}]" if rf2["n"] else "--", provenance=trun)
         reg.add("tp reader fail n", rf2["n"], provenance=trun)
+    if os.path.exists("out/aamas/reader_retest.json"):
+        rt = _j("reader_retest")
+        rrun = "aamas_reader_retest"
+        reg.add("rt pages", rt["n_pages"], provenance=rrun)
+        reg.add("rt groups first", rt["groups_first"], provenance=rrun)
+        reg.add("rt groups second", rt["groups_second"], provenance=rrun)
+        reg.add("rt matched", rt["matched"], provenance=rrun)
+        reg.add("rt matched pct", _pct(rt["pct_matched_of_first"]), provenance=rrun)
+        reg.add("rt matched ci", f"{rt['pct_matched_of_first']}" + PCT + f" [{rt['ci_matched_of_first'][0]}, {rt['ci_matched_of_first'][1]}]", provenance=rrun)
+        reg.add("rt matched of second pct", _pct(rt["pct_matched_of_second"]), provenance=rrun)
+        reg.add("rt neither agree", rt["neither_agree"], provenance=rrun)
+        reg.add("rt neither agree pct", _pct(rt["pct_neither_agree"]), provenance=rrun)
+        reg.add("rt testable agree pct", _pct(rt["pct_testable_agree"]), provenance=rrun)
+        reg.add("rt both tested", rt["both_tested"], provenance=rrun)
+        reg.add("rt fail agree", rt["fail_agree"], provenance=rrun)
+        reg.add("rt fail first", _pct(rt["pct_fail_first"]), provenance=rrun)
+        reg.add("rt fail second", _pct(rt["pct_fail_second"]), provenance=rrun)
+        reg.add("rt neither first", _pct(rt["pct_neither_first"]), provenance=rrun)
+        reg.add("rt neither second", _pct(rt["pct_neither_second"]), provenance=rrun)
+    if os.path.exists("out/aamas/reader_effort.json"):
+        re_ = _j("reader_effort")
+        erun = "aamas_reader_effort"
+        reg.add("re pages", re_["n_pages"], provenance=erun)
+        reg.add("re groups first", re_["groups_first"], provenance=erun)
+        reg.add("re groups second", re_["groups_second"], provenance=erun)
+        reg.add("re matched", re_["matched"], provenance=erun)
+        reg.add("re matched ci", f"{re_['pct_matched_of_first']}" + PCT + f" [{re_['ci_matched_of_first'][0]}, {re_['ci_matched_of_first'][1]}]", provenance=erun)
+        reg.add("re matched of second pct", _pct(re_["pct_matched_of_second"]), provenance=erun)
+        reg.add("re neither agree pct", _pct(re_["pct_neither_agree"]), provenance=erun)
+        reg.add("re testable agree pct", _pct(re_["pct_testable_agree"]), provenance=erun)
+        reg.add("re both tested", re_["both_tested"], provenance=erun)
+        reg.add("re fail agree", re_["fail_agree"], provenance=erun)
+        reg.add("re neither first", _pct(re_["pct_neither_first"]), provenance=erun)
+        reg.add("re neither second", _pct(re_["pct_neither_second"]), provenance=erun)
+        reg.add("re testable first", _pct(re_["pct_testable_first"]), provenance=erun)
+        reg.add("re testable second", _pct(re_["pct_testable_second"]), provenance=erun)
+        reg.add("re fail first", _pct(re_["pct_fail_first"]), provenance=erun)
+        reg.add("re fail second", _pct(re_["pct_fail_second"]), provenance=erun)
     if os.path.exists("out/aamas/gold_set_census.json"):
         cz = _j("gold_set_census")
         crun = "aamas_gold_set_census"

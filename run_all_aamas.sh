@@ -21,6 +21,10 @@ fi
 if ls audits/aamas_census/labels_shard*.json > /dev/null 2>&1; then
 python aamas/merge_census.py > /dev/null
 python study/pages_score.py --items audits/aamas_census/items.json --labels audits/aamas_census/labels.json     --analysis out/aamas/analysis.json --out out/aamas/gold_set_census.json > /dev/null
+python aamas/reader_retest.py > /dev/null
+if [ -f audits/aamas_census_effort/labels.json ]; then
+python aamas/reader_retest.py --first audits/aamas_census --second audits/aamas_census_effort --out out/aamas/reader_effort.json > /dev/null
+fi
 fi
 python aamas/figures.py
 python aamas/supplement_tables.py

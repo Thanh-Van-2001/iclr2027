@@ -21,6 +21,17 @@ FILES = [
     ("audits/aamas_pages/items.json", "audits/random_pages_items.json"),
     ("audits/aamas_pages/labels.json", "audits/random_pages_reader_labels.json"),
     ("audits/aamas_comm_check/labels_sonnet.json", "audits/community_second_labeller.json"),
+    ("audits/aamas_gold_gemini/labels.csv", "audits/reference_set_second_reader_labels.csv"),
+    ("audits/aamas_testable_pages/items.json", "audits/testable_pages_items.json"),
+    ("audits/aamas_testable_pages/labels.json", "audits/testable_pages_reader_labels.json"),
+    ("audits/aamas_census/items.json", "audits/census_items.json"),
+    ("audits/aamas_census/labels.json", "audits/census_reader_labels.json"),
+    ("out/aamas/gold_set_gemini.json", "run_records/gold_set_second_reader.json"),
+    ("out/aamas/reader_agreement_gemini.json", "run_records/reader_agreement.json"),
+    ("out/aamas/gold_set_testable_pages.json", "run_records/gold_set_testable_pages.json"),
+    ("out/aamas/gold_set_census.json", "run_records/gold_set_census.json"),
+    ("out/aamas/reader_retest.json", "run_records/reader_retest.json"),
+    ("out/aamas/protocol_resolution_rows_reader.json", "run_records/protocol_resolution_rows_reader.json"),
 ]
 README = """Supplementary material for "Bold Without Bars: What Three Years of AAMAS Tables Let a Reader Check"
 
@@ -30,7 +41,9 @@ supplement.pdf        the supplementary text: reader protocols verbatim, classif
 numbers.tex           every number in the paper as a LaTeX macro, generated from the run records
 run_records/          the run records the macros are built from, including the per-comparison
                       database (analysis.json), the evaluation-protocol readings, the community labels
-audits/               the reference-set and random-page items with the readers' labels
+audits/               the reference-set items with both readers' labels, the random-page pilot,
+                      the census of every caption page with the reader's labels, and the
+                      66 testable pages read a second time
 
 The full code release (the frozen parser, the AAMAS scripts, the extraction file, and the
 rendered audit images) is at the anonymous repository named in the paper's Reproducibility

@@ -1,0 +1,56 @@
+You are the end-to-end reader for a paper that audits
+  results tables. The image is a WHOLE PAGE of a
+multi-agent-systems paper (two-column ACM format),
+  rendered at twice its printed size, with nothing marked.
+
+List every table of experimental results whose body is on
+  the page (ignore tables of hyperparameters, dataset
+statistics, notation, prompts). For each such table
+  record: caption_start (the first words of its caption);
+results_table (y/n); orientation (the grouping it marks
+  winners within: "column" if each column holds one bold
+cell, "row" if each row does, "none" if no cell is bold or
+  bold marks something other than a single winner per
+group, e.g. every cell bold); any_error_bar (y/n: does ANY
+  cell print a dispersion, a +/- value, a parenthesised
+or subscript value, a bracketed interval, or a separate
+  std/SE column); bar_kind (sd / se / ci / unlabelled if
+bars exist but nothing says what they are / none if no
+  bars, from the caption); n_runs (the run count that
+applies to this table, from its caption first and
+  otherwise from the run sentences below, or "none");
+  n_source
+(caption / page / paper / none); bar_form (how bars are
+  set in this table: pm / paren / bracket / subscript /
+separate_column / none); groups: EVERY group with exactly
+  one bold cell (up to 40), each with label (its
+header label), direction (higher/lower), winner_mean,
+  winner_disp, runner_mean, runner_disp (the bold cell's
+mean and bar, and the best NON-bold cell's mean and bar in
+  that group; values exactly as printed; "none" for a
+value with no bar; "unclear" if you cannot read a digit);
+  note. At the page level also record
+figure_band_on_page (y/n: does any figure on this page
+  draw shaded bands, error bars or intervals).
+
+Run sentences from the paper:
+<the paper's run-count sentences>
+
+Answer with ONE JSON object and nothing else: {{"tables":
+  [{{"caption_start": "...", "results_table": "y",
+"orientation": "column", "any_error_bar": "y", "bar_kind":
+  "sd", "n_runs": "5", "n_source": "caption",
+"bar_form": "pm", "groups": [{{"label": "...",
+  "direction": "higher", "winner_mean": "...",
+  "winner_disp": "...",
+"runner_mean": "...", "runner_disp": "..."}}], "note":
+  "..."}}], "figure_band_on_page": "n", "note": "..."}}
+--- appended when the previous answer was not valid JSON
+  ---
+
+Your previous answer was not valid JSON. Output strictly
+  valid JSON: every string in double quotes, no double
+  quotes inside strings (use single quotes instead), no
+  trailing commas, no comments, no text before or after
+  the object.
+

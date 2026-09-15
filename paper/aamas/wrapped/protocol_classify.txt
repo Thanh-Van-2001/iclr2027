@@ -1,0 +1,33 @@
+You are classifying a paper from the AAMAS conference into
+  exactly one community.
+Labels (answer with the label id only):
+- learning: reinforcement learning, multi-agent RL,
+  imitation, bandits, learning in games
+- game_theory_social_choice: game theory, mechanism
+  design, auctions, voting, fair division, matching,
+  cooperative games
+- llm_agents: LLM-based agents, generative or agentic AI,
+  language models as agents
+- simulation: agent-based modelling and simulation of
+  societies, markets, epidemics, traffic
+- planning_search: planning, scheduling, search,
+  optimisation, path finding, constraint solving
+- reasoning_norms: logic, knowledge representation,
+  argumentation, norms, ethics, trust, formal verification
+- robotics_hai: robotics, control, human-agent or
+  human-robot interaction
+- other: anything else, including systems and engineering
+  of agent platforms
+
+Also say whether the paper reports quantitative
+  experimental results in tables (yes/no) as far as the
+  first page suggests.
+
+Answer as JSON: {"label": "<id>", "confidence":
+  "high|medium|low", "tables_expected": "yes|no|unsure"}
+
+Title: {title}
+
+First page:
+{page}
+

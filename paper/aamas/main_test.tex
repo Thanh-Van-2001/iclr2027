@@ -36,32 +36,30 @@ on Autonomous Agents and Multiagent Systems (AAMAS 2027)}{3--7 May 2027}{Hanoi, 
 
 \begin{abstract}
 A results table marks a winner in bold and asks the reader to believe it. We
-ask how often the page prints what checking would need. A frozen text-layer
-parser reads every main-track paper in the AAMAS
-proceedings of 2024--2026 (\nAPapers{} papers), finds the results tables
-whose bold marks a winner, and sets each bold cell against the best value
-the authors did not mark. Of the \nAComparisons{} highlighted comparisons it
-reads, \nAPctNeither{} print no error bar on either side and
-\nAPctTestable{} can be tested from the page; an image-based reader's census
-of random pages puts the bar-less share at \nPagesReaderNeither{}. Every testable comparison comes from
-\nAPapersTestable{} papers, and \nAPctFail{} of them are not
-distinguishable from zero by Welch's $t$ at the authors' own run counts:
-\nRunsLeThreeFail{} where three seeds or fewer are stated,
-\nRunsGeSixFail{} at six or more, and \nPpAnyFail{} of those papers have
-at least one such cell. AAMAS and the NeurIPS/ICML mainstream print a
-$\pm$ cell at similar rates per paper; among the comparisons the parser
-reads, AAMAS carries bars more often
-and the bars support the claim no more often. Win and success rates carry a
-second resolution that needs no error bar, the binomial noise of the
-evaluation protocol; of the \nRatePapers{} papers that highlight a rate, a
-language model finds the number of evaluation episodes stated in
-\nPrdReaderK{}, and on their comparisons \nPrdResBelow{} of the highlighted
-gaps fall below what that many episodes can resolve. On a reference set the
-reader agrees with the parser on the whole claim in \nGClaim{} of
-comparisons and on the verdict in \nGVerdict{}; on random two-column pages
-the parser lists \nPagesReaderFoundPct{} of the groups the reader lists.
-Every number is a statement about what the parser reads, with that
-precision and coverage. Everything is released.
+ask how often the page prints what checking would need, with two
+instruments: an image-based reader that reads every page of the AAMAS
+proceedings of 2024--2026 holding a table caption (\nCzPagesRead{} pages of
+\nAPapers{} main-track papers), and a frozen text-layer parser run on the
+same corpus and on NeurIPS/ICML. In every row or column with exactly one
+bold cell, the bold value is set against the best value the authors did not
+mark. The reader finds \nCzGroups{} such comparisons: \nCzNeitherCi{} print
+no error bar on either side, \nCzTestableCi{} can be tested from the page,
+and of those \nCzReaderFail{} are not distinguishable from zero by Welch's
+$t$ at the stated run count. The parser reads \nAComparisons{} comparisons
+and finds \nAPctNeither{}, \nAPctTestable{} and \nAPctFail{}; every
+testable one comes from \nAPapersTestable{} papers, \nPpAnyFail{} of which
+have at least one failing cell, and the rate is \nRunsLeThreeFail{} where
+three seeds or fewer are stated. AAMAS and the NeurIPS/ICML mainstream print
+a $\pm$ cell at similar rates per paper; the highlighted comparisons of
+AAMAS carry bars more often and the bars support the claim no more often.
+Win and success rates carry a second resolution that needs no error bar, the
+binomial noise of the evaluation protocol; of the \nRatePapers{} papers that
+highlight a rate, \nPrdReaderK{} state the number of evaluation episodes,
+and on their comparisons \nPrdResBelow{} of the gaps fall below what that
+many episodes can resolve. On a reference set the reader agrees with the
+parser on the whole claim in \nGClaim{} of comparisons and on the verdict
+in \nGVerdict{}; over the census the parser lists \nCzReaderFoundPct{} of
+the reader's comparisons. Everything is released.
 \end{abstract}
 
 \begin{CCSXML}
@@ -111,10 +109,12 @@ change, so that the two literatures can be compared under one definition;
 Section~\ref{sec:instrument} describes them and measures what they do on a
 two-column page.
 
-The findings are these. \nAPctNeither{} of the \nAComparisons{} highlighted
-comparisons the parser reads in AAMAS carry no error bar on either side, and
-\nAPctTestable{} can be tested from the page; all of the testable ones come
-from \nAPapersTestable{} papers. On the main text of the mainstream sample
+The findings are these. An image-based reader that reads every page of the
+proceedings holding a table caption finds \nCzGroups{} highlighted
+comparisons, \nCzNeither{} of them with no error bar on either side and
+\nCzTestable{} testable from the page; the parser reads \nAComparisons{}
+and finds \nAPctNeither{} and \nAPctTestable{}, and all of its testable
+ones come from \nAPapersTestable{} papers. On the main text of the mainstream sample
 the same parser finds \nMlMainNeither{} and \nMlMainTestable{}. The
 difference is not a difference in habit at the level of the paper
 (\nAPctPapersErr{} of AAMAS papers print a $\pm$ cell in a table, against
@@ -135,15 +135,14 @@ form a pattern could.
 None of these numbers is exact, and the paper says how inexact. Conventions
 the source papers leave unstated move the failure rate across the span of
 Table~\ref{tab:span}; a reference set drawn from this corpus after the
-parser was frozen puts its agreement with an image-based reader at
-\nGClaim{} on the whole claim and \nGVerdict{} on the verdict; and a reading
-of \nPagesRead{} random pages shows that on two-column pages the parser
-lists \nPagesReaderFoundPct{} of the single-bold groups the reader lists,
-and that the bar-less share among the groups it keeps is not lower than
-among the groups it misses. The parser is not a substitute for reading a
-paper. It is a way of asking
-one question of \nATablesDetected{} tables at once, with a precision and a
-coverage that are measured rather than assumed.
+parser was frozen puts its agreement with the reader at \nGClaim{} on the
+whole claim and \nGVerdict{} on the verdict; and over the census the parser
+lists \nCzReaderFoundPct{} of the reader's comparisons, the ones it misses
+being the more bar-less. Two instruments of different technology, one on
+the text layer and one on the rendered page, give the same picture. Neither
+is a substitute for reading a paper; together they are a way of asking one
+question of \nCzTables{} tables at once, with a precision and a coverage
+that are measured rather than assumed.
 
 \section{What is measured}
 \label{sec:what}
@@ -245,50 +244,62 @@ band.}
 \end{figure*}
 
 \begin{table}[t]
-\caption{The census. Highlighted comparisons the parser reads in the AAMAS
-main track 2024--2026 and in NeurIPS/ICML 2025, on all pages and on
-main-text pages only, under one definition. Intervals are 95\% cluster
-bootstraps over papers. ``$\pm$ cell'': the paper prints a $\pm$ value in a
-table; ``anywhere'': a $\pm$ or parenthesised cell, or a figure caption
-naming a deviation, interval or band. The mainstream run count is searched
-in the whole paper for both columns.}
+\caption{The census. Highlighted comparisons in the AAMAS main track
+2024--2026 as the image-based reader lists them on every caption page and
+as the frozen parser reads them, and the parser on NeurIPS/ICML 2025 on all
+pages and on main-text pages only, under one definition. Intervals are 95\%
+cluster bootstraps over papers. ``$\pm$ cell'': the paper prints a $\pm$
+value in a table; ``anywhere'': a $\pm$ or parenthesised cell, or a figure
+caption naming a deviation, interval or band.}
 \label{tab:census}
 \footnotesize
-\setlength{\tabcolsep}{2.5pt}
-\begin{tabular}{@{}lrrr@{}}
+\setlength{\tabcolsep}{2pt}
+\begin{tabular}{@{}lrrrr@{}}
 \toprule
- & AAMAS & ML 2025 & ML main text \\
+ & AAMAS reader & AAMAS parser & ML 2025 & ML main text \\
 \midrule
-Papers & \nAPapers{} & \nMlPapers{} & \nMlPapers{} \\
-Papers with a $\pm$ cell & \nAPctPapersErr{} & \nMlPctPapersErr{} & \nMlMainPapersErr{} \\
-Papers with uncertainty anywhere & \nUaAnywhere{} & -- & -- \\
-Papers stating a run count & \nAPctPapersRuns{} & \nMlPctPapersRuns{} & -- \\
-Median stated run count & \nAMedianRuns{} & \nMlMedianRuns{} & -- \\
-Highlighted comparisons & \nAComparisons{} & \nMlComparisons{} & \nMlMainComparisons{} \\
-Median per table & \nAComparisonsPerTable{} & \nMlComparisonsPerTable{} & -- \\
-No bar on either side & \nAPctNeitherCi{} & \nMlPctNeitherCi{} & \nMlMainNeither{} \\
-Bar on one side only & \nAPctOneSide{} & -- & -- \\
-Bars but no run count & \nAPctNoN{} & -- & -- \\
-Testable from the page & \nAPctTestableCi{} & \nMlPctTestableCi{} & \nMlMainTestable{} \\
-\quad papers holding them & \nAPapersTestable{} & \nMlTestablePapers{} & \nMlMainTestablePapers{} \\
-\quad of which fail, Welch & \nAPctFailCi{} & \nMlPctFailCi{} & \nMlMainFail{} \\
-\quad fail after Holm & \nAPctFailHolmCi{} & \nMlPctFailHolmCi{} & \nMlMainFailHolm{} \\
+Papers & \nAPapers{} & \nAPapers{} & \nMlPapers{} & \nMlPapers{} \\
+Papers with a $\pm$ cell & -- & \nAPctPapersErr{} & \nMlPctPapersErr{} & \nMlMainPapersErr{} \\
+Papers with uncertainty anywhere & -- & \nUaAnywhere{} & -- & -- \\
+Papers stating a run count & -- & \nAPctPapersRuns{} & \nMlPctPapersRuns{} & -- \\
+Median stated run count & -- & \nAMedianRuns{} & \nMlMedianRuns{} & -- \\
+Highlighted comparisons & \nCzGroups{} & \nAComparisons{} & \nMlComparisons{} & \nMlMainComparisons{} \\
+Papers holding them & \nCzPapersWithGroups{} & \nClaimPapers{} & -- & -- \\
+No bar on either side & \nCzNeitherCi{} & \nAPctNeitherCi{} & \nMlPctNeitherCi{} & \nMlMainNeither{} \\
+Bar on one side only & \nCzOneSide{} & \nAPctOneSide{} & -- & -- \\
+Bars but no run count & -- & \nAPctNoN{} & -- & -- \\
+Testable from the page & \nCzTestableCi{} & \nAPctTestableCi{} & \nMlPctTestableCi{} & \nMlMainTestable{} \\
+\quad papers holding them & \nCzReaderFailPapers{} & \nAPapersTestable{} & \nMlTestablePapers{} & \nMlMainTestablePapers{} \\
+\quad of which fail, Welch & \nCzReaderFail{} & \nAPctFailCi{} & \nMlPctFailCi{} & \nMlMainFail{} \\
+\quad fail after Holm & -- & \nAPctFailHolmCi{} & \nMlPctFailHolmCi{} & \nMlMainFailHolm{} \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-Table~\ref{tab:census} and Figure~\ref{fig:census}a are the census. Of
-\nAComparisons{} comparisons in \nATablesYielding{} tables, \nAPctNeither{}
-carry no error bar on either side, \nAPctOneSide{} on one side only, and
-\nAPctNoN{} carry bars on both sides but no run count anywhere in the paper;
-\nAPctTestable{} can be tested. The bar-less share is \nAPctNeitherCi{} once
-the bootstrap resamples papers rather than comparisons, because comparisons
-come in clusters: a mean of \nAMeanCluster{} per paper and a design effect of
+Table~\ref{tab:census} and Figure~\ref{fig:census}a are the census, taken
+twice. The image-based reader (Section~\ref{sec:instrument} gives its
+protocol) read every one of the \nCzPagesDrawn{} pages on which the parser
+detected a table caption, \nCzPagesRead{} of them successfully, listed
+\nCzTables{} results tables of which \nCzTablesWithBar{} print any bar, and
+in them \nCzGroups{} rows or columns with exactly one bold cell, from
+\nCzPapersWithGroups{} papers. Of those, \nCzNeither{} carry no error bar on
+either side (\nCzNeitherCi{} resampling papers), \nCzOneSide{} a bar on one
+side only, and \nCzTestable{} can be tested (\nCzTestableCi{}). The parser,
+on the whole corpus, reads \nAComparisons{} comparisons in
+\nATablesYielding{} tables: \nAPctNeither{} bar-less (\nAPctNeitherCi{}),
+\nAPctOneSide{} one-sided, \nAPctNoN{} with bars but no run count anywhere
+in the paper, and \nAPctTestable{} testable (\nAPctTestableCi{}). The two
+instruments agree to within their intervals on both shares, which is the
+paper's answer to whether a text-layer parser can be trusted on this
+format: not on its own, but the reader confirms what it reads. Intervals
+resample papers because comparisons come in clusters, a mean of
+\nAMeanCluster{} per paper for the parser and a design effect of
 \nADesignEffect{} (intra-class correlation \nAIcc{}, effective sample
-\nANEff{}). Every interval in this paper is of that kind. The \nANTestable{}
-testable comparisons come from \nAPapersTestable{} papers, ten of which
-hold \nTopTenPapersShare{} of them, and that is the population the failure
-rates of Section~\ref{sec:support} describe.
+\nANEff{}); every interval in this paper is of that kind. The parser's
+\nANTestable{} testable comparisons come from \nAPapersTestable{} papers,
+ten of which hold \nTopTenPapersShare{} of them, and the reader's
+\nCzReaderFailN{} from \nCzReaderFailPapers{}; those are the populations
+the failure rates of Section~\ref{sec:support} describe.
 
 \paragraph{Against the mainstream.} On the main text of the 2025 NeurIPS and
 ICML sample the same parser finds \nMlMainNeither{} bar-less and
@@ -375,8 +386,11 @@ Of the \nANTestable{} testable comparisons, from \nAPapersTestable{} papers,
 (\nAPctFailCi{} over papers): Welch's $t$ on the \nWelchN{} with a run
 count, \nWelchFail{} of which fail, and a normal-limit $z$ on the \nZN{}
 standard errors and intervals that need none, \nZFail{} of which fail;
-\nAPctFailHolm{} fail after Holm's correction within the table. With the
-paper as the unit, \nPpAnyFail{} of the \nPpPapers{} papers have at least
+\nAPctFailHolm{} fail after Holm's correction within the table. From the
+reader's own values on the census, \nCzReaderFail{} of its
+\nCzReaderFailN{} testable comparisons fail, and on the \nCzShared{}
+comparisons both instruments test the verdicts agree on \nCzSharedAgree{}.
+With the paper as the unit, \nPpAnyFail{} of the \nPpPapers{} papers have at least
 one failing cell and \nPpAllFail{} nothing but; the median paper fails
 \nPpMedian{} of its testable comparisons (quartiles \nPpQOne{} and
 \nPpQThree{}), the mean of the paper rates is \nPpMean{}, and the ten
@@ -705,53 +719,45 @@ reference column, a pseudocode block read as a table.
 These are agreements between two extractors of different technology, one on
 the text layer and one on the rendered image, not precision against a human
 reference; no human labelled any item, and the box anchors the reader on the
-parser's choice of winner though not on its values.
+parser's choice of winner though not on its values. A second image-based
+reader from another vendor (named in the AI use statement) read the same
+items under the same protocol: it agrees with the parser on the whole claim
+in \nGThreeClaimFrac{} (\nGThreeClaim{}) and on the verdict in
+\nGThreeVerdictFrac{} (\nGThreeVerdict{}), finds no bar on
+\nGThreeNoBarAbsentFrac{} of the bar-less items, and agrees with the first
+reader on the bold cell in \nReadersAgreeBold{} items, the winner's mean in
+\nReadersAgreeWinner{}, the runner-up in \nReadersAgreeRunner{} and the run
+count in \nReadersAgreeRuns{}. Two readers of two vendors agreeing narrows
+the shared blind spot; it is still not a human.
 
-\paragraph{Random pages.} Precision does not bound recall. We drew one page
-holding a table caption at random from each of \nPagesPapers{} papers
-outside the reference set and had the reader list, with nothing marked, every
-results table on the page, every row or column with exactly one bold cell,
-and for each the bars and run count. \nPagesTables{} of the tables it lists
-are results tables and \nPagesTablesWithBar{} of those print any bar. The
-reader finds \nPagesReaderGroups{} single-bold groups on \nRbPagesReaderGroups{}
-of the pages (\nRbTopFiveShare{} of them on five pages, one page at the
-protocol's cap of forty), of which \nPagesReaderNeither{} are bar-less and
-\nPagesReaderTestable{} testable; the parser lists \nPagesPipeGroups{} on
-the same pages, \nPagesPipeNeither{} bar-less and \nPagesPipeTestable{}
-testable. Matching one reader group to at most one parser comparison by the
-winner's value, the parser lists \nPagesReaderFoundPct{} of the reader's
-groups (\nPagesReaderFound{} over groups, \nPagesReaderFoundPageCi{}
-resampling pages), against \nScRecall{} on \nScPages{} single-column pages
-of the mainstream sample under the same protocol; the reader lists
-\nPagesPipeFoundPct{} of the parser's groups here against \nScPrecision{}
-there, and the \nPagesPipeUnconfirmedN{} parser groups the reader does not
-list, pseudocode and property tables among them, are
-\nPagesPipeUnconfirmedNeither{} bar-less, which is the parser's precision in
-the wild pushing the bar-less share up. The loss is mostly the
-parser's rules, not its eyes: of the reader's groups, \nRbGroupsNoParserTable{}
-sit on the \nRbPagesNoParserTable{} pages where the parser detected no table,
-\nRbGroupsParserNoGroups{} on the \nRbPagesParserNoGroups{} pages where it
-detected the table and produced no comparison from it (bold that is not the
-extreme of its line, lines with more than one bold cell, a block cut the
-columns do not agree on), and \nRbGroupsBoth{} on the \nRbPagesBoth{} pages
-where both list groups. Which way the loss biases the census is not settled
-by a hundred pages. Among the reader's groups, the ones the parser also
-lists are more often bar-less than the ones it misses
-(\nPagesMatchedNeither{} against \nPagesUnmatchedNeither{}), and over every
-group the reader finds the bar-less share is \nPagesCensusRatio{} times the
-parser's on the same pages, which would put the headline at
-\nANeitherCensusScaled{} (\nANeitherCensusScaledLo{} to
-\nANeitherCensusScaledHi{} across the reader's interval); over the whole
-corpus, on the other hand, the tables the parser keeps carry a $\pm$ cell
-more often than the tables it discards (\nTbKeptWithBar{} against
-\nTbDiscardedWithBar{}). The reader finds \nPagesReaderTestable{} of its
-groups testable where the parser finds none of its own on these pages, and
-from its own values fails \nPagesReaderFail{} of the \nPagesReaderFailN{}
-it can test, too few to carry a rate. Every number in
-Sections~\ref{sec:print} and~\ref{sec:support} is therefore a statement
-about the \nAComparisons{} comparisons the parser reads, with a precision
-measured on the reference set and a coverage measured here, and the
-coverage on this format is the paper's main limitation.
+\paragraph{The census, and the parser's coverage.} Precision does not
+bound recall, and on this format recall had to be measured directly. A
+second image-based reader, from the other vendor (the same one that read the
+reference set a second time), read every page on which the parser detected a
+table caption, with nothing marked, under the protocol released with the
+paper and fixed before the reading began: every results table on the page,
+every row or column with exactly one bold cell, and for each the bars and
+the run count. That reading is the census of Section~\ref{sec:print}. Set
+against it, matching one reader group to at most one parser comparison by
+the winner's value, the parser lists \nCzReaderFoundPct{} of the reader's
+groups (\nCzReaderFoundPageCi{} resampling pages) and the reader lists
+\nCzPipeFoundPct{} of the parser's; of the parser's testable comparisons on
+those pages the reader lists \nCzPipeTestableFound{}. The groups the parser
+misses print bars less often than the groups it keeps
+(\nCzUnmatchedNeither{} bar-less against \nCzMatchedNeither{}), so its
+bar-less share is if anything the lower of the two. On the verdict the two
+agree on \nCzSharedAgree{} of the \nCzShared{} comparisons both can test;
+the reader tests \nCzReaderOnlyN{} the parser does not and fails
+\nCzReaderOnlyFails{}, the parser tests \nCzPipeOnlyN{} the reader does not
+and fails \nCzPipeOnlyFails{}. A pilot of \nPagesRead{} random caption
+pages read by the first reader before the census (\nPagesReaderGroups{}
+groups, \nPagesReaderNeither{} bar-less) gave the same picture with a wide
+interval, and on the \nCcrPages{} pages both readers read the second lists
+\nCcrSecondGroups{} groups to the first's \nCcrFirstGroups{} and matches
+\nCcrMatched{} of them (\nCcrMatchedPct{}), with bar-less shares of
+\nCcrSecondNeither{} and \nCcrFirstNeither{}: the readers disagree with
+each other about as much as either disagrees with the parser, and every
+number in this paper carries that error.
 
 \paragraph{What the funnel discards.} Of \nATablesDetected{} tables
 detected, \nATablesYielding{} yield at least one comparison. Among
@@ -812,16 +818,17 @@ second more often than the mainstream, and the test then shows how thin the
 evidence is at three or five seeds; the third is stated by fewer than one
 paper in ten, though it is the one quantity that resolves a win rate with no
 error bar at all. A reader who finds a bold cell in these proceedings can check it on the
-page somewhere between one time in three, by what the parser reads, and one
-time in ten, by what a reader lists on random pages; and when the check can
-be made, it fails about as often as it passes.
+page about one time in three, by either instrument, and when the check can
+be made it fails about as often as it passes.
 
 \section*{AI use statement}
 A vision-language model (Claude Opus 5, Anthropic) served as the image-based
-reader of Section~\ref{sec:instrument} under the released protocol; a
-language model (Gemini 3.1 Pro, Google) assigned the community labels of
-Section~\ref{sec:corpus} under the released prompt, and a second (Claude
-Sonnet 5, Anthropic) re-labelled a hundred papers to measure their
+reader of Section~\ref{sec:instrument} under the released protocol, and a
+second (Gemini 3.1 Pro, Google) read the reference set again under the same
+protocol; the latter also read the evaluation protocols of
+Section~\ref{sec:protocol} and assigned the community labels of
+Section~\ref{sec:corpus} under the released prompts, and a third model
+(Claude Sonnet 5, Anthropic) re-labelled a hundred papers to measure their
 agreement. All three are measurement instruments whose every answer is
 released, not authors. Language models assisted with code and with editing
 the text. No hypothesis or experimental design was generated by a model.

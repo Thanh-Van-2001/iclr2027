@@ -16,3 +16,9 @@ data/corpus/
 data/pilot/
 data/*.jsonl
 audits/**/*_fulltext.txt
+# rendered page images of the census kits are regenerated from data/corpus by
+# aamas/sample_all_caption_pages.py and aamas/sample_testable_pages.py (hundreds of MB)
+audits/aamas_census/img/
+audits/aamas_census_effort/img/
+audits/aamas_census_retry/img/
+audits/aamas_testable_pages/img/

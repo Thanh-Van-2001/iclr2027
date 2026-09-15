@@ -85,19 +85,23 @@ KEYS = {
 }
 
 
-def ask(vendor: dict, key: str, image_path: str, text: str, retries: int = 4) -> dict:
+def ask(vendor: dict, key: str, image_path: str, text: str, retries: int = 4, max_tokens: int = 4096, return_text: bool = False,
+        extra: dict | None = None):
+    """extra: request fields merged into the body (e.g. {"stream": True} to keep a
+    gateway from timing out on a long answer); the relay may ignore them."""
     with open(image_path, "rb") as fh:
         b64 = base64.b64encode(fh.read()).decode()
     body = {
         "model": vendor["model"],
         "temperature": 0,
         "stream": False,
-        "max_tokens": 4096,
+        "max_tokens": max_tokens,
         "messages": [{"role": "user", "content": [
             {"type": "text", "text": text},
             {"type": "image_url", "image_url": {"url": f"data:image/png;base64,{b64}"}},
         ]}],
     }
+    body.update(extra or {})
     req = urllib.request.Request(vendor["url"], data=json.dumps(body).encode(),
                                  headers={"Content-Type": "application/json", "Authorization": f"Bearer {key}"})
     last = None
@@ -119,6 +123,8 @@ def ask(vendor: dict, key: str, image_path: str, text: str, retries: int = 4) ->
                 content = out["choices"][0]["message"]["content"]
             if isinstance(content, list):
                 content = "".join(part.get("text", "") for part in content)
+            if return_text:
+                return content
             m = re.search(r"\{.*\}", content, re.S)
             return json.loads(m.group(0)) if m else {"note": content}
         except Exception as exc:  # noqa: BLE001

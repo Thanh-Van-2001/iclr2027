@@ -1,0 +1,85 @@
+You are the blind reader of a reference set for a paper
+  that audits results tables. Work
+in D:\iclr2027.
+Each item is a crop of a page around one table, rendered
+  at twice its printed size, with
+a RED BOX drawn around
+one cell (the cell under audit) and nothing else drawn.
+  Read the image yourself with the
+Read tool. Do NOT open
+audits/aamas_gold/items.json or any labels file: you must
+  read blind, from the image and
+the text files named below only.
+
+Definitions. The boxed cell's GROUP is its row or its
+  column, whichever the table marks
+winners within (exactly one
+bold cell per group). orientation = "row" if the group is
+  a row, "column" if a column.
+direction = "higher" if a
+larger value is better for that metric, "lower" otherwise.
+  The RUNNER-UP is the best (by
+direction) cell in the group
+that is NOT bold. Read means and error bars exactly as
+  printed (e.g. "84.3", "0.7");
+write "none" if a value has no
+error bar and "unclear" if you cannot make out a digit.
+  disp_type: "sd" if the caption
+or the paper says standard
+deviation, "se" for standard error, "ci" for a confidence
+  interval, "unlabelled" if
+nothing says.
+
+Per stratum record:
+- testable: results_table (y/n: is this a table of
+  experimental results); bold_ok (y/n:
+the boxed cell is bold and
+    the only bold cell in its group); orientation;
+    direction; winner_mean, winner_disp,
+runner_mean, runner_disp;
+    disp_type; n_runs and n_source
+    (caption/page/paper/none) using ONLY the sentences in
+<id>_runs.txt (the paper's
+    sentences mentioning seeds, runs, trials, times,
+    repetitions), choosing the count that
+applies to this table and
+    "none" if no sentence states one that applies;
+    rival_copied (y/n: the runner-up's row
+or column carries a citation,
+    dagger, asterisk, or wording such as "from", "reported
+    in", "results taken from",
+marking a number copied from
+  another paper; "unclear" if you cannot tell); a note.
+- no_bar: results_table; bold_ok; orientation; direction;
+  winner_mean; runner_mean;
+error_bar_present (y/n: does the
+    table print ANY dispersion for the boxed cell or its
+    runner-up, either inside the cell
+or in a separate column or
+    row, or a +/- anywhere in the table); a note saying
+    where the bar is if present.
+- no_n: results_table; n_runs (the number of
+  seeds/runs/trials/repetitions behind this
+table's numbers, or "none");
+    n_source (caption/page/paper/none); a note quoting the
+    sentence. For this stratum
+search the WHOLE paper: use Grep
+    on <id>_fulltext.txt for patterns like seed, run,
+    trial, repeat, times, average, fold,
+then Read the matching
+    region. Report the count that applies to this table;
+    "none" if the paper never states
+one.
+
+Files, for item <id> of stratum <s>: image
+D:\iclr2027\audits\aamas_gold\img\<id>_<s>.png ; run
+  sentences
+D:\iclr2027\audits\aamas_gold\img\<id>_runs.txt (testable
+  and no_n) ; full text
+D:\iclr2027\audits\aamas_gold\img\<id>_fulltext.txt (no_n
+  only).
+
+Every field is a string. Leave a field that the stratum
+  does not ask for as an empty
+string. Be exact and literal;
+this is a measurement, not an interpretation.

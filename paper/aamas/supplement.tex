@@ -34,8 +34,14 @@ on Autonomous Agents and Multiagent Systems (AAMAS 2027)}{3--7 May 2027}{Hanoi, 
   community labels, the protocol sentences, and the reference-set scores.
 \item \texttt{audits/aamas\_gold/}: the \nGTestableN{} testable and
   \nGNoBarN{} bar-less reference items, rendered, with the reader's labels.
-\item \texttt{audits/aamas\_pages/}: the \nPagesRead{} random pages with the
-  reader's end-to-end labels.
+\item \texttt{audits/aamas\_gold\_gemini/}: the second reader's labels on the
+  same reference items.
+\item \texttt{audits/aamas\_pages/}: the \nPagesRead{} random pages of the
+  pilot with the first reader's end-to-end labels.
+\item \texttt{audits/aamas\_census/}: the \nCzPagesDrawn{} caption pages of
+  the census with the second reader's labels (\nCzPagesRead{} read).
+\item \texttt{audits/aamas\_testable\_pages/}: the \nTpPages{} pages holding
+  parser-testable comparisons, read a second time for the test--retest check.
 \item \texttt{run\_all\_aamas.sh}: regenerates every number and the macros.
 \end{itemize}
 
@@ -46,31 +52,77 @@ audited cell boxed in red and the paper's sentences mentioning seeds, runs,
 trials, times or repetitions, and the following instructions verbatim. It had
 no access to the parser's output.
 
-{\footnotesize\verbatiminput{protocol_reader.txt}}
+{\scriptsize\verbatiminput{wrapped/protocol_reader.txt}}
 
 \section{The random-page protocol}
 \label{app:pages}
-{\footnotesize\verbatiminput{protocol_pages.txt}}
+The pilot: \nPagesRead{} caption pages drawn at random, read end to end by
+the first reader (Claude Opus 5) under these instructions verbatim.
+{\scriptsize\verbatiminput{wrapped/protocol_pages.txt}}
+
+\section{The census protocol}
+\label{app:census}
+Every page on which the parser detected a table caption (\nCzPagesDrawn{}
+pages from \nCzPapersDrawn{} papers) was rendered at twice its printed size
+and sent, with the paper's run-count sentences, to the second reader (Gemini
+3.1 Pro, temperature 0) under the instructions below, emitted verbatim from
+\texttt{study/read\_pages\_api.py} by the build. The protocol was fixed
+before the reading began (\texttt{git tag census-protocol-v1}). Pages whose
+answer was not valid JSON after three attempts were retried in a separate
+run. Fifteen pages, among the densest in the corpus, timed out at the relay
+on every attempt at the model's default reasoning setting (one of them
+carries a hundred single-bold groups over three tables); they were read
+with the reasoning effort set to \texttt{low}, everything else identical.
+To see what that setting changes, \nRePages{} pages the census had read at
+the default setting, drawn at random among those listing a group, were read
+again at \texttt{low}: the second read matches \nReMatchedCi{} of the first
+read's \nReGroupsFirst{} groups and lists \nReGroupsSecond{}; the bar-less
+verdict agrees on \nReNeitherAgreePct{} of the matched groups, testability on
+\nReTestableAgreePct{}, and the Welch verdict on \nReFailAgree{} of the
+\nReBothTested{} both could test; bar-less shares \nReNeitherFirst{} against
+\nReNeitherSecond{}, failure rates \nReFailFirst{} against \nReFailSecond{}
+(\texttt{out/aamas/reader\_effort.json}). \nCzPagesRead{} of the
+\nCzPagesDrawn{} pages were read. The reading is
+scored by \texttt{study/pages\_score.py}, the same script that scores the
+pilot, matching each reader group to at most one parser comparison on the
+winner's printed value.
+
+The \nTpPages{} pages holding parser-testable comparisons had been read by
+the same model in an earlier run under the same instructions; on the
+\nRtPages{} of them the census read, the second
+read matches \nRtMatchedCi{} of the first read's \nRtGroupsFirst{} groups
+(\nRtMatchedOfSecondPct{} of the second read's \nRtGroupsSecond{}), the
+bar-less verdict agrees on \nRtNeitherAgree{} of the \nRtMatched{} matched
+groups (\nRtNeitherAgreePct{}), testability on \nRtTestableAgreePct{}, and
+the Welch verdict on \nRtFailAgree{} of the \nRtBothTested{} groups both
+reads could test; the failure rates of the two reads are \nRtFailFirst{}
+and \nRtFailSecond{} (\texttt{aamas/reader\_retest.py}).
+
+On the \nCcrPages{} random pilot pages both readers read, the first lists
+\nCcrFirstGroups{} groups and the second \nCcrSecondGroups{}, \nCcrMatched{}
+of which match (\nCcrMatchedPct{} of the first's); their bar-less shares are
+\nCcrFirstNeither{} and \nCcrSecondNeither{}.
+{\scriptsize\verbatiminput{wrapped/protocol_census.txt}}
 
 \section{The community classifier}
 \label{app:classifier}
 Model: Gemini 3.1 Pro (Google), temperature 0, one call per paper with the
 title and the first page's text (up to 3500 characters). Prompt verbatim:
-{\footnotesize\verbatiminput{protocol_classify.txt}}
+{\scriptsize\verbatiminput{wrapped/protocol_classify.txt}}
 
 \section{The evaluation-protocol reader}
 \label{app:protocol-reader}
 Model: Gemini 3.1 Pro (Google), temperature 0, one call per paper with the
 first 60,000 characters of the paper's text; every answer is in
-	exttt{out/aamas/protocol\_reader.json}. Prompt verbatim:
-{\footnotesize\verbatiminput{protocol_reader_prompt.txt}}
+\texttt{out/aamas/protocol\_reader.json}. Prompt verbatim:
+{\scriptsize\verbatiminput{wrapped/protocol_reader_prompt.txt}}
 
 \section{Citation detection}
 \label{app:citations}
 A paper is counted as citing a methodology work when its text matches the
 title phrase below (case-insensitive), which catches the reference entry
 whatever the citation style:
-{\footnotesize\verbatiminput{citation_patterns.txt}}
+{\scriptsize\verbatiminput{wrapped/citation_patterns.txt}}
 
 \section{Evaluation-protocol patterns}
 \label{app:patterns}
