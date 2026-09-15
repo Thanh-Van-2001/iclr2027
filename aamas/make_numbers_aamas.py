@@ -462,6 +462,46 @@ def build(out_path: str) -> dict:
         rf_ = pg["reader_failure"]
         reg.add("pages reader fail", f"{rf_['pct_fail']}\\% [{rf_['ci'][0]}, {rf_['ci'][1]}]", provenance=prun)
         reg.add("pages reader fail n", rf_["n"], provenance=prun)
+    if os.path.exists("out/aamas/gold_set_gemini.json"):
+        g3 = _j("gold_set_gemini")
+        ra3 = _j("reader_agreement_gemini")
+        g3t = g3["testable"]
+        reg.add("g three claim", _pct_ci(g3t["fields"]["claim_and_values"]), provenance="aamas_gold_set_gemini")
+        reg.add("g three claim frac", _frac(g3t["fields"]["claim_and_values"]), provenance="aamas_gold_set_gemini")
+        v3 = g3t["verdict_2x2"]
+        reg.add("g three verdict frac", f"{v3['both_fail'] + v3['both_survive']} of {g3t['n_testable_under_both']}", provenance="aamas_gold_set_gemini")
+        reg.add("g three verdict", _pct(v3["per_item_agreement"]) if v3["per_item_agreement"] is not None else "--", provenance="aamas_gold_set_gemini")
+        reg.add("g three no bar absent frac", _frac(g3["no_bar"]["error_bar_truly_absent"]), provenance="aamas_gold_set_gemini")
+        for f, name in (("bold_ok", "bold"), ("winner_mean", "winner"), ("runner_mean", "runner"), ("n_runs", "runs")):
+            if f in ra3:
+                reg.add(f"readers agree {name}", f"{ra3[f]['agree']} of {ra3[f]['n']}", provenance="aamas_reader_agreement_gemini")
+    if os.path.exists("out/aamas/gold_set_testable_pages.json"):
+        tp = _j("gold_set_testable_pages")
+        trun = "aamas_gold_set_testable_pages"
+        reg.add("tp pages", tp["n_pages"], provenance=trun)
+        reg.add("tp reader groups", tp["reader"]["groups"], provenance=trun)
+        reg.add("tp reader neither", f"{tp['reader']['pct_neither']}\\% [{tp['reader']['ci_neither'][0]}, {tp['reader']['ci_neither'][1]}]", provenance=trun)
+        reg.add("tp reader testable", f"{tp['reader']['pct_testable']}\\% [{tp['reader']['ci_testable'][0]}, {tp['reader']['ci_testable'][1]}]", provenance=trun)
+        reg.add("tp pipe groups", tp["pipeline_same_pages"]["groups"], provenance=trun)
+        reg.add("tp pipe neither", _pct(tp["pipeline_same_pages"]["pct_neither"]), provenance=trun)
+        reg.add("tp pipe testable", _pct(tp["pipeline_same_pages"]["pct_testable"]), provenance=trun)
+        reg.add("tp reader found pct", _pct(tp["reader_groups_found_by_pipeline"]["pct"]), provenance=trun)
+        reg.add("tp pipe found pct", _pct(tp["pipeline_groups_found_by_reader"]["pct"]), provenance=trun)
+        ptf = tp["pipeline_testable_found_by_reader"]
+        reg.add("tp pipe testable found", _pct_ci(ptf) if ptf["pct"] is not None else "--", provenance=trun)
+        reg.add("tp pipe testable found frac", _frac(ptf), provenance=trun)
+        vs = tp["verdicts_same_pages"]
+        reg.add("tp shared", vs["shared"]["n"], provenance=trun)
+        reg.add("tp shared agree", vs["shared"]["agree"], provenance=trun)
+        reg.add("tp shared reader fails", vs["shared"]["reader_fails"], provenance=trun)
+        reg.add("tp shared pipe fails", vs["shared"]["pipeline_fails"], provenance=trun)
+        reg.add("tp pipe only n", vs["pipeline_only"]["n"], provenance=trun)
+        reg.add("tp pipe only fails", vs["pipeline_only"]["fails"], provenance=trun)
+        reg.add("tp reader only n", vs["reader_only"]["n"], provenance=trun)
+        reg.add("tp reader only fails", vs["reader_only"]["fails"], provenance=trun)
+        rf2 = tp["reader_failure"]
+        reg.add("tp reader fail", f"{rf2['pct_fail']}\\% [{rf2['ci'][0]}, {rf2['ci'][1]}]" if rf2["n"] else "--", provenance=trun)
+        reg.add("tp reader fail n", rf2["n"], provenance=trun)
     reg.write(out_path)
     return reg.manifest()
 

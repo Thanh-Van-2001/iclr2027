@@ -98,6 +98,7 @@ def main(argv=None) -> int:
     p_groups = p_neither = p_testable = 0
     r_found = p_found = 0
     p_unconfirmed = p_unconfirmed_neither = 0
+    p_found_testable = p_testable_total = 0
     n_tables = n_results = n_tables_bar = 0
     for iid, it in sorted(items.items()):
         pg = pages.get(iid)
@@ -167,6 +168,8 @@ def main(argv=None) -> int:
                 u_g += 1; u_n += (not g["wb"] and not g["rb"])
         r_found += len(matched_ids)
         p_found += len(used)
+        p_found_testable += sum(1 for ci in used if pc[ci].get("test"))
+        p_testable_total += sum(1 for c in pc if c.get("test"))
         page["found"] = len(matched_ids)
         # the parser's groups the reader does not list, and how many of them
         # carry no bar: the false positives' contribution to the census
@@ -235,6 +238,7 @@ def main(argv=None) -> int:
         "reader_groups_found_by_pipeline": dict(_rate(r_found, r_groups, "reader groups whose winner the pipeline also has on that page"),
                                                 page_ci=_boot(per_page, "found")),
         "pipeline_groups_found_by_reader": _rate(p_found, p_groups, "pipeline comparisons whose winner the reader also lists"),
+        "pipeline_testable_found_by_reader": _rate(p_found_testable, p_testable_total, "pipeline testable comparisons whose winner the reader also lists"),
         "pipeline_groups_unconfirmed": {"n": p_unconfirmed, "neither": p_unconfirmed_neither,
                                         "pct_neither": round(100 * p_unconfirmed_neither / p_unconfirmed, 1) if p_unconfirmed else None},
         "per_page": per_page,

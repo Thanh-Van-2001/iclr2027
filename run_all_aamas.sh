@@ -11,6 +11,13 @@ python aamas/make_all_aamas.py
 python study/gold_set.py score --items audits/aamas_gold/items.json --labels audits/aamas_gold/labels.csv --exclude-unboxed --out out/aamas/gold_set.json > /dev/null
 python study/pages_score.py --items audits/aamas_pages/items.json --labels audits/aamas_pages/labels.json \
     --analysis out/aamas/analysis.json --out out/aamas/gold_set_pages.json > /dev/null
+if [ -f audits/aamas_gold_gemini/labels.csv ]; then
+python study/gold_set.py score --items audits/aamas_gold/items.json --labels audits/aamas_gold_gemini/labels.csv --exclude-unboxed --out out/aamas/gold_set_gemini.json > /dev/null
+python study/gold_set.py agree --a audits/aamas_gold/labels.csv --b audits/aamas_gold_gemini/labels.csv > out/aamas/reader_agreement_gemini.json
+fi
+if [ -f audits/aamas_testable_pages/labels.json ]; then
+python study/pages_score.py --items audits/aamas_testable_pages/items.json --labels audits/aamas_testable_pages/labels.json     --analysis out/aamas/analysis.json --out out/aamas/gold_set_testable_pages.json > /dev/null
+fi
 python aamas/figures.py
 python aamas/supplement_tables.py
 python aamas/make_numbers_aamas.py
