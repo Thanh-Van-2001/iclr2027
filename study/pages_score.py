@@ -63,6 +63,25 @@ def _eq(a, b):
     return a is not None and b is not None and abs(float(a) - float(b)) <= 1e-9
 
 
+def _boot_papers(per_page, key, reps=2000, seed=0):
+    """The same interval resampling papers rather than pages, for a census
+    that reads several pages of one paper."""
+    rng = random.Random(seed)
+    by = {}
+    for p in per_page:
+        if p["n_groups"]:
+            by.setdefault(p.get("paper"), []).append(p)
+    papers = list(by.values())
+    vals = []
+    for _ in range(reps):
+        draw = [papers[rng.randrange(len(papers))] for _ in papers]
+        num = sum(p[key] for pp in draw for p in pp)
+        den = sum(p["n_groups"] for pp in draw for p in pp)
+        vals.append(100 * num / den if den else 0)
+    vals.sort()
+    return [round(vals[int(0.025 * reps)], 1), round(vals[int(0.975 * reps) - 1], 1)]
+
+
 def _boot(per_page, key, reps=2000, seed=0):
     rng = random.Random(seed)
     pages = [p for p in per_page if p["n_groups"]]
@@ -139,7 +158,7 @@ def main(argv=None) -> int:
         for c in pc:
             if c.get("test") and not any(_eq(g["w"], c["winner"]) and g["fail"] is not None for g in groups):
                 pipe_only.append(c["test"]["p"] >= 0.05)
-        page = {"id": iid, "n_groups": len(groups),
+        page = {"id": iid, "paper": it["paper"], "n_groups": len(groups),
                 "neither": sum(1 for g in groups if not g["wb"] and not g["rb"]),
                 "testable": sum(1 for g in groups if g["testable"]),
                 "pipe_groups": len(pc),
@@ -231,7 +250,10 @@ def main(argv=None) -> int:
                    "ci_neither": _boot(per_page, "neither"),
                    "pct_one_side": round(100 * r_onebar / r_groups, 1) if r_groups else None,
                    "pct_testable": round(100 * r_testable / r_groups, 1) if r_groups else None,
-                   "ci_testable": _boot(per_page, "testable")},
+                   "ci_testable": _boot(per_page, "testable"),
+                   "ci_neither_papers": _boot_papers(per_page, "neither"),
+                   "ci_testable_papers": _boot_papers(per_page, "testable"),
+                   "papers_with_groups": len({p["paper"] for p in per_page if p["n_groups"]})},
         "pipeline_same_pages": {"groups": p_groups,
                                 "pct_neither": round(100 * p_neither / p_groups, 1) if p_groups else None,
                                 "pct_testable": round(100 * p_testable / p_groups, 1) if p_groups else None},
