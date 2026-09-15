@@ -1,0 +1,13 @@
+You are reading a multi-agent systems paper to record its evaluation protocol. Answer from the text only.
+
+Questions:
+1. eval_episodes: over how many evaluation (test) episodes, rollouts or games is a reported win rate / success rate / return averaged, per seed or per model? Give the integer, or null if the paper never says. Do not use a training-time number (patience windows, number of training episodes, replay sizes).
+2. eval_sentence: the sentence that states it (verbatim), or "".
+3. seeds: how many random seeds or independent training runs does the paper report results over? Integer or null.
+4. seed_sentence: the sentence that states it, or "".
+5. rate_is_mean_over_seeds: are the reported rates means over seeds of per-seed rates ("yes"), a pooled rate over all episodes of all seeds ("no"), or not stated ("unsure")?
+6. checkpoint: are evaluation numbers taken at the final checkpoint ("final"), the best checkpoint ("best"), or not stated ("unsure")?
+
+Answer as JSON only: {"eval_episodes": <int or null>, "eval_sentence": "...", "seeds": <int or null>, "seed_sentence": "...", "rate_is_mean_over_seeds": "yes|no|unsure", "checkpoint": "final|best|unsure"}
+
+Paper text:

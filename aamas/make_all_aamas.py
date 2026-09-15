@@ -516,7 +516,11 @@ def single_column_reference(path: str = "out/gold_set_pages.json") -> dict:
     return {"recall_pct": d["reader_groups_found_by_pipeline"]["pct"],
             "recall_page_ci": d["reader_groups_found_by_pipeline"].get("page_ci"),
             "precision_pct": d["pipeline_groups_found_by_reader"]["pct"],
-            "pages": d["n_pages"], "reader_groups": d["reader"]["groups"]}
+            "pages": d["n_pages"], "reader_groups": d["reader"]["groups"],
+            "reader_pct_neither": d["reader"]["pct_neither"], "reader_ci_neither": d["reader"]["ci_neither"],
+            "reader_pct_testable": d["reader"]["pct_testable"], "reader_ci_testable": d["reader"]["ci_testable"],
+            "pipe_pct_neither": d["pipeline_same_pages"]["pct_neither"],
+            "pipe_pct_testable": d["pipeline_same_pages"]["pct_testable"]}
 
 
 def duplicate_table_records(records: list) -> dict:

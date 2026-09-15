@@ -15,3 +15,5 @@ python aamas/figures.py
 python aamas/supplement_tables.py
 python aamas/make_numbers_aamas.py
 python aamas/check_aamas.py "$@"
+cd paper/aamas && latexmk -pdf -interaction=nonstopmode -halt-on-error supplement.tex > build_supp.log 2>&1 && cd ../..
+python aamas/make_supplementary.py

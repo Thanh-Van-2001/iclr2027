@@ -58,6 +58,20 @@ Model: Gemini 3.1 Pro (Google), temperature 0, one call per paper with the
 title and the first page's text (up to 3500 characters). Prompt verbatim:
 {\footnotesize\verbatiminput{protocol_classify.txt}}
 
+\section{The evaluation-protocol reader}
+\label{app:protocol-reader}
+Model: Gemini 3.1 Pro (Google), temperature 0, one call per paper with the
+first 60,000 characters of the paper's text; every answer is in
+	exttt{out/aamas/protocol\_reader.json}. Prompt verbatim:
+{\footnotesize\verbatiminput{protocol_reader_prompt.txt}}
+
+\section{Citation detection}
+\label{app:citations}
+A paper is counted as citing a methodology work when its text matches the
+title phrase below (case-insensitive), which catches the reference entry
+whatever the citation style:
+{\footnotesize\verbatiminput{citation_patterns.txt}}
+
 \section{Evaluation-protocol patterns}
 \label{app:patterns}
 The sentences that state an evaluation episode count or a seed count were

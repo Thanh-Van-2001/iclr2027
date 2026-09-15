@@ -301,8 +301,14 @@ game-theoretic and social-choice papers, \nCGameTheorySocialChoicePapers{}
 of the \nAPapers{}, rarely mark a winner in a table at all, and the
 LLM-agent papers that do mark one print bars as seldom as the mainstream.
 The mainstream sample is dominated by leaderboard tables of benchmark
-scores, where bars are rarest. Section~\ref{sec:instrument} adds the caveat that the parser's
-coverage differs between the two formats.
+scores, where bars are rarest. The parser's coverage differs between the
+two formats (Section~\ref{sec:instrument}), so the comparison that does not
+depend on it is the one the image-based reader makes on random pages with
+nothing marked: on \nPagesRead{} AAMAS pages the reader's single-bold
+groups are \nPagesReaderNeither{} bar-less and \nPagesReaderTestable{}
+testable, on \nScPages{} mainstream pages under the same protocol
+\nScReaderNeither{} and \nScReaderTestable{}. The direction survives; the
+AAMAS interval is wide because few of its pages carry such groups.
 
 \paragraph{By year.} Bar-less shares of \nANeitherTwentyFourCi{},
 \nANeitherTwentyFiveCi{} and \nANeitherTwentySixCi{} in 2024, 2025 and 2026,

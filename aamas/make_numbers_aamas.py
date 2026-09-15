@@ -313,6 +313,11 @@ def build(out_path: str) -> dict:
         reg.add("sc recall", _pct(sc["recall_pct"]), provenance="gold_set_pages")
         reg.add("sc precision", _pct(sc["precision_pct"]), provenance="gold_set_pages")
         reg.add("sc pages", sc["pages"], provenance="gold_set_pages")
+        reg.add("sc reader groups", sc["reader_groups"], provenance="gold_set_pages")
+        reg.add("sc reader neither", f"{sc['reader_pct_neither']}\\% [{sc['reader_ci_neither'][0]}, {sc['reader_ci_neither'][1]}]", provenance="gold_set_pages")
+        reg.add("sc reader testable", f"{sc['reader_pct_testable']}\\% [{sc['reader_ci_testable'][0]}, {sc['reader_ci_testable'][1]}]", provenance="gold_set_pages")
+        reg.add("sc pipe neither", _pct(sc["pipe_pct_neither"]), provenance="gold_set_pages")
+        reg.add("sc pipe testable", _pct(sc["pipe_pct_testable"]), provenance="gold_set_pages")
     pr_ = ex["protocol_resolution"]
     reg.add("res below wald pct", _pct(pr_["pct_below_wald"]) if pr_["pct_below_wald"] is not None else "--", provenance=run)
     # the copied-rival bound, as in the concurrent study: removing every
