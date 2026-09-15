@@ -1,0 +1,183 @@
+id,stratum,results_table,bold_ok,orientation,direction,winner_mean,winner_disp,runner_mean,runner_disp,disp_type,n_runs,n_source,rival_copied,error_bar_present,note
+001,testable,y,y,row,higher,3558,40,3533,39,unlabelled,3,caption,n,,Boxed cell is row maximum.
+002,testable,y,y,column,lower,573.40,5.04,579.85,9.08,sd,3,caption,n,,Valid bold winner in column.
+003,testable,y,y,column,higher,0.8763,0.0053,0.8332,0.0064,unlabelled,none,none,n,,Boxed cell wins KeyDoor column.
+004,testable,y,y,row,higher,857.0,0.8,778.0,12.1,se,none,none,n,,Valid row winner.
+005,testable,y,y,row,higher,0.75,0.07,0.63,0.17,unlabelled,none,none,n,,Valid row winner.
+006,testable,y,y,row,lower,74.57,2.13,80.94,2.57,unlabelled,100,caption,n,,Valid winner in row.
+007,testable,y,y,row,higher,1659.10,130.30,1412.36,182.96,unlabelled,none,none,n,,"The caption states that the best results are highlighted in blue, which also appear to be bolded."
+008,testable,y,y,row,higher,101.3,2.35,98.2,1.33,ci,5,caption,n,,Valid row winner.
+009,testable,y,y,column,higher,60.12,0.12,58.42,0.13,unlabelled,none,none,n,,Valid column winner.
+010,testable,y,y,column,higher,25.47,0.47,20.51,0.48,se,30,caption,n,,The runner-up is the Myopic policy.
+011,testable,y,y,row,higher,106.6,0.6,106.1,0.7,unlabelled,5,caption,n,,"The boxed cell is the baseline MOBILE performance, which is higher than the MOBILE (w/ ours) performance in this specific case."
+012,testable,y,y,column,higher,94.4,6.9,90.5,1.2,se,3,paper,n,,Boxed cell wins column.
+013,testable,y,y,column,higher,39.54,3.74,12.25,3.39,se,30,caption,n,,"The red box is slightly misaligned and cuts off the dispersion, but the intended cell is clear."
+014,testable,y,y,column,higher,224.9,7.1,148.7,9.1,se,3,caption,n,,Valid winner.
+015,testable,y,y,column,higher,36.1,10.7,24.6,10.6,unlabelled,100,paper,n,,Red box missing; evaluated first bold cell.
+016,testable,y,y,row,higher,19.38,0.98,19.07,0.73,unlabelled,none,none,n,,The table uses blue text instead of bolding to indicate the best results.
+017,testable,y,y,row,higher,5749.2,599.0,4865.2,710.8,unlabelled,5,caption,n,,Boxed cell is the clear row winner.
+018,testable,y,y,row,higher,96.93,0.27,94.92,0.85,sd,5,paper,n,,Boxed cell is the clear row winner.
+019,testable,y,y,column,higher,29.9,13.5,25.1,12.1,unlabelled,100,paper,n,,Boxed cell correctly identifies the column maximum.
+020,testable,y,y,row,higher,6772.0,649.5,5353.7,869.6,unlabelled,5,caption,n,,Clear win.
+021,testable,y,y,row,higher,29243.837,12.819,116.803,33.556,sd,3,caption,n,,Valid row winner.
+022,testable,y,y,row,higher,3355.917,12.819,-417.833,228.319,sd,3,caption,n,,Boxed cell is bolded correctly.
+023,testable,y,y,row,higher,30,13,29,11,sd,5,caption,n,,Valid winner.
+024,testable,y,y,row,higher,1990.4,288.6,1362.4,522.9,unlabelled,5,paper,y,,Caption says 'standard'.
+025,testable,y,n,column,higher,989.39,0.64,983.60,0.77,unlabelled,none,none,n,,Multiple bold cells in column.
+026,testable,y,y,row,higher,818,32,812,20,unlabelled,3,page,n,,Valid row winner.
+027,testable,y,y,row,higher,50.4,1.3,48.4,1.7,sd,5,paper,n,,Valid winner.
+028,testable,y,y,row,higher,95.69,6.31,88.03,4.15,sd,5,paper,n,,Valid winner in row.
+029,testable,,,,,,,,,,,,,,"```json
+{
+  ""results_table"": ""y"",
+  ""bold_ok"": ""y"",
+  ""orientation"": ""row"",
+  ""direction"": ""higher"",
+  ""winner_mean"": ""8.92"",
+  ""winner_disp"": ""0.43"",
+  ""runner_mean"": ""7.01"",
+  ""runner_disp"": ""0.21"",
+  ""disp_type"": ""unlabelled"",
+  ""n_runs"": ""5"",
+  ""n_source"": ""paper"",
+  ""rival_copied"": ""n"",
+  ""note"": ""The red box is drawn slightly high, cutting into the row above, but targets the cell for MMM2"
+030,testable,y,y,column,higher,35.65,0.15,34.91,0.18,unlabelled,none,none,n,,Boxed cell is column winner; runner-up is CS+RQPO.
+031,testable,y,y,column,lower,626.70,7.35,732.38,0.00,sd,3,paper,y,,Valid winner.
+032,testable,y,y,row,higher,3.400,0.843,1.444,1.423,unlabelled,10,paper,n,,Boxed cell is the row winner.
+033,testable,y,y,row,higher,181.0,14.0,110.4,44.3,unlabelled,3,paper,n,,The boxed cell is the bold winner in its row.
+034,testable,y,y,column,higher,0.35,0.01,0.34,0.01,sd,3,caption,n,,Boxed cell is the column block winner.
+035,testable,y,y,row,higher,2.145,0.129,1.440,0.511,unlabelled,10,paper,n,,Valid row winner.
+036,testable,y,y,column,higher,29.9,13.5,25.1,12.1,unlabelled,100,paper,n,,Boxed cell correctly identifies the column maximum.
+037,testable,y,y,row,higher,31,19,29,27,sd,3,paper,n,,Boxed cell is the row winner.
+038,testable,y,y,row,higher,11.1,2.6,10.6,1.49,unlabelled,5,paper,n,,The boxed cell is the only bold cell in its row and represents the highest mean.
+039,testable,y,y,row,higher,1611.6,288.0,1584.6,361.4,unlabelled,5,caption,n,,Valid row winner.
+040,testable,y,n,column,higher,0.47,0.06,0.55,0.50,unlabelled,10,paper,n,,Multiple bold cells; Expert higher.
+041,testable,,,,,,,,,,,,,,"```json
+{
+  ""results_table"": ""y"",
+  ""bold_ok"": ""y"",
+  ""orientation"": ""column"",
+  ""direction"": ""higher"",
+  ""winner_mean"": ""-5.1"",
+  ""winner_disp"": ""0.5"",
+  ""runner_mean"": ""-5.1"",
+  ""runner_disp"": ""1.5"",
+  ""disp_type"": ""se"",
+  ""n_runs"": 8,
+  ""n_source"": ""caption"",
+  ""rival_copied"": ""n"",
+  ""note"": ""The caption states that methods within the S.E.M of the best are bolded, but several non-bold cells have the same mean"
+042,testable,y,y,row,lower,0.219,0.026,0.225,0.026,unlabelled,50,paper,n,,Boxed cell is row winner.
+043,testable,y,y,row,higher,93.7,1.0,8.8,0.9,sd,5,caption,n,,Valid winner.
+044,testable,y,y,row,higher,0.889,0.092,0.883,0.061,sd,10,paper,n,,The boxed cell is correctly bolded as the maximum value in its row.
+045,testable,y,y,column,higher,66.0,6.8,65.1,16.0,se,3,page,n,,Valid winner in column.
+046,testable,y,y,row,higher,557,244,460,95,sd,5,page,n,,Boxed cell is row winner.
+047,testable,y,y,row,higher,147.43,1.87,44.63,0.95,sd,5,paper,n,,"The runner-up is selected as the highest non-bold value in the row, even though it does not satisfy the cost constraint used for selecting the winner."
+048,testable,y,y,column,higher,0.99,0.01,0.86,0.01,unlabelled,128,paper,n,,Boxed cell is the column winner.
+049,testable,y,y,row,higher,0.729,0.104,0.300,0.133,sd,10,paper,n,,The runner-up is the Overlap method.
+050,testable,y,y,column,higher,56.33,3.10,17.75,1.77,se,30,caption,n,,The boxed cell is the correctly bolded maximum value in its column.
+051,testable,y,y,column,higher,195.7,6.2,172.2,15.4,se,3,caption,n,,Valid winner in column.
+052,testable,y,y,row,higher,17.81,1.14,16.02,0.97,sd,5,caption,n,,The boxed cell is correctly bolded as the maximum value in its row.
+053,testable,y,y,row,higher,3274.5,429.5,2594.3,315.6,unlabelled,5,caption,n,,Row winner is correct.
+054,testable,y,y,column,higher,0.8904,0.0044,0.8447,0.0172,unlabelled,none,none,n,,Valid table with unlabelled dispersion.
+055,testable,y,y,column,higher,0.70,0.02,0.67,0.01,sd,128,paper,n,,Boxed cell wins column.
+056,testable,y,y,row,higher,4656.6,145.1,3889.7,81.6,unlabelled,5,paper,y,,Valid winner.
+057,testable,y,y,row,higher,7939,851,1103,216,sd,3,caption,n,,Recurrent SAC uses 3 seeds.
+058,testable,y,y,row,higher,6130.8,856.4,5419.6,682.0,unlabelled,5,caption,n,,Boxed cell wins row.
+059,testable,y,y,row,higher,860,47,837,107,unlabelled,5,paper,n,,Clear row winner.
+060,testable,y,y,column,higher,-88.44,2.84,-135.99,1.32,unlabelled,none,none,n,,Valid bold winner in column.
+061,testable,y,y,row,higher,6.85,0.17,4.78,0.31,unlabelled,5,paper,n,,The number of runs is inferred from the fragmented sentence 'Every algorithm is evaluated for 32 episodes and 5' combined with 'random seeds'.
+062,testable,y,n,row,higher,233,32,184,18,unlabelled,5,caption,n,,Row has multiple bold cells.
+063,testable,y,y,column,higher,1677,697,1254,710,sd,10,caption,n,,Boxed cell is the clear winner.
+064,testable,y,y,column,higher,29.9,13.5,25.1,12.1,unlabelled,100,paper,n,,Boxed cell correctly identifies the column maximum.
+065,testable,y,n,row,higher,2062.3,3.8,2056.9,5.9,unlabelled,5,paper,y,,Highest value unbolded.
+066,testable,y,y,row,higher,0.877,0.051,0.727,0.043,sd,10,paper,n,,The boxed cell is correctly bolded as the maximum value in its row.
+067,testable,y,y,row,higher,14.5,9.6,13.1,7.9,se,5,paper,n,,Boxed cell is row winner.
+068,testable,y,y,row,higher,91.2,6,83.4,4,sd,5,caption,n,,"The boxed cell is the clear winner in its row, with the runner-up being 83.4±4."
+069,testable,y,y,column,higher,-0.1,0.02,-0.6,0.14,sd,none,none,n,,The red box highlights the meta-agent reward for SHAPER; the runner-up is M-FOS.
+070,testable,y,y,column,higher,0.38,0.03,0.34,0.04,se,none,none,n,,Boxed cell is the correct column winner.
+071,testable,y,y,row,higher,17.14,1.51,16.35,0.91,unlabelled,none,none,n,,The winning cells are highlighted in blue and bolded.
+072,testable,y,y,row,higher,101.0,16.8,98.3,49.7,unlabelled,5,caption,n,,Boxed cell is bold.
+073,testable,y,y,row,higher,628.3,16.6,615.8,12.7,se,none,none,n,,Valid table; no run count found.
+074,testable,y,y,column,higher,17.29,0.76,16.13,1.21,sd,5,caption,n,,The boxed cell is the only bold cell in its column and represents the highest mean.
+075,testable,y,y,row,higher,0.52,0.07,0.31,0.00,se,3,paper,n,,The runner-up is IBC.
+076,testable,y,y,row,higher,40.8,2.3,39.9,0.1,unlabelled,5,caption,y,,Valid winner.
+077,testable,y,y,row,higher,65.5,2.3,62.5,3.8,sd,5,paper,n,,Boxed cell is the clear winner.
+078,testable,y,y,row,higher,1.700,0.483,0.634,0.437,unlabelled,10,paper,n,,Valid row winner.
+079,testable,y,y,column,higher,28.7,7.8,22.5,9.4,unlabelled,5,paper,y,,Valid winner.
+080,testable,y,y,column,higher,36.1,10.7,24.6,10.6,unlabelled,100,paper,n,,Red box missing; evaluated first bold cell.
+081,testable,y,y,row,higher,4422.8,199.3,2855.0,242.2,unlabelled,5,paper,y,,"Caption says 'standard', omitting deviation/error."
+082,testable,y,y,row,higher,3336.27,11.30,3270.54,297.76,sd,5,page,n,,Runner-up ignores cost constraint.
+083,testable,y,y,row,higher,976,6,974,6,unlabelled,5,paper,n,,Boxed cell is the clear row winner.
+084,testable,y,y,column,higher,0.67,0.01,0.53,0.00,sd,3,page,y,,Valid winner in column.
+085,testable,y,y,row,higher,9.46,0.07,6.82,0.34,unlabelled,5,paper,n,,The number of runs is inferred to be 5 from the fragmented sentences 'Every algorithm is evaluated for 32 episodes and 5' and 'random seeds'.
+086,testable,y,y,row,higher,1.336,0.240,0.874,0.605,unlabelled,10,paper,n,,Valid row winner.
+087,testable,y,y,column,higher,0.73,0.01,0.68,0.00,sd,3,page,y,,Valid winner.
+088,testable,y,y,row,higher,102.7,0.68,101.8,4.63,unlabelled,5,caption,n,,Boxed cell wins row comparing method variants.
+089,testable,,,,,,,,,,,,,,"```json
+{
+  ""results_table"": ""y"",
+  ""bold_ok"": ""y"",
+  ""orientation"": ""column"",
+  ""direction"": ""higher"",
+  ""winner_mean"": ""-5.1"",
+  ""winner_disp"": ""0.5"",
+  ""runner_mean"": ""-5.1"",
+  ""runner_disp"": ""1.5"",
+  ""disp_type"": ""se"",
+  ""n_runs"": 8,
+  ""n_source"": ""caption"",
+  ""rival_copied"": ""n"",
+  ""note"": ""The caption states that methods within the S.E.M of the best are bolded, but several non-bold cells have the same mean"
+090,testable,y,y,row,lower,0.0001,0.0001,0.0009,0.0006,unlabelled,50,paper,n,,Lowest value in row wins.
+091,testable,y,y,row,lower,0.001,0.001,0.045,0.005,sd,3,caption,n,,Boxed cell is row winner.
+092,testable,y,y,row,higher,48,19,47,12,sd,5,page,n,,Boxed cell wins row.
+093,testable,y,n,row,higher,0.73,0.10,0.68,0.10,unlabelled,none,none,n,,Row has multiple bold cells.
+094,testable,y,y,row,lower,0.112,0.080,0.138,0.090,unlabelled,50,paper,n,,Lower values are better.
+095,testable,y,y,row,higher,675,3,619,24,unlabelled,3,paper,y,,Winner correctly bolded.
+096,testable,y,y,row,higher,8.37,0.07,6.82,0.34,unlabelled,5,paper,n,,"The boxed cell is the bold winner in its row, with higher values indicating better performance."
+097,testable,y,y,row,higher,4.065,0.773,3.483,0.894,unlabelled,10,paper,n,,Valid row winner.
+098,testable,y,y,column,lower,24.59,1.5,41.05,0.1,unlabelled,5,paper,n,,Valid bolding for column winner.
+099,testable,y,y,row,higher,0.824,0.068,0.745,0.088,sd,10,paper,n,,The boxed cell is the bold winner in the Average row for the Known AD Scenario.
+100,testable,y,y,row,higher,8.25,0.37,8.15,0.63,sd,5,caption,n,,The boxed cell is the correctly bolded maximum in its row.
+101,no_bar,y,y,column,higher,60.12,,53.53,,,,,,n,No error bars shown.
+102,no_bar,y,n,row,higher,60.2,,96.9,,,,,,n,No error bars shown.
+103,no_bar,y,n,column,higher,71.8,,66.1,,,,,,n,No error bars shown.
+104,no_bar,y,y,column,lower,1.00,,1.62,,,,,,n,No error bars shown.
+105,no_bar,y,y,row,higher,288.56,,273.34,,,,,,n,No error bars present.
+106,no_bar,y,n,column,higher,71.8,,66.1,,,,,,n,No error bars shown.
+107,no_bar,y,y,column,higher,0.950,,0.833,,,,,,n,No error bars shown.
+108,no_bar,n,n,n/a,n/a,n/a,,n/a,,,,,,n,Boxed cell is a line number in pseudocode.
+109,no_bar,y,y,column,higher,3.00,,2.26,,,,,,n,No error bars shown.
+110,no_bar,y,y,column,higher,72.27,,70.73,,,,,,n,No error bars are shown.
+111,no_bar,y,y,column,higher,30.77,,28.20,,,,,,n,No error bars shown.
+112,no_bar,y,y,column,higher,62.50,,0.00,,,,,,n,No error bars for this metric.
+113,no_bar,y,y,column,higher,98.2,,96.6,,,,,,n,No error bars present.
+114,no_bar,y,y,column,higher,68.4,,61.6,,,,,,n,No error bars.
+115,no_bar,y,y,column,lower,1.32,,1.38,,,,,,n,No error bars shown.
+116,no_bar,y,y,column,higher,0.88,,0.68,,,,,,n,No error bars shown.
+117,no_bar,y,y,column,lower,6.52,,6.55,,,,,,n,No error bars present.
+118,no_bar,y,y,column,higher,87.3,,83.7,,,,,,n,No error bars shown.
+119,no_bar,y,y,column,lower,0.31,,0.40,,,,,,n,No error bars shown.
+120,no_bar,y,n,column,higher,4620.00,,4550.00,,,,,,n,None present.
+121,no_bar,y,y,column,lower,< 0.001,,0.06,,,,,,n,No error bars shown.
+122,no_bar,y,y,column,lower,0.17,,0.18,,,,,,n,No error bars shown.
+123,no_bar,y,n,row,higher,82.65,,82.43,,,,,,n,None shown.
+124,no_bar,y,y,column,higher,90.3,,85.7,,,,,,n,No error bars shown.
+125,no_bar,y,y,row,higher,93.4,,84.0,,,,,,n,No error bars shown.
+126,no_bar,n,n,n/a,n/a,n/a,,n/a,,,,,,n,Box is in an algorithm block.
+127,no_bar,y,y,column,higher,31.12,,30.40,,,,,,n,No error bars shown.
+128,no_bar,y,y,column,higher,0.60,,0.42,,,,,,n,None.
+129,no_bar,y,y,column,lower,9.38,,9.42,,,,,,n,"Parentheses show times, not dispersion."
+130,no_bar,y,y,column,lower,0.096,,6.675,,,,,,n,No error bars shown.
+131,no_bar,y,y,row,higher,143.84,,135.22,,,,,,n,No error bars present.
+132,no_bar,y,y,column,higher,2.10,,1.54,,,,,,n,No error bars are present.
+133,no_bar,y,y,column,higher,8.54,,8.23,,,,,,n,No error bars shown.
+134,no_bar,y,y,column,lower,8.57,,8.63,,,,,,n,"Parentheses show times, not dispersion."
+135,no_bar,y,y,row,lower,0.6,,1.0,,,,,,n,No error bars shown.
+136,no_bar,y,y,row,lower,0.18,,0.99,,,,,,n,No error bars present.
+137,no_bar,y,y,row,higher,0.84,,0.75,,,,,,n,No error bars shown.
+138,no_bar,n,n,n/a,n/a,n/a,,n/a,,,,,,n,Boxed cell is in pseudocode.
+139,no_bar,y,n,column,higher,71.8,,66.1,,,,,,n,No error bars shown.
+140,no_bar,y,y,column,higher,29.34,,22.49,,,,,,n,No error bars shown.
