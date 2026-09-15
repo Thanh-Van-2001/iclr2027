@@ -546,6 +546,46 @@ def build(out_path: str) -> dict:
         rf2 = tp["reader_failure"]
         reg.add("tp reader fail", f"{rf2['pct_fail']}\\% [{rf2['ci'][0]}, {rf2['ci'][1]}]" if rf2["n"] else "--", provenance=trun)
         reg.add("tp reader fail n", rf2["n"], provenance=trun)
+    if os.path.exists("out/aamas/gold_set_census.json"):
+        cz = _j("gold_set_census")
+        crun = "aamas_gold_set_census"
+        items_c = json.load(open("audits/aamas_census/items.json", encoding="utf-8"))
+        reg.add("cz pages drawn", len(items_c), provenance=crun)
+        reg.add("cz papers drawn", len({it["paper"] for it in items_c}), provenance=crun)
+        reg.add("cz pages read", cz["n_pages"], provenance=crun)
+        reg.add("cz tables", cz["n_results_tables"], provenance=crun)
+        reg.add("cz tables with bar", _pct(cz["pct_results_tables_with_any_bar"]), provenance=crun)
+        rz = cz["reader"]
+        reg.add("cz groups", rz["groups"], provenance=crun)
+        reg.add("cz papers with groups", rz["papers_with_groups"], provenance=crun)
+        reg.add("cz neither", _pct(rz["pct_neither"]), provenance=crun)
+        reg.add("cz neither ci", f"{rz['pct_neither']}\\% [{rz['ci_neither_papers'][0]}, {rz['ci_neither_papers'][1]}]", provenance=crun)
+        reg.add("cz one side", _pct(rz["pct_one_side"]), provenance=crun)
+        reg.add("cz testable", _pct(rz["pct_testable"]), provenance=crun)
+        reg.add("cz testable ci", f"{rz['pct_testable']}\\% [{rz['ci_testable_papers'][0]}, {rz['ci_testable_papers'][1]}]", provenance=crun)
+        pz = cz["pipeline_same_pages"]
+        reg.add("cz pipe groups", pz["groups"], provenance=crun)
+        reg.add("cz pipe neither", _pct(pz["pct_neither"]), provenance=crun)
+        reg.add("cz pipe testable", _pct(pz["pct_testable"]), provenance=crun)
+        reg.add("cz reader found pct", _pct(cz["reader_groups_found_by_pipeline"]["pct"]), provenance=crun)
+        reg.add("cz reader found page ci", f"[{cz['reader_groups_found_by_pipeline']['page_ci'][0]}, {cz['reader_groups_found_by_pipeline']['page_ci'][1]}]", provenance=crun)
+        reg.add("cz pipe found pct", _pct(cz["pipeline_groups_found_by_reader"]["pct"]), provenance=crun)
+        reg.add("cz pipe testable found", _pct_ci(cz["pipeline_testable_found_by_reader"]) if cz["pipeline_testable_found_by_reader"]["pct"] is not None else "--", provenance=crun)
+        reg.add("cz matched neither", _pct(cz["reader_groups_matched"]["pct_neither"]), provenance=crun)
+        reg.add("cz unmatched neither", _pct(cz["reader_groups_unmatched"]["pct_neither"]), provenance=crun)
+        fz = cz["reader_failure"]
+        reg.add("cz reader fail", f"{fz['pct_fail']}\\% [{fz['ci'][0]}, {fz['ci'][1]}]" if fz["n"] else "--", provenance=crun)
+        reg.add("cz reader fail n", fz["n"], provenance=crun)
+        reg.add("cz reader fail papers", fz["n_papers"], provenance=crun)
+        vz = cz["verdicts_same_pages"]
+        reg.add("cz shared", vz["shared"]["n"], provenance=crun)
+        reg.add("cz shared agree", vz["shared"]["agree"], provenance=crun)
+        reg.add("cz shared reader fails", vz["shared"]["reader_fails"], provenance=crun)
+        reg.add("cz shared pipe fails", vz["shared"]["pipeline_fails"], provenance=crun)
+        reg.add("cz reader only n", vz["reader_only"]["n"], provenance=crun)
+        reg.add("cz reader only fails", vz["reader_only"]["fails"], provenance=crun)
+        reg.add("cz pipe only n", vz["pipeline_only"]["n"], provenance=crun)
+        reg.add("cz pipe only fails", vz["pipeline_only"]["fails"], provenance=crun)
     reg.write(out_path)
     return reg.manifest()
 

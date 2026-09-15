@@ -18,6 +18,10 @@ fi
 if [ -f audits/aamas_testable_pages/labels.json ]; then
 python study/pages_score.py --items audits/aamas_testable_pages/items.json --labels audits/aamas_testable_pages/labels.json     --analysis out/aamas/analysis.json --out out/aamas/gold_set_testable_pages.json > /dev/null
 fi
+if ls audits/aamas_census/labels_shard*.json > /dev/null 2>&1; then
+python aamas/merge_census.py > /dev/null
+python study/pages_score.py --items audits/aamas_census/items.json --labels audits/aamas_census/labels.json     --analysis out/aamas/analysis.json --out out/aamas/gold_set_census.json > /dev/null
+fi
 python aamas/figures.py
 python aamas/supplement_tables.py
 python aamas/make_numbers_aamas.py
