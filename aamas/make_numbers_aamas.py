@@ -146,7 +146,9 @@ def build(out_path: str) -> dict:
     for band, d in sd["by_runs"].items():
         key = {"le3": "le three", "4to5": "four to five", "ge6": "ge six"}.get(band, band)
         reg.add(f"runs {key} fail", _pct(d["pct_fail"]), provenance=run)
+        reg.add(f"runs {key} fail ci", f"{d['pct_fail']}\\% [{d['ci_fail'][0]}, {d['ci_fail'][1]}]", provenance=run)
         reg.add(f"runs {key} n", d["n"], provenance=run)
+        reg.add(f"runs {key} papers", ex["runs_band_papers"][band], provenance=run)
 
     pa = ex["power_audit"]
     reg.add("power n", pa["n"], provenance=run)
@@ -352,6 +354,10 @@ def build(out_path: str) -> dict:
             reg.add("prd without largest below", _pct(wl2["pct_below"]) if wl2["pct_below"] is not None else "--", provenance="aamas_protocol_reader")
             reg.add("prd per paper lo", _pct(rsp["per_paper_pct_below"][0]), provenance="aamas_protocol_reader")
             reg.add("prd per paper hi", _pct(rsp["per_paper_pct_below"][-1]), provenance="aamas_protocol_reader")
+        for name, d in rsp.items():
+            if isinstance(d, dict) and "n_with_episode_count" in d:
+                reg.add(f"prd span {name.replace('_', ' ')} below", _pct(d["pct_below"]) if d["pct_below"] is not None else "--", provenance="aamas_protocol_reader")
+                reg.add(f"prd span {name.replace('_', ' ')} n", d["n_with_episode_count"], provenance="aamas_protocol_reader")
         rs_ = prd["resolution_stated_seeds"]
         reg.add("prd res stated n", rs_["n_with_episode_count"], provenance="aamas_protocol_reader")
         reg.add("prd res stated papers", rs_["n_papers"], provenance="aamas_protocol_reader")

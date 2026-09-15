@@ -80,6 +80,7 @@ def main(argv=None) -> int:
     ap.add_argument("--model", default=None)
     ap.add_argument("--kit", required=True)
     ap.add_argument("--out", default=None)
+    ap.add_argument("--shard", default=None, help="k/n: read only every n-th item starting at k (parallel runs)")
     args = ap.parse_args(argv)
     vendor = dict(VENDORS[args.vendor])
     if args.model:
@@ -88,8 +89,13 @@ def main(argv=None) -> int:
     if not key or not vendor["url"]:
         print("set the relay URL and key first", file=sys.stderr)
         return 2
-    out = args.out or os.path.join(args.kit, "labels.json")
     items = json.load(open(os.path.join(args.kit, "items.json"), encoding="utf-8"))
+    suffix = ""
+    if args.shard:
+        k, n = (int(x) for x in args.shard.split("/"))
+        items = items[k::n]
+        suffix = f"_shard{k}"
+    out = args.out or os.path.join(args.kit, f"labels{suffix}.json")
     pages = json.load(open(out, encoding="utf-8")) if os.path.exists(out) else []
     done = {p["id"] for p in pages}
     for it in items:

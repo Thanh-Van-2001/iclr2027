@@ -144,13 +144,13 @@ def protocol_resolution(comparisons: list, protocol: dict, alpha: float = 0.05, 
 
 
 ENV_FAMILIES = [
-    ("StarCraft (SMAC, SMACv2)", r"smac|starcraft|(?:3s5z|2s3z|5m_vs_6m|corridor|mmm2|protoss|terran|zerg)"),
-    ("Multi-agent particle (MPE)", r"mpe|particle|simple_spread|simple spread|cooperative navigation|predator"),
-    ("Google Research Football", r"football|grf"),
-    ("Overcooked, Hanabi, LBF, RWARE", r"overcooked|hanabi|level-based foraging|lbf|rware|warehouse"),
-    ("MuJoCo, D4RL, control", r"mujoco|d4rl|halfcheetah|hopper|walker|ant|humanoid|mamujoco|control suite|dmc"),
-    ("Atari, Procgen, games", r"atari|procgen|pong|breakout|melting pot|meltingpot"),
-    ("Path finding, routing, scheduling", r"mapf|path[- ]finding|routing|scheduling|vehicle|traffic|warehouse"),
+    ("StarCraft (SMAC, SMACv2)", r"\bsmac|starcraft|\b(?:3s5z|2s3z|5m_vs_6m|corridor|mmm2|protoss|terran|zerg)\b"),
+    ("Multi-agent particle (MPE)", r"\bmpe\b|particle|simple_spread|simple spread|cooperative navigation|predator"),
+    ("Google Research Football", r"football|\bgrf\b"),
+    ("Overcooked, Hanabi, LBF, RWARE", r"overcooked|hanabi|level-based foraging|\blbf\b|\brware\b|warehouse"),
+    ("MuJoCo, D4RL, control", r"mujoco|d4rl|halfcheetah|\bhopper\b|\bwalker|\bant\b|humanoid|mamujoco|control suite|\bdmc\b"),
+    ("Atari, Procgen, games", r"atari|procgen|\bpong\b|breakout|melting ?pot"),
+    ("Path finding, routing, scheduling", r"\bmapf\b|path[- ]finding|routing|scheduling|vehicle|traffic|warehouse"),
 ]
 
 
@@ -712,6 +712,9 @@ def main() -> int:
         "ml_main_text": ml_main_text(),
         "protocol_span": protocol_span(cs, protocol),
         "per_paper_failure": per_paper_failure(cs),
+        "runs_band_papers": {band: len({c["paper"] for c in cs if c.get("test") and c.get("n_runs") and
+                                        ((band == "le3" and c["n_runs"] <= 3) or (band == "4to5" and 4 <= c["n_runs"] <= 5) or (band == "ge6" and c["n_runs"] >= 6))})
+                             for band in ("le3", "4to5", "ge6")},
         "framework_defaults": framework_defaults(records, cs, protocol),
         "caption_assertion": caption_assertion(cs),
         "uncertainty_anywhere": uncertainty_anywhere(records),
@@ -731,6 +734,10 @@ def main() -> int:
         json.dump(extras, fh, indent=1)
     with open(f"{OUT}/protocol_resolution_rows.json", "w", encoding="utf-8") as fh:
         json.dump(res["rows"], fh, indent=1)
+    rp_, _ = reader_protocol()
+    if rp_:
+        with open(f"{OUT}/protocol_resolution_rows_reader.json", "w", encoding="utf-8") as fh:
+            json.dump(protocol_resolution(cs, rp_)["rows"], fh, indent=1)
     print("wrote", f"{OUT}/extra.json")
     return 0
 

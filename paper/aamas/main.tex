@@ -40,15 +40,16 @@ parser reads every main-track paper in the AAMAS
 proceedings of 2024--2026 (\nAPapers{} papers), finds the results tables
 whose bold marks a winner, and sets each bold cell against the best value
 the authors did not mark. Of the \nAComparisons{} highlighted comparisons it
-reads, \nAPctNeither{} print no error bar on either side
-(\nANeitherCensusScaled{} by an image-based reader's census of random
-pages) and \nAPctTestable{} can be tested from the page. Every testable
-comparison comes from \nAPapersTestable{} papers, and
-\nAPctFail{} of them are not distinguishable from zero by Welch's $t$ at the
-authors' own run counts: \nRunsLeThreeFail{} where three seeds or fewer are
-stated, \nRunsGeSixFail{} at six or more. AAMAS and the main text of
-\nMlPapers{} NeurIPS and ICML papers print a $\pm$ cell at similar rates per
-paper; among the comparisons the parser reads, AAMAS carries bars more often
+reads, \nAPctNeither{} print no error bar on either side and
+\nAPctTestable{} can be tested from the page; an image-based reader's census
+of random pages puts the bar-less share at \nPagesReaderNeither{}. Every testable comparison comes from
+\nAPapersTestable{} papers, and \nAPctFail{} of them are not
+distinguishable from zero by Welch's $t$ at the authors' own run counts:
+\nRunsLeThreeFail{} where three seeds or fewer are stated,
+\nRunsGeSixFail{} at six or more, and \nPpAnyFail{} of those papers have
+at least one such cell. AAMAS and the NeurIPS/ICML mainstream print a
+$\pm$ cell at similar rates per paper; among the comparisons the parser
+reads, AAMAS carries bars more often
 and the bars support the claim no more often. Win and success rates carry a
 second resolution that needs no error bar, the binomial noise of the
 evaluation protocol; of the \nRatePapers{} papers that highlight a rate, a
@@ -59,8 +60,7 @@ reader agrees with the parser on the whole claim in \nGClaim{} of
 comparisons and on the verdict in \nGVerdict{}; on random two-column pages
 the parser lists \nPagesReaderFoundPct{} of the groups the reader lists.
 Every number is a statement about what the parser reads, with that
-precision and coverage. We release the pipeline, the database and the
-reference set.
+precision and coverage. Everything is released.
 \end{abstract}
 
 \begin{CCSXML}
@@ -248,7 +248,9 @@ band.}
 main track 2024--2026 and in NeurIPS/ICML 2025, on all pages and on
 main-text pages only, under one definition. Intervals are 95\% cluster
 bootstraps over papers. ``$\pm$ cell'': the paper prints a $\pm$ value in a
-table.}
+table; ``anywhere'': a $\pm$ or parenthesised cell, or a figure caption
+naming a deviation, interval or band. The mainstream run count is searched
+in the whole paper for both columns.}
 \label{tab:census}
 \footnotesize
 \setlength{\tabcolsep}{2.5pt}
@@ -258,6 +260,7 @@ table.}
 \midrule
 Papers & \nAPapers{} & \nMlPapers{} & \nMlPapers{} \\
 Papers with a $\pm$ cell & \nAPctPapersErr{} & \nMlPctPapersErr{} & \nMlMainPapersErr{} \\
+Papers with uncertainty anywhere & \nUaAnywhere{} & -- & -- \\
 Papers stating a run count & \nAPctPapersRuns{} & \nMlPctPapersRuns{} & -- \\
 Median stated run count & \nAMedianRuns{} & \nMlMedianRuns{} & -- \\
 Highlighted comparisons & \nAComparisons{} & \nMlComparisons{} & \nMlMainComparisons{} \\
@@ -371,7 +374,19 @@ Of the \nANTestable{} testable comparisons, from \nAPapersTestable{} papers,
 (\nAPctFailCi{} over papers): Welch's $t$ on the \nWelchN{} with a run
 count, \nWelchFail{} of which fail, and a normal-limit $z$ on the \nZN{}
 standard errors and intervals that need none, \nZFail{} of which fail;
-\nAPctFailHolm{} fail after Holm's correction within the table. The median relative gap among the failing
+\nAPctFailHolm{} fail after Holm's correction within the table. With the
+paper as the unit, \nPpAnyFail{} of the \nPpPapers{} papers have at least
+one failing cell and \nPpAllFail{} nothing but; the median paper fails
+\nPpMedian{} of its testable comparisons (quartiles \nPpQOne{} and
+\nPpQThree{}), the mean of the paper rates is \nPpMean{}, and the ten
+largest papers hold \nPpTopTenShare{} of the comparisons. The pooled rate
+is therefore not one paper's habit but a spread across most of them. Where
+a caption itself asserts superiority (outperforms, significantly, surpasses,
+state of the art), which \nCapAssertingPapers{} papers' captions do for
+\nCapAssertingN{} testable comparisons, \nCapAssertingFail{} fail; where
+the caption only describes the table, \nCapDescribingFail{} of
+\nCapDescribingN{} do. Bold by convention and bold with a claim behind it
+fare alike, the asserted claims if anything worse, on few papers. The median relative gap among the failing
 comparisons is \nAGapFail{}, among the surviving ones \nAGapPass{}. A
 two-sample $z$ on the same comparisons, each printed deviation taken as
 exact, fails \nSpanZTwoSidedFail{}. On the mainstream sample the
@@ -381,8 +396,11 @@ better once it prints a deviation is not one the data support.
 
 \paragraph{Seeds.} The failure rate follows the run count
 (Figure~\ref{fig:census}b). At three seeds or fewer (\nRunsLeThreeN{}
-comparisons) \nRunsLeThreeFail{} fail; at four or five (\nRunsFourToFiveN{})
-\nRunsFourToFiveFail{}; at six or more (\nRunsGeSixN{}) \nRunsGeSixFail{}.
+comparisons from \nRunsLeThreePapers{} papers) \nRunsLeThreeFailCi{}
+fail; at four or five (\nRunsFourToFiveN{} from \nRunsFourToFivePapers{})
+\nRunsFourToFiveFailCi{}; at six or more (\nRunsGeSixN{} from
+\nRunsGeSixPapers{}) \nRunsGeSixFailCi{}. The intervals, over papers,
+overlap; the direction is the one the arithmetic predicts.
 Part of this is the arithmetic of the $t$ distribution. The largest gap
 among the \nExNThreeSeedFailing{} three-seed win-rate comparisons that fail
 is \nExWinner{} against \nExRunner{} points, with printed deviations of
@@ -469,8 +487,8 @@ captions in one, two tables set side by side that the window merged; their
 With both artefacts removed the corpus is \nRArtefactsRemovedN{}
 comparisons, \nRArtefactsRemovedNeither{} bar-less,
 \nRArtefactsRemovedTestable{} testable and \nRArtefactsRemovedFail{}
-failing, which is the reading we would print if the parser were not frozen,
-and the abstract prints it beside the frozen one. Two strata are then worth
+failing, which is the reading we would print if the parser were not frozen;
+Table~\ref{tab:span} prints it beside the frozen one. Two strata are then worth
 their own rate. Tables whose caption says ablation, where bold marks the
 full model rather than a winner, hold \nRAblationOnlyTestableN{} testable
 comparisons and fail at \nRAblationOnlyFail{}; without them the rate is
@@ -536,7 +554,11 @@ papers, the patterns in \nPrdRegexK{}; on the \nPrdBothK{} papers where
 both find one they agree on \nPrdAgreeK{}, the exception being a pattern
 that took a training-time patience window for an evaluation count. On seeds
 the two agree on \nPrdAgreeSeeds{} of the \nPrdBothSeeds{} papers where
-both find a count. The parser's own run-count search, which accepts runs,
+both find a count; the patterns can also take one phrase for both $K$ and
+the seeds, which the model does not. None of the \nRatePapers{} papers
+names a framework whose shipped configuration would fix $K$ by default
+(\nFdNaming{} name PyMARL, EPyMARL, MARLlib, BenchMARL or JaxMARL), so a
+count cannot be inherited here; where it is not stated, it is absent. The parser's own run-count search, which accepts runs,
 trials and repetitions as well as seeds, finds a count in
 \nAPctPapersRuns{} of all papers, the seed pattern in \nProtoStateSeedsPct{};
 the difference is the vocabulary each accepts, not a disagreement about any
@@ -550,7 +572,7 @@ do not say.
 \centering
 \includegraphics[width=0.9\columnwidth]{fig_protocol}
 \caption{Rate comparisons whose paper states the number of evaluation
-episodes, by the patterns: the printed gap against the gap that many
+episodes, as the model read it: the printed gap against the gap that many
 episodes, times the stated seeds, can resolve at $p<0.05$. Points below the
 diagonal are gaps the protocol could not have distinguished from zero, error
 bar or not.}
@@ -566,24 +588,37 @@ seeds, or one seed where none is stated (\nPrdResSeedAssumedOne{} of these
 comparisons; fewer episodes resolve less, so this is the reading most
 hostile to the claim), \nPrdResBelow{} of the gaps fall below the
 resolution of the protocol that produced them (\nPrdResBelowCi{} over
-comparisons, \nPrdResBelowPaperCi{} over papers), and on the
+comparisons, \nPrdResBelowPaperCi{} over papers;
+Figure~\ref{fig:protocol}), and on the
 \nPrdResStatedN{} comparisons from the \nPrdResStatedPapers{} papers that
-state both $K$ and the seeds, \nPrdResStatedBelow{}. The resolution is
+state both $K$ and the seeds, \nPrdResStatedBelow{}. No paper dominates
+this set (the largest holds \nPrdLargestPaperShare{}; without it,
+\nPrdWithoutLargestBelow{} on \nPrdWithoutLargestN{} comparisons from
+\nPrdWithoutLargestPapers{} papers), and per paper the share runs from
+\nPrdPerPaperLo{} to \nPrdPerPaperHi{}. Where $K$ counts a fixed set of
+tasks or instances rather than sampled episodes, as it does for the
+LLM-agent papers, seeds run over the same items and do not multiply the
+trials; taking $K$ alone for every comparison gives
+\nPrdSpanSeedsOneForAllBelow{}, and five seeds where none is stated
+\nPrdSpanSeedsStatedOrFiveBelow{}. The resolution is
 Newcombe's interval for a difference of proportions, built from the Wilson
 limits of each arm, which behaves at the boundary where the Wald term
 collapses and where StarCraft maps won on every episode sit; the Wald
 reading is \nResBelowWaldPct{} on the pattern-read set. With the patterns'
-$K$ instead (Figure~\ref{fig:protocol}), \nResWithK{} comparisons from
+$K$ instead, \nResWithK{} comparisons from
 \nResPapers{} papers, one holding \nPspanLargestPaperShare{} of them, give
-\nResBelowPct{} (\nResBelowCi{}; \nResBelowPaperCi{} over papers), and the
-share moves from \nPspanSeedsStatedOrFiveBelow{} with five seeds assumed
-where none is stated to \nPspanSeedsOneForAllBelow{} with one seed assumed
-for all. Among the \nResBarredN{} pattern-read comparisons that print an
+\nResBelowPct{} (\nResBelowCi{}; \nResBelowPaperCi{} over papers;
+\nPspanWithoutLargestBelow{} without that paper, whose $K$ the model does
+not accept), and the share moves from \nPspanSeedsStatedOrFiveBelow{}
+with five seeds assumed where none is stated to
+\nPspanSeedsOneForAllBelow{} with one seed assumed for all. Among the \nResBarredN{} pattern-read comparisons that print an
 error bar, \nResBarredBelow{} are below the binomial floor, and of the
 \nResBarredWelchPass{} that pass Welch's $t$ on their printed deviations,
 \nResBarredWelchPassBelow{} lie below it, the two resolutions disagreeing
-about the same cell. A dozen papers are too few to carry a rate for the
-venue and we offer none; the finding is that the quantity can be computed
+about the same cell. \citet{gorsane2022towards} recorded evaluation episode counts by hand on
+papers up to 2022, none of them in this corpus, and found the same
+convention-driven values; a dozen papers are too few to carry a rate for
+the venue and we offer none; the finding is that the quantity can be computed
 at all, that where it can it removes a third to two thirds of the claims it
 meets depending on a seed count the page does not always give, and that
 two papers in three that highlight a rate do not say over how many episodes
@@ -599,9 +634,11 @@ bounded by the caption's own horizontal extent and by the next caption on the
 page, and the numeric cells in that window are the table. Bold is read from
 the font flags of each span, so a bold cell is one whose digits are set in a
 bold face, not one inferred from context. A cell's error bar is whatever
-follows its mean in the forms $a \pm b$, $a(b)$ or $a[b, c]$; what the bar is
-comes from the caption, then from the text near the table, then from the
-paper. Rows and columns are recovered from the cells' coordinates, and the
+follows its mean in the forms $a \pm b$, $a(b)$ or $a[b, c]$; a deviation
+set as a subscript without a separator is read as part of the mean, which
+the reference set caught in one table and which counts a bar as absent.
+What the bar is comes from the caption, then from the text near the table,
+then from the paper. Rows and columns are recovered from the cells' coordinates, and the
 orientation is the axis on which most lines hold exactly one bold cell, cut
 into blocks where several lines agree on a break. In each single-bold group
 the rival is the best non-bold cell in the read direction, whatever column it
@@ -735,7 +772,10 @@ The case for seeds and intervals in reinforcement learning was made by
 multi-agent learning by \citet{gorsane2022towards}, who read the evaluation
 sections of MARL papers by hand and found most reporting a handful of seeds
 without intervals, and by \citet{singh2023how}, who read a further year and
-found little changed. Benchmarks and libraries followed
+found little changed; both recorded seed counts and evaluation episode
+counts by hand on samples drawn from several venues, which is the reading
+Section~\ref{sec:protocol} automates and the community split extends
+beyond cooperative learning. Benchmarks and libraries followed
 \cite{papoudakis2021benchmarking,ellis2023smacv2,bettini2024benchmarl}, and
 \citet{patterson2024empirical} set out what an empirical design in RL should
 contain. The recommendations are settled and their uptake has been measured by hand
