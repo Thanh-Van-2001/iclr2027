@@ -94,7 +94,8 @@ def build(out_path: str) -> dict:
             reg.add(f"c {name} neither", _pct(cs_["pct_neither"]), provenance=run)
             reg.add(f"c {name} testable", _pct(cs_["pct_testable"]), provenance=run)
             reg.add(f"c {name} n testable", cs_["n_testable"], provenance=run)
-            reg.add(f"c {name} fail", _pct(cs_["pct_fail"]) if cs_["n_testable"] >= 20 else "--", provenance=run)
+            reg.add(f"c {name} testable papers", cs_.get("papers_testable", 0), provenance=run)
+            reg.add(f"c {name} fail", _pct(cs_["pct_fail"]) if cs_["n_testable"] >= 20 and cs_.get("papers_testable", 0) >= 5 else "--", provenance=run)
             reg.add(f"c {name} papers err", _pct(cs_["pct_err"]), provenance=run)
     if "_unlabelled_papers" in comm:
         reg.add("c unlabelled papers", comm["_unlabelled_papers"], provenance=run)
@@ -211,6 +212,9 @@ def build(out_path: str) -> dict:
         reg.add("comm kappa", f"{ca['kappa']:.2f}", provenance=run)
     rd = ex["readings"]
     for key, d in (("dup removed", rd["without_duplicates"]), ("dup only", rd["duplicates"]),
+                   ("ablation removed", rd["without_ablation"]), ("ablation only", rd["ablation_tables"]),
+                   ("merged removed", rd["without_merged"]), ("merged only", rd["merged_caption_tables"]),
+                   ("artefacts removed", rd["without_artefacts"]),
                    ("own row removed", rd["without_own_row"]), ("own row only", rd["own_row_tables"]),
                    ("zero removed", rd["zero_deviation"]["without_zero"])):
         reg.add(f"r {key} n", d["n"], provenance=run)
@@ -220,6 +224,12 @@ def build(out_path: str) -> dict:
         reg.add(f"r {key} testable", _pct(d["pct_testable"]), provenance=run)
         reg.add(f"r {key} fail", _pct(d["pct_fail"]) if d["pct_fail"] is not None else "--", provenance=run)
     reg.add("r own row tables", rd["own_row_tables"]["tables"], provenance=run)
+    reg.add("r merged tables", rd["merged_caption_tables"]["tables"], provenance=run)
+    rdis = ex.get("reference_disagreements", {})
+    if rdis:
+        reg.add("g disagree n", rdis["n"], provenance="aamas_gold_set")
+        reg.add("g disagree survive", rdis["parser_survives"], provenance="aamas_gold_set")
+        reg.add("g disagree fail", rdis["parser_fails"], provenance="aamas_gold_set")
     z = rd["zero_deviation"]
     reg.add("r zero n", z["n_testable_with_a_zero"], provenance=run)
     reg.add("r zero both", z["n_both_zero"], provenance=run)
@@ -274,6 +284,64 @@ def build(out_path: str) -> dict:
     bw = ex["protocol_resolution"]["below_among_barred"]
     reg.add("res barred welch pass", bw["welch_pass"], provenance=run)
     reg.add("res barred welch pass below", bw["welch_pass_below"], provenance=run)
+    dn = ex["denominators"]
+    reg.add("rate papers", dn["rate_papers"], provenance=run)
+    reg.add("rate papers stating k", dn["rate_papers_stating_k"], provenance=run)
+    reg.add("rate papers stating k pct", _pct(dn["pct_rate_papers_stating_k"]), provenance=run)
+    reg.add("claim papers", dn["claim_papers"], provenance=run)
+    reg.add("claim papers with pm", _pct(dn["pct_claim_papers_with_pm"]), provenance=run)
+    reg.add("welch n", dn["welch_n"], provenance=run)
+    reg.add("z n", dn["z_n"], provenance=run)
+    reg.add("welch fail", _pct(dn["welch_fail"]), provenance=run)
+    reg.add("z fail", _pct(dn["z_fail"]), provenance=run)
+    reg.add("top ten papers share", _pct(dn["top10_papers_share_of_testable"]), provenance=run)
+    reg.add("a icc", f"{b['deff']['icc']:.2f}", provenance=run)
+    reg.add("a n eff", b["deff"]["n_eff"], provenance=run)
+    cc = ex["citation_conditioned"]
+    for key, d in (("citing", cc["citing"]), ("not citing", cc["not_citing"])):
+        reg.add(f"cc {key} papers", d["papers"], provenance=run)
+        reg.add(f"cc {key} pm", _pct(d["pct_papers_pm"]), provenance=run)
+        reg.add(f"cc {key} runs", _pct(d["pct_papers_runs"]), provenance=run)
+        reg.add(f"cc {key} k", _pct(d["pct_papers_k"]), provenance=run)
+        reg.add(f"cc {key} neither", _pct(d["pct_neither"]), provenance=run)
+        reg.add(f"cc {key} testable", _pct(d["pct_testable"]), provenance=run)
+        reg.add(f"cc {key} fail", _pct(d["pct_fail"]) if d["pct_fail"] is not None else "--", provenance=run)
+        reg.add(f"cc {key} n testable", d["n_testable"], provenance=run)
+    reg.add("cc detected in", cc["detected_in"], provenance=run)
+    sc = ex.get("single_column_reference", {})
+    if sc:
+        reg.add("sc recall", _pct(sc["recall_pct"]), provenance="gold_set_pages")
+        reg.add("sc precision", _pct(sc["precision_pct"]), provenance="gold_set_pages")
+        reg.add("sc pages", sc["pages"], provenance="gold_set_pages")
+    pr_ = ex["protocol_resolution"]
+    reg.add("res below wald pct", _pct(pr_["pct_below_wald"]) if pr_["pct_below_wald"] is not None else "--", provenance=run)
+    # the copied-rival bound, as in the concurrent study: removing every
+    # comparison whose rival is copied at both extremes
+    if os.path.exists("out/aamas/gold_set.json"):
+        rc_ = _j("gold_set")["testable"]["fields"].get("rival_copied")
+        if rc_:
+            s_c = rc_["pct"] / 100
+            pf = s["pct_fail"] / 100
+            reg.add("fail copied removed low", f"{100 * max(pf - s_c, 0) / (1 - s_c):.1f}\\%", provenance="aamas_gold_set")
+            reg.add("fail copied removed high", f"{100 * min(pf / (1 - s_c), 1):.1f}\\%", provenance="aamas_gold_set")
+    prd = ex.get("protocol_reader", {})
+    if prd:
+        st = prd["stats"]
+        for k in ("papers", "reader_k", "regex_k", "both_k", "agree_k", "reader_seeds", "regex_seeds", "both_seeds", "agree_seeds",
+                  "mean_over_seeds_yes", "mean_over_seeds_no", "checkpoint_best", "checkpoint_final"):
+            reg.add("prd " + k.replace("_", " "), st[k], provenance="aamas_protocol_reader")
+        rr = prd["resolution"]
+        reg.add("prd res n", rr["n_with_episode_count"], provenance="aamas_protocol_reader")
+        reg.add("prd res papers", rr["n_papers"], provenance="aamas_protocol_reader")
+        reg.add("prd res below", _pct(rr["pct_below"]) if rr["pct_below"] is not None else "--", provenance="aamas_protocol_reader")
+        if rr["pct_below"] is not None:
+            reg.add("prd res below ci", f"{rr['pct_below']}\\% [{rr['ci'][0]}, {rr['ci'][1]}]", provenance="aamas_protocol_reader")
+            reg.add("prd res below paper ci", f"[{rr['paper_ci'][0]}, {rr['paper_ci'][1]}]", provenance="aamas_protocol_reader")
+            reg.add("prd res seed assumed one", _pct(rr["pct_seed_assumed_one"]), provenance="aamas_protocol_reader")
+        rs_ = prd["resolution_stated_seeds"]
+        reg.add("prd res stated n", rs_["n_with_episode_count"], provenance="aamas_protocol_reader")
+        reg.add("prd res stated papers", rs_["n_papers"], provenance="aamas_protocol_reader")
+        reg.add("prd res stated below", _pct(rs_["pct_below"]) if rs_["pct_below"] is not None else "--", provenance="aamas_protocol_reader")
     dr = ex["duplicate_table_records"]
     reg.add("a dup keys", dr["duplicate_keys"], provenance=run)
     reg.add("a dup identical", dr["identical_records"], provenance=run)
@@ -332,6 +400,9 @@ def build(out_path: str) -> dict:
         reg.add("g pipe fail only", v["pipeline_fail_reader_survive"], provenance="aamas_gold_set")
         un = gt.get("reader_untestable", {})
         reg.add("g untestable n", sum(d["n"] for d in un.values()), provenance="aamas_gold_set")
+        reg.add("g untestable pipe fails", sum(d["pipeline_fails"] for d in un.values()), provenance="aamas_gold_set")
+        reg.add("g verdict full frac", f"{both} of {gt['n_labelled']}", provenance="aamas_gold_set")
+        reg.add("g verdict full pct", _pct(round(100 * both / gt["n_labelled"], 1)), provenance="aamas_gold_set")
         nb = g["no_bar"]
         reg.add("g no bar n", nb["n"], provenance="aamas_gold_set")
         reg.add("g no bar results table frac", _frac(nb["results_table"]), provenance="aamas_gold_set")
@@ -363,6 +434,10 @@ def build(out_path: str) -> dict:
         if pc_:
             reg.add("pages reader found page ci", f"[{pc_[0]}, {pc_[1]}]", provenance=prun)
         reg.add("pages pipe found pct", _pct(pg["pipeline_groups_found_by_reader"]["pct"]), provenance=prun)
+        pu = pg.get("pipeline_groups_unconfirmed", {})
+        if pu:
+            reg.add("pages pipe unconfirmed n", pu["n"], provenance=prun)
+            reg.add("pages pipe unconfirmed neither", _pct(pu["pct_neither"]), provenance=prun)
         reg.add("pages matched neither", _pct(pg["reader_groups_matched"]["pct_neither"]), provenance=prun)
         reg.add("pages unmatched neither", _pct(pg["reader_groups_unmatched"]["pct_neither"]), provenance=prun)
         ratio = pg["reader"]["pct_neither"] / pg["pipeline_same_pages"]["pct_neither"]

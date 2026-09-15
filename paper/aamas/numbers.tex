@@ -53,10 +53,14 @@
 \newcommand{\nAGroupsCandidate}{4061}
 % a groups usable pct: aamas_make_all
 \newcommand{\nAGroupsUsablePct}{65.4\%}
+% a icc: aamas_make_all
+\newcommand{\nAIcc}{0.38}
 % a mean cluster: aamas_make_all
 \newcommand{\nAMeanCluster}{10.0}
 % a median runs: aamas_make_all
 \newcommand{\nAMedianRuns}{5}
+% a n eff: aamas_make_all
+\newcommand{\nANEff}{151}
 % a n testable: aamas_make_all
 \newcommand{\nANTestable}{659}
 % a n testable twenty five: aamas_make_all
@@ -156,7 +160,7 @@
 % c game theory social choice comparisons: aamas_make_all
 \newcommand{\nCGameTheorySocialChoiceComparisons}{86}
 % c game theory social choice fail: aamas_make_all
-\newcommand{\nCGameTheorySocialChoiceFail}{4.7\%}
+\newcommand{\nCGameTheorySocialChoiceFail}{--}
 % c game theory social choice n testable: aamas_make_all
 \newcommand{\nCGameTheorySocialChoiceNTestable}{43}
 % c game theory social choice neither: aamas_make_all
@@ -167,6 +171,8 @@
 \newcommand{\nCGameTheorySocialChoicePapersErr}{2.0\%}
 % c game theory social choice testable: aamas_make_all
 \newcommand{\nCGameTheorySocialChoiceTestable}{50.0\%}
+% c game theory social choice testable papers: aamas_make_all
+\newcommand{\nCGameTheorySocialChoiceTestablePapers}{1}
 % c learning claim papers: aamas_make_all
 \newcommand{\nCLearningClaimPapers}{39.8\%}
 % c learning comparisons: aamas_make_all
@@ -183,6 +189,8 @@
 \newcommand{\nCLearningPapersErr}{35.1\%}
 % c learning testable: aamas_make_all
 \newcommand{\nCLearningTestable}{43.2\%}
+% c learning testable papers: aamas_make_all
+\newcommand{\nCLearningTestablePapers}{52}
 % c llm agents claim papers: aamas_make_all
 \newcommand{\nCLlmAgentsClaimPapers}{63.0\%}
 % c llm agents comparisons: aamas_make_all
@@ -199,6 +207,8 @@
 \newcommand{\nCLlmAgentsPapersErr}{21.9\%}
 % c llm agents testable: aamas_make_all
 \newcommand{\nCLlmAgentsTestable}{11.3\%}
+% c llm agents testable papers: aamas_make_all
+\newcommand{\nCLlmAgentsTestablePapers}{7}
 % c other claim papers: aamas_make_all
 \newcommand{\nCOtherClaimPapers}{20.0\%}
 % c other comparisons: aamas_make_all
@@ -215,6 +225,8 @@
 \newcommand{\nCOtherPapersErr}{0.0\%}
 % c other testable: aamas_make_all
 \newcommand{\nCOtherTestable}{0.0\%}
+% c other testable papers: aamas_make_all
+\newcommand{\nCOtherTestablePapers}{0}
 % c planning search claim papers: aamas_make_all
 \newcommand{\nCPlanningSearchClaimPapers}{27.8\%}
 % c planning search comparisons: aamas_make_all
@@ -231,6 +243,8 @@
 \newcommand{\nCPlanningSearchPapersErr}{19.4\%}
 % c planning search testable: aamas_make_all
 \newcommand{\nCPlanningSearchTestable}{7.0\%}
+% c planning search testable papers: aamas_make_all
+\newcommand{\nCPlanningSearchTestablePapers}{1}
 % c reasoning norms claim papers: aamas_make_all
 \newcommand{\nCReasoningNormsClaimPapers}{16.0\%}
 % c reasoning norms comparisons: aamas_make_all
@@ -247,12 +261,14 @@
 \newcommand{\nCReasoningNormsPapersErr}{1.3\%}
 % c reasoning norms testable: aamas_make_all
 \newcommand{\nCReasoningNormsTestable}{0.0\%}
+% c reasoning norms testable papers: aamas_make_all
+\newcommand{\nCReasoningNormsTestablePapers}{0}
 % c robotics hai claim papers: aamas_make_all
 \newcommand{\nCRoboticsHaiClaimPapers}{35.8\%}
 % c robotics hai comparisons: aamas_make_all
 \newcommand{\nCRoboticsHaiComparisons}{214}
 % c robotics hai fail: aamas_make_all
-\newcommand{\nCRoboticsHaiFail}{19.6\%}
+\newcommand{\nCRoboticsHaiFail}{--}
 % c robotics hai n testable: aamas_make_all
 \newcommand{\nCRoboticsHaiNTestable}{46}
 % c robotics hai neither: aamas_make_all
@@ -263,6 +279,8 @@
 \newcommand{\nCRoboticsHaiPapersErr}{22.6\%}
 % c robotics hai testable: aamas_make_all
 \newcommand{\nCRoboticsHaiTestable}{21.5\%}
+% c robotics hai testable papers: aamas_make_all
+\newcommand{\nCRoboticsHaiTestablePapers}{3}
 % c simulation claim papers: aamas_make_all
 \newcommand{\nCSimulationClaimPapers}{22.5\%}
 % c simulation comparisons: aamas_make_all
@@ -279,8 +297,48 @@
 \newcommand{\nCSimulationPapersErr}{10.0\%}
 % c simulation testable: aamas_make_all
 \newcommand{\nCSimulationTestable}{19.0\%}
+% c simulation testable papers: aamas_make_all
+\newcommand{\nCSimulationTestablePapers}{2}
 % c unlabelled papers: aamas_make_all
 \newcommand{\nCUnlabelledPapers}{0}
+% cc citing fail: aamas_make_all
+\newcommand{\nCcCitingFail}{59.1\%}
+% cc citing k: aamas_make_all
+\newcommand{\nCcCitingK}{40.0\%}
+% cc citing n testable: aamas_make_all
+\newcommand{\nCcCitingNTestable}{44}
+% cc citing neither: aamas_make_all
+\newcommand{\nCcCitingNeither}{32.9\%}
+% cc citing papers: aamas_make_all
+\newcommand{\nCcCitingPapers}{10}
+% cc citing pm: aamas_make_all
+\newcommand{\nCcCitingPm}{80.0\%}
+% cc citing runs: aamas_make_all
+\newcommand{\nCcCitingRuns}{70.0\%}
+% cc citing testable: aamas_make_all
+\newcommand{\nCcCitingTestable}{60.3\%}
+% cc detected in: aamas_make_all
+\newcommand{\nCcDetectedIn}{246}
+% cc not citing fail: aamas_make_all
+\newcommand{\nCcNotCitingFail}{52.0\%}
+% cc not citing k: aamas_make_all
+\newcommand{\nCcNotCitingK}{13.6\%}
+% cc not citing n testable: aamas_make_all
+\newcommand{\nCcNotCitingNTestable}{615}
+% cc not citing neither: aamas_make_all
+\newcommand{\nCcNotCitingNeither}{58.1\%}
+% cc not citing papers: aamas_make_all
+\newcommand{\nCcNotCitingPapers}{236}
+% cc not citing pm: aamas_make_all
+\newcommand{\nCcNotCitingPm}{40.3\%}
+% cc not citing runs: aamas_make_all
+\newcommand{\nCcNotCitingRuns}{43.2\%}
+% cc not citing testable: aamas_make_all
+\newcommand{\nCcNotCitingTestable}{30.2\%}
+% claim papers: aamas_make_all
+\newcommand{\nClaimPapers}{246}
+% claim papers with pm: aamas_make_all
+\newcommand{\nClaimPapersWithPm}{41.9\%}
 % comm agree: aamas_make_all
 \newcommand{\nCommAgree}{88.0\% [80.2, 93.0]}
 % comm agree frac: aamas_make_all
@@ -397,6 +455,10 @@
 \newcommand{\nExWinner}{71}
 % ex winner sd: aamas_make_all
 \newcommand{\nExWinnerSd}{8.1}
+% fail copied removed high: aamas_gold_set
+\newcommand{\nFailCopiedRemovedHigh}{60.2\%}
+% fail copied removed low: aamas_gold_set
+\newcommand{\nFailCopiedRemovedLow}{45.5\%}
 % fig caption unc papers pct: aamas_make_all
 \newcommand{\nFigCaptionUncPapersPct}{24.2\%}
 % fig caption unc testable papers: aamas_make_all
@@ -415,6 +477,12 @@
 \newcommand{\nGDirection}{96.8\% [91.1, 98.9]}
 % g direction frac: aamas_gold_set
 \newcommand{\nGDirectionFrac}{92 of 95}
+% g disagree fail: aamas_gold_set
+\newcommand{\nGDisagreeFail}{3}
+% g disagree n: aamas_gold_set
+\newcommand{\nGDisagreeN}{9}
+% g disagree survive: aamas_gold_set
+\newcommand{\nGDisagreeSurvive}{6}
 % g disp treatment: aamas_gold_set
 \newcommand{\nGDispTreatment}{90.5\% [83.0, 94.9]}
 % g disp treatment frac: aamas_gold_set
@@ -469,10 +537,16 @@
 \newcommand{\nGUnboxedN}{10}
 % g untestable n: aamas_gold_set
 \newcommand{\nGUntestableN}{18}
+% g untestable pipe fails: aamas_gold_set
+\newcommand{\nGUntestablePipeFails}{6}
 % g verdict: aamas_gold_set
 \newcommand{\nGVerdict}{98.7\%}
 % g verdict frac: aamas_gold_set
 \newcommand{\nGVerdictFrac}{76 of 77}
+% g verdict full frac: aamas_gold_set
+\newcommand{\nGVerdictFullFrac}{76 of 95}
+% g verdict full pct: aamas_gold_set
+\newcommand{\nGVerdictFullPct}{80.0\%}
 % g winner disp: aamas_gold_set
 \newcommand{\nGWinnerDisp}{100.0\% [96.1, 100.0]}
 % g winner disp frac: aamas_gold_set
@@ -544,11 +618,11 @@
 % pages drawn: aamas_gold_set_pages
 \newcommand{\nPagesDrawn}{100}
 % pages matched neither: aamas_gold_set_pages
-\newcommand{\nPagesMatchedNeither}{56.6\%}
+\newcommand{\nPagesMatchedNeither}{65.2\%}
 % pages papers: aamas_gold_set_pages
 \newcommand{\nPagesPapers}{100}
 % pages pipe found pct: aamas_gold_set_pages
-\newcommand{\nPagesPipeFoundPct}{62.7\%}
+\newcommand{\nPagesPipeFoundPct}{61.3\%}
 % pages pipe groups: aamas_gold_set_pages
 \newcommand{\nPagesPipeGroups}{75}
 % pages pipe neither: aamas_gold_set_pages
@@ -559,6 +633,10 @@
 \newcommand{\nPagesPipeOnlyN}{0}
 % pages pipe testable: aamas_gold_set_pages
 \newcommand{\nPagesPipeTestable}{0.0\%}
+% pages pipe unconfirmed n: aamas_gold_set_pages
+\newcommand{\nPagesPipeUnconfirmedN}{29}
+% pages pipe unconfirmed neither: aamas_gold_set_pages
+\newcommand{\nPagesPipeUnconfirmedNeither}{69.0\%}
 % pages read: aamas_gold_set_pages
 \newcommand{\nPagesRead}{100}
 % pages reader fail: aamas_gold_set_pages
@@ -566,11 +644,11 @@
 % pages reader fail n: aamas_gold_set_pages
 \newcommand{\nPagesReaderFailN}{22}
 % pages reader found: aamas_gold_set_pages
-\newcommand{\nPagesReaderFound}{20.9\% [16.4, 26.4]}
+\newcommand{\nPagesReaderFound}{18.2\% [13.9, 23.4]}
 % pages reader found page ci: aamas_gold_set_pages
-\newcommand{\nPagesReaderFoundPageCi}{[6.0, 41.2]}
+\newcommand{\nPagesReaderFoundPageCi}{[4.9, 37.4]}
 % pages reader found pct: aamas_gold_set_pages
-\newcommand{\nPagesReaderFoundPct}{20.9\%}
+\newcommand{\nPagesReaderFoundPct}{18.2\%}
 % pages reader groups: aamas_gold_set_pages
 \newcommand{\nPagesReaderGroups}{253}
 % pages reader neither: aamas_gold_set_pages
@@ -590,7 +668,7 @@
 % pages tables with bar: aamas_gold_set_pages
 \newcommand{\nPagesTablesWithBar}{45.3\%}
 % pages unmatched neither: aamas_gold_set_pages
-\newcommand{\nPagesUnmatchedNeither}{49.5\%}
+\newcommand{\nPagesUnmatchedNeither}{47.8\%}
 % power level: aamas_make_all
 \newcommand{\nPowerLevel}{80\%}
 % power median ratio: aamas_make_all
@@ -601,6 +679,50 @@
 \newcommand{\nPowerPapers}{67}
 % power underpowered: aamas_make_all
 \newcommand{\nPowerUnderpowered}{53.7\%}
+% prd agree k: aamas_protocol_reader
+\newcommand{\nPrdAgreeK}{4}
+% prd agree seeds: aamas_protocol_reader
+\newcommand{\nPrdAgreeSeeds}{10}
+% prd both k: aamas_protocol_reader
+\newcommand{\nPrdBothK}{5}
+% prd both seeds: aamas_protocol_reader
+\newcommand{\nPrdBothSeeds}{12}
+% prd checkpoint best: aamas_protocol_reader
+\newcommand{\nPrdCheckpointBest}{3}
+% prd checkpoint final: aamas_protocol_reader
+\newcommand{\nPrdCheckpointFinal}{5}
+% prd mean over seeds no: aamas_protocol_reader
+\newcommand{\nPrdMeanOverSeedsNo}{1}
+% prd mean over seeds yes: aamas_protocol_reader
+\newcommand{\nPrdMeanOverSeedsYes}{15}
+% prd papers: aamas_protocol_reader
+\newcommand{\nPrdPapers}{38}
+% prd reader k: aamas_protocol_reader
+\newcommand{\nPrdReaderK}{13}
+% prd reader seeds: aamas_protocol_reader
+\newcommand{\nPrdReaderSeeds}{16}
+% prd regex k: aamas_protocol_reader
+\newcommand{\nPrdRegexK}{7}
+% prd regex seeds: aamas_protocol_reader
+\newcommand{\nPrdRegexSeeds}{16}
+% prd res below: aamas_protocol_reader
+\newcommand{\nPrdResBelow}{42.7\%}
+% prd res below ci: aamas_protocol_reader
+\newcommand{\nPrdResBelowCi}{42.7\% [33.3, 52.7]}
+% prd res below paper ci: aamas_protocol_reader
+\newcommand{\nPrdResBelowPaperCi}{[22.9, 65.7]}
+% prd res n: aamas_protocol_reader
+\newcommand{\nPrdResN}{96}
+% prd res papers: aamas_protocol_reader
+\newcommand{\nPrdResPapers}{13}
+% prd res seed assumed one: aamas_protocol_reader
+\newcommand{\nPrdResSeedAssumedOne}{24.0\%}
+% prd res stated below: aamas_protocol_reader
+\newcommand{\nPrdResStatedBelow}{41.1\%}
+% prd res stated n: aamas_protocol_reader
+\newcommand{\nPrdResStatedN}{73}
+% prd res stated papers: aamas_protocol_reader
+\newcommand{\nPrdResStatedPapers}{8}
 % proto mode episodes: aamas_protocol
 \newcommand{\nProtoModeEpisodes}{10}
 % proto mode episodes n: aamas_protocol
@@ -618,33 +740,69 @@
 % pspan largest paper share: aamas_make_all
 \newcommand{\nPspanLargestPaperShare}{50.4\%}
 % pspan per paper hi: aamas_make_all
-\newcommand{\nPspanPerPaperHi}{83.3\%}
+\newcommand{\nPspanPerPaperHi}{100.0\%}
 % pspan per paper lo: aamas_make_all
 \newcommand{\nPspanPerPaperLo}{0.0\%}
 % pspan seeds one for all below: aamas_make_all
-\newcommand{\nPspanSeedsOneForAllBelow}{62.8\%}
+\newcommand{\nPspanSeedsOneForAllBelow}{66.1\%}
 % pspan seeds one for all n: aamas_make_all
 \newcommand{\nPspanSeedsOneForAllN}{121}
 % pspan seeds one for all papers: aamas_make_all
 \newcommand{\nPspanSeedsOneForAllPapers}{7}
 % pspan seeds stated only below: aamas_make_all
-\newcommand{\nPspanSeedsStatedOnlyBelow}{33.3\%}
+\newcommand{\nPspanSeedsStatedOnlyBelow}{37.0\%}
 % pspan seeds stated only n: aamas_make_all
 \newcommand{\nPspanSeedsStatedOnlyN}{54}
 % pspan seeds stated only papers: aamas_make_all
 \newcommand{\nPspanSeedsStatedOnlyPapers}{5}
 % pspan seeds stated or five below: aamas_make_all
-\newcommand{\nPspanSeedsStatedOrFiveBelow}{28.9\%}
+\newcommand{\nPspanSeedsStatedOrFiveBelow}{30.6\%}
 % pspan seeds stated or five n: aamas_make_all
 \newcommand{\nPspanSeedsStatedOrFiveN}{121}
 % pspan seeds stated or five papers: aamas_make_all
 \newcommand{\nPspanSeedsStatedOrFivePapers}{7}
 % pspan seeds stated or one below: aamas_make_all
-\newcommand{\nPspanSeedsStatedOrOneBelow}{46.3\%}
+\newcommand{\nPspanSeedsStatedOrOneBelow}{51.2\%}
 % pspan seeds stated or one n: aamas_make_all
 \newcommand{\nPspanSeedsStatedOrOneN}{121}
 % pspan seeds stated or one papers: aamas_make_all
 \newcommand{\nPspanSeedsStatedOrOnePapers}{7}
+% r ablation only fail: aamas_make_all
+\newcommand{\nRAblationOnlyFail}{30.2\%}
+% r ablation only n: aamas_make_all
+\newcommand{\nRAblationOnlyN}{186}
+% r ablation only neither: aamas_make_all
+\newcommand{\nRAblationOnlyNeither}{62.4\%}
+% r ablation only testable: aamas_make_all
+\newcommand{\nRAblationOnlyTestable}{23.1\%}
+% r ablation only testable n: aamas_make_all
+\newcommand{\nRAblationOnlyTestableN}{43}
+% r ablation only testable papers: aamas_make_all
+\newcommand{\nRAblationOnlyTestablePapers}{11}
+% r ablation removed fail: aamas_make_all
+\newcommand{\nRAblationRemovedFail}{54.1\%}
+% r ablation removed n: aamas_make_all
+\newcommand{\nRAblationRemovedN}{1923}
+% r ablation removed neither: aamas_make_all
+\newcommand{\nRAblationRemovedNeither}{56.7\%}
+% r ablation removed testable: aamas_make_all
+\newcommand{\nRAblationRemovedTestable}{32.0\%}
+% r ablation removed testable n: aamas_make_all
+\newcommand{\nRAblationRemovedTestableN}{616}
+% r ablation removed testable papers: aamas_make_all
+\newcommand{\nRAblationRemovedTestablePapers}{60}
+% r artefacts removed fail: aamas_make_all
+\newcommand{\nRArtefactsRemovedFail}{57.4\%}
+% r artefacts removed n: aamas_make_all
+\newcommand{\nRArtefactsRemovedN}{1772}
+% r artefacts removed neither: aamas_make_all
+\newcommand{\nRArtefactsRemovedNeither}{56.3\%}
+% r artefacts removed testable: aamas_make_all
+\newcommand{\nRArtefactsRemovedTestable}{32.2\%}
+% r artefacts removed testable n: aamas_make_all
+\newcommand{\nRArtefactsRemovedTestableN}{570}
+% r artefacts removed testable papers: aamas_make_all
+\newcommand{\nRArtefactsRemovedTestablePapers}{61}
 % r dup only fail: aamas_make_all
 \newcommand{\nRDupOnlyFail}{12.0\%}
 % r dup only n: aamas_make_all
@@ -669,6 +827,32 @@
 \newcommand{\nRDupRemovedTestableN}{609}
 % r dup removed testable papers: aamas_make_all
 \newcommand{\nRDupRemovedTestablePapers}{64}
+% r merged only fail: aamas_make_all
+\newcommand{\nRMergedOnlyFail}{35.6\%}
+% r merged only n: aamas_make_all
+\newcommand{\nRMergedOnlyN}{122}
+% r merged only neither: aamas_make_all
+\newcommand{\nRMergedOnlyNeither}{48.4\%}
+% r merged only testable: aamas_make_all
+\newcommand{\nRMergedOnlyTestable}{36.9\%}
+% r merged only testable n: aamas_make_all
+\newcommand{\nRMergedOnlyTestableN}{45}
+% r merged only testable papers: aamas_make_all
+\newcommand{\nRMergedOnlyTestablePapers}{5}
+% r merged removed fail: aamas_make_all
+\newcommand{\nRMergedRemovedFail}{53.7\%}
+% r merged removed n: aamas_make_all
+\newcommand{\nRMergedRemovedN}{1987}
+% r merged removed neither: aamas_make_all
+\newcommand{\nRMergedRemovedNeither}{57.8\%}
+% r merged removed testable: aamas_make_all
+\newcommand{\nRMergedRemovedTestable}{30.9\%}
+% r merged removed testable n: aamas_make_all
+\newcommand{\nRMergedRemovedTestableN}{614}
+% r merged removed testable papers: aamas_make_all
+\newcommand{\nRMergedRemovedTestablePapers}{63}
+% r merged tables: aamas_make_all
+\newcommand{\nRMergedTables}{79}
 % r own row only fail: aamas_make_all
 \newcommand{\nROwnRowOnlyFail}{59.4\%}
 % r own row only n: aamas_make_all
@@ -713,6 +897,12 @@
 \newcommand{\nRZeroRemovedTestableN}{617}
 % r zero removed testable papers: aamas_make_all
 \newcommand{\nRZeroRemovedTestablePapers}{65}
+% rate papers: aamas_make_all
+\newcommand{\nRatePapers}{38}
+% rate papers stating k: aamas_make_all
+\newcommand{\nRatePapersStatingK}{7}
+% rate papers stating k pct: aamas_make_all
+\newcommand{\nRatePapersStatingKPct}{18.4\%}
 % rb groups both: aamas_make_all
 \newcommand{\nRbGroupsBoth}{154}
 % rb groups no parser table: aamas_make_all
@@ -732,7 +922,7 @@
 % rb top five share: aamas_make_all
 \newcommand{\nRbTopFiveShare}{52.6\%}
 % res barless below: aamas_make_all
-\newcommand{\nResBarlessBelow}{46}
+\newcommand{\nResBarlessBelow}{52}
 % res barless n: aamas_make_all
 \newcommand{\nResBarlessN}{103}
 % res barred below: aamas_make_all
@@ -744,13 +934,15 @@
 % res barred welch pass below: aamas_make_all
 \newcommand{\nResBarredWelchPassBelow}{3}
 % res below: aamas_make_all
-\newcommand{\nResBelow}{56}
+\newcommand{\nResBelow}{62}
 % res below ci: aamas_make_all
-\newcommand{\nResBelowCi}{46.3\% [37.6, 55.1]}
+\newcommand{\nResBelowCi}{51.2\% [42.4, 60.0]}
 % res below paper ci: aamas_make_all
-\newcommand{\nResBelowPaperCi}{[18.2, 59.5]}
+\newcommand{\nResBelowPaperCi}{[21.1, 68.6]}
 % res below pct: aamas_make_all
-\newcommand{\nResBelowPct}{46.3\%}
+\newcommand{\nResBelowPct}{51.2\%}
+% res below wald pct: aamas_make_all
+\newcommand{\nResBelowWaldPct}{46.3\%}
 % res median episodes: aamas_make_all
 \newcommand{\nResMedianEpisodes}{50}
 % res papers: aamas_make_all
@@ -775,6 +967,12 @@
 \newcommand{\nRunsLeThreeFail}{65.0\%}
 % runs le three n: aamas_make_all
 \newcommand{\nRunsLeThreeN}{160}
+% sc pages: gold_set_pages
+\newcommand{\nScPages}{247}
+% sc precision: gold_set_pages
+\newcommand{\nScPrecision}{77.9\%}
+% sc recall: gold_set_pages
+\newcommand{\nScRecall}{50.6\%}
 % span as reported fail: aamas_make_all
 \newcommand{\nSpanAsReportedFail}{52.5\%}
 % span as reported fail holm: aamas_make_all
@@ -891,3 +1089,13 @@
 \newcommand{\nTieNExcluding}{659}
 % tie pct tables second best: aamas_make_all
 \newcommand{\nTiePctTablesSecondBest}{1.6\%}
+% top ten papers share: aamas_make_all
+\newcommand{\nTopTenPapersShare}{41.3\%}
+% welch fail: aamas_make_all
+\newcommand{\nWelchFail}{53.7\%}
+% welch n: aamas_make_all
+\newcommand{\nWelchN}{622}
+% z fail: aamas_make_all
+\newcommand{\nZFail}{32.4\%}
+% z n: aamas_make_all
+\newcommand{\nZN}{37}

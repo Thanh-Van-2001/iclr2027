@@ -89,10 +89,19 @@ def protocol_resolution(comparisons: list, protocol: dict, alpha: float = 0.05, 
         n = k * (s or (5 if seed_mode == "or_five" else 1))
         scale = 100.0 if kind == "percent" else 1.0
         pw, pr = c["winner"] / scale, c["runner_up"] / scale
+        pw, pr = min(max(pw, 0.0), 1.0), min(max(pr, 0.0), 1.0)
         se = math.sqrt(max(pw * (1 - pw), 1e-9) / n + max(pr * (1 - pr), 1e-9) / n)
         gap = abs(pw - pr)
+        # Newcombe's interval for a difference of proportions, built from the
+        # Wilson limits of each arm, behaves at 0 and 100 percent where the
+        # Wald term collapses (SMAC maps won at every episode sit there).
+        hi_p, lo_p = max(pw, pr), min(pw, pr)
+        l_hi, u_hi = wilson_interval(round(hi_p * n), n)
+        l_lo, u_lo = wilson_interval(round(lo_p * n), n)
+        newcombe = math.sqrt((hi_p - l_hi) ** 2 + (u_lo - lo_p) ** 2)
         rows.append({"paper": c["paper"], "table": c["table"], "k": k, "seeds": s, "n": n,
-                     "gap": round(gap, 4), "resolvable": round(z * se, 4), "below": gap < z * se,
+                     "gap": round(gap, 4), "resolvable": round(newcombe, 4), "below": gap < newcombe,
+                     "resolvable_wald": round(z * se, 4), "below_wald": gap < z * se,
                      "has_bars": c["winner_dispersion"] is not None and c["runner_dispersion"] is not None,
                      "welch_pass": bool(c.get("test")) and c["survives_raw"],
                      "seed_assumed_one": s is None})
@@ -114,6 +123,8 @@ def protocol_resolution(comparisons: list, protocol: dict, alpha: float = 0.05, 
     boots.sort()
     ks = sorted(r["k"] for r in rows)
     return {"n_rate_like": len(rows) + no_k, "n_with_episode_count": len(rows),
+            "below_wald": sum(r["below_wald"] for r in rows),
+            "pct_below_wald": round(100 * sum(r["below_wald"] for r in rows) / len(rows), 1) if rows else None,
             "n_without_episode_count": no_k, "n_papers": len(papers),
             "below_resolution": below,
             "pct_below": round(100 * below / len(rows), 1) if rows else None,
@@ -228,8 +239,8 @@ def readings(records: list, comparisons: list) -> dict:
     # own-row tables: every bold cell on one line
     own_keys = set()
     for k, ts in keys.items():
-        for t in ts:
-            bold = [c for c in t["cells"] if c["bold"]]
+        for tb in ts:
+            bold = [c for c in tb["cells"] if c["bold"]]
             if len(bold) >= 3:
                 ys = sorted(c["y"] for c in bold)
                 xs = sorted(c["x"] for c in bold)
@@ -240,7 +251,24 @@ def readings(records: list, comparisons: list) -> dict:
     t = [c for c in comparisons if c.get("test")]
     zero = [c for c in t if c["winner_dispersion"] == 0 or c["runner_dispersion"] == 0]
     both_zero = [c for c in t if c["winner_dispersion"] == 0 and c["runner_dispersion"] == 0]
+    # tables whose caption string holds two "Table n" captions: two tables
+    # set side by side that the window merged, a two-column artefact
+    merged_keys = set()
+    for k, ts in keys.items():
+        for tb in ts:
+            if len(re.findall(r"\bTable\s+\d+", tb.get("caption", "") or "")) >= 2:
+                merged_keys.add(k)
+    merged = [c for c in comparisons if (c["paper"], c["table"], c["page"]) in merged_keys]
+    not_merged = [c for c in comparisons if (c["paper"], c["table"], c["page"]) not in merged_keys]
+    artefact_keys = dup_keys | merged_keys
+    clean = [c for c in comparisons if (c["paper"], c["table"], c["page"]) not in artefact_keys]
+    abl_rx = re.compile(r"ablat", re.I)
+    abl = [c for c in comparisons if abl_rx.search(c.get("caption", "") or "")]
+    not_abl = [c for c in comparisons if not abl_rx.search(c.get("caption", "") or "")]
     return {"duplicates": _rates(in_dup), "without_duplicates": _rates(not_dup),
+            "merged_caption_tables": {"tables": len(merged_keys), **_rates(merged)}, "without_merged": _rates(not_merged),
+            "without_artefacts": _rates(clean),
+            "ablation_tables": _rates(abl), "without_ablation": _rates(not_abl),
             "own_row_tables": {"tables": len(own_keys), **_rates(own)}, "without_own_row": _rates(not_own),
             "zero_deviation": {"n_testable_with_a_zero": len(zero), "n_both_zero": len(both_zero),
                                "pct_fail_among_zero": round(100 * sum(1 for c in zero if not c["survives_raw"]) / max(len(zero), 1), 1) if zero else None,
@@ -352,6 +380,145 @@ def table_retention_bias(records: list) -> dict:
             "tables_discarded": disc, "pct_discarded_with_bar": round(100 * disc_bar / max(disc, 1), 1)}
 
 
+def denominators(records: list, comparisons: list, protocol: dict) -> dict:
+    """The shares a reviewer asked for over the right populations: K stated
+    among papers with a rate comparison; a +/- cell among papers with a
+    highlighted comparison."""
+    recs = {r["id"]: r for r in records}
+    rate_papers = {c["paper"] for c in comparisons if rate_like(c)}
+    claim_papers = {c["paper"] for c in comparisons}
+    t = [c for c in comparisons if c.get("test")]
+    return {"rate_papers": len(rate_papers),
+            "rate_papers_stating_k": sum(1 for p in rate_papers if protocol.get(p, {}).get("eval_episodes")),
+            "pct_rate_papers_stating_k": round(100 * sum(1 for p in rate_papers if protocol.get(p, {}).get("eval_episodes")) / max(len(rate_papers), 1), 1),
+            "claim_papers": len(claim_papers),
+            "pct_claim_papers_with_pm": round(100 * sum(1 for p in claim_papers if recs[p].get("reports_explicit_error_bar")) / max(len(claim_papers), 1), 1),
+            "welch_n": sum(1 for c in t if c["test"].get("test") == "welch"),
+            "z_n": sum(1 for c in t if c["test"].get("test") != "welch"),
+            "welch_fail": round(100 * sum(1 for c in t if c["test"].get("test") == "welch" and not c["survives_raw"]) / max(sum(1 for c in t if c["test"].get("test") == "welch"), 1), 1),
+            "z_fail": round(100 * sum(1 for c in t if c["test"].get("test") != "welch" and not c["survives_raw"]) / max(sum(1 for c in t if c["test"].get("test") != "welch"), 1), 1),
+            "top10_papers_share_of_testable": round(100 * sum(sorted(collections.Counter(c["paper"] for c in t).values(), reverse=True)[:10]) / max(len(t), 1), 1)}
+
+
+CITED = {
+    "gorsane2022": r"standardi[sz]ed performance evaluation protocol",
+    "agarwal2021": r"statistical precipice",
+    "colas2018": r"how many random seeds",
+    "henderson2018": r"reinforcement learning that matters",
+    "papoudakis2021": r"benchmarking multi-?agent deep reinforcement learning",
+    "patterson2023": r"empirical design in reinforcement learning",
+}
+
+
+def citation_conditioned(records: list, comparisons: list, protocol: dict, corpus_dir: str = "data/corpus") -> dict:
+    """Among papers with a highlighted comparison: do those that cite the
+    evaluation-methodology literature print bars, run counts and episode
+    counts more often? Citation is detected in the paper's text by author
+    name and title words."""
+    import fitz
+    recs = {r["id"]: r for r in records}
+    claim_papers = sorted({c["paper"] for c in comparisons})
+    cites = {}
+    for pid in claim_papers:
+        r = recs[pid]
+        path = os.path.join(corpus_dir, f"{r['venue']}{r['year']}_{pid}.pdf")
+        if not os.path.exists(path):
+            continue
+        try:
+            text = " ".join(pg.get_text() for pg in fitz.open(path))
+        except Exception:  # noqa: BLE001
+            continue
+        text = re.sub(r"\s+", " ", text)
+        cites[pid] = {k: bool(re.search(pat, text, re.I)) for k, pat in CITED.items()}
+    def group(ids):
+        cs = [c for c in comparisons if c["paper"] in ids]
+        t = [c for c in cs if c.get("test")]
+        return {"papers": len(ids), "comparisons": len(cs),
+                "pct_papers_pm": round(100 * sum(1 for p in ids if recs[p].get("reports_explicit_error_bar")) / max(len(ids), 1), 1),
+                "pct_papers_runs": round(100 * sum(1 for p in ids if recs[p].get("n_runs_global")) / max(len(ids), 1), 1),
+                "pct_papers_k": round(100 * sum(1 for p in ids if protocol.get(p, {}).get("eval_episodes")) / max(len(ids), 1), 1),
+                "pct_neither": round(100 * sum(1 for c in cs if c["winner_dispersion"] is None and c["runner_dispersion"] is None) / max(len(cs), 1), 1),
+                "pct_testable": round(100 * len(t) / max(len(cs), 1), 1),
+                "pct_fail": round(100 * sum(1 for c in t if not c["survives_raw"]) / max(len(t), 1), 1) if t else None,
+                "n_testable": len(t)}
+    citing = {p for p, d in cites.items() if any(d.values())}
+    not_citing = {p for p in cites if p not in citing}
+    return {"detected_in": len(cites), "per_work": {k: sum(1 for d in cites.values() if d[k]) for k in CITED},
+            "citing": group(citing), "not_citing": group(not_citing)}
+
+
+def reference_disagreements(items_path: str = "audits/aamas_gold/items.json",
+                            labels_path: str = "audits/aamas_gold/labels.csv") -> dict:
+    """On the testable reference items where reader and parser disagree on the
+    claim, which way the parser's verdict went: a spurious survival biases the
+    failure rate down, a spurious failure up."""
+    if not (os.path.exists(items_path) and os.path.exists(labels_path)):
+        return {}
+    from gold_set import _match, _num, _unclear, _pipeline_test
+    items = {it["id"]: it for it in json.load(open(items_path, encoding="utf-8"))}
+    rows = {r["id"]: r for r in csv.DictReader(open(labels_path, encoding="utf-8", newline=""))}
+    vf = (("winner_mean", "winner"), ("winner_disp", "winner_dispersion"), ("runner_mean", "runner_up"), ("runner_disp", "runner_dispersion"))
+    n = survive = fail = 0
+    for i, r in rows.items():
+        it = items[i]
+        if it["stratum"] != "testable" or it.get("mark") is None or not r["results_table"].lower().startswith("y"):
+            continue
+        bad = not r["bold_ok"].lower().startswith("y") or any(
+            not _unclear(r[f]) and not _match(_num(r[f]), it["pipeline"][k]) for f, k in vf)
+        if not bad:
+            continue
+        t = _pipeline_test(it)
+        if not t:
+            continue
+        n += 1
+        if t["p"] >= 0.05:
+            fail += 1
+        else:
+            survive += 1
+    return {"n": n, "parser_survives": survive, "parser_fails": fail}
+
+
+def reader_protocol(path: str = "out/aamas/protocol_reader.json") -> dict:
+    """The language model's reading of K and seeds for every paper with a
+    rate comparison, in the shape protocol_resolution() takes, plus its
+    agreement with the regular expressions."""
+    if not os.path.exists(path):
+        return {}, {}
+    rd = json.load(open(path, encoding="utf-8"))
+    rx = json.load(open(f"{OUT}/protocol.json", encoding="utf-8"))
+    proto = {}
+    for pid, d in rd.items():
+        k = d.get("eval_episodes") if isinstance(d.get("eval_episodes"), int) else None
+        sd = d.get("seeds") if isinstance(d.get("seeds"), int) else None
+        proto[pid] = {"eval_episodes": k, "seeds": sd}
+    both = [pid for pid in rd if proto[pid]["eval_episodes"] and rx.get(pid, {}).get("eval_episodes")]
+    sboth = [pid for pid in rd if proto[pid]["seeds"] and rx.get(pid, {}).get("seeds")]
+    stats = {"papers": len(rd),
+             "reader_k": sum(1 for pid in rd if proto[pid]["eval_episodes"]),
+             "regex_k": sum(1 for pid in rd if rx.get(pid, {}).get("eval_episodes")),
+             "both_k": len(both), "agree_k": sum(1 for pid in both if proto[pid]["eval_episodes"] == rx[pid]["eval_episodes"]),
+             "reader_seeds": sum(1 for pid in rd if proto[pid]["seeds"]),
+             "regex_seeds": sum(1 for pid in rd if rx.get(pid, {}).get("seeds")),
+             "both_seeds": len(sboth), "agree_seeds": sum(1 for pid in sboth if proto[pid]["seeds"] == rx[pid]["seeds"]),
+             "mean_over_seeds_yes": sum(1 for d in rd.values() if d.get("rate_is_mean_over_seeds") == "yes"),
+             "mean_over_seeds_no": sum(1 for d in rd.values() if d.get("rate_is_mean_over_seeds") == "no"),
+             "checkpoint_best": sum(1 for d in rd.values() if d.get("checkpoint") == "best"),
+             "checkpoint_final": sum(1 for d in rd.values() if d.get("checkpoint") == "final")}
+    return proto, stats
+
+
+def single_column_reference(path: str = "out/gold_set_pages.json") -> dict:
+    """The parser's recall and precision on single-column pages, from the
+    concurrent study's random-page reading, for the cross-format comparison."""
+    if not os.path.exists(path):
+        return {}
+    d = json.load(open(path, encoding="utf-8"))
+    return {"recall_pct": d["reader_groups_found_by_pipeline"]["pct"],
+            "recall_page_ci": d["reader_groups_found_by_pipeline"].get("page_ci"),
+            "precision_pct": d["pipeline_groups_found_by_reader"]["pct"],
+            "pages": d["n_pages"], "reader_groups": d["reader"]["groups"]}
+
+
 def duplicate_table_records(records: list) -> dict:
     """Tables the parser recorded more than once under one (paper, number,
     page): a two-column artefact in which a caption is attached to a body
@@ -443,9 +610,17 @@ def main() -> int:
         "community_agreement": community_agreement(f"{OUT}/communities.csv", "audits/aamas_comm_check/labels_sonnet.json"),
         "readings": readings(records, cs),
         "recall_breakdown": recall_breakdown(records),
+        "denominators": denominators(records, cs, protocol),
+        "citation_conditioned": citation_conditioned(records, cs, protocol),
+        "single_column_reference": single_column_reference(),
+        "reference_disagreements": reference_disagreements(),
         "table_retention_bias": table_retention_bias(records),
         "ml_main_text": ml_main_text(),
         "protocol_span": protocol_span(cs, protocol),
+        "protocol_reader": (lambda pr_: {"stats": pr_[1],
+                                         "resolution": {k: v for k, v in protocol_resolution(cs, pr_[0]).items() if k != "rows"},
+                                         "resolution_stated_seeds": {k: v for k, v in protocol_resolution(cs, pr_[0], seed_mode="stated").items() if k != "rows"}}
+                            if pr_[0] else {})(reader_protocol()),
         "protocol_stats": {
             "papers_scanned": len(protocol),
             "state_eval_episodes": sum(1 for p in protocol.values() if p.get("eval_episodes")),
