@@ -24,7 +24,7 @@ def main():
     ml = _j("out/both_years.json")["2025"]
     ml_runs = _j("out/extra_stats.json")["subset_direction"]["by_runs"]
     a = ex["summary"]
-    fig, axes = plt.subplots(1, 2, figsize=(7.0, 2.4), gridspec_kw={"width_ratios": [1.15, 1]})
+    fig, axes = plt.subplots(1, 2, figsize=(7.0, 2.7), gridspec_kw={"width_ratios": [1.15, 1]})
 
     # (a) stacked composition of comparisons
     ax = axes[0]
@@ -33,7 +33,15 @@ def main():
             ("Bars, no run count", "pct_no_n", "#787878"),
             ("Testable, fails", None, "#c0392b"),
             ("Testable, survives", None, "#27ae60")]
-    rows = [("AAMAS\n2024--26", a), ("NeurIPS/ICML\n2025", ml)]
+    rows = [("AAMAS\n2024--26\n(parser)", a), ("NeurIPS/ICML\n2025 (parser)", ml)]
+    if os.path.exists("out/aamas/gold_set_census.json"):
+        cz = _j("out/aamas/gold_set_census.json")
+        rz, fz = cz["reader"], cz["reader_failure"]
+        fail = fz["pct_fail"] if fz["n"] else 0.0
+        rows.insert(0, ("AAMAS\n2024--26\n(reader census)", {
+            "pct_neither": rz["pct_neither"], "pct_one": rz["pct_one_side"],
+            "pct_no_n": max(0.0, 100.0 - rz["pct_neither"] - rz["pct_one_side"] - rz["pct_testable"]),
+            "pct_testable": rz["pct_testable"], "pct_fail": fail}))
     for i, (name, s) in enumerate(rows):
         left = 0.0
         vals = [s["pct_neither"], s["pct_one"], s["pct_no_n"],
@@ -46,8 +54,8 @@ def main():
                 ax.text(left + v / 2, i, f"{v:.0f}%", ha="center", va="center", fontsize=6.5,
                         color="white" if color in ("#787878", "#c0392b", "#27ae60") else "black")
             left += v
-    ax.set_yticks([0, 1])
-    ax.set_yticklabels([r[0] for r in rows], fontsize=7.5)
+    ax.set_yticks(list(range(len(rows))))
+    ax.set_yticklabels([r[0] for r in rows], fontsize=7)
     ax.set_xlim(0, 100)
     ax.set_xlabel("share of highlighted comparisons (%)", fontsize=7.5)
     ax.tick_params(axis="x", labelsize=7)
