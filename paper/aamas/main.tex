@@ -35,38 +35,32 @@ on Autonomous Agents and Multiagent Systems (AAMAS 2027)}{3--7 May 2027}{Hanoi, 
 
 \begin{abstract}
 A results table marks a winner in bold and asks the reader to believe it. We
-ask how often the page prints what checking would need. A text-layer parser,
-frozen before it met this corpus, reads every main-track paper in the AAMAS
-proceedings of 2024, 2025 and 2026 (\nAPapers{} papers), finds the results
-tables whose bold marks a winner, and sets each bold cell against the best
-value the authors did not mark. Of the \nAComparisons{} highlighted
-comparisons it reads, \nAPctNeither{} print no error bar on either side
-(\nRArtefactsRemovedNeither{} with the records a reference set showed to be
-artefacts removed; \nANeitherCensusScaled{} implied by an image-based
-reader's census of random pages) and \nAPctTestable{} can be tested from
-the page (\nPagesReaderTestable{} by the reader's census). Every testable
-comparison comes from \nAPapersTestable{} papers, most of them in
-multi-agent learning, and \nAPctFail{} of them are not distinguishable from
-zero by Welch's $t$ at the authors' own run counts, \nRunsLeThreeFail{}
-where three seeds or fewer are stated and \nRunsGeSixFail{} at six or more.
-At the level of the paper, AAMAS and the main text of \nMlPapers{} NeurIPS
-and ICML papers of 2025 print a $\pm$ cell at similar rates
-(\nAPctPapersErr{} against \nMlMainPapersErr{}); among the comparisons the
-parser reads, AAMAS carries bars more often and the bars support the claim
-no more often, a comparison the parser's unequal coverage of the two formats
-qualifies. Win and success rates carry a second resolution that needs no
-error bar, the binomial noise of the evaluation protocol; among the
-\nRatePapers{} papers that highlight a rate, a language model finds the
-number of evaluation episodes stated in \nPrdReaderK{}, and on their
-comparisons \nPrdResBelow{} of the highlighted gaps fall below what that
-many episodes can resolve. On a reference set drawn from the corpus, the
-image-based reader agrees with the parser on the whole claim in \nGClaim{}
-of comparisons and on the verdict in \nGVerdict{} of those both can test;
-on random two-column pages the parser lists \nPagesReaderFoundPct{} of the
-single-bold groups the reader lists. Every number is a statement about what
-the parser reads, with that precision and that coverage, and the paper says
-which way each bias runs. We release the pipeline, the per-comparison
-database and the rendered reference set.
+ask how often the page prints what checking would need. A frozen text-layer
+parser reads every main-track paper in the AAMAS
+proceedings of 2024--2026 (\nAPapers{} papers), finds the results tables
+whose bold marks a winner, and sets each bold cell against the best value
+the authors did not mark. Of the \nAComparisons{} highlighted comparisons it
+reads, \nAPctNeither{} print no error bar on either side
+(\nANeitherCensusScaled{} by an image-based reader's census of random
+pages) and \nAPctTestable{} can be tested from the page. Every testable
+comparison comes from \nAPapersTestable{} papers, and
+\nAPctFail{} of them are not distinguishable from zero by Welch's $t$ at the
+authors' own run counts: \nRunsLeThreeFail{} where three seeds or fewer are
+stated, \nRunsGeSixFail{} at six or more. AAMAS and the main text of
+\nMlPapers{} NeurIPS and ICML papers print a $\pm$ cell at similar rates per
+paper; among the comparisons the parser reads, AAMAS carries bars more often
+and the bars support the claim no more often. Win and success rates carry a
+second resolution that needs no error bar, the binomial noise of the
+evaluation protocol; of the \nRatePapers{} papers that highlight a rate, a
+language model finds the number of evaluation episodes stated in
+\nPrdReaderK{}, and on their comparisons \nPrdResBelow{} of the highlighted
+gaps fall below what that many episodes can resolve. On a reference set the
+reader agrees with the parser on the whole claim in \nGClaim{} of
+comparisons and on the verdict in \nGVerdict{}; on random two-column pages
+the parser lists \nPagesReaderFoundPct{} of the groups the reader lists.
+Every number is a statement about what the parser reads, with that
+precision and coverage. We release the pipeline, the database and the
+reference set.
 \end{abstract}
 
 \begin{CCSXML}
