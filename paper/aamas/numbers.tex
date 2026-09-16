@@ -375,6 +375,8 @@
 \newcommand{\nCcrFirstUnmatched}{107}
 % ccr first unmatched neither: aamas_reader_cross_pilot
 \newcommand{\nCcrFirstUnmatchedNeither}{65.4\%}
+% ccr groups on empty pages pct: aamas_reader_cross_pilot
+\newcommand{\nCcrGroupsOnEmptyPagesPct}{50.3\%}
 % ccr matched: aamas_reader_cross_pilot
 \newcommand{\nCcrMatched}{86}
 % ccr matched neither agree: aamas_reader_cross_pilot
@@ -391,6 +393,10 @@
 \newcommand{\nCcrPagesFirstEmpty}{0}
 % ccr pages second empty: aamas_reader_cross_pilot
 \newcommand{\nCcrPagesSecondEmpty}{5}
+% ccr pages second empty pct: aamas_reader_cross_pilot
+\newcommand{\nCcrPagesSecondEmptyPct}{29.4\%}
+% ccr pages with groups: aamas_reader_cross_pilot
+\newcommand{\nCcrPagesWithGroups}{17}
 % ccr second groups: aamas_reader_cross_pilot
 \newcommand{\nCcrSecondGroups}{102}
 % ccr second neither: aamas_reader_cross_pilot
@@ -401,6 +407,10 @@
 \newcommand{\nCcrSharedBothTested}{15}
 % ccr shared fail agree: aamas_reader_cross_pilot
 \newcommand{\nCcrSharedFailAgree}{15}
+% ccr shared fail first: aamas_reader_cross_pilot
+\newcommand{\nCcrSharedFailFirst}{20.0\%}
+% ccr shared fail second: aamas_reader_cross_pilot
+\newcommand{\nCcrSharedFailSecond}{26.3\%}
 % ccr shared first groups: aamas_reader_cross_pilot
 \newcommand{\nCcrSharedFirstGroups}{96}
 % ccr shared first neither: aamas_reader_cross_pilot
@@ -421,12 +431,20 @@
 \newcommand{\nCcrSharedSecondNeither}{40.2\%}
 % ccr shared second testable: aamas_reader_cross_pilot
 \newcommand{\nCcrSharedSecondTestable}{18.6\%}
+% ccr shared testable agree pct: aamas_reader_cross_pilot
+\newcommand{\nCcrSharedTestableAgreePct}{95.3\%}
+% ccr shared tested first: aamas_reader_cross_pilot
+\newcommand{\nCcrSharedTestedFirst}{15}
+% ccr shared tested second: aamas_reader_cross_pilot
+\newcommand{\nCcrSharedTestedSecond}{19}
 % ccr tested first: aamas_reader_cross_pilot
 \newcommand{\nCcrTestedFirst}{15}
 % ccr tested second: aamas_reader_cross_pilot
 \newcommand{\nCcrTestedSecond}{19}
 % ccr unmatched on empty pages: aamas_reader_cross_pilot
 \newcommand{\nCcrUnmatchedOnEmptyPages}{97}
+% ccr unmatched on shared pages: aamas_reader_cross_pilot
+\newcommand{\nCcrUnmatchedOnSharedPages}{10}
 % claim papers: aamas_make_all
 \newcommand{\nClaimPapers}{246}
 % claim papers with pm: aamas_make_all
@@ -528,9 +546,15 @@
 % cz reader only n: aamas_gold_set_census
 \newcommand{\nCzReaderOnlyN}{377}
 % cz reader se fail: aamas_gold_set_census
-\newcommand{\nCzReaderSeFail}{79.5\%}
+\newcommand{\nCzReaderSeFail}{69.0\%}
 % cz reader se n: aamas_gold_set_census
-\newcommand{\nCzReaderSeN}{772}
+\newcommand{\nCzReaderSeN}{883}
+% cz reader unlabelled as sd fail: aamas_gold_set_census
+\newcommand{\nCzReaderUnlabelledAsSdFail}{54.6\%}
+% cz reader unlabelled as se fail: aamas_gold_set_census
+\newcommand{\nCzReaderUnlabelledAsSeFail}{84.6\%}
+% cz reader unlabelled n: aamas_gold_set_census
+\newcommand{\nCzReaderUnlabelledN}{434}
 % cz reader unlabelled pct: aamas_gold_set_census
 \newcommand{\nCzReaderUnlabelledPct}{49.2\%}
 % cz reader unmatched groups: aamas_gold_set_census
@@ -577,6 +601,30 @@
 \newcommand{\nDdofFail}{55.4\%}
 % ddof n: aamas_make_all
 \newcommand{\nDdofN}{659}
+% ec comparisons: aamas_make_all
+\newcommand{\nEcComparisons}{295}
+% ec none comparisons: aamas_make_all
+\newcommand{\nEcNoneComparisons}{245}
+% ec none neither: aamas_make_all
+\newcommand{\nEcNoneNeither}{76.3\%}
+% ec none pages: aamas_make_all
+\newcommand{\nEcNonePages}{70}
+% ec none testable: aamas_make_all
+\newcommand{\nEcNoneTestable}{24}
+% ec notable comparisons: aamas_make_all
+\newcommand{\nEcNotableComparisons}{50}
+% ec notable neither: aamas_make_all
+\newcommand{\nEcNotableNeither}{100.0\%}
+% ec notable pages: aamas_make_all
+\newcommand{\nEcNotablePages}{36}
+% ec notable testable: aamas_make_all
+\newcommand{\nEcNotableTestable}{0}
+% ec pages: aamas_make_all
+\newcommand{\nEcPages}{106}
+% ec pages pct: aamas_make_all
+\newcommand{\nEcPagesPct}{31.4\%}
+% ec parser pages: aamas_make_all
+\newcommand{\nEcParserPages}{338}
 % env atari comparisons: aamas_make_all
 \newcommand{\nEnvAtariComparisons}{32}
 % env atari fail: aamas_make_all
@@ -711,6 +759,54 @@
 \newcommand{\nFigCaptionUncPapersPct}{24.2\%}
 % fig caption unc testable papers: aamas_make_all
 \newcommand{\nFigCaptionUncTestablePapers}{33}
+% fm aamas rest fail: aamas_make_all
+\newcommand{\nFmAamasRestFail}{41.6\%}
+% fm aamas rest fail ci: aamas_make_all
+\newcommand{\nFmAamasRestFailCi}{[30.0, 55.1]}
+% fm aamas rest n: aamas_make_all
+\newcommand{\nFmAamasRestN}{385}
+% fm aamas rest papers: aamas_make_all
+\newcommand{\nFmAamasRestPapers}{48}
+% fm aamas rl fail: aamas_make_all
+\newcommand{\nFmAamasRlFail}{67.9\%}
+% fm aamas rl fail ci: aamas_make_all
+\newcommand{\nFmAamasRlFailCi}{[54.7, 79.0]}
+% fm aamas rl n: aamas_make_all
+\newcommand{\nFmAamasRlN}{274}
+% fm aamas rl papers: aamas_make_all
+\newcommand{\nFmAamasRlPapers}{23}
+% fm ml rest fail: aamas_make_all
+\newcommand{\nFmMlRestFail}{47.2\%}
+% fm ml rest fail ci: aamas_make_all
+\newcommand{\nFmMlRestFailCi}{[41.6, 52.6]}
+% fm ml rest n: aamas_make_all
+\newcommand{\nFmMlRestN}{5148}
+% fm ml rest papers: aamas_make_all
+\newcommand{\nFmMlRestPapers}{238}
+% fm ml rl fail: aamas_make_all
+\newcommand{\nFmMlRlFail}{53.9\%}
+% fm ml rl fail ci: aamas_make_all
+\newcommand{\nFmMlRlFailCi}{[46.5, 64.0]}
+% fm ml rl n: aamas_make_all
+\newcommand{\nFmMlRlN}{317}
+% fm ml rl papers: aamas_make_all
+\newcommand{\nFmMlRlPapers}{18}
+% fm mlmain rest fail: aamas_make_all
+\newcommand{\nFmMlmainRestFail}{44.6\%}
+% fm mlmain rest fail ci: aamas_make_all
+\newcommand{\nFmMlmainRestFailCi}{[38.8, 50.2]}
+% fm mlmain rest n: aamas_make_all
+\newcommand{\nFmMlmainRestN}{2116}
+% fm mlmain rest papers: aamas_make_all
+\newcommand{\nFmMlmainRestPapers}{173}
+% fm mlmain rl fail: aamas_make_all
+\newcommand{\nFmMlmainRlFail}{50.0\%}
+% fm mlmain rl fail ci: aamas_make_all
+\newcommand{\nFmMlmainRlFailCi}{[38.9, 58.7]}
+% fm mlmain rl n: aamas_make_all
+\newcommand{\nFmMlmainRlN}{94}
+% fm mlmain rl papers: aamas_make_all
+\newcommand{\nFmMlmainRlPapers}{7}
 % g bold cell: aamas_gold_set
 \newcommand{\nGBoldCell}{94.7\% [88.3, 97.7]}
 % g bold cell frac: aamas_gold_set
@@ -971,6 +1067,8 @@
 \newcommand{\nMsCrossFirstUnmatched}{483}
 % ms cross first unmatched neither: aamas_census_checks
 \newcommand{\nMsCrossFirstUnmatchedNeither}{77.8\%}
+% ms cross groups on empty pages pct: aamas_census_checks
+\newcommand{\nMsCrossGroupsOnEmptyPagesPct}{23.4\%}
 % ms cross matched: aamas_census_checks
 \newcommand{\nMsCrossMatched}{973}
 % ms cross matched neither agree: aamas_census_checks
@@ -987,6 +1085,10 @@
 \newcommand{\nMsCrossPagesFirstEmpty}{2}
 % ms cross pages second empty: aamas_census_checks
 \newcommand{\nMsCrossPagesSecondEmpty}{17}
+% ms cross pages second empty pct: aamas_census_checks
+\newcommand{\nMsCrossPagesSecondEmptyPct}{15.0\%}
+% ms cross pages with groups: aamas_census_checks
+\newcommand{\nMsCrossPagesWithGroups}{113}
 % ms cross second groups: aamas_census_checks
 \newcommand{\nMsCrossSecondGroups}{1083}
 % ms cross second neither: aamas_census_checks
@@ -997,6 +1099,10 @@
 \newcommand{\nMsCrossSharedBothTested}{121}
 % ms cross shared fail agree: aamas_census_checks
 \newcommand{\nMsCrossSharedFailAgree}{121}
+% ms cross shared fail first: aamas_census_checks
+\newcommand{\nMsCrossSharedFailFirst}{34.9\%}
+% ms cross shared fail second: aamas_census_checks
+\newcommand{\nMsCrossSharedFailSecond}{43.6\%}
 % ms cross shared first groups: aamas_census_checks
 \newcommand{\nMsCrossSharedFirstGroups}{1116}
 % ms cross shared first neither: aamas_census_checks
@@ -1017,12 +1123,20 @@
 \newcommand{\nMsCrossSharedSecondNeither}{81.3\%}
 % ms cross shared second testable: aamas_census_checks
 \newcommand{\nMsCrossSharedSecondTestable}{14.5\%}
+% ms cross shared testable agree pct: aamas_census_checks
+\newcommand{\nMsCrossSharedTestableAgreePct}{97.9\%}
+% ms cross shared tested first: aamas_census_checks
+\newcommand{\nMsCrossSharedTestedFirst}{129}
+% ms cross shared tested second: aamas_census_checks
+\newcommand{\nMsCrossSharedTestedSecond}{149}
 % ms cross tested first: aamas_census_checks
 \newcommand{\nMsCrossTestedFirst}{178}
 % ms cross tested second: aamas_census_checks
 \newcommand{\nMsCrossTestedSecond}{151}
 % ms cross unmatched on empty pages: aamas_census_checks
 \newcommand{\nMsCrossUnmatchedOnEmptyPages}{340}
+% ms cross unmatched on shared pages: aamas_census_checks
+\newcommand{\nMsCrossUnmatchedOnSharedPages}{143}
 % ms fail: aamas_census_checks
 \newcommand{\nMsFail}{43.5\%}
 % ms fail n: aamas_census_checks
@@ -1310,7 +1424,7 @@
 % penv other or none of these modal k: aamas_protocol_reader2
 \newcommand{\nPenvOtherOrNoneOfTheseModalK}{100 (14)}
 % penv other or none of these modal seeds: aamas_protocol_reader2
-\newcommand{\nPenvOtherOrNoneOfTheseModalSeeds}{5 (29)}
+\newcommand{\nPenvOtherOrNoneOfTheseModalSeeds}{5 (28)}
 % penv other or none of these papers: aamas_protocol_reader2
 \newcommand{\nPenvOtherOrNoneOfThesePapers}{156}
 % penv other or none of these resolution: aamas_protocol_reader2
@@ -1320,7 +1434,7 @@
 % penv other or none of these state k: aamas_protocol_reader2
 \newcommand{\nPenvOtherOrNoneOfTheseStateK}{43.6\%}
 % penv other or none of these state seeds: aamas_protocol_reader2
-\newcommand{\nPenvOtherOrNoneOfTheseStateSeeds}{55.1\%}
+\newcommand{\nPenvOtherOrNoneOfTheseStateSeeds}{54.5\%}
 % penv other or none of these testable: aamas_protocol_reader2
 \newcommand{\nPenvOtherOrNoneOfTheseTestable}{209}
 % penv other or none of these testable papers: aamas_protocol_reader2
@@ -1576,7 +1690,7 @@
 % ptwo first both: aamas_protocol_reader2
 \newcommand{\nPtwoFirstBoth}{10}
 % ptwo first both seeds: aamas_protocol_reader2
-\newcommand{\nPtwoFirstBothSeeds}{13}
+\newcommand{\nPtwoFirstBothSeeds}{12}
 % ptwo first first k second none: aamas_protocol_reader2
 \newcommand{\nPtwoFirstFirstKSecondNone}{0}
 % ptwo first second k first none: aamas_protocol_reader2
@@ -1589,6 +1703,10 @@
 \newcommand{\nPtwoFollowsStandardSetup}{19}
 % ptwo framework named: aamas_protocol_reader2
 \newcommand{\nPtwoFrameworkNamed}{63}
+% ptwo k papers marl bench: aamas_protocol_reader2
+\newcommand{\nPtwoKPapersMarlBench}{0}
+% ptwo k papers single: aamas_protocol_reader2
+\newcommand{\nPtwoKPapersSingle}{5}
 % ptwo papers: aamas_protocol_reader2
 \newcommand{\nPtwoPapers}{322}
 % ptwo rate papers: aamas_protocol_reader2
@@ -1604,9 +1722,9 @@
 % ptwo rate papers with k: aamas_protocol_reader2
 \newcommand{\nPtwoRatePapersWithK}{8}
 % ptwo rate papers with k inherited: aamas_protocol_reader2
-\newcommand{\nPtwoRatePapersWithKInherited}{15}
+\newcommand{\nPtwoRatePapersWithKInherited}{14}
 % ptwo rate papers with seeds: aamas_protocol_reader2
-\newcommand{\nPtwoRatePapersWithSeeds}{11}
+\newcommand{\nPtwoRatePapersWithSeeds}{10}
 % ptwo regex agree k: aamas_protocol_reader2
 \newcommand{\nPtwoRegexAgreeK}{33}
 % ptwo regex agree seeds: aamas_protocol_reader2
@@ -1620,25 +1738,37 @@
 % ptwo regex regex k only: aamas_protocol_reader2
 \newcommand{\nPtwoRegexRegexKOnly}{6}
 % ptwo res inherited below: aamas_protocol_reader2
-\newcommand{\nPtwoResInheritedBelow}{66.2\%}
+\newcommand{\nPtwoResInheritedBelow}{65.2\%}
 % ptwo res inherited below paper ci: aamas_protocol_reader2
-\newcommand{\nPtwoResInheritedBelowPaperCi}{[47.1, 80.6]}
+\newcommand{\nPtwoResInheritedBelowPaperCi}{[44.8, 80.8]}
+% ptwo res inherited cv folds: aamas_protocol_reader2
+\newcommand{\nPtwoResInheritedCvFolds}{8}
 % ptwo res inherited indep below: aamas_protocol_reader2
-\newcommand{\nPtwoResInheritedIndepBelow}{34}
+\newcommand{\nPtwoResInheritedIndepBelow}{29}
 % ptwo res inherited indep n: aamas_protocol_reader2
-\newcommand{\nPtwoResInheritedIndepN}{52}
+\newcommand{\nPtwoResInheritedIndepN}{44}
 % ptwo res inherited indep papers: aamas_protocol_reader2
-\newcommand{\nPtwoResInheritedIndepPapers}{9}
+\newcommand{\nPtwoResInheritedIndepPapers}{8}
+% ptwo res inherited lattice below: aamas_protocol_reader2
+\newcommand{\nPtwoResInheritedLatticeBelow}{23}
+% ptwo res inherited lattice below pct: aamas_protocol_reader2
+\newcommand{\nPtwoResInheritedLatticeBelowPct}{71.9\%}
+% ptwo res inherited lattice consistent: aamas_protocol_reader2
+\newcommand{\nPtwoResInheritedLatticeConsistent}{32}
+% ptwo res inherited lattice consistent papers: aamas_protocol_reader2
+\newcommand{\nPtwoResInheritedLatticeConsistentPapers}{8}
+% ptwo res inherited lattice papers all consistent: aamas_protocol_reader2
+\newcommand{\nPtwoResInheritedLatticePapersAllConsistent}{5}
 % ptwo res inherited n: aamas_protocol_reader2
-\newcommand{\nPtwoResInheritedN}{77}
+\newcommand{\nPtwoResInheritedN}{69}
 % ptwo res inherited papers: aamas_protocol_reader2
-\newcommand{\nPtwoResInheritedPapers}{15}
+\newcommand{\nPtwoResInheritedPapers}{14}
 % ptwo res inherited rate like: aamas_protocol_reader2
 \newcommand{\nPtwoResInheritedRateLike}{102}
 % ptwo res inherited seed assumed one: aamas_protocol_reader2
-\newcommand{\nPtwoResInheritedSeedAssumedOne}{5.2\%}
+\newcommand{\nPtwoResInheritedSeedAssumedOne}{5.8\%}
 % ptwo res inherited shared below: aamas_protocol_reader2
-\newcommand{\nPtwoResInheritedSharedBelow}{17}
+\newcommand{\nPtwoResInheritedSharedBelow}{16}
 % ptwo res inherited shared n: aamas_protocol_reader2
 \newcommand{\nPtwoResInheritedSharedN}{25}
 % ptwo res inherited shared paired below: aamas_protocol_reader2
@@ -1646,13 +1776,13 @@
 % ptwo res inherited shared papers: aamas_protocol_reader2
 \newcommand{\nPtwoResInheritedSharedPapers}{6}
 % ptwo res inherited welch pass: aamas_protocol_reader2
-\newcommand{\nPtwoResInheritedWelchPass}{16}
+\newcommand{\nPtwoResInheritedWelchPass}{11}
 % ptwo res inherited welch pass below: aamas_protocol_reader2
-\newcommand{\nPtwoResInheritedWelchPassBelow}{8}
+\newcommand{\nPtwoResInheritedWelchPassBelow}{6}
 % ptwo res or one below: aamas_protocol_reader2
-\newcommand{\nPtwoResOrOneBelow}{59.4\%}
+\newcommand{\nPtwoResOrOneBelow}{56.2\%}
 % ptwo res or one below paper ci: aamas_protocol_reader2
-\newcommand{\nPtwoResOrOneBelowPaperCi}{[25.0, 86.7]}
+\newcommand{\nPtwoResOrOneBelowPaperCi}{[24.0, 82.1]}
 % ptwo res or one n: aamas_protocol_reader2
 \newcommand{\nPtwoResOrOneN}{32}
 % ptwo res or one papers: aamas_protocol_reader2
@@ -1662,15 +1792,27 @@
 % ptwo res or one seed assumed one: aamas_protocol_reader2
 \newcommand{\nPtwoResOrOneSeedAssumedOne}{53.1\%}
 % ptwo res typed below: aamas_protocol_reader2
-\newcommand{\nPtwoResTypedBelow}{59.4\%}
+\newcommand{\nPtwoResTypedBelow}{56.2\%}
 % ptwo res typed below paper ci: aamas_protocol_reader2
-\newcommand{\nPtwoResTypedBelowPaperCi}{[25.0, 86.7]}
+\newcommand{\nPtwoResTypedBelowPaperCi}{[24.0, 82.1]}
+% ptwo res typed cv folds: aamas_protocol_reader2
+\newcommand{\nPtwoResTypedCvFolds}{8}
 % ptwo res typed indep below: aamas_protocol_reader2
 \newcommand{\nPtwoResTypedIndepBelow}{2}
 % ptwo res typed indep n: aamas_protocol_reader2
 \newcommand{\nPtwoResTypedIndepN}{7}
 % ptwo res typed indep papers: aamas_protocol_reader2
 \newcommand{\nPtwoResTypedIndepPapers}{2}
+% ptwo res typed lattice below: aamas_protocol_reader2
+\newcommand{\nPtwoResTypedLatticeBelow}{13}
+% ptwo res typed lattice below pct: aamas_protocol_reader2
+\newcommand{\nPtwoResTypedLatticeBelowPct}{72.2\%}
+% ptwo res typed lattice consistent: aamas_protocol_reader2
+\newcommand{\nPtwoResTypedLatticeConsistent}{18}
+% ptwo res typed lattice consistent papers: aamas_protocol_reader2
+\newcommand{\nPtwoResTypedLatticeConsistentPapers}{4}
+% ptwo res typed lattice papers all consistent: aamas_protocol_reader2
+\newcommand{\nPtwoResTypedLatticePapersAllConsistent}{3}
 % ptwo res typed n: aamas_protocol_reader2
 \newcommand{\nPtwoResTypedN}{32}
 % ptwo res typed papers: aamas_protocol_reader2
@@ -1680,7 +1822,7 @@
 % ptwo res typed seed assumed one: aamas_protocol_reader2
 \newcommand{\nPtwoResTypedSeedAssumedOne}{12.5\%}
 % ptwo res typed shared below: aamas_protocol_reader2
-\newcommand{\nPtwoResTypedSharedBelow}{17}
+\newcommand{\nPtwoResTypedSharedBelow}{16}
 % ptwo res typed shared n: aamas_protocol_reader2
 \newcommand{\nPtwoResTypedSharedN}{25}
 % ptwo res typed shared paired below: aamas_protocol_reader2
@@ -1710,43 +1852,43 @@
 % ptwo smac family: aamas_protocol_reader2
 \newcommand{\nPtwoSmacFamily}{35}
 % ptwo smac family no k: aamas_protocol_reader2
-\newcommand{\nPtwoSmacFamilyNoK}{25}
+\newcommand{\nPtwoSmacFamilyNoK}{23}
 % ptwo span inh k times seeds for all below: aamas_protocol_reader2
-\newcommand{\nPtwoSpanInhKTimesSeedsForAllBelow}{64.9\%}
+\newcommand{\nPtwoSpanInhKTimesSeedsForAllBelow}{65.2\%}
 % ptwo span inh k times seeds for all n: aamas_protocol_reader2
-\newcommand{\nPtwoSpanInhKTimesSeedsForAllN}{77}
+\newcommand{\nPtwoSpanInhKTimesSeedsForAllN}{69}
 % ptwo span inh k times seeds for all papers: aamas_protocol_reader2
-\newcommand{\nPtwoSpanInhKTimesSeedsForAllPapers}{15}
+\newcommand{\nPtwoSpanInhKTimesSeedsForAllPapers}{14}
 % ptwo span inh seeds one for all below: aamas_protocol_reader2
-\newcommand{\nPtwoSpanInhSeedsOneForAllBelow}{75.3\%}
+\newcommand{\nPtwoSpanInhSeedsOneForAllBelow}{75.4\%}
 % ptwo span inh seeds one for all n: aamas_protocol_reader2
-\newcommand{\nPtwoSpanInhSeedsOneForAllN}{77}
+\newcommand{\nPtwoSpanInhSeedsOneForAllN}{69}
 % ptwo span inh seeds one for all papers: aamas_protocol_reader2
-\newcommand{\nPtwoSpanInhSeedsOneForAllPapers}{15}
+\newcommand{\nPtwoSpanInhSeedsOneForAllPapers}{14}
 % ptwo span inh seeds stated only below: aamas_protocol_reader2
-\newcommand{\nPtwoSpanInhSeedsStatedOnlyBelow}{68.3\%}
+\newcommand{\nPtwoSpanInhSeedsStatedOnlyBelow}{67.3\%}
 % ptwo span inh seeds stated only n: aamas_protocol_reader2
-\newcommand{\nPtwoSpanInhSeedsStatedOnlyN}{60}
+\newcommand{\nPtwoSpanInhSeedsStatedOnlyN}{52}
 % ptwo span inh seeds stated only papers: aamas_protocol_reader2
-\newcommand{\nPtwoSpanInhSeedsStatedOnlyPapers}{10}
+\newcommand{\nPtwoSpanInhSeedsStatedOnlyPapers}{9}
 % ptwo span inh seeds stated or five below: aamas_protocol_reader2
-\newcommand{\nPtwoSpanInhSeedsStatedOrFiveBelow}{61.0\%}
+\newcommand{\nPtwoSpanInhSeedsStatedOrFiveBelow}{59.4\%}
 % ptwo span inh seeds stated or five n: aamas_protocol_reader2
-\newcommand{\nPtwoSpanInhSeedsStatedOrFiveN}{77}
+\newcommand{\nPtwoSpanInhSeedsStatedOrFiveN}{69}
 % ptwo span inh seeds stated or five papers: aamas_protocol_reader2
-\newcommand{\nPtwoSpanInhSeedsStatedOrFivePapers}{15}
+\newcommand{\nPtwoSpanInhSeedsStatedOrFivePapers}{14}
 % ptwo span inh seeds stated or one below: aamas_protocol_reader2
-\newcommand{\nPtwoSpanInhSeedsStatedOrOneBelow}{66.2\%}
+\newcommand{\nPtwoSpanInhSeedsStatedOrOneBelow}{65.2\%}
 % ptwo span inh seeds stated or one n: aamas_protocol_reader2
-\newcommand{\nPtwoSpanInhSeedsStatedOrOneN}{77}
+\newcommand{\nPtwoSpanInhSeedsStatedOrOneN}{69}
 % ptwo span inh seeds stated or one papers: aamas_protocol_reader2
-\newcommand{\nPtwoSpanInhSeedsStatedOrOnePapers}{15}
+\newcommand{\nPtwoSpanInhSeedsStatedOrOnePapers}{14}
 % ptwo span inh typed below: aamas_protocol_reader2
-\newcommand{\nPtwoSpanInhTypedBelow}{66.2\%}
+\newcommand{\nPtwoSpanInhTypedBelow}{65.2\%}
 % ptwo span inh typed n: aamas_protocol_reader2
-\newcommand{\nPtwoSpanInhTypedN}{77}
+\newcommand{\nPtwoSpanInhTypedN}{69}
 % ptwo span inh typed papers: aamas_protocol_reader2
-\newcommand{\nPtwoSpanInhTypedPapers}{15}
+\newcommand{\nPtwoSpanInhTypedPapers}{14}
 % ptwo span k times seeds for all below: aamas_protocol_reader2
 \newcommand{\nPtwoSpanKTimesSeedsForAllBelow}{56.2\%}
 % ptwo span k times seeds for all n: aamas_protocol_reader2
@@ -1754,31 +1896,31 @@
 % ptwo span k times seeds for all papers: aamas_protocol_reader2
 \newcommand{\nPtwoSpanKTimesSeedsForAllPapers}{8}
 % ptwo span seeds one for all below: aamas_protocol_reader2
-\newcommand{\nPtwoSpanSeedsOneForAllBelow}{65.6\%}
+\newcommand{\nPtwoSpanSeedsOneForAllBelow}{62.5\%}
 % ptwo span seeds one for all n: aamas_protocol_reader2
 \newcommand{\nPtwoSpanSeedsOneForAllN}{32}
 % ptwo span seeds one for all papers: aamas_protocol_reader2
 \newcommand{\nPtwoSpanSeedsOneForAllPapers}{8}
 % ptwo span seeds stated only below: aamas_protocol_reader2
-\newcommand{\nPtwoSpanSeedsStatedOnlyBelow}{60.0\%}
+\newcommand{\nPtwoSpanSeedsStatedOnlyBelow}{53.3\%}
 % ptwo span seeds stated only n: aamas_protocol_reader2
 \newcommand{\nPtwoSpanSeedsStatedOnlyN}{15}
 % ptwo span seeds stated only papers: aamas_protocol_reader2
 \newcommand{\nPtwoSpanSeedsStatedOnlyPapers}{3}
 % ptwo span seeds stated or five below: aamas_protocol_reader2
-\newcommand{\nPtwoSpanSeedsStatedOrFiveBelow}{46.9\%}
+\newcommand{\nPtwoSpanSeedsStatedOrFiveBelow}{43.8\%}
 % ptwo span seeds stated or five n: aamas_protocol_reader2
 \newcommand{\nPtwoSpanSeedsStatedOrFiveN}{32}
 % ptwo span seeds stated or five papers: aamas_protocol_reader2
 \newcommand{\nPtwoSpanSeedsStatedOrFivePapers}{8}
 % ptwo span seeds stated or one below: aamas_protocol_reader2
-\newcommand{\nPtwoSpanSeedsStatedOrOneBelow}{59.4\%}
+\newcommand{\nPtwoSpanSeedsStatedOrOneBelow}{56.2\%}
 % ptwo span seeds stated or one n: aamas_protocol_reader2
 \newcommand{\nPtwoSpanSeedsStatedOrOneN}{32}
 % ptwo span seeds stated or one papers: aamas_protocol_reader2
 \newcommand{\nPtwoSpanSeedsStatedOrOnePapers}{8}
 % ptwo span typed below: aamas_protocol_reader2
-\newcommand{\nPtwoSpanTypedBelow}{59.4\%}
+\newcommand{\nPtwoSpanTypedBelow}{56.2\%}
 % ptwo span typed n: aamas_protocol_reader2
 \newcommand{\nPtwoSpanTypedN}{32}
 % ptwo span typed papers: aamas_protocol_reader2
@@ -1788,9 +1930,9 @@
 % ptwo with k pct: aamas_protocol_reader2
 \newcommand{\nPtwoWithKPct}{38.8\%}
 % ptwo with seeds: aamas_protocol_reader2
-\newcommand{\nPtwoWithSeeds}{207}
+\newcommand{\nPtwoWithSeeds}{206}
 % ptwo with seeds pct: aamas_protocol_reader2
-\newcommand{\nPtwoWithSeedsPct}{64.3\%}
+\newcommand{\nPtwoWithSeedsPct}{64.0\%}
 % r ablation only fail: aamas_make_all
 \newcommand{\nRAblationOnlyFail}{30.2\%}
 % r ablation only fail ci: aamas_make_all

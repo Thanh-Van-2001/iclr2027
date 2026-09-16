@@ -190,14 +190,27 @@ def protocol_resolution(comparisons: list, protocol: dict, alpha: float = 0.05, 
         if seed_mode == "one":
             s = None
         fixed = p.get("episodes_kind") == "fixed_instances"
-        if fixed and seed_mode != "kxs_all":
+        if p.get("cv_folds") and seed_mode != "kxs_all":
+            # cross-validation: K instances per fold, the folds disjoint
+            n = k * p["cv_folds"]
+        elif fixed and seed_mode != "kxs_all":
             # a fixed set of K instances: seeds re-run the same items and do
             # not multiply the trials; the rule holds in every seed mode (an
             # earlier version applied it in one mode only, a reviewer found)
             n = k
         else:
             n = k * (s or (5 if seed_mode == "or_five" else 1))
+        # a rate over n trials is a multiple of 1/n: a printed value off that
+        # lattice, beyond its own rounding, says the count is not n (a mean
+        # over runs the page does not count, or a misread K); the check is
+        # the automated validation of every K reading
         scale = 100.0 if kind == "percent" else 1.0
+        def _on_lattice(v):
+            digits = len(str(v).split(".")[1]) if "." in str(v) else 0
+            half_unit = 0.5 * 10 ** (-digits) / scale
+            x = (v / scale) * n
+            return abs(x - round(x)) <= half_unit * n + 1e-9
+        lattice_ok = _on_lattice(c["winner"]) and _on_lattice(c["runner_up"])
         pw, pr = c["winner"] / scale, c["runner_up"] / scale
         pw, pr = min(max(pw, 0.0), 1.0), min(max(pr, 0.0), 1.0)
         se = math.sqrt(max(pw * (1 - pw), 1e-9) / n + max(pr * (1 - pr), 1e-9) / n)
@@ -217,6 +230,7 @@ def protocol_resolution(comparisons: list, protocol: dict, alpha: float = 0.05, 
         rows.append({"paper": c["paper"], "table": c["table"], "k": k, "seeds": s, "n": n,
                      "fixed_instances": fixed, "k_inherited": bool(p.get("k_inherited")),
                      "shares_eval": shares, "below_paired_floor": gap < 6.0 / k,
+                     "lattice_ok": lattice_ok, "cv_folds": p.get("cv_folds"),
                      "gap": round(gap, 4), "resolvable": round(newcombe, 4), "below": gap < newcombe,
                      "resolvable_wald": round(z * se, 4), "below_wald": gap < z * se,
                      "has_bars": c["winner_dispersion"] is not None and c["runner_dispersion"] is not None,
@@ -258,6 +272,13 @@ def protocol_resolution(comparisons: list, protocol: dict, alpha: float = 0.05, 
                                         "papers": len({r["paper"] for r in rows if not r["shares_eval"]})},
             "welch_pass_below": {"n": sum(1 for r in rows if r["welch_pass"]),
                                  "below": sum(1 for r in rows if r["welch_pass"] and r["below"])},
+            "lattice": {"n": len(rows), "consistent": sum(1 for r in rows if r["lattice_ok"]),
+                        "consistent_papers": len({r["paper"] for r in rows if r["lattice_ok"]}),
+                        "papers_all_consistent": len({pp for pp in papers if all(r["lattice_ok"] for r in rows if r["paper"] == pp)}),
+                        "below_among_consistent": sum(1 for r in rows if r["lattice_ok"] and r["below"]),
+                        "pct_below_among_consistent": round(100 * sum(1 for r in rows if r["lattice_ok"] and r["below"]) /
+                                                            max(sum(1 for r in rows if r["lattice_ok"]), 1), 1)},
+            "cv_fold_comparisons": sum(1 for r in rows if r["cv_folds"]),
             "below_among_bar_less": {
                 "n": sum(1 for r in rows if not r["has_bars"]),
                 "below": sum(1 for r in rows if not r["has_bars"] and r["below"])},
@@ -783,9 +804,19 @@ def reader_protocol2(path: str = "out/aamas/protocol_reader2.json") -> tuple:
                 "shares_eval_episodes": d.get("shares_eval_episodes"), "sd_over": d.get("sd_over")}
         proto[pid] = base
         inh = dict(base)
-        if not k and any(str(e).startswith(SMAC_FAMILY) for e in envs):
+        # PyMARL's default is imputed to a SMAC-family paper stating no K unless
+        # it names another codebase (JaxMARL, MARLlib ...), whose defaults differ
+        fw = (d.get("framework") or "").lower()
+        if not k and any(str(e).startswith(SMAC_FAMILY) for e in envs) and (not fw or "pymarl" in fw or "epymarl" in fw):
             inh["eval_episodes"] = PYMARL_TEST_NEPISODE
             inh["k_inherited"] = True
+        # cross-validation over a fixed set tests disjoint folds: the instances
+        # multiply, the seeds do not (the model reads the folds as seeds)
+        sent = f"{d.get('eval_sentence', '')} {d.get('seed_sentence', '')}".lower()
+        if base["episodes_kind"] == "fixed_instances" and "cross-validation" in sent.replace(" ", "-") and sd:
+            for dct in (base, inh):
+                dct["cv_folds"] = sd
+                dct["seeds"] = None
         inherited[pid] = inh
     n = len(proto)
     stats = {"papers": n,
@@ -875,6 +906,66 @@ def single_column_reference(path: str = "out/aamas/gold_set_ml_pages_first_reade
             "reader_pct_testable": d["reader"]["pct_testable"], "reader_ci_testable": d["reader"]["ci_testable"],
             "pipe_pct_neither": d["pipeline_same_pages"]["pct_neither"],
             "pipe_pct_testable": d["pipeline_same_pages"]["pct_testable"]}
+
+
+def empty_census_pages(comparisons: list, items_path: str = "audits/aamas_census/items.json",
+                       labels_path: str = "audits/aamas_census/labels.json") -> dict:
+    """The pages on which the parser reads a comparison and the census listed
+    no group, split by what the reader said of the page: a results table
+    whose bold it read as marking no single winner per line (orientation
+    none), or no results table at all; with the parser's comparisons and
+    their bar-less and testable counts on each."""
+    if not (os.path.exists(items_path) and os.path.exists(labels_path)):
+        return {}
+    items = {it["id"]: it for it in json.load(open(items_path, encoding="utf-8"))}
+    labels = {p["id"]: p for p in json.load(open(labels_path, encoding="utf-8"))}
+    by_page = collections.defaultdict(list)
+    for c in comparisons:
+        by_page[(c["paper"], c["page"])].append(c)
+    out = {"orientation_none": {"pages": 0, "comparisons": 0, "neither": 0, "testable": 0},
+           "no_results_table": {"pages": 0, "comparisons": 0, "neither": 0, "testable": 0}}
+    for iid, lab in labels.items():
+        it = items.get(iid)
+        if it is None:
+            continue
+        groups = sum(len(t.get("groups", [])) for t in lab.get("tables", []) if str(t.get("results_table", "")).lower().startswith("y"))
+        cs_ = by_page.get((it["paper"], it["page"]), [])
+        if groups or not cs_:
+            continue
+        results = any(str(t.get("results_table", "")).lower().startswith("y") for t in lab.get("tables", []))
+        key = "orientation_none" if results else "no_results_table"
+        out[key]["pages"] += 1
+        out[key]["comparisons"] += len(cs_)
+        out[key]["neither"] += sum(1 for c in cs_ if c["winner_dispersion"] is None and c["runner_dispersion"] is None)
+        out[key]["testable"] += sum(1 for c in cs_ if c.get("test"))
+    for k in out:
+        d = out[k]
+        d["pct_neither"] = round(100 * d["neither"] / d["comparisons"], 1) if d["comparisons"] else None
+    out["pages"] = out["orientation_none"]["pages"] + out["no_results_table"]["pages"]
+    out["comparisons"] = out["orientation_none"]["comparisons"] + out["no_results_table"]["comparisons"]
+    out["parser_pages_with_comparisons"] = len({k for k, v in by_page.items() if v})
+    return out
+
+
+def family_matched_mainstream(aamas_cs: list, ml_path: str = "out/analysis_2025.json") -> dict:
+    """The failure rate of the two venues within the RL environment families
+    the captions name and outside them: the pooled venue comparison mixes
+    RL tables with leaderboard tables, and the family split is the reading a
+    reviewer asked for. The same caption patterns on both corpora."""
+    if not os.path.exists(ml_path):
+        return {}
+    ml = json.load(open(ml_path, encoding="utf-8"))["_comparisons"]
+    # the RL families only: routing and scheduling tables are not RL evaluations
+    fams = [re.compile(pat, re.I) for name, pat in ENV_FAMILIES if not name.startswith("Path")]
+
+    def split(cs):
+        t = [c for c in cs if c.get("test")]
+        rl = [c for c in t if any(f.search(c.get("caption", "") or "") for f in fams)]
+        rest = [c for c in t if c not in rl]
+        return {"rl": _rates(rl), "rest": _rates(rest)}
+    limit = {"NeurIPS": 9, "ICML": 8}
+    return {"aamas": split(aamas_cs), "mainstream_all": split(ml),
+            "mainstream_main_text": split([c for c in ml if c["page"] < limit.get(c["venue"], 9)])}
 
 
 def big_n_and_largest(comparisons: list, proto2: dict, communities_path: str = f"{OUT}/communities.csv") -> dict:
@@ -1196,6 +1287,11 @@ def main() -> int:
             "rate_papers_fixed": len({c["paper"] for c in cs_dd if rate_like(c) and p2[0].get(c["paper"], {}).get("episodes_kind") == "fixed_instances"}),
             "rate_papers_smac": len({c["paper"] for c in cs_dd if rate_like(c) and any(str(e).startswith(SMAC_FAMILY) for e in p2[0].get(c["paper"], {}).get("environments", []))}),
             "rate_papers_regex_k": len({c["paper"] for c in cs_dd if rate_like(c) and protocol.get(c["paper"], {}).get("eval_episodes")}),
+            # who the K-stating rate papers are: single-agent, and StarCraft/football/particle
+            "k_papers_single": len({c["paper"] for c in cs_dd if rate_like(c) and p2[0].get(c["paper"], {}).get("eval_episodes")
+                                    and p2[0][c["paper"]].get("agents") == "single"}),
+            "k_papers_marl_bench": len({c["paper"] for c in cs_dd if rate_like(c) and p2[0].get(c["paper"], {}).get("eval_episodes")
+                                        and any(str(e).startswith(("SMAC", "GRF", "MPE", "StarCraft")) for e in p2[0][c["paper"]].get("environments", []))}),
             "agreement_with_first_reading": (lambda rd1: {
                 "both": sum(1 for pid in p2[0] if pid in rd1 and rd1[pid]["eval_episodes"] and p2[0][pid]["eval_episodes"]),
                 "agree_k": sum(1 for pid in p2[0] if pid in rd1 and rd1[pid]["eval_episodes"] and p2[0][pid]["eval_episodes"] == rd1[pid]["eval_episodes"]),
@@ -1216,6 +1312,8 @@ def main() -> int:
         } if p2[0] else {})(reader_protocol2()),
         "per_paper_failure": per_paper_failure(cs),
         "big_n_and_largest": big_n_and_largest(cs, reader_protocol2()[0]),
+        "empty_census_pages": empty_census_pages(cs),
+        "family_matched": family_matched_mainstream(cs),
         "typed_unlabelled": typed_unlabelled(cs, reader_protocol2()[0]),
         "per_paper_failure_dedup": per_paper_failure(exact_copies(cs)[1]),
         "ddof_reading": ddof_reading(cs),

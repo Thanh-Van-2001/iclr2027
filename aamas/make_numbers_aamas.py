@@ -469,6 +469,15 @@ def build(out_path: str) -> dict:
         reg.add(f"{prefix} pages second empty", x["pages_second_empty_first_not"], provenance=prov)
         reg.add(f"{prefix} pages first empty", x["pages_first_empty_second_not"], provenance=prov)
         reg.add(f"{prefix} unmatched on empty pages", x["unmatched_first_on_second_empty_pages"], provenance=prov)
+        reg.add(f"{prefix} unmatched on shared pages", x["groups_first"] - x["matched"] - x["unmatched_first_on_second_empty_pages"], provenance=prov)
+        reg.add(f"{prefix} groups on empty pages pct", _pct(round(100 * x["unmatched_first_on_second_empty_pages"] / max(x["groups_first"], 1), 1)), provenance=prov)
+        reg.add(f"{prefix} pages with groups", x["shared_pages"] + x["pages_second_empty_first_not"] + x["pages_first_empty_second_not"], provenance=prov)
+        reg.add(f"{prefix} pages second empty pct", _pct(round(100 * x["pages_second_empty_first_not"] / max(x["shared_pages"] + x["pages_second_empty_first_not"] + x["pages_first_empty_second_not"], 1), 1)), provenance=prov)
+        reg.add(f"{prefix} shared fail first", _pct(x["shared_pct_fail_first"]) if x.get("shared_pct_fail_first") is not None else "--", provenance=prov)
+        reg.add(f"{prefix} shared fail second", _pct(x["shared_pct_fail_second"]) if x.get("shared_pct_fail_second") is not None else "--", provenance=prov)
+        reg.add(f"{prefix} shared tested first", x.get("shared_tested_first", "--"), provenance=prov)
+        reg.add(f"{prefix} shared tested second", x.get("shared_tested_second", "--"), provenance=prov)
+        reg.add(f"{prefix} shared testable agree pct", _pct(x["shared_testable_agree_pct"]) if x.get("shared_testable_agree_pct") is not None else "--", provenance=prov)
         reg.add(f"{prefix} shared pages", x["shared_pages"], provenance=prov)
         reg.add(f"{prefix} shared first groups", x["shared_groups_first"], provenance=prov)
         reg.add(f"{prefix} shared second groups", x["shared_groups_second"], provenance=prov)
@@ -742,8 +751,11 @@ def build(out_path: str) -> dict:
         reg.add("cz reader matched groups", cz["reader_groups_matched"]["groups"], provenance=crun)
         reg.add("cz reader unmatched groups", cz["reader_groups_unmatched"]["groups"], provenance=crun)
         rs = cz["reader_sensitivity"]
-        reg.add("cz reader se n", rs["unlabelled_or_sd_as_se"]["n"], provenance=crun)
-        reg.add("cz reader se fail", _pct(rs["unlabelled_or_sd_as_se"]["pct_fail"]), provenance=crun)
+        reg.add("cz reader se n", rs["unlabelled_as_se"]["n"], provenance=crun)
+        reg.add("cz reader se fail", _pct(rs["unlabelled_as_se"]["pct_fail"]), provenance=crun)
+        reg.add("cz reader unlabelled n", rs["unlabelled_as_se"]["n_unlabelled"], provenance=crun)
+        reg.add("cz reader unlabelled as sd fail", _pct(rs["unlabelled_as_se"]["pct_fail_unlabelled_as_sd"]), provenance=crun)
+        reg.add("cz reader unlabelled as se fail", _pct(rs["unlabelled_as_se"]["pct_fail_unlabelled_as_se"]), provenance=crun)
         bk = rs["bar_kinds_tested"]
         tot = sum(bk.values())
         reg.add("cz reader unlabelled pct", _pct(round(100 * bk.get("unlabelled", 0) / tot, 1)), provenance=crun)
@@ -804,7 +816,8 @@ def build(out_path: str) -> dict:
                     reg.add(f"ptwo span {sp_name}{name.replace('_', ' ')} n", d["n_with_episode_count"], provenance=prun)
                     reg.add(f"ptwo span {sp_name}{name.replace('_', ' ')} papers", d["n_papers"], provenance=prun)
         for k in ("rate_papers", "rate_papers_read", "rate_papers_with_k", "rate_papers_with_k_inherited",
-                  "rate_papers_with_seeds", "rate_papers_fixed", "rate_papers_smac", "rate_papers_regex_k"):
+                  "rate_papers_with_seeds", "rate_papers_fixed", "rate_papers_smac", "rate_papers_regex_k",
+                  "k_papers_single", "k_papers_marl_bench"):
             reg.add("ptwo " + k.replace("_", " "), p2[k], provenance=prun)
         for k, v in p2["agreement_with_first_reading"].items():
             reg.add("ptwo first " + k.replace("_", " "), v, provenance=prun)
@@ -834,6 +847,33 @@ def build(out_path: str) -> dict:
             reg.add(f"ptwo res {name} indep papers", io_["papers"], provenance=prun)
             reg.add(f"ptwo res {name} welch pass", d["welch_pass_below"]["n"], provenance=prun)
             reg.add(f"ptwo res {name} welch pass below", d["welch_pass_below"]["below"], provenance=prun)
+            lt = d["lattice"]
+            reg.add(f"ptwo res {name} lattice consistent", lt["consistent"], provenance=prun)
+            reg.add(f"ptwo res {name} lattice consistent papers", lt["consistent_papers"], provenance=prun)
+            reg.add(f"ptwo res {name} lattice papers all consistent", lt["papers_all_consistent"], provenance=prun)
+            reg.add(f"ptwo res {name} lattice below", lt["below_among_consistent"], provenance=prun)
+            reg.add(f"ptwo res {name} lattice below pct", _pct(lt["pct_below_among_consistent"]), provenance=prun)
+            reg.add(f"ptwo res {name} cv folds", d["cv_fold_comparisons"], provenance=prun)
+        ec = ex.get("empty_census_pages", {})
+        if ec:
+            reg.add("ec pages", ec["pages"], provenance=run)
+            reg.add("ec comparisons", ec["comparisons"], provenance=run)
+            reg.add("ec parser pages", ec["parser_pages_with_comparisons"], provenance=run)
+            reg.add("ec pages pct", _pct(round(100 * ec["pages"] / ec["parser_pages_with_comparisons"], 1)), provenance=run)
+            for k, tag in (("orientation_none", "none"), ("no_results_table", "notable")):
+                reg.add(f"ec {tag} pages", ec[k]["pages"], provenance=run)
+                reg.add(f"ec {tag} comparisons", ec[k]["comparisons"], provenance=run)
+                reg.add(f"ec {tag} testable", ec[k]["testable"], provenance=run)
+                reg.add(f"ec {tag} neither", _pct(ec[k]["pct_neither"]) if ec[k]["pct_neither"] is not None else "--", provenance=run)
+        fm = ex.get("family_matched", {})
+        if fm:
+            for venue, tag in (("aamas", "aamas"), ("mainstream_all", "ml"), ("mainstream_main_text", "mlmain")):
+                for part in ("rl", "rest"):
+                    d = fm[venue][part]
+                    reg.add(f"fm {tag} {part} n", d["n"], provenance=run)
+                    reg.add(f"fm {tag} {part} papers", d["papers"], provenance=run)
+                    reg.add(f"fm {tag} {part} fail", _pct(d["pct_fail"]) if d["pct_fail"] is not None else "--", provenance=run)
+                    reg.add(f"fm {tag} {part} fail ci", f"[{d['ci_fail'][0]}, {d['ci_fail'][1]}]" if d.get("ci_fail") else "--", provenance=run)
         rf = ex["rate_filter"]
         for k in ("table_names_a_rate", "not_anchored_on_a_caption", "lower_is_better", "out_of_range",
                   "group_label_names_another_metric", "off_the_table_scale", "kept", "kept_papers"):

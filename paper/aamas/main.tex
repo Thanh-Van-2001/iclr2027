@@ -47,17 +47,16 @@ page about one time in six; most of the rest print no bar. Where the
 check can be made it fails about as often as it passes: \nCzReaderFailPct{}
 of the reader's testable comparisons and \nAPctFail{} of the parser's are
 not separable from their rival at $p < 0.05$ by Welch's $t$ at the stated
-run count, and the rate is highest at three seeds or fewer. The two
-image-based readers agree on every group's verdict where both list a
-page. AAMAS and the NeurIPS/ICML mainstream print a $\pm$ cell at similar
-rates per paper; the highlighted comparisons of AAMAS carry bars more
-often, and the bars support the claim no more often. A win rate over $K$
-episodes has a binomial resolution that needs no error bar: of the
-\nPtwoRatePapers{} papers that highlight one, \nPtwoRatePapersWithK{}
-state $K$, and on their comparisons about half of the highlighted gaps
-fall below what the stated episodes resolve, a share that rests on eight
-papers and moves with a seed count the page does not always give.
-Everything is released.
+run count, a rate that does not separate by run count below thirty. AAMAS
+and the main text of the NeurIPS/ICML mainstream print a $\pm$ cell at
+similar rates per paper; the highlighted comparisons of AAMAS carry bars
+more often, and within the RL environment families AAMAS fails the test
+more often (\nFmAamasRlFail{} against \nFmMlRlFail{}), outside them less.
+A win rate over $K$ episodes has a binomial resolution that needs no error
+bar: of the \nPtwoRatePapers{} papers that highlight one,
+\nPtwoRatePapersWithK{} state $K$, too few to carry a venue rate; where it
+is stated, about half the highlighted gaps fall below it. Everything is
+released.
 \end{abstract}
 
 \begin{CCSXML}
@@ -81,16 +80,16 @@ either prints or does not: a measure of run-to-run spread for both values, and
 the number of runs behind them. Without the first, the gap between two means
 is a gap between two draws; without the second, an error bar has no scale.
 
-The community knows this. Recommendations on how many seeds to run, how to
-report intervals, and how to evaluate cooperative multi-agent learning in
-particular have been published and are cited
-\cite{henderson2017deep,colas2018how,agarwal2021deep,gorsane2022towards,patterson2024empirical}.
-How often papers follow them has been measured by hand on samples of
+The community knows this. Recommendations on seeds, intervals and the
+evaluation of cooperative multi-agent learning have been published and
+are cited
+\cite{henderson2017deep,colas2018how,agarwal2021deep,gorsane2022towards,patterson2024empirical},
+and how often papers follow them has been measured by hand on samples of
 cooperative-MARL papers \cite{gorsane2022towards,singh2023how}. It has not
 been measured over a whole proceedings, across every community that
-publishes there, with one rule applied to every results table a parser can
-read, and with the question of whether the printed evidence then supports
-the claim. This paper measures that for AAMAS.
+publishes there, with one rule applied to every results table, and with
+the question of whether the printed evidence then supports the claim.
+This paper measures that for AAMAS.
 
 We take every main-track paper in the IFAAMAS proceedings of 2024, 2025 and
 2026, \nAPapers{} papers in all, and a parser extracts from each the results
@@ -124,7 +123,10 @@ come from its learning community, whose tables carry a deviation as a matter
 of course. What the deviations then show is no better: \nAPctFail{} of the
 testable comparisons are not resolved at the stated run count,
 against \nMlMainFail{} in the mainstream, and \nRunsLeThreeFail{} of those
-resting on three seeds or fewer. A second, venue-specific resolution comes
+resting on three seeds or fewer (the bands below thirty seeds overlap;
+within the RL environment families AAMAS fails at \nFmAamasRlFail{}
+against the mainstream's \nFmMlRlFail{}, outside them at
+\nFmAamasRestFail{} against \nFmMlRestFail{}). A second, venue-specific resolution comes
 from the evaluation protocol itself: a win rate over $K$ episodes has a
 binomial standard error whether or not anyone prints one, and where a paper
 states $K$ the gaps it highlights can be set against it. Of the
@@ -141,8 +143,8 @@ both can test and \nGVerdictFullFrac{} when every item the reader could
 not test counts against the parser; over the census the parser lists
 \nCzReaderFoundPct{} of the reader's comparisons and the reader
 \nCzPipeFoundPct{} of the parser's; and where both image-based readers
-list a page they agree on every group's bar-less verdict, while a reader
-returns a whole page empty on a few percent of reads.
+list a page they agree on every matched group's bar-less verdict, while
+they differ on which pages hold groups at all.
 Section~\ref{sec:instrument} measures each of these; in
 Sections~\ref{sec:print} and~\ref{sec:support} the instrument error is of
 the order of the sampling intervals, and in Section~\ref{sec:protocol} the
@@ -169,14 +171,13 @@ discarded rather than guessed at.
 an error bar and a run count is available: from the caption, from the table's
 page, or, failing both, the smallest count stated anywhere in the paper.
 The last is the reading least favourable to the claim, since a paper that
-tunes on two seeds and reports on ten is tested at two; it is the one rule
-applied throughout, and Table~\ref{tab:span} gives the caption-only and
-caption-or-page readings beside it. Standard errors and confidence
-intervals need no count: they are tested as printed, with Welch's degrees
-of freedom where a count is stated and in the normal limit where none is,
-which at few seeds is generous to the claim. A bracketed pair after a mean
-is read as an interval of the mean; the parser cannot tell an interquartile
-range from one. An unlabelled bar is read as a standard deviation, the
+tunes on two seeds and reports on ten is tested at two; Table~\ref{tab:span}
+gives the caption-only and caption-or-page readings beside it. Standard
+errors and confidence intervals need no count: they are tested as
+printed, with Welch's degrees of freedom where a count is stated and in
+the normal limit where none is, which at few seeds is generous to the
+claim; a bracketed pair after a mean is read as an interval of the mean.
+An unlabelled bar is read as a standard deviation, the
 reading that makes the claim easiest to support; Section~\ref{sec:support}
 gives the other reading. A printed deviation of zero is kept as zero, not
 treated as missing.
@@ -192,12 +193,12 @@ its group, so a test of the maximum against the runner-up at a nominal
 convention asserts no direction, and the one-sided reading is in
 Table~\ref{tab:span}. A failure says the printed evidence does not resolve
 the claim at the stated run count, not that the claim is false or that the
-authors asserted more than the bold: many tables bold the best mean by
-convention and assert nothing about significance, and for those a failure
-says only how thin the evidence is. A two-sample $z$ that takes the
-printed deviations as exact gives a lower rate and is reported beside it;
-Holm's correction within a table, where several comparisons share one
-family, gives a higher one.
+authors asserted more than the bold; many tables bold the best mean by
+convention, and for those a failure says only how thin the evidence is. A
+surviving comparison is one the printed evidence is consistent with at
+5\%, not one it establishes. A two-sample $z$ that takes the printed
+deviations as exact gives a lower rate; Holm's correction within a table
+gives a higher one.
 
 \paragraph{What the parser cannot see.} It reads the text layer of the PDF,
 so a table rendered as an image, uncertainty drawn in a figure, and shading
@@ -222,10 +223,9 @@ paper listed under the main track (``Full Papers'' in 2024, ``Research Paper
 Track'' in 2025 and 2026) and leave out extended abstracts, demonstrations,
 the doctoral consortium, JAAMAS and Blue Sky papers: \nAPapersTwentyFour{},
 \nAPapersTwentyFive{} and \nAPapersTwentySix{} papers, \nAPapers{} in all,
-every one fetched and parsed. Every one is an eight-page ACM two-column
-document with an unlimited reference list and no appendix in the proceedings
-PDF, which matters for what follows: whatever a reader can check has to be on
-those eight pages.
+every one fetched and parsed. Each is an eight-page ACM two-column
+document with no appendix in the proceedings PDF, so whatever a reader
+can check has to be on those eight pages.
 
 The comparison sample is a simple random draw of \nMlDrawn{} papers from the
 \nMlListed{} accepted at NeurIPS and ICML in 2025, \nMlPapers{} of which
@@ -320,9 +320,8 @@ one side only, \nCzBarsNoN{} bars but no run count, and \nCzTestable{} can
 be tested with a run count from anywhere in the paper (\nCzTestableCi{};
 the parser's share with the count restricted to the caption or the
 table's page is \nSpanCaptionOrPageTestable{}, to the caption alone
-\nStrictTestable{}); \nCzTestableUnreadable{} of the
-\nCzTestableN{} testable groups carry a value the reader could not read,
-so \nCzReaderFailN{} from \nCzReaderFailPapers{} papers are tested. The
+\nStrictTestable{}), of which \nCzReaderFailN{} from
+\nCzReaderFailPapers{} papers have readable values. The
 parser, on the whole corpus, reads \nAComparisons{} comparisons in
 \nATablesYielding{} tables: \nAPctNeither{} bar-less (\nAPctNeitherCi{}),
 \nAPctOneSide{} one-sided, \nAPctNoN{} with bars but no run count anywhere
@@ -333,16 +332,20 @@ bar-less share is \nCzMatchedNeither{} by the reader and
 \nCzPipeMatchedNeither{} by the parser, the \nCzReaderUnmatchedGroups{}
 groups only the reader lists are \nCzUnmatchedNeither{} bar-less, and the
 \nCzPipeUnconfirmedN{} comparisons only the parser lists are
-\nCzPipeUnconfirmedNeither{} bar-less (the stratum in which the reference
-set found pseudocode read as tables), so each headline errs in its own
-direction and the matched core is the cross-instrument result.
-Intervals resample papers because comparisons come in clusters: on the
-parser's testable set the mean is \nAMeanCluster{} per paper and the
-design effect \nADesignEffect{} (intra-class correlation \nAIcc{},
-effective sample \nANEff{}). Every interval on a share of comparisons in
-this section and the next is a cluster bootstrap over papers; the
-agreement figures of Section~\ref{sec:instrument} carry Wilson intervals
-over items or resample pages, as marked. The parser's \nANTestable{}
+\nCzPipeUnconfirmedNeither{} bar-less. Of those, \nEcNoneComparisons{} sit
+on \nEcNonePages{} pages the reader read as results tables whose bold
+marks no single winner per line (\nEcNoneNeither{} bar-less,
+\nEcNoneTestable{} testable), the own-row and block-cut tables the
+parser's rules keep and the census protocol does not, and
+\nEcNotableComparisons{} on \nEcNotablePages{} pages it read as holding
+no results table. So each headline errs in its own direction and the
+matched core is the cross-instrument result.
+Intervals resample papers because comparisons come in clusters (on the
+parser's testable set, \nAMeanCluster{} per paper, design effect
+\nADesignEffect{}, effective sample \nANEff{}); every interval on a share
+of comparisons in this section and the next is a cluster bootstrap over
+papers, and the agreement figures of Section~\ref{sec:instrument} carry
+Wilson intervals over items or resample pages, as marked. The parser's \nANTestable{}
 testable comparisons come from \nAPapersTestable{} papers, ten of which
 hold \nTopTenPapersShare{} of them; the largest, \nLargestN{} comparisons
 at \nLargestRuns{} runs failing at \nLargestFail{}, is a data-pricing
@@ -352,15 +355,17 @@ failure rates of Section~\ref{sec:support} describe.
 
 \paragraph{Against the mainstream.} On the main text of the 2025 NeurIPS and
 ICML sample the same parser finds \nMlMainNeither{} bar-less and
-\nMlMainTestable{} testable, and on the papers' full length, appendices
-included, \nMlPctNeither{} and \nMlPctTestable{}. At the level of the paper
-the two venues look alike: \nAPctPapersErr{} of AAMAS papers print a $\pm$
-cell in a table, \nMlMainPapersErr{} of mainstream papers do so in their
-main text, and the median stated run count is \nAMedianRuns{} in both. The
-gap is in who prints the tables that make claims. The highlighted
-comparisons of AAMAS come from a narrow slice of the proceedings:
+\nMlMainTestable{} testable (\nMlPctNeither{} and \nMlPctTestable{} with
+appendices). At the level of the paper the venues look alike:
+\nAPctPapersErr{} of AAMAS papers print a $\pm$ cell in a table,
+\nMlMainPapersErr{} of mainstream papers do so in their main text
+(\nMlPctPapersErr{} with appendices), and the median stated run count is
+\nAMedianRuns{} in both. The gap is in who prints the tables that make
+claims. The highlighted comparisons of AAMAS come from a narrow slice of
+the proceedings:
 Table~\ref{tab:community} shows that the learning community holds most of
-them and prints a deviation beside them as a matter of course, while the
+them and prints a deviation beside about half of them, against a fifth in
+the mainstream, while the
 game-theoretic and social-choice papers, \nCGameTheorySocialChoicePapers{}
 of the \nAPapers{}, rarely mark a winner in a table at all, and the
 LLM-agent papers that do mark one print bars as seldom as the mainstream.
@@ -375,21 +380,21 @@ mainstream pages of the concurrent study. The first reader: on a pilot of
 and \nPagesReaderTestable{} testable, against \nScReaderNeither{} and
 \nScReaderTestable{} on \nScPages{} of the same mainstream pages. The
 venues separate on bars under either reader; on testability the pilot is
-too small to say (four of its pages hold most of its bar-carrying groups,
-from papers that state no run count anywhere), and the census settles it.
+too small to say, and the census settles it.
 On the \nMsCrossSharedPages{} mainstream pages both readers list groups,
 their bar-less shares are \nMsCrossSharedFirstNeither{} and
 \nMsCrossSharedSecondNeither{}, and they agree on the bar-less verdict for
 \nMsCrossSharedNeitherAgreePct{} of the \nMsCrossSharedMatched{} groups
-both list.
+both list; they differ on which groups can be tested, failing
+\nMsCrossSharedFailFirst{} of \nMsCrossSharedTestedFirst{} and
+\nMsCrossSharedFailSecond{} of \nMsCrossSharedTestedSecond{} there.
 
-\paragraph{By year.} Bar-less shares of \nANeitherTwentyFourCi{},
-\nANeitherTwentyFiveCi{} and \nANeitherTwentySixCi{} in 2024, 2025 and
-2026, and failure rates of \nAFailTwentyFourCi{}, \nAFailTwentyFiveCi{}
-and \nAFailTwentySixCi{}, have overlapping intervals and no monotone
-order, 2025 sitting below both its neighbours on both; three years and
-\nAPapersTestable{} papers cannot separate a trend from the papers that
-happened to be accepted.
+\paragraph{By year.} Failure rates of \nAFailTwentyFourCi{},
+\nAFailTwentyFiveCi{} and \nAFailTwentySixCi{} in 2024, 2025 and 2026,
+and bar-less shares of \nANeitherTwentyFour{}, \nANeitherTwentyFive{} and
+\nANeitherTwentySix{}, have overlapping intervals and no monotone order;
+three years cannot separate a trend from the papers that happened to be
+accepted.
 
 \begin{table}[t]
 \caption{By community, from a language-model reading of title and first page.
@@ -452,12 +457,10 @@ accepted; the reader's higher rate over its \nCzReaderFailN{} comes from
 the \nCzReaderOnlyN{} comparisons the parser does not test, which fail at
 \nCzReaderOnlyFailPct{}. With the paper as the unit, the median paper
 fails \nPpMedian{} of its testable comparisons (quartiles \nPpQOne{} and
-\nPpQThree{}) and the mean of the paper rates is \nPpMean{}; \nPpAnyFail{}
-of the \nPpPapers{} papers have at least one failing cell and
-\nPpAllFail{} nothing but, and the ten largest papers hold
-\nPpTopTenShare{} of the comparisons (\nPpdTopTenShare{} with exact copies
-removed). The distribution over papers is wide, with both ends occupied;
-the pooled rate is a spread across most of them, not one paper's habit. Where
+\nPpQThree{}), the mean of the paper rates is \nPpMean{}, and
+\nPpAllFail{} of the \nPpPapers{} papers fail every one; the distribution
+is wide with both ends occupied, and the pooled rate is a spread across
+most papers, not one paper's habit. Where
 a caption itself asserts superiority (outperforms, significantly, surpasses,
 state of the art), which \nCapAssertingPapers{} papers' captions do for
 \nCapAssertingN{} testable comparisons, \nCapAssertingFail{} fail; where
@@ -470,8 +473,16 @@ comparisons is \nAGapFail{}, among the surviving ones \nAGapPass{}. A
 two-sample $z$ on the same comparisons, each printed deviation taken as
 exact, fails \nSpanZTwoSidedFail{}. On the mainstream sample the
 corresponding rates are \nMlMainFail{} on main-text pages and \nMlPctFail{}
-on all pages: the AAMAS interval covers both, and the claim that AAMAS does
-better once it prints a deviation is not one the data support.
+on all pages, but the pooled pair mixes RL tables with leaderboard tables.
+Within the RL environment families the captions name (the same patterns
+on both corpora), AAMAS fails at \nFmAamasRlFail{} \nFmAamasRlFailCi{} on
+\nFmAamasRlN{} comparisons from \nFmAamasRlPapers{} papers against the
+mainstream's \nFmMlRlFail{} \nFmMlRlFailCi{} (\nFmMlRlN{} from
+\nFmMlRlPapers{}); outside them AAMAS fails at \nFmAamasRestFail{}
+\nFmAamasRestFailCi{} against \nFmMlRestFail{} \nFmMlRestFailCi{}. The
+intervals over two dozen papers overlap; the direction is that the RL
+tables of AAMAS resolve their claims less often than the mainstream's, and
+its other tables more often.
 
 \paragraph{Seeds.} Figure~\ref{fig:census}b splits the failure rate by
 run count. At three seeds or fewer (\nRunsLeThreeN{} comparisons from
@@ -480,8 +491,9 @@ run count. At three seeds or fewer (\nRunsLeThreeN{} comparisons from
 \nRunsFourToFiveFailCi{}; at six to thirty (\nRunsSixToThirtyN{} from
 \nRunsSixToThirtyPapers{}) \nRunsSixToThirtyFailCi{}; above thirty
 (\nRunsGtThirtyN{} from \nRunsGtThirtyPapers{}) \nRunsGtThirtyFailCi{}.
-The first three intervals, over papers, overlap; the only band that
-clearly separates is the well-powered one, and the protocol reading of
+The first three intervals, over papers, overlap; the well-powered band
+separates from the two few-seed bands and overlaps the six-to-thirty
+band, and the protocol reading of
 Section~\ref{sec:protocol} puts the deviation over those runs in
 \nBignSdOverSeedsPapers{} of its \nBignPapers{} papers
 (\nBignSdOverSeedsComparisons{} comparisons) and over evaluation episodes
@@ -551,22 +563,21 @@ Copied rivals removed, both extremes & \nCopiedRemovedN{} & -- & \nFailCopiedRem
 \end{table}
 
 \paragraph{Conventions.} Table~\ref{tab:span} moves one reading at a time.
-The run count matters most for how much can be tested: counting only
-captions leaves \nStrictN{} comparisons testable (\nStrictTestable{} of the
-corpus) with \nStrictFail{} failing, and a count taken from anywhere in the
-paper, which the headline uses, more than doubles the testable set at almost
-the same rate. What the bar means matters most for the rate:
+The run count matters most for how much can be tested: captions alone
+leave \nStrictN{} comparisons testable (\nStrictTestable{} of the corpus)
+at \nStrictFail{}, and a count from anywhere in the paper, which the
+headline uses, more than doubles the set at almost the same rate. What
+the bar means matters most for the rate:
 \nBarsUnlabelledPct{} of the bars that reach the test are unlabelled, and
 reading them as standard errors rather than deviations moves their failure
 rate from \nBarsAsStdFail{} to \nBarsAsSemFail{}; the labelled bars alone
 fail at \nBarsLabelledFail{}. The reference set puts the parser's
 agreement with a reader on the raw kind of bar at \nGDispTypeFrac{} and
 on the run count at \nGNRunsFrac{}, its two weakest fields, and at
-\nGDispTreatmentFrac{} on the kind as the test uses it. Typing the
+\nGDispTreatmentFrac{} on the kind as the test uses it; typing the
 unlabelled bars by what the protocol reading of Section~\ref{sec:protocol}
-says their paper's deviation is (\nTuBySeeds{} over seeds, \nTuByCi{} an
-interval, \nTuByEpisodes{} over episodes, \nTuBySe{} a standard error)
-gives \nTuFail{}, which is the evidence for the deviation default.
+says their paper's deviation is gives \nTuFail{}, the evidence for the
+deviation default.
 \nRZeroN{} testable comparisons carry a printed deviation of zero on one
 side, none on both; \nRZeroFail{} of them fail, and the rate without them
 is \nRZeroRemovedFail{}. \nRBigNOnlyN{} comparisons from
@@ -599,12 +610,8 @@ or ``reported in'' marker, a number copied from another paper, and
 removing every such comparison at either extreme bounds the rate between
 \nFailCopiedRemovedLow{} and \nFailCopiedRemovedHigh{}.
 
-\paragraph{Families.} \nHolmPctInFamiliesOverFive{} of the testable
-comparisons sit in a table with more than five others; Holm within the
-table is reported, not preferred, since not every bold cell is a separate
-claim. The \nCcCitingPapers{} papers citing the evaluation-methodology
-literature print bars and run counts more often and fail no less often
-(supplement).
+The \nCcCitingPapers{} papers citing the evaluation-methodology literature
+print bars and run counts more often and fail no less often (supplement).
 
 \section{The resolution of the evaluation protocol}
 \label{sec:protocol}
@@ -696,28 +703,38 @@ None of these & \nPenvOtherOrNoneOfThesePapers{} & \nPenvOtherOrNoneOfTheseState
 when its table's caption or header names a win, winning, success, solved
 or completion rate, the record is anchored on a caption beginning
 ``Table'', the bold marks the higher value, the group's own row label and
-column header, read from the PDF text layer around the parser's
-coordinates, name no other metric (time, cost, return, reward, turns,
-rank), and its values sit on the table's scale. Of \nRfTableNamesARate{}
-comparisons in tables that name a rate, \nRfNotAnchoredOnACaption{} are
-body-text windows, \nRfLowerIsBetter{} are lower-is-better columns,
-\nRfOutOfRange{} lie outside $[0, 100]$, \nRfGroupLabelNamesAnotherMetric{}
-name another metric and \nRfOffTheTableScale{} are on the wrong scale;
-\nRfKept{} from \nRfKeptPapers{} papers remain. An earlier filter at the
-table level admitted the time, cost and return columns of tables whose
-caption named a success rate, which a reviewer caught; no human checked
-the survivors.
+column header (read from the PDF text layer around the parser's
+coordinates) name no other metric, and its values sit on the table's
+scale: \nRfKept{} of \nRfTableNamesARate{} candidates from
+\nRfKeptPapers{} papers remain (\nPtwoResTypedRateLike{} with exact copies
+removed; the supplement counts each rule). An earlier table-level filter
+admitted the time, cost and return columns of tables whose caption named
+a success rate, which a reviewer caught; no human checked the survivors.
 
 \paragraph{Gaps below resolution.} \nPtwoResTypedN{} of those
 comparisons, from the \nPtwoResTypedPapers{} papers that state $K$, can be
-set against their protocol. Taking $K$ episodes per seed times the stated
-seeds where $K$ counts sampled episodes, $K$ alone where it counts a fixed
-instance set (\nPtwoRatePapersFixed{} of the \nPtwoRatePapers{} rate
-papers, whose seeds re-run the same items), and one seed where none is
-stated for sampled episodes, \nPtwoResTypedBelow{} of the gaps fall below
-the resolution of the protocol that produced them
+set against their protocol. None of those papers evaluates on StarCraft,
+football or particle environments (\nPtwoKPapersMarlBench{} do) and
+\nPtwoKPapersSingle{} of them control a single agent, so the measured
+result is not the MARL protocol the section is named for; the StarCraft
+papers enter only through the imputed reading below. Taking $K$ episodes
+per seed times the stated seeds where $K$ counts sampled episodes, $K$
+alone where it counts a fixed instance set (\nPtwoRatePapersFixed{} of
+the \nPtwoRatePapers{} rate papers, whose seeds re-run the same items),
+$K$ times the folds where a paper cross-validates over disjoint items
+(one paper, \nPtwoResTypedCvFolds{} comparisons), and one seed where none
+is stated for sampled episodes, \nPtwoResTypedBelow{} of the gaps fall
+below the resolution of the protocol that produced them
 (\nPtwoResTypedBelowPaperCi{} over \nPtwoResTypedPapers{} papers,
-indicative only at that count; the supplement lists every paper). The
+indicative only at that count; the supplement lists every paper). A rate
+over $n$ trials is a multiple of $1/n$, which is a free check on every
+$K$ the model read: \nPtwoResTypedLatticeConsistent{} of the
+\nPtwoResTypedN{} comparisons, from \nPtwoResTypedLatticeConsistentPapers{}
+papers, print values on the lattice their $n$ implies, and
+\nPtwoResTypedLatticeBelowPct{} of those fall below the resolution; an
+off-lattice value means a mean over runs the page does not count or a
+misread $K$, and no human has read any of the eight papers to say which.
+The
 reading moves with the seed assumption, the fixed-instance rule held
 throughout: \nPtwoSpanSeedsStatedOnlyBelow{} on the
 \nPtwoSpanSeedsStatedOnlyN{} comparisons from
@@ -739,8 +756,10 @@ and \nPtwoResTypedIndepBelow{} of them fall below it. With PyMARL's count
 imputed to the SMAC papers that state none, an assumed $K$ and not a
 floor, \nPtwoResInheritedN{} comparisons from \nPtwoResInheritedPapers{}
 papers give \nPtwoResInheritedBelow{} (\nPtwoResInheritedBelowPaperCi{});
-of the \nPtwoResInheritedWelchPass{} barred comparisons in that set that
-pass Welch's $t$ on their printed deviation,
+only \nPtwoResInheritedLatticeConsistent{} of them print values on the
+lattice the imputed count implies, and of the
+\nPtwoResInheritedWelchPass{} barred comparisons in that set that pass
+Welch's $t$ on their printed deviation,
 \nPtwoResInheritedWelchPassBelow{} lie below the imputed term, which
 cannot hold unless the deviation is not over independent seeds or the
 paper averaged more episodes than the default. The pattern-read $K$
@@ -758,30 +777,22 @@ that highlight a rate do not say over how many episodes it was measured.
 \label{sec:instrument}
 
 \paragraph{How it reads.} The parser takes the PDF's text layer through
-PyMuPDF. A table is anchored on a caption: a text span beginning ``Table $n$''
-opens a window below it (or above it, for venues that caption underneath),
-bounded by the caption's own horizontal extent and by the next caption on the
-page, and the numeric cells in that window are the table. Bold is read from
-the font flags of each span, so a bold cell is one whose digits are set in a
-bold face, not one inferred from context. A cell's error bar is whatever
-follows its mean in the forms $a \pm b$, $a(b)$ or $a[b, c]$; a deviation
-set as a subscript without a separator is read as part of the mean, which
-the reference set caught in one table and which counts a bar as absent.
-What the bar is comes from the caption, then from the text near the table,
-then from the paper. Rows and columns are recovered from the cells'
-coordinates, and the orientation is the axis on which most lines hold
-exactly one bold cell, cut into blocks where several lines agree on a
-break. In each single-bold group the rival is the best non-bold cell in
-the read direction, whatever column it sits in: a reference column such as
-an expert or oracle is not excluded, which the reference set below shows
-once. The run count is searched for in the caption, then on the table's
-page, then in the whole paper, and the smallest count is taken. Every rule
-was fixed on single-column NeurIPS and ICML PDFs; AAMAS papers are
-two-column ACM documents with narrower tables, tables that span both
-columns, and body text beside every table. The earlier precision figures
-do not transfer, and neither does recall. Table~\ref{tab:validation}
-collects every measurement of what the parser and the readers do on this
-format; the paragraphs below say what the table cannot.
+PyMuPDF. A table is anchored on a caption beginning ``Table $n$'', which
+opens a window bounded by the caption's extent and the next caption; the
+numeric cells in the window are the table, bold is read from the font
+flags, and a cell's error bar is whatever follows its mean as $a \pm b$,
+$a(b)$ or $a[b, c]$. Rows and columns come from the cells' coordinates,
+the orientation is the axis on which most lines hold exactly one bold
+cell, cut into blocks where several lines agree on a break, and the rival
+is the best non-bold cell in the read direction, whatever column it sits
+in. The run count is searched for in the caption, then the table's page,
+then the paper, and the smallest count is taken. Every rule was fixed on
+single-column NeurIPS and ICML PDFs; AAMAS papers are two-column ACM
+documents with narrower tables, tables that span both columns, and body
+text beside every table, so the earlier precision and recall figures do
+not transfer. Table~\ref{tab:validation} collects every measurement of
+what the parser and the readers do on this format; the paragraphs below
+say what the table cannot.
 
 \begin{table*}[t]
 \caption{Every validation exercise, in one place. ``First'' and ``second''
@@ -793,7 +804,7 @@ agreements between instruments, not precision against a reference.}
 \scriptsize
 \centering
 \setlength{\tabcolsep}{3pt}
-\begin{tabular}{@{}p{3.1cm}lp{2.1cm}p{1.9cm}p{9.6cm}@{}}
+\begin{tabular}{@{}p{2.7cm}lp{1.9cm}p{1.8cm}p{10.4cm}@{}}
 \toprule
 Exercise & Reader & Items & Compared with & Result \\
 \midrule
@@ -803,8 +814,9 @@ Reference set, second reader & second & same items & parser & whole claim \nGThr
 Reference set, reader against reader & both & same items & each other & bold cell \nReadersAgreeBold{}, winner \nReadersAgreeWinner{}, runner-up \nReadersAgreeRunner{}, run count \nReadersAgreeRuns{} \\
 Pilot, random caption pages & first & \nPagesRead{} pages & parser & reader lists \nPagesReaderGroups{} groups, \nPagesReaderNeither{} bar-less, \nPagesReaderTestable{} testable (\nPagesReaderFailN{} tested, \nPagesReaderFail{} fail); parser lists \nPagesReaderFoundPct{} of them \\
 Census, every caption page & second & \nCzPagesRead{} pages & parser & \nCzGroups{} groups; parser lists \nCzReaderFoundPct{} of them (\nCzReaderFoundPageCi{} over pages), reader lists \nCzPipeFoundPct{} of the parser's; verdicts agree on \nCzSharedAgree{} of \nCzShared{} \\
-Reader against reader, pilot pages & both & \nCcrPages{} pages & each other & \nCcrFirstGroups{} against \nCcrSecondGroups{} groups; every unmatched first-reader group sits on the \nCcrPagesSecondEmpty{} pages the census reader returned empty; on the \nCcrSharedPages{} pages both list, \nCcrSharedMatchedPct{} matched, bar-less \nCcrSharedFirstNeither{} against \nCcrSharedSecondNeither{}, verdicts \nCcrSharedNeitherAgreePct{} and \nCcrSharedFailAgree{} of \nCcrSharedBothTested{} \\
-Test--retest & second & \nRtPages{} pages & itself & \nRtGroupsFirst{} against \nRtGroupsSecond{} groups, \nRtMatchedCi{} of the first read matched (pages); \nRtPagesIdentical{} pages identical, \nRtPagesFirstEmpty{} empty in one run only; bar-less verdict \nRtNeitherAgreePct{}, Welch verdict \nRtFailAgree{} of \nRtBothTested{} \\
+Reader against reader, pilot pages & both & \nCcrPages{} pages & each other & \nCcrFirstGroups{} against \nCcrSecondGroups{} groups; \nCcrUnmatchedOnEmptyPages{} of the \nCcrFirstUnmatched{} unmatched first-reader groups sit on the \nCcrPagesSecondEmpty{} pages the census reader returned empty; on the \nCcrSharedPages{} pages both list, \nCcrSharedMatchedPct{} matched, bar-less \nCcrSharedFirstNeither{} against \nCcrSharedSecondNeither{}, verdicts \nCcrSharedNeitherAgreePct{} and \nCcrSharedFailAgree{} of \nCcrSharedBothTested{} \\
+Empty census pages & second & \nEcPages{} pages & parser & pages holding \nEcComparisons{} parser comparisons: \nEcNonePages{} read as results tables with no single winner per line (\nEcNoneComparisons{} comparisons, \nEcNoneNeither{} bar-less), \nEcNotablePages{} as holding no results table (\nEcNotableComparisons{}) \\
+Test--retest & second & \nRtPages{} pages & itself & \nRtGroupsFirst{} against \nRtGroupsSecond{} groups, \nRtMatchedCi{} of the first read matched (pages); \nRtPagesIdentical{} pages identical, \nRtPagesFirstEmpty{} and \nRtPagesSecondEmpty{} empty in one run only; bar-less verdict \nRtNeitherAgreePct{}, Welch verdict \nRtFailAgree{} of \nRtBothTested{} \\
 Reasoning-effort check & second & \nRePages{} pages & itself at ``low'' & \nReMatchedCi{} of groups matched; bar-less verdict \nReNeitherAgreePct{}, Welch \nReFailAgree{} of \nReBothTested{}; bar-less share \nReNeitherFirst{} against \nReNeitherSecond{} \\
 Empty listings re-read & second & \nZrPages{} pages & itself & pages on which the parser reads a comparison and the census listed nothing: \nZrPagesWithGroups{} yield groups on a second read (\nZrGroups{}, \nZrNeither{} bar-less); with them substituted the census is \nZruGroups{} groups, \nZruNeitherCi{} bar-less, \nZruTestableCi{} testable, recall \nZruRecall{} \\
 Caption-less pages & second & \nNcPages{} random pages & -- & pages on which the parser detected no caption: \nNcPagesAnyTable{} hold a table of any kind (Wilson upper bound \nNcPagesAnyTableUpper{}) \\
@@ -842,48 +854,56 @@ read the same items (Table~\ref{tab:validation}), which narrows the
 shared blind spot and is still not a human.
 
 \paragraph{The census, and the parser's coverage.} Precision does not
-bound recall, and on this format recall had to be measured directly: the
-second reader read every page on which the parser detected a table
-caption, with nothing marked, under a protocol fixed before the reading
-began (every results table on the page, every row or column with exactly
-one bold cell, its bars and its run count), and that reading is the census
-of Section~\ref{sec:print}. Matching one reader group to at most one
-parser comparison by the winner's value, the parser lists
+bound recall, so the second reader read every page on which the parser
+detected a caption, with nothing marked, under a protocol fixed before
+the reading began; that reading is the census of Section~\ref{sec:print}.
+Matching one reader group to at most one parser comparison by the
+winner's value, the parser lists
 \nCzReaderFoundPct{} of the reader's groups and the reader
 \nCzPipeFoundPct{} of the parser's; the groups the parser misses print
 bars less often than the groups it keeps (\nCzUnmatchedNeither{} bar-less
 against \nCzMatchedNeither{}), and the parser comparisons the reader does
 not list are \nCzPipeUnconfirmedNeither{} bar-less, so each instrument's
-headline errs in its own direction. The two instruments also share more
-than their technology: the pages read are the ones on which the parser
-detected a caption, the run-count sentences the reader receives are the
-ones a regular expression selects from the text layer, the Welch code and
-the standard-deviation default for an unlabelled bar are the same, and
-groups are matched on the winner's printed value; bar presence, the values
-and the choice of count are the reader's own, and testability is partly
-shared. Of the reader's tested groups \nCzReaderUnlabelledPct{} carry an
-unlabelled bar (the parser's \nBarsUnlabelledPct{}), and read as standard
-errors its rate moves from \nCzReaderFail{} to \nCzReaderSeFail{};
+headline errs in its own direction. The two instruments also share the
+caption-page denominator, the regular expression that selects the
+run-count sentences the reader receives, the Welch code and the
+deviation default for an unlabelled bar, and the matching on the winner's
+value; bar presence, the values and the choice of count are the reader's
+own. Of the reader's tested groups \nCzReaderUnlabelledPct{} carry an
+unlabelled bar (the parser's \nBarsUnlabelledPct{}), and with those alone
+read as standard errors its rate moves from \nCzReaderFail{} to
+\nCzReaderSeFail{} (the unlabelled \nCzReaderUnlabelledN{} themselves from
+\nCzReaderUnlabelledAsSdFail{} to \nCzReaderUnlabelledAsSeFail{});
 \nCzReaderBigN{} of its groups from \nCzReaderBigNPapers{} papers carry a
 run count above thirty and fail at \nCzReaderBigNFail{}, without which its
 rate is \nCzReaderWithoutBigNFail{}. The two readers' disagreement is
-whole pages, not groups. On the \nCcrPages{} pilot pages both read, the
-first reader lists \nCcrFirstGroups{} groups and the census reader
-\nCcrSecondGroups{}; every one of the \nCcrUnmatchedOnEmptyPages{}
-first-reader groups the census reader does not list sits on the
-\nCcrPagesSecondEmpty{} pages it returned empty, tables it read as having
-several bold cells per line or bold on the authors' row (which the paper's
-unit excludes), while on the \nCcrSharedPages{} pages both list groups
-they match \nCcrSharedMatchedPct{} of the first reader's, agree on the
-bar-less verdict for every matched group, and give bar-less shares of
+mostly whole pages. On the \nCcrPages{} pilot pages both read, the first
+reader lists \nCcrFirstGroups{} groups and the census reader
+\nCcrSecondGroups{}; \nCcrUnmatchedOnEmptyPages{} of the
+\nCcrFirstUnmatched{} first-reader groups the census reader does not list
+sit on the \nCcrPagesSecondEmpty{} pages it returned empty, tables it read
+as having several bold cells per line or bold on the authors' row. The
+parser keeps such tables where a line's bold is its extreme and cuts
+columns into blocks, and the census protocol has neither rule, so part of
+that disagreement is the readers' unit and not their reading; nobody has
+looked at the five pages. On the \nCcrSharedPages{} pages both list
+groups they match \nCcrSharedMatchedPct{} of the first reader's, agree on
+the bar-less verdict for every matched group and on testability for
+\nCcrSharedTestableAgreePct{}, and give bar-less shares of
 \nCcrSharedFirstNeither{} and \nCcrSharedSecondNeither{}. Read twice, the
 census reader is consistent on the groups it lists and not on whether it
 lists a page (Table~\ref{tab:validation}): of the \nZrPages{} pages on
-which the parser reads a comparison and the census listed nothing,
-\nZrPagesWithGroups{} yield groups when read again, and with those
-substituted the census moves to \nZruNeither{} bar-less and
-\nZruTestable{} testable. An empty page is therefore the census's
-principal unmeasured error, at a few percent of reads. The parser's
+which the parser reads a comparison and the census listed nothing
+(\nEcPagesPct{} of the \nEcParserPages{} such pages), \nZrPagesWithGroups{}
+yield groups when read again, and with those substituted the census moves
+to \nZruNeither{} bar-less and \nZruTestable{} testable. An empty page is
+the census's principal unmeasured error: a few percent of reads, but
+\nCcrPagesSecondEmptyPct{} of the pilot pages and
+\nMsCrossPagesSecondEmptyPct{} of the mainstream pages on which the other
+reader lists groups, holding \nCcrGroupsOnEmptyPagesPct{} and
+\nMsCrossGroupsOnEmptyPagesPct{} of its groups, because the empty pages
+are the dense ones, and a consistently empty page is invisible to a
+re-read. The parser's
 caption detection is not the blind spot: of \nNcPages{} random pages on
 which it detected no caption, \nNcPagesAnyTable{} hold a table (upper
 bound \nNcPagesAnyTableUpper{} of pages). The census bar-less share is a
@@ -891,10 +911,8 @@ lower bound on what a fuller listing would give, and every number in
 Sections~\ref{sec:print} and~\ref{sec:support} carries an instrument
 error of the order of the sampling interval printed beside it.
 
-\paragraph{What the funnel discards.} Of \nATablesDetected{} tables
-detected, \nATablesYielding{} yield a comparison; of \nAGroupsCandidate{}
-candidate groups, \nAGroupsUsablePct{} have exactly one bold cell and a
-rival, and \nABoldNotExtremalPct{} of single-bold groups are dropped
+Of \nATablesDetected{} tables detected, \nATablesYielding{} yield a
+comparison, and \nABoldNotExtremalPct{} of single-bold groups are dropped
 because the bold is not the extreme of its group, a rule validated on the
 mainstream format only and applied to the readers' groups too.
 
@@ -919,14 +937,14 @@ whether the evidence that is printed supports the claim it sits beside.
 Studies of reporting practice in machine learning at large
 \cite{dodge2019show,bouthillier2021accounting,christodoulou2025false,hutchinson2022evaluation}
 read papers by hand in the hundreds; \citet{marie2021scientific} read a
-decade of machine-translation papers for significance testing and copied baselines,
-which is the copied-rival bound of Table~\ref{tab:span} by hand, and
+decade of machine-translation papers for significance testing and copied
+baselines, the copied-rival bound of Table~\ref{tab:span} by hand, and
 \citet{dror2018hitchhiker} surveyed significance testing in language
-processing. The parser here descends from the results-table extractors of
+processing. The parser descends from the results-table extractors of
 \citet{hou2019identification} and \citet{kardas2020axcell}, built to fill
-leaderboards rather than to test them; it reads tables by the thousand
-and pays for it in a measured error. What is new is the cell-level
-question with the extraction error measured, over a whole proceedings. Re-running literatures
+leaderboards rather than to test them; what is new is the cell-level
+question with the extraction error measured, over a whole proceedings.
+Re-running literatures
 \cite{henderson2017deep,musgrave2020metric,dacrema2019really} asks whether
 gains hold up; we ask only whether the page lets a reader tell. The
 evaluation-overfitting and protocol literature
@@ -959,9 +977,9 @@ $K$; for the LLM-agent papers, whose $K$ is a fixed set of instances,
 seeds do not multiply the trials and the resolution is $K$'s alone, so
 the line to print is the instance count and whether the compared methods
 saw the same instances. A reader who finds a bold cell in these
-proceedings can check it in the table about one time in three, by either
-instrument, and when the check can be made it fails about as often as it
-passes; the learning curves help less than they might, since
+proceedings can check it from the paper about one time in three, by
+either instrument, and from the table's own page about one in six; when
+the check can be made it fails about as often as it passes; the learning curves help less than they might, since
 \nFigCaptionUncPapersPct{} of papers have a figure caption naming a band
 and only \nCzNeitherOnBandedPage{} of the reader's bar-less comparisons
 share their page with one.
@@ -981,10 +999,8 @@ protocol, error bar or not.}
 $K$ & $S$ & $K \times S$ & $p = 0.5$ & $p = 0.8$ \\
 \midrule
 10 & 1 & \nLkKOZSON{} & \nLkKOZSOHalf{} & \nLkKOZSOEighty{} \\
-10 & 3 & \nLkKOZSTN{} & \nLkKOZSTHalf{} & \nLkKOZSTEighty{} \\
 10 & 5 & \nLkKOZSSN{} & \nLkKOZSSHalf{} & \nLkKOZSSEighty{} \\
 32 & 1 & \nLkKTTSON{} & \nLkKTTSOHalf{} & \nLkKTTSOEighty{} \\
-32 & 3 & \nLkKTTSTN{} & \nLkKTTSTHalf{} & \nLkKTTSTEighty{} \\
 32 & 5 & \nLkKTTSSN{} & \nLkKTTSSHalf{} & \nLkKTTSSEighty{} \\
 32 & 10 & \nLkKTTSOZN{} & \nLkKTTSOZHalf{} & \nLkKTTSOZEighty{} \\
 100 & 5 & \nLkKOZZSSN{} & \nLkKOZZSSHalf{} & \nLkKOZZSSEighty{} \\
@@ -992,22 +1008,18 @@ $K$ & $S$ & $K \times S$ & $p = 0.5$ & $p = 0.8$ \\
 \end{tabular}
 \end{table}
 
-\section*{AI use statement}
+\section*{AI use and reproducibility}
 The first image-based reader (Claude Opus 5, Anthropic) read the reference
 set, the AAMAS pilot pages and, in the concurrent study, the mainstream
 pages; the second (Gemini 3.1 Pro, Google) read the reference set again,
 took the census, read the mainstream pages, read the evaluation protocols
-of Section~\ref{sec:protocol} and assigned the community labels, and a
-third (Claude Sonnet 5, Anthropic) re-labelled a hundred papers. All are
-measurement instruments whose every prompt and answer is released, not
-authors. Language models assisted with code and with editing the text;
-no hypothesis or experimental design was generated by a model.
-
-\section*{Reproducibility}
-The frozen parser, the index, the per-comparison database, every reading
-with its prompt and answers, and every script that produced a number here
-are in the supplementary material; every number in the text is a macro
-from a run record.
+of Section~\ref{sec:protocol} and assigned the community labels; a third
+(Claude Sonnet 5, Anthropic) re-labelled a hundred papers. All are
+measurement instruments, not authors; every prompt and answer, the frozen
+parser, the index, the per-comparison database and every script that
+produced a number here are in the supplementary material, and every
+number in the text is a macro from a run record. Language models assisted
+with code and editing; no hypothesis or design was generated by a model.
 
 \balance
 \bibliographystyle{ACM-Reference-Format}

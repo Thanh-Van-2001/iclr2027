@@ -2,25 +2,24 @@
 \begin{table}[h]
 \caption{The same with PyMARL's default of 32 evaluation episodes imputed to SMAC-family papers that state no $K$ (marked *).}
 \small
-\begin{tabular}{@{}lrrlrr@{}}
+\begin{tabular}{@{}lrrlrrr@{}}
 \toprule
-Paper & $K$ & Seeds & Protocol & Comparisons & Below \\
+Paper & $K$ & Seeds & Protocol & Comparisons & Below & On lattice \\
 \midrule
-f1332ed3 & 32* & 5 & sampled episodes & 13 & 76.9\% \\
-88e58152 & 32* & 5 & sampled episodes & 10 & 90.0\% \\
-9ac2952d & 32* & 5 & sampled episodes & 8 & 62.5\% \\
-9e1f676f & 20 & 5 & fixed instances & 8 & 87.5\% \\
-53ddd82b & 32* & 5 & sampled episodes & 6 & 33.3\% \\
-7d3b1582 & 30 & 10 & sampled episodes & 5 & 40.0\% \\
-52914b52 & 100 & -- & fixed instances & 5 & 0.0\% \\
-86d33b84 & 32* & 3 & sampled episodes & 5 & 100.0\% \\
-2be4fe34 & 100 & -- & sampled episodes & 4 & 100.0\% \\
-cd479f88 & 100 & -- & fixed instances & 4 & 100.0\% \\
-948ca548 & 1000 & 5 & sampled episodes & 2 & 0.0\% \\
-be9a5551 & 5 & -- & fixed instances & 2 & 100.0\% \\
-b1245714 & 286 & -- & fixed instances & 2 & 0.0\% \\
-fa7854e8 & 32* & 5 & sampled episodes & 2 & 0.0\% \\
-c794bd1e & 32* & 3 & sampled episodes & 1 & 100.0\% \\
+f1332ed3 & 32* & 5 & sampled episodes & 13 & 76.9\% & 0 of 13 \\
+88e58152 & 32* & 5 & sampled episodes & 10 & 90.0\% & 10 of 10 \\
+9e1f676f & 20 & 30 & cross-validation & 8 & 75.0\% & 8 of 8 \\
+53ddd82b & 32* & 5 & sampled episodes & 6 & 33.3\% & 1 of 6 \\
+7d3b1582 & 30 & 10 & sampled episodes & 5 & 40.0\% & 5 of 5 \\
+52914b52 & 100 & -- & fixed instances & 5 & 0.0\% & 0 of 5 \\
+86d33b84 & 32* & 3 & sampled episodes & 5 & 100.0\% & 1 of 5 \\
+2be4fe34 & 100 & -- & sampled episodes & 4 & 100.0\% & 4 of 4 \\
+cd479f88 & 100 & -- & fixed instances & 4 & 100.0\% & 0 of 4 \\
+948ca548 & 1000 & 5 & sampled episodes & 2 & 0.0\% & 0 of 2 \\
+be9a5551 & 5 & -- & fixed instances & 2 & 100.0\% & 1 of 2 \\
+b1245714 & 286 & -- & fixed instances & 2 & 0.0\% & 0 of 2 \\
+fa7854e8 & 32* & 5 & sampled episodes & 2 & 0.0\% & 2 of 2 \\
+c794bd1e & 32* & 3 & sampled episodes & 1 & 100.0\% & 0 of 1 \\
 \bottomrule
 \end{tabular}
 \end{table}

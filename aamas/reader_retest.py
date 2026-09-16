@@ -115,7 +115,8 @@ def main(argv=None):
     T = lambda k: sum(p[k] for p in per_page)  # noqa: E731
     both = [p for p in per_page if p["g1"] > 0 and p["g2"] > 0]
     shared = {k: sum(p[k] for p in both) for k in ("g1", "g2", "matched", "n1_neither", "n2_neither", "n1_testable",
-                                                    "n2_testable", "neither_agree", "fail_agree", "both_tested")}
+                                                    "n2_testable", "neither_agree", "fail_agree", "both_tested",
+                                                    "n1_tested", "n2_tested", "n1_fail", "n2_fail", "testable_agree")}
     shared["pages"] = len(both)
     res = {
         "n_pages": len(per_page), "n_papers": len({p["paper"] for p in per_page}),
@@ -159,6 +160,10 @@ def main(argv=None):
         "shared_pct_testable_second": round(100.0 * shared["n2_testable"] / shared["g2"], 1) if shared["g2"] else None,
         "shared_neither_agree_pct": round(100.0 * shared["neither_agree"] / shared["matched"], 1) if shared["matched"] else None,
         "shared_fail_agree": shared["fail_agree"], "shared_both_tested": shared["both_tested"],
+        "shared_tested_first": shared["n1_tested"], "shared_tested_second": shared["n2_tested"],
+        "shared_pct_fail_first": round(100.0 * shared["n1_fail"] / shared["n1_tested"], 1) if shared["n1_tested"] else None,
+        "shared_pct_fail_second": round(100.0 * shared["n2_fail"] / shared["n2_tested"], 1) if shared["n2_tested"] else None,
+        "shared_testable_agree_pct": round(100.0 * shared["testable_agree"] / shared["matched"], 1) if shared["matched"] else None,
         "per_page": per_page,
     }
     os.makedirs(os.path.dirname(args.out), exist_ok=True)

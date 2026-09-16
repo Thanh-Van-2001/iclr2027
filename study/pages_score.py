@@ -156,9 +156,11 @@ def main(argv=None) -> int:
                         res = p_value(abs(w - r), sw, sr, int(n) if n else None)
                         fail = (res["p"] >= 0.05) if res else None
                 fail_se = None
-                if testable and kind not in ("se", "ci"):
-                    # the same group with an unlabelled or SD bar read as a
-                    # standard error (the parser's Table 3 sensitivity)
+                if testable and kind not in ("se", "ci", "sd", "std"):
+                    # the same group with an UNLABELLED bar read as a standard
+                    # error (the parser's Table 3 sensitivity); an earlier
+                    # version re-read the caption-stated SDs too, which a
+                    # reviewer of the AAMAS study caught
                     w, r = _num(g.get("winner_mean")), _num(g.get("runner_mean"))
                     sw, sr = _bar_num(g.get("winner_disp")), _bar_num(g.get("runner_disp"))
                     if None not in (w, r, sw, sr):
@@ -276,9 +278,14 @@ def main(argv=None) -> int:
     # sensitivities on the reader's own verdicts
     se_tested = [g for g in tested if g["fail_se"] is not None]
     small_n = [g for g in tested if not (g["n"] is not None and g["n"] > 30)]
+    # the headline rate with only the unlabelled bars re-read as standard errors
+    all_se = [(g["fail_se"] if g["fail_se"] is not None else g["fail"]) for g in tested]
     reader_sens = {
-        "unlabelled_or_sd_as_se": {"n": len(se_tested),
-                                   "pct_fail": round(100 * sum(g["fail_se"] for g in se_tested) / len(se_tested), 1) if se_tested else None},
+        "unlabelled_as_se": {"n_unlabelled": len(se_tested),
+                             "pct_fail_unlabelled_as_sd": round(100 * sum(g["fail"] for g in se_tested) / len(se_tested), 1) if se_tested else None,
+                             "pct_fail_unlabelled_as_se": round(100 * sum(g["fail_se"] for g in se_tested) / len(se_tested), 1) if se_tested else None,
+                             "n": len(tested),
+                             "pct_fail": round(100 * sum(all_se) / len(tested), 1) if tested else None},
         "bar_kinds_tested": dict(__import__("collections").Counter(g["kind"] or "unlabelled" for g in tested)),
         "run_count_above_30": {"n": sum(1 for g in tested if g["n"] is not None and g["n"] > 30),
                                "papers": len({g["paper"] for g in tested if g["n"] is not None and g["n"] > 30}),

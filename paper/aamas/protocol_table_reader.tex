@@ -2,18 +2,18 @@
 \begin{table}[h]
 \caption{The protocol-resolution comparisons by paper, model-read set: $K$ and seeds as the model read them, whether $K$ counts sampled episodes or a fixed instance set, and the share of gaps below the resolution at $K$ times seeds for sampled episodes and $K$ alone for fixed instances.}
 \small
-\begin{tabular}{@{}lrrlrr@{}}
+\begin{tabular}{@{}lrrlrrr@{}}
 \toprule
-Paper & $K$ & Seeds & Protocol & Comparisons & Below \\
+Paper & $K$ & Seeds & Protocol & Comparisons & Below & On lattice \\
 \midrule
-9e1f676f & 20 & 5 & fixed instances & 8 & 87.5\% \\
-7d3b1582 & 30 & 10 & sampled episodes & 5 & 40.0\% \\
-52914b52 & 100 & -- & fixed instances & 5 & 0.0\% \\
-2be4fe34 & 100 & -- & sampled episodes & 4 & 100.0\% \\
-cd479f88 & 100 & -- & fixed instances & 4 & 100.0\% \\
-948ca548 & 1000 & 5 & sampled episodes & 2 & 0.0\% \\
-be9a5551 & 5 & -- & fixed instances & 2 & 100.0\% \\
-b1245714 & 286 & -- & fixed instances & 2 & 0.0\% \\
+9e1f676f & 20 & 30 & cross-validation & 8 & 75.0\% & 8 of 8 \\
+7d3b1582 & 30 & 10 & sampled episodes & 5 & 40.0\% & 5 of 5 \\
+52914b52 & 100 & -- & fixed instances & 5 & 0.0\% & 0 of 5 \\
+2be4fe34 & 100 & -- & sampled episodes & 4 & 100.0\% & 4 of 4 \\
+cd479f88 & 100 & -- & fixed instances & 4 & 100.0\% & 0 of 4 \\
+948ca548 & 1000 & 5 & sampled episodes & 2 & 0.0\% & 0 of 2 \\
+be9a5551 & 5 & -- & fixed instances & 2 & 100.0\% & 1 of 2 \\
+b1245714 & 286 & -- & fixed instances & 2 & 0.0\% & 0 of 2 \\
 \bottomrule
 \end{tabular}
 \end{table}
