@@ -19,7 +19,9 @@ PAGE_LIMIT = 8
 # Literals that are legitimately hand-written: the CC licence version (4.0), the
 # conference ordinal (26th), the CCS concept ids and significance (10010147...,
 # 500) from the ACM template, and the version in a model's name (Gemini 3.1).
-ALLOW = sys.argv[1] if len(sys.argv) > 1 else "4.0,26,10010147.10010919,10010177,500,3.1"
+# 32 is PyMARL's default evaluation-episode count, a design parameter of the
+# lookup table rather than a measurement.
+ALLOW = sys.argv[1] if len(sys.argv) > 1 else "4.0,26,10010147.10010919,10010177,500,3.1,32"
 
 
 def build() -> bool:

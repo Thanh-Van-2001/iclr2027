@@ -1,0 +1,29 @@
+2: Initialization:
+---
+40-run sweep at 𝑇= 100𝐾completes in roughly 45s
+---
+Claim 1 provides an upper bound on how many times a
+---
+Figure 1: Regret and revenue curves for TRCM-UCBOPT averaged over 𝑁= 40 random seeds
+---
+Here, A𝑖(𝑏,𝑡) denotes the total number of times provider 𝑖is allocated
+---
+To obtain statistically stable estimates, we run each
+---
+bound 𝑐𝑖, random seed 𝑟𝑠𝑖
+---
+configuration over (𝑁= 40) independent random seeds
+---
+izations for each run
+---
+random seeds and summarize the averaged trajectories in Figure 1
+---
+repeat
+---
+seed of nature), allocations A(𝑏) and ALG(𝑏) are identical
+---
+times bad sub-optimal providers are used is bounded by a constant
+---
+with input 𝑏𝑖∈I, random seed 𝑟𝑠𝑖, and output e𝑏𝑖(𝑏𝑖;𝑟𝑠𝑖) ∈𝐼, that
+---
+with probability at least 1 −𝜅, if it is run with 𝛼=

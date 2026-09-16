@@ -17,7 +17,13 @@ rm -f "$DEST/paperengine/litreview.py" "$DEST/paperengine/review.py" "$DEST/pape
 rm -f "$DEST/aamas/make_reader_wf.py" "$DEST/aamas/stub_check.py"
 cp run_all_aamas.sh requirements.txt "$DEST/"
 
-cp -r audits/aamas_gold audits/aamas_pages "$DEST/audits/"
+cp -r audits/aamas_gold audits/aamas_gold_gemini audits/aamas_pages "$DEST/audits/"
+# the census kits ship their items, labels and draw records; the page images
+# (hundreds of MB) are regenerated from data/corpus by the sampling scripts
+for kit in aamas_census aamas_census_retry aamas_census_effort aamas_testable_pages; do
+  mkdir -p "$DEST/audits/$kit"
+  cp audits/$kit/*.json "$DEST/audits/$kit/"
+done
 find "$DEST/audits" -name "*_fulltext.txt" -delete
 cp data/extracted_aamas.jsonl "$DEST/data/"
 # the NeurIPS/ICML side-by-side is read from these two records

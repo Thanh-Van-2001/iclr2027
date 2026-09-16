@@ -1,0 +1,19 @@
+We run
+---
+We run the experiments using the same configuration as the base-
+---
+all the synthesized control policies on 100 random seeds to mea-
+---
+initial rollout process before the learning starts at the T-th step
+---
+is updated fewer times and hence is not suitable for complex tasks
+---
+reusing the experiences (transitions) multiple times
+---
+space from the collected rollouts using find_important_dimensions
+---
+start with a random policy (line 2) and collect transitions (rollouts)
+---
+times as follows:
+---
+times faster than

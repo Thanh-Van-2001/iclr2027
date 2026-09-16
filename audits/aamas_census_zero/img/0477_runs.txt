@@ -1,0 +1,51 @@
+, Q-values initialization: action estimation value for
+---
+Each training episode runs until the
+---
+Robot movement times
+---
+Robot task times
+---
+Synchronously, we run all
+---
+Table 4: Cycle times achieved with 2000 cycles
+---
+The controller executor runs the Prism system
+---
+The initialization of the RL
+---
+The third level or run time level (Java) is made up of the
+---
+We leverage Prism to produce a controller that runs using an
+---
+actions provided by the controller at run time
+---
+approaches do not yet cover run time constraints due to the offline
+---
+at run time, agent actions, and therefore considers quality
+---
+considers robot movement times, interruption times, and
+---
+model-at-runtime, and optimized at run time through RL learning
+---
+over episodes and updating its policy (Q-table for classic
+---
+results are used for the model initialization of the RL agent, which
+---
+run time
+---
+run-time,
+---
+simulator engine that uses Java-based APIs to run the Prism model
+---
+system action evaluation at run time
+---
+task and interruption times of each robot, and the interruption
+---
+that can be executed while the system is running (see the run time
+---
+times obtained with state-of-the-art methods, namely, random and
+---
+verification process permits at run time to avoid unsafe action
+---
+while iterating over episodes

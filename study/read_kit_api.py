@@ -86,7 +86,7 @@ KEYS = {
 
 
 def ask(vendor: dict, key: str, image_path: str, text: str, retries: int = 4, max_tokens: int = 4096, return_text: bool = False,
-        extra: dict | None = None):
+        extra: dict | None = None, timeout: int = 300):
     """extra: request fields merged into the body (e.g. {"stream": True} to keep a
     gateway from timing out on a long answer); the relay may ignore them."""
     with open(image_path, "rb") as fh:
@@ -107,7 +107,7 @@ def ask(vendor: dict, key: str, image_path: str, text: str, retries: int = 4, ma
     last = None
     for attempt in range(retries):
         try:
-            with urllib.request.urlopen(req, timeout=300) as r:
+            with urllib.request.urlopen(req, timeout=timeout) as r:
                 raw = r.read().decode()
             if raw.lstrip().startswith("data:"):
                 # a relay that streams regardless: stitch the deltas together

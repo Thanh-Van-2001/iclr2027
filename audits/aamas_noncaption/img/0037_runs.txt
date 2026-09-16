@@ -1,0 +1,63 @@
+All baselines use the same seeds (§4
+---
+At run-
+---
+At 𝑡=0 a seed set S0 and associated messages X0
+---
+Cooldowns: repeated exposures of the
+---
+Experiments run on a single
+---
+For (3) we report out-of-sample 𝑅2, sign stability of ˆ𝑠𝑖across folds,
+---
+GPU; random seeds and config files are released for reproducibility
+---
+Initial seeds S0 are drawn from logged first-post events
+---
+Multi–message runs interleave messages with the
+---
+RL for exposure balance yet emphasise seed selection over runtime
+---
+Sharding instantiation (no theory repeated)
+---
+ance ˜𝜆𝑏(𝑖,𝑡) re-weights seed/candidate selection to inject corrective
+---
+coefficient, learning rates, rollout length, minibatch and epochs,
+---
+enforce a minimum inter–attempt delay for repeated exposures of
+---
+episodes are held out chronologically to avoid leakage
+---
+for all subsequent runs
+---
+ing and cooldowns, and balance [0, 1] re-weights seeds/candidates
+---
+is disabled; the same policy runs on the full user graph with user-
+---
+long-run dynamics
+---
+max𝑡𝑟𝑡per episode and average across runs (the training objective
+---
+pre-registered, reversible field trials to assess external validity and
+---
+re–weights seed sampling only
+---
+run the topic-conditioned IC on the remaining graph
+---
+these probabilities at run-time but do not alter their estimation
+---
+ties from (ii) run-time control over exposure timing and selection,
+---
+trials with appropriate transparency and independent oversight
+---
+ventions rely on hard structural moderation or content/seed ma-
+---
+which reweighs seed/candidate selection to pair negative-topic im-
+---
+which reweights seeds and candidates to promote corrective and
+---
+with standard IC initialisation [14]
+---
+Δ𝑡≥𝜏𝑓˜𝜆𝑓(𝑖,𝑡) for repeated exposures of the same topic to
+---
+𝑟𝑡across episodes; the same 𝜏is used for all methods on test

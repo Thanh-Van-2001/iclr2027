@@ -1,0 +1,21 @@
+(i) Given a fixed number of episodes for the fine-tuning process,
+---
+0 over a few episodes (Line 6) to quickly obtain the BR
+---
+9 times faster than without using pre-pretraining)
+---
+These processes are repeated for 𝐾epochs and then output the final
+---
+of episodes used for training the best response is 10
+---
+of pre-training episodes is 20 million (20M)
+---
+other parts of Grasper for 20M pre-training episodes requires a
+---
+pre-training episodes and compare the running time of Grasper
+---
+strategy multiple times
+---
+the need to restart the training process from the beginning
+---
+𝑘−1 for few episodes;

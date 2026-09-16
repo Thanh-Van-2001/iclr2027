@@ -83,6 +83,9 @@ def main(argv=None) -> int:
     ap.add_argument("--shard", default=None, help="k/n: read only every n-th item starting at k (parallel runs)")
     ap.add_argument("--reverse", action="store_true", help="read the shard from its end (a second worker meeting the first)")
     ap.add_argument("--max-tokens", type=int, default=12000, help="output budget per call")
+    ap.add_argument("--venue-phrase", default="multi-agent-systems paper (two-column ACM format)",
+                    help="the one phrase of the protocol naming the page's format; for the mainstream pages "
+                         "'machine-learning paper (single-column NeurIPS/ICML format)'")
     ap.add_argument("--reasoning-effort", default=None,
                     help="sent as {'reasoning': {'effort': ...}}; the 15 census pages on which the relay timed out at "
                          "the default were read at 'low', everything else identical")
@@ -122,16 +125,26 @@ def main(argv=None) -> int:
         runs_path = os.path.join(args.kit, "img", f"{it['id']}_runs.txt")
         runs = open(runs_path, encoding="utf-8").read() if os.path.exists(runs_path) else "(none)"
         ans = None
-        prompt = PROTO.format(runs=runs[:6000])
+        proto = PROTO.replace("multi-agent-systems paper (two-column ACM format)", args.venue_phrase)
+        prompt = proto.format(runs=runs[:6000])
+        effort_used = args.reasoning_effort
         for attempt in range(3):
             try:
+                # a page on which the relay times out twice at the default
+                # reasoning setting is read at 'low' on the third attempt,
+                # as the fifteen densest census pages were; the record says so
+                effort = args.reasoning_effort or ("low" if attempt == 2 else None)
+                # a default-setting attempt that has not answered in two
+                # minutes is a dense page the gateway will time out on
                 text = ask(vendor, key, img, prompt, max_tokens=args.max_tokens, return_text=True,
-                           extra={"reasoning": {"effort": args.reasoning_effort}} if args.reasoning_effort else None)
+                           retries=1 if attempt < 2 else 2, timeout=120 if attempt < 2 else 300,
+                           extra={"reasoning": {"effort": effort}} if effort else None)
                 ans = _parse(text)
+                effort_used = effort
                 break
             except Exception as exc:  # noqa: BLE001
                 print(f"  {it['id']} attempt {attempt + 1} failed: {str(exc)[:120]}", flush=True)
-                prompt = PROTO.format(runs=runs[:6000]) + STRICT
+                prompt = proto.format(runs=runs[:6000]) + (STRICT if "JSON" in str(exc) or "Expecting" in str(exc) else "")
         if ans is None:
             ans = {"tables": [], "note": "failed: no valid JSON after three attempts"}
         tables = ans.get("tables", []) if isinstance(ans, dict) else []
@@ -144,7 +157,8 @@ def main(argv=None) -> int:
                     g[k] = str(g.get(k, "")).strip()
         pages.append({"id": it["id"], "tables": tables,
                       "figure_band_on_page": str(ans.get("figure_band_on_page", "")).strip() if isinstance(ans, dict) else "",
-                      "note": str(ans.get("note", "")) if isinstance(ans, dict) else ""})
+                      "note": str(ans.get("note", "")) if isinstance(ans, dict) else "",
+                      "reasoning_effort": effort_used or "default"})
         json.dump(pages, open(out, "w", encoding="utf-8"), indent=1, ensure_ascii=False)
         print(f"  {it['id']} {len(tables)} tables, {sum(len(t['groups']) for t in tables)} groups", flush=True)
     print("wrote", out, len(pages), "pages")

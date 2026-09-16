@@ -275,7 +275,10 @@ def score(items_path: str, labels_path: str, exclude_unboxed: bool = False) -> d
     T = [(it, lb) for it, lb in T if not (exclude_unboxed and it.get("mark") is None)]
     fields = {}
     n = len(T)
-    fields["results_table"] = rate(n, sum(1 for i in labels if items[i]["stratum"] == "testable"),
+    # the denominator leaves the unboxed items out as every other field does;
+    # an earlier version kept them in and printed "95 of 100" for a stratum of
+    # 95 (a reviewer's reconciliation)
+    fields["results_table"] = rate(n, sum(1 for i in labels if items[i]["stratum"] == "testable") - len(unboxed),
                                    "the cropped region is a results table")
     fields["bold_cell"] = rate(sum(1 for it, lb in T if lb["bold_ok"].lower().startswith("y")), n,
                                "the circled cell is bold and alone in its group")

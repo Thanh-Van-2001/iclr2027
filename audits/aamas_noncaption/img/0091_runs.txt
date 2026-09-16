@@ -1,0 +1,53 @@
+1: procedure Initialisation(Ω)
+---
+ABU-BAE exhibits notably faster estimation times than ABU in
+---
+After initialisation, we begin the search process with A-MCTS,
+---
+Figure 1 illustrates this initialisation process
+---
+Figure 1: The BAE initialisation process in an environment
+---
+Initialisation
+---
+Initialisation Example
+---
+Note that, OEATA-A requires significantly more time to run
+---
+Our approach can run alone or together with different state-
+---
+Our method can run estimations from scratch and, thus, it
+---
+Since the simulation procedure is performed multiple times, the
+---
+To run our experiments, we defined 4 different scenarios:
+---
+Uniform initialisation
+---
+a strategic agent is an agent that runs an algorithm for planning and
+---
+agent perspective 𝜙because it enables us to run a single-agent MDP
+---
+during the rollout phase, we conjecture that BAE often performs
+---
+hoc teamwork algorithm at the same time we run BAE’s adversarial
+---
+iment runs independently, so no knowledge is carried from one
+---
+inversely proportional to the number of times each action is tried,
+---
+rollout’s simulations) due to its confidence in identifying the true
+---
+run our adversarial detection approach, BAE
+---
+run the true impostor 𝜓
+---
+scenario, we ran 200 episodes and saved the estimated Q-values for
+---
+to run the A-MCTS approach and estimate Q-values for each action
+---
+to run the type-based methods, AGA and ABU
+---
+to run, besides requiring previous knowledge about the world and
+---
+𝜔←Initialisation(Ω)

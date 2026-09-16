@@ -96,7 +96,13 @@ def main():
     print("wrote", os.path.join(OUT, "fig_census.pdf"))
 
     # protocol resolution: printed gap against what K episodes x seeds resolve
-    rows = _j("out/aamas/protocol_resolution_rows_reader.json") if os.path.exists("out/aamas/protocol_resolution_rows_reader.json") else _j("out/aamas/protocol_resolution_rows.json")
+    # the model-read set of Section 6 (typed reading), else the earlier readings
+    rows = None
+    for cand in ("out/aamas/protocol_resolution_rows_reader2.json", "out/aamas/protocol_resolution_rows_reader.json",
+                 "out/aamas/protocol_resolution_rows.json"):
+        if os.path.exists(cand):
+            rows = _j(cand)
+            break
     fig, ax = plt.subplots(figsize=(3.3, 2.6))
     for has_bars, color, label in ((False, "#1f4e79", "no error bar printed"), (True, "#e67e22", "error bar printed")):
         xs = [r["resolvable"] * 100 for r in rows if r["has_bars"] == has_bars]

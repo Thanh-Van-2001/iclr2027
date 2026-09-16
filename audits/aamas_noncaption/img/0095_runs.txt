@@ -1,0 +1,25 @@
+(4) Run game simulations to create the empirical payoff matrix 𝑃
+---
+10000 episodes
+---
+Then we run simulations
+---
+dominant strategies that are expected to prevail in the long run
+---
+file that prevails in the long run is (WL, CA); this is the primary
+---
+of play in the underlying game, and run simulations to generate
+---
+player 𝑘receives in simulation run 𝑖when playing strategy 𝑠𝑡𝑟𝑘
+---
+prevail in the long run, based on the underlying dynamics of the
+---
+ultimately identifying which ones prevail in the long run
+---
+underlying game according to these strategies, (c) run policies to
+---
+we ran the method 1000 times, using values of 𝛼within the range
+---
+we simulate the game over 5,000 repeats and calculate the average
+---
+where 𝑁is the number of simulation runs, 𝑠𝑡𝑟𝑘represents player

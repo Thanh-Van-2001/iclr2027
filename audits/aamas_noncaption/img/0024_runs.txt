@@ -1,0 +1,15 @@
+Furthermore, we dealt with unsafe simulated rollouts
+---
+These simulated rollouts provide on-policy samples without
+---
+horizon rollouts that may accumulate significant noise in the 𝑛GP
+---
+independent runs) are reported
+---
+ing states 𝑥∼D, from which we rollout the unshielded policy b𝜋for
+---
+lower bound on the probability of constraint satisfaction at all times,
+---
+often trained on shorter horizon rollouts and preferred here over
+---
+rollouts we train b𝜋with advantage actor-critic (A2C) [47]

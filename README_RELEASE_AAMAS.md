@@ -23,12 +23,30 @@ the extraction file and the audit labels, without touching the network.
   (`analysis.json`), `extra.json` (census, per-year, per-community, span,
   protocol resolution, funnel), `protocol.json` (every matched episode and
   seed sentence), `communities.csv` (the model's label per paper),
-  `gold_set.json` and `gold_set_pages.json` (the audit scores).
+  `gold_set.json`, `gold_set_gemini.json` and `gold_set_pages.json` (the
+  reference-set and pilot scores), `gold_set_census.json` (the census
+  scored against the parser), `protocol_reader.json` (the model's reading
+  of each rate paper's evaluation protocol).
 - `audits/aamas_gold/` — the 140 reference items: rendered crops with the
   audited cell boxed, the run sentences, `items.json` (the parser's reading)
   and `labels.csv` (the reader's).
-- `audits/aamas_pages/` — the 100 random pages, rendered, with the reader's
-  end-to-end labels (`labels.json`).
+- `audits/aamas_gold_gemini/` — the second reader's labels on the same
+  reference items (`labels.csv`).
+- `audits/aamas_pages/` — the 100 random pilot pages, rendered, with the
+  first reader's end-to-end labels (`labels.json`).
+- `audits/aamas_census/` — the census: every caption page (`items.json`,
+  1008 pages) with the second reader's labels (`labels.json`, merged from
+  the per-shard files by `aamas/merge_census.py`). `aamas_census_retry/`
+  lists the 15 pages re-read at reasoning effort `low`;
+  `aamas_census_effort/` the 40 pages read again at `low` to measure what
+  the setting changes (`draw.json` records the draw);
+  `aamas_testable_pages/` the 66 pages holding parser-testable comparisons,
+  read twice. The page images are not shipped (they run to hundreds of
+  megabytes); `python aamas/sample_all_caption_pages.py` and
+  `python aamas/sample_testable_pages.py` render them again from
+  `data/corpus`, and the scores in `out/aamas/gold_set_census.json`,
+  `gold_set_testable_pages.json`, `reader_retest.json` and
+  `reader_effort.json` need only the labels.
 - `audits/aamas_comm_check/` — the 100 first pages read by the second
   community labeller and its labels.
 - `out/both_years.json`, `out/extra_stats.json` — the NeurIPS/ICML 2025

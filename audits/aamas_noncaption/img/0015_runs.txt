@@ -1,0 +1,23 @@
+All runs are performed on an AMD EPYC 7H12 64 core CPU with
+---
+Collect rollout data (𝑚𝑖,𝜅𝑖) while training policy 𝜋
+---
+For each rollout,
+---
+The curriculum only requires observations of rollouts and not the
+---
+Therefore, the data (samples obtained from rollouts) can be used as
+---
+We will estimate the competency levels using past rollouts
+---
+competency level using past rollouts and was used to infer estimated
+---
+distribution based on data from rollouts
+---
+features using data from past rollouts
+---
+second antagonistic policy and instead uses rollouts from a single
+---
+too much time at the end of each rollout generation
+---
+while it is necessary to use rollouts on each environment for ACCEL

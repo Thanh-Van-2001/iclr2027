@@ -113,6 +113,7 @@ def main(argv=None) -> int:
     per_page = []
     shared, reader_only, pipe_only = [], [], []
     m_g = m_n = u_g = u_n = 0   # reader groups the pipeline also has / does not
+    pm_g = [0, 0, 0]            # parser comparisons the reader also lists: n, bar-less, testable
     r_groups = r_neither = r_testable = r_onebar = 0
     p_groups = p_neither = p_testable = 0
     r_found = p_found = 0
@@ -143,21 +144,20 @@ def main(argv=None) -> int:
                     if None not in (w, r, sw, sr):
                         res = p_value(abs(w - r), sw, sr, int(n) if n else None)
                         fail = (res["p"] >= 0.05) if res else None
+                fail_se = None
+                if testable and kind not in ("se", "ci"):
+                    # the same group with an unlabelled or SD bar read as a
+                    # standard error (the parser's Table 3 sensitivity)
+                    w, r = _num(g.get("winner_mean")), _num(g.get("runner_mean"))
+                    sw, sr = _bar_num(g.get("winner_disp")), _bar_num(g.get("runner_disp"))
+                    if None not in (w, r, sw, sr):
+                        res = p_value(abs(w - r), sw, sr, int(n) if n else None)
+                        fail_se = (res["p"] >= 0.05) if res else None
                 groups.append({"w": _num(g.get("winner_mean")), "wb": wb, "rb": rb,
-                               "testable": testable, "fail": fail, "paper": it["paper"]})
+                               "testable": testable, "fail": fail, "paper": it["paper"],
+                               "kind": kind, "n": n, "fail_se": fail_se,
+                               "bars_no_n": wb and rb and n is None and kind not in ("se", "ci")})
         pc = by_page.get((it["paper"], it["page"]), [])
-        # verdicts on the same pages: groups both instruments test, and the
-        # ones only one of them can
-        for g in groups:
-            m = next((c for c in pc if _eq(g["w"], c["winner"])), None)
-            if g["fail"] is not None and m is not None and m.get("test"):
-                shared.append((g["fail"], m["test"]["p"] >= 0.05))
-            elif g["fail"] is not None:
-                reader_only.append(g["fail"])
-        matched_w = {round(g["w"], 9) for g in groups if g["w"] is not None}
-        for c in pc:
-            if c.get("test") and not any(_eq(g["w"], c["winner"]) and g["fail"] is not None for g in groups):
-                pipe_only.append(c["test"]["p"] >= 0.05)
         page = {"id": iid, "paper": it["paper"], "n_groups": len(groups),
                 "neither": sum(1 for g in groups if not g["wb"] and not g["rb"]),
                 "testable": sum(1 for g in groups if g["testable"]),
@@ -165,6 +165,8 @@ def main(argv=None) -> int:
                 "pipe_neither": sum(1 for c in pc if c["winner_dispersion"] is None and c["runner_dispersion"] is None),
                 "pipe_testable": sum(1 for c in pc if c.get("test"))}
         page["tested_groups"] = [g for g in groups if g["testable"] and g["fail"] is not None]
+        page["testable_unreadable"] = sum(1 for g in groups if g["testable"] and g["fail"] is None)
+        page["bars_no_n"] = sum(1 for g in groups if g["bars_no_n"])
         per_page.append(page)
         r_groups += page["n_groups"]; r_neither += page["neither"]; r_testable += page["testable"]
         r_onebar += sum(1 for g in groups if g["wb"] != g["rb"])
@@ -185,6 +187,34 @@ def main(argv=None) -> int:
                 m_g += 1; m_n += (not g["wb"] and not g["rb"])
             else:
                 u_g += 1; u_n += (not g["wb"] and not g["rb"])
+        # verdicts on the same pages, on the one-to-one matching: groups both
+        # instruments test, and the ones only one of them can. An earlier
+        # version matched on the first value hit and lost 22 parser-testable
+        # comparisons between the two lists (a reviewer's reconciliation).
+        pair = {}
+        used_list = []
+        for gi, g in enumerate(groups):
+            for ci, c in enumerate(pc):
+                if ci not in used_list and _eq(g["w"], c["winner"]):
+                    used_list.append(ci); pair[gi] = ci
+                    break
+        for gi, g in enumerate(groups):
+            c = pc[pair[gi]] if gi in pair else None
+            if g["fail"] is not None and c is not None and c.get("test"):
+                shared.append((g["fail"], c["test"]["p"] >= 0.05))
+            elif g["fail"] is not None:
+                reader_only.append(g["fail"])
+            elif c is not None and c.get("test"):
+                pipe_only.append(c["test"]["p"] >= 0.05)
+        for ci, c in enumerate(pc):
+            if ci not in used_list and c.get("test"):
+                pipe_only.append(c["test"]["p"] >= 0.05)
+        # the parser's comparisons the reader confirms: their own shares
+        for ci in used:
+            c = pc[ci]
+            pm_g[0] += 1
+            pm_g[1] += (c["winner_dispersion"] is None and c["runner_dispersion"] is None)
+            pm_g[2] += bool(c.get("test"))
         r_found += len(matched_ids)
         p_found += len(used)
         p_found_testable += sum(1 for ci in used if pc[ci].get("test"))
@@ -229,18 +259,40 @@ def main(argv=None) -> int:
         reader_failure = {"n": len(tested), "n_papers": len(papers_),
                           "pct_fail": round(100 * sum(g["fail"] for g in tested) / len(tested), 1),
                           "ci": [round(bvals[50], 1), round(bvals[1949], 1)]}
+    # sensitivities on the reader's own verdicts
+    se_tested = [g for g in tested if g["fail_se"] is not None]
+    small_n = [g for g in tested if not (g["n"] is not None and g["n"] > 30)]
+    reader_sens = {
+        "unlabelled_or_sd_as_se": {"n": len(se_tested),
+                                   "pct_fail": round(100 * sum(g["fail_se"] for g in se_tested) / len(se_tested), 1) if se_tested else None},
+        "bar_kinds_tested": dict(__import__("collections").Counter(g["kind"] or "unlabelled" for g in tested)),
+        "run_count_above_30": {"n": sum(1 for g in tested if g["n"] is not None and g["n"] > 30),
+                               "papers": len({g["paper"] for g in tested if g["n"] is not None and g["n"] > 30}),
+                               "pct_fail": round(100 * sum(g["fail"] for g in tested if g["n"] is not None and g["n"] > 30) /
+                                                 max(sum(1 for g in tested if g["n"] is not None and g["n"] > 30), 1), 1)},
+        "without_run_count_above_30": {"n": len(small_n),
+                                       "pct_fail": round(100 * sum(g["fail"] for g in small_n) / len(small_n), 1) if small_n else None},
+        "testable_unreadable_values": sum(p_["testable_unreadable"] for p_ in per_page),
+        "testable_papers": len({p_["paper"] for p_ in per_page if p_["testable"]}),
+    }
     out = {
         "reader_failure": reader_failure,
+        "reader_sensitivity": reader_sens,
         "verdicts_same_pages": {
             "shared": {"n": len(shared), "reader_fails": sum(1 for a, b in shared if a),
                        "pipeline_fails": sum(1 for a, b in shared if b),
-                       "agree": sum(1 for a, b in shared if a == b)},
+                       "agree": sum(1 for a, b in shared if a == b),
+                       "both_fail": sum(1 for a, b in shared if a and b),
+                       "pipeline_fails_reader_survives": sum(1 for a, b in shared if b and not a),
+                       "reader_fails_pipeline_survives": sum(1 for a, b in shared if a and not b)},
             "reader_only": {"n": len(reader_only), "fails": sum(reader_only)},
             "pipeline_only": {"n": len(pipe_only), "fails": sum(pipe_only)},
         },
         "corpus_one_page_per_paper": {"pct_neither": round(sum(nei) / len(nei), 1),
                                       "pct_testable": round(sum(tes) / len(tes), 1)},
         "reader_groups_matched": {"groups": m_g, "pct_neither": round(100 * m_n / m_g, 1) if m_g else None},
+        "pipeline_groups_matched": {"groups": pm_g[0], "pct_neither": round(100 * pm_g[1] / pm_g[0], 1) if pm_g[0] else None,
+                                    "pct_testable": round(100 * pm_g[2] / pm_g[0], 1) if pm_g[0] else None},
         "reader_groups_unmatched": {"groups": u_g, "pct_neither": round(100 * u_n / u_g, 1) if u_g else None},
         "n_pages": len(per_page),
         "n_tables_listed": n_tables, "n_results_tables": n_results,
@@ -250,6 +302,8 @@ def main(argv=None) -> int:
                    "ci_neither": _boot(per_page, "neither"),
                    "pct_one_side": round(100 * r_onebar / r_groups, 1) if r_groups else None,
                    "pct_testable": round(100 * r_testable / r_groups, 1) if r_groups else None,
+                   "n_testable": r_testable,
+                   "pct_bars_no_n": round(100 * sum(p_["bars_no_n"] for p_ in per_page) / r_groups, 1) if r_groups else None,
                    "ci_testable": _boot(per_page, "testable"),
                    "ci_neither_papers": _boot_papers(per_page, "neither"),
                    "ci_testable_papers": _boot_papers(per_page, "testable"),

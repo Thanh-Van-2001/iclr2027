@@ -66,11 +66,13 @@ def main(argv=None):
     ap.add_argument("--first", default=FIRST)
     ap.add_argument("--second", default=SECOND)
     ap.add_argument("--out", default=OUT)
+    ap.add_argument("--first-labels", default=None, help="labels file of the first kit (default labels.json)")
+    ap.add_argument("--second-labels", default=None, help="labels file of the second kit (default labels.json)")
     args = ap.parse_args(argv)
     items1 = json.load(open(os.path.join(args.first, "items.json"), encoding="utf-8"))
     items2 = json.load(open(os.path.join(args.second, "items.json"), encoding="utf-8"))
-    lab1 = {p["id"]: p for p in json.load(open(os.path.join(args.first, "labels.json"), encoding="utf-8"))}
-    lab2 = {p["id"]: p for p in json.load(open(os.path.join(args.second, "labels.json"), encoding="utf-8"))}
+    lab1 = {p["id"]: p for p in json.load(open(args.first_labels or os.path.join(args.first, "labels.json"), encoding="utf-8"))}
+    lab2 = {p["id"]: p for p in json.load(open(args.second_labels or os.path.join(args.second, "labels.json"), encoding="utf-8"))}
     key2 = {(it["paper"], it["page"]): it["id"] for it in items2}
     per_page = []
     for it in items1:
@@ -100,6 +102,8 @@ def main(argv=None):
             "n2_fail": sum(1 for b in g2 if b["fail"]),
             "both_tested": len(both_tested),
             "fail_agree": sum(1 for a, b in both_tested if a["fail"] == b["fail"]),
+            "n1_unmatched_neither": sum(1 for a in g1 if a["neither"]) - sum(1 for a, b in pairs if a["neither"]),
+            "n2_unmatched_neither": sum(1 for b in g2 if b["neither"]) - sum(1 for a, b in pairs if b["neither"]),
         })
     T = lambda k: sum(p[k] for p in per_page)  # noqa: E731
     res = {
@@ -121,6 +125,15 @@ def main(argv=None):
         "pct_fail_second": round(100.0 * T("n2_fail") / T("n2_tested"), 1) if T("n2_tested") else None,
         "both_tested": T("both_tested"), "fail_agree": T("fail_agree"),
         "pct_fail_agree": round(100.0 * T("fail_agree") / T("both_tested"), 1) if T("both_tested") else None,
+        # page-level agreement, reported symmetrically: pages where the two
+        # reads list the same groups, and pages where one read lists nothing
+        "pages_identical": sum(1 for p in per_page if p["g1"] == p["g2"] == p["matched"]),
+        "pages_first_empty_second_not": sum(1 for p in per_page if p["g1"] == 0 and p["g2"] > 0),
+        "pages_second_empty_first_not": sum(1 for p in per_page if p["g2"] == 0 and p["g1"] > 0),
+        "groups_on_first_empty_pages": sum(p["g2"] for p in per_page if p["g1"] == 0 and p["g2"] > 0),
+        "groups_on_second_empty_pages": sum(p["g1"] for p in per_page if p["g2"] == 0 and p["g1"] > 0),
+        "unmatched_first_neither_pct": round(100.0 * T("n1_unmatched_neither") / (T("g1") - T("matched")), 1) if T("g1") - T("matched") else None,
+        "unmatched_second_neither_pct": round(100.0 * T("n2_unmatched_neither") / (T("g2") - T("matched")), 1) if T("g2") - T("matched") else None,
         "per_page": per_page,
     }
     os.makedirs(os.path.dirname(args.out), exist_ok=True)

@@ -1,0 +1,23 @@
+ically, let 𝑁𝑖(𝑡) be the number of times that arm 𝑖has been broad-
+---
+independent runs
+---
+is the number of times agent 𝑚pulls arm 𝑖in a commit step, and
+---
+number of times agent𝑚pulls arm𝑖in an explore step), and 𝑁𝑐
+---
+of times that agent 𝑚shares the information of arm 𝑖(i
+---
+one, and has to pull all the arms for Ω(log𝑇) times by themselves
+---
+times
+---
+times smaller than the regret of the single-agent case, and almost
+---
+to pull (and share) arm 2 for more times than running the 2-UCB
+---
+work to reduce the times of exploring these arms
+---
+𝑁𝑖(𝑇) is the number of times that arm 𝑖has been shared (by all
+---
+𝑁𝑖(𝑡) is the number of times that arm 𝑖has been pulled

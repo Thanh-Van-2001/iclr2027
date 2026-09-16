@@ -1,0 +1,59 @@
+1, we exploit an 𝐿decay strategy to combine the uniform restart
+---
+Considering a mixed restart distribution over 𝑀and 𝑀
+---
+However, the uniform restart dis-
+---
+Let 𝑀and 𝑀be two di"erent restart distributions
+---
+We introduce 𝐿-retrain to restart an agent from regions of the state
+---
+additional rollouts for each policy update
+---
+additional rollouts from that state and reduce the policy update
+---
+and formal evaluation over hundreds of seeds considering various
+---
+another uniform restart distribution 𝑀: S ↑[0, 1] that considers
+---
+averaged over all the runs
+---
+does not require additional rollouts and we prove that using mixed
+---
+ever, this method and, more generally, designing a poor restart state
+---
+for collisions [35, 38], and we use a uniform restart distribution
+---
+in suboptimal restart distributions (lines 16-20)
+---
+introduced to derive the bound in case of a single uniform restart
+---
+ment for 𝐿-retrain’s mixture of uniform restart distributions
+---
+of seeds and di#erent behavioral preferences related to safety—
+---
+of 𝐿-retrain are supported by 1600 training runs, which signi!cantly
+---
+over hundreds of seeds across locomotion, power network, and
+---
+over the current 𝑃under the 𝐿mixture of restart policies as:
+---
+restarts the agent in states visited by the current policy to generate
+---
+rithms, with a restart strategy over retrain areas (green)
+---
+runs per method
+---
+surpasses the typical 3-10 runs per method used in previous policy
+---
+then introduce a mixed restart distribution, combining the typical
+---
+tween the typical uniform restart state distribution and the retrain
+---
+uniform restart distribution 𝑀over the entire state space S, with
+---
+uniform restart distributions leads, in the worst case, to the same
+---
+vides a lower bound on the policy improvement for mixed restart
+---
+• Hopper, Cheetah: The robots have to learn how to run for-

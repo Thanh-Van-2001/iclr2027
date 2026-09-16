@@ -1,0 +1,79 @@
+(the visitation count), as well as the average return of all rollouts
+---
+, the rollout’s return,
+---
+106 rollouts has a higher average BAI%, but is better than MOTTTS-
+---
+A rollout is split in 4 phases
+---
+All rollouts start from the current state 𝑠𝑡and are assigned a score
+---
+At the end of a rollout, we need to assess
+---
+Based on these simulated rollouts, it estimates the average score 𝜇𝑎
+---
+Each node keeps track of the number of times it has been visited
+---
+Evaluating rollouts
+---
+Figure 3: Best-arm-identification percentage (BAI%) of MCBUL depending on the number of rollouts
+---
+For MABs, this has been used in the context of clinical trials, by
+---
+For each arm, we count the number of times it is recommended as
+---
+For each rollout, POMCP samples
+---
+For each rollout, we sample a different virtual MOMAB
+---
+Given enough simulated rollouts, MCBUL can accurately
+---
+However, for similar wall-times,
+---
+In general, the BAI% increases with the number of rollouts
+---
+Learning for dose allocation in adaptive clinical trials with safety constraints
+---
+Otherwise, we walk to that child-node, and repeat the process
+---
+Recommending an action is based on simulated rollouts
+---
+Simulating rollouts
+---
+Since this occurs at every rollout, each rollout creates one belief-
+---
+Since we can best assess the quality of a rollout after it has been
+---
+The tree-size is thus proportional to the number of rollouts
+---
+Transition model for simulated rollouts
+---
+We analyze the effect of the number of rollouts on MCBUL’s perfor-
+---
+We observe that, given enough rollouts, the timing of the queries
+---
+We repeat this process until the budget has been exhausted
+---
+action to execute in 𝑠𝑡+1, based on simulated rollouts starting from
+---
+as the number of times we ask the decision maker for feedback (i
+---
+ber of simulations, or rollouts, using a model of the environment
+---
+can execute simulated rollouts that each will increase the size and
+---
+count and value of each visited node during this rollout (Figure 1f)
+---
+dashed estimates are unchanged — b-c-d) A single MCTS-like rollout is performed, using UCB within the tree and MOTTTS
+---
+is two-fold
+---
+of rollouts
+---
+of the rollout using a scoring function (i
+---
+of times we sample from our posterior belief, it is more compu-
+---
+on performance than increasing the number of rollouts
+---
+order of magnitude more rollouts than MCBULR2 to reach similar performance in BAI%

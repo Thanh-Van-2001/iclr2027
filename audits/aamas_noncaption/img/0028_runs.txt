@@ -1,0 +1,61 @@
+(iii) The trial did not converge: The number of nodes in the tree
+---
+4All computational experiments were run on a server with 144 Intel Xeon Gold 6254
+---
+5 × 109 trials for each policy
+---
+88 × 1011 trials run in total for all the computational
+---
+A trial is a single run of the simulation and terminates in one of
+---
+Another round of the infection process runs, where 𝑏
+---
+Based solely on the trials run in the second round, we compute the
+---
+For each instance (𝑝,𝑞), we run 𝑁= 7
+---
+For each instance, we run 5×105 trials for each policy
+---
+For these instances, we run a second round of trials
+---
+Given the miniscule fraction of trials that terminated in state (𝑖𝑖𝑖),
+---
+Nearly all trials terminate in states (𝑖) or (𝑖𝑖); out of the ap-
+---
+Otherwise, the trials
+---
+The infection process begins at 𝑡= 0 and runs
+---
+The infection process runs uninhibited for steps 0 ≤𝑡< 𝑘
+---
+Then another round of the infection process runs, in
+---
+a single round of the infection process runs
+---
+and runs uninhibited for three steps
+---
+based on each policy’s observed performance over a series of trials
+---
+containment to be the probability that a trial terminates in state (𝑖)
+---
+experiments we present, only 87 trials terminated in state (𝑖𝑖𝑖)
+---
+fidence bounds, we run a series of 1
+---
+however a large number of trials is necessary for our confidence
+---
+observe these regions of dominance after running far fewer trials,
+---
+of containment over a series of trials
+---
+over a series of trials is the fraction of trials which terminate in
+---
+second round of trials
+---
+trials for each policy
+---
+trials for instance parameters 𝑝=
+---
+we run a second round of computational experiments, in which we
+---
+which is different from the average observed over a series of trials

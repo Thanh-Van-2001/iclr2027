@@ -1,0 +1,25 @@
+100 episodes
+---
+5k steps over 100 episodes
+---
+Each experiment is repeated 5 times
+---
+Policies are evaluated every 10k steps over 100 episodes
+---
+Policies are evaluated every 5k steps over 100 episodes
+---
+executing it multiple times in the environment, and reporting the
+---
+ization of the policies, experiments are repeated over 11 seeds for
+---
+may be prohibitively high, making repeated execution impracti-
+---
+over 5 seeds)
+---
+require retraining the agent several times with different
+---
+seeds)
+---
+short tasks (Fruit-Tree-Navigation, Deep-Sea-Treasure) and 5 seeds
+---
+where repeated policy execution is not possible as funding is non-

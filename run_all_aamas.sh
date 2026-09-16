@@ -5,7 +5,7 @@
 #   python study/pipeline.py --source aamas2024 --source aamas2025 --source aamas2026 \
 #       --out data/extracted_aamas.jsonl --cache-pdfs data/corpus
 # and the protocol scan and community labels need the cached PDFs:
-#   python aamas/protocol.py ; RELAY_API_KEY=... python aamas/classify.py
+#   python aamas/protocol.py ; RELAY_API_KEY=... python aamas/classify.py ; python aamas/protocol_reader2.py
 set -e
 python aamas/make_all_aamas.py
 python study/gold_set.py score --items audits/aamas_gold/items.json --labels audits/aamas_gold/labels.csv --exclude-unboxed --out out/aamas/gold_set.json > /dev/null
@@ -25,6 +25,8 @@ python aamas/reader_retest.py > /dev/null
 if [ -f audits/aamas_census_effort/labels.json ]; then
 python aamas/reader_retest.py --first audits/aamas_census --second audits/aamas_census_effort --out out/aamas/reader_effort.json > /dev/null
 fi
+# the census checks: caption-less pages, the zero-listing re-read, the mainstream pages under the census reader
+python aamas/census_checks.py > /dev/null
 fi
 python aamas/figures.py
 python aamas/supplement_tables.py

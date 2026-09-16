@@ -107,15 +107,34 @@ of which match (\nCcrMatchedPct{} of the first's); their bar-less shares are
 \section{The community classifier}
 \label{app:classifier}
 Model: Gemini 3.1 Pro (Google), temperature 0, one call per paper with the
-title and the first page's text (up to 3500 characters). Prompt verbatim:
+title and the first page's text (up to 3500 characters). A second model
+(Claude Sonnet 5, Anthropic) labelled a random hundred papers under the
+same prompt; the two agree on \nCommAgreeFrac{} and the disagreeing pairs
+are below. Learning in games is labelled learning by the prompt's design.
+Prompt verbatim:
 {\scriptsize\verbatiminput{wrapped/protocol_classify.txt}}
+\input{comm_confusion.tex}
 
 \section{The evaluation-protocol reader}
 \label{app:protocol-reader}
 Model: Gemini 3.1 Pro (Google), temperature 0, one call per paper with the
-first 60,000 characters of the paper's text; every answer is in
-\texttt{out/aamas/protocol\_reader.json}. Prompt verbatim:
+first 60,000 characters of the paper's text. The first reading (six
+fields, every paper highlighting a rate under an earlier, looser rate
+pattern; \texttt{out/aamas/protocol\_reader.json}) used the prompt below.
+The reading the paper's Section~6 rests on
+(\texttt{out/aamas/protocol\_reader2.json}, \texttt{aamas/protocol\_reader2.py})
+covers every learning-labelled paper, every paper highlighting a rate and
+every paper with a testable comparison, \nPtwoPapers{} in all, and adds
+whether the evaluation episodes are sampled or a fixed instance set, the
+environments, single- or multi-agent, the codebase, whether the paper
+says it follows a named benchmark's standard setup without stating $K$,
+whether the compared methods share evaluation episodes, and what the
+printed deviation is over. Its prompt follows the first. No human read
+any of the papers; the check is between the model and the regular
+expressions of Section~\ref{app:patterns}, and between two prompts to
+the same model.
 {\scriptsize\verbatiminput{wrapped/protocol_reader_prompt.txt}}
+{\scriptsize\verbatiminput{wrapped/protocol_reader2_prompt.txt}}
 
 \section{Citation detection}
 \label{app:citations}
@@ -134,7 +153,42 @@ one, which under-counts protocols described in words the patterns miss.
 
 \section{The protocol-resolution comparisons by paper}
 \label{app:protocol-papers}
+Section~6 of the paper works on the corpus with the \nSixdedupRemoved{}
+exact-copy comparisons removed (\nSixdedupN{} remain); a rate comparison
+is one whose caption or header names a win, winning, success, solved or
+completion rate and whose values lie in $[0, 1]$ or $[0, 100]$. The first
+table is the model-read set the paper reports; the second imputes
+PyMARL's default of 32 evaluation episodes to SMAC-family papers that
+state none; the third is the pattern-read set.
+\input{protocol_table_reader.tex}
+\input{protocol_table_inherited.tex}
 \input{protocol_table.tex}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\columnwidth]{fig_protocol}
+\caption{The model-read set: the printed gap of each rate comparison
+against the gap its protocol can resolve at $p<0.05$ ($K$ times seeds for
+sampled episodes, $K$ alone for a fixed instance set). Points below the
+diagonal are gaps the protocol could not have distinguished from zero,
+error bar or not.}
+\end{figure}
+
+\section{Who cites the methodology}
+\label{app:cites}
+Among the \nCcDetectedIn{} papers with a highlighted comparison,
+\nCcCitingPapers{} cite at least one of the evaluation-methodology papers
+named in the paper's related work (by title in the text), and they report
+differently: \nCcCitingPm{} print a $\pm$ cell against \nCcNotCitingPm{}
+of the rest, \nCcCitingRuns{} state a run count against
+\nCcNotCitingRuns{}, and \nCcCitingK{} state an evaluation episode count
+the patterns match against \nCcNotCitingK{}; their comparisons are
+\nCcCitingNeither{} bar-less against \nCcNotCitingNeither{}, and the
+\nCcCitingNTestable{} testable ones fail at \nCcCitingFail{} against
+\nCcNotCitingFail{}. So few papers cannot say whether the citation causes
+the habit or the habit the citation; they can say that the
+recommendations travel with the citation and that the test result does
+not.
 
 \section{Every scoring of the reference set}
 \label{app:scores}

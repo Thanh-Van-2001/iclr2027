@@ -1,0 +1,19 @@
+# Training Episodes
+---
+All training and test runs are per-
+---
+CACTUS with QMIX scales up to instances with 8 to 16 times more
+---
+For each experiment, all respective algorithms are run 10 times to
+---
+In addition, we run CBSH as a slow but optimal MAPF solver
+---
+Unlike PRIMAL, CACTUS is only run on CPU while still
+---
+consisting of 32 episodes before being evaluated on all test instances
+---
+episodes
+---
+every 𝐸= 32 episodes using ADAM with a learning rate of 0
+---
+the number of episodes, the

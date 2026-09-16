@@ -1,0 +1,55 @@
+(that is, episodes) are required to provide such a guarantee
+---
+Consider the run of any arbitrary algorithm
+---
+During a run
+---
+Episodes
+---
+For 𝜖,𝛿∈(0, 1), the expected number of episodes
+---
+Repeated expansion of the RHS of (1), while invoking definitions
+---
+Results average 10 runs, and show one standard error
+---
+Since there is a cap on the number of episodes in which 𝜎can both
+---
+Table 1 shows the average stopping times when player x learns
+---
+Table 1: PAC stopping times for player x in 3-card and 5-card Kuhn Poker
+---
+as learning proceeds [25], since stopping times are prohibitively
+---
+be needy and get played, the total number of “good” episodes (which
+---
+conditioned on the event that even one of the episodes generating them
+---
+convention, there are at most 2(𝑡−1) episodes up to batch 𝑡
+---
+episodes so far on which the policy played was consistent with 𝜎, and
+---
+episodes starting at 𝑠1
+---
+let 𝑛𝑡+(𝜎) denote the number of times 𝜎was reached
+---
+multiple episodes until randomness takes it down that state’s path
+---
+of any algorithm, suppose 𝑡equals the number of episodes and 𝑛𝑡(𝜎)
+---
+only from episodes that do reach 𝜎
+---
+probability of such an event is at most a constant times 𝛿
+---
+such as Lucb and Ucb can be run “as is” on T-MDPs, by treating each
+---
+than a constant times
+---
+the learning algorithm may stop after any number of episodes 𝑡and
+---
+they must necessarily come from different episodes
+---
+through repeated game interactions
+---
+we have for evaluating 𝜋after 𝑡−1 episodes
+---
+𝜋𝑡, based on the trajectories observed in the preceding 𝑡−1 episodes

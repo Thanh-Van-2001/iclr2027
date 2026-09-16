@@ -226,19 +226,23 @@ def _fail_rate(rows: list, p_key: str = "_p", family: str = "table") -> dict:
             fail += c[p_key] >= 0.05
             fail_holm += not h
     n = len(rows)
+    # the interval over papers and the paper count, so every row of the
+    # conventions table can print both (additive; the rates are unchanged)
     return {"n": n, "pct_fail": round(100 * fail / n, 1),
-            "pct_fail_holm": round(100 * fail_holm / n, 1)}
+            "pct_fail_holm": round(100 * fail_holm / n, 1),
+            "papers": len({c["paper"] for c in rows}),
+            "ci_fail": _paper_bootstrap_fail(rows, reps=2000, seed=0, p_key=p_key)}
 
 
 ABLATION = re.compile(r"(?i)\bablat|\bw/o\b|\bwithout\b|\bcomponent|\bvariant|\bremov|\beffect of\b")
 
 
-def _paper_bootstrap_fail(rows: list, reps: int = 1000, seed: int = 0) -> list:
+def _paper_bootstrap_fail(rows: list, reps: int = 1000, seed: int = 0, p_key: str = "_p") -> list:
     """Percentile interval for the failure rate, resampling papers."""
     import random
     by_paper: dict = {}
     for c in rows:
-        by_paper.setdefault(c["paper"], []).append(c["_p"] >= 0.05)
+        by_paper.setdefault(c["paper"], []).append(c[p_key] >= 0.05)
     papers = list(by_paper.values())
     rng = random.Random(seed)
     vals = []

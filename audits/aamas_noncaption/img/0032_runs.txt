@@ -1,0 +1,23 @@
+For each run, we used 10000 iterations with
+---
+For each value of 𝑛we run 200 instances using different seeds and
+---
+Hence, we run only gradient descent when 𝑚≥6
+---
+On the instances where |𝐴| ≤10 we also run the Kemeny-Young
+---
+We run Al-
+---
+We run Algorithm 1, Elo, and several VasE methods across many
+---
+We run experiments to demonstrate a number of properties of in-
+---
+across 3 seeds per instance on all 12,680 PrefLib data instances
+---
+be run on this dataset due to their complexity, since 𝑚= 52, 958
+---
+macy game outcomes across 50 seeds and train/test splits
+---
+runs use batch size 32
+---
+𝐶, the discrepancy function 𝐷outputs 1 two times: once with pair
