@@ -1433,5 +1433,473 @@
   "figure_band_on_page": "n",
   "note": "",
   "reasoning_effort": "default"
+ },
+ {
+  "id": "0341",
+  "tables": [
+   {
+    "caption_start": "TABLE 2: Performance comparison under different backgrounds.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": "The values with slashes are not error bars, they are likely mean/std or two different metrics, but without a clear indication of error bars, we treat them as none. Also, bolding is per column but there are multiple bold cells per column (one per scene)."
+   },
+   {
+    "caption_start": "TABLE 3: Scalability analysis experiments. ISR and SSR are",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": "The values in parentheses are improvements (up arrows), not error bars. Bolding is per row."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "low"
+ },
+ {
+  "id": "0348",
+  "tables": [],
+  "figure_band_on_page": "n",
+  "note": "Table 2 contains psychological priors (initialization parameters), not experimental results.",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0352",
+  "tables": [
+   {
+    "caption_start": "Table 3: Result of logistic regression",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 4: Results for three disruption",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 5: p-value of Permutation Test",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0358",
+  "tables": [
+   {
+    "caption_start": "Table 4: Performance under different",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "100",
+    "n_source": "paper",
+    "bar_form": "pm",
+    "groups": [],
+    "note": "SD is specified in the row header rather than the caption; no bold cells indicate winners."
+   }
+  ],
+  "figure_band_on_page": "y",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0368",
+  "tables": [],
+  "figure_band_on_page": "n",
+  "note": "The tables on this page are for algorithm details and notation, not experimental results.",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0369",
+  "tables": [],
+  "figure_band_on_page": "n",
+  "note": "The only table on the page is a notation table, which is ignored.",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0386",
+  "tables": [
+   {
+    "caption_start": "Table 1: Comparison with the",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Cells contain two metrics separated by a slash. Bolding is applied per metric, resulting in multiple bold cells per column in some cases (e.g., Weihai Port 5min)."
+   },
+   {
+    "caption_start": "Table 2: Ablation experiments for",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": "No bold cells indicating winners."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0389",
+  "tables": [
+   {
+    "caption_start": "Table 1: Results on Intel Sensor Dataset",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 2: Results on NREL Wind Turbine Dataset",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0397",
+  "tables": [
+   {
+    "caption_start": "Table 1: Results of comparative experiments",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "se",
+    "n_runs": "8",
+    "n_source": "caption",
+    "bar_form": "pm",
+    "groups": [],
+    "note": "Multiple bold cells per column in some blocks (e.g., Reacher-v4 Gamma has -3.9 and -4.3 bolded)."
+   },
+   {
+    "caption_start": "Table 2: Results of comparative experiments",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "se",
+    "n_runs": "8",
+    "n_source": "caption",
+    "bar_form": "pm",
+    "groups": [],
+    "note": "Multiple bold cells per column in some blocks (e.g., Ant-v2 Uniform has 2006.0 and 1677.1 bolded? Wait, no, only 2006.0 is bolded. Let's check Table 2 carefully. Gamma: Walker2d-v2 D2AC bold, Hopper-v2 D2AC bold, Ant-v2 D2AC bold. Double Gaussian: Walker2d-v2 D2AC bold, Hopper-v2 D2AC bold, Ant-v2 DFBT bold. Uniform: Walker2d-v2 D2AC bold, Hopper-v2 D2AC bold, Ant-v2 DFBT bold. Constant 5: Walker2d-v2 D2AC bold, Hopper-v2 D2AC bold, Ant-v2 D2AC bold. Wait, Table 2 has exactly one bold cell per column per block. But the prompt says 'orientation (the grouping it marks winners within: \"column\" if each column holds one bold cell, \"row\" if each row does, \"none\" if no cell is bold or bold marks something other than a single winner per group, e.g. every cell bold)'. Since Table 2 has one bold cell per column per block, it's 'column' within blocks, but overall there are multiple bold cells per column. I will mark 'none' for both as they use 'within the range of S.E.M of the best' which implies multiple can be bold, even if Table 2 happens to have 1 per block."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "low"
+ },
+ {
+  "id": "0424",
+  "tables": [
+   {
+    "caption_start": "Table 1: Summary of results.",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Theoretical complexity results"
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0434",
+  "tables": [
+   {
+    "caption_start": "Table 1: Prediction accuracy of the proposed pxpGP and dec-pxpGP frameworks across fleet size",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "pm",
+    "groups": [],
+    "note": "Bold marks best in Centralized and best in Decentralized separately, so two bold cells per row for NRMSE and two for NLPD. Orientation is none."
+   },
+   {
+    "caption_start": "Table 2: Computational and Communication Complexity Comparison of Distributed GP Methods",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Complexity table"
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "low"
+ },
+ {
+  "id": "0446",
+  "tables": [
+   {
+    "caption_start": "Table 5: Average execution time,",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 6: Peak and average token",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "pm",
+    "groups": [],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0459",
+  "tables": [
+   {
+    "caption_start": "Table 2: Anomaly explanation evaluation",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": "The entire bottom row is bolded to indicate totals, not winners."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0461",
+  "tables": [
+   {
+    "caption_start": "Table 1: General performance comparison (Action-State)",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Bold marks baselines that tie or beat the proposed method (red), or is applied inconsistently; it does not mark a single winner per group."
+   },
+   {
+    "caption_start": "Table 2: Anti-noise performance comparison (Action-State)",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Bold marks baselines that tie or beat the proposed method (red), or is applied inconsistently; it does not mark a single winner per group."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0466",
+  "tables": [
+   {
+    "caption_start": "Table 3: Run time in sampling subgraphs",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "5",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0477",
+  "tables": [],
+  "figure_band_on_page": "n",
+  "note": "Table 2 describes the task distribution (problem setup/dataset statistics) and is therefore ignored.",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0489",
+  "tables": [
+   {
+    "caption_start": "Table 3: Comparison of baselines",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "pm",
+    "groups": [
+     {
+      "label": "Preference",
+      "direction": "higher",
+      "winner_mean": "3.49",
+      "winner_disp": "0.17",
+      "runner_mean": "3.37",
+      "runner_disp": "0.21"
+     },
+     {
+      "label": "Correctness",
+      "direction": "higher",
+      "winner_mean": "4.23",
+      "winner_disp": "0.25",
+      "runner_mean": "4.00",
+      "runner_disp": "0.25"
+     },
+     {
+      "label": "Action Acc.",
+      "direction": "higher",
+      "winner_mean": "0.73",
+      "winner_disp": "0.10",
+      "runner_mean": "0.64",
+      "runner_disp": "0.10"
+     }
+    ],
+    "note": "Row 3 (Goal Acc.) has two bold cells, so it is excluded from groups."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0490",
+  "tables": [
+   {
+    "caption_start": "Table 1: Empirical results",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Multiple bold cells per column (one per block)."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "low"
+ },
+ {
+  "id": "0508",
+  "tables": [
+   {
+    "caption_start": "Table 3: MENSA performance",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0527",
+  "tables": [],
+  "figure_band_on_page": "y",
+  "note": "Table 1 is a parameter table, ignored.",
+  "reasoning_effort": "low"
  }
 ]

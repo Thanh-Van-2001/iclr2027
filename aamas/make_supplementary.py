@@ -32,6 +32,23 @@ FILES = [
     ("out/aamas/gold_set_census.json", "run_records/gold_set_census.json"),
     ("out/aamas/reader_retest.json", "run_records/reader_retest.json"),
     ("out/aamas/protocol_resolution_rows_reader.json", "run_records/protocol_resolution_rows_reader.json"),
+    ("out/aamas/protocol_reader2.json", "run_records/protocol_reader2.json"),
+    ("out/aamas/protocol_resolution_rows_reader2.json", "run_records/protocol_resolution_rows_reader2.json"),
+    ("out/aamas/protocol_resolution_rows_reader2_inherited.json", "run_records/protocol_resolution_rows_reader2_inherited.json"),
+    ("out/aamas/reader_effort.json", "run_records/reader_effort.json"),
+    ("out/aamas/census_checks.json", "run_records/census_checks.json"),
+    ("out/aamas/gold_set_census_union.json", "run_records/gold_set_census_union.json"),
+    ("out/aamas/gold_set_ml_pages_census_reader.json", "run_records/gold_set_ml_pages_census_reader.json"),
+    ("out/aamas/reader_cross_ml.json", "run_records/reader_cross_ml.json"),
+    ("audits/aamas_census_effort/items.json", "audits/census_effort_items.json"),
+    ("audits/aamas_census_effort/labels.json", "audits/census_effort_reader_labels.json"),
+    ("audits/aamas_census_zero/items.json", "audits/census_zero_reread_items.json"),
+    ("audits/aamas_census_zero/labels.json", "audits/census_zero_reread_labels.json"),
+    ("audits/aamas_noncaption/items.json", "audits/noncaption_pages_items.json"),
+    ("audits/aamas_noncaption/labels.json", "audits/noncaption_pages_reader_labels.json"),
+    ("audits/gold_f/items.json", "audits/mainstream_pages_items.json"),
+    ("audits/gold_f/labels.json", "audits/mainstream_pages_first_reader_labels.json"),
+    ("audits/gold_f/labels_gemini.json", "audits/mainstream_pages_census_reader_labels.json"),
 ]
 README = """Supplementary material for "Bold Without Bars: What Three Years of AAMAS Tables Let a Reader Check"
 
