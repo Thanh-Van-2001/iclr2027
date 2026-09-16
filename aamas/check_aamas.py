@@ -38,8 +38,13 @@ def page_check() -> tuple:
     last_text_page = None
     for i in range(len(doc)):
         t = doc[i].get_text()
-        if re.search(r"(?im)^\s*references\s*$", t) or "\n[1] " in t:
-            last_text_page = i + 1
+        m = re.search(r"(?im)^\s*references\s*$", t)
+        if m or "\n[1] " in t:
+            # the main text ends on the previous page when the references
+            # heading is the first thing on this one (after the running head)
+            before = t[:m.start()] if m else t[:t.find("\n[1] ")]
+            body = [ln for ln in before.splitlines()[2:] if ln.strip()]
+            last_text_page = i + 1 if body else i
             break
     return len(doc), last_text_page
 
@@ -60,7 +65,7 @@ def main() -> int:
     if not ok["build"]:
         return 1
     n, ref_page = page_check()
-    print(f"2. PAGES: {n} pages, references begin on page {ref_page} (main text limit {PAGE_LIMIT})")
+    print(f"2. PAGES: {n} pages, main text ends on page {ref_page} (limit {PAGE_LIMIT}; references unlimited)")
     ok["pages"] = ref_page is not None and ref_page <= PAGE_LIMIT
     aw = abstract_words()
     print(f"   abstract: {aw} words (100 to 300)")

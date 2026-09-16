@@ -707,6 +707,8 @@ def build(out_path: str) -> dict:
         reg.add("cz testable papers", rs["testable_papers"], provenance=crun)
         reg.add("cz testable unreadable", rs["testable_unreadable_values"], provenance=crun)
         reg.add("cz bars no n", _pct(cz["reader"]["pct_bars_no_n"]), provenance=crun)
+        reg.add("cz neither on banded page", _pct(cz["reader"]["pct_neither_on_banded_page"]) if cz["reader"].get("pct_neither_on_banded_page") is not None else "--", provenance=crun)
+        reg.add("cz pages groups and band", cz["reader"]["pages_with_groups_and_band"], provenance=crun)
         # the fifteen densest pages, read at low effort: their share of the census
         rpath = "audits/aamas_census/labels_shard_retry2.json"
         if os.path.exists(rpath):

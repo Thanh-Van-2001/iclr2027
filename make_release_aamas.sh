@@ -27,7 +27,7 @@ done
 # the mainstream random pages of the concurrent study, with both readers' labels
 # (renders in that study's release; study/sample_pages.py regenerates them)
 mkdir -p "$DEST/audits/gold_f"
-cp audits/gold_f/items.json audits/gold_f/labels.json audits/gold_f/labels_gemini.json "$DEST/audits/gold_f/" 2>/dev/null || true
+cp audits/gold_f/items.json audits/gold_f/labels.json audits/gold_f/labels_gemini.json audits/gold_f/labels_geminir.json audits/gold_f/labels_gemini_merged.json "$DEST/audits/gold_f/" 2>/dev/null || true
 cp out/gold_set_pages.json out/analysis_2025.json "$DEST/out/" 2>/dev/null || true
 find "$DEST/audits" -name "*_fulltext.txt" -delete
 cp data/extracted_aamas.jsonl "$DEST/data/"

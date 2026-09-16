@@ -166,6 +166,9 @@ def main(argv=None) -> int:
                 "pipe_testable": sum(1 for c in pc if c.get("test"))}
         page["tested_groups"] = [g for g in groups if g["testable"] and g["fail"] is not None]
         page["testable_unreadable"] = sum(1 for g in groups if g["testable"] and g["fail"] is None)
+        # a shaded band in a figure on the same page: evidence the table's
+        # bar-less cells may have elsewhere on the page
+        page["figure_band"] = str(pg.get("figure_band_on_page", "")).lower().startswith("y")
         page["bars_no_n"] = sum(1 for g in groups if g["bars_no_n"])
         per_page.append(page)
         r_groups += page["n_groups"]; r_neither += page["neither"]; r_testable += page["testable"]
@@ -304,6 +307,8 @@ def main(argv=None) -> int:
                    "pct_testable": round(100 * r_testable / r_groups, 1) if r_groups else None,
                    "n_testable": r_testable,
                    "pct_bars_no_n": round(100 * sum(p_["bars_no_n"] for p_ in per_page) / r_groups, 1) if r_groups else None,
+                   "pct_neither_on_banded_page": round(100 * sum(p_["neither"] for p_ in per_page if p_["figure_band"]) / r_neither, 1) if r_neither else None,
+                   "pages_with_groups_and_band": sum(1 for p_ in per_page if p_["n_groups"] and p_["figure_band"]),
                    "ci_testable": _boot(per_page, "testable"),
                    "ci_neither_papers": _boot_papers(per_page, "neither"),
                    "ci_testable_papers": _boot_papers(per_page, "testable"),

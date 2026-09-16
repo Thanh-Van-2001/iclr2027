@@ -1,0 +1,1316 @@
+[
+ {
+  "id": "350",
+  "tables": [],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "349",
+  "tables": [
+   {
+    "caption_start": "Table 1. The distribution of mixed",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "100",
+    "n_source": "page",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 2. The utility and exploitability",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "10",
+    "n_source": "page",
+    "bar_form": "pm",
+    "groups": [
+     {
+      "label": "Utility (\\times 10^{-2})",
+      "direction": "higher",
+      "winner_mean": "1.03",
+      "winner_disp": "0.10",
+      "runner_mean": "-1.00",
+      "runner_disp": "0.09"
+     },
+     {
+      "label": "Utility",
+      "direction": "higher",
+      "winner_mean": "1.00",
+      "winner_disp": "0.00",
+      "runner_mean": "-12.67",
+      "runner_disp": "0.01"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "348",
+  "tables": [
+   {
+    "caption_start": "Table 1. Qualitative Comparison",
+    "results_table": "n",
+    "groups": [],
+    "orientation": "",
+    "any_error_bar": "",
+    "bar_kind": "",
+    "n_runs": "",
+    "n_source": "",
+    "bar_form": "",
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "347",
+  "tables": [
+   {
+    "caption_start": "Table 2: Comparison of the proposed",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "LLaVA-Next Sampling Random Accuracy",
+      "direction": "higher",
+      "winner_mean": "85.17%",
+      "winner_disp": "none",
+      "runner_mean": "84.67%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "LLaVA-Next Sampling Random F1 score",
+      "direction": "higher",
+      "winner_mean": "83.02%",
+      "winner_disp": "none",
+      "runner_mean": "82.20%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "LLaVA-Next Sampling Popular Accuracy",
+      "direction": "higher",
+      "winner_mean": "84.10%",
+      "winner_disp": "none",
+      "runner_mean": "83.57%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "LLaVA-Next Sampling Popular F1 score",
+      "direction": "higher",
+      "winner_mean": "82.03%",
+      "winner_disp": "none",
+      "runner_mean": "81.16%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "LLaVA-Next Sampling Adversarial Accuracy",
+      "direction": "higher",
+      "winner_mean": "82.30%",
+      "winner_disp": "none",
+      "runner_mean": "81.60%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "LLaVA-Next Sampling Adversarial F1 score",
+      "direction": "higher",
+      "winner_mean": "80.40%",
+      "winner_disp": "none",
+      "runner_mean": "80.27%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "LLaVA-Next Greedy Random Accuracy",
+      "direction": "higher",
+      "winner_mean": "86.43%",
+      "winner_disp": "none",
+      "runner_mean": "84.97%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "LLaVA-Next Greedy Random F1 score",
+      "direction": "higher",
+      "winner_mean": "84.52%",
+      "winner_disp": "none",
+      "runner_mean": "82.53%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "LLaVA-Next Greedy Popular Accuracy",
+      "direction": "higher",
+      "winner_mean": "85.07%",
+      "winner_disp": "none",
+      "runner_mean": "83.93%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "LLaVA-Next Greedy Popular F1 score",
+      "direction": "higher",
+      "winner_mean": "83.22%",
+      "winner_disp": "none",
+      "runner_mean": "81.56%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "LLaVA-Next Greedy Adversarial Accuracy",
+      "direction": "higher",
+      "winner_mean": "83.90%",
+      "winner_disp": "none",
+      "runner_mean": "82.97%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "LLaVA-Next Greedy Adversarial F1 score",
+      "direction": "higher",
+      "winner_mean": "82.14%",
+      "winner_disp": "none",
+      "runner_mean": "80.67%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "InstructBLIP Sampling Random Accuracy",
+      "direction": "higher",
+      "winner_mean": "86.33%",
+      "winner_disp": "none",
+      "runner_mean": "85.43%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "InstructBLIP Sampling Random F1 score",
+      "direction": "higher",
+      "winner_mean": "85.41%",
+      "winner_disp": "none",
+      "runner_mean": "84.81%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "InstructBLIP Sampling Popular Accuracy",
+      "direction": "higher",
+      "winner_mean": "84.60%",
+      "winner_disp": "none",
+      "runner_mean": "82.43%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "InstructBLIP Sampling Popular F1 score",
+      "direction": "higher",
+      "winner_mean": "83.87%",
+      "winner_disp": "none",
+      "runner_mean": "82.24%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "InstructBLIP Sampling Adversarial Accuracy",
+      "direction": "higher",
+      "winner_mean": "81.57%",
+      "winner_disp": "none",
+      "runner_mean": "79.47%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "InstructBLIP Sampling Adversarial F1 score",
+      "direction": "higher",
+      "winner_mean": "81.29%",
+      "winner_disp": "none",
+      "runner_mean": "79.84%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "InstructBLIP Greedy Random Accuracy",
+      "direction": "higher",
+      "winner_mean": "88.37%",
+      "winner_disp": "none",
+      "runner_mean": "88.10%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "InstructBLIP Greedy Random F1 score",
+      "direction": "higher",
+      "winner_mean": "87.50%",
+      "winner_disp": "none",
+      "runner_mean": "87.15%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "InstructBLIP Greedy Popular Accuracy",
+      "direction": "higher",
+      "winner_mean": "86.10%",
+      "winner_disp": "none",
+      "runner_mean": "85.87%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "InstructBLIP Greedy Popular F1 score",
+      "direction": "higher",
+      "winner_mean": "85.40%",
+      "winner_disp": "none",
+      "runner_mean": "85.10%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "InstructBLIP Greedy Adversarial Accuracy",
+      "direction": "higher",
+      "winner_mean": "83.13%",
+      "winner_disp": "none",
+      "runner_mean": "83.07%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "InstructBLIP Greedy Adversarial F1 score",
+      "direction": "higher",
+      "winner_mean": "82.64%",
+      "winner_disp": "none",
+      "runner_mean": "82.52%",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "346",
+  "tables": [
+   {
+    "caption_start": "Table 1: Regret guarantees for",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": "theoretical bounds"
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "345",
+  "tables": [
+   {
+    "caption_start": "Table 1: Test accuracy (%)",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "5",
+    "n_source": "caption",
+    "bar_form": "paren",
+    "groups": [],
+    "note": "No bold cells."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "344",
+  "tables": [],
+  "figure_band_on_page": "n",
+  "note": "The only table on the page summarizes theoretical convergence rates, not experimental results.",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "343",
+  "tables": [
+   {
+    "caption_start": "Table 3. Comparative analysis of Euclidean",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 4. Comparative analysis of Euclidean",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 5. Comparative analysis of Euclidean",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "342",
+  "tables": [
+   {
+    "caption_start": "Table 1: The complete results of approaches",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "5",
+    "n_source": "paper",
+    "bar_form": "subscript",
+    "groups": [],
+    "note": "Each column contains multiple bold cells (one for each rho value), so orientation is none."
+   },
+   {
+    "caption_start": "Table 2: The complete results of ablation",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "5",
+    "n_source": "paper",
+    "bar_form": "subscript",
+    "groups": [],
+    "note": "No bold cells in this table."
+   }
+  ],
+  "figure_band_on_page": "y",
+  "note": "Figure 1 contains bar charts with error bars.",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "341",
+  "tables": [
+   {
+    "caption_start": "Table 5: Estimated risks and",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "pm",
+    "groups": [
+     {
+      "label": "$\\hat{\\mathcal{R}}^k_{\\text{LSTM}}(Q) - \\hat{\\Lambda}(k)$",
+      "direction": "lower",
+      "winner_mean": "0.3724",
+      "winner_disp": "0.0043",
+      "runner_mean": "0.4162",
+      "runner_disp": "0.0023"
+     },
+     {
+      "label": "$\\hat{\\mathcal{R}}^k_{\\text{MLP}}(Q) - \\hat{\\Lambda}(k)$",
+      "direction": "lower",
+      "winner_mean": "0.3719",
+      "winner_disp": "0.0043",
+      "runner_mean": "0.4068",
+      "runner_disp": "0.0031"
+     }
+    ],
+    "note": "Cols 1-2 excluded (2 bold cells)."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "None.",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "340",
+  "tables": [
+   {
+    "caption_start": "Table 2. Quantitative evaluation results",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Image 4xSuper-Resolution PSNR",
+      "direction": "higher",
+      "winner_mean": "26.89",
+      "winner_disp": "none",
+      "runner_mean": "25.46",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Image 4xSuper-Resolution SSIM",
+      "direction": "higher",
+      "winner_mean": "0.7478",
+      "winner_disp": "none",
+      "runner_mean": "0.6856",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Image 4xSuper-Resolution LPIPS",
+      "direction": "lower",
+      "winner_mean": "0.179",
+      "winner_disp": "none",
+      "runner_mean": "0.199",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Image 4xSuper-Resolution FID",
+      "direction": "lower",
+      "winner_mean": "16.21",
+      "winner_disp": "none",
+      "runner_mean": "18.37",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Image Inpainting PSNR",
+      "direction": "higher",
+      "winner_mean": "29.20",
+      "winner_disp": "none",
+      "runner_mean": "29.15",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Image Inpainting SSIM",
+      "direction": "higher",
+      "winner_mean": "0.9077",
+      "winner_disp": "none",
+      "runner_mean": "0.9068",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Image Inpainting LPIPS",
+      "direction": "lower",
+      "winner_mean": "0.036",
+      "winner_disp": "none",
+      "runner_mean": "0.036",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Image Inpainting FID",
+      "direction": "lower",
+      "winner_mean": "4.08",
+      "winner_disp": "none",
+      "runner_mean": "4.12",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Image Deraining PSNR",
+      "direction": "higher",
+      "winner_mean": "32.05",
+      "winner_disp": "none",
+      "runner_mean": "32.00",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Image Deraining SSIM",
+      "direction": "higher",
+      "winner_mean": "0.9036",
+      "winner_disp": "none",
+      "runner_mean": "0.9029",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Image Deraining LPIPS",
+      "direction": "lower",
+      "winner_mean": "0.045",
+      "winner_disp": "none",
+      "runner_mean": "0.045",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Image Deraining FID",
+      "direction": "lower",
+      "winner_mean": "17.65",
+      "winner_disp": "none",
+      "runner_mean": "17.87",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "339",
+  "tables": [
+   {
+    "caption_start": "Table 1. Results of biomarker prediction, gene mutation prediction, and cancer subtyping tasks, with accuracy, AUC, F1 score reported.",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "5",
+    "n_source": "paper",
+    "bar_form": "subscript",
+    "groups": [
+     {
+      "label": "BCNB-ER (n = 1038) ACC",
+      "direction": "higher",
+      "winner_mean": "0.836",
+      "winner_disp": "0.043",
+      "runner_mean": "0.825",
+      "runner_disp": "0.038"
+     },
+     {
+      "label": "BCNB-ER (n = 1038) AUC",
+      "direction": "higher",
+      "winner_mean": "0.848",
+      "winner_disp": "0.042",
+      "runner_mean": "0.835",
+      "runner_disp": "0.040"
+     },
+     {
+      "label": "BCNB-ER (n = 1038) F1 Score",
+      "direction": "higher",
+      "winner_mean": "0.739",
+      "winner_disp": "0.042",
+      "runner_mean": "0.734",
+      "runner_disp": "0.077"
+     },
+     {
+      "label": "TCGA-LUAD TP53 (n = 469) ACC",
+      "direction": "higher",
+      "winner_mean": "0.678",
+      "winner_disp": "0.068",
+      "runner_mean": "0.668",
+      "runner_disp": "0.061"
+     },
+     {
+      "label": "TCGA-LUAD TP53 (n = 469) AUC",
+      "direction": "higher",
+      "winner_mean": "0.706",
+      "winner_disp": "0.090",
+      "runner_mean": "0.688",
+      "runner_disp": "0.077"
+     },
+     {
+      "label": "TCGA-LUAD TP53 (n = 469) F1 Score",
+      "direction": "higher",
+      "winner_mean": "0.672",
+      "winner_disp": "0.070",
+      "runner_mean": "0.658",
+      "runner_disp": "0.063"
+     },
+     {
+      "label": "UBC-OCEAN (n = 527) ACC",
+      "direction": "higher",
+      "winner_mean": "0.835",
+      "winner_disp": "0.015",
+      "runner_mean": "0.823",
+      "runner_disp": "0.035"
+     },
+     {
+      "label": "UBC-OCEAN (n = 527) AUC",
+      "direction": "higher",
+      "winner_mean": "0.956",
+      "winner_disp": "0.019",
+      "runner_mean": "0.946",
+      "runner_disp": "0.015"
+     },
+     {
+      "label": "UBC-OCEAN (n = 527) F1 Score",
+      "direction": "higher",
+      "winner_mean": "0.806",
+      "winner_disp": "0.041",
+      "runner_mean": "0.796",
+      "runner_disp": "0.039"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "338",
+  "tables": [
+   {
+    "caption_start": "Table 3: Downstream evaluation performance of post-trained models.",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "MMLU [HBB+21]",
+      "direction": "higher",
+      "winner_mean": "71.9",
+      "winner_disp": "none",
+      "runner_mean": "67.3",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MMLU-Pro [WMZ+24]",
+      "direction": "higher",
+      "winner_mean": "54.7",
+      "winner_disp": "none",
+      "runner_mean": "52.8",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Arena Hard [LCF+24]",
+      "direction": "higher",
+      "winner_mean": "34.9",
+      "winner_disp": "none",
+      "runner_mean": "32.8",
+      "runner_disp": "none"
+     },
+     {
+      "label": "GSM8K [CKB+21]",
+      "direction": "higher",
+      "winner_mean": "89.5",
+      "winner_disp": "none",
+      "runner_mean": "88.6",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Qasper [DLB+21]",
+      "direction": "higher",
+      "winner_mean": "40.4",
+      "winner_disp": "none",
+      "runner_mean": "40.2",
+      "runner_disp": "none"
+     },
+     {
+      "label": "SummScreenFD [CCWG22]",
+      "direction": "higher",
+      "winner_mean": "17.0",
+      "winner_disp": "none",
+      "runner_mean": "16.0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "BigCodeBench [ZVC+25]",
+      "direction": "higher",
+      "winner_mean": "44.5",
+      "winner_disp": "none",
+      "runner_mean": "43.0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MBPP [AON+21]",
+      "direction": "higher",
+      "winner_mean": "69.8",
+      "winner_disp": "none",
+      "runner_mean": "65.3",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 4: Pass@1 performance of models on reasoning benchmarks measured with a maximum",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "AIME24",
+      "direction": "higher",
+      "winner_mean": "52.29",
+      "winner_disp": "none",
+      "runner_mean": "53.70",
+      "runner_disp": "none"
+     },
+     {
+      "label": "AIME25",
+      "direction": "higher",
+      "winner_mean": "33.59",
+      "winner_disp": "none",
+      "runner_mean": "35.94",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Math500",
+      "direction": "higher",
+      "winner_mean": "92.45",
+      "winner_disp": "none",
+      "runner_mean": "93.03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "GPQA Diamond",
+      "direction": "higher",
+      "winner_mean": "45.08",
+      "winner_disp": "none",
+      "runner_mean": "47.85",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "337",
+  "tables": [
+   {
+    "caption_start": "Table 6: Ablation on progressive pairing",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "PSNR ↑",
+      "direction": "higher",
+      "winner_mean": "16.30",
+      "winner_disp": "none",
+      "runner_mean": "16.24",
+      "runner_disp": "none"
+     },
+     {
+      "label": "SSIM ↑",
+      "direction": "higher",
+      "winner_mean": "0.5308",
+      "winner_disp": "none",
+      "runner_mean": "0.5305",
+      "runner_disp": "none"
+     },
+     {
+      "label": "LPIPS ↓",
+      "direction": "lower",
+      "winner_mean": "0.5166",
+      "winner_disp": "none",
+      "runner_mean": "0.5170",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 7: Ablation on iterations of pose updates in PVO, in addition to the initial pose estimation",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "336",
+  "tables": [
+   {
+    "caption_start": "Table 4: Results for the",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "se",
+    "n_runs": "3",
+    "n_source": "paper",
+    "bar_form": "pm",
+    "groups": [],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "335",
+  "tables": [
+   {
+    "caption_start": "Table 1: Evaluation metrics",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "4",
+    "n_source": "paper",
+    "bar_form": "pm",
+    "groups": [
+     {
+      "label": "QCD-S Valid Frac. (↑)",
+      "direction": "higher",
+      "winner_mean": "0.997",
+      "winner_disp": "0.001",
+      "runner_mean": "0.941",
+      "runner_disp": "0.003"
+     },
+     {
+      "label": "QCD-S LLH Frac.",
+      "direction": "higher",
+      "winner_mean": "1.003",
+      "winner_disp": "0.002",
+      "runner_mean": "0.982",
+      "runner_disp": "0.000"
+     },
+     {
+      "label": "QCD-M Valid Frac. (↑)",
+      "direction": "higher",
+      "winner_mean": "0.977",
+      "winner_disp": "0.010",
+      "runner_mean": "0.645",
+      "runner_disp": "0.040"
+     },
+     {
+      "label": "QCD-M LLH Frac.",
+      "direction": "higher",
+      "winner_mean": "0.994",
+      "winner_disp": "0.002",
+      "runner_mean": "0.936",
+      "runner_disp": "0.002"
+     },
+     {
+      "label": "QCD-L Valid Frac. (↑)",
+      "direction": "higher",
+      "winner_mean": "0.943",
+      "winner_disp": "0.016",
+      "runner_mean": "0.416",
+      "runner_disp": "0.036"
+     },
+     {
+      "label": "QCD-L LLH Frac.",
+      "direction": "higher",
+      "winner_mean": "0.975",
+      "winner_disp": "0.001",
+      "runner_mean": "0.898",
+      "runner_disp": "0.002"
+     },
+     {
+      "label": "W-S Valid Frac. (↑)",
+      "direction": "higher",
+      "winner_mean": "0.994",
+      "winner_disp": "0.002",
+      "runner_mean": "0.851",
+      "runner_disp": "0.014"
+     },
+     {
+      "label": "W-S LLH Frac.",
+      "direction": "higher",
+      "winner_mean": "1.006",
+      "winner_disp": "0.001",
+      "runner_mean": "0.965",
+      "runner_disp": "0.001"
+     },
+     {
+      "label": "W-M Valid Frac. (↑)",
+      "direction": "higher",
+      "winner_mean": "0.930",
+      "winner_disp": "0.024",
+      "runner_mean": "0.341",
+      "runner_disp": "0.054"
+     },
+     {
+      "label": "W-M LLH Frac.",
+      "direction": "higher",
+      "winner_mean": "0.980",
+      "winner_disp": "0.004",
+      "runner_mean": "0.886",
+      "runner_disp": "0.002"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "334",
+  "tables": [
+   {
+    "caption_start": "Table 11: Overall performance on Touché23-ValueEval, DailyDilemma for o3-mini.",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Touché23-ValueEval MAE",
+      "direction": "lower",
+      "winner_mean": "1.790*",
+      "winner_disp": "none",
+      "runner_mean": "2.201",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Touché23-ValueEval Correlation",
+      "direction": "higher",
+      "winner_mean": "0.742*",
+      "winner_disp": "none",
+      "runner_mean": "0.649",
+      "runner_disp": "none"
+     },
+     {
+      "label": "DailyDilemma MAE",
+      "direction": "lower",
+      "winner_mean": "0.450*",
+      "winner_disp": "none",
+      "runner_mean": "0.504",
+      "runner_disp": "none"
+     },
+     {
+      "label": "DailyDilemma Correlation",
+      "direction": "higher",
+      "winner_mean": "0.724*",
+      "winner_disp": "none",
+      "runner_mean": "0.655",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 12: Overall performance on Touché23-ValueEval and DailyDilemma for gpt-4o-mini.",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Touché23-ValueEval MAE",
+      "direction": "lower",
+      "winner_mean": "2.099",
+      "winner_disp": "none",
+      "runner_mean": "2.416",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Touché23-ValueEval Correlation",
+      "direction": "higher",
+      "winner_mean": "0.681",
+      "winner_disp": "none",
+      "runner_mean": "0.588",
+      "runner_disp": "none"
+     },
+     {
+      "label": "DailyDilemma MAE",
+      "direction": "lower",
+      "winner_mean": "0.417",
+      "winner_disp": "none",
+      "runner_mean": "0.549",
+      "runner_disp": "none"
+     },
+     {
+      "label": "DailyDilemma Correlation",
+      "direction": "higher",
+      "winner_mean": "0.745",
+      "winner_disp": "none",
+      "runner_mean": "0.602",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "333",
+  "tables": [
+   {
+    "caption_start": "Table 8. QA performance (EM /",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Bold marks winners for EM and F1 independently, which are in the same cell separated by a slash. This results in multiple bold cells per column (e.g., HotpotQA under Llama-3.3-70B-Instruct has bold in NV-Embed-v2 for EM and HippoRAG 2 for F1), so orientation is none."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "332",
+  "tables": [
+   {
+    "caption_start": "Table 3: Per-task performance, grouped by complexity.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "20",
+    "n_source": "paper",
+    "bar_form": "pm",
+    "groups": [],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "331",
+  "tables": [
+   {
+    "caption_start": "Table 17: Performance improvement via",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "330",
+  "tables": [
+   {
+    "caption_start": "Table 1. Performance of algorithms",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Top 3 bolded."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "No bands.",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "329",
+  "tables": [
+   {
+    "caption_start": "Table 4: Ablation study on different components",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "pm",
+    "groups": [],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "328",
+  "tables": [
+   {
+    "caption_start": "Table 2: AC-LORA evaluation on",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "ci",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "paren",
+    "groups": [
+     {
+      "label": "Struct to textRouge-1",
+      "direction": "higher",
+      "winner_mean": "61.7",
+      "winner_disp": "58.2-64.7",
+      "runner_mean": "61.3",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Struct to textRouge-L",
+      "direction": "higher",
+      "winner_mean": "54.5",
+      "winner_disp": "none",
+      "runner_mean": "54.3",
+      "runner_disp": "51.1-57.3"
+     },
+     {
+      "label": "Translation",
+      "direction": "higher",
+      "winner_mean": "13.6",
+      "winner_disp": "11.37-15.45",
+      "runner_mean": "12.8",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Commonsense",
+      "direction": "higher",
+      "winner_mean": "65.0",
+      "winner_disp": "58.5-72.0",
+      "runner_mean": "61.5",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Sentiment",
+      "direction": "higher",
+      "winner_mean": "90.5",
+      "winner_disp": "none",
+      "runner_mean": "90.0",
+      "runner_disp": "86.0-94.0"
+     },
+     {
+      "label": "Reading Comp",
+      "direction": "higher",
+      "winner_mean": "55.3",
+      "winner_disp": "49.0-60.6",
+      "runner_mean": "51.7",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Closed book QA",
+      "direction": "higher",
+      "winner_mean": "48.5",
+      "winner_disp": "none",
+      "runner_mean": "45.0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Coreference",
+      "direction": "higher",
+      "winner_mean": "63.0",
+      "winner_disp": "none",
+      "runner_mean": "61.0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Read.comp.w/commonsense",
+      "direction": "higher",
+      "winner_mean": "69.0",
+      "winner_disp": "none",
+      "runner_mean": "63.0",
+      "runner_disp": "49.0-69.0"
+     },
+     {
+      "label": "Paraphrase",
+      "direction": "higher",
+      "winner_mean": "63.0",
+      "winner_disp": "56.4-69.5",
+      "runner_mean": "58.0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "NLI",
+      "direction": "higher",
+      "winner_mean": "70.0",
+      "winner_disp": "none",
+      "runner_mean": "68.7",
+      "runner_disp": "64.2-72.5"
+     }
+    ],
+    "note": "Row 'Struct to textRouge-2' has two bold cells so is excluded."
+   }
+  ],
+  "figure_band_on_page": "y",
+  "note": "",
+  "reasoning_effort": "low"
+ },
+ {
+  "id": "327",
+  "tables": [
+   {
+    "caption_start": "Table 7: T-MEX w/wo noise",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "100",
+    "n_source": "page",
+    "bar_form": "pm",
+    "groups": [],
+    "note": "No bold cells."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "Brief summary.",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "326",
+  "tables": [
+   {
+    "caption_start": "Table 1: BP Time cost",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "50",
+    "n_source": "caption",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ }
+]

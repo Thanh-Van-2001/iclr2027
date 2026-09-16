@@ -48,7 +48,7 @@ FILES = [
     ("audits/aamas_noncaption/labels.json", "audits/noncaption_pages_reader_labels.json"),
     ("audits/gold_f/items.json", "audits/mainstream_pages_items.json"),
     ("audits/gold_f/labels.json", "audits/mainstream_pages_first_reader_labels.json"),
-    ("audits/gold_f/labels_gemini.json", "audits/mainstream_pages_census_reader_labels.json"),
+    ("audits/gold_f/labels_gemini_merged.json", "audits/mainstream_pages_census_reader_labels.json"),
 ]
 README = """Supplementary material for "Bold Without Bars: What Three Years of AAMAS Tables Let a Reader Check"
 

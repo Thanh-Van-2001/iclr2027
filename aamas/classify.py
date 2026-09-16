@@ -45,8 +45,8 @@ URL = os.environ.get("RELAY_URL", "")
 MODEL = os.environ.get("RELAY_MODEL", "gemini/gemini-3.1-pro-preview")
 
 
-def ask(text: str, key: str, retries: int = 4) -> str:
-    body = {"model": MODEL, "temperature": 0, "stream": False, "max_tokens": 2000,
+def ask(text: str, key: str, retries: int = 4, max_tokens: int = 2000) -> str:
+    body = {"model": MODEL, "temperature": 0, "stream": False, "max_tokens": max_tokens,
             "messages": [{"role": "user", "content": text}]}
     req = urllib.request.Request(URL, data=json.dumps(body).encode(),
                                  headers={"Content-Type": "application/json", "Authorization": f"Bearer {key}"})

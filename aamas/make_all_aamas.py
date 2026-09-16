@@ -138,7 +138,7 @@ def protocol_resolution(comparisons: list, protocol: dict, alpha: float = 0.05, 
                      "resolvable_wald": round(z * se, 4), "below_wald": gap < z * se,
                      "has_bars": c["winner_dispersion"] is not None and c["runner_dispersion"] is not None,
                      "welch_pass": bool(c.get("test")) and c["survives_raw"],
-                     "seed_assumed_one": s is None})
+                     "seed_assumed_one": s is None and not (seed_mode == "typed" and fixed)})
     below = sum(r["below"] for r in rows)
     lo, hi = wilson_interval(below, len(rows)) if rows else (0, 0)
     papers = {r["paper"] for r in rows}
@@ -672,9 +672,13 @@ def reader_protocol2(path: str = "out/aamas/protocol_reader2.json") -> tuple:
     if not os.path.exists(path):
         return {}, {}, {}
     rd = json.load(open(path, encoding="utf-8"))
+    # the reading covers the learning-labelled, rate-highlighting and
+    # testable papers; a few read under an earlier rate pattern are left out
+    from protocol_reader2 import paper_set
+    keep = set(paper_set()[0])
     proto, inherited = {}, {}
     for pid, d in rd.items():
-        if "parse_error" in d:
+        if "parse_error" in d or pid not in keep:
             continue
         k = d.get("eval_episodes") if isinstance(d.get("eval_episodes"), int) else None
         sd = d.get("seeds") if isinstance(d.get("seeds"), int) else None

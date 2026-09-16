@@ -126,6 +126,19 @@ def mainstream(kit="audits/gold_f", labels="labels_gemini.json"):
     path = os.path.join(kit, labels)
     if not os.path.exists(path):
         return {}
+    # a forward and a reverse worker each wrote their own file; merge them in
+    # item order (the reverse file ends in r.json)
+    twin = path[:-5] + "r.json"
+    if os.path.exists(twin):
+        items = json.load(open(os.path.join(kit, "items.json"), encoding="utf-8"))
+        pages = {}
+        for f in (path, twin):
+            for pg in json.load(open(f, encoding="utf-8")):
+                if not str(pg.get("note", "")).startswith("failed"):
+                    pages.setdefault(pg["id"], pg)
+        merged = [pages[it["id"]] for it in items if it["id"] in pages]
+        path = os.path.join(kit, "labels_gemini_merged.json")
+        json.dump(merged, open(path, "w", encoding="utf-8"), indent=1, ensure_ascii=False)
     subprocess.run([sys.executable, "study/pages_score.py", "--items", os.path.join(kit, "items.json"),
                     "--labels", path, "--analysis", "out/analysis_2025.json",
                     "--out", "out/aamas/gold_set_ml_pages_census_reader.json"], check=True, capture_output=True)

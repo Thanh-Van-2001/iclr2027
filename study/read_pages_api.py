@@ -106,6 +106,9 @@ def main(argv=None) -> int:
     if args.reverse:
         items = list(reversed(items))
     out = args.out or os.path.join(args.kit, f"labels{suffix}.json")
+    if args.out and args.reverse:
+        # a reverse worker on a named output writes beside it, never into it
+        out = out[:-5] + "r.json"
     pages = json.load(open(out, encoding="utf-8")) if os.path.exists(out) else []
     done = {p["id"] for p in pages}
     # a forward worker on the same shard writes its own file; skip what it has done

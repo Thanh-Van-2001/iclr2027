@@ -41,7 +41,9 @@ the extraction file and the audit labels, without touching the network.
   `aamas_census_effort/` the 40 pages read again at `low` to measure what
   the setting changes (`draw.json` records the draw);
   `aamas_testable_pages/` the 66 pages holding parser-testable comparisons,
-  read twice. The page images are not shipped (they run to hundreds of
+  read twice; `aamas_census_zero/` the pages on which the census listed no
+  group, read again; `aamas_noncaption/` 100 random pages on which the
+  parser detected no caption, read under the census protocol. The page images are not shipped (they run to hundreds of
   megabytes); `python aamas/sample_all_caption_pages.py` and
   `python aamas/sample_testable_pages.py` render them again from
   `data/corpus`, and the scores in `out/aamas/gold_set_census.json`,
@@ -49,6 +51,16 @@ the extraction file and the audit labels, without touching the network.
   `reader_effort.json` need only the labels.
 - `audits/aamas_comm_check/` — the 100 first pages read by the second
   community labeller and its labels.
+- `audits/gold_f/` — the concurrent study's 256 random NeurIPS/ICML pages
+  (`items.json`) with the first reader's labels (`labels.json`) and the
+  census reader's (`labels_gemini.json`); renders are in that study's
+  release and `study/sample_pages.py` regenerates them.
+- `out/aamas/protocol_reader2.json` — the extended evaluation-protocol
+  reading (K, seeds, sampled or fixed instances, environments, codebase,
+  shared evaluation episodes, what the deviation is over) of every
+  learning-labelled, rate-highlighting or testable paper;
+  `census_checks.json`, `reader_effort.json`, `reader_retest.json` — the
+  census checks.
 - `out/both_years.json`, `out/extra_stats.json` — the NeurIPS/ICML 2025
   records the side-by-side reads (from the concurrent submission's release).
 - `paper/aamas/numbers.tex` — the macros as built.

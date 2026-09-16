@@ -25,6 +25,8 @@ cp run_all.sh requirements.txt "$DEST/"
 # hand-judged audits (renderings, labels, scoring inputs); full paper texts are not shipped
 cp -r audits "$DEST/audits"
 find "$DEST/audits" -name "*_fulltext.txt" -delete
+# the AAMAS study's kits belong to its own release, not this one
+rm -rf "$DEST"/audits/aamas_* "$DEST/audits/gold_f/labels_gemini.json"
 rm -rf "$DEST/audits/human/img" "$DEST/audits/human/README_VI.md" "$DEST"/audits/human/label*.html   # keep the CSVs and the English README
 
 # extraction files: everything downstream regenerates from these two

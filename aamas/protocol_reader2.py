@@ -81,7 +81,8 @@ def main(argv=None):
         r = recs[pid]
         path = os.path.join("data", "corpus", f"{r['venue']}{r['year']}_{pid}.pdf")
         text = " ".join(pg.get_text() for pg in fitz.open(path))[:60000]
-        raw = ask(PROMPT + text, key)
+        # the quoted sentences make long answers; 2000 tokens truncated 60 of 324
+        raw = ask(PROMPT + text, key, max_tokens=6000)
         s = raw.strip()
         if "```" in s:
             s = s.split("```")[1]
