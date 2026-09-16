@@ -296,7 +296,11 @@ def subset_direction(records: list, comparisons: list) -> dict:
     def _band(lo, hi):
         rows_ = [c for c in testable if c.get("n_runs") and lo <= c["n_runs"] <= hi]
         return {"n": len(rows_), "pct_fail": fr(rows_), "ci_fail": _paper_bootstrap_fail(rows_) if rows_ else None}
-    by_runs = {"le3": _band(2, 3), "4to5": _band(4, 5), "ge6": _band(6, 10 ** 6)}
+    by_runs = {"le3": _band(2, 3), "4to5": _band(4, 5), "ge6": _band(6, 10 ** 6),
+               # the six-and-over band split at thirty: counts above thirty are
+               # the well-powered papers (or evaluation-episode counts), and
+               # a reviewer of the AAMAS study asked to see them apart
+               "6to30": _band(6, 30), "gt30": _band(31, 10 ** 6)}
     # (4) reweighted to the population's distribution of relative gap, the one
     # quantity observed for every comparison and the strongest predictor of
     # the verdict

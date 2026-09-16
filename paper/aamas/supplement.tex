@@ -105,10 +105,31 @@ the Welch verdict on \nRtFailAgree{} of the \nRtBothTested{} groups both
 reads could test; the failure rates of the two reads are \nRtFailFirst{}
 and \nRtFailSecond{} (\texttt{aamas/reader\_retest.py}).
 
+Every reader group whose bold cell is not the better value in the
+stated direction, or ties its rival, is dropped before scoring
+(\texttt{--extremal-only} in \texttt{study/pages\_score.py}, and always
+in \texttt{aamas/reader\_retest.py}), as the parser's rules drop such
+groups; the concurrent study scores its readers without that rule.
 On the \nCcrPages{} random pilot pages both readers read, the first lists
 \nCcrFirstGroups{} groups and the second \nCcrSecondGroups{}, \nCcrMatched{}
-of which match (\nCcrMatchedPct{} of the first's); their bar-less shares are
-\nCcrFirstNeither{} and \nCcrSecondNeither{}.
+of which match (\nCcrMatchedPct{} of the first's). Every one of the
+\nCcrUnmatchedOnEmptyPages{} unmatched first-reader groups sits on the
+\nCcrPagesSecondEmpty{} pages the census reader returned with no group;
+four of those tables it read as having several bold cells per line or
+bold on the authors' row (its notes are in the labels file), which the
+paper's unit excludes, and one is a true dropout that a second read
+lists. On the \nCcrSharedPages{} pages both list groups the second reader
+matches \nCcrSharedMatchedPct{} of the first's, the bar-less shares are
+\nCcrSharedFirstNeither{} and \nCcrSharedSecondNeither{}, the testable
+shares \nCcrSharedFirstTestable{} and \nCcrSharedSecondTestable{}, and
+the matched groups agree on the bar-less verdict in
+\nCcrSharedNeitherAgreePct{} and on the Welch verdict in
+\nCcrSharedFailAgree{} of \nCcrSharedBothTested{}. The same decomposition
+on the \nMsPages{} mainstream pages: \nMsCrossPagesSecondEmpty{} pages
+returned empty by the census reader, and on the \nMsCrossSharedPages{}
+pages both list, \nMsCrossSharedMatchedPct{} matched with bar-less shares
+\nMsCrossSharedFirstNeither{} and \nMsCrossSharedSecondNeither{}
+(\texttt{out/aamas/reader\_cross\_pilot.json}, \texttt{reader\_cross\_ml.json}).
 {\scriptsize\verbatiminput{wrapped/protocol_census.txt}}
 
 \section{The community classifier}
@@ -128,8 +149,9 @@ Model: Gemini 3.1 Pro (Google), temperature 0, one call per paper with the
 first 60,000 characters of the paper's text. The first reading (six
 fields, every paper highlighting a rate under an earlier, looser rate
 pattern; \texttt{out/aamas/protocol\_reader.json}) used the prompt below.
-The reading the paper's Section~6 rests on
-(\texttt{out/aamas/protocol\_reader2.json}, \texttt{aamas/protocol\_reader2.py})
+The reading the paper's Section~6 rests on, written by
+\texttt{aamas/protocol\_reader2.py} to
+\texttt{out/aamas/protocol\_reader2.json},
 covers every learning-labelled paper, every paper highlighting a rate and
 every paper with a testable comparison, \nPtwoPapers{} in all, and adds
 whether the evaluation episodes are sampled or a fixed instance set, the
@@ -161,12 +183,30 @@ one, which under-counts protocols described in words the patterns miss.
 \section{The protocol-resolution comparisons by paper}
 \label{app:protocol-papers}
 Section~6 of the paper works on the corpus with the \nSixdedupRemoved{}
-exact-copy comparisons removed (\nSixdedupN{} remain); a rate comparison
-is one whose caption or header names a win, winning, success, solved or
-completion rate and whose values lie in $[0, 1]$ or $[0, 100]$. The first
-table is the model-read set the paper reports; the second imputes
-PyMARL's default of 32 evaluation episodes to SMAC-family papers that
-state none; the third is the pattern-read set.
+exact-copy comparisons removed (\nSixdedupN{} remain). A rate comparison
+passes five tests (\texttt{aamas/make\_all\_aamas.py}, \texttt{build\_rate\_set}):
+its table's caption or header names a win, winning, success, solved or
+completion rate; the record is anchored on a caption beginning ``Table'';
+the bold marks the higher value; the group's own row label and column
+header, read from the PDF text layer around the parser's coordinates by
+\texttt{aamas/rate\_labels.py} (\texttt{out/aamas/rate\_group\_labels.json}),
+name no other metric; and its values sit on the table's scale, percent
+where the text says so or no value in the table is a proportion. Of
+\nRfTableNamesARate{} comparisons in tables naming a rate,
+\nRfNotAnchoredOnACaption{} body-text windows, \nRfLowerIsBetter{}
+lower-is-better columns, \nRfOutOfRange{} out-of-range values,
+\nRfGroupLabelNamesAnotherMetric{} groups labelled with another metric
+and \nRfOffTheTableScale{} off-scale values are removed, leaving
+\nRfKept{} from \nRfKeptPapers{} papers. An earlier, table-level filter
+admitted time, cost and return columns of tables whose caption named a
+success rate; a reviewer of the fourth draft caught it, and no human has
+checked the survivors. The first table is the model-read set the paper
+reports (the fixed-instance rule, $n = K$, holds in every seed reading);
+the second imputes PyMARL's default of 32 evaluation episodes to
+SMAC-family papers that state none; the third is the pattern-read set.
+Of the \nPtwoPapers{} papers the extended reader covers, a few read under
+the earlier rate pattern are kept in the record and left out of every
+count.
 \input{protocol_table_reader.tex}
 \input{protocol_table_inherited.tex}
 \input{protocol_table.tex}

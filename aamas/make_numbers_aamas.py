@@ -132,7 +132,10 @@ def build(out_path: str) -> dict:
         if row.get("n") is not None:
             reg.add(f"span {key} n", row["n"], provenance=run)
         if row.get("ci_fail"):
-            reg.add(f"span {key} fail ci", f"[{row['ci_fail'][0]}, {row['ci_fail'][1]}]", provenance=run)
+            # the reported row carries the headline's own interval, so one
+            # quantity prints one interval everywhere (a reviewer found two)
+            ci = [b["pct_fail"]["lo"], b["pct_fail"]["hi"]] if name == "as_reported" else row["ci_fail"]
+            reg.add(f"span {key} fail ci", f"[{ci[0]:.1f}, {ci[1]:.1f}]", provenance=run)
             reg.add(f"span {key} papers", row["papers"], provenance=run)
     reg.add("span lo", _pct(hs["span"][0]), provenance=run)
     reg.add("span hi", _pct(hs["span"][1]), provenance=run)
@@ -141,6 +144,26 @@ def build(out_path: str) -> dict:
     reg.add("strict testable", _pct(rcs["strict"]["pct_testable"]), provenance=run)
     reg.add("strict fail", _pct(rcs["strict"]["pct_fail"]), provenance=run)
     reg.add("strict n", rcs["strict"]["n"], provenance=run)
+    cop = hs["rows"].get("caption_or_page_run_count", {})
+    if cop.get("n"):
+        reg.add("span caption or page testable", _pct(round(100 * cop["n"] / s["comparisons"], 1)), provenance=run)
+    bl = ex["big_n_and_largest"]
+    reg.add("bign papers", len(bl["big_n_papers"]), provenance=run)
+    reg.add("bign sd over seeds papers", bl["big_n_sd_over_seeds"], provenance=run)
+    reg.add("bign sd over episodes papers", bl["big_n_sd_over_episodes"], provenance=run)
+    reg.add("bign sd over seeds comparisons", bl["big_n_comparisons_sd_over_seeds"], provenance=run)
+    reg.add("bign sd over episodes comparisons", bl["big_n_comparisons_sd_over_episodes"], provenance=run)
+    lg = bl["largest"]
+    reg.add("largest n", lg["n"], provenance=run)
+    reg.add("largest pct of testable", _pct(lg["pct_of_testable"]), provenance=run)
+    reg.add("largest fail", _pct(lg["pct_fail"]), provenance=run)
+    reg.add("largest runs", lg["n_runs"], provenance=run)
+    tu = ex["typed_unlabelled"]
+    reg.add("tu n", tu["n"], provenance=run)
+    reg.add("tu fail", _pct(tu["pct_fail"]), provenance=run)
+    reg.add("tu papers", tu["papers"], provenance=run)
+    for k, v in tu["unlabelled_by_reading"].items():
+        reg.add("tu by " + str(k), v, provenance=run)
     ebm = ex["error_bar_meaning"]
     reg.add("bars unlabelled n", ebm["n_unknown"], provenance=run)
     reg.add("bars unlabelled pct", _pct(ebm["pct_of_error_barred_that_are_unlabelled"]), provenance=run)
@@ -150,7 +173,7 @@ def build(out_path: str) -> dict:
 
     sd = ex["subset_direction"]
     for band, d in sd["by_runs"].items():
-        key = {"le3": "le three", "4to5": "four to five", "ge6": "ge six"}.get(band, band)
+        key = {"le3": "le three", "4to5": "four to five", "ge6": "ge six", "6to30": "six to thirty", "gt30": "gt thirty"}.get(band, band)
         reg.add(f"runs {key} fail", _pct(d["pct_fail"]), provenance=run)
         reg.add(f"runs {key} fail ci", f"{d['pct_fail']}\\% [{d['ci_fail'][0]}, {d['ci_fail'][1]}]", provenance=run)
         reg.add(f"runs {key} n", d["n"], provenance=run)
@@ -427,21 +450,45 @@ def build(out_path: str) -> dict:
     if wl:
         reg.add("pspan without largest n", wl["n"], provenance=run)
         reg.add("pspan without largest below", _pct(wl["pct_below"]) if wl["pct_below"] is not None else "--", provenance=run)
-    ccr = ex.get("census_cross_reader", {})
-    if ccr:
-        reg.add("ccr pages", ccr["pages"], provenance=run)
-        reg.add("ccr first groups", ccr["first_groups"], provenance=run)
-        reg.add("ccr second groups", ccr["second_groups"], provenance=run)
-        reg.add("ccr first neither", _pct(ccr["first_pct_neither"]), provenance=run)
-        reg.add("ccr second neither", _pct(ccr["second_pct_neither"]), provenance=run)
-        reg.add("ccr matched", ccr["first_matched_by_second"], provenance=run)
-        reg.add("ccr matched pct", _pct(ccr["pct_first_matched"]), provenance=run)
-        reg.add("ccr matched neither agree", ccr["matched_neither_agree"], provenance=run)
-        reg.add("ccr matched neither agree pct", _pct(ccr["pct_matched_neither_agree"]), provenance=run)
-        reg.add("ccr first unmatched", ccr["first_unmatched"], provenance=run)
-        reg.add("ccr first unmatched neither", _pct(ccr["pct_first_unmatched_neither"]), provenance=run)
-        reg.add("ccr pages second empty", ccr["pages_second_lists_nothing"], provenance=run)
-        reg.add("ccr pages first empty", ccr["pages_first_lists_nothing"], provenance=run)
+    def cross(prefix, x, prov):
+        """Macros for any two-reading comparison scored by aamas/reader_retest.py."""
+        reg.add(f"{prefix} pages", x["n_pages"], provenance=prov)
+        reg.add(f"{prefix} first groups", x["groups_first"], provenance=prov)
+        reg.add(f"{prefix} second groups", x["groups_second"], provenance=prov)
+        reg.add(f"{prefix} first neither", _pct(x["pct_neither_first"]), provenance=prov)
+        reg.add(f"{prefix} second neither", _pct(x["pct_neither_second"]), provenance=prov)
+        reg.add(f"{prefix} first testable", _pct(x["pct_testable_first"]), provenance=prov)
+        reg.add(f"{prefix} second testable", _pct(x["pct_testable_second"]), provenance=prov)
+        reg.add(f"{prefix} matched", x["matched"], provenance=prov)
+        reg.add(f"{prefix} matched pct", _pct(x["pct_matched_of_first"]), provenance=prov)
+        reg.add(f"{prefix} matched of second pct", _pct(x["pct_matched_of_second"]), provenance=prov)
+        reg.add(f"{prefix} matched neither agree", x["neither_agree"], provenance=prov)
+        reg.add(f"{prefix} matched neither agree pct", _pct(x["pct_neither_agree"]) if x["pct_neither_agree"] is not None else "--", provenance=prov)
+        reg.add(f"{prefix} first unmatched", x["groups_first"] - x["matched"], provenance=prov)
+        reg.add(f"{prefix} first unmatched neither", _pct(x["unmatched_first_neither_pct"]) if x["unmatched_first_neither_pct"] is not None else "--", provenance=prov)
+        reg.add(f"{prefix} pages second empty", x["pages_second_empty_first_not"], provenance=prov)
+        reg.add(f"{prefix} pages first empty", x["pages_first_empty_second_not"], provenance=prov)
+        reg.add(f"{prefix} unmatched on empty pages", x["unmatched_first_on_second_empty_pages"], provenance=prov)
+        reg.add(f"{prefix} shared pages", x["shared_pages"], provenance=prov)
+        reg.add(f"{prefix} shared first groups", x["shared_groups_first"], provenance=prov)
+        reg.add(f"{prefix} shared second groups", x["shared_groups_second"], provenance=prov)
+        reg.add(f"{prefix} shared matched", x["shared_matched"], provenance=prov)
+        reg.add(f"{prefix} shared matched pct", _pct(x["shared_pct_matched_of_first"]) if x["shared_pct_matched_of_first"] is not None else "--", provenance=prov)
+        reg.add(f"{prefix} shared first neither", _pct(x["shared_pct_neither_first"]) if x["shared_pct_neither_first"] is not None else "--", provenance=prov)
+        reg.add(f"{prefix} shared second neither", _pct(x["shared_pct_neither_second"]) if x["shared_pct_neither_second"] is not None else "--", provenance=prov)
+        reg.add(f"{prefix} shared first testable", _pct(x["shared_pct_testable_first"]) if x["shared_pct_testable_first"] is not None else "--", provenance=prov)
+        reg.add(f"{prefix} shared second testable", _pct(x["shared_pct_testable_second"]) if x["shared_pct_testable_second"] is not None else "--", provenance=prov)
+        reg.add(f"{prefix} shared neither agree pct", _pct(x["shared_neither_agree_pct"]) if x["shared_neither_agree_pct"] is not None else "--", provenance=prov)
+        reg.add(f"{prefix} shared fail agree", x["shared_fail_agree"], provenance=prov)
+        reg.add(f"{prefix} shared both tested", x["shared_both_tested"], provenance=prov)
+        reg.add(f"{prefix} both tested", x["both_tested"], provenance=prov)
+        reg.add(f"{prefix} fail agree", x["fail_agree"], provenance=prov)
+        reg.add(f"{prefix} fail first", _pct(x["pct_fail_first"]) if x["pct_fail_first"] is not None else "--", provenance=prov)
+        reg.add(f"{prefix} fail second", _pct(x["pct_fail_second"]) if x["pct_fail_second"] is not None else "--", provenance=prov)
+        reg.add(f"{prefix} tested first", x["tested_first"], provenance=prov)
+        reg.add(f"{prefix} tested second", x["tested_second"], provenance=prov)
+    if os.path.exists("out/aamas/reader_cross_pilot.json"):
+        cross("ccr", _j("reader_cross_pilot"), "aamas_reader_cross_pilot")
     dr = ex["duplicate_table_records"]
     reg.add("a dup keys", dr["duplicate_keys"], provenance=run)
     reg.add("a dup identical", dr["identical_records"], provenance=run)
@@ -513,6 +560,7 @@ def build(out_path: str) -> dict:
         reg.add("g no bar absent", _pct_ci(nb["error_bar_truly_absent"]), provenance="aamas_gold_set")
         reg.add("g no bar absent frac", _frac(nb["error_bar_truly_absent"]), provenance="aamas_gold_set")
         reg.add("g rival copied", _pct_ci(f["rival_copied"]) if "rival_copied" in f else "--", provenance="aamas_gold_set")
+        reg.add("g disp type frac", _frac(f["disp_type"]) if "disp_type" in f else "--", provenance="aamas_gold_set")
     if os.path.exists("out/aamas/gold_set_pages.json"):
         pg = _j("gold_set_pages")
         prun = "aamas_gold_set_pages"
@@ -665,6 +713,7 @@ def build(out_path: str) -> dict:
         fz = cz["reader_failure"]
         reg.add("cz reader fail", f"{fz['pct_fail']}\\% [{fz['ci'][0]}, {fz['ci'][1]}]" if fz["n"] else "--", provenance=crun)
         reg.add("cz reader fail n", fz["n"], provenance=crun)
+        reg.add("cz reader fail pct", _pct(fz["pct_fail"]) if fz["n"] else "--", provenance=crun)
         reg.add("cz reader fail papers", fz["n_papers"], provenance=crun)
         vz = cz["verdicts_same_pages"]
         reg.add("cz shared", vz["shared"]["n"], provenance=crun)
@@ -765,14 +814,30 @@ def build(out_path: str) -> dict:
             key = "penv " + "".join(ch for ch in row["environment"].lower() if ch.isalpha() or ch == " ").replace("  ", " ")
             reg.add(f"{key} papers", row["papers"], provenance=prun)
             reg.add(f"{key} state k", _pct(row["pct_state_k"]), provenance=prun)
-            reg.add(f"{key} modal k", row["modal_k"] if row["modal_k"] is not None else "--", provenance=prun)
+            reg.add(f"{key} modal k", f"{row['modal_k']} ({row['modal_k_papers']})" if row["modal_k"] is not None else "--", provenance=prun)
             reg.add(f"{key} state seeds", _pct(row["pct_state_seeds"]), provenance=prun)
-            reg.add(f"{key} modal seeds", row["modal_seeds"] if row["modal_seeds"] is not None else "--", provenance=prun)
-            reg.add(f"{key} resolution", row["resolution_points_at_modal"] if row["resolution_points_at_modal"] is not None else "--", provenance=prun)
+            reg.add(f"{key} modal seeds", f"{row['modal_seeds']} ({row['modal_seeds_papers']})" if row["modal_seeds"] is not None else "--", provenance=prun)
+            reg.add(f"{key} resolution", f"{row['resolution_points_at_modal']:.1f}" if row["resolution_points_at_modal"] is not None else "--", provenance=prun)
             reg.add(f"{key} fixed", row["fixed_instances"], provenance=prun)
+            reg.add(f"{key} single agent", row["single_agent"], provenance=prun)
             reg.add(f"{key} testable", row["testable_comparisons"], provenance=prun)
             reg.add(f"{key} testable papers", row["testable_papers"], provenance=prun)
-            reg.add(f"{key} fail", _pct(row["pct_fail"]) if row["pct_fail"] is not None else "--", provenance=prun)
+            reg.add(f"{key} fail", (_pct(row["pct_fail"]) + f" [{row['ci_fail'][0]}, {row['ci_fail'][1]}]") if row["pct_fail"] is not None else "--", provenance=prun)
+        for name, d in (("typed", p2["resolution_typed"]), ("inherited", p2["resolution_typed_inherited"])):
+            sd, io_ = d["shared_design"], d["independent_or_unstated"]
+            reg.add(f"ptwo res {name} shared n", sd["n"], provenance=prun)
+            reg.add(f"ptwo res {name} shared below", sd["below"], provenance=prun)
+            reg.add(f"ptwo res {name} shared paired below", sd["below_paired_floor"], provenance=prun)
+            reg.add(f"ptwo res {name} shared papers", sd["papers"], provenance=prun)
+            reg.add(f"ptwo res {name} indep n", io_["n"], provenance=prun)
+            reg.add(f"ptwo res {name} indep below", io_["below"], provenance=prun)
+            reg.add(f"ptwo res {name} indep papers", io_["papers"], provenance=prun)
+            reg.add(f"ptwo res {name} welch pass", d["welch_pass_below"]["n"], provenance=prun)
+            reg.add(f"ptwo res {name} welch pass below", d["welch_pass_below"]["below"], provenance=prun)
+        rf = ex["rate_filter"]
+        for k in ("table_names_a_rate", "not_anchored_on_a_caption", "lower_is_better", "out_of_range",
+                  "group_label_names_another_metric", "off_the_table_scale", "kept", "kept_papers"):
+            reg.add("rf " + k.replace("_", " "), rf.get(k, 0), provenance=run)
     if os.path.exists("out/aamas/census_checks.json"):
         cc = _j("census_checks")
         krun = "aamas_census_checks"
@@ -826,15 +891,7 @@ def build(out_path: str) -> dict:
             reg.add("ms fail n", ms["reader_failure"]["n"] if ms["reader_failure"] else "--", provenance=krun)
             reg.add("ms recall", _pct(ms["recall_pct"]), provenance=krun)
             reg.add("ms precision", _pct(ms["precision_pct"]), provenance=krun)
-            x = ms["cross_reader"]
-            reg.add("ms cross pages", x["n_pages"], provenance=krun)
-            reg.add("ms cross first groups", x["groups_first"], provenance=krun)
-            reg.add("ms cross second groups", x["groups_second"], provenance=krun)
-            reg.add("ms cross matched", x["matched"], provenance=krun)
-            reg.add("ms cross matched pct", _pct(x["pct_matched_of_first"]), provenance=krun)
-            reg.add("ms cross first neither", _pct(x["pct_neither_first"]), provenance=krun)
-            reg.add("ms cross second neither", _pct(x["pct_neither_second"]), provenance=krun)
-            reg.add("ms cross neither agree pct", _pct(x["pct_neither_agree"]) if x["pct_neither_agree"] is not None else "--", provenance=krun)
+            cross("ms cross", ms["cross_reader"], krun)
     reg.write(out_path)
     return reg.manifest()
 

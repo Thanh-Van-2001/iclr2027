@@ -109,7 +109,7 @@ def zero_reread(kit="audits/aamas_census_zero", census="audits/aamas_census"):
     upath = os.path.join(census, "labels_union.json")
     json.dump(union, open(upath, "w", encoding="utf-8"), indent=1, ensure_ascii=False)
     subprocess.run([sys.executable, "study/pages_score.py", "--items", os.path.join(census, "items.json"),
-                    "--labels", upath, "--analysis", "out/aamas/analysis.json",
+                    "--labels", upath, "--analysis", "out/aamas/analysis.json", "--extremal-only",
                     "--out", "out/aamas/gold_set_census_union.json"], check=True, capture_output=True)
     u = json.load(open("out/aamas/gold_set_census_union.json", encoding="utf-8"))
     res["union"] = {"pages_substituted": len(sub), "groups": u["reader"]["groups"],
@@ -140,7 +140,7 @@ def mainstream(kit="audits/gold_f", labels="labels_gemini.json"):
         path = os.path.join(kit, "labels_gemini_merged.json")
         json.dump(merged, open(path, "w", encoding="utf-8"), indent=1, ensure_ascii=False)
     subprocess.run([sys.executable, "study/pages_score.py", "--items", os.path.join(kit, "items.json"),
-                    "--labels", path, "--analysis", "out/analysis_2025.json",
+                    "--labels", path, "--analysis", "out/analysis_2025.json", "--extremal-only",
                     "--out", "out/aamas/gold_set_ml_pages_census_reader.json"], check=True, capture_output=True)
     d = json.load(open("out/aamas/gold_set_ml_pages_census_reader.json", encoding="utf-8"))
     # the two readers on the same mainstream pages

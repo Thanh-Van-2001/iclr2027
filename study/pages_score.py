@@ -101,6 +101,9 @@ def main(argv=None) -> int:
     ap.add_argument("--labels", default="audits/gold_f/labels.json")
     ap.add_argument("--analysis", default="out/analysis_2025.json")
     ap.add_argument("--out", default="out/gold_set_pages.json")
+    ap.add_argument("--extremal-only", action="store_true",
+                    help="drop reader groups whose bold cell is not the better value in the stated direction, "
+                         "or ties its rival, as the parser's rules do (the AAMAS study's unit)")
     args = ap.parse_args(argv)
 
     items = {it["id"]: it for it in json.load(open(args.items, encoding="utf-8"))}
@@ -120,6 +123,7 @@ def main(argv=None) -> int:
     p_unconfirmed = p_unconfirmed_neither = 0
     p_found_testable = p_testable_total = 0
     n_tables = n_results = n_tables_bar = 0
+    n_nonextremal = 0
     for iid, it in sorted(items.items()):
         pg = pages.get(iid)
         if pg is None:
@@ -134,6 +138,13 @@ def main(argv=None) -> int:
             kind = t.get("bar_kind", "").lower()
             n = _num(t.get("n_runs"))
             for g in t.get("groups", []):
+                if args.extremal_only:
+                    w_, r_ = _num(g.get("winner_mean")), _num(g.get("runner_mean"))
+                    d_ = str(g.get("direction", "")).lower()
+                    if w_ is not None and r_ is not None and (
+                            w_ == r_ or (d_.startswith("low") and w_ > r_) or (d_.startswith("high") and w_ < r_)):
+                        n_nonextremal += 1
+                        continue
                 wb = _bar_num(g.get("winner_disp")) is not None or str(g.get("winner_disp", "")).startswith("[")
                 rb = _bar_num(g.get("runner_disp")) is not None or str(g.get("runner_disp", "")).startswith("[")
                 testable = wb and rb and (n is not None or kind in ("se", "ci"))
@@ -299,6 +310,7 @@ def main(argv=None) -> int:
         "reader_groups_unmatched": {"groups": u_g, "pct_neither": round(100 * u_n / u_g, 1) if u_g else None},
         "n_pages": len(per_page),
         "n_tables_listed": n_tables, "n_results_tables": n_results,
+        "reader_groups_dropped_nonextremal": n_nonextremal,
         "pct_results_tables_with_any_bar": round(100 * n_tables_bar / n_results, 1) if n_results else None,
         "reader": {"groups": r_groups,
                    "pct_neither": round(100 * r_neither / r_groups, 1) if r_groups else None,

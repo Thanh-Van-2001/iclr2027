@@ -39,7 +39,8 @@ cp paper/aamas/numbers.tex "$DEST/paper/aamas/"
 cp README_RELEASE_AAMAS.md "$DEST/README.md"
 cp LICENSE "$DEST/LICENSE"
 
-if grep -r -n -i -E "thanh|nguyen|felice|tsinghua|talyxion|holy_grail|beetrade|sk-b80" "$DEST" --include="*.py" --include="*.sh" --include="*.md" --include="*.csv" --include="*.json" --include="*.tex" -l; then
+# ("Nguyen et al." inside a source paper's caption text is a cited author, not an identity)
+if grep -r -n -i -E "thanh|nguyen|felice|tsinghua|talyxion|holy_grail|beetrade|sk-b80" "$DEST" --include="*.py" --include="*.sh" --include="*.md" --include="*.csv" --include="*.json" --include="*.tex" | grep -v -i "nguyen et al" | cut -d: -f1 | sort -u | grep .; then
   echo "identifying strings above: fix before pushing"; exit 1
 fi
 du -sh "$DEST"

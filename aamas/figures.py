@@ -24,7 +24,7 @@ def main():
     ml = _j("out/both_years.json")["2025"]
     ml_runs = _j("out/extra_stats.json")["subset_direction"]["by_runs"]
     a = ex["summary"]
-    fig, axes = plt.subplots(1, 2, figsize=(7.0, 2.7), gridspec_kw={"width_ratios": [1.15, 1]})
+    fig, axes = plt.subplots(1, 2, figsize=(7.0, 2.35), gridspec_kw={"width_ratios": [1.15, 1]})
 
     # (a) stacked composition of comparisons
     ax = axes[0]
@@ -67,7 +67,7 @@ def main():
 
     # (b) failure by run count band
     ax = axes[1]
-    bands = [("le3", "$\\leq 3$"), ("4to5", "4--5"), ("ge6", "$\\geq 6$")]
+    bands = [("le3", "$\\leq 3$"), ("4to5", "4--5"), ("6to30", "6--30"), ("gt30", "$> 30$")]
     for j, (src, name, color) in enumerate(((ex["subset_direction"]["by_runs"], "AAMAS", "#1f4e79"),
                                              (ml_runs, "NeurIPS/ICML", "#7f7f7f"))):
         xs = [k + (j - 0.5) * 0.3 for k in range(len(bands))]

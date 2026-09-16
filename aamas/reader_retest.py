@@ -32,6 +32,13 @@ def groups_of(page):
         kind = t.get("bar_kind", "").lower()
         n = _num(t.get("n_runs"))
         for g in t.get("groups", []):
+            # the paper's unit: a bold cell that is not the better value in
+            # the stated direction, or ties its rival, is not a comparison
+            w_, r_ = _num(g.get("winner_mean")), _num(g.get("runner_mean"))
+            d_ = str(g.get("direction", "")).lower()
+            if w_ is not None and r_ is not None and (
+                    w_ == r_ or (d_.startswith("low") and w_ > r_) or (d_.startswith("high") and w_ < r_)):
+                continue
             wb = _bar_num(g.get("winner_disp")) is not None or str(g.get("winner_disp", "")).startswith("[")
             rb = _bar_num(g.get("runner_disp")) is not None or str(g.get("runner_disp", "")).startswith("[")
             testable = wb and rb and (n is not None or kind in ("se", "ci"))
@@ -106,6 +113,10 @@ def main(argv=None):
             "n2_unmatched_neither": sum(1 for b in g2 if b["neither"]) - sum(1 for a, b in pairs if b["neither"]),
         })
     T = lambda k: sum(p[k] for p in per_page)  # noqa: E731
+    both = [p for p in per_page if p["g1"] > 0 and p["g2"] > 0]
+    shared = {k: sum(p[k] for p in both) for k in ("g1", "g2", "matched", "n1_neither", "n2_neither", "n1_testable",
+                                                    "n2_testable", "neither_agree", "fail_agree", "both_tested")}
+    shared["pages"] = len(both)
     res = {
         "n_pages": len(per_page), "n_papers": len({p["paper"] for p in per_page}),
         "groups_first": T("g1"), "groups_second": T("g2"), "matched": T("matched"),
@@ -134,6 +145,20 @@ def main(argv=None):
         "groups_on_second_empty_pages": sum(p["g1"] for p in per_page if p["g2"] == 0 and p["g1"] > 0),
         "unmatched_first_neither_pct": round(100.0 * T("n1_unmatched_neither") / (T("g1") - T("matched")), 1) if T("g1") - T("matched") else None,
         "unmatched_second_neither_pct": round(100.0 * T("n2_unmatched_neither") / (T("g2") - T("matched")), 1) if T("g2") - T("matched") else None,
+        # the decomposition a reviewer asked for: how much of the disagreement
+        # is whole pages one read returned empty, and how the two reads
+        # compare on the pages both list
+        "unmatched_first_on_second_empty_pages": sum(p["g1"] for p in per_page if p["g2"] == 0 and p["g1"] > 0),
+        "unmatched_second_on_first_empty_pages": sum(p["g2"] for p in per_page if p["g1"] == 0 and p["g2"] > 0),
+        "shared_pages": shared["pages"],
+        "shared_groups_first": shared["g1"], "shared_groups_second": shared["g2"], "shared_matched": shared["matched"],
+        "shared_pct_matched_of_first": round(100.0 * shared["matched"] / shared["g1"], 1) if shared["g1"] else None,
+        "shared_pct_neither_first": round(100.0 * shared["n1_neither"] / shared["g1"], 1) if shared["g1"] else None,
+        "shared_pct_neither_second": round(100.0 * shared["n2_neither"] / shared["g2"], 1) if shared["g2"] else None,
+        "shared_pct_testable_first": round(100.0 * shared["n1_testable"] / shared["g1"], 1) if shared["g1"] else None,
+        "shared_pct_testable_second": round(100.0 * shared["n2_testable"] / shared["g2"], 1) if shared["g2"] else None,
+        "shared_neither_agree_pct": round(100.0 * shared["neither_agree"] / shared["matched"], 1) if shared["matched"] else None,
+        "shared_fail_agree": shared["fail_agree"], "shared_both_tested": shared["both_tested"],
         "per_page": per_page,
     }
     os.makedirs(os.path.dirname(args.out), exist_ok=True)
