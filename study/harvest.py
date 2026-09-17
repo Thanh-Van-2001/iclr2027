@@ -166,7 +166,15 @@ def arxiv_index(category: str, year: int, max_results: int = 4000) -> list[dict]
     return out
 
 
+def oa_index(path: str = "out/swevo/index.json") -> list[dict]:
+    """The open-access metaheuristics corpus listed by swevo/harvest_oa.py
+    (OpenAlex); the PDFs are fetched by swevo/fetch_oa.py into data/corpus_oa."""
+    with open(path, encoding="utf-8") as fh:
+        return json.load(fh)
+
+
 SOURCES = {
+    "swevo-oa": lambda: oa_index(),
     "arxiv-csne-2025": lambda: arxiv_index("cs.NE", 2025),
     "arxiv-mathoc-2025": lambda: arxiv_index("math.OC", 2025),
     "aamas2026": lambda: aamas_index(2026),
