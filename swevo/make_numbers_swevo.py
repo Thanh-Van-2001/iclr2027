@@ -22,6 +22,10 @@ def _ci(d: dict, digits: int = 1) -> str:
     return f"{d['point']:.{digits}f}{PCT} [{d['lo']:.{digits}f}, {d['hi']:.{digits}f}]"
 
 
+def _word(n: int) -> str:
+    return ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"][n]
+
+
 def _pct(x) -> str:
     return f"{x}{PCT}"
 
@@ -76,7 +80,7 @@ def build(out_path: str) -> dict:
     reg.add("a median runs", int(s["median_runs"]) if s.get("median_runs") else "--", provenance=run)
     reg.add("a claim papers", len({c["paper"] for c in _j("analysis")["_comparisons"]}), provenance=run)
     reg.add("a tables detected", ex["funnel"]["tables_detected"], provenance=run)
-    reg.add("a tables yielding", ex["funnel"]["tables_with_comparison"], provenance=run)
+    reg.add("a tables yielding", ex["funnel"]["tables_yielding_at_least_one_comparison"], provenance=run)
     for year, d in ex["by_year"].items():
         tag = {"2024": "twenty four", "2025": "twenty five"}[year]
         ys, yb = d["summary"], d["bootstrap"]
@@ -113,12 +117,18 @@ def build(out_path: str) -> dict:
         reg.add("st all papers", st["all_papers"], provenance=run)
         reg.add("st all naming pct", _pct(round(100 * st["all_papers_naming_a_test"] / max(st["all_papers"], 1), 1)), provenance=run)
 
+    for lab, d in ex.get("scan_by_kind", {}).items():
+        for k, v in d.items():
+            reg.add(f"sk {lab.replace('_', ' ')} {k.replace('_', ' ')}", _pct(v) if k.startswith("pct") else v, provenance=run)
+
     rc = ex.get("run_counts", {})
     if rc:
-        for n_, cnt in rc["parser_counts"][:6]:
-            reg.add(f"rc parser {n_}", cnt, provenance=run)
-        for n_, cnt in rc["scan_counts"][:6]:
-            reg.add(f"rc scan {n_}", cnt, provenance=run)
+        for rank, (n_, cnt) in enumerate(rc["parser_counts"][:6]):
+            reg.add(f"rc parser rank {_word(rank + 1)} n", n_, provenance=run)
+            reg.add(f"rc parser rank {_word(rank + 1)} count", cnt, provenance=run)
+        for rank, (n_, cnt) in enumerate(rc["scan_counts"][:6]):
+            reg.add(f"rc scan rank {_word(rank + 1)} n", n_, provenance=run)
+            reg.add(f"rc scan rank {_word(rank + 1)} count", cnt, provenance=run)
         reg.add("rc papers stating", rc["papers_stating_runs_in_text"], provenance=run)
         reg.add("rc papers scanned", rc["papers_scanned"], provenance=run)
         reg.add("rc papers stating pct", _pct(rc["pct_papers_stating_runs"]), provenance=run)
@@ -129,8 +139,11 @@ def build(out_path: str) -> dict:
 
     cc = ex.get("cites", {})
     if cc:
+        names = {"derrac2011": "derrac", "garcia2009": "garcia nine", "garcia2010": "garcia ten", "sorensen2015": "sorensen",
+                 "aranha2022": "aranha", "camacho2022": "camacho", "bartz2020": "bartz", "beiranvand2017": "beiranvand",
+                 "kendall2016": "kendall", "hansen_coco": "coco", "wolpert_nfl": "nfl"}
         for k, v in cc["counts"].items():
-            reg.add(f"cc {k.replace('_', ' ')}", v, provenance=run)
+            reg.add(f"cc {names.get(k, k.replace('_', ' '))}", v, provenance=run)
         reg.add("cc citing papers", cc["citing_papers"], provenance=run)
         reg.add("cc claim papers", cc["claim_papers"], provenance=run)
         _rates_block(reg, "cc citing", cc["citing"], run)
@@ -145,8 +158,12 @@ def build(out_path: str) -> dict:
             "run_count_from_paper": "runs from paper", "run_count_from_none": "runs from none"}
     for name, row in hs["rows"].items():
         key = nice.get(name, name.replace("_", " "))
+        if "pct_fail" not in row:  # an empty subset carries only its count
+            reg.add(f"span {key} n", row.get("n", 0), provenance=run)
+            continue
         reg.add(f"span {key} fail", _pct(row["pct_fail"]), provenance=run)
-        reg.add(f"span {key} fail holm", _pct(row["pct_fail_holm"]), provenance=run)
+        if row.get("pct_fail_holm") is not None:
+            reg.add(f"span {key} fail holm", _pct(row["pct_fail_holm"]), provenance=run)
         if row.get("n") is not None:
             reg.add(f"span {key} n", row["n"], provenance=run)
         if row.get("ci_fail"):
@@ -193,22 +210,22 @@ def build(out_path: str) -> dict:
     ebm = ex["error_bar_meaning"]
     reg.add("bars unlabelled n", ebm["n_unknown"], provenance=run)
     reg.add("bars unlabelled pct", _pct(ebm["pct_of_error_barred_that_are_unlabelled"]), provenance=run)
-    reg.add("bars labelled fail", _pct(ebm["labelled_only"]["pct_fail"]), provenance=run)
-    reg.add("bars as sem fail", _pct(ebm["read_as_sem"]["pct_fail"]), provenance=run)
-    reg.add("bars as std fail", _pct(ebm["read_as_std"]["pct_fail"]), provenance=run)
+    for key, d in (("labelled", ebm["labelled_only"]), ("as sem", ebm["read_as_sem"]), ("as std", ebm["read_as_std"])):
+        reg.add(f"bars {key} n", d.get("n", 0), provenance=run)
+        reg.add(f"bars {key} fail", _pct(d["pct_fail"]) if "pct_fail" in d else "--", provenance=run)
     rcs = ex["run_count_scope"]
     reg.add("strict testable", _pct(rcs["strict"]["pct_testable"]), provenance=run)
     reg.add("strict fail", _pct(rcs["strict"]["pct_fail"]), provenance=run)
     reg.add("strict n", rcs["strict"]["n"], provenance=run)
     hf = ex["holm_families"]
     reg.add("holm median family", hf["median_family_size"], provenance=run)
-    reg.add("holm pct in families over five", _pct(hf["pct_in_families_over_five"]), provenance=run)
+    reg.add("holm pct in families over five", _pct(hf["pct_testable_in_families_over_5"]), provenance=run)
     sd = ex["subset_direction"]
     for band, d in sd["by_runs"].items():
         key = {"le3": "le three", "4to5": "four to five", "ge6": "ge six", "6to30": "six to thirty", "gt30": "gt thirty"}.get(band, band)
         reg.add(f"runs {key} n", d["n"], provenance=run)
-        reg.add(f"runs {key} fail", _pct(d["pct_fail"]), provenance=run)
-        reg.add(f"runs {key} fail ci", f"{d['pct_fail']}{PCT} [{d['ci_fail'][0]}, {d['ci_fail'][1]}]", provenance=run)
+        reg.add(f"runs {key} fail", _pct(d["pct_fail"]) if d["n"] else "--", provenance=run)
+        reg.add(f"runs {key} fail ci", f"{d['pct_fail']}{PCT} [{d['ci_fail'][0]}, {d['ci_fail'][1]}]" if d.get("ci_fail") else "--", provenance=run)
     ua = ex["uncertainty_anywhere"]
     for k, v in ua.items():
         if isinstance(v, (int, float)):
@@ -218,11 +235,11 @@ def build(out_path: str) -> dict:
     _rates_block(reg, "cap describing", cap["describing"], run)
     bl = ex["big_n_and_largest"]
     reg.add("bign papers", len(bl["big_n_papers"]), provenance=run)
-    lg = bl["largest"]
-    reg.add("largest n", lg["n"], provenance=run)
-    reg.add("largest pct of testable", _pct(lg["pct_of_testable"]), provenance=run)
-    reg.add("largest fail", _pct(lg["pct_fail"]), provenance=run)
-    reg.add("largest runs", lg["n_runs"], provenance=run)
+    lg = bl["largest"] or {}
+    reg.add("largest n", lg.get("n", 0), provenance=run)
+    reg.add("largest pct of testable", _pct(lg["pct_of_testable"]) if lg else "--", provenance=run)
+    reg.add("largest fail", _pct(lg["pct_fail"]) if lg else "--", provenance=run)
+    reg.add("largest runs", lg.get("n_runs", "--"), provenance=run)
     fu = ex["funnel"]
     for k, v in fu.items():
         if isinstance(v, (int, float)):

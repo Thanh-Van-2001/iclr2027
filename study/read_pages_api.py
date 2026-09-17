@@ -86,6 +86,9 @@ def main(argv=None) -> int:
     ap.add_argument("--venue-phrase", default="multi-agent-systems paper (two-column ACM format)",
                     help="the one phrase of the protocol naming the page's format; for the mainstream pages "
                          "'machine-learning paper (single-column NeurIPS/ICML format)'")
+    ap.add_argument("--bar-forms", default="pm / paren / bracket / subscript / separate_column / none",
+                    help="the bar_form vocabulary of the protocol; the metaheuristics census adds separate_row "
+                         "(mean and deviation printed as two rows of the same table)")
     ap.add_argument("--reasoning-effort", default=None,
                     help="sent as {'reasoning': {'effort': ...}}; the 15 census pages on which the relay timed out at "
                          "the default were read at 'low', everything else identical")
@@ -129,6 +132,7 @@ def main(argv=None) -> int:
         runs = open(runs_path, encoding="utf-8").read() if os.path.exists(runs_path) else "(none)"
         ans = None
         proto = PROTO.replace("multi-agent-systems paper (two-column ACM format)", args.venue_phrase)
+        proto = proto.replace("pm / paren / bracket / subscript / separate_column / none", args.bar_forms)
         prompt = proto.format(runs=runs[:6000])
         effort_used = args.reasoning_effort
         for attempt in range(3):

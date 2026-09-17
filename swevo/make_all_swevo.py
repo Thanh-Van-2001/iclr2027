@@ -27,10 +27,10 @@ from sensitivity import (checkability_span, correlation_sensitivity, error_bar_m
 from paperengine.stats import wilson_interval  # noqa: E402
 
 OUT = "out/swevo"
-EXTRACTED = "data/extracted_oa.jsonl"
+EXTRACTED = os.environ.get("SWEVO_EXTRACTED", "data/extracted_oa.jsonl")
 
 
-def _boot_share(items: list, key, reps: int = 2000, seed: int = 0) -> list | None:
+def _boot_share(items: list, reps: int = 2000, seed: int = 0) -> list | None:
     """Cluster bootstrap over papers of a share of comparisons; items are
     (paper, bool) pairs."""
     import random
@@ -125,6 +125,34 @@ def cites(cs: list, scan: dict) -> dict:
             "citing_state_runs": sum(1 for p in method if scan[p].get("run_modal"))}
 
 
+def scan_by_kind(scan: dict, kinds: dict, metaphor: dict, suite: dict) -> dict:
+    """The text-scan readings (run count stated, test named, CEC suite used)
+    and the classifier's metaphor flag, by paper kind, over the scanned papers."""
+    out = {}
+    for lab in sorted(set(kinds.values())) + ["all"]:
+        ids = [p for p, v in scan.items() if "error" not in v and (lab == "all" or kinds.get(p) == lab)]
+        n = len(ids)
+        out[lab] = {"papers": n,
+                    "runs_stated": sum(1 for p in ids if scan[p].get("run_modal")),
+                    "pct_runs_stated": round(100 * sum(1 for p in ids if scan[p].get("run_modal")) / max(n, 1), 1),
+                    "test_named": sum(1 for p in ids if scan[p].get("any_test")),
+                    "pct_test_named": round(100 * sum(1 for p in ids if scan[p].get("any_test")) / max(n, 1), 1),
+                    "wilcoxon": sum(1 for p in ids if scan[p].get("tests", {}).get("wilcoxon")),
+                    "friedman": sum(1 for p in ids if scan[p].get("tests", {}).get("friedman")),
+                    "t_test": sum(1 for p in ids if scan[p].get("tests", {}).get("t_test")),
+                    "thirty_modal": sum(1 for p in ids if scan[p].get("run_modal") == 30),
+                    "pct_thirty_modal": round(100 * sum(1 for p in ids if scan[p].get("run_modal") == 30) / max(n, 1), 1),
+                    "cec": sum(1 for p in ids if scan[p].get("suites", {}).get("cec")),
+                    "pct_cec": round(100 * sum(1 for p in ids if scan[p].get("suites", {}).get("cec")) / max(n, 1), 1),
+                    "metaphor_yes": sum(1 for p in ids if metaphor.get(p) == "yes"),
+                    "pct_metaphor_yes": round(100 * sum(1 for p in ids if metaphor.get(p) == "yes") / max(n, 1), 1),
+                    "bestiary_hit": sum(1 for p in ids if scan[p].get("metaphors_in_title_or_abstract")),
+                    "pct_bestiary_hit": round(100 * sum(1 for p in ids if scan[p].get("metaphors_in_title_or_abstract")) / max(n, 1), 1),
+                    "cites_methodology": sum(1 for p in ids if any(v for k, v in scan[p].get("cites", {}).items() if k != "wolpert_nfl")),
+                    "pct_cites_methodology": round(100 * sum(1 for p in ids if any(v for k, v in scan[p].get("cites", {}).items() if k != "wolpert_nfl")) / max(n, 1), 1)}
+    return out
+
+
 def main() -> int:
     os.makedirs(OUT, exist_ok=True)
     records = load_unique(EXTRACTED)
@@ -168,6 +196,7 @@ def main() -> int:
         "kind_counts": dict(collections.Counter(kinds.values())),
         "metaphor_counts": dict(collections.Counter(metaphor.values())),
         "stat_tests": stat_tests(cs, scan) if scan else {},
+        "scan_by_kind": scan_by_kind(scan, kinds, metaphor, suite) if scan and kinds else {},
         "run_counts": run_counts(cs, scan) if scan else {},
         "cites": cites(cs, scan) if scan else {},
         "headline_span": extra_stats.headline_span(cs, records),

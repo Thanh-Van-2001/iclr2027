@@ -60,23 +60,49 @@ def _sentence(text: str, pos: int, width: int = 160) -> str:
     return re.sub(r"\s+", " ", text[max(a, pos - width):min(b, pos + width)]).strip()
 
 
+def _singular(name: str) -> str:
+    """Crude singular: wolves -> wolf, flies -> fly, walruses -> walrus."""
+    if name.endswith("ves"):
+        return name[:-3] + "f"
+    if name.endswith("ies"):
+        return name[:-3] + "y"
+    if name.endswith(("uses", "shes", "ches", "xes")):
+        return name[:-2]
+    if name.endswith(("us", "ss")):
+        return name
+    return name[:-1] if name.endswith("s") else name
+
+
+# names that are ordinary words of the field and would match everything
+STOP = {"hybrid", "swarm", "vehicle", "memetic", "cultural", "genetic", "evolution", "search", "group",
+        "social", "team", "human", "parallel", "random", "society", "population", "colony", "learning",
+        "teaching", "neural", "gravity", "election", "strategy", "game", "leader", "sport", "war", "state",
+        "system", "network", "field", "cloud", "wave", "flow", "energy", "force", "path", "point", "model",
+        "regular", "binary", "artificial", "chaotic", "quantum", "improved", "modified", "particle", "vibrating",
+        "plant", "water", "forest", "world", "design", "method", "dynamic", "behavior", "theory", "transfer", "molecule"}
+
+
 def metaphor_patterns() -> list:
-    out = []
+    """One pattern per bestiary family ("Whales"), matching the family word or
+    any of its specific names ("beluga", "killer whale") near an optimizer word."""
     if not os.path.exists(BESTIARY):
-        return out
+        return []
+    fam = collections.defaultdict(set)
     for e in json.load(open(BESTIARY, encoding="utf-8")):
-        name = e["metaphor"].split(":")[-1].strip().lower()
-        name = re.sub(r"\s*\(.*?\)", "", name)
-        # names that are ordinary words of the field match everything
-        if len(name) < 4 or name in ("hybrid", "swarm", "vehicles", "vehicle", "memetic", "cultural", "genetic", "evolution",
-                                     "search", "group", "social", "team", "human", "parallel", "random", "society",
-                                     "population", "colony", "learning", "teaching", "neural", "gravity", "election"):
+        parts = [re.sub(r"\s*\(.*?\)|'s", "", x).strip().lower() for x in e["metaphor"].split(":")]
+        family = parts[0]
+        words = set()
+        for x in parts:
+            sing = _singular(x)
+            if len(sing) >= 4 and sing not in STOP:
+                words.add(sing)
+        fam[family] |= words
+    out = []
+    for family, words in sorted(fam.items()):
+        if not words:
             continue
-        # crude singular: wolves -> wolf, hawks -> hawk, flies -> fly
-        sing = re.sub(r"ves$", "f", name)
-        sing = re.sub(r"ies$", "y", sing)
-        sing = re.sub(r"([^s])s$", r"\1", sing)
-        out.append((e["metaphor"], re.compile(r"\b" + re.escape(sing) + r"s?\b.{0,40}\b(optimi[sz]|algorithm|search)", re.I)))
+        alt = "|".join(re.escape(w) + "(s|es)?" for w in sorted(words, key=len, reverse=True))
+        out.append((family, re.compile(r"\b(" + alt + r")\b.{0,40}\b(optimi[sz]|algorithm|search)", re.I)))
     return out
 
 
