@@ -13,5 +13,5 @@ empirical methodology; reproducibility; statistical significance; multi-agent re
 
 ## Files
 - Main PDF: D:/iclr2027/paper/aamas/main.pdf (main text ends on page 8, references on page 9; anonymous sigconf template)
-- Supplementary zip: paper/aamas/supplementary.zip (supplement.pdf, run records, audit labels; 1.4 MB) + code pointer (release repo Thanh-Van-2001/checkable-aamas, private; make an anonymous.4open.science mirror before submitting and cite it)
+- Supplementary zip: paper/aamas/supplementary.zip (supplement.pdf, run records, audit labels; 1.4 MB) + code pointer: https://anonymous.4open.science/r/checkable-aamas-F0D8 (mirror of the private release repo Thanh-Van-2001/checkable-aamas; press Update on anonymous.4open.science after every release push; expires 2027-06-30)
 - Student-author box: tick if the primary author is a student.

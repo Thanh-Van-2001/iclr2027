@@ -63,8 +63,8 @@ audits/               the reference-set items with both readers' labels, the ran
                       66 testable pages read a second time
 
 The full code release (the frozen parser, the AAMAS scripts, the extraction file, and the
-rendered audit images) is at the anonymous repository named in the paper's Reproducibility
-statement; run_all_aamas.sh there regenerates every number without network access.
+rendered audit images) is at https://anonymous.4open.science/r/checkable-aamas-F0D8 ;
+run_all_aamas.sh there regenerates every number without network access.
 """
 
 
