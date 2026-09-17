@@ -22,43 +22,7 @@
 \maketitle
 
 \begin{abstract}
-Machine learning decides what to believe by comparing numbers in tables. We ask
-how many of those comparisons a reader could check.
-
-From \nPapersTotal{} papers accepted at NeurIPS and ICML we extract the
-results tables whose bold marks a winner and identify the claim each makes:
-the value the authors set in bold against the best value they did not. Then we ask whether the paper
-prints what a test of that claim would need---an error bar on each of the two
-values, and the number of runs behind them. Of
-\nComparisonsTwentyFive{} highlighted comparisons in the 2025 sample,
-\nPctNeitherSide{} carry no error bar on either side as read,
-\nHeadlineWithComparisonAudit{} once the instrument's measured recall is
-propagated, and \nPctTestable{} can be tested from what is printed.
-
-Of those that can be tested, which come from \nPapersContributing{} papers,
-\nPctFail{} are not distinguishable from zero by Welch's $t$ at the stated run
-counts on the authors' own numbers (\nFailZ{} by a two-sample $z$ that takes
-the printed deviations as exact; \nFailInstrumentWide{} once the instrument's
-measured verdict and testability error is propagated), and \nPctFailHolm{} (\nFailZHolm{})
-once the other comparisons in the same table are accounted for. Where a
-caption names its benchmark, the split size alone says what is significant on
-it: \nResolutionPctBelowSig{} of those gaps are not, under independence,
-\nResolutionPctBelowSigRhoNine{} under paired scoring.
-
-Neither headline is precise, and neither can be. Across conventions the source
-papers leave unstated, the failure rate spans \nSpanLow{} to \nSpanHigh{} and
-the checkable share \nStrictTestable{} to \nTestableAsSem{}, both far wider
-than sampling error: the papers do not print enough to pin down their own
-claims. On a reference set drawn after the pipeline was frozen, an
-image-based reader agrees with it on the verdict in \nGoldFrozenAgreePct{} of
-the comparisons both can test and on every field of the claim in
-\nGoldFrozenClaimPct{}; on random pages it lists half again as many
-highlighted comparisons as the pipeline does, with a bar-less share
-\nPagesCensusRatio{} times the pipeline's. A second sample of \nPapersTwentyFour{} papers from
-2024 gives \nPctNeitherSideTwentyFour{} and \nPctFailTwentyFour{}. We release
-the pipeline, the per-comparison database, the rendered tables on which the
-instrument was scored, and the sixteen parser bugs that looking at them
-caught, at \nReleaseUrl{}.
+Results tables in machine learning often signal the strongest method by boldfacing a value, but such claims can be independently assessed only when the paper reports sufficient uncertainty information. We study how often this is possible using random samples totaling 2,895 papers accepted at NeurIPS and ICML in 2024-2025. An automated pipeline identifies highlighted results and their strongest competitors, interprets table structure and metric direction, and determines whether each comparison contains enough information for statistical testing. In the 2025 sample, only 16.9\% of highlighted comparisons are testable from the reported uncertainty and run counts. Among these testable comparisons, 47.6\% of highlighted differences are not statistically distinguishable from zero using Welch's $t$-test at the stated run counts, and this fraction increases after correcting for multiple comparisons within tables. The 2024 sample exhibits the same overall pattern, and sensitivity analyses across alternative statistical and reporting assumptions do not change the qualitative conclusion. Validation against manually checked reference sets supports the reliability of the extraction pipeline, and the resulting data and evaluation artifacts are released with the paper. Our findings suggest that uncertainty and run counts should be reported at the level of the comparisons used to support empirical claims.
 \end{abstract}
 
 \section{Introduction}
