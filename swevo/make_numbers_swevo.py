@@ -103,6 +103,17 @@ def build(out_path: str) -> dict:
     for lab, n in ex.get("metaphor_counts", {}).items():
         reg.add(f"mc {lab}", n, provenance=run)
 
+    ka = ex.get("kind_agreement", {})
+    if ka.get("papers"):
+        reg.add("ka papers", ka["papers"], provenance=run)
+        reg.add("ka agree", ka["agree"], provenance=run)
+        reg.add("ka pct agree", _pct(ka["pct_agree"]), provenance=run)
+        reg.add("ka ci agree", f"[{ka['ci_agree'][0]}, {ka['ci_agree'][1]}]", provenance=run)
+        reg.add("ka kappa", f"{ka['kappa']:.2f}", provenance=run)
+        reg.add("ka metaphor papers", ka["metaphor_papers"], provenance=run)
+        reg.add("ka metaphor agree", ka["metaphor_agree"], provenance=run)
+        reg.add("ka pct metaphor agree", _pct(ka["pct_metaphor_agree"]), provenance=run)
+
     st = ex.get("stat_tests", {})
     if st:
         reg.add("st testable papers", st["testable_papers"], provenance=run)
@@ -248,6 +259,85 @@ def build(out_path: str) -> dict:
     for k, v in bs.items():
         if isinstance(v, (int, float)):
             reg.add("bs " + k.replace("_", " "), _pct(v) if "pct" in k else v, provenance=run)
+
+    if os.path.exists("out/swevo/gold_set_census.json"):
+        cz = _j("gold_set_census")
+        crun = "swevo_gold_set_census"
+        items_c = json.load(open("audits/swevo_census/items.json", encoding="utf-8"))
+        reg.add("cz pages drawn", len(items_c), provenance=crun)
+        reg.add("cz papers drawn", len({it["paper"] for it in items_c}), provenance=crun)
+        reg.add("cz pages read", cz["n_pages"], provenance=crun)
+        reg.add("cz tables", cz["n_results_tables"], provenance=crun)
+        reg.add("cz tables with bar", _pct(cz["pct_results_tables_with_any_bar"]), provenance=crun)
+        rz = cz["reader"]
+        reg.add("cz groups", rz["groups"], provenance=crun)
+        reg.add("cz papers with groups", rz["papers_with_groups"], provenance=crun)
+        reg.add("cz neither", _pct(rz["pct_neither"]), provenance=crun)
+        reg.add("cz neither ci", f"[{rz['ci_neither_papers'][0]}, {rz['ci_neither_papers'][1]}]", provenance=crun)
+        reg.add("cz one side", _pct(rz["pct_one_side"]), provenance=crun)
+        reg.add("cz testable", _pct(rz["pct_testable"]), provenance=crun)
+        reg.add("cz testable n", rz["n_testable"], provenance=crun)
+        reg.add("cz testable ci", f"[{rz['ci_testable_papers'][0]}, {rz['ci_testable_papers'][1]}]", provenance=crun)
+        reg.add("cz bars no n", _pct(rz["pct_bars_no_n"]), provenance=crun)
+        pz = cz["pipeline_same_pages"]
+        reg.add("cz pipe groups", pz["groups"], provenance=crun)
+        reg.add("cz pipe neither", _pct(pz["pct_neither"]), provenance=crun)
+        reg.add("cz pipe testable", _pct(pz["pct_testable"]), provenance=crun)
+        reg.add("cz reader found pct", _pct(cz["reader_groups_found_by_pipeline"]["pct"]), provenance=crun)
+        reg.add("cz pipe found pct", _pct(cz["pipeline_groups_found_by_reader"]["pct"]), provenance=crun)
+        reg.add("cz matched neither", _pct(cz["reader_groups_matched"]["pct_neither"]), provenance=crun)
+        reg.add("cz unmatched neither", _pct(cz["reader_groups_unmatched"]["pct_neither"]), provenance=crun)
+        reg.add("cz reader matched groups", cz["reader_groups_matched"]["groups"], provenance=crun)
+        reg.add("cz reader unmatched groups", cz["reader_groups_unmatched"]["groups"], provenance=crun)
+        fz = cz["reader_failure"]
+        reg.add("cz reader fail", f"{fz['pct_fail']}\\% [{fz['ci'][0]}, {fz['ci'][1]}]" if fz["n"] else "--", provenance=crun)
+        reg.add("cz reader fail n", fz["n"], provenance=crun)
+        reg.add("cz reader fail pct", _pct(fz["pct_fail"]) if fz["n"] else "--", provenance=crun)
+        reg.add("cz reader fail ci", f"[{fz['ci'][0]}, {fz['ci'][1]}]" if fz["n"] else "--", provenance=crun)
+        reg.add("cz reader fail papers", fz["n_papers"], provenance=crun)
+        vz = cz["verdicts_same_pages"]
+        reg.add("cz shared", vz["shared"]["n"], provenance=crun)
+        reg.add("cz shared agree", vz["shared"]["agree"], provenance=crun)
+        reg.add("cz shared reader fails", vz["shared"]["reader_fails"], provenance=crun)
+        reg.add("cz shared pipe fails", vz["shared"]["pipeline_fails"], provenance=crun)
+        reg.add("cz reader only n", vz["reader_only"]["n"], provenance=crun)
+        reg.add("cz reader only fails", vz["reader_only"]["fails"], provenance=crun)
+        reg.add("cz pipe only n", vz["pipeline_only"]["n"], provenance=crun)
+        reg.add("cz pipe only fails", vz["pipeline_only"]["fails"], provenance=crun)
+        rs = cz["reader_sensitivity"]
+        reg.add("cz reader se n", rs["unlabelled_as_se"]["n"], provenance=crun)
+        reg.add("cz reader unlabelled n", rs["unlabelled_as_se"]["n_unlabelled"], provenance=crun)
+        reg.add("cz reader unlabelled as se fail", _pct(rs["unlabelled_as_se"]["pct_fail_unlabelled_as_se"]), provenance=crun)
+    if os.path.exists("out/swevo/census_readings.json"):
+        cr = _j("census_readings")
+        rrun = "swevo_census_readings"
+        reg.add("cr pages read", cr["pages_read"], provenance=rrun)
+        reg.add("cr papers read", cr["papers_read"], provenance=rrun)
+        reg.add("cr papers in kit", cr["papers_in_kit"], provenance=rrun)
+        lay = cr["layout"]
+        reg.add("cr results tables", lay["results_tables"], provenance=rrun)
+        for k, v in lay["bar_form"].items():
+            reg.add(f"cr form {k.replace('_', ' ')}", v, provenance=rrun)
+            reg.add(f"cr form {k.replace('_', ' ')} pct", _pct(lay["pct_bar_form"][k]), provenance=rrun)
+        reg.add("cr tables with run count", _pct(lay["pct_tables_with_run_count"]), provenance=rrun)
+        reg.add("cr tables at thirty", _pct(lay["pct_tables_at_thirty"]), provenance=rrun)
+        for rank, (n_, cnt) in enumerate(lay["n_runs"][:5]):
+            reg.add(f"cr runs rank {_word(rank + 1)} n", n_, provenance=rrun)
+            reg.add(f"cr runs rank {_word(rank + 1)} count", cnt, provenance=rrun)
+        for k, v in lay["n_source"].items():
+            reg.add(f"cr n source {k}", v, provenance=rrun)
+        for lab, d in cr["by_kind"].items():
+            key = lab.replace("_", " ")
+            reg.add(f"cr {key} papers", d["papers"], provenance=rrun)
+            reg.add(f"cr {key} papers with groups", d["papers_with_groups"], provenance=rrun)
+            reg.add(f"cr {key} groups", d["groups"], provenance=rrun)
+            reg.add(f"cr {key} neither", _pct(d["pct_neither"]) if d["pct_neither"] is not None else "--", provenance=rrun)
+            reg.add(f"cr {key} neither ci", f"[{d['ci_neither'][0]}, {d['ci_neither'][1]}]" if d["ci_neither"] else "--", provenance=rrun)
+            reg.add(f"cr {key} testable", _pct(d["pct_testable"]) if d["pct_testable"] is not None else "--", provenance=rrun)
+            reg.add(f"cr {key} testable ci", f"[{d['ci_testable'][0]}, {d['ci_testable'][1]}]" if d["ci_testable"] else "--", provenance=rrun)
+            reg.add(f"cr {key} tested", d["tested"], provenance=rrun)
+            reg.add(f"cr {key} fail", _pct(d["pct_fail"]) if d["pct_fail"] is not None else "--", provenance=rrun)
+            reg.add(f"cr {key} fail ci", f"[{d['ci_fail'][0]}, {d['ci_fail'][1]}]" if d["ci_fail"] else "--", provenance=rrun)
 
     reg.write(out_path)
     return reg.manifest()

@@ -153,6 +153,37 @@ def scan_by_kind(scan: dict, kinds: dict, metaphor: dict, suite: dict) -> dict:
     return out
 
 
+def kind_agreement(kinds: dict, metaphor: dict, second_path: str = "out/swevo/kinds_second_sonnet.csv") -> dict:
+    """Agreement between the primary labeller and a second vendor's model on
+    the papers both labelled: raw agreement, Cohen's kappa, the confusion."""
+    if not os.path.exists(second_path):
+        return {}
+    second, second_m = {}, {}
+    with open(second_path, encoding="utf-8", newline="") as fh:
+        for r in csv.DictReader(fh):
+            if r["label"] != "parse_error":
+                second[r["id"]] = r["label"]
+                second_m[r["id"]] = r["metaphor_named"] or "unsure"
+    both = [p for p in second if p in kinds]
+    if not both:
+        return {"papers": 0}
+    agree = sum(1 for p in both if kinds[p] == second[p])
+    labs = sorted(set(kinds[p] for p in both) | set(second[p] for p in both))
+    pa = {a: sum(1 for p in both if kinds[p] == a) / len(both) for a in labs}
+    pb = {a: sum(1 for p in both if second[p] == a) / len(both) for a in labs}
+    pe = sum(pa[a] * pb[a] for a in labs)
+    po = agree / len(both)
+    kappa = (po - pe) / (1 - pe) if pe < 1 else 1.0
+    conf = collections.Counter((kinds[p], second[p]) for p in both if kinds[p] != second[p])
+    m_both = [p for p in both if p in metaphor]
+    m_agree = sum(1 for p in m_both if metaphor[p] == second_m[p])
+    return {"papers": len(both), "agree": agree, "pct_agree": round(100 * agree / len(both), 1),
+            "kappa": round(kappa, 3), "disagreements": [[a, b, n] for (a, b), n in conf.most_common()],
+            "metaphor_papers": len(m_both), "metaphor_agree": m_agree,
+            "pct_metaphor_agree": round(100 * m_agree / max(len(m_both), 1), 1),
+            "ci_agree": [round(100 * x, 1) for x in wilson_interval(agree, len(both))]}
+
+
 def main() -> int:
     os.makedirs(OUT, exist_ok=True)
     records = load_unique(EXTRACTED)
@@ -166,7 +197,9 @@ def main() -> int:
     scan = json.load(open(f"{OUT}/text_scan.json", encoding="utf-8")) if os.path.exists(f"{OUT}/text_scan.json") else {}
     kinds, metaphor, suite = {}, {}, {}
     import glob
-    for path in sorted(glob.glob(f"{OUT}/kinds*.csv")):
+    for path in sorted(glob.glob(f"{OUT}/kinds_shard*.csv")) + [f"{OUT}/kinds.csv"]:
+        if not os.path.exists(path):
+            continue
         with open(path, encoding="utf-8", newline="") as fh:
             for r in csv.DictReader(fh):
                 if r["label"] == "parse_error" or r["id"] in kinds:
@@ -194,6 +227,7 @@ def main() -> int:
         "metaphor": by_group(cs, metaphor, "by_metaphor") if metaphor else {},
         "suite": by_group(cs, suite, "by_suite") if suite else {},
         "kind_counts": dict(collections.Counter(kinds.values())),
+        "kind_agreement": kind_agreement(kinds, metaphor),
         "metaphor_counts": dict(collections.Counter(metaphor.values())),
         "stat_tests": stat_tests(cs, scan) if scan else {},
         "scan_by_kind": scan_by_kind(scan, kinds, metaphor, suite) if scan and kinds else {},

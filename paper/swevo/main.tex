@@ -1,0 +1,101 @@
+\documentclass[preprint,review,12pt]{elsarticle}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{lineno}
+\input{numbers}
+\journal{Swarm and Evolutionary Computation}
+
+\begin{document}
+\begin{frontmatter}
+
+\title{The convention on the page: an audit of \nOListedSrep{} open-access metaheuristics papers against their own reporting rule}
+
+\author[1]{Author name\corref{cor1}}
+\ead{email}
+\cortext[cor1]{Corresponding author.}
+\affiliation[1]{organization={Affiliation}, city={City}, country={Country}}
+
+\begin{abstract}
+Metaheuristics has an explicit convention for reporting a comparison: a fixed number of independent runs, thirty by tradition, a mean and a standard deviation per function, the best value marked in bold, and a non-parametric test recommended for more than a decade. We ask how much of that convention reaches the printed page. A frozen text-layer parser and an image-based reader census, both released, were applied to every 2024--2025 article of \emph{Scientific Reports} that OpenAlex lists as mentioning a metaheuristic (\nOListedSrep{} papers, \nOParsed{} parsed), and each bold cell was set against the best unmarked value in its row or column. PLACEHOLDER-RESULTS. Every number in the paper is generated from the released run records, and the two companion audits of machine-learning and multi-agent venues that use the same instrument are under review elsewhere.
+\end{abstract}
+
+\begin{keyword}
+metaheuristics \sep experimental methodology \sep statistical testing \sep reporting standards \sep meta-research \sep reproducibility
+\end{keyword}
+
+\end{frontmatter}
+
+\linenumbers
+
+\section{Introduction}
+\label{sec:intro}
+
+A results table in a metaheuristics paper is a promise with a shape. Each row is a benchmark function, each column an optimizer; the cell holds the mean over some number of independent runs, with the standard deviation beside it or on the line below; the best mean in the row is bold; a Wilcoxon signed-rank or Friedman test, somewhere later, says whether the bold is more than noise. The shape is not an accident. It was argued into the field's habits by García et al.\ \cite{garcia2009study,garcia2010advanced} and Derrac et al.\ \cite{derrac2011practical}, restated in every methodological guide since \cite{carrasco2020recent,latorre2021prescription,osaba2021tutorial,bartz2020benchmarking,beiranvand2017best,kendall2016good}, and enforced, to a degree, by the CEC competition rules that fix the run count, the budget and the summary statistics \cite{hansen2021coco}.
+
+What the guides do not say is how often the shape survives contact with a page. A bold cell is only checkable if the reader can see both means, both deviations and the run count; a test is only a test if the paper says which one, on what, and paired or not. This paper measures those things on the page, with instruments that are fixed before the corpus is downloaded and released with it, so that the measurement is reproducible and its errors are stated rather than guessed at.
+
+The measurement is deliberately narrow. It does not re-run any optimizer, does not ask whether a proposed algorithm is new (a question others have taken up \cite{sorensen2015metaheuristics,aranha2022metaphor,camacho2022exposing,tzanetos2021nature,piotrowski2018some}), and does not judge whether a benchmark suite is the right one \cite{kudela2022critical}. It asks only: given the numbers the authors chose to print, does the bold cell stand at the run count the authors state, and does the paper's own test say the same thing? Where the printed numbers cannot answer, that is the finding.
+
+The paper makes three contributions. First, a census of reporting practice over \nOParsed{} open-access metaheuristics papers of 2024--2025, by two instruments whose precision and coverage are measured on a reference set rather than assumed: how often a bold cell has a deviation and a run count on the page, how often it survives Welch's $t$ on the printed numbers, and how those rates split between papers that propose an optimizer, papers that apply one, and papers that compare several. Second, a reading of the field's own statistical convention beside the printed evidence: which tests are named, at what run count, and whether papers that cite the methodology literature report differently. Third, the released instrument and every run record, so that the numbers here can be regenerated and the corpus rule changed by anyone who disagrees with it.
+
+\section{Related work}
+\label{sec:related}
+
+\paragraph{Methodology guides.} The statistical convention of the field is unusually well documented. García et al.\ \cite{garcia2009study} argued from the CEC 2005 special session that parametric tests are inappropriate for optimizer comparisons and recommended the Wilcoxon signed-rank test for pairs and the Friedman test with post-hoc procedures for groups; Derrac et al.\ \cite{derrac2011practical} turned that into a tutorial in the first issue of this journal, and Carrasco et al.\ \cite{carrasco2020recent} surveyed a decade of its uptake, finding that non-parametric tests had become common while their assumptions were rarely checked. LaTorre et al.\ \cite{latorre2021prescription} and Osaba et al.\ \cite{osaba2021tutorial} give prescriptive guidelines covering the run count, the benchmark suite, the tuning of competitors and the test; Bartz-Beielstein et al.\ \cite{bartz2020benchmarking}, Beiranvand et al.\ \cite{beiranvand2017best}, Kendall et al.\ \cite{kendall2016good} and, earlier, Hooker \cite{hooker1995testing} and Eiben and Jelasity \cite{eiben2002critical} make the same case from the benchmarking and operational-research sides. Our study reads the literature that those guides address and reports, paper by paper, what of the guidance reached print.
+
+\paragraph{Critiques of the field.} A second literature asks whether new metaheuristics are new. Sörensen \cite{sorensen2015metaheuristics} called the metaphor-driven proposals of the 2000s a step backwards; Aranha et al.\ \cite{aranha2022metaphor} issued a call for action signed by editors of several journals; Camacho-Villalón et al.\ \cite{camacho2022exposing} showed six widely cited algorithms to be re-descriptions of older ones; Molina et al.\ \cite{molina2020comprehensive}, Tzanetos and Dounias \cite{tzanetos2021nature}, Velasco et al.\ \cite{velasco2024literature} and Campelo and Aranha \cite{campelo2023lessons} catalogue and taxonomise the population. Kudela \cite{kudela2022critical} showed that a common benchmark hazard, functions whose optimum lies at the origin, lets centre-biased algorithms appear to win. Our question is orthogonal to novelty and to benchmark choice: it concerns whether the evidence printed for a claim, whatever the algorithm and the suite, can be checked.
+
+\paragraph{Audits of reporting.} Statcheck \cite{nuijten2016prevalence} recomputed $p$-values from printed test statistics in psychology and found inconsistencies in half of the papers; AxCell \cite{kardas2020axcell} extracted results tables from machine-learning papers into leaderboards. The instrument here belongs to that family, reads the tables rather than the prose, and was first applied to two machine-learning and multi-agent venues in companion audits that are under review; this is its third application and the first to a field with an explicit convention to audit against. The instrument is unchanged; what is new is the corpus, the reading of the field's own tests, and the classification by kind of paper.
+
+\section{What is measured}
+\label{sec:what}
+
+\paragraph{The unit.} A \emph{comparison} is one bold cell in a results table set against the best non-bold cell in its group, the group being the row or the column within which the table marks its winners. The parser decides the orientation per table by which axis carries exactly one bold cell per line, and reads the direction (lower is better for an error, higher for a hit rate) from the header. Tables where bold marks several cells per line, where the caption announces first, second and third best, and cells tied with their rival, are left out and counted.
+
+\paragraph{Testability.} A comparison is \emph{testable} when both cells carry a dispersion and a run count is available: from the caption, from the page, or, failing both, the smallest count stated anywhere in the paper, which is the reading least favourable to the claim. An unlabelled dispersion is read as a standard deviation, the reading that makes the claim easiest to support; a bracketed pair is read as an interval of the mean.
+
+\paragraph{The test.} On a testable comparison we compute Welch's $t$ \cite{welch1947generalization} from the two means, the two deviations and the run count, and call the comparison \emph{failing} when $p \geq 0.05$ two-sided. A failure says that the printed evidence does not separate the bold cell from its rival at the stated run count; it does not say that the claim is false, and it says nothing about a difference the authors never asserted. Many tables bold the best mean by convention; for those, a failure measures how thin the evidence is, not that anything was overstated. Holm's correction \cite{holm1979simple} within a table is reported beside the raw rate.
+
+\paragraph{The format hazard.} Metaheuristics tables often print the mean and the standard deviation as two rows (\emph{Mean} / \emph{Std}) or two columns of the same table rather than as $a \pm b$ in one cell. The parser, which was frozen before this corpus was chosen, reads such a mean as bar-less. This was stated in the pre-registered plan before any page was read, and the image-based reader census of Section~\ref{sec:census} is therefore the primary instrument for the presence of dispersions on this corpus; its protocol gains one value of one field, recording whether the dispersion sits beside the mean, in a separate row, in a separate column, or nowhere.
+
+\paragraph{Frozen.} The parser and the rules above were fixed and tagged before the first companion audit and have not been changed since; this study adds readings on its output, not changes to it.
+
+\section{Corpus}
+\label{sec:corpus}
+
+The plan fixed, before any download, a corpus of fully open-access CC-BY journals with a metaheuristics output, selected by an API query so that the corpus is reproducible: every article of 2024 or 2025 whose title or abstract matches a phrase list (metaheuristic, evolutionary algorithm, genetic algorithm, particle swarm, differential evolution, swarm intelligence, ant colony, simulated annealing, nature-inspired, bio-inspired optimization, grey wolf, whale optimization, memetic, NSGA) in OpenAlex.\footnote{\url{https://openalex.org}; the query and the list are in the released code.} Hybrid journals, this one included, were excluded because their open-access subset is a selected sample. The query listed \nOListed{} papers across seven journals. Three publishers refused automated download of their PDFs (a bot challenge, a rate limit and a proxy block, respectively), and the corpus is therefore the \emph{Scientific Reports} subset, \nOListedSrep{} papers, of which \nOParsed{} were fetched and parsed. This is a deviation from the plan, recorded here: the corpus is one journal's open-access output rather than seven, and the reader should take the numbers as describing that journal's metaheuristics papers, a large and heterogeneous population, and not the field's flagship venues.
+
+PLACEHOLDER-CORPUS-DESCRIPTION
+
+\section{Results}
+\label{sec:results}
+
+PLACEHOLDER-RESULTS-SECTIONS
+
+\section{The reader census}
+\label{sec:census}
+
+PLACEHOLDER-CENSUS
+
+\section{Discussion}
+\label{sec:discussion}
+
+PLACEHOLDER-DISCUSSION
+
+\section*{Declaration of generative AI and AI-assisted technologies}
+During the preparation of this work the author used large language models as labelling instruments (the image-based reader census, the paper-kind classifier and the statistical-test reader, each under a released protocol) and as a drafting and reviewing assistant for the text and code. After using these tools the author reviewed and edited the content and takes full responsibility for the content of the publication.
+
+\section*{Declaration of competing interest}
+The author declares no competing interests.
+
+\section*{Data availability}
+The released code, protocols, run records and labels are at PLACEHOLDER-URL.
+
+\bibliographystyle{elsarticle-num}
+\bibliography{refs}
+
+\end{document}
