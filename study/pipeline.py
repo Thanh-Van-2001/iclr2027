@@ -111,6 +111,7 @@ def _fetch(url: str, timeout: int = 90) -> bytes:
 MAX_PDF_BYTES = 30_000_000
 # Set by --cache-pdfs: directory in which every downloaded PDF is kept.
 PDF_CACHE = None
+CACHED_ONLY = False
 
 
 def _already_done(path: str) -> set:
@@ -150,16 +151,18 @@ def run(records: list, out_jsonl: str, *, workers: int = 3, delay: float = 0.02,
             except queue.Empty:
                 return
             try:
-                declared = _content_length(rec["pdf"])
-                if declared is not None and declared > MAX_PDF_BYTES:
-                    raise ValueError(f"PDF too large ({declared // 1_000_000} MB, from HEAD)")
                 # The AAMAS corpus keeps its PDFs on disk (data/corpus) so that
                 # the reference-set renderings and the full-text passes need no
-                # second download.
+                # second download; a cached PDF is not asked about again.
                 cache_path = os.path.join(PDF_CACHE, f"{rec['venue']}{rec['year']}_{rec['id']}.pdf") if PDF_CACHE else None
                 if cache_path and os.path.exists(cache_path):
                     blob = open(cache_path, "rb").read()
                 else:
+                    if CACHED_ONLY:
+                        raise ValueError("not cached")
+                    declared = _content_length(rec["pdf"])
+                    if declared is not None and declared > MAX_PDF_BYTES:
+                        raise ValueError(f"PDF too large ({declared // 1_000_000} MB, from HEAD)")
                     blob = _fetch(rec["pdf"])
                 if len(blob) < 20_000 or not blob.startswith(b"%PDF"):
                     raise ValueError("not a usable PDF")
@@ -224,9 +227,11 @@ def main(argv=None) -> int:
     ap.add_argument("--workers", type=int, default=3)
     ap.add_argument("--out", default="data/extracted_large.jsonl")
     ap.add_argument("--cache-pdfs", default=None, help="keep every downloaded PDF in this directory")
+    ap.add_argument("--cached-only", action="store_true", help="parse only the PDFs already in the cache; download nothing")
     args = ap.parse_args(argv)
-    global PDF_CACHE
+    global PDF_CACHE, CACHED_ONLY
     PDF_CACHE = args.cache_pdfs
+    CACHED_ONLY = args.cached_only
 
     records = []
     listed = {}
