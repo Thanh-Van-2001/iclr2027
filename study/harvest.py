@@ -30,7 +30,7 @@ import urllib.error
 import urllib.request
 from typing import Iterable, Optional
 
-UA = {"User-Agent": "Mozilla/5.0 (compatible; paper-audit/0.1)"}
+UA = {"User-Agent": "Mozilla/5.0 (compatible; paper-audit/0.1)", "Accept": "*/*"}   # arXiv answers 406 without an Accept header
 CACHE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "corpus")
 DELAY = 1.0
 
@@ -43,7 +43,7 @@ def _get(url: str, *, retries: int = 3, timeout: int = 90) -> bytes:
                 return r.read()
         except Exception as exc:  # IncompleteRead is not an OSError
             last = exc
-            time.sleep(2.0 * (attempt + 1))
+            time.sleep(2.0 * (attempt + 1) + (8.0 if "406" in str(exc) else 0.0))
     raise RuntimeError(f"failed to fetch {url}: {last}")
 
 
@@ -127,7 +127,48 @@ def aamas_index(year: int) -> list[dict]:
     return out
 
 
+def arxiv_index(category: str, year: int, max_results: int = 4000) -> list[dict]:
+    """Every arXiv paper with the given primary category submitted in one
+    year, from the arXiv API (Atom), with its PDF URL. Cross-lists are kept
+    when the category is primary. The API asks for three seconds between
+    calls; 200 records per call."""
+    import xml.etree.ElementTree as ET
+    from urllib.parse import quote
+    ns = {"a": "http://www.w3.org/2005/Atom", "arxiv": "http://arxiv.org/schemas/atom"}
+    out, start = [], 0
+    while start < max_results:
+        # the API answers urllib's requests with 406 past the first page; the
+        # requests library, with the same headers, is accepted
+        import requests
+        time.sleep(4.0)   # the API rate limit
+        r = requests.get("https://export.arxiv.org/api/query",
+                         params={"search_query": f"cat:{category} AND submittedDate:[{year}01010000 TO {year}12312359]",
+                                 "start": start, "max_results": 200, "sortBy": "submittedDate", "sortOrder": "ascending"},
+                         headers=UA, timeout=120)
+        r.raise_for_status()
+        root = ET.fromstring(r.content)
+        entries = root.findall("a:entry", ns)
+        if not entries:
+            break
+        for e in entries:
+            prim = e.find("arxiv:primary_category", ns)
+            if prim is None or prim.get("term") != category:
+                continue
+            aid = e.find("a:id", ns).text.strip().rsplit("/", 1)[-1]   # e.g. 2501.01234v2
+            title = re.sub(r"\s+", " ", e.find("a:title", ns).text).strip()
+            out.append({"venue": f"arXiv-{category.replace('.', '')}", "year": year,
+                        "id": hashlib.sha1(aid.encode()).hexdigest()[:16], "arxiv_id": aid,
+                        "title": title, "pdf": f"https://arxiv.org/pdf/{aid}",
+                        "abstract_page": f"https://arxiv.org/abs/{aid}",
+                        "published": (e.find("a:published", ns).text or "")[:10]})
+        start += 200
+        time.sleep(3.0)
+    return out
+
+
 SOURCES = {
+    "arxiv-csne-2025": lambda: arxiv_index("cs.NE", 2025),
+    "arxiv-mathoc-2025": lambda: arxiv_index("math.OC", 2025),
     "aamas2026": lambda: aamas_index(2026),
     "aamas2025": lambda: aamas_index(2025),
     "aamas2024": lambda: aamas_index(2024),
