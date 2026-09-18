@@ -29,11 +29,13 @@ cp audits/swevo_verdict/*.json audits/swevo_verdict/*.txt "$DEST/audits/swevo_ve
 cp audits/swevo_census_retry/items.json "$DEST/audits/swevo_census_retry/"
 # the human kit ships its items, template and labelling sheet; the page images are those of the census
 cp audits/swevo_human/items.json audits/swevo_human/draw.json audits/swevo_human/labels_template.csv audits/swevo_human/label.html "$DEST/audits/swevo_human/"
-cp audits/swevo_human/labels.csv "$DEST/audits/swevo_human/" 2>/dev/null || true
+cp audits/swevo_human/labels*.csv "$DEST/audits/swevo_human/" 2>/dev/null || true
 mkdir -p "$DEST/audits/swevo_human_rows" "$DEST/audits/swevo_census_rows"
 cp audits/swevo_human_rows/items.json audits/swevo_human_rows/draw.json audits/swevo_human_rows/labels_template.csv audits/swevo_human_rows/label.html "$DEST/audits/swevo_human_rows/"
-cp audits/swevo_human_rows/labels.csv "$DEST/audits/swevo_human_rows/" 2>/dev/null || true
+cp audits/swevo_human_rows/labels*.csv "$DEST/audits/swevo_human_rows/" 2>/dev/null || true
 cp audits/swevo_census_rows/*.json audits/swevo_census_rows/instruction.txt "$DEST/audits/swevo_census_rows/"
+mkdir -p "$DEST/audits/swevo_census_rows2"
+cp audits/swevo_census_rows2/*.json audits/swevo_census_rows2/instruction.txt "$DEST/audits/swevo_census_rows2/"
 find "$DEST/audits" -name "*_fulltext.txt" -delete
 cp data/extracted_oa.jsonl "$DEST/data/"
 cp out/swevo/*.json out/swevo/*.csv "$DEST/out/swevo/" 2>/dev/null || true

@@ -40,6 +40,17 @@ without touching the network.
   (`labels.json`, merged from the per-shard files by `swevo/merge_census.py`).
   The page images (700 MB) are regenerated from the PDFs by
   `python swevo/census_kit.py`.
+- `audits/swevo_census_rows/`, `audits/swevo_census_rows2/` — the re-read
+  of the Mean/Std-row pages under `instruction.txt`, merged table by table
+  into the census by `swevo/census_readings.py` (the merge rule is in the
+  paper); `audits/swevo_verdict/` — the model's reading of the printed
+  verdicts for `swevo/verdict_crosstab.py`.
+- `audits/swevo_human/`, `audits/swevo_human_rows/` — the two labelling kits
+  (100 separate-column groups, 100 Mean/Std-row groups): `label.html` opens
+  in a browser and writes `labels.csv`; `python swevo/human_score.py [--kit
+  audits/swevo_human_rows]` scores it. `labels_claude-sonnet-5.csv` is a
+  second vendor's model answering the same kit (`swevo/kit_reader.py`),
+  reported in the paper as a model check and not as a human label.
 - `paper/swevo/numbers.tex` — the generated macro file; every number in the
   paper is one of these, with its run record named in the comment above it.
 
