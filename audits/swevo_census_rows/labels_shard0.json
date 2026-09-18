@@ -1,0 +1,1070 @@
+[
+ {
+  "id": "0037",
+  "tables": [
+   {
+    "caption_start": "Table 4. Comparison of different meta-heuristic",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "separate_row",
+    "groups": [],
+    "note": "No bold cells in the data area."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0090",
+  "tables": [
+   {
+    "caption_start": "Table 2. Categories of resilience",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "bracket",
+    "groups": [],
+    "note": "Defines category ranges."
+   },
+   {
+    "caption_start": "Table 3. Descriptive statistics",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "separate_row",
+    "groups": [],
+    "note": "Dataset statistics."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0166",
+  "tables": [
+   {
+    "caption_start": "Table 8. Comparison of the average",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "page",
+    "bar_form": "none",
+    "groups": [],
+    "note": "No bold cells to indicate winners."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0171",
+  "tables": [
+   {
+    "caption_start": "Table 15. Optimal speed reducer design results.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": "The f(x) column has two bold cells due to a tie, so it does not have exactly one bold cell."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0239",
+  "tables": [
+   {
+    "caption_start": "Table 7. Results of PMSOMA and other algorithms for 50 benchmark functions.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 8. Results of PMSOMA and other algorithms for 50 benchmark unimodal separable functions (F1 to F5).",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "separate_row",
+    "groups": [
+     {
+      "label": "F1",
+      "direction": "lower",
+      "winner_mean": "-6.00E-01",
+      "winner_disp": "0.00E+00",
+      "runner_mean": "-6.00E-01",
+      "runner_disp": "0.00E+00"
+     },
+     {
+      "label": "F2",
+      "direction": "lower",
+      "winner_mean": "0.00E+00",
+      "winner_disp": "0.00E+00",
+      "runner_mean": "2.78E-15",
+      "runner_disp": "1.51E-14"
+     },
+     {
+      "label": "F5",
+      "direction": "lower",
+      "winner_mean": "1.35E-05",
+      "winner_disp": "1.43E-05",
+      "runner_mean": "2.31E-04",
+      "runner_disp": "1.35E-04"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0246",
+  "tables": [
+   {
+    "caption_start": "Table 21. Hydro-static thrust bearing",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Best cost",
+      "direction": "lower",
+      "winner_mean": "1616.2952",
+      "winner_disp": "none",
+      "runner_mean": "1625.6366",
+      "runner_disp": "none"
+     }
+    ],
+    "note": "Only Best cost is extracted as a group because the other columns are design variables, not performance metrics, and their bold values are neither minimums nor maximums."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0251",
+  "tables": [
+   {
+    "caption_start": "Table 6. Experimental evaluation outcomes utilizing",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "separate_row",
+    "groups": [
+     {
+      "label": "F29",
+      "direction": "lower",
+      "winner_mean": "8.0204E+03",
+      "winner_disp": "7.3249E+02",
+      "runner_mean": "8.8417E+03",
+      "runner_disp": "6.1206E+02"
+     },
+     {
+      "label": "F30",
+      "direction": "lower",
+      "winner_mean": "2.1562E+07",
+      "winner_disp": "3.7326E+07",
+      "runner_mean": "6.7528E+07",
+      "runner_disp": "3.4635E+07"
+     }
+    ],
+    "note": "Excluded Best, Worst, Rank, and the overall Mean (which appears to be mean rank) rows as per instructions."
+   }
+  ],
+  "figure_band_on_page": "y",
+  "note": "Figure 8 contains boxplots with whiskers.",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0292",
+  "tables": [
+   {
+    "caption_start": "Table 10. P-value on CEC2017",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Bolding indicates p > 0.05 rather than a single winner per group, so orientation is none."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0296",
+  "tables": [
+   {
+    "caption_start": "Table 15. Experimental results of",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Multiple rows are bolded (AGSK and MIGOA), so there are multiple bold cells per column."
+   },
+   {
+    "caption_start": "Table 16. Experimental results of",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Optimal value",
+      "direction": "lower",
+      "winner_mean": "5885.3328",
+      "winner_disp": "none",
+      "runner_mean": "5885.4356",
+      "runner_disp": "none"
+     }
+    ],
+    "note": "The entire MIGOA row is bolded."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0326",
+  "tables": [
+   {
+    "caption_start": "Table 9. Comparison results on",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Multiple bold cells in Best cost column, none in Mean cost."
+   },
+   {
+    "caption_start": "Table 10. The results of",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "separate_row",
+    "groups": [],
+    "note": "Bold cell is in Total cost row, which is not a mean. Mean cost row has no bold cells."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0330",
+  "tables": [
+   {
+    "caption_start": "Table 15. Comparison results on",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Best cost",
+      "direction": "lower",
+      "winner_mean": "121,412.00",
+      "winner_disp": "none",
+      "runner_mean": "121,412.54",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0467",
+  "tables": [
+   {
+    "caption_start": "Table 4. A Mean_per_class_error comparison",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "50",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "P1",
+      "direction": "lower",
+      "winner_mean": "0.129",
+      "winner_disp": "none",
+      "runner_mean": "0.165",
+      "runner_disp": "none"
+     },
+     {
+      "label": "P2",
+      "direction": "lower",
+      "winner_mean": "0.209",
+      "winner_disp": "none",
+      "runner_mean": "0.242",
+      "runner_disp": "none"
+     },
+     {
+      "label": "P3",
+      "direction": "lower",
+      "winner_mean": "0.114",
+      "winner_disp": "none",
+      "runner_mean": "0.120",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0480",
+  "tables": [
+   {
+    "caption_start": "Table 2. IGD values",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "30",
+    "n_source": "page",
+    "bar_form": "separate_row",
+    "groups": [
+     {
+      "label": "ZDT1",
+      "direction": "lower",
+      "winner_mean": "2.1907e-3",
+      "winner_disp": "(4.16e-5)",
+      "runner_mean": "2.4462e-3",
+      "runner_disp": "(7.26e-5)-"
+     },
+     {
+      "label": "ZDT2",
+      "direction": "lower",
+      "winner_mean": "2.1965e-3",
+      "winner_disp": "(4.63e-5)",
+      "runner_mean": "2.4531e-2",
+      "runner_disp": "(2.89e-2)-"
+     },
+     {
+      "label": "ZDT3",
+      "direction": "lower",
+      "winner_mean": "2.6517e-3",
+      "winner_disp": "(1.10e-4)",
+      "runner_mean": "3.9203e-3",
+      "runner_disp": "(6.47e-3)-"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0485",
+  "tables": [
+   {
+    "caption_start": "Table 9. Ablation experiment IGD data table.",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "30",
+    "n_source": "page",
+    "bar_form": "separate_row",
+    "groups": [
+     {
+      "label": "ZDT1",
+      "direction": "lower",
+      "winner_mean": "2.1907e-3",
+      "winner_disp": "4.16e-5",
+      "runner_mean": "2.2264e-03",
+      "runner_disp": "4.33e-05"
+     },
+     {
+      "label": "ZDT2",
+      "direction": "lower",
+      "winner_mean": "2.1965e-3",
+      "winner_disp": "4.63e-5",
+      "runner_mean": "2.1983e-03",
+      "runner_disp": "4.60e-05"
+     },
+     {
+      "label": "ZDT3",
+      "direction": "lower",
+      "winner_mean": "2.5938e-03",
+      "winner_disp": "1.02e-04",
+      "runner_mean": "2.6517e-3",
+      "runner_disp": "1.10e-4"
+     },
+     {
+      "label": "ZDT4",
+      "direction": "lower",
+      "winner_mean": "6.6310e-01",
+      "winner_disp": "1.33e-02",
+      "runner_mean": "7.2842e-1",
+      "runner_disp": "1.33e-1"
+     },
+     {
+      "label": "ZDT6",
+      "direction": "lower",
+      "winner_mean": "1.7408e-3",
+      "winner_disp": "3.06e-5",
+      "runner_mean": "1.7478e-03",
+      "runner_disp": "3.09e-05"
+     },
+     {
+      "label": "UF1",
+      "direction": "lower",
+      "winner_mean": "1.3947e-1",
+      "winner_disp": "1.01e-2",
+      "runner_mean": "1.4478e-01",
+      "runner_disp": "5.09e-02"
+     },
+     {
+      "label": "UF2",
+      "direction": "lower",
+      "winner_mean": "6.8977e-2",
+      "winner_disp": "5.29e-3",
+      "runner_mean": "7.2080e-02",
+      "runner_disp": "5.57e-03"
+     },
+     {
+      "label": "UF3",
+      "direction": "lower",
+      "winner_mean": "3.1789e-1",
+      "winner_disp": "3.81e-2",
+      "runner_mean": "3.3696e-01",
+      "runner_disp": "3.71e-02"
+     },
+     {
+      "label": "UF4",
+      "direction": "lower",
+      "winner_mean": "5.7310e-02",
+      "winner_disp": "8.06e-04",
+      "runner_mean": "5.9731e-02",
+      "runner_disp": "6.42e-03"
+     },
+     {
+      "label": "UF5",
+      "direction": "lower",
+      "winner_mean": "1.5391e+0",
+      "winner_disp": "2.38e-1",
+      "runner_mean": "1.5448e+00",
+      "runner_disp": "1.50e-01"
+     },
+     {
+      "label": "UF6",
+      "direction": "lower",
+      "winner_mean": "6.9818e-01",
+      "winner_disp": "3.13e-02",
+      "runner_mean": "7.3828e-1",
+      "runner_disp": "1.01e-1"
+     },
+     {
+      "label": "UF7",
+      "direction": "lower",
+      "winner_mean": "1.0736e-1",
+      "winner_disp": "1.43e-2",
+      "runner_mean": "1.2097e-01",
+      "runner_disp": "1.76e-02"
+     },
+     {
+      "label": "UF8",
+      "direction": "lower",
+      "winner_mean": "2.9259e-1",
+      "winner_disp": "7.35e-2",
+      "runner_mean": "2.9924e-01",
+      "runner_disp": "4.00e-02"
+     },
+     {
+      "label": "UF9",
+      "direction": "lower",
+      "winner_mean": "1.4122e-1",
+      "winner_disp": "1.26e-2",
+      "runner_mean": "1.4266e-01",
+      "runner_disp": "1.21e-02"
+     },
+     {
+      "label": "UF10",
+      "direction": "lower",
+      "winner_mean": "8.3621e-1",
+      "winner_disp": "1.85e-1",
+      "runner_mean": "8.7224e-01",
+      "runner_disp": "1.47e-01"
+     },
+     {
+      "label": "DTLZ1",
+      "direction": "lower",
+      "winner_mean": "8.7038e+0",
+      "winner_disp": "5.85e+0",
+      "runner_mean": "1.0027e+01",
+      "runner_disp": "1.00e+01"
+     },
+     {
+      "label": "DTLZ2",
+      "direction": "lower",
+      "winner_mean": "6.4582e-2",
+      "winner_disp": "3.26e-3",
+      "runner_mean": "6.7554e-02",
+      "runner_disp": "3.44e-03"
+     },
+     {
+      "label": "DTLZ3",
+      "direction": "lower",
+      "winner_mean": "7.9018e+1",
+      "winner_disp": "3.18e+1",
+      "runner_mean": "8.4955e+01",
+      "runner_disp": "5.23e+01"
+     },
+     {
+      "label": "DTLZ4",
+      "direction": "lower",
+      "winner_mean": "2.6471e-1",
+      "winner_disp": "3.49e-2",
+      "runner_mean": "2.7542e-01",
+      "runner_disp": "2.82e-02"
+     },
+     {
+      "label": "DTLZ5",
+      "direction": "lower",
+      "winner_mean": "9.0050e-3",
+      "winner_disp": "1.33e-3",
+      "runner_mean": "9.6686e-03",
+      "runner_disp": "1.37e-03"
+     },
+     {
+      "label": "DTLZ6",
+      "direction": "lower",
+      "winner_mean": "2.2715e-03",
+      "winner_disp": "3.31e-05",
+      "runner_mean": "2.3094e-3",
+      "runner_disp": "3.67e-5"
+     },
+     {
+      "label": "DTLZ7",
+      "direction": "lower",
+      "winner_mean": "3.9275e-02",
+      "winner_disp": "3.90e-03",
+      "runner_mean": "4.4846e-2",
+      "runner_disp": "7.09e-3"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0546",
+  "tables": [
+   {
+    "caption_start": "Table 8. The experimental results of 15 algorithms on classical test functions (Dim = 100).",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "30",
+    "n_source": "page",
+    "bar_form": "separate_row",
+    "groups": [
+     {
+      "label": "F5",
+      "direction": "lower",
+      "winner_mean": "1.21E-04",
+      "winner_disp": "1.35E-04",
+      "runner_mean": "6.23E-03",
+      "runner_disp": "1.15E-02"
+     },
+     {
+      "label": "F6",
+      "direction": "lower",
+      "winner_mean": "5.85E-11",
+      "winner_disp": "3.20E-10",
+      "runner_mean": "2.23E-05",
+      "runner_disp": "6.67E-05"
+     },
+     {
+      "label": "F7",
+      "direction": "lower",
+      "winner_mean": "5.27E-05",
+      "winner_disp": "6.12E-05",
+      "runner_mean": "7.37E-05",
+      "runner_disp": "5.40E-05"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0551",
+  "tables": [
+   {
+    "caption_start": "Table 13. p-values of classical test functions",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Bolding indicates p > 0.05 rather than a single winner per group."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0555",
+  "tables": [
+   {
+    "caption_start": "Table 19. Comparison results for",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": "The entire row for the proposed method TEAO is bolded, which does not mark the best value per column (e.g. in column 'd', the bolded value is 5.24E-02 but 5.00E-02 is lower)."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0570",
+  "tables": [
+   {
+    "caption_start": "Table 4. Ranking of algorithms",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 5. Ranking of algorithms",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 6. Ranking of algorithms",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0574",
+  "tables": [
+   {
+    "caption_start": "Table 12. Wilcoxon rank sum test results",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Win/tie/loss counts, no bold winners."
+   },
+   {
+    "caption_start": "Table 13. The rankings of IMARO and basic algorithms",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Table contains only ranks, so no groups of means are extracted per the layout rule."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0583",
+  "tables": [
+   {
+    "caption_start": "Table 5. Optimization results of applied",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "50",
+    "n_source": "paper",
+    "bar_form": "separate_row",
+    "groups": [],
+    "note": "The only bold cells are in the Mean Rank and Ranking rows, which are excluded per instructions."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0589",
+  "tables": [
+   {
+    "caption_start": "Table 12. Results of t test",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "50",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0593",
+  "tables": [
+   {
+    "caption_start": "Table 22. Comparison of optimization results",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "50",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": "No bold cells to indicate winners."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0654",
+  "tables": [
+   {
+    "caption_start": "Table 5. FRT values of all algorithms",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "f1",
+      "direction": "lower",
+      "winner_mean": "1.000",
+      "winner_disp": "none",
+      "runner_mean": "2.000",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f2",
+      "direction": "lower",
+      "winner_mean": "1.000",
+      "winner_disp": "none",
+      "runner_mean": "2.000",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f3",
+      "direction": "lower",
+      "winner_mean": "1.000",
+      "winner_disp": "none",
+      "runner_mean": "2.000",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f4",
+      "direction": "lower",
+      "winner_mean": "1.000",
+      "winner_disp": "none",
+      "runner_mean": "2.000",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f5",
+      "direction": "lower",
+      "winner_mean": "1.000",
+      "winner_disp": "none",
+      "runner_mean": "2.333",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f6",
+      "direction": "lower",
+      "winner_mean": "1.333",
+      "winner_disp": "none",
+      "runner_mean": "1.667",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f10",
+      "direction": "lower",
+      "winner_mean": "1.333",
+      "winner_disp": "none",
+      "runner_mean": "2.667",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Average FRT",
+      "direction": "lower",
+      "winner_mean": "1.383",
+      "winner_disp": "none",
+      "runner_mean": "3.267",
+      "runner_disp": "none"
+     }
+    ],
+    "note": "Rows f7, f8, f9 have multiple bold cells so they are excluded."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "Table 6 is a dataset statistics table and is ignored.",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0715",
+  "tables": [
+   {
+    "caption_start": "Various cost components",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   },
+   {
+    "caption_start": "Cost comparison using",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "separate_row",
+    "groups": [],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0729",
+  "tables": [
+   {
+    "caption_start": "Table 9. The statistical Results of",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "20",
+    "n_source": "paper",
+    "bar_form": "separate_row",
+    "groups": [
+     {
+      "label": "CEC10",
+      "direction": "lower",
+      "winner_mean": "19.99603",
+      "winner_disp": "4.445576",
+      "runner_mean": "20.15596",
+      "runner_disp": "3.84692"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0734",
+  "tables": [
+   {
+    "caption_start": "Table 16. The obtained results",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "20",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": "No bold cells in the table."
+   }
+  ],
+  "figure_band_on_page": "y",
+  "note": "Figure 32(b) contains boxplots with whiskers.",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0751",
+  "tables": [
+   {
+    "caption_start": "Table 6: Comparison of calculated",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0884",
+  "tables": [
+   {
+    "caption_start": "Table 4. Findings on unimodal",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "10",
+    "n_source": "page",
+    "bar_form": "separate_row",
+    "groups": [
+     {
+      "label": "F1",
+      "direction": "lower",
+      "winner_mean": "2.194e-109",
+      "winner_disp": "9.656e-109",
+      "runner_mean": "-2.0714e-90",
+      "runner_disp": "9.9463e-91"
+     },
+     {
+      "label": "F2",
+      "direction": "lower",
+      "winner_mean": "2.477e-112",
+      "winner_disp": "1.616e-111",
+      "runner_mean": "5.1604e-97",
+      "runner_disp": "2.8143e-97"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "",
+  "note": "",
+  "reasoning_effort": "default"
+ }
+]

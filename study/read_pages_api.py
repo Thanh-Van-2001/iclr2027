@@ -89,6 +89,8 @@ def main(argv=None) -> int:
     ap.add_argument("--bar-forms", default="pm / paren / bracket / subscript / separate_column / none",
                     help="the bar_form vocabulary of the protocol; the metaheuristics census adds separate_row "
                          "(mean and deviation printed as two rows of the same table)")
+    ap.add_argument("--extra-instruction", default=None,
+                    help="a paragraph appended to the protocol (the metaheuristics re-read of Mean/Std-row tables)")
     ap.add_argument("--reasoning-effort", default=None,
                     help="sent as {'reasoning': {'effort': ...}}; the 15 census pages on which the relay timed out at "
                          "the default were read at 'low', everything else identical")
@@ -133,6 +135,8 @@ def main(argv=None) -> int:
         ans = None
         proto = PROTO.replace("multi-agent-systems paper (two-column ACM format)", args.venue_phrase)
         proto = proto.replace("pm / paren / bracket / subscript / separate_column / none", args.bar_forms)
+        if args.extra_instruction:
+            proto = proto.replace("Run sentences from the paper:", args.extra_instruction.strip() + chr(10) + chr(10) + "Run sentences from the paper:", 1)
         prompt = proto.format(runs=runs[:6000])
         effort_used = args.reasoning_effort
         for attempt in range(3):

@@ -49,6 +49,9 @@ METHODOLOGY = {
     "kendall2016": r"good laboratory practice for optimization research",
     "hansen_coco": r"coco: a platform for comparing continuous optimizers",
     "wolpert_nfl": r"no free lunch theorems for optimization",
+    "carrasco2020": r"recent trends in the use of statistical tests for comparing swarm and evolutionary",
+    "latorre2021": r"prescription of methodological guidelines for comparing bio-inspired",
+    "osaba2021": r"tutorial on the design, experimentation and application of metaheuristic",
 }
 BESTIARY = "out/swevo/ec_bestiary.json"
 
@@ -121,7 +124,7 @@ def scan(path: str, title: str, abstract: str, patterns: list) -> dict:
         runs[RUNS_WORDS[m.group(1).lower()]] += 1
     run_sent = _sentence(main, RUNS.search(main).start()) if RUNS.search(main) else ""
     # the journal's own table note, inserted by production on tables that bold anything
-    bold_note = bool(re.search(r"significant values are in bold|significant values are (?:shown |given |marked )?in bold|values in bold are significant", main, re.I))
+    bold_note = bool(re.search(r"signific(?:ant|ance) values? (?:are|is) (?:shown |given |marked |displayed |presented |highlighted )?in \[?\(?bold|values in bold are significant|significant (?:values|results) (?:are )?(?:shown |given |marked |displayed |highlighted )?in \[?\(?bold", main, re.I))
     tests = {k: len(rx.findall(main)) for k, rx in TESTS.items()}
     test_sents = {k: _sentence(main, rx.search(main).start()) for k, rx in TESTS.items() if rx.search(main)}
     suites = {k: bool(rx.search(main)) for k, rx in SUITES.items()}

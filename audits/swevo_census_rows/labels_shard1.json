@@ -1,0 +1,1349 @@
+[
+ {
+  "id": "0039",
+  "tables": [
+   {
+    "caption_start": "Table 6. Comparison of algorithms for functions of different dimensions.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": "No bold cells."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0162",
+  "tables": [
+   {
+    "caption_start": "The results of each improvement strategy impact.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "30",
+    "n_source": "page",
+    "bar_form": "separate_row",
+    "groups": [],
+    "note": "No bold cells to indicate winners."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0168",
+  "tables": [
+   {
+    "caption_start": "Table 11. Optimal pressure vessel design results.",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "f(x)",
+      "direction": "lower",
+      "winner_mean": "6059.714",
+      "winner_disp": "none",
+      "runner_mean": "6068.247",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 12. Optimal tension/compression spring design results.",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "f(x)",
+      "direction": "lower",
+      "winner_mean": "0.012665",
+      "winner_disp": "none",
+      "runner_mean": "0.012684",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0236",
+  "tables": [
+   {
+    "caption_start": "Table 1. Testing results for the 10 chaotic mapping algorithms",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "page",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "F1",
+      "direction": "lower",
+      "winner_mean": "9.11E+02",
+      "winner_disp": "none",
+      "runner_mean": "9.36E+02",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F2",
+      "direction": "lower",
+      "winner_mean": "2.00E+02",
+      "winner_disp": "none",
+      "runner_mean": "2.00E+02",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F3",
+      "direction": "lower",
+      "winner_mean": "3.00E+02",
+      "winner_disp": "none",
+      "runner_mean": "3.00E+02",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F4",
+      "direction": "lower",
+      "winner_mean": "4.04E+02",
+      "winner_disp": "none",
+      "runner_mean": "4.04E+02",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F5",
+      "direction": "lower",
+      "winner_mean": "5.10E+02",
+      "winner_disp": "none",
+      "runner_mean": "5.10E+02",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F6",
+      "direction": "lower",
+      "winner_mean": "6.00E+02",
+      "winner_disp": "none",
+      "runner_mean": "6.00E+02",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F7",
+      "direction": "lower",
+      "winner_mean": "7.28E+02",
+      "winner_disp": "none",
+      "runner_mean": "7.31E+02",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F8",
+      "direction": "lower",
+      "winner_mean": "8.09E+02",
+      "winner_disp": "none",
+      "runner_mean": "8.10E+02",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F9",
+      "direction": "lower",
+      "winner_mean": "9.00E+02",
+      "winner_disp": "none",
+      "runner_mean": "9.00E+02",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F10",
+      "direction": "lower",
+      "winner_mean": "1.58E+03",
+      "winner_disp": "none",
+      "runner_mean": "1.71E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F11",
+      "direction": "lower",
+      "winner_mean": "1.11E+03",
+      "winner_disp": "none",
+      "runner_mean": "1.12E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F12",
+      "direction": "lower",
+      "winner_mean": "8.06E+03",
+      "winner_disp": "none",
+      "runner_mean": "9.35E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F13",
+      "direction": "lower",
+      "winner_mean": "2.12E+03",
+      "winner_disp": "none",
+      "runner_mean": "2.33E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F14",
+      "direction": "lower",
+      "winner_mean": "1.43E+03",
+      "winner_disp": "none",
+      "runner_mean": "1.43E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F15",
+      "direction": "lower",
+      "winner_mean": "1.52E+03",
+      "winner_disp": "none",
+      "runner_mean": "1.53E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F16",
+      "direction": "lower",
+      "winner_mean": "1.61E+03",
+      "winner_disp": "none",
+      "runner_mean": "1.61E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F17",
+      "direction": "lower",
+      "winner_mean": "1.73E+03",
+      "winner_disp": "none",
+      "runner_mean": "1.74E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F18",
+      "direction": "lower",
+      "winner_mean": "1.96E+03",
+      "winner_disp": "none",
+      "runner_mean": "2.27E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F19",
+      "direction": "lower",
+      "winner_mean": "1.91E+03",
+      "winner_disp": "none",
+      "runner_mean": "1.91E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F20",
+      "direction": "lower",
+      "winner_mean": "2.02E+03",
+      "winner_disp": "none",
+      "runner_mean": "2.02E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F21",
+      "direction": "lower",
+      "winner_mean": "2.20E+03",
+      "winner_disp": "none",
+      "runner_mean": "2.25E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F22",
+      "direction": "lower",
+      "winner_mean": "2.30E+03",
+      "winner_disp": "none",
+      "runner_mean": "2.30E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F23",
+      "direction": "lower",
+      "winner_mean": "2.62E+03",
+      "winner_disp": "none",
+      "runner_mean": "2.62E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F24",
+      "direction": "lower",
+      "winner_mean": "2.67E+03",
+      "winner_disp": "none",
+      "runner_mean": "2.71E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F25",
+      "direction": "lower",
+      "winner_mean": "2.91E+03",
+      "winner_disp": "none",
+      "runner_mean": "2.92E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F26",
+      "direction": "lower",
+      "winner_mean": "2.93E+03",
+      "winner_disp": "none",
+      "runner_mean": "2.94E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F27",
+      "direction": "lower",
+      "winner_mean": "3.10E+03",
+      "winner_disp": "none",
+      "runner_mean": "3.10E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F28",
+      "direction": "lower",
+      "winner_mean": "3.07E+03",
+      "winner_disp": "none",
+      "runner_mean": "3.14E+03",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0242",
+  "tables": [
+   {
+    "caption_start": "Table 12. Comparison of results on the CEC2017 testing set.",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "page",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "F1",
+      "direction": "lower",
+      "winner_mean": "8.57E+02",
+      "winner_disp": "none",
+      "runner_mean": "1.12E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F2",
+      "direction": "lower",
+      "winner_mean": "2.00E+02",
+      "winner_disp": "none",
+      "runner_mean": "2.00E+02",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F4",
+      "direction": "lower",
+      "winner_mean": "4.00E+02",
+      "winner_disp": "none",
+      "runner_mean": "4.02E+02",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0247",
+  "tables": [
+   {
+    "caption_start": "Table 22. Welded beam design",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "page",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Multiple bold cells in the Best cost column indicate ties, so orientation is none."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0253",
+  "tables": [
+   {
+    "caption_start": "Table 8. The wilcoxon rank-sum test",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "page",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Statistical test summary table with win/tie/loss counts, no bold cells."
+   }
+  ],
+  "figure_band_on_page": "y",
+  "note": "Figure 13 contains boxplots with whiskers.",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0293",
+  "tables": [
+   {
+    "caption_start": "Table 11. P-value on CEC2017",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": "P-value table where bold marks values > 0.05 rather than a single winner per group."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0323",
+  "tables": [
+   {
+    "caption_start": "Table 4. The results of the",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "separate_row",
+    "groups": [],
+    "note": "All cells in the Total cost row are bolded, so no single winner is marked."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "Table 2 is notation, Table 3 is hyperparameters.",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0327",
+  "tables": [
+   {
+    "caption_start": "Table 11. Comparison results on",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Two bold cells in Best cost column, none in Mean cost column."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0331",
+  "tables": [
+   {
+    "caption_start": "Table 16. The results of the proposed",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "separate_row",
+    "groups": [],
+    "note": "The only bold cell is in the 'Total cost' row, which represents the best (lowest) cost according to the text, not the mean. The 'Mean cost' row has no bold cells. Therefore, following the rule to only extract groups of means, no groups are extracted."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0468",
+  "tables": [
+   {
+    "caption_start": "Table 5. The no._of_features_chosen comparison",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Bold marks the proposed method's column, not the best value in each row."
+   },
+   {
+    "caption_start": "Table 6. Different optimizers' combinational time",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Bold marks the proposed method's column, not the best value in each row."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0481",
+  "tables": [
+   {
+    "caption_start": "Table 4. IGD values for 5",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "30",
+    "n_source": "page",
+    "bar_form": "separate_row",
+    "groups": [
+     {
+      "label": "ZDT1",
+      "direction": "lower",
+      "winner_mean": "2.1907e-3",
+      "winner_disp": "(4.16e-5)",
+      "runner_mean": "1.3712e-2",
+      "runner_disp": "(4.58e-3)-"
+     },
+     {
+      "label": "ZDT2",
+      "direction": "lower",
+      "winner_mean": "2.1965e-3",
+      "winner_disp": "(4.63e-5)",
+      "runner_mean": "2.5728e-3",
+      "runner_disp": "(9.69e-4)-"
+     },
+     {
+      "label": "ZDT3",
+      "direction": "lower",
+      "winner_mean": "2.6517e-3",
+      "winner_disp": "(1.10e-4)",
+      "runner_mean": "4.1205e-2",
+      "runner_disp": "(9.38e-3)-"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0487",
+  "tables": [
+   {
+    "caption_start": "Table 11. Sensitivity analysis of",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "ZDT3",
+      "direction": "lower",
+      "winner_mean": "2.5392e-03",
+      "winner_disp": "none",
+      "runner_mean": "2.5899e-03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "ZDT6",
+      "direction": "lower",
+      "winner_mean": "1.6924e-03",
+      "winner_disp": "none",
+      "runner_mean": "1.7408e-03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "UF3",
+      "direction": "lower",
+      "winner_mean": "3.1789e-01",
+      "winner_disp": "none",
+      "runner_mean": "3.3399e-01",
+      "runner_disp": "none"
+     },
+     {
+      "label": "UF7",
+      "direction": "lower",
+      "winner_mean": "1.0736e-01",
+      "winner_disp": "none",
+      "runner_mean": "1.0882e-01",
+      "runner_disp": "none"
+     },
+     {
+      "label": "UF9",
+      "direction": "lower",
+      "winner_mean": "1.4122e-01",
+      "winner_disp": "none",
+      "runner_mean": "1.4757e-01",
+      "runner_disp": "none"
+     },
+     {
+      "label": "DTLZ2",
+      "direction": "lower",
+      "winner_mean": "6.4582e-02",
+      "winner_disp": "none",
+      "runner_mean": "6.7412e-02",
+      "runner_disp": "none"
+     },
+     {
+      "label": "DTLZ4",
+      "direction": "lower",
+      "winner_mean": "2.6471e-01",
+      "winner_disp": "none",
+      "runner_mean": "2.9990e-01",
+      "runner_disp": "none"
+     },
+     {
+      "label": "DTLZ7",
+      "direction": "lower",
+      "winner_mean": "4.2336e-02",
+      "winner_disp": "none",
+      "runner_mean": "4.4846e-02",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 12. Sensitivity analysis of",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "ZDT3",
+      "direction": "lower",
+      "winner_mean": "2.6517e-03",
+      "winner_disp": "none",
+      "runner_mean": "2.6691e-03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "ZDT6",
+      "direction": "lower",
+      "winner_mean": "1.7341e-03",
+      "winner_disp": "none",
+      "runner_mean": "1.7321e-03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "UF3",
+      "direction": "lower",
+      "winner_mean": "3.1789e-01",
+      "winner_disp": "none",
+      "runner_mean": "3.3429e-01",
+      "runner_disp": "none"
+     },
+     {
+      "label": "UF7",
+      "direction": "lower",
+      "winner_mean": "1.0736e-01",
+      "winner_disp": "none",
+      "runner_mean": "1.1738e-01",
+      "runner_disp": "none"
+     },
+     {
+      "label": "UF9",
+      "direction": "lower",
+      "winner_mean": "1.4122e-01",
+      "winner_disp": "none",
+      "runner_mean": "1.5309e-01",
+      "runner_disp": "none"
+     },
+     {
+      "label": "DTLZ2",
+      "direction": "lower",
+      "winner_mean": "6.4582e-02",
+      "winner_disp": "none",
+      "runner_mean": "8.6333e-02",
+      "runner_disp": "none"
+     },
+     {
+      "label": "DTLZ4",
+      "direction": "lower",
+      "winner_mean": "2.6471e-01",
+      "winner_disp": "none",
+      "runner_mean": "2.8427e-01",
+      "runner_disp": "none"
+     },
+     {
+      "label": "DTLZ7",
+      "direction": "lower",
+      "winner_mean": "4.3701e-02",
+      "winner_disp": "none",
+      "runner_mean": "4.4846e-02",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "y",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0548",
+  "tables": [
+   {
+    "caption_start": "Table 10. The experimental results",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "separate_row",
+    "groups": [
+     {
+      "label": "F5",
+      "direction": "lower",
+      "winner_mean": "1.35E-01",
+      "winner_disp": "2.46E-01",
+      "runner_mean": "1.09E-02",
+      "runner_disp": "1.12E-02"
+     },
+     {
+      "label": "F7",
+      "direction": "lower",
+      "winner_mean": "4.41E-05",
+      "winner_disp": "2.93E-05",
+      "runner_mean": "8.11E-05",
+      "runner_disp": "7.98E-05"
+     },
+     {
+      "label": "F8",
+      "direction": "lower",
+      "winner_mean": "-4.19E+05",
+      "winner_disp": "7.42E+00",
+      "runner_mean": "-4.16E+05",
+      "runner_disp": "4.94E+03"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0552",
+  "tables": [
+   {
+    "caption_start": "Table 14. p-values of classical test functions",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Multiple bold cells per row"
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0556",
+  "tables": [
+   {
+    "caption_start": "Comparison results for the welded beam problem.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": "The entire row for TEAO is bolded to highlight the proposed algorithm, rather than to mark winners per column (variable columns do not have winners, and GWO ties for the best Optimal value but is not bolded)."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0571",
+  "tables": [
+   {
+    "caption_start": "Table 8. Friedman scores of the ARO",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "CEC2014 with Dim = 10/30/50/100 10",
+      "direction": "lower",
+      "winner_mean": "4.27",
+      "winner_disp": "none",
+      "runner_mean": "4.97",
+      "runner_disp": "none"
+     },
+     {
+      "label": "CEC2014 with Dim = 10/30/50/100 30",
+      "direction": "lower",
+      "winner_mean": "4.53",
+      "winner_disp": "none",
+      "runner_mean": "4.77",
+      "runner_disp": "none"
+     },
+     {
+      "label": "CEC2014 with Dim = 10/30/50/100 50",
+      "direction": "lower",
+      "winner_mean": "4.57",
+      "winner_disp": "none",
+      "runner_mean": "5.07",
+      "runner_disp": "none"
+     },
+     {
+      "label": "CEC2014 with Dim = 10/30/50/100 100",
+      "direction": "lower",
+      "winner_mean": "3.40",
+      "winner_disp": "none",
+      "runner_mean": "3.53",
+      "runner_disp": "none"
+     },
+     {
+      "label": "CEC2017 with Dim = 10/30/50/100 10",
+      "direction": "lower",
+      "winner_mean": "4.38",
+      "winner_disp": "none",
+      "runner_mean": "4.79",
+      "runner_disp": "none"
+     },
+     {
+      "label": "CEC2017 with Dim = 10/30/50/100 30",
+      "direction": "lower",
+      "winner_mean": "4.86",
+      "winner_disp": "none",
+      "runner_mean": "5.03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "CEC2017 with Dim = 10/30/50/100 50",
+      "direction": "lower",
+      "winner_mean": "3.14",
+      "winner_disp": "none",
+      "runner_mean": "5.03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "CEC2017 with Dim = 10/30/50/100 100",
+      "direction": "lower",
+      "winner_mean": "2.10",
+      "winner_disp": "none",
+      "runner_mean": "3.93",
+      "runner_disp": "none"
+     },
+     {
+      "label": "CEC2022 with Dim = 10/20 10",
+      "direction": "lower",
+      "winner_mean": "4.75",
+      "winner_disp": "none",
+      "runner_mean": "5.42",
+      "runner_disp": "none"
+     },
+     {
+      "label": "CEC2022 with Dim = 10/20 20",
+      "direction": "lower",
+      "winner_mean": "4.08",
+      "winner_disp": "none",
+      "runner_mean": "4.83",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Average rank of CEC2014",
+      "direction": "lower",
+      "winner_mean": "4.73",
+      "winner_disp": "none",
+      "runner_mean": "5.08",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Average rank of CEC2017",
+      "direction": "lower",
+      "winner_mean": "4.17",
+      "winner_disp": "none",
+      "runner_mean": "4.97",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Average rank Of CEC2022",
+      "direction": "lower",
+      "winner_mean": "5.13",
+      "winner_disp": "none",
+      "runner_mean": "4.92",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Average rank of CEC2014, CEC2017 and CEC2022",
+      "direction": "lower",
+      "winner_mean": "4.60",
+      "winner_disp": "none",
+      "runner_mean": "5.38",
+      "runner_disp": "none"
+     }
+    ],
+    "note": "In the 'Average rank Of CEC2022' column, 5.13 is bolded despite 4.92 being lower."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0575",
+  "tables": [
+   {
+    "caption_start": "Table 14. Wilcoxon rank sum test",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 15. The rankings of IMARO",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "10",
+      "direction": "lower",
+      "winner_mean": "1.87",
+      "winner_disp": "none",
+      "runner_mean": "3.30",
+      "runner_disp": "none"
+     },
+     {
+      "label": "30",
+      "direction": "lower",
+      "winner_mean": "2.60",
+      "winner_disp": "none",
+      "runner_mean": "3.90",
+      "runner_disp": "none"
+     },
+     {
+      "label": "50",
+      "direction": "lower",
+      "winner_mean": "2.40",
+      "winner_disp": "none",
+      "runner_mean": "3.67",
+      "runner_disp": "none"
+     },
+     {
+      "label": "100",
+      "direction": "lower",
+      "winner_mean": "2.53",
+      "winner_disp": "none",
+      "runner_mean": "3.80",
+      "runner_disp": "none"
+     },
+     {
+      "label": "10",
+      "direction": "lower",
+      "winner_mean": "1.79",
+      "winner_disp": "none",
+      "runner_mean": "2.52",
+      "runner_disp": "none"
+     },
+     {
+      "label": "30",
+      "direction": "lower",
+      "winner_mean": "1.17",
+      "winner_disp": "none",
+      "runner_mean": "3.28",
+      "runner_disp": "none"
+     },
+     {
+      "label": "50",
+      "direction": "lower",
+      "winner_mean": "1.07",
+      "winner_disp": "none",
+      "runner_mean": "3.66",
+      "runner_disp": "none"
+     },
+     {
+      "label": "100",
+      "direction": "lower",
+      "winner_mean": "1.00",
+      "winner_disp": "none",
+      "runner_mean": "3.14",
+      "runner_disp": "none"
+     },
+     {
+      "label": "10",
+      "direction": "lower",
+      "winner_mean": "2.17",
+      "winner_disp": "none",
+      "runner_mean": "2.67",
+      "runner_disp": "none"
+     },
+     {
+      "label": "20",
+      "direction": "lower",
+      "winner_mean": "1.08",
+      "winner_disp": "none",
+      "runner_mean": "3.42",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Average rank of CEC2014",
+      "direction": "lower",
+      "winner_mean": "2.35",
+      "winner_disp": "none",
+      "runner_mean": "3.78",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Average rank of CEC2017",
+      "direction": "lower",
+      "winner_mean": "1.26",
+      "winner_disp": "none",
+      "runner_mean": "3.53",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Average rank of CEC2022",
+      "direction": "lower",
+      "winner_mean": "1.63",
+      "winner_disp": "none",
+      "runner_mean": "3.13",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Average rank",
+      "direction": "lower",
+      "winner_mean": "1.74",
+      "winner_disp": "none",
+      "runner_mean": "3.69",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0584",
+  "tables": [
+   {
+    "caption_start": "Table 6. Optimization results of",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "separate_row",
+    "groups": [],
+    "note": "Bold cells only appear in the Mean Rank and Ranking rows, which are excluded per instructions."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0590",
+  "tables": [
+   {
+    "caption_start": "Table 14. Comparison of optimization results",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "50",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": "No bold cells."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0649",
+  "tables": [
+   {
+    "caption_start": "Table 5. Wilcoxon test results",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 6. Friedman test results",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 7. Wilcoxon test results",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 8. Friedman test results",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0655",
+  "tables": [
+   {
+    "caption_start": "Table 7. MAE and MSE values",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0726",
+  "tables": [
+   {
+    "caption_start": "Table 6. The statistical Results of unimodal benchmark functions",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "20",
+    "n_source": "paper",
+    "bar_form": "separate_row",
+    "groups": [
+     {
+      "label": "F1",
+      "direction": "lower",
+      "winner_mean": "0",
+      "winner_disp": "0",
+      "runner_mean": "5.90E-158",
+      "runner_disp": "2.70E-157"
+     },
+     {
+      "label": "F2",
+      "direction": "lower",
+      "winner_mean": "9.60E-194",
+      "winner_disp": "0",
+      "runner_mean": "2.43E-78",
+      "runner_disp": "4.77E-78"
+     },
+     {
+      "label": "F3",
+      "direction": "lower",
+      "winner_mean": "0",
+      "winner_disp": "0",
+      "runner_mean": "6.00E-143",
+      "runner_disp": "2.60E-142"
+     },
+     {
+      "label": "F4",
+      "direction": "lower",
+      "winner_mean": "7.70E-189",
+      "winner_disp": "0",
+      "runner_mean": "8.88E-74",
+      "runner_disp": "3.97E-73"
+     },
+     {
+      "label": "F5",
+      "direction": "lower",
+      "winner_mean": "0.14477",
+      "winner_disp": "0.170624",
+      "runner_mean": "3.136644",
+      "runner_disp": "4.426942"
+     },
+     {
+      "label": "F6",
+      "direction": "lower",
+      "winner_mean": "0.000493",
+      "winner_disp": "0.000328",
+      "runner_mean": "0.010501",
+      "runner_disp": "0.006585"
+     },
+     {
+      "label": "F7",
+      "direction": "lower",
+      "winner_mean": "9.84E-05",
+      "winner_disp": "7.45E-05",
+      "runner_mean": "0.000116",
+      "runner_disp": "0.000101"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0730",
+  "tables": [
+   {
+    "caption_start": "Table 10. Results for the three-bar truss problem.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": "No bold cells."
+   }
+  ],
+  "figure_band_on_page": "y",
+  "note": "Figure 27b contains boxplots.",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0735",
+  "tables": [
+   {
+    "caption_start": "Table 17. Statistical results for the Cantilever Beam Design problem.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "20",
+    "n_source": "paper",
+    "bar_form": "separate_row",
+    "groups": [],
+    "note": "Multiple bold cells in the Mean row."
+   },
+   {
+    "caption_start": "Table 18. Results of the welded beam design problem.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": "No bold cells."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ }
+]

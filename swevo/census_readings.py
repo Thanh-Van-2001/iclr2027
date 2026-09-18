@@ -26,7 +26,7 @@ from analyze import p_value  # noqa: E402
 
 # a reader "group" whose header label names a summary row rather than an
 # optimizer or a function is a Std, Rank or Best/Worst row read as a group
-ROW_LABEL = re.compile(r"^(std|sd|s\.?d\.?|standard deviation|stdev|rank|ave\.? ?rank|mean rank|friedman|best|worst|median|min|max|time|p[- ]?value|h)\b", re.I)
+ROW_LABEL = re.compile(r"(?:^|[ ,;:(/])(std|sd|s\.?d\.?|standard deviation|stdev|rank|ave\.? ?rank|mean rank|friedman|best|worst|wor\.|median|min|max|time|p[- ]?value|h)(?:$|[ ,;:)/])", re.I)
 
 
 def _regroup(labels: dict, items: dict, kinds: dict):
@@ -59,8 +59,82 @@ def _regroup(labels: dict, items: dict, kinds: dict):
                 groups.append({"page": iid, "paper": paper, "kind": kinds.get(paper, "unlabelled"), "form": form,
                                "label": str(g.get("label", "")), "w": w, "r": r, "wd": wd, "rd": rd,
                                "wb": wb, "rb": rb, "n": n, "testable": testable, "fail": fail,
-                               "row_label": bool(ROW_LABEL.match(str(g.get("label", "")).strip()))})
+                               "row_label": bool(ROW_LABEL.search(str(g.get("label", "")).strip())),
+                               "table": f"{iid}:{t.get('caption_start', '')[:40]}", "kind_label": kind})
     return groups
+
+
+def _welch_variant(g, *, one_sided=False, ddof=False, rho=0.0, unlabelled_as_se=False):
+    """Re-test one reader group under an alternative convention."""
+    if not (g["testable"] and g["fail"] is not None) or g["w"] is None or g["r"] is None:
+        return None
+    kind, n = g["kind_label"], g["n"]
+    wd, rd = g["wd"], g["rd"]
+    if wd is None or rd is None:
+        return None
+    if kind in ("se",):
+        sw, sr = wd, rd
+    elif kind in ("ci",):
+        sw, sr = wd / 1.96, rd / 1.96
+    elif unlabelled_as_se and kind not in ("sd", "std"):
+        sw, sr = wd, rd
+    else:
+        if not n:
+            return None
+        f = (n / (n - 1)) ** 0.5 if (ddof and n > 1) else 1.0
+        sw, sr = f * wd / n ** 0.5, f * rd / n ** 0.5
+    res = p_value(abs(g["w"] - g["r"]), sw, sr, int(n) if n else None, rho=rho)
+    if res is None:
+        return None
+    pv = res["p"] / 2 if one_sided else res["p"]
+    return pv >= 0.05
+
+
+def _impossible(g) -> bool:
+    """A sample deviation over n non-negative runs cannot exceed sqrt(n) times
+    the mean; a pair that does is a mis-paired mean and deviation."""
+    n = g["n"]
+    if not n:
+        return False
+    for m, d in ((g["w"], g["wd"]), (g["r"], g["rd"])):
+        if m is not None and d is not None and m >= 0 and d > (n ** 0.5) * m * 1.0000001 and d > 0:
+            return True
+    return False
+
+
+def _holm_fail(gs: list, family: str) -> float | None:
+    """Holm within a family (table or paper) over the tested groups: the share
+    still failing after the correction."""
+    tested = [g for g in gs if g["testable"] and g["fail"] is not None and g["w"] is not None and g["r"] is not None]
+    fam = collections.defaultdict(list)
+    for g in tested:
+        kind, n = g["kind_label"], g["n"]
+        wd, rd = g["wd"], g["rd"]
+        if kind == "se":
+            sw, sr = wd, rd
+        elif kind == "ci":
+            sw, sr = wd / 1.96, rd / 1.96
+        elif n:
+            sw, sr = wd / n ** 0.5, rd / n ** 0.5
+        else:
+            continue
+        res = p_value(abs(g["w"] - g["r"]), sw, sr, int(n) if n else None)
+        if res is None:
+            continue
+        fam[g[family] if family == "table" else g["paper"]].append(res["p"])
+    fails = total = 0
+    for ps in fam.values():
+        m = len(ps)
+        order = sorted(range(m), key=lambda i: ps[i])
+        rejected = [False] * m
+        for rank, i in enumerate(order):
+            if ps[i] <= 0.05 / (m - rank):
+                rejected[i] = True
+            else:
+                break
+        fails += sum(1 for x in rejected if not x)
+        total += m
+    return round(100 * fails / total, 1) if total else None
 
 
 def _shares(gs: list) -> dict:
@@ -215,6 +289,21 @@ def main() -> int:
              "zero_sd": _shares([g for g in gs if zero_sd(g)]), "without_zero_sd": _shares([g for g in gs if not zero_sd(g)]),
              "pct_tested_sd_ge_mean": round(100 * sum(1 for g in tested if heavy(g)) / len(tested), 1) if tested else None,
              "pct_tested_zero_sd": round(100 * sum(1 for g in tested if zero_sd(g)) / len(tested), 1) if tested else None}
+    # alternative conventions on the reader's tested groups, and the impossible pairs
+    def vrate(**kw):
+        v = [_welch_variant(g, **kw) for g in gs]
+        v = [x for x in v if x is not None]
+        return round(100 * sum(v) / len(v), 1) if v else None
+    imp = [g for g in gs if _impossible(g)]
+    alternatives = {"as_reported": _shares(gs)["pct_fail"], "holm_table": _holm_fail(gs, "table"), "holm_paper": _holm_fail(gs, "paper"),
+                    "one_sided": vrate(one_sided=True), "population_sd": vrate(ddof=True),
+                    "rho_half": vrate(rho=0.5), "rho_nine_tenths": vrate(rho=0.9),
+                    "unlabelled_as_se": vrate(unlabelled_as_se=True),
+                    "unlabelled_tested": sum(1 for g in tested if g["kind_label"] not in ("sd", "std", "se", "ci")),
+                    "impossible_pairs": len(imp), "impossible_pairs_tested": sum(1 for g in imp if g["testable"] and g["fail"] is not None),
+                    "impossible_pairs_papers": len({g["paper"] for g in imp}),
+                    "impossible_pairs_separate": sum(1 for g in imp if g["form"].startswith("separate")),
+                    "without_impossible": _shares([g for g in gs if not _impossible(g)])}
     # row labels: Std, Rank, Best/Worst rows read as groups
     row = {"row_label_groups": sum(1 for g in gs if g["row_label"]), "row_label_pct": round(100 * sum(1 for g in gs if g["row_label"]) / max(len(gs), 1), 1),
            "row_label_only": _shares([g for g in gs if g["row_label"]]), "without_row_label": _shares([g for g in gs if not g["row_label"]])}
@@ -244,7 +333,31 @@ def main() -> int:
     citing = {"citing": _shares([g for g in gs if cites(g["paper"])]), "not_citing": _shares([g for g in gs if not cites(g["paper"])])}
     scan_runs = {"reader_n_agrees_scan": sum(1 for g in tested if g["n"] and scan.get(g["paper"], {}).get("run_modal") == int(g["n"])),
                  "reader_n_disagrees_scan": sum(1 for g in tested if g["n"] and scan.get(g["paper"], {}).get("run_modal") and scan[g["paper"]]["run_modal"] != int(g["n"]))}
+    # the Mean/Std-row pages re-read under the row instruction, merged over the census
+    rows_kit = "audits/swevo_census_rows"
+    reread = {}
+    if os.path.exists(rows_kit):
+        import glob as _glob
+        for path in sorted(_glob.glob(os.path.join(rows_kit, "labels_shard*.json"))):
+            for pg in json.load(open(path, encoding="utf-8")):
+                if not str(pg.get("note", "")).startswith("failed"):
+                    reread[pg["id"]] = pg
+    merged = dict(labels)
+    merged.update(reread)
+    gs2 = _regroup(merged, items, kinds) if reread else []
+    def _by_kind2(gs_):
+        return {lab: _shares([g for g in gs_ if g["kind"] == lab]) for lab in ("new_optimizer", "application")}
+    rows_reread = {"pages_in_kit": len(json.load(open(os.path.join(rows_kit, "items.json"), encoding="utf-8"))) if os.path.exists(os.path.join(rows_kit, "items.json")) else 0,
+                   "pages_reread": len(reread),
+                   "before_on_those_pages": _shares([g for g in gs if g["page"] in reread]) if reread else None,
+                   "after_on_those_pages": _shares([g for g in gs2 if g["page"] in reread]) if reread else None,
+                   "census_after": _shares(gs2) if reread else None,
+                   "census_after_by_kind": _by_kind2(gs2) if reread else None,
+                   "census_after_without_row_label": _shares([g for g in gs2 if not g["row_label"]]) if reread else None,
+                   "tables_separate_row_after": sum(1 for pg in reread.values() for t in pg.get("tables", []) if str(t.get("bar_form", "")).lower() == "separate_row"),
+                   "tables_reread": sum(1 for pg in reread.values() for t in pg.get("tables", []) if str(t.get("results_table", "")).lower().startswith("y"))}
     out = {"layout": layout, "by_kind": by_kind, "per_paper": per_paper, "shape": shape, "row": row, "bold_rule": bold,
+           "alternatives": alternatives, "rows_reread": rows_reread,
            "note": note, "citing": citing, "scan_runs": scan_runs, "regrouped": _shares(gs),
            "pages_read": len(labels), "pages_in_kit": len(items),
            "papers_in_kit": len({it["paper"] for it in items.values()}),

@@ -252,6 +252,19 @@ def build(out_path: str) -> dict:
             reg.add(f"ka st {k.replace('_', ' ')} test", _pct(d["pct_test_named"]), provenance=run)
         reg.add("ka metaphor none disagreements", ka2["metaphor_none_disagreements"], provenance=run)
 
+    for j, d in ex.get("fetch_attempts", {}).items():
+        key = "fa " + j.lower().replace("&", "and").replace(" ", " ")
+        reg.add(f"{key} attempts", d["attempts"], provenance=run)
+        reg.add(f"{key} pdf ok", d["pdf_ok"], provenance=run)
+        reg.add(f"{key} html only", d["html_only"], provenance=run)
+        reg.add(f"{key} statuses", d["statuses"].replace("None", "no answer"), provenance=run)
+    fa = ex.get("fetch_attempts", {})
+    if fa:
+        mdpi = [j for j in fa if j in ("Mathematics", "Applied Sciences", "Biomimetics", "Algorithms")]
+        reg.add("fa mdpi attempts", sum(fa[j]["attempts"] for j in mdpi), provenance=run)
+        reg.add("fa mdpi pdf ok", sum(fa[j]["pdf_ok"] for j in mdpi), provenance=run)
+        reg.add("fa mdpi listed", sum(fa[j]["listed"] for j in mdpi), provenance=run)
+
     ta = ex.get("test_reader_agreement", {})
     if ta:
         reg.add("ta papers", ta["papers"], provenance=run)
@@ -267,7 +280,8 @@ def build(out_path: str) -> dict:
     if cc:
         names = {"derrac2011": "derrac", "garcia2009": "garcia nine", "garcia2010": "garcia ten", "sorensen2015": "sorensen",
                  "aranha2022": "aranha", "camacho2022": "camacho", "bartz2020": "bartz", "beiranvand2017": "beiranvand",
-                 "kendall2016": "kendall", "hansen_coco": "coco", "wolpert_nfl": "nfl"}
+                 "kendall2016": "kendall", "hansen_coco": "coco", "wolpert_nfl": "nfl",
+                 "carrasco2020": "carrasco", "latorre2021": "latorre", "osaba2021": "osaba"}
         for k, v in cc["counts"].items():
             reg.add(f"cc {names.get(k, k.replace('_', ' '))}", v, provenance=run)
         reg.add("cc citing papers", cc["citing_papers"], provenance=run)
@@ -478,12 +492,18 @@ def build(out_path: str) -> dict:
         reg.add("vc printed not significant", _pct(vc["printed_not_significant_among_located"]) if vc["printed_not_significant_among_located"] is not None else "--", provenance=vrun)
         for k, v in vc["crosstab"].items():
             reg.add("vc " + k.replace("_", " "), v, provenance=vrun)
+        reg.add("vc ci agree papers", f"[{vc['ci_agree_papers'][0]}, {vc['ci_agree_papers'][1]}]" if vc.get("ci_agree_papers") else "--", provenance=vrun)
+        reg.add("vc welch fail not located", _pct(vc["welch_fail_not_located"]) if vc.get("welch_fail_not_located") is not None else "--", provenance=vrun)
+        reg.add("vc not located", vc.get("not_located", 0), provenance=vrun)
+        reg.add("vc conflicting keys papers", vc.get("conflicting_keys_papers", 0), provenance=vrun)
+        for k in ("beside_group", "same_page_table"):
+            reg.add("vc source " + k.replace("_", " "), vc["source"].get(k, 0), provenance=vrun)
         reg.add("vc largest paper located", vc.get("largest_paper_located", 0), provenance=vrun)
         reg.add("vc pct largest paper", _pct(vc["pct_largest_paper"]) if vc.get("pct_largest_paper") is not None else "--", provenance=vrun)
         aw = vc.get("agree_without_largest") or {}
         reg.add("vc agree without largest n", aw.get("n", 0), provenance=vrun)
         reg.add("vc agree without largest pct", _pct(aw["pct"]) if aw else "--", provenance=vrun)
-        for k in sorted(set(vc["status"]) | {"located", "verdict_not_printed", "group_not_matched", "page_not_read"}):
+        for k in sorted(set(vc["status"]) | {"located", "verdict_not_printed", "group_not_matched", "page_not_read", "different_pair", "ambiguous_key"}):
             reg.add("vc status " + k.replace("_", " "), vc["status"].get(k, 0), provenance=vrun)
         for k in ("same_page", "verdict_table", "verdict_table_winner_named"):
             reg.add("vc source " + k.replace("_", " "), vc["source"].get(k, 0), provenance=vrun)
@@ -501,11 +521,13 @@ def build(out_path: str) -> dict:
         reg.add("cz groups", rz["groups"], provenance=crun)
         reg.add("cz papers with groups", rz["papers_with_groups"], provenance=crun)
         reg.add("cz neither", _pct(rz["pct_neither"]), provenance=crun)
-        reg.add("cz neither ci", f"[{rz['ci_neither_papers'][0]}, {rz['ci_neither_papers'][1]}]", provenance=crun)
+        _rg = _j("census_readings").get("regrouped", {}) if os.path.exists("out/swevo/census_readings.json") else {}
+        _ci = lambda key, fallback: (f"[{_rg[key][0]}, {_rg[key][1]}]" if _rg.get(key) else fallback)
+        reg.add("cz neither ci", _ci("ci_neither", f"[{rz['ci_neither_papers'][0]}, {rz['ci_neither_papers'][1]}]"), provenance=crun)
         reg.add("cz one side", _pct(rz["pct_one_side"]), provenance=crun)
         reg.add("cz testable", _pct(rz["pct_testable"]), provenance=crun)
         reg.add("cz testable n", rz["n_testable"], provenance=crun)
-        reg.add("cz testable ci", f"[{rz['ci_testable_papers'][0]}, {rz['ci_testable_papers'][1]}]", provenance=crun)
+        reg.add("cz testable ci", _ci("ci_testable", f"[{rz['ci_testable_papers'][0]}, {rz['ci_testable_papers'][1]}]"), provenance=crun)
         reg.add("cz bars no n", _pct(rz["pct_bars_no_n"]), provenance=crun)
         pz = cz["pipeline_same_pages"]
         reg.add("cz pipe groups", pz["groups"], provenance=crun)
@@ -518,10 +540,11 @@ def build(out_path: str) -> dict:
         reg.add("cz reader matched groups", cz["reader_groups_matched"]["groups"], provenance=crun)
         reg.add("cz reader unmatched groups", cz["reader_groups_unmatched"]["groups"], provenance=crun)
         fz = cz["reader_failure"]
-        reg.add("cz reader fail", f"{fz['pct_fail']}\\% [{fz['ci'][0]}, {fz['ci'][1]}]" if fz["n"] else "--", provenance=crun)
+        _fci = _rg.get("ci_fail") or fz.get("ci")
+        reg.add("cz reader fail", f"{fz['pct_fail']}{PCT} [{_fci[0]}, {_fci[1]}]" if fz["n"] else "--", provenance=crun)
         reg.add("cz reader fail n", fz["n"], provenance=crun)
         reg.add("cz reader fail pct", _pct(fz["pct_fail"]) if fz["n"] else "--", provenance=crun)
-        reg.add("cz reader fail ci", f"[{fz['ci'][0]}, {fz['ci'][1]}]" if fz["n"] else "--", provenance=crun)
+        reg.add("cz reader fail ci", f"[{_fci[0]}, {_fci[1]}]" if fz["n"] else "--", provenance=crun)
         reg.add("cz reader fail papers", fz["n_papers"], provenance=crun)
         vz = cz["verdicts_same_pages"]
         reg.add("cz shared", vz["shared"]["n"], provenance=crun)
@@ -604,6 +627,25 @@ def build(out_path: str) -> dict:
         if sr_:
             reg.add("cr n agrees scan", sr_["reader_n_agrees_scan"], provenance=rrun)
             reg.add("cr n disagrees scan", sr_["reader_n_disagrees_scan"], provenance=rrun)
+        al = cr.get("alternatives", {})
+        if al:
+            for k in ("as_reported", "holm_table", "holm_paper", "one_sided", "population_sd", "rho_half", "rho_nine_tenths", "unlabelled_as_se"):
+                reg.add("cral " + k.replace("_", " "), _pct(al[k]) if al[k] is not None else "--", provenance=rrun)
+            for k in ("unlabelled_tested", "impossible_pairs", "impossible_pairs_tested", "impossible_pairs_papers", "impossible_pairs_separate"):
+                reg.add("cral " + k.replace("_", " "), al[k], provenance=rrun)
+            _cr_shares("cral without impossible", al["without_impossible"])
+        rr = cr.get("rows_reread", {})
+        if rr and rr.get("pages_reread"):
+            reg.add("crrr pages in kit", rr["pages_in_kit"], provenance=rrun)
+            reg.add("crrr pages reread", rr["pages_reread"], provenance=rrun)
+            reg.add("crrr tables reread", rr["tables_reread"], provenance=rrun)
+            reg.add("crrr tables separate row after", rr["tables_separate_row_after"], provenance=rrun)
+            _cr_shares("crrr before", rr["before_on_those_pages"])
+            _cr_shares("crrr after", rr["after_on_those_pages"])
+            _cr_shares("crrr census after", rr["census_after"])
+            _cr_shares("crrr census after no row label", rr["census_after_without_row_label"])
+            for lab, d in rr["census_after_by_kind"].items():
+                _cr_shares("crrr census after " + lab.replace("_", " "), d)
         for lab, d in cr["by_kind"].items():
             key = lab.replace("_", " ")
             reg.add(f"cr {key} papers", d["papers"], provenance=rrun)

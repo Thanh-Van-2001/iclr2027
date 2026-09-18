@@ -1,0 +1,962 @@
+[
+ {
+  "id": "2204",
+  "tables": [
+   {
+    "caption_start": "Table 8. Data for six indicators",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "CS",
+      "direction": "higher",
+      "winner_mean": "2.8",
+      "winner_disp": "none",
+      "runner_mean": "3",
+      "runner_disp": "none"
+     }
+    ],
+    "note": "Only the CS column contains a bold cell. Although the caption states 'the larger the value of CS, the better', the bolded value (2.8) is smaller than the maximum non-bold value (3), which is recorded as the runner-up."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "2199",
+  "tables": [
+   {
+    "caption_start": "Table 14. Results analysis of 10-BTD, Part 2.",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "36",
+    "n_source": "paper",
+    "bar_form": "separate_column",
+    "groups": [
+     {
+      "label": "Mean",
+      "direction": "lower",
+      "winner_mean": "5.2480E+02",
+      "winner_disp": "2.2839E+00",
+      "runner_mean": "5.2531E+02",
+      "runner_disp": "1.6380E+01"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 15. Results analysis of GTD, Part 1.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "36",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 16. Results analysis of GTD, Part 2.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "36",
+    "n_source": "paper",
+    "bar_form": "separate_column",
+    "groups": [],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "y",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1992",
+  "tables": [
+   {
+    "caption_start": "Table 7. Statistical comparison for the results",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "separate_row",
+    "groups": [],
+    "note": "No bold cells indicating winners."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1859",
+  "tables": [
+   {
+    "caption_start": "The results of Wilcoxon's rank sum test",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "50",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   },
+   {
+    "caption_start": "Comparison of optimization results of tension/compression spring design.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1846",
+  "tables": [
+   {
+    "caption_start": "Table 4. Optimal parameters",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "40",
+    "n_source": "paper",
+    "bar_form": "separate_row",
+    "groups": [],
+    "note": "No bold cells to indicate winners."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1728",
+  "tables": [
+   {
+    "caption_start": "Table 13. Measured versus estimated voltage",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Summary row has bold cells but does not indicate a winner among competitors."
+   },
+   {
+    "caption_start": "Table 14. Parameter tuning for horizon,",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "40",
+    "n_source": "paper",
+    "bar_form": "separate_row",
+    "groups": [],
+    "note": "No bold cells in the body."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1723",
+  "tables": [
+   {
+    "caption_start": "Table 7. Measured versus estimated",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Bolding marks the average row, not a winner."
+   }
+  ],
+  "figure_band_on_page": "y",
+  "note": "Boxplot in Fig 7b has whiskers.",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1688",
+  "tables": [
+   {
+    "caption_start": "Table 11. Results of Spacing",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": "No bold cells in the table body."
+   },
+   {
+    "caption_start": "Table 12. Results of Runtime",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": "No bold cells in the table body."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "No figures on the page.",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1683",
+  "tables": [
+   {
+    "caption_start": "Table 4. The Generational Distance",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "separate_row",
+    "groups": [],
+    "note": "No bold cells to indicate winners."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1669",
+  "tables": [
+   {
+    "caption_start": "Table 11. The IGDX Wilcoxon signed rank test results.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "21",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Statistical test results with symbols"
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1649",
+  "tables": [
+   {
+    "caption_start": "Table 9. Comparison results for",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "20",
+    "n_source": "paper",
+    "bar_form": "separate_row",
+    "groups": [
+     {
+      "label": "RT1",
+      "direction": "lower",
+      "winner_mean": "263.8960776",
+      "winner_disp": "0.000393724",
+      "runner_mean": "263.8961029",
+      "runner_disp": "0.000234016"
+     },
+     {
+      "label": "RT2",
+      "direction": "lower",
+      "winner_mean": "7.20E-11",
+      "winner_disp": "2.15E-10",
+      "runner_mean": "1.35E-10",
+      "runner_disp": "2.85E-10"
+     },
+     {
+      "label": "RT3",
+      "direction": "lower",
+      "winner_mean": "2.964916E+06",
+      "winner_disp": "12.54059321",
+      "runner_mean": "2.965190E+06",
+      "runner_disp": "207.8069803"
+     },
+     {
+      "label": "RT4",
+      "direction": "lower",
+      "winner_mean": "1.339970751",
+      "winner_disp": "1.59E-05",
+      "runner_mean": "1.339978634",
+      "runner_disp": "1.48E-05"
+     },
+     {
+      "label": "RT5",
+      "direction": "lower",
+      "winner_mean": "1.057394311",
+      "winner_disp": "2.03E-07",
+      "runner_mean": "17.6989275",
+      "runner_disp": "51.22155971"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 10. Statistical results for",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1644",
+  "tables": [
+   {
+    "caption_start": "Table 3. Comparison results on the 23 benchmark functions",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "separate_row",
+    "groups": [
+     {
+      "label": "F2",
+      "direction": "lower",
+      "winner_mean": "0",
+      "winner_disp": "0",
+      "runner_mean": "4.17E-212",
+      "runner_disp": "0"
+     },
+     {
+      "label": "F4",
+      "direction": "lower",
+      "winner_mean": "0",
+      "winner_disp": "0",
+      "runner_mean": "3.00E-205",
+      "runner_disp": "0"
+     },
+     {
+      "label": "F5",
+      "direction": "lower",
+      "winner_mean": "0",
+      "winner_disp": "0",
+      "runner_mean": "1.83E-09",
+      "runner_disp": "4.44E-09"
+     },
+     {
+      "label": "F6",
+      "direction": "lower",
+      "winner_mean": "0",
+      "winner_disp": "0",
+      "runner_mean": "1.83E-12",
+      "runner_disp": "2.47E-12"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1516",
+  "tables": [
+   {
+    "caption_start": "Table 9. Nemenyi's statistical test",
+    "results_table": "n",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Statistical test results with symbols"
+   },
+   {
+    "caption_start": "Table 10. Findings from the sensitivity",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": "No bold cells"
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1453",
+  "tables": [
+   {
+    "caption_start": "Table 5. Average fitness comparison between",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "base_exactly",
+      "direction": "lower",
+      "winner_mean": "0.0055",
+      "winner_disp": "none",
+      "runner_mean": "0.0074",
+      "runner_disp": "none"
+     },
+     {
+      "label": "BreastEW",
+      "direction": "lower",
+      "winner_mean": "0.0101",
+      "winner_disp": "none",
+      "runner_mean": "0.0105",
+      "runner_disp": "none"
+     },
+     {
+      "label": "KrvskpEW",
+      "direction": "lower",
+      "winner_mean": "0.0131",
+      "winner_disp": "none",
+      "runner_mean": "0.0137",
+      "runner_disp": "none"
+     },
+     {
+      "label": "SonarEW",
+      "direction": "lower",
+      "winner_mean": "0.0058",
+      "winner_disp": "none",
+      "runner_mean": "0.0065",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1296",
+  "tables": [
+   {
+    "caption_start": "Table 4. Test function optimization results under 50 dimension.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "separate_row",
+    "groups": [],
+    "note": "No bold text to indicate winners."
+   },
+   {
+    "caption_start": "Table 5. Test function optimization results under 2 dimension.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "separate_row",
+    "groups": [],
+    "note": "No bold text to indicate winners."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1289",
+  "tables": [
+   {
+    "caption_start": "Table 26. Comparison of the optimization",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Optimum cost",
+      "direction": "lower",
+      "winner_mean": "2994.471",
+      "winner_disp": "none",
+      "runner_mean": "2994.834",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 27. The Statistical results",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "20",
+    "n_source": "paper",
+    "bar_form": "separate_column",
+    "groups": [],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1285",
+  "tables": [
+   {
+    "caption_start": "Table 17. Statistical results of WSR test obtained by CAO on CEC-2020 benchmark (Dim = 20).",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "20",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 18. Optimum results of the different methods for the pressure vessel design problem.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "20",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 19. Statistical results from various meta-heuristic algorithms for the pressure vessel problem.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "20",
+    "n_source": "paper",
+    "bar_form": "separate_column",
+    "groups": [],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1279",
+  "tables": [
+   {
+    "caption_start": "Table 7. Significance comparisons of WSR test.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "20",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Table contains p-values and significance indicators, no bold cells indicating winners."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "Radar charts do not have error bars or bands.",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1227",
+  "tables": [
+   {
+    "caption_start": "Table 5. Wilcoxon p-values",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Table contains p-values and significance symbols, with no bold text indicating winners."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1199",
+  "tables": [
+   {
+    "caption_start": "Table 7. Experimental outcomes by Wilcoxon's",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "page",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "C 11",
+      "direction": "higher",
+      "winner_mean": "8.7663E-01",
+      "winner_disp": "none",
+      "runner_mean": "2.3243E-02",
+      "runner_disp": "none"
+     },
+     {
+      "label": "C 13",
+      "direction": "higher",
+      "winner_mean": "3.7904E-01",
+      "winner_disp": "none",
+      "runner_mean": "4.0772E-11",
+      "runner_disp": "none"
+     },
+     {
+      "label": "C 16",
+      "direction": "higher",
+      "winner_mean": "1.7613E-01",
+      "winner_disp": "none",
+      "runner_mean": "1.5014E-02",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1170",
+  "tables": [
+   {
+    "caption_start": "Table 1. Assessment results of the CEC-2005",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "separate_row",
+    "groups": [],
+    "note": "No bold cells to indicate winners."
+   },
+   {
+    "caption_start": "Table 2. Performance of optimization algorithms on",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": "No bold cells to indicate winners."
+   },
+   {
+    "caption_start": "Table 3. Statistical results of optimization algorithms",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "separate_column",
+    "groups": [],
+    "note": "No bold cells to indicate winners."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1147",
+  "tables": [
+   {
+    "caption_start": "Table 8. Wilcoxon Signed-Rank Test",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Table contains statistical test summaries (+/-/=) with no bold cells indicating winners."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1087",
+  "tables": [
+   {
+    "caption_start": "Table 11. Optimization results for",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "20",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Weight(kN)",
+      "direction": "lower",
+      "winner_mean": "360.22",
+      "winner_disp": "none",
+      "runner_mean": "379.21",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1083",
+  "tables": [
+   {
+    "caption_start": "Table 7. Statistical outcomes for",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "51",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Optimal load carrying capacity",
+      "direction": "higher",
+      "winner_mean": "85549.2391",
+      "winner_disp": "none",
+      "runner_mean": "85548.5106",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1029",
+  "tables": [
+   {
+    "caption_start": "Table 6. Example 3: comparison of optimal solutions for 600-bar truss dome.",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "50",
+    "n_source": "paper",
+    "bar_form": "separate_row",
+    "groups": [
+     {
+      "label": "Mean (kg)",
+      "direction": "lower",
+      "winner_mean": "6087.17",
+      "winner_disp": "10.34",
+      "runner_mean": "6093.428",
+      "runner_disp": "12.0012"
+     }
+    ],
+    "note": "Extracted only the Mean row as a group, per the instruction to never list Best, SD, or Time rows as groups of their own."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0991",
+  "tables": [
+   {
+    "caption_start": "Table 6. Comparison results of",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "50",
+    "n_source": "page",
+    "bar_form": "none",
+    "groups": [],
+    "note": "No bold cells in the table body."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0973",
+  "tables": [
+   {
+    "caption_start": "Table 7. Time response specifications for",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Settling time (s)",
+      "direction": "lower",
+      "winner_mean": "0.88416",
+      "winner_disp": "none",
+      "runner_mean": "0.89209",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Undershoot (M^-)",
+      "direction": "higher",
+      "winner_mean": "-0.18518",
+      "winner_disp": "none",
+      "runner_mean": "-0.19458",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Overshoot (M^+)",
+      "direction": "lower",
+      "winner_mean": "0.0081756",
+      "winner_disp": "none",
+      "runner_mean": "0.010527",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0933",
+  "tables": [
+   {
+    "caption_start": "Table 13. Average accuracy and average",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "20",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "MLL, NB, Percent=10, Features",
+      "direction": "lower",
+      "winner_mean": "8.0",
+      "winner_disp": "none",
+      "runner_mean": "8.3",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MLL, NB, Percent=20, Features",
+      "direction": "lower",
+      "winner_mean": "8.7",
+      "winner_disp": "none",
+      "runner_mean": "8.9",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MLL, KNN, Percent=10, Features",
+      "direction": "lower",
+      "winner_mean": "7.2",
+      "winner_disp": "none",
+      "runner_mean": "7.3",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MLL, KNN, Percent=20, Features",
+      "direction": "lower",
+      "winner_mean": "8.3",
+      "winner_disp": "none",
+      "runner_mean": "8.5",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "",
+  "note": "",
+  "reasoning_effort": "default"
+ }
+]

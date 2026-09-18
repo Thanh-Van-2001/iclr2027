@@ -172,6 +172,33 @@ def scan_run_count_reading(cs: list, scan: dict) -> dict:
             "ci_fail": _boot_share(out) if n else None}
 
 
+BOLD_SENTENCE = re.compile(r"bold", re.I)
+BOLD_BEST = re.compile(r"best|optimal|lowest|highest|superior|minimum|maximum|top", re.I)
+BOLD_SIG = re.compile(r"statistic|signific", re.I)
+
+
+def bold_rule_of(x: dict) -> str:
+    """The paper's stated bold rule, from the model's field and, where the
+    model filed "not stated" while quoting a sentence that states one, from
+    that sentence (a review of the first submission found 23 such papers)."""
+    b = str(x.get("bold_rule") or "not stated").lower()
+    sent = str(x.get("bold_sentence") or "")
+    if BOLD_SIG.search(b):
+        return "statistically best"
+    if BOLD_BEST.search(b):
+        return "best"
+    if "propos" in b or "our" in b:
+        return "proposed"
+    if BOLD_SENTENCE.search(sent):
+        if BOLD_SIG.search(sent):
+            return "statistically best"
+        if BOLD_BEST.search(sent):
+            return "best"
+        if re.search(r"propos|our (?:method|algorithm|approach)", sent, re.I):
+            return "proposed"
+    return "not stated" if "not stated" in b or b in ("", "none") else "other"
+
+
 def test_reader_blocks(cs: list, kinds: dict) -> dict:
     """The model's full-text reading (swevo/test_reader.py) aggregated over
     its three paper sets: run counts, where the deviation sits, which test,
@@ -195,8 +222,9 @@ def test_reader_blocks(cs: list, kinds: dict) -> dict:
     scan = json.load(open(f"{OUT}/text_scan.json", encoding="utf-8")) if os.path.exists(f"{OUT}/text_scan.json") else {}
     noted = [p for p in d if scan.get(p, {}).get("bold_note")]
     note_block = {"note_papers_read": len(noted),
-                  "note_filed_statistically_best": sum(1 for p in noted if "statistic" in str(d[p].get("bold_rule") or "").lower() or "signific" in str(d[p].get("bold_rule") or "").lower()),
-                  "note_filed_not_stated": sum(1 for p in noted if "not stated" in str(d[p].get("bold_rule") or "not stated").lower() or not d[p].get("bold_rule"))}
+                  "note_filed_statistically_best": sum(1 for p in noted if bold_rule_of(d[p]) == "statistically best"),
+                  "note_filed_not_stated": sum(1 for p in noted if bold_rule_of(d[p]) == "not stated"),
+                  "sentence_rescued": sum(1 for x in d.values() if "not stated" in str(x.get("bold_rule") or "not stated").lower() and bold_rule_of(x) != "not stated")}
     testable = {c["paper"] for c in cs if c.get("test")}
     out = {}
     groups = {"all": list(d), "testable": [p for p in d if p in testable],
@@ -213,11 +241,7 @@ def test_reader_blocks(cs: list, kinds: dict) -> dict:
         layout = collections.Counter(str(x.get("std_layout") or "unsure") for x in v)
         bold = collections.Counter()
         for x in v:
-            b = str(x.get("bold_rule") or "not stated").lower()
-            bold["statistically best" if "statistic" in b or "signific" in b else
-                 "best" if "best" in b or "optimal" in b or "lowest" in b or "highest" in b else
-                 "proposed" if "propos" in b or "our" in b else
-                 "not stated" if "not stated" in b or b in ("", "none") else "other"] += 1
+            bold[bold_rule_of(x)] += 1
         bench = collections.Counter(t for x in v for t in (x.get("benchmark") or []))
         out[name] = {
             "papers": n,
@@ -410,14 +434,14 @@ def bold_note(scan: dict, kinds: dict) -> dict:
 
 def _method_citers(scan: dict) -> set:
     keys = ["derrac2011", "garcia2009", "garcia2010", "sorensen2015", "aranha2022", "camacho2022", "bartz2020",
-            "beiranvand2017", "kendall2016", "hansen_coco"]
+            "beiranvand2017", "kendall2016", "hansen_coco", "carrasco2020", "latorre2021", "osaba2021"]
     return {p for p, v in scan.items() if any(v.get("cites", {}).get(k) for k in keys)}
 
 
 def cites(cs: list, scan: dict) -> dict:
     """Papers citing the methodology literature, and how they report."""
     keys = ["derrac2011", "garcia2009", "garcia2010", "sorensen2015", "aranha2022", "camacho2022", "bartz2020",
-            "beiranvand2017", "kendall2016", "hansen_coco", "wolpert_nfl"]
+            "beiranvand2017", "kendall2016", "hansen_coco", "carrasco2020", "latorre2021", "osaba2021", "wolpert_nfl"]
     counts = {k: sum(1 for v in scan.values() if v.get("cites", {}).get(k)) for k in keys}
     method = _method_citers(scan)
     claim_papers = {c["paper"] for c in cs}
@@ -518,6 +542,12 @@ def main() -> int:
         json.dump(analysis, fh, indent=1)
     cs = analysis["_comparisons"]
     summary, boot = make_all._summary(analysis, cs), make_all._bootstrap(cs)
+    # every parser interval in the paper comes from one cluster bootstrap (_boot_share, seed 0)
+    boot["pct_neither"]["lo"], boot["pct_neither"]["hi"] = _boot_share([(c["paper"], c["winner_dispersion"] is None and c["runner_dispersion"] is None) for c in cs])
+    boot["pct_testable"]["lo"], boot["pct_testable"]["hi"] = _boot_share([(c["paper"], bool(c.get("test"))) for c in cs])
+    _t = [c for c in cs if c.get("test")]
+    boot["pct_fail"]["lo"], boot["pct_fail"]["hi"] = _boot_share([(c["paper"], c["test"]["p"] >= 0.05) for c in _t])
+    boot["pct_fail_holm"]["lo"], boot["pct_fail_holm"]["hi"] = _boot_share([(c["paper"], not c.get("survives_holm")) for c in _t])
     print(f"OA metaheuristics: {summary['papers']} papers, {summary['comparisons']} comparisons, "
           f"{summary['pct_neither']}% neither, {summary['pct_testable']}% testable, {summary['pct_fail']}% fail")
     scan = json.load(open(f"{OUT}/text_scan.json", encoding="utf-8")) if os.path.exists(f"{OUT}/text_scan.json") else {}
@@ -576,6 +606,10 @@ def main() -> int:
         "test_reader": test_reader_blocks(cs, kinds),
         "arxiv": arxiv_check(),
         "test_reader_agreement": test_reader_agreement(),
+        "fetch_attempts": ({j: {"listed": v["listed"], "attempts": len(v["attempts"]), "pdf_ok": v["pdf_ok"], "statuses": "/".join(v["statuses"]),
+                                "html_only": sum(1 for r in v["attempts"] if r.get("status") == 200 and not r.get("is_pdf"))}
+                            for j, v in json.load(open(f"{OUT}/fetch_attempts.json", encoding="utf-8"))["journals"].items()}
+                           if os.path.exists(f"{OUT}/fetch_attempts.json") else {}),
         "headline_span": extra_stats.headline_span(cs, records),
         "span_rows": (lambda hs: {"lo": min(hs["rows"][k]["pct_fail"] for k in ("as_reported", "z_two_sided", "one_sided", "rho_0.5", "rho_0.9") if k in hs["rows"]),
                                   "hi": max(hs["rows"][k]["pct_fail"] for k in ("as_reported", "z_two_sided", "one_sided", "rho_0.5", "rho_0.9") if k in hs["rows"]),

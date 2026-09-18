@@ -70,12 +70,31 @@ def main() -> int:
     papers = {l.strip() for l in open(os.path.join(VK, "papers.txt"), encoding="utf-8") if l.strip()}
     gs = [g for g in _regroup({i: labels[i] for i in labels if items[i]["paper"] in papers}, items, kinds)
           if g["testable"] and g["fail"] is not None]
-    # verdict-table entries per paper: (label, competitor) -> verdict
-    entries = collections.defaultdict(dict)
+    # verdict-table entries: per page and table first (a function label such as
+    # "F1" repeats across suites and dimensions), then per paper where the key
+    # is unique; a key with conflicting verdicts in the paper is unusable
+    entries_page = collections.defaultdict(dict)
+    entries_paper = collections.defaultdict(lambda: collections.defaultdict(set))
+    against = collections.defaultdict(set)
     for iid, vp in vpages.items():
         for t in vp.get("verdict_tables", []):
+            if t.get("compared_against"):
+                against[vp["paper"]].add(_norm(t.get("compared_against")))
             for e in t.get("entries", []):
-                entries[vp["paper"]][(_norm(e.get("label")), _norm(e.get("competitor")))] = e.get("verdict")
+                key = (_norm(e.get("label")), _norm(e.get("competitor")))
+                entries_page[iid].setdefault(key, e.get("verdict"))
+                entries_paper[vp["paper"]][key].add(str(e.get("verdict")))
+    conflicts = {paper: sum(1 for v in d.values() if len(v) > 1) for paper, d in entries_paper.items()}
+
+    def lookup(paper, iid, key):
+        if key in entries_page.get(iid, {}):
+            return entries_page[iid][key], "same_page_table"
+        vs = entries_paper.get(paper, {}).get(key)
+        if vs and len(vs) == 1:
+            return next(iter(vs)), "verdict_table"
+        if vs and len(vs) > 1:
+            return None, "ambiguous"
+        return None, "none"
     rows = []
     for g in gs:
         vp = vpages.get(g["page"])
@@ -102,19 +121,28 @@ def main() -> int:
         if match is None:
             rows.append(dict(g, status="group_not_matched"))
             continue
+        # the paper's verdicts compare the proposed algorithm with each
+        # competitor; the pair is the same only when the bold cell or its rival
+        # is that algorithm, and the verdict is then the competitor's entry
+        prop = against.get(g["paper"], set())
+        wn, rn = _norm(match.get("winner_name")), _norm(match.get("runner_name"))
+        same_pair = (not prop) or (wn in prop) or (rn in prop)
+        competitor = rn if (wn in prop or not prop) else wn
         verdict = match.get("verdict_here")
-        source = "same_page"
+        source = "beside_group"
         if classify(verdict) is None:
-            key = (_norm(match.get("label") or g["label"]), _norm(match.get("runner_name")))
-            verdict = entries[g["paper"]].get(key)
-            source = "verdict_table" if verdict is not None else "none"
-            if verdict is None:
-                # the verdict table may list the winner's name when the rival is the proposed method
-                key2 = (_norm(match.get("label") or g["label"]), _norm(match.get("winner_name")))
-                verdict = entries[g["paper"]].get(key2)
-                source = "verdict_table_winner_named" if verdict is not None else "none"
+            key = (_norm(match.get("label") or g["label"]), competitor)
+            verdict, source = lookup(g["paper"], g["page"], key)
         cls = classify(verdict)
-        rows.append(dict(g, status="located" if cls else "verdict_not_printed", winner_name=match.get("winner_name"),
+        if not same_pair:
+            status = "different_pair"
+        elif source == "ambiguous":
+            status = "ambiguous_key"
+        elif cls:
+            status = "located"
+        else:
+            status = "verdict_not_printed"
+        rows.append(dict(g, status=status, winner_name=match.get("winner_name"),
                          runner_name=match.get("runner_name"), verdict=verdict, verdict_class=cls, source=source))
     located = [r for r in rows if r["status"] == "located"]
     def cell(a, b):
@@ -127,7 +155,22 @@ def main() -> int:
     for r in located:
         by_paper[r["paper"]][0] += 1
         by_paper[r["paper"]][1] += (bool(r["fail"]) == (r["verdict_class"] == "not_significant"))
+    # a cluster bootstrap over papers for the agreement, and the Welch rate on the groups without a located verdict
+    import random
+    rng = random.Random(0)
+    keys = list(by_paper)
+    vals = []
+    for _ in range(2000):
+        draw = [by_paper[keys[rng.randrange(len(keys))]] for _ in keys]
+        k_, n_ = sum(x[1] for x in draw), sum(x[0] for x in draw)
+        vals.append(100 * k_ / n_ if n_ else 0)
+    vals.sort()
+    not_located = [r for r in rows if r["status"] != "located"]
     out = {"papers": len(papers), "pages_read": len(vpages), "tested_groups": len(rows),
+           "ci_agree_papers": [round(vals[50], 1), round(vals[1949], 1)] if keys else None,
+           "welch_fail_not_located": round(100 * sum(1 for r in not_located if r["fail"]) / len(not_located), 1) if not_located else None,
+           "not_located": len(not_located),
+           "conflicting_keys_papers": sum(1 for v in conflicts.values() if v),
            "status": dict(collections.Counter(r["status"] for r in rows)),
            "source": dict(collections.Counter(r.get("source", "") for r in located)),
            "located": n, "pct_located": round(100 * n / max(len(rows), 1), 1),
