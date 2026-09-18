@@ -504,6 +504,9 @@ def build(out_path: str) -> dict:
         for k in ("beside_group", "same_page_table"):
             reg.add("vc source " + k.replace("_", " "), vc["source"].get(k, 0), provenance=vrun)
         reg.add("vc chance agreement", _pct(vc["chance_agreement"]) if vc.get("chance_agreement") is not None else "--", provenance=vrun)
+        reg.add("vc macro agreement", _pct(vc["macro_agreement"]) if vc.get("macro_agreement") is not None else "--", provenance=vrun)
+        reg.add("vc per paper agreement min", _pct(vc["per_paper_agreement_min"]) if vc.get("per_paper_agreement_min") is not None else "--", provenance=vrun)
+        reg.add("vc per paper agreement max", _pct(vc["per_paper_agreement_max"]) if vc.get("per_paper_agreement_max") is not None else "--", provenance=vrun)
         reg.add("vc kappa", f"{vc['kappa']:.2f}" if vc.get("kappa") is not None else "--", provenance=vrun)
         reg.add("vc top three share", _pct(vc["top_three_share"]) if vc.get("top_three_share") is not None else "--", provenance=vrun)
         reg.add("vc sign contradictions", vc.get("sign_contradictions", 0), provenance=vrun)

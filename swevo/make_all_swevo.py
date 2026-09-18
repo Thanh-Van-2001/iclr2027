@@ -517,7 +517,9 @@ def kind_agreement(kinds: dict, metaphor: dict, second_path: str = "out/swevo/ki
               "either_new_optimizer": srates([p for p in both if kinds[p] == "new_optimizer" or second[p] == "new_optimizer"]),
               "first_application": srates([p for p in both if kinds[p] == "application"]),
               "second_application": srates([p for p in both if second[p] == "application"]),
-              "both_application": srates([p for p in both if kinds[p] == "application" and second[p] == "application"])}
+              "both_application": srates([p for p in both if kinds[p] == "application" and second[p] == "application"]),
+              "disputed": srates([p for p in both if kinds[p] != second[p]]),
+              "disputed_to_new_optimizer": srates([p for p in both if kinds[p] == "application" and second[p] == "new_optimizer"])}
     tp = sum(1 for p in both if kinds[p] == "new_optimizer" and second[p] == "new_optimizer")
     direction = {"first_new_optimizer": sum(1 for p in both if kinds[p] == "new_optimizer"),
                  "second_new_optimizer": sum(1 for p in both if second[p] == "new_optimizer"),
