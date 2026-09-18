@@ -222,6 +222,34 @@ def _boot_mean(vals: list, reps: int = 2000, seed: int = 0):
     return [round(out[int(0.025 * reps)], 1), round(out[int(0.975 * reps) - 1], 1)]
 
 
+def _boot_coverage(by_paper: dict, sims: int = 300, reps: int = 1000, seed: int = 1) -> dict:
+    """How often the percentile cluster bootstrap covers the pooled rate when the
+    observed papers (their group counts and failure shares) are taken as the
+    population: each simulated corpus draws the same number of papers with
+    replacement, draws each paper's failures as a binomial at its observed share,
+    and asks whether the interval covers the population's pooled rate. Nominal 95."""
+    pop = [(n, f / n) for n, f in by_paper.values() if n]
+    if len(pop) < 10:
+        return {"papers": len(pop), "coverage": None}
+    theta = 100 * sum(n * p for n, p in pop) / sum(n for n, _ in pop)
+    rng = random.Random(seed)
+    hits = 0
+    widths = []
+    for _ in range(sims):
+        draw = [pop[rng.randrange(len(pop))] for _ in pop]
+        obs = [(n, sum(1 for _ in range(n) if rng.random() < p)) for n, p in draw]
+        vals = []
+        for _ in range(reps):
+            b = [obs[rng.randrange(len(obs))] for _ in obs]
+            d = sum(x[0] for x in b)
+            vals.append(100 * sum(x[1] for x in b) / d if d else 0.0)
+        vals.sort()
+        lo, hi = vals[int(0.025 * reps)], vals[int(0.975 * reps) - 1]
+        hits += lo <= theta <= hi
+        widths.append(hi - lo)
+    return {"papers": len(pop), "sims": sims, "coverage": round(100 * hits / sims, 1), "mean_width": round(sum(widths) / len(widths), 1), "theta": round(theta, 1)}
+
+
 def _kish(gs: list) -> dict:
     sizes = collections.Counter(g["paper"] for g in gs)
     tot = sum(sizes.values())
@@ -392,6 +420,7 @@ def main() -> int:
                      # each paper weighted equally: the mean of the per-paper failure shares, with a percentile bootstrap over papers as units
                      "macro_rate": round(statistics.mean(rates), 1) if rates else None,
                      "macro_rate_ci": _boot_mean(rates) if len(rates) >= 10 else None,
+                     "boot_coverage": _boot_coverage(by_paper),
                      "top_four_share": round(100 * sum(x[0] for x in sizes[:4]) / tot, 1) if tot else None,
                      "top_ten_share": round(100 * sum(x[0] for x in sizes[:10]) / tot, 1) if tot else None,
                      "median_rate": round(statistics.median(rates), 1) if rates else None,

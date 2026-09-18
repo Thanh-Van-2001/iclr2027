@@ -1,0 +1,61 @@
+{
+ "rating": 5,
+ "confidence": 5,
+ "summary": "The paper audits the reporting conventions of metaheuristics papers in Scientific Reports, using automated parsing and LLM-based image reading to check if printed summary statistics support the bolded 'best' claims via Welch's t-test. While the reproducible pipeline and pre-registration are commendable, the statistical inference used to critique the literature is itself deeply flawed. The audit relies on applying normal-theory tests to heavy-tailed data, bootstraps over an asymptotically invalid number of effective clusters, and misuses multiple testing corrections and agreement metrics on highly concentrated data.",
+ "strengths": "The automated extraction pipeline is impressive, the pre-registration of the analysis plan is excellent practice, and the distinction between new-optimizer and application papers is a valuable bibliometric contribution.",
+ "objections": [
+  {
+   "id": "welch_heavy_tails",
+   "severity": "blocking",
+   "objection": "The core premise of using Welch's t-test on printed summaries to audit the claims is statistically invalid for this specific domain. The author acknowledges that 'the error on a solved function is a heavy-tailed quantity near zero' and that 'the summary itself says that a t statistic has a ceiling the printed numbers cannot pass'. If the data is heavy-tailed and bounded at zero, the sample mean and SD are not sufficient statistics, and the variance is dominated by outliers. A failure of Welch's t here does not mean the printed evidence is 'thin'; it means Welch's t is the wrong test, which is exactly why the field uses the Wilcoxon test. Falsifying a non-parametric rank test using a parametric test that violates its own assumptions is a methodological error.",
+   "what_would_fix_it": "The paper must explicitly concede that Welch's t-test failure on heavy-tailed data is an artifact of the test's normality assumption, not necessarily a lack of evidence. The framing must shift from 'the printed summaries do not separate the bold cell' to 'the printed summaries are mathematically incompatible with normal-theory separation'.",
+   "quote": "we compute Welch's t [24] from the two means, the two deviations and the run count... A deviation at least as large as its mean, or a mean below 10−3, is common in benchmark tables, where the error on a solved function is a heavy-tailed quantity near zero."
+  },
+  {
+   "id": "bootstrap_kish",
+   "severity": "blocking",
+   "objection": "The use of a percentile cluster bootstrap is asymptotically invalid given the extreme concentration of the data. The author notes 'the Kish ratio of the squared sum to the sum of squares of the papers' group counts is 12.7'. A percentile bootstrap requires a sufficiently large number of independent clusters to achieve nominal coverage; 12.7 effective clusters guarantees severe under-coverage and erratic confidence intervals.",
+   "what_would_fix_it": "Abandon the percentile cluster bootstrap. Use a wild cluster bootstrap, or fit a mixed-effects logistic regression with random intercepts for papers to derive confidence intervals. If sticking to the bootstrap, the exact empirical coverage deficit at K=12.7 must be simulated and stated.",
+   "quote": "the Kish ratio of the squared sum to the sum of squares of the papers' group counts is 12.7... Every interval on a group rate in this paper is a percentile cluster bootstrap over papers; with this few papers, and cluster sizes this unequal, it is an approximation that under-covers"
+  },
+  {
+   "id": "holm_rows",
+   "severity": "major",
+   "objection": "Reporting Holm's correction on an arbitrary subset of the actual hypothesis family is statistically meaningless. The author applies it to 'the extracted single-bold comparisons, a smaller family than the table's'. A family-wise error rate correction is only valid if applied to the actual family of tests (e.g., all algorithms compared across all functions in the table). An 'understated' FWER correction is just a wrong number.",
+   "what_would_fix_it": "Either estimate the true family size (number of competitors minus one, multiplied by the number of functions) and apply the correction properly, or remove the Holm rows entirely.",
+   "quote": "Holm's correction [25] within a table is reported beside the raw rate; it controls the family-wise error over the extracted single-bold comparisons, a smaller family than the table's, so it understates the correction the authors would face."
+  },
+  {
+   "id": "impossible_pair",
+   "severity": "major",
+   "objection": "The impossible-pair check is confounded. The author flags pairs where SD > sqrt(n)*Mean, but admits 'a raw fitness with a positive optimum is not so bounded, and the check will flag such a pair falsely'. Because I cannot open the run records to check these 25 groups, I must assume this metric is mixing true reporting errors with perfectly valid raw fitness scores.",
+   "what_would_fix_it": "Manually verify the 25 flagged groups in the 7 papers to determine if they are actually bounded at zero (errors) or raw fitnesses. If they cannot be disambiguated, drop the impossible-pair exclusion from the failure rate calculations.",
+   "quote": "For a quantity bounded below by zero... the sample deviation over n runs cannot exceed √n times the mean... a raw fitness with a positive optimum is not so bounded, and the check will flag such a pair falsely"
+  },
+  {
+   "id": "kappa_clustering",
+   "severity": "major",
+   "objection": "Calculating Cohen's kappa on highly clustered data violates the assumption of independent margins used to calculate expected chance agreement. With 84.7% of the pairs coming from just 3 multi-objective studies, the marginal probabilities are entirely dictated by the specific behavior of those three papers, making the kappa statistic uninterpretable for the corpus.",
+   "what_would_fix_it": "Drop the Cohen's kappa statistic. Report only the raw specific agreement rates (which are already provided and much more informative) and explicitly state that this agreement is essentially a case study of 3 papers.",
+   "quote": "The two verdicts agree in 147 cases (83.1%; chance agreement 62.4%, Cohen's κ 0.55... 9 papers, three multi-objective studies holding 84.7%)"
+  },
+  {
+   "id": "terminology_bound",
+   "severity": "minor",
+   "objection": "A regular expression scan is not a mathematical 'lower bound' on the proportion of papers stating a run count. Regexes have false positives (e.g., matching a citation year or an unrelated parameter as a run count). Because I cannot open the run records, I cannot verify the false positive rate, but it is strictly > 0, invalidating the word 'bound'.",
+   "what_would_fix_it": "Change 'lower bound' to 'conservative estimate' or 'heuristic approximation'.",
+   "quote": "The scan is a lower bound: it finds the phrasings it was written for."
+  },
+  {
+   "id": "terminology_conservative",
+   "severity": "minor",
+   "objection": "Taking the smallest run count stated anywhere in the paper is not 'conservative' in the context of this audit. In hypothesis testing, a conservative choice makes it harder to reject the null. Here, the author's 'failure' is the *inability* to reject the null. Using a smaller N reduces power, making it *easier* to fail Welch's t-test, thereby artificially inflating the audit's headline failure rate. This is anti-conservative for the paper's own argument.",
+   "what_would_fix_it": "Replace 'conservative' with 'least favorable to separation' (which is accurately used elsewhere in the text) and acknowledge that this choice biases the audit toward finding failures.",
+   "quote": "the smallest count stated anywhere in the paper, conservative on machine-learning papers, is here often not a run count"
+  }
+ ],
+ "questions_to_authors": "Regarding the regex scan for run counts: what is the estimated false positive rate of these patterns? Since I cannot open the run records, how many of the 'found' run counts were actually citations, dimensions, or population sizes? For the 25 'impossible pairs', did you manually check if they were raw fitnesses or errors to the optimum?",
+ "would_champion": false,
+ "model": "gemini/gemini-3.1-pro-preview",
+ "brief": "statistician"
+}

@@ -1,0 +1,47 @@
+{
+ "rating": 5,
+ "confidence": 5,
+ "summary": "This manuscript presents a large-scale audit of reporting conventions in metaheuristics papers published in Scientific Reports, utilizing automated parsing and LLM-based image reading to check if printed summaries support the bolded claims. While the motivation aligns perfectly with the field's ongoing methodological reckoning, the execution relies on unvalidated language models acting as ground truth, tautological classifications, and heavily concentrated samples that are inappropriately generalized.",
+ "strengths": "The pre-registration of the study design, the public release of all run records and prompts, and the direct engagement with the field's established statistical guidelines (García, Derrac, etc.) are highly commendable.",
+ "objections": [
+  {
+   "id": "unvalidated_instrument",
+   "severity": "blocking",
+   "objection": "The precision of the primary instrument (the image-based reader) is never established against a human baseline. The paper admits this, relying instead on inter-model agreement. An audit of the literature cannot rest on an unvalidated black box.",
+   "what_would_fix_it": "A human must label the released reference kits to establish actual precision and recall. As you note, \"Two models agreeing is not a person reading the page, and the kits stay released for one.\" Do the human labeling before resubmission.",
+   "quote": "Two models agreeing is not a person reading the page, and the kits stay released for one."
+  },
+  {
+   "id": "model_correcting_model",
+   "severity": "major",
+   "objection": "The 'repair' of the Mean/Std row blind spot is not a methodological correction, but simply re-prompting the same model that failed the first time. This compounds the error rate of the LLM rather than establishing a reliable ground truth for the corrected census.",
+   "what_would_fix_it": "Manually verify the 371 re-read pages to ensure the model actually extracted the correct Mean/Std pairs, rather than blindly trusting the LLM's second attempt.",
+   "quote": "Every census page holding a results table filed as having no dispersion... was read again under the same protocol with one added instruction: to take the Std cell beneath or beside a mean as that mean's dispersion"
+  },
+  {
+   "id": "classifier_artefact",
+   "severity": "major",
+   "objection": "The stark reporting gap between 'new optimizer' and 'application' papers may be an artefact of the LLM classifier. If the model uses the presence of rigorous benchmarking language (runs, tests) to classify a paper as a 'new optimizer', the resulting reporting gap is a tautology. The instability of the boundary is evident in the second labeller's results.",
+   "what_would_fix_it": "Provide the exact prompt used for classification in an appendix to prove it does not instruct the model to use reporting rigor as a feature, and manually validate the 100-paper sample to confirm the split is based purely on the stated algorithmic contribution.",
+   "quote": "the disagreements run one way, the second labeller filing 24 of the hundred as new-optimizer papers against the first's 18... under the second labeller the stratum would be roughly a third larger."
+  },
+  {
+   "id": "verdict_crosstab_generalization",
+   "severity": "major",
+   "objection": "The abstract presents the 83.1% agreement between Welch's t and the authors' printed verdicts as a general finding, but the body reveals this cross-tab is overwhelmingly dominated by just three specific papers. It does not show a field-wide trend.",
+   "what_would_fix_it": "Revise the abstract and discussion to explicitly state that this agreement rate is a property of three multi-objective papers rather than a representative sample of the corpus.",
+   "quote": "The two agree in 83.1% of 177 pairs (Cohen's κ 0.55; 9 papers, three multi-objective studies holding 84.7%)"
+  },
+  {
+   "id": "abstract_body_mismatch",
+   "severity": "minor",
+   "objection": "The abstract claims the second model confirmed the reading on 74.7% of 'a hundred' groups, but the body text states the model only answered 99 items. I cannot check the run records to see if the denominator was 99 or 100, but the text is internally inconsistent.",
+   "what_would_fix_it": "Change the abstract to match the body text exactly (e.g., '74 of 99 separate-column groups').",
+   "quote": "Abstract: \"A second vendor's model confirms the reader's whole reading on 74.7% of a hundred separate-column groups\" vs Body: \"On the separate-column kit it answered 99 of the hundred items... the whole claim, bold cell and all four values, in 74 of 99 (74.7%...)\""
+  }
+ ],
+ "questions_to_authors": "Given that the field's statistical guidelines (which I have co-authored) emphasize rigorous, reproducible non-parametric testing, how can we justify auditing these papers using an LLM whose own error characteristics on this specific task remain unquantified by human review?",
+ "would_champion": false,
+ "model": "gemini/gemini-3.1-pro-preview",
+ "brief": "methodologist"
+}

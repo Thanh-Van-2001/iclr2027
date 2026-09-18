@@ -1,0 +1,24 @@
+{
+ "rating": 6,
+ "confidence": 4,
+ "summary": "The manuscript presents a pre-registered audit of 1644 metaheuristics papers published in Scientific Reports (2024-2025) to evaluate adherence to the field's reporting conventions (e.g., reporting runs, means, standard deviations, and statistical tests). Using LLM-based text scanning and image-based table parsing, the author finds that while new-optimizer papers frequently claim to follow conventions, the printed tables often lack the necessary standard deviations to verify the bolded 'best' results. Furthermore, where testable, about a third of the bolded cells cannot be statistically separated from their rivals using Welch's t-test on the printed summaries. The deviation from the pre-registered corpus (7 journals down to 1 due to publisher scraping blocks) is clearly documented, justified, and acceptable given the large sample size obtained.",
+ "strengths": "The paper is exceptionally well-written, methodologically transparent, and tackles a critical reproducibility issue in evolutionary computation. The pre-registration of the audit, the clever use of image-based LLMs to overcome standard PDF parsing hazards (like separate Mean/Std rows), and the careful distinction between typographic claims (bold cells) and aggregate statistical claims are highly commendable. The author is also refreshingly honest about the limitations of the instruments and the concentration of the data.",
+ "objections": [
+  {
+   "id": "human-validation-llm",
+   "severity": "major",
+   "objection": "The paper relies entirely on LLMs (Gemini 3.1 Pro, Claude Sonnet 5) for the image-based reader census and text extraction, without human validation of the final load-bearing metrics. The author explicitly admits: 'no person has yet labelled the released kits' and 'Two models agreeing is not a person reading the page, and the kits stay released for one.' For an archival journal audit claiming that 34.5% of bold cells fail a statistical check, relying solely on LLM consensus for the table extraction is insufficient.",
+   "what_would_fix_it": "The author must manually label the 100-item kits (or a statistically significant sample) to report true human-vs-machine precision/recall for the table extraction, and update Section 6 with these human-validated metrics."
+  },
+  {
+   "id": "pooled-vs-per-paper",
+   "severity": "minor",
+   "objection": "The tested groups are highly concentrated. The author notes: 'four papers hold 50.2% of them... the Kish ratio... is 12.7.' While the abstract transparently mentions 'four of which hold 50.2%', quoting the pooled 34.5% failure rate as the primary headline metric risks misrepresenting the average paper in the field, given the heavy skew.",
+   "what_would_fix_it": "In the abstract, alongside or instead of the pooled 34.5%, explicitly state the per-paper median or mean failure rate (e.g., 'Across the 46 papers the per-paper failure share has median 36.4%') to ensure the headline finding is robust to the concentration."
+  }
+ ],
+ "questions_to_authors": "Can you provide the human-labelled results for the released kits? How much would the 34.5% pooled failure rate change if the 4 heavily-weighted papers were excluded entirely from the calculation?",
+ "would_champion": true,
+ "model": "gemini/gemini-3.1-pro-preview",
+ "brief": "editor"
+}

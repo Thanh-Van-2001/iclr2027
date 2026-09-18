@@ -1,0 +1,47 @@
+{
+ "rating": 5,
+ "confidence": 5,
+ "summary": "This paper presents an automated audit of reporting conventions in 1644 metaheuristics papers published in Scientific Reports, using LLM-based parsing and image reading to determine if bolded best results are supported by printed dispersions and run counts. While the premise is interesting and the scale of the audit is impressive, the methodology relies entirely on LLMs validating other LLMs for its most critical measurements. As authors who have spent years establishing rigorous statistical guidelines for this field, we find the lack of human ground truth for the primary instrument's precision unacceptable. Furthermore, the paper misinterprets the divergence between parametric and non-parametric tests, and its classification of literatures creates an artificial reporting gap.",
+ "strengths": "The pre-registration of the protocol, the public release of the extraction kits, and the sheer scale of the automated census are commendable. The authors correctly identify that the field's reporting convention (mean ± std, bold best, non-parametric test) is a structural promise, and auditing its presence on the page is a valuable meta-research contribution.",
+ "objections": [
+  {
+   "id": "unestablished_precision",
+   "severity": "blocking",
+   "objection": "The precision of the primary instrument on the most common layout is entirely unestablished by human review. The authors admit this is the core of their argument, yet rely on a second LLM (Claude) to validate the first (Gemini). I cannot open the run records to verify these LLM agreements; human ground truth is required for an audit claiming to measure the field's errors.",
+   "what_would_fix_it": "A human must label the released kits (the 100 separate-column items and the Mean/Std-row kit) and the paper must report the instrument's precision against this human ground truth, not against a second vendor's model.",
+   "quote": "The reader's precision on that layout, pairing a mean in one column or row with the right optimizer's deviation in another, is the load-bearing measurement of this paper and is not yet made by a person"
+  },
+  {
+   "id": "repair_is_just_reprompting",
+   "severity": "major",
+   "objection": "The 're-read' census is presented as a repair, but it is simply a second pass of the same LLM with a tweaked prompt. It is a second model correcting a model, not a validated correction. The success of this instruction is again only checked by another LLM.",
+   "what_would_fix_it": "Explicitly state in the abstract and methodology that the 're-read' is an automated re-prompting, not a human-verified repair. Report the exact failure rate of this second pass based on the human-labelled kits requested in the blocking objection.",
+   "quote": "was read again under the same protocol with one added instruction: to take the Std cell beneath or beside a mean as that mean's dispersion"
+  },
+  {
+   "id": "classifier_artefact",
+   "severity": "major",
+   "objection": "The claim that the classifier 'names no reporting feature' is technically true but practically false. The prompt defines 'new_optimizer' as one that 'evaluates it against other optimizers'. A paper evaluating against other optimizers is by definition a benchmarking paper, which necessitates reporting run counts and tests. The 'application' stratum does not. The reporting gap is an artefact of how the prompt splits benchmarking from non-benchmarking.",
+   "what_would_fix_it": "Acknowledge that the prompt's definition of 'new_optimizer' acts as a direct proxy for benchmarking exercises. Soften the claim that the classifier did not sort on reporting features, as evaluating against rivals inherently dictates the presence of those features.",
+   "quote": "The prompt... sees the title and abstract only and names no reporting feature, so the reporting rates below, computed from the full text, are not what it sorted on."
+  },
+  {
+   "id": "verdict_crosstab_misinterpretation",
+   "severity": "major",
+   "objection": "The cross-tab relies on a tiny, skewed sample (84.7% of pairs from just three multi-objective papers) to claim Welch's t is 'more demanding'. Multi-objective metrics (like Hypervolume or IGD) have highly skewed, non-normal distributions. The divergence between Welch's t and the authors' rank tests is exactly why our methodology guides recommend non-parametric tests. Welch is not 'more demanding' here; it is statistically inappropriate for the underlying distribution, which causes the disagreement.",
+   "what_would_fix_it": "Remove the claim that Welch's t is 'more demanding'. Explicitly state that the disagreement in these specific multi-objective papers is likely due to Welch's t being inappropriate for heavy-tailed/skewed multi-objective indicators, validating the field's use of non-parametric tests.",
+   "quote": "Welch's t on the summaries is therefore the more demanding reading of the same pair"
+  },
+  {
+   "id": "abstract_body_mismatch",
+   "severity": "minor",
+   "objection": "The abstract conflates 'bold cells' with 'groups including summary rows'. A summary row (like Best, Worst, Median, or Time) is not a 'bold mean', so the 47.6% figure in the abstract misrepresents the denominator used in the body.",
+   "what_would_fix_it": "Change the abstract text to match the body's definition, clarifying that the 47.6% figure includes summary rows, not just bold means.",
+   "quote": "Abstract: (47.6% of all their bold cells) ... Body: Over every group, summary rows included, the shares are 47.6%"
+  }
+ ],
+ "questions_to_authors": "Why was human validation completely omitted for the separate-column layout, which you explicitly identify as the 'load-bearing measurement' of the paper? Given that you have already prepared the 100-item kits, how long would it take a human author to label them and report true precision?",
+ "would_champion": false,
+ "model": "gemini/gemini-3.1-pro-preview",
+ "brief": "methodologist"
+}

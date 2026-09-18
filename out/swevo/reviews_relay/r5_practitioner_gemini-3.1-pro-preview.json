@@ -1,0 +1,30 @@
+{
+ "rating": 5,
+ "confidence": 5,
+ "summary": "The paper audits 1644 metaheuristics papers from Scientific Reports (2024-2025) to determine if their printed tables provide the necessary data (mean, standard deviation, run count) to support their bolded 'best' results. Using automated parsing and LLM-based image reading, it finds that while new-optimizer papers generally state run counts and name non-parametric tests, the printed summaries often fail to separate the bolded cell from its rival using a Welch's t-test (34.5% failure rate). The study highlights a gap between the field's recommended non-parametric aggregate tests and what a reader can actually verify from the printed page.",
+ "strengths": "The paper tackles a critical reproducibility issue in the SWEVO community. It is highly transparent about its methods, pre-registration, and the limitations of its frozen parser (e.g., the Mean/Std row blind spot). The distinction between new-optimizer and application papers is insightful, and the finding that 83.1% of printed verdicts agree with the Welch check is a valuable contribution.",
+ "objections": [
+  {
+   "id": "missing_human_validation",
+   "severity": "blocking",
+   "objection": "The paper relies on an LLM to read complex tables (separate columns for Mean/Std) but admits this core metric has not been verified by a human. You write: \"The reader's precision on that layout, pairing a mean in one column or row with the right optimizer's deviation in another, is the load-bearing measurement of this paper and is not yet made by a person... The kits stay released for one.\" You cannot submit a paper to a top-tier journal where the load-bearing measurement is explicitly unfinished.",
+   "what_would_fix_it": "Complete the human labeling of the released kits. Update the results and error bounds based on actual human validation of the LLM's performance on the separate-column layout, rather than relying solely on a second LLM (Claude) for agreement."
+  },
+  {
+   "id": "parametric_test_on_heavy_tails",
+   "severity": "major",
+   "objection": "As a researcher who runs CEC suites, I know errors approach zero and distributions are highly skewed, which is exactly why García and Derrac told us to use non-parametric tests. You acknowledge this: \"For a fifth of the tested groups the summary itself says that a t statistic has a ceiling the printed numbers cannot pass\". Including these in the headline 34.5% failure rate penalizes papers for the exact statistical reality that our field's guidelines were written to address.",
+   "what_would_fix_it": "Separate the Welch failure rate into two distinct groups: those that violate t-test bounds (e.g., std >= mean on bounded data) and those that do not. Quote the failure rate on the valid subset as the primary metric, or explicitly state in the abstract that X% of the failures are due to the data being mathematically incompatible with a t-test."
+  },
+  {
+   "id": "aggregate_vs_per_cell",
+   "severity": "major",
+   "objection": "A per-cell Welch test says absolutely nothing about a paper's aggregate claim (e.g., a Friedman rank test across 30 CEC functions). You correctly note: \"the per-cell test here measures what the printed evidence resolves for the marker, not whether the aggregate claim holds.\" However, the framing of the paper risks implying that a 34.5% failure rate invalidates the algorithms themselves, rather than just the typographic bolding on specific functions.",
+   "what_would_fix_it": "Add a dedicated paragraph in the Discussion explicitly stating that a per-cell Welch failure does not invalidate the paper's primary aggregate claim (e.g., 'Algorithm X outperforms Algorithm Y over CEC 2017'). Emphasize that the audit tests the typographic convention of bolding individual cells, not the overall efficacy of the proposed metaheuristics."
+  }
+ ],
+ "questions_to_authors": "Is the audit fair? Yes, in demanding that what is printed be verifiable. But it is slightly unfair to audit non-parametric aggregate claims using parametric per-cell tests without heavily caveating that the original authors were following SWEVO guidelines (Derrac 2011) which explicitly warn against parametric tests. Does a per-cell Welch test say anything about the aggregate claim? No, and you acknowledge this, but the distinction needs to be louder so readers don't misinterpret the 34.5% figure. Would the recommendations change what I do? Yes, it strongly encourages me to publish raw per-run data or explicit +/-/= markers per cell, which is a highly positive outcome for the field. What would make me dismiss the paper? The lack of human validation on the LLM's table reading. I cannot recommend acceptance until a human has labeled the kits to verify the 'load-bearing measurement'.",
+ "would_champion": false,
+ "model": "gemini/gemini-3.1-pro-preview",
+ "brief": "practitioner"
+}

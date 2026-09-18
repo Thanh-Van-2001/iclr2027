@@ -1,0 +1,82 @@
+{
+ "rating": 5,
+ "confidence": 5,
+ "summary": "The paper audits the statistical reporting practices of metaheuristics papers in Scientific Reports, using automated parsers and LLM readers to extract summary statistics and re-test claims using Welch's t-test. While the goal of auditing reproducibility and reporting standards is highly commendable, the statistical methodology used to conduct the audit is fundamentally flawed. The author applies parametric tests to data explicitly acknowledged as heavy-tailed and bounded, uses inappropriate cluster bootstrap methods on highly concentrated data, misapplies survey statistics (Kish), and misinterprets the statistical implications of their own bounds and conservative assumptions.",
+ "strengths": "The pre-registration of the protocol, the release of the extraction code, and the attempt to empirically quantify the gap between methodological guidelines and actual reporting practices in a large corpus.",
+ "objections": [
+  {
+   "id": "welch_t_mismatch",
+   "severity": "major",
+   "objection": "Applying Welch's t-test to summary statistics of metaheuristics runs is statistically invalid. These distributions are notoriously non-normal, often bounded, and heavy-tailed. The field uses non-parametric tests (Wilcoxon/Friedman) precisely for this reason. Testing a non-parametric claim with a parametric test that violates distributional assumptions is a methodological error.",
+   "what_would_fix_it": "Remove Welch's t-test as the arbiter of truth. Instead, report whether the printed summary statistics mathematically permit *any* test to find significance, or restrict the analysis to comparing the printed p-values/verdicts against the stated rules.",
+   "quote": "On a testable comparison we compute Welch's t [24] from the two means, the two deviations and the run count, with the same count on both arms, and call the comparison failing when p ≥0.05 two-sided."
+  },
+  {
+   "id": "bootstrap_few_clusters",
+   "severity": "blocking",
+   "objection": "A percentile cluster bootstrap over 46 highly unequal clusters (where 4 hold 50% of the data) is not just an 'approximation that under-covers'; it is asymptotically invalid and will produce highly erratic, discrete confidence intervals. I cannot open the run records to check the exact cluster sizes, but the text's admission of this concentration guarantees the bootstrap is broken here.",
+   "what_would_fix_it": "Use a wild cluster bootstrap, or a parametric mixed-effects model (e.g., logistic regression with random effects for paper) to compute valid confidence intervals.",
+   "quote": "Every interval in this paper is a percentile cluster bootstrap over papers; with this few papers, and cluster sizes this unequal, it is an approximation that under-covers..."
+  },
+  {
+   "id": "kish_count_misapplication",
+   "severity": "major",
+   "objection": "The Kish formula computes the effective sample size for weighted survey designs (design effect due to unequal weights). It does not compute the 'effective number of clusters' for hierarchical data with unequal cluster sizes. This is a misapplication of survey methodology to cluster-robust inference.",
+   "what_would_fix_it": "Remove the Kish ratio. Report the intra-cluster correlation (ICC) or simply state the Gini coefficient or concentration ratio of the groups per paper.",
+   "quote": "...as a descriptive measure of that concentration, the Kish ratio of the squared sum to the sum of squares of the papers' group counts is 12.7."
+  },
+  {
+   "id": "holm_subset",
+   "severity": "major",
+   "objection": "Applying a step-down procedure like Holm's to an arbitrary subset of a hypothesis family destroys its FWER control properties. It does not merely 'understate' the correction; it renders the adjusted p-values mathematically meaningless.",
+   "what_would_fix_it": "Apply the Holm correction to the entire family of comparisons in the table, or drop the Holm correction entirely and report only unadjusted rates.",
+   "quote": "Holm's correction [25] within a table is reported beside the raw rate; it is applied to the extracted single-bold comparisons only, a subset of the table's family, so it understates the correction the authors would face."
+  },
+  {
+   "id": "heavy_tail_contradiction",
+   "severity": "blocking",
+   "objection": "You acknowledge that the t-test is mathematically capped and inappropriate for this heavy-tailed data, yet you use its failure rate to claim the 'printed evidence is thin.' If the test is invalid for the data generating process, its failure reflects your poor choice of test, not the authors' lack of evidence.",
+   "what_would_fix_it": "Exclude these heavy-tailed/bounded groups from the Welch's t-test analysis entirely, as the test is known *a priori* to be invalid for them.",
+   "quote": "For a fifth of the tested groups the summary itself says that a t statistic has a ceiling the printed numbers cannot pass; those are the groups the field's non-parametric convention exists for, and on them the printed summaries fail the t-type check more often, whatever a rank test on the runs would have said."
+  },
+  {
+   "id": "impossible_pair_confounded",
+   "severity": "major",
+   "objection": "You admit the check flags raw fitness falsely. Because you cannot distinguish between error-to-optimum and raw fitness without human labels, this check introduces false positives into your error rate.",
+   "what_would_fix_it": "Do not use this check to filter or bound mis-pairings unless you can programmatically or manually verify whether the metric is an error-to-optimum or raw fitness.",
+   "quote": "...a raw fitness with a positive optimum is not so bounded, and the check will flag such a pair falsely, which is one more reason to read the count as approximate."
+  },
+  {
+   "id": "kappa_prevalence",
+   "severity": "minor",
+   "objection": "Cohen's kappa is severely biased by marginal imbalances (the prevalence problem). Here, the disagreements are highly skewed (26 vs 4), which artificially deflates kappa despite high absolute agreement (83.1%).",
+   "what_would_fix_it": "Report Gwet's AC1, or simply report the positive and negative specific agreement rates.",
+   "quote": "The two verdicts agree in 147 cases (83.1%; chance agreement 62.4%, Cohen's κ 0.55..."
+  },
+  {
+   "id": "bound_regex",
+   "severity": "minor",
+   "objection": "A regex scan is not a mathematical 'lower bound.' It is an empirical count subject to both false negatives (missed phrasings) and false positives (e.g., 'we did not use Wilcoxon').",
+   "what_would_fix_it": "Change 'lower bound' to 'conservative estimate' or 'strict matching count'.",
+   "quote": "The scan is a lower bound: it finds the phrasings it was written for."
+  },
+  {
+   "id": "bound_mispairings",
+   "severity": "major",
+   "objection": "Because the check falsely flags raw fitness (as admitted in the previous sentence), it includes false positives. Therefore, it cannot be a mathematical 'lower bound' on mis-pairings.",
+   "what_would_fix_it": "Remove the claim that this is a lower bound. State that it is a noisy heuristic estimate of mis-pairings.",
+   "quote": "The check gives a lower bound on the reader's mis-pairings, not an upper one: it catches only the pairings large enough to be impossible..."
+  },
+  {
+   "id": "conservative_n",
+   "severity": "major",
+   "objection": "Using the smallest run count is not 'conservative' when testing for a difference. A smaller n reduces statistical power, making it *harder* to reject the null, which artificially inflates your failure rate. This is anti-conservative for your audit's claims.",
+   "what_would_fix_it": "Acknowledge that using the smallest n biases the audit towards falsely failing the authors' comparisons (Type II error for the original test, Type I error for the audit).",
+   "quote": "...the smallest count stated anywhere in the paper, conservative on machine-learning papers, is here often not a run count..."
+  }
+ ],
+ "questions_to_authors": "How can you justify evaluating the validity of non-parametric claims using a parametric test that you explicitly acknowledge is broken by the heavy-tailed nature of the data? (Note: 'floor' and 'valid' as standalone inferential claims were not found in the text to attack, but all instances of 'bound' and 'conservative' have been addressed).",
+ "would_champion": false,
+ "model": "gemini/gemini-3.1-pro-preview",
+ "brief": "statistician"
+}

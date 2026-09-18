@@ -1,0 +1,30 @@
+{
+ "rating": 7,
+ "confidence": 4,
+ "summary": "The manuscript presents an automated audit of 1644 metaheuristics papers published in Scientific Reports (2024-2025) to evaluate adherence to the field's reporting conventions (e.g., providing run counts, mean/std, and statistical tests). Using a pre-registered methodology involving text parsing and LLM-based image reading, the author finds that while new-optimizer papers frequently claim to follow these conventions, the printed tables often lack the necessary standard deviations to verify the claims. Furthermore, applying Welch's t-test to the printed summaries reveals that 34.5% of testable bolded best results are not statistically separable from their rivals. The paper is highly readable, its length is justified by the detailed methodology and validation, and the abstract accurately reflects the body. The deviation from the pre-registered corpus (using only 1 journal instead of 7) is acceptable and well-justified due to publisher API blocking. My decision is a major revision, primarily because the paper relies on unexecuted human validation kits to verify the LLM reader's accuracy on complex table layouts.",
+ "strengths": "The paper is highly relevant to SWEVO's focus on methodological rigor and reproducibility. The use of pre-registered, automated instruments allows for an impressive large-scale audit. The manuscript is exceptionally transparent about its limitations, instrument blind spots, and deviations from the pre-registered plan. The distinction between 'new optimizer' and 'application' papers provides valuable nuance to the findings.",
+ "objections": [
+  {
+   "id": "human-labels",
+   "severity": "major",
+   "objection": "The paper relies on LLMs (Gemini and Claude) for reading complex table layouts, but explicitly states that human validation has not yet been performed. Quote: 'a person has not yet labelled the released kits' and 'Two models agreeing is not a person reading the page, and the kits stay released for one.' For a methodological audit critiquing the rigor of a field, ground-truth validation of the automated instruments by a human is essential.",
+   "what_would_fix_it": "Complete the human labeling of the released 100-item kits and update Section 6 with the human-validated precision and recall metrics, replacing or supplementing the LLM-LLM agreement scores."
+  },
+  {
+   "id": "failure-concentration",
+   "severity": "minor",
+   "objection": "The Welch test failures are highly concentrated in a very small number of papers. Quote: 'four papers hold 50.2% of them and ten hold 68.4%'. While the paper notes this in the results and provides the Kish ratio, the abstract presents the 34.5% failure rate without this crucial context, which might mislead readers into thinking the failures are uniformly widespread across the field.",
+   "what_would_fix_it": "Add a brief clause to the abstract clarifying that the tested groups and subsequent failures are highly concentrated in a small subset of papers (e.g., '...in 46 papers, though highly concentrated in a few, 34.5% are not separable...')."
+  },
+  {
+   "id": "megajournal-context",
+   "severity": "minor",
+   "objection": "The corpus is restricted entirely to Scientific Reports. Quote: 'no number in this paper describes the venues in which this journal's readers publish.' While the technical reason for this deviation is completely acceptable, Scientific Reports is a megajournal with potentially different peer-review standards than specialized venues like SWEVO.",
+   "what_would_fix_it": "Add a sentence or two in the Discussion acknowledging that the reporting quality in a general megajournal may not perfectly reflect the standards enforced in specialized evolutionary computation venues."
+  }
+ ],
+ "questions_to_authors": "Could you clarify if the 119 papers that 'set a whole row in bold' were entirely excluded from the denominator of the 34.5% failure rate by the image reader, or how they were handled? Also, how long do you estimate the human labeling of the 100-item kits will take to complete for the revision?",
+ "would_champion": true,
+ "model": "gemini/gemini-3.1-pro-preview",
+ "brief": "editor"
+}

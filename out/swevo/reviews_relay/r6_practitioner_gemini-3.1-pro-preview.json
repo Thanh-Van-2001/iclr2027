@@ -1,0 +1,33 @@
+{
+ "rating": 5,
+ "confidence": 5,
+ "summary": "This paper audits 1,644 metaheuristics articles published in Scientific Reports (2024-2025) to determine if the field's reporting conventions (bolding the best mean, providing standard deviations and run counts) are actually supported by the printed evidence. Using automated parsing and LLM-based image reading, the author finds that in new-optimizer papers, 39.6% of bold means lack a printed deviation. Where deviations and run counts are printed, 34.5% of the bold cells fail to separate from the second-best cell via a per-cell Welch's t-test. The paper distinguishes between this typographic per-cell claim and the field's aggregate non-parametric claims.",
+ "strengths": "The pre-registration of the methodology is commendable. As a researcher who runs CEC suites at 51 runs and reports Wilcoxon/Friedman tables, I find the audit fair because it explicitly acknowledges that a per-cell Welch test does *not* invalidate the aggregate rank-based claims across functions. The transparency regarding the automated parser's blind spots (specifically the Mean/Std row layout, which is a massive pain in LaTeX) and the subsequent re-reading protocol shows deep methodological integrity.",
+ "objections": [
+  {
+   "id": "no-human-validation",
+   "severity": "blocking",
+   "objection": "The core instrument for reading the separate-column/row layouts (which hold 76.2% of the barred groups) is an LLM (Gemini) validated only against another LLM (Claude). An audit paper critiquing human reporting cannot rely on unvalidated AI extraction for its headline metrics.",
+   "what_would_fix_it": "The author must manually label the two 100-item released kits and report the LLM's precision/recall against this human ground truth in Section 6.",
+   "quote": "no person has yet labelled the released kits."
+  },
+  {
+   "id": "concentration-of-errors",
+   "severity": "major",
+   "objection": "The headline failure rate of 34.5% is pooled across groups, but 50.2% of these groups come from just 4 papers. This heavily skews the perception of the 'average' paper in the field.",
+   "what_would_fix_it": "Quote the per-paper median (36.4%) or mean failure rate in the abstract alongside the pooled group rate to accurately reflect the distribution of the issue.",
+   "quote": "Of the 727 bold cells the reader can test, in 46 papers, four of which hold 50.2%, 34.5% are not separable"
+  },
+  {
+   "id": "corpus-extrapolation",
+   "severity": "minor",
+   "objection": "The paper audits Scientific Reports due to scraping blocks, but occasionally frames the findings as a measurement of 'the field'. SciRep is a megajournal; its review standards for tables often differ from specialist venues like SWEVO or IEEE TEVC.",
+   "what_would_fix_it": "Add a sentence in the abstract explicitly noting that reporting rates in a general megajournal may not reflect specialist metaheuristics venues.",
+   "quote": "The convention lives in the new-optimizer papers: by full-text scan 73.0% state a run count"
+  }
+ ],
+ "questions_to_authors": "Speaking as a senior metaheuristics researcher: Is the audit fair? Yes, because you carefully avoid conflating the per-cell Welch test with the aggregate Wilcoxon test. Does a per-cell Welch test say anything about the paper's aggregate claim? No, and I appreciate that Section 7 explicitly states this. Would the recommendations change what I do? Yes, I will ensure my future CEC tables include +/-/= markers per cell rather than just bolding the best mean. What would make me dismiss the paper? If you hadn't caught the Mean/Std row layout issue, I would have rejected this outright as a failure of the parser. However, the lack of human validation for the LLM reader is currently a blocking issue. Can you provide the human baseline for the 100-item kits?",
+ "would_champion": false,
+ "model": "gemini/gemini-3.1-pro-preview",
+ "brief": "practitioner"
+}
