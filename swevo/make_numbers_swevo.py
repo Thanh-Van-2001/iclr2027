@@ -420,6 +420,7 @@ def build(out_path: str) -> dict:
             reg.add(f"cr groups form {k.replace('_', ' ')}", lay["groups_by_form"].get(k, 0), provenance=rrun)
             reg.add(f"cr barred groups form {k.replace('_', ' ')}", lay["groups_with_both_bars_by_form"].get(k, 0), provenance=rrun)
         reg.add("cr groups separate layout pct", _pct(lay["pct_groups_in_separate_layout"]), provenance=rrun)
+        reg.add("cr form separate pct", _pct(round(lay["pct_bar_form"].get("separate_column", 0.0) + lay["pct_bar_form"].get("separate_row", 0.0), 1)), provenance=rrun)
         reg.add("cr barred groups separate layout pct", _pct(lay["pct_barred_groups_in_separate_layout"]), provenance=rrun)
         reg.add("cr tables with run count", _pct(lay["pct_tables_with_run_count"]), provenance=rrun)
         reg.add("cr tables at thirty", _pct(lay["pct_tables_at_thirty"]), provenance=rrun)
