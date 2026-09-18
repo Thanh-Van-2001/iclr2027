@@ -81,6 +81,7 @@ def main(argv=None) -> int:
     ap.add_argument("--shard", default=None)
     ap.add_argument("--model", default="gemini/gemini-3.1-pro-preview")
     ap.add_argument("--max-tokens", type=int, default=12000)
+    ap.add_argument("--reverse", action="store_true", help="read the shard from its end (a second worker meeting the first)")
     args = ap.parse_args(argv)
     vendor = dict(VENDORS["relay"])
     vendor["model"] = args.model
@@ -96,11 +97,20 @@ def main(argv=None) -> int:
         items = items[k::n]
         suffix = f"_shard{k}"
     os.makedirs(OUT_DIR, exist_ok=True)
+    if args.reverse:
+        items = list(reversed(items))
+        suffix += "r"
     out = os.path.join(OUT_DIR, f"labels{suffix}.json")
+    twin = out[:-6] + ".json" if args.reverse else out[:-5] + "r.json"
     pages = json.load(open(out, encoding="utf-8")) if os.path.exists(out) else []
     done = {p["id"] for p in pages}
+    def twin_done():
+        try:
+            return {p["id"] for p in json.load(open(twin, encoding="utf-8"))} if os.path.exists(twin) else set()
+        except Exception:  # noqa: BLE001
+            return set()
     for it in items:
-        if it["id"] in done:
+        if it["id"] in done or it["id"] in twin_done():
             continue
         img = os.path.join(KIT, "img", f"{it['id']}_page.png")
         ans = None

@@ -466,6 +466,23 @@ def build(out_path: str) -> dict:
                 reg.add("ag " + k.replace("_", " ") + " frac", f"{v.get('agree', v.get('correct'))} of {v['n']}", provenance="swevo_reader_agreement")
                 reg.add("ag " + k.replace("_", " ") + " pct", _pct(v["pct"]) if v.get("pct") is not None else "--", provenance="swevo_reader_agreement")
 
+    if os.path.exists("out/swevo/verdict_crosstab.json"):
+        vc = _j("verdict_crosstab")
+        vrun = "swevo_verdict_crosstab"
+        for k in ("papers", "pages_read", "tested_groups", "located", "agree", "papers_located"):
+            reg.add("vc " + k.replace("_", " "), vc[k], provenance=vrun)
+        reg.add("vc pct located", _pct(vc["pct_located"]), provenance=vrun)
+        reg.add("vc pct agree", _pct(vc["pct_agree"]) if vc["pct_agree"] is not None else "--", provenance=vrun)
+        reg.add("vc ci agree", f"[{vc['ci_agree'][0]}, {vc['ci_agree'][1]}]" if vc.get("ci_agree") else "--", provenance=vrun)
+        reg.add("vc welch fail among located", _pct(vc["welch_fail_among_located"]) if vc["welch_fail_among_located"] is not None else "--", provenance=vrun)
+        reg.add("vc printed not significant", _pct(vc["printed_not_significant_among_located"]) if vc["printed_not_significant_among_located"] is not None else "--", provenance=vrun)
+        for k, v in vc["crosstab"].items():
+            reg.add("vc " + k.replace("_", " "), v, provenance=vrun)
+        for k, v in vc["status"].items():
+            reg.add("vc status " + k.replace("_", " "), v, provenance=vrun)
+        for k in ("same_page", "verdict_table", "verdict_table_winner_named"):
+            reg.add("vc source " + k.replace("_", " "), vc["source"].get(k, 0), provenance=vrun)
+
     if os.path.exists("out/swevo/gold_set_census.json"):
         cz = _j("gold_set_census")
         crun = "swevo_gold_set_census"

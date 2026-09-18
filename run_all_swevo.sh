@@ -23,6 +23,8 @@ python swevo/merge_census.py > /dev/null
 python study/pages_score.py --items audits/swevo_census/items.json --labels audits/swevo_census/labels.json \
     --analysis out/swevo/analysis.json --extremal-only --out out/swevo/gold_set_census.json > /dev/null
 python swevo/census_readings.py > /dev/null
+if ls audits/swevo_verdict/labels_shard*.json > /dev/null 2>&1; then python swevo/verdict_crosstab.py > /dev/null; fi
+if [ -f audits/swevo_human/labels.csv ]; then python swevo/human_score.py > /dev/null; fi
 fi
 python swevo/make_numbers_swevo.py
 echo "numbers regenerated -> paper/swevo/numbers.tex"
