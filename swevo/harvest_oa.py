@@ -15,7 +15,7 @@ import time
 
 import requests
 
-MAILTO = "felicenguyen2001@gmail.com"
+MAILTO = os.environ.get("OPENALEX_MAILTO", "")  # OpenAlex's polite pool: set your address in the environment
 UA = {"User-Agent": f"paper-audit/0.1 (mailto:{MAILTO})"}
 JOURNALS = [
     ("2045-2322", "Scientific Reports"),
