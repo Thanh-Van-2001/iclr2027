@@ -180,6 +180,25 @@ def build(out_path: str) -> dict:
             reg.add(f"{key} runs rank {_word(rank + 1)} n", n_, provenance=run)
             reg.add(f"{key} runs rank {_word(rank + 1)} count", c, provenance=run)
 
+    ax = ex.get("arxiv", {})
+    if ax:
+        reg.add("ax listed", ax["listed"] or "--", provenance=run)
+        reg.add("ax parsed", ax["parsed"], provenance=run)
+        for name, d in ((k, v) for k, v in ax.items() if isinstance(v, dict)):
+            key = "ax " + ("all" if name == "all" else "mh")
+            reg.add(f"{key} papers", d["papers"], provenance=run)
+            reg.add(f"{key} comparisons", d["comparisons"], provenance=run)
+            reg.add(f"{key} claim papers", d["claim_papers"], provenance=run)
+            reg.add(f"{key} neither", _pct(d["pct_neither"]), provenance=run)
+            reg.add(f"{key} neither ci", f"[{d['ci_neither'][0]:.1f}, {d['ci_neither'][1]:.1f}]", provenance=run)
+            reg.add(f"{key} testable", _pct(d["pct_testable"]), provenance=run)
+            reg.add(f"{key} testable n", d["n_testable"], provenance=run)
+            reg.add(f"{key} testable papers", d["papers_testable"], provenance=run)
+            reg.add(f"{key} fail", _pct(d["pct_fail"]) if d["n_testable"] else "--", provenance=run)
+            reg.add(f"{key} fail ci", f"[{d['ci_fail'][0]:.1f}, {d['ci_fail'][1]:.1f}]" if d["ci_fail"] else "--", provenance=run)
+            reg.add(f"{key} papers err", _pct(d["pct_papers_err"]), provenance=run)
+            reg.add(f"{key} papers runs", _pct(d["pct_papers_runs"]), provenance=run)
+
     cc = ex.get("cites", {})
     if cc:
         names = {"derrac2011": "derrac", "garcia2009": "garcia nine", "garcia2010": "garcia ten", "sorensen2015": "sorensen",

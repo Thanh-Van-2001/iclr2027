@@ -235,6 +235,35 @@ def test_reader_blocks(cs: list, kinds: dict) -> dict:
     return out
 
 
+def arxiv_check(path: str = "data/extracted_arxiv_csne.jsonl") -> dict:
+    """The parser on a second, LaTeX-set corpus: every arXiv cs.NE preprint of
+    2025 the API listed, and the subset whose title matches the phrase list
+    of the OpenAlex query. Added after the main corpus was read (a post-hoc
+    check that the format hazard is the field's table layout and not one
+    publisher's typesetting), and said so in the paper."""
+    import re
+    if not os.path.exists(path):
+        return {}
+    sys.path.insert(0, os.path.join(HERE))
+    from harvest_oa import PHRASES
+    rx = re.compile("|".join(re.escape(p) for p in PHRASES), re.I)
+    recs = load_unique(path)
+    stats_path = "out/pipeline_stats_extracted_arxiv_csne.json"
+    listed = json.load(open(stats_path, encoding="utf-8")).get("listed", {}).get("arxiv-csne-2025") if os.path.exists(stats_path) else None
+    out = {"listed": listed, "parsed": len(recs)}
+    for name, rs in (("all", recs), ("metaheuristics_titles", [r for r in recs if rx.search(r["title"])])):
+        a = analyse(rs)
+        cs_ = a["_comparisons"]
+        s = make_all._summary(a, cs_)
+        b = make_all._bootstrap(cs_)
+        out[name] = {"papers": s["papers"], "comparisons": s["comparisons"], "claim_papers": len({c["paper"] for c in cs_}),
+                     "pct_neither": s["pct_neither"], "ci_neither": [b["pct_neither"]["lo"], b["pct_neither"]["hi"]],
+                     "pct_testable": s["pct_testable"], "n_testable": s["n_testable"], "papers_testable": s["papers_testable"],
+                     "pct_fail": s["pct_fail"], "ci_fail": [b["pct_fail"]["lo"], b["pct_fail"]["hi"]] if s["n_testable"] else None,
+                     "pct_papers_err": s["pct_err"], "pct_papers_runs": s["pct_n"]}
+    return out
+
+
 def cites(cs: list, scan: dict) -> dict:
     """Papers citing the methodology literature, and how they report."""
     keys = ["derrac2011", "garcia2009", "garcia2010", "sorensen2015", "aranha2022", "camacho2022", "bartz2020",
@@ -365,6 +394,7 @@ def main() -> int:
         "cites": cites(cs, scan) if scan else {},
         "scan_run_count": scan_run_count_reading(cs, scan) if scan else {},
         "test_reader": test_reader_blocks(cs, kinds),
+        "arxiv": arxiv_check(),
         "headline_span": extra_stats.headline_span(cs, records),
         "subset_direction": extra_stats.subset_direction(records, cs),
         "holm_families": extra_stats.holm_families(cs),

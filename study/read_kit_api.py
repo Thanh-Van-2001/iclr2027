@@ -77,11 +77,33 @@ orientation; direction; winner_mean; runner_mean; error_bar_present (y/n: does t
 the boxed cell or its runner-up, inside the cell, in a separate column or row, or a +/- anywhere in the table);
 note (one sentence saying where the bar is if present)."""
 
+# The two strata below carry no boxed cell: the crop shows the whole table
+# the parser threw away (discarded) or the group whose bold cell it read as
+# not the best (non_extremal). The cause vocabulary is the one the earlier
+# reference sets used, with two values added for the metaheuristics format.
+TASK_DISCARDED = """The crop shows a table the parser THREW AWAY because it found no row or column with exactly one bold
+numeric cell and at least one non-bold rival. Record: results_table (y/n: is this a table of experimental results);
+cause (one of: no_bold = no numeric cell is bold; multi_bold = several cells per row and per column are bold;
+whole_row_bold = a whole row (e.g. the proposed method's) or a header row is bold rather than single winners;
+not_results = not a results table (settings, notation, data description); bold_missed = single bold winners ARE
+present and a parser should have read them; other); note (one sentence)."""
+
+TASK_NONEXTREMAL = """The crop shows a table in which the parser found a group (row or column) with exactly one bold cell
+but read that bold cell as NOT the best value in its group. Record: results_table (y/n); cause (one of:
+subclass_best = the bold cell is the best within a sub-block of the table (a dimension, a category, a suite) and
+the group spans blocks; excluding_oracle = the bold cell is the best among comparable methods and a reference,
+oracle or upper bound beats it; own_method = bold marks the authors' method rather than the best value;
+header_bold = the bold cell is a bold header or label (a dimension, a year, a parameter value), not a result;
+misread = the bold cell IS the best in its group and the parser misread the direction or the orientation;
+parse_error = a number was misread; other); note (one sentence)."""
+
 KEYS = {
     "testable": ["results_table", "bold_ok", "orientation", "direction", "winner_mean", "winner_disp",
                  "runner_mean", "runner_disp", "disp_type", "n_runs", "n_source", "rival_copied", "note"],
     "no_bar": ["results_table", "bold_ok", "orientation", "direction", "winner_mean", "runner_mean",
                "error_bar_present", "note"],
+    "discarded": ["results_table", "cause", "note"],
+    "non_extremal": ["results_table", "cause", "note"],
 }
 
 
@@ -163,7 +185,8 @@ def main(argv=None) -> int:
             img = os.path.join(args.kit, "img", f"{iid}_{stratum}.png")
             runs_path = os.path.join(args.kit, "img", f"{iid}_runs.txt")
             runs = open(runs_path, encoding="utf-8").read() if os.path.exists(runs_path) else "(none)"
-            task = TASK_TESTABLE.format(runs=runs[:6000]) if stratum == "testable" else TASK_NOBAR
+            task = {"testable": TASK_TESTABLE.format(runs=runs[:6000]), "no_bar": TASK_NOBAR,
+                    "discarded": TASK_DISCARDED, "non_extremal": TASK_NONEXTREMAL}[stratum]
             text = PROMPT.format(task=task, keys=", ".join(KEYS[stratum]))
             try:
                 ans = ask(vendor, key, img, text)
