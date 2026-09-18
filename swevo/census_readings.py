@@ -222,6 +222,20 @@ def _boot_mean(vals: list, reps: int = 2000, seed: int = 0):
     return [round(out[int(0.025 * reps)], 1), round(out[int(0.975 * reps) - 1], 1)]
 
 
+def _cluster_wald(cl: list):
+    """Cluster-robust Wald interval for a pooled share: the clusters are the
+    units, the variance is the cluster-level residual sum with the k/(k-1)
+    correction, and the quantile is Student's t on k-1 degrees of freedom."""
+    from scipy.stats import t as student_t
+    k, N = len(cl), sum(n for n, _ in cl)
+    if k < 2 or not N:
+        return None
+    p = sum(f for _, f in cl) / N
+    v = sum((f - n * p) ** 2 for n, f in cl) / N ** 2 * k / (k - 1)
+    q = student_t.ppf(0.975, k - 1)
+    return [round(100 * max(p - q * v ** 0.5, 0.0), 1), round(100 * min(p + q * v ** 0.5, 1.0), 1)]
+
+
 def _boot_coverage(by_paper: dict, sims: int = 300, reps: int = 1000, seed: int = 1) -> dict:
     """How often the percentile cluster bootstrap covers the pooled rate when the
     observed papers (their group counts and failure shares) are taken as the
@@ -234,10 +248,13 @@ def _boot_coverage(by_paper: dict, sims: int = 300, reps: int = 1000, seed: int 
     theta = 100 * sum(n * p for n, p in pop) / sum(n for n, _ in pop)
     rng = random.Random(seed)
     hits = 0
+    hits_wald = 0
     widths = []
     for _ in range(sims):
         draw = [pop[rng.randrange(len(pop))] for _ in pop]
         obs = [(n, sum(1 for _ in range(n) if rng.random() < p)) for n, p in draw]
+        w = _cluster_wald(obs)
+        hits_wald += bool(w and w[0] <= theta <= w[1])
         vals = []
         for _ in range(reps):
             b = [obs[rng.randrange(len(obs))] for _ in obs]
@@ -247,7 +264,9 @@ def _boot_coverage(by_paper: dict, sims: int = 300, reps: int = 1000, seed: int 
         lo, hi = vals[int(0.025 * reps)], vals[int(0.975 * reps) - 1]
         hits += lo <= theta <= hi
         widths.append(hi - lo)
-    return {"papers": len(pop), "sims": sims, "coverage": round(100 * hits / sims, 1), "mean_width": round(sum(widths) / len(widths), 1), "theta": round(theta, 1)}
+    return {"papers": len(pop), "sims": sims, "coverage": round(100 * hits / sims, 1), "coverage_wald": round(100 * hits_wald / sims, 1),
+            "mean_width": round(sum(widths) / len(widths), 1), "theta": round(theta, 1),
+            "wald_ci": _cluster_wald([(n, f) for n, f in by_paper.values() if n])}
 
 
 def _icc_design(by_paper: dict) -> dict:

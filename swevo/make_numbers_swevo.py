@@ -675,6 +675,8 @@ def build(out_path: str) -> dict:
             bc = pp.get("boot_coverage") or {}
             reg.add(f"{tag} pp boot coverage", _pct(bc["coverage"]) if bc.get("coverage") is not None else "--", provenance=rrun)
             reg.add(f"{tag} pp boot coverage sims", bc.get("sims", 0), provenance=rrun)
+            reg.add(f"{tag} pp wald coverage", _pct(bc["coverage_wald"]) if bc.get("coverage_wald") is not None else "--", provenance=rrun)
+            reg.add(f"{tag} pp wald ci", f"[{bc['wald_ci'][0]}, {bc['wald_ci'][1]}]" if bc.get("wald_ci") else "--", provenance=rrun)
             for k in ("top_four_share", "top_ten_share", "median_rate", "q1_rate", "q3_rate", "largest_paper_fail"):
                 reg.add(f"{tag} pp {k.replace('_', ' ')}", _pct(pp[k]) if pp[k] is not None else "--", provenance=rrun)
             _sh(f"{tag} pp without largest", pp["without_largest"])
