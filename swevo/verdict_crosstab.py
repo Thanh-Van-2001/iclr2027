@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.join(HERE, "..", "study"))
 sys.path.insert(0, HERE)
 from gold_set import _num  # noqa: E402
 from paperengine.stats import wilson_interval  # noqa: E402
-from census_readings import _regroup  # noqa: E402
+from census_readings import _regroup, corrected_labels  # noqa: E402
 
 KIT = "audits/swevo_census"
 VK = "audits/swevo_verdict"
@@ -60,7 +60,8 @@ def classify(v: str):
 
 def main() -> int:
     items = {it["id"]: it for it in json.load(open(os.path.join(KIT, "items.json"), encoding="utf-8"))}
-    labels = {p["id"]: p for p in json.load(open(os.path.join(KIT, "labels.json"), encoding="utf-8"))}
+    # the corrected census (per-table merge of the row re-reads) is the set the paper quotes
+    labels = corrected_labels()
     kinds = {}
     vpages = {}
     for path in sorted(glob.glob(os.path.join(VK, "labels_shard*.json"))):
@@ -145,6 +146,26 @@ def main() -> int:
         rows.append(dict(g, status=status, winner_name=match.get("winner_name"),
                          runner_name=match.get("runner_name"), verdict=verdict, verdict_class=cls, source=source))
     located = [r for r in rows if r["status"] == "located"]
+    # the sign convention of each paper: among located pairs whose bold cell is
+    # the proposed optimizer, the sign printed most often is the sign that
+    # marks the proposed optimizer as better; a pair whose printed sign says
+    # the bold cell is worse contradicts the bold and is flagged
+    sign_of = {}
+    for paper in {r["paper"] for r in located}:
+        signs = collections.Counter(str(r["verdict"]).strip() for r in located if r["paper"] == paper
+                                    and _norm(r.get("winner_name")) in against.get(paper, set()) and str(r["verdict"]).strip() in ("+", "-", "−"))
+        if signs:
+            sign_of[paper] = signs.most_common(1)[0][0]
+    contradictions = 0
+    for r in located:
+        v = str(r["verdict"]).strip()
+        if v in ("+", "-", "−") and r["paper"] in sign_of:
+            better = sign_of[r["paper"]]
+            bold_is_proposed = _norm(r.get("winner_name")) in against.get(r["paper"], set())
+            # for a bold proposed optimizer the printed sign should be the "better" sign; for a bold competitor the other
+            expected = better if bold_is_proposed else ("-" if better == "+" else "+")
+            r["sign_contradicts_bold"] = (v.replace("−", "-") != expected.replace("−", "-"))
+            contradictions += r["sign_contradicts_bold"]
     def cell(a, b):
         return sum(1 for r in located if bool(r["fail"]) == a and (r["verdict_class"] == "not_significant") == b)
     xt = {"welch_fail_printed_not_significant": cell(True, True), "welch_fail_printed_significant": cell(True, False),
@@ -166,8 +187,28 @@ def main() -> int:
         vals.append(100 * k_ / n_ if n_ else 0)
     vals.sort()
     not_located = [r for r in rows if r["status"] != "located"]
+    # chance agreement and Cohen's kappa on the located pairs
+    p_fail = sum(1 for r in located if r["fail"]) / n if n else 0
+    p_ns = sum(1 for r in located if r["verdict_class"] == "not_significant") / n if n else 0
+    p_e = p_fail * p_ns + (1 - p_fail) * (1 - p_ns)
+    p_o = agree / n if n else 0
+    kappa = round((p_o - p_e) / (1 - p_e), 3) if n and p_e < 1 else None
+    per_paper_2x2 = {}
+    for r in located:
+        d = per_paper_2x2.setdefault(r["paper"], {"located": 0, "agree": 0, "fail_ns": 0, "fail_sig": 0, "pass_ns": 0, "pass_sig": 0})
+        d["located"] += 1
+        ns = r["verdict_class"] == "not_significant"
+        d["agree"] += (bool(r["fail"]) == ns)
+        d[("fail_" if r["fail"] else "pass_") + ("ns" if ns else "sig")] += 1
+    top3 = sorted(per_paper_2x2.values(), key=lambda d: -d["located"])[:3]
     out = {"papers": len(papers), "pages_read": len(vpages), "tested_groups": len(rows),
            "ci_agree_papers": [round(vals[50], 1), round(vals[1949], 1)] if keys else None,
+           "chance_agreement": round(100 * p_e, 1) if n else None, "kappa": kappa,
+           "top_three_share": round(100 * sum(d["located"] for d in top3) / n, 1) if n else None,
+           "sign_contradictions": contradictions, "sign_checked": sum(1 for r in located if "sign_contradicts_bold" in r),
+           "sign_conventions": {k: v for k, v in sign_of.items()},
+           "per_paper_2x2": per_paper_2x2,
+           "effective_papers": round(n ** 2 / sum(d["located"] ** 2 for d in per_paper_2x2.values()), 1) if per_paper_2x2 else None,
            "welch_fail_not_located": round(100 * sum(1 for r in not_located if r["fail"]) / len(not_located), 1) if not_located else None,
            "not_located": len(not_located),
            "conflicting_keys_papers": sum(1 for v in conflicts.values() if v),

@@ -1,0 +1,1201 @@
+[
+ {
+  "id": "2221",
+  "tables": [
+   {
+    "caption_start": "Table 3. Optimal parameters for the DDM.",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "50",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "RMSE",
+      "direction": "lower",
+      "winner_mean": "9.8252E-04",
+      "winner_disp": "none",
+      "runner_mean": "9.8270E-04",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 4. Optimal parameters for the Photowatt-PWP201.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "50",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": "multiple bold cells in RMSE column"
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "2132",
+  "tables": [
+   {
+    "caption_start": "Table 22. Performance comparison between",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Accuracy (%)",
+      "direction": "higher",
+      "winner_mean": "94.27",
+      "winner_disp": "none",
+      "runner_mean": "92.15",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Macro F1",
+      "direction": "higher",
+      "winner_mean": "0.94",
+      "winner_disp": "none",
+      "runner_mean": "0.92",
+      "runner_disp": "none"
+     },
+     {
+      "label": "AUC",
+      "direction": "higher",
+      "winner_mean": "0.94",
+      "winner_disp": "none",
+      "runner_mean": "0.93",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 23. Classification performance of",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 24. Top contributing EEG",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "y",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "2099",
+  "tables": [
+   {
+    "caption_start": "Table 6. Diagnostic results of",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "5",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Same proportion of samples",
+      "direction": "higher",
+      "winner_mean": "95.94",
+      "winner_disp": "none",
+      "runner_mean": "92.08",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Sample of different proportions",
+      "direction": "higher",
+      "winner_mean": "89.94",
+      "winner_disp": "none",
+      "runner_mean": "85.88",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "2088",
+  "tables": [
+   {
+    "caption_start": "Table 5. Compare the error evaluation indexes",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "3",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "MAE",
+      "direction": "lower",
+      "winner_mean": "0.135",
+      "winner_disp": "none",
+      "runner_mean": "0.143",
+      "runner_disp": "none"
+     },
+     {
+      "label": "RMSE",
+      "direction": "lower",
+      "winner_mean": "0.162",
+      "winner_disp": "none",
+      "runner_mean": "0.179",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MAPE",
+      "direction": "lower",
+      "winner_mean": "0.204",
+      "winner_disp": "none",
+      "runner_mean": "0.212",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "2005",
+  "tables": [
+   {
+    "caption_start": "Table 3. ACO and KL divergence.",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "KL divergence",
+      "direction": "higher",
+      "winner_mean": "0.17248",
+      "winner_disp": "none",
+      "runner_mean": "0.096615",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1945",
+  "tables": [
+   {
+    "caption_start": "Table 14. Bat Algorithm Hyperparameter Trials",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Composite",
+      "direction": "higher",
+      "winner_mean": "0.8723",
+      "winner_disp": "none",
+      "runner_mean": "0.8684",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 15. Bat Algorithm Hyperparameter Trials",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Composite",
+      "direction": "higher",
+      "winner_mean": "0.8634",
+      "winner_disp": "none",
+      "runner_mean": "0.8522",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1867",
+  "tables": [
+   {
+    "caption_start": "Table 7. Accuracy of models developed",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Std. Dev",
+      "direction": "lower",
+      "winner_mean": "0.0134",
+      "winner_disp": "none",
+      "runner_mean": "0.0078",
+      "runner_disp": "none"
+     },
+     {
+      "label": "R2",
+      "direction": "higher",
+      "winner_mean": "0.9985",
+      "winner_disp": "none",
+      "runner_mean": "0.9996",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Adjusted R2",
+      "direction": "higher",
+      "winner_mean": "0.9976",
+      "winner_disp": "none",
+      "runner_mean": "0.9992",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Predicted R2",
+      "direction": "higher",
+      "winner_mean": "0.9935",
+      "winner_disp": "none",
+      "runner_mean": "0.9958",
+      "runner_disp": "none"
+     }
+    ],
+    "note": "Bold marks the suggested model (Cubic), which is not the absolute best in the columns because the mathematically best model (Quartic) is aliased."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1788",
+  "tables": [
+   {
+    "caption_start": "Table 1. IGD values of the",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "ZDT1",
+      "direction": "lower",
+      "winner_mean": "2.6588e-3",
+      "winner_disp": "none",
+      "runner_mean": "1.4153e+0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "ZDT2",
+      "direction": "lower",
+      "winner_mean": "2.6875e-3",
+      "winner_disp": "none",
+      "runner_mean": "2.2137e+0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "ZDT3",
+      "direction": "lower",
+      "winner_mean": "2.8077e-3",
+      "winner_disp": "none",
+      "runner_mean": "1.1929e+0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "ZDT4",
+      "direction": "lower",
+      "winner_mean": "2.6530e-3",
+      "winner_disp": "none",
+      "runner_mean": "4.1884e+1",
+      "runner_disp": "none"
+     },
+     {
+      "label": "ZDT6",
+      "direction": "lower",
+      "winner_mean": "2.1962e-3",
+      "winner_disp": "none",
+      "runner_mean": "4.6610e+0",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1712",
+  "tables": [
+   {
+    "caption_start": "Table 10. Average HV values",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "data1",
+      "direction": "higher",
+      "winner_mean": "0.1706",
+      "winner_disp": "none",
+      "runner_mean": "0.1618",
+      "runner_disp": "none"
+     },
+     {
+      "label": "data2",
+      "direction": "higher",
+      "winner_mean": "0.1678",
+      "winner_disp": "none",
+      "runner_mean": "0.1608",
+      "runner_disp": "none"
+     },
+     {
+      "label": "data3",
+      "direction": "higher",
+      "winner_mean": "0.1615",
+      "winner_disp": "none",
+      "runner_mean": "0.1514",
+      "runner_disp": "none"
+     },
+     {
+      "label": "data4",
+      "direction": "higher",
+      "winner_mean": "0.1683",
+      "winner_disp": "none",
+      "runner_mean": "0.1601",
+      "runner_disp": "none"
+     },
+     {
+      "label": "data5",
+      "direction": "higher",
+      "winner_mean": "0.1421",
+      "winner_disp": "none",
+      "runner_mean": "0.1320",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu01",
+      "direction": "higher",
+      "winner_mean": "0.0482",
+      "winner_disp": "none",
+      "runner_mean": "0.0351",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu02",
+      "direction": "higher",
+      "winner_mean": "0.0308",
+      "winner_disp": "none",
+      "runner_mean": "0.0250",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu03",
+      "direction": "higher",
+      "winner_mean": "0.0441",
+      "winner_disp": "none",
+      "runner_mean": "0.0417",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu04",
+      "direction": "higher",
+      "winner_mean": "0.1146",
+      "winner_disp": "none",
+      "runner_mean": "0.1030",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu05",
+      "direction": "higher",
+      "winner_mean": "0.1122",
+      "winner_disp": "none",
+      "runner_mean": "0.0932",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu06",
+      "direction": "higher",
+      "winner_mean": "0.0856",
+      "winner_disp": "none",
+      "runner_mean": "0.0730",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu07",
+      "direction": "higher",
+      "winner_mean": "0.0811",
+      "winner_disp": "none",
+      "runner_mean": "0.0798",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu08",
+      "direction": "higher",
+      "winner_mean": "0.0871",
+      "winner_disp": "none",
+      "runner_mean": "0.0692",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMK01",
+      "direction": "higher",
+      "winner_mean": "0.0535",
+      "winner_disp": "none",
+      "runner_mean": "0.0478",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMK02",
+      "direction": "higher",
+      "winner_mean": "0.0447",
+      "winner_disp": "none",
+      "runner_mean": "0.0391",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMK03",
+      "direction": "higher",
+      "winner_mean": "0.1219",
+      "winner_disp": "none",
+      "runner_mean": "0.1138",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMK04",
+      "direction": "higher",
+      "winner_mean": "0.1298",
+      "winner_disp": "none",
+      "runner_mean": "0.1182",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMK05",
+      "direction": "higher",
+      "winner_mean": "0.0738",
+      "winner_disp": "none",
+      "runner_mean": "0.0520",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMK06",
+      "direction": "higher",
+      "winner_mean": "0.0920",
+      "winner_disp": "none",
+      "runner_mean": "0.0838",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMK07",
+      "direction": "higher",
+      "winner_mean": "0.0636",
+      "winner_disp": "none",
+      "runner_mean": "0.0634",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMK08",
+      "direction": "higher",
+      "winner_mean": "0.0230",
+      "winner_disp": "none",
+      "runner_mean": "0.0200",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMK09",
+      "direction": "higher",
+      "winner_mean": "0.0531",
+      "winner_disp": "none",
+      "runner_mean": "0.0382",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMK10",
+      "direction": "higher",
+      "winner_mean": "0.0565",
+      "winner_disp": "none",
+      "runner_mean": "0.0424",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1698",
+  "tables": [
+   {
+    "caption_start": "Table 15. Different metrics values on",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "MMRE - COCOMO81",
+      "direction": "lower",
+      "winner_mean": "8.7523E-01",
+      "winner_disp": "none",
+      "runner_mean": "8.8098E-01",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MMRE - Maxwell",
+      "direction": "lower",
+      "winner_mean": "8.1102E-01",
+      "winner_disp": "none",
+      "runner_mean": "1.0496E+00",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MMRE - Desharnais",
+      "direction": "lower",
+      "winner_mean": "6.5664E-01",
+      "winner_disp": "none",
+      "runner_mean": "6.6522E-01",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1590",
+  "tables": [
+   {
+    "caption_start": "Table 3. Performance evaluation of",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "MSE Text Score",
+      "direction": "lower",
+      "winner_mean": "0.3950",
+      "winner_disp": "none",
+      "runner_mean": "0.3958",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MSE Text Sentiment",
+      "direction": "lower",
+      "winner_mean": "0.0372",
+      "winner_disp": "none",
+      "runner_mean": "0.0375",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MSE Photo Score",
+      "direction": "lower",
+      "winner_mean": "0.5238",
+      "winner_disp": "none",
+      "runner_mean": "0.5263",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MSE Photo Sentiment",
+      "direction": "lower",
+      "winner_mean": "0.0717",
+      "winner_disp": "none",
+      "runner_mean": "0.0718",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MSE Merge Score",
+      "direction": "lower",
+      "winner_mean": "0.4165",
+      "winner_disp": "none",
+      "runner_mean": "0.4237",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MSE Merge Sentiment",
+      "direction": "lower",
+      "winner_mean": "0.0413",
+      "winner_disp": "none",
+      "runner_mean": "0.0417",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MAE Text Score",
+      "direction": "lower",
+      "winner_mean": "0.4379",
+      "winner_disp": "none",
+      "runner_mean": "0.4381",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MAE Text Sentiment",
+      "direction": "lower",
+      "winner_mean": "0.1194",
+      "winner_disp": "none",
+      "runner_mean": "0.1196",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MAE Photo Score",
+      "direction": "lower",
+      "winner_mean": "0.5505",
+      "winner_disp": "none",
+      "runner_mean": "0.5559",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MAE Photo Sentiment",
+      "direction": "lower",
+      "winner_mean": "0.1738",
+      "winner_disp": "none",
+      "runner_mean": "0.1747",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MAE Merge Score",
+      "direction": "lower",
+      "winner_mean": "0.4530",
+      "winner_disp": "none",
+      "runner_mean": "0.4567",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MAE Merge Sentiment",
+      "direction": "lower",
+      "winner_mean": "0.1285",
+      "winner_disp": "none",
+      "runner_mean": "0.1290",
+      "runner_disp": "none"
+     },
+     {
+      "label": "R2 Text Score",
+      "direction": "higher",
+      "winner_mean": "0.4566",
+      "winner_disp": "none",
+      "runner_mean": "0.4556",
+      "runner_disp": "none"
+     },
+     {
+      "label": "R2 Text Sentiment",
+      "direction": "higher",
+      "winner_mean": "0.5356",
+      "winner_disp": "none",
+      "runner_mean": "0.5317",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1511",
+  "tables": [
+   {
+    "caption_start": "Table 8. MAPE Comparative performance metric results between the proposed HHO-SVR model and other",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "10",
+    "n_source": "caption",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "1",
+      "direction": "lower",
+      "winner_mean": "0.0122883",
+      "winner_disp": "none",
+      "runner_mean": "0.0123195",
+      "runner_disp": "none"
+     },
+     {
+      "label": "2",
+      "direction": "lower",
+      "winner_mean": "0.0122823",
+      "winner_disp": "none",
+      "runner_mean": "0.0123176",
+      "runner_disp": "none"
+     },
+     {
+      "label": "3",
+      "direction": "lower",
+      "winner_mean": "0.0122812",
+      "winner_disp": "none",
+      "runner_mean": "0.0123176",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1442",
+  "tables": [
+   {
+    "caption_start": "Table 19. Simulation results using different algorithms",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "50",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Cost ($/hr)",
+      "direction": "lower",
+      "winner_mean": "1.5625 × 10^6",
+      "winner_disp": "none",
+      "runner_mean": "1.6384 × 10^6",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Saving ($/hr)",
+      "direction": "higher",
+      "winner_mean": "107,200",
+      "winner_disp": "none",
+      "runner_mean": "31,300",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Reduction (%)",
+      "direction": "higher",
+      "winner_mean": "6.4203",
+      "winner_disp": "none",
+      "runner_mean": "1.8746",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1433",
+  "tables": [
+   {
+    "caption_start": "Table 7. Simulation results using different",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "50",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Total cost ($/hr) - Case 1",
+      "direction": "lower",
+      "winner_mean": "1.1865 \\times 10^5",
+      "winner_disp": "none",
+      "runner_mean": "1.1914 \\times 10^5",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Total cost ($/hr) - Case 2",
+      "direction": "lower",
+      "winner_mean": "1.21408 \\times 10^5",
+      "winner_disp": "none",
+      "runner_mean": "1.21074 \\times 10^5a",
+      "runner_disp": "none"
+     }
+    ],
+    "note": "Saving and Reduction rows are entirely bolded, so they are excluded as they do not mark a single winner per group."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1424",
+  "tables": [
+   {
+    "caption_start": "Table 7. Average model performance on",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Accuracy",
+      "direction": "higher",
+      "winner_mean": "77.0",
+      "winner_disp": "none",
+      "runner_mean": "74.3",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Precision",
+      "direction": "higher",
+      "winner_mean": "66.82",
+      "winner_disp": "none",
+      "runner_mean": "65.84",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Recall",
+      "direction": "higher",
+      "winner_mean": "77.26",
+      "winner_disp": "none",
+      "runner_mean": "75.48",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F1 Score",
+      "direction": "higher",
+      "winner_mean": "69.78",
+      "winner_disp": "none",
+      "runner_mean": "67.7",
+      "runner_disp": "none"
+     },
+     {
+      "label": "ROC AUC",
+      "direction": "higher",
+      "winner_mean": "75.16",
+      "winner_disp": "none",
+      "runner_mean": "73.5",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1417",
+  "tables": [
+   {
+    "caption_start": "Table 5. The average one-error criterion",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "20",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Medical",
+      "direction": "lower",
+      "winner_mean": "0.7005",
+      "winner_disp": "none",
+      "runner_mean": "0.7035",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Enron",
+      "direction": "lower",
+      "winner_mean": "0.7506",
+      "winner_disp": "none",
+      "runner_mean": "0.7614",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Bibtex",
+      "direction": "lower",
+      "winner_mean": "0.5948",
+      "winner_disp": "none",
+      "runner_mean": "0.6253",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Image",
+      "direction": "lower",
+      "winner_mean": "0.3815",
+      "winner_disp": "none",
+      "runner_mean": "0.4008",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Scene",
+      "direction": "lower",
+      "winner_mean": "0.3230",
+      "winner_disp": "none",
+      "runner_mean": "0.4090",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Cooking",
+      "direction": "lower",
+      "winner_mean": "0.5890",
+      "winner_disp": "none",
+      "runner_mean": "0.6060",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 6. The average mean accuracy criterion",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "20",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Medical",
+      "direction": "higher",
+      "winner_mean": "0.3220",
+      "winner_disp": "none",
+      "runner_mean": "0.3120",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Enron",
+      "direction": "higher",
+      "winner_mean": "0.2287",
+      "winner_disp": "none",
+      "runner_mean": "0.2277",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Bibtex",
+      "direction": "higher",
+      "winner_mean": "0.3547",
+      "winner_disp": "none",
+      "runner_mean": "0.3300",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Image",
+      "direction": "higher",
+      "winner_mean": "0.7507",
+      "winner_disp": "none",
+      "runner_mean": "0.7479",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Scene",
+      "direction": "higher",
+      "winner_mean": "0.7990",
+      "winner_disp": "none",
+      "runner_mean": "0.7580",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Cooking",
+      "direction": "higher",
+      "winner_mean": "0.3330",
+      "winner_disp": "none",
+      "runner_mean": "0.3050",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1386",
+  "tables": [
+   {
+    "caption_start": "Table 3. Prediction errors of tourist flow by different models at mount Lu.",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "3 days MAPE (%)",
+      "direction": "lower",
+      "winner_mean": "2.73",
+      "winner_disp": "none",
+      "runner_mean": "2.95",
+      "runner_disp": "none"
+     },
+     {
+      "label": "3 days BRMSE (%)",
+      "direction": "lower",
+      "winner_mean": "2.71",
+      "winner_disp": "none",
+      "runner_mean": "2.92",
+      "runner_disp": "none"
+     },
+     {
+      "label": "3 days R2",
+      "direction": "higher",
+      "winner_mean": "0.988",
+      "winner_disp": "none",
+      "runner_mean": "0.971",
+      "runner_disp": "none"
+     },
+     {
+      "label": "7 days MAPE (%)",
+      "direction": "lower",
+      "winner_mean": "3.03",
+      "winner_disp": "none",
+      "runner_mean": "3.28",
+      "runner_disp": "none"
+     },
+     {
+      "label": "7 days BRMSE (%)",
+      "direction": "lower",
+      "winner_mean": "3.12",
+      "winner_disp": "none",
+      "runner_mean": "3.41",
+      "runner_disp": "none"
+     },
+     {
+      "label": "7 days R2",
+      "direction": "higher",
+      "winner_mean": "0.979",
+      "winner_disp": "none",
+      "runner_mean": "0.962",
+      "runner_disp": "none"
+     },
+     {
+      "label": "15 days MAPE (%)",
+      "direction": "lower",
+      "winner_mean": "6.33",
+      "winner_disp": "none",
+      "runner_mean": "6.95",
+      "runner_disp": "none"
+     },
+     {
+      "label": "15 days BRMSE (%)",
+      "direction": "lower",
+      "winner_mean": "6.82",
+      "winner_disp": "none",
+      "runner_mean": "7.62",
+      "runner_disp": "none"
+     },
+     {
+      "label": "15 days R2",
+      "direction": "higher",
+      "winner_mean": "0.875",
+      "winner_disp": "none",
+      "runner_mean": "0.868",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1342",
+  "tables": [
+   {
+    "caption_start": "Table 3. Standard deviation of the results for mathematical test functions.",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": "The table contains only standard deviations, so no groups of means are recorded per the layout rule."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ }
+]

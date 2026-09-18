@@ -1,0 +1,7 @@
+{
+ "first_reader": "gemini/gemini-3.1-pro-preview (Google, served through an OpenAI-compatible relay; reasoning effort default unless stated)",
+ "second_reader": "cc/claude-sonnet-5 (Anthropic, served through the same relay)",
+ "protocol": "reference protocol of study/read_kit_api.py (PROMPT, TASK_*), strata testable / no_bar / discarded / non_extremal",
+ "command": "python study/read_kit_api.py --vendor relay --model <model> --kit audits/swevo_gold --out audits/swevo_gold/labels_<reader>.csv",
+ "items": "python study/gold_set.py sample --extracted data/extracted_oa.jsonl --analysis out/swevo/analysis.json --source swevo-oa --seed 2026 --testable 60 --no-bar 40 --discarded 20 --non-extremal 20 --out-dir audits/swevo_gold (PDF_CACHE=data/corpus_oa)"
+}

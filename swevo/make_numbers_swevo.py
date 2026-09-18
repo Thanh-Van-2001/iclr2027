@@ -232,6 +232,9 @@ def build(out_path: str) -> dict:
         _scan_block("cs " + lab.replace("_", " "), d)
     for lab, d in ex.get("tests_scan_fail", {}).items():
         _scan_block("ts " + lab, d)
+    reg.add("hk genuine papers", ex.get("holders_genuine", 0), provenance=run)
+    reg.add("hk all papers", ex.get("holders_all", 0), provenance=run)
+    reg.add("a effective papers", f"{b['effective_papers']:.1f}" if b.get("effective_papers") else "--", provenance=run)
     for lab, d in ex.get("scan_by_kind_holders", {}).items():
         k = "hk " + lab.replace("_", " ")
         reg.add(f"{k} papers", d["papers"], provenance=run)
@@ -499,6 +502,12 @@ def build(out_path: str) -> dict:
         reg.add("vc conflicting keys papers", vc.get("conflicting_keys_papers", 0), provenance=vrun)
         for k in ("beside_group", "same_page_table"):
             reg.add("vc source " + k.replace("_", " "), vc["source"].get(k, 0), provenance=vrun)
+        reg.add("vc chance agreement", _pct(vc["chance_agreement"]) if vc.get("chance_agreement") is not None else "--", provenance=vrun)
+        reg.add("vc kappa", f"{vc['kappa']:.2f}" if vc.get("kappa") is not None else "--", provenance=vrun)
+        reg.add("vc top three share", _pct(vc["top_three_share"]) if vc.get("top_three_share") is not None else "--", provenance=vrun)
+        reg.add("vc sign contradictions", vc.get("sign_contradictions", 0), provenance=vrun)
+        reg.add("vc sign checked", vc.get("sign_checked", 0), provenance=vrun)
+        reg.add("vc effective papers", f"{vc['effective_papers']:.1f}" if vc.get("effective_papers") else "--", provenance=vrun)
         reg.add("vc largest paper located", vc.get("largest_paper_located", 0), provenance=vrun)
         reg.add("vc pct largest paper", _pct(vc["pct_largest_paper"]) if vc.get("pct_largest_paper") is not None else "--", provenance=vrun)
         aw = vc.get("agree_without_largest") or {}
@@ -522,7 +531,7 @@ def build(out_path: str) -> dict:
         reg.add("cz groups", rz["groups"], provenance=crun)
         reg.add("cz papers with groups", rz["papers_with_groups"], provenance=crun)
         reg.add("cz neither", _pct(rz["pct_neither"]), provenance=crun)
-        _rg = _j("census_readings").get("regrouped", {}) if os.path.exists("out/swevo/census_readings.json") else {}
+        _rg = _j("census_readings").get("pre", {}).get("all", {}) if os.path.exists("out/swevo/census_readings.json") else {}
         _rgci = lambda key, fallback: (f"[{_rg[key][0]}, {_rg[key][1]}]" if _rg.get(key) else fallback)
         reg.add("cz neither ci", _rgci("ci_neither", f"[{rz['ci_neither_papers'][0]}, {rz['ci_neither_papers'][1]}]"), provenance=crun)
         reg.add("cz one side", _pct(rz["pct_one_side"]), provenance=crun)
@@ -566,100 +575,95 @@ def build(out_path: str) -> dict:
         reg.add("cr pages read", cr["pages_read"], provenance=rrun)
         reg.add("cr papers read", cr["papers_read"], provenance=rrun)
         reg.add("cr papers in kit", cr["papers_in_kit"], provenance=rrun)
-        lay = cr["layout"]
-        reg.add("cr results tables", lay["results_tables"], provenance=rrun)
-        for k in sorted(set(lay["bar_form"]) | {"pm", "paren", "bracket", "subscript", "separate_column", "separate_row", "none"}):
-            reg.add(f"cr form {k.replace('_', ' ')}", lay["bar_form"].get(k, 0), provenance=rrun)
-            reg.add(f"cr form {k.replace('_', ' ')} pct", _pct(lay["pct_bar_form"].get(k, 0.0)), provenance=rrun)
-        for k in sorted(set(lay["groups_by_form"]) | {"pm", "paren", "bracket", "subscript", "separate_column", "separate_row", "none"}):
-            reg.add(f"cr groups form {k.replace('_', ' ')}", lay["groups_by_form"].get(k, 0), provenance=rrun)
-            reg.add(f"cr barred groups form {k.replace('_', ' ')}", lay["groups_with_both_bars_by_form"].get(k, 0), provenance=rrun)
-        reg.add("cr groups separate layout pct", _pct(lay["pct_groups_in_separate_layout"]), provenance=rrun)
-        reg.add("cr form separate pct", _pct(round(lay["pct_bar_form"].get("separate_column", 0.0) + lay["pct_bar_form"].get("separate_row", 0.0), 1)), provenance=rrun)
-        reg.add("cr barred groups separate layout pct", _pct(lay["pct_barred_groups_in_separate_layout"]), provenance=rrun)
-        reg.add("cr tables with run count", _pct(lay["pct_tables_with_run_count"]), provenance=rrun)
-        reg.add("cr tables at thirty", _pct(lay["pct_tables_at_thirty"]), provenance=rrun)
-        for rank, (n_, cnt) in enumerate(lay["n_runs"][:5]):
-            reg.add(f"cr runs rank {_word(rank + 1)} n", n_, provenance=rrun)
-            reg.add(f"cr runs rank {_word(rank + 1)} count", cnt, provenance=rrun)
-        for k in sorted(set(lay["n_source"]) | {"caption", "page", "paper", "none", "unstated"}):
-            reg.add(f"cr n source {k}", lay["n_source"].get(k, 0), provenance=rrun)
-        def _cr_shares(prefix, d):
-            reg.add(f"{prefix} groups", d["groups"], provenance=rrun)
-            reg.add(f"{prefix} papers", d["papers"], provenance=rrun)
-            reg.add(f"{prefix} neither", _pct(d["pct_neither"]) if d["pct_neither"] is not None else "--", provenance=rrun)
-            reg.add(f"{prefix} neither ci", f"[{d['ci_neither'][0]}, {d['ci_neither'][1]}]" if d.get("ci_neither") else "--", provenance=rrun)
-            reg.add(f"{prefix} testable", _pct(d["pct_testable"]) if d["pct_testable"] is not None else "--", provenance=rrun)
-            reg.add(f"{prefix} testable ci", f"[{d['ci_testable'][0]}, {d['ci_testable'][1]}]" if d.get("ci_testable") else "--", provenance=rrun)
-            reg.add(f"{prefix} tested", d["tested"], provenance=rrun)
-            reg.add(f"{prefix} tested papers", d["tested_papers"], provenance=rrun)
-            reg.add(f"{prefix} fail", _pct(d["pct_fail"]) if d["pct_fail"] is not None else "--", provenance=rrun)
-            reg.add(f"{prefix} fail ci", f"[{d['ci_fail'][0]}, {d['ci_fail'][1]}]" if d.get("ci_fail") and d["tested_papers"] >= 10 else "--", provenance=rrun)
-        pp = cr.get("per_paper", {})
-        if pp:
+
+        def _sh(prefix, d, prov=rrun):
+            reg.add(f"{prefix} groups", d["groups"], provenance=prov)
+            reg.add(f"{prefix} papers", d["papers"], provenance=prov)
+            reg.add(f"{prefix} neither", _pct(d["pct_neither"]) if d["pct_neither"] is not None else "--", provenance=prov)
+            reg.add(f"{prefix} neither ci", f"[{d['ci_neither'][0]}, {d['ci_neither'][1]}]" if d.get("ci_neither") and d["papers"] >= 10 else "--", provenance=prov)
+            reg.add(f"{prefix} one side", _pct(d["pct_one_side"]) if d.get("pct_one_side") is not None else "--", provenance=prov)
+            reg.add(f"{prefix} testable", _pct(d["pct_testable"]) if d["pct_testable"] is not None else "--", provenance=prov)
+            reg.add(f"{prefix} testable ci", f"[{d['ci_testable'][0]}, {d['ci_testable'][1]}]" if d.get("ci_testable") and d["papers"] >= 10 else "--", provenance=prov)
+            reg.add(f"{prefix} testable n", d.get("testable_n", 0), provenance=prov)
+            reg.add(f"{prefix} tested", d["tested"], provenance=prov)
+            reg.add(f"{prefix} tested papers", d["tested_papers"], provenance=prov)
+            reg.add(f"{prefix} tested effective", f"{d['tested_effective_papers']:.1f}" if d.get("tested_effective_papers") else "--", provenance=prov)
+            reg.add(f"{prefix} fail", _pct(d["pct_fail"]) if d["pct_fail"] is not None else "--", provenance=prov)
+            reg.add(f"{prefix} fail ci", f"[{d['ci_fail'][0]}, {d['ci_fail'][1]}]" if d.get("ci_fail") and d["tested_papers"] >= 10 else "--", provenance=prov)
+            reg.add(f"{prefix} zero both", d.get("zero_both", 0), provenance=prov)
+            reg.add(f"{prefix} unreadable", d.get("unreadable", 0), provenance=prov)
+
+        for tag, lay in (("cr", cr["layout"]), ("crc", cr["layout_corrected"])):
+            reg.add(f"{tag} results tables", lay["results_tables"], provenance=rrun)
+            reg.add(f"{tag} tables any bar", _pct(lay["pct_tables_any_bar"]), provenance=rrun)
+            for k in sorted(set(lay["bar_form"]) | {"pm", "paren", "bracket", "subscript", "separate_column", "separate_row", "none"}):
+                reg.add(f"{tag} form {k.replace('_', ' ')}", lay["bar_form"].get(k, 0), provenance=rrun)
+                reg.add(f"{tag} form {k.replace('_', ' ')} pct", _pct(lay["pct_bar_form"].get(k, 0.0)), provenance=rrun)
+            reg.add(f"{tag} form separate pct", _pct(round(lay["pct_bar_form"].get("separate_column", 0.0) + lay["pct_bar_form"].get("separate_row", 0.0), 1)), provenance=rrun)
+            reg.add(f"{tag} groups separate layout pct", _pct(lay["pct_groups_in_separate_layout"]), provenance=rrun)
+            reg.add(f"{tag} barred groups separate layout pct", _pct(lay["pct_barred_groups_in_separate_layout"]), provenance=rrun)
+            reg.add(f"{tag} tables with run count", _pct(lay["pct_tables_with_run_count"]), provenance=rrun)
+            reg.add(f"{tag} tables at thirty", _pct(lay["pct_tables_at_thirty"]), provenance=rrun)
+            for rank, (n_, cnt) in enumerate(lay["n_runs"][:5]):
+                reg.add(f"{tag} runs rank {_word(rank + 1)} n", n_, provenance=rrun)
+                reg.add(f"{tag} runs rank {_word(rank + 1)} count", cnt, provenance=rrun)
+            for k in sorted(set(lay["n_source"]) | {"caption", "page", "paper", "none", "unstated"}):
+                reg.add(f"{tag} n source {k}", lay["n_source"].get(k, 0), provenance=rrun)
+
+        for tag, d in (("cr", cr["pre"]), ("crc", cr["corrected"])):
+            _sh(f"{tag} all", d["all"])
+            for lab, dd in d["by_kind"].items():
+                _sh(f"{tag} {lab.replace('_', ' ')}", dd)
+            rw = d["rows"]
+            _sh(f"{tag} means", rw["means_only"])
+            for lab, dd in rw["means_only_by_kind"].items():
+                _sh(f"{tag} means {lab.replace('_', ' ')}", dd)
+            for k in ("std_row_groups", "best_row_groups", "not_means_table_groups", "row_label_groups"):
+                reg.add(f"{tag} rows {k.replace('_', ' ')}", rw[k], provenance=rrun)
+            reg.add(f"{tag} rows row label pct", _pct(rw["row_label_pct"]), provenance=rrun)
+            _sh(f"{tag} rows only", rw["row_label_only"])
+            _sh(f"{tag} rows without", rw["without_row_label"])
+            pp = d["per_paper"]
             for k in ("papers", "tested", "papers_any_fail", "largest_paper_tested"):
-                reg.add("crpp " + k.replace("_", " "), pp[k], provenance=rrun)
+                reg.add(f"{tag} pp {k.replace('_', ' ')}", pp[k], provenance=rrun)
+            reg.add(f"{tag} pp effective papers", f"{pp['effective_papers']:.1f}" if pp.get("effective_papers") else "--", provenance=rrun)
             for k in ("top_four_share", "top_ten_share", "median_rate", "q1_rate", "q3_rate", "largest_paper_fail"):
-                reg.add("crpp " + k.replace("_", " "), _pct(pp[k]) if pp[k] is not None else "--", provenance=rrun)
-            _cr_shares("crpp without largest", pp["without_largest"])
-            _cr_shares("crpp without top four", pp["without_top_four"])
-        sh = cr.get("shape", {})
-        if sh:
+                reg.add(f"{tag} pp {k.replace('_', ' ')}", _pct(pp[k]) if pp[k] is not None else "--", provenance=rrun)
+            _sh(f"{tag} pp without largest", pp["without_largest"])
+            _sh(f"{tag} pp without top four", pp["without_top_four"])
+            sh = d["shape"]
             for k in ("sd_ge_mean", "mean_tiny", "either", "neither", "zero_sd", "without_zero_sd"):
-                _cr_shares("crsh " + k.replace("_", " "), sh[k])
-            reg.add("crsh pct tested sd ge mean", _pct(sh["pct_tested_sd_ge_mean"]), provenance=rrun)
-            reg.add("crsh pct tested zero sd", _pct(sh["pct_tested_zero_sd"]), provenance=rrun)
-        rw = cr.get("row", {})
-        if rw:
-            reg.add("crrow groups", rw["row_label_groups"], provenance=rrun)
-            reg.add("crrow pct", _pct(rw["row_label_pct"]), provenance=rrun)
-            _cr_shares("crrow only", rw["row_label_only"])
-            _cr_shares("crrow without", rw["without_row_label"])
-        for lab, d in cr.get("bold_rule", {}).items():
-            _cr_shares("crbold " + lab.replace("_", " "), d)
-        nt = cr.get("note", {})
-        if nt:
-            _cr_shares("crnote with", nt["with_note"])
-            _cr_shares("crnote without", nt["without_note"])
-            reg.add("crnote papers", nt["papers_with_note_in_census"], provenance=rrun)
-        for lab, d in cr.get("citing", {}).items():
-            _cr_shares("crcite " + lab.replace("_", " "), d)
-        sr_ = cr.get("scan_runs", {})
-        if sr_:
-            reg.add("cr n agrees scan", sr_["reader_n_agrees_scan"], provenance=rrun)
-            reg.add("cr n disagrees scan", sr_["reader_n_disagrees_scan"], provenance=rrun)
-        al = cr.get("alternatives", {})
-        if al:
-            for k in ("as_reported", "holm_table", "holm_paper", "one_sided", "population_sd", "rho_half", "rho_nine_tenths", "unlabelled_as_se"):
-                reg.add("cral " + k.replace("_", " "), _pct(al[k]) if al[k] is not None else "--", provenance=rrun)
-            for k in ("unlabelled_tested", "impossible_pairs", "impossible_pairs_tested", "impossible_pairs_papers", "impossible_pairs_separate"):
-                reg.add("cral " + k.replace("_", " "), al[k], provenance=rrun)
-            _cr_shares("cral without impossible", al["without_impossible"])
-        rr = cr.get("rows_reread", {})
-        if rr and rr.get("pages_reread"):
-            reg.add("crrr pages in kit", rr["pages_in_kit"], provenance=rrun)
-            reg.add("crrr pages reread", rr["pages_reread"], provenance=rrun)
-            reg.add("crrr tables reread", rr["tables_reread"], provenance=rrun)
-            reg.add("crrr tables separate row after", rr["tables_separate_row_after"], provenance=rrun)
-            _cr_shares("crrr before", rr["before_on_those_pages"])
-            _cr_shares("crrr after", rr["after_on_those_pages"])
-            _cr_shares("crrr census after", rr["census_after"])
-            _cr_shares("crrr census after no row label", rr["census_after_without_row_label"])
-            for lab, d in rr["census_after_by_kind"].items():
-                _cr_shares("crrr census after " + lab.replace("_", " "), d)
-        for lab, d in cr["by_kind"].items():
-            key = lab.replace("_", " ")
-            reg.add(f"cr {key} papers", d["papers"], provenance=rrun)
-            reg.add(f"cr {key} papers with groups", d["papers_with_groups"], provenance=rrun)
-            reg.add(f"cr {key} groups", d["groups"], provenance=rrun)
-            reg.add(f"cr {key} neither", _pct(d["pct_neither"]) if d["pct_neither"] is not None else "--", provenance=rrun)
-            reg.add(f"cr {key} neither ci", f"[{d['ci_neither'][0]}, {d['ci_neither'][1]}]" if d["ci_neither"] else "--", provenance=rrun)
-            reg.add(f"cr {key} testable", _pct(d["pct_testable"]) if d["pct_testable"] is not None else "--", provenance=rrun)
-            reg.add(f"cr {key} testable ci", f"[{d['ci_testable'][0]}, {d['ci_testable'][1]}]" if d["ci_testable"] else "--", provenance=rrun)
-            reg.add(f"cr {key} tested", d["tested"], provenance=rrun)
-            reg.add(f"cr {key} tested papers", d.get("tested_papers", 0), provenance=rrun)
-            reg.add(f"cr {key} fail", _pct(d["pct_fail"]) if d["pct_fail"] is not None else "--", provenance=rrun)
-            reg.add(f"cr {key} fail ci", f"[{d['ci_fail'][0]}, {d['ci_fail'][1]}]" if d["ci_fail"] else "--", provenance=rrun)
+                _sh(f"{tag} sh {k.replace('_', ' ')}", sh[k])
+            reg.add(f"{tag} sh pct tested sd ge mean", _pct(sh["pct_tested_sd_ge_mean"]) if sh["pct_tested_sd_ge_mean"] is not None else "--", provenance=rrun)
+            reg.add(f"{tag} sh pct tested zero sd", _pct(sh["pct_tested_zero_sd"]) if sh["pct_tested_zero_sd"] is not None else "--", provenance=rrun)
+            reg.add(f"{tag} sh zero both groups", sh["zero_both_groups"], provenance=rrun)
+            reg.add(f"{tag} sh zero both papers", sh["zero_both_papers"], provenance=rrun)
+            reg.add(f"{tag} sh unreadable groups", sh["unreadable_groups"], provenance=rrun)
+            al = d["alternatives"]
+            for k in ("as_reported", "holm_table", "holm_paper", "one_sided", "population_sd", "rho_half", "rho_nine_tenths", "unlabelled_as_se", "impossible_pairs_fail"):
+                reg.add(f"{tag} al {k.replace('_', ' ')}", _pct(al[k]) if al[k] is not None else "--", provenance=rrun)
+            for k in ("unlabelled_tested", "impossible_pairs", "impossible_pairs_tested", "impossible_pairs_papers", "impossible_pairs_separate",
+                      "count_from_caption_or_page_tested", "count_from_paper_sentences"):
+                reg.add(f"{tag} al {k.replace('_', ' ')}", al[k], provenance=rrun)
+            _sh(f"{tag} al without impossible", al["without_impossible"])
+            _sh(f"{tag} al count from caption or page", al["count_from_caption_or_page"])
+            for lab, dd in d["bold_rule"].items():
+                _sh(f"{tag} bold {lab.replace('_', ' ')}", dd)
+            _sh(f"{tag} note with", d["note"]["with_note"])
+            _sh(f"{tag} note without", d["note"]["without_note"])
+            reg.add(f"{tag} note papers", d["note"]["papers_with_note"], provenance=rrun)
+            for lab, dd in d["citing"].items():
+                _sh(f"{tag} cite {lab.replace('_', ' ')}", dd)
+            for k, v in d["scan_runs"].items():
+                reg.add(f"{tag} runs {k.replace('_', ' ')}", v, provenance=rrun)
+
+        rr = cr["rows_reread"]
+        for k in ("pages_reread", "tables_reread", "tables_replaced", "tables_kept", "tables_truncated", "pages_with_a_kept_table",
+                  "before_barred", "after_barred", "before_means", "after_means", "tables_separate_row_after", "tables_separate_after",
+                  "tables_none_after", "pages_in_kits", "pages_new_optimizer", "pages_application"):
+            reg.add(f"crrr {k.replace('_', ' ')}", rr[k], provenance=rrun)
+        _sh("crrr before", rr["before_on_those_pages"])
+        _sh("crrr after", rr["after_on_those_pages"])
 
     reg.write(out_path)
     return reg.manifest()

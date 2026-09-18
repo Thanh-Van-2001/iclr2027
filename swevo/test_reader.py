@@ -61,6 +61,7 @@ def main(argv=None):
     ap.add_argument("--extracted", default=os.environ.get("SWEVO_EXTRACTED", "data/extracted_oa.jsonl"))
     ap.add_argument("--corpus", default="data/corpus_oa")
     ap.add_argument("--out", default=OUT)
+    ap.add_argument("--max-chars", type=int, default=400000, help="characters of the paper's text sent to the model (the first submission used 80000, which cut two thirds of the new-optimizer papers)")
     args = ap.parse_args(argv)
     key = os.environ.get("RELAY_API_KEY")
     if not key or not os.environ.get("RELAY_URL"):
@@ -84,7 +85,8 @@ def main(argv=None):
             continue
         r = recs[pid]
         path = os.path.join(args.corpus, f"{r['venue']}{r['year']}_{pid}.pdf")
-        text = " ".join(pg.get_text() for pg in fitz.open(path))[:80000]
+        full = " ".join(pg.get_text() for pg in fitz.open(path))
+        text = full[:args.max_chars]
         raw = ask(PROMPT + text, key, max_tokens=4000)
         s = raw.strip()
         if "```" in s:
@@ -97,6 +99,8 @@ def main(argv=None):
             d = {"parse_error": raw[:300]}
         d["title"] = r["title"]
         d["model"] = os.environ.get("RELAY_MODEL", "gemini/gemini-3.1-pro-preview")
+        d["chars_sent"] = len(text)
+        d["chars_total"] = len(full)
         d["in_testable_set"] = (pid in tset) if not args.papers else None
         done[pid] = d
         json.dump(done, open(args.out, "w", encoding="utf-8"), indent=1, ensure_ascii=False)

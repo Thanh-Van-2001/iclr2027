@@ -1,5 +1,7 @@
 {
  "pages": 236,
  "rule": "census pages of papers the full-text reader labels Mean/Std rows that hold a results table filed as bar_form none, plus pages whose reader notes mention a separate row",
- "protocol": "census-protocol-v1 + row instruction (swevo)"
+ "protocol": "census-protocol-v1 + row instruction (swevo)",
+ "model": "gemini/gemini-3.1-pro-preview (Google, served through an OpenAI-compatible relay; reasoning effort default unless stated)",
+ "command": "python study/read_pages_api.py --kit audits/swevo_census_rows --shard k/4 [--reverse] --out ... --venue-phrase ... --bar-forms ... --max-tokens 8000 --extra-instruction \"$(cat instruction.txt)\""
 }

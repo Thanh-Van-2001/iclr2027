@@ -131,7 +131,11 @@ def scan(path: str, title: str, abstract: str, patterns: list) -> dict:
     cec_years = sorted({m.group(0)[-2:] for m in SUITES["cec"].finditer(main)})
     head = f"{title} {abstract}"
     metaphors = [name for name, rx in patterns if rx.search(head)]
-    cites = {k: bool(re.search(pat, body, re.I)) for k, pat in METHODOLOGY.items()}
+    # titles wrap and hyphenate in the narrow reference column: match on
+    # whitespace-normalised, de-hyphenated text with any run of blanks
+    flat = re.sub(r"-\s*\n\s*", "", body)
+    flat = re.sub(r"\s+", " ", flat)
+    cites = {k: bool(re.search(pat.replace(" ", r"\s+"), flat, re.I | re.S)) for k, pat in METHODOLOGY.items()}
     return {"pages": len(doc), "runs": dict(runs.most_common(6)), "run_modal": runs.most_common(1)[0][0] if runs else None,
             "run_sentence": run_sent[:300], "tests": tests, "test_sentences": {k: v[:300] for k, v in test_sents.items()},
             "any_test": any(tests[k] for k in ("wilcoxon", "friedman", "t_test", "mann_whitney", "kruskal", "anova")),

@@ -1,0 +1,7 @@
+{
+ "pages": 135,
+ "rule": "every other census page holding a results table filed as having no dispersion with at least one single-bold group (the pages the first re-read did not cover, mostly application papers)",
+ "protocol": "census-protocol-v1 + row instruction (swevo)",
+ "model": "gemini/gemini-3.1-pro-preview (Google, served through an OpenAI-compatible relay; reasoning effort default unless stated)",
+ "command": "as audits/swevo_census_rows, kit audits/swevo_census_rows2"
+}

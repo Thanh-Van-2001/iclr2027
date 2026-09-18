@@ -1,0 +1,1254 @@
+[
+ {
+  "id": "2222",
+  "tables": [
+   {
+    "caption_start": "Table 5. Optimal parameters for",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "50",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "RMSE",
+      "direction": "lower",
+      "winner_mean": "1.7298E-03",
+      "winner_disp": "none",
+      "runner_mean": "1.7337E-03",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 6. Optimal parameters for",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "50",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "RMSE",
+      "direction": "lower",
+      "winner_mean": "1.6601E-02",
+      "winner_disp": "none",
+      "runner_mean": "1.6659E-02",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "2135",
+  "tables": [
+   {
+    "caption_start": "Table 31. Comparison of NeuroFusionNet",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "5",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Accuracy (%)",
+      "direction": "higher",
+      "winner_mean": "94.27",
+      "winner_disp": "none",
+      "runner_mean": "89.6",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F1-score",
+      "direction": "higher",
+      "winner_mean": "0.94",
+      "winner_disp": "none",
+      "runner_mean": "0.88",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "Ignored Table 30 as it presents PCA feature loadings rather than experimental performance comparisons.",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "2112",
+  "tables": [
+   {
+    "caption_start": "Table 29. Evaluations with baselines for email content.",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Cohen's kappa",
+      "direction": "higher",
+      "winner_mean": ".916419",
+      "winner_disp": "none",
+      "runner_mean": ".910931",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 30. Evaluations with baselines for HTTP content.",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Cohen's kappa",
+      "direction": "higher",
+      "winner_mean": ".870437",
+      "winner_disp": "none",
+      "runner_mean": ".861078",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "2090",
+  "tables": [
+   {
+    "caption_start": "Table 7. Compare the error evaluation",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "3",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "AID MAE",
+      "direction": "lower",
+      "winner_mean": "0.210",
+      "winner_disp": "none",
+      "runner_mean": "0.310",
+      "runner_disp": "none"
+     },
+     {
+      "label": "AID RMSE",
+      "direction": "lower",
+      "winner_mean": "0.261",
+      "winner_disp": "none",
+      "runner_mean": "0.380",
+      "runner_disp": "none"
+     },
+     {
+      "label": "AID MAPE",
+      "direction": "lower",
+      "winner_mean": "0.161",
+      "winner_disp": "none",
+      "runner_mean": "0.179",
+      "runner_disp": "none"
+     },
+     {
+      "label": "PTB MAE",
+      "direction": "lower",
+      "winner_mean": "0.185",
+      "winner_disp": "none",
+      "runner_mean": "0.203",
+      "runner_disp": "none"
+     },
+     {
+      "label": "PTB RMSE",
+      "direction": "lower",
+      "winner_mean": "0.195",
+      "winner_disp": "none",
+      "runner_mean": "0.228",
+      "runner_disp": "none"
+     },
+     {
+      "label": "PTB MAPE",
+      "direction": "lower",
+      "winner_mean": "0.082",
+      "winner_disp": "none",
+      "runner_mean": "0.101",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "2023",
+  "tables": [
+   {
+    "caption_start": "Table 11. Comparison of Pareto front solutions",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "33",
+      "direction": "lower",
+      "winner_mean": "4,171,613",
+      "winner_disp": "none",
+      "runner_mean": "4,928,140",
+      "runner_disp": "none"
+     },
+     {
+      "label": "35",
+      "direction": "lower",
+      "winner_mean": "4,171,613",
+      "winner_disp": "none",
+      "runner_mean": "4,640,084",
+      "runner_disp": "none"
+     },
+     {
+      "label": "35",
+      "direction": "lower",
+      "winner_mean": "4,171,613",
+      "winner_disp": "none",
+      "runner_mean": "5,467,962",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1953",
+  "tables": [
+   {
+    "caption_start": "Table 33. Comparison of proposed",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "NMI",
+      "direction": "higher",
+      "winner_mean": "0.8519",
+      "winner_disp": "none",
+      "runner_mean": "0.8200",
+      "runner_disp": "none"
+     },
+     {
+      "label": "ARI",
+      "direction": "higher",
+      "winner_mean": "0.7250",
+      "winner_disp": "none",
+      "runner_mean": "0.7800",
+      "runner_disp": "none"
+     },
+     {
+      "label": "AUC",
+      "direction": "higher",
+      "winner_mean": "0.924",
+      "winner_disp": "none",
+      "runner_mean": "0.900",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "Ignored Table 32 as it is a hyperparameter table.",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1937",
+  "tables": [
+   {
+    "caption_start": "Table 11. Performance metrics",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "MAPE/%",
+      "direction": "lower",
+      "winner_mean": "3.01",
+      "winner_disp": "none",
+      "runner_mean": "3.71",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MAE/mm",
+      "direction": "lower",
+      "winner_mean": "0.026",
+      "winner_disp": "none",
+      "runner_mean": "0.033",
+      "runner_disp": "none"
+     },
+     {
+      "label": "RMSE/mm",
+      "direction": "lower",
+      "winner_mean": "0.030",
+      "winner_disp": "none",
+      "runner_mean": "0.040",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 12. Average performance metrics",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Text mentions bold numbers but none are actually bolded in the printed table."
+   },
+   {
+    "caption_start": "Table 13. Significance test results.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "ci",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "bracket",
+    "groups": [],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1789",
+  "tables": [
+   {
+    "caption_start": "Table 2. HV values of",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "ZDT1",
+      "direction": "higher",
+      "winner_mean": "7.2174e-1",
+      "winner_disp": "none",
+      "runner_mean": "0.0000e+0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "ZDT2",
+      "direction": "higher",
+      "winner_mean": "4.4627e-1",
+      "winner_disp": "none",
+      "runner_mean": "0.0000e+0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "ZDT3",
+      "direction": "higher",
+      "winner_mean": "6.0037e-1",
+      "winner_disp": "none",
+      "runner_mean": "2.0782e-3",
+      "runner_disp": "none"
+     },
+     {
+      "label": "ZDT4",
+      "direction": "higher",
+      "winner_mean": "7.2178e-1",
+      "winner_disp": "none",
+      "runner_mean": "0.0000e+0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "ZDT6",
+      "direction": "higher",
+      "winner_mean": "3.8964e-1",
+      "winner_disp": "none",
+      "runner_mean": "3.0307e-3",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 3. Spacing values of",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "ZDT1",
+      "direction": "lower",
+      "winner_mean": "4.6289e-3",
+      "winner_disp": "none",
+      "runner_mean": "6.9726e-2",
+      "runner_disp": "none"
+     },
+     {
+      "label": "ZDT2",
+      "direction": "lower",
+      "winner_mean": "4.6052e-3",
+      "winner_disp": "none",
+      "runner_mean": "5.0312e-2",
+      "runner_disp": "none"
+     },
+     {
+      "label": "ZDT3",
+      "direction": "lower",
+      "winner_mean": "4.4646e-3",
+      "winner_disp": "none",
+      "runner_mean": "7.7011e-2",
+      "runner_disp": "none"
+     },
+     {
+      "label": "ZDT4",
+      "direction": "lower",
+      "winner_mean": "4.6115e-3",
+      "winner_disp": "none",
+      "runner_mean": "2.5247e+0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "ZDT6",
+      "direction": "lower",
+      "winner_mean": "4.4356e-3",
+      "winner_disp": "none",
+      "runner_mean": "1.7991e-1",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 4. Coverage values of",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1713",
+  "tables": [
+   {
+    "caption_start": "Table 11. The average HV and IGD",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "page",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "data1 HV",
+      "direction": "higher",
+      "winner_mean": "0.1706",
+      "winner_disp": "none",
+      "runner_mean": "0.0308",
+      "runner_disp": "none"
+     },
+     {
+      "label": "data1 IGD",
+      "direction": "lower",
+      "winner_mean": "0.0500",
+      "winner_disp": "none",
+      "runner_mean": "0.1213",
+      "runner_disp": "none"
+     },
+     {
+      "label": "data2 HV",
+      "direction": "higher",
+      "winner_mean": "0.1608",
+      "winner_disp": "none",
+      "runner_mean": "0.0506",
+      "runner_disp": "none"
+     },
+     {
+      "label": "data2 IGD",
+      "direction": "lower",
+      "winner_mean": "0.0394",
+      "winner_disp": "none",
+      "runner_mean": "0.2872",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1709",
+  "tables": [
+   {
+    "caption_start": "Table 6. The compared results of average IGD",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "page",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "data1",
+      "direction": "lower",
+      "winner_mean": "0.5459",
+      "winner_disp": "none",
+      "runner_mean": "1.0234",
+      "runner_disp": "none"
+     },
+     {
+      "label": "data2",
+      "direction": "lower",
+      "winner_mean": "0.0394",
+      "winner_disp": "none",
+      "runner_mean": "0.2297",
+      "runner_disp": "none"
+     },
+     {
+      "label": "data3",
+      "direction": "lower",
+      "winner_mean": "0.1486",
+      "winner_disp": "none",
+      "runner_mean": "0.8043",
+      "runner_disp": "none"
+     },
+     {
+      "label": "data4",
+      "direction": "lower",
+      "winner_mean": "0.1638",
+      "winner_disp": "none",
+      "runner_mean": "1.6547",
+      "runner_disp": "none"
+     },
+     {
+      "label": "data5",
+      "direction": "lower",
+      "winner_mean": "0.5977",
+      "winner_disp": "none",
+      "runner_mean": "1.4568",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu01",
+      "direction": "lower",
+      "winner_mean": "0.1572",
+      "winner_disp": "none",
+      "runner_mean": "0.6997",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu02",
+      "direction": "lower",
+      "winner_mean": "0.4961",
+      "winner_disp": "none",
+      "runner_mean": "1.9889",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu03",
+      "direction": "lower",
+      "winner_mean": "0.2452",
+      "winner_disp": "none",
+      "runner_mean": "0.3218",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu04",
+      "direction": "lower",
+      "winner_mean": "1.9386",
+      "winner_disp": "none",
+      "runner_mean": "9.4899",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu05",
+      "direction": "lower",
+      "winner_mean": "2.2885",
+      "winner_disp": "none",
+      "runner_mean": "12.5678",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu06",
+      "direction": "lower",
+      "winner_mean": "0.4468",
+      "winner_disp": "none",
+      "runner_mean": "45.6789",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu07",
+      "direction": "lower",
+      "winner_mean": "1.7153",
+      "winner_disp": "none",
+      "runner_mean": "3.4567",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu08",
+      "direction": "lower",
+      "winner_mean": "0.2210",
+      "winner_disp": "none",
+      "runner_mean": "0.5394",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMk01",
+      "direction": "lower",
+      "winner_mean": "1.1555",
+      "winner_disp": "none",
+      "runner_mean": "1.3206",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMk02",
+      "direction": "lower",
+      "winner_mean": "0.8166",
+      "winner_disp": "none",
+      "runner_mean": "2.1460",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMk03",
+      "direction": "lower",
+      "winner_mean": "1.7127",
+      "winner_disp": "none",
+      "runner_mean": "8.2345",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMk04",
+      "direction": "lower",
+      "winner_mean": "1.3668",
+      "winner_disp": "none",
+      "runner_mean": "1.4266",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMk05",
+      "direction": "lower",
+      "winner_mean": "2.0582",
+      "winner_disp": "none",
+      "runner_mean": "2.8649",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMk06",
+      "direction": "lower",
+      "winner_mean": "3.4538",
+      "winner_disp": "none",
+      "runner_mean": "8.3017",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMk07",
+      "direction": "lower",
+      "winner_mean": "2.7827",
+      "winner_disp": "none",
+      "runner_mean": "4.3913",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMk08",
+      "direction": "lower",
+      "winner_mean": "2.2471",
+      "winner_disp": "none",
+      "runner_mean": "2.6966",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMk09",
+      "direction": "lower",
+      "winner_mean": "11.0057",
+      "winner_disp": "none",
+      "runner_mean": "14.0539",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMk10",
+      "direction": "lower",
+      "winner_mean": "4.3852",
+      "winner_disp": "none",
+      "runner_mean": "20.8669",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1695",
+  "tables": [
+   {
+    "caption_start": "Table 10. MMRE values on different Software data sets based on different models.",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "COCOMO81",
+      "direction": "lower",
+      "winner_mean": "8.7523E-01",
+      "winner_disp": "none",
+      "runner_mean": "8.8861E-01",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Maxwell",
+      "direction": "lower",
+      "winner_mean": "8.1102E-01",
+      "winner_disp": "none",
+      "runner_mean": "8.3948E-01",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Desharnais",
+      "direction": "lower",
+      "winner_mean": "6.5664E-01",
+      "winner_disp": "none",
+      "runner_mean": "7.1385E-01",
+      "runner_disp": "none"
+     },
+     {
+      "label": "China",
+      "direction": "lower",
+      "winner_mean": "1.2306E-01",
+      "winner_disp": "none",
+      "runner_mean": "1.2818E-01",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Miyazaki",
+      "direction": "lower",
+      "winner_mean": "4.5370E-01",
+      "winner_disp": "none",
+      "runner_mean": "4.6001E-01",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1543",
+  "tables": [
+   {
+    "caption_start": "Table 5. Comparison of DT",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Accuracy",
+      "direction": "higher",
+      "winner_mean": "0.8890",
+      "winner_disp": "none",
+      "runner_mean": "0.8855",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Precision",
+      "direction": "higher",
+      "winner_mean": "0.8860",
+      "winner_disp": "none",
+      "runner_mean": "0.8820",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Recall",
+      "direction": "higher",
+      "winner_mean": "0.8925",
+      "winner_disp": "none",
+      "runner_mean": "0.8890",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F1 Score",
+      "direction": "higher",
+      "winner_mean": "0.8892",
+      "winner_disp": "none",
+      "runner_mean": "0.8854",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1443",
+  "tables": [
+   {
+    "caption_start": "Table 20. Simulation results using",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "50",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Cost ($/hr)",
+      "direction": "lower",
+      "winner_mean": "1.6196 × 10^6",
+      "winner_disp": "none",
+      "runner_mean": "1.6871 × 10^6",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Saving ($/hr)",
+      "direction": "higher",
+      "winner_mean": "126,400",
+      "winner_disp": "none",
+      "runner_mean": "58,900",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Reduction (%)",
+      "direction": "higher",
+      "winner_mean": "7.2394",
+      "winner_disp": "none",
+      "runner_mean": "3.3734",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1434",
+  "tables": [
+   {
+    "caption_start": "Table 8. Simulation results using",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "50",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Emission (ton/hr)",
+      "direction": "lower",
+      "winner_mean": "0.66599 \\times 10^5",
+      "winner_disp": "none",
+      "runner_mean": "0.72978 \\times 10^5",
+      "runner_disp": "none"
+     }
+    ],
+    "note": "Reduction (%) row has multiple bold cells so it is excluded."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1425",
+  "tables": [
+   {
+    "caption_start": "Table 8. Pairwise comparison of mean",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "paren",
+    "groups": [],
+    "note": "Caption says significant values are bold, but no cells appear bold. Parentheses contain p-values, not error bars."
+   },
+   {
+    "caption_start": "Table 9. Comparison of PHONEME Indian",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "20% Accuracy",
+      "direction": "higher",
+      "winner_mean": "83.7",
+      "winner_disp": "none",
+      "runner_mean": "83.2",
+      "runner_disp": "none"
+     },
+     {
+      "label": "20% Precision",
+      "direction": "higher",
+      "winner_mean": "68.9",
+      "winner_disp": "none",
+      "runner_mean": "68.1",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1421",
+  "tables": [
+   {
+    "caption_start": "Table 3. Comparison of credit card fraud detection results",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "20% Precision",
+      "direction": "higher",
+      "winner_mean": "90.5",
+      "winner_disp": "none",
+      "runner_mean": "90.0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "20% Recall",
+      "direction": "higher",
+      "winner_mean": "80.4",
+      "winner_disp": "none",
+      "runner_mean": "81.8",
+      "runner_disp": "none"
+     },
+     {
+      "label": "20% F1 Score",
+      "direction": "higher",
+      "winner_mean": "84.1",
+      "winner_disp": "none",
+      "runner_mean": "83.4",
+      "runner_disp": "none"
+     },
+     {
+      "label": "20% ROC AUC",
+      "direction": "higher",
+      "winner_mean": "90.2",
+      "winner_disp": "none",
+      "runner_mean": "90.1",
+      "runner_disp": "none"
+     },
+     {
+      "label": "40% Precision",
+      "direction": "higher",
+      "winner_mean": "93.1",
+      "winner_disp": "none",
+      "runner_mean": "86.8",
+      "runner_disp": "none"
+     },
+     {
+      "label": "40% Recall",
+      "direction": "higher",
+      "winner_mean": "83.3",
+      "winner_disp": "none",
+      "runner_mean": "82.6",
+      "runner_disp": "none"
+     },
+     {
+      "label": "40% F1 Score",
+      "direction": "higher",
+      "winner_mean": "85.5",
+      "winner_disp": "none",
+      "runner_mean": "83.9",
+      "runner_disp": "none"
+     },
+     {
+      "label": "40% ROC AUC",
+      "direction": "higher",
+      "winner_mean": "91.6",
+      "winner_disp": "none",
+      "runner_mean": "91.3",
+      "runner_disp": "none"
+     },
+     {
+      "label": "60% Precision",
+      "direction": "higher",
+      "winner_mean": "87.0",
+      "winner_disp": "none",
+      "runner_mean": "85.7",
+      "runner_disp": "none"
+     },
+     {
+      "label": "60% Recall",
+      "direction": "higher",
+      "winner_mean": "84.7",
+      "winner_disp": "none",
+      "runner_mean": "83.2",
+      "runner_disp": "none"
+     },
+     {
+      "label": "60% F1 Score",
+      "direction": "higher",
+      "winner_mean": "84.7",
+      "winner_disp": "none",
+      "runner_mean": "83.8",
+      "runner_disp": "none"
+     },
+     {
+      "label": "80% Precision",
+      "direction": "higher",
+      "winner_mean": "93.4",
+      "winner_disp": "none",
+      "runner_mean": "87.6",
+      "runner_disp": "none"
+     },
+     {
+      "label": "80% Recall",
+      "direction": "higher",
+      "winner_mean": "85.1",
+      "winner_disp": "none",
+      "runner_mean": "84.5",
+      "runner_disp": "none"
+     },
+     {
+      "label": "80% F1 Score",
+      "direction": "higher",
+      "winner_mean": "84.8",
+      "winner_disp": "none",
+      "runner_mean": "84.1",
+      "runner_disp": "none"
+     },
+     {
+      "label": "80% ROC AUC",
+      "direction": "higher",
+      "winner_mean": "92.3",
+      "winner_disp": "none",
+      "runner_mean": "91.6",
+      "runner_disp": "none"
+     },
+     {
+      "label": "100% Precision",
+      "direction": "higher",
+      "winner_mean": "92.4",
+      "winner_disp": "none",
+      "runner_mean": "86.4",
+      "runner_disp": "none"
+     },
+     {
+      "label": "100% Recall",
+      "direction": "higher",
+      "winner_mean": "84.0",
+      "winner_disp": "none",
+      "runner_mean": "83.3",
+      "runner_disp": "none"
+     },
+     {
+      "label": "100% F1 Score",
+      "direction": "higher",
+      "winner_mean": "82.5",
+      "winner_disp": "none",
+      "runner_mean": "81.1",
+      "runner_disp": "none"
+     },
+     {
+      "label": "100% ROC AUC",
+      "direction": "higher",
+      "winner_mean": "92.3",
+      "winner_disp": "none",
+      "runner_mean": "92.0",
+      "runner_disp": "none"
+     }
+    ],
+    "note": "60% ROC AUC has two bold cells, so it is excluded."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1387",
+  "tables": [
+   {
+    "caption_start": "Table 4. Prediction error comparison of",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "3 days MAPE (%)",
+      "direction": "lower",
+      "winner_mean": "1.93",
+      "winner_disp": "none",
+      "runner_mean": "2.16",
+      "runner_disp": "none"
+     },
+     {
+      "label": "3 days BRMSE (%)",
+      "direction": "lower",
+      "winner_mean": "2.67",
+      "winner_disp": "none",
+      "runner_mean": "3.23",
+      "runner_disp": "none"
+     },
+     {
+      "label": "3 days R2",
+      "direction": "higher",
+      "winner_mean": "0.996",
+      "winner_disp": "none",
+      "runner_mean": "0.994",
+      "runner_disp": "none"
+     },
+     {
+      "label": "7 days MAPE (%)",
+      "direction": "lower",
+      "winner_mean": "3.49",
+      "winner_disp": "none",
+      "runner_mean": "3.89",
+      "runner_disp": "none"
+     },
+     {
+      "label": "7 days BRMSE (%)",
+      "direction": "lower",
+      "winner_mean": "7.19",
+      "winner_disp": "none",
+      "runner_mean": "7.92",
+      "runner_disp": "none"
+     },
+     {
+      "label": "7 days R2",
+      "direction": "higher",
+      "winner_mean": "0.963",
+      "winner_disp": "none",
+      "runner_mean": "0.952",
+      "runner_disp": "none"
+     },
+     {
+      "label": "15 days MAPE (%)",
+      "direction": "lower",
+      "winner_mean": "5.68",
+      "winner_disp": "none",
+      "runner_mean": "5.94",
+      "runner_disp": "none"
+     },
+     {
+      "label": "15 days BRMSE (%)",
+      "direction": "lower",
+      "winner_mean": "10.25",
+      "winner_disp": "none",
+      "runner_mean": "11.43",
+      "runner_disp": "none"
+     },
+     {
+      "label": "15 days R2",
+      "direction": "higher",
+      "winner_mean": "0.862",
+      "winner_disp": "none",
+      "runner_mean": "0.831",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "y",
+  "note": "",
+  "reasoning_effort": "default"
+ }
+]

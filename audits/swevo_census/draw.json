@@ -2,6 +2,8 @@
  "n_papers": 500,
  "seed": 2026,
  "papers_eligible": 1553,
- "protocol": "census-protocol-v1 with bar_form separate_row (swevo)",
- "papers_drawn": 500
+ "protocol": "census-protocol-v1 (study/read_pages_api.PROTO) with --venue-phrase 'metaheuristics paper in Scientific Reports (single-column Nature format)' and --bar-forms 'pm / paren / bracket / subscript / separate_column / separate_row / none'; max_tokens 12000; 11 timed-out pages re-read at reasoning effort low, max_tokens 4096 (labels_shard9.json)",
+ "papers_drawn": 500,
+ "model": "gemini/gemini-3.1-pro-preview (Google, served through an OpenAI-compatible relay; reasoning effort default unless stated)",
+ "command": "python study/read_pages_api.py --kit audits/swevo_census --shard k/4 [--reverse] --out audits/swevo_census/labels_shardk.json --venue-phrase ... --bar-forms ..."
 }

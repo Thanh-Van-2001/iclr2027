@@ -174,7 +174,7 @@ def scan_run_count_reading(cs: list, scan: dict) -> dict:
 
 BOLD_SENTENCE = re.compile(r"bold", re.I)
 BOLD_BEST = re.compile(r"best|optimal|lowest|highest|superior|minimum|maximum|top", re.I)
-BOLD_SIG = re.compile(r"statistic|signific", re.I)
+BOLD_SIG = re.compile(r"signific|statistically (?:best|better|superior|optimal|dominant)", re.I)
 
 
 def bold_rule_of(x: dict) -> str:
@@ -206,7 +206,7 @@ def test_reader_blocks(cs: list, kinds: dict) -> dict:
     import glob
     import time
     d = {}
-    for path in sorted(glob.glob(f"{OUT}/test_reader_part*.json")) + [f"{OUT}/test_reader.json"]:
+    for path in sorted(glob.glob(f"{OUT}/test_reader_part*.json")) + [f"{OUT}/test_reader.json"] + sorted(glob.glob(f"{OUT}/test_reader_v2_part*.json")):
         if not os.path.exists(path):
             continue
         for _ in range(5):
@@ -273,13 +273,14 @@ def test_reader_agreement(second_path: str = "out/swevo/test_reader_second.json"
     if not os.path.exists(second_path):
         return {}
     first = {}
-    for path in sorted(glob.glob(f"{OUT}/test_reader_part*.json")):
+    for path in sorted(glob.glob(f"{OUT}/test_reader_part*.json")) + sorted(glob.glob(f"{OUT}/test_reader_v2_part*.json")):
         first.update(json.load(open(path, encoding="utf-8")))
     second = json.load(open(second_path, encoding="utf-8"))
+    if os.path.exists(second_path.replace(".json", "_v2.json")):
+        second.update(json.load(open(second_path.replace(".json", "_v2.json"), encoding="utf-8")))
     both = [p for p in second if p in first and "parse_error" not in first[p] and "parse_error" not in second[p]]
     def bold(v):
-        b = str(v.get("bold_rule") or "not stated").lower()
-        return "statistically_best" if ("statistic" in b or "signific" in b) else "best" if any(w in b for w in ("best", "optimal", "lowest", "highest")) else "not_stated"
+        return bold_rule_of(v)
     def named(v):
         return any(t != "none" for t in (v.get("test") or []))
     def layout(v):
@@ -407,8 +408,9 @@ def parser_readings(cs: list, scan: dict) -> dict:
 
 def scan_by_kind_holders(scan: dict, kinds: dict, cs: list) -> dict:
     """The text-scan rates by kind restricted to the papers in which the
-    parser found a highlighted comparison: papers that compare something."""
-    holders = {c["paper"] for c in cs}
+    parser found a genuine highlighted comparison: one that is neither a
+    reference-list line nor a cell of an all-bold row."""
+    holders = {c["paper"] for c in cs if not back_matter(c) and not c.get("_row_bold")}
     out = {}
     for lab in ("new_optimizer", "application", "all"):
         ids = [p for p, v in scan.items() if "error" not in v and p in holders and (lab == "all" or kinds.get(p) == lab)]
@@ -546,6 +548,8 @@ def main() -> int:
     boot["pct_neither"]["lo"], boot["pct_neither"]["hi"] = _boot_share([(c["paper"], c["winner_dispersion"] is None and c["runner_dispersion"] is None) for c in cs])
     boot["pct_testable"]["lo"], boot["pct_testable"]["hi"] = _boot_share([(c["paper"], bool(c.get("test"))) for c in cs])
     _t = [c for c in cs if c.get("test")]
+    _sizes = collections.Counter(c["paper"] for c in _t)
+    boot["effective_papers"] = round(sum(_sizes.values()) ** 2 / sum(v * v for v in _sizes.values()), 1) if _sizes else None
     boot["pct_fail"]["lo"], boot["pct_fail"]["hi"] = _boot_share([(c["paper"], c["test"]["p"] >= 0.05) for c in _t])
     boot["pct_fail_holm"]["lo"], boot["pct_fail_holm"]["hi"] = _boot_share([(c["paper"], not c.get("survives_holm")) for c in _t])
     print(f"OA metaheuristics: {summary['papers']} papers, {summary['comparisons']} comparisons, "
@@ -574,6 +578,7 @@ def main() -> int:
         recs = [r for r in records if r["year"] == year]
         a = analyse(recs)
         by_year[str(year)] = {"summary": make_all._summary(a, a["_comparisons"]), "bootstrap": make_all._bootstrap(a["_comparisons"])}
+    row_bold_readings(cs, records)   # sets c["_row_bold"] on every comparison, used by the holders below
     index = {r["id"]: r for r in json.load(open(f"{OUT}/index.json", encoding="utf-8"))}
     fetched = len([f for f in os.listdir("data/corpus_oa")]) if os.path.isdir("data/corpus_oa") else None
     by_journal_listed = collections.Counter(r["journal"] for r in index.values())
@@ -585,6 +590,8 @@ def main() -> int:
                    "listed_by_year": dict(collections.Counter(r["year"] for r in index.values() if r["journal"] == "Scientific Reports")),
                    "by_journal": dict(collections.Counter(index[r["id"]]["journal"] for r in records if r["id"] in index))},
         "kinds": by_group(cs, kinds, "by_kind") if kinds else {},
+        "holders_genuine": len({c["paper"] for c in cs if not back_matter(c) and not c.get("_row_bold")}),
+        "holders_all": len({c["paper"] for c in cs}),
         "metaphor": by_group(cs, metaphor, "by_metaphor") if metaphor else {},
         "suite": by_group(cs, suite, "by_suite") if suite else {},
         "kind_counts": dict(collections.Counter(kinds.values())),
