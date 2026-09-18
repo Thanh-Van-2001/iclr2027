@@ -362,11 +362,21 @@ def build(out_path: str) -> dict:
         reg.add(f"{tag} no bar winner frac", _frac(nb["winner_mean"]), provenance=grun)
         reg.add(f"{tag} no bar absent", _pct_ci(nb["error_bar_truly_absent"]), provenance=grun)
         reg.add(f"{tag} no bar absent frac", _frac(nb["error_bar_truly_absent"]), provenance=grun)
+        vocab = {"discarded": ("no_bold", "multi_bold", "whole_row_bold", "not_results", "bold_missed", "parse_error", "other"),
+                 "non_extremal": ("subclass_best", "excluding_oracle", "own_method", "header_bold", "misread", "parse_error", "other")}
         for st in ("discarded", "non_extremal"):
             if st in g and isinstance(g[st], dict):
+                reg.add(f"{tag} {st.replace('_', ' ')} n", g[st].get("n", 0), provenance=grun)
                 for k, d in g[st].items():
                     if isinstance(d, dict) and "correct" in d and "n" in d:
                         reg.add(f"{tag} {st.replace('_', ' ')} {k.replace('_', ' ')} frac", _frac(d), provenance=grun)
+                causes = g[st].get("causes", {})
+                for c in sorted(set(vocab[st]) | set(causes)):
+                    reg.add(f"{tag} {st.replace('_', ' ')} cause {c.replace('_', ' ')}", causes.get(c, 0), provenance=grun)
+        items_g = json.load(open("audits/swevo_gold/items.json", encoding="utf-8"))
+        reg.add(f"{tag} items n", len(items_g), provenance=grun)
+        for st in ("testable", "no_bar", "discarded", "non_extremal"):
+            reg.add(f"{tag} stratum {st.replace('_', ' ')}", sum(1 for it in items_g if it["stratum"] == st), provenance=grun)
     if os.path.exists("out/swevo/reader_agreement.json"):
         ag = _j("reader_agreement")
         for k, v in ag.items():

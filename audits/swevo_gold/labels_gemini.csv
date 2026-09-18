@@ -1,0 +1,141 @@
+id,stratum,results_table,bold_ok,orientation,direction,winner_mean,winner_disp,runner_mean,runner_disp,disp_type,n_runs,n_source,rival_copied,error_bar_present,cause,note
+001,testable,y,y,column,lower,0.777,0.015,0.788,0.015,sd,5,caption,n,,,Clear winner.
+002,testable,y,y,row,lower,207,3.866,211,4.06,sd,51,paper,n,,,"The caption indicates these are error values, so lower is better."
+003,testable,y,y,row,higher,0.428,0.00685,0.412,0.00784,unlabelled,none,none,n,,,"Higher values are bolded, indicating that a higher HV metric is better."
+004,testable,y,y,row,higher,0.503,0.00839,0.487,0.00914,unlabelled,none,none,n,,,"The table presents HV metric results where higher values are better, and no dispersion type or run count is specified for this specific experiment."
+005,testable,y,y,column,higher,0.412866,0.000021,0.401635,0.000033,unlabelled,none,none,n,,,Dispersion is variance.
+006,testable,y,y,column,lower,10.75,0.22,11.86,0.26,sd,5,caption,y,,,Correct winner.
+007,testable,y,y,row,lower,7.74,2.75,7.91,2.47,sd,51,paper,n,,,The boxed cell is the lowest mean in its row and is correctly bolded.
+008,testable,y,y,row,higher,100,0.00,100,0.00,sd,500,paper,n,,,Tie for best mean; only one bolded.
+009,testable,n,n/a,n/a,n/a,n/a,n/a,n/a,n/a,n/a,none,none,n/a,,,"Reference list, not results table."
+010,testable,y,y,row,higher,100,0.00,100,0.00,sd,500,paper,n,,,Tie for best mean; only one bolded.
+011,testable,y,y,column,higher,98.9,0.4,94.8,0.6,ci,10,paper,y,,,The runner-up row name carries a citation superscript.
+012,testable,y,y,row,higher,100,0.00,100,0.00,sd,500,paper,n,,,Tied with runner-up.
+013,testable,y,y,row,higher,100,0.00,100,0.00,sd,500,paper,n,,,Tie for best mean; only one bolded.
+014,testable,y,y,row,higher,0.187,0.00467,0.166,0.00501,unlabelled,none,none,n,,,The runner-up is MTO-CPE with a mean of 0.166.
+015,testable,y,y,row,higher,100,0.00,100,0.00,sd,500,paper,n,,,Tied with runner-up.
+016,testable,n,unclear,unclear,unclear,unclear,unclear,unclear,unclear,unclear,none,none,unclear,,,Not a results table.
+017,testable,y,y,row,lower,24.87,3.24,26.40,3.36,sd,51,paper,n,,,The boxed cell is correctly bolded as the lowest mean error in its row.
+018,testable,n,unclear,unclear,unclear,unclear,unclear,unclear,unclear,unlabelled,none,none,unclear,,,"The image shows a list of references, not a table of experimental results."
+019,testable,y,y,row,higher,99.87,0.10,97.88,0.02,sd,500,paper,n,,,Clear row winner.
+020,testable,y,y,column,lower,0.461,0.012,0.485,0.012,sd,5,caption,y,,,Boxed cell is the column winner.
+021,testable,y,y,column,lower,0.498,0.011,0.509,0.011,sd,5,caption,n,,,Ablation study.
+022,testable,y,y,row,lower,272,87.12,275,86.3,sd,51,paper,n,,,The boxed cell is the lowest mean in its row and is correctly bolded.
+023,testable,y,y,column,higher,0.849,0.010,0.831,0.011,sd,5,caption,y,,,PatchTST is runner-up.
+024,testable,n,n,none,none,none,none,none,none,none,none,none,none,,,"The image shows a list of references, not a results table."
+025,testable,n,n,row,higher,none,none,none,none,unlabelled,none,none,n,,,"The image shows a list of references, not a table of experimental results."
+026,testable,n,n/a,n/a,n/a,n/a,n/a,n/a,n/a,n/a,none,none,n/a,,,"Bibliography, not a results table."
+027,testable,y,y,row,lower,22.4,2.4,25.7,2.9,unlabelled,30,paper,n,,,Lower run time is better; bold value is the row minimum.
+028,testable,y,y,row,lower,0.0000000854,0.000000114,0.000000453,0.000000129,sd,51,paper,n,,,The boxed cell is the winner in its row.
+029,testable,y,y,row,lower,347,19.7,362.94,13.157,sd,51,paper,n,,,Lower is better for error values.
+030,testable,y,y,row,lower,30.599,21.226,36.23,23.1,sd,51,paper,n,,,The boxed cell is correctly bolded as the lowest error value in its row.
+031,testable,y,y,row,lower,472,8.544,480.88,2.7999,sd,51,paper,n,,,"The table reports error values, so lower is better."
+032,testable,y,y,row,lower,706,406,951,89.554,sd,51,paper,n,,,The boxed cell is the lowest error value in its row and is correctly bolded.
+033,testable,y,y,row,lower,347,19.7,362.94,13.157,sd,51,paper,n,,,The boxed cell is the winner in its row.
+034,testable,y,y,row,higher,0.8967,0.0087,0.8887,0.0113,unlabelled,30,paper,n,,,Boxed cell is highest in row.
+035,testable,y,y,column,lower,11.42,0.23,12.76,0.25,sd,5,caption,y,,,Valid.
+036,testable,y,y,row,lower,496,3.54,506,3.85,sd,51,paper,n,,,The boxed cell is the lowest value in its row and is correctly bolded.
+037,testable,n,n,unclear,unclear,none,none,none,none,unlabelled,none,none,unclear,,,Image is a reference list.
+038,testable,y,y,row,lower,310,127,346,146,sd,51,paper,n,,,The boxed cell is the lowest error value in its row.
+039,testable,y,y,row,lower,23.864,2.4882,25.12,3.96,sd,51,paper,n,,,The boxed cell is the lowest value in its row and is correctly bolded.
+040,testable,y,y,column,lower,0.461,0.012,0.466,0.011,sd,5,caption,n,,,Valid bolding.
+041,testable,n,n,n/a,n/a,n/a,n/a,n/a,n/a,n/a,none,none,n/a,,,"The image shows a list of references, not a table of experimental results."
+042,testable,y,y,row,lower,2976,412,3110,401,sd,51,paper,n,,,The boxed cell is correctly bolded as the lowest error value in its row.
+043,testable,y,y,row,higher,0.8756,0.0098,0.8663,0.0132,unlabelled,30,paper,n,,,Boxed cell is max.
+044,testable,y,y,row,lower,365,924,793.1,1134.8,sd,51,paper,n,,,The boxed cell is the lowest error value in its row and is correctly bolded.
+045,testable,y,y,row,higher,0.187,0.00467,0.166,0.00501,unlabelled,none,none,n,,,"The table shows HV metric results for different numbers of IoT devices, with the highest value in each row bolded."
+046,testable,y,y,column,higher,99.0,0.3,94.2,0.5,ci,10,paper,y,,,"The runner-up row has a citation superscript, indicating the value is likely copied from another paper."
+047,testable,y,y,row,higher,100,0.00,100,0.00,sd,500,paper,n,,,Tied with runner-up.
+048,testable,y,y,column,lower,0.742,0.014,0.751,0.015,sd,5,caption,n,,,Boxed cell is the bold winner in the RMSE column.
+049,testable,y,y,row,higher,100,0.00,100,0.00,sd,500,paper,n,,,Tie for best mean; only one bolded.
+050,testable,y,y,row,lower,16.3,0.9,22.4,1.1,unlabelled,30,paper,n,,,"RT is run time, lower is better."
+051,testable,n,n,unclear,unclear,none,none,none,none,unlabelled,none,none,unclear,,,Not a results table; shows references.
+052,testable,y,y,row,higher,0.278,0.0246,0.251,0.0285,unlabelled,none,none,n,,,"The table presents HV metric results, but the provided text does not specify the number of runs for this particular table."
+053,testable,y,y,row,lower,0.043550,0.120647,0.089452,0.090057,unlabelled,30,paper,n,,,The boxed cell is the correctly bolded minimum in its row.
+054,testable,y,y,row,lower,53.39,1.29,57.90,1.53,sd,51,paper,n,,,The caption specifies standard deviation and error values (lower is better).
+055,testable,y,y,row,lower,12.4,0.7,17.6,0.8,unlabelled,30,paper,unclear,,,RT is run time; lower is better.
+056,testable,y,y,row,lower,7.24,2.321,7.58,2.42,sd,51,paper,n,,,Correctly bolded lowest error.
+057,testable,y,y,row,lower,23.1,4.321,24.283,2.0174,sd,51,paper,n,,,The boxed cell is the correctly bolded winner in its row for a lower-is-better metric.
+058,testable,y,y,row,higher,0.278,0.0246,0.251,0.0285,unlabelled,none,none,n,,,The table presents HV metric results but does not specify the dispersion measure or the number of runs for this particular experiment in the provided text.
+059,testable,y,y,row,lower,1636,674.12,1680.6,522.93,sd,51,paper,n,,,"The table reports error values, so lower is better."
+060,testable,y,y,column,lower,0.777,0.015,0.802,0.016,sd,5,caption,y,,,Valid RMSE result.
+061,no_bar,y,y,row,higher,0.9991,,0.9870,,,,,,y,,Std columns present.
+062,no_bar,y,n,row,lower,8.882E-16,,2.922E-06,,,,,,y,,STD is in a separate row.
+063,no_bar,y,n,row,higher,1.00,,0.00,,,,,,n,,No error bars are shown.
+064,no_bar,n,n,none,none,none,,none,,,,,,n,,Not an ML results table.
+065,no_bar,y,y,row,lower,0.0472,,0.0877,,,,,,n,,No error bars shown.
+066,no_bar,y,y,row,lower,0.37461,,0.38436,,,,,,y,,SD in separate row.
+067,no_bar,y,y,row,lower,1.81E-07,,2.05E-02,,,,,,y,,Std is in a separate row.
+068,no_bar,y,n,column,lower,none,,none,,,,,,n,,No dispersion for boxed cells.
+069,no_bar,y,y,row,lower,-1.04E+01,,-1.00E+01,,,,,,y,,Std in separate row.
+070,no_bar,y,y,row,higher,0.96,,0.9571,,,,,,n,,No error bars shown.
+071,no_bar,n,n,n/a,n/a,n/a,,n/a,,,,,,n,,Not an ML results table.
+072,no_bar,y,y,row,higher,- 1.26E+01,,- 2404.9032,,,,,,y,,Std in separate row.
+073,no_bar,y,y,column,higher,0.718,,0.603,,,,,,n,,No error bars shown.
+074,no_bar,y,y,row,lower,8.68E-84,,3.49E-63,,,,,,n,,No error bars shown.
+075,no_bar,y,y,row,higher,0.3220,,0.3120,,,,,,n,,No error bars shown.
+076,no_bar,y,y,row,lower,1.57142857,,2.28571429,,,,,,n,,No error bars present.
+077,no_bar,y,y,row,lower,16.2,,17.2,,,,,,n,,No error bars shown.
+078,no_bar,y,y,row,lower,0.34241,,0.35391,,,,,,y,,SD in separate row.
+079,no_bar,y,n,column,lower,0.071114,,0.088453,,,,,,n,,None.
+080,no_bar,y,n,row,higher,1.00,,0.00,,,,,,n,,No error bars shown.
+081,no_bar,y,n,row,lower,none,,none,,,,,,y,,STD in separate rows.
+082,no_bar,y,n,column,lower,8.199,,4.949,,,,,,n,,No error bars.
+083,no_bar,y,y,column,lower,1.5 x 10^-4,,7.7 x 10^-4,,,,,,n,,No error bars.
+084,no_bar,n,n,n/a,n/a,n/a,,n/a,,,,,,n,,Not a results table.
+085,no_bar,y,n,row,lower,0.005,,0.006,,,,,,n,,No error bars present.
+086,no_bar,n,n,none,none,none,,none,,,,,,n,,Not a results table.
+087,no_bar,y,n,row,higher,0.88,,0.25,,,,,,n,,No error bars shown.
+088,no_bar,y,y,column,lower,3.40,,3.53,,,,,,n,,No error bars shown.
+089,no_bar,y,n,column,lower,4.690,,4.949,,,,,,n,,None present.
+090,no_bar,y,y,row,higher,6.22E-02,,8.74E-115,,,,,,y,,STD in separate row.
+091,no_bar,y,y,column,higher,599.88,,599.81,,,,,,n,,No error bars.
+092,no_bar,y,y,row,lower,1.65E-215,,1.49E-175,,,,,,y,,Std is in the row below.
+093,no_bar,y,y,row,lower,0.0595,,0.1571,,,,,,n,,No error bars shown.
+094,no_bar,y,y,column,lower,13.14148,,13.33275,,,,,,n,,No error bars shown.
+095,no_bar,y,y,row,lower,1,,2,,,,,,n,,No error bars shown.
+096,no_bar,y,n,row,lower,6059.7143,,6059.7208,,,,,,n,,No error bars shown.
+097,no_bar,y,y,row,higher,0.9188,,0.9107,,,,,,n,,No error bars present.
+098,no_bar,y,y,row,lower,7.20E-11,,1.35E-10,,,,,,y,,STD in row below.
+099,no_bar,n,n/a,n/a,n/a,n/a,,n/a,,,,,,n,,Not a results table.
+100,no_bar,n,n,n/a,n/a,n/a,,n/a,,,,,,n,,"Image is a reference list, not a table."
+101,discarded,y,,,,,,,,,,,,,whole_row_bold,Entire rows are bolded rather than individual winning cells.
+102,discarded,y,,,,,,,,,,,,,no_bold,The table contains experimental results but no cells are bolded to indicate winners.
+103,discarded,y,,,,,,,,,,,,,no_bold,There are no bold cells in this table.
+104,discarded,n,,,,,,,,,,,,,not_results,"The image shows text and a figure caption, but no table."
+105,discarded,y,,,,,,,,,,,,,no_bold,The table contains experimental results but no cells are bolded to indicate winners.
+106,discarded,y,,,,,,,,,,,,,no_bold,The table contains experimental results but no cells are bolded to indicate a winner.
+107,discarded,y,,,,,,,,,,,,,no_bold,The table contains experimental results but no cells are bolded to indicate the best performance.
+108,discarded,y,,,,,,,,,,,,,no_bold,The table presents experimental results but does not use bold text to indicate the best performance.
+109,discarded,n,,,,,,,,,,,,,not_results,"The table contains data describing a 33-bus system, not experimental results."
+110,discarded,y,,,,,,,,,,,,,whole_row_bold,"The entire row for the 14-7-5-1 model is bolded to highlight it as the most robust model, rather than individual cells being bolded to indicate the best performance in a column."
+111,discarded,y,,,,,,,,,,,,,no_bold,The table reports performance metrics (Time Taken) but does not use bold text to indicate the best results.
+112,discarded,y,,,,,,,,,,,,,no_bold,There are no bold numeric cells in this table to indicate best performance.
+113,discarded,n,,,,,,,,,,,,,not_results,"The image contains text and equations describing a fuzzy logic system, not a table of experimental results."
+114,discarded,n,,,,,,,,,,,,,not_results,"The table describes subnet configurations for different layer types, not experimental results."
+115,discarded,n,,,,,,,,,,,,,not_results,"The table shows parameter configurations for models, not experimental results."
+116,discarded,y,,,,,,,,,,,,,no_bold,The table presents experimental results but does not use bold text to indicate the best performance.
+117,discarded,n,,,,,,,,,,,,,not_results,"The table lists hyperparameters and experimental settings for two models, not performance results."
+118,discarded,y,,,,,,,,,,,,,no_bold,The crop shows the left edge of a table with no bold text visible.
+119,discarded,y,,,,,,,,,,,,,no_bold,The table contains experimental results but no cells are bolded to indicate best performance.
+120,discarded,n,,,,,,,,,,,,,not_results,"The table lists specifications and features of EV models, not experimental results."
+121,non_extremal,y,,,,,,,,,,,,,header_bold,Bold cells are column headers.
+122,non_extremal,n,,,,,,,,,,,,,header_bold,"Bold cells are column headers, not results."
+123,non_extremal,y,,,,,,,,,,,,,other,Entire row bolded for best overall model.
+124,non_extremal,n,,,,,,,,,,,,,other,"Box highlights a journal volume in references, not a table."
+125,non_extremal,y,,,,,,,,,,,,,own_method,"Entire row is bolded to highlight the method, not the column-wise best value."
+126,non_extremal,y,,,,,,,,,,,,,misread,Cell is the best value; parser likely assumed higher-is-better.
+127,non_extremal,y,,,,,,,,,,,,,own_method,Authors bolded their own method regardless of performance.
+128,non_extremal,y,,,,,,,,,,,,,misread,Parser misread direction; lower is better.
+129,non_extremal,n,,,,,,,,,,,,,other,"Image is a reference list, not a table."
+130,non_extremal,y,,,,,,,,,,,,,misread,Bold cell is column minimum; parser assumed higher is better.
+131,non_extremal,n,,,,,,,,,,,,,header_bold,Bold cell is a parameter header.
+132,non_extremal,y,,,,,,,,,,,,,header_bold,Boxed cell is a header.
+133,non_extremal,y,,,,,,,,,,,,,misread,Bold cell is the minimum value; parser likely assumed higher is better.
+134,non_extremal,y,,,,,,,,,,,,,subclass_best,Bold cell is best in sub-block; parser used whole column.
+135,non_extremal,y,,,,,,,,,,,,,misread,Parser assumed higher is better for inference time.
+136,non_extremal,y,,,,,,,,,,,,,own_method,Row bolded for preferred model despite lower recall.
+137,non_extremal,y,,,,,,,,,,,,,own_method,Entire row bolded for proposed method.
+138,non_extremal,y,,,,,,,,,,,,,own_method,Entire row bolded to highlight the method.
+139,non_extremal,y,,,,,,,,,,,,,other,"Bolding formats variance values, not the best result."
+140,non_extremal,n,,,,,,,,,,,,,header_bold,"Bold cell is a row header, not a result."
