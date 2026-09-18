@@ -1,0 +1,42 @@
+{
+ "rating": 5,
+ "confidence": 4,
+ "summary": "The manuscript presents an automated audit of 1,644 metaheuristics papers published in Scientific Reports (2024-2025), assessing adherence to the field's statistical reporting conventions (e.g., Derrac, Garcia, LaTorre). Using LLM-based text and image parsers, the authors argue that a large portion of the literature fails to print the necessary summary statistics (means, standard deviations, run counts) required to verify the bolded 'best' results via a Welch's t-test. While the premise is highly relevant to the ongoing methodological crisis in metaheuristics, the execution relies heavily on unvalidated LLM outputs, conflates model-to-model agreement with ground truth, and draws field-wide conclusions from highly concentrated, skewed data subsets.",
+ "strengths": "The pre-registration of the study design, the public release of the parsing instruments and prompts, and the direct engagement with the field's established methodological guidelines are commendable. The identification of the 'separate row/column' format hazard is an important contribution to automated literature auditing.",
+ "objections": [
+  {
+   "id": "instrument-precision",
+   "severity": "blocking",
+   "objection": "The precision of the primary instrument (the image-based reader) on the load-bearing separate-column layout is never established against a human ground truth. The text explicitly admits: \"Two models agreeing is not a person reading the page, and the kits stay released for one.\" Model-to-model agreement (Gemini vs. Claude) is insufficient to establish the precision of an automated audit.",
+   "what_would_fix_it": "The authors must manually label the 100-item validation kits themselves to establish actual human-grounded precision and recall metrics before publication."
+  },
+  {
+   "id": "re-read-repair",
+   "severity": "major",
+   "objection": "The 'corrected' census is presented as a repair, but it is merely a second LLM pass with a tweaked prompt, merged via an automated heuristic. \"The Mean/Std-row blind spot was repaired after the census... read again under the same protocol with one added instruction... merged table by table: a re-read table replaces the original only where it keeps every dispersion the original had...\"",
+   "what_would_fix_it": "Do not label this a 'repair'. Explicitly state that this is a second model correcting a model. Manually validate a sample of the merged tables to report the false positive/negative rate of the merge heuristic itself."
+  },
+  {
+   "id": "abstract-numbers",
+   "severity": "major",
+   "objection": "The abstract's numbers and terminology do not strictly align with the body. The abstract claims \"31.3% where the summaries do not cap a t statistic\", but the body defines this 31.3% as groups with \"neither\" a deviation at least the mean nor a mean below 10^-3. I cannot open the run records to verify the exact counts, but the text definitions diverge. Furthermore, the abstract conflates \"bold cells\" with \"groups\" (comparisons).",
+   "what_would_fix_it": "Align the abstract's terminology exactly with the body's definitions. Replace \"where the summaries do not cap a t statistic\" with the actual mathematical filter applied, and correct \"bold cells\" to \"groups\" or \"comparisons\" where appropriate."
+  },
+  {
+   "id": "classifier-artefact",
+   "severity": "major",
+   "objection": "The massive gap in reporting quality between 'new optimizer' and 'application' papers may be a tautological artefact of the LLM classifier. \"The prompt... sees the title and abstract only and names no reporting feature; its definition of a new optimizer, one evaluated against others, does select the papers that benchmark, which is where the convention applies...\"",
+   "what_would_fix_it": "Provide a human-coded validation of 100 papers to prove the LLM is not simply classifying papers into the 'new optimizer' stratum based on the presence of methodological keywords (e.g., 'runs', 'Wilcoxon') in the abstract."
+  },
+  {
+   "id": "verdict-crosstab",
+   "severity": "major",
+   "objection": "The cross-tabulation comparing Welch's t-test to the papers' printed verdicts is heavily skewed and does not represent the field. \"The verdict was located for 177 groups... in 9 papers, three of them, all multi-objective studies with PlatEMO-style rank-sum tables, holding 84.7% of the pairs...\"",
+   "what_would_fix_it": "Because multi-objective indicators (like HV or IGD) have highly skewed distributions where rank tests and Welch's t will naturally diverge, pooling these pairs distorts the finding. Report the agreement rates averaged per-paper (mean of means), or explicitly separate the 3 multi-objective papers from the remaining 6 in the analysis."
+  }
+ ],
+ "questions_to_authors": "How can you justify publishing an audit of human reporting errors when the audit's own 'load-bearing' measurements have deliberately been left unverified by any human? Why was the manual labeling of the 100-item kits deferred?",
+ "would_champion": false,
+ "model": "gemini/gemini-3.1-pro-preview",
+ "brief": "methodologist"
+}

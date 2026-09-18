@@ -1,0 +1,33 @@
+{
+ "rating": 6,
+ "confidence": 4,
+ "summary": "The manuscript presents an automated audit of 1644 metaheuristics papers published in Scientific Reports (2024-2025) to evaluate adherence to the field's reporting conventions (e.g., providing run counts, means, standard deviations, and statistical tests). Using pre-registered LLM/VLM instruments, the authors find that a large portion of papers (especially applications) fail to report necessary statistics to verify bolded 'best' results. Even among testable results, 34.5% of bolded cells are not statistically separable from their rivals using a Welch's t-test on the printed summaries. The manuscript is highly readable, its length is justified by the extensive methodological details required for an automated audit, and the abstract perfectly matches the body. The corpus deviation (from 7 journals to just Scientific Reports due to scraping blocks) is unfortunate but acceptable given the transparent reporting, though it requires careful framing. My decision is Major Revision (rating 6): the paper is excellent and highly relevant to SWEVO, but it currently lacks human validation for its most critical automated measurement.",
+ "strengths": "Highly original methodology using VLMs for table extraction; rigorous pre-registration and transparent reporting of deviations; addresses a critical reproducibility issue in evolutionary computation; excellent writing and clear distinction between typographic claims (bolding) and statistical claims.",
+ "objections": [
+  {
+   "id": "human-validation",
+   "severity": "blocking",
+   "objection": "The paper relies heavily on the VLM's ability to parse separate columns/rows for means and standard deviations, but explicitly admits that this core metric has not been validated by a human. Relying solely on agreement between two LLMs (Gemini and Claude) is insufficient for a methodological audit that critiques human reporting.",
+   "what_would_fix_it": "The authors must have a human manually label the released 100-item validation kits and report the human-vs-model agreement in Section 6, rather than leaving it as an exercise for the reader.",
+   "quote": "The reader's precision on that layout, pairing a mean in one column or row with the right optimizer's deviation in another, is the load-bearing measurement of this paper and is not yet made by a person... Two models agreeing is not a person reading the page, and the kits stay released for one."
+  },
+  {
+   "id": "corpus-generalization",
+   "severity": "major",
+   "objection": "Because the corpus was restricted to Scientific Reports, the findings reflect the review standards of a general megajournal, which may differ significantly from specialized venues like SWEVO or IEEE TEVC. The text sometimes generalizes these findings to 'the field'.",
+   "what_would_fix_it": "Soften claims about 'the field' throughout the abstract and introduction. Explicitly frame the conclusions as an audit of metaheuristics papers *in a general megajournal*, and add a sentence in the Discussion about how megajournal review standards might differ from specialized venues.",
+   "quote": "The corpus is therefore the Scientific Reports subset: 1644 papers... This is a deviation from the plan: the corpus is one megajournal's metaheuristics output rather than seven journals', and no number in this paper describes the venues in which this journal's readers publish."
+  },
+  {
+   "id": "table2-clarity",
+   "severity": "minor",
+   "objection": "The presentation of the post-hoc repair for the Mean/Std row blind spot in Table 2 is slightly confusing, as it presents two parallel sets of results without immediately making clear to a skimming reader which column represents the final, most accurate estimate.",
+   "what_would_fix_it": "Add a bolded note in the caption of Table 2 or adjust the column headers to explicitly guide the reader that the 'Mean/Std rows re-read' column is the primary, corrected finding to be cited.",
+   "quote": "The Mean/Std-row blind spot was repaired after the census, and the repair is reported beside it, not in place of it."
+  }
+ ],
+ "questions_to_authors": "Given the automated nature of the pipeline, could a small random sample of papers from a specialized journal (e.g., SWEVO) be manually downloaded and processed to provide a baseline comparison against Scientific Reports? This would greatly strengthen the paper's relevance to this specific journal's readership.",
+ "would_champion": true,
+ "model": "gemini/gemini-3.1-pro-preview",
+ "brief": "editor"
+}

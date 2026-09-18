@@ -228,6 +228,10 @@ def main() -> int:
            "papers_located": len(by_paper),
            "largest_paper_located": max((v[0] for v in by_paper.values()), default=0),
            "pct_largest_paper": round(100 * max((v[0] for v in by_paper.values()), default=0) / n, 1) if n else None,
+           "agree_without_top_three": (lambda big3: {"n": n - sum(by_paper[b][0] for b in big3), "agree": agree - sum(by_paper[b][1] for b in big3),
+                                                      "papers": len(by_paper) - len(big3),
+                                                      "pct": round(100 * (agree - sum(by_paper[b][1] for b in big3)) / max(n - sum(by_paper[b][0] for b in big3), 1), 1)})(
+               sorted(by_paper, key=lambda k: -by_paper[k][0])[:3]) if by_paper else None,
            "agree_without_largest": (lambda big: {"n": n - by_paper[big][0], "agree": agree - by_paper[big][1],
                                                   "pct": round(100 * (agree - by_paper[big][1]) / max(n - by_paper[big][0], 1), 1)})(max(by_paper, key=lambda k: by_paper[k][0])) if by_paper else None,
            "per_paper": {k: {"located": v[0], "agree": v[1]} for k, v in by_paper.items()},

@@ -1,0 +1,60 @@
+{
+ "rating": 5,
+ "confidence": 5,
+ "summary": "This manuscript presents a large-scale, pre-registered audit of reporting practices in metaheuristics papers published in Scientific Reports. It extracts printed means, standard deviations, and run counts to test whether the bolded 'best' results are statistically supported by Welch's t-test. While the empirical effort, transparency, and focus on reproducibility are highly commendable, the statistical methodology used to analyze the extracted data contains several critical flaws. Specifically, the use of a percentile cluster bootstrap on a highly concentrated dataset, the misapplication of the Kish effective sample size, the invalid partial application of Holm's correction, and imprecise terminology regarding distributions and bounds undermine the statistical inferences.",
+ "strengths": "The paper tackles a severe methodological crisis in metaheuristics with a massive, automated, and pre-registered audit. The transparency is exemplary, with all prompts, code, and run records released. The distinction between the typographic claim (the bold cell) and the aggregate statistical claim is well-articulated.",
+ "objections": [
+  {
+   "id": "welch_equal_n",
+   "severity": "major",
+   "objection": "The paper computes Welch's t 'with the same count on both arms'. Welch's t-test is explicitly designed to handle unequal variances and unequal sample sizes. By forcing the run count to be identical on both arms (often using the minimum stated count), you artificially alter the degrees of freedom via the Welch-Satterthwaite equation and distort the standard error of the difference. If the actual run counts differ, this is not Welch's t.",
+   "what_would_fix_it": "Compute Welch's t using the actual run counts for each algorithm if available. If forced to assume equal counts because the paper only provides a single global minimum count, explicitly state that this alters the degrees of freedom and is a lower-bound approximation, not a true Welch's t."
+  },
+  {
+   "id": "bootstrap_few_clusters",
+   "severity": "blocking",
+   "objection": "The paper uses a percentile cluster bootstrap over papers, admitting that 'with this few papers, and cluster sizes this unequal, it is an approximation that under-covers' (yielding 91.3% coverage for a nominal 95%). The percentile cluster bootstrap relies on asymptotic properties that fail miserably with highly unbalanced clusters and an effective sample size of 12.7. Knowingly reporting an invalid confidence interval is unacceptable.",
+   "what_would_fix_it": "Replace the percentile cluster bootstrap with a method robust to few, unbalanced clusters, such as a wild cluster bootstrap, a bias-corrected and accelerated (BCa) bootstrap, or a binomial Generalized Linear Mixed Model (GLMM) with a random intercept for the paper."
+  },
+  {
+   "id": "kish_count",
+   "severity": "major",
+   "objection": "The paper states: 'the Kish ratio of the squared sum to the sum of squares of the papers' group counts is 12.7.' The Kish formula is designed to measure the design effect due to unequal weighting in survey sampling. Applying it to cluster sizes to define 'effective papers' implicitly assumes an intra-cluster correlation (ICC) of exactly 1.0. If the ICC of the failure rate within papers is less than 1, this heuristic severely underestimates the effective sample size.",
+   "what_would_fix_it": "Calculate the actual ICC for the failure rate within papers and use the standard design effect formula (DE = 1 + (m-1)*ICC) to estimate the effective sample size, or remove the Kish heuristic entirely."
+  },
+  {
+   "id": "holm_rows",
+   "severity": "major",
+   "objection": "The paper states: 'Holm's correction [25] within a table is reported beside the raw rate; it controls the family-wise error over the extracted single-bold comparisons, a smaller family than the table's, so it understates the correction the authors would face.' Applying a Family-Wise Error Rate (FWER) correction to an arbitrary subset of tests (only the extracted single-bold comparisons) rather than the full family of hypotheses tested in the table produces a statistically meaningless intermediate p-value threshold.",
+   "what_would_fix_it": "Either apply Holm's correction to the full set of comparisons in the table (if inferable from the number of algorithms and functions) or remove the Holm correction entirely. A partial FWER correction is invalid."
+  },
+  {
+   "id": "heavy_tail",
+   "severity": "minor",
+   "objection": "The paper argues: 'A deviation at least as large as its mean, or a mean below 10−3, is common in benchmark tables, where the error on a solved function is a heavy-tailed quantity near zero.' A standard deviation larger than the mean for a strictly positive variable indicates high positive skewness, not necessarily a 'heavy tail'. For example, an exponential distribution has equal mean and standard deviation but is light-tailed.",
+   "what_would_fix_it": "Change 'heavy-tailed quantity' to 'highly right-skewed quantity'."
+  },
+  {
+   "id": "impossible_pair",
+   "severity": "major",
+   "objection": "The paper states: 'For a quantity bounded below by zero, an error to the optimum or a distance, the sample deviation over n runs cannot exceed √n times the mean, since one run can carry at most the whole sum'. This mathematical bound strictly assumes the absolute minimum possible value is exactly zero. In many benchmark suites (e.g., CEC), the global optimum is shifted to a non-zero value (e.g., 100, 200). If raw fitness is reported without subtracting this shift, the true bound is √n(mean - optimum), making your √n*mean check overly conservative or entirely inapplicable.",
+   "what_would_fix_it": "Explicitly clarify that this bound strictly requires the reported values to be errors (where the minimum is exactly 0) and that shifted raw fitnesses invalidate the check, which is why it flags pairs falsely."
+  },
+  {
+   "id": "kappa_prevalence",
+   "severity": "minor",
+   "objection": "The paper states: 'Cohen's κ 0.55, which the imbalance of the margins pulls down, so the specific agreement is also given'. Cohen's kappa is highly sensitive to trait prevalence (the prevalence index effect). When margins are heavily imbalanced, kappa becomes artificially low and is an inappropriate metric for inter-rater reliability.",
+   "what_would_fix_it": "Report Gwet's AC1 statistic, which is robust to the prevalence paradox, or explicitly state that kappa is unreliable here and rely solely on specific agreement."
+  },
+  {
+   "id": "word_bound",
+   "severity": "minor",
+   "objection": "The prompt requires attacking every place the paper says 'bound', 'floor', 'valid', or 'conservative'. The words 'floor', 'valid', and 'conservative' do not appear in the manuscript. For 'bound', the paper states: 'The check is not a bound in either direction: it misses every mis-pairing small enough to be possible...'. This is statistically imprecise terminology. A diagnostic check or filter is not a 'bound'; the mathematical limit (√n * mean) is the bound.",
+   "what_would_fix_it": "Reword 'The check is not a bound in either direction' to 'The check is not a definitive filter in either direction'. (Note: 'floor', 'valid', and 'conservative' were not found in the text)."
+  }
+ ],
+ "questions_to_authors": "How do you justify publishing confidence intervals from a percentile cluster bootstrap when your own simulations show it under-covers at 91.3% due to having only 12.7 effective clusters? Have you considered calculating the actual intra-cluster correlation (ICC) to determine the true effective sample size rather than relying on the Kish ratio?",
+ "would_champion": false,
+ "model": "gemini/gemini-3.1-pro-preview",
+ "brief": "statistician"
+}

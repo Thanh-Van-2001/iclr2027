@@ -250,6 +250,24 @@ def _boot_coverage(by_paper: dict, sims: int = 300, reps: int = 1000, seed: int 
     return {"papers": len(pop), "sims": sims, "coverage": round(100 * hits / sims, 1), "mean_width": round(sum(widths) / len(widths), 1), "theta": round(theta, 1)}
 
 
+def _icc_design(by_paper: dict) -> dict:
+    """One-way ANOVA intra-class correlation of the failure indicator within
+    papers, the design effect 1 + (n0 - 1) * ICC with n0 the ANOVA cluster
+    size, and the effective number of tested groups N / DE."""
+    cl = [(n, f) for n, f in by_paper.values() if n]
+    k, N = len(cl), sum(n for n, _ in cl)
+    if k < 2 or N <= k:
+        return {"icc": None, "design_effect": None, "effective_groups": None, "n0": None}
+    ybar = sum(f for _, f in cl) / N
+    msb = sum(n * (f / n - ybar) ** 2 for n, f in cl) / (k - 1)
+    msw = sum(f * (1 - f / n) ** 2 + (n - f) * (f / n) ** 2 for n, f in cl) / (N - k)
+    n0 = (N - sum(n * n for n, _ in cl) / N) / (k - 1)
+    icc = (msb - msw) / (msb + (n0 - 1) * msw) if (msb + (n0 - 1) * msw) > 0 else 0.0
+    icc = max(icc, 0.0)
+    de = 1 + (n0 - 1) * icc
+    return {"icc": round(icc, 3), "design_effect": round(de, 2), "effective_groups": round(N / de, 1), "n0": round(n0, 1)}
+
+
 def _kish(gs: list) -> dict:
     sizes = collections.Counter(g["paper"] for g in gs)
     tot = sum(sizes.values())
@@ -421,6 +439,7 @@ def main() -> int:
                      "macro_rate": round(statistics.mean(rates), 1) if rates else None,
                      "macro_rate_ci": _boot_mean(rates) if len(rates) >= 10 else None,
                      "boot_coverage": _boot_coverage(by_paper),
+                     "icc": _icc_design(by_paper),
                      "top_four_share": round(100 * sum(x[0] for x in sizes[:4]) / tot, 1) if tot else None,
                      "top_ten_share": round(100 * sum(x[0] for x in sizes[:10]) / tot, 1) if tot else None,
                      "median_rate": round(statistics.median(rates), 1) if rates else None,

@@ -1,0 +1,33 @@
+{
+ "rating": 5,
+ "confidence": 5,
+ "summary": "This paper presents an automated bibliometric audit of 1644 metaheuristics papers published in Scientific Reports (2024-2025). Using a mix of regex parsing and LLM-based image reading, it evaluates whether the printed tables (means, standard deviations, run counts) provide sufficient evidence to support the bolding of the 'best' cells. The authors apply a Welch's t-test to the printed summaries and find that in 34.5% of testable cases, the bold cell cannot be statistically separated from the runner-up. The paper highlights a stark difference in reporting quality between papers proposing new optimizers and those applying existing ones.",
+ "strengths": "The paper addresses a critical reproducibility issue in our community. The methodology is highly transparent, pre-registered, and the distinction between 'new optimizer' and 'application' papers accurately reflects the sociological divide in the field. The authors are also commendably honest about the limitations of their automated parsers.",
+ "objections": [
+  {
+   "id": "llm-validation",
+   "severity": "blocking",
+   "objection": "The paper relies heavily on an LLM (Gemini) to extract data from separate-column and separate-row layouts, which constitute the majority of the testable data. Validating one LLM with another LLM (Claude) is unacceptable for a formal audit of human scientists.",
+   "what_would_fix_it": "Have a human expert label the 100-item separate-column and Mean/Std-row kits. Report the precision and recall of the LLM reader against this human ground truth, rather than relying on Claude 5's agreement.",
+   "quote": "no person has yet labelled the released kits."
+  },
+  {
+   "id": "welch-bounded-data",
+   "severity": "major",
+   "objection": "The paper applies Welch's t-test to CEC benchmark data, which is often bounded at zero and heavily skewed. The community explicitly moved to Wilcoxon/Friedman (García 2009) precisely because t-tests are mathematically invalid for this data. Including cases where the t-test is obviously invalid inflates the headline failure rate.",
+   "what_would_fix_it": "Do not pool the mathematically invalid t-test cases into the headline 34.5% failure rate. Use the 31.3% figure (where the summaries do not cap a t-statistic) as the primary headline metric in the abstract and conclusion.",
+   "quote": "The failure rate is 49.0% on the 147 groups with a deviation at least the mean, 47.1% on the 104 with a mean below 10−3, and 31.3% [23.3, 40.3] on the 556 with neither."
+  },
+  {
+   "id": "aggregate-claim-clarity",
+   "severity": "minor",
+   "objection": "While the text acknowledges that a per-cell failure does not invalidate the aggregate rank tests, the abstract's phrasing could easily be misinterpreted by a casual reader as invalidating the papers' core claims.",
+   "what_would_fix_it": "Add a brief clause to the abstract explicitly stating that because metaheuristics claims are typically aggregate (e.g., Friedman over 30 functions), a per-cell Welch failure does not necessarily refute the paper's primary algorithmic claim.",
+   "quote": "a per-cell check of printed evidence, not of aggregate rank tests."
+  }
+ ],
+ "questions_to_authors": "Is the audit fair? Yes and no. It is fair to audit what authors actually print on the page. However, auditing heavy-tailed CEC benchmark data using a Welch's t-test—a test our community explicitly abandoned 15 years ago for this exact reason—feels like a category error, even if you acknowledge it is 'the only test the printed summaries admit.' Does a per-cell Welch test of a bold mean say anything about the paper's aggregate claim? As you rightly note in the discussion, no. My algorithms are validated by a Friedman rank over 30 or 50 functions; a Welch failure on F14 does not invalidate the paper. Would the recommendations change what you do? Yes, your recommendation to enforce the +/-/= notation per cell (or release per-run values) is excellent and reinforces the Derrac/García guidelines. What would make you dismiss the paper? I would dismiss this paper if it is published without human validation of the LLM table reader. You cannot publish a 'gotcha' audit of the literature where the load-bearing data extraction is performed by an unverified generative AI.",
+ "would_champion": false,
+ "model": "gemini/gemini-3.1-pro-preview",
+ "brief": "practitioner"
+}

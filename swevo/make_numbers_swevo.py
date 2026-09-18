@@ -540,6 +540,11 @@ def build(out_path: str) -> dict:
         reg.add("vc sign contradictions", vc.get("sign_contradictions", 0), provenance=vrun)
         reg.add("vc sign checked", vc.get("sign_checked", 0), provenance=vrun)
         reg.add("vc effective papers", f"{vc['effective_papers']:.1f}" if vc.get("effective_papers") else "--", provenance=vrun)
+        w3 = vc.get("agree_without_top_three") or {}
+        reg.add("vc without top three n", w3.get("n", 0), provenance=vrun)
+        reg.add("vc without top three papers", w3.get("papers", 0), provenance=vrun)
+        reg.add("vc without top three agree", w3.get("agree", 0), provenance=vrun)
+        reg.add("vc without top three pct", _pct(w3["pct"]) if w3.get("pct") is not None else "--", provenance=vrun)
         for k in ("specific_agreement_fail_ns", "specific_agreement_pass_sig"):
             reg.add(f"vc {k.replace('_', ' ')}", _pct(vc[k]) if vc.get(k) is not None else "--", provenance=vrun)
         reg.add("vc largest paper located", vc.get("largest_paper_located", 0), provenance=vrun)
@@ -663,6 +668,10 @@ def build(out_path: str) -> dict:
             reg.add(f"{tag} pp effective papers", f"{pp['effective_papers']:.1f}" if pp.get("effective_papers") else "--", provenance=rrun)
             reg.add(f"{tag} pp macro rate", _pct(pp["macro_rate"]) if pp.get("macro_rate") is not None else "--", provenance=rrun)
             reg.add(f"{tag} pp macro rate ci", f"[{pp['macro_rate_ci'][0]}, {pp['macro_rate_ci'][1]}]" if pp.get("macro_rate_ci") else "--", provenance=rrun)
+            ic = pp.get("icc") or {}
+            reg.add(f"{tag} pp icc", f"{ic['icc']:.2f}" if ic.get("icc") is not None else "--", provenance=rrun)
+            reg.add(f"{tag} pp design effect", f"{ic['design_effect']:.1f}" if ic.get("design_effect") is not None else "--", provenance=rrun)
+            reg.add(f"{tag} pp effective groups", f"{ic['effective_groups']:.0f}" if ic.get("effective_groups") is not None else "--", provenance=rrun)
             bc = pp.get("boot_coverage") or {}
             reg.add(f"{tag} pp boot coverage", _pct(bc["coverage"]) if bc.get("coverage") is not None else "--", provenance=rrun)
             reg.add(f"{tag} pp boot coverage sims", bc.get("sims", 0), provenance=rrun)
