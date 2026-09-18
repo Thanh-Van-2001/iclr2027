@@ -442,6 +442,7 @@ def build(out_path: str) -> dict:
         reg.add(f"{tag} no bar results table frac", _frac(nb["results_table"]), provenance=grun)
         reg.add(f"{tag} no bar bold frac", _frac(nb["bold_cell"]), provenance=grun)
         reg.add(f"{tag} no bar winner frac", _frac(nb["winner_mean"]), provenance=grun)
+        reg.add(f"{tag} no bar runner frac", _frac(nb["runner_mean"]) if "runner_mean" in nb else "--", provenance=grun)
         reg.add(f"{tag} no bar absent", _pct_ci(nb["error_bar_truly_absent"]), provenance=grun)
         reg.add(f"{tag} no bar absent frac", _frac(nb["error_bar_truly_absent"]), provenance=grun)
         vocab = {"discarded": ("no_bold", "multi_bold", "whole_row_bold", "not_results", "bold_missed", "parse_error", "other"),
@@ -522,12 +523,12 @@ def build(out_path: str) -> dict:
         reg.add("cz papers with groups", rz["papers_with_groups"], provenance=crun)
         reg.add("cz neither", _pct(rz["pct_neither"]), provenance=crun)
         _rg = _j("census_readings").get("regrouped", {}) if os.path.exists("out/swevo/census_readings.json") else {}
-        _ci = lambda key, fallback: (f"[{_rg[key][0]}, {_rg[key][1]}]" if _rg.get(key) else fallback)
-        reg.add("cz neither ci", _ci("ci_neither", f"[{rz['ci_neither_papers'][0]}, {rz['ci_neither_papers'][1]}]"), provenance=crun)
+        _rgci = lambda key, fallback: (f"[{_rg[key][0]}, {_rg[key][1]}]" if _rg.get(key) else fallback)
+        reg.add("cz neither ci", _rgci("ci_neither", f"[{rz['ci_neither_papers'][0]}, {rz['ci_neither_papers'][1]}]"), provenance=crun)
         reg.add("cz one side", _pct(rz["pct_one_side"]), provenance=crun)
         reg.add("cz testable", _pct(rz["pct_testable"]), provenance=crun)
         reg.add("cz testable n", rz["n_testable"], provenance=crun)
-        reg.add("cz testable ci", _ci("ci_testable", f"[{rz['ci_testable_papers'][0]}, {rz['ci_testable_papers'][1]}]"), provenance=crun)
+        reg.add("cz testable ci", _rgci("ci_testable", f"[{rz['ci_testable_papers'][0]}, {rz['ci_testable_papers'][1]}]"), provenance=crun)
         reg.add("cz bars no n", _pct(rz["pct_bars_no_n"]), provenance=crun)
         pz = cz["pipeline_same_pages"]
         reg.add("cz pipe groups", pz["groups"], provenance=crun)

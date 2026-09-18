@@ -327,7 +327,8 @@ def main() -> int:
     note = {"with_note": _shares([g for g in gs if scan.get(g["paper"], {}).get("bold_note")]),
             "without_note": _shares([g for g in gs if not scan.get(g["paper"], {}).get("bold_note")]),
             "papers_with_note_in_census": len({g["paper"] for g in gs if scan.get(g["paper"], {}).get("bold_note")})}
-    keys = ["derrac2011", "garcia2009", "garcia2010", "sorensen2015", "aranha2022", "camacho2022", "bartz2020", "beiranvand2017", "kendall2016", "hansen_coco"]
+    keys = ["derrac2011", "garcia2009", "garcia2010", "sorensen2015", "aranha2022", "camacho2022", "bartz2020", "beiranvand2017", "kendall2016", "hansen_coco",
+            "carrasco2020", "latorre2021", "osaba2021"]
     def cites(paper):
         return any(scan.get(paper, {}).get("cites", {}).get(k) for k in keys)
     citing = {"citing": _shares([g for g in gs if cites(g["paper"])]), "not_citing": _shares([g for g in gs if not cites(g["paper"])])}

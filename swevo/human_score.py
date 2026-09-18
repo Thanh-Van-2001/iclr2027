@@ -18,8 +18,13 @@ from pages_score import _bar_num, _se  # noqa: E402
 from gold_set import _num, _match  # noqa: E402
 from analyze import p_value  # noqa: E402
 
-KIT = "audits/swevo_human"
-OUT = "out/swevo/human_separate.json"
+import argparse
+_ap = argparse.ArgumentParser()
+_ap.add_argument("--kit", default="audits/swevo_human")
+_ap.add_argument("--out", default=None)
+_args, _ = _ap.parse_known_args()
+KIT = _args.kit
+OUT = _args.out or ("out/swevo/human_rows.json" if KIT.endswith("_rows") else "out/swevo/human_separate.json")
 
 
 def _rate(k, n):
@@ -35,6 +40,7 @@ def main() -> int:
     items = {it["id"]: it for it in json.load(open(os.path.join(KIT, "items.json"), encoding="utf-8"))}
     rows = [r for r in csv.DictReader(open(path, encoding="utf-8", newline="")) if any(v.strip() for k, v in r.items() if k != "id")]
     fields = {"winner_mean": [0, 0], "winner_disp": [0, 0], "runner_mean": [0, 0], "runner_disp": [0, 0], "n_runs": [0, 0]}
+    recall = {"std_printed_y": 0, "std_printed_y_reader_barred": 0, "std_printed_n": 0, "std_printed_n_reader_barred": 0}
     bold_ok = [0, 0]
     results = [0, 0]
     claim = [0, 0]
@@ -48,6 +54,15 @@ def main() -> int:
             results[1] += 1
             continue
         results[0] += 1; results[1] += 1
+        sp = str(r.get("std_printed", "")).strip().lower()
+        if sp:
+            reader_barred = _bar_num(rd.get("winner_disp")) is not None and _bar_num(rd.get("runner_disp")) is not None
+            if sp.startswith("y"):
+                recall["std_printed_y"] += 1
+                recall["std_printed_y_reader_barred"] += reader_barred
+            else:
+                recall["std_printed_n"] += 1
+                recall["std_printed_n_reader_barred"] += reader_barred
         bold_ok[1] += 1
         bold_ok[0] += str(r.get("bold_ok", "")).strip().lower().startswith("y")
         if any(str(r.get(f, "")).strip().lower() == "unclear" for f in fields):
@@ -100,7 +115,10 @@ def main() -> int:
     out = {"labelled": len(rows), "results_table": _rate(*results), "bold_ok": _rate(*bold_ok),
            "fields": {f: _rate(*v) for f, v in fields.items()}, "claim": _rate(*claim),
            "claim_page_ci": [round(vals[50], 1), round(vals[1949], 1)], "pages": len(pages),
-           "verdict_flips": _rate(*flips), "unclear_items": unclear}
+           "verdict_flips": _rate(*flips), "unclear_items": unclear,
+           "recall": dict(recall, reader_recall=_rate(recall["std_printed_y_reader_barred"], recall["std_printed_y"]),
+                          reader_false_bar=_rate(recall["std_printed_n_reader_barred"], recall["std_printed_n"])),
+           "by_stratum": {st: {"n": sum(1 for r in rows if items[r["id"]].get("stratum") == st)} for st in {items[r["id"]].get("stratum", "") for r in rows}}}
     os.makedirs("out/swevo", exist_ok=True)
     json.dump(out, open(OUT, "w", encoding="utf-8"), indent=1)
     print(json.dumps(out, indent=None)[:800])

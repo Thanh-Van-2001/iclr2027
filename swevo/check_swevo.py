@@ -13,9 +13,9 @@ from paperengine import provenance, refcheck, style  # noqa: E402
 
 D = "paper/swevo"
 MAIN = "main.tex"
-# hand-written literals that are not measurements: the canonical thirty runs
+# hand-written literals that are not measurements: the canonical thirty runs, HTTP status codes,
 # of the convention, the CEC suite years, the licence version
-ALLOW = sys.argv[1] if len(sys.argv) > 1 else "30,2005,2013,2014,2017,2019,2020,2021,2022,4.0,0.05"
+ALLOW = sys.argv[1] if len(sys.argv) > 1 else "30,2005,2013,2014,2017,2019,2020,2021,2022,4.0,0.05,403,200"
 
 
 def build() -> bool:
