@@ -11,8 +11,12 @@
 set -e
 if [ -d data/corpus_oa ]; then python swevo/text_scan.py > /dev/null; fi
 python swevo/make_all_swevo.py
-if [ -f audits/swevo_gold/labels.csv ]; then
-python study/gold_set.py score --items audits/swevo_gold/items.json --labels audits/swevo_gold/labels.csv --exclude-unboxed --out out/swevo/gold_set.json > /dev/null
+if [ -f audits/swevo_gold/labels_gemini.csv ]; then
+python study/gold_set.py score --items audits/swevo_gold/items.json --labels audits/swevo_gold/labels_gemini.csv --exclude-unboxed --out out/swevo/gold_set.json > /dev/null
+fi
+if [ -f audits/swevo_gold/labels_sonnet.csv ]; then
+python study/gold_set.py score --items audits/swevo_gold/items.json --labels audits/swevo_gold/labels_sonnet.csv --exclude-unboxed --out out/swevo/gold_set_sonnet.json > /dev/null
+python study/gold_set.py agree --a audits/swevo_gold/labels_gemini.csv --b audits/swevo_gold/labels_sonnet.csv > out/swevo/reader_agreement.json
 fi
 if ls audits/swevo_census/labels_shard*.json > /dev/null 2>&1; then
 python swevo/merge_census.py > /dev/null

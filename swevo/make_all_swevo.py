@@ -171,6 +171,70 @@ def scan_run_count_reading(cs: list, scan: dict) -> dict:
             "ci_fail": _boot_share(out) if n else None}
 
 
+def test_reader_blocks(cs: list, kinds: dict) -> dict:
+    """The model's full-text reading (swevo/test_reader.py) aggregated over
+    its three paper sets: run counts, where the deviation sits, which test,
+    on what, paired or not, per-cell verdicts, what bold means."""
+    import glob
+    import time
+    d = {}
+    for path in sorted(glob.glob(f"{OUT}/test_reader_part*.json")) + [f"{OUT}/test_reader.json"]:
+        if not os.path.exists(path):
+            continue
+        for _ in range(5):
+            try:
+                d.update(json.load(open(path, encoding="utf-8")))
+                break
+            except json.JSONDecodeError:
+                time.sleep(1)
+    d = {k: v for k, v in d.items() if "parse_error" not in v}
+    if not d:
+        return {}
+    sets = json.load(open(f"{OUT}/test_reader_set.json", encoding="utf-8")) if os.path.exists(f"{OUT}/test_reader_set.json") else {}
+    testable = {c["paper"] for c in cs if c.get("test")}
+    out = {}
+    groups = {"all": list(d), "testable": [p for p in d if p in testable],
+              "new_optimizer": [p for p in d if kinds.get(p) == "new_optimizer"],
+              "random_other": [p for p in d if p in set(sets.get("random_other", []))]}
+    for name, ids in groups.items():
+        n = len(ids)
+        if not n:
+            continue
+        v = [d[p] for p in ids]
+        runs = collections.Counter(x.get("runs") for x in v if isinstance(x.get("runs"), int))
+        tests = collections.Counter(t for x in v for t in (x.get("test") or []) if t != "none")
+        named = sum(1 for x in v if any(t != "none" for t in (x.get("test") or [])))
+        layout = collections.Counter(str(x.get("std_layout") or "unsure") for x in v)
+        bold = collections.Counter()
+        for x in v:
+            b = str(x.get("bold_rule") or "not stated").lower()
+            bold["statistically best" if "statistic" in b or "signific" in b else
+                 "best" if "best" in b or "optimal" in b or "lowest" in b or "highest" in b else
+                 "proposed" if "propos" in b or "our" in b else
+                 "not stated" if "not stated" in b or b in ("", "none") else "other"] += 1
+        bench = collections.Counter(t for x in v for t in (x.get("benchmark") or []))
+        out[name] = {
+            "papers": n,
+            "runs_stated": sum(runs.values()), "pct_runs_stated": round(100 * sum(runs.values()) / n, 1),
+            "runs_thirty": runs.get(30, 0), "pct_runs_thirty": round(100 * runs.get(30, 0) / n, 1),
+            "runs_top": runs.most_common(6),
+            "layout": dict(layout), "pct_layout": {k: round(100 * c / n, 1) for k, c in layout.items()},
+            "pct_std_off_cell": round(100 * (layout.get("separate_row", 0) + layout.get("separate_column", 0)) / n, 1),
+            "test_named": named, "pct_test_named": round(100 * named / n, 1),
+            "tests": tests.most_common(10),
+            "test_on": dict(collections.Counter(str(x.get("test_on") or "unsure") for x in v)),
+            "paired": dict(collections.Counter(str(x.get("paired") or "unsure") for x in v)),
+            "markers": sum(1 for x in v if str(x.get("markers", "")).lower().startswith("y")),
+            "pct_markers": round(100 * sum(1 for x in v if str(x.get("markers", "")).lower().startswith("y")) / n, 1),
+            "pct_markers_among_named": round(100 * sum(1 for x in v if str(x.get("markers", "")).lower().startswith("y")
+                                                       and any(t != "none" for t in (x.get("test") or []))) / max(named, 1), 1),
+            "bold_rule": dict(bold), "pct_bold_rule": {k: round(100 * c / n, 1) for k, c in bold.items()},
+            "benchmark": bench.most_common(8),
+            "alpha_005": sum(1 for x in v if x.get("alpha") == 0.05),
+        }
+    return out
+
+
 def cites(cs: list, scan: dict) -> dict:
     """Papers citing the methodology literature, and how they report."""
     keys = ["derrac2011", "garcia2009", "garcia2010", "sorensen2015", "aranha2022", "camacho2022", "bartz2020",
@@ -300,6 +364,7 @@ def main() -> int:
         "run_counts": run_counts(cs, scan) if scan else {},
         "cites": cites(cs, scan) if scan else {},
         "scan_run_count": scan_run_count_reading(cs, scan) if scan else {},
+        "test_reader": test_reader_blocks(cs, kinds),
         "headline_span": extra_stats.headline_span(cs, records),
         "subset_direction": extra_stats.subset_direction(records, cs),
         "holm_families": extra_stats.holm_families(cs),

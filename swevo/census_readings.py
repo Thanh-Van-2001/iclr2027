@@ -52,6 +52,7 @@ def main() -> int:
 
     # 1. the layout of the dispersion, over the reader's results tables
     forms = collections.Counter()
+    groups_by_form, barred_by_form = collections.Counter(), collections.Counter()
     forms_by_kind = collections.defaultdict(collections.Counter)
     n_runs_vals = collections.Counter()
     n_src = collections.Counter()
@@ -77,6 +78,9 @@ def main() -> int:
                 n_src["none"] += 1
             if t.get("groups"):
                 tables_with_groups += 1
+                groups_by_form[f] += len(t["groups"])
+                barred_by_form[f] += sum(1 for g in t["groups"] if str(g.get("winner_disp", "")).strip().lower() not in ("", "none", "unclear")
+                                         and str(g.get("runner_disp", "")).strip().lower() not in ("", "none", "unclear"))
     n_results = sum(forms.values())
     layout = {"results_tables": n_results, "tables_with_groups": tables_with_groups,
               "bar_form": dict(forms.most_common()),
@@ -85,6 +89,9 @@ def main() -> int:
               "bar_kind": dict(bar_kind.most_common()),
               "n_runs": [[k, v] for k, v in n_runs_vals.most_common(10)],
               "n_source": dict(n_src.most_common()),
+              "groups_by_form": dict(groups_by_form), "groups_with_both_bars_by_form": dict(barred_by_form),
+              "pct_groups_in_separate_layout": round(100 * sum(v for k, v in groups_by_form.items() if k.startswith("separate")) / max(sum(groups_by_form.values()), 1), 1),
+              "pct_barred_groups_in_separate_layout": round(100 * sum(v for k, v in barred_by_form.items() if k.startswith("separate")) / max(sum(barred_by_form.values()), 1), 1),
               "pct_tables_with_run_count": round(100 * sum(v for k, v in n_src.items() if k not in ("none", "unstated")) / max(n_results, 1), 1),
               "pct_tables_at_thirty": round(100 * n_runs_vals.get(30, 0) / max(n_results, 1), 1)}
 

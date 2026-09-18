@@ -20,7 +20,22 @@
 \affiliation[1]{organization={Affiliation}, city={City}, country={Country}}
 
 \begin{abstract}
-Metaheuristics has an explicit convention for reporting a comparison: a fixed number of independent runs, thirty by tradition, a mean and a standard deviation per function, the best value marked in bold, and a non-parametric test recommended for more than a decade. We ask how much of that convention reaches the printed page. A frozen text-layer parser and an image-based reader census, both released, were applied to every 2024--2025 article of \emph{Scientific Reports} that OpenAlex lists as mentioning a metaheuristic (\nOListedSrep{} papers, \nOParsed{} parsed), and each bold cell was set against the best unmarked value in its row or column. PLACEHOLDER-RESULTS. Every number in the paper is generated from the released run records, and the two companion audits of machine-learning and multi-agent venues that use the same instrument are under review elsewhere.
+Metaheuristics has an explicit convention for reporting a comparison: a fixed number of independent runs, thirty by tradition, a mean and a standard deviation per function, the best value marked in bold, and a non-parametric test recommended for more than a decade. We ask how much of that convention reaches the printed page. A frozen text-layer parser and an image-based reader census, both released, were applied to every 2024--2025 article of \emph{Scientific Reports} that OpenAlex lists as mentioning a metaheuristic (\nOListedSrep{} papers, \nOParsed{} parsed), and each bold cell was set against the best unmarked value in its row or column. The parser reads 
+AComparisons{} highlighted comparisons in 
+AClaimPapers{} papers and finds a dispersion beside both cells in only 
+APctTestable{} of them, because this literature prints its deviation in a separate column or row rather than in the cell; the reader census over 
+CzPapersDrawn{} papers, which sees those columns, reads a dispersion on both sides for 
+CzTestable{} of its 
+CzGroups{} groups, and of the groups it can test at the stated run count 
+CzReaderFailPct{} fail Welch's $t$ on the printed numbers. The convention is concentrated in the 
+KcNewOptimizer{} papers that propose an optimizer, of which 
+SkNewOptimizerPctRunsStated{} state a run count and 
+SkNewOptimizerPctTestNamed{} name a statistical test; the 
+KcApplication{} application papers do so in 
+SkApplicationPctRunsStated{} and 
+SkApplicationPctTestNamed{} of cases. A model reading of the full text finds the test's verdict printed beside the table in 
+TrNewOptimizerPctMarkers{} of the new-optimizer papers and no statement of what bold means in 
+TrAllBoldNotStatedPct{} of all papers read. Every number in the paper is generated from the released run records, and the two companion audits of machine-learning and multi-agent venues that use the same instrument are under review elsewhere.
 \end{abstract}
 
 \begin{keyword}
@@ -156,7 +171,36 @@ The metaphor split is reported for completeness and should not be over-read: the
 \subsection{The field's own test}
 \label{sec:tests}
 
-Of the \nStTestablePapers{} papers with a parser-testable comparison, \nStNaming{} name a statistical test somewhere in the text and \nStMarkers{} print the $+/=/-$ verdict beside the tables. Welch's $t$ on the printed numbers fails \nStNamedFail{} \nStNamedFailCi{} of the comparisons in the papers that name a test and \nStUnnamedFail{} \nStUnnamedFailCi{} in those that do not, on \nStNamedN{} and \nStUnnamedN{} comparisons. PLACEHOLDER-TEST-READER
+Of the \nStTestablePapers{} papers with a parser-testable comparison, \nStNaming{} name a statistical test somewhere in the text and \nStMarkers{} print the $+/=/-$ verdict beside the tables. Welch's $t$ on the printed numbers fails \nStNamedFail{} \nStNamedFailCi{} of the comparisons in the papers that name a test and \nStUnnamedFail{} \nStUnnamedFailCi{} in those that do not, on \nStNamedN{} and \nStUnnamedN{} comparisons. The regular-expression scan says whether a test is named; it cannot say on what. A language model therefore read the full text of \nTrAllPapers{} papers, the \nTrTestablePapers{} with a parser-testable comparison, the \nTrNewOptimizerPapers{} new-optimizer papers it had read by the time of writing and a random \nTrRandomOtherPapers{} of the rest, under a released prompt that asks for the run count and its sentence, the summary statistics printed, where the deviation sits, which test is reported and on what quantity, whether it is paired, the significance level, whether a per-cell verdict is printed, and what the paper says bold means (Table~\ref{tab:testreader}). Among the new-optimizer papers \nTrNewOptimizerPctRunsStated{} state a run count and \nTrNewOptimizerPctRunsThirty{} state thirty; the deviation is printed in a separate row or column in \nTrNewOptimizerPctStdOffCell{} of them and in the cell in \nTrNewOptimizerLayoutSameCellPct{}; \nTrNewOptimizerPctTestNamed{} report a test, the Wilcoxon signed-rank (\nTrNewOptimizerTestWilcoxonSignedRank{} papers), the rank-sum (\nTrNewOptimizerTestWilcoxonRankSum{}) and Friedman (\nTrNewOptimizerTestFriedman{}) most often; the test is on the per-run values in \nTrNewOptimizerOnPerRunValues{} papers and on per-function means in \nTrNewOptimizerOnPerFunctionMeans{}; it is stated to be paired in \nTrNewOptimizerPairedYes{}, unpaired in \nTrNewOptimizerPairedNo{} and left unsaid in \nTrNewOptimizerPairedUnsure{}; a per-cell verdict ($+/=/-$, win--tie--loss counts, a $p$ per function) is printed in \nTrNewOptimizerPctMarkers{} of the papers, \nTrNewOptimizerPctMarkersAmongNamed{} of those that name a test. What bold means is stated in \nTrNewOptimizerBoldBestPct{} of the papers (``best'' in every case) and left unstated in \nTrNewOptimizerBoldNotStatedPct{}. In the random papers of the rest of the corpus the same reading finds a run count in \nTrRandomOtherPctRunsStated{}, a test in \nTrRandomOtherPctTestNamed{} (the $t$-test in \nTrRandomOtherTestTTest{} papers) and a per-cell verdict in \nTrRandomOtherPctMarkers{}.
+
+\begin{table}[t]
+\caption{The model's reading of the full text: how the experiment is reported, by paper set. ``Random rest'': a seeded random draw of papers outside the other two sets. Percentages are of the papers in the set.}
+\label{tab:testreader}
+\centering
+\small
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+ & New optimizer & Random rest & Parser-testable \\
+\midrule
+Papers read & \nTrNewOptimizerPapers{} & \nTrRandomOtherPapers{} & \nTrTestablePapers{} \\
+Run count stated & \nTrNewOptimizerPctRunsStated{} & \nTrRandomOtherPctRunsStated{} & \nTrTestablePctRunsStated{} \\
+\quad thirty & \nTrNewOptimizerPctRunsThirty{} & \nTrRandomOtherPctRunsThirty{} & \nTrTestablePctRunsThirty{} \\
+Deviation in the cell & \nTrNewOptimizerLayoutSameCellPct{} & \nTrRandomOtherLayoutSameCellPct{} & \nTrTestableLayoutSameCellPct{} \\
+Deviation in a separate row or column & \nTrNewOptimizerPctStdOffCell{} & \nTrRandomOtherPctStdOffCell{} & \nTrTestablePctStdOffCell{} \\
+No deviation printed & \nTrNewOptimizerLayoutNonePct{} & \nTrRandomOtherLayoutNonePct{} & \nTrTestableLayoutNonePct{} \\
+A test reported & \nTrNewOptimizerPctTestNamed{} & \nTrRandomOtherPctTestNamed{} & \nTrTestablePctTestNamed{} \\
+\quad Wilcoxon signed-rank (papers) & \nTrNewOptimizerTestWilcoxonSignedRank{} & \nTrRandomOtherTestWilcoxonSignedRank{} & \nTrTestableTestWilcoxonSignedRank{} \\
+\quad Friedman (papers) & \nTrNewOptimizerTestFriedman{} & \nTrRandomOtherTestFriedman{} & \nTrTestableTestFriedman{} \\
+\quad $t$-test (papers) & \nTrNewOptimizerTestTTest{} & \nTrRandomOtherTestTTest{} & \nTrTestableTestTTest{} \\
+\quad on per-run values (papers) & \nTrNewOptimizerOnPerRunValues{} & \nTrRandomOtherOnPerRunValues{} & \nTrTestableOnPerRunValues{} \\
+\quad stated paired / unpaired (papers) & \nTrNewOptimizerPairedYes{} / \nTrNewOptimizerPairedNo{} & \nTrRandomOtherPairedYes{} / \nTrRandomOtherPairedNo{} & \nTrTestablePairedYes{} / \nTrTestablePairedNo{} \\
+Per-cell verdict printed & \nTrNewOptimizerPctMarkers{} & \nTrRandomOtherPctMarkers{} & \nTrTestablePctMarkers{} \\
+Bold rule stated & \nTrNewOptimizerBoldBestPct{} & \nTrRandomOtherBoldBestPct{} & \nTrTestableBoldBestPct{} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 
 \subsection{Who cites the guides}
 \label{sec:cites}
@@ -200,12 +244,37 @@ Thirty-run tables only & \nRcThirtyN{} & \nRcThirtyFail{} \\
 \section{The reader census}
 \label{sec:census}
 
-PLACEHOLDER-CENSUS
+\paragraph{Protocol.} An image-based reader (a vision-language model, named with its version in the released run records) was given every page of \nCzPapersDrawn{} randomly drawn papers on which the parser had detected a table caption, \nCzPagesDrawn{} pages, rendered at twice print size with nothing marked, together with the paper's run sentences, under the protocol released with the companion audits: list every results table on the page; for each, the orientation, whether any cell prints a dispersion, what the dispersion is (SD, SE, CI, unlabelled), its layout (in the cell, in parentheses, in a separate column, in a separate row, none), the run count and where it was found; then every group with exactly one bold cell, with the bold cell's mean and dispersion and the best non-bold cell's mean and dispersion, values as printed. The one change to the protocol for this corpus is the \emph{separate row} value of the layout field. The reader's groups are scored under the parser's unit: a group whose bold cell is not the better value in its stated direction, or ties its rival, is dropped as the parser drops it, so the two instruments count the same thing. Welch's test is computed on the reader's values exactly as on the parser's.
+
+\paragraph{Reference set.} Before the census, \nGDrawnN{} boxed cells drawn from the parser's output (testable, bar-less, discarded and non-extremal strata) were read by two vendors' models under the released reference protocol, each shown the rendered table with the audited cell boxed. On the testable stratum the first reader confirms the parser's bold cell in \nGBoldCellFrac{} cases and the whole claim, both cells and all four values, in \nGClaimFrac{} (\nGClaim{}); the second reader in \nGTwoBoldCellFrac{} and \nGTwoClaimFrac{}. Where both the parser and the reader can test, the verdicts agree in \nGVerdictFrac{} items for the first reader and \nGTwoVerdictFrac{} for the second, and in every disagreement the parser fails a comparison the reader survives, because the parser's run count is the smallest in the paper while the reader takes the count the table's caption or page states (the two readers agree with each other on the run count in \nAgNRunsFrac{} items and on the printed values in \nAgWinnerMeanFrac{}, \nAgWinnerDispFrac{}, \nAgRunnerMeanFrac{} and \nAgRunnerDispFrac{}). On the bar-less stratum the first reader confirms that no dispersion is printed for the boxed cell in 
+GNoBarAbsentFrac{} items and the second in 
+GTwoNoBarAbsentFrac{}; where a reader finds one, the parser's bar-less reading is wrong for that cell, and the census, not the reference set, says how often that happens across the corpus.
+
+\paragraph{What the census reads.} Table~\ref{tab:headline} gives the census beside the parser. On \nCzPagesRead{} pages the reader lists \nCzTables{} results tables, of which \nCzTablesWithBar{} print any dispersion; the layout is \emph{none} for \nCrFormNonePct{} of them, a separate column for \nCrFormSeparateColumnPct{}, a separate row for \nCrFormSeparateRowPct{}, a $\pm$ or parenthesis in the cell for \nCrFormPmPct{} and \nCrFormParenPct{}. The reader finds \nCzGroups{} single-bold groups in \nCzPapersWithGroups{} papers, and reads a dispersion on both sides for far more of them than the parser does: \nCzNeither{} \nCzNeitherCi{} bar-less against the parser's \nAPctNeither{}, and \nCzTestable{} \nCzTestableCi{} testable against \nAPctTestable{}. \nCrBarredGroupsSeparateLayoutPct{} of the reader's groups with both dispersions sit in tables whose dispersion is a separate column or row, the layout the parser cannot read; this is the format hazard the plan named, measured. On the reader's \nCzReaderFailN{} tested groups the Welch failure rate is \nCzReaderFail{}.
+
+\paragraph{By kind, under the reader.} The gap between kinds that the parser could not see is plain to the reader. In the new-optimizer papers of the census \nCrNewOptimizerNeither{} \nCrNewOptimizerNeitherCi{} of the groups are bar-less and \nCrNewOptimizerTestable{} \nCrNewOptimizerTestableCi{} testable, with \nCrNewOptimizerFail{} \nCrNewOptimizerFailCi{} of \nCrNewOptimizerTested{} tested failing; in the application papers \nCrApplicationNeither{} \nCrApplicationNeitherCi{} are bar-less and \nCrApplicationTestable{} testable. The convention, where it is followed, is followed on the page: the deviation is there, in its own column, and the run count is in the text. Where it is not followed, nothing is there.
+
+\paragraph{The run count the reader uses.} The reader finds a run count for \nCrTablesWithRunCount{} of the results tables, from the caption in \nCrNSourceCaption{} cases, the page in \nCrNSourcePage{} and the run sentences of the paper in \nCrNSourcePaper{}; the modal count is \nCrRunsRankOneN{} (\nCrRunsRankOneCount{} tables), and \nCrTablesAtThirty{} of the tables are read at thirty.
+
+\paragraph{Parser and reader on the same pages.} On the census pages the parser lists \nCzPipeGroups{} comparisons; the reader lists the parser's bold cell for \nCzPipeFoundPct{} of them, and the parser lists the reader's for \nCzReaderFoundPct{} of the reader's \nCzGroups{}. The parser's coverage of this format is therefore low, and its comparisons are drawn from the minority of tables that bold single cells and set values in one cell; the reader's coverage is what the census reports, and its own precision is what the reference set measures.
+
 
 \section{Discussion}
 \label{sec:discussion}
 
-PLACEHOLDER-DISCUSSION
+\paragraph{The convention is on the page, in a column the cell-reader cannot see.} The parser's headline for this corpus, \nAPctNeither{} of highlighted comparisons with no dispersion on either side, is not the field's reporting rate; it is the rate at which the field prints its deviation \emph{inside the cell}, which is the machine-learning habit and not this one. The reader, which sees the \emph{Std} column, reads a dispersion on both sides for \nCzTestable{} of its groups against the parser's \nAPctTestable{}. Two lessons follow. For an audit, the unit must be chosen for the format, and an instrument frozen on one literature measures a different thing on another until its blind spots are named and measured, as the pre-registered plan did here. For an author, the convention as practised is checkable: where the deviation and the run count are printed, a reader can recompute the comparison, and the recomputation fails at the stated run count in \nCzReaderFailPct{} of the reader's tested groups. A bold cell that is the best mean of its runs is, that often, not separable from its rival by the numbers printed beside it, at the run count the paper states.
+
+\paragraph{Two literatures under one name.} 
+KcApplication{} of the 
+SkAllPapers{} papers this query returns are applications, and they follow the convention in \nSkApplicationPctRunsStated{} (run count stated) and \nSkApplicationPctTestNamed{} (test named) of cases, against \nSkNewOptimizerPctRunsStated{} and \nSkNewOptimizerPctTestNamed{} for the papers that propose an optimizer; under the reader their groups are bar-less \nCrApplicationNeither{} of the time against \nCrNewOptimizerNeither{}. The guides are written for the second literature and mostly reach it. The first, which is where a metaheuristic meets a scheduling problem or a neural network's hyperparameters, and which is the larger part of what a general reader of this journal encounters under the word, states no run count in most cases and prints the best value bold. Reviewers of application papers have the same guides available and could ask for the same things.
+
+\paragraph{What bold means.} The model's reading of the full text finds a stated rule for bold in only \nTrAllBoldBestPct{} of the papers it read (``best value'' or ``best mean'') and no rule at all in \nTrAllBoldNotStatedPct{}; none says that bold marks a statistically supported difference. Meanwhile \nRbRowBoldPapers{} papers set the proposed method's entire row in bold, a typographic claim of a different kind, and the journal's house style sets header rows in bold, which produced \nRbHeaderRowOnlyN{} spurious comparisons for the parser and would confuse a hurried reader as well. A one-line legend, ``bold: best mean over \emph{N} runs; $\dagger$: Wilcoxon $p < 0.05$ against the proposed method'', costs nothing and settles both questions; \nTrAllPctMarkers{} of the read papers print such a per-cell verdict, \nTrNewOptimizerPctMarkers{} among those proposing an optimizer.
+
+\paragraph{The test the field names and the test the page supports.} \nSkNewOptimizerPctTestNamed{} of the new-optimizer papers name a statistical test, Wilcoxon and Friedman most often, as the guides ask. The page, however, prints means and deviations, and a mean and a deviation support a $t$-type comparison, not a rank test; the Wilcoxon verdict, computed on the per-run values the paper does not print, reaches the reader only as a symbol or a $p$-value if the paper prints one, and as nothing otherwise. That is why the audit uses Welch's $t$ on the summaries: not because it is the right test for the data, but because it is the only test the printed evidence permits, and a reader who wants to check a bold cell is in exactly that position. The field could close this gap in either direction, by printing the test's verdict beside every bold cell, or by releasing the per-run values so that the named test can be recomputed; the guides recommend both, and \nTrAllPctMarkersAmongNamed{} of the papers that name a test do the first.
+
+\paragraph{Limitations.} The corpus is one journal's open-access output, chosen because it was the one of seven listed journals whose publisher permitted automated download; it is large and heterogeneous, but it is not this journal's readership, and the new-optimizer stratum is 
+KcNewOptimizer{} papers. The reader is a model; its precision on the parser's cells is measured on the reference set and its agreement with a second vendor's model is reported, but neither is a human, and the labels a person would give on a sample of the census pages remain the check a sceptical reader should ask for. The parser was frozen for a different format and its coverage here is low; its numbers are kept because they were pre-registered and because a filter on them is easier to argue about than a change to them, but the reader's are the ones to quote. Welch's $t$ at the smallest stated run count is a deliberately conservative reading of what the page supports, and Table~\ref{tab:span} shows the alternatives; none of them is a claim about what the authors would have found with their raw data.
+
 
 \section*{Declaration of generative AI and AI-assisted technologies}
 During the preparation of this work the author used large language models as labelling instruments (the image-based reader census, the paper-kind classifier and the statistical-test reader, each under a released protocol) and as a drafting and reviewing assistant for the text and code. After using these tools the author reviewed and edited the content and takes full responsibility for the content of the publication.

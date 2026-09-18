@@ -354,7 +354,12 @@ def p_value(gap: float, se_w: float, se_r: float, n, rho: float = 0.0) -> Option
         # A standard error or interval with a stated run count also has
         # n - 1 degrees of freedom per arm; the earlier version applied Welch
         # only to deviations, which a reviewer rightly called unnecessary.
-        df = (se_w ** 2 + se_r ** 2) ** 2 / ((se_w ** 4 + se_r ** 4) / (n - 1))
+        # Satterthwaite's df is scale-free; the variances are rescaled by the
+        # larger one first so that the fourth powers of a deviation printed as
+        # 1e-150 (a metaheuristics table) do not underflow to zero.
+        top = max(se_w ** 2, se_r ** 2)
+        a, b = se_w ** 2 / top, se_r ** 2 / top
+        df = (a + b) ** 2 / ((a ** 2 + b ** 2) / (n - 1))
         out["df"] = df
         out["p_t"] = 2 * (1 - t_cdf(abs(z), df))
         out["p"] = out["p_t"]

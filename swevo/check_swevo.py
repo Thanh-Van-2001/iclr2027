@@ -28,7 +28,8 @@ def build() -> bool:
 
 def abstract_words() -> int:
     import fitz
-    t = fitz.open(os.path.join(D, "main.pdf"))[0].get_text()
+    doc = fitz.open(os.path.join(D, "main.pdf"))
+    t = "".join(doc[k].get_text() for k in range(min(2, len(doc))))
     i, j = t.find("Abstract"), t.find("Keywords")
     return len(t[i + len("Abstract"):j].split()) if 0 <= i < j else -1
 

@@ -156,6 +156,30 @@ def build(out_path: str) -> dict:
         reg.add("sr fail", _pct(sr["pct_fail"]) if sr["pct_fail"] is not None else "--", provenance=run)
         reg.add("sr fail ci", f"[{sr['ci_fail'][0]}, {sr['ci_fail'][1]}]" if sr.get("ci_fail") else "--", provenance=run)
 
+    for name, d in ex.get("test_reader", {}).items():
+        key = "tr " + name.replace("_", " ")
+        for k in ("papers", "runs_stated", "runs_thirty", "test_named", "markers"):
+            reg.add(f"{key} {k.replace('_', ' ')}", d[k], provenance=run)
+        reg.add(f"{key} alpha five percent", d["alpha_005"], provenance=run)
+        for k in ("pct_runs_stated", "pct_runs_thirty", "pct_std_off_cell", "pct_test_named", "pct_markers", "pct_markers_among_named"):
+            reg.add(f"{key} {k.replace('_', ' ')}", _pct(d[k]), provenance=run)
+        for lab in ("same_cell", "separate_row", "separate_column", "none", "unsure"):
+            reg.add(f"{key} layout {lab.replace('_', ' ')}", d["layout"].get(lab, 0), provenance=run)
+            reg.add(f"{key} layout {lab.replace('_', ' ')} pct", _pct(d["pct_layout"].get(lab, 0.0)), provenance=run)
+        for lab in ("best", "statistically best", "proposed", "not stated", "other"):
+            reg.add(f"{key} bold {lab}", d["bold_rule"].get(lab, 0), provenance=run)
+            reg.add(f"{key} bold {lab} pct", _pct(d["pct_bold_rule"].get(lab, 0.0)), provenance=run)
+        for lab in ("per_run_values", "per_function_means", "ranks", "unsure", "none"):
+            reg.add(f"{key} on {lab.replace('_', ' ')}", d["test_on"].get(lab, 0), provenance=run)
+        for lab in ("yes", "no", "unsure"):
+            reg.add(f"{key} paired {lab}", d["paired"].get(lab, 0), provenance=run)
+        tests = dict(d["tests"])
+        for t in sorted(set(tests) | {"wilcoxon_signed_rank", "wilcoxon_rank_sum", "mann_whitney", "friedman", "t_test", "anova", "holm", "bonferroni", "kruskal_wallis", "other"}):
+            reg.add(f"{key} test {t.replace('_', ' ')}", tests.get(t, 0), provenance=run)
+        for rank, (n_, c) in enumerate(d["runs_top"][:4]):
+            reg.add(f"{key} runs rank {_word(rank + 1)} n", n_, provenance=run)
+            reg.add(f"{key} runs rank {_word(rank + 1)} count", c, provenance=run)
+
     cc = ex.get("cites", {})
     if cc:
         names = {"derrac2011": "derrac", "garcia2009": "garcia nine", "garcia2010": "garcia ten", "sorensen2015": "sorensen",
@@ -280,6 +304,59 @@ def build(out_path: str) -> dict:
         if isinstance(v, (int, float)):
             reg.add("bs " + k.replace("_", " "), _pct(v) if "pct" in k else v, provenance=run)
 
+    def _frac(d: dict, k="correct", n="n") -> str:
+        return f"{d[k]} of {d[n]}"
+
+    def _pct_ci(d: dict) -> str:
+        if d.get("pct") is None:
+            return "--"
+        return f"{d['pct']}{PCT} [{d['ci'][0]}, {d['ci'][1]}]"
+
+    for tag, path, grun in (("g", "gold_set", "swevo_gold_set_gemini"), ("g two", "gold_set_sonnet", "swevo_gold_set_sonnet")):
+        if not os.path.exists(f"out/swevo/{path}.json"):
+            continue
+        g = _j(path)
+        gt = g["testable"]
+        f = gt["fields"]
+        reg.add(f"{tag} testable n", gt["n_labelled"], provenance=grun)
+        reg.add(f"{tag} unboxed n", gt["n_unboxed"] + g["no_bar"]["n_unboxed"], provenance=grun)
+        reg.add(f"{tag} drawn n", gt["n_labelled"] + gt["n_unboxed"] + g["no_bar"]["n"] + g["no_bar"]["n_unboxed"], provenance=grun)
+        reg.add(f"{tag} claim frac", _frac(f["claim_and_values"]), provenance=grun)
+        reg.add(f"{tag} claim", _pct_ci(f["claim_and_values"]), provenance=grun)
+        for name in ("bold_cell", "winner_mean", "winner_disp", "runner_mean", "runner_disp", "n_runs", "orientation", "direction"):
+            if name in f:
+                reg.add(f"{tag} {name.replace('_', ' ')}", _pct_ci(f[name]), provenance=grun)
+                reg.add(f"{tag} {name.replace('_', ' ')} frac", _frac(f[name]), provenance=grun)
+        v = gt["verdict_2x2"]
+        both = v["both_fail"] + v["both_survive"]
+        reg.add(f"{tag} verdict frac", f"{both} of {gt['n_testable_under_both']}", provenance=grun)
+        reg.add(f"{tag} verdict", _pct(v["per_item_agreement"]) if v["per_item_agreement"] is not None else "--", provenance=grun)
+        reg.add(f"{tag} fail reader", _pct(gt["failure_rate_reader_values"]) if gt.get("failure_rate_reader_values") is not None else "--", provenance=grun)
+        reg.add(f"{tag} fail pipe", _pct(gt["failure_rate_pipeline_values_same_items"]) if gt.get("failure_rate_pipeline_values_same_items") is not None else "--", provenance=grun)
+        reg.add(f"{tag} reader fail only", v["reader_fail_pipeline_survive"], provenance=grun)
+        reg.add(f"{tag} pipe fail only", v["pipeline_fail_reader_survive"], provenance=grun)
+        reg.add(f"{tag} verdict full frac", f"{both} of {gt['n_labelled']}", provenance=grun)
+        nb = g["no_bar"]
+        reg.add(f"{tag} no bar n", nb["n"], provenance=grun)
+        reg.add(f"{tag} no bar results table frac", _frac(nb["results_table"]), provenance=grun)
+        reg.add(f"{tag} no bar bold frac", _frac(nb["bold_cell"]), provenance=grun)
+        reg.add(f"{tag} no bar winner frac", _frac(nb["winner_mean"]), provenance=grun)
+        reg.add(f"{tag} no bar absent", _pct_ci(nb["error_bar_truly_absent"]), provenance=grun)
+        reg.add(f"{tag} no bar absent frac", _frac(nb["error_bar_truly_absent"]), provenance=grun)
+        for st in ("discarded", "non_extremal"):
+            if st in g and isinstance(g[st], dict):
+                for k, d in g[st].items():
+                    if isinstance(d, dict) and "correct" in d and "n" in d:
+                        reg.add(f"{tag} {st.replace('_', ' ')} {k.replace('_', ' ')} frac", _frac(d), provenance=grun)
+    if os.path.exists("out/swevo/reader_agreement.json"):
+        ag = _j("reader_agreement")
+        for k, v in ag.items():
+            if isinstance(v, (int, float)):
+                reg.add("ag " + k.replace("_", " "), _pct(v) if "pct" in k else v, provenance="swevo_reader_agreement")
+            elif isinstance(v, dict) and "n" in v and ("agree" in v or "correct" in v):
+                reg.add("ag " + k.replace("_", " ") + " frac", f"{v.get('agree', v.get('correct'))} of {v['n']}", provenance="swevo_reader_agreement")
+                reg.add("ag " + k.replace("_", " ") + " pct", _pct(v["pct"]) if v.get("pct") is not None else "--", provenance="swevo_reader_agreement")
+
     if os.path.exists("out/swevo/gold_set_census.json"):
         cz = _j("gold_set_census")
         crun = "swevo_gold_set_census"
@@ -336,16 +413,21 @@ def build(out_path: str) -> dict:
         reg.add("cr papers in kit", cr["papers_in_kit"], provenance=rrun)
         lay = cr["layout"]
         reg.add("cr results tables", lay["results_tables"], provenance=rrun)
-        for k, v in lay["bar_form"].items():
-            reg.add(f"cr form {k.replace('_', ' ')}", v, provenance=rrun)
-            reg.add(f"cr form {k.replace('_', ' ')} pct", _pct(lay["pct_bar_form"][k]), provenance=rrun)
+        for k in sorted(set(lay["bar_form"]) | {"pm", "paren", "bracket", "subscript", "separate_column", "separate_row", "none"}):
+            reg.add(f"cr form {k.replace('_', ' ')}", lay["bar_form"].get(k, 0), provenance=rrun)
+            reg.add(f"cr form {k.replace('_', ' ')} pct", _pct(lay["pct_bar_form"].get(k, 0.0)), provenance=rrun)
+        for k in sorted(set(lay["groups_by_form"]) | {"pm", "paren", "bracket", "subscript", "separate_column", "separate_row", "none"}):
+            reg.add(f"cr groups form {k.replace('_', ' ')}", lay["groups_by_form"].get(k, 0), provenance=rrun)
+            reg.add(f"cr barred groups form {k.replace('_', ' ')}", lay["groups_with_both_bars_by_form"].get(k, 0), provenance=rrun)
+        reg.add("cr groups separate layout pct", _pct(lay["pct_groups_in_separate_layout"]), provenance=rrun)
+        reg.add("cr barred groups separate layout pct", _pct(lay["pct_barred_groups_in_separate_layout"]), provenance=rrun)
         reg.add("cr tables with run count", _pct(lay["pct_tables_with_run_count"]), provenance=rrun)
         reg.add("cr tables at thirty", _pct(lay["pct_tables_at_thirty"]), provenance=rrun)
         for rank, (n_, cnt) in enumerate(lay["n_runs"][:5]):
             reg.add(f"cr runs rank {_word(rank + 1)} n", n_, provenance=rrun)
             reg.add(f"cr runs rank {_word(rank + 1)} count", cnt, provenance=rrun)
-        for k, v in lay["n_source"].items():
-            reg.add(f"cr n source {k}", v, provenance=rrun)
+        for k in sorted(set(lay["n_source"]) | {"caption", "page", "paper", "none", "unstated"}):
+            reg.add(f"cr n source {k}", lay["n_source"].get(k, 0), provenance=rrun)
         for lab, d in cr["by_kind"].items():
             key = lab.replace("_", " ")
             reg.add(f"cr {key} papers", d["papers"], provenance=rrun)
