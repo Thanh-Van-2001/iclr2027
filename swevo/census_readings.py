@@ -210,6 +210,18 @@ def _boot_pairs(pairs: list, reps: int = 2000, seed: int = 0):
     return [round(vals[int(0.025 * reps)], 1), round(vals[int(0.975 * reps) - 1], 1)]
 
 
+def _boot_mean(vals: list, reps: int = 2000, seed: int = 0):
+    """Percentile bootstrap of a mean over units that are already one per paper."""
+    rng = random.Random(seed)
+    vals = sorted(vals)
+    out = []
+    for _ in range(reps):
+        draw = [vals[rng.randrange(len(vals))] for _ in vals]
+        out.append(sum(draw) / len(draw))
+    out.sort()
+    return [round(out[int(0.025 * reps)], 1), round(out[int(0.975 * reps) - 1], 1)]
+
+
 def _kish(gs: list) -> dict:
     sizes = collections.Counter(g["paper"] for g in gs)
     tot = sum(sizes.values())
@@ -377,6 +389,9 @@ def main() -> int:
         largest = max(by_paper, key=lambda k: by_paper[k][0]) if by_paper else None
         top4 = {k for k, _ in sorted(by_paper.items(), key=lambda kv: -kv[1][0])[:4]}
         per_paper = {"papers": len(by_paper), "tested": tot, "effective_papers": _kish(tested)["effective"],
+                     # each paper weighted equally: the mean of the per-paper failure shares, with a percentile bootstrap over papers as units
+                     "macro_rate": round(statistics.mean(rates), 1) if rates else None,
+                     "macro_rate_ci": _boot_mean(rates) if len(rates) >= 10 else None,
                      "top_four_share": round(100 * sum(x[0] for x in sizes[:4]) / tot, 1) if tot else None,
                      "top_ten_share": round(100 * sum(x[0] for x in sizes[:10]) / tot, 1) if tot else None,
                      "median_rate": round(statistics.median(rates), 1) if rates else None,

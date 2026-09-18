@@ -204,6 +204,9 @@ def main() -> int:
     out = {"papers": len(papers), "pages_read": len(vpages), "tested_groups": len(rows),
            "ci_agree_papers": [round(vals[50], 1), round(vals[1949], 1)] if keys else None,
            "chance_agreement": round(100 * p_e, 1) if n else None, "kappa": kappa,
+           # specific agreement on each side (Cicchetti and Feinstein), which kappa's prevalence dependence does not touch
+           "specific_agreement_fail_ns": round(100 * 2 * xt["welch_fail_printed_not_significant"] / max(2 * xt["welch_fail_printed_not_significant"] + xt["welch_fail_printed_significant"] + xt["welch_pass_printed_not_significant"], 1), 1) if n else None,
+           "specific_agreement_pass_sig": round(100 * 2 * xt["welch_pass_printed_significant"] / max(2 * xt["welch_pass_printed_significant"] + xt["welch_fail_printed_significant"] + xt["welch_pass_printed_not_significant"], 1), 1) if n else None,
            "top_three_share": round(100 * sum(d["located"] for d in top3) / n, 1) if n else None,
            "macro_agreement": round(100 * sum(d["agree"] / d["located"] for d in per_paper_2x2.values()) / len(per_paper_2x2), 1) if per_paper_2x2 else None,
            "per_paper_agreement_min": round(100 * min(d["agree"] / d["located"] for d in per_paper_2x2.values()), 1) if per_paper_2x2 else None,

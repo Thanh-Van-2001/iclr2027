@@ -540,6 +540,8 @@ def build(out_path: str) -> dict:
         reg.add("vc sign contradictions", vc.get("sign_contradictions", 0), provenance=vrun)
         reg.add("vc sign checked", vc.get("sign_checked", 0), provenance=vrun)
         reg.add("vc effective papers", f"{vc['effective_papers']:.1f}" if vc.get("effective_papers") else "--", provenance=vrun)
+        for k in ("specific_agreement_fail_ns", "specific_agreement_pass_sig"):
+            reg.add(f"vc {k.replace('_', ' ')}", _pct(vc[k]) if vc.get(k) is not None else "--", provenance=vrun)
         reg.add("vc largest paper located", vc.get("largest_paper_located", 0), provenance=vrun)
         reg.add("vc pct largest paper", _pct(vc["pct_largest_paper"]) if vc.get("pct_largest_paper") is not None else "--", provenance=vrun)
         aw = vc.get("agree_without_largest") or {}
@@ -659,6 +661,8 @@ def build(out_path: str) -> dict:
             for k in ("papers", "tested", "papers_any_fail", "largest_paper_tested"):
                 reg.add(f"{tag} pp {k.replace('_', ' ')}", pp[k], provenance=rrun)
             reg.add(f"{tag} pp effective papers", f"{pp['effective_papers']:.1f}" if pp.get("effective_papers") else "--", provenance=rrun)
+            reg.add(f"{tag} pp macro rate", _pct(pp["macro_rate"]) if pp.get("macro_rate") is not None else "--", provenance=rrun)
+            reg.add(f"{tag} pp macro rate ci", f"[{pp['macro_rate_ci'][0]}, {pp['macro_rate_ci'][1]}]" if pp.get("macro_rate_ci") else "--", provenance=rrun)
             for k in ("top_four_share", "top_ten_share", "median_rate", "q1_rate", "q3_rate", "largest_paper_fail"):
                 reg.add(f"{tag} pp {k.replace('_', ' ')}", _pct(pp[k]) if pp[k] is not None else "--", provenance=rrun)
             _sh(f"{tag} pp without largest", pp["without_largest"])

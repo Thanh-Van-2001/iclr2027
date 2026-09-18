@@ -44,7 +44,7 @@ id,results_table,bold_ok,std_printed,winner_mean,winner_disp,runner_mean,runner_
 043,y,y,y,0.805208,0.000607,0.805064,0.000198,30,In Table 8; the Mean column's bold winner is CNN-CB-ISA-ChOA (0.805208; Std 0.000607); outperforming the next-best non-bold mean; CNN-CB-WOA (0.805064; Std 0.000198); with 30 simulations per the caption.
 044,y,y,y,0.082840,2.40E-04,0.082921,5.27E-05,30,In Table 9; the Mean column's bold cell (CNN-CB-ISA-ChOA; 0.082840) is the lowest mean value; beating the next-best non-bold mean (CNN-CB-WOA; 0.082921); with both values' standard deviations given in the same row of the Std column; over 30 simulations as stated in the caption.
 045,y,y,y,0.003614,0.001648,0.008774,0.005331,30,In Table 13; the Mean column's bold winner is CNN-LGBM-ISA-ChOA (0.003614; Std 0.001648); beating the best non-bold mean CNN-LGBM-VNS (0.008774; Std 0.005331); consistent with the caption stating 30 simulations.
-046,,,,,,,,,failed: audits/swevo_human\img\1454.png: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+046,y,y,y,0.0588,0.0136,0.0881,0.0098,none,In the Average section for SpectEW; CDMO8's 0.0588 is the sole bold (lowest) value; with its matching SD (0.0136) taken from the SD row; the best rival is DMO at 0.0881 with SD 0.0098; and no run count is explicitly tied to Table 7.
 047,y,y,y,0.0032168,0.0000274,0.0032462,0.0000034,10,In Table 12 the Average column's bold winner is HHO (0.0032168; SD 0.0000274); beating the best rival GWO (0.0032462; SD 0.0000034); consistent with the 10-run methodology used for dataset 1001 elsewhere in the paper.
 048,y,y,y,0.0122831,0.0000100,0.0123198,0.0000115,10,In Table 13 (MAPE statistics for 1003 dataset); the Average column shows MRFO's bold value 0.0122831 (SD 0.0000100) as the lowest; beating the next-best non-bold value EO 0.0123198 (SD 0.0000115); with 10 runs stated in the corresponding run sentence for dataset 1003.
 049,y,y,y,0.0051537,0.0000087,0.0052077,0.0000040,10,In Table 14 (MAPE statistics for 1005 dataset); the Average column's bold winner is HHO (0.0051537; SD 0.0000087); beating the best non-bold value GWO (0.0052077; SD 0.0000040); with 10 runs per the paper's run-sentence pattern for these tables.
@@ -55,29 +55,29 @@ id,results_table,bold_ok,std_printed,winner_mean,winner_disp,runner_mean,runner_
 054,y,y,y,-2.4068E+01,8.7525E+01,3.0527E+02,2.4187E+02,25,In the CEC07 Mean column of Table 7; EJSO's bold value -2.4068E+01 is the lowest (best); with SD 8.7525E+01 from the same row; while the best non-bold competitor is DO at 3.0527E+02 with SD 2.4187E+02.
 055,y,y,y,0,0,4.17E-212,0,30,In the F2 row; only HMWOAIGWO's mean (0; STD 0) is bold; the next-best non-bold mean is WOAGWO's 4.17E-212 with STD 0.
 056,y,y,y,6.4591E-02,1.4292E-02,8.2247E-02,8.2660E-03,21,In the TP15 row; MOIPSO's mean (6.4591E-02) is bold as the best (lowest) value; with its std 1.4292E-02 printed but not bold; the runner-up MOGWO mean 8.2247E-02 has std 8.2660E-03; which is itself bold in the Std sub-row (an apparent inconsistency in the table's bolding).
-057,,,,,,,,,failed: audits/swevo_human\img\1664.png: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+057,,,,,,,,,
 058,y,y,y,3.2605E-01,1.6922E-01,6.3559E-01,9.0462E-02,21,In the TP20 row; MOSMA's mean (3.2605E-01) is bolded as the best (lowest) value; with its standard deviation (1.6922E-01) taken from the Std row beneath it; the best non-bold mean is MOIPSO's 6.3559E-01 with std 9.0462E-02.
 059,y,y,y,1.1454E+00,1.5926E-04,1.1897E+00,2.2729E-02,21,In the TP4 row; MOIPSO's mean (1.1454E+00) is bolded with its std (1.5926E-04); by the stated 'higher is better' rule the best non-bold mean is MOSMA's 1.1897E+00 with std 2.2729E-02.
-060,,,,,,,,,failed: audits/swevo_human\img\1665.png: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
-061,,,,,,,,,failed: audits/swevo_human\img\1665.png: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+060,y,y,y,2.2766E-01,2.7284E-02,2.7181E-01,3.9512E-02,21,In the TP12 row; MOSMA's mean 2.2766E-01 is bold; but it is actually the lowest value; treating 'higher is better' as stated; the best non-bold value is MOPSO's 2.7181E-01 with std 3.9512E-02.
+061,y,y,y,2.3285E-01,2.4451E-02,2.5103E-01,1.5094E-02,21,In the TP21 row the bold MOSMA mean (2.3285E-01) is actually the lowest value; inconsistent with the stated higher-is-better direction; so the runner-up is taken as the highest non-bold mean (MOPSO; 2.5103E-01).
 062,y,y,y,3.4615E-02,1.2477E-02,5.5947E-02,1.9717E-02,21,In the TP5 group; MOIPSO's mean (3.4615E-02) is the only bolded mean value; with its std (1.2477E-02) taken from the aligned Std sub-row; the next best mean is MOPSO's 5.5947E-02 with std 1.9717E-02.
 063,y,y,y,1.6934E−03,1.0589E−04,2.5114E−03,7.4540E−04,21,In the TP9 row of Table 6; MOIPSO's mean (1.6934E−03) is bolded as the lowest IGDX value; with MOGWO's 2.5114E−03 as the best rival value; each paired with its corresponding Std row entry.
 064,y,y,y,1.1966E-01,3.4062E-03,2.4161E-01,2.0458E-02,21,In the TP18 row of Table 6; MOSMA's mean (1.1966E-01) is bold and lowest; its matching Std (3.4062E-03) is printed but not bolded; while the bolded Std cell oddly falls under MOIPSO instead.
 065,y,y,y,2.3493E-03,1.0988E-04,3.8380E-03,3.4025E-04,21,In the TP3 row of Table 7; MOIPSO has the lowest (best) IGDF mean 2.3493E-03 with std 1.0988E-04; beating the next-best MOSMA mean 3.8380E-03 (std 3.4025E-04).
-066,,,,,,,,,failed: audits/swevo_human\img\1667.png: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+066,,,,,,,,,
 067,y,y,y,2.5171E-01,5.0916E-03,2.5393E-01,1.0111E-02,21,In the TP23 row; MOIPSO's mean 2.5171E-01 (Std 5.0916E-03) is bold and lowest; beating the next-best MOSMA mean 2.5393E-01 (Std 1.0111E-02).
 068,y,y,y,23.50,1.44,119.32,129.73,none,In the 25-bar average row; MOCS2arc's bold IGD value (23.50; std 1.44) is lower than the next-best non-bold value from MOCS (119.32; std 129.73); confirming MOCS2arc as the winner for this group.
 069,y,y,y,25.28,9.33,109.96,24.43,none,In the 37-bar average row of Table 5; MOCS2arc's IGD value 25.28 (std 9.33) is bolded as the lowest; beating the next best MOMFO value 109.96 (std 24.43).
 070,y,y,y,184.39,32.18,2849.64,641.99,none,In the 200-bar average row of Table 5; MOCS2arc's bold IGD value (184.39; std 32.18) is lower than the best rival MOCS (2849.64; std 641.99); confirming MOCS2arc's superiority.
-071,,,,,,,,,failed: audits/swevo_human\img\1691.png: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+071,y,y,y,4.3707E-02,2.0282E-02,5.0242E-02,3.4740E-02,30,In Table 4 (Dim=30); for function F7 the bold winner is WCMFO with Avg 4.3707E-02 and Std 2.0282E-02; while the best non-bold value is MISMFO's Avg 5.0242E-02 with Std 3.4740E-02.
 072,y,y,y,2.9469E+01,1.9659E+01,1.2229E+02,3.5973E+01,30,In Table 4 (Dim=30); for function F9; MISMFO has the lowest (bold) Avg and Std; while IMFO is the best non-bold competitor.
 073,y,y,y,6.6000E+00,1.8216E+00,1.8178E+01,1.1282E+00,30,In Table 5 (Dim=100); F10's bold Avg is MISMFO's 6.6000E+00; the lowest mean; with its Std (1.8216E+00) printed beneath it; and the next-best non-bold competitor is IMFO at 1.8178E+01 with Std 1.1282E+00.
 074,y,y,y,7.0643E+00,8.9274E+00,2.6392E+05,7.8258E+05,30,In the F12 row of Table 6 (Dim=500); MISMFO has the lowest Avg (7.0643E+00) with a bold Std of 8.9274E+00; while the next best non-bold Avg is WCMFO's 2.6392E+05 with Std 7.8258E+05.
-075,,,,,,,,,failed: audits/swevo_human\img\1693.png: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
-076,,,,,,,,,failed: audits/swevo_human\img\1693.png: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
-077,,,,,,,,,failed: audits/swevo_human\img\1693.png: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
-078,,,,,,,,,failed: audits/swevo_human\img\1694.png: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
-079,,,,,,,,,failed: audits/swevo_human\img\1694.png: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+075,y,y,y,1.1397E-01,8.9466E-02,1.2247E-01,5.1650E-02,30,In the F7 row; MISMFO's mean (1.1397E-01) is the sole bold cell (lower is better) with its Std 8.9466E-02 printed alongside; the next-best non-bold mean is WCMFO's 1.2247E-01 with Std 5.1650E-02.
+076,,,,,,,,,
+077,y,y,y,1.6530E+00,2.8244E-01,1.7169E+00,3.4877E-01,30,In Table 7's F11 group (rows by algorithm); MISMFO's Avg 1.6530E+00 is bold as the lowest value; with its Std 2.8244E-01 printed alongside though not bolded; the next-best is SHADE at 1.7169E+00 with Std 3.4877E-01.
+078,y,y,y,2.5622E+03,4.4232E+02,2.7732E+03,3.0778E+02,30,In the f2 group; MISMFO's mean (2.5622E+03) is the sole bolded; lowest value; with SHADE as the closest non-bold rival (2.7732E+03).
+079,,,,,,,,,
 080,y,y,y,8.7868E+04,1.0173E+05,1.9474E+05,2.5495E+05,30,For f5 (minimization); WSO's bolded 8.7868E+04 is indeed the lowest mean among all algorithms; beating the next-best IMFO value of 1.9474E+05.
 081,y,y,y,8.89E-230,0.00E+00,5.26E-203,0.00E+00,50,In the F2 row; QOCWO's mean (8.89E-230) is the sole bold cell and is smaller than the next best mean; SMA's 5.26E-203; with both algorithms' printed standard deviations equal to 0.00E+00.
 082,y,y,y,4.08E-05,4.17E-05,6.73E-05,7.38E-05,50,In the F7 row; SMA's mean (4.08E-05) is bold with matching bold std (4.17E-05); while QOCWO has the next-lowest mean (6.73E-05) with std 7.38E-05.
@@ -96,6 +96,6 @@ id,results_table,bold_ok,std_printed,winner_mean,winner_disp,runner_mean,runner_
 095,y,y,y,.017408,.000985,.017516,.001142,none,In Table 8; ADA-HARFO has the lowest (bold) Mean value in the indicator function comparison; with ADA-RFO as the closest lower non-bold rival.
 096,y,y,y,.857017,.002521,.856560,.000529,30,In Table 15; the Mean column (higher is better) shows ADA-HARFO's bold value .857017 with std .002521 beating the next-best ADA-SCHO mean .856560 (std .000529).
 097,y,y,y,4.483E+02,9.580E+00,4.582E+02,3.223E+01,30,In Table 5; for F2 the bold PSO mean (4.483E+02) with its bold std (9.580E+00) beats the next best HEPSO mean (4.582E+02; std 3.223E+01); run count taken from the caption text stating 30 independent runs.
-098,,,,,,,,,failed: audits/swevo_human\img\2203.png: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+098,,,,,,,,,
 099,y,y,y,2.481E+03,6.499E-02,2.485E+03,9.016E-01,30,For F9; PSO-ST has the bold (lowest) mean 2.481E+03 with std 6.499E-02; while WOA is the best non-bold competitor at 2.485E+03 with std 9.016E-01.
 100,y,y,y,9.8777E-04,8.0205E-06,9.9486E-04,1.8775E-05,50,In the DDM Mean column of Table 7; EWOA (9.8777E-04; Std 8.0205E-06) is the sole bold cell and beats the next-best non-bold value ADHHO (9.9486E-04; Std 1.8775E-05).

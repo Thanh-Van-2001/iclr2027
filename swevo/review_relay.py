@@ -47,7 +47,7 @@ def main(argv=None):
         if os.path.exists(out):
             continue
         prompt = brief + "\n\n" + CONTEXT + "\n\nPRE-REGISTERED PLAN:\n" + plan + "\n\nMANUSCRIPT (text extracted from the PDF; tables read row by row; line numbers removed):\n" + paper
-        raw = classify.ask(prompt, key, max_tokens=8000)
+        raw = classify.ask(prompt, key, max_tokens=8000, timeout=900)
         s = raw.strip()
         if "```" in s:
             s = max(s.split("```"), key=len)

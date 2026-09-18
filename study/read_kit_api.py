@@ -44,7 +44,7 @@ VENDORS = {
 
 COLS = ["id", "stratum", "results_table", "bold_ok", "orientation", "direction", "winner_mean",
         "winner_disp", "runner_mean", "runner_disp", "disp_type", "n_runs", "n_source",
-        "rival_copied", "error_bar_present", "note"]
+        "rival_copied", "error_bar_present", "cause", "note"]
 
 PROMPT = """You are the blind reader of a reference set for a paper that audits results tables in machine-learning
 papers. The image is a crop of a page around one table, rendered at twice its printed size, with a RED BOX drawn

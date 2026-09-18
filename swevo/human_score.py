@@ -50,7 +50,8 @@ def main() -> int:
         print("no human labels yet:", path)
         return 0
     items = {it["id"]: it for it in json.load(open(os.path.join(KIT, "items.json"), encoding="utf-8"))}
-    rows = [r for r in csv.DictReader(open(path, encoding="utf-8", newline="")) if any(v.strip() for k, v in r.items() if k != "id")]
+    # a row counts as labelled only if some answer field is filled; a note alone (a model's "failed: ...") is not an answer
+    rows = [r for r in csv.DictReader(open(path, encoding="utf-8", newline="")) if any(v.strip() for k, v in r.items() if k not in ("id", "note"))]
     fields = {"winner_mean": [0, 0], "winner_disp": [0, 0], "runner_mean": [0, 0], "runner_disp": [0, 0], "n_runs": [0, 0]}
     recall = {"std_printed_y": 0, "std_printed_y_reader_barred": 0, "std_printed_n": 0, "std_printed_n_reader_barred": 0}
     bold_ok = [0, 0]

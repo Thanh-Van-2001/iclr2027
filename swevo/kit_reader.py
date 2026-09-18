@@ -57,7 +57,7 @@ def main(argv=None) -> int:
     cols = ["id", "results_table", "bold_ok", "std_printed", "winner_mean", "winner_disp", "runner_mean", "runner_disp", "n_runs", "note"]
     rows = []
     for it in items:
-        if it["id"] in done and any(done[it["id"]].get(c) for c in cols[1:]):
+        if it["id"] in done and any(done[it["id"]].get(c) for c in cols[1:-1]):
             rows.append(done[it["id"]])
             continue
         img = os.path.join(args.kit, "img", f"{it['page_id']}.png")
