@@ -1,0 +1,1063 @@
+[
+ {
+  "id": "0722",
+  "tables": [],
+  "figure_band_on_page": "",
+  "note": "failed: no valid JSON after three attempts",
+  "reasoning_effort": "low"
+ },
+ {
+  "id": "0725",
+  "tables": [
+   {
+    "caption_start": "Table 5. The statistical Results of multimodal",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "20",
+    "n_source": "page",
+    "bar_form": "separate_column",
+    "groups": [
+     {
+      "label": "F8 / Mean",
+      "direction": "lower",
+      "winner_mean": "-20,949.1",
+      "winner_disp": "0.014833",
+      "runner_mean": "-20,949",
+      "runner_disp": "0.206536"
+     },
+     {
+      "label": "F9 / Mean",
+      "direction": "lower",
+      "winner_mean": "0",
+      "winner_disp": "0",
+      "runner_mean": "0",
+      "runner_disp": "0"
+     },
+     {
+      "label": "F10 / Mean",
+      "direction": "lower",
+      "winner_mean": "8.88E-16",
+      "winner_disp": "0",
+      "runner_mean": "8.88E-16",
+      "runner_disp": "0"
+     },
+     {
+      "label": "F11 / Mean",
+      "direction": "lower",
+      "winner_mean": "0",
+      "winner_disp": "0",
+      "runner_mean": "0",
+      "runner_disp": "0"
+     },
+     {
+      "label": "F12 / Mean",
+      "direction": "lower",
+      "winner_mean": "5.98E-08",
+      "winner_disp": "1.92E-08",
+      "runner_mean": "1.49E-07",
+      "runner_disp": "1.21E-07"
+     },
+     {
+      "label": "F13 / Mean",
+      "direction": "lower",
+      "winner_mean": "0.000551",
+      "winner_disp": "0.002457",
+      "runner_mean": "0.000718",
+      "runner_disp": "0.000996"
+     }
+    ],
+    "note": "Extracting Mean rows. F9, F10, F11 have multiple bold cells in the Mean row, so they are technically ties, but I'll just pick the first runner up that matches."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "low"
+ },
+ {
+  "id": "0808",
+  "tables": [
+   {
+    "caption_start": "Table 6. Experimental results",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "51",
+    "n_source": "paper",
+    "bar_form": "paren",
+    "groups": [
+     {
+      "label": "F4",
+      "direction": "lower",
+      "winner_mean": "4.83e+01",
+      "winner_disp": "3.98e+01",
+      "runner_mean": "5.25e+01",
+      "runner_disp": "4.39e+01"
+     },
+     {
+      "label": "F5",
+      "direction": "lower",
+      "winner_mean": "6.83e+00",
+      "winner_disp": "1.57e+00",
+      "runner_mean": "7.42e+00",
+      "runner_disp": "2.82e+00"
+     },
+     {
+      "label": "F6",
+      "direction": "lower",
+      "winner_mean": "0.00e+00",
+      "winner_disp": "0.00e+00",
+      "runner_mean": "1.59e-08",
+      "runner_disp": "7.51e-08"
+     },
+     {
+      "label": "F7",
+      "direction": "lower",
+      "winner_mean": "5.75e+01",
+      "winner_disp": "9.63e-01",
+      "runner_mean": "6.07e+01",
+      "runner_disp": "1.96e+00"
+     },
+     {
+      "label": "F8",
+      "direction": "lower",
+      "winner_mean": "6.50e+00",
+      "winner_disp": "1.79e+00",
+      "runner_mean": "7.17e+00",
+      "runner_disp": "3.04e+00"
+     },
+     {
+      "label": "F10",
+      "direction": "lower",
+      "winner_mean": "2.95e+03",
+      "winner_disp": "3.25e+02",
+      "runner_mean": "3.21e+03",
+      "runner_disp": "3.52e+02"
+     },
+     {
+      "label": "F11",
+      "direction": "lower",
+      "winner_mean": "2.93e+01",
+      "winner_disp": "1.93e+00",
+      "runner_mean": "3.20e+01",
+      "runner_disp": "4.87e+00"
+     },
+     {
+      "label": "F12",
+      "direction": "lower",
+      "winner_mean": "9.60e+02",
+      "winner_disp": "2.69e+02",
+      "runner_mean": "1.22e+03",
+      "runner_disp": "3.45e+02"
+     },
+     {
+      "label": "F13",
+      "direction": "lower",
+      "winner_mean": "4.18e+01",
+      "winner_disp": "6.88e+00",
+      "runner_mean": "4.30e+01",
+      "runner_disp": "1.63e+01"
+     },
+     {
+      "label": "F14",
+      "direction": "lower",
+      "winner_mean": "2.70e+01",
+      "winner_disp": "2.53e+00",
+      "runner_mean": "2.83e+01",
+      "runner_disp": "3.07e+00"
+     },
+     {
+      "label": "F15",
+      "direction": "lower",
+      "winner_mean": "2.19e+01",
+      "winner_disp": "1.99e+00",
+      "runner_mean": "2.22e+01",
+      "runner_disp": "2.52e+00"
+     },
+     {
+      "label": "F16",
+      "direction": "lower",
+      "winner_mean": "3.84e+02",
+      "winner_disp": "1.31e+02",
+      "runner_mean": "3.87e+02",
+      "runner_disp": "1.30e+02"
+     },
+     {
+      "label": "F17",
+      "direction": "lower",
+      "winner_mean": "2.65e+02",
+      "winner_disp": "8.82e+01",
+      "runner_mean": "2.57e+02",
+      "runner_disp": "1.82e+02"
+     },
+     {
+      "label": "F18",
+      "direction": "lower",
+      "winner_mean": "2.33e+01",
+      "winner_disp": "1.14e+00",
+      "runner_mean": "2.39e+01",
+      "runner_disp": "1.56e+00"
+     },
+     {
+      "label": "F19",
+      "direction": "lower",
+      "winner_mean": "1.37e+01",
+      "winner_disp": "2.76e+00",
+      "runner_mean": "1.59e+01",
+      "runner_disp": "3.27e+00"
+     },
+     {
+      "label": "F20",
+      "direction": "lower",
+      "winner_mean": "1.17e+02",
+      "winner_disp": "6.29e+01",
+      "runner_mean": "1.27e+02",
+      "runner_disp": "6.12e+01"
+     },
+     {
+      "label": "F21",
+      "direction": "lower",
+      "winner_mean": "2.09e+02",
+      "winner_disp": "3.36e+00",
+      "runner_mean": "2.11e+02",
+      "runner_disp": "2.72e+00"
+     },
+     {
+      "label": "F22",
+      "direction": "lower",
+      "winner_mean": "1.87e+03",
+      "winner_disp": "1.77e+03",
+      "runner_mean": "1.98e+03",
+      "runner_disp": "1.81e+03"
+     },
+     {
+      "label": "F23",
+      "direction": "lower",
+      "winner_mean": "4.31e+02",
+      "winner_disp": "4.53e+00",
+      "runner_mean": "4.34e+02",
+      "runner_disp": "4.90e+00"
+     },
+     {
+      "label": "F24",
+      "direction": "lower",
+      "winner_mean": "5.09e+02",
+      "winner_disp": "2.70e+00",
+      "runner_mean": "5.11e+02",
+      "runner_disp": "2.77e+00"
+     },
+     {
+      "label": "F25",
+      "direction": "lower",
+      "winner_mean": "4.81e+02",
+      "winner_disp": "2.75e+00",
+      "runner_mean": "4.81e+02",
+      "runner_disp": "2.27e+00"
+     },
+     {
+      "label": "F26",
+      "direction": "lower",
+      "winner_mean": "3.07e+02",
+      "winner_disp": "1.41e+00",
+      "runner_mean": "1.17e+03",
+      "runner_disp": "3.18e+01"
+     },
+     {
+      "label": "F27",
+      "direction": "lower",
+      "winner_mean": "5.11e+02",
+      "winner_disp": "1.23e+01",
+      "runner_mean": "5.13e+02",
+      "runner_disp": "2.37e+01"
+     },
+     {
+      "label": "F28",
+      "direction": "lower",
+      "winner_mean": "4.59e+02",
+      "winner_disp": "1.92e-13",
+      "runner_mean": "4.59e+02",
+      "runner_disp": "1.95e-13"
+     },
+     {
+      "label": "F29",
+      "direction": "lower",
+      "winner_mean": "3.37e+02",
+      "winner_disp": "1.74e+01",
+      "runner_mean": "3.41e+02",
+      "runner_disp": "1.10e+01"
+     },
+     {
+      "label": "F30",
+      "direction": "lower",
+      "winner_mean": "5.92e+05",
+      "winner_disp": "1.97e+04",
+      "runner_mean": "6.08e+05",
+      "runner_disp": "3.45e+04"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "low"
+ },
+ {
+  "id": "0867",
+  "tables": [
+   {
+    "caption_start": "Table 7. Average quantitative results obtained",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Output Entropy",
+      "direction": "higher",
+      "winner_mean": "7.55",
+      "winner_disp": "none",
+      "runner_mean": "7.17",
+      "runner_disp": "none"
+     },
+     {
+      "label": "PSNR",
+      "direction": "higher",
+      "winner_mean": "27.99",
+      "winner_disp": "none",
+      "runner_mean": "24.42",
+      "runner_disp": "none"
+     },
+     {
+      "label": "AMBE",
+      "direction": "lower",
+      "winner_mean": "3.27",
+      "winner_disp": "none",
+      "runner_mean": "7.54",
+      "runner_disp": "none"
+     },
+     {
+      "label": "ICF",
+      "direction": "higher",
+      "winner_mean": "44.93",
+      "winner_disp": "none",
+      "runner_mean": "44.56",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Output Local Contrast",
+      "direction": "higher",
+      "winner_mean": "75.84",
+      "winner_disp": "none",
+      "runner_mean": "74.09",
+      "runner_disp": "none"
+     },
+     {
+      "label": "SSIM",
+      "direction": "higher",
+      "winner_mean": "0.89",
+      "winner_disp": "none",
+      "runner_mean": "0.86",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FSIM",
+      "direction": "higher",
+      "winner_mean": "0.96",
+      "winner_disp": "none",
+      "runner_mean": "0.95",
+      "runner_disp": "none"
+     },
+     {
+      "label": "TEN",
+      "direction": "higher",
+      "winner_mean": "0.20",
+      "winner_disp": "none",
+      "runner_mean": "0.17",
+      "runner_disp": "none"
+     },
+     {
+      "label": "QRCM",
+      "direction": "higher",
+      "winner_mean": "0.11",
+      "winner_disp": "none",
+      "runner_mean": "0.09",
+      "runner_disp": "none"
+     }
+    ],
+    "note": "Input Entropy and Input Local Contrast have no bold cells."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "low"
+ },
+ {
+  "id": "0898",
+  "tables": [
+   {
+    "caption_start": "Table 3. Solution accuracy and optimization",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "separate_column",
+    "groups": [
+     {
+      "label": "D=1 Mean",
+      "direction": "lower",
+      "winner_mean": "1.07 \\times 10^4",
+      "winner_disp": "2.21 \\times 10^3",
+      "runner_mean": "1.08 \\times 10^4",
+      "runner_disp": "2.90 \\times 10^3"
+     },
+     {
+      "label": "D=1 SR",
+      "direction": "higher",
+      "winner_mean": "99.50%",
+      "winner_disp": "none",
+      "runner_mean": "99.30%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "D=1 Time",
+      "direction": "lower",
+      "winner_mean": "5.60",
+      "winner_disp": "none",
+      "runner_mean": "8.70",
+      "runner_disp": "none"
+     },
+     {
+      "label": "D=2 Mean",
+      "direction": "lower",
+      "winner_mean": "5.19 \\times 10^5",
+      "winner_disp": "8.88 \\times 10^6",
+      "runner_mean": "1.25 \\times 10^6",
+      "runner_disp": "1.83 \\times 10^7"
+     },
+     {
+      "label": "D=2 SR",
+      "direction": "higher",
+      "winner_mean": "92.10%",
+      "winner_disp": "none",
+      "runner_mean": "90.50%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "D=2 Time",
+      "direction": "lower",
+      "winner_mean": "24.55",
+      "winner_disp": "none",
+      "runner_mean": "30.00",
+      "runner_disp": "none"
+     },
+     {
+      "label": "D=3 Mean",
+      "direction": "lower",
+      "winner_mean": "9.01 \\times 10^5",
+      "winner_disp": "1.43 \\times 10^7",
+      "runner_mean": "1.57 \\times 10^6",
+      "runner_disp": "1.68 \\times 10^7"
+     },
+     {
+      "label": "D=3 SR",
+      "direction": "higher",
+      "winner_mean": "75.30%",
+      "winner_disp": "none",
+      "runner_mean": "71.80%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "D=3 Time",
+      "direction": "lower",
+      "winner_mean": "49.26",
+      "winner_disp": "none",
+      "runner_mean": "63.45",
+      "runner_disp": "none"
+     },
+     {
+      "label": "D=4 Mean",
+      "direction": "lower",
+      "winner_mean": "5.24 \\times 10^5",
+      "winner_disp": "4.82 \\times 10^6",
+      "runner_mean": "3.55 \\times 10^6",
+      "runner_disp": "2.37 \\times 10^7"
+     },
+     {
+      "label": "D=4 SR",
+      "direction": "higher",
+      "winner_mean": "48.90%",
+      "winner_disp": "none",
+      "runner_mean": "38.40%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "D=4 Time",
+      "direction": "lower",
+      "winner_mean": "82.21",
+      "winner_disp": "none",
+      "runner_mean": "109.65",
+      "runner_disp": "none"
+     },
+     {
+      "label": "D=5 Mean",
+      "direction": "lower",
+      "winner_mean": "4.75 \\times 10^5",
+      "winner_disp": "5.58 \\times 10^6",
+      "runner_mean": "3.58 \\times 10^6",
+      "runner_disp": "1.76 \\times 10^7"
+     },
+     {
+      "label": "D=5 SR",
+      "direction": "higher",
+      "winner_mean": "24.80%",
+      "winner_disp": "none",
+      "runner_mean": "14.50%",
+      "runner_disp": "none"
+     },
+     {
+      "label": "D=5 Time",
+      "direction": "lower",
+      "winner_mean": "126.10",
+      "winner_disp": "none",
+      "runner_mean": "168.02",
+      "runner_disp": "none"
+     }
+    ],
+    "note": "D=1 Mean has two bold cells (MAPSO and MPSO), but MPSO is not bold in SD. I will treat MAPSO as winner and AHFPSO as runner up. Wait, MPSO is bold in Mean. I will just pick MAPSO as winner."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "low"
+ },
+ {
+  "id": "0970",
+  "tables": [],
+  "figure_band_on_page": "n",
+  "note": "Table 1 is dataset statistics.",
+  "reasoning_effort": "low"
+ },
+ {
+  "id": "1097",
+  "tables": [
+   {
+    "caption_start": "Table 8. Analysis of the execution time",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "low"
+ },
+ {
+  "id": "1182",
+  "tables": [
+   {
+    "caption_start": "Table 21. Simulation results",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "25",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "G1=[1000, 900, 800, 700] Voltage(V)",
+      "direction": "higher",
+      "winner_mean": "115.2",
+      "winner_disp": "none",
+      "runner_mean": "118.43",
+      "runner_disp": "none"
+     },
+     {
+      "label": "G1=[1000, 900, 800, 700] Current (A)",
+      "direction": "higher",
+      "winner_mean": "4.54",
+      "winner_disp": "none",
+      "runner_mean": "4.52",
+      "runner_disp": "none"
+     },
+     {
+      "label": "G1=[1000, 900, 800, 700] Power (W)",
+      "direction": "higher",
+      "winner_mean": "523.14",
+      "winner_disp": "none",
+      "runner_mean": "521.92",
+      "runner_disp": "none"
+     },
+     {
+      "label": "G1=[1000, 900, 800, 700] Max. Power (W)",
+      "direction": "higher",
+      "winner_mean": "525.13",
+      "winner_disp": "none",
+      "runner_mean": "525.13",
+      "runner_disp": "none"
+     },
+     {
+      "label": "G1=[1000, 900, 800, 700] Conversion efficiency (%)",
+      "direction": "higher",
+      "winner_mean": "99.63",
+      "winner_disp": "none",
+      "runner_mean": "99.38",
+      "runner_disp": "none"
+     },
+     {
+      "label": "G2=[900, 550, 100, 600] Voltage (V)",
+      "direction": "higher",
+      "winner_mean": "82.61",
+      "winner_disp": "none",
+      "runner_mean": "83.46",
+      "runner_disp": "none"
+     },
+     {
+      "label": "G2=[900, 550, 100, 600] Current (A)",
+      "direction": "higher",
+      "winner_mean": "3.95",
+      "winner_disp": "none",
+      "runner_mean": "3.86",
+      "runner_disp": "none"
+     },
+     {
+      "label": "G2=[900, 550, 100, 600] Power (W)",
+      "direction": "higher",
+      "winner_mean": "334",
+      "winner_disp": "none",
+      "runner_mean": "321.38",
+      "runner_disp": "none"
+     },
+     {
+      "label": "G2=[900, 550, 100, 600] Max.Power (W)",
+      "direction": "higher",
+      "winner_mean": "336.65",
+      "winner_disp": "none",
+      "runner_mean": "336.62",
+      "runner_disp": "none"
+     },
+     {
+      "label": "G2=[900, 550, 100, 600] Conversion efficiency (%)",
+      "direction": "higher",
+      "winner_mean": "99.23",
+      "winner_disp": "none",
+      "runner_mean": "95.63",
+      "runner_disp": "none"
+     },
+     {
+      "label": "G3=[750, 850, 600, 800] Voltage (V)",
+      "direction": "higher",
+      "winner_mean": "53.66",
+      "winner_disp": "none",
+      "runner_mean": "83.26",
+      "runner_disp": "none"
+     },
+     {
+      "label": "G3=[750, 850, 600, 800] Current (A)",
+      "direction": "higher",
+      "winner_mean": "6.24",
+      "winner_disp": "none",
+      "runner_mean": "6.21",
+      "runner_disp": "none"
+     },
+     {
+      "label": "G3=[750, 850, 600, 800] Power (W)",
+      "direction": "higher",
+      "winner_mean": "334.62",
+      "winner_disp": "none",
+      "runner_mean": "329.90",
+      "runner_disp": "none"
+     },
+     {
+      "label": "G3=[750, 850, 600, 800] Max.Power (W)",
+      "direction": "higher",
+      "winner_mean": "340.08",
+      "winner_disp": "none",
+      "runner_mean": "340.07",
+      "runner_disp": "none"
+     },
+     {
+      "label": "G3=[750, 850, 600, 800] Conversion efficiency (%)",
+      "direction": "higher",
+      "winner_mean": "98.42",
+      "winner_disp": "none",
+      "runner_mean": "97.01",
+      "runner_disp": "none"
+     },
+     {
+      "label": "G4=[600, 800, 400, 200] Voltage (V)",
+      "direction": "higher",
+      "winner_mean": "56.42",
+      "winner_disp": "none",
+      "runner_mean": "55.62",
+      "runner_disp": "none"
+     },
+     {
+      "label": "G4=[600, 800, 400, 200] Current (A)",
+      "direction": "higher",
+      "winner_mean": "4.33",
+      "winner_disp": "none",
+      "runner_mean": "4.21",
+      "runner_disp": "none"
+     },
+     {
+      "label": "G4=[600, 800, 400, 200] Power (W)",
+      "direction": "higher",
+      "winner_mean": "243.59",
+      "winner_disp": "none",
+      "runner_mean": "233.27",
+      "runner_disp": "none"
+     },
+     {
+      "label": "G4=[600, 800, 400, 200] Max.Power (W)",
+      "direction": "higher",
+      "winner_mean": "258.30",
+      "winner_disp": "none",
+      "runner_mean": "258.29",
+      "runner_disp": "none"
+     },
+     {
+      "label": "G4=[600, 800, 400, 200] Conversion efficiency (%)",
+      "direction": "higher",
+      "winner_mean": "94.35",
+      "winner_disp": "none",
+      "runner_mean": "88.97",
+      "runner_disp": "none"
+     },
+     {
+      "label": "G5=[600, 200, 800, 250] Voltage(V)",
+      "direction": "higher",
+      "winner_mean": "66.45",
+      "winner_disp": "none",
+      "runner_mean": "67.21",
+      "runner_disp": "none"
+     },
+     {
+      "label": "G5=[600, 200, 800, 250] Current (A)",
+      "direction": "higher",
+      "winner_mean": "2.83",
+      "winner_disp": "none",
+      "runner_mean": "2.853",
+      "runner_disp": "none"
+     },
+     {
+      "label": "G5=[600, 200, 800, 250] Power (W)",
+      "direction": "higher",
+      "winner_mean": "188.52",
+      "winner_disp": "none",
+      "runner_mean": "186.13",
+      "runner_disp": "none"
+     },
+     {
+      "label": "G5=[600, 200, 800, 250] Max. Power (W)",
+      "direction": "higher",
+      "winner_mean": "191.21",
+      "winner_disp": "none",
+      "runner_mean": "191.22",
+      "runner_disp": "none"
+     },
+     {
+      "label": "G5=[600, 200, 800, 250] Conversion efficiency (%)",
+      "direction": "higher",
+      "winner_mean": "98.59",
+      "winner_disp": "none",
+      "runner_mean": "97.33",
+      "runner_disp": "none"
+     },
+     {
+      "label": "G6=[400, 600, 800, 100] Voltage (V)",
+      "direction": "higher",
+      "winner_mean": "87.52",
+      "winner_disp": "none",
+      "runner_mean": "86.46",
+      "runner_disp": "none"
+     },
+     {
+      "label": "G6=[400, 600, 800, 100] Current (A)",
+      "direction": "higher",
+      "winner_mean": "2.62",
+      "winner_disp": "none",
+      "runner_mean": "2.63",
+      "runner_disp": "none"
+     },
+     {
+      "label": "G6=[400, 600, 800, 100] Power (W)",
+      "direction": "higher",
+      "winner_mean": "229.45",
+      "winner_disp": "none",
+      "runner_mean": "225.66",
+      "runner_disp": "none"
+     },
+     {
+      "label": "G6=[400, 600, 800, 100] Max. Power (W)",
+      "direction": "higher",
+      "winner_mean": "232.52",
+      "winner_disp": "none",
+      "runner_mean": "232.52",
+      "runner_disp": "none"
+     },
+     {
+      "label": "G6=[400, 600, 800, 100] Conversion efficiency (%)",
+      "direction": "higher",
+      "winner_mean": "98.69",
+      "winner_disp": "none",
+      "runner_mean": "97.04",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "low"
+ },
+ {
+  "id": "1283",
+  "tables": [
+   {
+    "caption_start": "Table 12. The results of the different methods for CEC-2020 test functions (Dim = 10).",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "20",
+    "n_source": "paper",
+    "bar_form": "separate_column",
+    "groups": [
+     {
+      "label": "Fun1",
+      "direction": "lower",
+      "winner_mean": "2.050E+03",
+      "winner_disp": "3.389E+03",
+      "runner_mean": "1.653E+07",
+      "runner_disp": "1.111E+07"
+     },
+     {
+      "label": "Fun2",
+      "direction": "lower",
+      "winner_mean": "1.626E+03",
+      "winner_disp": "3.112E+02",
+      "runner_mean": "1.702E+03",
+      "runner_disp": "3.018E+02"
+     },
+     {
+      "label": "Fun3",
+      "direction": "lower",
+      "winner_mean": "7.201E+02",
+      "winner_disp": "3.565E+00",
+      "runner_mean": "7.290E+02",
+      "runner_disp": "1.075E+01"
+     },
+     {
+      "label": "Fun4",
+      "direction": "lower",
+      "winner_mean": "1.901E+03",
+      "winner_disp": "2.750E-01",
+      "runner_mean": "1.902E+03",
+      "runner_disp": "1.082E+00"
+     },
+     {
+      "label": "Fun5",
+      "direction": "lower",
+      "winner_mean": "6.860E+03",
+      "winner_disp": "4.845E+03",
+      "runner_mean": "1.842E+04",
+      "runner_disp": "8.108E+03"
+     },
+     {
+      "label": "Fun6",
+      "direction": "lower",
+      "winner_mean": "1.382E+03",
+      "winner_disp": "4.907E+01",
+      "runner_mean": "1.682E+03",
+      "runner_disp": "6.038E+01"
+     },
+     {
+      "label": "Fun7",
+      "direction": "lower",
+      "winner_mean": "8.964E+03",
+      "winner_disp": "7.475E+03",
+      "runner_mean": "9.179E+03",
+      "runner_disp": "5.485E+03"
+     },
+     {
+      "label": "Fun8",
+      "direction": "lower",
+      "winner_mean": "2.301E+03",
+      "winner_disp": "5.358E-01",
+      "runner_mean": "2.310E+03",
+      "runner_disp": "4.000E+00"
+     },
+     {
+      "label": "Fun9",
+      "direction": "lower",
+      "winner_mean": "2.346E+03",
+      "winner_disp": "2.375E+01",
+      "runner_mean": "2.730E+03",
+      "runner_disp": "8.836E+01"
+     },
+     {
+      "label": "Fun10",
+      "direction": "lower",
+      "winner_mean": "2.933E+03",
+      "winner_disp": "2.290E+01",
+      "runner_mean": "2.933E+03",
+      "runner_disp": "1.857E+01"
+     }
+    ],
+    "note": "Fun10 has two bold means, but only one bold std. I'll treat the first bold mean as the winner."
+   },
+   {
+    "caption_start": "Table 13. The results of the different methods for CEC-2020 test functions (Dim = 20).",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "20",
+    "n_source": "paper",
+    "bar_form": "separate_column",
+    "groups": [
+     {
+      "label": "Fun1",
+      "direction": "lower",
+      "winner_mean": "2.254E+03",
+      "winner_disp": "3.105E+03",
+      "runner_mean": "2.582E+08",
+      "runner_disp": "6.905E+07"
+     },
+     {
+      "label": "Fun2",
+      "direction": "lower",
+      "winner_mean": "2.411E+03",
+      "winner_disp": "7.336E+02",
+      "runner_mean": "2.415E+03",
+      "runner_disp": "4.056E+02"
+     },
+     {
+      "label": "Fun3",
+      "direction": "lower",
+      "winner_mean": "7.507E+02",
+      "winner_disp": "1.099E+01",
+      "runner_mean": "7.794E+02",
+      "runner_disp": "3.150E+01"
+     },
+     {
+      "label": "Fun4",
+      "direction": "lower",
+      "winner_mean": "1.903E+03",
+      "winner_disp": "1.141E+00",
+      "runner_mean": "1.915E+03",
+      "runner_disp": "2.234E+00"
+     },
+     {
+      "label": "Fun5",
+      "direction": "lower",
+      "winner_mean": "3.210E+05",
+      "winner_disp": "2.445E+05",
+      "runner_mean": "4.680E+06",
+      "runner_disp": "1.543E+06"
+     },
+     {
+      "label": "Fun6",
+      "direction": "lower",
+      "winner_mean": "2.651E+03",
+      "winner_disp": "1.973E+02",
+      "runner_mean": "1.813E+03",
+      "runner_disp": "1.762E+02"
+     },
+     {
+      "label": "Fun7",
+      "direction": "lower",
+      "winner_mean": "1.173E+05",
+      "winner_disp": "1.184E+05",
+      "runner_mean": "1.474E+05",
+      "runner_disp": "2.141E+05"
+     },
+     {
+      "label": "Fun8",
+      "direction": "lower",
+      "winner_mean": "3.379E+03",
+      "winner_disp": "1.251E+03",
+      "runner_mean": "3.784E+03",
+      "runner_disp": "2.057E+03"
+     },
+     {
+      "label": "Fun9",
+      "direction": "lower",
+      "winner_mean": "2.983E+03",
+      "winner_disp": "2.499E+01",
+      "runner_mean": "2.842E+03",
+      "runner_disp": "1.412E+01"
+     },
+     {
+      "label": "Fun10",
+      "direction": "lower",
+      "winner_mean": "2.949E+03",
+      "winner_disp": "2.927E+01",
+      "runner_mean": "2.991E+03",
+      "runner_disp": "3.839E+01"
+     }
+    ],
+    "note": "Fun6 and Fun9 have bold means that are not the lowest. I'll record the bold mean as the winner and the lowest non-bold mean as the runner-up."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "low"
+ },
+ {
+  "id": "1360",
+  "tables": [
+   {
+    "caption_start": "Table 12. An evaluation of",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": "No bold cells."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "low"
+ },
+ {
+  "id": "1377",
+  "tables": [
+   {
+    "caption_start": "Table 5. Quantitative statistical metrics",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "50",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "low"
+ }
+]
