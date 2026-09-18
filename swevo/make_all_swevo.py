@@ -306,7 +306,7 @@ def test_reader_agreement(second_path: str = "out/swevo/test_reader_second.json"
         out[f"{name}_pct_runs_stated"] = round(100 * sum(1 for x in v if x.get("runs") is not None) / max(len(v), 1), 1)
         out[f"{name}_pct_test_named"] = round(100 * sum(1 for x in v if named(x)) / max(len(v), 1), 1)
         out[f"{name}_pct_markers"] = round(100 * sum(1 for x in v if str(x.get("markers", "")).lower().startswith("y")) / max(len(v), 1), 1)
-        out[f"{name}_pct_bold_not_stated"] = round(100 * sum(1 for x in v if bold(x) == "not_stated") / max(len(v), 1), 1)
+        out[f"{name}_pct_bold_not_stated"] = round(100 * sum(1 for x in v if bold(x) == "not stated") / max(len(v), 1), 1)
     return out
 
 

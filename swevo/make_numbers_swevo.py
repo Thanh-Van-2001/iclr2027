@@ -426,6 +426,7 @@ def build(out_path: str) -> dict:
         reg.add(f"{tag} unboxed n", gt["n_unboxed"] + g["no_bar"]["n_unboxed"], provenance=grun)
         reg.add(f"{tag} drawn n", gt["n_labelled"] + gt["n_unboxed"] + g["no_bar"]["n"] + g["no_bar"]["n_unboxed"], provenance=grun)
         reg.add(f"{tag} claim frac", _frac(f["claim_and_values"]), provenance=grun)
+        reg.add(f"{tag} claim of drawn frac", f"{f['claim_and_values']['correct']} of {sum(1 for it in json.load(open('audits/swevo_gold/items.json', encoding='utf-8')) if it['stratum'] == 'testable')}", provenance=grun)
         reg.add(f"{tag} claim", _pct_ci(f["claim_and_values"]), provenance=grun)
         for name in ("bold_cell", "winner_mean", "winner_disp", "runner_mean", "runner_disp", "n_runs", "orientation", "direction"):
             if name in f:
