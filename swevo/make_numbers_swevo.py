@@ -233,7 +233,7 @@ def build(out_path: str) -> dict:
     for lab, d in ex.get("tests_scan_fail", {}).items():
         _scan_block("ts " + lab, d)
     reg.add("hk genuine papers", ex.get("holders_genuine", 0), provenance=run)
-    reg.add("hk all papers", ex.get("holders_all", 0), provenance=run)
+    reg.add("hk any comparison papers", ex.get("holders_all", 0), provenance=run)
     reg.add("a effective papers", f"{b['effective_papers']:.1f}" if b.get("effective_papers") else "--", provenance=run)
     for lab, d in ex.get("scan_by_kind_holders", {}).items():
         k = "hk " + lab.replace("_", " ")
