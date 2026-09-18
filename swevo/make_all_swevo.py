@@ -50,6 +50,41 @@ def _boot_share(items: list, reps: int = 2000, seed: int = 0) -> list | None:
     return [round(vals[int(0.025 * reps)], 1), round(vals[int(0.975 * reps) - 1], 1)]
 
 
+def row_bold_readings(cs: list, records: list) -> dict:
+    """This format sets header rows in bold, and many papers set the proposed
+    method's whole row in bold. The parser's unit assumes bold marks a cell;
+    a comparison whose winner sits in a row whose every numeric cell is bold
+    comes from one of those two conventions. Two readings: without the
+    comparisons whose winner row is the table's first (header) row, and
+    without every all-bold-row comparison."""
+    recs = {r["id"]: r for r in records}
+    header, rowbold = [], []
+    for c in cs:
+        table = next((t for t in recs[c["paper"]]["tables"]
+                      if t.get("page") == c["page"] and (t.get("caption") or "") == (c.get("caption") or "")), None)
+        if table is None:
+            continue
+        cells = table["cells"]
+        wy = c["winner_cell"]["y"]
+        row = [x for x in cells if abs(x["y"] - wy) < 1.5]
+        first = abs(min(x["y"] for x in cells) - wy) < 1.5
+        allbold = len(row) > 1 and all(x["bold"] for x in row)
+        c["_row_bold"] = allbold
+        c["_header_row"] = allbold and first
+        if allbold:
+            rowbold.append(c)
+            if first:
+                header.append(c)
+    keep_h = [c for c in cs if not c.get("_header_row")]
+    keep_r = [c for c in cs if not c.get("_row_bold")]
+    return {"header_row_only": _rates(header), "without_header_row": _rates(keep_h),
+            "row_bold_only": _rates(rowbold), "without_row_bold": _rates(keep_r),
+            "header_row_papers": len({c["paper"] for c in header}),
+            "row_bold_papers": len({c["paper"] for c in rowbold}),
+            "papers_all_row_bold": sum(1 for p in {c["paper"] for c in cs}
+                                       if all(c.get("_row_bold") for c in cs if c["paper"] == p))}
+
+
 def by_group(cs: list, label: dict, name: str) -> dict:
     """The census shares and the failure rate by a per-paper label."""
     out = {}
@@ -108,6 +143,32 @@ def run_counts(cs: list, scan: dict) -> dict:
             "parser_scan_agree": agree, "parser_scan_disagree": disagree,
             "thirty_runs": _rates(thirty),
             "pct_testable_at_thirty": round(100 * len(thirty) / max(len(t), 1), 1)}
+
+
+def scan_run_count_reading(cs: list, scan: dict) -> dict:
+    """The testable comparisons re-tested at the run count the text scan
+    reads as the paper's modal statement, where it has one, instead of the
+    parser's smallest count; a reading of the run-count rule, not of the
+    parser."""
+    from analyze import test_comparison
+    out = []
+    changed = 0
+    for c in cs:
+        if not c.get("test"):
+            continue
+        n = scan.get(c["paper"], {}).get("run_modal")
+        if not n:
+            continue
+        d = dict(c, n_runs=int(n))
+        t = test_comparison(d)
+        if t is None:
+            continue
+        changed += (int(n) != c.get("n_runs"))
+        out.append((c["paper"], t["p"] >= 0.05))
+    n = len(out)
+    return {"n": n, "papers": len({p for p, _ in out}), "changed_count": changed,
+            "pct_fail": round(100 * sum(f for _, f in out) / n, 1) if n else None,
+            "ci_fail": _boot_share(out) if n else None}
 
 
 def cites(cs: list, scan: dict) -> dict:
@@ -219,10 +280,15 @@ def main() -> int:
         a = analyse(recs)
         by_year[str(year)] = {"summary": make_all._summary(a, a["_comparisons"]), "bootstrap": make_all._bootstrap(a["_comparisons"])}
     index = {r["id"]: r for r in json.load(open(f"{OUT}/index.json", encoding="utf-8"))}
+    fetched = len([f for f in os.listdir("data/corpus_oa")]) if os.path.isdir("data/corpus_oa") else None
+    by_journal_listed = collections.Counter(r["journal"] for r in index.values())
     extras = {
         "summary": summary, "bootstrap": boot, "by_year": by_year,
         "corpus": {"listed": len(index), "listed_in_corpus_journal": sum(1 for r in index.values() if r["journal"] == "Scientific Reports"),
-                   "parsed": len(records), "by_journal": dict(collections.Counter(index[r["id"]]["journal"] for r in records if r["id"] in index))},
+                   "journals_listed": len(by_journal_listed), "by_journal_listed": dict(by_journal_listed),
+                   "fetched": fetched, "parsed": len(records),
+                   "listed_by_year": dict(collections.Counter(r["year"] for r in index.values() if r["journal"] == "Scientific Reports")),
+                   "by_journal": dict(collections.Counter(index[r["id"]]["journal"] for r in records if r["id"] in index))},
         "kinds": by_group(cs, kinds, "by_kind") if kinds else {},
         "metaphor": by_group(cs, metaphor, "by_metaphor") if metaphor else {},
         "suite": by_group(cs, suite, "by_suite") if suite else {},
@@ -233,6 +299,7 @@ def main() -> int:
         "scan_by_kind": scan_by_kind(scan, kinds, metaphor, suite) if scan and kinds else {},
         "run_counts": run_counts(cs, scan) if scan else {},
         "cites": cites(cs, scan) if scan else {},
+        "scan_run_count": scan_run_count_reading(cs, scan) if scan else {},
         "headline_span": extra_stats.headline_span(cs, records),
         "subset_direction": extra_stats.subset_direction(records, cs),
         "holm_families": extra_stats.holm_families(cs),
@@ -242,6 +309,7 @@ def main() -> int:
         "correlation_sensitivity": correlation_sensitivity(cs),
         "checkability_span": checkability_span(cs),
         "readings": readings(records, cs),
+        "row_bold": row_bold_readings(cs, records),
         "per_paper_failure": per_paper_failure(cs),
         "per_paper_failure_dedup": per_paper_failure(exact_copies(cs)[1]),
         "ddof_reading": ddof_reading(cs),

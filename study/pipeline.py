@@ -228,6 +228,8 @@ def main(argv=None) -> int:
     ap.add_argument("--out", default="data/extracted_large.jsonl")
     ap.add_argument("--cache-pdfs", default=None, help="keep every downloaded PDF in this directory")
     ap.add_argument("--cached-only", action="store_true", help="parse only the PDFs already in the cache; download nothing")
+    ap.add_argument("--shard", default=None, help="k/n: every n-th listed paper from k, so several processes can share a corpus")
+    ap.add_argument("--delay", type=float, default=0.02, help="seconds a worker pauses after each paper (arXiv asks for three)")
     args = ap.parse_args(argv)
     global PDF_CACHE, CACHED_ONLY
     PDF_CACHE = args.cache_pdfs
@@ -248,10 +250,13 @@ def main(argv=None) -> int:
     if args.sample and args.sample < len(records):
         records = random.Random(args.seed).sample(records, args.sample)
         records.sort(key=lambda r: (r["venue"], r["year"], r["id"]))
+    if args.shard:
+        k, n = (int(x) for x in args.shard.split("/"))
+        records = records[k::n]
 
     os.makedirs(os.path.dirname(os.path.abspath(args.out)) or ".", exist_ok=True)
     already = len(_already_done(args.out))
-    stats = run(records, args.out, workers=args.workers)
+    stats = run(records, args.out, workers=args.workers, delay=args.delay)
     # A resumed run must report the corpus, not the batch it just added.
     stats["ok"] += already
     print(f"\nextracted {stats['ok']}  |  download failures {stats['download_failed']}  "

@@ -148,6 +148,14 @@ def build(out_path: str) -> dict:
         _rates_block(reg, "rc thirty", rc["thirty_runs"], run)
         reg.add("rc thirty share", _pct(rc["pct_testable_at_thirty"]), provenance=run)
 
+    sr = ex.get("scan_run_count", {})
+    if sr:
+        reg.add("sr n", sr["n"], provenance=run)
+        reg.add("sr papers", sr["papers"], provenance=run)
+        reg.add("sr changed", sr["changed_count"], provenance=run)
+        reg.add("sr fail", _pct(sr["pct_fail"]) if sr["pct_fail"] is not None else "--", provenance=run)
+        reg.add("sr fail ci", f"[{sr['ci_fail'][0]}, {sr['ci_fail'][1]}]" if sr.get("ci_fail") else "--", provenance=run)
+
     cc = ex.get("cites", {})
     if cc:
         names = {"derrac2011": "derrac", "garcia2009": "garcia nine", "garcia2010": "garcia ten", "sorensen2015": "sorensen",
@@ -183,6 +191,18 @@ def build(out_path: str) -> dict:
             reg.add(f"span {key} papers", row["papers"], provenance=run)
     reg.add("span lo", _pct(hs["span"][0]), provenance=run)
     reg.add("span hi", _pct(hs["span"][1]), provenance=run)
+
+    rb = ex["row_bold"]
+    for key in ("header row only", "without header row", "row bold only", "without row bold"):
+        _rates_block(reg, "rb " + key, rb[key.replace(" ", "_")], run)
+    reg.add("rb header row papers", rb["header_row_papers"], provenance=run)
+    reg.add("rb row bold papers", rb["row_bold_papers"], provenance=run)
+    reg.add("rb papers all row bold", rb["papers_all_row_bold"], provenance=run)
+    co = ex["corpus"]
+    reg.add("o journals listed", co["journals_listed"], provenance=run)
+    reg.add("o fetched", co["fetched"], provenance=run)
+    for y, n in co["listed_by_year"].items():
+        reg.add(f"o listed srep {({'2024': 'twenty four', '2025': 'twenty five'})[str(y)]}", n, provenance=run)
 
     rd = ex["readings"]
     for key, d in (("dup removed", rd["without_duplicates"]), ("dup only", rd["duplicates"]),

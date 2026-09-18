@@ -69,12 +69,133 @@ The paper makes three contributions. First, a census of reporting practice over 
 
 The plan fixed, before any download, a corpus of fully open-access CC-BY journals with a metaheuristics output, selected by an API query so that the corpus is reproducible: every article of 2024 or 2025 whose title or abstract matches a phrase list (metaheuristic, evolutionary algorithm, genetic algorithm, particle swarm, differential evolution, swarm intelligence, ant colony, simulated annealing, nature-inspired, bio-inspired optimization, grey wolf, whale optimization, memetic, NSGA) in OpenAlex.\footnote{\url{https://openalex.org}; the query and the list are in the released code.} Hybrid journals, this one included, were excluded because their open-access subset is a selected sample. The query listed \nOListed{} papers across seven journals. Three publishers refused automated download of their PDFs (a bot challenge, a rate limit and a proxy block, respectively), and the corpus is therefore the \emph{Scientific Reports} subset, \nOListedSrep{} papers, of which \nOParsed{} were fetched and parsed. This is a deviation from the plan, recorded here: the corpus is one journal's open-access output rather than seven, and the reader should take the numbers as describing that journal's metaheuristics papers, a large and heterogeneous population, and not the field's flagship venues.
 
-PLACEHOLDER-CORPUS-DESCRIPTION
+\paragraph{What the corpus is.} A language model read the title and abstract of each listed paper and assigned one kind: \emph{new optimizer} (a new, modified or hybrid metaheuristic evaluated against others), \emph{comparison} (existing optimizers benchmarked, none proposed), \emph{application} (one or more metaheuristics applied to a domain problem, the application being the contribution), \emph{survey or theory}, or \emph{other}; the prompt asked also whether the optimizer is named after a metaphor and whether the abstract mentions benchmark functions. A second vendor's model labelled a random \nKaPapers{} papers under the same prompt and agreed with the first on \nKaAgree{} (\nKaPctAgree{}, Wilson \nKaCiAgree{}; Cohen's $\kappa$ \nKaKappa{}); the disagreements are almost all a modified optimizer applied to one problem, which one model files as an application and the other as an optimizer. On the metaphor question the two agreed on \nKaMetaphorAgree{} of \nKaMetaphorPapers{}, and the question is treated as a rough stratifier only. The corpus is, by this reading, \nKcApplication{} application papers, \nKcNewOptimizer{} new-optimizer papers, \nKcComparison{} comparisons, \nKcSurveyTheory{} surveys and \nKcOther{} others: the metaheuristics literature as it reaches a general-science megajournal is five parts application to one part algorithm, and the two kinds report differently enough (Section~\ref{sec:kinds}) that every rate below is given by kind as well as in all.
+
+A regular-expression scan of the full text, released with the paper, records for every paper whether it states a number of independent runs (``30 independent runs'', ``run thirty times''), which statistical tests it names (Wilcoxon, Friedman, $t$, Mann--Whitney, Kruskal--Wallis, ANOVA, a $p$-value, a Bonferroni or Holm correction, the $+/=/-$ convention), which benchmark suite it names (a CEC year, BBOB, the classical functions), and whether it cites the methodology papers named in Section~\ref{sec:related}, by title. Table~\ref{tab:kinds} reports these by kind.
+
+\begin{table}[t]
+\caption{The corpus by kind of paper, from a model reading of title and abstract, with what the full text states (regular-expression scan) and what the parser finds. ``Runs stated'': the text states a number of independent runs; ``30 modal'': the most frequently stated count is thirty; ``test named'': any statistical test is named; ``CEC'': a CEC test suite is named; ``metaphor'': the classifier says the optimizer is metaphor-named; ``cites methodology'': any of the guides of Section~\ref{sec:related} is cited by title. Parser columns: highlighted comparisons in the papers of that kind, the share with no dispersion on either side, the share testable, and the Welch failure rate with its cluster-bootstrap interval over papers. The comparison and survey kinds are too small to report.}
+\label{tab:kinds}
+\centering
+\small
+\setlength{\tabcolsep}{5pt}
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+ & New optimizer & Application & All \\
+\midrule
+Papers & \nKcNewOptimizer{} & \nKcApplication{} & \nSkAllPapers{} \\
+Runs stated in text & \nSkNewOptimizerPctRunsStated{} & \nSkApplicationPctRunsStated{} & \nSkAllPctRunsStated{} \\
+\quad 30 the modal count & \nSkNewOptimizerPctThirtyModal{} & \nSkApplicationPctThirtyModal{} & \nSkAllPctThirtyModal{} \\
+A test named & \nSkNewOptimizerPctTestNamed{} & \nSkApplicationPctTestNamed{} & \nSkAllPctTestNamed{} \\
+\quad Wilcoxon (papers) & \nSkNewOptimizerWilcoxon{} & \nSkApplicationWilcoxon{} & \nSkAllWilcoxon{} \\
+\quad Friedman (papers) & \nSkNewOptimizerFriedman{} & \nSkApplicationFriedman{} & \nSkAllFriedman{} \\
+\quad $t$-test (papers) & \nSkNewOptimizerTTest{} & \nSkApplicationTTest{} & \nSkAllTTest{} \\
+A CEC suite named & \nSkNewOptimizerPctCec{} & \nSkApplicationPctCec{} & \nSkAllPctCec{} \\
+Metaphor-named optimizer & \nSkNewOptimizerPctMetaphorYes{} & \nSkApplicationPctMetaphorYes{} & \nSkAllPctMetaphorYes{} \\
+Cites a methodology guide & \nSkNewOptimizerPctCitesMethodology{} & \nSkApplicationPctCitesMethodology{} & \nSkAllPctCitesMethodology{} \\
+\midrule
+Parser: highlighted comparisons & \nKNewOptimizerN{} & \nKApplicationN{} & \nAComparisons{} \\
+\quad papers holding them & \nKNewOptimizerClaimPapers{} & \nKApplicationClaimPapers{} & \nAClaimPapers{} \\
+\quad no dispersion on either side & \nKNewOptimizerNeither{} & \nKApplicationNeither{} & \nAPctNeither{} \\
+\quad testable & \nKNewOptimizerTestable{} & \nKApplicationTestable{} & \nAPctTestable{} \\
+\quad tested & \nKNewOptimizerTestableN{} & \nKApplicationTestableN{} & \nANTestable{} \\
+\quad fail, Welch & \nKNewOptimizerFail{} \nKNewOptimizerFailCi{} & \nKApplicationFail{} \nKApplicationFailCi{} & \nAPctFail{} \nAPctFailCi{} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 
 \section{Results}
 \label{sec:results}
 
-PLACEHOLDER-RESULTS-SECTIONS
+\subsection{What the parser finds}
+\label{sec:parser}
+
+The parser detected \nATablesDetected{} table captions in the \nOParsed{} papers and read \nAComparisons{} highlighted comparisons from \nATablesYielding{} of them, in \nAClaimPapers{} papers (Table~\ref{tab:headline}). Most tables yield nothing because they mark no single winner per row or column: they bold nothing, bold a header, or bold a whole row. Of the comparisons it did read, \nAPctNeitherCi{} print no dispersion beside either cell, \nAPctOneSide{} beside one, and \nAPctTestableCi{} are testable: both dispersions on the page and a run count somewhere in the paper. That is \nANTestable{} comparisons in \nAPapersTestable{} papers, and of those \nAPctFailCi{} fail Welch's test at the stated run count (\nAPctFailHolmCi{} after Holm within a table). The intervals are wide because the testable set is small and concentrated: cluster bootstraps over \nAPapersTestable{} papers.
+
+Two things about the parser's reading of this format need saying before the numbers are interpreted. First, the bar-less share is an upper bound. The parser reads a cell's dispersion only when it is printed in the cell ($a \pm b$, $a\,(b)$, $a\,[b, c]$); a standard deviation printed in a \emph{Std} column or a \emph{Std} row, the layout most metaheuristics tables use, is invisible to it. The reader census (Section~\ref{sec:census}) reads those, and its bar-less share is the one to quote. Second, this journal's house style sets header rows in bold, and many papers set the proposed method's entire row in bold; the parser's unit takes a bold numeric cell as a marked winner, so a header row containing numbers (dimensions, years, parameter values) and a proposed-method row both produce comparisons. \nRbRowBoldOnlyN{} of the \nAComparisons{} comparisons, in \nRbRowBoldPapers{} papers, have their bold cell in a row whose every numeric cell is bold; \nRbHeaderRowOnlyN{} of those, in \nRbHeaderRowPapers{} papers, sit in the table's first row and are header artefacts. Without the header rows the rates are \nRbWithoutHeaderRowNeither{} bar-less, \nRbWithoutHeaderRowTestable{} testable and \nRbWithoutHeaderRowFail{} failing on \nRbWithoutHeaderRowTestableN{} tested; without every all-bold row, \nRbWithoutRowBoldNeither{}, \nRbWithoutRowBoldTestable{} and \nRbWithoutRowBoldFail{} \nRbWithoutRowBoldFailCi{} on \nRbWithoutRowBoldTestableN{} tested. The proposed-method rows are not artefacts in the same sense: a bold row that is also the best value in its column is a claim the authors make, if a weaker one, and Section~\ref{sec:tests} reports what the papers say their bold means. The headline keeps the frozen unit and the table gives both readings.
+
+\begin{table}[t]
+\caption{What the page prints beside a highlighted value, by instrument. The parser reads every paper; the reader census reads every caption page of \nCzPapersDrawn{} randomly drawn papers. Intervals are 95\% cluster bootstraps over papers. ``Testable'' takes the run count from anywhere in the paper.}
+\label{tab:headline}
+\centering
+\small
+\setlength{\tabcolsep}{6pt}
+\begin{tabular}{@{}lrr@{}}
+\toprule
+ & Parser & Reader census \\
+\midrule
+Papers & \nAPapers{} & \nCzPapersDrawn{} \\
+Papers with a $\pm$ cell in a table & \nAPctPapersErr{} & -- \\
+Papers with a dispersion anywhere (cell or figure caption) & \nUaPctAnywhere{} & -- \\
+Papers stating a run count (parser / text scan) & \nAPctPapersRuns{} / \nRcPapersStatingPct{} & -- \\
+Results tables read & \nATablesDetected{} & \nCzTables{} \\
+\quad with any dispersion & -- & \nCzTablesWithBar{} \\
+Highlighted comparisons & \nAComparisons{} & \nCzGroups{} \\
+\quad papers holding them & \nAClaimPapers{} & \nCzPapersWithGroups{} \\
+No dispersion on either side & \nAPctNeitherCi{} & \nCzNeither{} \nCzNeitherCi{} \\
+Dispersion on one side only & \nAPctOneSide{} & \nCzOneSide{} \\
+Both dispersions, no run count & \nAPctNoN{} & \nCzBarsNoN{} \\
+Testable & \nAPctTestableCi{} & \nCzTestable{} \nCzTestableCi{} \\
+\quad tested (values readable) & \nANTestable{} & \nCzReaderFailN{} \\
+\quad of which fail, Welch & \nAPctFailCi{} & \nCzReaderFail{} \\
+\quad fail after Holm & \nAPctFailHolmCi{} & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{Where the uncertainty is.} \nUaPctPmCell{} of the papers print a $\pm$ cell in any table and \nUaPctAnyCell{} a $\pm$ or parenthesised cell; \nUaPctFigureCaption{} have a figure caption that names a deviation, interval or band; \nUaPctAnywhere{} have one of these anywhere. The text scan finds a stated run count in \nRcPapersStatingPct{} of papers (the parser's stricter sentence patterns in \nAPctPapersRuns{}), and where both instruments find one they agree on \nRcAgree{} papers and disagree on \nRcDisagree{}: the parser takes the smallest count in the paper by rule, and a paper that runs thirty times and also tunes on five is tested at five. The modal stated count in the text scan is \nRcScanRankOneN{} (\nRcScanRankOneCount{} papers), then \nRcScanRankTwoN{} (\nRcScanRankTwoCount{}) and \nRcScanRankThreeN{} (\nRcScanRankThreeCount{}); the thirty-run convention holds in \nSkNewOptimizerPctThirtyModal{} of the new-optimizer papers and \nSkApplicationPctThirtyModal{} of the application papers.
+
+\subsection{By kind of paper}
+\label{sec:kinds}
+
+Table~\ref{tab:kinds} splits everything by kind. The new-optimizer papers are where the convention lives: \nSkNewOptimizerPctRunsStated{} state a run count, \nSkNewOptimizerPctTestNamed{} name a statistical test (Wilcoxon in \nSkNewOptimizerWilcoxon{} papers, Friedman in \nSkNewOptimizerFriedman{}), \nSkNewOptimizerPctCec{} name a CEC suite, \nSkNewOptimizerPctMetaphorYes{} carry a metaphor name, and \nSkNewOptimizerPctCitesMethodology{} cite one of the methodology guides. The application papers, five times as many, state a run count in \nSkApplicationPctRunsStated{} of cases and a test in \nSkApplicationPctTestNamed{}, and the test they name most often is the $t$-test (\nSkApplicationTTest{} papers) rather than the Wilcoxon (\nSkApplicationWilcoxon{}). On the parser's unit the two kinds print dispersions equally rarely (\nKNewOptimizerNeither{} against \nKApplicationNeither{} bar-less), and the testable comparisons of the new-optimizer papers fail more often (\nKNewOptimizerFail{} \nKNewOptimizerFailCi{} on \nKNewOptimizerTestableN{} tested, against \nKApplicationFail{} \nKApplicationFailCi{} on \nKApplicationTestableN{}), with intervals that overlap.
+
+The metaphor split is reported for completeness and should not be over-read: the comparisons of metaphor-named papers are \nMYesNeither{} bar-less and \nMYesTestable{} testable against \nMNoNeither{} and \nMNoTestable{} for the rest, on \nMYesClaimPapers{} and \nMNoClaimPapers{} papers, and the two labellers agreed on the metaphor question in only \nKaPctMetaphorAgree{} of cases.
+
+\subsection{The field's own test}
+\label{sec:tests}
+
+Of the \nStTestablePapers{} papers with a parser-testable comparison, \nStNaming{} name a statistical test somewhere in the text and \nStMarkers{} print the $+/=/-$ verdict beside the tables. Welch's $t$ on the printed numbers fails \nStNamedFail{} \nStNamedFailCi{} of the comparisons in the papers that name a test and \nStUnnamedFail{} \nStUnnamedFailCi{} in those that do not, on \nStNamedN{} and \nStUnnamedN{} comparisons. PLACEHOLDER-TEST-READER
+
+\subsection{Who cites the guides}
+\label{sec:cites}
+
+Derrac et al.\ \cite{derrac2011practical} is cited by title in \nCcDerrac{} of the \nSkAllPapers{} papers, Sörensen \cite{sorensen2015metaheuristics} in \nCcSorensen{}, Camacho-Villalón et al.\ \cite{camacho2022exposing} in \nCcCamacho{}, Aranha et al.\ \cite{aranha2022metaphor} in \nCcAranha{} and García et al.\ \cite{garcia2010advanced} in \nCcGarciaTen{}; the benchmarking guides \cite{bartz2020benchmarking,beiranvand2017best,kendall2016good,hansen2021coco} and García et al.\ \cite{garcia2009study} are cited by none, and the no-free-lunch theorem \cite{wolpert1997no} by \nCcNfl{}. The \nCcCitingPapers{} citing papers that hold comparisons print dispersions on \nCcCitingTestable{} of them against \nCcNotCitingTestable{} for the \nCcNotCitingPapers{} non-citing papers, and their tested comparisons fail more often (\nCcCitingFail{} \nCcCitingFailCi{} on \nCcCitingTestableN{}, against \nCcNotCitingFail{} \nCcNotCitingFailCi{} on \nCcNotCitingTestableN{}); \nCcCitingNameATest{} of the citing papers name a test and \nCcCitingStateRuns{} state a run count. Citing the guide goes with printing the evidence, and printing the evidence exposes the claim to the test.
+
+\subsection{Readings}
+\label{sec:readings}
+
+Table~\ref{tab:span} moves one convention at a time on the parser's testable set. A two-sample $z$ that takes the printed deviations as exact gives \nSpanZTwoSidedFail{}; a one-sided test \nSpanOneSidedFail{}; reading a printed deviation as a population rather than a sample deviation \nDdofFail{}; a run count taken from the caption or the table's page only leaves \nSpanCaptionOrPageN{} comparisons testable. Holm within a table gives \nAPctFailHolm{}. A paired reading at correlation $0.5$ gives \nSpanRhoHalfFail{} and at $0.9$ \nSpanRhoNineTenthsFail{}: the printed deviations are over independent runs of each optimizer, so the unpaired headline is the appropriate one unless the paper says the runs share seeds. The span of the failure rate across the readings that keep the full testable set is \nSpanLo{} to \nSpanHi{}.
+
+\begin{table}[t]
+\caption{The failure rate under each reading of the parser's testable set. Rows that change the set give its size.}
+\label{tab:span}
+\centering
+\small
+\begin{tabular}{@{}lrr@{}}
+\toprule
+Reading & Tested & Fail \\
+\midrule
+As reported (Welch, two-sided, unlabelled bar as SD, smallest run count in the paper) & \nSpanAsReportedN{} & \nSpanAsReportedFail{} \\
+Holm within a table & \nSpanHolmFamilyPaperN{} & \nSpanHolmFamilyPaperFailHolm{} \\
+Two-sample $z$ & \nSpanZTwoSidedN{} & \nSpanZTwoSidedFail{} \\
+One-sided & \nSpanOneSidedN{} & \nSpanOneSidedFail{} \\
+Deviation read as population SD & \nDdofN{} & \nDdofFail{} \\
+Paired, $\rho = 0.5$ & \nSpanRhoHalfN{} & \nSpanRhoHalfFail{} \\
+Paired, $\rho = 0.9$ & \nSpanRhoNineTenthsN{} & \nSpanRhoNineTenthsFail{} \\
+Run count from caption or page only & \nSpanCaptionOrPageN{} & \nSpanCaptionOrPageFail{} \\
+Run count from the text scan's modal statement & 
+SrN{} & 
+SrFail{} \\
+Header rows removed & \nRbWithoutHeaderRowTestableN{} & \nRbWithoutHeaderRowFail{} \\
+All-bold rows removed & \nRbWithoutRowBoldTestableN{} & \nRbWithoutRowBoldFail{} \\
+Exact copies of a rival removed & \nRCopiesRemovedTestableN{} & \nRCopiesRemovedFail{} \\
+Thirty-run tables only & \nRcThirtyN{} & \nRcThirtyFail{} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
 
 \section{The reader census}
 \label{sec:census}

@@ -32,6 +32,7 @@ def main(argv=None) -> int:
     recs = [r for r in load_records(args.extracted)
             if any(t.get("page") is not None for t in r.get("tables", []))]
     recs.sort(key=lambda r: r["id"])
+    eligible = len(recs)
     if args.n_papers and args.n_papers < len(recs):
         recs = random.Random(args.seed).sample(recs, args.n_papers)
         recs.sort(key=lambda r: r["id"])
@@ -60,7 +61,7 @@ def main(argv=None) -> int:
                           "n_tables_detected": sum(1 for t in r["tables"] if t.get("page") == page_no)})
         doc.close()
     json.dump(items, open(os.path.join(args.out_dir, "items.json"), "w", encoding="utf-8"), indent=1)
-    json.dump({"n_papers": args.n_papers, "seed": args.seed, "papers_eligible": len(recs),
+    json.dump({"n_papers": args.n_papers, "seed": args.seed, "papers_eligible": eligible, "papers_drawn": len(recs),
                "protocol": "census-protocol-v1 with bar_form separate_row (swevo)"},
               open(os.path.join(args.out_dir, "draw.json"), "w", encoding="utf-8"), indent=1)
     print(len(items), "pages from", len({it["paper"] for it in items}), "papers ->", args.out_dir)
