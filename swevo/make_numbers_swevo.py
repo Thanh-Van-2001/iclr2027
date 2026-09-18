@@ -478,6 +478,11 @@ def build(out_path: str) -> dict:
         reg.add("vc printed not significant", _pct(vc["printed_not_significant_among_located"]) if vc["printed_not_significant_among_located"] is not None else "--", provenance=vrun)
         for k, v in vc["crosstab"].items():
             reg.add("vc " + k.replace("_", " "), v, provenance=vrun)
+        reg.add("vc largest paper located", vc.get("largest_paper_located", 0), provenance=vrun)
+        reg.add("vc pct largest paper", _pct(vc["pct_largest_paper"]) if vc.get("pct_largest_paper") is not None else "--", provenance=vrun)
+        aw = vc.get("agree_without_largest") or {}
+        reg.add("vc agree without largest n", aw.get("n", 0), provenance=vrun)
+        reg.add("vc agree without largest pct", _pct(aw["pct"]) if aw else "--", provenance=vrun)
         for k in sorted(set(vc["status"]) | {"located", "verdict_not_printed", "group_not_matched", "page_not_read"}):
             reg.add("vc status " + k.replace("_", " "), vc["status"].get(k, 0), provenance=vrun)
         for k in ("same_page", "verdict_table", "verdict_table_winner_named"):

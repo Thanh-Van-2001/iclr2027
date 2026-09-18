@@ -136,6 +136,10 @@ def main() -> int:
            "welch_fail_among_located": round(100 * sum(1 for r in located if r["fail"]) / n, 1) if n else None,
            "printed_not_significant_among_located": round(100 * sum(1 for r in located if r["verdict_class"] == "not_significant") / n, 1) if n else None,
            "papers_located": len(by_paper),
+           "largest_paper_located": max((v[0] for v in by_paper.values()), default=0),
+           "pct_largest_paper": round(100 * max((v[0] for v in by_paper.values()), default=0) / n, 1) if n else None,
+           "agree_without_largest": (lambda big: {"n": n - by_paper[big][0], "agree": agree - by_paper[big][1],
+                                                  "pct": round(100 * (agree - by_paper[big][1]) / max(n - by_paper[big][0], 1), 1)})(max(by_paper, key=lambda k: by_paper[k][0])) if by_paper else None,
            "per_paper": {k: {"located": v[0], "agree": v[1]} for k, v in by_paper.items()},
            "verdict_classes_raw": dict(collections.Counter(str(r.get("verdict")) for r in located).most_common(15))}
     json.dump(out, open(OUT, "w", encoding="utf-8"), indent=1, ensure_ascii=False)
