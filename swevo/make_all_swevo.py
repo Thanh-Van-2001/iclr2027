@@ -10,6 +10,7 @@ import collections
 import csv
 import json
 import os
+import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -191,6 +192,11 @@ def test_reader_blocks(cs: list, kinds: dict) -> dict:
     if not d:
         return {}
     sets = json.load(open(f"{OUT}/test_reader_set.json", encoding="utf-8")) if os.path.exists(f"{OUT}/test_reader_set.json") else {}
+    scan = json.load(open(f"{OUT}/text_scan.json", encoding="utf-8")) if os.path.exists(f"{OUT}/text_scan.json") else {}
+    noted = [p for p in d if scan.get(p, {}).get("bold_note")]
+    note_block = {"note_papers_read": len(noted),
+                  "note_filed_statistically_best": sum(1 for p in noted if "statistic" in str(d[p].get("bold_rule") or "").lower() or "signific" in str(d[p].get("bold_rule") or "").lower()),
+                  "note_filed_not_stated": sum(1 for p in noted if "not stated" in str(d[p].get("bold_rule") or "not stated").lower() or not d[p].get("bold_rule"))}
     testable = {c["paper"] for c in cs if c.get("test")}
     out = {}
     groups = {"all": list(d), "testable": [p for p in d if p in testable],
@@ -232,6 +238,7 @@ def test_reader_blocks(cs: list, kinds: dict) -> dict:
             "benchmark": bench.most_common(8),
             "alpha_005": sum(1 for x in v if x.get("alpha") == 0.05),
         }
+    out["note"] = note_block
     return out
 
 
@@ -264,12 +271,112 @@ def arxiv_check(path: str = "data/extracted_arxiv_csne.jsonl") -> dict:
     return out
 
 
+BACK_MATTER = re.compile(r"References|Received:.*Accepted|Data availab|Author contributions|Acknowledg|Competing interests", re.I)
+
+
+def _year_like(x) -> bool:
+    return x is not None and float(x).is_integer() and 1990 <= x <= 2026
+
+
+def back_matter(c: dict) -> bool:
+    """A comparison read from a page's back matter: a reference-list line
+    "13 (1)" against "564 (2022)" parsed as mean (deviation), or a table whose
+    caption or header sits after the References or Data availability heading.
+    The reference set exposed this class; the frozen unit keeps it and the
+    readings below remove it."""
+    text = (c.get("header_text") or "") + " " + (c.get("caption") or "")
+    return bool(BACK_MATTER.search(text)) or _year_like(c.get("winner_dispersion")) or _year_like(c.get("runner_dispersion"))
+
+
+def _retest(c: dict, n) -> dict | None:
+    from analyze import test_comparison
+    d = dict(c, n_runs=int(n) if n else None)
+    return test_comparison(d)
+
+
+def _scan_rates(cs: list, scan: dict) -> dict:
+    """The testable comparisons re-tested at the text scan's modal run count
+    where the paper states one, the parser's count otherwise; fail share and
+    papers, so that every subgroup rate can be printed both ways."""
+    out = []
+    for c in cs:
+        if not c.get("test"):
+            continue
+        n = scan.get(c["paper"], {}).get("run_modal") or c.get("n_runs")
+        t = _retest(c, n)
+        if t is None:
+            continue
+        out.append((c["paper"], t["p"] >= 0.05))
+    n = len(out)
+    return {"n": n, "papers": len({p for p, _ in out}), "fails": sum(f for _, f in out),
+            "pct_fail": round(100 * sum(f for _, f in out) / n, 1) if n else None,
+            "ci_fail": _boot_share(out) if len({p for p, _ in out}) >= 10 else None}
+
+
+def parser_readings(cs: list, scan: dict) -> dict:
+    """Readings on the parser's testable set that the reference set and the
+    first review exposed: back-matter rows, the smallest-count rule, zero
+    deviations, interval cells tested without a count, and all of them at once."""
+    t = [c for c in cs if c.get("test")]
+    bm = [c for c in t if back_matter(c)]
+    zero = [c for c in t if c.get("winner_dispersion") == 0 or c.get("runner_dispersion") == 0]
+    interval = [c for c in t if not c.get("n_runs")]
+    keep_bm = [c for c in t if not back_matter(c)]
+    clean = [c for c in keep_bm if c not in zero and c.get("n_runs")]
+    def rates(sub):
+        r = _rates(sub)
+        r["scan"] = _scan_rates(sub, scan)
+        return r
+    small = [c for c in t if c.get("n_runs") and c["n_runs"] <= 5]
+    return {"as_reported": rates(t), "back_matter_only": rates(bm), "without_back_matter": rates(keep_bm),
+            "zero_sd_only": rates(zero), "without_zero_sd": rates([c for c in t if c not in zero]),
+            "interval_only": rates(interval), "without_interval": rates([c for c in t if c.get("n_runs")]),
+            "cleaned": rates(clean),
+            "back_matter_all_comparisons": sum(1 for c in cs if back_matter(c)),
+            "back_matter_papers": len({c["paper"] for c in bm}),
+            "tested_at_five_or_fewer": len(small), "tested_at_five_or_fewer_papers": len({c["paper"] for c in small}),
+            "median_n": __import__("statistics").median([c["n_runs"] for c in t if c.get("n_runs")]) if any(c.get("n_runs") for c in t) else None}
+
+
+def scan_by_kind_holders(scan: dict, kinds: dict, cs: list) -> dict:
+    """The text-scan rates by kind restricted to the papers in which the
+    parser found a highlighted comparison: papers that compare something."""
+    holders = {c["paper"] for c in cs}
+    out = {}
+    for lab in ("new_optimizer", "application", "all"):
+        ids = [p for p, v in scan.items() if "error" not in v and p in holders and (lab == "all" or kinds.get(p) == lab)]
+        n = len(ids)
+        out[lab] = {"papers": n,
+                    "pct_runs_stated": round(100 * sum(1 for p in ids if scan[p].get("run_modal")) / max(n, 1), 1),
+                    "pct_test_named": round(100 * sum(1 for p in ids if scan[p].get("any_test")) / max(n, 1), 1),
+                    "pct_thirty_modal": round(100 * sum(1 for p in ids if scan[p].get("run_modal") == 30) / max(n, 1), 1)}
+    return out
+
+
+def bold_note(scan: dict, kinds: dict) -> dict:
+    """The journal's production note "Significant values are in bold" as the
+    text scan finds it, by kind."""
+    out = {}
+    for lab in ("new_optimizer", "application", "all"):
+        ids = [p for p, v in scan.items() if "error" not in v and (lab == "all" or kinds.get(p) == lab)]
+        n = len(ids)
+        k = sum(1 for p in ids if scan[p].get("bold_note"))
+        out[lab] = {"papers": n, "with_note": k, "pct": round(100 * k / max(n, 1), 1)}
+    return out
+
+
+def _method_citers(scan: dict) -> set:
+    keys = ["derrac2011", "garcia2009", "garcia2010", "sorensen2015", "aranha2022", "camacho2022", "bartz2020",
+            "beiranvand2017", "kendall2016", "hansen_coco"]
+    return {p for p, v in scan.items() if any(v.get("cites", {}).get(k) for k in keys)}
+
+
 def cites(cs: list, scan: dict) -> dict:
     """Papers citing the methodology literature, and how they report."""
     keys = ["derrac2011", "garcia2009", "garcia2010", "sorensen2015", "aranha2022", "camacho2022", "bartz2020",
             "beiranvand2017", "kendall2016", "hansen_coco", "wolpert_nfl"]
     counts = {k: sum(1 for v in scan.values() if v.get("cites", {}).get(k)) for k in keys}
-    method = {p for p, v in scan.items() if any(v.get("cites", {}).get(k) for k in keys if k != "wolpert_nfl")}
+    method = _method_citers(scan)
     claim_papers = {c["paper"] for c in cs}
     a = [c for c in cs if c["paper"] in method]
     b = [c for c in cs if c["paper"] not in method]
@@ -329,13 +436,35 @@ def kind_agreement(kinds: dict, metaphor: dict, second_path: str = "out/swevo/ki
     po = agree / len(both)
     kappa = (po - pe) / (1 - pe) if pe < 1 else 1.0
     conf = collections.Counter((kinds[p], second[p]) for p in both if kinds[p] != second[p])
+    scan = json.load(open(f"{OUT}/text_scan.json", encoding="utf-8")) if os.path.exists(f"{OUT}/text_scan.json") else {}
+    def srates(ids):
+        n = len(ids)
+        return {"papers": n,
+                "pct_runs_stated": round(100 * sum(1 for p in ids if scan.get(p, {}).get("run_modal")) / max(n, 1), 1),
+                "pct_test_named": round(100 * sum(1 for p in ids if scan.get(p, {}).get("any_test")) / max(n, 1), 1)}
+    strata = {"first_new_optimizer": srates([p for p in both if kinds[p] == "new_optimizer"]),
+              "second_new_optimizer": srates([p for p in both if second[p] == "new_optimizer"]),
+              "both_new_optimizer": srates([p for p in both if kinds[p] == "new_optimizer" and second[p] == "new_optimizer"]),
+              "either_new_optimizer": srates([p for p in both if kinds[p] == "new_optimizer" or second[p] == "new_optimizer"]),
+              "first_application": srates([p for p in both if kinds[p] == "application"]),
+              "second_application": srates([p for p in both if second[p] == "application"]),
+              "both_application": srates([p for p in both if kinds[p] == "application" and second[p] == "application"])}
+    tp = sum(1 for p in both if kinds[p] == "new_optimizer" and second[p] == "new_optimizer")
+    direction = {"first_new_optimizer": sum(1 for p in both if kinds[p] == "new_optimizer"),
+                 "second_new_optimizer": sum(1 for p in both if second[p] == "new_optimizer"),
+                 "application_to_new_optimizer": sum(1 for p in both if kinds[p] == "application" and second[p] == "new_optimizer"),
+                 "new_optimizer_to_application": sum(1 for p in both if kinds[p] == "new_optimizer" and second[p] == "application"),
+                 "precision_vs_second": round(100 * tp / max(sum(1 for p in both if kinds[p] == "new_optimizer"), 1), 1),
+                 "recall_vs_second": round(100 * tp / max(sum(1 for p in both if second[p] == "new_optimizer"), 1), 1)}
     m_both = [p for p in both if p in metaphor]
     m_agree = sum(1 for p in m_both if metaphor[p] == second_m[p])
     return {"papers": len(both), "agree": agree, "pct_agree": round(100 * agree / len(both), 1),
             "kappa": round(kappa, 3), "disagreements": [[a, b, n] for (a, b), n in conf.most_common()],
             "metaphor_papers": len(m_both), "metaphor_agree": m_agree,
             "pct_metaphor_agree": round(100 * m_agree / max(len(m_both), 1), 1),
-            "ci_agree": [round(100 * x, 1) for x in wilson_interval(agree, len(both))]}
+            "ci_agree": [round(100 * x, 1) for x in wilson_interval(agree, len(both))],
+            "strata": strata, "direction": direction,
+            "metaphor_none_disagreements": sum(1 for p in m_both if metaphor[p] != second_m[p] and "none" in (metaphor[p], second_m[p]))}
 
 
 def main() -> int:
@@ -392,10 +521,21 @@ def main() -> int:
         "scan_by_kind": scan_by_kind(scan, kinds, metaphor, suite) if scan and kinds else {},
         "run_counts": run_counts(cs, scan) if scan else {},
         "cites": cites(cs, scan) if scan else {},
+        "parser_readings": parser_readings(cs, scan),
+        "scan_by_kind_holders": scan_by_kind_holders(scan, kinds, cs) if scan and kinds else {},
+        "bold_note": bold_note(scan, kinds) if scan and kinds else {},
+        "kind_scan_fail": {lab: _scan_rates([c for c in cs if kinds.get(c["paper"]) == lab], scan) for lab in ("new_optimizer", "application")} if scan and kinds else {},
+        "cites_scan_fail": ({"citing": _scan_rates([c for c in cs if c["paper"] in _method_citers(scan)], scan),
+                             "not_citing": _scan_rates([c for c in cs if c["paper"] not in _method_citers(scan)], scan)} if scan else {}),
+        "tests_scan_fail": ({"named": _scan_rates([c for c in cs if scan.get(c["paper"], {}).get("any_test")], scan),
+                             "unnamed": _scan_rates([c for c in cs if not scan.get(c["paper"], {}).get("any_test")], scan)} if scan else {}),
         "scan_run_count": scan_run_count_reading(cs, scan) if scan else {},
         "test_reader": test_reader_blocks(cs, kinds),
         "arxiv": arxiv_check(),
         "headline_span": extra_stats.headline_span(cs, records),
+        "span_rows": (lambda hs: {"lo": min(hs["rows"][k]["pct_fail"] for k in ("as_reported", "z_two_sided", "one_sided", "rho_0.5", "rho_0.9") if k in hs["rows"]),
+                                  "hi": max(hs["rows"][k]["pct_fail"] for k in ("as_reported", "z_two_sided", "one_sided", "rho_0.5", "rho_0.9") if k in hs["rows"]),
+                                  "rows": [k for k in ("as_reported", "z_two_sided", "one_sided", "rho_0.5", "rho_0.9") if k in hs["rows"]]})(extra_stats.headline_span(cs, records)),
         "subset_direction": extra_stats.subset_direction(records, cs),
         "holm_families": extra_stats.holm_families(cs),
         "run_count_scope": run_count_scope(cs, records),

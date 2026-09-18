@@ -16,7 +16,7 @@ import re
 
 import fitz
 
-RUNS = re.compile(r"\b(\d{1,4})\s+(?:independent\s+|separate\s+|random\s+)?(?:runs|trials|repetitions|executions|independent experiments)\b", re.I)
+RUNS = re.compile(r"\b(\d{1,4})\s+(?:independent\s+|separate\s+|random\s+)?(?:runs|trials|repetitions|executions|independent experiments)\b|\b(?:run|executed|repeated|performed|conducted|simulated|tested|implemented)\s+(?:independently\s+)?(\d{1,4})\s+times\b", re.I)
 RUNS_WORDS = {"ten": 10, "twenty": 20, "thirty": 30, "fifty": 50, "hundred": 100, "five": 5, "fifteen": 15, "twenty-five": 25, "twenty five": 25}
 RUNS_WORDY = re.compile(r"\b(ten|twenty|thirty|fifty|hundred|five|fifteen|twenty-five|twenty five)\s+(?:independent\s+)?(?:runs|trials|repetitions)\b", re.I)
 TESTS = {
@@ -114,12 +114,14 @@ def scan(path: str, title: str, abstract: str, patterns: list) -> dict:
     main = body[:refs_start]
     runs = collections.Counter()
     for m in RUNS.finditer(main):
-        n = int(m.group(1))
+        n = int(m.group(1) or m.group(2))
         if 2 <= n <= 10000:
             runs[n] += 1
     for m in RUNS_WORDY.finditer(main):
         runs[RUNS_WORDS[m.group(1).lower()]] += 1
     run_sent = _sentence(main, RUNS.search(main).start()) if RUNS.search(main) else ""
+    # the journal's own table note, inserted by production on tables that bold anything
+    bold_note = bool(re.search(r"significant values are in bold|significant values are (?:shown |given |marked )?in bold|values in bold are significant", main, re.I))
     tests = {k: len(rx.findall(main)) for k, rx in TESTS.items()}
     test_sents = {k: _sentence(main, rx.search(main).start()) for k, rx in TESTS.items() if rx.search(main)}
     suites = {k: bool(rx.search(main)) for k, rx in SUITES.items()}
@@ -132,7 +134,7 @@ def scan(path: str, title: str, abstract: str, patterns: list) -> dict:
             "any_test": any(tests[k] for k in ("wilcoxon", "friedman", "t_test", "mann_whitney", "kruskal", "anova")),
             "suites": suites, "cec_years": cec_years,
             "title_proposes_algorithm": bool(OPTIMIZER_TITLE.search(title)), "title_novelty_word": bool(NOVEL_TITLE.search(title)),
-            "metaphors_in_title_or_abstract": metaphors, "cites": cites}
+            "metaphors_in_title_or_abstract": metaphors, "cites": cites, "bold_note": bold_note}
 
 
 def main(argv=None):

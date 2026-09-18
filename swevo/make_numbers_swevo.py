@@ -157,6 +157,10 @@ def build(out_path: str) -> dict:
         reg.add("sr fail ci", f"[{sr['ci_fail'][0]}, {sr['ci_fail'][1]}]" if sr.get("ci_fail") else "--", provenance=run)
 
     for name, d in ex.get("test_reader", {}).items():
+        if name == "note":
+            for k, v in d.items():
+                reg.add("tr " + k.replace("_", " "), v, provenance=run)
+            continue
         key = "tr " + name.replace("_", " ")
         for k in ("papers", "runs_stated", "runs_thirty", "test_named", "markers"):
             reg.add(f"{key} {k.replace('_', ' ')}", d[k], provenance=run)
@@ -199,6 +203,55 @@ def build(out_path: str) -> dict:
             reg.add(f"{key} papers err", _pct(d["pct_papers_err"]), provenance=run)
             reg.add(f"{key} papers runs", _pct(d["pct_papers_runs"]), provenance=run)
 
+    def _scan_block(prefix, d):
+        reg.add(f"{prefix} n", d["n"], provenance=run)
+        reg.add(f"{prefix} papers", d["papers"], provenance=run)
+        reg.add(f"{prefix} fails", d["fails"], provenance=run)
+        reg.add(f"{prefix} fail", _pct(d["pct_fail"]) if d["pct_fail"] is not None else "--", provenance=run)
+        reg.add(f"{prefix} fail ci", f"[{d['ci_fail'][0]}, {d['ci_fail'][1]}]" if d.get("ci_fail") else "--", provenance=run)
+
+    pr = ex.get("parser_readings", {})
+    for key in ("as_reported", "back_matter_only", "without_back_matter", "zero_sd_only", "without_zero_sd",
+                "interval_only", "without_interval", "cleaned"):
+        d = pr[key]
+        k = "pr " + key.replace("_", " ")
+        reg.add(f"{k} n", d["n"], provenance=run)
+        reg.add(f"{k} papers", d["papers"], provenance=run)
+        reg.add(f"{k} fail", _pct(d["pct_fail"]) if d["pct_fail"] is not None else "--", provenance=run)
+        reg.add(f"{k} fail holm", _pct(d["pct_fail_holm"]) if d.get("pct_fail_holm") is not None else "--", provenance=run)
+        reg.add(f"{k} fail ci", f"[{d['ci_fail'][0]}, {d['ci_fail'][1]}]" if d.get("ci_fail") and d["papers"] >= 10 else "--", provenance=run)
+        _scan_block(f"{k} scan", d["scan"])
+    reg.add("pr back matter all comparisons", pr["back_matter_all_comparisons"], provenance=run)
+    reg.add("pr back matter papers", pr["back_matter_papers"], provenance=run)
+    reg.add("pr tested at five or fewer", pr["tested_at_five_or_fewer"], provenance=run)
+    reg.add("pr tested at five or fewer papers", pr["tested_at_five_or_fewer_papers"], provenance=run)
+    reg.add("pr median n", int(pr["median_n"]) if pr["median_n"] else "--", provenance=run)
+    for lab, d in ex.get("kind_scan_fail", {}).items():
+        _scan_block("ks " + lab.replace("_", " "), d)
+    for lab, d in ex.get("cites_scan_fail", {}).items():
+        _scan_block("cs " + lab.replace("_", " "), d)
+    for lab, d in ex.get("tests_scan_fail", {}).items():
+        _scan_block("ts " + lab, d)
+    for lab, d in ex.get("scan_by_kind_holders", {}).items():
+        k = "hk " + lab.replace("_", " ")
+        reg.add(f"{k} papers", d["papers"], provenance=run)
+        for f in ("pct_runs_stated", "pct_test_named", "pct_thirty_modal"):
+            reg.add(f"{k} {f.replace('_', ' ')}", _pct(d[f]), provenance=run)
+    for lab, d in ex.get("bold_note", {}).items():
+        k = "bn " + lab.replace("_", " ")
+        reg.add(f"{k} papers", d["papers"], provenance=run)
+        reg.add(f"{k} with note", d["with_note"], provenance=run)
+        reg.add(f"{k} pct", _pct(d["pct"]), provenance=run)
+    ka2 = ex.get("kind_agreement", {})
+    if ka2.get("direction"):
+        for k, v in ka2["direction"].items():
+            reg.add("ka dir " + k.replace("_", " "), _pct(v) if k.startswith(("precision", "recall")) else v, provenance=run)
+        for k, d in ka2["strata"].items():
+            reg.add(f"ka st {k.replace('_', ' ')} papers", d["papers"], provenance=run)
+            reg.add(f"ka st {k.replace('_', ' ')} runs", _pct(d["pct_runs_stated"]), provenance=run)
+            reg.add(f"ka st {k.replace('_', ' ')} test", _pct(d["pct_test_named"]), provenance=run)
+        reg.add("ka metaphor none disagreements", ka2["metaphor_none_disagreements"], provenance=run)
+
     cc = ex.get("cites", {})
     if cc:
         names = {"derrac2011": "derrac", "garcia2009": "garcia nine", "garcia2010": "garcia ten", "sorensen2015": "sorensen",
@@ -234,6 +287,10 @@ def build(out_path: str) -> dict:
             reg.add(f"span {key} papers", row["papers"], provenance=run)
     reg.add("span lo", _pct(hs["span"][0]), provenance=run)
     reg.add("span hi", _pct(hs["span"][1]), provenance=run)
+    sp = ex.get("span_rows", {})
+    if sp:
+        reg.add("span rows lo", _pct(min(sp["lo"], ex["ddof_reading"]["pct_fail"])), provenance=run)
+        reg.add("span rows hi", _pct(max(sp["hi"], ex["ddof_reading"]["pct_fail"])), provenance=run)
 
     rb = ex["row_bold"]
     for key in ("header row only", "without header row", "row bold only", "without row bold"):
@@ -373,6 +430,18 @@ def build(out_path: str) -> dict:
                 causes = g[st].get("causes", {})
                 for c in sorted(set(vocab[st]) | set(causes)):
                     reg.add(f"{tag} {st.replace('_', ' ')} cause {c.replace('_', ' ')}", causes.get(c, 0), provenance=grun)
+        import csv as _csv
+        lab_path = {"g": "audits/swevo_gold/labels_gemini.csv", "g two": "audits/swevo_gold/labels_sonnet.csv"}[tag]
+        rows_g = list(_csv.DictReader(open(lab_path, encoding="utf-8", newline="")))
+        for st in ("testable", "no_bar"):
+            sub = [r for r in rows_g if r["stratum"] == st]
+            reg.add(f"{tag} {st.replace('_', ' ')} not results", sum(1 for r in sub if r["results_table"].strip().lower().startswith("n")), provenance=grun)
+            reg.add(f"{tag} {st.replace('_', ' ')} rows", len(sub), provenance=grun)
+        cv = f["claim_and_values"]
+        if cv.get("paper_ci"):
+            reg.add(f"{tag} claim paper ci", f"[{cv['paper_ci'][0]}, {cv['paper_ci'][1]}]", provenance=grun)
+            reg.add(f"{tag} claim papers", cv.get("n_papers", 0), provenance=grun)
+            reg.add(f"{tag} claim max one paper", cv.get("max_disagreements_one_paper", 0), provenance=grun)
         items_g = json.load(open("audits/swevo_gold/items.json", encoding="utf-8"))
         reg.add(f"{tag} items n", len(items_g), provenance=grun)
         for st in ("testable", "no_bar", "discarded", "non_extremal"):
@@ -458,6 +527,50 @@ def build(out_path: str) -> dict:
             reg.add(f"cr runs rank {_word(rank + 1)} count", cnt, provenance=rrun)
         for k in sorted(set(lay["n_source"]) | {"caption", "page", "paper", "none", "unstated"}):
             reg.add(f"cr n source {k}", lay["n_source"].get(k, 0), provenance=rrun)
+        def _cr_shares(prefix, d):
+            reg.add(f"{prefix} groups", d["groups"], provenance=rrun)
+            reg.add(f"{prefix} papers", d["papers"], provenance=rrun)
+            reg.add(f"{prefix} neither", _pct(d["pct_neither"]) if d["pct_neither"] is not None else "--", provenance=rrun)
+            reg.add(f"{prefix} neither ci", f"[{d['ci_neither'][0]}, {d['ci_neither'][1]}]" if d.get("ci_neither") else "--", provenance=rrun)
+            reg.add(f"{prefix} testable", _pct(d["pct_testable"]) if d["pct_testable"] is not None else "--", provenance=rrun)
+            reg.add(f"{prefix} testable ci", f"[{d['ci_testable'][0]}, {d['ci_testable'][1]}]" if d.get("ci_testable") else "--", provenance=rrun)
+            reg.add(f"{prefix} tested", d["tested"], provenance=rrun)
+            reg.add(f"{prefix} tested papers", d["tested_papers"], provenance=rrun)
+            reg.add(f"{prefix} fail", _pct(d["pct_fail"]) if d["pct_fail"] is not None else "--", provenance=rrun)
+            reg.add(f"{prefix} fail ci", f"[{d['ci_fail'][0]}, {d['ci_fail'][1]}]" if d.get("ci_fail") and d["tested_papers"] >= 10 else "--", provenance=rrun)
+        pp = cr.get("per_paper", {})
+        if pp:
+            for k in ("papers", "tested", "papers_any_fail", "largest_paper_tested"):
+                reg.add("crpp " + k.replace("_", " "), pp[k], provenance=rrun)
+            for k in ("top_four_share", "top_ten_share", "median_rate", "q1_rate", "q3_rate", "largest_paper_fail"):
+                reg.add("crpp " + k.replace("_", " "), _pct(pp[k]) if pp[k] is not None else "--", provenance=rrun)
+            _cr_shares("crpp without largest", pp["without_largest"])
+            _cr_shares("crpp without top four", pp["without_top_four"])
+        sh = cr.get("shape", {})
+        if sh:
+            for k in ("sd_ge_mean", "mean_tiny", "either", "neither", "zero_sd", "without_zero_sd"):
+                _cr_shares("crsh " + k.replace("_", " "), sh[k])
+            reg.add("crsh pct tested sd ge mean", _pct(sh["pct_tested_sd_ge_mean"]), provenance=rrun)
+            reg.add("crsh pct tested zero sd", _pct(sh["pct_tested_zero_sd"]), provenance=rrun)
+        rw = cr.get("row", {})
+        if rw:
+            reg.add("crrow groups", rw["row_label_groups"], provenance=rrun)
+            reg.add("crrow pct", _pct(rw["row_label_pct"]), provenance=rrun)
+            _cr_shares("crrow only", rw["row_label_only"])
+            _cr_shares("crrow without", rw["without_row_label"])
+        for lab, d in cr.get("bold_rule", {}).items():
+            _cr_shares("crbold " + lab.replace("_", " "), d)
+        nt = cr.get("note", {})
+        if nt:
+            _cr_shares("crnote with", nt["with_note"])
+            _cr_shares("crnote without", nt["without_note"])
+            reg.add("crnote papers", nt["papers_with_note_in_census"], provenance=rrun)
+        for lab, d in cr.get("citing", {}).items():
+            _cr_shares("crcite " + lab.replace("_", " "), d)
+        sr_ = cr.get("scan_runs", {})
+        if sr_:
+            reg.add("cr n agrees scan", sr_["reader_n_agrees_scan"], provenance=rrun)
+            reg.add("cr n disagrees scan", sr_["reader_n_disagrees_scan"], provenance=rrun)
         for lab, d in cr["by_kind"].items():
             key = lab.replace("_", " ")
             reg.add(f"cr {key} papers", d["papers"], provenance=rrun)
@@ -468,6 +581,7 @@ def build(out_path: str) -> dict:
             reg.add(f"cr {key} testable", _pct(d["pct_testable"]) if d["pct_testable"] is not None else "--", provenance=rrun)
             reg.add(f"cr {key} testable ci", f"[{d['ci_testable'][0]}, {d['ci_testable'][1]}]" if d["ci_testable"] else "--", provenance=rrun)
             reg.add(f"cr {key} tested", d["tested"], provenance=rrun)
+            reg.add(f"cr {key} tested papers", d.get("tested_papers", 0), provenance=rrun)
             reg.add(f"cr {key} fail", _pct(d["pct_fail"]) if d["pct_fail"] is not None else "--", provenance=rrun)
             reg.add(f"cr {key} fail ci", f"[{d['ci_fail'][0]}, {d['ci_fail'][1]}]" if d["ci_fail"] else "--", provenance=rrun)
 

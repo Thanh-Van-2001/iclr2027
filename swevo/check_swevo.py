@@ -31,7 +31,12 @@ def abstract_words() -> int:
     doc = fitz.open(os.path.join(D, "main.pdf"))
     t = "".join(doc[k].get_text() for k in range(min(2, len(doc))))
     i, j = t.find("Abstract"), t.find("Keywords")
-    return len(t[i + len("Abstract"):j].split()) if 0 <= i < j else -1
+    if not (0 <= i < j):
+        return -1
+    body = t[i + len("Abstract"):j]
+    # the corresponding-author footnote is set on the same page and is not part of the abstract
+    body = re.sub(r"\S?Corresponding author\..*?\)", " ", body, flags=re.S)
+    return len(body.split())
 
 
 def main() -> int:
