@@ -22,9 +22,21 @@ import argparse
 _ap = argparse.ArgumentParser()
 _ap.add_argument("--kit", default="audits/swevo_human")
 _ap.add_argument("--out", default=None)
+_ap.add_argument("--labels", default=None, help="a labels file other than the kit's labels.csv (a model's answers to the kit)")
 _args, _ = _ap.parse_known_args()
 KIT = _args.kit
-OUT = _args.out or ("out/swevo/human_rows.json" if KIT.endswith("_rows") else "out/swevo/human_separate.json")
+LABELS = _args.labels or os.path.join(KIT, "labels.csv")
+_tag = "" if _args.labels is None else "_" + os.path.basename(_args.labels).replace("labels_", "").replace(".csv", "")
+OUT = _args.out or (("out/swevo/human_rows" if KIT.endswith("_rows") else "out/swevo/human_separate") + _tag + ".json")
+sys.path.insert(0, HERE)
+from census_readings import _disp, _disp_str  # noqa: E402
+import re as _re
+
+
+def _clean(v):
+    """A typed value with a Unicode minus or a space after the sign."""
+    x = str(v if v is not None else "").replace("−", "-").replace("–", "-")
+    return _re.sub(r"^([+-])\s+", r"\1", x.strip())
 
 
 def _rate(k, n):
@@ -33,7 +45,7 @@ def _rate(k, n):
 
 
 def main() -> int:
-    path = os.path.join(KIT, "labels.csv")
+    path = LABELS
     if not os.path.exists(path):
         print("no human labels yet:", path)
         return 0
@@ -56,7 +68,7 @@ def main() -> int:
         results[0] += 1; results[1] += 1
         sp = str(r.get("std_printed", "")).strip().lower()
         if sp:
-            reader_barred = _bar_num(rd.get("winner_disp")) is not None and _bar_num(rd.get("runner_disp")) is not None
+            reader_barred = _disp(rd.get("winner_disp")) is not None and _disp(rd.get("runner_disp")) is not None
             if sp.startswith("y"):
                 recall["std_printed_y"] += 1
                 recall["std_printed_y_reader_barred"] += reader_barred
@@ -76,8 +88,10 @@ def main() -> int:
             if f == "n_runs":
                 a, b = _num(h), _num(it.get("n_runs_reader"))
                 hit = (a is not None and b is not None and a == b) or (h.lower() == "none" and str(it.get("n_runs_reader", "")).lower() in ("", "none"))
+            elif f.endswith("_disp"):
+                hit = _match(_disp(_clean(h)), _disp(_clean(rd.get(f))))
             else:
-                hit = _match(_num(h), _num(rd.get(f)))
+                hit = _match(_num(_clean(h)), _num(_clean(rd.get(f))))
             fields[f][0] += hit
             if f != "n_runs":
                 ok_all = ok_all and hit
@@ -89,13 +103,13 @@ def main() -> int:
         n_h = _num(r.get("n_runs")) or n_r
         def verdict(w, wd, rm, rdd, n):
             w, rm = _num(w), _num(rm)
-            sw, sr = _se(wd, kind, n), _se(rdd, kind, n)
+            sw, sr = _se(_disp_str(wd), kind, n), _se(_disp_str(rdd), kind, n)
             if None in (w, rm, sw, sr):
                 return None
             res = p_value(abs(w - rm), sw, sr, int(n) if n else None)
             return (res["p"] >= 0.05) if res else None
         v_r = verdict(rd["winner_mean"], rd["winner_disp"], rd["runner_mean"], rd["runner_disp"], n_r)
-        v_h = verdict(r.get("winner_mean"), r.get("winner_disp"), r.get("runner_mean"), r.get("runner_disp"), n_h)
+        v_h = verdict(_clean(r.get("winner_mean")), _clean(r.get("winner_disp")), _clean(r.get("runner_mean")), _clean(r.get("runner_disp")), n_h)
         if v_r is not None and v_h is not None:
             flips[1] += 1
             flips[0] += (v_r != v_h)
@@ -112,7 +126,7 @@ def main() -> int:
         k, n = sum(x[0] for x in draw), sum(x[1] for x in draw)
         vals.append(100 * k / n if n else 0)
     vals.sort()
-    out = {"labelled": len(rows), "results_table": _rate(*results), "bold_ok": _rate(*bold_ok),
+    out = {"labels": LABELS, "labelled": len(rows), "results_table": _rate(*results), "bold_ok": _rate(*bold_ok),
            "fields": {f: _rate(*v) for f, v in fields.items()}, "claim": _rate(*claim),
            "claim_page_ci": [round(vals[50], 1), round(vals[1949], 1)], "pages": len(pages),
            "verdict_flips": _rate(*flips), "unclear_items": unclear,

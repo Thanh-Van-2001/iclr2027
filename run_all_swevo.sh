@@ -26,6 +26,10 @@ python swevo/census_readings.py > /dev/null
 if ls audits/swevo_verdict/labels_shard*.json > /dev/null 2>&1; then python swevo/verdict_crosstab.py > /dev/null; fi
 if [ -f audits/swevo_human/labels.csv ]; then python swevo/human_score.py > /dev/null; fi
 if [ -f audits/swevo_human_rows/labels.csv ]; then python swevo/human_score.py --kit audits/swevo_human_rows > /dev/null; fi
+for m in claude-sonnet-5; do
+if [ -f audits/swevo_human/labels_$m.csv ]; then python swevo/human_score.py --kit audits/swevo_human --labels audits/swevo_human/labels_$m.csv > /dev/null; fi
+if [ -f audits/swevo_human_rows/labels_$m.csv ]; then python swevo/human_score.py --kit audits/swevo_human_rows --labels audits/swevo_human_rows/labels_$m.csv > /dev/null; fi
+done
 fi
 python swevo/make_numbers_swevo.py
 echo "numbers regenerated -> paper/swevo/numbers.tex"

@@ -485,6 +485,34 @@ def build(out_path: str) -> dict:
                 reg.add("ag " + k.replace("_", " ") + " frac", f"{v.get('agree', v.get('correct'))} of {v['n']}", provenance="swevo_reader_agreement")
                 reg.add("ag " + k.replace("_", " ") + " pct", _pct(v["pct"]) if v.get("pct") is not None else "--", provenance="swevo_reader_agreement")
 
+    for tag, path in (("hm", "human_separate"), ("hr", "human_rows"), ("hms", "human_separate_claude-sonnet-5"), ("hrs", "human_rows_claude-sonnet-5")):
+        if not os.path.exists(f"out/swevo/{path}.json"):
+            continue
+        h = _j(path)
+        hrun = "swevo_" + path.replace("-", "_")
+        reg.add(f"{tag} labelled", h["labelled"], provenance=hrun)
+        reg.add(f"{tag} pages", h["pages"], provenance=hrun)
+        for k in ("results_table", "bold_ok", "claim", "verdict_flips"):
+            d = h[k]
+            reg.add(f"{tag} {k.replace('_', ' ')} frac", f"{d['correct']} of {d['n']}", provenance=hrun)
+            reg.add(f"{tag} {k.replace('_', ' ')} pct", _pct(d["pct"]) if d["pct"] is not None else "--", provenance=hrun)
+            reg.add(f"{tag} {k.replace('_', ' ')} ci", f"[{d['ci'][0]}, {d['ci'][1]}]", provenance=hrun)
+        for k, d in h["fields"].items():
+            reg.add(f"{tag} {k.replace('_', ' ')} frac", f"{d['correct']} of {d['n']}", provenance=hrun)
+            reg.add(f"{tag} {k.replace('_', ' ')} pct", _pct(d["pct"]) if d["pct"] is not None else "--", provenance=hrun)
+        reg.add(f"{tag} claim page ci", f"[{h['claim_page_ci'][0]}, {h['claim_page_ci'][1]}]", provenance=hrun)
+        reg.add(f"{tag} unclear", h["unclear_items"], provenance=hrun)
+        rc = h.get("recall", {})
+        if rc:
+            reg.add(f"{tag} std printed y", rc["std_printed_y"], provenance=hrun)
+            reg.add(f"{tag} std printed n", rc["std_printed_n"], provenance=hrun)
+            reg.add(f"{tag} reader recall frac", f"{rc['reader_recall']['correct']} of {rc['reader_recall']['n']}", provenance=hrun)
+            reg.add(f"{tag} reader recall pct", _pct(rc["reader_recall"]["pct"]) if rc["reader_recall"]["pct"] is not None else "--", provenance=hrun)
+            reg.add(f"{tag} reader false bar frac", f"{rc['reader_false_bar']['correct']} of {rc['reader_false_bar']['n']}", provenance=hrun)
+        for st, d in h.get("by_stratum", {}).items():
+            if st:
+                reg.add(f"{tag} stratum {st} n", d["n"], provenance=hrun)
+
     if os.path.exists("out/swevo/verdict_crosstab.json"):
         vc = _j("verdict_crosstab")
         vrun = "swevo_verdict_crosstab"
