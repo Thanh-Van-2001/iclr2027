@@ -1,0 +1,2009 @@
+[
+ {
+  "id": "0238",
+  "paper": "23b1ed8bd6fe0821",
+  "page": 10,
+  "results_tables": [
+   {
+    "caption_start": "Table 5. Test results",
+    "has_bold": "y",
+    "groups": [
+     {
+      "label": "F1",
+      "direction": "lower",
+      "winner_name": "PMSOMA2",
+      "winner_mean": "8.57E+02",
+      "runner_name": "PMSOMA8",
+      "runner_mean": "9.48E+02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F2",
+      "direction": "lower",
+      "winner_name": "PMSOMA2",
+      "winner_mean": "2.00E+02",
+      "runner_name": "PMSOMA1",
+      "runner_mean": "2.00E+02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F4",
+      "direction": "lower",
+      "winner_name": "PMSOMA2",
+      "winner_mean": "4.00E+02",
+      "runner_name": "PMSOMA1",
+      "runner_mean": "4.00E+02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F5",
+      "direction": "lower",
+      "winner_name": "PMSOMA2",
+      "winner_mean": "5.07E+02",
+      "runner_name": "PMSOMA6",
+      "runner_mean": "5.08E+02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F6",
+      "direction": "lower",
+      "winner_name": "PMSOMA2",
+      "winner_mean": "6.00E+02",
+      "runner_name": "PMSOMA1",
+      "runner_mean": "6.00E+02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F7",
+      "direction": "lower",
+      "winner_name": "PMSOMA1",
+      "winner_mean": "7.23E+02",
+      "runner_name": "PMSOMA2",
+      "runner_mean": "7.24E+02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F8",
+      "direction": "lower",
+      "winner_name": "PMSOMA6",
+      "winner_mean": "8.07E+02",
+      "runner_name": "PMSOMA1",
+      "runner_mean": "8.07E+02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F9",
+      "direction": "lower",
+      "winner_name": "PMSOMA7",
+      "winner_mean": "9.00E+02",
+      "runner_name": "PMSOMA1",
+      "runner_mean": "9.00E+02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F10",
+      "direction": "lower",
+      "winner_name": "PMSOMA2",
+      "winner_mean": "1.29E+03",
+      "runner_name": "PMSOMA5",
+      "runner_mean": "1.38E+03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F11",
+      "direction": "lower",
+      "winner_name": "PMSOMA2",
+      "winner_mean": "1.11E+03",
+      "runner_name": "PMSOMA1",
+      "runner_mean": "1.11E+03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F12",
+      "direction": "lower",
+      "winner_name": "PMSOMA3",
+      "winner_mean": "8.98E+03",
+      "runner_name": "PMSOMA2",
+      "runner_mean": "9.13E+03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F13",
+      "direction": "lower",
+      "winner_name": "PMSOMA2",
+      "winner_mean": "1.78E+03",
+      "runner_name": "PMSOMA8",
+      "runner_mean": "1.86E+03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F14",
+      "direction": "lower",
+      "winner_name": "PMSOMA2",
+      "winner_mean": "1.42E+03",
+      "runner_name": "PMSOMA1",
+      "runner_mean": "1.42E+03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F15",
+      "direction": "lower",
+      "winner_name": "PMSOMA2",
+      "winner_mean": "1.51E+03",
+      "runner_name": "PMSOMA1",
+      "runner_mean": "1.51E+03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F16",
+      "direction": "lower",
+      "winner_name": "PMSOMA4",
+      "winner_mean": "1.60E+03",
+      "runner_name": "PMSOMA1",
+      "runner_mean": "1.60E+03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F17",
+      "direction": "lower",
+      "winner_name": "PMSOMA2",
+      "winner_mean": "1.72E+03",
+      "runner_name": "PMSOMA1",
+      "runner_mean": "1.72E+03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F18",
+      "direction": "lower",
+      "winner_name": "PMSOMA2",
+      "winner_mean": "3.05E+03",
+      "runner_name": "PMSOMA1",
+      "runner_mean": "3.12E+03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F19",
+      "direction": "lower",
+      "winner_name": "PMSOMA2",
+      "winner_mean": "1.91E+03",
+      "runner_name": "PMSOMA1",
+      "runner_mean": "1.91E+03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F20",
+      "direction": "lower",
+      "winner_name": "PMSOMA2",
+      "winner_mean": "2.01E+03",
+      "runner_name": "PMSOMA1",
+      "runner_mean": "2.01E+03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F21",
+      "direction": "lower",
+      "winner_name": "PMSOMA6",
+      "winner_mean": "2.24E+03",
+      "runner_name": "PMSOMA4",
+      "runner_mean": "2.24E+03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F22",
+      "direction": "lower",
+      "winner_name": "PMSOMA2",
+      "winner_mean": "2.30E+03",
+      "runner_name": "PMSOMA1",
+      "runner_mean": "2.30E+03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F23",
+      "direction": "lower",
+      "winner_name": "PMSOMA1",
+      "winner_mean": "2.61E+03",
+      "runner_name": "PMSOMA2",
+      "runner_mean": "2.61E+03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F24",
+      "direction": "lower",
+      "winner_name": "PMSOMA4",
+      "winner_mean": "2.67E+03",
+      "runner_name": "PMSOMA1",
+      "runner_mean": "2.68E+03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F25",
+      "direction": "lower",
+      "winner_name": "PMSOMA5",
+      "winner_mean": "2.92E+03",
+      "runner_name": "PMSOMA2",
+      "runner_mean": "2.92E+03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F26",
+      "direction": "lower",
+      "winner_name": "PMSOMA1",
+      "winner_mean": "2.92E+03",
+      "runner_name": "PMSOMA3",
+      "runner_mean": "2.93E+03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F27",
+      "direction": "lower",
+      "winner_name": "PMSOMA1",
+      "winner_mean": "3.10E+03",
+      "runner_name": "PMSOMA2",
+      "runner_mean": "3.10E+03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F28",
+      "direction": "lower",
+      "winner_name": "PMSOMA7",
+      "winner_mean": "3.16E+03",
+      "runner_name": "PMSOMA3",
+      "runner_mean": "3.17E+03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F29",
+      "direction": "lower",
+      "winner_name": "PMSOMA2",
+      "winner_mean": "3.16E+03",
+      "runner_name": "PMSOMA8",
+      "runner_mean": "3.16E+03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F30",
+      "direction": "lower",
+      "winner_name": "PMSOMA2",
+      "winner_mean": "4.81E+03",
+      "runner_name": "PMSOMA4",
+      "runner_mean": "5.70E+03",
+      "verdict_here": "none"
+     }
+    ]
+   }
+  ],
+  "verdict_tables": [
+   {
+    "caption_start": "Table 5. Test results",
+    "verdict_kind": "ranks",
+    "compared_against": "none",
+    "entries": [
+     {
+      "label": "Frideman",
+      "competitor": "PMSOMA1",
+      "verdict": "3.7667"
+     },
+     {
+      "label": "Frideman",
+      "competitor": "PMSOMA2",
+      "verdict": "2.3000"
+     },
+     {
+      "label": "Frideman",
+      "competitor": "PMSOMA3",
+      "verdict": "4.3667"
+     },
+     {
+      "label": "Frideman",
+      "competitor": "PMSOMA4",
+      "verdict": "5.0667"
+     },
+     {
+      "label": "Frideman",
+      "competitor": "PMSOMA5",
+      "verdict": "4.7333"
+     },
+     {
+      "label": "Frideman",
+      "competitor": "PMSOMA6",
+      "verdict": "4.5000"
+     },
+     {
+      "label": "Frideman",
+      "competitor": "PMSOMA7",
+      "verdict": "5.6667"
+     },
+     {
+      "label": "Frideman",
+      "competitor": "PMSOMA8",
+      "verdict": "5.6000"
+     },
+     {
+      "label": "rank",
+      "competitor": "PMSOMA1",
+      "verdict": "2"
+     },
+     {
+      "label": "rank",
+      "competitor": "PMSOMA2",
+      "verdict": "1"
+     },
+     {
+      "label": "rank",
+      "competitor": "PMSOMA3",
+      "verdict": "3"
+     },
+     {
+      "label": "rank",
+      "competitor": "PMSOMA4",
+      "verdict": "6"
+     },
+     {
+      "label": "rank",
+      "competitor": "PMSOMA5",
+      "verdict": "5"
+     },
+     {
+      "label": "rank",
+      "competitor": "PMSOMA6",
+      "verdict": "4"
+     },
+     {
+      "label": "rank",
+      "competitor": "PMSOMA7",
+      "verdict": "8"
+     },
+     {
+      "label": "rank",
+      "competitor": "PMSOMA8",
+      "verdict": "7"
+     }
+    ],
+    "note": "Table 5 includes Friedman test results and ranks at the top."
+   }
+  ],
+  "note": "Table 4 is just parameters."
+ },
+ {
+  "id": "0480",
+  "paper": "39598ac0ec68e0c5",
+  "page": 11,
+  "results_tables": [
+   {
+    "caption_start": "Table 2. IGD values",
+    "has_bold": "y",
+    "groups": [
+     {
+      "label": "ZDT1",
+      "direction": "lower",
+      "winner_name": "HCRMOPSO",
+      "winner_mean": "2.1907e-3",
+      "runner_name": "MMOPSO",
+      "runner_mean": "2.4462e-3",
+      "verdict_here": "-"
+     },
+     {
+      "label": "ZDT2",
+      "direction": "lower",
+      "winner_name": "HCRMOPSO",
+      "winner_mean": "2.1965e-3",
+      "runner_name": "SMPSO",
+      "runner_mean": "7.6603e-2",
+      "verdict_here": "-"
+     },
+     {
+      "label": "ZDT3",
+      "direction": "lower",
+      "winner_name": "HCRMOPSO",
+      "winner_mean": "2.6517e-3",
+      "runner_name": "MMOPSO",
+      "runner_mean": "3.9203e-3",
+      "verdict_here": "-"
+     },
+     {
+      "label": "ZDT4",
+      "direction": "lower",
+      "winner_name": "HCRMOPSO",
+      "winner_mean": "7.2842e-1",
+      "runner_name": "MMOPSO",
+      "runner_mean": "6.6278e+0",
+      "verdict_here": "-"
+     },
+     {
+      "label": "ZDT6",
+      "direction": "lower",
+      "winner_name": "HCRMOPSO",
+      "winner_mean": "1.7408e-3",
+      "runner_name": "SMPSO",
+      "runner_mean": "1.9305e-3",
+      "verdict_here": "-"
+     },
+     {
+      "label": "UF1",
+      "direction": "lower",
+      "winner_name": "MMOPSO",
+      "winner_mean": "1.1071e-1",
+      "runner_name": "NMPSO",
+      "runner_mean": "1.2399e-1",
+      "verdict_here": "none"
+     },
+     {
+      "label": "UF2",
+      "direction": "lower",
+      "winner_name": "HCRMOPSO",
+      "winner_mean": "6.8977e-2",
+      "runner_name": "MMOPSO",
+      "runner_mean": "7.0904e-2",
+      "verdict_here": "≈"
+     },
+     {
+      "label": "UF3",
+      "direction": "lower",
+      "winner_name": "HCRMOPSO",
+      "winner_mean": "3.1789e-1",
+      "runner_name": "MOPSO",
+      "runner_mean": "3.2436e-1",
+      "verdict_here": "≈"
+     },
+     {
+      "label": "UF4",
+      "direction": "lower",
+      "winner_name": "MMOPSO",
+      "winner_mean": "5.5877e-2",
+      "runner_name": "NMPSO",
+      "runner_mean": "6.1944e-2",
+      "verdict_here": "none"
+     },
+     {
+      "label": "UF5",
+      "direction": "lower",
+      "winner_name": "HCRMOPSO",
+      "winner_mean": "1.5391e+0",
+      "runner_name": "MMOPSO",
+      "runner_mean": "1.5506e+0",
+      "verdict_here": "≈"
+     },
+     {
+      "label": "UF6",
+      "direction": "lower",
+      "winner_name": "MMOPSO",
+      "winner_mean": "6.0682e-1",
+      "runner_name": "NMPSO",
+      "runner_mean": "6.9416e-1",
+      "verdict_here": "none"
+     },
+     {
+      "label": "UF7",
+      "direction": "lower",
+      "winner_name": "HCRMOPSO",
+      "winner_mean": "1.0736e-1",
+      "runner_name": "MMOPSO",
+      "runner_mean": "1.9090e-1",
+      "verdict_here": "-"
+     },
+     {
+      "label": "UF8",
+      "direction": "lower",
+      "winner_name": "MMOPSO",
+      "winner_mean": "2.6825e-1",
+      "runner_name": "MOPSO",
+      "runner_mean": "2.9753e-1",
+      "verdict_here": "none"
+     },
+     {
+      "label": "UF9",
+      "direction": "lower",
+      "winner_name": "HCRMOPSO",
+      "winner_mean": "1.4122e-1",
+      "runner_name": "MMOPSO",
+      "runner_mean": "4.4253e-1",
+      "verdict_here": "-"
+     },
+     {
+      "label": "UF10",
+      "direction": "lower",
+      "winner_name": "HCRMOPSO",
+      "winner_mean": "8.3621e-1",
+      "runner_name": "MMOPSO",
+      "runner_mean": "1.2094e+0",
+      "verdict_here": "-"
+     },
+     {
+      "label": "DTLZ1",
+      "direction": "lower",
+      "winner_name": "MMOPSO",
+      "winner_mean": "3.2885e+0",
+      "runner_name": "SMPSO",
+      "runner_mean": "3.3007e+0",
+      "verdict_here": "none"
+     },
+     {
+      "label": "DTLZ2",
+      "direction": "lower",
+      "winner_name": "MOPSO",
+      "winner_mean": "4.3958e-2",
+      "runner_name": "MMOPSO",
+      "runner_mean": "5.1499e-2",
+      "verdict_here": "none"
+     },
+     {
+      "label": "DTLZ3",
+      "direction": "lower",
+      "winner_name": "SMPSO",
+      "winner_mean": "5.0793e+1",
+      "runner_name": "HCRMOPSO",
+      "runner_mean": "7.9018e+1",
+      "verdict_here": "+"
+     },
+     {
+      "label": "DTLZ4",
+      "direction": "lower",
+      "winner_name": "MMOPSO",
+      "winner_mean": "5.1081e-2",
+      "runner_name": "HCRMOPSO",
+      "runner_mean": "2.6471e-1",
+      "verdict_here": "none"
+     },
+     {
+      "label": "DTLZ5",
+      "direction": "lower",
+      "winner_name": "SMPSO",
+      "winner_mean": "3.5733e-3",
+      "runner_name": "MMOPSO",
+      "runner_mean": "3.6179e-3",
+      "verdict_here": "+"
+     },
+     {
+      "label": "DTLZ6",
+      "direction": "lower",
+      "winner_name": "HCRMOPSO",
+      "winner_mean": "2.3094e-3",
+      "runner_name": "MMOPSO",
+      "runner_mean": "3.4650e-3",
+      "verdict_here": "-"
+     },
+     {
+      "label": "DTLZ7",
+      "direction": "lower",
+      "winner_name": "HCRMOPSO",
+      "winner_mean": "4.4846e-2",
+      "runner_name": "NMPSO",
+      "runner_mean": "4.8701e-2",
+      "verdict_here": "≈"
+     }
+    ]
+   }
+  ],
+  "verdict_tables": [
+   {
+    "caption_start": "Table 2. IGD values",
+    "verdict_kind": "symbols",
+    "compared_against": "HCRMOPSO",
+    "entries": [
+     {
+      "label": "ZDT1",
+      "competitor": "MMOPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT1",
+      "competitor": "NMPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT1",
+      "competitor": "SMPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT1",
+      "competitor": "MOPSOCD",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT1",
+      "competitor": "MOPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT2",
+      "competitor": "MMOPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT2",
+      "competitor": "NMPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT2",
+      "competitor": "SMPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT2",
+      "competitor": "MOPSOCD",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT2",
+      "competitor": "MOPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT3",
+      "competitor": "MMOPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT3",
+      "competitor": "NMPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT3",
+      "competitor": "SMPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT3",
+      "competitor": "MOPSOCD",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT3",
+      "competitor": "MOPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT4",
+      "competitor": "MMOPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT4",
+      "competitor": "NMPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT4",
+      "competitor": "SMPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT4",
+      "competitor": "MOPSOCD",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT4",
+      "competitor": "MOPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT6",
+      "competitor": "MMOPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT6",
+      "competitor": "NMPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT6",
+      "competitor": "SMPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT6",
+      "competitor": "MOPSOCD",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT6",
+      "competitor": "MOPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "UF1",
+      "competitor": "MMOPSO",
+      "verdict": "+"
+     },
+     {
+      "label": "UF1",
+      "competitor": "NMPSO",
+      "verdict": "+"
+     },
+     {
+      "label": "UF1",
+      "competitor": "SMPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "UF1",
+      "competitor": "MOPSOCD",
+      "verdict": "-"
+     },
+     {
+      "label": "UF1",
+      "competitor": "MOPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "UF2",
+      "competitor": "MMOPSO",
+      "verdict": "≈"
+     },
+     {
+      "label": "UF2",
+      "competitor": "NMPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "UF2",
+      "competitor": "SMPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "UF2",
+      "competitor": "MOPSOCD",
+      "verdict": "-"
+     },
+     {
+      "label": "UF2",
+      "competitor": "MOPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "UF3",
+      "competitor": "MMOPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "UF3",
+      "competitor": "NMPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "UF3",
+      "competitor": "SMPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "UF3",
+      "competitor": "MOPSOCD",
+      "verdict": "-"
+     },
+     {
+      "label": "UF3",
+      "competitor": "MOPSO",
+      "verdict": "≈"
+     },
+     {
+      "label": "UF4",
+      "competitor": "MMOPSO",
+      "verdict": "+"
+     },
+     {
+      "label": "UF4",
+      "competitor": "NMPSO",
+      "verdict": "≈"
+     },
+     {
+      "label": "UF4",
+      "competitor": "SMPSO",
+      "verdict": "≈"
+     },
+     {
+      "label": "UF4",
+      "competitor": "MOPSOCD",
+      "verdict": "-"
+     },
+     {
+      "label": "UF4",
+      "competitor": "MOPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "UF5",
+      "competitor": "MMOPSO",
+      "verdict": "≈"
+     },
+     {
+      "label": "UF5",
+      "competitor": "NMPSO",
+      "verdict": "≈"
+     },
+     {
+      "label": "UF5",
+      "competitor": "SMPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "UF5",
+      "competitor": "MOPSOCD",
+      "verdict": "-"
+     },
+     {
+      "label": "UF5",
+      "competitor": "MOPSO",
+      "verdict": "≈"
+     },
+     {
+      "label": "UF6",
+      "competitor": "MMOPSO",
+      "verdict": "≈"
+     },
+     {
+      "label": "UF6",
+      "competitor": "NMPSO",
+      "verdict": "≈"
+     },
+     {
+      "label": "UF6",
+      "competitor": "SMPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "UF6",
+      "competitor": "MOPSOCD",
+      "verdict": "-"
+     },
+     {
+      "label": "UF6",
+      "competitor": "MOPSO",
+      "verdict": "≈"
+     },
+     {
+      "label": "UF7",
+      "competitor": "MMOPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "UF7",
+      "competitor": "NMPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "UF7",
+      "competitor": "SMPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "UF7",
+      "competitor": "MOPSOCD",
+      "verdict": "-"
+     },
+     {
+      "label": "UF7",
+      "competitor": "MOPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "UF8",
+      "competitor": "MMOPSO",
+      "verdict": "≈"
+     },
+     {
+      "label": "UF8",
+      "competitor": "NMPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "UF8",
+      "competitor": "SMPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "UF8",
+      "competitor": "MOPSOCD",
+      "verdict": "-"
+     },
+     {
+      "label": "UF8",
+      "competitor": "MOPSO",
+      "verdict": "≈"
+     },
+     {
+      "label": "UF9",
+      "competitor": "MMOPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "UF9",
+      "competitor": "NMPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "UF9",
+      "competitor": "SMPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "UF9",
+      "competitor": "MOPSOCD",
+      "verdict": "-"
+     },
+     {
+      "label": "UF9",
+      "competitor": "MOPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "UF10",
+      "competitor": "MMOPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "UF10",
+      "competitor": "NMPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "UF10",
+      "competitor": "SMPSO",
+      "verdict": "-"
+     },
+     {
+      "label": "UF10",
+      "competitor": "MOPSOCD",
+      "verdict": "-"
+     },
+     {
+      "label": "UF10",
+      "competitor": "MOPSO",
+      "verdict": "≈"
+     },
+     {
+      "label": "DTLZ1",
+      "competitor": "MMOPSO",
+      "verdict": "+"
+     },
+     {
+      "label": "DTLZ1",
+      "competitor": "NMPSO",
+      "verdict": "+"
+     },
+     {
+      "label": "DTLZ1",
+      "competitor": "SMPSO",
+      "verdict": "+"
+     },
+     {
+      "label": "DTLZ1",
+      "competitor": "MOPSOCD",
+      "verdict": "-"
+     },
+     {
+      "label": "DTLZ1",
+      "competitor": "MOPSO",
+      "verdict": "≈"
+     }
+    ],
+    "note": "Truncated entries at 80"
+   }
+  ],
+  "note": "The symbols are appended to the Std values."
+ },
+ {
+  "id": "0930",
+  "paper": "67873752ac75de00",
+  "page": 24,
+  "results_tables": [
+   {
+    "caption_start": "Table 10. The comparison of average",
+    "has_bold": "y",
+    "groups": [
+     {
+      "label": "Lymphoma NB 10",
+      "direction": "lower",
+      "winner_name": "MI",
+      "winner_mean": "4.695e-04",
+      "runner_name": "ReliefF",
+      "runner_mean": "9.218e-03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Lymphoma NB 20",
+      "direction": "lower",
+      "winner_name": "MI",
+      "winner_mean": "2.448e-03",
+      "runner_name": "ReliefF",
+      "runner_mean": "6.839e-03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Lymphoma KNN 10",
+      "direction": "lower",
+      "winner_name": "Chi-square",
+      "winner_mean": "4.424e-02",
+      "runner_name": "ReliefF",
+      "runner_mean": "4.428e-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Lymphoma KNN 20",
+      "direction": "lower",
+      "winner_name": "ReliefF",
+      "winner_mean": "4.414e-02",
+      "runner_name": "MI",
+      "runner_mean": "4.415e-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "GLIOMA NB 10",
+      "direction": "lower",
+      "winner_name": "Chi-square",
+      "winner_mean": "4.005e-02",
+      "runner_name": "MI",
+      "runner_mean": "7.174e-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "GLIOMA NB 20",
+      "direction": "lower",
+      "winner_name": "Decision Tree",
+      "winner_mean": "5.965e-02",
+      "runner_name": "Chi-square",
+      "runner_mean": "6.272e-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "GLIOMA KNN 10",
+      "direction": "lower",
+      "winner_name": "Chi-square",
+      "winner_mean": "8.095e-03",
+      "runner_name": "Decision Tree",
+      "runner_mean": "2.406e-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "GLIOMA KNN 20",
+      "direction": "lower",
+      "winner_name": "MI",
+      "winner_mean": "1.990e-02",
+      "runner_name": "Chi-square",
+      "runner_mean": "2.277e-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "TOX 171 NB 10",
+      "direction": "lower",
+      "winner_name": "Chi-square",
+      "winner_mean": "6.287e-02",
+      "runner_name": "MI",
+      "runner_mean": "6.847e-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "TOX 171 NB 20",
+      "direction": "lower",
+      "winner_name": "ReliefF",
+      "winner_mean": "3.599e-02",
+      "runner_name": "Chi-square",
+      "runner_mean": "4.080e-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "TOX 171 KNN 10",
+      "direction": "lower",
+      "winner_name": "MI",
+      "winner_mean": "4.921e-02",
+      "runner_name": "ReliefF",
+      "runner_mean": "5.156e-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "TOX 171 KNN 20",
+      "direction": "lower",
+      "winner_name": "MI",
+      "winner_mean": "4.972e-02",
+      "runner_name": "Chi-square",
+      "runner_mean": "5.961e-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Brain Tumor 1 NB 10",
+      "direction": "lower",
+      "winner_name": "Chi-square",
+      "winner_mean": "3.784e-02",
+      "runner_name": "MI",
+      "runner_mean": "4.012e-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Brain Tumor 1 NB 20",
+      "direction": "lower",
+      "winner_name": "Chi-square",
+      "winner_mean": "3.325e-02",
+      "runner_name": "MI",
+      "runner_mean": "3.987e-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Brain Tumor 1 KNN 10",
+      "direction": "lower",
+      "winner_name": "MI",
+      "winner_mean": "2.881e-02",
+      "runner_name": "ReliefF",
+      "runner_mean": "3.765e-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Brain Tumor 1 KNN 20",
+      "direction": "lower",
+      "winner_name": "MI",
+      "winner_mean": "2.432e-02",
+      "runner_name": "Chi-square",
+      "runner_mean": "3.940e-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Prostate GE NB 10",
+      "direction": "lower",
+      "winner_name": "MI",
+      "winner_mean": "1.598e-02",
+      "runner_name": "ReliefF",
+      "runner_mean": "1.600e-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Prostate GE NB 20",
+      "direction": "lower",
+      "winner_name": "ReliefF",
+      "winner_mean": "1.790e-02",
+      "runner_name": "Chi-square",
+      "runner_mean": "2.078e-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Prostate GE KNN 10",
+      "direction": "lower",
+      "winner_name": "MI",
+      "winner_mean": "9.864e-03",
+      "runner_name": "Chi-square",
+      "runner_mean": "1.696e-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Prostate GE KNN 20",
+      "direction": "lower",
+      "winner_name": "ReliefF",
+      "winner_mean": "1.196e-02",
+      "runner_name": "Chi-square",
+      "runner_mean": "1.492e-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "LFPF 1 NB 10",
+      "direction": "lower",
+      "winner_name": "Chi-square",
+      "winner_mean": "3.400e-02",
+      "runner_name": "ReliefF",
+      "runner_mean": "6.012e-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "LFPF 1 NB 20",
+      "direction": "lower",
+      "winner_name": "Chi-square",
+      "winner_mean": "4.848e-02",
+      "runner_name": "ReliefF",
+      "runner_mean": "5.923e-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "LFPF 1 KNN 10",
+      "direction": "lower",
+      "winner_name": "Chi-square",
+      "winner_mean": "3.753e-02",
+      "runner_name": "ReliefF",
+      "runner_mean": "6.920e-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "LFPF 1 KNN 20",
+      "direction": "lower",
+      "winner_name": "Chi-square",
+      "winner_mean": "5.805e-02",
+      "runner_name": "ReliefF",
+      "runner_mean": "8.870e-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "CNS NB 10",
+      "direction": "lower",
+      "winner_name": "Chi-square",
+      "winner_mean": "6.085e-02",
+      "runner_name": "ReliefF",
+      "runner_mean": "8.608e-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "CNS NB 20",
+      "direction": "lower",
+      "winner_name": "Chi-square",
+      "winner_mean": "6.000e-02",
+      "runner_name": "ReliefF",
+      "runner_mean": "9.915e-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "CNS KNN 10",
+      "direction": "lower",
+      "winner_name": "Chi-square",
+      "winner_mean": "1.342e-02",
+      "runner_name": "MI",
+      "runner_mean": "2.343e-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "CNS KNN 20",
+      "direction": "lower",
+      "winner_name": "Chi-square",
+      "winner_mean": "1.665e-02",
+      "runner_name": "MI",
+      "runner_mean": "2.983e-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Leukemia 2 NB 10",
+      "direction": "lower",
+      "winner_name": "Chi-square",
+      "winner_mean": "1.402e-04",
+      "runner_name": "MI",
+      "runner_mean": "1.433e-04",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Leukemia 2 NB 20",
+      "direction": "lower",
+      "winner_name": "Chi-square",
+      "winner_mean": "8.068e-05",
+      "runner_name": "MI",
+      "runner_mean": "8.279e-05",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Leukemia 2 KNN 10",
+      "direction": "lower",
+      "winner_name": "Chi-square",
+      "winner_mean": "9.735e-05",
+      "runner_name": "MI",
+      "runner_mean": "1.053e-04",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Leukemia 2 KNN 20",
+      "direction": "lower",
+      "winner_name": "Chi-square",
+      "winner_mean": "5.895e-05",
+      "runner_name": "ReliefF",
+      "runner_mean": "6.032e-05",
+      "verdict_here": "none"
+     },
+     {
+      "label": "CLL SUB 111 NB 10",
+      "direction": "lower",
+      "winner_name": "Chi-square",
+      "winner_mean": "4.769e-02",
+      "runner_name": "ReliefF",
+      "runner_mean": "5.344e-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "CLL SUB 111 NB 20",
+      "direction": "lower",
+      "winner_name": "Decision Tree",
+      "winner_mean": "3.917e-02",
+      "runner_name": "MI",
+      "runner_mean": "4.436e-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "CLL SUB 111 KNN 10",
+      "direction": "lower",
+      "winner_name": "ReliefF",
+      "winner_mean": "1.455e-02",
+      "runner_name": "MI",
+      "runner_mean": "2.498e-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "CLL SUB 111 KNN 20",
+      "direction": "lower",
+      "winner_name": "Chi-square",
+      "winner_mean": "3.100e-02",
+      "runner_name": "MI",
+      "runner_mean": "3.585e-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "MLL NB 10",
+      "direction": "lower",
+      "winner_name": "Chi-square",
+      "winner_mean": "6.198e-05",
+      "runner_name": "MI",
+      "runner_mean": "6.200e-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "MLL NB 20",
+      "direction": "lower",
+      "winner_name": "Chi-square",
+      "winner_mean": "3.398e-05",
+      "runner_name": "ReliefF",
+      "runner_mean": "3.734e-05",
+      "verdict_here": "none"
+     },
+     {
+      "label": "MLL KNN 10",
+      "direction": "lower",
+      "winner_name": "Chi-square",
+      "winner_mean": "5.164e-05",
+      "runner_name": "ReliefF",
+      "runner_mean": "5.245e-05",
+      "verdict_here": "none"
+     },
+     {
+      "label": "MLL KNN 20",
+      "direction": "lower",
+      "winner_name": "MI",
+      "winner_mean": "2.544e-05",
+      "runner_name": "ReliefF",
+      "runner_mean": "2.782e-05",
+      "verdict_here": "none"
+     }
+    ]
+   }
+  ],
+  "verdict_tables": [
+   {
+    "caption_start": "Table 10. The comparison of average",
+    "verdict_kind": "wtl_counts",
+    "compared_against": "HRO-GWO+",
+    "entries": [
+     {
+      "label": "Rank",
+      "competitor": "Decision Tree",
+      "verdict": "3/0/45"
+     },
+     {
+      "label": "Rank",
+      "competitor": "ReliefF",
+      "verdict": "6/1/41"
+     },
+     {
+      "label": "Rank",
+      "competitor": "MI",
+      "verdict": "13/0/35"
+     },
+     {
+      "label": "Rank",
+      "competitor": "Chi-square",
+      "verdict": "25/1/22"
+     }
+    ],
+    "note": "The w/t/l counts are at the bottom of the table."
+   }
+  ],
+  "note": "The table contains w/t/l counts at the bottom row."
+ },
+ {
+  "id": "2208",
+  "paper": "ec8ad2c48711b997",
+  "page": 10,
+  "results_tables": [
+   {
+    "caption_start": "Table 4. Mean and standard",
+    "has_bold": "y",
+    "groups": [
+     {
+      "label": "ZDT1",
+      "direction": "lower",
+      "winner_name": "Ar-RGDEMO",
+      "winner_mean": "2.94e-3",
+      "runner_name": "SPEAR",
+      "runner_mean": "3.27e-3",
+      "verdict_here": "none"
+     },
+     {
+      "label": "ZDT2",
+      "direction": "lower",
+      "winner_name": "Ar-RGDEMO",
+      "winner_mean": "2.64e-3",
+      "runner_name": "MOEAD-DYTS",
+      "runner_mean": "2.68e-3",
+      "verdict_here": "none"
+     },
+     {
+      "label": "ZDT3",
+      "direction": "lower",
+      "winner_name": "Ar-RGDEMO",
+      "winner_mean": "1.98e-3",
+      "runner_name": "SPEAR",
+      "runner_mean": "2.63e-3",
+      "verdict_here": "none"
+     },
+     {
+      "label": "ZDT4",
+      "direction": "lower",
+      "winner_name": "MOEAD-DYTS",
+      "winner_mean": "2.56e-3",
+      "runner_name": "MOEAD-FRRMAB",
+      "runner_mean": "2.74e-3",
+      "verdict_here": "+"
+     },
+     {
+      "label": "ZDT6",
+      "direction": "lower",
+      "winner_name": "MOEAD-DYTS",
+      "winner_mean": "2.08e-3",
+      "runner_name": "MOEAD-DE",
+      "runner_mean": "2.08e-3",
+      "verdict_here": "+"
+     },
+     {
+      "label": "UF1",
+      "direction": "lower",
+      "winner_name": "MOEAD-DYTS",
+      "winner_mean": "9.64e-3",
+      "runner_name": "MOEAD-FRRMAB",
+      "runner_mean": "1.61e-2",
+      "verdict_here": "+"
+     },
+     {
+      "label": "UF2",
+      "direction": "lower",
+      "winner_name": "Ar-RGDEMO",
+      "winner_mean": "1.46e-2",
+      "runner_name": "MOEAD-DYTS",
+      "runner_mean": "1.49e-2",
+      "verdict_here": "none"
+     },
+     {
+      "label": "UF3",
+      "direction": "lower",
+      "winner_name": "MOEAD-DYTS",
+      "winner_mean": "2.74e-2",
+      "runner_name": "MOEAD-FRRMAB",
+      "runner_mean": "2.90e-2",
+      "verdict_here": "+"
+     },
+     {
+      "label": "UF4",
+      "direction": "lower",
+      "winner_name": "Ar-RGDEMO",
+      "winner_mean": "4.33e-2",
+      "runner_name": "SPEAR",
+      "runner_mean": "4.65e-2",
+      "verdict_here": "none"
+     },
+     {
+      "label": "UF5",
+      "direction": "lower",
+      "winner_name": "Ar-RGDEMO",
+      "winner_mean": "2.51e-1",
+      "runner_name": "SPEAR",
+      "runner_mean": "2.81e-1",
+      "verdict_here": "none"
+     },
+     {
+      "label": "UF6",
+      "direction": "lower",
+      "winner_name": "Ar-RGDEMO",
+      "winner_mean": "1.16e-1",
+      "runner_name": "SPEAR",
+      "runner_mean": "1.33e-1",
+      "verdict_here": "none"
+     },
+     {
+      "label": "UF7",
+      "direction": "lower",
+      "winner_name": "MOEAD-PaS",
+      "winner_mean": "1.43e-2",
+      "runner_name": "MOEAD-FRRMAB",
+      "runner_mean": "2.89e-2",
+      "verdict_here": "+"
+     },
+     {
+      "label": "UF8",
+      "direction": "lower",
+      "winner_name": "Ar-RGDEMO",
+      "winner_mean": "1.51e-1",
+      "runner_name": "MOEAD-DE",
+      "runner_mean": "1.51e-1",
+      "verdict_here": "none"
+     },
+     {
+      "label": "UF9",
+      "direction": "lower",
+      "winner_name": "Ar-RGDEMO",
+      "winner_mean": "1.14e-1",
+      "runner_name": "MOEAD-DYTS",
+      "runner_mean": "2.16e-1",
+      "verdict_here": "none"
+     },
+     {
+      "label": "UF10",
+      "direction": "lower",
+      "winner_name": "SPEAR",
+      "winner_mean": "3.39e-1",
+      "runner_name": "RPEA",
+      "runner_mean": "3.90e-1",
+      "verdict_here": "+"
+     },
+     {
+      "label": "IMOP1",
+      "direction": "lower",
+      "winner_name": "Ar-RGDEMO",
+      "winner_mean": "3.93e-4",
+      "runner_name": "SPEAR",
+      "runner_mean": "1.85e-3",
+      "verdict_here": "none"
+     },
+     {
+      "label": "IMOP2",
+      "direction": "lower",
+      "winner_name": "Ar-RGDEMO",
+      "winner_mean": "1.19e-3",
+      "runner_name": "SPEAR",
+      "runner_mean": "1.37e-3",
+      "verdict_here": "none"
+     },
+     {
+      "label": "IMOP3",
+      "direction": "lower",
+      "winner_name": "SPEAR",
+      "winner_mean": "2.16e-3",
+      "runner_name": "MOEAD-DE",
+      "runner_mean": "3.16e-3",
+      "verdict_here": "+"
+     },
+     {
+      "label": "IMOP4",
+      "direction": "lower",
+      "winner_name": "Ar-RGDEMO",
+      "winner_mean": "5.54e-3",
+      "runner_name": "RPEA",
+      "runner_mean": "7.84e-3",
+      "verdict_here": "none"
+     },
+     {
+      "label": "IMOP5",
+      "direction": "lower",
+      "winner_name": "SPEAR",
+      "winner_mean": "3.53e-2",
+      "runner_name": "RPEA",
+      "runner_mean": "3.98e-2",
+      "verdict_here": "+"
+     },
+     {
+      "label": "IMOP6",
+      "direction": "lower",
+      "winner_name": "SPEAR",
+      "winner_mean": "2.87e-2",
+      "runner_name": "MOEAD-DE",
+      "runner_mean": "3.24e-2",
+      "verdict_here": "+"
+     },
+     {
+      "label": "IMOP7",
+      "direction": "lower",
+      "winner_name": "SPEAR",
+      "winner_mean": "2.10e-2",
+      "runner_name": "MOEAD-DE",
+      "runner_mean": "2.60e-2",
+      "verdict_here": "+"
+     },
+     {
+      "label": "IMOP8",
+      "direction": "lower",
+      "winner_name": "Ar-RGDEMO",
+      "winner_mean": "2.49e-2",
+      "runner_name": "MOEAD-PaS",
+      "runner_mean": "4.43e-2",
+      "verdict_here": "none"
+     }
+    ]
+   }
+  ],
+  "verdict_tables": [
+   {
+    "caption_start": "Table 4. Mean and standard",
+    "verdict_kind": "symbols",
+    "compared_against": "Ar-RGDEMO",
+    "entries": [
+     {
+      "label": "ZDT1",
+      "competitor": "MOEAD-DE",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT1",
+      "competitor": "MOEAD-FRRMAB",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT1",
+      "competitor": "MOEAD-DYTS",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT1",
+      "competitor": "MOEAD-PaS",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT1",
+      "competitor": "RPEA",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT1",
+      "competitor": "SPEAR",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT1",
+      "competitor": "MaOEA-IGD",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT2",
+      "competitor": "MOEAD-DE",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT2",
+      "competitor": "MOEAD-FRRMAB",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT2",
+      "competitor": "MOEAD-DYTS",
+      "verdict": "≈"
+     },
+     {
+      "label": "ZDT2",
+      "competitor": "MOEAD-PaS",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT2",
+      "competitor": "RPEA",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT2",
+      "competitor": "SPEAR",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT2",
+      "competitor": "MaOEA-IGD",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT3",
+      "competitor": "MOEAD-DE",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT3",
+      "competitor": "MOEAD-FRRMAB",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT3",
+      "competitor": "MOEAD-DYTS",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT3",
+      "competitor": "MOEAD-PaS",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT3",
+      "competitor": "RPEA",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT3",
+      "competitor": "SPEAR",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT3",
+      "competitor": "MaOEA-IGD",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT4",
+      "competitor": "MOEAD-DE",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT4",
+      "competitor": "MOEAD-FRRMAB",
+      "verdict": "+"
+     },
+     {
+      "label": "ZDT4",
+      "competitor": "MOEAD-DYTS",
+      "verdict": "+"
+     },
+     {
+      "label": "ZDT4",
+      "competitor": "MOEAD-PaS",
+      "verdict": "+"
+     },
+     {
+      "label": "ZDT4",
+      "competitor": "RPEA",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT4",
+      "competitor": "SPEAR",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT4",
+      "competitor": "MaOEA-IGD",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT6",
+      "competitor": "MOEAD-DE",
+      "verdict": "+"
+     },
+     {
+      "label": "ZDT6",
+      "competitor": "MOEAD-FRRMAB",
+      "verdict": "+"
+     },
+     {
+      "label": "ZDT6",
+      "competitor": "MOEAD-DYTS",
+      "verdict": "+"
+     },
+     {
+      "label": "ZDT6",
+      "competitor": "MOEAD-PaS",
+      "verdict": "+"
+     },
+     {
+      "label": "ZDT6",
+      "competitor": "RPEA",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT6",
+      "competitor": "SPEAR",
+      "verdict": "-"
+     },
+     {
+      "label": "ZDT6",
+      "competitor": "MaOEA-IGD",
+      "verdict": "-"
+     },
+     {
+      "label": "UF1",
+      "competitor": "MOEAD-DE",
+      "verdict": "+"
+     },
+     {
+      "label": "UF1",
+      "competitor": "MOEAD-FRRMAB",
+      "verdict": "+"
+     },
+     {
+      "label": "UF1",
+      "competitor": "MOEAD-DYTS",
+      "verdict": "+"
+     },
+     {
+      "label": "UF1",
+      "competitor": "MOEAD-PaS",
+      "verdict": "+"
+     },
+     {
+      "label": "UF1",
+      "competitor": "RPEA",
+      "verdict": "-"
+     },
+     {
+      "label": "UF1",
+      "competitor": "SPEAR",
+      "verdict": "-"
+     },
+     {
+      "label": "UF1",
+      "competitor": "MaOEA-IGD",
+      "verdict": "-"
+     },
+     {
+      "label": "UF2",
+      "competitor": "MOEAD-DE",
+      "verdict": "-"
+     },
+     {
+      "label": "UF2",
+      "competitor": "MOEAD-FRRMAB",
+      "verdict": "-"
+     },
+     {
+      "label": "UF2",
+      "competitor": "MOEAD-DYTS",
+      "verdict": "≈"
+     },
+     {
+      "label": "UF2",
+      "competitor": "MOEAD-PaS",
+      "verdict": "-"
+     },
+     {
+      "label": "UF2",
+      "competitor": "RPEA",
+      "verdict": "-"
+     },
+     {
+      "label": "UF2",
+      "competitor": "SPEAR",
+      "verdict": "-"
+     },
+     {
+      "label": "UF2",
+      "competitor": "MaOEA-IGD",
+      "verdict": "-"
+     },
+     {
+      "label": "UF3",
+      "competitor": "MOEAD-DE",
+      "verdict": "≈"
+     },
+     {
+      "label": "UF3",
+      "competitor": "MOEAD-FRRMAB",
+      "verdict": "+"
+     },
+     {
+      "label": "UF3",
+      "competitor": "MOEAD-DYTS",
+      "verdict": "+"
+     },
+     {
+      "label": "UF3",
+      "competitor": "MOEAD-PaS",
+      "verdict": "+"
+     },
+     {
+      "label": "UF3",
+      "competitor": "RPEA",
+      "verdict": "-"
+     },
+     {
+      "label": "UF3",
+      "competitor": "SPEAR",
+      "verdict": "-"
+     },
+     {
+      "label": "UF3",
+      "competitor": "MaOEA-IGD",
+      "verdict": "-"
+     },
+     {
+      "label": "UF4",
+      "competitor": "MOEAD-DE",
+      "verdict": "-"
+     },
+     {
+      "label": "UF4",
+      "competitor": "MOEAD-FRRMAB",
+      "verdict": "-"
+     },
+     {
+      "label": "UF4",
+      "competitor": "MOEAD-DYTS",
+      "verdict": "-"
+     },
+     {
+      "label": "UF4",
+      "competitor": "MOEAD-PaS",
+      "verdict": "-"
+     },
+     {
+      "label": "UF4",
+      "competitor": "RPEA",
+      "verdict": "-"
+     },
+     {
+      "label": "UF4",
+      "competitor": "SPEAR",
+      "verdict": "-"
+     },
+     {
+      "label": "UF4",
+      "competitor": "MaOEA-IGD",
+      "verdict": "-"
+     },
+     {
+      "label": "UF5",
+      "competitor": "MOEAD-DE",
+      "verdict": "-"
+     },
+     {
+      "label": "UF5",
+      "competitor": "MOEAD-FRRMAB",
+      "verdict": "-"
+     },
+     {
+      "label": "UF5",
+      "competitor": "MOEAD-DYTS",
+      "verdict": "-"
+     },
+     {
+      "label": "UF5",
+      "competitor": "MOEAD-PaS",
+      "verdict": "-"
+     },
+     {
+      "label": "UF5",
+      "competitor": "RPEA",
+      "verdict": "≈"
+     },
+     {
+      "label": "UF5",
+      "competitor": "SPEAR",
+      "verdict": "≈"
+     },
+     {
+      "label": "UF5",
+      "competitor": "MaOEA-IGD",
+      "verdict": "+"
+     },
+     {
+      "label": "UF6",
+      "competitor": "MOEAD-DE",
+      "verdict": "-"
+     },
+     {
+      "label": "UF6",
+      "competitor": "MOEAD-FRRMAB",
+      "verdict": "-"
+     },
+     {
+      "label": "UF6",
+      "competitor": "MOEAD-DYTS",
+      "verdict": "-"
+     },
+     {
+      "label": "UF6",
+      "competitor": "MOEAD-PaS",
+      "verdict": "-"
+     },
+     {
+      "label": "UF6",
+      "competitor": "RPEA",
+      "verdict": "-"
+     },
+     {
+      "label": "UF6",
+      "competitor": "SPEAR",
+      "verdict": "≈"
+     },
+     {
+      "label": "UF6",
+      "competitor": "MaOEA-IGD",
+      "verdict": "+"
+     }
+    ],
+    "note": "truncated entries"
+   }
+  ],
+  "note": ""
+ }
+]

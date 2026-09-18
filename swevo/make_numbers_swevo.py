@@ -478,8 +478,8 @@ def build(out_path: str) -> dict:
         reg.add("vc printed not significant", _pct(vc["printed_not_significant_among_located"]) if vc["printed_not_significant_among_located"] is not None else "--", provenance=vrun)
         for k, v in vc["crosstab"].items():
             reg.add("vc " + k.replace("_", " "), v, provenance=vrun)
-        for k, v in vc["status"].items():
-            reg.add("vc status " + k.replace("_", " "), v, provenance=vrun)
+        for k in sorted(set(vc["status"]) | {"located", "verdict_not_printed", "group_not_matched", "page_not_read"}):
+            reg.add("vc status " + k.replace("_", " "), vc["status"].get(k, 0), provenance=vrun)
         for k in ("same_page", "verdict_table", "verdict_table_winner_named"):
             reg.add("vc source " + k.replace("_", " "), vc["source"].get(k, 0), provenance=vrun)
 
