@@ -242,6 +242,49 @@ def test_reader_blocks(cs: list, kinds: dict) -> dict:
     return out
 
 
+def test_reader_agreement(second_path: str = "out/swevo/test_reader_second.json") -> dict:
+    """Field-by-field agreement between the first full-text reader and a
+    second vendor's model on the papers both read."""
+    import glob
+    if not os.path.exists(second_path):
+        return {}
+    first = {}
+    for path in sorted(glob.glob(f"{OUT}/test_reader_part*.json")):
+        first.update(json.load(open(path, encoding="utf-8")))
+    second = json.load(open(second_path, encoding="utf-8"))
+    both = [p for p in second if p in first and "parse_error" not in first[p] and "parse_error" not in second[p]]
+    def bold(v):
+        b = str(v.get("bold_rule") or "not stated").lower()
+        return "statistically_best" if ("statistic" in b or "signific" in b) else "best" if any(w in b for w in ("best", "optimal", "lowest", "highest")) else "not_stated"
+    def named(v):
+        return any(t != "none" for t in (v.get("test") or []))
+    def layout(v):
+        x = str(v.get("std_layout") or "unsure")
+        return "off_cell" if x.startswith("separate") else x
+    fields = {
+        "runs": [(first[p].get("runs"), second[p].get("runs")) for p in both],
+        "runs_stated": [(first[p].get("runs") is not None, second[p].get("runs") is not None) for p in both],
+        "test_named": [(named(first[p]), named(second[p])) for p in both],
+        "markers": [(str(first[p].get("markers", "")).lower().startswith("y"), str(second[p].get("markers", "")).lower().startswith("y")) for p in both],
+        "bold_rule": [(bold(first[p]), bold(second[p])) for p in both],
+        "std_layout": [(layout(first[p]), layout(second[p])) for p in both],
+        "paired": [(str(first[p].get("paired") or "unsure"), str(second[p].get("paired") or "unsure")) for p in both],
+    }
+    out = {"papers": len(both)}
+    for k, pairs in fields.items():
+        hit = sum(1 for a, b in pairs if a == b)
+        out[k] = {"n": len(pairs), "agree": hit, "pct": round(100 * hit / max(len(pairs), 1), 1),
+                  "ci": [round(100 * x, 1) for x in wilson_interval(hit, len(pairs))] if pairs else None}
+    # the second reader's rates on the same papers, beside the first's
+    for name, rd in (("first", first), ("second", second)):
+        v = [rd[p] for p in both]
+        out[f"{name}_pct_runs_stated"] = round(100 * sum(1 for x in v if x.get("runs") is not None) / max(len(v), 1), 1)
+        out[f"{name}_pct_test_named"] = round(100 * sum(1 for x in v if named(x)) / max(len(v), 1), 1)
+        out[f"{name}_pct_markers"] = round(100 * sum(1 for x in v if str(x.get("markers", "")).lower().startswith("y")) / max(len(v), 1), 1)
+        out[f"{name}_pct_bold_not_stated"] = round(100 * sum(1 for x in v if bold(x) == "not_stated") / max(len(v), 1), 1)
+    return out
+
+
 def arxiv_check(path: str = "data/extracted_arxiv_csne.jsonl") -> dict:
     """The parser on a second, LaTeX-set corpus: every arXiv cs.NE preprint of
     2025 the API listed, and the subset whose title matches the phrase list
@@ -532,6 +575,7 @@ def main() -> int:
         "scan_run_count": scan_run_count_reading(cs, scan) if scan else {},
         "test_reader": test_reader_blocks(cs, kinds),
         "arxiv": arxiv_check(),
+        "test_reader_agreement": test_reader_agreement(),
         "headline_span": extra_stats.headline_span(cs, records),
         "span_rows": (lambda hs: {"lo": min(hs["rows"][k]["pct_fail"] for k in ("as_reported", "z_two_sided", "one_sided", "rho_0.5", "rho_0.9") if k in hs["rows"]),
                                   "hi": max(hs["rows"][k]["pct_fail"] for k in ("as_reported", "z_two_sided", "one_sided", "rho_0.5", "rho_0.9") if k in hs["rows"]),

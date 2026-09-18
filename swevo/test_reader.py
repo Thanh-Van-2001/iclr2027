@@ -96,6 +96,7 @@ def main(argv=None):
         except Exception:  # noqa: BLE001
             d = {"parse_error": raw[:300]}
         d["title"] = r["title"]
+        d["model"] = os.environ.get("RELAY_MODEL", "gemini/gemini-3.1-pro-preview")
         d["in_testable_set"] = (pid in tset) if not args.papers else None
         done[pid] = d
         json.dump(done, open(args.out, "w", encoding="utf-8"), indent=1, ensure_ascii=False)

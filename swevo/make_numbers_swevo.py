@@ -252,6 +252,17 @@ def build(out_path: str) -> dict:
             reg.add(f"ka st {k.replace('_', ' ')} test", _pct(d["pct_test_named"]), provenance=run)
         reg.add("ka metaphor none disagreements", ka2["metaphor_none_disagreements"], provenance=run)
 
+    ta = ex.get("test_reader_agreement", {})
+    if ta:
+        reg.add("ta papers", ta["papers"], provenance=run)
+        for k in ("runs", "runs_stated", "test_named", "markers", "bold_rule", "std_layout", "paired"):
+            reg.add(f"ta {k.replace('_', ' ')} frac", f"{ta[k]['agree']} of {ta[k]['n']}", provenance=run)
+            reg.add(f"ta {k.replace('_', ' ')} pct", _pct(ta[k]["pct"]), provenance=run)
+            reg.add(f"ta {k.replace('_', ' ')} ci", f"[{ta[k]['ci'][0]}, {ta[k]['ci'][1]}]" if ta[k]["ci"] else "--", provenance=run)
+        for k, v in ta.items():
+            if k.startswith(("first_", "second_")):
+                reg.add("ta " + k.replace("_", " "), _pct(v), provenance=run)
+
     cc = ex.get("cites", {})
     if cc:
         names = {"derrac2011": "derrac", "garcia2009": "garcia nine", "garcia2010": "garcia ten", "sorensen2015": "sorensen",
