@@ -81,6 +81,7 @@ def row_bold_readings(cs: list, records: list) -> dict:
     return {"header_row_only": _rates(header), "without_header_row": _rates(keep_h),
             "row_bold_only": _rates(rowbold), "without_row_bold": _rates(keep_r),
             "header_row_papers": len({c["paper"] for c in header}),
+            "non_header_row_bold_papers": len({c["paper"] for c in rowbold if not c.get("_header_row")}),
             "row_bold_papers": len({c["paper"] for c in rowbold}),
             "papers_all_row_bold": sum(1 for p in {c["paper"] for c in cs}
                                        if all(c.get("_row_bold") for c in cs if c["paper"] == p))}
@@ -300,6 +301,20 @@ def test_reader_agreement(second_path: str = "out/swevo/test_reader_second.json"
         hit = sum(1 for a, b in pairs if a == b)
         out[k] = {"n": len(pairs), "agree": hit, "pct": round(100 * hit / max(len(pairs), 1), 1),
                   "ci": [round(100 * x, 1) for x in wilson_interval(hit, len(pairs))] if pairs else None}
+    # the per-cell-verdict field, with the direction of every disagreement, on all double-read papers and on the new-optimizer ones
+    kinds = {}
+    if os.path.exists(f"{OUT}/kinds_merged.csv"):
+        import csv as _csv
+        kinds = {r["id"]: r["label"] for r in _csv.DictReader(open(f"{OUT}/kinds_merged.csv", encoding="utf-8", newline=""))}
+    for lab, ids in (("all", both), ("new_optimizer", [p for p in both if kinds.get(p) == "new_optimizer"])):
+        fy = [str(first[p].get("markers", "")).lower().startswith("y") for p in ids]
+        sy = [str(second[p].get("markers", "")).lower().startswith("y") for p in ids]
+        out[f"markers_{lab}"] = {"n": len(ids), "first_yes": sum(fy), "second_yes": sum(sy),
+                                 "first_pct": round(100 * sum(fy) / max(len(ids), 1), 1), "second_pct": round(100 * sum(sy) / max(len(ids), 1), 1),
+                                 "first_no_second_yes": sum(1 for a, b in zip(fy, sy) if not a and b),
+                                 "first_yes_second_no": sum(1 for a, b in zip(fy, sy) if a and not b),
+                                 "agree": sum(1 for a, b in zip(fy, sy) if a == b),
+                                 "disputed_ids": [p for p, a, b in zip(ids, fy, sy) if a != b]}
     # the second reader's rates on the same papers, beside the first's
     for name, rd in (("first", first), ("second", second)):
         v = [rd[p] for p in both]
@@ -429,8 +444,12 @@ def bold_note(scan: dict, kinds: dict) -> dict:
     for lab in ("new_optimizer", "application", "all"):
         ids = [p for p, v in scan.items() if "error" not in v and (lab == "all" or kinds.get(p) == lab)]
         n = len(ids)
-        k = sum(1 for p in ids if scan[p].get("bold_note"))
-        out[lab] = {"papers": n, "with_note": k, "pct": round(100 * k / max(n, 1), 1)}
+        noted = [p for p in ids if scan[p].get("bold_note")]
+        k = len(noted)
+        out[lab] = {"papers": n, "with_note": k, "pct": round(100 * k / max(n, 1), 1),
+                    "note_no_test_named": sum(1 for p in noted if not scan[p].get("any_test")),
+                    "note_no_runs_stated": sum(1 for p in noted if not scan[p].get("run_modal")),
+                    "note_neither": sum(1 for p in noted if not scan[p].get("any_test") and not scan[p].get("run_modal"))}
     return out
 
 

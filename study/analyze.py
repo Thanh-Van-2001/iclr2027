@@ -360,6 +360,9 @@ def p_value(gap: float, se_w: float, se_r: float, n, rho: float = 0.0) -> Option
         top = max(se_w ** 2, se_r ** 2)
         a, b = se_w ** 2 / top, se_r ** 2 / top
         df = (a + b) ** 2 / ((a ** 2 + b ** 2) / (n - 1))
+        if rho:
+            # a paired reading is a one-sample t on the differences: n - 1 degrees of freedom
+            df = n - 1
         out["df"] = df
         out["p_t"] = 2 * (1 - t_cdf(abs(z), df))
         out["p"] = out["p_t"]

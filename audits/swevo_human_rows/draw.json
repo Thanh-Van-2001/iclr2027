@@ -6,11 +6,16 @@
  "pool_unchanged": 207,
  "drawn": 100,
  "strata": {
-  "barred": 50,
-  "barless": 50
+  "barred": 54,
+  "barless": 46
  },
  "kinds": {
   "new_optimizer": 97,
   "application": 3
- }
+ },
+ "strata_at_draw": {
+  "barred": 50,
+  "barless": 50
+ },
+ "restrata_changed": 4
 }

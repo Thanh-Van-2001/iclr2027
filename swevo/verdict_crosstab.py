@@ -228,6 +228,10 @@ def main() -> int:
            "papers_located": len(by_paper),
            "largest_paper_located": max((v[0] for v in by_paper.values()), default=0),
            "pct_largest_paper": round(100 * max((v[0] for v in by_paper.values()), default=0) / n, 1) if n else None,
+           # of the located Welch failures, how many carry a printed significant verdict, and where they sit
+           "welch_fail_located": sum(1 for r in located if r["fail"]),
+           "welch_fail_printed_significant_top_three": (lambda big3: sum(1 for r in located if r["fail"] and r["verdict_class"] != "not_significant" and r["paper"] in big3))(
+               set(sorted(by_paper, key=lambda k: -by_paper[k][0])[:3])),
            "agree_without_top_three": (lambda big3: {"n": n - sum(by_paper[b][0] for b in big3), "agree": agree - sum(by_paper[b][1] for b in big3),
                                                       "papers": len(by_paper) - len(big3),
                                                       "pct": round(100 * (agree - sum(by_paper[b][1] for b in big3)) / max(n - sum(by_paper[b][0] for b in big3), 1), 1)})(

@@ -156,6 +156,10 @@ def build(out_path: str) -> dict:
         reg.add("sr fail", _pct(sr["pct_fail"]) if sr["pct_fail"] is not None else "--", provenance=run)
         reg.add("sr fail ci", f"[{sr['ci_fail'][0]}, {sr['ci_fail'][1]}]" if sr.get("ci_fail") else "--", provenance=run)
 
+    trb = ex.get("test_reader", {})
+    if all(k in trb for k in ("all", "testable", "new_optimizer", "random_other")):
+        # the three draws overlap: the parser-testable papers that are also new-optimizer or random-rest papers
+        reg.add("tr overlap", trb["testable"]["papers"] + trb["new_optimizer"]["papers"] + trb["random_other"]["papers"] - trb["all"]["papers"], provenance=run)
     for name, d in ex.get("test_reader", {}).items():
         if name == "note":
             for k, v in d.items():
@@ -245,6 +249,8 @@ def build(out_path: str) -> dict:
         reg.add(f"{k} papers", d["papers"], provenance=run)
         reg.add(f"{k} with note", d["with_note"], provenance=run)
         reg.add(f"{k} pct", _pct(d["pct"]), provenance=run)
+        for f in ("note_no_test_named", "note_no_runs_stated", "note_neither"):
+            reg.add(f"{k} {f.replace('_', ' ')}", d.get(f, 0), provenance=run)
     ka2 = ex.get("kind_agreement", {})
     if ka2.get("direction"):
         for k, v in ka2["direction"].items():
@@ -267,6 +273,9 @@ def build(out_path: str) -> dict:
         reg.add("fa mdpi attempts", sum(fa[j]["attempts"] for j in mdpi), provenance=run)
         reg.add("fa mdpi pdf ok", sum(fa[j]["pdf_ok"] for j in mdpi), provenance=run)
         reg.add("fa mdpi listed", sum(fa[j]["listed"] for j in mdpi), provenance=run)
+        # the two listed journals Europe PMC mirrors (Biomimetics, PeerJ Computer Science)
+        mirrored = [j for j in fa if j in ("Biomimetics", "PeerJ Computer Science")]
+        reg.add("fa mirrored listed", sum(fa[j]["listed"] for j in mirrored), provenance=run)
 
     ta = ex.get("test_reader_agreement", {})
     if ta:
@@ -278,6 +287,15 @@ def build(out_path: str) -> dict:
         for k, v in ta.items():
             if k.startswith(("first_", "second_")):
                 reg.add("ta " + k.replace("_", " "), _pct(v), provenance=run)
+        for lab in ("all", "new_optimizer"):
+            m = ta.get(f"markers_{lab}") or {}
+            if not m:
+                continue
+            k = "ta markers " + lab.replace("_", " ")
+            for f in ("n", "first_yes", "second_yes", "first_no_second_yes", "first_yes_second_no", "agree"):
+                reg.add(f"{k} {f.replace('_', ' ')}", m[f], provenance=run)
+            reg.add(f"{k} first pct", _pct(m["first_pct"]), provenance=run)
+            reg.add(f"{k} second pct", _pct(m["second_pct"]), provenance=run)
 
     cc = ex.get("cites", {})
     if cc:
@@ -325,6 +343,7 @@ def build(out_path: str) -> dict:
         _rates_block(reg, "rb " + key, rb[key.replace(" ", "_")], run)
     reg.add("rb header row papers", rb["header_row_papers"], provenance=run)
     reg.add("rb row bold papers", rb["row_bold_papers"], provenance=run)
+    reg.add("rb non header row bold papers", rb.get("non_header_row_bold_papers", 0), provenance=run)
     reg.add("rb papers all row bold", rb["papers_all_row_bold"], provenance=run)
     co = ex["corpus"]
     reg.add("o journals listed", co["journals_listed"], provenance=run)
@@ -485,6 +504,14 @@ def build(out_path: str) -> dict:
                 reg.add("ag " + k.replace("_", " ") + " frac", f"{v.get('agree', v.get('correct'))} of {v['n']}", provenance="swevo_reader_agreement")
                 reg.add("ag " + k.replace("_", " ") + " pct", _pct(v["pct"]) if v.get("pct") is not None else "--", provenance="swevo_reader_agreement")
 
+    for kit, tag in (("audits/swevo_human", "hmk"), ("audits/swevo_human_rows", "hrk")):
+        dpath = f"{kit}/draw.json"
+        if os.path.exists(dpath):
+            dj = json.load(open(dpath, encoding="utf-8"))
+            for k, v in (dj.get("strata") or {}).items():
+                reg.add(f"{tag} {k}", v, provenance="swevo_" + tag)
+            reg.add(f"{tag} restrata changed", dj.get("restrata_changed", 0), provenance="swevo_" + tag)
+            reg.add(f"{tag} drawn", dj.get("drawn", dj.get("n", 0)), provenance="swevo_" + tag)
     for tag, path in (("hm", "human_separate"), ("hr", "human_rows"), ("hms", "human_separate_claude-sonnet-5"), ("hrs", "human_rows_claude-sonnet-5")):
         if not os.path.exists(f"out/swevo/{path}.json"):
             continue
@@ -492,6 +519,9 @@ def build(out_path: str) -> dict:
         hrun = "swevo_" + path.replace("-", "_")
         reg.add(f"{tag} labelled", h["labelled"], provenance=hrun)
         reg.add(f"{tag} pages", h["pages"], provenance=hrun)
+        wr = h.get("whole_row_bold") or {}
+        reg.add(f"{tag} whole row bold frac", f"{wr.get('correct', 0)} of {wr.get('n', 0)}", provenance=hrun)
+        reg.add(f"{tag} whole row bold pct", _pct(wr["pct"]) if wr.get("pct") is not None else "--", provenance=hrun)
         for k in ("results_table", "bold_ok", "claim", "verdict_flips"):
             d = h[k]
             reg.add(f"{tag} {k.replace('_', ' ')} frac", f"{d['correct']} of {d['n']}", provenance=hrun)
@@ -527,6 +557,10 @@ def build(out_path: str) -> dict:
             reg.add("vc " + k.replace("_", " "), v, provenance=vrun)
         reg.add("vc ci agree papers", f"[{vc['ci_agree_papers'][0]}, {vc['ci_agree_papers'][1]}]" if vc.get("ci_agree_papers") else "--", provenance=vrun)
         reg.add("vc welch fail not located", _pct(vc["welch_fail_not_located"]) if vc.get("welch_fail_not_located") is not None else "--", provenance=vrun)
+        reg.add("vc welch fail located", vc.get("welch_fail_located", 0), provenance=vrun)
+        reg.add("vc welch fail printed significant top three", vc.get("welch_fail_printed_significant_top_three", 0), provenance=vrun)
+        reg.add("vc welch fail printed significant rest", vc["crosstab"]["welch_fail_printed_significant"] - vc.get("welch_fail_printed_significant_top_three", 0), provenance=vrun)
+        reg.add("vc welch fail printed significant pct of fails", _pct(round(100 * vc["crosstab"]["welch_fail_printed_significant"] / max(vc.get("welch_fail_located", 1), 1), 1)), provenance=vrun)
         reg.add("vc not located", vc.get("not_located", 0), provenance=vrun)
         reg.add("vc conflicting keys papers", vc.get("conflicting_keys_papers", 0), provenance=vrun)
         for k in ("beside_group", "same_page_table"):
@@ -619,19 +653,31 @@ def build(out_path: str) -> dict:
             reg.add(f"{prefix} groups", d["groups"], provenance=prov)
             reg.add(f"{prefix} papers", d["papers"], provenance=prov)
             reg.add(f"{prefix} neither", _pct(d["pct_neither"]) if d["pct_neither"] is not None else "--", provenance=prov)
-            reg.add(f"{prefix} neither ci", f"[{d['ci_neither'][0]}, {d['ci_neither'][1]}]" if d.get("ci_neither") and d["papers"] >= 10 else "--", provenance=prov)
+            eff = d.get("effective_papers") or 0
+            teff = d.get("tested_effective_papers") or 0
+            reg.add(f"{prefix} effective", f"{eff:.1f}" if eff else "--", provenance=prov)
+            reg.add(f"{prefix} neither ci", f"[{d['ci_neither'][0]}, {d['ci_neither'][1]}]" if d.get("ci_neither") and d["papers"] >= 10 and eff >= 8 else "--", provenance=prov)
             reg.add(f"{prefix} one side", _pct(d["pct_one_side"]) if d.get("pct_one_side") is not None else "--", provenance=prov)
             reg.add(f"{prefix} testable", _pct(d["pct_testable"]) if d["pct_testable"] is not None else "--", provenance=prov)
-            reg.add(f"{prefix} testable ci", f"[{d['ci_testable'][0]}, {d['ci_testable'][1]}]" if d.get("ci_testable") and d["papers"] >= 10 else "--", provenance=prov)
+            reg.add(f"{prefix} testable ci", f"[{d['ci_testable'][0]}, {d['ci_testable'][1]}]" if d.get("ci_testable") and d["papers"] >= 10 and eff >= 8 else "--", provenance=prov)
             reg.add(f"{prefix} testable n", d.get("testable_n", 0), provenance=prov)
             reg.add(f"{prefix} tested", d["tested"], provenance=prov)
             reg.add(f"{prefix} tested papers", d["tested_papers"], provenance=prov)
             reg.add(f"{prefix} tested effective", f"{d['tested_effective_papers']:.1f}" if d.get("tested_effective_papers") else "--", provenance=prov)
             reg.add(f"{prefix} fail", _pct(d["pct_fail"]) if d["pct_fail"] is not None else "--", provenance=prov)
-            reg.add(f"{prefix} fail ci", f"[{d['ci_fail'][0]}, {d['ci_fail'][1]}]" if d.get("ci_fail") and d["tested_papers"] >= 10 else "--", provenance=prov)
+            reg.add(f"{prefix} fail ci", f"[{d['ci_fail'][0]}, {d['ci_fail'][1]}]" if d.get("ci_fail") and d["tested_papers"] >= 10 and teff >= 8 else "--", provenance=prov)
             reg.add(f"{prefix} zero both", d.get("zero_both", 0), provenance=prov)
+            reg.add(f"{prefix} largest tested", d.get("largest_tested", 0), provenance=prov)
+            reg.add(f"{prefix} largest fail", _pct(d["largest_fail"]) if d.get("largest_fail") is not None else "--", provenance=prov)
+            reg.add(f"{prefix} without largest tested", d.get("without_largest_tested", 0), provenance=prov)
+            reg.add(f"{prefix} without largest fail", _pct(d["without_largest_fail"]) if d.get("without_largest_fail") is not None else "--", provenance=prov)
             reg.add(f"{prefix} unreadable", d.get("unreadable", 0), provenance=prov)
 
+        for tag, key in (("cr", "papers_pre"), ("crc", "papers_corrected")):
+            pk = cr.get(key) or {}
+            for lab in ("new_optimizer", "application"):
+                reg.add(f"{tag} papers with tables {lab.replace('_', ' ')}", pk.get("papers_with_results_tables", {}).get(lab, 0), provenance=rrun)
+                reg.add(f"{tag} papers with groups {lab.replace('_', ' ')}", pk.get("papers_with_single_bold_groups", {}).get(lab, 0), provenance=rrun)
         for tag, lay in (("cr", cr["layout"]), ("crc", cr["layout_corrected"])):
             reg.add(f"{tag} results tables", lay["results_tables"], provenance=rrun)
             reg.add(f"{tag} tables any bar", _pct(lay["pct_tables_any_bar"]), provenance=rrun)
@@ -672,7 +718,38 @@ def build(out_path: str) -> dict:
             reg.add(f"{tag} pp icc", f"{ic['icc']:.2f}" if ic.get("icc") is not None else "--", provenance=rrun)
             reg.add(f"{tag} pp design effect", f"{ic['design_effect']:.1f}" if ic.get("design_effect") is not None else "--", provenance=rrun)
             reg.add(f"{tag} pp effective groups", f"{ic['effective_groups']:.0f}" if ic.get("effective_groups") is not None else "--", provenance=rrun)
+            reg.add(f"{tag} pp design effect kish", f"{ic['design_effect_kish']:.1f}" if ic.get("design_effect_kish") is not None else "--", provenance=rrun)
+            reg.add(f"{tag} pp effective groups kish", f"{ic['effective_groups_kish']:.0f}" if ic.get("effective_groups_kish") is not None else "--", provenance=rrun)
+            reg.add(f"{tag} pp n star", f"{ic['n_star']:.1f}" if ic.get("n_star") is not None else "--", provenance=rrun)
+            reg.add(f"{tag} pp top three share", _pct(pp["top_three_share"]) if pp.get("top_three_share") is not None else "--", provenance=rrun)
+            reg.add(f"{tag} pp top three multi objective", pp.get("top_three_multi_objective", 0), provenance=rrun)
+            _sh(f"{tag} pp top three only", pp["top_three_only"])
+            _sh(f"{tag} pp without top three", pp["without_top_three"])
+            ob = d["objective"]
+            _sh(f"{tag} mo", ob["multi_objective"])
+            _sh(f"{tag} so", ob["single_objective"])
+            for lab, dd in ob["multi_objective_by_kind"].items():
+                _sh(f"{tag} mo {lab.replace('_', ' ')}", dd)
+            for lab, dd in ob["single_objective_by_kind"].items():
+                _sh(f"{tag} so {lab.replace('_', ' ')}", dd)
+            reg.add(f"{tag} mo papers tested", ob["multi_objective_papers_tested"], provenance=rrun)
+            ori = d["orientation"]
+            _sh(f"{tag} col", ori["column_oriented"])
+            _sh(f"{tag} col means", ori["column_oriented_means"])
+            for lab, dd in ori["column_oriented_by_kind"].items():
+                _sh(f"{tag} col {lab.replace('_', ' ')}", dd)
+            _sh(f"{tag} nocol", ori["without_column_oriented"])
+            _sh(f"{tag} nocol means", ori["without_column_oriented_means"])
+            for lab, dd in ori["without_column_oriented_by_kind"].items():
+                _sh(f"{tag} nocol {lab.replace('_', ' ')}", dd)
+            for lab, dd in ori["without_column_oriented_means_by_kind"].items():
+                _sh(f"{tag} nocol means {lab.replace('_', ' ')}", dd)
+            reg.add(f"{tag} col tables", ori["column_oriented_tables"], provenance=rrun)
+            reg.add(f"{tag} col tables tested", ori["column_oriented_tables_tested"], provenance=rrun)
+            reg.add(f"{tag} dropped nonextremal", d.get("dropped_nonextremal", 0), provenance=rrun)
+            reg.add(f"{tag} dropped nonextremal papers", d.get("dropped_nonextremal_papers", 0), provenance=rrun)
             bc = pp.get("boot_coverage") or {}
+            reg.add(f"{tag} pp boot coverage mc ci", f"[{bc['coverage_mc_ci'][0]}, {bc['coverage_mc_ci'][1]}]" if bc.get("coverage_mc_ci") else "--", provenance=rrun)
             reg.add(f"{tag} pp boot coverage", _pct(bc["coverage"]) if bc.get("coverage") is not None else "--", provenance=rrun)
             reg.add(f"{tag} pp boot coverage sims", bc.get("sims", 0), provenance=rrun)
             reg.add(f"{tag} pp wald coverage", _pct(bc["coverage_wald"]) if bc.get("coverage_wald") is not None else "--", provenance=rrun)
@@ -682,8 +759,13 @@ def build(out_path: str) -> dict:
             _sh(f"{tag} pp without largest", pp["without_largest"])
             _sh(f"{tag} pp without top four", pp["without_top_four"])
             sh = d["shape"]
-            for k in ("sd_ge_mean", "mean_tiny", "either", "neither", "zero_sd", "without_zero_sd"):
+            for k in ("sd_ge_mean", "mean_tiny", "either", "neither", "zero_sd", "without_zero_sd",
+                      "sd_ge_mean_bold_only", "sd_ge_mean_rival_only", "sd_ge_mean_both", "sd_lt_mean"):
                 _sh(f"{tag} sh {k.replace('_', ' ')}", sh[k])
+            for k in ("bold_zero_pm_zero", "ceiling_binds", "ceiling_binds_fail", "zero_both_as_pass_tested"):
+                reg.add(f"{tag} sh {k.replace('_', ' ')}", sh.get(k, 0), provenance=rrun)
+            reg.add(f"{tag} sh ceiling binds pct tested", _pct(sh["ceiling_binds_pct_tested"]) if sh.get("ceiling_binds_pct_tested") is not None else "--", provenance=rrun)
+            reg.add(f"{tag} sh zero both as pass pct fail", _pct(sh["zero_both_as_pass_pct_fail"]) if sh.get("zero_both_as_pass_pct_fail") is not None else "--", provenance=rrun)
             reg.add(f"{tag} sh pct tested sd ge mean", _pct(sh["pct_tested_sd_ge_mean"]) if sh["pct_tested_sd_ge_mean"] is not None else "--", provenance=rrun)
             reg.add(f"{tag} sh pct tested zero sd", _pct(sh["pct_tested_zero_sd"]) if sh["pct_tested_zero_sd"] is not None else "--", provenance=rrun)
             reg.add(f"{tag} sh zero both groups", sh["zero_both_groups"], provenance=rrun)

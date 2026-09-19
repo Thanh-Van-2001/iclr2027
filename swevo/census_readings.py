@@ -73,10 +73,32 @@ def _disp(x):
     return _bar_num(_disp_str(x))
 
 
+MULTI_OBJECTIVE = re.compile(r"multi-?objective|many-?objective|pareto|hypervolume|\bIGD\b|NSGA|MOEA|MOPSO|MODE\b|bi-?objective", re.I)
+
+
+def _mo_papers(paper_ids: set) -> set:
+    """Papers whose title or abstract names a multi-objective study, from the OpenAlex index."""
+    path = "out/swevo/index.json"
+    if not os.path.exists(path):
+        return set()
+    out = set()
+    for r in json.load(open(path, encoding="utf-8")):
+        if r.get("id") in paper_ids and MULTI_OBJECTIVE.search(str(r.get("title", "")) + " " + str(r.get("abstract", ""))):
+            out.add(r["id"])
+    return out
+
+
+DROPPED = {"nonextremal": 0, "papers": set()}
+
+
 def _regroup(labels: dict, items: dict, kinds: dict):
     """Every reader group with the fields the readings need, scored as
-    pages_score scores it (extremal-only, Welch on the reader's values)."""
+    pages_score scores it (extremal-only, Welch on the reader's values).
+    Groups whose bold cell is not the better value in its direction, or ties
+    its rival, are dropped and counted in DROPPED."""
     groups = []
+    DROPPED["nonextremal"] = 0
+    DROPPED["papers"] = set()
     for iid, pg in labels.items():
         paper = items[iid]["paper"]
         for ti, t in enumerate(pg.get("tables", [])):
@@ -90,6 +112,8 @@ def _regroup(labels: dict, items: dict, kinds: dict):
                 w, r = _num(g.get("winner_mean")), _num(g.get("runner_mean"))
                 d = str(g.get("direction", "")).lower()
                 if w is not None and r is not None and (w == r or (d.startswith("low") and w > r) or (d.startswith("high") and w < r)):
+                    DROPPED["nonextremal"] += 1
+                    DROPPED["papers"].add(paper)
                     continue
                 wd, rd = _disp(g.get("winner_disp")), _disp(g.get("runner_disp"))
                 wb = wd is not None or str(g.get("winner_disp", "")).startswith("[")
@@ -110,7 +134,8 @@ def _regroup(labels: dict, items: dict, kinds: dict):
                                "testable": testable, "fail": fail, "zero_both": zero_both,
                                "std_row": bool(STD_ROW.search(label)), "best_row": bool(BEST_ROW.search(label)),
                                "row_label": bool(ROW_LABEL.search(label)), "not_means_table": bool(NOT_MEANS_CAPTION.search(cap)),
-                               "table": f"{iid}:{ti}", "kind_label": kind})
+                               "table": f"{iid}:{ti}", "kind_label": kind,
+                               "orientation": str(t.get("orientation", "")).lower().strip()})
     return groups
 
 
@@ -236,7 +261,7 @@ def _cluster_wald(cl: list):
     return [round(100 * max(p - q * v ** 0.5, 0.0), 1), round(100 * min(p + q * v ** 0.5, 1.0), 1)]
 
 
-def _boot_coverage(by_paper: dict, sims: int = 300, reps: int = 1000, seed: int = 1) -> dict:
+def _boot_coverage(by_paper: dict, sims: int = 1000, reps: int = 1000, seed: int = 1) -> dict:
     """How often the percentile cluster bootstrap covers the pooled rate when the
     observed papers (their group counts and failure shares) are taken as the
     population: each simulated corpus draws the same number of papers with
@@ -264,7 +289,10 @@ def _boot_coverage(by_paper: dict, sims: int = 300, reps: int = 1000, seed: int 
         lo, hi = vals[int(0.025 * reps)], vals[int(0.975 * reps) - 1]
         hits += lo <= theta <= hi
         widths.append(hi - lo)
+    cov = hits / sims
+    mc = 1.96 * (cov * (1 - cov) / sims) ** 0.5
     return {"papers": len(pop), "sims": sims, "coverage": round(100 * hits / sims, 1), "coverage_wald": round(100 * hits_wald / sims, 1),
+            "coverage_mc_ci": [round(100 * (cov - mc), 1), round(100 * (cov + mc), 1)],
             "mean_width": round(sum(widths) / len(widths), 1), "theta": round(theta, 1),
             "wald_ci": _cluster_wald([(n, f) for n, f in by_paper.values() if n])}
 
@@ -283,8 +311,19 @@ def _icc_design(by_paper: dict) -> dict:
     n0 = (N - sum(n * n for n, _ in cl) / N) / (k - 1)
     icc = (msb - msw) / (msb + (n0 - 1) * msw) if (msb + (n0 - 1) * msw) > 0 else 0.0
     icc = max(icc, 0.0)
-    de = 1 + (n0 - 1) * icc
-    return {"icc": round(icc, 3), "design_effect": round(de, 2), "effective_groups": round(N / de, 1), "n0": round(n0, 1)}
+    # the pooled share weights papers by their group counts, so the design effect that
+    # belongs to it uses Kish's n* = sum(n^2)/N, not the ANOVA n0; the empirical design
+    # effect is the cluster-robust variance over the binomial one, which is what the
+    # printed intervals already embody
+    n_star = sum(n * n for n, _ in cl) / N
+    de_kish = 1 + (n_star - 1) * icc
+    v_cluster = sum((f - n * ybar) ** 2 for n, f in cl) / N ** 2 * k / (k - 1)
+    v_binom = ybar * (1 - ybar) / N
+    de_emp = v_cluster / v_binom if v_binom > 0 else None
+    return {"icc": round(icc, 3), "n0": round(n0, 1), "n_star": round(n_star, 1),
+            "design_effect_anova": round(1 + (n0 - 1) * icc, 2),
+            "design_effect_kish": round(de_kish, 2), "effective_groups_kish": round(N / de_kish, 1),
+            "design_effect": round(de_emp, 2) if de_emp else None, "effective_groups": round(N / de_emp, 1) if de_emp else None}
 
 
 def _kish(gs: list) -> dict:
@@ -299,7 +338,7 @@ def _kish(gs: list) -> dict:
 def _shares(gs: list) -> dict:
     n = len(gs)
     tested = [g for g in gs if g["testable"] and g["fail"] is not None]
-    return {"groups": n, "papers": len({g["paper"] for g in gs}),
+    return {"groups": n, "papers": len({g["paper"] for g in gs}), "effective_papers": _kish(gs)["effective"],
             "pct_neither": round(100 * sum(1 for g in gs if not g["wb"] and not g["rb"]) / n, 1) if n else None,
             "ci_neither": _boot_pairs([(g["paper"], int(not g["wb"] and not g["rb"]), 1) for g in gs]) if n else None,
             "pct_one_side": round(100 * sum(1 for g in gs if g["wb"] != g["rb"]) / n, 1) if n else None,
@@ -311,7 +350,19 @@ def _shares(gs: list) -> dict:
             "pct_fail": round(100 * sum(1 for g in tested if g["fail"]) / len(tested), 1) if tested else None,
             "ci_fail": _boot_pairs([(g["paper"], int(bool(g["fail"])), 1) for g in tested]) if tested else None,
             "zero_both": sum(1 for g in gs if g["zero_both"]),
-            "unreadable": sum(1 for g in gs if g["testable"] and g["fail"] is None and not g["zero_both"])}
+            "unreadable": sum(1 for g in gs if g["testable"] and g["fail"] is None and not g["zero_both"]),
+            **_largest(tested)}
+
+
+def _largest(tested: list) -> dict:
+    """The largest paper's share of a stratum's tested groups, its failure rate, and the rate without it."""
+    by = collections.Counter(g["paper"] for g in tested)
+    if not by:
+        return {"largest_tested": 0, "largest_fail": None, "without_largest_tested": 0, "without_largest_fail": None}
+    big = max(by, key=by.get)
+    rest = [g for g in tested if g["paper"] != big]
+    return {"largest_tested": by[big], "largest_fail": round(100 * sum(1 for g in tested if g["paper"] == big and g["fail"]) / by[big], 1),
+            "without_largest_tested": len(rest), "without_largest_fail": round(100 * sum(1 for g in rest if g["fail"]) / len(rest), 1) if rest else None}
 
 
 def _by_kind(gs: list) -> dict:
@@ -453,6 +504,8 @@ def main() -> int:
         rates = [100 * f / n for n, f in by_paper.values()]
         largest = max(by_paper, key=lambda k: by_paper[k][0]) if by_paper else None
         top4 = {k for k, _ in sorted(by_paper.items(), key=lambda kv: -kv[1][0])[:4]}
+        top3 = [k for k, _ in sorted(by_paper.items(), key=lambda kv: -kv[1][0])[:3]]
+        mo = _mo_papers({g["paper"] for g in gs})
         per_paper = {"papers": len(by_paper), "tested": tot, "effective_papers": _kish(tested)["effective"],
                      # each paper weighted equally: the mean of the per-paper failure shares, with a percentile bootstrap over papers as units
                      "macro_rate": round(statistics.mean(rates), 1) if rates else None,
@@ -468,7 +521,27 @@ def main() -> int:
                      "largest_paper_tested": by_paper[largest][0] if largest else 0,
                      "largest_paper_fail": round(100 * by_paper[largest][1] / by_paper[largest][0], 1) if largest else None,
                      "without_largest": _shares([g for g in gs if g["paper"] != largest]),
-                     "without_top_four": _shares([g for g in gs if g["paper"] not in top4])}
+                     "without_top_four": _shares([g for g in gs if g["paper"] not in top4]),
+                     "top_three_share": round(100 * sum(x[0] for x in sizes[:3]) / tot, 1) if tot else None,
+                     "top_three_ids": top3, "top_three_multi_objective": sum(1 for k in top3 if k in mo),
+                     "top_three_only": _shares([g for g in gs if g["paper"] in top3]),
+                     "without_top_three": _shares([g for g in gs if g["paper"] not in top3])}
+        # multi-objective studies (title or abstract) against the rest; a post-hoc split
+        objective = {"multi_objective": _shares([g for g in gs if g["paper"] in mo]),
+                     "single_objective": _shares([g for g in gs if g["paper"] not in mo]),
+                     "multi_objective_by_kind": _by_kind([g for g in gs if g["paper"] in mo]),
+                     "single_objective_by_kind": _by_kind([g for g in gs if g["paper"] not in mo]),
+                     "multi_objective_papers_tested": len({g["paper"] for g in tested if g["paper"] in mo})}
+        # tables the reader filed as column-oriented, where a whole bold row gives one bold cell per column
+        col = [g for g in gs if g["orientation"] == "column"]
+        orientation = {"column_oriented": _shares(col), "column_oriented_by_kind": _by_kind(col),
+                       "column_oriented_means": _shares([g for g in col if _is_mean(g)]),
+                       "without_column_oriented": _shares([g for g in gs if g["orientation"] != "column"]),
+                       "without_column_oriented_by_kind": _by_kind([g for g in gs if g["orientation"] != "column"]),
+                       "without_column_oriented_means": _shares([g for g in gs if g["orientation"] != "column" and _is_mean(g)]),
+                       "without_column_oriented_means_by_kind": _by_kind([g for g in gs if g["orientation"] != "column" and _is_mean(g)]),
+                       "column_oriented_tables": len({g["table"] for g in col}),
+                       "column_oriented_tables_tested": len({g["table"] for g in col if g["testable"] and g["fail"] is not None})}
 
         def heavy(g):
             return (g["wd"] is not None and g["w"] is not None and g["wd"] >= abs(g["w"])) or (g["rd"] is not None and g["r"] is not None and g["rd"] >= abs(g["r"]))
@@ -478,7 +551,34 @@ def main() -> int:
 
         def zero_sd(g):
             return (g["wd"] is not None and g["wd"] == 0) or (g["rd"] is not None and g["rd"] == 0)
+
+        def heavy_w(g):
+            return g["wd"] is not None and g["w"] is not None and g["wd"] >= abs(g["w"])
+
+        def heavy_r(g):
+            return g["rd"] is not None and g["r"] is not None and g["rd"] >= abs(g["r"])
+
+        def ceiling_binds(g):
+            # for non-negative quantities with s >= m on both arms, |t| <= sqrt(n) |m2 - m1| / sqrt(m1^2 + m2^2)
+            if not (heavy_w(g) and heavy_r(g)) or not g["n"] or g["n"] < 2 or (g["w"] == 0 and g["r"] == 0):
+                return False
+            from scipy.stats import t as student_t
+            den = (g["w"] ** 2 + g["r"] ** 2) ** 0.5  # underflows to zero for means near 1e-160
+            if den == 0:
+                return False
+            tmax = (g["n"] ** 0.5) * abs(g["r"] - g["w"]) / den
+            return tmax < student_t.ppf(0.975, g["n"] - 1)
+        cb = [g for g in tested if ceiling_binds(g)]
         shape = {"tested": len(tested),
+                 "sd_ge_mean_bold_only": _shares([g for g in gs if heavy_w(g) and not heavy_r(g)]),
+                 "sd_ge_mean_rival_only": _shares([g for g in gs if heavy_r(g) and not heavy_w(g)]),
+                 "sd_ge_mean_both": _shares([g for g in gs if heavy_w(g) and heavy_r(g)]),
+                 "sd_lt_mean": _shares([g for g in gs if not heavy(g)]),
+                 "bold_zero_pm_zero": sum(1 for g in tested if g["w"] == 0 and g["wd"] == 0),
+                 "ceiling_binds": len(cb), "ceiling_binds_fail": sum(1 for g in cb if g["fail"]),
+                 "ceiling_binds_pct_tested": round(100 * len(cb) / len(tested), 1) if tested else None,
+                 "zero_both_as_pass_pct_fail": round(100 * sum(1 for g in tested if g["fail"]) / (len(tested) + sum(1 for g in gs if g["zero_both"])), 1) if tested else None,
+                 "zero_both_as_pass_tested": len(tested) + sum(1 for g in gs if g["zero_both"]),
                  "sd_ge_mean": _shares([g for g in gs if heavy(g)]), "mean_tiny": _shares([g for g in gs if tiny(g)]),
                  "either": _shares([g for g in gs if heavy(g) or tiny(g)]), "neither": _shares([g for g in gs if not heavy(g) and not tiny(g)]),
                  "zero_sd": _shares([g for g in gs if zero_sd(g)]), "without_zero_sd": _shares([g for g in gs if not zero_sd(g)]),
@@ -523,12 +623,17 @@ def main() -> int:
                      "reader_n_disagrees_scan": sum(1 for g in tested if g["n"] and scan.get(g["paper"], {}).get("run_modal") and scan[g["paper"]]["run_modal"] != int(g["n"])),
                      "tested_n_at_most_five": sum(1 for g in tested if g["n"] and g["n"] <= 5),
                      "tested_n_thirty": sum(1 for g in tested if g["n"] == 30)}
+        # papers of each kind with results tables in the census, and how many hold any single-bold group
         return {"name": name, "all": _shares(gs), "by_kind": _by_kind(gs), "per_paper": per_paper, "shape": shape,
-                "alternatives": alternatives, "rows": rows, "bold_rule": bold, "note": note, "citing": citing, "scan_runs": scan_runs}
+                "objective": objective, "orientation": orientation,
+                "alternatives": alternatives, "rows": rows, "bold_rule": bold, "note": note, "citing": citing, "scan_runs": scan_runs,
+                "dropped_nonextremal": DROPPED["nonextremal"], "dropped_nonextremal_papers": len(DROPPED["papers"])}
 
     gs1 = _regroup(labels, items, kinds)
+    pre_readings = readings_of(gs1, "pre-registered")
     merged, reread, mlog = merged_labels(labels)
     gs2 = _regroup(merged, items, kinds)
+    corrected_readings = readings_of(gs2, "corrected")
 
     def on_pages(gs):
         return [g for g in gs if g["page"] in reread]
@@ -537,14 +642,30 @@ def main() -> int:
                        before_barred=sum(1 for g in on_pages(gs1) if g["wb"] and g["rb"]),
                        after_barred=sum(1 for g in on_pages(gs2) if g["wb"] and g["rb"]),
                        before_means=sum(1 for g in on_pages(gs1) if _is_mean(g)), after_means=sum(1 for g in on_pages(gs2) if _is_mean(g)),
-                       tables_separate_row_after=sum(1 for pg in reread.values() for t in pg.get("tables", []) if str(t.get("bar_form", "")).lower() == "separate_row"),
-                       tables_separate_after=sum(1 for pg in reread.values() for t in pg.get("tables", []) if str(t.get("bar_form", "")).lower().startswith("separate")),
+                       tables_separate_row_after=sum(1 for pg in reread.values() for t in pg.get("tables", []) if str(t.get("results_table", "")).lower().startswith("y") and str(t.get("bar_form", "")).lower() == "separate_row"),
+                       tables_separate_after=sum(1 for pg in reread.values() for t in pg.get("tables", []) if str(t.get("results_table", "")).lower().startswith("y") and str(t.get("bar_form", "")).lower().startswith("separate")),
                        tables_none_after=sum(1 for pg in reread.values() for t in pg.get("tables", []) if str(t.get("results_table", "")).lower().startswith("y") and str(t.get("bar_form", "")).lower() in ("none", "")),
                        pages_in_kits=sum(len(json.load(open(os.path.join(k, "items.json"), encoding="utf-8"))) for k in ROW_KITS if os.path.exists(os.path.join(k, "items.json"))),
                        pages_new_optimizer=sum(1 for i in reread if kinds.get(items[i]["paper"]) == "new_optimizer"),
                        pages_application=sum(1 for i in reread if kinds.get(items[i]["paper"]) == "application"))
+    # papers with a results table in the census, and those with at least one single-bold group, by kind
+    def papers_by_kind(labs, gs):
+        with_tables = collections.Counter()
+        seen = set()
+        for iid, pg in labs.items():
+            paper = items[iid]["paper"]
+            if paper in seen:
+                continue
+            if any(str(t.get("results_table", "")).lower().startswith("y") for t in pg.get("tables", [])):
+                seen.add(paper)
+                with_tables[kinds.get(paper, "unlabelled")] += 1
+        with_groups = collections.Counter()
+        for paper in {g["paper"] for g in gs}:
+            with_groups[kinds.get(paper, "unlabelled")] += 1
+        return {"papers_with_results_tables": dict(with_tables), "papers_with_single_bold_groups": dict(with_groups)}
     out = {"layout": layout_of(labels), "layout_corrected": layout_of(merged),
-           "pre": readings_of(gs1, "pre-registered"), "corrected": readings_of(gs2, "corrected"),
+           "papers_pre": papers_by_kind(labels, gs1), "papers_corrected": papers_by_kind(merged, gs2),
+           "pre": pre_readings, "corrected": corrected_readings,
            "rows_reread": rows_reread,
            "pages_read": len(labels), "pages_in_kit": len(items), "papers_in_kit": len({it["paper"] for it in items.values()}),
            "papers_read": len({items[i]["paper"] for i in labels})}

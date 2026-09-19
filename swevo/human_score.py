@@ -55,6 +55,7 @@ def main() -> int:
     fields = {"winner_mean": [0, 0], "winner_disp": [0, 0], "runner_mean": [0, 0], "runner_disp": [0, 0], "n_runs": [0, 0]}
     recall = {"std_printed_y": 0, "std_printed_y_reader_barred": 0, "std_printed_n": 0, "std_printed_n_reader_barred": 0}
     bold_ok = [0, 0]
+    whole_row = [0, 0]  # the added question: every bold cell of the table in one row or column
     results = [0, 0]
     claim = [0, 0]
     flips = [0, 0]
@@ -78,6 +79,10 @@ def main() -> int:
                 recall["std_printed_n_reader_barred"] += reader_barred
         bold_ok[1] += 1
         bold_ok[0] += str(r.get("bold_ok", "")).strip().lower().startswith("y")
+        wr = str(r.get("whole_row_bold", "")).strip().lower()
+        if wr:
+            whole_row[1] += 1
+            whole_row[0] += wr.startswith("y")
         if any(str(r.get(f, "")).strip().lower() == "unclear" for f in fields):
             unclear += 1
         ok_all = str(r.get("bold_ok", "")).strip().lower().startswith("y")
@@ -128,6 +133,7 @@ def main() -> int:
         vals.append(100 * k / n if n else 0)
     vals.sort()
     out = {"labels": LABELS, "labelled": len(rows), "results_table": _rate(*results), "bold_ok": _rate(*bold_ok),
+           "whole_row_bold": _rate(*whole_row),
            "fields": {f: _rate(*v) for f, v in fields.items()}, "claim": _rate(*claim),
            "claim_page_ci": [round(vals[50], 1), round(vals[1949], 1)], "pages": len(pages),
            "verdict_flips": _rate(*flips), "unclear_items": unclear,

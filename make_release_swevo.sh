@@ -34,6 +34,8 @@ mkdir -p "$DEST/audits/swevo_human_rows" "$DEST/audits/swevo_census_rows"
 cp audits/swevo_human_rows/items.json audits/swevo_human_rows/draw.json audits/swevo_human_rows/labels_template.csv audits/swevo_human_rows/label.html "$DEST/audits/swevo_human_rows/"
 cp audits/swevo_human_rows/labels*.csv "$DEST/audits/swevo_human_rows/" 2>/dev/null || true
 cp audits/swevo_census_rows/*.json audits/swevo_census_rows/instruction.txt "$DEST/audits/swevo_census_rows/"
+mkdir -p "$DEST/audits/swevo_markers"
+cp audits/swevo_markers/*.csv "$DEST/audits/swevo_markers/" 2>/dev/null || true
 mkdir -p "$DEST/audits/swevo_census_rows2"
 cp audits/swevo_census_rows2/*.json audits/swevo_census_rows2/instruction.txt "$DEST/audits/swevo_census_rows2/"
 find "$DEST/audits" -name "*_fulltext.txt" -delete

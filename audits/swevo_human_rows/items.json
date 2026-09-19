@@ -358,10 +358,11 @@
    "runner_disp": "(9.69e-4)-"
   },
   "barred_before": true,
-  "barred_after": false,
-  "stratum": "barless",
+  "barred_after": true,
+  "stratum": "barred",
   "id": "014",
-  "run_sentences": "Each algorithm was run independently 30 times\n---\nIterate over all particles (loop N times)\n---\nThe process is then repeated until the number of archives does not exceed a predetermined threshold\n---\nThen the repetition operation is followed\n---\nThis process is repeated iteratively until all clusters are merged into a\n---\nTo ensure fairness, all experiments were independently executed 30 times, and the parameters of all\n---\nexperimental groups and the original HCRMOPSO algorithm were each independently run 30 times on various\n---\nfor 30 times on 22 test problems\n---\nindependent runs\n---\nindependent runs of HCRMOPSO, five other MOPSO variants, and five MOEAs are presented in detail in Figs\n---\nouter loop runs N times, with each iteration having a total cost of O(ND) + O(N) + O(D) + O(1) ≈O(ND)\n---\nouter loop runs N times, with each iteration’s dominant cost being O(ND)\n---\nskewness of IGD values across 30 independent runs, facilitating visual assessment of each algorithm’s relative"
+  "run_sentences": "Each algorithm was run independently 30 times\n---\nIterate over all particles (loop N times)\n---\nThe process is then repeated until the number of archives does not exceed a predetermined threshold\n---\nThen the repetition operation is followed\n---\nThis process is repeated iteratively until all clusters are merged into a\n---\nTo ensure fairness, all experiments were independently executed 30 times, and the parameters of all\n---\nexperimental groups and the original HCRMOPSO algorithm were each independently run 30 times on various\n---\nfor 30 times on 22 test problems\n---\nindependent runs\n---\nindependent runs of HCRMOPSO, five other MOPSO variants, and five MOEAs are presented in detail in Figs\n---\nouter loop runs N times, with each iteration having a total cost of O(ND) + O(N) + O(D) + O(1) ≈O(ND)\n---\nouter loop runs N times, with each iteration’s dominant cost being O(ND)\n---\nskewness of IGD values across 30 independent runs, facilitating visual assessment of each algorithm’s relative",
+  "stratum_at_draw": "barless"
  },
  {
   "page_id": "0482",
@@ -384,10 +385,11 @@
    "runner_disp": "(1.07e-3)-"
   },
   "barred_before": true,
-  "barred_after": false,
-  "stratum": "barless",
+  "barred_after": true,
+  "stratum": "barred",
   "id": "015",
-  "run_sentences": "Each algorithm was run independently 30 times\n---\nIterate over all particles (loop N times)\n---\nThe process is then repeated until the number of archives does not exceed a predetermined threshold\n---\nThen the repetition operation is followed\n---\nThis process is repeated iteratively until all clusters are merged into a\n---\nTo ensure fairness, all experiments were independently executed 30 times, and the parameters of all\n---\nexperimental groups and the original HCRMOPSO algorithm were each independently run 30 times on various\n---\nfor 30 times on 22 test problems\n---\nindependent runs\n---\nindependent runs of HCRMOPSO, five other MOPSO variants, and five MOEAs are presented in detail in Figs\n---\nouter loop runs N times, with each iteration having a total cost of O(ND) + O(N) + O(D) + O(1) ≈O(ND)\n---\nouter loop runs N times, with each iteration’s dominant cost being O(ND)\n---\nskewness of IGD values across 30 independent runs, facilitating visual assessment of each algorithm’s relative"
+  "run_sentences": "Each algorithm was run independently 30 times\n---\nIterate over all particles (loop N times)\n---\nThe process is then repeated until the number of archives does not exceed a predetermined threshold\n---\nThen the repetition operation is followed\n---\nThis process is repeated iteratively until all clusters are merged into a\n---\nTo ensure fairness, all experiments were independently executed 30 times, and the parameters of all\n---\nexperimental groups and the original HCRMOPSO algorithm were each independently run 30 times on various\n---\nfor 30 times on 22 test problems\n---\nindependent runs\n---\nindependent runs of HCRMOPSO, five other MOPSO variants, and five MOEAs are presented in detail in Figs\n---\nouter loop runs N times, with each iteration having a total cost of O(ND) + O(N) + O(D) + O(1) ≈O(ND)\n---\nouter loop runs N times, with each iteration’s dominant cost being O(ND)\n---\nskewness of IGD values across 30 independent runs, facilitating visual assessment of each algorithm’s relative",
+  "stratum_at_draw": "barless"
  },
  {
   "page_id": "0485",
@@ -2204,10 +2206,11 @@
    "runner_disp": "7,437,823"
   },
   "barred_before": false,
-  "barred_after": false,
-  "stratum": "barless",
+  "barred_after": true,
+  "stratum": "barred",
   "id": "085",
-  "run_sentences": "Conventional methods often relied on laborious trial-and-error processes that\n---\nDiversity curves highlight how solutions explore and exploit the solution space during a run\n---\nDue to the low IGD values during the runs of most algorithms, MOCS2arc exhibits the best convergence\n---\nInitialization and mating selection\n---\nStep 1: Initialization\n---\naccomplished through extensive trial and error\n---\nalgorithm was tested using trial parameters on a 10-bar truss to find the best parameters of the algorithm\n---\nand highly qualitative solutions in the archive throughout the run\n---\narchive mechanism, it might take longer to run on bigger, more complicated problems\n---\ncomputationally more efficient with statistically shorter running times than other methods\n---\nin the algorithm's performance across different runs, rendering it unstable and unpredictable in its ability to\n---\npossibility that MOCS2arc can run a compelling exploration in diverse regions of the search space to evaluate a\n---\nthroughout the run"
+  "run_sentences": "Conventional methods often relied on laborious trial-and-error processes that\n---\nDiversity curves highlight how solutions explore and exploit the solution space during a run\n---\nDue to the low IGD values during the runs of most algorithms, MOCS2arc exhibits the best convergence\n---\nInitialization and mating selection\n---\nStep 1: Initialization\n---\naccomplished through extensive trial and error\n---\nalgorithm was tested using trial parameters on a 10-bar truss to find the best parameters of the algorithm\n---\nand highly qualitative solutions in the archive throughout the run\n---\narchive mechanism, it might take longer to run on bigger, more complicated problems\n---\ncomputationally more efficient with statistically shorter running times than other methods\n---\nin the algorithm's performance across different runs, rendering it unstable and unpredictable in its ability to\n---\npossibility that MOCS2arc can run a compelling exploration in diverse regions of the search space to evaluate a\n---\nthroughout the run",
+  "stratum_at_draw": "barless"
  },
  {
   "page_id": "1682",
@@ -2230,10 +2233,11 @@
    "runner_disp": "2.56E+09"
   },
   "barred_before": false,
-  "barred_after": false,
-  "stratum": "barless",
+  "barred_after": true,
+  "stratum": "barred",
   "id": "086",
-  "run_sentences": "Conventional methods often relied on laborious trial-and-error processes that\n---\nDiversity curves highlight how solutions explore and exploit the solution space during a run\n---\nDue to the low IGD values during the runs of most algorithms, MOCS2arc exhibits the best convergence\n---\nInitialization and mating selection\n---\nStep 1: Initialization\n---\naccomplished through extensive trial and error\n---\nalgorithm was tested using trial parameters on a 10-bar truss to find the best parameters of the algorithm\n---\nand highly qualitative solutions in the archive throughout the run\n---\narchive mechanism, it might take longer to run on bigger, more complicated problems\n---\ncomputationally more efficient with statistically shorter running times than other methods\n---\nin the algorithm's performance across different runs, rendering it unstable and unpredictable in its ability to\n---\npossibility that MOCS2arc can run a compelling exploration in diverse regions of the search space to evaluate a\n---\nthroughout the run"
+  "run_sentences": "Conventional methods often relied on laborious trial-and-error processes that\n---\nDiversity curves highlight how solutions explore and exploit the solution space during a run\n---\nDue to the low IGD values during the runs of most algorithms, MOCS2arc exhibits the best convergence\n---\nInitialization and mating selection\n---\nStep 1: Initialization\n---\naccomplished through extensive trial and error\n---\nalgorithm was tested using trial parameters on a 10-bar truss to find the best parameters of the algorithm\n---\nand highly qualitative solutions in the archive throughout the run\n---\narchive mechanism, it might take longer to run on bigger, more complicated problems\n---\ncomputationally more efficient with statistically shorter running times than other methods\n---\nin the algorithm's performance across different runs, rendering it unstable and unpredictable in its ability to\n---\npossibility that MOCS2arc can run a compelling exploration in diverse regions of the search space to evaluate a\n---\nthroughout the run",
+  "stratum_at_draw": "barless"
  },
  {
   "page_id": "1682",

@@ -48,9 +48,15 @@ without touching the network.
 - `audits/swevo_human/`, `audits/swevo_human_rows/` — the two labelling kits
   (100 separate-column groups, 100 Mean/Std-row groups): `label.html` opens
   in a browser and writes `labels.csv`; `python swevo/human_score.py [--kit
-  audits/swevo_human_rows]` scores it. `labels_claude-sonnet-5.csv` is a
+  audits/swevo_human_rows]` scores it; `swevo/kit_refresh.py` recomputed the
+  rows kit's strata and added the whole-row question to both sheets after
+  the draw. `labels_claude-sonnet-5.csv` is a
   second vendor's model answering the same kit (`swevo/kit_reader.py`),
   reported in the paper as a model check and not as a human label.
+- `audits/swevo_markers/adjudicate.csv` — the papers on which the two
+  full-text readers disagree about whether a per-cell verdict is printed
+  (every disagreement one way), with both readers' quoted sentences, for a
+  person to adjudicate from the PDF (`swevo/markers_kit.py`).
 - `paper/swevo/numbers.tex` — the generated macro file; every number in the
   paper is one of these, with its run record named in the comment above it.
 
