@@ -40,6 +40,10 @@ mkdir -p "$DEST/audits/swevo_markers"
 cp audits/swevo_markers/*.csv "$DEST/audits/swevo_markers/" 2>/dev/null || true
 mkdir -p "$DEST/audits/swevo_census_rows2"
 cp audits/swevo_census_rows2/*.json audits/swevo_census_rows2/instruction.txt "$DEST/audits/swevo_census_rows2/"
+mkdir -p "$DEST/audits/swevo_census_rows3"
+cp audits/swevo_census_rows3/*.json audits/swevo_census_rows3/instruction.txt "$DEST/audits/swevo_census_rows3/"
+cp audits/swevo_verdict/papers2.txt "$DEST/audits/swevo_verdict/" 2>/dev/null || true
+cp paper/swevo/supplement.tex "$DEST/paper/swevo/" 2>/dev/null || true
 find "$DEST/audits" -name "*_fulltext.txt" -delete
 cp data/extracted_oa.jsonl "$DEST/data/"
 cp data/extracted_pmc.jsonl "$DEST/data/" 2>/dev/null || true

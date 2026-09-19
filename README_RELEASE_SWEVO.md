@@ -41,10 +41,11 @@ without touching the network.
   (`labels.json`, merged from the per-shard files by `swevo/merge_census.py`).
   The page images (700 MB) are regenerated from the PDFs by
   `python swevo/census_kit.py`.
-- `audits/swevo_census_rows/`, `audits/swevo_census_rows2/` — the re-read
+- `audits/swevo_census_rows/`, `audits/swevo_census_rows2/`, `audits/swevo_census_rows3/` — the re-read
   of the Mean/Std-row pages under `instruction.txt`, merged table by table
   into the census by `swevo/census_readings.py` (the merge rule is in the
-  paper); `audits/swevo_verdict/` — the model's reading of the printed
+  paper; rows3 is the third pass over the pages the second cut at its
+  token budget); `audits/swevo_verdict/` — the model's reading of the printed
   verdicts for `swevo/verdict_crosstab.py`.
 - `audits/swevo_human/`, `audits/swevo_human_rows/` — the two labelling kits
   (100 separate-column groups, 100 Mean/Std-row groups): `label.html` opens
