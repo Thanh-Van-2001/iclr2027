@@ -1,0 +1,40 @@
+{
+ "rating": 5,
+ "confidence": 4,
+ "summary": "As a senior researcher who routinely benchmarks algorithms on CEC suites (often at 51 runs) and reports Wilcoxon/Friedman statistics, I read this audit with high interest. Is the audit fair? Partially. It is entirely fair to call out the community—especially the 'application' side—for failing to print run counts or standard deviations, which are basic prerequisites for reproducibility. However, the audit's reliance on a per-cell Welch's t-test is statistically mismatched to our field's actual claims. A per-cell Welch test says absolutely nothing about a paper's aggregate claim, which is typically established via a Wilcoxon signed-rank test across a whole suite of functions (e.g., 30 CEC benchmark functions). The author acknowledges this mismatch, noting that CEC errors are zero-bounded and skewed, and even finds that 50% of the Welch 'failures' that have a printed rank verdict actually passed the authors' rank test. Yet, the Welch failure rate remains the headline metric. Would the recommendations change what I do? Yes, it reinforces the need to explicitly tie bolding to statistical significance markers (+/-/=) in the table legend, rather than just bolding the best mean. What makes me dismiss the paper in its current form, however, is the methodology: an audit holding a field to account cannot rely entirely on an unvalidated LLM (Gemini) to parse complex table layouts. The author admits the human validation kits are 'released for one' but not completed. You cannot publish an audit where the core measurement instrument has not been validated against human ground truth.",
+ "strengths": "The scale of the audit (1644 papers) is impressive, and the distinction between 'new optimizer' and 'application' papers accurately reflects the sociological divide in our literature. The author is also commendably transparent about the limitations of the Welch test and explicitly states that a per-cell failure does not refute an algorithm.",
+ "objections": [
+  {
+   "id": "no-human-validation",
+   "severity": "blocking",
+   "objection": "The core image-reading instrument has not been validated by a human. Relying on a second LLM to verify the first LLM is insufficient for a published audit.",
+   "what_would_fix_it": "Complete the human labeling of the 200 kit items yourself. Report the precision and recall of the LLM reader against this human ground truth before publication.",
+   "quote": "The reader's pairing of means with deviations is checked against a second model on two hundred released kit items, not yet against a person."
+  },
+  {
+   "id": "unadjudicated-disputes",
+   "severity": "blocking",
+   "objection": "The author leaves data disputes between the two LLMs unresolved in the manuscript, asking the community to adjudicate them.",
+   "what_would_fix_it": "Manually adjudicate the 14 disputed papers and update the statistics accordingly. A submitted manuscript must present resolved data, not a homework assignment for the reader.",
+   "quote": "the per-cell-verdict field is the one on which the two readers disagree most, every disagreement a verdict the second reader quotes and the first misses, and the 14 disputed new-optimizer papers are listed in the release for adjudication."
+  },
+  {
+   "id": "misleading-abstract-metric",
+   "severity": "major",
+   "objection": "The abstract presents the 35.7% Welch failure rate as a headline finding without the crucial context that Welch's t-test is poorly calibrated for this data and often disagrees with the field's prescribed rank tests.",
+   "what_would_fix_it": "Amend the abstract to explicitly state that Welch's t-test is a proxy necessitated by the printed format, that it is poorly calibrated for skewed benchmark data, and that half of the checked Welch failures actually passed the authors' rank tests.",
+   "quote": "Of the 698 bold means whose summaries can be tested, 35.7% are not separated from their rival by Welch's t at the stated run count, a per-cell check the guides do not prescribe"
+  },
+  {
+   "id": "aggregate-vs-per-cell",
+   "severity": "major",
+   "objection": "The paper does not sufficiently clarify early on that the field's methodological guides (e.g., García 2009, Derrac 2011) prescribe *aggregate* tests across functions, making per-cell bolding a typographic convenience rather than the locus of the statistical claim.",
+   "what_would_fix_it": "In the Introduction, explicitly state that the field's standard is an aggregate test across multiple functions, and clarify that auditing per-cell bolding tests a typographic convention, not the core algorithmic claim of the papers.",
+   "quote": "The bold cell is a typographic marker of the best mean on one function; the authors' own test... is on the per-run values of one function in 131 of the 175 new-optimizer papers that name one and paired across functions in 33"
+  }
+ ],
+ "questions_to_authors": "As someone who runs CEC suites, I know the errors are bounded at zero and highly skewed. If you know Welch's t-test is inappropriate for this distribution, and you found that 50% of Welch failures actually passed the rank test, why is the Welch failure rate presented so prominently without caveats in the abstract? Furthermore, why submit an audit of a community without doing the 200-item human validation yourself? An auditor must validate their own instruments.",
+ "would_champion": false,
+ "model": "gemini/gemini-3.1-pro-preview",
+ "brief": "practitioner"
+}

@@ -1,0 +1,36 @@
+{
+ "rating": 5,
+ "confidence": 4,
+ "summary": "This paper presents an automated audit of 1644 metaheuristics papers published in Scientific Reports (2024-2025) to determine adherence to the field's statistical reporting conventions (e.g., Derrac, Garcia). Using LLMs for text classification, full-text reading, and image-based table parsing, the author argues that a large portion of the literature fails to print necessary dispersions, and where printed, Welch's t-test frequently fails to separate the bolded 'best' mean from its rival. While the premise is highly relevant to the methodology literature, the execution relies on unvalidated LLM outputs, tautological classifications, and heavily skewed cross-tabs.",
+ "strengths": "The paper directly engages with the field's methodological crisis regarding reproducibility and statistical rigor. The attempt to pre-register the analysis plan and the commitment to open science (releasing prompts, code, and kits) are highly commendable.",
+ "objections": [
+  {
+   "id": "obj_unvalidated_instrument",
+   "severity": "blocking",
+   "objection": "The precision of the primary instrument (the LLM image reader) on the most common layout is entirely unestablished by human validation. The paper admits that for the separate-column layout, which holds 76.6% of the barred groups, the pairing of means with deviations 'is the load-bearing measurement of this paper and is not yet made by a person'. Relying on a second LLM (Claude Sonnet 5) to agree with the first LLM (Gemini) is insufficient for an audit claiming to expose the field's errors.",
+   "what_would_fix_it": "The released kits must be labeled by a human (the author or an independent annotator) to establish the actual precision and recall of the image reader before the paper can be accepted. You cannot audit the field's rigor with an unvalidated black box."
+  },
+  {
+   "id": "obj_biased_reread_merge",
+   "severity": "major",
+   "objection": "The 'corrected census' is not a true repair, but a second pass by the same model with a highly biased merge rule that forces confirmation. The paper states: 'a re-read table replaces its original unless it is such a truncation and lists fewer groups... a correctly removed one is refused'. This one-way rule artificially inflates the retention of dispersions and bakes in the model's initial errors.",
+   "what_would_fix_it": "Report the re-read as a completely independent pass without the asymmetric merge rule, or manually adjudicate the discrepancies between the first and second readings."
+  },
+  {
+   "id": "obj_tautological_split",
+   "severity": "major",
+   "objection": "The split between 'new optimizer' and 'application' literatures is an artefact of the classifier's prompt. The prompt defines a new optimizer as 'one evaluated against others', which the author admits 'does select the papers that benchmark, which is where the convention applies'. It is tautological to separate papers by whether they benchmark, and then conclude that the benchmarking stratum is the one that uses benchmarking statistics (runs, tests).",
+   "what_would_fix_it": "Revise the claims regarding the 'two literatures'. Acknowledge that the classifier is essentially a 'benchmarking vs. non-benchmarking' detector, rather than a strict algorithmic-contribution vs. application split, and adjust the discussion accordingly."
+  },
+  {
+   "id": "obj_skewed_crosstab",
+   "severity": "major",
+   "objection": "The verdict cross-tab does not show a general failure of the field's conventions; it shows an artefact of multi-objective indicators. The paper claims 'of the 54 Welch failures that sit beside a printed verdict, 27 (50.0%) carry a significant printed rank verdict'. However, it also notes that this rests on just 11 papers, with 'three of them, all multi-objective studies with PlatEMO-style rank-sum tables, holding 80.3% of the pairs'. As the methodology guides state, Welch's t is inappropriate for highly skewed multi-objective indicators. Extrapolating this to critique the broader convention is misleading.",
+   "what_would_fix_it": "Separate the multi-objective papers from the single-objective papers in the cross-tab analysis. Explicitly state that the disagreement between Welch's t and the authors' rank tests is driven almost entirely by three multi-objective papers where t-tests are known to be invalid."
+  }
+ ],
+ "questions_to_authors": "How can the field trust an audit of its statistical rigor when the audit's own primary instrument (the LLM table reader) has not been validated by a human? Why use a merge rule for the re-read that explicitly prevents the model from removing spurious dispersions? Since I cannot open the run records, can you confirm exactly how many of the 27 Welch failures with significant rank verdicts occurred outside the three multi-objective papers?",
+ "would_champion": false,
+ "model": "gemini/gemini-3.1-pro-preview",
+ "brief": "methodologist"
+}

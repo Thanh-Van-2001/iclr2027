@@ -1,0 +1,60 @@
+{
+ "rating": 5,
+ "confidence": 5,
+ "summary": "The manuscript presents a large-scale automated audit of reporting practices in metaheuristics papers published in Scientific Reports. It extracts summary statistics from tables and attempts to verify the 'bold' (best) results using Welch's t-test, comparing the printed evidence against the authors' stated statistical claims. While the engineering effort behind the extraction pipeline is commendable, the statistical inference used to conduct the audit is fundamentally flawed. The paper misapplies standard statistical tools to order statistics, violates independence assumptions, misuses survey formulas for clustered data, and relies on asymptotic methods (bootstrap) in regimes where they provably fail.",
+ "strengths": "The paper tackles a critical issue in the metaheuristics literature—the disconnect between printed evidence and statistical claims. The pre-registration of the analysis plan and the release of the extraction instruments are excellent open-science practices.",
+ "objections": [
+  {
+   "id": "welchs-equal-n",
+   "severity": "major",
+   "objection": "The paper states: \"we compute Welch's t [24] from the two means, the two deviations and the run count, with the same count on both arms since the paper states one count for all its optimizers\". Welch's t-test is designed to handle unequal variances, but by forcing $n_1 = n_2$, you ignore the reality that actual run counts often differ (e.g., due to budget exhaustion, missing runs, or algorithm crashes). If the true $n$ differs between arms, both the test statistic and the degrees of freedom are incorrect, invalidating the p-value.",
+   "what_would_fix_it": "Acknowledge that assuming equal $n$ when the true $n$ might differ invalidates the exactness of the test, and provide a sensitivity analysis showing how much the failure rate changes if $n$ varies by a realistic margin (e.g., 10%)."
+  },
+  {
+   "id": "bootstrap-few-clusters",
+   "severity": "blocking",
+   "objection": "The paper states: \"Every interval on a group rate in this paper is a percentile cluster bootstrap over papers; with this few papers, and cluster sizes this unequal, it is an approximation that under-covers\". Bootstrapping over 46 clusters where the effective cluster count is as low as 2.3 to 13.1 is statistically invalid. The asymptotic properties of the bootstrap fail completely in this regime, making the printed confidence intervals meaningless.",
+   "what_would_fix_it": "Remove the bootstrap intervals for strata with tiny effective cluster counts, or replace them with a wild cluster bootstrap or an exact permutation approach suitable for small $N$."
+  },
+  {
+   "id": "kish-count",
+   "severity": "major",
+   "objection": "The paper states: \"the Kish ratio of the squared sum to the sum of squares of the papers' group counts is 13.1\". The Kish formula is designed to measure the design effect (loss of precision) due to unequal weighting in survey sampling. It is not a valid estimator for the effective degrees of freedom or effective number of clusters in highly unbalanced hierarchical/clustered data with intra-class correlation.",
+   "what_would_fix_it": "Use a proper mixed-effects model to estimate the intra-class correlation (ICC) and calculate the effective sample size based on the actual variance components, rather than misapplying a survey weight formula."
+  },
+  {
+   "id": "holm-rows",
+   "severity": "major",
+   "objection": "The paper states: \"Holm's correction [25] within a table is reported beside the raw rate; it controls the family-wise error over the table's bold-cell claims\". Applying Holm's correction to a post-hoc audit of bold vs. 2nd-best cells is statistically meaningless. The FWER applies to the family of hypotheses actually tested by the original authors, not a synthetic set of \"bold-cell claims\" constructed by an auditor.",
+   "what_would_fix_it": "Remove the Holm correction rows from Table 3 and the associated text. It answers a question neither the original authors nor a realistic reader is asking."
+  },
+  {
+   "id": "heavy-tail-t",
+   "severity": "blocking",
+   "objection": "The paper states: \"with both arms so shaped and the quantity non-negative, |t| cannot exceed \\sqrt{n} |m_2 - m_1| / \\sqrt{m_1^2 + m_2^2}, and that ceiling falls below the critical value in 15 tested groups\". If the distribution is so heavily right-skewed that $s \\ge m$ near a boundary of zero, the sample mean and variance are highly correlated, and the sampling distribution of the t-statistic is nowhere near Student's t. The algebraic ceiling is irrelevant because the probabilistic assumptions of the test are entirely violated.",
+   "what_would_fix_it": "Explicitly state that the t-test is completely invalid in this regime due to the breakdown of distributional assumptions, rather than framing it merely as an algebraic cap on the statistic."
+  },
+  {
+   "id": "impossible-pair",
+   "severity": "minor",
+   "objection": "The paper states: \"an impossible-pair check (a deviation above \\sqrt{n} times a non-negative mean; Supplement, Section S3) catches the largest mis-pairings only\". The bound $s \\le m\\sqrt{n}$ is an extreme algebraic maximum (achieved only when $n-1$ values are exactly 0). Using it as a check for mis-pairings provides false confidence, as almost any random pairing of $m$ and $s$ from real data will easily satisfy it.",
+   "what_would_fix_it": "Explicitly state in the main text how weak this bound is, clarifying that passing this check does not meaningfully validate the LLM's pairings."
+  },
+  {
+   "id": "kappa-independence",
+   "severity": "major",
+   "objection": "The paper states: \"Cohen's \\kappa 0.52, which the imbalance of the margins pulls down... averaged paper by paper the agreement is 80.9%\". Calculating a single pooled kappa over 173 groups clustered within just 11 papers (with 3 papers holding 80.3% of the pairs) violates the independence assumption of the kappa statistic. Furthermore, kappa is notoriously misleading with severe marginal imbalances.",
+   "what_would_fix_it": "Remove the pooled Cohen's kappa. Report only the specific agreement rates (positive/negative agreement) and the paper-by-paper averages."
+  },
+  {
+   "id": "terminology-floor-conservative-bound",
+   "severity": "major",
+   "objection": "The paper misuses statistical terminology. 1) \"The first reader's rate is therefore a floor for this field\": An LLM's extraction rate is an estimate with unknown recall, not a mathematical floor. 2) \"anti-conservative under the null of equal arms\": Testing the maximum vs. second maximum is not just \"anti-conservative\"; it fundamentally changes the null distribution to that of order statistics. 3) \"bounded, strongly right-skewed quantity near zero\": If the quantity is bounded and skewed, the t-test is invalid, not just \"poorly calibrated\".",
+   "what_would_fix_it": "Replace \"floor\" with \"lower estimate\". Replace \"anti-conservative\" with a clear statement that standard tests do not apply to order statistics (the maximum and second maximum). Acknowledge the strict invalidity of the t-test for bounded skewed data."
+  }
+ ],
+ "questions_to_authors": "How can you justify using a standard two-sample t-test on the maximum and second maximum of a set of algorithms? This is a comparison of order statistics, which have a completely different distribution under the null hypothesis. Have you considered using extreme value theory or a permutation test to establish a valid baseline for this audit?",
+ "would_champion": false,
+ "model": "gemini/gemini-3.1-pro-preview",
+ "brief": "statistician"
+}

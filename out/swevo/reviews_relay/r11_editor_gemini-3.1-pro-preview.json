@@ -1,0 +1,33 @@
+{
+ "rating": 5,
+ "confidence": 4,
+ "summary": "The manuscript presents a large-scale automated audit of 1644 metaheuristics papers published in Scientific Reports (2024-2025) to determine how often they adhere to the field's reporting conventions (e.g., providing run counts, standard deviations, and statistical tests). Using LLMs for text and image parsing, the author finds that while most new-optimizer papers claim to follow the conventions, a significant portion fail to provide the necessary data on the page to verify their claims, and over a third of testable bolded 'best' results fail a Welch's t-test. The study is well-motivated, the scale is impressive, and the deviation from the planned corpus (due to scraping blocks) is well-justified.",
+ "strengths": "The paper addresses a critical issue in evolutionary computation (reproducibility and reporting standards). The pre-registered plan, large sample size, and release of all prompts and data are excellent open-science practices. The distinction between new-optimizer and application papers is insightful, and the identification of the 'Mean/Std row' format hazard shows a deep understanding of the domain's literature.",
+ "objections": [
+  {
+   "id": "human-validation-tables",
+   "severity": "blocking",
+   "objection": "The paper relies on LLMs to parse complex table layouts (separate rows/columns) which account for 76.6% of the barred groups, but explicitly admits this has not been validated by a human. An audit paper cannot rely solely on unvalidated LLM outputs for its core metric, especially when the author acknowledges the LLM's blind spots.",
+   "quote": "its pairing of means with deviations is checked against a second vendor's model on two hundred kit items and against the impossible-pair check, not against a person, and the kits are released for one",
+   "what_would_fix_it": "The author must manually label the 200 kit items themselves and report the human-validated precision and recall of the LLM reader in the paper, rather than leaving it as an exercise for the reader."
+  },
+  {
+   "id": "human-validation-text",
+   "severity": "major",
+   "objection": "The two LLMs used to read the full text disagreed significantly on the 'per-cell verdict' field (35.9% vs 57.8%), yet the author leaves the adjudication of these 14 disputed papers to the release rather than resolving it in the text.",
+   "quote": "Nothing checks the full-text fields against a person; the per-cell-verdict field is the one on which the two readers disagree most... and the 14 disputed new-optimizer papers are listed in the release for adjudication.",
+   "what_would_fix_it": "Manually adjudicate the 14 disputed papers and report the true, human-verified rate for the per-cell verdict field in the manuscript."
+  },
+  {
+   "id": "abstract-incomplete-method",
+   "severity": "minor",
+   "objection": "The abstract ends with a statement that the methodology is incomplete (lacking human validation), which undermines the authority of the audit.",
+   "quote": "The reader's pairing of means with deviations is checked against a second model on two hundred released kit items, not yet against a person.",
+   "what_would_fix_it": "Once the human validation is completed (as requested in the blocking objection), update the abstract to report the actual human agreement rate."
+  }
+ ],
+ "questions_to_authors": "Why was the human validation of the 200 kit items and 14 disputed papers not completed prior to submission, given that it would likely only take a few hours of manual work and would vastly strengthen the paper's claims as a definitive audit?",
+ "would_champion": false,
+ "model": "gemini/gemini-3.1-pro-preview",
+ "brief": "editor"
+}
