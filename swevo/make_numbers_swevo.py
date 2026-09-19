@@ -114,6 +114,19 @@ def build(out_path: str) -> dict:
         reg.add("ka metaphor agree", ka["metaphor_agree"], provenance=run)
         reg.add("ka pct metaphor agree", _pct(ka["pct_metaphor_agree"]), provenance=run)
 
+    kaf = ex.get("kind_agreement_full", {})
+    if kaf.get("papers"):
+        reg.add("kaf papers", kaf["papers"], provenance=run)
+        reg.add("kaf agree", kaf["agree"], provenance=run)
+        reg.add("kaf pct agree", _pct(kaf["pct_agree"]), provenance=run)
+        reg.add("kaf kappa", f"{kaf['kappa']:.2f}", provenance=run)
+        for k, v in kaf["direction"].items():
+            reg.add("kaf dir " + k.replace("_", " "), _pct(v) if k.startswith(("precision", "recall")) else v, provenance=run)
+        for k, d in kaf["strata"].items():
+            reg.add(f"kaf st {k.replace('_', ' ')} papers", d["papers"], provenance=run)
+            reg.add(f"kaf st {k.replace('_', ' ')} runs", _pct(d["pct_runs_stated"]), provenance=run)
+            reg.add(f"kaf st {k.replace('_', ' ')} test", _pct(d["pct_test_named"]), provenance=run)
+
     st = ex.get("stat_tests", {})
     if st:
         reg.add("st testable papers", st["testable_papers"], provenance=run)
@@ -734,6 +747,11 @@ def build(out_path: str) -> dict:
             for lab, dd in ob["single_objective_by_kind"].items():
                 _sh(f"{tag} so {lab.replace('_', ' ')}", dd)
             reg.add(f"{tag} mo papers tested", ob["multi_objective_papers_tested"], provenance=rrun)
+            for blk, name in (("by_kind_second", "ksec"), ("by_kind_both", "kboth")):
+                for lab, dd in (d.get(blk) or {}).items():
+                    _sh(f"{tag} {name} {lab.replace('_', ' ')}", dd)
+                for lab, dd in (d.get(blk + "_means") or {}).items():
+                    _sh(f"{tag} {name} means {lab.replace('_', ' ')}", dd)
             ori = d["orientation"]
             _sh(f"{tag} col", ori["column_oriented"])
             _sh(f"{tag} col means", ori["column_oriented_means"])

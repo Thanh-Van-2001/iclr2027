@@ -449,6 +449,11 @@ def main() -> int:
     if os.path.exists("out/swevo/kinds_merged.csv"):
         for r in csv.DictReader(open("out/swevo/kinds_merged.csv", encoding="utf-8", newline="")):
             kinds[r["id"]] = r["label"]
+    kinds2 = {}
+    if os.path.exists("out/swevo/kinds2_merged.csv"):
+        for r in csv.DictReader(open("out/swevo/kinds2_merged.csv", encoding="utf-8", newline="")):
+            if r["label"] != "parse_error":
+                kinds2[r["id"]] = r["label"]
     scan = json.load(open("out/swevo/text_scan.json", encoding="utf-8")) if os.path.exists("out/swevo/text_scan.json") else {}
     tr = {}
     paths = sorted(glob.glob("out/swevo/test_reader_part*.json")) + sorted(glob.glob("out/swevo/test_reader_v2_part*.json"))
@@ -624,8 +629,13 @@ def main() -> int:
                      "reader_n_disagrees_scan": sum(1 for g in tested if g["n"] and scan.get(g["paper"], {}).get("run_modal") and scan[g["paper"]]["run_modal"] != int(g["n"])),
                      "tested_n_at_most_five": sum(1 for g in tested if g["n"] and g["n"] <= 5),
                      "tested_n_thirty": sum(1 for g in tested if g["n"] == 30)}
-        # papers of each kind with results tables in the census, and how many hold any single-bold group
+        # the kinds under the second labeller, and where both labellers agree
+        second = {lab: _shares([g for g in gs if kinds2.get(g["paper"]) == lab]) for lab in ("new_optimizer", "application")} if kinds2 else {}
+        both = {lab: _shares([g for g in gs if kinds2.get(g["paper"]) == lab and g["kind"] == lab]) for lab in ("new_optimizer", "application")} if kinds2 else {}
+        second_m = {lab: _shares([g for g in means if kinds2.get(g["paper"]) == lab]) for lab in ("new_optimizer", "application")} if kinds2 else {}
+        both_m = {lab: _shares([g for g in means if kinds2.get(g["paper"]) == lab and g["kind"] == lab]) for lab in ("new_optimizer", "application")} if kinds2 else {}
         return {"name": name, "all": _shares(gs), "by_kind": _by_kind(gs), "per_paper": per_paper, "shape": shape,
+                "by_kind_second": second, "by_kind_both": both, "by_kind_second_means": second_m, "by_kind_both_means": both_m,
                 "objective": objective, "orientation": orientation,
                 "alternatives": alternatives, "rows": rows, "bold_rule": bold, "note": note, "citing": citing, "scan_runs": scan_runs,
                 "dropped_nonextremal": DROPPED["nonextremal"], "dropped_nonextremal_papers": len(DROPPED["papers"])}

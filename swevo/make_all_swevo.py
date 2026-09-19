@@ -594,6 +594,19 @@ def main() -> int:
             w.writerow(["id", "label", "metaphor_named", "benchmark_suite"])
             for k in sorted(kinds):
                 w.writerow([k, kinds[k], metaphor[k], suite[k]])
+    # the second labeller over the whole corpus, merged from its shards to the same shape
+    kinds2 = {}
+    for path in sorted(glob.glob(f"{OUT}/kinds2_shard*.csv")):
+        with open(path, encoding="utf-8", newline="") as fh:
+            for r in csv.DictReader(fh):
+                if r["id"] not in kinds2:
+                    kinds2[r["id"]] = (r["label"], r["metaphor_named"] or "unsure", r["benchmark_suite"] or "unsure")
+    if kinds2:
+        with open(f"{OUT}/kinds2_merged.csv", "w", encoding="utf-8", newline="") as fh:
+            w = csv.writer(fh)
+            w.writerow(["id", "label", "metaphor_named", "benchmark_suite"])
+            for k in sorted(kinds2):
+                w.writerow([k, *kinds2[k]])
     by_year = {}
     for year in sorted({r["year"] for r in records}):
         recs = [r for r in records if r["year"] == year]
@@ -617,6 +630,8 @@ def main() -> int:
         "suite": by_group(cs, suite, "by_suite") if suite else {},
         "kind_counts": dict(collections.Counter(kinds.values())),
         "kind_agreement": kind_agreement(kinds, metaphor),
+        # the second labeller over the whole corpus (out/swevo/kinds2_merged.csv, merged from kinds2_shard*.csv)
+        "kind_agreement_full": kind_agreement(kinds, metaphor, second_path=f"{OUT}/kinds2_merged.csv"),
         "metaphor_counts": dict(collections.Counter(metaphor.values())),
         "stat_tests": stat_tests(cs, scan) if scan else {},
         "scan_by_kind": scan_by_kind(scan, kinds, metaphor, suite) if scan and kinds else {},

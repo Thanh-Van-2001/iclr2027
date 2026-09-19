@@ -29,7 +29,8 @@ without touching the network.
   database), `extra.json` (headline, by kind, by year, readings, text-scan
   blocks, citation blocks), `text_scan.json`, `kinds_merged.csv` and the
   per-shard `kinds_shard*.csv` (the first labeller), `kinds_second_sonnet.csv`
-  (the second labeller), `test_reader.json` (the model's reading of each
+  (the second labeller on a random hundred) and `kinds2_shard*.csv` /
+  `kinds2_merged.csv` (the second labeller over the whole corpus), `test_reader.json` (the model's reading of each
   paper's runs, layout, test and bold rule), `gold_set*.json` (the
   reference-set and census scores), `census_readings.json`.
 - `audits/swevo_gold/` — the 140 reference items: rendered crops with the
