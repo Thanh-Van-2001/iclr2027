@@ -69,6 +69,12 @@ def main() -> int:
             if p.get("note") != "failed":
                 vpages[p["id"]] = p
     papers = {l.strip() for l in open(os.path.join(VK, "papers.txt"), encoding="utf-8") if l.strip()}
+    first_draw = len(papers)
+    # the second draw, after review round five: every remaining tested census paper, whatever the reader field said
+    second = os.path.join(VK, "papers2.txt")
+    papers2 = {l.strip() for l in open(second, encoding="utf-8") if l.strip()} if os.path.exists(second) else set()
+    read_ids = set(vpages)
+    papers |= papers2
     # the groups that are means over runs, the base the abstract quotes (summary rows and rank tables out)
     gs = [g for g in _regroup({i: labels[i] for i in labels if items[i]["paper"] in papers}, items, kinds)
           if g["testable"] and g["fail"] is not None and _is_mean(g)]
@@ -202,7 +208,12 @@ def main() -> int:
         d["agree"] += (bool(r["fail"]) == ns)
         d[("fail_" if r["fail"] else "pass_") + ("ns" if ns else "sig")] += 1
     top3 = sorted(per_paper_2x2.values(), key=lambda d: -d["located"])[:3]
-    out = {"papers": len(papers), "pages_read": len(vpages), "tested_groups": len(rows),
+    items_all = json.load(open(os.path.join(KIT, "items.json"), encoding="utf-8"))
+    pages_of = collections.Counter(it["paper"] for it in items_all if it["paper"] in papers)
+    pages_read_of = collections.Counter(items[i]["paper"] for i in read_ids if i in items)
+    out = {"papers": len(papers), "papers_first_draw": first_draw, "papers_second_draw": len(papers2),
+           "papers_fully_read": sum(1 for p_ in papers if pages_read_of.get(p_, 0) >= pages_of.get(p_, 0) and pages_of.get(p_, 0)),
+           "pages_read": len(vpages), "tested_groups": len(rows),
            "ci_agree_papers": [round(vals[50], 1), round(vals[1949], 1)] if keys else None,
            "chance_agreement": round(100 * p_e, 1) if n else None, "kappa": kappa,
            # specific agreement on each side (Cicchetti and Feinstein), which kappa's prevalence dependence does not touch

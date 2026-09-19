@@ -595,8 +595,8 @@ def build(out_path: str) -> dict:
     if os.path.exists("out/swevo/verdict_crosstab.json"):
         vc = _j("verdict_crosstab")
         vrun = "swevo_verdict_crosstab"
-        for k in ("papers", "pages_read", "tested_groups", "located", "agree", "papers_located"):
-            reg.add("vc " + k.replace("_", " "), vc[k], provenance=vrun)
+        for k in ("papers", "pages_read", "tested_groups", "located", "agree", "papers_located", "papers_first_draw", "papers_second_draw", "papers_fully_read"):
+            reg.add("vc " + k.replace("_", " "), vc.get(k, 0), provenance=vrun)
         reg.add("vc pct located", _pct(vc["pct_located"]), provenance=vrun)
         reg.add("vc pct agree", _pct(vc["pct_agree"]) if vc["pct_agree"] is not None else "--", provenance=vrun)
         reg.add("vc ci agree", f"[{vc['ci_agree'][0]}, {vc['ci_agree'][1]}]" if vc.get("ci_agree") else "--", provenance=vrun)

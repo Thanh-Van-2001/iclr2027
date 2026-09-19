@@ -1,0 +1,2497 @@
+[
+ {
+  "id": "0236",
+  "tables": [
+   {
+    "caption_start": "Table 1. Testing results for the 10 chaotic mapping algorithms",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "page",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "F1",
+      "direction": "lower",
+      "winner_mean": "9.11E+02",
+      "winner_disp": "none",
+      "runner_mean": "9.36E+02",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F2",
+      "direction": "lower",
+      "winner_mean": "2.00E+02",
+      "winner_disp": "none",
+      "runner_mean": "2.00E+02",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F3",
+      "direction": "lower",
+      "winner_mean": "3.00E+02",
+      "winner_disp": "none",
+      "runner_mean": "3.00E+02",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F4",
+      "direction": "lower",
+      "winner_mean": "4.04E+02",
+      "winner_disp": "none",
+      "runner_mean": "4.04E+02",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F5",
+      "direction": "lower",
+      "winner_mean": "5.10E+02",
+      "winner_disp": "none",
+      "runner_mean": "5.10E+02",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F6",
+      "direction": "lower",
+      "winner_mean": "6.00E+02",
+      "winner_disp": "none",
+      "runner_mean": "6.00E+02",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F7",
+      "direction": "lower",
+      "winner_mean": "7.28E+02",
+      "winner_disp": "none",
+      "runner_mean": "7.31E+02",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F8",
+      "direction": "lower",
+      "winner_mean": "8.09E+02",
+      "winner_disp": "none",
+      "runner_mean": "8.10E+02",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F9",
+      "direction": "lower",
+      "winner_mean": "9.00E+02",
+      "winner_disp": "none",
+      "runner_mean": "9.00E+02",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F10",
+      "direction": "lower",
+      "winner_mean": "1.58E+03",
+      "winner_disp": "none",
+      "runner_mean": "1.71E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F11",
+      "direction": "lower",
+      "winner_mean": "1.11E+03",
+      "winner_disp": "none",
+      "runner_mean": "1.12E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F12",
+      "direction": "lower",
+      "winner_mean": "8.06E+03",
+      "winner_disp": "none",
+      "runner_mean": "9.35E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F13",
+      "direction": "lower",
+      "winner_mean": "2.12E+03",
+      "winner_disp": "none",
+      "runner_mean": "2.33E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F14",
+      "direction": "lower",
+      "winner_mean": "1.43E+03",
+      "winner_disp": "none",
+      "runner_mean": "1.43E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F15",
+      "direction": "lower",
+      "winner_mean": "1.52E+03",
+      "winner_disp": "none",
+      "runner_mean": "1.53E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F16",
+      "direction": "lower",
+      "winner_mean": "1.61E+03",
+      "winner_disp": "none",
+      "runner_mean": "1.61E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F17",
+      "direction": "lower",
+      "winner_mean": "1.73E+03",
+      "winner_disp": "none",
+      "runner_mean": "1.74E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F18",
+      "direction": "lower",
+      "winner_mean": "1.96E+03",
+      "winner_disp": "none",
+      "runner_mean": "2.27E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F19",
+      "direction": "lower",
+      "winner_mean": "1.91E+03",
+      "winner_disp": "none",
+      "runner_mean": "1.91E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F20",
+      "direction": "lower",
+      "winner_mean": "2.02E+03",
+      "winner_disp": "none",
+      "runner_mean": "2.02E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F21",
+      "direction": "lower",
+      "winner_mean": "2.20E+03",
+      "winner_disp": "none",
+      "runner_mean": "2.25E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F22",
+      "direction": "lower",
+      "winner_mean": "2.30E+03",
+      "winner_disp": "none",
+      "runner_mean": "2.30E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F23",
+      "direction": "lower",
+      "winner_mean": "2.62E+03",
+      "winner_disp": "none",
+      "runner_mean": "2.62E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F24",
+      "direction": "lower",
+      "winner_mean": "2.67E+03",
+      "winner_disp": "none",
+      "runner_mean": "2.71E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F25",
+      "direction": "lower",
+      "winner_mean": "2.91E+03",
+      "winner_disp": "none",
+      "runner_mean": "2.92E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F26",
+      "direction": "lower",
+      "winner_mean": "2.93E+03",
+      "winner_disp": "none",
+      "runner_mean": "2.94E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F27",
+      "direction": "lower",
+      "winner_mean": "3.10E+03",
+      "winner_disp": "none",
+      "runner_mean": "3.10E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F28",
+      "direction": "lower",
+      "winner_mean": "3.07E+03",
+      "winner_disp": "none",
+      "runner_mean": "3.14E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F29",
+      "direction": "lower",
+      "winner_mean": "3.18E+03",
+      "winner_disp": "none",
+      "runner_mean": "3.18E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "F30",
+      "direction": "lower",
+      "winner_mean": "4.67E+03",
+      "winner_disp": "none",
+      "runner_mean": "5.61E+03",
+      "runner_disp": "none"
+     }
+    ],
+    "note": "Skipped Frideman and rank rows as they are not means."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0238",
+  "tables": [],
+  "figure_band_on_page": "",
+  "note": "failed: no valid JSON after three attempts",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0285",
+  "tables": [
+   {
+    "caption_start": "Table 3. Comparison of",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "20",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "20*3*2*3",
+      "direction": "higher",
+      "winner_mean": "0.64",
+      "winner_disp": "none",
+      "runner_mean": "0.20",
+      "runner_disp": "none"
+     },
+     {
+      "label": "20*3*2*5",
+      "direction": "higher",
+      "winner_mean": "1",
+      "winner_disp": "none",
+      "runner_mean": "0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "20*3*3*3",
+      "direction": "higher",
+      "winner_mean": "0.38",
+      "winner_disp": "none",
+      "runner_mean": "0.14",
+      "runner_disp": "none"
+     },
+     {
+      "label": "20*3*3*5",
+      "direction": "higher",
+      "winner_mean": "0.68",
+      "winner_disp": "none",
+      "runner_mean": "0.17",
+      "runner_disp": "none"
+     },
+     {
+      "label": "20*5*2*3",
+      "direction": "higher",
+      "winner_mean": "0.52",
+      "winner_disp": "none",
+      "runner_mean": "0.34",
+      "runner_disp": "none"
+     },
+     {
+      "label": "20*5*2*5",
+      "direction": "higher",
+      "winner_mean": "0.56",
+      "winner_disp": "none",
+      "runner_mean": "0.22",
+      "runner_disp": "none"
+     },
+     {
+      "label": "20*5*3*3",
+      "direction": "higher",
+      "winner_mean": "0.21",
+      "winner_disp": "none",
+      "runner_mean": "0.19",
+      "runner_disp": "none"
+     },
+     {
+      "label": "20*5*3*5",
+      "direction": "higher",
+      "winner_mean": "0.66",
+      "winner_disp": "none",
+      "runner_mean": "0.31",
+      "runner_disp": "none"
+     },
+     {
+      "label": "30*3*2*3",
+      "direction": "higher",
+      "winner_mean": "0.64",
+      "winner_disp": "none",
+      "runner_mean": "0.25",
+      "runner_disp": "none"
+     },
+     {
+      "label": "30*3*2*5",
+      "direction": "higher",
+      "winner_mean": "0.26",
+      "winner_disp": "none",
+      "runner_mean": "0.12",
+      "runner_disp": "none"
+     },
+     {
+      "label": "30*3*3*3",
+      "direction": "higher",
+      "winner_mean": "0.84",
+      "winner_disp": "none",
+      "runner_mean": "0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "30*3*3*5",
+      "direction": "higher",
+      "winner_mean": "0.88",
+      "winner_disp": "none",
+      "runner_mean": "0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "30*5*2*3",
+      "direction": "higher",
+      "winner_mean": "0.72",
+      "winner_disp": "none",
+      "runner_mean": "0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "30*5*2*5",
+      "direction": "higher",
+      "winner_mean": "0.66",
+      "winner_disp": "none",
+      "runner_mean": "0.12",
+      "runner_disp": "none"
+     },
+     {
+      "label": "30*5*3*3",
+      "direction": "higher",
+      "winner_mean": "0.50",
+      "winner_disp": "none",
+      "runner_mean": "0.24",
+      "runner_disp": "none"
+     },
+     {
+      "label": "30*5*3*5",
+      "direction": "higher",
+      "winner_mean": "0.61",
+      "winner_disp": "none",
+      "runner_mean": "0.14",
+      "runner_disp": "none"
+     },
+     {
+      "label": "50*3*2*3",
+      "direction": "higher",
+      "winner_mean": "0.32",
+      "winner_disp": "none",
+      "runner_mean": "0.18",
+      "runner_disp": "none"
+     },
+     {
+      "label": "50*3*2*5",
+      "direction": "higher",
+      "winner_mean": "0.40",
+      "winner_disp": "none",
+      "runner_mean": "0.29",
+      "runner_disp": "none"
+     },
+     {
+      "label": "50*3*3*3",
+      "direction": "higher",
+      "winner_mean": "0.8",
+      "winner_disp": "none",
+      "runner_mean": "0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "50*3*3*5",
+      "direction": "higher",
+      "winner_mean": "1",
+      "winner_disp": "none",
+      "runner_mean": "0",
+      "runner_disp": "none"
+     },
+     {
+      "label": "50*5*2*3",
+      "direction": "higher",
+      "winner_mean": "0.72",
+      "winner_disp": "none",
+      "runner_mean": "0.18",
+      "runner_disp": "none"
+     },
+     {
+      "label": "50*5*2*5",
+      "direction": "higher",
+      "winner_mean": "0.44",
+      "winner_disp": "none",
+      "runner_mean": "0.40",
+      "runner_disp": "none"
+     },
+     {
+      "label": "50*5*3*3",
+      "direction": "higher",
+      "winner_mean": "0.46",
+      "winner_disp": "none",
+      "runner_mean": "0.22",
+      "runner_disp": "none"
+     },
+     {
+      "label": "50*5*3*5",
+      "direction": "higher",
+      "winner_mean": "0.84",
+      "winner_disp": "none",
+      "runner_mean": "0",
+      "runner_disp": "none"
+     }
+    ],
+    "note": "The table has two pairs of columns: C(A,B) vs C(B,A) and VH(A) vs VH(B). I extracted the C(A,B) vs C(B,A) pair as the groups."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "low"
+ },
+ {
+  "id": "0481",
+  "tables": [
+   {
+    "caption_start": "Table 4. IGD",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "separate_row",
+    "groups": [
+     {
+      "label": "ZDT1",
+      "direction": "lower",
+      "winner_mean": "2.1907e-3",
+      "winner_disp": "(4.16e-5)",
+      "runner_mean": "1.3712e-2",
+      "runner_disp": "(4.58e-3)-"
+     },
+     {
+      "label": "ZDT2",
+      "direction": "lower",
+      "winner_mean": "2.1965e-3",
+      "winner_disp": "(4.63e-5)",
+      "runner_mean": "4.5739e-3",
+      "runner_disp": "(2.61e-3)-"
+     },
+     {
+      "label": "ZDT3",
+      "direction": "lower",
+      "winner_mean": "2.6517e-3",
+      "winner_disp": "(1.10e-4)",
+      "runner_mean": "4.1205e-2",
+      "runner_disp": "(9.38e-3)-"
+     },
+     {
+      "label": "ZDT4",
+      "direction": "lower",
+      "winner_mean": "2.9707e-3",
+      "winner_disp": "(2.84e-4)+",
+      "runner_mean": "7.5896e-2",
+      "runner_disp": "(1.42e-1)+"
+     },
+     {
+      "label": "ZDT6",
+      "direction": "lower",
+      "winner_mean": "1.7408e-3",
+      "winner_disp": "(3.06e-5)",
+      "runner_mean": "1.8454e-3",
+      "runner_disp": "(8.00e-4)≈"
+     },
+     {
+      "label": "UF1",
+      "direction": "lower",
+      "winner_mean": "1.0627e-1",
+      "winner_disp": "(1.39e-2)+",
+      "runner_mean": "1.1288e-1",
+      "runner_disp": "(2.25e-2)+"
+     },
+     {
+      "label": "UF2",
+      "direction": "lower",
+      "winner_mean": "6.4362e-2",
+      "winner_disp": "(6.94e-3)+",
+      "runner_mean": "6.8977e-2",
+      "runner_disp": "(5.29e-3)"
+     },
+     {
+      "label": "UF3",
+      "direction": "lower",
+      "winner_mean": "3.0121e-1",
+      "winner_disp": "(3.34e-2)≈",
+      "runner_mean": "3.1789e-1",
+      "runner_disp": "(3.81e-2)"
+     },
+     {
+      "label": "UF4",
+      "direction": "lower",
+      "winner_mean": "6.2140e-2",
+      "winner_disp": "(6.10e-3)",
+      "runner_mean": "7.9543e-2",
+      "runner_disp": "(2.90e-3)-"
+     },
+     {
+      "label": "UF5",
+      "direction": "lower",
+      "winner_mean": "8.7044e-1",
+      "winner_disp": "(2.56e-1)+",
+      "runner_mean": "9.1580e-1",
+      "runner_disp": "(1.39e-1)+"
+     },
+     {
+      "label": "UF6",
+      "direction": "lower",
+      "winner_mean": "4.5565e-1",
+      "winner_disp": "(1.96e-1)+",
+      "runner_mean": "4.6413e-1",
+      "runner_disp": "(7.29e-2)+"
+     },
+     {
+      "label": "UF7",
+      "direction": "lower",
+      "winner_mean": "1.0736e-1",
+      "winner_disp": "(1.43e-2)",
+      "runner_mean": "1.4631e-1",
+      "runner_disp": "(9.33e-2)≈"
+     },
+     {
+      "label": "UF8",
+      "direction": "lower",
+      "winner_mean": "2.9259e-1",
+      "winner_disp": "(7.35e-2)",
+      "runner_mean": "3.5897e-1",
+      "runner_disp": "(5.37e-2)-"
+     },
+     {
+      "label": "UF9",
+      "direction": "lower",
+      "winner_mean": "1.4122e-1",
+      "winner_disp": "(1.26e-2)",
+      "runner_mean": "3.2479e-1",
+      "runner_disp": "(3.46e-2)-"
+     },
+     {
+      "label": "UF10",
+      "direction": "lower",
+      "winner_mean": "8.3621e-1",
+      "winner_disp": "(1.85e-1)",
+      "runner_mean": "1.0984e+0",
+      "runner_disp": "(2.74e-1)-"
+     },
+     {
+      "label": "DTLZ1",
+      "direction": "lower",
+      "winner_mean": "1.5715e-2",
+      "winner_disp": "(5.98e-4)+",
+      "runner_mean": "2.6877e+0",
+      "runner_disp": "(8.82e-1)+"
+     },
+     {
+      "label": "DTLZ2",
+      "direction": "lower",
+      "winner_mean": "4.2223e-2",
+      "winner_disp": "(6.83e-4)+",
+      "runner_mean": "4.2247e-2",
+      "runner_disp": "(1.67e-3)+"
+     },
+     {
+      "label": "DTLZ3",
+      "direction": "lower",
+      "winner_mean": "4.6832e-2",
+      "winner_disp": "(1.65e-2)+",
+      "runner_mean": "1.5626e+1",
+      "runner_disp": "(4.60e+0)+"
+     },
+     {
+      "label": "DTLZ4",
+      "direction": "lower",
+      "winner_mean": "5.8785e-2",
+      "winner_disp": "(9.11e-2)+",
+      "runner_mean": "2.1236e-1",
+      "runner_disp": "(1.15e-1)+"
+     },
+     {
+      "label": "DTLZ5",
+      "direction": "lower",
+      "winner_mean": "3.8335e-3",
+      "winner_disp": "(4.34e-4)+",
+      "runner_mean": "9.0050e-3",
+      "runner_disp": "(1.33e-3)"
+     },
+     {
+      "label": "DTLZ6",
+      "direction": "lower",
+      "winner_mean": "2.3094e-3",
+      "winner_disp": "(3.67e-5)",
+      "runner_mean": "1.0718e-2",
+      "runner_disp": "(2.58e-2)-"
+     },
+     {
+      "label": "DTLZ7",
+      "direction": "lower",
+      "winner_mean": "4.4846e-2",
+      "winner_disp": "(7.09e-3)",
+      "runner_mean": "1.0564e-1",
+      "runner_disp": "(2.58e-2)-"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "low"
+ },
+ {
+  "id": "0507",
+  "tables": [
+   {
+    "caption_start": "Table 3. Network lifetime in scenario",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 4. Network lifetime in scenario",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "0 FND",
+      "direction": "higher",
+      "winner_mean": "263",
+      "winner_disp": "none",
+      "runner_mean": "138",
+      "runner_disp": "none"
+     },
+     {
+      "label": "0 HND",
+      "direction": "higher",
+      "winner_mean": "324",
+      "winner_disp": "none",
+      "runner_mean": "299",
+      "runner_disp": "none"
+     },
+     {
+      "label": "0.15 FND",
+      "direction": "higher",
+      "winner_mean": "188",
+      "winner_disp": "none",
+      "runner_mean": "124",
+      "runner_disp": "none"
+     },
+     {
+      "label": "0.15 HND",
+      "direction": "higher",
+      "winner_mean": "292",
+      "winner_disp": "none",
+      "runner_mean": "261",
+      "runner_disp": "none"
+     },
+     {
+      "label": "0.35 FND",
+      "direction": "higher",
+      "winner_mean": "152",
+      "winner_disp": "none",
+      "runner_mean": "104",
+      "runner_disp": "none"
+     },
+     {
+      "label": "0.35 HND",
+      "direction": "higher",
+      "winner_mean": "253",
+      "winner_disp": "none",
+      "runner_mean": "226",
+      "runner_disp": "none"
+     },
+     {
+      "label": "0.55 FND",
+      "direction": "higher",
+      "winner_mean": "119",
+      "winner_disp": "none",
+      "runner_mean": "58",
+      "runner_disp": "none"
+     },
+     {
+      "label": "0.55 HND",
+      "direction": "higher",
+      "winner_mean": "209",
+      "winner_disp": "none",
+      "runner_mean": "300",
+      "runner_disp": "none"
+     },
+     {
+      "label": "1.15 FND",
+      "direction": "higher",
+      "winner_mean": "99",
+      "winner_disp": "none",
+      "runner_mean": "35",
+      "runner_disp": "none"
+     },
+     {
+      "label": "1.15 HND",
+      "direction": "higher",
+      "winner_mean": "154",
+      "winner_disp": "none",
+      "runner_mean": "150",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 5. Network lifetime in scenario",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "0 FND",
+      "direction": "higher",
+      "winner_mean": "326",
+      "winner_disp": "none",
+      "runner_mean": "152",
+      "runner_disp": "none"
+     },
+     {
+      "label": "0.15 FND",
+      "direction": "higher",
+      "winner_mean": "142",
+      "winner_disp": "none",
+      "runner_mean": "113",
+      "runner_disp": "none"
+     },
+     {
+      "label": "0.15 HND",
+      "direction": "higher",
+      "winner_mean": "201",
+      "winner_disp": "none",
+      "runner_mean": "198",
+      "runner_disp": "none"
+     },
+     {
+      "label": "0.35 FND",
+      "direction": "higher",
+      "winner_mean": "96",
+      "winner_disp": "none",
+      "runner_mean": "62",
+      "runner_disp": "none"
+     },
+     {
+      "label": "0.55 FND",
+      "direction": "higher",
+      "winner_mean": "82",
+      "winner_disp": "none",
+      "runner_mean": "33",
+      "runner_disp": "none"
+     },
+     {
+      "label": "0.55 HND",
+      "direction": "higher",
+      "winner_mean": "119",
+      "winner_disp": "none",
+      "runner_mean": "119",
+      "runner_disp": "none"
+     },
+     {
+      "label": "1.15 FND",
+      "direction": "higher",
+      "winner_mean": "48",
+      "winner_disp": "none",
+      "runner_mean": "6",
+      "runner_disp": "none"
+     },
+     {
+      "label": "1.15 HND",
+      "direction": "higher",
+      "winner_mean": "99",
+      "winner_disp": "none",
+      "runner_mean": "82",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0546",
+  "tables": [
+   {
+    "caption_start": "Table 8. The experimental results of 15 algorithms on classical test functions (Dim = 100).",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "separate_row",
+    "groups": [
+     {
+      "label": "F5",
+      "direction": "lower",
+      "winner_mean": "1.21E-04",
+      "winner_disp": "1.35E-04",
+      "runner_mean": "6.23E-03",
+      "runner_disp": "1.15E-02"
+     },
+     {
+      "label": "F6",
+      "direction": "lower",
+      "winner_mean": "5.85E-11",
+      "winner_disp": "3.20E-10",
+      "runner_mean": "2.23E-05",
+      "runner_disp": "6.67E-05"
+     },
+     {
+      "label": "F7",
+      "direction": "lower",
+      "winner_mean": "5.27E-05",
+      "winner_disp": "6.12E-05",
+      "runner_mean": "7.37E-05",
+      "runner_disp": "5.40E-05"
+     },
+     {
+      "label": "F8",
+      "direction": "lower",
+      "winner_mean": "- 4.19E+04",
+      "winner_disp": "2.33E+02",
+      "runner_mean": "- 4.17E+04",
+      "runner_disp": "7.32E+02"
+     },
+     {
+      "label": "F12",
+      "direction": "lower",
+      "winner_mean": "7.18E-11",
+      "winner_disp": "3.72E-10",
+      "runner_mean": "1.93E-08",
+      "runner_disp": "4.88E-09"
+     },
+     {
+      "label": "F13",
+      "direction": "lower",
+      "winner_mean": "1.84E-11",
+      "winner_disp": "7.11E-11",
+      "runner_mean": "4.59E-08",
+      "runner_disp": "4.84E-08"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0681",
+  "tables": [
+   {
+    "caption_start": "Table 3. Simulated test results for test system 1 only economic scheduling.",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Multiple cells are bolded in the same rows."
+   },
+   {
+    "caption_start": "Table 4. Simulated test results for test system 1 only emission scheduling.",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Total cost ($/h)",
+      "direction": "lower",
+      "winner_mean": "50,063.6678",
+      "winner_disp": "none",
+      "runner_mean": "50,080.00",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Total emission (kg/h)",
+      "direction": "lower",
+      "winner_mean": "696.63",
+      "winner_disp": "none",
+      "runner_mean": "696.5099",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Total loss (MW)",
+      "direction": "lower",
+      "winner_mean": "19.372",
+      "winner_disp": "none",
+      "runner_mean": "37.5530",
+      "runner_disp": "none"
+     },
+     {
+      "label": "CPU time",
+      "direction": "lower",
+      "winner_mean": "3.60",
+      "winner_disp": "none",
+      "runner_mean": "6.15",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 5. Simulated test results for test system 1 environmentally constrained economic emission (ECES) scheduling.",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "Total cost ($/h)",
+      "direction": "lower",
+      "winner_mean": "47,379.44",
+      "winner_disp": "none",
+      "runner_mean": "47,398.00",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Total emission (kg/h)",
+      "direction": "lower",
+      "winner_mean": "818.62",
+      "winner_disp": "none",
+      "runner_mean": "808.9096",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Total loss (MW)",
+      "direction": "lower",
+      "winner_mean": "33.97",
+      "winner_disp": "none",
+      "runner_mean": "36.4885",
+      "runner_disp": "none"
+     },
+     {
+      "label": "CPU time",
+      "direction": "lower",
+      "winner_mean": "3.60",
+      "winner_disp": "none",
+      "runner_mean": "6.82",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0930",
+  "tables": [],
+  "figure_band_on_page": "",
+  "note": "failed: no valid JSON after three attempts",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "0933",
+  "tables": [],
+  "figure_band_on_page": "",
+  "note": "failed: no valid JSON after three attempts",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1195",
+  "tables": [
+   {
+    "caption_start": "Table 3. Experimental outcomes test",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "y",
+    "bar_kind": "sd",
+    "n_runs": "30",
+    "n_source": "page",
+    "bar_form": "separate_row",
+    "groups": [
+     {
+      "label": "C 23",
+      "direction": "lower",
+      "winner_mean": "2.7071E+03",
+      "winner_disp": "1.6371E+01",
+      "runner_mean": "2.7283E+03",
+      "runner_disp": "2.2711E+01"
+     },
+     {
+      "label": "C 24",
+      "direction": "lower",
+      "winner_mean": "2.8735E+03",
+      "winner_disp": "1.6263E+01",
+      "runner_mean": "2.8887E+03",
+      "runner_disp": "1.6797E+01"
+     },
+     {
+      "label": "C 25",
+      "direction": "lower",
+      "winner_mean": "2.8909E+03",
+      "winner_disp": "1.1837E+01",
+      "runner_mean": "2.8921E+03",
+      "runner_disp": "9.9750E+00"
+     },
+     {
+      "label": "C 26",
+      "direction": "lower",
+      "winner_mean": "4.0471E+03",
+      "winner_disp": "6.9881E+02",
+      "runner_mean": "4.2541E+03",
+      "runner_disp": "4.2431E+02"
+     },
+     {
+      "label": "C 27",
+      "direction": "lower",
+      "winner_mean": "3.2095E+03",
+      "winner_disp": "8.9268E+00",
+      "runner_mean": "3.2241E+03",
+      "runner_disp": "1.3698E+01"
+     },
+     {
+      "label": "C 28",
+      "direction": "lower",
+      "winner_mean": "3.2364E+03",
+      "winner_disp": "1.6272E+01",
+      "runner_mean": "3.2423E+03",
+      "runner_disp": "1.9374E+01"
+     },
+     {
+      "label": "C 29",
+      "direction": "lower",
+      "winner_mean": "3.5672E+03",
+      "winner_disp": "1.8340E+02",
+      "runner_mean": "3.6857E+03",
+      "runner_disp": "1.5790E+02"
+     },
+     {
+      "label": "C 30",
+      "direction": "lower",
+      "winner_mean": "1.1502E+04",
+      "winner_disp": "4.7975E+03",
+      "runner_mean": "1.1840E+04",
+      "runner_disp": "5.6458E+03"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1199",
+  "tables": [
+   {
+    "caption_start": "Table 7. Experimental outcomes by Wilcoxon's",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "page",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "C 11",
+      "direction": "higher",
+      "winner_mean": "8.7663E-01",
+      "winner_disp": "none",
+      "runner_mean": "2.3243E-02",
+      "runner_disp": "none"
+     },
+     {
+      "label": "C 13",
+      "direction": "higher",
+      "winner_mean": "3.7904E-01",
+      "winner_disp": "none",
+      "runner_mean": "4.0772E-11",
+      "runner_disp": "none"
+     },
+     {
+      "label": "C 16",
+      "direction": "higher",
+      "winner_mean": "1.7613E-01",
+      "winner_disp": "none",
+      "runner_mean": "1.5014E-02",
+      "runner_disp": "none"
+     },
+     {
+      "label": "C 17",
+      "direction": "higher",
+      "winner_mean": "2.3985E-01",
+      "winner_disp": "none",
+      "runner_mean": "6.0971E-03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "C 20",
+      "direction": "higher",
+      "winner_mean": "1.6687E-01",
+      "winner_disp": "none",
+      "runner_mean": "7.2884E-03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "C 25",
+      "direction": "higher",
+      "winner_mean": "1.2967E-01",
+      "winner_disp": "none",
+      "runner_mean": "5.6073E-05",
+      "runner_disp": "none"
+     },
+     {
+      "label": "C 28",
+      "direction": "higher",
+      "winner_mean": "2.6433E-01",
+      "winner_disp": "none",
+      "runner_mean": "1.5178E-03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "C 30",
+      "direction": "higher",
+      "winner_mean": "3.6322E-01",
+      "winner_disp": "none",
+      "runner_mean": "2.3715E-10",
+      "runner_disp": "none"
+     }
+    ],
+    "note": "Wilcoxon test p-values"
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1309",
+  "tables": [
+   {
+    "caption_start": "Table 8. Mean value assessment of",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "f1",
+      "direction": "lower",
+      "winner_mean": "4.470E+03",
+      "winner_disp": "none",
+      "runner_mean": "8.206E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f2",
+      "direction": "lower",
+      "winner_mean": "7.615E+27",
+      "winner_disp": "none",
+      "runner_mean": "1.572E+30",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f3",
+      "direction": "lower",
+      "winner_mean": "2.035E+04",
+      "winner_disp": "none",
+      "runner_mean": "2.920E+04",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f4",
+      "direction": "lower",
+      "winner_mean": "3.814E+01",
+      "winner_disp": "none",
+      "runner_mean": "4.279E+01",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f5",
+      "direction": "lower",
+      "winner_mean": "2.667E+08",
+      "winner_disp": "none",
+      "runner_mean": "1.484E+09",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f6",
+      "direction": "lower",
+      "winner_mean": "5.490E+03",
+      "winner_disp": "none",
+      "runner_mean": "1.117E+04",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f7",
+      "direction": "lower",
+      "winner_mean": "3.467E+07",
+      "winner_disp": "none",
+      "runner_mean": "2.303E+08",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f8",
+      "direction": "lower",
+      "winner_mean": "-9.706E+02",
+      "winner_disp": "none",
+      "runner_mean": "-1.562E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f9",
+      "direction": "lower",
+      "winner_mean": "4.986E+03",
+      "winner_disp": "none",
+      "runner_mean": "1.171E+04",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f10",
+      "direction": "lower",
+      "winner_mean": "1.157E+01",
+      "winner_disp": "none",
+      "runner_mean": "2.045E+01",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f11",
+      "direction": "lower",
+      "winner_mean": "2.595E+00",
+      "winner_disp": "none",
+      "runner_mean": "3.822E+00",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f12",
+      "direction": "lower",
+      "winner_mean": "1.015E+08",
+      "winner_disp": "none",
+      "runner_mean": "2.658E+08",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f13",
+      "direction": "lower",
+      "winner_mean": "1.763E+08",
+      "winner_disp": "none",
+      "runner_mean": "4.074E+08",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f14",
+      "direction": "lower",
+      "winner_mean": "6.294E-03",
+      "winner_disp": "none",
+      "runner_mean": "8.815E-03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f15",
+      "direction": "lower",
+      "winner_mean": "2.067E-02",
+      "winner_disp": "none",
+      "runner_mean": "6.150E-02",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f16",
+      "direction": "lower",
+      "winner_mean": "1.229E+01",
+      "winner_disp": "none",
+      "runner_mean": "4.488E+02",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f17",
+      "direction": "lower",
+      "winner_mean": "9.745E+03",
+      "winner_disp": "none",
+      "runner_mean": "2.247E+04",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f18",
+      "direction": "lower",
+      "winner_mean": "1.853E+02",
+      "winner_disp": "none",
+      "runner_mean": "2.178E+02",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f19",
+      "direction": "lower",
+      "winner_mean": "2.049E+02",
+      "winner_disp": "none",
+      "runner_mean": "2.317E+02",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f20",
+      "direction": "lower",
+      "winner_mean": "1.151E+05",
+      "winner_disp": "none",
+      "runner_mean": "4.432E+05",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f21",
+      "direction": "lower",
+      "winner_mean": "3.927E+08",
+      "winner_disp": "none",
+      "runner_mean": "1.198E+09",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f22",
+      "direction": "lower",
+      "winner_mean": "4.904E+16",
+      "winner_disp": "none",
+      "runner_mean": "8.605E+17",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f23",
+      "direction": "lower",
+      "winner_mean": "-2.536E+03",
+      "winner_disp": "none",
+      "runner_mean": "-1.312E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f24",
+      "direction": "lower",
+      "winner_mean": "4.988E+03",
+      "winner_disp": "none",
+      "runner_mean": "8.587E+03",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f25",
+      "direction": "lower",
+      "winner_mean": "4.317E+02",
+      "winner_disp": "none",
+      "runner_mean": "5.079E+02",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f26",
+      "direction": "lower",
+      "winner_mean": "-2.813E+10",
+      "winner_disp": "none",
+      "runner_mean": "-1.691E+13",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f27",
+      "direction": "lower",
+      "winner_mean": "7.944E+04",
+      "winner_disp": "none",
+      "runner_mean": "1.648E+05",
+      "runner_disp": "none"
+     },
+     {
+      "label": "f28",
+      "direction": "lower",
+      "winner_mean": "-7.573E+00",
+      "winner_disp": "none",
+      "runner_mean": "-2.732E+01",
+      "runner_disp": "none"
+     }
+    ],
+    "note": "For negative values, the bolded value is sometimes not the lowest (e.g., f8, f26, f28), but direction is assumed lower based on positive values."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1425",
+  "tables": [
+   {
+    "caption_start": "Table 8. Pairwise comparison of mean F1-scores",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "y",
+    "bar_kind": "unlabelled",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "paren",
+    "groups": [],
+    "note": "No bold cells found despite caption."
+   },
+   {
+    "caption_start": "Table 9. Comparison of PHONEME Indian results",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "20% Accuracy",
+      "direction": "higher",
+      "winner_mean": "83.7",
+      "winner_disp": "none",
+      "runner_mean": "83.2",
+      "runner_disp": "none"
+     },
+     {
+      "label": "20% Precision",
+      "direction": "higher",
+      "winner_mean": "68.9",
+      "winner_disp": "none",
+      "runner_mean": "68.1",
+      "runner_disp": "none"
+     },
+     {
+      "label": "20% Recall",
+      "direction": "higher",
+      "winner_mean": "87.1",
+      "winner_disp": "none",
+      "runner_mean": "86.9",
+      "runner_disp": "none"
+     },
+     {
+      "label": "20% F1 Score",
+      "direction": "higher",
+      "winner_mean": "73.8",
+      "winner_disp": "none",
+      "runner_mean": "73.2",
+      "runner_disp": "none"
+     },
+     {
+      "label": "40% Precision",
+      "direction": "higher",
+      "winner_mean": "65.9",
+      "winner_disp": "none",
+      "runner_mean": "64.7",
+      "runner_disp": "none"
+     },
+     {
+      "label": "40% F1 Score",
+      "direction": "higher",
+      "winner_mean": "73.8",
+      "winner_disp": "none",
+      "runner_mean": "73.4",
+      "runner_disp": "none"
+     },
+     {
+      "label": "40% ROC AUC",
+      "direction": "higher",
+      "winner_mean": "83.5",
+      "winner_disp": "none",
+      "runner_mean": "83.1",
+      "runner_disp": "none"
+     },
+     {
+      "label": "60% Accuracy",
+      "direction": "higher",
+      "winner_mean": "83.9",
+      "winner_disp": "none",
+      "runner_mean": "82.6",
+      "runner_disp": "none"
+     },
+     {
+      "label": "60% Precision",
+      "direction": "higher",
+      "winner_mean": "68.0",
+      "winner_disp": "none",
+      "runner_mean": "66.2",
+      "runner_disp": "none"
+     },
+     {
+      "label": "60% Recall",
+      "direction": "higher",
+      "winner_mean": "89.7",
+      "winner_disp": "none",
+      "runner_mean": "89.5",
+      "runner_disp": "none"
+     },
+     {
+      "label": "60% F1 Score",
+      "direction": "higher",
+      "winner_mean": "75.0",
+      "winner_disp": "none",
+      "runner_mean": "74.6",
+      "runner_disp": "none"
+     },
+     {
+      "label": "60% ROC AUC",
+      "direction": "higher",
+      "winner_mean": "84.3",
+      "winner_disp": "none",
+      "runner_mean": "83.8",
+      "runner_disp": "none"
+     },
+     {
+      "label": "80% Accuracy",
+      "direction": "higher",
+      "winner_mean": "80.9",
+      "winner_disp": "none",
+      "runner_mean": "80.8",
+      "runner_disp": "none"
+     },
+     {
+      "label": "80% Precision",
+      "direction": "higher",
+      "winner_mean": "61.6",
+      "winner_disp": "none",
+      "runner_mean": "61.2",
+      "runner_disp": "none"
+     },
+     {
+      "label": "80% Recall",
+      "direction": "higher",
+      "winner_mean": "94.2",
+      "winner_disp": "none",
+      "runner_mean": "90.7",
+      "runner_disp": "none"
+     },
+     {
+      "label": "80% ROC AUC",
+      "direction": "higher",
+      "winner_mean": "83.8",
+      "winner_disp": "none",
+      "runner_mean": "83.1",
+      "runner_disp": "none"
+     },
+     {
+      "label": "100% Accuracy",
+      "direction": "higher",
+      "winner_mean": "79.6",
+      "winner_disp": "none",
+      "runner_mean": "79.5",
+      "runner_disp": "none"
+     },
+     {
+      "label": "100% Precision",
+      "direction": "higher",
+      "winner_mean": "60.8",
+      "winner_disp": "none",
+      "runner_mean": "59.7",
+      "runner_disp": "none"
+     },
+     {
+      "label": "100% Recall",
+      "direction": "higher",
+      "winner_mean": "94.2",
+      "winner_disp": "none",
+      "runner_mean": "92.7",
+      "runner_disp": "none"
+     },
+     {
+      "label": "100% F1 Score",
+      "direction": "higher",
+      "winner_mean": "72.7",
+      "winner_disp": "none",
+      "runner_mean": "71.2",
+      "runner_disp": "none"
+     },
+     {
+      "label": "100% ROC AUC",
+      "direction": "higher",
+      "winner_mean": "82.7",
+      "winner_disp": "none",
+      "runner_mean": "82.3",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1453",
+  "tables": [
+   {
+    "caption_start": "Table 5. Average fitness comparison",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "page",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "base_exactly",
+      "direction": "lower",
+      "winner_mean": "0.0055",
+      "winner_disp": "none",
+      "runner_mean": "0.0074",
+      "runner_disp": "none"
+     },
+     {
+      "label": "base_BreastEW",
+      "direction": "lower",
+      "winner_mean": "0.0027",
+      "winner_disp": "none",
+      "runner_mean": "0.0072",
+      "runner_disp": "none"
+     },
+     {
+      "label": "base_M-of-n3",
+      "direction": "lower",
+      "winner_mean": "0.0012",
+      "winner_disp": "none",
+      "runner_mean": "0.0012",
+      "runner_disp": "none"
+     },
+     {
+      "label": "BreastEW",
+      "direction": "lower",
+      "winner_mean": "0.0101",
+      "winner_disp": "none",
+      "runner_mean": "0.0105",
+      "runner_disp": "none"
+     },
+     {
+      "label": "KrvskpEW",
+      "direction": "lower",
+      "winner_mean": "0.0131",
+      "winner_disp": "none",
+      "runner_mean": "0.0128",
+      "runner_disp": "none"
+     },
+     {
+      "label": "SonarEW",
+      "direction": "lower",
+      "winner_mean": "0.0058",
+      "winner_disp": "none",
+      "runner_mean": "0.0065",
+      "runner_disp": "none"
+     },
+     {
+      "label": "SpectEW",
+      "direction": "lower",
+      "winner_mean": "0.0379",
+      "winner_disp": "none",
+      "runner_mean": "0.0437",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Waveform",
+      "direction": "lower",
+      "winner_mean": "0.0122",
+      "winner_disp": "none",
+      "runner_mean": "0.0925",
+      "runner_disp": "none"
+     },
+     {
+      "label": "CongressEW",
+      "direction": "lower",
+      "winner_mean": "0.0010",
+      "winner_disp": "none",
+      "runner_mean": "0.0043",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Ionosphere",
+      "direction": "lower",
+      "winner_mean": "0.0297",
+      "winner_disp": "none",
+      "runner_mean": "0.0307",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 6. Comparison between CDMO8",
+    "results_table": "y",
+    "orientation": "none",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "page",
+    "bar_form": "none",
+    "groups": [],
+    "note": "Multiple bold cells per row in many sections."
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "low"
+ },
+ {
+  "id": "1590",
+  "tables": [
+   {
+    "caption_start": "Table 3. Performance evaluation of",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "none",
+    "n_source": "none",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "MSE Text Score",
+      "direction": "lower",
+      "winner_mean": "0.3950",
+      "winner_disp": "none",
+      "runner_mean": "0.3958",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MSE Text Sentiment",
+      "direction": "lower",
+      "winner_mean": "0.0372",
+      "winner_disp": "none",
+      "runner_mean": "0.0375",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MSE Photo Score",
+      "direction": "lower",
+      "winner_mean": "0.5238",
+      "winner_disp": "none",
+      "runner_mean": "0.5263",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MSE Photo Sentiment",
+      "direction": "lower",
+      "winner_mean": "0.0717",
+      "winner_disp": "none",
+      "runner_mean": "0.0718",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MSE Merge Score",
+      "direction": "lower",
+      "winner_mean": "0.4165",
+      "winner_disp": "none",
+      "runner_mean": "0.4237",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MSE Merge Sentiment",
+      "direction": "lower",
+      "winner_mean": "0.0413",
+      "winner_disp": "none",
+      "runner_mean": "0.0417",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MAE Text Score",
+      "direction": "lower",
+      "winner_mean": "0.4379",
+      "winner_disp": "none",
+      "runner_mean": "0.4381",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MAE Text Sentiment",
+      "direction": "lower",
+      "winner_mean": "0.1194",
+      "winner_disp": "none",
+      "runner_mean": "0.1196",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MAE Photo Score",
+      "direction": "lower",
+      "winner_mean": "0.5505",
+      "winner_disp": "none",
+      "runner_mean": "0.5559",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MAE Photo Sentiment",
+      "direction": "lower",
+      "winner_mean": "0.1738",
+      "winner_disp": "none",
+      "runner_mean": "0.1747",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MAE Merge Score",
+      "direction": "lower",
+      "winner_mean": "0.4530",
+      "winner_disp": "none",
+      "runner_mean": "0.4567",
+      "runner_disp": "none"
+     },
+     {
+      "label": "MAE Merge Sentiment",
+      "direction": "lower",
+      "winner_mean": "0.1285",
+      "winner_disp": "none",
+      "runner_mean": "0.1290",
+      "runner_disp": "none"
+     },
+     {
+      "label": "R2 Text Score",
+      "direction": "higher",
+      "winner_mean": "0.4566",
+      "winner_disp": "none",
+      "runner_mean": "0.4556",
+      "runner_disp": "none"
+     },
+     {
+      "label": "R2 Text Sentiment",
+      "direction": "higher",
+      "winner_mean": "0.5356",
+      "winner_disp": "none",
+      "runner_mean": "0.5317",
+      "runner_disp": "none"
+     },
+     {
+      "label": "R2 Photo Score",
+      "direction": "higher",
+      "winner_mean": "0.0281",
+      "winner_disp": "none",
+      "runner_mean": "0.0235",
+      "runner_disp": "none"
+     },
+     {
+      "label": "R2 Photo Sentiment",
+      "direction": "higher",
+      "winner_mean": "0.0152",
+      "winner_disp": "none",
+      "runner_mean": "0.0141",
+      "runner_disp": "none"
+     },
+     {
+      "label": "R2 Merge Score",
+      "direction": "higher",
+      "winner_mean": "0.4617",
+      "winner_disp": "none",
+      "runner_mean": "0.4524",
+      "runner_disp": "none"
+     },
+     {
+      "label": "R2 Merge Sentiment",
+      "direction": "higher",
+      "winner_mean": "0.5066",
+      "winner_disp": "none",
+      "runner_mean": "0.5027",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1696",
+  "tables": [
+   {
+    "caption_start": "Table 11. MdMRE values on different Software data sets based on different models.",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "COCOMO81",
+      "direction": "lower",
+      "winner_mean": "6.8146E-01",
+      "winner_disp": "none",
+      "runner_mean": "6.8275E-01",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Maxwell",
+      "direction": "lower",
+      "winner_mean": "5.5127E-01",
+      "winner_disp": "none",
+      "runner_mean": "5.6911E-01",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Desharnais",
+      "direction": "lower",
+      "winner_mean": "3.8504E-01",
+      "winner_disp": "none",
+      "runner_mean": "4.3524E-01",
+      "runner_disp": "none"
+     },
+     {
+      "label": "China",
+      "direction": "lower",
+      "winner_mean": "3.3131E-02",
+      "winner_disp": "none",
+      "runner_mean": "4.0870E-02",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Miyazaki",
+      "direction": "lower",
+      "winner_mean": "3.2851E-01",
+      "winner_disp": "none",
+      "runner_mean": "3.4222E-01",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 12. R2 values on different Software data sets based on different models.",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "COCOMO81",
+      "direction": "higher",
+      "winner_mean": "5.8163E-01",
+      "winner_disp": "none",
+      "runner_mean": "5.6235E-01",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Maxwell",
+      "direction": "higher",
+      "winner_mean": "6.8107E-01",
+      "winner_disp": "none",
+      "runner_mean": "6.7404E-01",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Desharnais",
+      "direction": "higher",
+      "winner_mean": "6.2088E-01",
+      "winner_disp": "none",
+      "runner_mean": "5.5923E-01",
+      "runner_disp": "none"
+     },
+     {
+      "label": "China",
+      "direction": "higher",
+      "winner_mean": "6.8261E-01",
+      "winner_disp": "none",
+      "runner_mean": "6.5114E-01",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Miyazaki",
+      "direction": "higher",
+      "winner_mean": "8.4133E-01",
+      "winner_disp": "none",
+      "runner_mean": "7.7331E-01",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   },
+   {
+    "caption_start": "Table 13. RMSE values on different Software data sets based on different models.",
+    "results_table": "y",
+    "orientation": "column",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "COCOMO81",
+      "direction": "lower",
+      "winner_mean": "8.9386E-02",
+      "winner_disp": "none",
+      "runner_mean": "1.0309E-01",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Maxwell",
+      "direction": "lower",
+      "winner_mean": "1.0091E-01",
+      "winner_disp": "none",
+      "runner_mean": "1.0710E-01",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Desharnais",
+      "direction": "lower",
+      "winner_mean": "1.1046E-01",
+      "winner_disp": "none",
+      "runner_mean": "1.2345E-01",
+      "runner_disp": "none"
+     },
+     {
+      "label": "China",
+      "direction": "lower",
+      "winner_mean": "8.2079E-02",
+      "winner_disp": "none",
+      "runner_mean": "8.9263E-02",
+      "runner_disp": "none"
+     },
+     {
+      "label": "Miyazaki",
+      "direction": "lower",
+      "winner_mean": "8.1746E-02",
+      "winner_disp": "none",
+      "runner_mean": "9.7849E-02",
+      "runner_disp": "none"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "default"
+ },
+ {
+  "id": "1713",
+  "tables": [
+   {
+    "caption_start": "Table 11. The average HV and IGD values",
+    "results_table": "y",
+    "orientation": "row",
+    "any_error_bar": "n",
+    "bar_kind": "none",
+    "n_runs": "30",
+    "n_source": "paper",
+    "bar_form": "none",
+    "groups": [
+     {
+      "label": "data1 HV",
+      "direction": "higher",
+      "winner_mean": "0.1706",
+      "winner_disp": "none",
+      "runner_mean": "0.0308",
+      "runner_disp": "none"
+     },
+     {
+      "label": "data1 IGD",
+      "direction": "lower",
+      "winner_mean": "0.0500",
+      "winner_disp": "none",
+      "runner_mean": "0.1213",
+      "runner_disp": "none"
+     },
+     {
+      "label": "data2 HV",
+      "direction": "higher",
+      "winner_mean": "0.1608",
+      "winner_disp": "none",
+      "runner_mean": "0.0506",
+      "runner_disp": "none"
+     },
+     {
+      "label": "data2 IGD",
+      "direction": "lower",
+      "winner_mean": "0.0394",
+      "winner_disp": "none",
+      "runner_mean": "0.2872",
+      "runner_disp": "none"
+     },
+     {
+      "label": "data3 HV",
+      "direction": "higher",
+      "winner_mean": "0.1615",
+      "winner_disp": "none",
+      "runner_mean": "0.0358",
+      "runner_disp": "none"
+     },
+     {
+      "label": "data3 IGD",
+      "direction": "lower",
+      "winner_mean": "0.1253",
+      "winner_disp": "none",
+      "runner_mean": "0.1486",
+      "runner_disp": "none"
+     },
+     {
+      "label": "data4 HV",
+      "direction": "higher",
+      "winner_mean": "0.1683",
+      "winner_disp": "none",
+      "runner_mean": "0.0848",
+      "runner_disp": "none"
+     },
+     {
+      "label": "data4 IGD",
+      "direction": "lower",
+      "winner_mean": "0.1638",
+      "winner_disp": "none",
+      "runner_mean": "1.6873",
+      "runner_disp": "none"
+     },
+     {
+      "label": "data5 HV",
+      "direction": "higher",
+      "winner_mean": "0.1320",
+      "winner_disp": "none",
+      "runner_mean": "0.0555",
+      "runner_disp": "none"
+     },
+     {
+      "label": "data5 IGD",
+      "direction": "lower",
+      "winner_mean": "0.5977",
+      "winner_disp": "none",
+      "runner_mean": "1.9795",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu01 HV",
+      "direction": "higher",
+      "winner_mean": "0.0735",
+      "winner_disp": "none",
+      "runner_mean": "0.0443",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu01 IGD",
+      "direction": "lower",
+      "winner_mean": "0.1572",
+      "winner_disp": "none",
+      "runner_mean": "0.3007",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu02 HV",
+      "direction": "higher",
+      "winner_mean": "0.0683",
+      "winner_disp": "none",
+      "runner_mean": "0.0460",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu02 IGD",
+      "direction": "lower",
+      "winner_mean": "0.4961",
+      "winner_disp": "none",
+      "runner_mean": "1.4559",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu03 HV",
+      "direction": "higher",
+      "winner_mean": "0.1082",
+      "winner_disp": "none",
+      "runner_mean": "0.0849",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu03 IGD",
+      "direction": "lower",
+      "winner_mean": "0.1390",
+      "winner_disp": "none",
+      "runner_mean": "0.2399",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu04 HV",
+      "direction": "higher",
+      "winner_mean": "0.1260",
+      "winner_disp": "none",
+      "runner_mean": "0.1208",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu04 IGD",
+      "direction": "lower",
+      "winner_mean": "0.3589",
+      "winner_disp": "none",
+      "runner_mean": "0.7326",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu05 HV",
+      "direction": "higher",
+      "winner_mean": "0.1316",
+      "winner_disp": "none",
+      "runner_mean": "0.1252",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu05 IGD",
+      "direction": "lower",
+      "winner_mean": "0.0169",
+      "winner_disp": "none",
+      "runner_mean": "0.0209",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu06 HV",
+      "direction": "higher",
+      "winner_mean": "0.1361",
+      "winner_disp": "none",
+      "runner_mean": "0.0931",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu06 IGD",
+      "direction": "lower",
+      "winner_mean": "0.0908",
+      "winner_disp": "none",
+      "runner_mean": "0.0999",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu07 HV",
+      "direction": "higher",
+      "winner_mean": "0.0952",
+      "winner_disp": "none",
+      "runner_mean": "0.0926",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu07 IGD",
+      "direction": "lower",
+      "winner_mean": "0.1589",
+      "winner_disp": "none",
+      "runner_mean": "0.1991",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu08 HV",
+      "direction": "higher",
+      "winner_mean": "0.0981",
+      "winner_disp": "none",
+      "runner_mean": "0.0894",
+      "runner_disp": "none"
+     },
+     {
+      "label": "remanu08 IGD",
+      "direction": "lower",
+      "winner_mean": "0.2210",
+      "winner_disp": "none",
+      "runner_mean": "0.4749",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMk01 HV",
+      "direction": "higher",
+      "winner_mean": "0.0628",
+      "winner_disp": "none",
+      "runner_mean": "0.0625",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMk01 IGD",
+      "direction": "lower",
+      "winner_mean": "0.7428",
+      "winner_disp": "none",
+      "runner_mean": "0.9074",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMk02 HV",
+      "direction": "higher",
+      "winner_mean": "0.0423",
+      "winner_disp": "none",
+      "runner_mean": "0.0373",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMk02 IGD",
+      "direction": "lower",
+      "winner_mean": "0.8166",
+      "winner_disp": "none",
+      "runner_mean": "0.9016",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMk03 HV",
+      "direction": "higher",
+      "winner_mean": "0.1412",
+      "winner_disp": "none",
+      "runner_mean": "0.1274",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMk03 IGD",
+      "direction": "lower",
+      "winner_mean": "1.7127",
+      "winner_disp": "none",
+      "runner_mean": "1.8033",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMk04 HV",
+      "direction": "higher",
+      "winner_mean": "0.1396",
+      "winner_disp": "none",
+      "runner_mean": "0.1364",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMk04 IGD",
+      "direction": "lower",
+      "winner_mean": "1.7098",
+      "winner_disp": "none",
+      "runner_mean": "1.8489",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMk05 HV",
+      "direction": "higher",
+      "winner_mean": "0.0915",
+      "winner_disp": "none",
+      "runner_mean": "0.0646",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMk05 IGD",
+      "direction": "lower",
+      "winner_mean": "2.8649",
+      "winner_disp": "none",
+      "runner_mean": "3.0428",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMk06 HV",
+      "direction": "higher",
+      "winner_mean": "0.0938",
+      "winner_disp": "none",
+      "runner_mean": "0.0581",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMk06 IGD",
+      "direction": "lower",
+      "winner_mean": "3.4538",
+      "winner_disp": "none",
+      "runner_mean": "3.8042",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMk07 HV",
+      "direction": "higher",
+      "winner_mean": "0.0676",
+      "winner_disp": "none",
+      "runner_mean": "0.0401",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMk07 IGD",
+      "direction": "lower",
+      "winner_mean": "2.7827",
+      "winner_disp": "none",
+      "runner_mean": "3.9271",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMk08 HV",
+      "direction": "higher",
+      "winner_mean": "0.0306",
+      "winner_disp": "none",
+      "runner_mean": "0.0256",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMk08 IGD",
+      "direction": "lower",
+      "winner_mean": "2.2849",
+      "winner_disp": "none",
+      "runner_mean": "2.3844",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMk09 HV",
+      "direction": "higher",
+      "winner_mean": "0.0918",
+      "winner_disp": "none",
+      "runner_mean": "0.0442",
+      "runner_disp": "none"
+     },
+     {
+      "label": "FMk09 IGD",
+      "direction": "lower",
+      "winner_mean": "7.6250",
+      "winner_disp": "none",
+      "runner_mean": "10.6257",
+      "runner_disp": "none"
+     }
+    ],
+    "note": "Table 11"
+   }
+  ],
+  "figure_band_on_page": "n",
+  "note": "",
+  "reasoning_effort": "low"
+ }
+]

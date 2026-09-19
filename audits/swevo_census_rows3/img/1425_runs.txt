@@ -1,0 +1,51 @@
+EGA’s elitism preserved high-quality solutions, while SVMGA’s initialization focused the
+---
+Initialization, where the initial solutions from the ML models are introduced as candidates in the GA population
+---
+Initially, logistic regression is employed to generate an equation for both population initialization and the fitness
+---
+Logistic regression initialization, while better than random initialization, lacks the explicit boundary
+---
+Machines to evaluate the population initialization and fitness function
+---
+Population Initialization Population Initialization is the first and one of the most crucial steps in GAs
+---
+Random initialization serves as the baseline
+---
+Subsequently, support vector machine (SVM) is applied for the purposes of population initialization
+---
+The combination of initialization, crossover mechanisms, and mutation operators leads to synthetic
+---
+The results show that SVM-based initialization consistently outperforms both logistic regression
+---
+To evaluate the impact of different initialization strategies, we compared SVM-based initialization with logistic
+---
+and random initialization across all datasets
+---
+are Population Initialization, Fitness Function, Parent Selection, Crossover, and Mutation
+---
+data generation31,36,47 that rely on random initialization and simplistic fitness functions, our method uses SVM
+---
+fitness function and population initialization
+---
+information that makes SVM-based initialization particularly effective for minority class synthesis
+---
+initialization process, machine learning algorithms such as Logistic Regression and Support Vector Machines
+---
+initialization, to generate high-quality synthetic data that enhances classification performance
+---
+into the Genetic Algorithms (GAs) for population initialization and fitness function evaluation, as shown in Fig
+---
+logistic regression initialization analysis
+---
+logistic regression within both the initialization and fitness evaluation phases
+---
+regression initialization uses probability-based positioning
+---
+regression-based initialization and random initialization
+---
+the effectiveness of the method depends on the quality of the ML models used for initialization
+---
+we use linear SVMs to maintain computational efficiency during population initialization
+---
+•	 Initialization: Population initialized near ML Models decision boundaries

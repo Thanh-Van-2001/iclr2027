@@ -1,0 +1,25 @@
+Each algorithm was run independently 30 times
+---
+Iterate over all particles (loop N times)
+---
+The process is then repeated until the number of archives does not exceed a predetermined threshold
+---
+Then the repetition operation is followed
+---
+This process is repeated iteratively until all clusters are merged into a
+---
+To ensure fairness, all experiments were independently executed 30 times, and the parameters of all
+---
+experimental groups and the original HCRMOPSO algorithm were each independently run 30 times on various
+---
+for 30 times on 22 test problems
+---
+independent runs
+---
+independent runs of HCRMOPSO, five other MOPSO variants, and five MOEAs are presented in detail in Figs
+---
+outer loop runs N times, with each iteration having a total cost of O(ND) + O(N) + O(D) + O(1) ≈O(ND)
+---
+outer loop runs N times, with each iteration’s dominant cost being O(ND)
+---
+skewness of IGD values across 30 independent runs, facilitating visual assessment of each algorithm’s relative

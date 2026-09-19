@@ -1,0 +1,47 @@
+Each of them is evaluated by 20 independent runs
+---
+For hybrid problems, HRO-GWO win 20, 14 and 18 times in the average, optimal and worst values, respectively
+---
+Hybridization It is employed to renew the rice seed genes in the sterile line
+---
+If the newly generated rice seed exhibits superiority over the incumbent seed, it will supersede the
+---
+In each iteration, the population of rice seed is arranged by fitness level from superior to inferior and
+---
+Initialization
+---
+Renewal When the rice seed in the restorer has not been upgraded for SCmax successive times which is a pre−
+---
+Selfing In the restorer line, selfing guides rice seeds to move closer to the current optimal solution, and the
+---
+The time complexity of HRO-GWO is contingent upon two principal factors: initialization, individual evaluation
+---
+Then, to avoid model overfitting, ten-fold cross-validation is used to generate the training and
+---
+Two rice seed populations with
+---
+best signifies the dth genes of the optimum rice seeds
+---
+by 30 independent runs
+---
+current seed
+---
+denotes the dth genes of the randomly chosen rice seeds from the restorer line
+---
+is evaluated by 30 independent runs
+---
+m,b denotes the dth genes of the randomly selected rice seeds from the
+---
+number of features, HRO-GWO exhibits the lowest number remaining 23 times, thereby indicating that HRO-
+---
+rice seeds from the sterile line
+---
+run, the total number of function evaluations of each algorithm is set to 50000
+---
+sample high-dimensional biomedical datasets by 20 independent runs
+---
+set parameter, the seed will be reset as shown in Eq
+---
+the current rice seeds
+---
+wins nine times in the comparison of average value and worst value comparison, five times in the best value

@@ -4952,5 +4952,3468 @@
   ],
   "verdict_tables": [],
   "note": "Excluded x1 and x2 from Table 17 as they represent variable values rather than performance metrics. Excluded the Mean column from Table 18 because it contains multiple bold cells."
+ },
+ {
+  "id": "0025",
+  "paper": "067d8305cce4592c",
+  "page": 6,
+  "results_tables": [
+   {
+    "caption_start": "Table 4. Comparison of algorithms",
+    "has_bold": "n",
+    "groups": []
+   }
+  ],
+  "verdict_tables": [],
+  "note": "Tables 1-3 are function descriptions. Table 4 contains experimental results but has no bold cells."
+ },
+ {
+  "id": "0029",
+  "paper": "067d8305cce4592c",
+  "page": 13,
+  "results_tables": [
+   {
+    "caption_start": "Table 11. Comparison of RCOA",
+    "has_bold": "n",
+    "groups": []
+   },
+   {
+    "caption_start": "Table 12. Comparison of RCOA",
+    "has_bold": "n",
+    "groups": []
+   }
+  ],
+  "verdict_tables": [],
+  "note": "No bold cells or statistical verdicts found on this page."
+ },
+ {
+  "id": "0043",
+  "paper": "09aea4a2596af9a4",
+  "page": 10,
+  "results_tables": [
+   {
+    "caption_start": "Table 3. Comparison of the error values",
+    "has_bold": "y",
+    "groups": [
+     {
+      "label": "Score",
+      "direction": "higher",
+      "winner_name": "B11",
+      "winner_mean": "306",
+      "runner_name": "B12",
+      "runner_mean": "300",
+      "verdict_here": "none"
+     }
+    ]
+   }
+  ],
+  "verdict_tables": [],
+  "note": "The asterisks in Table 3 indicate negative values close to 0 due to floating-point errors, not statistical significance."
+ },
+ {
+  "id": "0047",
+  "paper": "09aea4a2596af9a4",
+  "page": 20,
+  "results_tables": [
+   {
+    "caption_start": "Table 11. Performance and comparison",
+    "has_bold": "y",
+    "groups": []
+   }
+  ],
+  "verdict_tables": [],
+  "note": "Table 11 compares different parameter settings (D, NP, Tmax) for a single algorithm rather than comparing different optimizers, so it does not fit the requested extraction format where optimizers are in the headers."
+ },
+ {
+  "id": "0124",
+  "paper": "1317b7cb0f1e852c",
+  "page": 6,
+  "results_tables": [],
+  "verdict_tables": [],
+  "note": "The only table on this page (Table 2) reports computational costs and does not contain experimental results comparing optimizers or statistical verdicts."
+ },
+ {
+  "id": "0543",
+  "paper": "3d2636aa36eadec5",
+  "page": 13,
+  "results_tables": [],
+  "verdict_tables": [],
+  "note": "The only table on this page is Table 5, which lists parameter settings for the comparative algorithms. There are no experimental results or statistical verdict tables."
+ },
+ {
+  "id": "0547",
+  "paper": "3d2636aa36eadec5",
+  "page": 19,
+  "results_tables": [
+   {
+    "caption_start": "Table 9. The experimental",
+    "has_bold": "y",
+    "groups": [
+     {
+      "label": "F1",
+      "direction": "lower",
+      "winner_name": "TEAO",
+      "winner_mean": "0.00E+00",
+      "runner_name": "FOX",
+      "runner_mean": "0.00E+00",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F2",
+      "direction": "lower",
+      "winner_name": "TEAO",
+      "winner_mean": "0.00E+00",
+      "runner_name": "FOX",
+      "runner_mean": "1.25E-195",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F3",
+      "direction": "lower",
+      "winner_name": "TEAO",
+      "winner_mean": "0.00E+00",
+      "runner_name": "FOX",
+      "runner_mean": "0.00E+00",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F4",
+      "direction": "lower",
+      "winner_name": "TEAO",
+      "winner_mean": "0.00E+00",
+      "runner_name": "FOX",
+      "runner_mean": "2.31E-196",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F5",
+      "direction": "lower",
+      "winner_name": "TEAO",
+      "winner_mean": "4.02E-03",
+      "runner_name": "AO",
+      "runner_mean": "2.44E-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F6",
+      "direction": "lower",
+      "winner_name": "TEAO",
+      "winner_mean": "3.85E-11",
+      "runner_name": "AO",
+      "runner_mean": "3.39E-04",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F7",
+      "direction": "lower",
+      "winner_name": "TEAO",
+      "winner_mean": "1.04E-04",
+      "runner_name": "AO",
+      "runner_mean": "5.77E-05",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F8",
+      "direction": "lower",
+      "winner_name": "TEAO",
+      "winner_mean": "- 1.20E+05",
+      "runner_name": "HHO",
+      "runner_mean": "- 2.09E+05",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F9",
+      "direction": "lower",
+      "winner_name": "TEAO",
+      "winner_mean": "0.00E+00",
+      "runner_name": "FOX",
+      "runner_mean": "0.00E+00",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F10",
+      "direction": "lower",
+      "winner_name": "TEAO",
+      "winner_mean": "4.44E-16",
+      "runner_name": "FOX",
+      "runner_mean": "3.52E-15",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F11",
+      "direction": "lower",
+      "winner_name": "TEAO",
+      "winner_mean": "0.00E+00",
+      "runner_name": "FOX",
+      "runner_mean": "0.00E+00",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F12",
+      "direction": "lower",
+      "winner_name": "TEAO",
+      "winner_mean": "4.42E-14",
+      "runner_name": "AO",
+      "runner_mean": "1.66E-07",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F13",
+      "direction": "lower",
+      "winner_name": "TEAO",
+      "winner_mean": "1.84E-10",
+      "runner_name": "AO",
+      "runner_mean": "8.02E-05",
+      "verdict_here": "none"
+     }
+    ]
+   }
+  ],
+  "verdict_tables": [],
+  "note": "The table has multiple bold cells in some rows (e.g., F1, F3, F9, F11) indicating ties for the best value. I have recorded the groups where TEAO is bold, but since there are ties, the 'winner' and 'runner-up' logic is slightly ambiguous. I treated TEAO as the winner and the next best non-bold as runner-up, or another bold as runner-up if it's a tie. No verdicts are printed on this page."
+ },
+ {
+  "id": "0551",
+  "paper": "3d2636aa36eadec5",
+  "page": 23,
+  "results_tables": [],
+  "verdict_tables": [
+   {
+    "caption_start": "Table 13. p-values of classical test functions",
+    "verdict_kind": "p_values",
+    "compared_against": "TEAO",
+    "entries": [
+     {
+      "label": "F14",
+      "competitor": "AO",
+      "verdict": "7.14E-03"
+     },
+     {
+      "label": "F14",
+      "competitor": "GWO",
+      "verdict": "9.52E-01"
+     },
+     {
+      "label": "F14",
+      "competitor": "CPSOGSA",
+      "verdict": "9.24E-04"
+     },
+     {
+      "label": "F14",
+      "competitor": "GJO",
+      "verdict": "5.72E-05"
+     },
+     {
+      "label": "F14",
+      "competitor": "WOA",
+      "verdict": "6.53E-03"
+     },
+     {
+      "label": "F14",
+      "competitor": "AVOA",
+      "verdict": "0.109736"
+     },
+     {
+      "label": "F14",
+      "competitor": "SSA",
+      "verdict": "2.77E-01"
+     },
+     {
+      "label": "F14",
+      "competitor": "RUN",
+      "verdict": "3.05E-03"
+     },
+     {
+      "label": "F14",
+      "competitor": "HHO",
+      "verdict": "4.22E-02"
+     },
+     {
+      "label": "F14",
+      "competitor": "SO",
+      "verdict": "1.72E-03"
+     },
+     {
+      "label": "F14",
+      "competitor": "PSO",
+      "verdict": "8.45E-01"
+     },
+     {
+      "label": "F14",
+      "competitor": "LPB",
+      "verdict": "1.03E-01"
+     },
+     {
+      "label": "F14",
+      "competitor": "FOX",
+      "verdict": "1.88E-06"
+     },
+     {
+      "label": "F14",
+      "competitor": "DBO",
+      "verdict": "6.45E-06"
+     },
+     {
+      "label": "F15",
+      "competitor": "AO",
+      "verdict": "3.00E-11"
+     },
+     {
+      "label": "F15",
+      "competitor": "GWO",
+      "verdict": "3.28E-11"
+     },
+     {
+      "label": "F15",
+      "competitor": "CPSOGSA",
+      "verdict": "3.00E-11"
+     },
+     {
+      "label": "F15",
+      "competitor": "GJO",
+      "verdict": "3.00E-11"
+     },
+     {
+      "label": "F15",
+      "competitor": "WOA",
+      "verdict": "3.00E-11"
+     },
+     {
+      "label": "F15",
+      "competitor": "AVOA",
+      "verdict": "3.00E-11"
+     },
+     {
+      "label": "F15",
+      "competitor": "SSA",
+      "verdict": "3.00E-11"
+     },
+     {
+      "label": "F15",
+      "competitor": "RUN",
+      "verdict": "4.94E-11"
+     },
+     {
+      "label": "F15",
+      "competitor": "HHO",
+      "verdict": "3.00E-11"
+     },
+     {
+      "label": "F15",
+      "competitor": "SO",
+      "verdict": "3.00E-11"
+     },
+     {
+      "label": "F15",
+      "competitor": "PSO",
+      "verdict": "3.00E-11"
+     },
+     {
+      "label": "F15",
+      "competitor": "LPB",
+      "verdict": "3.00E-11"
+     },
+     {
+      "label": "F15",
+      "competitor": "FOX",
+      "verdict": "3.00E-11"
+     },
+     {
+      "label": "F15",
+      "competitor": "DBO",
+      "verdict": "3.00E-11"
+     },
+     {
+      "label": "F16",
+      "competitor": "AO",
+      "verdict": "1.45E-11"
+     },
+     {
+      "label": "F16",
+      "competitor": "GWO",
+      "verdict": "4.41E-01"
+     },
+     {
+      "label": "F16",
+      "competitor": "CPSOGSA",
+      "verdict": "1.45E-11"
+     },
+     {
+      "label": "F16",
+      "competitor": "GJO",
+      "verdict": "1.45E-11"
+     },
+     {
+      "label": "F16",
+      "competitor": "WOA",
+      "verdict": "3.02E-11"
+     },
+     {
+      "label": "F16",
+      "competitor": "AVOA",
+      "verdict": "1.57E-04"
+     },
+     {
+      "label": "F16",
+      "competitor": "SSA",
+      "verdict": "1.45E-11"
+     },
+     {
+      "label": "F16",
+      "competitor": "RUN",
+      "verdict": "5.57E-10"
+     },
+     {
+      "label": "F16",
+      "competitor": "HHO",
+      "verdict": "6.16E-11"
+     },
+     {
+      "label": "F16",
+      "competitor": "SO",
+      "verdict": "4.47E-01"
+     },
+     {
+      "label": "F16",
+      "competitor": "PSO",
+      "verdict": "6.15E-02"
+     },
+     {
+      "label": "F16",
+      "competitor": "LPB",
+      "verdict": "1.45E-11"
+     },
+     {
+      "label": "F16",
+      "competitor": "FOX",
+      "verdict": "1.45E-11"
+     },
+     {
+      "label": "F16",
+      "competitor": "DBO",
+      "verdict": "8.10E-03"
+     },
+     {
+      "label": "F17",
+      "competitor": "AO",
+      "verdict": "1.21E-12"
+     },
+     {
+      "label": "F17",
+      "competitor": "GWO",
+      "verdict": "NaN"
+     },
+     {
+      "label": "F17",
+      "competitor": "CPSOGSA",
+      "verdict": "1.21E-12"
+     },
+     {
+      "label": "F17",
+      "competitor": "GJO",
+      "verdict": "1.21E-12"
+     },
+     {
+      "label": "F17",
+      "competitor": "WOA",
+      "verdict": "1.21E-12"
+     },
+     {
+      "label": "F17",
+      "competitor": "AVOA",
+      "verdict": "NaN"
+     },
+     {
+      "label": "F17",
+      "competitor": "SSA",
+      "verdict": "4.46E-12"
+     },
+     {
+      "label": "F17",
+      "competitor": "RUN",
+      "verdict": "1.94E-09"
+     },
+     {
+      "label": "F17",
+      "competitor": "HHO",
+      "verdict": "1.95E-09"
+     },
+     {
+      "label": "F17",
+      "competitor": "SO",
+      "verdict": "NaN"
+     },
+     {
+      "label": "F17",
+      "competitor": "PSO",
+      "verdict": "NaN"
+     },
+     {
+      "label": "F17",
+      "competitor": "LPB",
+      "verdict": "1.21E-12"
+     },
+     {
+      "label": "F17",
+      "competitor": "FOX",
+      "verdict": "1.21E-12"
+     },
+     {
+      "label": "F17",
+      "competitor": "DBO",
+      "verdict": "NaN"
+     },
+     {
+      "label": "F18",
+      "competitor": "AO",
+      "verdict": "2.95E-11"
+     },
+     {
+      "label": "F18",
+      "competitor": "GWO",
+      "verdict": "6.57E-07"
+     },
+     {
+      "label": "F18",
+      "competitor": "CPSOGSA",
+      "verdict": "2.95E-11"
+     },
+     {
+      "label": "F18",
+      "competitor": "GJO",
+      "verdict": "2.95E-11"
+     },
+     {
+      "label": "F18",
+      "competitor": "WOA",
+      "verdict": "2.95E-11"
+     },
+     {
+      "label": "F18",
+      "competitor": "AVOA",
+      "verdict": "2.95E-11"
+     },
+     {
+      "label": "F18",
+      "competitor": "SSA",
+      "verdict": "2.94E-11"
+     },
+     {
+      "label": "F18",
+      "competitor": "RUN",
+      "verdict": "1.23E-04"
+     },
+     {
+      "label": "F18",
+      "competitor": "HHO",
+      "verdict": "2.28E-09"
+     },
+     {
+      "label": "F18",
+      "competitor": "SO",
+      "verdict": "6.50E-05"
+     },
+     {
+      "label": "F18",
+      "competitor": "PSO",
+      "verdict": "3.06E-01"
+     },
+     {
+      "label": "F18",
+      "competitor": "LPB",
+      "verdict": "2.95E-11"
+     },
+     {
+      "label": "F18",
+      "competitor": "FOX",
+      "verdict": "2.95E-11"
+     },
+     {
+      "label": "F18",
+      "competitor": "DBO",
+      "verdict": "5.63E-09"
+     },
+     {
+      "label": "F19",
+      "competitor": "AO",
+      "verdict": "1.67E-11"
+     },
+     {
+      "label": "F19",
+      "competitor": "GWO",
+      "verdict": "2.44E-01"
+     },
+     {
+      "label": "F19",
+      "competitor": "CPSOGSA",
+      "verdict": "1.67E-11"
+     },
+     {
+      "label": "F19",
+      "competitor": "GJO",
+      "verdict": "1.67E-11"
+     },
+     {
+      "label": "F19",
+      "competitor": "WOA",
+      "verdict": "1.67E-11"
+     },
+     {
+      "label": "F19",
+      "competitor": "AVOA",
+      "verdict": "6.06E-07"
+     },
+     {
+      "label": "F19",
+      "competitor": "SSA",
+      "verdict": "1.66E-11"
+     },
+     {
+      "label": "F19",
+      "competitor": "RUN",
+      "verdict": "1.67E-11"
+     },
+     {
+      "label": "F19",
+      "competitor": "HHO",
+      "verdict": "1.67E-11"
+     },
+     {
+      "label": "F19",
+      "competitor": "SO",
+      "verdict": "1.48E-01"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "note": ""
+ },
+ {
+  "id": "0555",
+  "paper": "3d2636aa36eadec5",
+  "page": 27,
+  "results_tables": [
+   {
+    "caption_start": "Table 19. Comparison results for the tension/compression",
+    "has_bold": "y",
+    "groups": [
+     {
+      "label": "tension/compression spring design",
+      "direction": "lower",
+      "winner_name": "TEAO",
+      "winner_mean": "1.27E-02",
+      "runner_name": "CPSOGSA",
+      "runner_mean": "1.27E-02",
+      "verdict_here": "none"
+     }
+    ]
+   }
+  ],
+  "verdict_tables": [],
+  "note": "The table presents results for a single engineering design problem. The entire row for the proposed TEAO algorithm is bolded. The 'Optimal value' column was extracted as the group, with CPSOGSA selected as the runner-up among several algorithms tied at 1.27E-02."
+ },
+ {
+  "id": "0646",
+  "paper": "4a566a8f0f0fc3b8",
+  "page": 6,
+  "results_tables": [
+   {
+    "caption_start": "Table 1. Running time comparisons",
+    "has_bold": "n",
+    "groups": []
+   }
+  ],
+  "verdict_tables": [],
+  "note": "Table 2 contains parameter settings, not experimental results."
+ },
+ {
+  "id": "0650",
+  "paper": "4a566a8f0f0fc3b8",
+  "page": 17,
+  "results_tables": [
+   {
+    "caption_start": "Table 9. Results of the predicting models.",
+    "has_bold": "y",
+    "groups": [
+     {
+      "label": "Random Forest - Number of selected features",
+      "direction": "lower",
+      "winner_name": "h-PSOGNDO",
+      "winner_mean": "81",
+      "runner_name": "IGWO",
+      "runner_mean": "92",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Random Forest - Accuracy (%)",
+      "direction": "higher",
+      "winner_name": "h-PSOGNDO",
+      "winner_mean": "98.76",
+      "runner_name": "IGWO",
+      "runner_mean": "98.06",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Random Forest - Sensitivity (%)",
+      "direction": "higher",
+      "winner_name": "h-PSOGNDO",
+      "winner_mean": "98.88",
+      "runner_name": "GNDO",
+      "runner_mean": "97.01",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Random Forest - Specificity (%)",
+      "direction": "higher",
+      "winner_name": "h-PSOGNDO",
+      "winner_mean": "98.66",
+      "runner_name": "IGWO",
+      "runner_mean": "99.33",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Random Forest - Positive predictive value (%)",
+      "direction": "higher",
+      "winner_name": "h-PSOGNDO",
+      "winner_mean": "98.51",
+      "runner_name": "IGWO",
+      "runner_mean": "99.23",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Random Forest - Negative predictive value (%)",
+      "direction": "higher",
+      "winner_name": "h-PSOGNDO",
+      "winner_mean": "98.99",
+      "runner_name": "GNDO",
+      "runner_mean": "97.33",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Support Vector Machine - Number of selected features",
+      "direction": "lower",
+      "winner_name": "h-PSOGNDO",
+      "winner_mean": "81",
+      "runner_name": "IGWO",
+      "runner_mean": "92",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Support Vector Machine - Accuracy (%)",
+      "direction": "higher",
+      "winner_name": "h-PSOGNDO",
+      "winner_mean": "94.70",
+      "runner_name": "SCA",
+      "runner_mean": "94.52",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Support Vector Machine - Sensitivity (%)",
+      "direction": "higher",
+      "winner_name": "h-PSOGNDO",
+      "winner_mean": "96.64",
+      "runner_name": "IGWO",
+      "runner_mean": "95.90",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Support Vector Machine - Specificity (%)",
+      "direction": "higher",
+      "winner_name": "h-PSOGNDO",
+      "winner_mean": "92.95",
+      "runner_name": "SCA",
+      "runner_mean": "94.30",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Support Vector Machine - Positive predictive value (%)",
+      "direction": "higher",
+      "winner_name": "h-PSOGNDO",
+      "winner_mean": "92.50",
+      "runner_name": "SCA",
+      "runner_mean": "93.73",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Support Vector Machine - Negative predictive value (%)",
+      "direction": "higher",
+      "winner_name": "h-PSOGNDO",
+      "winner_mean": "96.85",
+      "runner_name": "IGWO",
+      "runner_mean": "96.14",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Naïve Bayes - Number of selected features",
+      "direction": "lower",
+      "winner_name": "h-PSOGNDO",
+      "winner_mean": "81",
+      "runner_name": "IGWO",
+      "runner_mean": "92",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Naïve Bayes - Accuracy (%)",
+      "direction": "higher",
+      "winner_name": "h-PSOGNDO",
+      "winner_mean": "87.63",
+      "runner_name": "IGWO",
+      "runner_mean": "83.92",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Naïve Bayes - Sensitivity (%)",
+      "direction": "higher",
+      "winner_name": "h-PSOGNDO",
+      "winner_mean": "86.19",
+      "runner_name": "SCA",
+      "runner_mean": "83.96",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Naïve Bayes - Specificity (%)",
+      "direction": "higher",
+      "winner_name": "h-PSOGNDO",
+      "winner_mean": "88.93",
+      "runner_name": "IGWO",
+      "runner_mean": "88.26",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Naïve Bayes - Positive predictive value (%)",
+      "direction": "higher",
+      "winner_name": "h-PSOGNDO",
+      "winner_mean": "87.50",
+      "runner_name": "IGWO",
+      "runner_mean": "85.83",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Naïve Bayes - Negative predictive value (%)",
+      "direction": "higher",
+      "winner_name": "h-PSOGNDO",
+      "winner_mean": "87.75",
+      "runner_name": "WOA",
+      "runner_mean": "85.23",
+      "verdict_here": "none"
+     },
+     {
+      "label": "KNN - Number of selected features",
+      "direction": "lower",
+      "winner_name": "h-PSOGNDO",
+      "winner_mean": "81",
+      "runner_name": "IGWO",
+      "runner_mean": "92",
+      "verdict_here": "none"
+     },
+     {
+      "label": "KNN - Accuracy (%)",
+      "direction": "higher",
+      "winner_name": "h-PSOGNDO",
+      "winner_mean": "98.32",
+      "runner_name": "GWO",
+      "runner_mean": "97.61",
+      "verdict_here": "none"
+     },
+     {
+      "label": "KNN - Sensitivity (%)",
+      "direction": "higher",
+      "winner_name": "h-PSOGNDO",
+      "winner_mean": "98.16",
+      "runner_name": "SCA",
+      "runner_mean": "98.50",
+      "verdict_here": "none"
+     },
+     {
+      "label": "KNN - Specificity (%)",
+      "direction": "higher",
+      "winner_name": "h-PSOGNDO",
+      "winner_mean": "98.50",
+      "runner_name": "WOA",
+      "runner_mean": "98.50",
+      "verdict_here": "none"
+     },
+     {
+      "label": "KNN - Positive predictive value (%)",
+      "direction": "higher",
+      "winner_name": "h-PSOGNDO",
+      "winner_mean": "98.50",
+      "runner_name": "WOA",
+      "runner_mean": "98.50",
+      "verdict_here": "none"
+     },
+     {
+      "label": "KNN - Negative predictive value (%)",
+      "direction": "higher",
+      "winner_name": "h-PSOGNDO",
+      "winner_mean": "98.13",
+      "runner_name": "SCA",
+      "runner_mean": "98.5",
+      "verdict_here": "none"
+     }
+    ]
+   }
+  ],
+  "verdict_tables": [],
+  "note": "The table caption states 'Significant values are in bold', but no explicit statistical test verdicts (like p-values or symbols) are provided in the table or text."
+ },
+ {
+  "id": "0654",
+  "paper": "4b38b2bfebe79533",
+  "page": 14,
+  "results_tables": [
+   {
+    "caption_start": "Table 5. FRT values",
+    "has_bold": "y",
+    "groups": [
+     {
+      "label": "f1",
+      "direction": "lower",
+      "winner_name": "KCGWO",
+      "winner_mean": "1.000",
+      "runner_name": "AOS",
+      "runner_mean": "2.000",
+      "verdict_here": "none"
+     },
+     {
+      "label": "f2",
+      "direction": "lower",
+      "winner_name": "KCGWO",
+      "winner_mean": "1.000",
+      "runner_name": "AOS",
+      "runner_mean": "2.000",
+      "verdict_here": "none"
+     },
+     {
+      "label": "f3",
+      "direction": "lower",
+      "winner_name": "KCGWO",
+      "winner_mean": "1.000",
+      "runner_name": "GWO",
+      "runner_mean": "2.000",
+      "verdict_here": "none"
+     },
+     {
+      "label": "f4",
+      "direction": "lower",
+      "winner_name": "KCGWO",
+      "winner_mean": "1.000",
+      "runner_name": "GWO",
+      "runner_mean": "2.000",
+      "verdict_here": "none"
+     },
+     {
+      "label": "f5",
+      "direction": "lower",
+      "winner_name": "KCGWO",
+      "winner_mean": "1.000",
+      "runner_name": "GWO",
+      "runner_mean": "2.333",
+      "verdict_here": "none"
+     },
+     {
+      "label": "f6",
+      "direction": "lower",
+      "winner_name": "SSA",
+      "winner_mean": "1.333",
+      "runner_name": "KCGWO",
+      "runner_mean": "1.667",
+      "verdict_here": "none"
+     },
+     {
+      "label": "f10",
+      "direction": "lower",
+      "winner_name": "KCGWO",
+      "winner_mean": "1.333",
+      "runner_name": "MVO",
+      "runner_mean": "2.667",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Average FRT",
+      "direction": "lower",
+      "winner_name": "KCGWO",
+      "winner_mean": "1.383",
+      "runner_name": "GWO",
+      "runner_mean": "3.267",
+      "verdict_here": "none"
+     }
+    ]
+   }
+  ],
+  "verdict_tables": [
+   {
+    "caption_start": "Table 5. FRT values",
+    "verdict_kind": "ranks",
+    "compared_against": "none",
+    "entries": [
+     {
+      "label": "f1",
+      "competitor": "KCGWO",
+      "verdict": "1.000"
+     },
+     {
+      "label": "f1",
+      "competitor": "GWO",
+      "verdict": "3.000"
+     },
+     {
+      "label": "f1",
+      "competitor": "MFO",
+      "verdict": "7.000"
+     },
+     {
+      "label": "f1",
+      "competitor": "MVO",
+      "verdict": "5.667"
+     },
+     {
+      "label": "f1",
+      "competitor": "SSA",
+      "verdict": "4.000"
+     },
+     {
+      "label": "f1",
+      "competitor": "JAYA",
+      "verdict": "5.333"
+     },
+     {
+      "label": "f1",
+      "competitor": "AOS",
+      "verdict": "2.000"
+     },
+     {
+      "label": "f1",
+      "competitor": "PSO",
+      "verdict": "8.000"
+     },
+     {
+      "label": "f2",
+      "competitor": "KCGWO",
+      "verdict": "1.000"
+     },
+     {
+      "label": "f2",
+      "competitor": "GWO",
+      "verdict": "3.000"
+     },
+     {
+      "label": "f2",
+      "competitor": "MFO",
+      "verdict": "7.667"
+     },
+     {
+      "label": "f2",
+      "competitor": "MVO",
+      "verdict": "5.000"
+     },
+     {
+      "label": "f2",
+      "competitor": "SSA",
+      "verdict": "6.000"
+     },
+     {
+      "label": "f2",
+      "competitor": "JAYA",
+      "verdict": "4.000"
+     },
+     {
+      "label": "f2",
+      "competitor": "AOS",
+      "verdict": "2.000"
+     },
+     {
+      "label": "f2",
+      "competitor": "PSO",
+      "verdict": "7.333"
+     },
+     {
+      "label": "f3",
+      "competitor": "KCGWO",
+      "verdict": "1.000"
+     },
+     {
+      "label": "f3",
+      "competitor": "GWO",
+      "verdict": "2.000"
+     },
+     {
+      "label": "f3",
+      "competitor": "MFO",
+      "verdict": "7.000"
+     },
+     {
+      "label": "f3",
+      "competitor": "MVO",
+      "verdict": "3.000"
+     },
+     {
+      "label": "f3",
+      "competitor": "SSA",
+      "verdict": "4.000"
+     },
+     {
+      "label": "f3",
+      "competitor": "JAYA",
+      "verdict": "5.333"
+     },
+     {
+      "label": "f3",
+      "competitor": "AOS",
+      "verdict": "7.333"
+     },
+     {
+      "label": "f3",
+      "competitor": "PSO",
+      "verdict": "6.333"
+     },
+     {
+      "label": "f4",
+      "competitor": "KCGWO",
+      "verdict": "1.000"
+     },
+     {
+      "label": "f4",
+      "competitor": "GWO",
+      "verdict": "2.000"
+     },
+     {
+      "label": "f4",
+      "competitor": "MFO",
+      "verdict": "7.000"
+     },
+     {
+      "label": "f4",
+      "competitor": "MVO",
+      "verdict": "3.000"
+     },
+     {
+      "label": "f4",
+      "competitor": "SSA",
+      "verdict": "4.000"
+     },
+     {
+      "label": "f4",
+      "competitor": "JAYA",
+      "verdict": "5.333"
+     },
+     {
+      "label": "f4",
+      "competitor": "AOS",
+      "verdict": "6.333"
+     },
+     {
+      "label": "f4",
+      "competitor": "PSO",
+      "verdict": "7.333"
+     },
+     {
+      "label": "f5",
+      "competitor": "KCGWO",
+      "verdict": "1.000"
+     },
+     {
+      "label": "f5",
+      "competitor": "GWO",
+      "verdict": "2.333"
+     },
+     {
+      "label": "f5",
+      "competitor": "MFO",
+      "verdict": "7.333"
+     },
+     {
+      "label": "f5",
+      "competitor": "MVO",
+      "verdict": "4.667"
+     },
+     {
+      "label": "f5",
+      "competitor": "SSA",
+      "verdict": "4.333"
+     },
+     {
+      "label": "f5",
+      "competitor": "JAYA",
+      "verdict": "6.000"
+     },
+     {
+      "label": "f5",
+      "competitor": "AOS",
+      "verdict": "2.667"
+     },
+     {
+      "label": "f5",
+      "competitor": "PSO",
+      "verdict": "7.667"
+     },
+     {
+      "label": "f6",
+      "competitor": "KCGWO",
+      "verdict": "1.667"
+     },
+     {
+      "label": "f6",
+      "competitor": "GWO",
+      "verdict": "4.333"
+     },
+     {
+      "label": "f6",
+      "competitor": "MFO",
+      "verdict": "7.333"
+     },
+     {
+      "label": "f6",
+      "competitor": "MVO",
+      "verdict": "4.667"
+     },
+     {
+      "label": "f6",
+      "competitor": "SSA",
+      "verdict": "1.333"
+     },
+     {
+      "label": "f6",
+      "competitor": "JAYA",
+      "verdict": "6.000"
+     },
+     {
+      "label": "f6",
+      "competitor": "AOS",
+      "verdict": "3.000"
+     },
+     {
+      "label": "f6",
+      "competitor": "PSO",
+      "verdict": "7.667"
+     },
+     {
+      "label": "f7",
+      "competitor": "KCGWO",
+      "verdict": "2.000"
+     },
+     {
+      "label": "f7",
+      "competitor": "GWO",
+      "verdict": "2.000"
+     },
+     {
+      "label": "f7",
+      "competitor": "MFO",
+      "verdict": "7.667"
+     },
+     {
+      "label": "f7",
+      "competitor": "MVO",
+      "verdict": "4.667"
+     },
+     {
+      "label": "f7",
+      "competitor": "SSA",
+      "verdict": "6.000"
+     },
+     {
+      "label": "f7",
+      "competitor": "JAYA",
+      "verdict": "4.333"
+     },
+     {
+      "label": "f7",
+      "competitor": "AOS",
+      "verdict": "2.000"
+     },
+     {
+      "label": "f7",
+      "competitor": "PSO",
+      "verdict": "7.333"
+     },
+     {
+      "label": "f8",
+      "competitor": "KCGWO",
+      "verdict": "1.833"
+     },
+     {
+      "label": "f8",
+      "competitor": "GWO",
+      "verdict": "5.000"
+     },
+     {
+      "label": "f8",
+      "competitor": "MFO",
+      "verdict": "1.833"
+     },
+     {
+      "label": "f8",
+      "competitor": "MVO",
+      "verdict": "6.000"
+     },
+     {
+      "label": "f8",
+      "competitor": "SSA",
+      "verdict": "7.333"
+     },
+     {
+      "label": "f8",
+      "competitor": "JAYA",
+      "verdict": "7.667"
+     },
+     {
+      "label": "f8",
+      "competitor": "AOS",
+      "verdict": "4.000"
+     },
+     {
+      "label": "f8",
+      "competitor": "PSO",
+      "verdict": "2.333"
+     },
+     {
+      "label": "f9",
+      "competitor": "KCGWO",
+      "verdict": "2.000"
+     },
+     {
+      "label": "f9",
+      "competitor": "GWO",
+      "verdict": "5.333"
+     },
+     {
+      "label": "f9",
+      "competitor": "MFO",
+      "verdict": "2.000"
+     },
+     {
+      "label": "f9",
+      "competitor": "MVO",
+      "verdict": "4.333"
+     },
+     {
+      "label": "f9",
+      "competitor": "SSA",
+      "verdict": "7.667"
+     },
+     {
+      "label": "f9",
+      "competitor": "JAYA",
+      "verdict": "7.333"
+     },
+     {
+      "label": "f9",
+      "competitor": "AOS",
+      "verdict": "5.333"
+     },
+     {
+      "label": "f9",
+      "competitor": "PSO",
+      "verdict": "2.000"
+     },
+     {
+      "label": "f10",
+      "competitor": "KCGWO",
+      "verdict": "1.333"
+     },
+     {
+      "label": "f10",
+      "competitor": "GWO",
+      "verdict": "3.667"
+     },
+     {
+      "label": "f10",
+      "competitor": "MFO",
+      "verdict": "3.000"
+     },
+     {
+      "label": "f10",
+      "competitor": "MVO",
+      "verdict": "2.667"
+     },
+     {
+      "label": "f10",
+      "competitor": "SSA",
+      "verdict": "6.000"
+     },
+     {
+      "label": "f10",
+      "competitor": "JAYA",
+      "verdict": "7.333"
+     },
+     {
+      "label": "f10",
+      "competitor": "AOS",
+      "verdict": "5.333"
+     },
+     {
+      "label": "f10",
+      "competitor": "PSO",
+      "verdict": "6.667"
+     }
+    ],
+    "note": "Table 5 contains Friedman ranks (FRT values)."
+   }
+  ],
+  "note": "Table 6 is dataset details."
+ },
+ {
+  "id": "0672",
+  "paper": "4dc39f3250b0e223",
+  "page": 7,
+  "results_tables": [
+   {
+    "caption_start": "Table 1. Comparison of the results",
+    "has_bold": "n",
+    "groups": []
+   },
+   {
+    "caption_start": "Table 2. Comparison of the results",
+    "has_bold": "n",
+    "groups": []
+   }
+  ],
+  "verdict_tables": [],
+  "note": "No bold cells or statistical verdicts found in the tables on this page."
+ },
+ {
+  "id": "0676",
+  "paper": "4dc39f3250b0e223",
+  "page": 16,
+  "results_tables": [
+   {
+    "caption_start": "Table 7. Comparison of model performance",
+    "has_bold": "n",
+    "groups": []
+   },
+   {
+    "caption_start": "Table 8. Comparison of model performance",
+    "has_bold": "n",
+    "groups": []
+   },
+   {
+    "caption_start": "Table 9. Comparison of combined dataset.",
+    "has_bold": "n",
+    "groups": []
+   },
+   {
+    "caption_start": "Table 10. Comparison of Framingham dataset.",
+    "has_bold": "n",
+    "groups": []
+   }
+  ],
+  "verdict_tables": [],
+  "note": "No bold cells or statistical verdicts found on this page."
+ },
+ {
+  "id": "0725",
+  "paper": "545e466ed3ef524b",
+  "page": 15,
+  "results_tables": [
+   {
+    "caption_start": "Table 5. The statistical Results of",
+    "has_bold": "y",
+    "groups": [
+     {
+      "label": "F8",
+      "direction": "lower",
+      "winner_name": "EGTO",
+      "winner_mean": "-20,949.1",
+      "runner_name": "GTO",
+      "runner_mean": "-20,949",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F12",
+      "direction": "lower",
+      "winner_name": "RUN",
+      "winner_mean": "5.98E-08",
+      "runner_name": "EGTO",
+      "runner_mean": "1.49E-07",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F13",
+      "direction": "lower",
+      "winner_name": "EGTO",
+      "winner_mean": "0.000551",
+      "runner_name": "GTO",
+      "runner_mean": "0.000718",
+      "verdict_here": "none"
+     }
+    ]
+   }
+  ],
+  "verdict_tables": [],
+  "note": "Extracted the 'Mean' rows for functions where exactly one algorithm's mean value is bolded."
+ },
+ {
+  "id": "0729",
+  "paper": "545e466ed3ef524b",
+  "page": 31,
+  "results_tables": [
+   {
+    "caption_start": "Table 9. The statistical Results of",
+    "has_bold": "y",
+    "groups": [
+     {
+      "label": "CEC10 Best",
+      "direction": "lower",
+      "winner_name": "ARO",
+      "winner_mean": "1.190124",
+      "runner_name": "EGTO",
+      "runner_mean": "3.813597",
+      "verdict_here": "none"
+     },
+     {
+      "label": "CEC10 Mean",
+      "direction": "lower",
+      "winner_name": "ARO",
+      "winner_mean": "19.99603",
+      "runner_name": "EGTO",
+      "runner_mean": "20.15596",
+      "verdict_here": "none"
+     },
+     {
+      "label": "CEC10 Median",
+      "direction": "lower",
+      "winner_name": "EGTO",
+      "winner_mean": "21",
+      "runner_name": "ARO",
+      "runner_mean": "21.06202",
+      "verdict_here": "none"
+     },
+     {
+      "label": "CEC10 Worst",
+      "direction": "lower",
+      "winner_name": "EGTO",
+      "winner_mean": "21.22352",
+      "runner_name": "ARO",
+      "runner_mean": "21.23736",
+      "verdict_here": "none"
+     },
+     {
+      "label": "CEC10 Std",
+      "direction": "lower",
+      "winner_name": "GWO",
+      "winner_mean": "0.100104",
+      "runner_name": "GBO",
+      "runner_mean": "0.104602",
+      "verdict_here": "none"
+     },
+     {
+      "label": "CEC10 Rank",
+      "direction": "lower",
+      "winner_name": "ARO",
+      "winner_mean": "1",
+      "runner_name": "EGTO",
+      "runner_mean": "2",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Average Rank",
+      "direction": "lower",
+      "winner_name": "EGTO",
+      "winner_mean": "2.3",
+      "runner_name": "ARO",
+      "runner_mean": "2.9",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Final ranking",
+      "direction": "lower",
+      "winner_name": "EGTO",
+      "winner_mean": "1",
+      "runner_name": "ARO",
+      "runner_mean": "2",
+      "verdict_here": "none"
+     }
+    ]
+   }
+  ],
+  "verdict_tables": [],
+  "note": ""
+ },
+ {
+  "id": "0733",
+  "paper": "545e466ed3ef524b",
+  "page": 37,
+  "results_tables": [
+   {
+    "caption_start": "Table 14. Comparison results",
+    "has_bold": "n",
+    "groups": []
+   },
+   {
+    "caption_start": "Table 15. Statistical results",
+    "has_bold": "y",
+    "groups": [
+     {
+      "label": "Std",
+      "direction": "lower",
+      "winner_name": "GTO",
+      "winner_mean": "1.34E-12",
+      "runner_name": "GBO",
+      "runner_mean": "1.34E-12",
+      "verdict_here": "none"
+     }
+    ]
+   }
+  ],
+  "verdict_tables": [],
+  "note": "In Table 15, most rows have multiple bold cells, so only the 'Std' row is extracted as it has exactly one bold cell."
+ },
+ {
+  "id": "0821",
+  "paper": "5e44d984b655c92a",
+  "page": 16,
+  "results_tables": [
+   {
+    "caption_start": "Table 5. Test function optimization results.",
+    "has_bold": "y",
+    "groups": [
+     {
+      "label": "f7",
+      "direction": "lower",
+      "winner_name": "PSCACO",
+      "winner_mean": "-1.0251E-01",
+      "runner_name": "CACO",
+      "runner_mean": "-9.1729E-01",
+      "verdict_here": "none"
+     },
+     {
+      "label": "f9",
+      "direction": "lower",
+      "winner_name": "GA",
+      "winner_mean": "0.0000E+00",
+      "runner_name": "PSCACO",
+      "runner_mean": "1.0244E-02",
+      "verdict_here": "none"
+     }
+    ]
+   }
+  ],
+  "verdict_tables": [],
+  "note": "For f7, PSCACO is bolded despite being numerically the highest (closest to zero among negative numbers), assuming minimization. Runner-up is selected as the lowest non-bold value. Several rows have no bold cells at all."
+ },
+ {
+  "id": "0825",
+  "paper": "5e44d984b655c92a",
+  "page": 23,
+  "results_tables": [
+   {
+    "caption_start": "Table 16. The outcomes of",
+    "has_bold": "n",
+    "groups": []
+   }
+  ],
+  "verdict_tables": [],
+  "note": "Table 16 contains no bold cells or statistical verdicts."
+ },
+ {
+  "id": "0829",
+  "paper": "5f7c806936fe56d4",
+  "page": 15,
+  "results_tables": [
+   {
+    "caption_start": "Table 5. Number of bins used",
+    "has_bold": "y",
+    "groups": [
+     {
+      "label": "Scholl02 Better",
+      "direction": "higher",
+      "winner_name": "HHSSμGA1",
+      "winner_mean": "2",
+      "runner_name": "FF",
+      "runner_mean": "0",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Waescher Mean",
+      "direction": "lower",
+      "winner_name": "HHGA1",
+      "winner_mean": "18.41",
+      "runner_name": "BF",
+      "runner_mean": "18.47",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Waescher Equal",
+      "direction": "higher",
+      "winner_name": "HHGA1",
+      "winner_mean": "17",
+      "runner_name": "BF",
+      "runner_mean": "16",
+      "verdict_here": "none"
+     },
+     {
+      "label": "IRUP Mean",
+      "direction": "lower",
+      "winner_name": "HHμGA1",
+      "winner_mean": "202.74",
+      "runner_name": "BF",
+      "runner_mean": "202.74",
+      "verdict_here": "none"
+     },
+     {
+      "label": "IRUP Error",
+      "direction": "lower",
+      "winner_name": "HHμGA1",
+      "winner_mean": "1",
+      "runner_name": "BF",
+      "runner_mean": "0",
+      "verdict_here": "none"
+     },
+     {
+      "label": "IRUP Worse",
+      "direction": "lower",
+      "winner_name": "HHμGA1",
+      "winner_mean": "1",
+      "runner_name": "BF",
+      "runner_mean": "0",
+      "verdict_here": "none"
+     },
+     {
+      "label": "IRUP Equal",
+      "direction": "higher",
+      "winner_name": "HHμGA1",
+      "winner_mean": "249",
+      "runner_name": "BF",
+      "runner_mean": "250",
+      "verdict_here": "none"
+     },
+     {
+      "label": "IRUP Bbetter",
+      "direction": "higher",
+      "winner_name": "HHSSGA2",
+      "winner_mean": "2",
+      "runner_name": "HHSSGA1",
+      "runner_mean": "1",
+      "verdict_here": "none"
+     }
+    ]
+   }
+  ],
+  "verdict_tables": [],
+  "note": ""
+ },
+ {
+  "id": "0887",
+  "paper": "655451396c98d3b0",
+  "page": 14,
+  "results_tables": [
+   {
+    "caption_start": "Table 7. Ranking result",
+    "has_bold": "y",
+    "groups": [
+     {
+      "label": "Average",
+      "direction": "lower",
+      "winner_name": "CPO-10",
+      "winner_mean": "33,472",
+      "runner_name": "CPO-6",
+      "runner_mean": "4",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Global rank",
+      "direction": "lower",
+      "winner_name": "CPO-10",
+      "winner_mean": "1",
+      "runner_name": "CPO-4",
+      "runner_mean": "2",
+      "verdict_here": "none"
+     }
+    ]
+   }
+  ],
+  "verdict_tables": [
+   {
+    "caption_start": "Table 7. Ranking result",
+    "verdict_kind": "ranks",
+    "compared_against": "none",
+    "entries": [
+     {
+      "label": "Global rank",
+      "competitor": "PO",
+      "verdict": "11"
+     },
+     {
+      "label": "Global rank",
+      "competitor": "CPO-1",
+      "verdict": "9"
+     },
+     {
+      "label": "Global rank",
+      "competitor": "CPO-2",
+      "verdict": "7"
+     },
+     {
+      "label": "Global rank",
+      "competitor": "CPO-3",
+      "verdict": "4"
+     },
+     {
+      "label": "Global rank",
+      "competitor": "CPO-4",
+      "verdict": "2"
+     },
+     {
+      "label": "Global rank",
+      "competitor": "CPO-5",
+      "verdict": "5"
+     },
+     {
+      "label": "Global rank",
+      "competitor": "CPO-6",
+      "verdict": "3"
+     },
+     {
+      "label": "Global rank",
+      "competitor": "CPO-7",
+      "verdict": "7"
+     },
+     {
+      "label": "Global rank",
+      "competitor": "CPO-8",
+      "verdict": "10"
+     },
+     {
+      "label": "Global rank",
+      "competitor": "CPO-9",
+      "verdict": "6"
+     },
+     {
+      "label": "Global rank",
+      "competitor": "CPO-10",
+      "verdict": "1"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "note": "In Table 7, the 'Average' value for CPO-6 is printed as '4', which is numerically lower than the bolded '33,472' for CPO-10, likely due to a typo in the paper. It is recorded as the runner-up based strictly on the printed text."
+ },
+ {
+  "id": "0891",
+  "paper": "655451396c98d3b0",
+  "page": 19,
+  "results_tables": [
+   {
+    "caption_start": "Table 13. Results of comparison",
+    "has_bold": "n",
+    "groups": []
+   }
+  ],
+  "verdict_tables": [],
+  "note": "No bold cells found in the results table."
+ },
+ {
+  "id": "0895",
+  "paper": "655451396c98d3b0",
+  "page": 25,
+  "results_tables": [
+   {
+    "caption_start": "Table 17. Comparison results",
+    "has_bold": "n",
+    "groups": []
+   }
+  ],
+  "verdict_tables": [],
+  "note": "No bold cells or statistical test verdicts were found on this page."
+ },
+ {
+  "id": "1026",
+  "paper": "6e435d039e985928",
+  "page": 8,
+  "results_tables": [
+   {
+    "caption_start": "Table 3. Example 1: comparison",
+    "has_bold": "y",
+    "groups": [
+     {
+      "label": "Mean (kg)",
+      "direction": "lower",
+      "winner_name": "CELSMA (Present)",
+      "winner_mean": "204.72",
+      "runner_name": "CESMA (Present)",
+      "runner_mean": "205.85",
+      "verdict_here": "none"
+     },
+     {
+      "label": "SD",
+      "direction": "lower",
+      "winner_name": "CELSMA (Present)",
+      "winner_mean": "2.72",
+      "runner_name": "SMA (Present)",
+      "runner_mean": "2.76",
+      "verdict_here": "none"
+     },
+     {
+      "label": "f1 (Hz)",
+      "direction": "higher",
+      "winner_name": "CELSMA (Present)",
+      "winner_mean": "15.905",
+      "runner_name": "MPA",
+      "runner_mean": "15.916",
+      "verdict_here": "none"
+     },
+     {
+      "label": "f2 (Hz)",
+      "direction": "lower",
+      "winner_name": "CELSMA (Present)",
+      "winner_mean": "28.648",
+      "runner_name": "MPA",
+      "runner_mean": "28.648",
+      "verdict_here": "none"
+     },
+     {
+      "label": "NSA or Np/Ite",
+      "direction": "lower",
+      "winner_name": "CELSMA (Present)",
+      "winner_mean": "20/500",
+      "runner_name": "SMA (Present)",
+      "runner_mean": "20/500",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Time(s)",
+      "direction": "lower",
+      "winner_name": "CELSMA (Present)",
+      "winner_mean": "7.25",
+      "runner_name": "CESMA (Present)",
+      "runner_mean": "7.40",
+      "verdict_here": "none"
+     }
+    ]
+   }
+  ],
+  "verdict_tables": [],
+  "note": "For f1 (Hz), f2 (Hz), and NSA or Np/Ite, the bolded values in CELSMA (Present) are either tied with other methods or not the absolute maximum/minimum, but are recorded as requested."
+ },
+ {
+  "id": "1030",
+  "paper": "6e435d039e985928",
+  "page": 12,
+  "results_tables": [],
+  "verdict_tables": [],
+  "note": "The page contains a table of node coordinates, but no experimental results or statistical verdict tables."
+ },
+ {
+  "id": "1184",
+  "paper": "859939a4c257c07d",
+  "page": 8,
+  "results_tables": [
+   {
+    "caption_start": "Table 3. Statistical results of HEO",
+    "has_bold": "y",
+    "groups": [
+     {
+      "label": "F1",
+      "direction": "lower",
+      "winner_name": "HEO",
+      "winner_mean": "3.8729E+06",
+      "runner_name": "HFPSO",
+      "runner_mean": "1.1795E+09",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F3",
+      "direction": "lower",
+      "winner_name": "HEO",
+      "winner_mean": "3.2020E+02",
+      "runner_name": "HFPSO",
+      "runner_mean": "3.2638E+02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F4",
+      "direction": "lower",
+      "winner_name": "HEO",
+      "winner_mean": "5.1944E+02",
+      "runner_name": "HFPSO",
+      "runner_mean": "5.1202E+03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F7",
+      "direction": "lower",
+      "winner_name": "HFPSO",
+      "winner_mean": "7.0074E+02",
+      "runner_name": "PSO",
+      "runner_mean": "7.0405E+02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F8",
+      "direction": "lower",
+      "winner_name": "FA",
+      "winner_mean": "3.3477E+03",
+      "runner_name": "HFPSO",
+      "runner_mean": "2.6354E+03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F9",
+      "direction": "lower",
+      "winner_name": "HFPSO",
+      "winner_mean": "9.1337E+02",
+      "runner_name": "PSO",
+      "runner_mean": "9.1358E+02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F10",
+      "direction": "lower",
+      "winner_name": "HEO",
+      "winner_mean": "4.4381E+05",
+      "runner_name": "HFPSO",
+      "runner_mean": "5.4690E+06",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F11",
+      "direction": "lower",
+      "winner_name": "HFPSO",
+      "winner_mean": "1.1336E+03",
+      "runner_name": "HPSOFF",
+      "runner_mean": "1.1551E+03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F12",
+      "direction": "lower",
+      "winner_name": "HEO",
+      "winner_mean": "1.3090E+03",
+      "runner_name": "HFPSO",
+      "runner_mean": "1.7752E+03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F15",
+      "direction": "lower",
+      "winner_name": "HEO",
+      "winner_mean": "1.6002E+03",
+      "runner_name": "HFPSO",
+      "runner_mean": "2.4467E+03",
+      "verdict_here": "none"
+     }
+    ]
+   }
+  ],
+  "verdict_tables": [],
+  "note": "Rows F2, F5, F6, and F13 have no bold cells and were skipped. Row F14 has two bold cells and was skipped."
+ },
+ {
+  "id": "1188",
+  "paper": "859939a4c257c07d",
+  "page": 13,
+  "results_tables": [
+   {
+    "caption_start": "Table 9. Comparing HEO optimum solution",
+    "has_bold": "y",
+    "groups": [
+     {
+      "label": "Optimum cost",
+      "direction": "lower",
+      "winner_name": "HEO",
+      "winner_mean": "1.40333",
+      "runner_name": "CGWO67",
+      "runner_mean": "1.72545",
+      "verdict_here": "none"
+     }
+    ]
+   },
+   {
+    "caption_start": "Table 10. Comparing the performance of HEO",
+    "has_bold": "y",
+    "groups": [
+     {
+      "label": "Worst",
+      "direction": "lower",
+      "winner_name": "CPSO",
+      "winner_mean": "1.782143",
+      "runner_name": "GA3",
+      "runner_mean": "1.785835",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Mean",
+      "direction": "lower",
+      "winner_name": "CPSO",
+      "winner_mean": "1.748831",
+      "runner_name": "CDE",
+      "runner_mean": "1.768150",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Best",
+      "direction": "lower",
+      "winner_name": "HEO",
+      "winner_mean": "1.403336",
+      "runner_name": "CGWO",
+      "runner_mean": "1.725450",
+      "verdict_here": "none"
+     },
+     {
+      "label": "STD",
+      "direction": "lower",
+      "winner_name": "CPSO",
+      "winner_mean": "1.29E-2",
+      "runner_name": "GA3",
+      "runner_mean": "1.12E-2",
+      "verdict_here": "none"
+     }
+    ]
+   },
+   {
+    "caption_start": "Table 11. Violations to constraints of the best",
+    "has_bold": "n",
+    "groups": []
+   }
+  ],
+  "verdict_tables": [],
+  "note": "In Table 9, columns for optimum variables (h, l, t, b) also contain bold cells but are omitted as they represent coordinates rather than performance metrics. In Table 10 STD, GA3 has a lower value than the bolded CPSO, but CPSO is recorded as the winner per the bolding."
+ },
+ {
+  "id": "1192",
+  "paper": "859939a4c257c07d",
+  "page": 17,
+  "results_tables": [
+   {
+    "caption_start": "Table 17. Performance of HEO algorithm",
+    "has_bold": "n",
+    "groups": []
+   }
+  ],
+  "verdict_tables": [],
+  "note": "No bold cells found in the table."
+ },
+ {
+  "id": "1208",
+  "paper": "85ff403d088997ed",
+  "page": 9,
+  "results_tables": [],
+  "verdict_tables": [],
+  "note": "The tables on this page only list selected genes and their descriptions. There are no experimental results comparing optimizers or statistical test verdicts."
+ },
+ {
+  "id": "1316",
+  "paper": "909f40bed26044e4",
+  "page": 10,
+  "results_tables": [
+   {
+    "caption_start": "Table 5. Layer 1 CNN multiclass",
+    "has_bold": "y",
+    "groups": [
+     {
+      "label": "Best",
+      "direction": "lower",
+      "winner_name": "CNN-ISA-ChOA",
+      "winner_mean": "0.137344",
+      "runner_name": "CNN-ChOA",
+      "runner_mean": "0.145736",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Worst",
+      "direction": "lower",
+      "winner_name": "CNN-ISA-ChOA",
+      "winner_mean": "0.147135",
+      "runner_name": "CNN-PSO",
+      "runner_mean": "0.149058",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Mean",
+      "direction": "lower",
+      "winner_name": "CNN-ISA-ChOA",
+      "winner_mean": "0.141140",
+      "runner_name": "CNN-ChOA",
+      "runner_mean": "0.146973",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Median",
+      "direction": "lower",
+      "winner_name": "CNN-ISA-ChOA",
+      "winner_mean": "0.137344",
+      "runner_name": "CNN-ChOA",
+      "runner_mean": "0.146467",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Std",
+      "direction": "lower",
+      "winner_name": "CNN-WOA",
+      "winner_mean": "0.000597",
+      "runner_name": "CNN-PSO",
+      "runner_mean": "0.000763",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Var",
+      "direction": "lower",
+      "winner_name": "CNN-WOA",
+      "winner_mean": "3.57E-07",
+      "runner_name": "CNN-PSO",
+      "runner_mean": "5.82E-07",
+      "verdict_here": "none"
+     }
+    ]
+   }
+  ],
+  "verdict_tables": [],
+  "note": ""
+ },
+ {
+  "id": "1320",
+  "paper": "909f40bed26044e4",
+  "page": 18,
+  "results_tables": [
+   {
+    "caption_start": "Table 10. Layer 2 CatBoost",
+    "has_bold": "n",
+    "groups": []
+   },
+   {
+    "caption_start": "Table 11. Best CatBoost model",
+    "has_bold": "n",
+    "groups": []
+   }
+  ],
+  "verdict_tables": [],
+  "note": "No bold cells in the data or statistical verdicts found on this page."
+ },
+ {
+  "id": "1324",
+  "paper": "909f40bed26044e4",
+  "page": 25,
+  "results_tables": [
+   {
+    "caption_start": "Table 16. Detail metrics comparison between proposed framework models and state of the art baseline classifiers.",
+    "has_bold": "n",
+    "groups": []
+   },
+   {
+    "caption_start": "Table 17. Shapiro-Wilk scores for forecasting experiments for normality condition evaluation.",
+    "has_bold": "n",
+    "groups": []
+   }
+  ],
+  "verdict_tables": [
+   {
+    "caption_start": "Table 18. Wilcoxon signed-rank test scores forecasting experiments.",
+    "verdict_kind": "p_values",
+    "compared_against": "ISA-ChOA",
+    "entries": [
+     {
+      "label": "Layer 1 CNN",
+      "competitor": "ChOA",
+      "verdict": "0.029"
+     },
+     {
+      "label": "Layer 1 CNN",
+      "competitor": "VNS",
+      "verdict": "0.035"
+     },
+     {
+      "label": "Layer 1 CNN",
+      "competitor": "PSO",
+      "verdict": "0.023"
+     },
+     {
+      "label": "Layer 1 CNN",
+      "competitor": "BA",
+      "verdict": "0.018"
+     },
+     {
+      "label": "Layer 1 CNN",
+      "competitor": "ABC",
+      "verdict": "0.029"
+     },
+     {
+      "label": "Layer 1 CNN",
+      "competitor": "WOA",
+      "verdict": "0.034"
+     },
+     {
+      "label": "Layer 1 CNN",
+      "competitor": "RSA",
+      "verdict": "0.025"
+     },
+     {
+      "label": "Layer 2 CB",
+      "competitor": "ChOA",
+      "verdict": "0.035"
+     },
+     {
+      "label": "Layer 2 CB",
+      "competitor": "VNS",
+      "verdict": "0.029"
+     },
+     {
+      "label": "Layer 2 CB",
+      "competitor": "PSO",
+      "verdict": "0.025"
+     },
+     {
+      "label": "Layer 2 CB",
+      "competitor": "BA",
+      "verdict": "0.044"
+     },
+     {
+      "label": "Layer 2 CB",
+      "competitor": "ABC",
+      "verdict": "0.037"
+     },
+     {
+      "label": "Layer 2 CB",
+      "competitor": "WOA",
+      "verdict": "0.035"
+     },
+     {
+      "label": "Layer 2 CB",
+      "competitor": "RSA",
+      "verdict": "0.028"
+     },
+     {
+      "label": "Layer 2 LGBM",
+      "competitor": "ChOA",
+      "verdict": "0.029"
+     },
+     {
+      "label": "Layer 2 LGBM",
+      "competitor": "VNS",
+      "verdict": "0.037"
+     },
+     {
+      "label": "Layer 2 LGBM",
+      "competitor": "PSO",
+      "verdict": "0.032"
+     },
+     {
+      "label": "Layer 2 LGBM",
+      "competitor": "BA",
+      "verdict": "0.038"
+     },
+     {
+      "label": "Layer 2 LGBM",
+      "competitor": "ABC",
+      "verdict": "0.035"
+     },
+     {
+      "label": "Layer 2 LGBM",
+      "competitor": "WOA",
+      "verdict": "0.024"
+     },
+     {
+      "label": "Layer 2 LGBM",
+      "competitor": "RSA",
+      "verdict": "0.039"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "note": "Table 17 contains Shapiro-Wilk scores for normality, which is a statistical test but not a comparison between optimizers, so it is recorded as a results table."
+ },
+ {
+  "id": "1453",
+  "paper": "9eef64e981fdd5fd",
+  "page": 9,
+  "results_tables": [
+   {
+    "caption_start": "Table 5. Average fitness comparison",
+    "has_bold": "y",
+    "groups": [
+     {
+      "label": "base_exactly",
+      "direction": "lower",
+      "winner_name": "CDMO8",
+      "winner_mean": "0.0055",
+      "runner_name": "CDMO9",
+      "runner_mean": "0.0074",
+      "verdict_here": "none"
+     },
+     {
+      "label": "base_BreastEW",
+      "direction": "lower",
+      "winner_name": "CDMO10",
+      "winner_mean": "0.0027",
+      "runner_name": "CDMO1",
+      "runner_mean": "0.0072",
+      "verdict_here": "none"
+     },
+     {
+      "label": "base_M-of-n3",
+      "direction": "lower",
+      "winner_name": "CDMO4",
+      "winner_mean": "0.0012",
+      "runner_name": "CDMO6",
+      "runner_mean": "0.0012",
+      "verdict_here": "none"
+     },
+     {
+      "label": "BreastEW",
+      "direction": "lower",
+      "winner_name": "CDMO8",
+      "winner_mean": "0.0101",
+      "runner_name": "CDMO3",
+      "runner_mean": "0.0105",
+      "verdict_here": "none"
+     },
+     {
+      "label": "KrvskpEW",
+      "direction": "lower",
+      "winner_name": "CDMO8",
+      "winner_mean": "0.0131",
+      "runner_name": "CDMO3",
+      "runner_mean": "0.0128",
+      "verdict_here": "none"
+     },
+     {
+      "label": "SonarEW",
+      "direction": "lower",
+      "winner_name": "CDMO8",
+      "winner_mean": "0.0058",
+      "runner_name": "CDMO4",
+      "runner_mean": "0.0065",
+      "verdict_here": "none"
+     },
+     {
+      "label": "SpectEW",
+      "direction": "lower",
+      "winner_name": "CDMO3",
+      "winner_mean": "0.0379",
+      "runner_name": "CDMO5",
+      "runner_mean": "0.0437",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Waveform",
+      "direction": "lower",
+      "winner_name": "CDMO7",
+      "winner_mean": "0.0122",
+      "runner_name": "CDMO8",
+      "runner_mean": "0.0925",
+      "verdict_here": "none"
+     },
+     {
+      "label": "CongressEW",
+      "direction": "lower",
+      "winner_name": "CDMO8",
+      "winner_mean": "0.0010",
+      "runner_name": "CDMO4",
+      "runner_mean": "0.0043",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Ionosphere",
+      "direction": "lower",
+      "winner_name": "CDMO5",
+      "winner_mean": "0.0297",
+      "runner_name": "CDMO1",
+      "runner_mean": "0.0448",
+      "verdict_here": "none"
+     }
+    ]
+   },
+   {
+    "caption_start": "Table 6. Comparison between CDMO8",
+    "has_bold": "y",
+    "groups": [
+     {
+      "label": "base_BreastEW Accuracy",
+      "direction": "higher",
+      "winner_name": "CDMO8",
+      "winner_mean": "0.9911",
+      "runner_name": "DMO",
+      "runner_mean": "0.9876",
+      "verdict_here": "none"
+     },
+     {
+      "label": "BreastEW Accuracy",
+      "direction": "higher",
+      "winner_name": "CDMO8",
+      "winner_mean": "0.9921",
+      "runner_name": "DMO",
+      "runner_mean": "0.9911",
+      "verdict_here": "none"
+     },
+     {
+      "label": "KrvskpEW Accuracy",
+      "direction": "higher",
+      "winner_name": "DMO",
+      "winner_mean": "0.9894",
+      "runner_name": "ARO",
+      "runner_mean": "0.9874",
+      "verdict_here": "none"
+     },
+     {
+      "label": "SonarEW Accuracy",
+      "direction": "higher",
+      "winner_name": "CDMO8",
+      "winner_mean": "1",
+      "runner_name": "DMO",
+      "runner_mean": "0.9824",
+      "verdict_here": "none"
+     },
+     {
+      "label": "SpectEW Accuracy",
+      "direction": "higher",
+      "winner_name": "CDMO8",
+      "winner_mean": "0.9722",
+      "runner_name": "HHO",
+      "runner_mean": "0.94339",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Waveform Accuracy",
+      "direction": "higher",
+      "winner_name": "CDMO8",
+      "winner_mean": "0.9192",
+      "runner_name": "DMO",
+      "runner_mean": "0.9069",
+      "verdict_here": "none"
+     },
+     {
+      "label": "CongressEW Accuracy",
+      "direction": "higher",
+      "winner_name": "CDMO8",
+      "winner_mean": "1",
+      "runner_name": "DMO",
+      "runner_mean": "0.9880",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Ionosphere Accuracy",
+      "direction": "higher",
+      "winner_name": "ARO",
+      "winner_mean": "0.96",
+      "runner_name": "CDMO8",
+      "runner_mean": "0.9571",
+      "verdict_here": "none"
+     },
+     {
+      "label": "base_BreastEW Precision",
+      "direction": "higher",
+      "winner_name": "CDMO8",
+      "winner_mean": "0.9911",
+      "runner_name": "DMO",
+      "runner_mean": "0.9876",
+      "verdict_here": "none"
+     },
+     {
+      "label": "BreastEW Precision",
+      "direction": "higher",
+      "winner_name": "DMO",
+      "winner_mean": "0.9912",
+      "runner_name": "CDMO8",
+      "runner_mean": "0.9861",
+      "verdict_here": "none"
+     },
+     {
+      "label": "KrvskpEW Precision",
+      "direction": "higher",
+      "winner_name": "CDMO8",
+      "winner_mean": "0.9939",
+      "runner_name": "DMO",
+      "runner_mean": "0.9910",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Waveform Precision",
+      "direction": "higher",
+      "winner_name": "CDMO8",
+      "winner_mean": "0.9188",
+      "runner_name": "DMO",
+      "runner_mean": "0.9107",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Ionosphere Precision",
+      "direction": "higher",
+      "winner_name": "CDMO8",
+      "winner_mean": "0.9565",
+      "runner_name": "ARO",
+      "runner_mean": "0.9295",
+      "verdict_here": "none"
+     },
+     {
+      "label": "base_BreastEW Sensitivity",
+      "direction": "higher",
+      "winner_name": "DMO",
+      "winner_mean": "0.9943",
+      "runner_name": "CDMO8",
+      "runner_mean": "0.9859",
+      "verdict_here": "none"
+     },
+     {
+      "label": "KrvskpEW Sensitivity",
+      "direction": "higher",
+      "winner_name": "DMO",
+      "winner_mean": "0.9887",
+      "runner_name": "CDMO8",
+      "runner_mean": "0.9849",
+      "verdict_here": "none"
+     },
+     {
+      "label": "SpectEW Sensitivity",
+      "direction": "higher",
+      "winner_name": "PSO",
+      "winner_mean": "0.9580",
+      "runner_name": "ACO",
+      "runner_mean": "0.9504",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Waveform Sensitivity",
+      "direction": "higher",
+      "winner_name": "CDMO8",
+      "winner_mean": "0.9218",
+      "runner_name": "PSO",
+      "runner_mean": "0.9087",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Ionosphere Sensitivity",
+      "direction": "higher",
+      "winner_name": "DMO",
+      "winner_mean": "0.9911",
+      "runner_name": "HHO",
+      "runner_mean": "0.9866",
+      "verdict_here": "none"
+     },
+     {
+      "label": "BreastEW Specificity",
+      "direction": "higher",
+      "winner_name": "PSO",
+      "winner_mean": "0.9926",
+      "runner_name": "ACO",
+      "runner_mean": "0.9911",
+      "verdict_here": "none"
+     },
+     {
+      "label": "KrvskpEW Specificity",
+      "direction": "higher",
+      "winner_name": "CDMO8",
+      "winner_mean": "0.9934",
+      "runner_name": "DMO",
+      "runner_mean": "0.9901",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Waveform Specificity",
+      "direction": "higher",
+      "winner_name": "CDMO8",
+      "winner_mean": "0.9166",
+      "runner_name": "DMO",
+      "runner_mean": "0.9145",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Ionosphere Specificity",
+      "direction": "higher",
+      "winner_name": "CDMO8",
+      "winner_mean": "0.92",
+      "runner_name": "ACO",
+      "runner_mean": "0.9072",
+      "verdict_here": "none"
+     },
+     {
+      "label": "base_BreastEW F-measure",
+      "direction": "higher",
+      "winner_name": "CDMO8",
+      "winner_mean": "0.9929",
+      "runner_name": "DMO",
+      "runner_mean": "0.9901",
+      "verdict_here": "none"
+     },
+     {
+      "label": "BreastEW F-measure",
+      "direction": "higher",
+      "winner_name": "CDMO8",
+      "winner_mean": "0.9930",
+      "runner_name": "DMO",
+      "runner_mean": "0.9929",
+      "verdict_here": "none"
+     },
+     {
+      "label": "SpectEW F-measure",
+      "direction": "higher",
+      "winner_name": "ARO",
+      "winner_mean": "0.9455",
+      "runner_name": "ACO",
+      "runner_mean": "0.9380",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Waveform F-measure",
+      "direction": "higher",
+      "winner_name": "CDMO8",
+      "winner_mean": "0.9203",
+      "runner_name": "DMO",
+      "runner_mean": "0.9047",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Ionosphere F-measure",
+      "direction": "higher",
+      "winner_name": "ARO",
+      "winner_mean": "0.9698",
+      "runner_name": "CDMO8",
+      "runner_mean": "0.9670",
+      "verdict_here": "none"
+     }
+    ]
+   }
+  ],
+  "verdict_tables": [],
+  "note": "No statistical verdicts are printed on this page."
+ },
+ {
+  "id": "1509",
+  "paper": "a950a45f555bebb8",
+  "page": 10,
+  "results_tables": [],
+  "verdict_tables": [],
+  "note": "The tables on this page describe dataset variables and descriptive statistics, not experimental results of optimizers."
+ },
+ {
+  "id": "1513",
+  "paper": "a950a45f555bebb8",
+  "page": 14,
+  "results_tables": [
+   {
+    "caption_start": "Table 15. MAPE statistics for 1007 dataset.",
+    "has_bold": "y",
+    "groups": [
+     {
+      "label": "1007",
+      "direction": "lower",
+      "winner_name": "HHO",
+      "winner_mean": "0.0033308",
+      "runner_name": "BMO",
+      "runner_mean": "0.0033579",
+      "verdict_here": "none"
+     }
+    ]
+   },
+   {
+    "caption_start": "Table 16. MAPE statistics for 1009 dataset.",
+    "has_bold": "y",
+    "groups": [
+     {
+      "label": "1009",
+      "direction": "lower",
+      "winner_name": "BMO",
+      "winner_mean": "0.0048839",
+      "runner_name": "HHO",
+      "runner_mean": "0.0049348",
+      "verdict_here": "none"
+     }
+    ]
+   }
+  ],
+  "verdict_tables": [],
+  "note": "The tables bold the entire row of the best-ranked method. Extracted the 'Average' column as it represents the primary mean performance metric."
+ },
+ {
+  "id": "1632",
+  "paper": "b5ceefcbd031f4e0",
+  "page": 12,
+  "results_tables": [
+   {
+    "caption_start": "Table 2. The OA and NB",
+    "has_bold": "n",
+    "groups": []
+   },
+   {
+    "caption_start": "Table 3. The OA and NB",
+    "has_bold": "n",
+    "groups": []
+   }
+  ],
+  "verdict_tables": [
+   {
+    "caption_start": "Table 4. Average rankings of the",
+    "verdict_kind": "ranks",
+    "compared_against": "none",
+    "entries": [
+     {
+      "label": "Ranking",
+      "competitor": "PSO",
+      "verdict": "7.7903"
+     },
+     {
+      "label": "Ranking",
+      "competitor": "ABC",
+      "verdict": "8.5966"
+     },
+     {
+      "label": "Ranking",
+      "competitor": "MPA",
+      "verdict": "5.3666"
+     },
+     {
+      "label": "Ranking",
+      "competitor": "DE",
+      "verdict": "6.8245"
+     },
+     {
+      "label": "Ranking",
+      "competitor": "SMO",
+      "verdict": "3.8805"
+     },
+     {
+      "label": "Ranking",
+      "competitor": "QANA",
+      "verdict": "6.2668"
+     },
+     {
+      "label": "Ranking",
+      "competitor": "GA",
+      "verdict": "3.2766"
+     },
+     {
+      "label": "Ranking",
+      "competitor": "GWO",
+      "verdict": "1.9117"
+     },
+     {
+      "label": "Ranking",
+      "competitor": "GWOGA",
+      "verdict": "1.2201"
+     }
+    ],
+    "note": ""
+   }
+  ],
+  "note": "No bold text is present in the results tables."
+ },
+ {
+  "id": "1689",
+  "paper": "b9d61af8b13e9eee",
+  "page": 11,
+  "results_tables": [],
+  "verdict_tables": [],
+  "note": "The only table on this page is Table 1, which lists parameter settings for different algorithms. It does not contain experimental results or statistical verdicts."
+ },
+ {
+  "id": "1693",
+  "paper": "b9d61af8b13e9eee",
+  "page": 17,
+  "results_tables": [],
+  "verdict_tables": [],
+  "note": "failed"
+ },
+ {
+  "id": "1697",
+  "paper": "b9d61af8b13e9eee",
+  "page": 25,
+  "results_tables": [
+   {
+    "caption_start": "Table 14. MAE values on",
+    "has_bold": "y",
+    "groups": [
+     {
+      "label": "COCOMO81",
+      "direction": "lower",
+      "winner_name": "MISMFO-MKSVR",
+      "winner_mean": "4.9140E-02",
+      "runner_name": "WCMFO-MKSVR",
+      "runner_mean": "5.0936E-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Maxwell",
+      "direction": "lower",
+      "winner_name": "SHADE-MKSVR",
+      "winner_mean": "7.3182E-02",
+      "runner_name": "LSHADE-MKSVR",
+      "runner_mean": "7.3863E-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Desharnais",
+      "direction": "lower",
+      "winner_name": "MISMFO-MKSVR",
+      "winner_mean": "7.6498E-02",
+      "runner_name": "IMFO-MKSVR",
+      "runner_mean": "8.4435E-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "China",
+      "direction": "lower",
+      "winner_name": "COLSHADE-MKSVR",
+      "winner_mean": "1.8667E-02",
+      "runner_name": "SHADE-MKSVR",
+      "runner_mean": "2.0557E-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Miyazaki",
+      "direction": "lower",
+      "winner_name": "MISMFO-MKSVR",
+      "winner_mean": "3.3847E-02",
+      "runner_name": "IMFO-MKSVR",
+      "runner_mean": "3.5151E-02",
+      "verdict_here": "none"
+     }
+    ]
+   }
+  ],
+  "verdict_tables": [],
+  "note": ""
+ },
+ {
+  "id": "1856",
+  "paper": "cb125ab131077177",
+  "page": 9,
+  "results_tables": [
+   {
+    "caption_start": "Table 3. Comparison of results on",
+    "has_bold": "y",
+    "groups": [
+     {
+      "label": "F2",
+      "direction": "lower",
+      "winner_name": "QOCWO",
+      "winner_mean": "2.04E-233",
+      "runner_name": "SMA",
+      "runner_mean": "3.17E-208",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F4",
+      "direction": "lower",
+      "winner_name": "QOCWO",
+      "winner_mean": "1.75E-227",
+      "runner_name": "WO",
+      "runner_mean": "3.23E-181",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F5",
+      "direction": "lower",
+      "winner_name": "QOCWO",
+      "winner_mean": "2.40E-03",
+      "runner_name": "WO",
+      "runner_mean": "2.00E-02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F6",
+      "direction": "lower",
+      "winner_name": "GBO",
+      "winner_mean": "3.26E-09",
+      "runner_name": "QOCWO",
+      "runner_mean": "7.30E-05",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F7",
+      "direction": "lower",
+      "winner_name": "QOCWO",
+      "winner_mean": "5.96E-05",
+      "runner_name": "SMA",
+      "runner_mean": "1.06E-04",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F12",
+      "direction": "lower",
+      "winner_name": "GBO",
+      "winner_mean": "3.80E-10",
+      "runner_name": "QOCWO",
+      "runner_mean": "9.77E-07",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F13",
+      "direction": "lower",
+      "winner_name": "QOCWO",
+      "winner_mean": "1.06E-05",
+      "runner_name": "WO",
+      "runner_mean": "2.02E-05",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F15",
+      "direction": "lower",
+      "winner_name": "QOCWO",
+      "winner_mean": "3.11E-04",
+      "runner_name": "WO",
+      "runner_mean": "3.19E-04",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F20",
+      "direction": "lower",
+      "winner_name": "QOCWO",
+      "winner_mean": "-3.29E+00",
+      "runner_name": "CGWO",
+      "runner_mean": "-3.28E+00",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F21",
+      "direction": "lower",
+      "winner_name": "QOCWO",
+      "winner_mean": "-1.02E+01",
+      "runner_name": "WO",
+      "runner_mean": "-1.02E+01",
+      "verdict_here": "none"
+     }
+    ]
+   }
+  ],
+  "verdict_tables": [],
+  "note": "Extracted groups with exactly one bold cell in the Mean row."
+ },
+ {
+  "id": "1860",
+  "paper": "cb125ab131077177",
+  "page": 15,
+  "results_tables": [
+   {
+    "caption_start": "Comparison of optimization results",
+    "has_bold": "n",
+    "groups": []
+   },
+   {
+    "caption_start": "Statistical results of QOCWO",
+    "has_bold": "n",
+    "groups": []
+   }
+  ],
+  "verdict_tables": [],
+  "note": "No bold cells or statistical verdicts found on this page."
+ },
+ {
+  "id": "1967",
+  "paper": "d54b05b4550fb829",
+  "page": 10,
+  "results_tables": [
+   {
+    "caption_start": "Table 4. Parameters identified for",
+    "has_bold": "n",
+    "groups": []
+   }
+  ],
+  "verdict_tables": [],
+  "note": "Table 4 contains parameter values with no bold data cells indicating best performance, and there are no statistical verdict tables on this page."
+ },
+ {
+  "id": "1971",
+  "paper": "d54b05b4550fb829",
+  "page": 17,
+  "results_tables": [
+   {
+    "caption_start": "Table 11. Comparison between estimated",
+    "has_bold": "n",
+    "groups": []
+   },
+   {
+    "caption_start": "Table 12. Statistical analysis for",
+    "has_bold": "n",
+    "groups": []
+   }
+  ],
+  "verdict_tables": [],
+  "note": "No bold cells or statistical verdicts found on this page."
+ },
+ {
+  "id": "2026",
+  "paper": "dc241dbc0591fd1b",
+  "page": 17,
+  "results_tables": [
+   {
+    "caption_start": "Table 2. Numerical results of scenario#1",
+    "has_bold": "n",
+    "groups": []
+   }
+  ],
+  "verdict_tables": [],
+  "note": "No bold cells or statistical verdicts found on this page."
+ },
+ {
+  "id": "2030",
+  "paper": "dc241dbc0591fd1b",
+  "page": 24,
+  "results_tables": [
+   {
+    "caption_start": "Table 8. Numerical results of scenario#2",
+    "has_bold": "n",
+    "groups": []
+   },
+   {
+    "caption_start": "Table 9. Statistical analysis of different",
+    "has_bold": "n",
+    "groups": []
+   }
+  ],
+  "verdict_tables": [],
+  "note": "No bold cells or statistical test verdicts found on this page."
+ },
+ {
+  "id": "2034",
+  "paper": "dc241dbc0591fd1b",
+  "page": 31,
+  "results_tables": [
+   {
+    "caption_start": "Table 16. Comparison with previous studies",
+    "has_bold": "n",
+    "groups": []
+   },
+   {
+    "caption_start": "Table 17. Comparison with previous studies",
+    "has_bold": "n",
+    "groups": []
+   },
+   {
+    "caption_start": "Table 18. Comparison with previous studies",
+    "has_bold": "n",
+    "groups": []
+   }
+  ],
+  "verdict_tables": [],
+  "note": "No bold cells or statistical verdicts found on this page."
+ },
+ {
+  "id": "2103",
+  "paper": "e0faa3d98e2a4d76",
+  "page": 12,
+  "results_tables": [
+   {
+    "caption_start": "Table 7. Objective function comparative",
+    "has_bold": "y",
+    "groups": [
+     {
+      "label": "Best",
+      "direction": "higher",
+      "winner_name": "ADA-HARFO",
+      "winner_mean": ".910931",
+      "runner_name": "ADA-GA",
+      "runner_mean": ".906937",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Worst",
+      "direction": "higher",
+      "winner_name": "ADA-HARFO",
+      "winner_mean": ".894158",
+      "runner_name": "ADA-GA",
+      "runner_mean": ".889045",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Mean",
+      "direction": "higher",
+      "winner_name": "ADA-HARFO",
+      "winner_mean": ".899159",
+      "runner_name": "ADA-RFO",
+      "runner_mean": ".897796",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Median",
+      "direction": "higher",
+      "winner_name": "ADA-RFO",
+      "winner_mean": ".897164",
+      "runner_name": "ADA-HARFO",
+      "runner_mean": ".895451",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Std",
+      "direction": "lower",
+      "winner_name": "ADA-HARFO",
+      "winner_mean": ".006107",
+      "runner_name": "ADA-ABC",
+      "runner_mean": ".005220",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Var",
+      "direction": "lower",
+      "winner_name": "ADA-HARFO",
+      "winner_mean": "3.73E-05",
+      "runner_name": "ADA-ABC",
+      "runner_mean": "2.72E-05",
+      "verdict_here": "none"
+     }
+    ]
+   },
+   {
+    "caption_start": "Table 8. Comparisons of the",
+    "has_bold": "y",
+    "groups": [
+     {
+      "label": "Best",
+      "direction": "lower",
+      "winner_name": "ADA-HARFO",
+      "winner_mean": ".015474",
+      "runner_name": "ADA-RFO",
+      "runner_mean": ".016119",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Worst",
+      "direction": "lower",
+      "winner_name": "ADA-HARFO",
+      "winner_mean": ".018053",
+      "runner_name": "ADA-RFO",
+      "runner_mean": ".019342",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Mean",
+      "direction": "lower",
+      "winner_name": "ADA-HARFO",
+      "winner_mean": ".017408",
+      "runner_name": "ADA-RFO",
+      "runner_mean": ".017516",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Median",
+      "direction": "lower",
+      "winner_name": "ADA-RFO",
+      "winner_mean": ".017730",
+      "runner_name": "ADA-HARFO",
+      "runner_mean": ".018053",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Std",
+      "direction": "lower",
+      "winner_name": "ADA-HARFO",
+      "winner_mean": ".000985",
+      "runner_name": "ADA-ABC",
+      "runner_mean": ".000961",
+      "verdict_here": "none"
+     },
+     {
+      "label": "Var",
+      "direction": "lower",
+      "winner_name": "ADA-HARFO",
+      "winner_mean": "9.70E-07",
+      "runner_name": "ADA-ABC",
+      "runner_mean": "9.24E-07",
+      "verdict_here": "none"
+     }
+    ]
+   }
+  ],
+  "verdict_tables": [],
+  "note": "The authors bolded ADA-HARFO for Std and Var in both tables even though ADA-ABC achieved lower (better) values."
+ },
+ {
+  "id": "2107",
+  "paper": "e0faa3d98e2a4d76",
+  "page": 22,
+  "results_tables": [
+   {
+    "caption_start": "Table 19. Objective function comparative",
+    "has_bold": "n",
+    "groups": []
+   },
+   {
+    "caption_start": "Table 20. Comparisons of the",
+    "has_bold": "n",
+    "groups": []
+   }
+  ],
+  "verdict_tables": [],
+  "note": "No bold cells or statistical verdicts found on this page."
+ },
+ {
+  "id": "2111",
+  "paper": "e0faa3d98e2a4d76",
+  "page": 28,
+  "results_tables": [
+   {
+    "caption_start": "Table 27. Shapiro-Wilk test scores",
+    "has_bold": "n",
+    "groups": []
+   }
+  ],
+  "verdict_tables": [],
+  "note": "Table 27 reports Shapiro-Wilk test scores for normality, not pairwise comparisons between optimizers. There are no bold cells in the table."
+ },
+ {
+  "id": "2203",
+  "paper": "ec6428493ad4630d",
+  "page": 7,
+  "results_tables": [
+   {
+    "caption_start": "Table 5. Comparison results of the algorithms in CEC2022",
+    "has_bold": "y",
+    "groups": [
+     {
+      "label": "F1",
+      "direction": "lower",
+      "winner_name": "HEPSO",
+      "winner_mean": "3.000E+02",
+      "runner_name": "PSO",
+      "runner_mean": "3.020E+02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F2",
+      "direction": "lower",
+      "winner_name": "PSO",
+      "winner_mean": "4.483E+02",
+      "runner_name": "HEPSO",
+      "runner_mean": "4.582E+02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F3",
+      "direction": "lower",
+      "winner_name": "HEPSO",
+      "winner_mean": "6.415E+02",
+      "runner_name": "UPS",
+      "runner_mean": "6.428E+02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F4",
+      "direction": "lower",
+      "winner_name": "HEPSO",
+      "winner_mean": "8.675E+02",
+      "runner_name": "PSO-ST",
+      "runner_mean": "8.717E+02",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F5",
+      "direction": "lower",
+      "winner_name": "PSO-ST",
+      "winner_mean": "1.557E+03",
+      "runner_name": "UPS",
+      "runner_mean": "1.706E+03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F6",
+      "direction": "lower",
+      "winner_name": "HEPSO",
+      "winner_mean": "2.319E+03",
+      "runner_name": "PSO",
+      "runner_mean": "3.229E+03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F7",
+      "direction": "lower",
+      "winner_name": "HEPSO",
+      "winner_mean": "2.095E+03",
+      "runner_name": "WOA",
+      "runner_mean": "2.118E+03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F8",
+      "direction": "lower",
+      "winner_name": "UPS",
+      "winner_mean": "2.257E+03",
+      "runner_name": "PSO-ST",
+      "runner_mean": "2.258E+03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F9",
+      "direction": "lower",
+      "winner_name": "PSO-ST",
+      "winner_mean": "2.481E+03",
+      "runner_name": "WOA",
+      "runner_mean": "2.485E+03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F10",
+      "direction": "lower",
+      "winner_name": "HEPSO",
+      "winner_mean": "3.285E+03",
+      "runner_name": "PSO-ST",
+      "runner_mean": "3.397E+03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F11",
+      "direction": "lower",
+      "winner_name": "HEPSO",
+      "winner_mean": "2.904E+03",
+      "runner_name": "WOA",
+      "runner_mean": "2.913E+03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "F12",
+      "direction": "lower",
+      "winner_name": "WOA",
+      "winner_mean": "3.212E+03",
+      "runner_name": "HEPSO",
+      "runner_mean": "3.499E+03",
+      "verdict_here": "none"
+     }
+    ]
+   }
+  ],
+  "verdict_tables": [],
+  "note": "Table 6 is a summary of the number of optimal values found by each algorithm, not a statistical verdict table."
+ },
+ {
+  "id": "2220",
+  "paper": "ed4714197c850d2e",
+  "page": 9,
+  "results_tables": [
+   {
+    "caption_start": "Table 1. Parameters' search ranges.",
+    "has_bold": "n",
+    "groups": []
+   },
+   {
+    "caption_start": "Table 2. Optimal parameters for the SDM.",
+    "has_bold": "y",
+    "groups": []
+   }
+  ],
+  "verdict_tables": [],
+  "note": "The RMSE column in Table 2 contains multiple bold cells, so it does not meet the criteria of having exactly one bold cell."
+ },
+ {
+  "id": "2224",
+  "paper": "ed4714197c850d2e",
+  "page": 13,
+  "results_tables": [
+   {
+    "caption_start": "Table 8. Objective function values",
+    "has_bold": "y",
+    "groups": [
+     {
+      "label": "STM6-40/36",
+      "direction": "lower",
+      "winner_name": "EWOA",
+      "winner_mean": "1.7324E-03",
+      "runner_name": "GWOCS",
+      "runner_mean": "1.7528E-03",
+      "verdict_here": "none"
+     },
+     {
+      "label": "STP6-120/36",
+      "direction": "lower",
+      "winner_name": "EWOA",
+      "winner_mean": "1.6629E-02",
+      "runner_name": "IWOA",
+      "runner_mean": "1.8241E-02",
+      "verdict_here": "none"
+     }
+    ]
+   }
+  ],
+  "verdict_tables": [],
+  "note": "The Photowatt-PW201 group is excluded because it contains multiple bold cells in the Mean column."
  }
 ]
