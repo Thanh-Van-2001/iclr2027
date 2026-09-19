@@ -40,7 +40,7 @@ from gold_set import _num  # noqa: E402
 from analyze import p_value  # noqa: E402
 
 KIT = "audits/swevo_census"
-ROW_KITS = ["audits/swevo_census_rows", "audits/swevo_census_rows2"]
+ROW_KITS = ["audits/swevo_census_rows", "audits/swevo_census_rows2", "audits/swevo_census_rows3"]
 OUT = "out/swevo/census_readings.json"
 
 # a group whose label names a summary row rather than a function or an
@@ -50,7 +50,7 @@ STD_ROW = re.compile(r"(?:^|[ ,;:(/])(std|sd|s\.?d\.?|standard deviation|stdev|r
 BEST_ROW = re.compile(r"(?:^|[ ,;:(/])(best|worst|wor\.|median|min|max)(?:$|[ ,;:)/])", re.I)
 ROW_LABEL = re.compile("|".join([STD_ROW.pattern, BEST_ROW.pattern]), re.I)
 # a table whose caption says it holds ranks, test verdicts or settings
-NOT_MEANS_CAPTION = re.compile(r"friedman|rank|wilcoxon|p[- ]?value|sensitivity|parameter setting|settings|complexity|running time|computational time", re.I)
+NOT_MEANS_CAPTION = re.compile(r"friedman|rank|wilcoxon|p[- ]?value|sensitivity|parameter setting|settings|complexity|running time|computational time|standard deviations? of|std\.? of", re.I)
 
 
 def _disp_str(x) -> str:
@@ -73,7 +73,8 @@ def _disp(x):
     return _bar_num(_disp_str(x))
 
 
-MULTI_OBJECTIVE = re.compile(r"multi-?objective|many-?objective|pareto|hypervolume|\bIGD\b|NSGA|MOEA|MOPSO|MODE\b|bi-?objective", re.I)
+MULTI_OBJECTIVE = re.compile(r"multi-?objective|many-?objective|pareto|hypervolume|\bIGD\b|NSGA|MOEA|MOPSO|bi-?objective", re.I)
+MULTI_OBJECTIVE_ACRONYM = re.compile(r"\bMODE\b")  # the acronym only, never the word "mode"
 
 
 def _mo_papers(paper_ids: set) -> set:
@@ -83,7 +84,8 @@ def _mo_papers(paper_ids: set) -> set:
         return set()
     out = set()
     for r in json.load(open(path, encoding="utf-8")):
-        if r.get("id") in paper_ids and MULTI_OBJECTIVE.search(str(r.get("title", "")) + " " + str(r.get("abstract", ""))):
+        text = str(r.get("title", "")) + " " + str(r.get("abstract", ""))
+        if r.get("id") in paper_ids and (MULTI_OBJECTIVE.search(text) or MULTI_OBJECTIVE_ACRONYM.search(text)):
             out.add(r["id"])
     return out
 
@@ -135,22 +137,24 @@ def _regroup(labels: dict, items: dict, kinds: dict):
                 testable = wb and rb and (n is not None or kind in ("se", "ci"))
                 fail = None
                 zero_both = False
+                pval = None
                 if testable and None not in (w, r):
                     sw, sr = _se(_disp_str(g.get("winner_disp")), kind, n), _se(_disp_str(g.get("runner_disp")), kind, n)
                     if None not in (sw, sr):
                         res = p_value(abs(w - r), sw, sr, int(n) if n else None)
                         fail = (res["p"] >= 0.05) if res else None
+                        pval = res["p"] if res else None
                         zero_both = res is None and sw == 0 and sr == 0
                 label = str(g.get("label", "")).strip()
                 groups.append({"page": iid, "paper": paper, "kind": kinds.get(paper, "unlabelled"), "form": form,
                                "label": label, "w": w, "r": r, "wd": wd, "rd": rd, "wb": wb, "rb": rb, "n": n,
                                "n_source": str(t.get("n_source", "")).lower().strip(),
-                               "testable": testable, "fail": fail, "zero_both": zero_both,
+                               "testable": testable, "fail": fail, "zero_both": zero_both, "p": pval,
                                "std_row": bool(STD_ROW.search(label)), "best_row": bool(BEST_ROW.search(label)),
                                "row_label": bool(ROW_LABEL.search(label)), "not_means_table": bool(NOT_MEANS_CAPTION.search(cap)),
                                "table": f"{iid}:{ti}", "kind_label": kind,
                                "orientation": str(t.get("orientation", "")).lower().strip(),
-                               "whole_row": _wholerow_flag(iid, cap)})
+                               "whole_row": _wholerow_flag(iid, cap) if str(t.get("orientation", "")).lower().strip() == "column" else None})
     return groups
 
 
@@ -415,7 +419,9 @@ def merged_labels(labels: dict, kits=ROW_KITS, wholesale: bool = False) -> tuple
                     reread[pg["id"]] = pg
     merged = {iid: json.loads(json.dumps(pg)) for iid, pg in labels.items()}
     log = {"pages_reread": len(reread), "tables_reread": 0, "tables_replaced": 0, "tables_kept": 0, "tables_truncated": 0,
-           "pages_with_a_kept_table": 0, "kept_barred_lost": 0, "kept_means_lost": 0, "kept_groups_old": 0, "kept_groups_new": 0}
+           "pages_with_a_kept_table": 0, "kept_barred_lost": 0, "kept_means_lost": 0, "kept_groups_old": 0, "kept_groups_new": 0,
+           "pages_truncated": sum(1 for pg in reread.values() if pg.get("figure_band_on_page") == ""),
+           "corrections_accepted": 0, "corrections_groups_old": 0, "corrections_groups_new": 0}
 
     def n_means(t):
         return sum(1 for g in t.get("groups", []) if not ROW_LABEL.search(str(g.get("label", "")).strip()))
@@ -446,10 +452,18 @@ def merged_labels(labels: dict, kits=ROW_KITS, wholesale: bool = False) -> tuple
                 continue
             used.add(old_i)
             old = old_tabs[old_i]
-            separate = str(new.get("bar_form", "")).lower().startswith("separate")
-            # the re-read must not lose a dispersion the original had, and
-            # must list as many means unless it files a separate layout
-            enough = n_barred(new) >= n_barred(old) and (n_means(new) >= n_means(old) or separate)
+            # a re-read whose answer was cut at the output budget leaves the page-level
+            # fields empty after the JSON repair; such a table is a truncation and keeps
+            # its original. A complete re-read that lists fewer groups is the reader's
+            # correction under the instruction (a whole bold row, a table of deviations,
+            # two bold cells per row) and is accepted.
+            truncated = pg.get("figure_band_on_page") == ""
+            fewer = n_barred(new) < n_barred(old) or n_means(new) < n_means(old)
+            enough = not (truncated and fewer)
+            if enough and fewer:
+                log["corrections_accepted"] += 1
+                log["corrections_groups_old"] += len(old.get("groups", []))
+                log["corrections_groups_new"] += len(new.get("groups", []))
             if not enough:
                 # what the refused re-read would have lost
                 log["kept_barred_lost"] += max(n_barred(old) - n_barred(new), 0)
@@ -531,6 +545,7 @@ def main() -> int:
                 "groups_by_form": dict(groups_by_form), "groups_with_both_bars_by_form": dict(barred_by_form),
                 "pct_groups_in_separate_layout": round(100 * sum(v for k, v in groups_by_form.items() if k.startswith("separate")) / max(sum(groups_by_form.values()), 1), 1),
                 "pct_barred_groups_in_separate_layout": round(100 * sum(v for k, v in barred_by_form.items() if k.startswith("separate")) / max(sum(barred_by_form.values()), 1), 1),
+                "tables_at_group_cap": sum(1 for pg in labs.values() for t in pg.get("tables", []) if len(t.get("groups", [])) >= 40),
                 "pct_tables_with_run_count": round(100 * sum(v for k, v in n_src.items() if k not in ("none", "unstated")) / max(n_results, 1), 1),
                 "pct_tables_at_thirty": round(100 * n_runs_vals.get(30, 0) / max(n_results, 1), 1),
                 "pct_tables_any_bar": round(100 * sum(v for k, v in forms.items() if k not in ("none", "unstated")) / max(n_results, 1), 1)}
@@ -676,6 +691,63 @@ def main() -> int:
                      "reader_n_disagrees_scan": sum(1 for g in tested if g["n"] and scan.get(g["paper"], {}).get("run_modal") and scan[g["paper"]]["run_modal"] != int(g["n"])),
                      "tested_n_at_most_five": sum(1 for g in tested if g["n"] and g["n"] <= 5),
                      "tested_n_thirty": sum(1 for g in tested if g["n"] == 30)}
+        # where the p-values sit, and the rate on the stratum where a t-type check is least objectionable
+        ps = [g["p"] for g in tested if g["p"] is not None]
+        fails_p = [x for x in ps if x >= 0.05]
+        passes_p = [x for x in ps if x < 0.05]
+
+        def floor_pair(g):
+            return g["w"] is not None and g["r"] is not None and abs(g["w"]) < 1e-10 and abs(g["r"]) < 1e-10
+        p_dist = {"tested_with_p": len(ps),
+                  "fail_p_at_least_half": round(100 * sum(1 for x in fails_p if x >= 0.5) / len(fails_p), 1) if fails_p else None,
+                  "fail_p_below_tenth": round(100 * sum(1 for x in fails_p if x < 0.10) / len(fails_p), 1) if fails_p else None,
+                  "pass_p_below_thousandth": round(100 * sum(1 for x in passes_p if x < 1e-3) / len(passes_p), 1) if passes_p else None,
+                  "pct_fail_at_one_percent": round(100 * sum(1 for x in ps if x >= 0.01) / len(ps), 1) if ps else None,
+                  "pct_fail_at_ten_percent": round(100 * sum(1 for x in ps if x >= 0.10) / len(ps), 1) if ps else None,
+                  "median_p_fail": round(statistics.median(fails_p), 3) if fails_p else None,
+                  "median_p_pass": ("%.1e" % statistics.median(passes_p)) if passes_p else None,
+                  "both_means_below_floor": sum(1 for g in tested if floor_pair(g)),
+                  "without_floor": _shares([g for g in gs if not floor_pair(g)])}
+        least = [g for g in means if not heavy(g) and g["paper"] not in mo and g["n"] and g["n"] >= 20 and g["whole_row"] != "y"]
+        p_dist["least_objectionable"] = _shares(least)
+        # the bar-less rate's own concentration, for the means of each kind: what per_paper gives the failure rate
+        def per_paper_of(rec, hit):
+            byp = collections.defaultdict(lambda: [0, 0])
+            for g in rec:
+                byp[g["paper"]][0] += 1
+                byp[g["paper"]][1] += bool(hit(g))
+            if not byp:
+                return {}
+            sizes = sorted(byp.values(), key=lambda x: -x[1])
+            tot_hit = sum(x[1] for x in sizes)
+            rates_ = [100 * h / n_ for n_, h in byp.values()]
+            big = max(byp, key=lambda k: byp[k][1])
+            top5 = {k for k, _ in sorted(byp.items(), key=lambda kv: -kv[1][1])[:5]}
+            hits = [g for g in rec if hit(g)]
+            rest_big = [g for g in rec if g["paper"] != big]
+            rest_top5 = [g for g in rec if g["paper"] not in top5]
+            return {"papers": len(byp), "groups": len(rec), "hits": tot_hit, "papers_with_hits": sum(1 for x in byp.values() if x[1]),
+                    "effective_papers": _kish(rec)["effective"], "effective_papers_hits": _kish(hits)["effective"] if hits else None,
+                    "largest_share": round(100 * byp[big][1] / tot_hit, 1) if tot_hit else None,
+                    "top_three_share": round(100 * sum(x[1] for x in sizes[:3]) / tot_hit, 1) if tot_hit else None,
+                    "top_five_share": round(100 * sum(x[1] for x in sizes[:5]) / tot_hit, 1) if tot_hit else None,
+                    "median_rate": round(statistics.median(rates_), 1), "q1_rate": round(statistics.quantiles(rates_, n=4)[0], 1) if len(rates_) >= 4 else None,
+                    "q3_rate": round(statistics.quantiles(rates_, n=4)[2], 1) if len(rates_) >= 4 else None,
+                    "macro_rate": round(statistics.mean(rates_), 1), "macro_rate_ci": _boot_mean(rates_) if len(rates_) >= 10 else None,
+                    "papers_at_zero": sum(1 for x in byp.values() if x[1] == 0), "papers_at_least_half": sum(1 for n_, h in byp.values() if h >= n_ / 2),
+                    "papers_at_hundred": sum(1 for n_, h in byp.values() if h == n_),
+                    "without_largest_pct": round(100 * sum(1 for g in rest_big if hit(g)) / len(rest_big), 1) if rest_big else None,
+                    "without_largest_groups": len(rest_big),
+                    "without_top_five_pct": round(100 * sum(1 for g in rest_top5 if hit(g)) / len(rest_top5), 1) if rest_top5 else None,
+                    "without_top_five_groups": len(rest_top5)}
+        barless = lambda g: not g["wb"] and not g["rb"]  # noqa: E731
+        per_paper_barless = {lab: per_paper_of([g for g in means if g["kind"] == lab], barless) for lab in ("new_optimizer", "application")}
+        per_paper_barless["all"] = per_paper_of(means, barless)
+        # where the bar-less new-optimizer means sit, at paper level, against the full-text layout field
+        bl_no = [g for g in means if g["kind"] == "new_optimizer" and barless(g)]
+        per_paper_barless["new_optimizer_in_papers_printing_a_deviation_somewhere"] = sum(1 for g in bl_no if (tr.get(g["paper"]) or {}).get("std_layout") not in (None, "none", "unsure") and "parse_error" not in (tr.get(g["paper"]) or {}))
+        per_paper_barless["new_optimizer_in_papers_printing_none"] = sum(1 for g in bl_no if (tr.get(g["paper"]) or {}).get("std_layout") == "none")
+        per_paper_barless["new_optimizer_in_tables_filed_no_bar"] = sum(1 for g in bl_no if g["form"] in ("none", ""))
         # the residual blind spot: bar-less mean groups against where the full-text reading says the deviation sits
         def layout_of(paper):
             x = tr.get(paper) or {}
@@ -714,6 +786,7 @@ def main() -> int:
         return {"name": name, "all": _shares(gs), "by_kind": _by_kind(gs), "per_paper": per_paper, "shape": shape,
                 "by_kind_second": second, "by_kind_both": both, "by_kind_second_means": second_m, "by_kind_both_means": both_m,
                 "residual_layout": residual, "coverage_by_stratum": coverage, "coverage_summary": coverage_summary,
+                "per_paper_barless": per_paper_barless, "p_dist": p_dist,
                 "objective": objective, "orientation": orientation,
                 "alternatives": alternatives, "rows": rows, "bold_rule": bold, "note": note, "citing": citing, "scan_runs": scan_runs,
                 "dropped_nonextremal": DROPPED["nonextremal"], "dropped_nonextremal_papers": len(DROPPED["papers"])}

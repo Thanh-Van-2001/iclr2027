@@ -1,0 +1,7 @@
+{
+ "pages": 34,
+ "rule": "the Mean/Std-row re-read pages whose answer was cut at the 8,000-token output budget (page-level fields absent after the JSON repair), read again at the census's 12,000-token budget under the same protocol and instruction (added after review round five)",
+ "protocol": "census-protocol-v1 + row instruction (swevo)",
+ "model": "gemini/gemini-3.1-pro-preview (Google, served through an OpenAI-compatible relay)",
+ "command": "python study/read_pages_api.py --kit audits/swevo_census_rows3 --shard k/4 --venue-phrase 'metaheuristics paper in Scientific Reports (single-column Nature format)' --bar-forms 'pm / paren / bracket / subscript / separate_column / separate_row / none' --max-tokens 12000 --extra-instruction \"$(cat instruction.txt)\""
+}

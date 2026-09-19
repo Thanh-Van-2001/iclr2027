@@ -1,0 +1,136 @@
+\documentclass[preprint,review,12pt]{elsarticle}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+\usepackage{lineno}
+\input{numbers}
+\journal{Swarm and Evolutionary Computation}
+
+\begin{document}
+\begin{frontmatter}
+\title{Supplementary material for ``The convention on the page: an audit of \nOListedSrep{} metaheuristics papers in \emph{Scientific Reports} against their own reporting rule''}
+\author[1]{Author name}
+\affiliation[1]{organization={Affiliation}, city={City}, country={Country}}
+\begin{abstract}
+The frozen parser's numbers on this corpus and its readings, the reference set, the impossible-pair check and the alternative conventions of the census, the classifier's prompt, and the parser on the two journals fetched through PMC. Every number is a macro from the released run records, as in the main text.
+\end{abstract}
+\end{frontmatter}
+\linenumbers
+
+\renewcommand{\thesection}{S\arabic{section}}
+\renewcommand{\thetable}{S\arabic{table}}
+
+\section{The frozen parser on this corpus}
+\label{app:parser}
+
+The parser, unchanged from the companion audits, detected \nATablesDetected{} table captions in the \nOParsed{} papers and read \nAComparisons{} highlighted comparisons in \nAClaimPapers{} of them; \nAPctNeitherCi{} print no dispersion in the cell, \nAPctTestable{} are testable, and \nAPctFailCi{} of the \nANTestable{} testable comparisons (\nAPapersTestable{} papers) fail Welch's test at the parser's run count. These are the numbers the plan fixed, and on this format they measure the instrument's unit more than the field, in three ways the reference set and review exposed: the deviation sits in a column or row the cell-level parser cannot read; this journal's house style sets header rows in bold and many papers set the proposed method's row in bold, so that \nRbRowBoldOnlyN{} comparisons (\nRbRowBoldPapers{} papers) come from all-bold rows and \nPrBackMatterAllComparisons{} from reference lists whose ``volume (issue)'' against ``page (year)'' parses as a mean with a deviation; and the smallest run count stated anywhere in the paper, the reading least favourable to separation on machine-learning papers, is here often not a run count, so that \nPrTestedAtFiveOrFewer{} of the testable comparisons, in \nPrTestedAtFiveOrFewerPapers{} papers, are tested at five runs or fewer, most from the phrase ``four trial vector generation strategies'' in two differential-evolution papers whose text states fifty-one and thirty runs. On the census pages the parser lists \nCzPipeGroups{} comparisons and the reader lists the parser's bold cell for \nCzPipeFoundPct{} of them. Table~\ref{tab:span} removes each artefact in turn; the cleaned reading, without the back-matter rows, the zero deviations and the interval cells and at the text scan's run count, is \nPrCleanedScanFail{} on \nPrCleanedScanN{} comparisons in \nPrCleanedScanPapers{} papers. None of the parser's subgroup contrasts is quoted in this paper, none of its rates is quoted as a rate of the field, and the census is the instrument to quote; the frozen headline is kept because the plan fixed it and because a filter on an instrument's output is easier to argue about than a change to the instrument.
+
+Table~\ref{tab:span} gives the parser's testable set under each reading named above; the full set of readings of the companion audits, the arXiv cs.NE cross-check and the per-paper uncertainty census are in the release and not quoted here.
+
+\begin{table}[t]
+\caption{The parser's testable set under each reading. Rows that change the set give its size and the papers holding it; intervals are cluster bootstraps over papers, printed only for ten or more papers; the one-sided, population-deviation, paired and $z$ readings of the companion audits are in the release. ``Text-scan count'': the run count re-read as the paper's modal statement of a run count, the parser's where the text states none.}
+\label{tab:span}
+\centering
+\footnotesize
+\setlength{\tabcolsep}{3pt}
+\resizebox{\linewidth}{!}{%
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+Reading & Tested & Papers & Fail \\
+\midrule
+As reported (Welch, two-sided, unlabelled bar as SD, smallest stated count) & \nPrAsReportedN{} & \nPrAsReportedPapers{} & \nPrAsReportedFail{} \nPrAsReportedFailCi{} \\
+Holm within a table / within a paper & \nPrAsReportedN{} & \nPrAsReportedPapers{} & \nAPctFailHolm{} / \nSpanHolmFamilyPaperFailHolm{} \\
+Text-scan run count & \nPrAsReportedScanN{} & \nPrAsReportedScanPapers{} & \nPrAsReportedScanFail{} \nPrAsReportedScanFailCi{} \\
+Back-matter rows removed & \nPrWithoutBackMatterN{} & \nPrWithoutBackMatterPapers{} & \nPrWithoutBackMatterFail{} \nPrWithoutBackMatterFailCi{} \\
+Zero deviations removed & \nPrWithoutZeroSdN{} & \nPrWithoutZeroSdPapers{} & \nPrWithoutZeroSdFail{} \nPrWithoutZeroSdFailCi{} \\
+Interval cells (no run count) removed & \nPrWithoutIntervalN{} & \nPrWithoutIntervalPapers{} & \nPrWithoutIntervalFail{} \nPrWithoutIntervalFailCi{} \\
+All three removed, text-scan run count & \nPrCleanedScanN{} & \nPrCleanedScanPapers{} & \nPrCleanedScanFail{} \\
+Header rows removed & \nRbWithoutHeaderRowTestableN{} & \nRbWithoutHeaderRowTestablePapers{} & \nRbWithoutHeaderRowFail{} \\
+All-bold rows removed & \nRbWithoutRowBoldTestableN{} & \nRbWithoutRowBoldTestablePapers{} & \nRbWithoutRowBoldFail{} \\
+\bottomrule
+\end{tabular}}
+\end{table}
+
+
+
+
+
+\paragraph{The two journals fetched through PMC} On the \nPmParserPapers{} parsed papers of \emph{Biomimetics} and \emph{PeerJ Computer Science} the parser reads \nPmParserComparisons{} highlighted comparisons, \nPmParserPctNeither{} with no dispersion in either cell and \nPmParserPctTestable{} testable, of which \nPmParserPctFail{} fail Welch's test at the parser's count; \nPmParserRowBoldComparisons{} comparisons come from all-bold rows and \nPmParserBackMatterComparisons{} from back matter, and without both the bar-less share is \nPmParserGenuineNeither{} on \nPmParserGenuineN{}. The same layout hazard, not a rate of the field.
+
+\section{The reference set}
+\label{app:refset}
+
+\paragraph{Reference set} Before the census, \nGItemsN{} items drawn from the parser's output (\nGStratumTestable{} testable and \nGStratumNoBar{} bar-less comparisons shown with the audited cell boxed, \nGUnboxedN{} of them unboxable and excluded; \nGStratumDiscarded{} discarded tables; \nGStratumNonExtremal{} non-extremal groups) were read by two vendors' models, Gemini 3.1 Pro and Claude Sonnet 5 through the same relay, under the released reference protocol; Table~\ref{tab:refset} gives the counts. On the testable stratum the first reader files \nGTestableNotResults{} of \nGTestableRows{} items as reference-list pages whose ``dispersion'' is a citation year (the class \ref{app:parser} removes); on the results tables it confirms the whole claim, both cells and all four values, in \nGClaimFrac{} (\nGClaim{} by item, \nGClaimPaperCi{} resampling the \nGClaimPapers{} papers), that is \nGClaimOfDrawnFrac{} of the items drawn. The run count is the field the readers get least often as the parser has it, because the parser's count is the smallest in the paper; where both can test, every verdict disagreement is the parser failing a comparison the reader survives. On the bar-less stratum, which is most of what the parser reads, the parser's unit is confirmed in little more than half of the items. Of the discarded tables the first reader files \nGDiscardedCauseNoBold{} as bolding nothing, \nGDiscardedCauseNotResults{} as not results tables and \nGDiscardedCauseWholeRowBold{} as bolding a whole row, none as winners the parser should have read; of the non-extremal groups, \nGNonExtremalCauseHeaderBold{} are a bold header taken for a result, \nGNonExtremalCauseOwnMethod{} bold marking the authors' method, \nGNonExtremalCauseSubclassBest{} best within a sub-block, \nGNonExtremalCauseOther{} other, and \nGNonExtremalCauseMisread{} the parser's own misreading of a direction or orientation (\nGNonExtremalExtractorAtFaultFrac{}).
+
+\begin{table}[t]
+\caption{The reference set: two readers against the parser's cells, and against each other. Fractions are items; ``confirmed'' means the reader's reading equals the parser's.}
+\label{tab:refset}
+\centering
+\footnotesize
+\begin{tabular}{@{}lrrr@{}}
+\toprule
+ & First reader & Second reader & Between readers \\
+\midrule
+Testable stratum, results tables: bold cell confirmed & \nGBoldCellFrac{} & \nGTwoBoldCellFrac{} & \nAgBoldOkFrac{} \\
+\quad whole claim (both cells, four values) & \nGClaimFrac{} & \nGTwoClaimFrac{} & -- \\
+\quad winner mean / deviation & -- & -- & \nAgWinnerMeanFrac{} / \nAgWinnerDispFrac{} \\
+\quad rival mean / deviation & -- & -- & \nAgRunnerMeanFrac{} / \nAgRunnerDispFrac{} \\
+\quad run count as the parser has it & \nGNRunsFrac{} & \nGTwoNRunsFrac{} & \nAgNRunsFrac{} \\
+\quad Welch verdict agrees where both can test & \nGVerdictFrac{} & \nGTwoVerdictFrac{} & -- \\
+\quad \quad parser fails, reader survives / the reverse & \nGPipeFailOnly{} / \nGReaderFailOnly{} & \nGTwoPipeFailOnly{} / \nGTwoReaderFailOnly{} & -- \\
+Bar-less stratum: boxed cell bold and alone in its group & \nGNoBarBoldFrac{} & \nGTwoNoBarBoldFrac{} & -- \\
+\quad the parser's rival confirmed & \nGNoBarRunnerFrac{} & \nGTwoNoBarRunnerFrac{} & -- \\
+\quad no dispersion confirmed & \nGNoBarAbsentFrac{} & \nGTwoNoBarAbsentFrac{} & -- \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Readings on the census}
+\label{app:readings}
+
+\paragraph{A check the run record allows} For a quantity bounded below by zero, an error to the optimum or a distance, the sample deviation over $n$ runs cannot exceed $\sqrt{n}$ times the mean, since one run can carry at most the whole sum; a raw fitness with a positive optimum is not so bounded, and the check will flag such a pair falsely, which is one more reason to read the count as approximate. Leaving aside means printed as zero, which is rounding, and summary rows, \nCrcAlImpossiblePairs{} of the re-read census's tested groups, in \nCrcAlImpossiblePairsPapers{} papers and \nCrcAlImpossiblePairsSeparate{} of them in separate-column or separate-row tables, break that bound on one arm; \nCrcAlImpossiblePairsFail{} of them fail Welch's test. Some are the reader pairing a mean with a deviation that is not its own; at least one is the authors' own printed pair, an inconsistency of the paper rather than of the reader, and the two cannot be told apart without a person. Without them the re-read census reads \nCrcAlWithoutImpossibleFail{} \nCrcAlWithoutImpossibleFailCi{} on \nCrcAlWithoutImpossibleTested{} tested groups. The check is not a bound in either direction: it misses every mis-pairing small enough to be possible, and on a raw fitness it flags a pair that is the authors' own; what it does say is that the mis-pairings it catches fail more often than the rest, which is the direction in which the ones it misses push.
+
+\paragraph{Readings on the re-read census} The alternative conventions of the companion audits are rows of Table~\ref{tab:headline}; reading the \nCrcAlUnlabelledTested{} tested groups whose bar is unlabelled as standard errors moves the census rate from \nCrcAllFail{} to \nCrcAlUnlabelledAsSe{}. The \nCrcAlCountFromPaperSentences{} tested groups not counted from the table's caption or page take their count from the paper's run sentences. The reader finds a run count for \nCrcTablesWithRunCount{} of the results tables, from the caption in \nCrcNSourceCaption{} cases, the page in \nCrcNSourcePage{} and the run sentences in \nCrcNSourcePaper{}; the modal count is \nCrcRunsRankOneN{} (\nCrcRunsRankOneCount{} tables), \nCrcRunsTestedNThirty{} of the tested groups are at thirty and \nCrcRunsTestedNAtMostFive{} at five or fewer.
+
+\section{The classifier's prompt}
+\label{app:prompt}
+
+The paper-kind classifier of Section~\ref{sec:corpus} received, for each listed paper, the text below with the title and the first three thousand characters of the abstract in place of the placeholders; it saw nothing else of the paper. The labels are those of the released code, in the order given there.
+
+\begin{footnotesize}
+\begin{verbatim}
+You are classifying a paper that mentions a metaheuristic into exactly one kind.
+Labels (answer with the label id only):
+- new_optimizer: proposes a new metaheuristic, or a modified / improved / hybrid
+  variant of one, and evaluates it against other optimizers
+- comparison: compares or benchmarks existing optimizers, or studies their behaviour,
+  without proposing a new one as the main contribution
+- application: applies one or more metaheuristics to a domain problem (engineering
+  design, scheduling, energy, medicine, machine learning tuning ...) and the
+  contribution is the application
+- survey_theory: a survey, review, tutorial, or a theoretical or methodological paper
+  without a new optimizer
+- other: anything else, or not about metaheuristics at all
+
+Also say: is the proposed or studied optimizer named after a natural, animal, human or
+  physical metaphor (e.g. grey wolf, whale, hippopotamus, political, chemical) rather
+  than a mechanism (yes/no/none)? Does the abstract mention benchmark functions or a
+  CEC test suite (yes/no)?
+
+Answer as JSON: {"label": "<id>", "confidence": "high|medium|low", "metaphor_named":
+  "yes|no|none", "benchmark_suite": "yes|no"}
+
+Title: {title}
+
+Abstract:
+{abstract}
+\end{verbatim}
+\end{footnotesize}
+
+
+\bibliographystyle{elsarticle-num}
+\bibliography{refs}
+\end{document}

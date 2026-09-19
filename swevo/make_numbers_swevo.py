@@ -646,6 +646,25 @@ def build(out_path: str) -> dict:
         items_c = json.load(open("audits/swevo_census/items.json", encoding="utf-8"))
         reg.add("cz pages drawn", len(items_c), provenance=crun)
         reg.add("cz papers drawn", len({it["paper"] for it in items_c}), provenance=crun)
+        # the census base: the corpus papers on which the parser detected a table caption, and the rest by kind
+        _dz = json.load(open("audits/swevo_census/draw.json", encoding="utf-8"))
+        reg.add("cz papers eligible", _dz.get("papers_eligible", 0), provenance=crun)
+        if os.path.exists("data/extracted_oa.jsonl") and os.path.exists("out/swevo/kinds_merged.csv"):
+            import csv as _csv2
+            _ids = {r["id"] for r in json.load(open("out/swevo/index.json", encoding="utf-8")) if r["journal"] == "Scientific Reports"}
+            _kinds = {r["id"]: r["label"] for r in _csv2.DictReader(open("out/swevo/kinds_merged.csv", encoding="utf-8", newline=""))}
+            _with = set()
+            _parsed = set()
+            for line in open("data/extracted_oa.jsonl", encoding="utf-8"):
+                r = json.loads(line)
+                _parsed.add(r["id"])
+                if r.get("tables"):
+                    _with.add(r["id"])
+            _excl = _ids - _with
+            reg.add("cz excluded papers", len(_excl), provenance=crun)
+            reg.add("cz excluded not parsed", len(_ids - _parsed), provenance=crun)
+            reg.add("cz excluded application", sum(1 for p_ in _excl if _kinds.get(p_) == "application"), provenance=crun)
+            reg.add("cz excluded new optimizer", sum(1 for p_ in _excl if _kinds.get(p_) == "new_optimizer"), provenance=crun)
         reg.add("cz pages read", cz["n_pages"], provenance=crun)
         reg.add("cz tables", cz["n_results_tables"], provenance=crun)
         reg.add("cz tables with bar", _pct(cz["pct_results_tables_with_any_bar"]), provenance=crun)
@@ -737,6 +756,7 @@ def build(out_path: str) -> dict:
             reg.add(f"{tag} groups separate layout pct", _pct(lay["pct_groups_in_separate_layout"]), provenance=rrun)
             reg.add(f"{tag} barred groups separate layout pct", _pct(lay["pct_barred_groups_in_separate_layout"]), provenance=rrun)
             reg.add(f"{tag} tables with run count", _pct(lay["pct_tables_with_run_count"]), provenance=rrun)
+            reg.add(f"{tag} tables at group cap", lay.get("tables_at_group_cap", 0), provenance=rrun)
             reg.add(f"{tag} tables at thirty", _pct(lay["pct_tables_at_thirty"]), provenance=rrun)
             for rank, (n_, cnt) in enumerate(lay["n_runs"][:5]):
                 reg.add(f"{tag} runs rank {_word(rank + 1)} n", n_, provenance=rrun)
@@ -752,7 +772,7 @@ def build(out_path: str) -> dict:
                 _sh(f"crw {lab.replace('_', ' ')}", dd)
             for lab, dd in ws["means_only_by_kind"].items():
                 _sh(f"crw means {lab.replace('_', ' ')}", dd)
-        for k in ("kept_barred_lost", "kept_means_lost", "kept_groups_old", "kept_groups_new"):
+        for k in ("kept_barred_lost", "kept_means_lost", "kept_groups_old", "kept_groups_new", "pages_truncated", "corrections_accepted", "corrections_groups_old", "corrections_groups_new"):
             reg.add(f"crrr {k.replace('_', ' ')}", cr["rows_reread"].get(k, 0), provenance=rrun)
         for tag, d in (("cr", cr["pre"]), ("crc", cr["corrected"])):
             _sh(f"{tag} all", d["all"])
@@ -793,6 +813,30 @@ def build(out_path: str) -> dict:
             for lab, dd in ob["single_objective_by_kind"].items():
                 _sh(f"{tag} so {lab.replace('_', ' ')}", dd)
             reg.add(f"{tag} mo papers tested", ob["multi_objective_papers_tested"], provenance=rrun)
+            pb = d.get("per_paper_barless") or {}
+            for lab in ("new_optimizer", "application", "all"):
+                q = pb.get(lab) or {}
+                key = f"{tag} pb {lab.replace('_', ' ')}"
+                for k in ("papers", "groups", "hits", "papers_with_hits", "papers_at_zero", "papers_at_least_half", "papers_at_hundred", "without_largest_groups", "without_top_five_groups"):
+                    reg.add(f"{key} {k.replace('_', ' ')}", q.get(k, 0), provenance=rrun)
+                for k in ("largest_share", "top_three_share", "top_five_share", "median_rate", "q1_rate", "q3_rate", "macro_rate", "without_largest_pct", "without_top_five_pct"):
+                    reg.add(f"{key} {k.replace('_', ' ')}", _pct(q[k]) if q.get(k) is not None else "--", provenance=rrun)
+                reg.add(f"{key} effective papers", f"{q['effective_papers']:.1f}" if q.get("effective_papers") else "--", provenance=rrun)
+                reg.add(f"{key} effective papers hits", f"{q['effective_papers_hits']:.1f}" if q.get("effective_papers_hits") else "--", provenance=rrun)
+                reg.add(f"{key} macro rate ci", f"[{q['macro_rate_ci'][0]}, {q['macro_rate_ci'][1]}]" if q.get("macro_rate_ci") else "--", provenance=rrun)
+            for k in ("new_optimizer_in_papers_printing_a_deviation_somewhere", "new_optimizer_in_papers_printing_none", "new_optimizer_in_tables_filed_no_bar"):
+                reg.add(f"{tag} pb {k.replace('_', ' ')}", pb.get(k, 0), provenance=rrun)
+            pd_ = d.get("p_dist") or {}
+            for k in ("tested_with_p", "both_means_below_floor"):
+                reg.add(f"{tag} pd {k.replace('_', ' ')}", pd_.get(k, 0), provenance=rrun)
+            for k in ("fail_p_at_least_half", "fail_p_below_tenth", "pass_p_below_thousandth", "pct_fail_at_one_percent", "pct_fail_at_ten_percent"):
+                reg.add(f"{tag} pd {k.replace('_', ' ')}", _pct(pd_[k]) if pd_.get(k) is not None else "--", provenance=rrun)
+            reg.add(f"{tag} pd median p fail", f"{pd_['median_p_fail']:.2f}" if pd_.get("median_p_fail") is not None else "--", provenance=rrun)
+            reg.add(f"{tag} pd median p pass", str(pd_.get("median_p_pass") or "--").replace("e-0", "e-"), provenance=rrun)
+            if pd_.get("without_floor"):
+                _sh(f"{tag} pd without floor", pd_["without_floor"])
+            if pd_.get("least_objectionable"):
+                _sh(f"{tag} least", pd_["least_objectionable"])
             cs_ = d.get("coverage_summary") or {}
             reg.add(f"{tag} cov strata", cs_.get("strata", 0), provenance=rrun)
             reg.add(f"{tag} cov min", _pct(cs_["min"]) if cs_.get("min") is not None else "--", provenance=rrun)

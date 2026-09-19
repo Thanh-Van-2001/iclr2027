@@ -58,6 +58,15 @@ def main() -> int:
     ok["numbers"] = provenance.main(args) == 0
     print("5. PROSE")
     ok["prose"] = style.main([os.path.join(D, MAIN), "--json", "out/swevo/style.json", "--max-style", "30"]) == 0
+    if os.path.exists(os.path.join(D, "supplement.tex")):
+        print("6. SUPPLEMENT")
+        r = subprocess.run(["latexmk", "-pdf", "-interaction=nonstopmode", "-halt-on-error", "supplement.tex"],
+                           cwd=D, capture_output=True, text=True)
+        open(os.path.join(D, "build_supplement.log"), "w", encoding="utf-8").write(r.stdout + r.stderr)
+        built = r.returncode == 0
+        audited = provenance.main([os.path.join(D, "supplement.tex")] + (["--allow", ALLOW] if ALLOW else []) + ["--json", "out/swevo/numbers_supplement.json"]) == 0
+        ok["supplement"] = built and audited
+        print("  compiled" if built else "  FAILED (see paper/swevo/build_supplement.log)")
     print("\nVERDICT")
     for k, v in ok.items():
         print(f"  {'pass' if v else 'FAIL':<5} {k}")
