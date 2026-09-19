@@ -89,6 +89,20 @@ def _mo_papers(paper_ids: set) -> set:
 
 
 DROPPED = {"nonextremal": 0, "papers": set()}
+COLS_KIT = "audits/swevo_census_cols"
+
+
+def _wholerow_answers() -> dict:
+    """The one-question re-read of the column-oriented tables: (page id, caption key) -> answer record."""
+    out = {}
+    for path in sorted(glob.glob(os.path.join(COLS_KIT, "labels_shard*.json"))):
+        for pg in json.load(open(path, encoding="utf-8")):
+            for t in pg.get("tables", []):
+                out[(pg["id"], str(t.get("caption_start", ""))[:25].lower())] = t
+    return out
+
+
+WHOLEROW = _wholerow_answers()
 
 
 def _regroup(labels: dict, items: dict, kinds: dict):
@@ -135,8 +149,19 @@ def _regroup(labels: dict, items: dict, kinds: dict):
                                "std_row": bool(STD_ROW.search(label)), "best_row": bool(BEST_ROW.search(label)),
                                "row_label": bool(ROW_LABEL.search(label)), "not_means_table": bool(NOT_MEANS_CAPTION.search(cap)),
                                "table": f"{iid}:{ti}", "kind_label": kind,
-                               "orientation": str(t.get("orientation", "")).lower().strip()})
+                               "orientation": str(t.get("orientation", "")).lower().strip(),
+                               "whole_row": _wholerow_flag(iid, cap)})
     return groups
+
+
+def _wholerow_flag(iid: str, cap: str):
+    """y / n from the whole-row question, or None where the table was not asked or not answered."""
+    t = WHOLEROW.get((iid, str(cap)[:25].lower()))
+    if not t:
+        return None
+    row = str(t.get("all_bold_in_one_row", "")).lower().startswith("y")
+    col = str(t.get("all_bold_in_one_column", "")).lower().startswith("y")
+    return "y" if (row or col) else "n"
 
 
 def _is_mean(g) -> bool:
@@ -371,10 +396,12 @@ def _by_kind(gs: list) -> dict:
     return out
 
 
-def merged_labels(labels: dict, kits=ROW_KITS) -> tuple:
+def merged_labels(labels: dict, kits=ROW_KITS, wholesale: bool = False) -> tuple:
     """The corrected census: per table, the re-read table replaces the
     original only where it files a separate layout or lists at least as
-    many groups of means; the record of gains and losses comes with it."""
+    many groups of means; the record of gains and losses comes with it.
+    With wholesale=True every re-read table replaces its original (both
+    directions), the reading that shows the size of the one-way rule."""
     reread = {}
     for kit in kits:
         for path in sorted(glob.glob(os.path.join(kit, "labels_shard*.json"))):
@@ -383,7 +410,7 @@ def merged_labels(labels: dict, kits=ROW_KITS) -> tuple:
                     reread[pg["id"]] = pg
     merged = {iid: json.loads(json.dumps(pg)) for iid, pg in labels.items()}
     log = {"pages_reread": len(reread), "tables_reread": 0, "tables_replaced": 0, "tables_kept": 0, "tables_truncated": 0,
-           "pages_with_a_kept_table": 0}
+           "pages_with_a_kept_table": 0, "kept_barred_lost": 0, "kept_means_lost": 0, "kept_groups_old": 0, "kept_groups_new": 0}
 
     def n_means(t):
         return sum(1 for g in t.get("groups", []) if not ROW_LABEL.search(str(g.get("label", "")).strip()))
@@ -418,7 +445,13 @@ def merged_labels(labels: dict, kits=ROW_KITS) -> tuple:
             # the re-read must not lose a dispersion the original had, and
             # must list as many means unless it files a separate layout
             enough = n_barred(new) >= n_barred(old) and (n_means(new) >= n_means(old) or separate)
-            if enough:
+            if not enough:
+                # what the refused re-read would have lost
+                log["kept_barred_lost"] += max(n_barred(old) - n_barred(new), 0)
+                log["kept_means_lost"] += max(n_means(old) - n_means(new), 0)
+                log["kept_groups_old"] += len(old.get("groups", []))
+                log["kept_groups_new"] += len(new.get("groups", []))
+            if enough or wholesale:
                 out_tabs.append(new)
                 log["tables_replaced"] += 1
             else:
@@ -546,6 +579,15 @@ def main() -> int:
                        "without_column_oriented_by_kind": _by_kind([g for g in gs if g["orientation"] != "column"]),
                        "without_column_oriented_means": _shares([g for g in gs if g["orientation"] != "column" and _is_mean(g)]),
                        "without_column_oriented_means_by_kind": _by_kind([g for g in gs if g["orientation"] != "column" and _is_mean(g)]),
+                       "whole_row_tables": len({g["table"] for g in gs if g["whole_row"] == "y"}),
+                       "whole_row_tables_no": len({g["table"] for g in gs if g["whole_row"] == "n"}),
+                       "whole_row_tables_unanswered": len({g["table"] for g in col if g["whole_row"] is None}),
+                       "whole_row": _shares([g for g in gs if g["whole_row"] == "y"]),
+                       "whole_row_by_kind": _by_kind([g for g in gs if g["whole_row"] == "y"]),
+                       "without_whole_row": _shares([g for g in gs if g["whole_row"] != "y"]),
+                       "without_whole_row_by_kind": _by_kind([g for g in gs if g["whole_row"] != "y"]),
+                       "without_whole_row_means": _shares([g for g in gs if g["whole_row"] != "y" and _is_mean(g)]),
+                       "without_whole_row_means_by_kind": _by_kind([g for g in gs if g["whole_row"] != "y" and _is_mean(g)]),
                        "column_oriented_tables": len({g["table"] for g in col}),
                        "column_oriented_tables_tested": len({g["table"] for g in col if g["testable"] and g["fail"] is not None})}
 
@@ -629,6 +671,15 @@ def main() -> int:
                      "reader_n_disagrees_scan": sum(1 for g in tested if g["n"] and scan.get(g["paper"], {}).get("run_modal") and scan[g["paper"]]["run_modal"] != int(g["n"])),
                      "tested_n_at_most_five": sum(1 for g in tested if g["n"] and g["n"] <= 5),
                      "tested_n_thirty": sum(1 for g in tested if g["n"] == 30)}
+        # the residual blind spot: bar-less mean groups against where the full-text reading says the deviation sits
+        def layout_of(paper):
+            x = tr.get(paper) or {}
+            return str(x.get("std_layout") or "unread").lower() if "parse_error" not in x else "unread"
+        residual = {}
+        for lay in ("separate_row", "separate_column", "same_cell", "none", "unsure", "unread"):
+            gl = [g for g in means if layout_of(g["paper"]).startswith(lay)]
+            residual[lay] = {"groups": len(gl), "papers": len({g["paper"] for g in gl}),
+                             "pct_barless": round(100 * sum(1 for g in gl if not g["wb"] and not g["rb"]) / len(gl), 1) if gl else None}
         # the kinds under the second labeller, and where both labellers agree
         second = {lab: _shares([g for g in gs if kinds2.get(g["paper"]) == lab]) for lab in ("new_optimizer", "application")} if kinds2 else {}
         both = {lab: _shares([g for g in gs if kinds2.get(g["paper"]) == lab and g["kind"] == lab]) for lab in ("new_optimizer", "application")} if kinds2 else {}
@@ -636,6 +687,7 @@ def main() -> int:
         both_m = {lab: _shares([g for g in means if kinds2.get(g["paper"]) == lab and g["kind"] == lab]) for lab in ("new_optimizer", "application")} if kinds2 else {}
         return {"name": name, "all": _shares(gs), "by_kind": _by_kind(gs), "per_paper": per_paper, "shape": shape,
                 "by_kind_second": second, "by_kind_both": both, "by_kind_second_means": second_m, "by_kind_both_means": both_m,
+                "residual_layout": residual,
                 "objective": objective, "orientation": orientation,
                 "alternatives": alternatives, "rows": rows, "bold_rule": bold, "note": note, "citing": citing, "scan_runs": scan_runs,
                 "dropped_nonextremal": DROPPED["nonextremal"], "dropped_nonextremal_papers": len(DROPPED["papers"])}
@@ -645,6 +697,11 @@ def main() -> int:
     merged, reread, mlog = merged_labels(labels)
     gs2 = _regroup(merged, items, kinds)
     corrected_readings = readings_of(gs2, "corrected")
+    # the re-read taken wholesale, both directions, as the size of the one-way merge rule
+    merged_w, _, _ = merged_labels(labels, wholesale=True)
+    gs3 = _regroup(merged_w, items, kinds)
+    wholesale = {"all": _shares(gs3), "by_kind": _by_kind(gs3), "means_only": _shares([g for g in gs3 if _is_mean(g)]),
+                 "means_only_by_kind": _by_kind([g for g in gs3 if _is_mean(g)])}
 
     def on_pages(gs):
         return [g for g in gs if g["page"] in reread]
@@ -676,7 +733,7 @@ def main() -> int:
         return {"papers_with_results_tables": dict(with_tables), "papers_with_single_bold_groups": dict(with_groups)}
     out = {"layout": layout_of(labels), "layout_corrected": layout_of(merged),
            "papers_pre": papers_by_kind(labels, gs1), "papers_corrected": papers_by_kind(merged, gs2),
-           "pre": pre_readings, "corrected": corrected_readings,
+           "pre": pre_readings, "corrected": corrected_readings, "wholesale": wholesale,
            "rows_reread": rows_reread,
            "pages_read": len(labels), "pages_in_kit": len(items), "papers_in_kit": len({it["paper"] for it in items.values()}),
            "papers_read": len({items[i]["paper"] for i in labels})}

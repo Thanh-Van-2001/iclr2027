@@ -557,6 +557,52 @@ def kind_agreement(kinds: dict, metaphor: dict, second_path: str = "out/swevo/ki
             "metaphor_none_disagreements": sum(1 for p in m_both if metaphor[p] != second_m[p] and "none" in (metaphor[p], second_m[p]))}
 
 
+def pmc_contrast(index: dict) -> dict:
+    """The two listed journals Europe PMC mirrors (Biomimetics, PeerJ Computer
+    Science), fetched after review through PMC's cloud bucket: the text scan,
+    the kind classifier and the frozen parser on them, as a labelled contrast
+    to the Scientific Reports corpus. The image census is not extended."""
+    import glob
+    ext = "data/extracted_pmc.jsonl"
+    scan_path = f"{OUT}/text_scan_pmc.json"
+    log_path = f"{OUT}/fetch_pmc_cloud_log.json"
+    if not os.path.exists(scan_path):
+        return {}
+    scan = json.load(open(scan_path, encoding="utf-8"))
+    kinds, metaphor, suite = {}, {}, {}
+    for path in sorted(glob.glob(f"{OUT}/kinds_pmc_*.csv")):
+        with open(path, encoding="utf-8", newline="") as fh:
+            for r in csv.DictReader(fh):
+                if r["label"] != "parse_error":
+                    kinds[r["id"]] = r["label"]
+                    metaphor[r["id"]] = r["metaphor_named"] or "unsure"
+                    suite[r["id"]] = r["benchmark_suite"] or "unsure"
+    log = json.load(open(log_path, encoding="utf-8")) if os.path.exists(log_path) else {"papers": {}}
+    out = {"journals": {}, "fetch": {"listed": len(log["papers"]), "ok": sum(1 for v in log["papers"].values() if v.get("status") == "ok"),
+                                     "no_pmcid": sum(1 for v in log["papers"].values() if v.get("error") == "no PMCID"),
+                                     "no_pdf": sum(1 for v in log["papers"].values() if v.get("error") == "no pdf in bucket")},
+           "scanned": len([p for p in scan if "error" not in scan[p]]), "labelled": len(kinds),
+           "kind_counts": dict(collections.Counter(kinds.values())),
+           "scan_by_kind": scan_by_kind(scan, kinds, metaphor, suite) if kinds else {},
+           "bold_note": bold_note(scan, kinds) if kinds else {}}
+    for j in ("Biomimetics", "PeerJ Computer Science"):
+        ids = [p for p in scan if "error" not in scan[p] and index.get(p, {}).get("journal") == j]
+        out["journals"][j] = {"scanned": len(ids), "listed": sum(1 for r in index.values() if r["journal"] == j),
+                              "pct_runs_stated": round(100 * sum(1 for p in ids if scan[p].get("run_modal")) / max(len(ids), 1), 1),
+                              "pct_test_named": round(100 * sum(1 for p in ids if scan[p].get("any_test")) / max(len(ids), 1), 1),
+                              "new_optimizer": sum(1 for p in ids if kinds.get(p) == "new_optimizer"),
+                              "application": sum(1 for p in ids if kinds.get(p) == "application")}
+    if os.path.exists(ext):
+        records = load_unique(ext)
+        analysis = analyse(records)
+        cs = analysis["_comparisons"]
+        row_bold_readings(cs, records)
+        out["parser"] = dict(make_all._summary(analysis, cs), row_bold_comparisons=sum(1 for c in cs if c.get("_row_bold")),
+                             back_matter_comparisons=sum(1 for c in cs if back_matter(c)),
+                             genuine=_rates([c for c in cs if not back_matter(c) and not c.get("_row_bold")]))
+    return out
+
+
 def main() -> int:
     os.makedirs(OUT, exist_ok=True)
     records = load_unique(EXTRACTED)
@@ -648,6 +694,7 @@ def main() -> int:
         "scan_run_count": scan_run_count_reading(cs, scan) if scan else {},
         "test_reader": test_reader_blocks(cs, kinds),
         "arxiv": arxiv_check(),
+        "pmc": pmc_contrast(index),
         "test_reader_agreement": test_reader_agreement(),
         "fetch_attempts": ({j: {"listed": v["listed"], "attempts": len(v["attempts"]), "pdf_ok": v["pdf_ok"], "statuses": "/".join(v["statuses"]),
                                 "html_only": sum(1 for r in v["attempts"] if r.get("status") == 200 and not r.get("is_pdf"))}

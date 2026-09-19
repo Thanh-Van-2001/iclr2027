@@ -198,8 +198,8 @@
    "comparison": 1
   },
   "papers_with_single_bold_groups": {
-   "new_optimizer": 44,
-   "application": 63
+   "application": 63,
+   "new_optimizer": 44
   }
  },
  "papers_corrected": {
@@ -211,8 +211,8 @@
    "comparison": 1
   },
   "papers_with_single_bold_groups": {
-   "new_optimizer": 43,
-   "application": 63
+   "application": 63,
+   "new_optimizer": 43
   }
  },
  "pre": {
@@ -1097,6 +1097,38 @@
     "largest_fail": 40.0,
     "without_largest_tested": 12,
     "without_largest_fail": 41.7
+   }
+  },
+  "residual_layout": {
+   "separate_row": {
+    "groups": 674,
+    "papers": 27,
+    "pct_barless": 40.4
+   },
+   "separate_column": {
+    "groups": 221,
+    "papers": 8,
+    "pct_barless": 56.6
+   },
+   "same_cell": {
+    "groups": 164,
+    "papers": 5,
+    "pct_barless": 0.0
+   },
+   "none": {
+    "groups": 206,
+    "papers": 3,
+    "pct_barless": 100.0
+   },
+   "unsure": {
+    "groups": 4,
+    "papers": 1,
+    "pct_barless": 100.0
+   },
+   "unread": {
+    "groups": 856,
+    "papers": 58,
+    "pct_barless": 96.0
    }
   },
   "objective": {
@@ -3190,6 +3222,38 @@
     "without_largest_fail": 38.5
    }
   },
+  "residual_layout": {
+   "separate_row": {
+    "groups": 672,
+    "papers": 27,
+    "pct_barless": 32.9
+   },
+   "separate_column": {
+    "groups": 223,
+    "papers": 8,
+    "pct_barless": 55.6
+   },
+   "same_cell": {
+    "groups": 164,
+    "papers": 5,
+    "pct_barless": 0.0
+   },
+   "none": {
+    "groups": 206,
+    "papers": 3,
+    "pct_barless": 100.0
+   },
+   "unsure": {
+    "groups": 4,
+    "papers": 1,
+    "pct_barless": 100.0
+   },
+   "unread": {
+    "groups": 838,
+    "papers": 58,
+    "pct_barless": 95.1
+   }
+  },
   "objective": {
    "multi_objective": {
     "groups": 717,
@@ -4397,6 +4461,260 @@
   "dropped_nonextremal": 291,
   "dropped_nonextremal_papers": 48
  },
+ "wholesale": {
+  "all": {
+   "groups": 2063,
+   "papers": 105,
+   "effective_papers": 48.3,
+   "pct_neither": 62.6,
+   "ci_neither": [
+    51.2,
+    74.6
+   ],
+   "pct_one_side": 0.0,
+   "pct_testable": 33.3,
+   "ci_testable": [
+    21.4,
+    45.4
+   ],
+   "testable_n": 687,
+   "tested": 667,
+   "tested_papers": 46,
+   "tested_effective_papers": 14.0,
+   "pct_fail": 34.5,
+   "ci_fail": [
+    26.5,
+    43.4
+   ],
+   "zero_both": 12,
+   "unreadable": 8,
+   "largest_tested": 120,
+   "largest_fail": 25.8,
+   "without_largest_tested": 547,
+   "without_largest_fail": 36.4
+  },
+  "by_kind": {
+   "new_optimizer": {
+    "groups": 1211,
+    "papers": 43,
+    "effective_papers": 23.4,
+    "pct_neither": 40.7,
+    "ci_neither": [
+     27.6,
+     55.1
+    ],
+    "pct_one_side": 0.1,
+    "pct_testable": 53.3,
+    "ci_testable": [
+     37.3,
+     68.5
+    ],
+    "testable_n": 646,
+    "tested": 626,
+    "tested_papers": 33,
+    "tested_effective_papers": 12.4,
+    "pct_fail": 34.7,
+    "ci_fail": [
+     27.0,
+     44.4
+    ],
+    "zero_both": 12,
+    "unreadable": 8,
+    "largest_tested": 120,
+    "largest_fail": 25.8,
+    "without_largest_tested": 506,
+    "without_largest_fail": 36.8
+   },
+   "application": {
+    "groups": 852,
+    "papers": 62,
+    "effective_papers": 28.5,
+    "pct_neither": 93.8,
+    "ci_neither": [
+     89.7,
+     97.3
+    ],
+    "pct_one_side": 0.0,
+    "pct_testable": 4.8,
+    "ci_testable": [
+     2.1,
+     7.9
+    ],
+    "testable_n": 41,
+    "tested": 41,
+    "tested_papers": 13,
+    "tested_effective_papers": 9.4,
+    "pct_fail": 31.7,
+    "ci_fail": [
+     10.2,
+     57.1
+    ],
+    "zero_both": 0,
+    "unreadable": 0,
+    "largest_tested": 8,
+    "largest_fail": 0.0,
+    "without_largest_tested": 33,
+    "without_largest_fail": 39.4
+   },
+   "all": {
+    "groups": 2063,
+    "papers": 105,
+    "effective_papers": 48.3,
+    "pct_neither": 62.6,
+    "ci_neither": [
+     51.2,
+     74.6
+    ],
+    "pct_one_side": 0.0,
+    "pct_testable": 33.3,
+    "ci_testable": [
+     21.4,
+     45.4
+    ],
+    "testable_n": 687,
+    "tested": 667,
+    "tested_papers": 46,
+    "tested_effective_papers": 14.0,
+    "pct_fail": 34.5,
+    "ci_fail": [
+     26.5,
+     43.4
+    ],
+    "zero_both": 12,
+    "unreadable": 8,
+    "largest_tested": 120,
+    "largest_fail": 25.8,
+    "without_largest_tested": 547,
+    "without_largest_fail": 36.4
+   }
+  },
+  "means_only": {
+   "groups": 1652,
+   "papers": 101,
+   "effective_papers": 43.0,
+   "pct_neither": 57.9,
+   "ci_neither": [
+    44.7,
+    70.3
+   ],
+   "pct_one_side": 0.1,
+   "pct_testable": 38.7,
+   "ci_testable": [
+    25.8,
+    52.2
+   ],
+   "testable_n": 640,
+   "tested": 622,
+   "tested_papers": 46,
+   "tested_effective_papers": 14.1,
+   "pct_fail": 35.5,
+   "ci_fail": [
+    28.3,
+    43.9
+   ],
+   "zero_both": 10,
+   "unreadable": 8,
+   "largest_tested": 120,
+   "largest_fail": 25.8,
+   "without_largest_tested": 502,
+   "without_largest_fail": 37.8
+  },
+  "means_only_by_kind": {
+   "new_optimizer": {
+    "groups": 916,
+    "papers": 40,
+    "effective_papers": 19.4,
+    "pct_neither": 29.8,
+    "ci_neither": [
+     15.1,
+     46.7
+    ],
+    "pct_one_side": 0.1,
+    "pct_testable": 65.4,
+    "ci_testable": [
+     47.3,
+     81.2
+    ],
+    "testable_n": 599,
+    "tested": 581,
+    "tested_papers": 33,
+    "tested_effective_papers": 12.4,
+    "pct_fail": 35.8,
+    "ci_fail": [
+     28.6,
+     44.7
+    ],
+    "zero_both": 10,
+    "unreadable": 8,
+    "largest_tested": 120,
+    "largest_fail": 25.8,
+    "without_largest_tested": 461,
+    "without_largest_fail": 38.4
+   },
+   "application": {
+    "groups": 736,
+    "papers": 61,
+    "effective_papers": 26.8,
+    "pct_neither": 92.8,
+    "ci_neither": [
+     87.7,
+     96.8
+    ],
+    "pct_one_side": 0.0,
+    "pct_testable": 5.6,
+    "ci_testable": [
+     2.5,
+     9.8
+    ],
+    "testable_n": 41,
+    "tested": 41,
+    "tested_papers": 13,
+    "tested_effective_papers": 9.4,
+    "pct_fail": 31.7,
+    "ci_fail": [
+     10.2,
+     57.1
+    ],
+    "zero_both": 0,
+    "unreadable": 0,
+    "largest_tested": 8,
+    "largest_fail": 0.0,
+    "without_largest_tested": 33,
+    "without_largest_fail": 39.4
+   },
+   "all": {
+    "groups": 1652,
+    "papers": 101,
+    "effective_papers": 43.0,
+    "pct_neither": 57.9,
+    "ci_neither": [
+     44.7,
+     70.3
+    ],
+    "pct_one_side": 0.1,
+    "pct_testable": 38.7,
+    "ci_testable": [
+     25.8,
+     52.2
+    ],
+    "testable_n": 640,
+    "tested": 622,
+    "tested_papers": 46,
+    "tested_effective_papers": 14.1,
+    "pct_fail": 35.5,
+    "ci_fail": [
+     28.3,
+     43.9
+    ],
+    "zero_both": 10,
+    "unreadable": 8,
+    "largest_tested": 120,
+    "largest_fail": 25.8,
+    "without_largest_tested": 502,
+    "without_largest_fail": 37.8
+   }
+  }
+ },
  "rows_reread": {
   "pages_reread": 371,
   "tables_reread": 493,
@@ -4404,6 +4722,10 @@
   "tables_kept": 42,
   "tables_truncated": 42,
   "pages_with_a_kept_table": 41,
+  "kept_barred_lost": 61,
+  "kept_means_lost": 532,
+  "kept_groups_old": 677,
+  "kept_groups_new": 127,
   "before_on_those_pages": {
    "groups": 1731,
    "papers": 90,

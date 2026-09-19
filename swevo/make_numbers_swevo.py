@@ -708,6 +708,16 @@ def build(out_path: str) -> dict:
             for k in sorted(set(lay["n_source"]) | {"caption", "page", "paper", "none", "unstated"}):
                 reg.add(f"{tag} n source {k}", lay["n_source"].get(k, 0), provenance=rrun)
 
+        ws = cr.get("wholesale") or {}
+        if ws:
+            _sh("crw all", ws["all"])
+            _sh("crw means", ws["means_only"])
+            for lab, dd in ws["by_kind"].items():
+                _sh(f"crw {lab.replace('_', ' ')}", dd)
+            for lab, dd in ws["means_only_by_kind"].items():
+                _sh(f"crw means {lab.replace('_', ' ')}", dd)
+        for k in ("kept_barred_lost", "kept_means_lost", "kept_groups_old", "kept_groups_new"):
+            reg.add(f"crrr {k.replace('_', ' ')}", cr["rows_reread"].get(k, 0), provenance=rrun)
         for tag, d in (("cr", cr["pre"]), ("crc", cr["corrected"])):
             _sh(f"{tag} all", d["all"])
             for lab, dd in d["by_kind"].items():
@@ -747,6 +757,10 @@ def build(out_path: str) -> dict:
             for lab, dd in ob["single_objective_by_kind"].items():
                 _sh(f"{tag} so {lab.replace('_', ' ')}", dd)
             reg.add(f"{tag} mo papers tested", ob["multi_objective_papers_tested"], provenance=rrun)
+            for lay, dd in (d.get("residual_layout") or {}).items():
+                reg.add(f"{tag} rl {lay.replace('_', ' ')} groups", dd["groups"], provenance=rrun)
+                reg.add(f"{tag} rl {lay.replace('_', ' ')} papers", dd["papers"], provenance=rrun)
+                reg.add(f"{tag} rl {lay.replace('_', ' ')} barless", _pct(dd["pct_barless"]) if dd["pct_barless"] is not None else "--", provenance=rrun)
             for blk, name in (("by_kind_second", "ksec"), ("by_kind_both", "kboth")):
                 for lab, dd in (d.get(blk) or {}).items():
                     _sh(f"{tag} {name} {lab.replace('_', ' ')}", dd)
@@ -763,6 +777,18 @@ def build(out_path: str) -> dict:
                 _sh(f"{tag} nocol {lab.replace('_', ' ')}", dd)
             for lab, dd in ori["without_column_oriented_means_by_kind"].items():
                 _sh(f"{tag} nocol means {lab.replace('_', ' ')}", dd)
+            for k in ("whole_row_tables", "whole_row_tables_no", "whole_row_tables_unanswered"):
+                reg.add(f"{tag} {k.replace('_', ' ')}", ori.get(k, 0), provenance=rrun)
+            if ori.get("whole_row"):
+                _sh(f"{tag} wr", ori["whole_row"])
+                _sh(f"{tag} nowr", ori["without_whole_row"])
+                _sh(f"{tag} nowr means", ori["without_whole_row_means"])
+                for lab, dd in ori["whole_row_by_kind"].items():
+                    _sh(f"{tag} wr {lab.replace('_', ' ')}", dd)
+                for lab, dd in ori["without_whole_row_by_kind"].items():
+                    _sh(f"{tag} nowr {lab.replace('_', ' ')}", dd)
+                for lab, dd in ori["without_whole_row_means_by_kind"].items():
+                    _sh(f"{tag} nowr means {lab.replace('_', ' ')}", dd)
             reg.add(f"{tag} col tables", ori["column_oriented_tables"], provenance=rrun)
             reg.add(f"{tag} col tables tested", ori["column_oriented_tables_tested"], provenance=rrun)
             reg.add(f"{tag} dropped nonextremal", d.get("dropped_nonextremal", 0), provenance=rrun)
