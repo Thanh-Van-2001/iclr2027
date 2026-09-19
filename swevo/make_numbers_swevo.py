@@ -790,6 +790,12 @@ def build(out_path: str) -> dict:
             for lab, dd in ob["single_objective_by_kind"].items():
                 _sh(f"{tag} so {lab.replace('_', ' ')}", dd)
             reg.add(f"{tag} mo papers tested", ob["multi_objective_papers_tested"], provenance=rrun)
+            cs_ = d.get("coverage_summary") or {}
+            reg.add(f"{tag} cov strata", cs_.get("strata", 0), provenance=rrun)
+            reg.add(f"{tag} cov min", _pct(cs_["min"]) if cs_.get("min") is not None else "--", provenance=rrun)
+            reg.add(f"{tag} cov max", _pct(cs_["max"]) if cs_.get("max") is not None else "--", provenance=rrun)
+            for k, v in (d.get("coverage_by_stratum") or {}).items():
+                reg.add(f"{tag} cov {k.replace('_', ' ')}", _pct(v["coverage"]) if v else "--", provenance=rrun)
             for lay, dd in (d.get("residual_layout") or {}).items():
                 reg.add(f"{tag} rl {lay.replace('_', ' ')} groups", dd["groups"], provenance=rrun)
                 reg.add(f"{tag} rl {lay.replace('_', ' ')} papers", dd["papers"], provenance=rrun)

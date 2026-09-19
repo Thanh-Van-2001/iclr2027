@@ -685,6 +685,27 @@ def main() -> int:
             gl = [g for g in means if layout_of(g["paper"]).startswith(lay)]
             residual[lay] = {"groups": len(gl), "papers": len({g["paper"] for g in gl}),
                              "pct_barless": round(100 * sum(1 for g in gl if not g["wb"] and not g["rb"]) / len(gl), 1) if gl else None}
+        # the simulated coverage of every printed failure interval, on that stratum's own cluster configuration
+        def cov_of(rec):
+            byp = collections.defaultdict(lambda: [0, 0])
+            for g in rec:
+                if g["testable"] and g["fail"] is not None:
+                    byp[g["paper"]][0] += 1
+                    byp[g["paper"]][1] += bool(g["fail"])
+            if len(byp) < 10 or _kish([g for g in rec if g["testable"] and g["fail"] is not None])["effective"] < 8:
+                return None
+            return _boot_coverage(byp, sims=400, reps=500, seed=2)
+        strata = {"all": gs, "means_only": means,
+                  "new_optimizer": [g for g in gs if g["kind"] == "new_optimizer"], "application": [g for g in gs if g["kind"] == "application"],
+                  "means_new_optimizer": [g for g in means if g["kind"] == "new_optimizer"], "means_application": [g for g in means if g["kind"] == "application"],
+                  "without_top_three": [g for g in gs if g["paper"] not in top3], "without_top_four": [g for g in gs if g["paper"] not in top4],
+                  "sd_lt_mean": [g for g in gs if not heavy(g)], "without_column_oriented": [g for g in gs if g["orientation"] != "column"],
+                  "without_whole_row": [g for g in gs if g["whole_row"] != "y"], "single_objective": [g for g in gs if g["paper"] not in mo],
+                  "without_note": [g for g in gs if not scan.get(g["paper"], {}).get("bold_note")],
+                  "without_impossible": [g for g in gs if not _impossible(g)]}
+        coverage = {k: cov_of(v) for k, v in strata.items()}
+        covs = [v["coverage"] for v in coverage.values() if v]
+        coverage_summary = {"strata": sum(1 for v in coverage.values() if v), "min": min(covs) if covs else None, "max": max(covs) if covs else None}
         # the kinds under the second labeller, and where both labellers agree
         second = {lab: _shares([g for g in gs if kinds2.get(g["paper"]) == lab]) for lab in ("new_optimizer", "application")} if kinds2 else {}
         both = {lab: _shares([g for g in gs if kinds2.get(g["paper"]) == lab and g["kind"] == lab]) for lab in ("new_optimizer", "application")} if kinds2 else {}
@@ -692,7 +713,7 @@ def main() -> int:
         both_m = {lab: _shares([g for g in means if kinds2.get(g["paper"]) == lab and g["kind"] == lab]) for lab in ("new_optimizer", "application")} if kinds2 else {}
         return {"name": name, "all": _shares(gs), "by_kind": _by_kind(gs), "per_paper": per_paper, "shape": shape,
                 "by_kind_second": second, "by_kind_both": both, "by_kind_second_means": second_m, "by_kind_both_means": both_m,
-                "residual_layout": residual,
+                "residual_layout": residual, "coverage_by_stratum": coverage, "coverage_summary": coverage_summary,
                 "objective": objective, "orientation": orientation,
                 "alternatives": alternatives, "rows": rows, "bold_rule": bold, "note": note, "citing": citing, "scan_runs": scan_runs,
                 "dropped_nonextremal": DROPPED["nonextremal"], "dropped_nonextremal_papers": len(DROPPED["papers"])}
