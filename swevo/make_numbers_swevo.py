@@ -114,6 +114,39 @@ def build(out_path: str) -> dict:
         reg.add("ka metaphor agree", ka["metaphor_agree"], provenance=run)
         reg.add("ka pct metaphor agree", _pct(ka["pct_metaphor_agree"]), provenance=run)
 
+    pm = ex.get("pmc", {})
+    if pm:
+        for k, v in pm["fetch"].items():
+            reg.add(f"pm fetch {k.replace('_', ' ')}", v, provenance=run)
+        reg.add("pm scanned", pm["scanned"], provenance=run)
+        reg.add("pm labelled", pm["labelled"], provenance=run)
+        for lab, n in pm["kind_counts"].items():
+            reg.add(f"pm kc {lab.replace('_', ' ')}", n, provenance=run)
+        for j, d in pm["journals"].items():
+            key = "pm j " + j.lower().replace(" ", " ")
+            for k, v in d.items():
+                reg.add(f"{key} {k.replace('_', ' ')}", _pct(v) if k.startswith("pct") else v, provenance=run)
+        for lab, d in pm.get("scan_by_kind", {}).items():
+            k = "pm sk " + lab.replace("_", " ")
+            reg.add(f"{k} papers", d["papers"], provenance=run)
+            for f in ("pct_runs_stated", "pct_test_named", "pct_thirty_modal"):
+                if f in d:
+                    reg.add(f"{k} {f.replace('_', ' ')}", _pct(d[f]), provenance=run)
+        for lab, d in pm.get("bold_note", {}).items():
+            reg.add(f"pm bn {lab.replace('_', ' ')} with note", d["with_note"], provenance=run)
+            reg.add(f"pm bn {lab.replace('_', ' ')} pct", _pct(d["pct"]), provenance=run)
+        pr = pm.get("parser") or {}
+        if pr:
+            for k in ("papers", "comparisons"):
+                reg.add(f"pm parser {k}", pr[k], provenance=run)
+            for k in ("pct_neither", "pct_testable", "pct_fail"):
+                reg.add(f"pm parser {k.replace('_', ' ')}", _pct(pr[k]) if pr.get(k) is not None else "--", provenance=run)
+            reg.add("pm parser row bold comparisons", pr.get("row_bold_comparisons", 0), provenance=run)
+            reg.add("pm parser back matter comparisons", pr.get("back_matter_comparisons", 0), provenance=run)
+            g = pr.get("genuine") or {}
+            reg.add("pm parser genuine n", g.get("n", 0), provenance=run)
+            reg.add("pm parser genuine neither", _pct(g["pct_neither"]) if g.get("pct_neither") is not None else "--", provenance=run)
+            reg.add("pm parser genuine testable", _pct(g["pct_testable"]) if g.get("pct_testable") is not None else "--", provenance=run)
     kaf = ex.get("kind_agreement_full", {})
     if kaf.get("papers"):
         reg.add("kaf papers", kaf["papers"], provenance=run)

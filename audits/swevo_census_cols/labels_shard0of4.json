@@ -1,0 +1,767 @@
+[
+ {
+  "id": "0043",
+  "captions": [
+   "Table 3. Comparison of the error"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 3. Comparison of the error",
+    "all_bold_in_one_row": "y",
+    "row_label": "B11",
+    "all_bold_in_one_column": "y",
+    "bold_cells": 1,
+    "note": "A single cell is bolded, highlighting the highest score in the table."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "0047",
+  "captions": [
+   "Table 11. Performance and comparison of"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 11. Performance and comparison of",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 2,
+    "note": "The two bold cells are located in different rows and columns."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "0058",
+  "captions": [
+   "Table 8. Grey Wolf optimization",
+   "Table 9. Final optimization result"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 8. Grey Wolf optimization",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 8,
+    "note": "Bold cells are found in the CatBoost and MLP + LR rows."
+   },
+   {
+    "caption_start": "Table 9. Final optimization result",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 8,
+    "note": "Bold cells are found in the CatBoost and MLP + LR rows."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "0125",
+  "captions": [
+   "Table 3. R values obtained",
+   "Table 4. R values obtained"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 3. R values obtained",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 12,
+    "note": "Bold text highlights the best results, which all belong to the Heuristic-v2 method."
+   },
+   {
+    "caption_start": "Table 4. R values obtained",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 12,
+    "note": "Bold text indicates the best results, which are distributed across different methods depending on the M0 value."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "0198",
+  "captions": [
+   "Performance comparison of crossover method combinations."
+  ],
+  "tables": [
+   {
+    "caption_start": "Performance comparison of crossover method combinations.",
+    "all_bold_in_one_row": "y",
+    "row_label": "PBX + OX1",
+    "all_bold_in_one_column": "y",
+    "bold_cells": 1,
+    "note": "There is only a single bold cell in the table."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "0280",
+  "captions": [
+   "Table 5. Performance of optimized models"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 5. Performance of optimized models",
+    "all_bold_in_one_row": "y",
+    "row_label": "MPA",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 5,
+    "note": "All bold cells are located in the MPA row for the testing dataset."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "0296",
+  "captions": [
+   "Table 16. Experimental results of"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 16. Experimental results of",
+    "all_bold_in_one_row": "y",
+    "row_label": "MIGOA",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 6,
+    "note": "All bold cells are located in the MIGOA row."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "0370",
+  "captions": [
+   "Table 12. Complementary role of"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 12. Complementary role of",
+    "all_bold_in_one_row": "y",
+    "row_label": "Final Model",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 12,
+    "note": "All bold cells are located in the Final Model row."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "0381",
+  "captions": [
+   "Table 8. Controller performances under"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 8. Controller performances under",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 9,
+    "note": "Multiple methods achieve the best value of 0 for overshoot in Case-I, resulting in bold cells across several rows."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "0572",
+  "captions": [
+   "Table 10. The rankings of IMARO"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 10. The rankings of IMARO",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 14,
+    "note": "Bold cells highlight the best values in each column, distributed across two rows."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "0605",
+  "captions": [
+   "Table 4. Ablation experiment results"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 4. Ablation experiment results",
+    "all_bold_in_one_row": "y",
+    "row_label": "✓, ✓",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 4,
+    "note": "All bold cells are located in the final row, representing the combined use of both techniques."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "0855",
+  "captions": [
+   "Table 4. Classification results by"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 4. Classification results by",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 6,
+    "note": "Bold values indicate the best performance for each metric across the different classifiers."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "0864",
+  "captions": [
+   "Table 4. Quantitative analysis results"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 4. Quantitative analysis results",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 9,
+    "note": "Bold cells indicate the top result for each metric, which are distributed across two rows."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "0870",
+  "captions": [
+   "Table 11. Presents a comparison of"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 11. Presents a comparison of",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 9,
+    "note": "Bold cells are distributed across both rows."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "0881",
+  "captions": [
+   "Table 10. Network throughput"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 10. Network throughput",
+    "all_bold_in_one_row": "y",
+    "row_label": "HGORSA",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 3,
+    "note": "The proposed method HGORSA has all its values in bold."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "0892",
+  "captions": [
+   "Table 14. Results of comparison"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 14. Results of comparison",
+    "all_bold_in_one_row": "y",
+    "row_label": "CPO10",
+    "all_bold_in_one_column": "y",
+    "bold_cells": 1,
+    "note": "There is only a single bold cell in the entire table."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "0938",
+  "captions": [
+   "Table 5. Comparison between"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 5. Comparison between",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 20,
+    "note": "Bold cells are found in the HKOA row and the p-value column."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "0942",
+  "captions": [
+   "Table 10. Comparison among algorithms"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 10. Comparison among algorithms",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": "many",
+    "note": "Bold cells are distributed across multiple rows and columns."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "0972",
+  "captions": [
+   "Table 6. Time response specifications"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 6. Time response specifications",
+    "all_bold_in_one_row": "y",
+    "row_label": "hSA-QIO based PID-F",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 3,
+    "note": "The proposed method achieves the best performance across all three metrics."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1060",
+  "captions": [
+   "Table 6. MAE, MSE, RMSE values without constraint."
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 6. MAE, MSE, RMSE values without constraint.",
+    "all_bold_in_one_row": "y",
+    "row_label": "LNNLMPC-DTBO",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 3,
+    "note": "All bold cells are located in the LNNLMPC-DTBO row."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1084",
+  "captions": [
+   "Table 8. Statistical outcomes for compression spring design challenges."
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 8. Statistical outcomes for compression spring design challenges.",
+    "all_bold_in_one_row": "y",
+    "row_label": "MHDE",
+    "all_bold_in_one_column": "y",
+    "bold_cells": 1,
+    "note": "Only a single cell is bolded in the table body."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1188",
+  "captions": [
+   "Table 10. Comparing the performance of HEO"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 10. Comparing the performance of HEO",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 4,
+    "note": "Bold cells are distributed across two rows (HEO and CPSO)."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1286",
+  "captions": [
+   "Table 21. The best variables the"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 21. The best variables the",
+    "all_bold_in_one_row": "y",
+    "row_label": "CAO",
+    "all_bold_in_one_column": "y",
+    "bold_cells": 1,
+    "note": "Only a single cell is bold in the body of this table."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1291",
+  "captions": [
+   "Table 31. The Statistical results obtained"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 31. The Statistical results",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 8,
+    "note": "Bold cells indicate the best results in each column, with multiple ties in the Best column."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1319",
+  "captions": [
+   "Table 9. Layer 2 CatBoost multiclass"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 9. Layer 2 CatBoost multiclass",
+    "all_bold_in_one_row": "y",
+    "row_label": "CNN-CB-ISA-ChOA",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 2,
+    "note": "The two bold cells are in the first row."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1386",
+  "captions": [
+   "Table 3. Prediction errors of tourist flow by different models at mount Lu."
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 3. Prediction errors of tourist flow",
+    "all_bold_in_one_row": "y",
+    "row_label": "CNN-BiLSTM-Att",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 9,
+    "note": "All bold cells are in the last row, corresponding to the proposed CNN-BiLSTM-Att model."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1480",
+  "captions": [
+   "Table 5. The statistical results"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 5. The statistical results",
+    "all_bold_in_one_row": "y",
+    "row_label": "Hybrid 2GRUx-WOA model (4)",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 5,
+    "note": "All bold numeric cells are located in the row for the Hybrid 2GRUx-WOA model (4)."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1562",
+  "captions": [
+   "Table 7. The statistical outcomes"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 7. The statistical outcomes",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 15,
+    "note": "Bold values indicate the best results for Mean, Best, and Worst metrics across different functions."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1650",
+  "captions": [
+   "Table 11. Annual total"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 11. Annual total",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "y",
+    "bold_cells": 3,
+    "note": "The bold cells highlight the superior performance of the HMWOAIGWO algorithm."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1695",
+  "captions": [
+   "Table 10. MMRE values on different Software data sets based on different models."
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 10. MMRE values on different Software data sets based on different models.",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 5,
+    "note": "The bold cells indicate the optimal values for each dataset, which are distributed across two different models."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1711",
+  "captions": [
+   "Table 8. The Friedman rank test"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 8. The Friedman rank test",
+    "all_bold_in_one_row": "y",
+    "row_label": "MLL-CPSO",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 2,
+    "note": "The proposed algorithm achieves the best rank for both metrics."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1867",
+  "captions": [
+   "Table 7. Accuracy of models developed"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 7. Accuracy of models developed",
+    "all_bold_in_one_row": "y",
+    "row_label": "Cubic",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 4,
+    "note": "All bold cells are located in the Cubic row."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1953",
+  "captions": [
+   "Table 33. Comparison of proposed"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 33. Comparison of proposed",
+    "all_bold_in_one_row": "y",
+    "row_label": "Proposed",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 3,
+    "note": "The proposed method achieves the highest scores across all three metrics."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1997",
+  "captions": [
+   "Table 4: Performance Comparison on"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 4: Performance Comparison on",
+    "all_bold_in_one_row": "y",
+    "row_label": "ThreatFedChainAI",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 4,
+    "note": "The proposed method ThreatFedChainAI has all its results highlighted in bold."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "2088",
+  "captions": [
+   "Table 5. Compare the error evaluation indexes"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 5. Compare the error evaluation indexes",
+    "all_bold_in_one_row": "y",
+    "row_label": "Model III",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 3,
+    "note": "All bold cells are located in the Model III row, indicating it achieved the best performance across all three metrics."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "2099",
+  "captions": [
+   "Table 6. Diagnostic results of"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 6. Diagnostic results of",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "y",
+    "bold_cells": 2,
+    "note": "The bold cells highlight the best average accuracy for each proportion setting."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "2112",
+  "captions": [
+   "Table 29. Evaluations with baselines for email content.",
+   "Table 30. Evaluations with baselines for HTTP content."
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 29. Evaluations with baselines for email content.",
+    "all_bold_in_one_row": "y",
+    "row_label": "XG-HARFO",
+    "all_bold_in_one_column": "y",
+    "bold_cells": 1,
+    "note": "Only the highest value is bolded."
+   },
+   {
+    "caption_start": "Table 30. Evaluations with baselines for HTTP content.",
+    "all_bold_in_one_row": "y",
+    "row_label": "XG-HARFO",
+    "all_bold_in_one_column": "y",
+    "bold_cells": 1,
+    "note": "Only the highest value is bolded."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "2135",
+  "captions": [
+   "Table 31. Comparison of NeuroFusionNet"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 31. Comparison of NeuroFusionNet",
+    "all_bold_in_one_row": "y",
+    "row_label": "Proposed NeuroFusionNet",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 2,
+    "note": "The proposed method's results are highlighted in bold."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "2199",
+  "captions": [
+   "Table 14. Results analysis of 10-BTD, Part 2."
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 14. Results analysis of 10-BTD, Part 2.",
+    "all_bold_in_one_row": "y",
+    "row_label": "RSO",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 4,
+    "note": "All bold cells are located in the RSO row."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "2221",
+  "captions": [
+   "Table 3. Optimal parameters for the DDM."
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 3. Optimal parameters for the DDM.",
+    "all_bold_in_one_row": "y",
+    "row_label": "EWOA",
+    "all_bold_in_one_column": "y",
+    "bold_cells": 1,
+    "note": "There is only a single bold cell in the entire table."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "2283",
+  "captions": [
+   "Table 7. Ablation study on"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 7. Ablation study on",
+    "all_bold_in_one_row": "y",
+    "row_label": "Full Model (Proposed TCN-GAN-SOA)",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 5,
+    "note": "All bold cells are located in the final row representing the full proposed model."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ }
+]

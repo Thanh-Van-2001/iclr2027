@@ -161,6 +161,11 @@ def _wholerow_flag(iid: str, cap: str):
         return None
     row = str(t.get("all_bold_in_one_row", "")).lower().startswith("y")
     col = str(t.get("all_bold_in_one_column", "")).lower().startswith("y")
+    cells = _num(t.get("bold_cells"))
+    # one row of several bold cells (or one column): the whole-row convention;
+    # both at once is a single bold cell, which is not that convention
+    if (row and col) or (cells is not None and cells <= 1):
+        return "n"
     return "y" if (row or col) else "n"
 
 

@@ -54,6 +54,10 @@ without touching the network.
   the draw. `labels_claude-sonnet-5.csv` is a
   second vendor's model answering the same kit (`swevo/kit_reader.py`),
   reported in the paper as a model check and not as a human label.
+- `audits/swevo_census_cols/` — the one-question re-read of every
+  column-oriented census table (does every bold cell lie in one row or
+  column, and under which label; `swevo/wholerow_reader.py`), asked after
+  review.
 - `audits/swevo_markers/adjudicate.csv` — the papers on which the two
   full-text readers disagree about whether a per-cell verdict is printed
   (every disagreement one way), with both readers' quoted sentences, for a
