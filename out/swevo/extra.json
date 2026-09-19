@@ -657,12 +657,12 @@
   "pct_papers_naming_a_test": 47.6,
   "test_kinds_among_testable_papers": {
    "wilcoxon": 6,
+   "friedman": 6,
+   "t_test": 2,
+   "p_value": 8,
    "mann_whitney": 1,
    "kruskal": 1,
    "anova": 2,
-   "p_value": 8,
-   "friedman": 6,
-   "t_test": 2,
    "bonferroni_holm": 2,
    "plus_minus_equal": 1
   },
@@ -1415,7 +1415,11 @@
      21
     ]
    ],
-   "alpha_005": 162
+   "alpha_005": 162,
+   "full_convention": 80,
+   "pct_full_convention": 22.2,
+   "three_of_four": 141,
+   "pct_three_of_four": 39.2
   },
   "testable": {
    "papers": 21,
@@ -1564,7 +1568,11 @@
      1
     ]
    ],
-   "alpha_005": 7
+   "alpha_005": 7,
+   "full_convention": 2,
+   "pct_full_convention": 9.5,
+   "three_of_four": 7,
+   "pct_three_of_four": 33.3
   },
   "new_optimizer": {
    "papers": 249,
@@ -1715,7 +1723,11 @@
      21
     ]
    ],
-   "alpha_005": 143
+   "alpha_005": 143,
+   "full_convention": 80,
+   "pct_full_convention": 32.1,
+   "three_of_four": 138,
+   "pct_three_of_four": 55.4
   },
   "random_other": {
    "papers": 100,
@@ -1840,7 +1852,11 @@
      1
     ]
    ],
-   "alpha_005": 18
+   "alpha_005": 18,
+   "full_convention": 0,
+   "pct_full_convention": 0.0,
+   "three_of_four": 2,
+   "pct_three_of_four": 2.0
   },
   "note": {
    "note_papers_read": 49,
@@ -1891,6 +1907,223 @@
    ],
    "pct_papers_err": 7.3,
    "pct_papers_runs": 61.5
+  }
+ },
+ "pmc": {
+  "journals": {
+   "Biomimetics": {
+    "scanned": 257,
+    "listed": 257,
+    "pct_runs_stated": 57.6,
+    "pct_test_named": 48.6,
+    "new_optimizer": 138,
+    "application": 94
+   },
+   "PeerJ Computer Science": {
+    "scanned": 92,
+    "listed": 109,
+    "pct_runs_stated": 34.8,
+    "pct_test_named": 42.4,
+    "new_optimizer": 17,
+    "application": 70
+   }
+  },
+  "fetch": {
+   "listed": 366,
+   "ok": 349,
+   "no_pmcid": 17,
+   "no_pdf": 0
+  },
+  "scanned": 349,
+  "labelled": 366,
+  "kind_counts": {
+   "survey_theory": 10,
+   "new_optimizer": 157,
+   "application": 179,
+   "other": 17,
+   "comparison": 3
+  },
+  "scan_by_kind": {
+   "application": {
+    "papers": 164,
+    "runs_stated": 45,
+    "pct_runs_stated": 27.4,
+    "test_named": 40,
+    "pct_test_named": 24.4,
+    "wilcoxon": 16,
+    "friedman": 9,
+    "t_test": 14,
+    "thirty_modal": 17,
+    "pct_thirty_modal": 10.4,
+    "cec": 4,
+    "pct_cec": 2.4,
+    "metaphor_yes": 107,
+    "pct_metaphor_yes": 65.2,
+    "bestiary_hit": 63,
+    "pct_bestiary_hit": 38.4,
+    "cites_methodology": 3,
+    "pct_cites_methodology": 1.8
+   },
+   "comparison": {
+    "papers": 3,
+    "runs_stated": 3,
+    "pct_runs_stated": 100.0,
+    "test_named": 3,
+    "pct_test_named": 100.0,
+    "wilcoxon": 1,
+    "friedman": 2,
+    "t_test": 1,
+    "thirty_modal": 3,
+    "pct_thirty_modal": 100.0,
+    "cec": 1,
+    "pct_cec": 33.3,
+    "metaphor_yes": 3,
+    "pct_metaphor_yes": 100.0,
+    "bestiary_hit": 2,
+    "pct_bestiary_hit": 66.7,
+    "cites_methodology": 0,
+    "pct_cites_methodology": 0.0
+   },
+   "new_optimizer": {
+    "papers": 155,
+    "runs_stated": 131,
+    "pct_runs_stated": 84.5,
+    "test_named": 120,
+    "pct_test_named": 77.4,
+    "wilcoxon": 105,
+    "friedman": 72,
+    "t_test": 4,
+    "thirty_modal": 81,
+    "pct_thirty_modal": 52.3,
+    "cec": 112,
+    "pct_cec": 72.3,
+    "metaphor_yes": 131,
+    "pct_metaphor_yes": 84.5,
+    "bestiary_hit": 76,
+    "pct_bestiary_hit": 49.0,
+    "cites_methodology": 21,
+    "pct_cites_methodology": 13.5
+   },
+   "other": {
+    "papers": 17,
+    "runs_stated": 1,
+    "pct_runs_stated": 5.9,
+    "test_named": 0,
+    "pct_test_named": 0.0,
+    "wilcoxon": 0,
+    "friedman": 0,
+    "t_test": 0,
+    "thirty_modal": 1,
+    "pct_thirty_modal": 5.9,
+    "cec": 0,
+    "pct_cec": 0.0,
+    "metaphor_yes": 0,
+    "pct_metaphor_yes": 0.0,
+    "bestiary_hit": 0,
+    "pct_bestiary_hit": 0.0,
+    "cites_methodology": 0,
+    "pct_cites_methodology": 0.0
+   },
+   "survey_theory": {
+    "papers": 10,
+    "runs_stated": 0,
+    "pct_runs_stated": 0.0,
+    "test_named": 1,
+    "pct_test_named": 10.0,
+    "wilcoxon": 1,
+    "friedman": 1,
+    "t_test": 0,
+    "thirty_modal": 0,
+    "pct_thirty_modal": 0.0,
+    "cec": 3,
+    "pct_cec": 30.0,
+    "metaphor_yes": 4,
+    "pct_metaphor_yes": 40.0,
+    "bestiary_hit": 2,
+    "pct_bestiary_hit": 20.0,
+    "cites_methodology": 0,
+    "pct_cites_methodology": 0.0
+   },
+   "all": {
+    "papers": 349,
+    "runs_stated": 180,
+    "pct_runs_stated": 51.6,
+    "test_named": 164,
+    "pct_test_named": 47.0,
+    "wilcoxon": 123,
+    "friedman": 84,
+    "t_test": 19,
+    "thirty_modal": 102,
+    "pct_thirty_modal": 29.2,
+    "cec": 120,
+    "pct_cec": 34.4,
+    "metaphor_yes": 245,
+    "pct_metaphor_yes": 70.2,
+    "bestiary_hit": 143,
+    "pct_bestiary_hit": 41.0,
+    "cites_methodology": 24,
+    "pct_cites_methodology": 6.9
+   }
+  },
+  "bold_note": {
+   "new_optimizer": {
+    "papers": 155,
+    "with_note": 0,
+    "pct": 0.0,
+    "note_no_test_named": 0,
+    "note_no_runs_stated": 0,
+    "note_neither": 0
+   },
+   "application": {
+    "papers": 164,
+    "with_note": 0,
+    "pct": 0.0,
+    "note_no_test_named": 0,
+    "note_no_runs_stated": 0,
+    "note_neither": 0
+   },
+   "all": {
+    "papers": 349,
+    "with_note": 0,
+    "pct": 0.0,
+    "note_no_test_named": 0,
+    "note_no_runs_stated": 0,
+    "note_neither": 0
+   }
+  },
+  "parser": {
+   "papers": 337,
+   "pct_err": 10.4,
+   "pct_n": 51.6,
+   "median_runs": 30.0,
+   "comparisons": 3289,
+   "pct_neither": 94.7,
+   "pct_no_n": 0.6,
+   "pct_one": 0.0,
+   "pct_testable": 4.6,
+   "n_testable": 151,
+   "papers_testable": 3,
+   "pct_fail": 12.6,
+   "pct_fail_holm": 23.2,
+   "gap_fail": 5.03,
+   "gap_pass": 23.29,
+   "median_comparisons_per_table": 13,
+   "row_bold_comparisons": 395,
+   "back_matter_comparisons": 0,
+   "genuine": {
+    "n": 2894,
+    "papers": 77,
+    "ci_fail": [
+     10.4,
+     19.4
+    ],
+    "pct_neither": 94.4,
+    "pct_testable": 5.2,
+    "n_testable": 151,
+    "testable_papers": 3,
+    "pct_fail": 12.6,
+    "pct_fail_holm": 23.2
+   }
   }
  },
  "test_reader_agreement": {

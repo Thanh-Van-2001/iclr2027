@@ -215,6 +215,9 @@ def build(out_path: str) -> dict:
         for k in ("papers", "runs_stated", "runs_thirty", "test_named", "markers"):
             reg.add(f"{key} {k.replace('_', ' ')}", d[k], provenance=run)
         reg.add(f"{key} alpha five percent", d["alpha_005"], provenance=run)
+        for k in ("full_convention", "three_of_four"):
+            reg.add(f"{key} {k.replace('_', ' ')}", d.get(k, 0), provenance=run)
+            reg.add(f"{key} pct {k.replace('_', ' ')}", _pct(d.get(f"pct_{k}", 0.0)), provenance=run)
         for k in ("pct_runs_stated", "pct_runs_thirty", "pct_std_off_cell", "pct_test_named", "pct_markers", "pct_markers_among_named"):
             reg.add(f"{key} {k.replace('_', ' ')}", _pct(d[k]), provenance=run)
         for lab in ("same_cell", "separate_row", "separate_column", "none", "unsure"):

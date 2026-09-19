@@ -54,6 +54,12 @@ without touching the network.
   the draw. `labels_claude-sonnet-5.csv` is a
   second vendor's model answering the same kit (`swevo/kit_reader.py`),
   reported in the paper as a model check and not as a human label.
+- `data/extracted_pmc.jsonl`, `out/swevo/text_scan_pmc.json`,
+  `out/swevo/kinds_pmc_*.csv`, `out/swevo/fetch_pmc_cloud_log.json` — the
+  349 papers of Biomimetics and PeerJ Computer Science fetched after review
+  through PMC's cloud bucket (`swevo/fetch_pmc_cloud.py`): the parser, the
+  scan and the classifier on them, reported as a contrast and not folded
+  into the corpus.
 - `audits/swevo_census_cols/` — the one-question re-read of every
   column-oriented census table (does every bold cell lie in one row or
   column, and under which label; `swevo/wholerow_reader.py`), asked after
@@ -72,7 +78,7 @@ pip install -r requirements.txt
 sh run_all_swevo.sh
 ```
 
-Rebuilding the corpus needs the network: `python swevo/harvest_oa.py`, then
+Rebuilding the corpus needs the network: `python swevo/harvest_oa.py`, (`python swevo/fetch_pmc_cloud.py` for the two PMC-mirrored journals), then
 `python swevo/fetch_oa.py --journal "Scientific Reports"`, then
 `python study/pipeline.py --source swevo-oa --cache-pdfs data/corpus_oa --cached-only --out data/extracted_oa.jsonl`.
 The model readings (`swevo/classify.py`, `swevo/test_reader.py`,

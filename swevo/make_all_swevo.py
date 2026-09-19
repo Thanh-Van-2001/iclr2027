@@ -200,6 +200,19 @@ def bold_rule_of(x: dict) -> str:
     return "not stated" if "not stated" in b or b in ("", "none") else "other"
 
 
+NONPARAMETRIC = {"friedman", "wilcoxon_rank_sum", "wilcoxon_signed_rank", "nemenyi", "kruskal_wallis", "mann_whitney", "friedman_aligned", "quade", "holm", "bonferroni"}
+
+
+def _three_of_four(x: dict) -> bool:
+    """A run count stated, a deviation printed somewhere, and a non-parametric test named."""
+    return (isinstance(x.get("runs"), int) and str(x.get("std_layout") or "none") not in ("none", "unsure")
+            and any(t in NONPARAMETRIC for t in (x.get("test") or [])))
+
+
+def _full_convention(x: dict) -> bool:
+    return _three_of_four(x) and str(x.get("markers", "")).lower().startswith("y")
+
+
 def test_reader_blocks(cs: list, kinds: dict) -> dict:
     """The model's full-text reading (swevo/test_reader.py) aggregated over
     its three paper sets: run counts, where the deviation sits, which test,
@@ -262,6 +275,11 @@ def test_reader_blocks(cs: list, kinds: dict) -> dict:
             "bold_rule": dict(bold), "pct_bold_rule": {k: round(100 * c / n, 1) for k, c in bold.items()},
             "benchmark": bench.most_common(8),
             "alpha_005": sum(1 for x in v if x.get("alpha") == 0.05),
+            # the whole convention at once: a run count, a deviation somewhere, a non-parametric test named, a per-cell verdict printed
+            "full_convention": sum(1 for x in v if _full_convention(x)),
+            "pct_full_convention": round(100 * sum(1 for x in v if _full_convention(x)) / n, 1),
+            "three_of_four": sum(1 for x in v if _three_of_four(x)),
+            "pct_three_of_four": round(100 * sum(1 for x in v if _three_of_four(x)) / n, 1),
         }
     out["note"] = note_block
     return out

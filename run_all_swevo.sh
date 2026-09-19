@@ -10,6 +10,7 @@
 #   python swevo/test_reader.py ; python study/read_pages_api.py --kit audits/swevo_census ...
 set -e
 if [ -d data/corpus_oa ]; then python swevo/text_scan.py > /dev/null; fi
+if [ -d data/corpus_pmc ]; then python swevo/text_scan.py --corpus data/corpus_pmc --out out/swevo/text_scan_pmc.json > /dev/null; fi
 python swevo/make_all_swevo.py
 if [ -f audits/swevo_gold/labels_gemini.csv ]; then
 python study/gold_set.py score --items audits/swevo_gold/items.json --labels audits/swevo_gold/labels_gemini.csv --exclude-unboxed --out out/swevo/gold_set.json > /dev/null

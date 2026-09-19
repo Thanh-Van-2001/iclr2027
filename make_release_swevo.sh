@@ -42,6 +42,8 @@ mkdir -p "$DEST/audits/swevo_census_rows2"
 cp audits/swevo_census_rows2/*.json audits/swevo_census_rows2/instruction.txt "$DEST/audits/swevo_census_rows2/"
 find "$DEST/audits" -name "*_fulltext.txt" -delete
 cp data/extracted_oa.jsonl "$DEST/data/"
+cp data/extracted_pmc.jsonl "$DEST/data/" 2>/dev/null || true
+cp out/pipeline_stats_extracted_pmc.json "$DEST/out/" 2>/dev/null || true
 cp out/swevo/*.json out/swevo/*.csv "$DEST/out/swevo/" 2>/dev/null || true
 rm -f "$DEST/out/swevo/refcheck.json" "$DEST/out/swevo/numbers.json" "$DEST/out/swevo/style.json"
 cp paper/swevo/numbers.tex "$DEST/paper/swevo/"
