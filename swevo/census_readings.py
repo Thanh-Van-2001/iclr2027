@@ -46,8 +46,11 @@ OUT = "out/swevo/census_readings.json"
 # a group whose label names a summary row rather than a function or an
 # optimizer: a Std, Rank or Time row is not a statistic over runs at all; a
 # Best, Worst or Median row is a statistic over runs that owes no deviation
-STD_ROW = re.compile(r"(?:^|[ ,;:(/])(std|sd|s\.?d\.?|standard deviation|stdev|rank|ave\.? ?rank|mean rank|friedman|time|p[- ]?value|h)(?:$|[ ,;:)/])", re.I)
-BEST_ROW = re.compile(r"(?:^|[ ,;:(/])(best|worst|wor\.|median|min|max)(?:$|[ ,;:)/])", re.I)
+# a summary row is named by its label: the deviation, rank, time and test rows by a token anywhere in the
+# label, the Wilcoxon h by the whole label or as h-value (a bare "h" would catch "$/h"), and min / max
+# only as the whole label (a "Max error" row is a mean over runs of an objective)
+STD_ROW = re.compile(r"(?:^|[ ,;:(/])(std|sd|s\.?d\.?|standard deviation|stdev|rank|ave\.? ?rank|mean rank|friedman|p[- ]?value|h[- ]?value)(?:$|[ ,;:)/])|^h$|^(?:cpu |run(?:ning)? |computational |computation |execution |average |mean )?time(?: ?\(s\))?$", re.I)
+BEST_ROW = re.compile(r"(?:^|[ ,;:(/])(best|worst|wor\.|median)(?:$|[ ,;:)/])|^(min|max)(imum)?$", re.I)
 ROW_LABEL = re.compile("|".join([STD_ROW.pattern, BEST_ROW.pattern]), re.I)
 # a table whose caption says it holds ranks, test verdicts or settings
 NOT_MEANS_CAPTION = re.compile(r"friedman|rank|wilcoxon|p[- ]?value|sensitivity|parameter setting|settings|complexity|running time|computational time|standard deviations? of|std\.? of", re.I)
@@ -168,8 +171,8 @@ def _wholerow_flag(iid: str, cap: str):
     cells = _num(t.get("bold_cells"))
     # one row of several bold cells (or one column): the whole-row convention;
     # both at once is a single bold cell, which is not that convention
-    if (row and col) or (cells is not None and cells <= 1):
-        return "n"
+    if (row and col) or (cells is not None and cells < 3):
+        return "n"  # a single bold cell, or two, is not the whole-row convention
     return "y" if (row or col) else "n"
 
 
