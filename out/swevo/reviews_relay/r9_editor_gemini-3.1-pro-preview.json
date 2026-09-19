@@ -1,0 +1,33 @@
+{
+ "rating": 6,
+ "confidence": 4,
+ "summary": "The manuscript presents a large-scale automated audit of 1644 metaheuristics papers published in Scientific Reports (2024-2025) to evaluate adherence to the field's reporting conventions (e.g., reporting run counts, standard deviations, and statistical tests). Using LLMs and vision-language models, the author finds that while most new-optimizer papers claim to follow conventions, a large portion fail to print standard deviations, and among those that do, 35.5% of the bolded 'best' results are not statistically separable from their rivals via a Welch's t-test on the summary statistics. The paper is transparent about its deviations from the pre-registered plan (due to publisher scraping blocks) and its reliance on automated readers.",
+ "strengths": "The paper tackles a highly relevant topic for SWEVO, given the journal's history of publishing methodological guidelines (e.g., Derrac et al., 2011). The methodology is highly transparent, pre-registered, and the code/prompts are released. The author does an excellent job of identifying, acknowledging, and adjusting for the blind spots of their automated parser (e.g., the Mean/Std row issue). The corpus deviation is well-justified by the technical realities of publisher API blocks.",
+ "objections": [
+  {
+   "id": "lack-of-human-validation",
+   "severity": "blocking",
+   "objection": "The paper relies entirely on LLMs/VLMs for data extraction without human ground-truth validation, which is a critical flaw for an empirical audit claiming precise failure percentages.",
+   "what_would_fix_it": "Have a human annotator complete the 'released kit items' to establish the true precision and recall of the Gemini 3.1 Pro reader against a human baseline, rather than just comparing it to Claude Sonnet 5.",
+   "quote": "The image reader's pairing of means with deviations is checked against a second vendor's model on two hundred released kit items, not yet against a person."
+  },
+  {
+   "id": "abstract-welch-caveat",
+   "severity": "major",
+   "objection": "The abstract highlights the 35.5% failure rate of Welch's t-test without sufficiently clarifying that this tests a per-cell typographic claim, whereas the field's actual statistical claims are usually aggregate rank tests across functions.",
+   "what_would_fix_it": "Add a brief sentence to the abstract explicitly stating that this per-cell failure rate evaluates the typographic bolding convention, not necessarily the authors' aggregate statistical claims across the benchmark suite.",
+   "quote": "Of the 682 bold means whose printed summaries can be tested, 35.5% [28.6, 42.4] are not separable from their rival by Welch's t at the stated run count, a per-cell check the guides do not prescribe"
+  },
+  {
+   "id": "megajournal-generalization",
+   "severity": "minor",
+   "objection": "The paper audits a single megajournal (Scientific Reports) but occasionally frames the conclusions as a reflection of the entire metaheuristics field, which may have stricter standards in specialized venues like SWEVO.",
+   "what_would_fix_it": "Add a sentence in the Discussion or Conclusion explicitly warning readers against generalizing the reporting quality of a general megajournal to specialized evolutionary computation venues.",
+   "quote": "no number here describes the venues in which this journal's readers publish, and a general-science megajournal's review may hold the convention less firmly than a specialist venue."
+  }
+ ],
+ "questions_to_authors": "Given that Scientific Reports is a general megajournal with potentially different peer-review standards than specialized venues like SWEVO or IEEE TEVC, do you suspect the failure rates observed here are an upper bound for the field? Furthermore, how long would it take a human to annotate the 200 kit items, and why was this not completed prior to submission?",
+ "would_champion": true,
+ "model": "gemini/gemini-3.1-pro-preview",
+ "brief": "editor"
+}

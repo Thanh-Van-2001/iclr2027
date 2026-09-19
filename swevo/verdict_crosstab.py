@@ -19,7 +19,7 @@ sys.path.insert(0, os.path.join(HERE, "..", "study"))
 sys.path.insert(0, HERE)
 from gold_set import _num  # noqa: E402
 from paperengine.stats import wilson_interval  # noqa: E402
-from census_readings import _regroup, corrected_labels  # noqa: E402
+from census_readings import _regroup, corrected_labels, _is_mean  # noqa: E402
 
 KIT = "audits/swevo_census"
 VK = "audits/swevo_verdict"
@@ -69,8 +69,9 @@ def main() -> int:
             if p.get("note") != "failed":
                 vpages[p["id"]] = p
     papers = {l.strip() for l in open(os.path.join(VK, "papers.txt"), encoding="utf-8") if l.strip()}
+    # the groups that are means over runs, the base the abstract quotes (summary rows and rank tables out)
     gs = [g for g in _regroup({i: labels[i] for i in labels if items[i]["paper"] in papers}, items, kinds)
-          if g["testable"] and g["fail"] is not None]
+          if g["testable"] and g["fail"] is not None and _is_mean(g)]
     # verdict-table entries: per page and table first (a function label such as
     # "F1" repeats across suites and dimensions), then per paper where the key
     # is unique; a key with conflicting verdicts in the paper is unusable

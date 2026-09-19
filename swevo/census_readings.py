@@ -524,6 +524,7 @@ def main() -> int:
                      "without_top_four": _shares([g for g in gs if g["paper"] not in top4]),
                      "top_three_share": round(100 * sum(x[0] for x in sizes[:3]) / tot, 1) if tot else None,
                      "top_three_ids": top3, "top_three_multi_objective": sum(1 for k in top3 if k in mo),
+                     "top_three_share_means": round(100 * sum(1 for g in tested if g["paper"] in top3 and _is_mean(g)) / max(sum(1 for g in tested if _is_mean(g)), 1), 1),
                      "top_three_only": _shares([g for g in gs if g["paper"] in top3]),
                      "without_top_three": _shares([g for g in gs if g["paper"] not in top3])}
         # multi-objective studies (title or abstract) against the rest; a post-hoc split

@@ -1,0 +1,30 @@
+{
+ "rating": 5,
+ "confidence": 5,
+ "summary": "As a senior metaheuristics researcher, I find this audit fascinating but currently incomplete. The paper audits 1644 metaheuristics papers from Scientific Reports to check adherence to reporting conventions (mean, std, run counts, statistical tests). It uses LLMs to parse text and table images, finding that while new-optimizer papers often state run counts and tests, the printed summaries often lack deviations or fail a per-cell Welch's t-test. To answer the reviewer prompt: Yes, the audit is mostly fair because it targets the typographic claim of the bold cell, though applying Welch's t to bounded CEC errors is statistically fraught. Does the per-cell Welch test say anything about our aggregate claims (Wilcoxon/Friedman)? No, and the author rightly acknowledges this. Would the recommendations change what I do? Yes, explicitly writing 'bold: best mean over 51 runs, * indicates Wilcoxon significance' is a great practice. However, what makes me dismiss the paper in its current form is the explicit admission that the core image-parsing metric has not been validated by a human.",
+ "strengths": "The author demonstrates an excellent grasp of the metaheuristics methodological literature (García, Derrac, CEC/BBOB guidelines). The distinction between 'new optimizer' and 'application' papers perfectly captures the dual nature of our field. The honest acknowledgment that a per-cell Welch failure does not refute the aggregate Wilcoxon/Friedman claim is crucial and well-handled.",
+ "objections": [
+  {
+   "id": "unvalidated-load-bearing",
+   "severity": "blocking",
+   "objection": "The paper relies on an LLM to pair means and standard deviations across separate rows/columns, but admits this has not been verified by a human. You cannot publish an audit where the primary instrument's accuracy on its most difficult, load-bearing task is unknown.",
+   "what_would_fix_it": "A human must label the released 100-item kits (as mentioned in Section 6) and the paper must report this human-validated precision instead of relying solely on a second LLM's agreement. Quote: 'The reader's precision on that layout, pairing a mean in one column or row with the right optimizer's deviation in another, is the load-bearing measurement of this paper and is not yet made by a person.'"
+  },
+  {
+   "id": "scirep-extrapolation",
+   "severity": "major",
+   "objection": "The corpus is limited to Scientific Reports, which has notoriously different standards and editorial quirks compared to core EC venues (like SWEVO or TEVC). The journal's forced production note heavily skews the 'bold rule' findings.",
+   "what_would_fix_it": "Add a strong disclaimer in the abstract and conclusion that Scientific Reports has specific editorial quirks (like the forced 'Significant values are in bold' note) and generally different benchmarking standards than core venues, meaning these rates describe a megajournal's ecosystem rather than the core SWEVO community. Quote: 'The corpus is therefore the Scientific Reports subset... no number in this paper describes the venues in which this journal's readers publish.'"
+  },
+  {
+   "id": "welch-bounded-data",
+   "severity": "minor",
+   "objection": "Applying Welch's t-test to bounded, right-skewed benchmark errors (where std often exceeds mean) is mathematically misspecified. The paper acknowledges this, but the headline failure rate (35.5%) conflates thin evidence with test misspecification.",
+   "what_would_fix_it": "State explicitly in the abstract that Welch's t is mathematically misspecified for bounded benchmark errors, so the failure rate is a mix of thin evidence and test misspecification. Quote: 'That is why the audit uses Welch's t on the summaries: not because it is the right test for the data, but because it is the only per-cell test the printed summaries admit'."
+  }
+ ],
+ "questions_to_authors": "Since I cannot open the run records to check the numbers, what is the actual human-validated precision of the Gemini model on the separate-column layout? Furthermore, of the 35.5% of tested groups that fail Welch's t, how many fail strictly because the standard deviation exceeds the mean, hitting the mathematical ceiling for t on bounded data?",
+ "would_champion": false,
+ "model": "gemini/gemini-3.1-pro-preview",
+ "brief": "practitioner"
+}

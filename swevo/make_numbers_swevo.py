@@ -723,6 +723,7 @@ def build(out_path: str) -> dict:
             reg.add(f"{tag} pp n star", f"{ic['n_star']:.1f}" if ic.get("n_star") is not None else "--", provenance=rrun)
             reg.add(f"{tag} pp top three share", _pct(pp["top_three_share"]) if pp.get("top_three_share") is not None else "--", provenance=rrun)
             reg.add(f"{tag} pp top three multi objective", pp.get("top_three_multi_objective", 0), provenance=rrun)
+            reg.add(f"{tag} pp top three share means", _pct(pp["top_three_share_means"]) if pp.get("top_three_share_means") is not None else "--", provenance=rrun)
             _sh(f"{tag} pp top three only", pp["top_three_only"])
             _sh(f"{tag} pp without top three", pp["without_top_three"])
             ob = d["objective"]

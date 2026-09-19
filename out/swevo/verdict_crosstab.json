@@ -1,28 +1,28 @@
 {
  "papers": 19,
  "pages_read": 179,
- "tested_groups": 508,
+ "tested_groups": 463,
  "ci_agree_papers": [
   73.6,
-  89.3
+  87.0
  ],
- "chance_agreement": 62.4,
- "kappa": 0.549,
- "specific_agreement_fail_ns": 65.1,
- "specific_agreement_pass_sig": 88.8,
- "top_three_share": 84.7,
- "macro_agreement": 81.3,
+ "chance_agreement": 61.3,
+ "kappa": 0.533,
+ "specific_agreement_fail_ns": 64.3,
+ "specific_agreement_pass_sig": 87.9,
+ "top_three_share": 83.7,
+ "macro_agreement": 81.1,
  "per_paper_agreement_min": 60.0,
  "per_paper_agreement_max": 100.0,
  "sign_contradictions": 4,
- "sign_checked": 133,
+ "sign_checked": 123,
  "sign_conventions": {
-  "39598ac0ec68e0c5": "-",
-  "b8566fed9b19aa8a": "+",
-  "189e10e351a6b810": "+",
-  "77f75af7547b098b": "-",
   "5da7cc31ebf6525f": "-",
-  "ec8ad2c48711b997": "-"
+  "ec8ad2c48711b997": "-",
+  "77f75af7547b098b": "-",
+  "39598ac0ec68e0c5": "-",
+  "189e10e351a6b810": "+",
+  "b8566fed9b19aa8a": "+"
  },
  "per_paper_2x2": {
   "189e10e351a6b810": {
@@ -82,12 +82,12 @@
    "pass_sig": 1
   },
   "b8566fed9b19aa8a": {
-   "located": 40,
-   "agree": 38,
-   "fail_ns": 2,
+   "located": 29,
+   "agree": 27,
+   "fail_ns": 1,
    "fail_sig": 1,
    "pass_ns": 1,
-   "pass_sig": 36
+   "pass_sig": 26
   },
   "ec8ad2c48711b997": {
    "located": 70,
@@ -98,42 +98,42 @@
    "pass_sig": 46
   }
  },
- "effective_papers": 3.8,
- "welch_fail_not_located": 30.8,
- "not_located": 331,
+ "effective_papers": 3.7,
+ "welch_fail_not_located": 31.6,
+ "not_located": 297,
  "conflicting_keys_papers": 13,
  "status": {
   "ambiguous_key": 29,
-  "located": 177,
-  "verdict_not_printed": 167,
-  "different_pair": 120,
-  "group_not_matched": 15
+  "located": 166,
+  "verdict_not_printed": 154,
+  "different_pair": 110,
+  "group_not_matched": 4
  },
  "source": {
-  "verdict_table": 41,
+  "verdict_table": 30,
   "beside_group": 106,
   "same_page_table": 30
  },
- "located": 177,
- "pct_located": 34.8,
+ "located": 166,
+ "pct_located": 35.9,
  "crosstab": {
-  "welch_fail_printed_not_significant": 28,
+  "welch_fail_printed_not_significant": 27,
   "welch_fail_printed_significant": 26,
   "welch_pass_printed_not_significant": 4,
-  "welch_pass_printed_significant": 119
+  "welch_pass_printed_significant": 109
  },
- "agree": 147,
- "pct_agree": 83.1,
+ "agree": 136,
+ "pct_agree": 81.9,
  "ci_agree": [
-  76.8,
-  87.9
+  75.4,
+  87.0
  ],
- "welch_fail_among_located": 30.5,
- "printed_not_significant_among_located": 18.1,
+ "welch_fail_among_located": 31.9,
+ "printed_not_significant_among_located": 18.7,
  "papers_located": 9,
  "largest_paper_located": 70,
- "pct_largest_paper": 39.5,
- "welch_fail_located": 54,
+ "pct_largest_paper": 42.2,
+ "welch_fail_located": 53,
  "welch_fail_printed_significant_top_three": 18,
  "agree_without_top_three": {
   "n": 27,
@@ -142,9 +142,9 @@
   "pct": 70.4
  },
  "agree_without_largest": {
-  "n": 107,
-  "agree": 90,
-  "pct": 84.1
+  "n": 96,
+  "agree": 79,
+  "pct": 82.3
  },
  "per_paper": {
   "189e10e351a6b810": {
@@ -176,8 +176,8 @@
    "agree": 3
   },
   "b8566fed9b19aa8a": {
-   "located": 40,
-   "agree": 38
+   "located": 29,
+   "agree": 27
   },
   "ec8ad2c48711b997": {
    "located": 70,
@@ -185,10 +185,10 @@
   }
  },
  "verdict_classes_raw": {
-  "-": 82,
-  "+": 51,
+  "-": 81,
+  "+": 42,
   "≈": 24,
-  "=": 3,
+  "=": 2,
   "4.94E-05": 1,
   "2.E-04": 1,
   "4.25E-01": 1,

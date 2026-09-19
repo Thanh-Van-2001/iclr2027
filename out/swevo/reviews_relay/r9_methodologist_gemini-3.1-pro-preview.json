@@ -1,0 +1,42 @@
+{
+ "rating": 5,
+ "confidence": 5,
+ "summary": "The paper presents an automated audit of reporting practices in metaheuristics, using large language models to parse tables and text. While the goal aligns with our methodological efforts to improve field standards (e.g., Derrac, Garcia, Carrasco), the execution relies heavily on unvalidated machine-learning extractions. The core measurements lack human ground-truth validation, the 'repair' of the census is merely a second prompt to the same model, the classifier's definitions tautologically guarantee the observed literature split, and the cross-tabulation of test verdicts is overwhelmingly driven by just three multi-objective papers. The manuscript requires a major revision to validate its automated instruments before the claims can be trusted.",
+ "strengths": "The paper tackles a critical issue in metaheuristics—the reproducibility and statistical validity of reported results—and correctly identifies that the field's typographic conventions (bolding) often lack the printed statistical support required by methodological guidelines. The release of the dataset and prompts is commendable.",
+ "objections": [
+  {
+   "id": "unvalidated_precision",
+   "severity": "blocking",
+   "objection": "The precision of the instrument on its most critical task (pairing means and deviations across columns/rows) is not established against human ground truth. The paper admits: \"The image reader's pairing of means with deviations is checked against a second vendor's model on two hundred released kit items, not yet against a person.\" As a reviewer, I cannot open the run records to check these items myself. A model agreeing with another model is not validation; it is merely consensus between black boxes.",
+   "what_would_fix_it": "Have a human label the 200 released kit items to establish the actual precision and recall of the reader's pairing logic, and report these human-validated metrics in the text."
+  },
+  {
+   "id": "model_repair_not_human",
+   "severity": "major",
+   "objection": "The 're-read' census is presented as a repair, but it is simply a second model pass correcting the first model's blind spot. \"The Mean/Std-row blind spot was repaired after the census... read again under the same protocol with one added instruction\". This is a second model correcting a model, which introduces its own unmeasured biases and truncation risks (as noted by the 42 refused tables).",
+   "what_would_fix_it": "Explicitly describe the re-read as a 'second model pass' rather than a 'repair', and validate a sample of the merged tables by hand to ensure the added instruction did not introduce new hallucinated pairings."
+  },
+  {
+   "id": "abstract_denominator_mismatch",
+   "severity": "major",
+   "objection": "The abstract mixes numbers from two different denominators, creating a misleading sequence. It states: \"Of the 682 bold means whose printed summaries can be tested... and of the 54 failures that sit beside a printed verdict\". The 682 refers to the 'means over runs' subset (Table 1), but the 54 failures are drawn from the 727 total tested groups (which includes non-means like Time/Rank rows that the model hallucinated, per Section 5.1).",
+   "what_would_fix_it": "Align the denominators in the abstract. Either report the total tested groups (727) alongside the 54 failures, or recalculate the failures strictly for the 682 means-only subset."
+  },
+  {
+   "id": "classifier_artefact",
+   "severity": "major",
+   "objection": "The reporting gap between the two literatures (new-optimizer vs. application) is largely an artefact of the classifier's prompt. The prompt defines `new_optimizer` as one that \"evaluates it against other optimizers\". Papers selected for explicitly evaluating against others will naturally report run counts and tests more often than papers that merely apply an algorithm. The split is tautological.",
+   "what_would_fix_it": "Acknowledge in Section 4 and the Discussion that the prompt's requirement for 'evaluates it against other optimizers' inherently selects for papers that benchmark, making the observed reporting gap a direct consequence of the classifier's definition."
+  },
+  {
+   "id": "verdict_crosstab_skew",
+   "severity": "major",
+   "objection": "The verdict cross-tabulation claims to show how Welch's t relates to the authors' printed verdicts, but the data is overwhelmingly skewed by a tiny subset of papers. \"three of them, all multi-objective studies with PlatEMO-style rank-sum tables, holding 84.7% of the pairs\". The finding that Welch fails where rank tests pass is a property of these three highly skewed multi-objective papers, not a general property of the field.",
+   "what_would_fix_it": "Explicitly state in the abstract and the Discussion that the disagreement between Welch's t and the printed rank verdicts is almost entirely driven by three multi-objective papers, and refrain from generalizing this to the broader single-objective literature."
+  }
+ ],
+ "questions_to_authors": "Can you provide the human-validated precision metrics for the 200 kit items? How many of the 54 Welch failures in the cross-tabulation actually belong to the 682 'means over runs' subset?",
+ "would_champion": false,
+ "model": "gemini/gemini-3.1-pro-preview",
+ "brief": "methodologist"
+}
