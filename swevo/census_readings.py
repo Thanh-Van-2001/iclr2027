@@ -415,15 +415,19 @@ def merged_labels(labels: dict, kits=ROW_KITS, wholesale: bool = False) -> tuple
     With wholesale=True every re-read table replaces its original (both
     directions), the reading that shows the size of the one-way rule."""
     reread = {}
+    truncated_first_pass = set()
     for kit in kits:
         for path in sorted(glob.glob(os.path.join(kit, "labels_shard*.json"))):
             for pg in json.load(open(path, encoding="utf-8")):
                 if not str(pg.get("note", "")).startswith("failed"):
                     reread[pg["id"]] = pg
+                    if kit != kits[-1] and pg.get("figure_band_on_page") == "":
+                        truncated_first_pass.add(pg["id"])
     merged = {iid: json.loads(json.dumps(pg)) for iid, pg in labels.items()}
     log = {"pages_reread": len(reread), "tables_reread": 0, "tables_replaced": 0, "tables_kept": 0, "tables_truncated": 0,
            "pages_with_a_kept_table": 0, "kept_barred_lost": 0, "kept_means_lost": 0, "kept_groups_old": 0, "kept_groups_new": 0,
            "pages_truncated": sum(1 for pg in reread.values() if pg.get("figure_band_on_page") == ""),
+           "pages_truncated_first_pass": len(truncated_first_pass),
            "corrections_accepted": 0, "corrections_groups_old": 0, "corrections_groups_new": 0}
 
     def n_means(t):
@@ -815,7 +819,7 @@ def main() -> int:
                        tables_separate_row_after=sum(1 for pg in reread.values() for t in pg.get("tables", []) if str(t.get("results_table", "")).lower().startswith("y") and str(t.get("bar_form", "")).lower() == "separate_row"),
                        tables_separate_after=sum(1 for pg in reread.values() for t in pg.get("tables", []) if str(t.get("results_table", "")).lower().startswith("y") and str(t.get("bar_form", "")).lower().startswith("separate")),
                        tables_none_after=sum(1 for pg in reread.values() for t in pg.get("tables", []) if str(t.get("results_table", "")).lower().startswith("y") and str(t.get("bar_form", "")).lower() in ("none", "")),
-                       pages_in_kits=sum(len(json.load(open(os.path.join(k, "items.json"), encoding="utf-8"))) for k in ROW_KITS if os.path.exists(os.path.join(k, "items.json"))),
+                       pages_in_kits=len({it["id"] for k in ROW_KITS if os.path.exists(os.path.join(k, "items.json")) for it in json.load(open(os.path.join(k, "items.json"), encoding="utf-8"))}),
                        pages_new_optimizer=sum(1 for i in reread if kinds.get(items[i]["paper"]) == "new_optimizer"),
                        pages_application=sum(1 for i in reread if kinds.get(items[i]["paper"]) == "application"))
     # papers with a results table in the census, and those with at least one single-bold group, by kind

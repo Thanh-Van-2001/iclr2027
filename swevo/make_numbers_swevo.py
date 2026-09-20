@@ -772,7 +772,7 @@ def build(out_path: str) -> dict:
                 _sh(f"crw {lab.replace('_', ' ')}", dd)
             for lab, dd in ws["means_only_by_kind"].items():
                 _sh(f"crw means {lab.replace('_', ' ')}", dd)
-        for k in ("kept_barred_lost", "kept_means_lost", "kept_groups_old", "kept_groups_new", "pages_truncated", "corrections_accepted", "corrections_groups_old", "corrections_groups_new"):
+        for k in ("kept_barred_lost", "kept_means_lost", "kept_groups_old", "kept_groups_new", "pages_truncated", "pages_truncated_first_pass", "corrections_accepted", "corrections_groups_old", "corrections_groups_new"):
             reg.add(f"crrr {k.replace('_', ' ')}", cr["rows_reread"].get(k, 0), provenance=rrun)
         for tag, d in (("cr", cr["pre"]), ("crc", cr["corrected"])):
             _sh(f"{tag} all", d["all"])
