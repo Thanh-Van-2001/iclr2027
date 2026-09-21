@@ -72,6 +72,16 @@ def _disp_str(x) -> str:
     return s
 
 
+def _numc(x):
+    """The reader writes values as printed; a space after the sign ("- 1.26E+04") and a thousands
+    separator ("-12,569.5") are not part of the number."""
+    if x is None:
+        return None
+    t = re.sub(r"^([+-])\s+", r"\1", str(x).strip())
+    t = re.sub(r"(?<=\d),(?=\d{3}(?:\D|$))", "", t)
+    return _num(t)
+
+
 def _disp(x):
     return _bar_num(_disp_str(x))
 
@@ -118,6 +128,8 @@ def _regroup(labels: dict, items: dict, kinds: dict):
     groups = []
     DROPPED["nonextremal"] = 0
     DROPPED["papers"] = set()
+    for k_ in ("ties", "worse", "worse_row_oriented", "worse_column_oriented"):
+        DROPPED[k_] = 0
     for iid, pg in labels.items():
         paper = items[iid]["paper"]
         for ti, t in enumerate(pg.get("tables", [])):
@@ -128,11 +140,14 @@ def _regroup(labels: dict, items: dict, kinds: dict):
             form = str(t.get("bar_form", "")).lower().strip()
             cap = str(t.get("caption_start", ""))
             for g in t.get("groups", []):
-                w, r = _num(g.get("winner_mean")), _num(g.get("runner_mean"))
+                w, r = _numc(g.get("winner_mean")), _numc(g.get("runner_mean"))
                 d = str(g.get("direction", "")).lower()
                 if w is not None and r is not None and (w == r or (d.startswith("low") and w > r) or (d.startswith("high") and w < r)):
                     DROPPED["nonextremal"] += 1
                     DROPPED["papers"].add(paper)
+                    DROPPED["ties" if w == r else "worse"] = DROPPED.get("ties" if w == r else "worse", 0) + 1
+                    ori_ = str(t.get("orientation", "")).lower().strip()
+                    DROPPED["worse_row_oriented" if ori_ == "row" else "worse_column_oriented"] = DROPPED.get("worse_row_oriented" if ori_ == "row" else "worse_column_oriented", 0) + (0 if w == r else 1)
                     continue
                 wd, rd = _disp(g.get("winner_disp")), _disp(g.get("runner_disp"))
                 wb = wd is not None or str(g.get("winner_disp", "")).startswith("[")
@@ -157,7 +172,8 @@ def _regroup(labels: dict, items: dict, kinds: dict):
                                "row_label": bool(ROW_LABEL.search(label)), "not_means_table": bool(NOT_MEANS_CAPTION.search(cap)),
                                "table": f"{iid}:{ti}", "kind_label": kind,
                                "orientation": str(t.get("orientation", "")).lower().strip(),
-                               "whole_row": _wholerow_flag(iid, cap) if str(t.get("orientation", "")).lower().strip() == "column" else None})
+                               "whole_row": _wholerow_flag(iid, cap) if str(t.get("orientation", "")).lower().strip() == "column" else None,
+                               "whole_col": _wholerow_flag(iid, cap) if str(t.get("orientation", "")).lower().strip() == "row" else None})
     return groups
 
 
@@ -206,6 +222,8 @@ def _welch_variant(g, *, one_sided=False, ddof=False, rho=0.0, unlabelled_as_se=
 
 
 def _impossible(g) -> bool:
+    if (g["wd"] is not None and g["wd"] < 0) or (g["rd"] is not None and g["rd"] < 0):
+        return True  # a deviation printed below zero is a mis-pairing or a misread
     """A sample deviation over n non-negative runs cannot exceed sqrt(n)
     times the mean; a printed mean of exactly zero is rounding and a
     summary row is not a mean, so neither is flagged."""
@@ -571,6 +589,25 @@ def main() -> int:
         top4 = {k for k, _ in sorted(by_paper.items(), key=lambda kv: -kv[1][0])[:4]}
         top3 = [k for k, _ in sorted(by_paper.items(), key=lambda kv: -kv[1][0])[:3]]
         mo = _mo_papers({g["paper"] for g in gs})
+        # the same block on the groups that are means over runs, the base the abstract quotes
+        by_paper_m = collections.defaultdict(lambda: [0, 0])
+        for g in tested:
+            if _is_mean(g):
+                by_paper_m[g["paper"]][0] += 1
+                by_paper_m[g["paper"]][1] += bool(g["fail"])
+        sizes_m = sorted(by_paper_m.values(), key=lambda x: -x[0])
+        tot_m = sum(x[0] for x in sizes_m)
+        rates_m = [100 * f / n for n, f in by_paper_m.values()]
+        top3_m = [k for k, _ in sorted(by_paper_m.items(), key=lambda kv: -kv[1][0])[:3]]
+        per_paper_means = {"papers": len(by_paper_m), "tested": tot_m, "effective_papers": _kish([g for g in tested if _is_mean(g)])["effective"],
+                           "top_three_share": round(100 * sum(x[0] for x in sizes_m[:3]) / tot_m, 1) if tot_m else None,
+                           "top_four_share": round(100 * sum(x[0] for x in sizes_m[:4]) / tot_m, 1) if tot_m else None,
+                           "median_rate": round(statistics.median(rates_m), 1) if rates_m else None,
+                           "q1_rate": round(statistics.quantiles(rates_m, n=4)[0], 1) if len(rates_m) >= 4 else None,
+                           "q3_rate": round(statistics.quantiles(rates_m, n=4)[2], 1) if len(rates_m) >= 4 else None,
+                           "macro_rate": round(statistics.mean(rates_m), 1) if rates_m else None,
+                           "macro_rate_ci": _boot_mean(rates_m) if len(rates_m) >= 10 else None,
+                           "without_top_three": _shares([g for g in means if g["paper"] not in top3_m])}
         per_paper = {"papers": len(by_paper), "tested": tot, "effective_papers": _kish(tested)["effective"],
                      # each paper weighted equally: the mean of the per-paper failure shares, with a percentile bootstrap over papers as units
                      "macro_rate": round(statistics.mean(rates), 1) if rates else None,
@@ -606,6 +643,13 @@ def main() -> int:
                        "without_column_oriented_by_kind": _by_kind([g for g in gs if g["orientation"] != "column"]),
                        "without_column_oriented_means": _shares([g for g in gs if g["orientation"] != "column" and _is_mean(g)]),
                        "without_column_oriented_means_by_kind": _by_kind([g for g in gs if g["orientation"] != "column" and _is_mean(g)]),
+                       "whole_col_tables": len({g["table"] for g in gs if g["whole_col"] == "y"}),
+                       "whole_col_tables_no": len({g["table"] for g in gs if g["whole_col"] == "n"}),
+                       "whole_col_asked": len({g["table"] for g in gs if g["whole_col"] is not None}),
+                       "whole_col": _shares([g for g in gs if g["whole_col"] == "y"]),
+                       "without_whole_col": _shares([g for g in gs if g["whole_col"] != "y"]),
+                       "without_one_line_bold": _shares([g for g in gs if g["whole_col"] != "y" and g["whole_row"] != "y"]),
+                       "without_one_line_bold_means_by_kind": _by_kind([g for g in gs if g["whole_col"] != "y" and g["whole_row"] != "y" and _is_mean(g)]),
                        "whole_row_tables": len({g["table"] for g in gs if g["whole_row"] == "y"}),
                        "whole_row_tables_no": len({g["table"] for g in gs if g["whole_row"] == "n"}),
                        "whole_row_tables_unanswered": len({g["table"] for g in col if g["whole_row"] is None}),
@@ -773,7 +817,7 @@ def main() -> int:
                     byp[g["paper"]][1] += bool(g["fail"])
             if len(byp) < 10 or _kish([g for g in rec if g["testable"] and g["fail"] is not None])["effective"] < 8:
                 return None
-            return _boot_coverage(byp, sims=400, reps=500, seed=2)
+            return _boot_coverage(byp)  # the same policy as the headline: 1000 simulated censuses, 1000 draws each, seed 1
         strata = {"all": gs, "means_only": means,
                   "new_optimizer": [g for g in gs if g["kind"] == "new_optimizer"], "application": [g for g in gs if g["kind"] == "application"],
                   "means_new_optimizer": [g for g in means if g["kind"] == "new_optimizer"], "means_application": [g for g in means if g["kind"] == "application"],
@@ -782,9 +826,11 @@ def main() -> int:
                   "without_whole_row": [g for g in gs if g["whole_row"] != "y"], "single_objective": [g for g in gs if g["paper"] not in mo],
                   "without_note": [g for g in gs if not scan.get(g["paper"], {}).get("bold_note")],
                   "without_impossible": [g for g in gs if not _impossible(g)]}
-        coverage = {k: cov_of(v) for k, v in strata.items()}
-        covs = [v["coverage"] for v in coverage.values() if v]
-        coverage_summary = {"strata": sum(1 for v in coverage.values() if v), "min": min(covs) if covs else None, "max": max(covs) if covs else None}
+        coverage = {k: cov_of(v) for k, v in strata.items()} if name == "corrected" else {}
+        covs = {k: v["coverage"] for k, v in coverage.items() if v}
+        coverage_summary = {"strata": len(covs), "min": min(covs.values()) if covs else None, "max": max(covs.values()) if covs else None,
+                            "min_stratum": min(covs, key=covs.get) if covs else None, "max_stratum": max(covs, key=covs.get) if covs else None,
+                            "means_only": covs.get("means_only")}
         # the kinds under the second labeller, and where both labellers agree
         second = {lab: _shares([g for g in gs if kinds2.get(g["paper"]) == lab]) for lab in ("new_optimizer", "application")} if kinds2 else {}
         both = {lab: _shares([g for g in gs if kinds2.get(g["paper"]) == lab and g["kind"] == lab]) for lab in ("new_optimizer", "application")} if kinds2 else {}
@@ -793,10 +839,12 @@ def main() -> int:
         return {"name": name, "all": _shares(gs), "by_kind": _by_kind(gs), "per_paper": per_paper, "shape": shape,
                 "by_kind_second": second, "by_kind_both": both, "by_kind_second_means": second_m, "by_kind_both_means": both_m,
                 "residual_layout": residual, "coverage_by_stratum": coverage, "coverage_summary": coverage_summary,
-                "per_paper_barless": per_paper_barless, "p_dist": p_dist,
+                "per_paper_barless": per_paper_barless, "p_dist": p_dist, "per_paper_means": per_paper_means,
                 "objective": objective, "orientation": orientation,
                 "alternatives": alternatives, "rows": rows, "bold_rule": bold, "note": note, "citing": citing, "scan_runs": scan_runs,
-                "dropped_nonextremal": DROPPED["nonextremal"], "dropped_nonextremal_papers": len(DROPPED["papers"])}
+                "dropped_nonextremal": DROPPED["nonextremal"], "dropped_nonextremal_papers": len(DROPPED["papers"]),
+                "dropped_ties": DROPPED.get("ties", 0), "dropped_worse": DROPPED.get("worse", 0),
+                "dropped_worse_row_oriented": DROPPED.get("worse_row_oriented", 0), "dropped_worse_column_oriented": DROPPED.get("worse_column_oriented", 0)}
 
     gs1 = _regroup(labels, items, kinds)
     pre_readings = readings_of(gs1, "pre-registered")

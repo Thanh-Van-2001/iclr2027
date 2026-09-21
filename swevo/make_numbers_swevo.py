@@ -218,6 +218,10 @@ def build(out_path: str) -> dict:
         for k in ("full_convention", "three_of_four"):
             reg.add(f"{key} {k.replace('_', ' ')}", d.get(k, 0), provenance=run)
             reg.add(f"{key} pct {k.replace('_', ' ')}", _pct(d.get(f"pct_{k}", 0.0)), provenance=run)
+        for k, v in (d.get("cross") or {}).items():
+            reg.add(f"{key} cross {k.replace('_', ' ')}", v, provenance=run)
+        reg.add(f"{key} signed rank papers", d.get("signed_rank_papers", 0), provenance=run)
+        reg.add(f"{key} paired unsaid among named", d.get("paired_unsaid_among_named", 0), provenance=run)
         for k in ("pct_runs_stated", "pct_runs_thirty", "pct_std_off_cell", "pct_test_named", "pct_markers", "pct_markers_among_named"):
             reg.add(f"{key} {k.replace('_', ' ')}", _pct(d[k]), provenance=run)
         for lab in ("same_cell", "separate_row", "separate_column", "none", "unsure"):
@@ -337,6 +341,13 @@ def build(out_path: str) -> dict:
             if k.startswith(("first_", "second_")):
                 reg.add("ta " + k.replace("_", " "), _pct(v), provenance=run)
         for lab in ("all", "new_optimizer"):
+            cv = ta.get(f"convention_{lab}") or {}
+            if cv:
+                k = "ta convention " + lab.replace("_", " ")
+                for f in ("n", "first", "second", "both"):
+                    reg.add(f"{k} {f}", cv[f], provenance=run)
+                reg.add(f"{k} first pct", _pct(cv["first_pct"]), provenance=run)
+                reg.add(f"{k} second pct", _pct(cv["second_pct"]), provenance=run)
             m = ta.get(f"markers_{lab}") or {}
             if not m:
                 continue
@@ -607,6 +618,8 @@ def build(out_path: str) -> dict:
         reg.add("vc ci agree papers", f"[{vc['ci_agree_papers'][0]}, {vc['ci_agree_papers'][1]}]" if vc.get("ci_agree_papers") else "--", provenance=vrun)
         reg.add("vc welch fail not located", _pct(vc["welch_fail_not_located"]) if vc.get("welch_fail_not_located") is not None else "--", provenance=vrun)
         reg.add("vc welch fail located", vc.get("welch_fail_located", 0), provenance=vrun)
+        for k in ("welch_fail_located_papers", "welch_fail_printed_significant_rest_papers", "papers_outside_top_three", "page_not_read_groups", "page_not_read_papers"):
+            reg.add("vc " + k.replace("_", " "), vc.get(k, 0), provenance=vrun)
         reg.add("vc welch fail printed significant top three", vc.get("welch_fail_printed_significant_top_three", 0), provenance=vrun)
         reg.add("vc welch fail printed significant rest", vc["crosstab"]["welch_fail_printed_significant"] - vc.get("welch_fail_printed_significant_top_three", 0), provenance=vrun)
         reg.add("vc welch fail printed significant pct of fails", _pct(round(100 * vc["crosstab"]["welch_fail_printed_significant"] / max(vc.get("welch_fail_located", 1), 1), 1)), provenance=vrun)
@@ -838,6 +851,18 @@ def build(out_path: str) -> dict:
             if pd_.get("least_objectionable"):
                 _sh(f"{tag} least", pd_["least_objectionable"])
             cs_ = d.get("coverage_summary") or {}
+            reg.add(f"{tag} cov min stratum", str(cs_.get("min_stratum") or "--").replace("_", " "), provenance=rrun)
+            reg.add(f"{tag} cov max stratum", str(cs_.get("max_stratum") or "--").replace("_", " "), provenance=rrun)
+            reg.add(f"{tag} cov means only", _pct(cs_["means_only"]) if cs_.get("means_only") is not None else "--", provenance=rrun)
+            pm_ = d.get("per_paper_means") or {}
+            if pm_:
+                for k in ("papers", "tested"):
+                    reg.add(f"{tag} ppm {k}", pm_[k], provenance=rrun)
+                reg.add(f"{tag} ppm effective papers", f"{pm_['effective_papers']:.1f}" if pm_.get("effective_papers") else "--", provenance=rrun)
+                for k in ("top_three_share", "top_four_share", "median_rate", "q1_rate", "q3_rate", "macro_rate"):
+                    reg.add(f"{tag} ppm {k.replace('_', ' ')}", _pct(pm_[k]) if pm_.get(k) is not None else "--", provenance=rrun)
+                reg.add(f"{tag} ppm macro rate ci", f"[{pm_['macro_rate_ci'][0]}, {pm_['macro_rate_ci'][1]}]" if pm_.get("macro_rate_ci") else "--", provenance=rrun)
+                _sh(f"{tag} ppm without top three", pm_["without_top_three"])
             reg.add(f"{tag} cov strata", cs_.get("strata", 0), provenance=rrun)
             reg.add(f"{tag} cov min", _pct(cs_["min"]) if cs_.get("min") is not None else "--", provenance=rrun)
             reg.add(f"{tag} cov max", _pct(cs_["max"]) if cs_.get("max") is not None else "--", provenance=rrun)
@@ -863,8 +888,16 @@ def build(out_path: str) -> dict:
                 _sh(f"{tag} nocol {lab.replace('_', ' ')}", dd)
             for lab, dd in ori["without_column_oriented_means_by_kind"].items():
                 _sh(f"{tag} nocol means {lab.replace('_', ' ')}", dd)
-            for k in ("whole_row_tables", "whole_row_tables_no", "whole_row_tables_unanswered"):
+            for k in ("whole_row_tables", "whole_row_tables_no", "whole_row_tables_unanswered", "whole_col_tables", "whole_col_tables_no", "whole_col_asked"):
                 reg.add(f"{tag} {k.replace('_', ' ')}", ori.get(k, 0), provenance=rrun)
+            if ori.get("whole_col"):
+                _sh(f"{tag} wc", ori["whole_col"])
+                _sh(f"{tag} nowc", ori["without_whole_col"])
+                _sh(f"{tag} noline", ori["without_one_line_bold"])
+                for lab, dd in ori["without_one_line_bold_means_by_kind"].items():
+                    _sh(f"{tag} noline means {lab.replace('_', ' ')}", dd)
+            for k in ("dropped_ties", "dropped_worse", "dropped_worse_row_oriented", "dropped_worse_column_oriented"):
+                reg.add(f"{tag} {k.replace('_', ' ')}", d.get(k, 0), provenance=rrun)
             if ori.get("whole_row"):
                 _sh(f"{tag} wr", ori["whole_row"])
                 _sh(f"{tag} nowr", ori["without_whole_row"])

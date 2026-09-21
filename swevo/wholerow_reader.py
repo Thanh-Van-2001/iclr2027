@@ -10,6 +10,7 @@ audits/swevo_census_cols/labels.json, one record per table.
 Usage: RELAY_URL=... RELAY_API_KEY=... python swevo/wholerow_reader.py [--shard k/n] [--model gemini/gemini-3.1-pro-preview]
 """
 import argparse
+import glob
 import json
 import os
 import re
@@ -54,10 +55,18 @@ def main(argv=None) -> int:
         print("set the relay URL and key first", file=sys.stderr)
         return 2
     labs = json.load(open(os.path.join(KIT, "labels_corrected.json"), encoding="utf-8"))
+    # the tables asked: every column-oriented results table with groups (a whole bold row gives one bold cell per
+    # column), and, after review round six, every row-oriented one with three or more single-bold groups or with
+    # a group the extremal filter drops (a whole bold column gives one bold cell per row)
     pages = []
     for pg in labs:
-        ts = [t for t in pg.get("tables", []) if str(t.get("results_table", "")).lower().startswith("y")
-              and str(t.get("orientation", "")).lower().strip() == "column" and t.get("groups")]
+        ts = []
+        for t in pg.get("tables", []):
+            if not str(t.get("results_table", "")).lower().startswith("y") or not t.get("groups"):
+                continue
+            ori = str(t.get("orientation", "")).lower().strip()
+            if ori == "column" or (ori == "row" and len(t.get("groups", [])) >= 3):
+                ts.append(t)
         if ts:
             pages.append((pg["id"], [str(t.get("caption_start", ""))[:80] for t in ts]))
     if args.shard:
@@ -69,9 +78,15 @@ def main(argv=None) -> int:
     if os.path.exists(out):
         done = {r["id"]: r for r in json.load(open(out, encoding="utf-8"))}
     rows = list(done.values())
+    # a page answered by any earlier shard file is not asked again (the shard split changed when the rule widened)
+    answered = {}
+    for path in glob.glob(os.path.join(OUT, "labels_shard*.json")):
+        for r in json.load(open(path, encoding="utf-8")):
+            if r.get("tables"):
+                answered.setdefault(r["id"], set()).update(r.get("captions", []))
     for i, (pid, caps) in enumerate(pages, 1):
-        if pid in done and done[pid].get("tables"):
-            continue
+        if set(caps) <= answered.get(pid, set()):
+            continue  # every table asked on this page is already answered, in this shard file or another
         img = os.path.join(KIT, "img", f"{pid}_page.png")
         text = PROMPT.format(tables="\n".join(f"- {c}" for c in caps).replace('"', "'"))
         try:

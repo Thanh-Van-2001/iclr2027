@@ -280,6 +280,12 @@ def test_reader_blocks(cs: list, kinds: dict) -> dict:
             "pct_full_convention": round(100 * sum(1 for x in v if _full_convention(x)) / n, 1),
             "three_of_four": sum(1 for x in v if _three_of_four(x)),
             "pct_three_of_four": round(100 * sum(1 for x in v if _three_of_four(x)) / n, 1),
+            # which test on what: the signed-rank paired across functions is the guides' test; the same test on the per-run
+            # values of one function pairs runs that were seeded independently
+            "cross": {f"{t}_{on}": sum(1 for x in v if t in (x.get("test") or []) and str(x.get("test_on") or "unsure") == on)
+                      for t in ("wilcoxon_signed_rank", "wilcoxon_rank_sum", "friedman") for on in ("per_run_values", "per_function_means")},
+            "signed_rank_papers": sum(1 for x in v if "wilcoxon_signed_rank" in (x.get("test") or [])),
+            "paired_unsaid_among_named": sum(1 for x in v if any(t != "none" for t in (x.get("test") or [])) and str(x.get("paired") or "unsure") == "unsure"),
         }
     out["note"] = note_block
     return out
@@ -327,6 +333,10 @@ def test_reader_agreement(second_path: str = "out/swevo/test_reader_second.json"
     for lab, ids in (("all", both), ("new_optimizer", [p for p in both if kinds.get(p) == "new_optimizer"])):
         fy = [str(first[p].get("markers", "")).lower().startswith("y") for p in ids]
         sy = [str(second[p].get("markers", "")).lower().startswith("y") for p in ids]
+        out[f"convention_{lab}"] = {"n": len(ids), "first": sum(1 for p in ids if _full_convention(first[p])), "second": sum(1 for p in ids if _full_convention(second[p])),
+                                    "both": sum(1 for p in ids if _full_convention(first[p]) and _full_convention(second[p])),
+                                    "first_pct": round(100 * sum(1 for p in ids if _full_convention(first[p])) / max(len(ids), 1), 1),
+                                    "second_pct": round(100 * sum(1 for p in ids if _full_convention(second[p])) / max(len(ids), 1), 1)}
         out[f"markers_{lab}"] = {"n": len(ids), "first_yes": sum(fy), "second_yes": sum(sy),
                                  "first_pct": round(100 * sum(fy) / max(len(ids), 1), 1), "second_pct": round(100 * sum(sy) / max(len(ids), 1), 1),
                                  "first_no_second_yes": sum(1 for a, b in zip(fy, sy) if not a and b),

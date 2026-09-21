@@ -656,15 +656,15 @@
   "papers_naming_a_test": 10,
   "pct_papers_naming_a_test": 47.6,
   "test_kinds_among_testable_papers": {
-   "t_test": 2,
+   "friedman": 6,
    "p_value": 8,
    "wilcoxon": 6,
-   "friedman": 6,
+   "plus_minus_equal": 1,
+   "t_test": 2,
    "anova": 2,
    "bonferroni_holm": 2,
    "mann_whitney": 1,
-   "kruskal": 1,
-   "plus_minus_equal": 1
+   "kruskal": 1
   },
   "papers_with_plus_equal_minus": 1,
   "named": {
@@ -1419,7 +1419,17 @@
    "full_convention": 80,
    "pct_full_convention": 22.2,
    "three_of_four": 141,
-   "pct_three_of_four": 39.2
+   "pct_three_of_four": 39.2,
+   "cross": {
+    "wilcoxon_signed_rank_per_run_values": 57,
+    "wilcoxon_signed_rank_per_function_means": 17,
+    "wilcoxon_rank_sum_per_run_values": 79,
+    "wilcoxon_rank_sum_per_function_means": 4,
+    "friedman_per_run_values": 74,
+    "friedman_per_function_means": 26
+   },
+   "signed_rank_papers": 82,
+   "paired_unsaid_among_named": 40
   },
   "testable": {
    "papers": 21,
@@ -1572,7 +1582,17 @@
    "full_convention": 2,
    "pct_full_convention": 9.5,
    "three_of_four": 7,
-   "pct_three_of_four": 33.3
+   "pct_three_of_four": 33.3,
+   "cross": {
+    "wilcoxon_signed_rank_per_run_values": 2,
+    "wilcoxon_signed_rank_per_function_means": 2,
+    "wilcoxon_rank_sum_per_run_values": 2,
+    "wilcoxon_rank_sum_per_function_means": 0,
+    "friedman_per_run_values": 1,
+    "friedman_per_function_means": 3
+   },
+   "signed_rank_papers": 4,
+   "paired_unsaid_among_named": 3
   },
   "new_optimizer": {
    "papers": 249,
@@ -1727,7 +1747,17 @@
    "full_convention": 80,
    "pct_full_convention": 32.1,
    "three_of_four": 138,
-   "pct_three_of_four": 55.4
+   "pct_three_of_four": 55.4,
+   "cross": {
+    "wilcoxon_signed_rank_per_run_values": 56,
+    "wilcoxon_signed_rank_per_function_means": 17,
+    "wilcoxon_rank_sum_per_run_values": 77,
+    "wilcoxon_rank_sum_per_function_means": 4,
+    "friedman_per_run_values": 73,
+    "friedman_per_function_means": 25
+   },
+   "signed_rank_papers": 78,
+   "paired_unsaid_among_named": 31
   },
   "random_other": {
    "papers": 100,
@@ -1856,7 +1886,17 @@
    "full_convention": 0,
    "pct_full_convention": 0.0,
    "three_of_four": 2,
-   "pct_three_of_four": 2.0
+   "pct_three_of_four": 2.0,
+   "cross": {
+    "wilcoxon_signed_rank_per_run_values": 1,
+    "wilcoxon_signed_rank_per_function_means": 0,
+    "wilcoxon_rank_sum_per_run_values": 1,
+    "wilcoxon_rank_sum_per_function_means": 0,
+    "friedman_per_run_values": 1,
+    "friedman_per_function_means": 1
+   },
+   "signed_rank_papers": 4,
+   "paired_unsaid_among_named": 8
   },
   "note": {
    "note_papers_read": 49,
@@ -2191,6 +2231,14 @@
     98.4
    ]
   },
+  "convention_all": {
+   "n": 99,
+   "first": 20,
+   "second": 30,
+   "both": 20,
+   "first_pct": 20.2,
+   "second_pct": 30.3
+  },
   "markers_all": {
    "n": 99,
    "first_yes": 23,
@@ -2218,6 +2266,14 @@
     "cf3fc0a123610a1f",
     "2522781996648fa7"
    ]
+  },
+  "convention_new_optimizer": {
+   "n": 64,
+   "first": 20,
+   "second": 29,
+   "both": 20,
+   "first_pct": 31.2,
+   "second_pct": 45.3
   },
   "markers_new_optimizer": {
    "n": 64,

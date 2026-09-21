@@ -844,5 +844,572 @@
   ],
   "model": "gemini/gemini-3.1-pro-preview",
   "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "0236",
+  "captions": [
+   "Table 1. Testing results for the 10 chaotic mapping algorithms"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 1. Testing results for the 10 chaotic mapping algorithms",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 30,
+    "note": "Each row in the table's body contains exactly one bold cell, highlighting the best result for that specific function."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "0240",
+  "captions": [
+   "Table 9. Results of PMSOMA",
+   "Table 10. Results of PMSOMA"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 9. Results of PMSOMA",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 9,
+    "note": "Bold cells are distributed between the PMSOMA and COA columns."
+   },
+   {
+    "caption_start": "Table 10. Results of PMSOMA",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "y",
+    "bold_cells": 7,
+    "note": "All bold cells are located in the PMSOMA column."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "0480",
+  "captions": [
+   "Table 2. IGD values for"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 2. IGD values for",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": "many",
+    "note": "Bold cells highlight the best results across different methods for each test problem."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "0485",
+  "captions": [
+   "Table 9. Ablation experiment IGD data table."
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 9. Ablation experiment IGD data table.",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": "many",
+    "note": "The table highlights the best mean and standard deviation values for each test problem across different methods."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "0546",
+  "captions": [
+   "Table 8. The experimental results of 15 algorithms on classical test functions ("
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 8. The experimental results of 15 algorithms on classical test functions (",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": "many",
+    "note": "The table highlights the best results in bold across multiple rows and columns."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "0654",
+  "captions": [
+   "Table 5. FRT values of all algorithms"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 5. FRT values of all algorithms",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 16,
+    "note": "Bold cells highlight the best (lowest) FRT values for each function."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "0723",
+  "captions": [
+   "Table 3. The statistical Results"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 3. The statistical Results",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": "many",
+    "note": "Bold cells indicate the best performance for each metric across different functions."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "0727",
+  "captions": [
+   "Table 7. The statistical Results of"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 7. The statistical Results of",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": "many",
+    "note": "The table has many bold cells distributed across multiple rows and columns."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "0898",
+  "captions": [
+   "Table 3. Solution accuracy and optimization"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 3. Solution accuracy and optimization",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 21,
+    "note": "Bold text highlights the best results for each metric across different dimensions."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "0930",
+  "captions": [
+   "Table 10. The comparison of average fitness"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 10. The comparison of average fitness",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": "many",
+    "note": "Bold text indicates the best result in each row."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1032",
+  "captions": [
+   "Table 10. Comparison of optimal solutions"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 10. Comparison of optimal solutions",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "y",
+    "bold_cells": 5,
+    "note": "All bold cells are located in the last column."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1103",
+  "captions": [
+   "Table 9. SAEs and OF"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 9. SAEs and OF",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "y",
+    "bold_cells": 7,
+    "note": "All bold cells are in the IAEO column."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1182",
+  "captions": [
+   "Table 21. Simulation results of"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 21. Simulation results of",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "y",
+    "bold_cells": 30,
+    "note": "All bold cells are located in the CHOA column."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1195",
+  "captions": [
+   "Table 3. Experimental outcomes test"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 3. Experimental outcomes test",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 17,
+    "note": "The bold cells highlight the best performance for each metric across the different algorithms."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1206",
+  "captions": [
+   "Table 4. Comparison of the gene"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 4. Comparison of the gene",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 23,
+    "note": "Bold cells indicate the best results across different datasets and algorithms."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1283",
+  "captions": [
+   "Table 12. The results of the different methods for CEC-2020 test functions (Dim ",
+   "Table 13. The results of the different methods for CEC-2020 test functions (Dim "
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 12. The results of the different methods for CEC-2020 test functions (Dim ",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 21,
+    "note": "Bold cells indicate the best results for each function and metric."
+   },
+   {
+    "caption_start": "Table 13. The results of the different methods for CEC-2020 test functions (Dim ",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 21,
+    "note": "Bold cells indicate the best results for each function and metric."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1308",
+  "captions": [
+   "Table 7. Mean value assessment"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 7. Mean value assessment",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 28,
+    "note": "Bold cells highlight the best mean value for each function across the compared algorithms."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1416",
+  "captions": [
+   "Table 4. The average accuracy"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 4. The average accuracy",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "y",
+    "bold_cells": 6,
+    "note": "All bold cells are located in the GNN_DE column."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1423",
+  "captions": [
+   "Table 6. Comparison of PIMA Indian results"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 6. Comparison of PIMA Indian results",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 26,
+    "note": "Bold cells highlight the best performance for each metric at each data usage percentage."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1442",
+  "captions": [
+   "Table 19. Simulation results using different algorithms"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 19. Simulation results using different algorithms",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 10,
+    "note": "Bold cells highlight the results for cost, saving, and reduction across multiple methods."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1454",
+  "captions": [
+   "Table 7. Comparison between CDMO8"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 7. Comparison between CDMO8",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": "many",
+    "note": "Bold cells are distributed across multiple rows and columns to highlight the best results."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1510",
+  "captions": [
+   "Table 6. Results of the Friedman Test",
+   "Table 7. MAPE Comparative performance metric"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 6. Results of the Friedman Test",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 5,
+    "note": "Bold cells indicate the best rank for each dataset across different methods."
+   },
+   {
+    "caption_start": "Table 7. MAPE Comparative performance metric",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 10,
+    "note": "Bold cells highlight the best performance metric for each run."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1590",
+  "captions": [
+   "Table 3. Performance evaluation of"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 3. Performance evaluation of",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 18,
+    "note": "Bold cells highlight the best results across different models for each metric and target."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1667",
+  "captions": [
+   "Table 7. The IGDF values"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 7. The IGDF values",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": "many",
+    "note": "Bold cells indicate the best performance for each test instance and metric."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1686",
+  "captions": [
+   "Table 7. The Overall Friedman rank"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 7. The Overall Friedman rank",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 10,
+    "note": "Most bold cells are in the last column, but one is in the second-to-last column."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1712",
+  "captions": [
+   "Table 10. Average HV values"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 10. Average HV values",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 23,
+    "note": "The bold cells are distributed across multiple rows and columns, highlighting the best value in each row."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1788",
+  "captions": [
+   "Table 1. IGD values of the"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 1. IGD values of the",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "y",
+    "bold_cells": 5,
+    "note": "All bold cells are located in the DPMOPSO column."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "1858",
+  "captions": [
+   "Table 5. Results and comparison"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 5. Results and comparison",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": "many",
+    "note": "The table has many bold cells distributed across multiple rows and columns."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "2203",
+  "captions": [
+   "Table 5. Comparison results of"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 5. Comparison results of",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 24,
+    "note": "Bold cells indicate the best performance for each function's mean and standard deviation."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
+ },
+ {
+  "id": "2209",
+  "captions": [
+   "Table 5. Mean and standard"
+  ],
+  "tables": [
+   {
+    "caption_start": "Table 5. Mean and standard",
+    "all_bold_in_one_row": "n",
+    "row_label": "none",
+    "all_bold_in_one_column": "n",
+    "bold_cells": 28,
+    "note": "Bold cells highlight the best results across various methods and test instances."
+   }
+  ],
+  "model": "gemini/gemini-3.1-pro-preview",
+  "protocol": "wholerow-question-v1"
  }
 ]
