@@ -41,9 +41,11 @@ def main() -> int:
     os.makedirs(OUT, exist_ok=True)
     with open(os.path.join(OUT, "adjudicate.csv"), "w", encoding="utf-8", newline="") as fh:
         w = csv.writer(fh)
-        w.writerow(["id", "why", "kind", "title", "first_markers", "first_sentence", "second_markers", "second_sentence", "pdf", "markers_human", "sentence_human", "note"])
+        w.writerow(["id", "why", "kind", "title", "url", "first_markers", "first_sentence", "second_markers", "second_sentence", "pdf", "markers_human", "sentence_human", "note"])
         for p, why in rows:
-            w.writerow([p, why, kinds.get(p, ""), index.get(p, {}).get("title", ""), first[p].get("markers", ""), str(first[p].get("markers_sentence", ""))[:300],
+            doi = index.get(p, {}).get("doi", "")
+            w.writerow([p, why, kinds.get(p, ""), index.get(p, {}).get("title", ""), f"https://doi.org/{doi}" if doi else index.get(p, {}).get("abstract_page", ""),
+                        first[p].get("markers", ""), str(first[p].get("markers_sentence", ""))[:300],
                         second.get(p, {}).get("markers", ""), str(second.get(p, {}).get("markers_sentence", ""))[:300], (glob.glob(f"data/corpus_oa/*_{p}.pdf") or [""])[0], "", "", ""])
     print("wrote", os.path.join(OUT, "adjudicate.csv"), len(rows), "papers")
     return 0

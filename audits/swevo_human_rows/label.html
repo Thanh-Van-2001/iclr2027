@@ -1899,3 +1899,21 @@ trial-and-error methods, which are not only time-consuming and labor-intensive b
 <div class='q'><b>100</b> &nbsp; caption: <i>Table 5. Comparison results of</i> &nbsp; group label: <b>F12</b> &nbsp; direction: lower<br>results_table <input type='text' name='rt_100' size='2'> bold_ok <input type='text' name='bo_100' size='2'> whole_row_bold <input type='text' name='wr_100' size='2'> std_printed <input type='text' name='sp_100' size='2'> winner mean <input type='text' name='wm_100'> winner disp <input type='text' name='wd_100'> runner mean <input type='text' name='rm_100'> runner disp <input type='text' name='rd_100'> n_runs <input type='text' name='nr_100' size='5'> note <input type='text' name='nt_100' size='30'></div>
 <p><i>(same page as above)</i></p>
 <p><button type='button' onclick='save()'>Save labels</button></p></form><script>function save(){const f=document.getElementById('f');let out='id,results_table,bold_ok,whole_row_bold,std_printed,winner_mean,winner_disp,runner_mean,runner_disp,n_runs,note\n';const ids=["001", "002", "003", "004", "005", "006", "007", "008", "009", "010", "011", "012", "013", "014", "015", "016", "017", "018", "019", "020", "021", "022", "023", "024", "025", "026", "027", "028", "029", "030", "031", "032", "033", "034", "035", "036", "037", "038", "039", "040", "041", "042", "043", "044", "045", "046", "047", "048", "049", "050", "051", "052", "053", "054", "055", "056", "057", "058", "059", "060", "061", "062", "063", "064", "065", "066", "067", "068", "069", "070", "071", "072", "073", "074", "075", "076", "077", "078", "079", "080", "081", "082", "083", "084", "085", "086", "087", "088", "089", "090", "091", "092", "093", "094", "095", "096", "097", "098", "099", "100"];for(const i of ids){const v=k=>(f.elements[k+'_'+i].value||'').replace(/,/g,';');out+=[i,v('rt'),v('bo'),v('wr'),v('sp'),v('wm'),v('wd'),v('rm'),v('rd'),v('nr'),v('nt')].join(',')+'\n';}const b=new Blob([out],{type:'text/csv'});const u=URL.createObjectURL(b);const l=document.createElement('a');l.href=u;l.download='labels.csv';l.click();}</script>
+<script>
+(function(){
+  const KEY='swevo_kit_rows';
+  const f=document.getElementById('f');
+  function fields(){return Array.from(f.querySelectorAll('input[type=text]'));}
+  function store(){const d={};for(const el of fields()){if(el.value)d[el.name]=el.value;}try{localStorage.setItem(KEY,JSON.stringify(d));}catch(e){}updateCount();}
+  function restore(){try{const d=JSON.parse(localStorage.getItem(KEY)||'{}');for(const el of fields()){if(d[el.name]!==undefined&&!el.value)el.value=d[el.name];}}catch(e){}updateCount();}
+  function updateCount(){const ids=new Set();for(const el of fields()){if(el.value)ids.add(el.name.slice(3));}const c=document.getElementById('count');if(c)c.textContent='Items with an answer: '+ids.size+' / '+document.querySelectorAll('div.q').length;}
+  function loadCsv(file){const r=new FileReader();r.onload=function(){const lines=r.result.split(/\r?\n/).filter(x=>x.trim());const head=lines[0].split(',');const map={results_table:'rt',bold_ok:'bo',whole_row_bold:'wr',std_printed:'sp',winner_mean:'wm',winner_disp:'wd',runner_mean:'rm',runner_disp:'rd',n_runs:'nr',note:'nt'};for(const line of lines.slice(1)){const cells=line.split(',');const id=cells[0];head.forEach((h,i)=>{const k=map[h.trim()];if(k&&cells[i]!==undefined){const el=f.elements[k+'_'+id];if(el)el.value=cells[i];}});}store();};r.readAsText(file);}
+  f.addEventListener('input',store);
+  const bar=document.createElement('div');
+  bar.style.cssText='position:fixed;right:12px;top:12px;background:#fff3c4;border:1px solid #c9a400;padding:8px 12px;font-size:13px;z-index:10';
+  bar.innerHTML="<b id='count'></b><br>Answers are saved in this browser as you type. Resume by reopening this file.<br>Load a saved labels.csv: <input type='file' id='loadcsv' accept='.csv'>";
+  document.body.appendChild(bar);
+  document.getElementById('loadcsv').addEventListener('change',e=>{if(e.target.files[0])loadCsv(e.target.files[0]);});
+  restore();
+})();
+</script>
