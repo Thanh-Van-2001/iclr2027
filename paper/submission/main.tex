@@ -46,9 +46,10 @@ We measure how often those three things are present. Across
 \nPapersTwentyFive{} papers accepted at NeurIPS and ICML in 2025,
 \nPctNeitherSide{} of highlighted comparisons carry no uncertainty on either
 side and \nPctTestable{} can be tested; \nPapersTwentyFour{} papers from 2024
-give the same picture. This is not a claim about whether the field's
-results are true. It is a claim about whether they are checkable, which is
-prior to truth and, unlike truth, is settled by looking.
+give the same picture. We ask whether the printed evidence is enough for a
+reader to check a comparison, which is a question about reporting rather than
+about whether the results are true, and one that is answered by looking at the
+page.
 
 \paragraph{Contributions.} Prior audits of reporting practice annotate papers by
 hand, which bounds them to a few hundred papers and a label per paper
@@ -58,9 +59,9 @@ results table claims in, the comparison.
 \begin{itemize}
 \item \textbf{A claim unit recoverable from typography.} The object of
   measurement is the bolded value against the best unbolded value in its group,
-  and it---with the metric's direction and the table's orientation---is
-  recovered from where the bold falls rather than from prose, so one pipeline
-  covers whole venues regardless of what any benchmark measures.
+  and that value, the metric's direction and the table's orientation are all
+  recovered from where the bold falls, so one pipeline covers whole venues
+  whatever a benchmark measures.
 \item \textbf{Checkability on \nComparisonsTwentyFive{} recovered comparisons},
   about half the census an image reader finds on the same pages.
   \nPctNeitherSide{} carry no error bar on either side as read,
@@ -81,7 +82,8 @@ results table claims in, the comparison.
 \item \textbf{A reference table for what benchmarks can resolve}
   (Appendix~\ref{app:mde}), from published split sizes alone: AIME supports no
   claim below \nAimeMde{} points, a \nFiveHundredItems{}-item benchmark none
-  below \nFiveHundredMde{}. Usable before an experiment, not only after.
+  below \nFiveHundredMde{}. The table is meant to be read while an experiment
+  is being designed.
 \item \textbf{A checklist ``yes'' is not a printed error bar.} Of
   \nCheckYes{} NeurIPS papers answering that they report error bars, or other
   appropriate information about statistical significance, \nCheckYesNoTable{}
@@ -245,9 +247,10 @@ printed. Holm--Bonferroni within each table raises this to \nCiFailHolm{}; the
 correction moves \nCiHolmDelta{} of testable comparisons from significant to
 not, a paired quantity estimated far more precisely than either level.
 
-A failure here says the printed evidence does not support the claim at the
-stated run count, not that the claim is false; at three runs the test has
-little power, and that is the point. A two-sample $z$ on the same
+A failure here says that the printed evidence does not support the claim at
+the stated run count; whether the claim itself is true is a separate question.
+At three runs a test has little power, and that is the evidence a reader of
+such a table is given. A two-sample $z$ on the same
 comparisons, each printed deviation taken as exact, fails \nFailZ{},
 \nFailZHolm{} after Holm within table: the reading most favourable to the
 field among readings of what the page prints; only the matched-seed
@@ -326,7 +329,7 @@ the number of test items alone; the missing quantity is then the test-set
 size. Given the gaps the papers report, how large would a shared test set have
 to be for those gaps to be distinguishable from zero? Restricting to comparisons
 whose two values both lie in $[40, 100]$ gives \nBinomComparisons{} comparisons
-from \nBinomPapers{} papers---\nBinomBaseRatio{} times the base of the
+from \nBinomPapers{} papers, \nBinomBaseRatio{} times the base of the
 variance-based analysis, because it needs no error bars. F1, BLEU and mean IoU live in that
 range too and are not proportions over items, so we also report the stricter
 subset whose caption or column header names an accuracy-like metric:
@@ -511,7 +514,7 @@ them.
 The development set of \nGoldDevN{} testable comparisons, read against the
 pipeline as it stood after the first six bugs of Appendix~\ref{app:bugs},
 found \nGoldDevBugs{} more; the pre-fix pipeline agreed with the reader on the
-whole claim---bold cell, rival and all four values---in \nGoldDevClaimFrac{}
+whole claim (the bold cell, its rival and all four values) in \nGoldDevClaimFrac{}
 readable items (\nGoldDevClaim{}). A held-out draw of \nGoldHeldN{} from
 papers the first set never touched agreed on the claim in
 \nGoldHeldClaimFrac{} (\nGoldHeldClaim{}) and on the verdict in
@@ -625,8 +628,8 @@ being dispersions printed in a separate column, which the cell grammar cannot
 pair with a mean. Scaled by that rate the share carrying no error bar is
 \nHeadlineWithComparisonAudit{}, beside the \nHeadlineWithExtraction{} from
 the table-level audit. We quote the propagated
-intervals beside the sampling interval \nCiNeitherSide{}: a paper about
-omitted uncertainty cannot omit its own. A check that depends on neither the
+intervals beside the sampling interval \nCiNeitherSide{}, so that the
+uncertainty of our own headline is reported as well. A check that depends on neither the
 PDF nor the reader, the arXiv LaTeX source of \nLatexWithTables{} papers,
 agrees with the pipeline on whether any table prints an error bar in
 \nLatexPaperAgree{} of papers and finds one in \nLatexPaperRecall{} of the
@@ -690,12 +693,13 @@ one.
 \section{Discussion}
 \label{sec:discussion}
 
-The cheapest fix is not more statistics but printing three quantities authors
-already have, a dispersion on each value in the main comparison and the number
-of runs behind them, after which the paper is checkable by anyone at no cost;
-the second is consulting Appendix~\ref{app:mde} before the experiment, where
-an author will sometimes find the sentence cannot be written, which is the
-point.
+The cheapest fix needs no new statistics, only three quantities authors
+already have: a dispersion on each value in the main comparison and the number
+of runs behind them. Printed, they make the comparison checkable by any reader
+at no cost. A second measure is to consult Appendix~\ref{app:mde} while the
+experiment is being designed, where an author will sometimes find that a test set of
+that size cannot resolve the intended claim, and can then say so or change the
+design.
 
 % The mandatory statements below do not count toward the nine-page limit,
 % so the main text ends here.
@@ -717,8 +721,8 @@ The authors used a large language model assistant throughout: to write and
 revise the extraction and analysis code, to draft and edit prose, and to search
 the literature. Every empirical number in the paper was produced by the
 released code and checked against its run record. The rendered-table audits of
-Section~\ref{sec:threats}---the recall audit, the rejected-table audit and the
-reference set---were read from the images by the assistant (Claude Opus 5,
+Section~\ref{sec:threats} (the recall audit, the rejected-table audit and the
+reference set) were read from the images by the assistant (Claude Opus 5,
 reading PNG renderings, with the prompt given in Appendix~\ref{app:gold};
 the other readers of Appendix~\ref{app:gold} are Claude Sonnet 5 and
 Gemini 3.1 Pro), with the pipeline's output hidden from them; the renderings and labels are
@@ -790,8 +794,8 @@ what those justifications actually say.
 checklist answers against paper content for NLP and for NeurIPS 2024
 respectively; ours is the same comparison for one question. The
 justifications mostly do not claim an error bar in a results table. The commonest, at
-\nJustSeeds{}, is that several random seeds were used---which is averaging, not
-reporting dispersion. Another \nJustTest{} report having run a significance
+\nJustSeeds{}, is that several random seeds were used, which averages the runs
+without reporting their spread. Another \nJustTest{} report having run a significance
 test, \nJustFigure{} point to a figure and \nJustAppendix{} to an appendix, and
 \nJustNone{} make no recognisable claim at all (the categories overlap, and
 the first and last shares coincide by chance). The question allows ``other
@@ -1275,9 +1279,9 @@ sampled ICML table came back with the page number as its runner-up.
 \paragraph{Cells.} A cell is a number with an optional error bar in one of four
 forms: $a \pm b$, $a(b)$, $a(\pm b)$, or an interval $a\,[l, u]$. The
 parenthesised form is ambiguous and is credited as an error bar only when the
-caption or the surrounding page names a dispersion. What the bar means---standard
-deviation, standard error, confidence interval, interquartile range---is read
-from the caption and the page by keyword; a table whose bars are never named is
+caption or the surrounding page names a dispersion. What the bar means (a
+standard deviation, a standard error, a confidence interval or an interquartile
+range) is read from the caption and the page by keyword; a table whose bars are never named is
 ``unlabelled'' and is read as a standard deviation, the reading more favourable
 to the field.
 
