@@ -1,0 +1,41 @@
+{
+ "kit": "page_detection",
+ "python": "3.14.4",
+ "script": "aamas/human_validation_kits.py",
+ "kit_version": "aamas-hv-1",
+ "seeds": {
+  "pages": 20261126,
+  "noncaption": 20261127,
+  "page_overlap": 20261128
+ },
+ "frames": {
+  "caption_pilot": "the 100 pilot pages of audits/aamas_pages, drawn by study/sample_pages.py: papers in a seeded random order, one page drawn uniformly among each paper's pages (of the first 40) holding a 'Table N:' caption line; one page per paper, so page = paper cluster",
+  "noncaption": "the 100 pages of audits/aamas_noncaption: random pages after the first and before the references on which the parser detected no caption (pool 5612 pages, 827 papers; draw.json)"
+ },
+ "draw": {
+  "caption_pilot": "30 of 100, simple random sample without replacement (random.Random(seed).sample on the sorted ids); the 35 hard-case pages were NOT used to select or exclude anything, and a drawn page that is also a hard-case page is kept and flagged",
+  "noncaption": "20 of 100, same rule; a separate stratum, scored separately",
+  "overlap": "8 of the 30 caption pages for a second annotator"
+ },
+ "estimands": {
+  "unweighted": "a random caption page of a random paper (the pilot's own design)",
+  "weighted": "all caption pages: each page weighted by its paper's number of caption pages (the inverse of its within-paper selection probability)"
+ },
+ "ids": "P01-P30 caption pages (set 'core'), P31-P50 non-caption pages (set 'extra'); ids carry no machine reading",
+ "counts": {
+  "caption_pilot": 30,
+  "noncaption": 20,
+  "overlap": 8,
+  "drawn_pages_also_in_hard_case_kit": 4
+ },
+ "sources": [
+  {
+   "path": "audits/aamas_pages/items.json",
+   "sha256": "8819a08fc92b5ac9438909e6f5653a68de7cb2d22753e9abb282d464c21957b7"
+  },
+  {
+   "path": "audits/aamas_noncaption/items.json",
+   "sha256": "5cc3d36d42152b13410f11d1e8d2690a8d94a92dfff02adfbb7af2a6c17e86c1"
+  }
+ ]
+}

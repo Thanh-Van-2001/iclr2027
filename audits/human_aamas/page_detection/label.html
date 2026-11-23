@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AAMAS pages: every single-bold group</title><style>
+:root{--bg:#f4f4f2;--panel:#fff;--ink:#141414;--muted:#5b5b5b;--line:#d8d8d4;--accent:#0b5cad;--warn:#b3261e;--ok:#1b7a2f;--hl:#fff4c2}
+*{box-sizing:border-box}
+body{font-family:system-ui,"Segoe UI",Arial,sans-serif;margin:0;background:var(--bg);color:var(--ink);font-size:14px}
+header{position:sticky;top:0;z-index:5;padding:8px 12px;background:var(--panel);border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+header b{font-size:15px}
+header label{font-size:13px}
+button{padding:5px 10px;font-size:13px;cursor:pointer;border:1px solid #999;background:#fafafa;border-radius:3px}
+button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+#guide{font-size:13px;padding:8px 14px;background:var(--hl);border-bottom:1px solid var(--line);line-height:1.5;max-height:40vh;overflow:auto}
+#guide h3{margin:6px 0 4px;font-size:14px}
+#wrap{display:flex;gap:10px;padding:10px;align-items:flex-start}
+#left{flex:1 1 58%;min-width:0;background:var(--panel);border:1px solid var(--line);padding:6px;max-height:calc(100vh - 120px);overflow:auto}
+#right{flex:0 0 480px;max-width:100%;background:var(--panel);border:1px solid var(--line);padding:10px;max-height:calc(100vh - 120px);overflow:auto}
+@media (max-width:900px){#wrap{flex-direction:column}#right{flex-basis:auto;width:100%}}
+#imgbox{position:relative;display:inline-block;width:100%}
+#imgbox img{width:100%;display:block}
+#imgbox.zoom{width:200%}
+.banner{background:#fdecea;color:var(--warn);border:1px solid #f3b8b3;padding:8px;margin-bottom:6px;font-weight:600}
+.banner a{color:var(--warn)}
+#context{white-space:pre-wrap;font-size:12px;background:#f7f7f5;border:1px solid var(--line);padding:6px;max-height:220px;overflow:auto}
+.meta{font-size:12.5px;color:var(--muted);margin-bottom:6px;line-height:1.45}
+.links a{display:inline-block;margin:0 8px 6px 0;font-weight:600;color:var(--accent)}
+.q{margin:7px 0}
+.q label{display:block;font-size:12.5px;margin-bottom:2px}
+.q .help{font-size:11.5px;color:var(--muted);margin-top:2px}
+.q input,.q select,.q textarea{width:100%;padding:5px 6px;font-size:14px;border:1px solid #b8b8b4;border-radius:3px;background:#fff;color:var(--ink)}
+.q textarea{height:62px;font-size:13px}
+.q.missing input,.q.missing select,.q.missing textarea{border-color:var(--warn);background:#fff6f5}
+.q.skipped{opacity:.45}
+#nav{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+#status{font-size:12px;color:var(--muted);margin-top:6px}
+.done{color:var(--ok);font-weight:600}
+.locked{padding:14px;background:#fdecea;border:1px solid #f3b8b3;color:var(--warn);font-weight:600}
+table.list{border-collapse:collapse;width:100%;font-size:12.5px;margin:4px 0}
+table.list td,table.list th{border:1px solid var(--line);padding:3px 4px;vertical-align:top}
+table.list input,table.list select{width:100%;font-size:12.5px;padding:2px 3px}
+.marker{position:absolute;transform:translate(-50%,-50%);min-width:20px;height:20px;border-radius:10px;background:rgba(179,38,30,.85);color:#fff;font-size:11px;font-weight:700;text-align:center;line-height:20px;padding:0 4px;pointer-events:none}
+.marker.sel{background:rgba(11,92,173,.95)}
+.armed{outline:3px solid var(--accent)}
+</style></head><body>
+<header><b>AAMAS pages: every single-bold group</b>
+<label>Annotator ID <input id="ann" size="9" placeholder="e.g. H1"></label>
+<label>Pages <select id="set"></select></label>
+<span id="prog"></span>
+<button class="primary" id="exp">Export CSV</button>
+<label>Resume from CSV <input type="file" id="imp" accept=".csv"></label>
+<button id="guideBtn">Show/hide instructions</button>
+<button id="zoomBtn">Zoom page</button>
+</header>
+<div id="guide">
+<h3>What you are doing</h3>
+Each item is one whole page of an AAMAS paper, drawn at random. List <b>every table</b> on the page and, in every
+results table, <b>every group that has exactly one bold cell</b>. A page can have none: say so explicitly.
+<h3>Definitions</h3>
+<ul>
+<li><b>Results table</b>: a table of measured outcomes (scores, rewards, errors, times) of methods or settings. Not hyperparameters, dataset statistics, notation or pseudocode.</li>
+<li><b>Orientation</b>: <i>column</i> if the methods are rows and you compare down a column; <i>row</i> if the methods are columns.</li>
+<li><b>Group</b>: one column (column orientation) or one row (row orientation) of numbers in which methods are compared. If the table is split into blocks by rules, each block's column is a separate group.</li>
+<li><b>Eligible group</b>: exactly one bold cell, at least one non-bold number, and the bold number is <i>strictly</i> the best in the direction the metric is read (choose <i>tie</i> or <i>no</i> otherwise). List the other single-bold groups too, with the right answer in <i>Bold is best?</i></li>
+<li><b>Bold rule</b>: if the caption says bold marks something other than the single best (top-3, significance, the authors' method), pick that option.</li>
+</ul>
+<h3>How</h3>
+<ol>
+<li>Enter your annotator ID. Answers autosave in this browser under that ID.</li>
+<li>Add each table (<b>+ Add table</b>), then each group (<b>+ Add group</b>). With a group selected, <b>click its bold cell on the page</b> to record where it is.</li>
+<li>Type the bold value exactly as printed (85.20, keep %). The group label is the row or column header (e.g. "Hopper", "Acc. (%)").</li>
+<li>Set the page status last. A page with no eligible group needs <i>This page has NO eligible group</i>, and a short note on what is there.</li>
+<li>Use <b>Open the full paper</b> when the page image is unclear. Export the CSV when you stop; resume with <b>Resume from CSV</b>.</li>
+</ol>
+</div>
+<div id="wrap">
+<div id="left"><div id="banner"></div><div id="imgbox"><img id="img" alt=""></div></div>
+<div id="right"><div class="meta" id="meta"></div><div class="links" id="links"></div><div id="form"></div>
+<div id="nav"><button id="prev">&larr; Previous page</button><button class="primary" id="next">Save &amp; next page &rarr;</button></div>
+<div id="status"></div></div></div>
+<script>
+const CFG={"kit": "page_detection", "version": "aamas-hv-1", "items": [{"id": "P01", "sets": ["core", "overlap"], "image": "images/P01.png", "width": 1224, "height": 1584, "meta": ["Paper: Games in Public Announcement: How to Reduce System Losses in Optimistic Blockchain Mechanisms", "PDF page 8"], "links": [{"label": "Open the full paper at PDF page 8", "href": "https://www.ifaamas.org/Proceedings/aamas2025/pdfs/p1371.pdf#page=8"}, {"label": "Open the page image in a new tab", "href": "images/P01.png"}]}, {"id": "P02", "sets": ["core"], "image": "images/P02.png", "width": 1224, "height": 1584, "meta": ["Paper: Minimax and Preferential Almost-Stable Matchings", "PDF page 8"], "links": [{"label": "Open the full paper at PDF page 8", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/PCDE6577.pdf#page=8"}, {"label": "Open the page image in a new tab", "href": "images/P02.png"}]}, {"id": "P03", "sets": ["core"], "image": "images/P03.png", "width": 1224, "height": 1584, "meta": ["Paper: Viral Marketing in Social Networks with Competing Products", "PDF page 8"], "links": [{"label": "Open the full paper at PDF page 8", "href": "https://www.ifaamas.org/Proceedings/aamas2024/pdfs/p2047.pdf#page=8"}, {"label": "Open the page image in a new tab", "href": "images/P03.png"}]}, {"id": "P04", "sets": ["core", "overlap"], "image": "images/P04.png", "width": 1224, "height": 1584, "meta": ["Paper: Single-Agent Planning in a Multi-Agent System: A Unified Framework for Type-Based Planners", "PDF page 7"], "links": [{"label": "Open the full paper at PDF page 7", "href": "https://www.ifaamas.org/Proceedings/aamas2025/pdfs/p2382.pdf#page=7"}, {"label": "Open the page image in a new tab", "href": "images/P04.png"}]}, {"id": "P05", "sets": ["core"], "image": "images/P05.png", "width": 1224, "height": 1584, "meta": ["Paper: Exploring Cognitive Bias Impact, Detection and Mitigation in Large Language Models", "PDF page 4"], "links": [{"label": "Open the full paper at PDF page 4", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/ZAVA7707.pdf#page=4"}, {"label": "Open the page image in a new tab", "href": "images/P05.png"}]}, {"id": "P06", "sets": ["core"], "image": "images/P06.png", "width": 1224, "height": 1584, "meta": ["Paper: Offline Risk-sensitive RL with Partial Observability to Enhance Performance in Human-Robot Teaming", "PDF page 6"], "links": [{"label": "Open the full paper at PDF page 6", "href": "https://www.ifaamas.org/Proceedings/aamas2024/pdfs/p58.pdf#page=6"}, {"label": "Open the page image in a new tab", "href": "images/P06.png"}]}, {"id": "P07", "sets": ["core"], "image": "images/P07.png", "width": 1224, "height": 1584, "meta": ["Paper: Stability in Online Assignment Games", "PDF page 8"], "links": [{"label": "Open the full paper at PDF page 8", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/YSRD5548.pdf#page=8"}, {"label": "Open the page image in a new tab", "href": "images/P07.png"}]}, {"id": "P08", "sets": ["core"], "image": "images/P08.png", "width": 1224, "height": 1584, "meta": ["Paper: Act as You Learn: Adaptive Decision-Making in Non-Stationary Markov Decision Processes", "PDF page 7"], "links": [{"label": "Open the full paper at PDF page 7", "href": "https://www.ifaamas.org/Proceedings/aamas2024/pdfs/p1301.pdf#page=7"}, {"label": "Open the page image in a new tab", "href": "images/P08.png"}]}, {"id": "P09", "sets": ["core"], "image": "images/P09.png", "width": 1224, "height": 1584, "meta": ["Paper: Minimax Exploiter: A Data Efficient Approach for Competitive Self-Play", "PDF page 7"], "links": [{"label": "Open the full paper at PDF page 7", "href": "https://www.ifaamas.org/Proceedings/aamas2024/pdfs/p114.pdf#page=7"}, {"label": "Open the page image in a new tab", "href": "images/P09.png"}]}, {"id": "P10", "sets": ["core"], "image": "images/P10.png", "width": 1224, "height": 1584, "meta": ["Paper: Planning Ahead with RSA: Efficient Signalling in Dynamic Environments by Projecting User Awareness across Future Timesteps", "PDF page 7"], "links": [{"label": "Open the full paper at PDF page 7", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/BRGK2754.pdf#page=7"}, {"label": "Open the page image in a new tab", "href": "images/P10.png"}]}, {"id": "P11", "sets": ["core"], "image": "images/P11.png", "width": 1224, "height": 1584, "meta": ["Paper: Peer-Aware Cost Estimation in Nonlinear General-Sum Dynamic Games for Mutual Learning and Intent Inference", "PDF page 7"], "links": [{"label": "Open the full paper at PDF page 7", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/MGNP2868.pdf#page=7"}, {"label": "Open the page image in a new tab", "href": "images/P11.png"}]}, {"id": "P12", "sets": ["core"], "image": "images/P12.png", "width": 1224, "height": 1584, "meta": ["Paper: Federated Gaussian Process Learning via Pseudo-Representations for Large-Scale Multi-Robot Systems", "PDF page 8"], "links": [{"label": "Open the full paper at PDF page 8", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/YQEA8075.pdf#page=8"}, {"label": "Open the page image in a new tab", "href": "images/P12.png"}]}, {"id": "P13", "sets": ["core", "overlap"], "image": "images/P13.png", "width": 1224, "height": 1584, "meta": ["Paper: Feature Engineering for Agents: An Adaptive Cognitive Architecture for Interpretable ML Monitoring", "PDF page 7"], "links": [{"label": "Open the full paper at PDF page 7", "href": "https://www.ifaamas.org/Proceedings/aamas2025/pdfs/p381.pdf#page=7"}, {"label": "Open the page image in a new tab", "href": "images/P13.png"}]}, {"id": "P14", "sets": ["core"], "image": "images/P14.png", "width": 1224, "height": 1584, "meta": ["Paper: Beyond Goal Recognition: A Reinforcement Learning-based Approach to Inferring Agent Behaviour", "PDF page 6"], "links": [{"label": "Open the full paper at PDF page 6", "href": "https://www.ifaamas.org/Proceedings/aamas2025/pdfs/p1427.pdf#page=6"}, {"label": "Open the page image in a new tab", "href": "images/P14.png"}]}, {"id": "P15", "sets": ["core", "overlap"], "image": "images/P15.png", "width": 1224, "height": 1584, "meta": ["Paper: Local Topological Information as a Powerful Enhancer for Generalizable Neural Method in Travelling Salesman Problem", "PDF page 6"], "links": [{"label": "Open the full paper at PDF page 6", "href": "https://www.ifaamas.org/Proceedings/aamas2025/pdfs/p188.pdf#page=6"}, {"label": "Open the page image in a new tab", "href": "images/P15.png"}]}, {"id": "P16", "sets": ["core"], "image": "images/P16.png", "width": 1224, "height": 1584, "meta": ["Paper: VGC-Bench: Towards Mastering Diverse Team Strategies in Competitive Pokémon", "PDF page 7"], "links": [{"label": "Open the full paper at PDF page 7", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/BOUG5148.pdf#page=7"}, {"label": "Open the page image in a new tab", "href": "images/P16.png"}]}, {"id": "P17", "sets": ["core"], "image": "images/P17.png", "width": 1224, "height": 1584, "meta": ["Paper: Hyper Strategy Logic", "PDF page 7"], "links": [{"label": "Open the full paper at PDF page 7", "href": "https://www.ifaamas.org/Proceedings/aamas2024/pdfs/p189.pdf#page=7"}, {"label": "Open the page image in a new tab", "href": "images/P17.png"}]}, {"id": "P18", "sets": ["core"], "image": "images/P18.png", "width": 1224, "height": 1584, "meta": ["Paper: Planning, Scheduling, and Execution on the Moon: The CADRE Technology Demonstration Mission", "PDF page 8"], "links": [{"label": "Open the full paper at PDF page 8", "href": "https://www.ifaamas.org/Proceedings/aamas2025/pdfs/p1727.pdf#page=8"}, {"label": "Open the page image in a new tab", "href": "images/P18.png"}]}, {"id": "P19", "sets": ["core"], "image": "images/P19.png", "width": 1224, "height": 1584, "meta": ["Paper: Issues with Measuring Task Complexity via Random Policies in Robotic Tasks", "PDF page 7"], "links": [{"label": "Open the full paper at PDF page 7", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/FDIK3367.pdf#page=7"}, {"label": "Open the page image in a new tab", "href": "images/P19.png"}]}, {"id": "P20", "sets": ["core"], "image": "images/P20.png", "width": 1224, "height": 1584, "meta": ["Paper: Modeling the Centaur: Human-Machine Synergy in Sequential Decision Making", "PDF page 6"], "links": [{"label": "Open the full paper at PDF page 6", "href": "https://www.ifaamas.org/Proceedings/aamas2025/pdfs/p1941.pdf#page=6"}, {"label": "Open the page image in a new tab", "href": "images/P20.png"}]}, {"id": "P21", "sets": ["core", "overlap"], "image": "images/P21.png", "width": 1224, "height": 1584, "meta": ["Paper: Efficient and Optimal Policy Gradient Algorithm for Corrupted Multi-armed Bandits", "PDF page 3"], "links": [{"label": "Open the full paper at PDF page 3", "href": "https://www.ifaamas.org/Proceedings/aamas2025/pdfs/p1354.pdf#page=3"}, {"label": "Open the page image in a new tab", "href": "images/P21.png"}]}, {"id": "P22", "sets": ["core"], "image": "images/P22.png", "width": 1224, "height": 1584, "meta": ["Paper: Self-Interpretable Reinforcement Learning via Rule Ensembles", "PDF page 7"], "links": [{"label": "Open the full paper at PDF page 7", "href": "https://www.ifaamas.org/Proceedings/aamas2025/pdfs/p2235.pdf#page=7"}, {"label": "Open the page image in a new tab", "href": "images/P22.png"}]}, {"id": "P23", "sets": ["core"], "image": "images/P23.png", "width": 1224, "height": 1584, "meta": ["Paper: Kidney Exchange: Faster Parameterized Algorithms and Tighter Lower Bounds", "PDF page 2"], "links": [{"label": "Open the full paper at PDF page 2", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/VKIC3106.pdf#page=2"}, {"label": "Open the page image in a new tab", "href": "images/P23.png"}]}, {"id": "P24", "sets": ["core", "overlap"], "image": "images/P24.png", "width": 1224, "height": 1584, "meta": ["Paper: Veto Core Consistent Preference Aggregation", "PDF page 8"], "links": [{"label": "Open the full paper at PDF page 8", "href": "https://www.ifaamas.org/Proceedings/aamas2024/pdfs/p1020.pdf#page=8"}, {"label": "Open the page image in a new tab", "href": "images/P24.png"}]}, {"id": "P25", "sets": ["core", "overlap"], "image": "images/P25.png", "width": 1224, "height": 1584, "meta": ["Paper: Real-World Testing Matters in Reinforcement Learning for Education", "PDF page 7"], "links": [{"label": "Open the full paper at PDF page 7", "href": "https://www.ifaamas.org/Proceedings/aamas2025/pdfs/p1764.pdf#page=7"}, {"label": "Open the page image in a new tab", "href": "images/P25.png"}]}, {"id": "P26", "sets": ["core"], "image": "images/P26.png", "width": 1224, "height": 1584, "meta": ["Paper: Decentralized Value Systems Agreements", "PDF page 8"], "links": [{"label": "Open the full paper at PDF page 8", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/FXWO5737.pdf#page=8"}, {"label": "Open the page image in a new tab", "href": "images/P26.png"}]}, {"id": "P27", "sets": ["core"], "image": "images/P27.png", "width": 1224, "height": 1584, "meta": ["Paper: Ratio-Based Signaling for Source-Victim Separation in Swarm Fault Detection", "PDF page 4"], "links": [{"label": "Open the full paper at PDF page 4", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/UYYF8433.pdf#page=4"}, {"label": "Open the page image in a new tab", "href": "images/P27.png"}]}, {"id": "P28", "sets": ["core"], "image": "images/P28.png", "width": 1224, "height": 1584, "meta": ["Paper: Enhancing Graph-based Coordination with Evolutionary Algorithms for Episodic Multi-agent Reinforcement Learning", "PDF page 6"], "links": [{"label": "Open the full paper at PDF page 6", "href": "https://www.ifaamas.org/Proceedings/aamas2025/pdfs/p1623.pdf#page=6"}, {"label": "Open the page image in a new tab", "href": "images/P28.png"}]}, {"id": "P29", "sets": ["core", "overlap"], "image": "images/P29.png", "width": 1224, "height": 1584, "meta": ["Paper: Pareto-guided Pipeline for Distilling Featherweight AI Agents in Mobile MOBA Games", "PDF page 4"], "links": [{"label": "Open the full paper at PDF page 4", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/HUOT2523.pdf#page=4"}, {"label": "Open the page image in a new tab", "href": "images/P29.png"}]}, {"id": "P30", "sets": ["core"], "image": "images/P30.png", "width": 1224, "height": 1584, "meta": ["Paper: End-to-End Decision-Focused Prediction in Dynamic Bike-Sharing Rebalancing", "PDF page 4"], "links": [{"label": "Open the full paper at PDF page 4", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/ITBP8245.pdf#page=4"}, {"label": "Open the page image in a new tab", "href": "images/P30.png"}]}, {"id": "P31", "sets": ["extra"], "image": "images/P31.png", "width": 1224, "height": 1584, "meta": ["Paper: Salience-Invariant Consistent Policy Learning for Generalization in Visual Reinforcement Learning", "PDF page 4"], "links": [{"label": "Open the full paper at PDF page 4", "href": "https://www.ifaamas.org/Proceedings/aamas2025/pdfs/p1987.pdf#page=4"}, {"label": "Open the page image in a new tab", "href": "images/P31.png"}]}, {"id": "P32", "sets": ["extra"], "image": "images/P32.png", "width": 1224, "height": 1584, "meta": ["Paper: Multi-agent Reinforcement Learning in the All-or-Nothing Public Goods game on Networks", "PDF page 8"], "links": [{"label": "Open the full paper at PDF page 8", "href": "https://www.ifaamas.org/Proceedings/aamas2025/pdfs/p1492.pdf#page=8"}, {"label": "Open the page image in a new tab", "href": "images/P32.png"}]}, {"id": "P33", "sets": ["extra"], "image": "images/P33.png", "width": 1224, "height": 1584, "meta": ["Paper: Scalable Offline Reinforcement Learning for Mean Field Games", "PDF page 4"], "links": [{"label": "Open the full paper at PDF page 4", "href": "https://www.ifaamas.org/Proceedings/aamas2025/pdfs/p408.pdf#page=4"}, {"label": "Open the page image in a new tab", "href": "images/P33.png"}]}, {"id": "P34", "sets": ["extra"], "image": "images/P34.png", "width": 1224, "height": 1584, "meta": ["Paper: Improving Mobile Maternal and Child Health Care Programs: Collaborative Bandits for Time Slot Selection", "PDF page 9"], "links": [{"label": "Open the full paper at PDF page 9", "href": "https://www.ifaamas.org/Proceedings/aamas2024/pdfs/p1540.pdf#page=9"}, {"label": "Open the page image in a new tab", "href": "images/P34.png"}]}, {"id": "P35", "sets": ["extra"], "image": "images/P35.png", "width": 1224, "height": 1584, "meta": ["Paper: Multi-Objective Categorical Deep Q-Networks", "PDF page 5"], "links": [{"label": "Open the full paper at PDF page 5", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/ARIZ7102.pdf#page=5"}, {"label": "Open the page image in a new tab", "href": "images/P35.png"}]}, {"id": "P36", "sets": ["extra"], "image": "images/P36.png", "width": 1224, "height": 1584, "meta": ["Paper: Towards Efficient Auction Design with ROI Constraints", "PDF page 2"], "links": [{"label": "Open the full paper at PDF page 2", "href": "https://www.ifaamas.org/Proceedings/aamas2024/pdfs/p1818.pdf#page=2"}, {"label": "Open the page image in a new tab", "href": "images/P36.png"}]}, {"id": "P37", "sets": ["extra"], "image": "images/P37.png", "width": 1224, "height": 1584, "meta": ["Paper: Safe Pareto Improvements for Expected Utility Maximizers in Program Games", "PDF page 9"], "links": [{"label": "Open the full paper at PDF page 9", "href": "https://www.ifaamas.org/Proceedings/aamas2025/pdfs/p602.pdf#page=9"}, {"label": "Open the page image in a new tab", "href": "images/P37.png"}]}, {"id": "P38", "sets": ["extra"], "image": "images/P38.png", "width": 1224, "height": 1584, "meta": ["Paper: Risk-aware Flow Tuning for Collective Emotion in Social Media via Multi-agent RL", "PDF page 5"], "links": [{"label": "Open the full paper at PDF page 5", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/KMUB2012.pdf#page=5"}, {"label": "Open the page image in a new tab", "href": "images/P38.png"}]}, {"id": "P39", "sets": ["extra"], "image": "images/P39.png", "width": 1224, "height": 1584, "meta": ["Paper: Truthful Reverse Auctions for Adaptive Selection via Contextual Multi-Armed Bandits", "PDF page 2"], "links": [{"label": "Open the full paper at PDF page 2", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/MBRQ7564.pdf#page=2"}, {"label": "Open the page image in a new tab", "href": "images/P39.png"}]}, {"id": "P40", "sets": ["extra"], "image": "images/P40.png", "width": 1224, "height": 1584, "meta": ["Paper: The Price of Anarchy in Spatial Social Choice", "PDF page 8"], "links": [{"label": "Open the full paper at PDF page 8", "href": "https://www.ifaamas.org/Proceedings/aamas2025/pdfs/p205.pdf#page=8"}, {"label": "Open the page image in a new tab", "href": "images/P40.png"}]}, {"id": "P41", "sets": ["extra"], "image": "images/P41.png", "width": 1224, "height": 1584, "meta": ["Paper: Beyond Surprise: Improving Exploration Through Surprise Novelty", "PDF page 9"], "links": [{"label": "Open the full paper at PDF page 9", "href": "https://www.ifaamas.org/Proceedings/aamas2024/pdfs/p1084.pdf#page=9"}, {"label": "Open the page image in a new tab", "href": "images/P41.png"}]}, {"id": "P42", "sets": ["extra"], "image": "images/P42.png", "width": 1224, "height": 1584, "meta": ["Paper: Towards Fair and Efficient Public Transportation: A Bus Stop Model", "PDF page 5"], "links": [{"label": "Open the full paper at PDF page 5", "href": "https://www.ifaamas.org/Proceedings/aamas2025/pdfs/p427.pdf#page=5"}, {"label": "Open the page image in a new tab", "href": "images/P42.png"}]}, {"id": "P43", "sets": ["extra"], "image": "images/P43.png", "width": 1224, "height": 1584, "meta": ["Paper: Fairness over Equality: Correcting Social Incentives in Asymmetric Sequential Social Dilemmas", "PDF page 9"], "links": [{"label": "Open the full paper at PDF page 9", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/CZPZ7833.pdf#page=9"}, {"label": "Open the page image in a new tab", "href": "images/P43.png"}]}, {"id": "P44", "sets": ["extra"], "image": "images/P44.png", "width": 1224, "height": 1584, "meta": ["Paper: Quality-Diversity for Multi-Agent Reinforcement Learning", "PDF page 8"], "links": [{"label": "Open the full paper at PDF page 8", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/SLJK5791.pdf#page=8"}, {"label": "Open the page image in a new tab", "href": "images/P44.png"}]}, {"id": "P45", "sets": ["extra"], "image": "images/P45.png", "width": 1224, "height": 1584, "meta": ["Paper: Multi-Agent Diagnostics for Robustness via Illuminated Diversity", "PDF page 3"], "links": [{"label": "Open the full paper at PDF page 3", "href": "https://www.ifaamas.org/Proceedings/aamas2024/pdfs/p1630.pdf#page=3"}, {"label": "Open the page image in a new tab", "href": "images/P45.png"}]}, {"id": "P46", "sets": ["extra"], "image": "images/P46.png", "width": 1224, "height": 1584, "meta": ["Paper: Synthesis of Safety Specifications for Probabilistic Systems", "PDF page 6"], "links": [{"label": "Open the full paper at PDF page 6", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/MGLX3286.pdf#page=6"}, {"label": "Open the page image in a new tab", "href": "images/P46.png"}]}, {"id": "P47", "sets": ["extra"], "image": "images/P47.png", "width": 1224, "height": 1584, "meta": ["Paper: Fairness Dynamics in Digital Economy Platforms with Biased Ratings", "PDF page 6"], "links": [{"label": "Open the full paper at PDF page 6", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/CEJT6762.pdf#page=6"}, {"label": "Open the page image in a new tab", "href": "images/P47.png"}]}, {"id": "P48", "sets": ["extra"], "image": "images/P48.png", "width": 1224, "height": 1584, "meta": ["Paper: Reasoning about Bias in Multi-Agent Systems Verification", "PDF page 2"], "links": [{"label": "Open the full paper at PDF page 2", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/RTAL7233.pdf#page=2"}, {"label": "Open the page image in a new tab", "href": "images/P48.png"}]}, {"id": "P49", "sets": ["extra"], "image": "images/P49.png", "width": 1224, "height": 1584, "meta": ["Paper: Ranking Joint Policies in Dynamic Games using Evolutionary Dynamics", "PDF page 4"], "links": [{"label": "Open the full paper at PDF page 4", "href": "https://www.ifaamas.org/Proceedings/aamas2025/pdfs/p1145.pdf#page=4"}, {"label": "Open the page image in a new tab", "href": "images/P49.png"}]}, {"id": "P50", "sets": ["extra"], "image": "images/P50.png", "width": 1224, "height": 1584, "meta": ["Paper: PyVRP+: LLM-Driven Metacognitive Heuristic Evolution for Hybrid Genetic Search in Vehicle Routing Problems", "PDF page 3"], "links": [{"label": "Open the full paper at PDF page 3", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/ISFV2587.pdf#page=3"}, {"label": "Open the page image in a new tab", "href": "images/P50.png"}]}], "sets": {"core": "Set 1: 30 pages (do first)", "overlap": "Double-annotation 8", "extra": "Set 2: 20 pages", "all": "All 50"}, "defaultSet": "core", "exportName": "page_detection_{annotator}.csv"};
+
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+const LS=(function(){try{const k='__hv_t';localStorage.setItem(k,'1');localStorage.removeItem(k);return localStorage;}catch(e){return null;}})();
+function lsGet(k){try{return LS?LS.getItem(k):null;}catch(e){return null;}}
+function lsSet(k,v){try{if(LS)LS.setItem(k,v);}catch(e){}}
+function nowIso(){return new Date().toISOString();}
+function csvCell(s){s=String(s==null?'':s);return /[",\n\r]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;}
+function parseCsv(text){
+  if(text.charCodeAt(0)===0xFEFF)text=text.slice(1);
+  const rows=[];let row=[],cell='',q=false;
+  for(let i=0;i<text.length;i++){const ch=text[i];
+    if(q){if(ch==='"'){if(text[i+1]==='"'){cell+='"';i++;}else q=false;}else cell+=ch;}
+    else if(ch==='"')q=true;
+    else if(ch===','){row.push(cell);cell='';}
+    else if(ch==='\n'||ch==='\r'){if(ch==='\r'&&text[i+1]==='\n')i++;row.push(cell);rows.push(row);row=[];cell='';}
+    else cell+=ch;}
+  if(cell!==''||row.length){row.push(cell);rows.push(row);}
+  return rows.filter(r=>r.length>1||(r[0]||'').trim()!=='');
+}
+function download(name,text){
+  const blob=new Blob(["﻿"+text],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();
+}
+
+const PAGES=CFG.items;
+let annotator=(lsGet('aamasHV:annotator')||'').trim();
+let st={}, view=[], cur=0, setName=lsGet('aamasHV:'+CFG.kit+':set')||CFG.defaultSet, armed=null, t0=Date.now();
+const OPT={status:[['groups_listed','I listed every eligible group on this page'],['none_found','This page has NO eligible group (checked every table)'],['unclear','Cannot tell']],
+ results:[['y','results table'],['n','not a results table'],['unclear','unclear']],
+ orient:[['column','column (methods are rows)'],['row','row (methods are columns)'],['unclear','unclear']],
+ rule:[['single_best','bold = the single best'],['top_k','bold = top-k / several marks'],['other','bold means something else'],['no_bold','no bold numbers'],['unclear','unclear']],
+ best:[['y','yes: bold is strictly best'],['tie','tied with a non-bold cell'],['n','no: a non-bold cell is better'],['unclear','unclear']]};
+function storeKey(){return 'aamasHV:'+CFG.kit+':'+CFG.version+':'+annotator;}
+function loadSt(){st={};if(!annotator)return;try{st=JSON.parse(lsGet(storeKey())||'{}');}catch(e){st={};}}
+function persist(){if(annotator)lsSet(storeKey(),JSON.stringify(st));}
+function inSet(p){return setName==='all'||(p.sets||[]).indexOf(setName)>=0;}
+function rebuildView(){view=PAGES.filter(inSet);if(!view.length){setName='all';view=PAGES.slice();}if(cur>=view.length)cur=0;}
+function pg(id){if(!st[id])st[id]={status:'',note:'',tables:[],groups:[],next:1};return st[id];}
+function problems(p){
+  const out=[];if(!p.status)out.push('page status');
+  p.tables.forEach((t,i)=>{if(!t.ref)out.push('table '+(i+1)+' identifier');if(!t.results)out.push('table '+(i+1)+' results?');
+    if(t.results==='y'){if(!t.orient)out.push('table '+(i+1)+' orientation');if(!t.rule)out.push('table '+(i+1)+' bold rule');}});
+  p.groups.forEach((g,i)=>{if(!g.table)out.push('group '+(i+1)+' table');if(!g.label)out.push('group '+(i+1)+' label');
+    if(!g.winner)out.push('group '+(i+1)+' bold value');if(!g.best)out.push('group '+(i+1)+' bold is best?');});
+  const elig=p.groups.filter(g=>g.best==='y').length;
+  if(p.status==='groups_listed'&&elig===0)out.push('status says groups are listed but no group has "bold is strictly best"');
+  if(p.status==='none_found'&&elig>0)out.push('status says no eligible group but '+elig+' group(s) are marked strictly best');
+  if(p.status==='none_found'&&p.tables.length===0&&!p.note)out.push('write in the note what is on the page (e.g. "no table", "only a figure")');
+  return out;
+}
+function isDone(id){const p=st[id];return !!p&&!!p.status&&problems(p).length===0;}
+function updateProg(){const n=view.filter(x=>isDone(x.id)).length;document.getElementById('prog').innerHTML='<span class="'+(n===view.length?'done':'')+'">'+n+'/'+view.length+' pages complete</span>';}
+function sel(name,opts,v,attrs){return '<select '+attrs+'><option value="">--</option>'+opts.map(o=>'<option value="'+o[0]+'"'+(v===o[0]?' selected':'')+'>'+esc(o[1])+'</option>').join('')+'</select>';}
+function leavePage(){if(!annotator||!view.length)return;const p=st[view[cur].id];if(p){p._seconds=Math.round((p._seconds||0)+(Date.now()-t0)/1000);persist();}}
+function drawMarkers(){
+  const box=document.getElementById('imgbox');box.querySelectorAll('.marker').forEach(m=>m.remove());
+  const it=view[cur];const p=st[it.id];if(!p||!it.width)return;
+  p.groups.forEach((g,i)=>{if(g.x===''||g.x==null)return;const m=document.createElement('div');m.className='marker'+(armed===g.key?' sel':'');
+    m.style.left=(100*g.x/it.width)+'%';m.style.top=(100*g.y/it.height)+'%';m.textContent=String(i+1);box.appendChild(m);});
+}
+function render(){
+  rebuildView();t0=Date.now();
+  document.getElementById('set').innerHTML=Object.keys(CFG.sets).map(k=>'<option value="'+k+'"'+(k===setName?' selected':'')+'>'+esc(CFG.sets[k])+'</option>').join('');
+  document.getElementById('ann').value=annotator;
+  const form=document.getElementById('form');
+  if(!annotator){form.innerHTML='<div class="locked">Enter your annotator ID at the top before labelling.</div>';updateProg();return;}
+  const it=view[cur];const p=pg(it.id);
+  const img=document.getElementById('img'),banner=document.getElementById('banner');banner.innerHTML='';
+  if(it.image){img.hidden=false;img.src=it.image;img.onerror=function(){img.hidden=true;banner.innerHTML='<div class="banner">Image file missing: '+esc(it.image)+'. Run <code>python aamas/human_validation_kits.py check</code>, or use the PDF link.</div>';};}
+  else{img.hidden=true;banner.innerHTML='<div class="banner">No page image is shipped. Open the PDF page with the link on the right and click positions are unavailable; describe the location in the group label.</div>';}
+  document.getElementById('meta').innerHTML='<b>'+esc(it.id)+'</b> ('+(cur+1)+' of '+view.length+')'+(isDone(it.id)?' <span class="done">complete</span>':'')+'<br>'+(it.meta||[]).map(esc).join('<br>');
+  document.getElementById('links').innerHTML=(it.links||[]).map(l=>'<a href="'+esc(l.href)+'" target="_blank" rel="noopener">'+esc(l.label)+'</a>').join('');
+  let h='<div class="q"><label>Page status *</label>'+sel('status',OPT.status,p.status,'data-p="status"')+'</div>';
+  h+='<div class="q"><label>Tables on this page (list every table, results or not)</label><table class="list"><tr><th>#</th><th>Identifier (e.g. Table 2)</th><th>Caption start</th><th>Results?</th><th>Orientation</th><th>Bold rule</th><th></th></tr>';
+  p.tables.forEach((t,i)=>{h+='<tr><td>'+(i+1)+'</td><td><input data-t="'+i+'" data-k="ref" value="'+esc(t.ref)+'"></td><td><input data-t="'+i+'" data-k="caption" value="'+esc(t.caption)+'"></td><td>'+sel('',OPT.results,t.results,'data-t="'+i+'" data-k="results"')+'</td><td>'+sel('',OPT.orient,t.orient,'data-t="'+i+'" data-k="orient"')+'</td><td>'+sel('',OPT.rule,t.rule,'data-t="'+i+'" data-k="rule"')+'</td><td><button data-deltable="'+i+'">x</button></td></tr>';});
+  h+='</table><button id="addTable">+ Add table</button></div>';
+  const tabOpts=p.tables.map((t,i)=>[t.key,(t.ref||('table '+(i+1)))]);
+  h+='<div class="q"><label>Groups with exactly one bold cell (one row per group). Select a group, then click its bold cell on the page.</label><table class="list"><tr><th>#</th><th>Table</th><th>Group label (row/column header)</th><th>Bold value as printed</th><th>Bold is best?</th><th>Location</th><th>Note</th><th></th></tr>';
+  p.groups.forEach((g,i)=>{h+='<tr'+(armed===g.key?' class="armed"':'')+'><td>'+(i+1)+'</td><td>'+sel('',tabOpts,g.table,'data-g="'+i+'" data-k="table"')+'</td><td><input data-g="'+i+'" data-k="label" value="'+esc(g.label)+'"></td><td><input data-g="'+i+'" data-k="winner" value="'+esc(g.winner)+'"></td><td>'+sel('',OPT.best,g.best,'data-g="'+i+'" data-k="best"')+'</td><td><button data-arm="'+i+'">'+(g.x!==''&&g.x!=null?'set ✓':'click to set')+'</button></td><td><input data-g="'+i+'" data-k="note" value="'+esc(g.note)+'"></td><td><button data-delgroup="'+i+'">x</button></td></tr>';});
+  h+='</table><button id="addGroup"'+(p.tables.length?'':' disabled')+'>+ Add group</button>'+(p.tables.length?'':' <span class="help">add a table first</span>')+'</div>';
+  h+='<div class="q"><label>Page note (what is on the page; anything unusual)</label><textarea data-p="note">'+esc(p.note)+'</textarea></div>';
+  form.innerHTML=h;
+  form.querySelectorAll('[data-p]').forEach(el=>{el.oninput=el.onchange=()=>{p[el.dataset.p]=el.value.trim();touch(p);};});
+  form.querySelectorAll('[data-t]').forEach(el=>{el.oninput=()=>{p.tables[+el.dataset.t][el.dataset.k]=el.value.trim();touch(p);};
+    // a renamed table is renamed in every group's table menu once the field is left
+    el.onchange=()=>{p.tables[+el.dataset.t][el.dataset.k]=el.value.trim();touch(p);if(el.dataset.k==='ref')render();};});
+  form.querySelectorAll('[data-g]').forEach(el=>{el.oninput=el.onchange=()=>{p.groups[+el.dataset.g][el.dataset.k]=el.value.trim();touch(p);};});
+  form.querySelectorAll('[data-deltable]').forEach(b=>b.onclick=()=>{const t=p.tables[+b.dataset.deltable];
+    if(p.groups.some(g=>g.table===t.key)&&!confirm('Delete this table and its groups?'))return;p.groups=p.groups.filter(g=>g.table!==t.key);p.tables.splice(+b.dataset.deltable,1);touch(p);render();});
+  form.querySelectorAll('[data-delgroup]').forEach(b=>b.onclick=()=>{p.groups.splice(+b.dataset.delgroup,1);touch(p);render();});
+  form.querySelectorAll('[data-arm]').forEach(b=>b.onclick=()=>{const g=p.groups[+b.dataset.arm];armed=(armed===g.key)?null:g.key;render();});
+  document.getElementById('addTable').onclick=()=>{p.tables.push({key:'t'+(p.next++),ref:'',caption:'',results:'',orient:'',rule:''});touch(p);render();};
+  const ag=document.getElementById('addGroup');if(ag)ag.onclick=()=>{const last=p.groups.length?p.groups[p.groups.length-1].table:(p.tables[0]||{}).key;
+    const g={key:'g'+(p.next++),table:last||'',label:'',winner:'',best:'',x:'',y:'',note:''};p.groups.push(g);armed=g.key;touch(p);render();};
+  drawMarkers();updateProg();
+  const pr=problems(p);document.getElementById('status').textContent=pr.length?('To finish this page: '+pr.join('; ')):'Page complete. Autosaved for annotator '+annotator+'.';
+}
+function touch(p){if(!p._first_opened)p._first_opened=nowIso();p._last_saved=nowIso();persist();updateProg();
+  const pr=problems(p);document.getElementById('status').textContent=pr.length?('To finish this page: '+pr.join('; ')):'Page complete. Autosaved for annotator '+annotator+'.';}
+document.getElementById('img').addEventListener('click',ev=>{
+  if(!annotator)return;const it=view[cur];const p=pg(it.id);
+  if(!armed){document.getElementById('status').textContent='Select a group ("click to set") before clicking the page.';return;}
+  const g=p.groups.find(x=>x.key===armed);if(!g)return;const r=ev.target.getBoundingClientRect();
+  // a click before the image has laid out has no size to scale by: refuse it rather than store NaN
+  if(!(r.width>0&&r.height>0&&ev.target.naturalWidth>0)){document.getElementById('status').textContent='The page image has not loaded yet; click again once it shows.';return;}
+  const x=Math.round((ev.clientX-r.left)*it.width/r.width),y=Math.round((ev.clientY-r.top)*it.height/r.height);
+  if(!isFinite(x)||!isFinite(y))return;
+  g.x=x;g.y=y;armed=null;touch(p);render();});
+function go(i){leavePage();if(i<0)i=0;if(i>=view.length){alert('End of this set. Export the CSV.');i=view.length-1;}cur=i;armed=null;render();window.scrollTo(0,0);}
+const COLS=['row_type','page_id','annotator_id','kit','kit_version','page_status','page_note','table_key','table_ref','table_caption','results_table','orientation','bold_rule','group_key','group_table_key','group_label','winner_value','bold_is_best','x_px','y_px','group_note','complete','first_opened_at','last_saved_at','seconds_on_page'];
+function buildCsv(){
+  const lines=[COLS.join(',')];
+  PAGES.slice().sort((a,b)=>a.id<b.id?-1:1).forEach(it=>{const p=st[it.id];if(!p||(!p.status&&!p.tables.length&&!p.groups.length&&!p.note))return;
+    const base={page_id:it.id,annotator_id:annotator,kit:CFG.kit,kit_version:CFG.version};
+    const put=o=>lines.push(COLS.map(c=>csvCell(o[c])).join(','));
+    put(Object.assign({},base,{row_type:'page',page_status:p.status,page_note:p.note,complete:isDone(it.id)?'y':'n',first_opened_at:p._first_opened||'',last_saved_at:p._last_saved||'',seconds_on_page:p._seconds||''}));
+    p.tables.forEach(t=>put(Object.assign({},base,{row_type:'table',table_key:t.key,table_ref:t.ref,table_caption:t.caption,results_table:t.results,orientation:t.orient,bold_rule:t.rule})));
+    p.groups.forEach(g=>put(Object.assign({},base,{row_type:'group',group_key:g.key,group_table_key:g.table,group_label:g.label,winner_value:g.winner,bold_is_best:g.best,x_px:g.x,y_px:g.y,group_note:g.note})));});
+  return lines.join('\n')+'\n';
+}
+document.getElementById('exp').onclick=()=>{if(!annotator){alert('Enter an annotator ID first.');return;}download(CFG.exportName.replace('{annotator}',annotator),buildCsv());};
+document.getElementById('prev').onclick=()=>go(cur-1);
+document.getElementById('next').onclick=()=>{const it=view[cur];const pr=problems(pg(it.id));if(pr.length&&!confirm('This page is not complete ('+pr.join('; ')+'). Move on anyway?'))return;go(cur+1);};
+document.getElementById('guideBtn').onclick=()=>{const g=document.getElementById('guide');g.hidden=!g.hidden;};
+document.getElementById('zoomBtn').onclick=()=>{document.getElementById('imgbox').classList.toggle('zoom');};
+document.getElementById('set').onchange=ev=>{leavePage();setName=ev.target.value;lsSet('aamasHV:'+CFG.kit+':set',setName);cur=0;render();};
+document.getElementById('ann').onchange=ev=>{const v=ev.target.value.trim().replace(/[^A-Za-z0-9_-]/g,'');if(annotator)leavePage();annotator=v;lsSet('aamasHV:annotator',annotator);loadSt();cur=0;render();};
+document.getElementById('imp').addEventListener('change',ev=>{
+  const f=ev.target.files[0];if(!f)return;const rd=new FileReader();
+  rd.onload=()=>{const rows=parseCsv(rd.result);if(!rows.length)return;const head=rows[0].map(s=>s.trim());const ix=c=>head.indexOf(c);
+    const owners=new Set(rows.slice(1).map(r=>(r[ix('annotator_id')]||'').trim()).filter(Boolean));
+    if(owners.size>1){alert('This CSV holds several annotator IDs. Import one annotator\'s file at a time.');return;}
+    const owner=owners.size?Array.from(owners)[0]:'';
+    if(!annotator&&owner){annotator=owner;lsSet('aamasHV:annotator',annotator);loadSt();}
+    if(owner&&owner!==annotator&&!confirm('The CSV belongs to '+owner+' but the page is set to '+annotator+'. Import anyway?'))return;
+    const ids=new Set(PAGES.map(x=>x.id));const g=(r,c)=>{const j=ix(c);return j>=0?(r[j]||'').trim():'';};let n=0;
+    const fresh={};
+    rows.slice(1).forEach(r=>{const id=g(r,'page_id');if(!ids.has(id))return;if(!fresh[id])fresh[id]={status:'',note:'',tables:[],groups:[],next:1};const p=fresh[id];
+      const rt=g(r,'row_type');
+      if(rt==='page'){p.status=g(r,'page_status');p.note=g(r,'page_note');p._first_opened=g(r,'first_opened_at');p._last_saved=g(r,'last_saved_at');p._seconds=Number(g(r,'seconds_on_page'))||0;n++;}
+      else if(rt==='table'){p.tables.push({key:g(r,'table_key'),ref:g(r,'table_ref'),caption:g(r,'table_caption'),results:g(r,'results_table'),orient:g(r,'orientation'),rule:g(r,'bold_rule')});}
+      else if(rt==='group'){p.groups.push({key:g(r,'group_key'),table:g(r,'group_table_key'),label:g(r,'group_label'),winner:g(r,'winner_value'),best:g(r,'bold_is_best'),x:g(r,'x_px'),y:g(r,'y_px'),note:g(r,'group_note')});}});
+    Object.keys(fresh).forEach(id=>{const p=fresh[id];const ks=p.tables.map(t=>t.key).concat(p.groups.map(x=>x.key)).map(k=>parseInt(String(k).slice(1),10)||0);p.next=1+Math.max(0,...ks);
+      p.groups.forEach(x=>{x.x=x.x===''?'':Number(x.x);x.y=x.y===''?'':Number(x.y);});st[id]=p;});
+    persist();alert('Imported '+n+' pages for annotator '+annotator+'.');render();};
+  rd.readAsText(f,'utf-8');ev.target.value='';});
+document.addEventListener('keydown',ev=>{if(ev.altKey&&ev.key==='ArrowLeft'){ev.preventDefault();go(cur-1);}if(ev.altKey&&ev.key==='ArrowRight'){ev.preventDefault();go(cur+1);}});
+window.addEventListener('beforeunload',()=>{leavePage();});
+loadSt();rebuildView();{const k=view.findIndex(x=>!isDone(x.id));cur=k<0?0:k;}render();
+</script></body></html>

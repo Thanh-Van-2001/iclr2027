@@ -10,10 +10,12 @@ rounds asked for and no model can supply:
                            sheet with each page image and one question
 
 Usage: python aamas/human_kits.py            (writes audits/human_aamas/)
+       python aamas/human_kits.py --html-only
+                                             (rewrites empty_pages/label.html from the existing
+                                              empty_pages/items.json; no redraw, no run records needed)
        python aamas/human_score.py           (scores the filled files)
 """
 import csv
-import html
 import json
 import os
 import random
@@ -23,12 +25,13 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
 sys.path.insert(0, os.path.join(HERE, "..", "study"))
-from make_all_aamas import build_rate_set, rate_like, reader_protocol2  # noqa: E402
 
 OUT = "audits/human_aamas"
 
 
 def kit_a():
+    # imported here so that --html-only runs on a checkout without the run records
+    from make_all_aamas import build_rate_set, rate_like, reader_protocol2  # noqa: E402
     cs = json.load(open("out/aamas/analysis.json", encoding="utf-8"))["_comparisons"]
     build_rate_set(cs)
     rate_papers = sorted({c["paper"] for c in cs if rate_like(c)})
@@ -94,32 +97,85 @@ def kit_b(n_random=30, seed=20260916):
                      "title": items[iid]["title"], "census_note": notes,
                      "parser_comparisons": sum(1 for c in cs if (c["paper"], c["page"]) == (items[iid]["paper"], items[iid]["page"]))})
     json.dump(rows, open(os.path.join(d, "items.json"), "w", encoding="utf-8"), indent=1, ensure_ascii=False)
-    # one HTML sheet: the page, one question, a count
-    parts = ["<!doctype html><meta charset='utf-8'><title>Empty census pages</title>",
-             "<style>body{font-family:sans-serif;max-width:1100px;margin:auto}img{width:100%;border:1px solid #999}"
-             ".q{background:#f6f6f6;padding:10px;margin:8px 0 30px}label{margin-right:14px}</style>",
-             "<h2>Empty census pages: does the page hold a results table where each row (or each column) has exactly one bold cell?</h2>",
-             "<p>Answer for the page as a whole. <b>yes</b>: at least one results table on the page marks exactly one bold cell per row or per column "
-             "(a table split into blocks, one bold per column in each block, counts as yes). <b>no</b>: every table on the page has several bold cells "
-             "per line, or bolds the authors' whole row, or is not a results table. <b>unclear</b>: cannot tell. If yes, type the number of such rows or columns.</p>",
-             "<p>Save with the button at the end; the file downloads as empty_pages_labels.csv.</p><form id='f'>"]
-    for r in rows:
-        parts.append(f"<div class='q'><b>{r['id']}</b> ({r['kind']}) &mdash; {html.escape(r['title'][:90])}<br>"
-                     f"<label><input type='radio' name='a_{r['id']}' value='yes'> yes</label>"
-                     f"<label><input type='radio' name='a_{r['id']}' value='no'> no</label>"
-                     f"<label><input type='radio' name='a_{r['id']}' value='unclear'> unclear</label>"
-                     f" &nbsp; groups: <input name='n_{r['id']}' size='4'></div>"
-                     f"<img src='img/{r['id']}.png'>")
-    parts.append("<p><button type='button' onclick='save()'>Save labels</button></p></form>"
-                 "<script>function save(){const f=document.getElementById('f');let out='id,answer,groups\\n';"
-                 "const ids=" + json.dumps([r["id"] for r in rows]) + ";for(const i of ids){const a=f.querySelector('input[name=a_'+i+']:checked');"
-                 "out+=i+','+(a?a.value:'')+','+(f.elements['n_'+i].value||'')+'\\n';}"
-                 "const b=new Blob([out],{type:'text/csv'});const u=URL.createObjectURL(b);const l=document.createElement('a');"
-                 "l.href=u;l.download='empty_pages_labels.csv';l.click();}</script>")
-    open(os.path.join(d, "label.html"), "w", encoding="utf-8").write("\n".join(parts))
+    write_empty_pages_html()
     print("kit B:", len(pilot_empty), "pilot pages +", len(draw), "orientation-none pages ->", d)
 
 
+EMPTY_INTRO = """
+<h3>One question per page</h3>
+Does the page hold a results table in which a row (or a column) has <b>exactly one bold cell</b>?
+Answer for the page as a whole. <b>yes</b>: at least one results table on the page marks exactly one bold cell per row
+or per column (a table split into blocks, one bold per column in each block, counts as yes); type how many such rows or
+columns there are. <b>no</b>: every table on the page has several bold cells per line, or bolds the authors' whole row,
+or is not a results table. <b>unclear</b>: cannot tell.
+<h3>Images</h3>
+Some page images are not shipped; for those a red note says so, and <b>Open the full paper</b> opens
+the public PDF at the right page.
+Enter your annotator ID first; answers autosave in this browser; <b>Export CSV</b> downloads
+<code>empty_pages_labels.csv</code>. Send that file unchanged.
+"""
+
+
+def write_empty_pages_html():
+    """Rewrite empty_pages/label.html from the frozen empty_pages/items.json.
+
+    The 35 pages are census pages, whose renders are not shipped. For each page
+    the sheet shows, in order of preference: a local census render
+    (empty_pages/img/<id>.png, produced from data/corpus by kit_b), the shipped
+    pilot render of the same paper page (audits/aamas_pages/img, copied into
+    empty_pages/img_shipped/), or nothing, with the PDF link. Which one each page
+    got is written to empty_pages/image_status.json, so a missing image is a
+    recorded fact rather than a broken link.
+    """
+    from human_kit_ui import form_kit_html  # noqa: E402
+    d = os.path.join(OUT, "empty_pages")
+    rows = json.load(open(os.path.join(d, "items.json"), encoding="utf-8"))
+    pilot = {(it["paper"], it["page"]): it["id"] for it in json.load(open("audits/aamas_pages/items.json", encoding="utf-8"))}
+    url_path = os.path.join(OUT, "paper_urls.json")
+    urls = json.load(open(url_path, encoding="utf-8")) if os.path.exists(url_path) else {}
+    status, view = {}, []
+    for r in rows:
+        local = os.path.join(d, "img", f"{r['id']}.png")
+        pid = pilot.get((r["paper"], r["page"]))
+        if os.path.exists(local):
+            image, st = f"img/{r['id']}.png", "local_census_render"
+        elif pid and os.path.exists(os.path.join("audits", "aamas_pages", "img", f"{pid}_page.png")):
+            os.makedirs(os.path.join(d, "img_shipped"), exist_ok=True)
+            shutil.copyfile(os.path.join("audits", "aamas_pages", "img", f"{pid}_page.png"),
+                            os.path.join(d, "img_shipped", f"{r['id']}.png"))
+            image, st = f"img_shipped/{r['id']}.png", "shipped_pilot_render"
+        else:
+            image, st = None, "missing_needs_data_corpus_or_pdf"
+        u = urls.get(r["paper"])
+        status[r["id"]] = {"status": st, "pilot_id": pid, "pdf_page": r["page"] + 1, "pdf_url": u["pdf"] if u else None}
+        links = [{"label": f"Open the full paper at PDF page {r['page'] + 1}", "href": f"{u['pdf']}#page={r['page'] + 1}"}] if u else []
+        view.append({"id": r["id"], "sets": ["all"], "image": image,
+                     "image_note": "This page image is not shipped: open the full paper with the link below.",
+                     "meta": [f"Paper: {r['title']}", f"PDF page {r['page'] + 1}"], "links": links})
+    json.dump(status, open(os.path.join(d, "image_status.json"), "w", encoding="utf-8"), indent=1)
+    fields = [
+        {"name": "answer", "label": "Does the page hold a results table with exactly one bold cell in a row or a column?",
+         "kind": "select", "options": [["yes", "yes"], ["no", "no"], ["unclear", "unclear"]]},
+        {"name": "groups", "label": "If yes: how many such rows or columns (an estimate is fine)", "kind": "text",
+         "req": {"if": ["answer", ["yes"]]}},
+        {"name": "note", "label": "Note (optional)", "kind": "area", "req": "never"},
+    ]
+    html_text = form_kit_html(kit="empty_pages", version="aamas-hv-1", title="Bold cells on 35 pages",
+                              intro_html=EMPTY_INTRO, items=view, fields=fields, gates=[],
+                              sets={"all": "All 35"},
+                              default_set="all", export_name="empty_pages_labels.csv")
+    with open(os.path.join(d, "label.html"), "w", encoding="utf-8", newline="\n") as fh:
+        fh.write(html_text)
+    counts = {}
+    for v in status.values():
+        counts[v["status"]] = counts.get(v["status"], 0) + 1
+    print("empty_pages sheet:", counts)
+    return status
+
+
 if __name__ == "__main__":
-    kit_a()
-    kit_b()
+    if "--html-only" in sys.argv:
+        write_empty_pages_html()
+    else:
+        kit_a()
+        kit_b()

@@ -11,6 +11,8 @@ import json
 import os
 
 KIT = "audits/human_aamas"
+# a checkout without the run records has no out/aamas yet
+os.makedirs("out/aamas", exist_ok=True)
 
 
 def _val(s):

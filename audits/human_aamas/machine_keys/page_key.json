@@ -1,0 +1,3340 @@
+{
+ "kit": "page_detection",
+ "python": "3.14.4",
+ "script": "aamas/human_validation_kits.py",
+ "kit_version": "aamas-hv-1",
+ "seeds": {
+  "pages": 20261126,
+  "noncaption": 20261127,
+  "page_overlap": 20261128
+ },
+ "sources": [
+  {
+   "path": "out/aamas/analysis.json (the frozen run record)",
+   "sha256": "af0e71067f84fd0f71d3d40e9616949977e6dcf383b62ec0542d32590b93d026"
+  },
+  {
+   "path": "audits/aamas_census/items.json",
+   "sha256": "f828f99d5dec1e74d4715c7257bf3fbe25f720c7b305bad7ba0a24d49bdf0b26"
+  },
+  {
+   "path": "audits/aamas_census/labels.json",
+   "sha256": "8eb4ab318cfd1fb1902e88845d212282dbfe1315b8879d6cea0f70949ff3816a"
+  },
+  {
+   "path": "audits/aamas_pages/labels.json",
+   "sha256": "c3cc2119bb03d24e720947eb5b9319ae643d0e655c07624bb39182a3a2ac346e"
+  },
+  {
+   "path": "audits/aamas_noncaption/labels.json",
+   "sha256": "142322823c31f2e1dfa803ee621b6b880fa89c29adcc8c8d2ed67fbd197436c2"
+  }
+ ],
+ "pages": {
+  "P01": {
+   "frame": "caption_pilot",
+   "source_kit": "audits/aamas_pages",
+   "source_id": "061",
+   "paper": "fb1881a017eb34c4",
+   "page": 7,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": true,
+   "caption_pages_in_paper": 3,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": true,
+    "census_id": "1000",
+    "tables": []
+   },
+   "pilot_reader": {
+    "tables": [
+     {
+      "caption_start": "Table 4: Payoff matrix with a system interference term D",
+      "results_table": "n",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "none",
+      "groups": []
+     }
+    ]
+   }
+  },
+  "P02": {
+   "frame": "caption_pilot",
+   "source_kit": "audits/aamas_pages",
+   "source_id": "057",
+   "paper": "6e7577d9acf9ec31",
+   "page": 7,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 1,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": true,
+    "census_id": "0476",
+    "tables": [
+     {
+      "caption_start": "Table 1: Overview of key complexity results.",
+      "results_table": "n",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "none",
+      "groups": []
+     }
+    ]
+   },
+   "pilot_reader": {
+    "tables": [
+     {
+      "caption_start": "Table 1: Overview of key complexity results. Here, d denotes the maximum preference list length",
+      "results_table": "n",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "none",
+      "groups": []
+     }
+    ]
+   }
+  },
+  "P03": {
+   "frame": "caption_pilot",
+   "source_kit": "audits/aamas_pages",
+   "source_id": "005",
+   "paper": "4927c18d3ad85afd",
+   "page": 7,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 1,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": true,
+    "census_id": "0313",
+    "tables": [
+     {
+      "caption_start": "Table 1: The maximum, minimum, and average",
+      "results_table": "y",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "300",
+      "groups": []
+     }
+    ]
+   },
+   "pilot_reader": {
+    "tables": [
+     {
+      "caption_start": "Table 1: The maximum, minimum, and average convergence time on different networks. (The suffix of BA stands for the number of nodes.)",
+      "results_table": "y",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "300",
+      "groups": []
+     }
+    ]
+   }
+  },
+  "P04": {
+   "frame": "caption_pilot",
+   "source_kit": "audits/aamas_pages",
+   "source_id": "080",
+   "paper": "c917a2273817cc85",
+   "page": 6,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": true,
+   "caption_pages_in_paper": 3,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": true,
+    "census_id": "0841",
+    "tables": []
+   },
+   "pilot_reader": {
+    "tables": []
+   }
+  },
+  "P05": {
+   "frame": "caption_pilot",
+   "source_kit": "audits/aamas_pages",
+   "source_id": "086",
+   "paper": "cc04b2ea854303b0",
+   "page": 3,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 2,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": true,
+    "census_id": "0850",
+    "tables": []
+   },
+   "pilot_reader": {
+    "tables": [
+     {
+      "caption_start": "Table 1: Statistics of the Constructed Bias-Induced Dataset",
+      "results_table": "n",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "none",
+      "groups": []
+     },
+     {
+      "caption_start": "Table 2 (referenced in text: 'Table 2 summarizes the prompt structures used for each bias type')",
+      "results_table": "n",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "none",
+      "groups": []
+     }
+    ]
+   }
+  },
+  "P06": {
+   "frame": "caption_pilot",
+   "source_kit": "audits/aamas_pages",
+   "source_id": "011",
+   "paper": "e0a0a9d27be3a874",
+   "page": 5,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 1,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": false,
+    "census_id": null,
+    "tables": null
+   },
+   "pilot_reader": {
+    "tables": [
+     {
+      "caption_start": "Table 1: Descriptive statistics of the scores by interaction control policy (random or learned) and data set.",
+      "results_table": "y",
+      "orientation": "column",
+      "bar_kind": "sd",
+      "n_runs": "4",
+      "groups": [
+       {
+        "label": "mean",
+        "direction": "higher",
+        "winner_mean": "23.4",
+        "winner_disp": "5.7",
+        "runner_mean": "25.6",
+        "runner_disp": "5.0"
+       },
+       {
+        "label": "std",
+        "direction": "lower",
+        "winner_mean": "5.7",
+        "winner_disp": "none",
+        "runner_mean": "5.0",
+        "runner_disp": "none"
+       },
+       {
+        "label": "min",
+        "direction": "higher",
+        "winner_mean": "14.0",
+        "winner_disp": "none",
+        "runner_mean": "9.0",
+        "runner_disp": "none"
+       },
+       {
+        "label": "25%",
+        "direction": "higher",
+        "winner_mean": "18.5",
+        "winner_disp": "none",
+        "runner_mean": "25.3",
+        "runner_disp": "none"
+       },
+       {
+        "label": "Median",
+        "direction": "higher",
+        "winner_mean": "24.0",
+        "winner_disp": "none",
+        "runner_mean": "27.0",
+        "runner_disp": "none"
+       },
+       {
+        "label": "75%",
+        "direction": "higher",
+        "winner_mean": "28.8",
+        "winner_disp": "none",
+        "runner_mean": "29.3",
+        "runner_disp": "none"
+       },
+       {
+        "label": "max",
+        "direction": "higher",
+        "winner_mean": "39.0",
+        "winner_disp": "none",
+        "runner_mean": "37.0",
+        "runner_disp": "none"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "P07": {
+   "frame": "caption_pilot",
+   "source_kit": "audits/aamas_pages",
+   "source_id": "038",
+   "paper": "a61c979c2ab7fcf3",
+   "page": 7,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 1,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": true,
+    "census_id": "0700",
+    "tables": []
+   },
+   "pilot_reader": {
+    "tables": [
+     {
+      "caption_start": "Table 1: Stability and optimality guarantees in vertex-weighted online assignment games.",
+      "results_table": "n",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "none",
+      "groups": []
+     },
+     {
+      "caption_start": "Table 2: Stability and optimality guarantees in edge-weighted with free disposal online assignment games.",
+      "results_table": "n",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "none",
+      "groups": []
+     }
+    ]
+   }
+  },
+  "P08": {
+   "frame": "caption_pilot",
+   "source_kit": "audits/aamas_pages",
+   "source_id": "042",
+   "paper": "a83bd50cf8b51a66",
+   "page": 6,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 2,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": true,
+    "census_id": "0714",
+    "tables": [
+     {
+      "caption_start": "Table 1: Expected discounted rewards for",
+      "results_table": "y",
+      "orientation": "row",
+      "bar_kind": "unlabelled",
+      "n_runs": "none",
+      "groups": [
+       {
+        "label": "Cliff Walking, 0.4",
+        "direction": "higher",
+        "winner_mean": "0.778",
+        "winner_disp": "0.02",
+        "runner_mean": "0.630",
+        "runner_disp": "0.04"
+       },
+       {
+        "label": "Cliff Walking, 0.5",
+        "direction": "higher",
+        "winner_mean": "0.815",
+        "winner_disp": "0.02",
+        "runner_mean": "0.664",
+        "runner_disp": "0.04"
+       },
+       {
+        "label": "Cliff Walking, 0.6",
+        "direction": "higher",
+        "winner_mean": "0.830",
+        "winner_disp": "0.01",
+        "runner_mean": "0.607",
+        "runner_disp": "0.04"
+       },
+       {
+        "label": "Cliff Walking, 0.8",
+        "direction": "higher",
+        "winner_mean": "0.871",
+        "winner_disp": "0.01",
+        "runner_mean": "0.680",
+        "runner_disp": "0.04"
+       },
+       {
+        "label": "Cliff Walking, 0.9",
+        "direction": "higher",
+        "winner_mean": "0.883",
+        "winner_disp": "0.01",
+        "runner_mean": "0.758",
+        "runner_disp": "0.02"
+       },
+       {
+        "label": "Cliff Walking, 1.0",
+        "direction": "higher",
+        "winner_mean": "0.947",
+        "winner_disp": "0.00",
+        "runner_mean": "0.694",
+        "runner_disp": "0.00"
+       },
+       {
+        "label": "NS Bridge, 0.4",
+        "direction": "higher",
+        "winner_mean": "-0.642",
+        "winner_disp": "0.03",
+        "runner_mean": "-0.684",
+        "runner_disp": "0.03"
+       },
+       {
+        "label": "NS Bridge, 0.5",
+        "direction": "higher",
+        "winner_mean": "-0.499",
+        "winner_disp": "0.08",
+        "runner_mean": "-0.499",
+        "runner_disp": "0.12"
+       },
+       {
+        "label": "NS Bridge, 0.6",
+        "direction": "higher",
+        "winner_mean": "-0.384",
+        "winner_disp": "0.14",
+        "runner_mean": "-0.429",
+        "runner_disp": "0.09"
+       },
+       {
+        "label": "NS Bridge, 0.8",
+        "direction": "higher",
+        "winner_mean": "-0.075",
+        "winner_disp": "0.10",
+        "runner_mean": "-0.082",
+        "runner_disp": "0.16"
+       },
+       {
+        "label": "NS Bridge, 0.9",
+        "direction": "higher",
+        "winner_mean": "0.135",
+        "winner_disp": "0.15",
+        "runner_mean": "0.109",
+        "runner_disp": "0.08"
+       },
+       {
+        "label": "NS Bridge, 1.0",
+        "direction": "higher",
+        "winner_mean": "0.729",
+        "winner_disp": "0.00",
+        "runner_mean": "0.183",
+        "runner_disp": "0.02"
+       },
+       {
+        "label": "Frozen Lake, 0.4",
+        "direction": "higher",
+        "winner_mean": "0.426",
+        "winner_disp": "0.12",
+        "runner_mean": "0.264",
+        "runner_disp": "0.19"
+       },
+       {
+        "label": "Frozen Lake, 0.5",
+        "direction": "higher",
+        "winner_mean": "0.446",
+        "winner_disp": "0.13",
+        "runner_mean": "0.336",
+        "runner_disp": "0.17"
+       },
+       {
+        "label": "Frozen Lake, 0.6",
+        "direction": "higher",
+        "winner_mean": "0.528",
+        "winner_disp": "0.14",
+        "runner_mean": "0.500",
+        "runner_disp": "0.13"
+       },
+       {
+        "label": "Frozen Lake, 0.8",
+        "direction": "higher",
+        "winner_mean": "0.516",
+        "winner_disp": "0.11",
+        "runner_mean": "0.514",
+        "runner_disp": "0.06"
+       },
+       {
+        "label": "Frozen Lake, 0.9",
+        "direction": "higher",
+        "winner_mean": "0.490",
+        "winner_disp": "0.12",
+        "runner_mean": "0.392",
+        "runner_disp": "0.20"
+       },
+       {
+        "label": "Frozen Lake, 1.0",
+        "direction": "higher",
+        "winner_mean": "0.988",
+        "winner_disp": "0.00",
+        "runner_mean": "0.782",
+        "runner_disp": "0.02"
+       }
+      ]
+     }
+    ]
+   },
+   "pilot_reader": {
+    "tables": [
+     {
+      "caption_start": "Table 1: Expected discounted rewards for all environments using different configurations for MCTS, RATS, and ADA-MCTS.",
+      "results_table": "y",
+      "orientation": "row",
+      "bar_kind": "unlabelled",
+      "n_runs": "none",
+      "groups": [
+       {
+        "label": "Cliff Walking 0.4",
+        "direction": "higher",
+        "winner_mean": "0.778",
+        "winner_disp": "0.02",
+        "runner_mean": "0.650",
+        "runner_disp": "0.04"
+       },
+       {
+        "label": "Cliff Walking 0.5",
+        "direction": "higher",
+        "winner_mean": "0.815",
+        "winner_disp": "0.02",
+        "runner_mean": "0.664",
+        "runner_disp": "0.04"
+       },
+       {
+        "label": "Cliff Walking 0.6",
+        "direction": "higher",
+        "winner_mean": "0.830",
+        "winner_disp": "0.01",
+        "runner_mean": "0.670",
+        "runner_disp": "0.04"
+       },
+       {
+        "label": "Cliff Walking 0.8",
+        "direction": "higher",
+        "winner_mean": "0.871",
+        "winner_disp": "0.01",
+        "runner_mean": "0.680",
+        "runner_disp": "0.04"
+       },
+       {
+        "label": "Cliff Walking 0.9",
+        "direction": "higher",
+        "winner_mean": "0.883",
+        "winner_disp": "0.01",
+        "runner_mean": "0.758",
+        "runner_disp": "0.02"
+       },
+       {
+        "label": "Cliff Walking 1.0",
+        "direction": "higher",
+        "winner_mean": "0.947",
+        "winner_disp": "0.00",
+        "runner_mean": "0.951",
+        "runner_disp": "0.00"
+       },
+       {
+        "label": "NS Bridge 0.4",
+        "direction": "higher",
+        "winner_mean": "-0.642",
+        "winner_disp": "0.03",
+        "runner_mean": "-0.660",
+        "runner_disp": "0.03"
+       },
+       {
+        "label": "NS Bridge 0.5",
+        "direction": "higher",
+        "winner_mean": "-0.499",
+        "winner_disp": "0.08",
+        "runner_mean": "-0.436",
+        "runner_disp": "0.13"
+       },
+       {
+        "label": "NS Bridge 0.6",
+        "direction": "higher",
+        "winner_mean": "-0.384",
+        "winner_disp": "0.14",
+        "runner_mean": "-0.429",
+        "runner_disp": "0.09"
+       },
+       {
+        "label": "NS Bridge 0.8",
+        "direction": "higher",
+        "winner_mean": "-0.075",
+        "winner_disp": "0.10",
+        "runner_mean": "0.030",
+        "runner_disp": "0.16"
+       },
+       {
+        "label": "NS Bridge 0.9",
+        "direction": "higher",
+        "winner_mean": "0.135",
+        "winner_disp": "0.15",
+        "runner_mean": "0.245",
+        "runner_disp": "0.15"
+       },
+       {
+        "label": "NS Bridge 1.0",
+        "direction": "higher",
+        "winner_mean": "0.729",
+        "winner_disp": "0.00",
+        "runner_mean": "0.729",
+        "runner_disp": "0.00"
+       },
+       {
+        "label": "Frozen Lake 0.4",
+        "direction": "higher",
+        "winner_mean": "0.426",
+        "winner_disp": "0.12",
+        "runner_mean": "0.401",
+        "runner_disp": "0.16"
+       },
+       {
+        "label": "Frozen Lake 0.5",
+        "direction": "higher",
+        "winner_mean": "0.446",
+        "winner_disp": "0.13",
+        "runner_mean": "0.422",
+        "runner_disp": "0.16"
+       },
+       {
+        "label": "Frozen Lake 0.6",
+        "direction": "higher",
+        "winner_mean": "0.528",
+        "winner_disp": "0.14",
+        "runner_mean": "0.500",
+        "runner_disp": "0.13"
+       },
+       {
+        "label": "Frozen Lake 0.8",
+        "direction": "higher",
+        "winner_mean": "0.516",
+        "winner_disp": "0.11",
+        "runner_mean": "0.514",
+        "runner_disp": "0.06"
+       },
+       {
+        "label": "Frozen Lake 0.9",
+        "direction": "higher",
+        "winner_mean": "0.490",
+        "winner_disp": "0.12",
+        "runner_mean": "0.689",
+        "runner_disp": "0.16"
+       },
+       {
+        "label": "Frozen Lake 1.0",
+        "direction": "higher",
+        "winner_mean": "0.988",
+        "winner_disp": "0.00",
+        "runner_mean": "0.988",
+        "runner_disp": "0.00"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "P09": {
+   "frame": "caption_pilot",
+   "source_kit": "audits/aamas_pages",
+   "source_id": "082",
+   "paper": "948ca54819131eb1",
+   "page": 6,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 1,
+   "also_in_hard_case_kit": "0628",
+   "parser": [
+    {
+     "table": "1",
+     "orientation": "column",
+     "direction": "higher_better",
+     "winner": 80.26,
+     "runner_up": 75.61,
+     "winner_dispersion": null,
+     "runner_dispersion": null,
+     "dispersion_kind": "unknown",
+     "n_runs": 3,
+     "winner_cell": {
+      "x": 248.4,
+      "y": 159.5
+     },
+     "runner_cell": {
+      "x": 248.4,
+      "y": 180.4
+     },
+     "testable": false,
+     "p": null,
+     "caption": "Table 1: Win rates of the best final Main Agents generated by all four different Exploiters, averaged over 1000 duels against each other. The Minimax Main Agent"
+    },
+    {
+     "table": "1",
+     "orientation": "column",
+     "direction": "higher_better",
+     "winner": 66.25,
+     "runner_up": 24.39,
+     "winner_dispersion": null,
+     "runner_dispersion": null,
+     "dispersion_kind": "unknown",
+     "n_runs": 3,
+     "winner_cell": {
+      "x": 371.6,
+      "y": 159.5
+     },
+     "runner_cell": {
+      "x": 371.6,
+      "y": 149.3
+     },
+     "testable": false,
+     "p": null,
+     "caption": "Table 1: Win rates of the best final Main Agents generated by all four different Exploiters, averaged over 1000 duels against each other. The Minimax Main Agent"
+    }
+   ],
+   "census_reader": {
+    "in_census_frame": true,
+    "census_id": "0628",
+    "tables": [
+     {
+      "caption_start": "Table 1: Win rates of",
+      "results_table": "y",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "1000",
+      "groups": []
+     }
+    ]
+   },
+   "pilot_reader": {
+    "tables": [
+     {
+      "caption_start": "Table 1: Win rates of the best final Main Agents generated by all four different Exploiters, averaged over 1000 duels against each other.",
+      "results_table": "y",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "1000",
+      "groups": []
+     }
+    ]
+   }
+  },
+  "P10": {
+   "frame": "caption_pilot",
+   "source_kit": "audits/aamas_pages",
+   "source_id": "029",
+   "paper": "2a3b5fa54122de49",
+   "page": 6,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 1,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": true,
+    "census_id": "0186",
+    "tables": [
+     {
+      "caption_start": "Table 1: Example test scenarios,",
+      "results_table": "n",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "none",
+      "groups": []
+     }
+    ]
+   },
+   "pilot_reader": {
+    "tables": [
+     {
+      "caption_start": "Table 1: Example test scenarios, in terms of critical property identities and onsets, and the sequences generated by our models.",
+      "results_table": "y",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "none",
+      "groups": []
+     }
+    ]
+   }
+  },
+  "P11": {
+   "frame": "caption_pilot",
+   "source_kit": "audits/aamas_pages",
+   "source_id": "081",
+   "paper": "d0454edb49f1e7b3",
+   "page": 6,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 1,
+   "also_in_hard_case_kit": null,
+   "parser": [
+    {
+     "table": "1",
+     "orientation": "row",
+     "direction": "lower_better",
+     "winner": 0.0,
+     "runner_up": 1.497,
+     "winner_dispersion": null,
+     "runner_dispersion": 0.043,
+     "dispersion_kind": "unknown",
+     "n_runs": null,
+     "winner_cell": {
+      "x": 414.2,
+      "y": 629.2
+     },
+     "runner_cell": {
+      "x": 513.4,
+      "y": 629.2
+     },
+     "testable": false,
+     "p": null,
+     "caption": "In our third case study, to extensively study N-PACE and the intent communication approach proposed in (7), we conduct Monte Carlo simulations of an intersectio"
+    },
+    {
+     "table": "1",
+     "orientation": "row",
+     "direction": "lower_better",
+     "winner": 0.0,
+     "runner_up": 1.0,
+     "winner_dispersion": null,
+     "runner_dispersion": null,
+     "dispersion_kind": "unknown",
+     "n_runs": null,
+     "winner_cell": {
+      "x": 414.2,
+      "y": 661.1
+     },
+     "runner_cell": {
+      "x": 366.9,
+      "y": 661.1
+     },
+     "testable": false,
+     "p": null,
+     "caption": "In our third case study, to extensively study N-PACE and the intent communication approach proposed in (7), we conduct Monte Carlo simulations of an intersectio"
+    }
+   ],
+   "census_reader": {
+    "in_census_frame": true,
+    "census_id": "0872",
+    "tables": [
+     {
+      "caption_start": "Table 1: Case study 3 benchmark",
+      "results_table": "y",
+      "orientation": "column",
+      "bar_kind": "unlabelled",
+      "n_runs": "300",
+      "groups": [
+       {
+        "label": "Average time to cross [s]",
+        "direction": "lower",
+        "winner_mean": "1.489",
+        "winner_disp": "0.035",
+        "runner_mean": "1.497",
+        "runner_disp": "0.043"
+       }
+      ]
+     }
+    ]
+   },
+   "pilot_reader": {
+    "tables": [
+     {
+      "caption_start": "Table 1: Case study 3 benchmark",
+      "results_table": "y",
+      "orientation": "column",
+      "bar_kind": "unlabelled",
+      "n_runs": "300",
+      "groups": [
+       {
+        "label": "Average time to cross [s]",
+        "direction": "lower",
+        "winner_mean": "1.489",
+        "winner_disp": "0.035",
+        "runner_mean": "1.497",
+        "runner_disp": "0.043"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "P12": {
+   "frame": "caption_pilot",
+   "source_kit": "audits/aamas_pages",
+   "source_id": "090",
+   "paper": "652de55ae06587ce",
+   "page": 7,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 1,
+   "also_in_hard_case_kit": "0434",
+   "parser": [
+    {
+     "table": "1",
+     "orientation": "column",
+     "direction": "lower_better",
+     "winner": 2.0,
+     "runner_up": 16.0,
+     "winner_dispersion": null,
+     "runner_dispersion": null,
+     "dispersion_kind": "unknown",
+     "n_runs": null,
+     "winner_cell": {
+      "x": 108.6,
+      "y": 318.5
+     },
+     "runner_cell": {
+      "x": 102.3,
+      "y": 173.9
+     },
+     "testable": false,
+     "p": null,
+     "caption": "Table 1: Prediction accuracy of the proposed pxpGP and dec-pxpGP frameworks across fleet size , using a training dataset of size 𝑁 = 30 , 000 equally distribute"
+    }
+   ],
+   "census_reader": {
+    "in_census_frame": true,
+    "census_id": "0434",
+    "tables": [
+     {
+      "caption_start": "Table 1: Prediction accuracy of the proposed pxpGP and dec-pxpGP frameworks across fleet size",
+      "results_table": "y",
+      "orientation": "none",
+      "bar_kind": "unlabelled",
+      "n_runs": "none",
+      "groups": []
+     },
+     {
+      "caption_start": "Table 2: Computational and Communication Complexity Comparison of Distributed GP Methods",
+      "results_table": "n",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "none",
+      "groups": []
+     }
+    ]
+   },
+   "pilot_reader": {
+    "tables": [
+     {
+      "caption_start": "Table 1: Prediction accuracy of the proposed pxpGP and dec-pxpGP frameworks across fleet size M = 16, 49, 64, 100, using a training dataset of size N = 30,000",
+      "results_table": "y",
+      "orientation": "row",
+      "bar_kind": "unlabelled",
+      "n_runs": "none",
+      "groups": [
+       {
+        "label": "N39W106 M=16 Centralized NRMSE (pxpGP vs gapxGP)",
+        "direction": "lower",
+        "winner_mean": "0.058",
+        "winner_disp": "± 0.012",
+        "runner_mean": "0.071",
+        "runner_disp": "± 0.001"
+       },
+       {
+        "label": "N39W106 M=16 Centralized NLPD (pxpGP vs gapxGP)",
+        "direction": "lower",
+        "winner_mean": "0.265",
+        "winner_disp": "± 0.057",
+        "runner_mean": "0.437",
+        "runner_disp": "± 0.009"
+       },
+       {
+        "label": "N39W106 M=16 Decentralized NRMSE (dec-pxpGP vs dec-gapxGP)",
+        "direction": "lower",
+        "winner_mean": "0.067",
+        "winner_disp": "± 0.001",
+        "runner_mean": "0.072",
+        "runner_disp": "± 0.007"
+       },
+       {
+        "label": "N39W106 M=16 Decentralized NLPD (dec-pxpGP vs dec-gapxGP)",
+        "direction": "lower",
+        "winner_mean": "0.305",
+        "winner_disp": "± 0.009",
+        "runner_mean": "0.311",
+        "runner_disp": "± 0.093"
+       },
+       {
+        "label": "N39W106 M=49 Centralized NRMSE (gapxGP bold vs pxpGP)",
+        "direction": "lower",
+        "winner_mean": "0.076",
+        "winner_disp": "± 0.002",
+        "runner_mean": "0.080",
+        "runner_disp": "± 0.002"
+       },
+       {
+        "label": "N39W106 M=49 Centralized NLPD (pxpGP vs gapxGP)",
+        "direction": "lower",
+        "winner_mean": "0.414",
+        "winner_disp": "± 0.033",
+        "runner_mean": "0.487",
+        "runner_disp": "± 0.014"
+       },
+       {
+        "label": "N39W106 M=49 Decentralized NRMSE (dec-pxpGP vs dec-gapxGP)",
+        "direction": "lower",
+        "winner_mean": "0.061",
+        "winner_disp": "± 0.002",
+        "runner_mean": "0.062",
+        "runner_disp": "± 0.003"
+       },
+       {
+        "label": "N39W106 M=49 Decentralized NLPD (dec-pxpGP vs dec-gapxGP)",
+        "direction": "lower",
+        "winner_mean": "0.153",
+        "winner_disp": "± 0.038",
+        "runner_mean": "0.213",
+        "runner_disp": "± 0.076"
+       },
+       {
+        "label": "N39W106 M=64 Centralized NRMSE (gapxGP bold vs pxpGP)",
+        "direction": "lower",
+        "winner_mean": "0.076",
+        "winner_disp": "± 0.002",
+        "runner_mean": "0.081",
+        "runner_disp": "± 0.003"
+       },
+       {
+        "label": "N39W106 M=64 Centralized NLPD (pxpGP vs gapxGP)",
+        "direction": "lower",
+        "winner_mean": "0.422",
+        "winner_disp": "± 0.037",
+        "runner_mean": "0.492",
+        "runner_disp": "± 0.018"
+       },
+       {
+        "label": "N39W106 M=64 Decentralized NRMSE (dec-pxpGP vs dec-gapxGP)",
+        "direction": "lower",
+        "winner_mean": "0.062",
+        "winner_disp": "± 0.002",
+        "runner_mean": "0.062",
+        "runner_disp": "± 0.003"
+       },
+       {
+        "label": "N39W106 M=64 Decentralized NLPD (dec-pxpGP vs dec-gapxGP)",
+        "direction": "lower",
+        "winner_mean": "0.170",
+        "winner_disp": "± 0.029",
+        "runner_mean": "0.204",
+        "runner_disp": "± 0.056"
+       },
+       {
+        "label": "N39W106 M=100 Centralized NRMSE (gapxGP bold vs pxpGP)",
+        "direction": "lower",
+        "winner_mean": "0.081",
+        "winner_disp": "± 0.003",
+        "runner_mean": "0.086",
+        "runner_disp": "± 0.003"
+       },
+       {
+        "label": "N39W106 M=100 Centralized NLPD (gapxGP bold vs pxpGP)",
+        "direction": "lower",
+        "winner_mean": "0.521",
+        "winner_disp": "± 0.019",
+        "runner_mean": "0.562",
+        "runner_disp": "± 0.021"
+       },
+       {
+        "label": "N39W106 M=100 Decentralized NRMSE (dec-pxpGP vs dec-gapxGP)",
+        "direction": "lower",
+        "winner_mean": "0.067",
+        "winner_disp": "± 0.008",
+        "runner_mean": "0.068",
+        "runner_disp": "± 0.006"
+       },
+       {
+        "label": "N39W106 M=100 Decentralized NLPD (dec-pxpGP vs dec-gapxGP)",
+        "direction": "lower",
+        "winner_mean": "0.219",
+        "winner_disp": "± 0.084",
+        "runner_mean": "0.272",
+        "runner_disp": "± 0.139"
+       },
+       {
+        "label": "N37W120 M=16 Centralized NRMSE (pxpGP vs gapxGP)",
+        "direction": "lower",
+        "winner_mean": "0.067",
+        "winner_disp": "± 0.012",
+        "runner_mean": "0.069",
+        "runner_disp": "± 0.002"
+       },
+       {
+        "label": "N37W120 M=16 Centralized NLPD (gapxGP bold vs pxpGP)",
+        "direction": "lower",
+        "winner_mean": "0.381",
+        "winner_disp": "± 0.057",
+        "runner_mean": "0.387",
+        "runner_disp": "± 0.130"
+       },
+       {
+        "label": "N37W120 M=16 Decentralized NRMSE (dec-pxpGP vs dec-gapxGP)",
+        "direction": "lower",
+        "winner_mean": "0.067",
+        "winner_disp": "± 0.005",
+        "runner_mean": "0.071",
+        "runner_disp": "± 0.001"
+       },
+       {
+        "label": "N37W120 M=16 Decentralized NLPD (dec-pxpGP vs dec-gapxGP)",
+        "direction": "lower",
+        "winner_mean": "0.202",
+        "winner_disp": "± 0.029",
+        "runner_mean": "0.235",
+        "runner_disp": "± 0.070"
+       },
+       {
+        "label": "N37W120 M=49 Centralized NRMSE (gapxGP bold vs pxpGP)",
+        "direction": "lower",
+        "winner_mean": "0.074",
+        "winner_disp": "± 0.003",
+        "runner_mean": "0.076",
+        "runner_disp": "± 0.004"
+       },
+       {
+        "label": "N37W120 M=49 Centralized NLPD (pxpGP vs gapxGP)",
+        "direction": "lower",
+        "winner_mean": "0.281",
+        "winner_disp": "± 0.135",
+        "runner_mean": "0.421",
+        "runner_disp": "± 0.067"
+       },
+       {
+        "label": "N37W120 M=49 Decentralized NRMSE (dec-gapxGP bold vs dec-pxpGP)",
+        "direction": "lower",
+        "winner_mean": "0.061",
+        "winner_disp": "± 0.003",
+        "runner_mean": "0.062",
+        "runner_disp": "± 0.002"
+       },
+       {
+        "label": "N37W120 M=49 Decentralized NLPD (dec-pxpGP vs dec-gapxGP)",
+        "direction": "lower",
+        "winner_mean": "0.061",
+        "winner_disp": "± 0.101",
+        "runner_mean": "0.151",
+        "runner_disp": "± 0.114"
+       },
+       {
+        "label": "N37W120 M=64 Centralized NRMSE (gapxGP bold vs pxpGP)",
+        "direction": "lower",
+        "winner_mean": "0.075",
+        "winner_disp": "± 0.003",
+        "runner_mean": "0.077",
+        "runner_disp": "± 0.004"
+       },
+       {
+        "label": "N37W120 M=64 Centralized NLPD (pxpGP vs gapxGP)",
+        "direction": "lower",
+        "winner_mean": "0.292",
+        "winner_disp": "± 0.133",
+        "runner_mean": "0.432",
+        "runner_disp": "± 0.062"
+       },
+       {
+        "label": "N37W120 M=64 Decentralized NRMSE (dec-gapxGP bold vs dec-pxpGP)",
+        "direction": "lower",
+        "winner_mean": "0.063",
+        "winner_disp": "± 0.003",
+        "runner_mean": "0.064",
+        "runner_disp": "± 0.004"
+       },
+       {
+        "label": "N37W120 M=64 Decentralized NLPD (dec-pxpGP vs dec-gapxGP)",
+        "direction": "lower",
+        "winner_mean": "0.084",
+        "winner_disp": "± 0.094",
+        "runner_mean": "0.133",
+        "runner_disp": "± 0.093"
+       },
+       {
+        "label": "N37W120 M=100 Centralized NRMSE (gapxGP bold vs pxpGP)",
+        "direction": "lower",
+        "winner_mean": "0.078",
+        "winner_disp": "± 0.003",
+        "runner_mean": "0.083",
+        "runner_disp": "± 0.004"
+       },
+       {
+        "label": "N37W120 M=100 Centralized NLPD (pxpGP vs gapxGP)",
+        "direction": "lower",
+        "winner_mean": "0.392",
+        "winner_disp": "± 0.040",
+        "runner_mean": "0.457",
+        "runner_disp": "± 0.066"
+       },
+       {
+        "label": "N37W120 M=100 Decentralized NRMSE (dec-pxpGP vs dec-gapxGP)",
+        "direction": "lower",
+        "winner_mean": "0.066",
+        "winner_disp": "± 0.005",
+        "runner_mean": "0.068",
+        "runner_disp": "± 0.006"
+       },
+       {
+        "label": "N37W120 M=100 Decentralized NLPD (dec-pxpGP vs dec-gapxGP)",
+        "direction": "lower",
+        "winner_mean": "0.106",
+        "winner_disp": "± 0.129",
+        "runner_mean": "0.204",
+        "runner_disp": "± 0.123"
+       },
+       {
+        "label": "N43W080 M=16 Centralized NRMSE (pxpGP vs gapxGP)",
+        "direction": "lower",
+        "winner_mean": "0.057",
+        "winner_disp": "± 0.016",
+        "runner_mean": "0.065",
+        "runner_disp": "± 0.005"
+       },
+       {
+        "label": "N43W080 M=16 Centralized NLPD (gapxGP bold vs pxpGP)",
+        "direction": "lower",
+        "winner_mean": "0.314",
+        "winner_disp": "± 0.105",
+        "runner_mean": "0.327",
+        "runner_disp": "± 0.139"
+       },
+       {
+        "label": "N43W080 M=16 Decentralized NRMSE (dec-gapxGP bold vs dec-pxpGP)",
+        "direction": "lower",
+        "winner_mean": "0.062",
+        "winner_disp": "± 0.005",
+        "runner_mean": "0.065",
+        "runner_disp": "± 0.008"
+       },
+       {
+        "label": "N43W080 M=16 Decentralized NLPD (dec-gapxGP bold vs dec-pxpGP)",
+        "direction": "lower",
+        "winner_mean": "0.161",
+        "winner_disp": "± 0.091",
+        "runner_mean": "0.123",
+        "runner_disp": "± 0.055"
+       },
+       {
+        "label": "N43W080 M=49 Centralized NRMSE (pxpGP bold vs gapxGP)",
+        "direction": "lower",
+        "winner_mean": "0.071",
+        "winner_disp": "± 0.005",
+        "runner_mean": "0.071",
+        "runner_disp": "± 0.008"
+       },
+       {
+        "label": "N43W080 M=49 Centralized NLPD (pxpGP vs gapxGP)",
+        "direction": "lower",
+        "winner_mean": "0.193",
+        "winner_disp": "± 0.169",
+        "runner_mean": "0.371",
+        "runner_disp": "± 0.095"
+       },
+       {
+        "label": "N43W080 M=49 Decentralized NRMSE (dec-pxpGP vs dec-gapxGP)",
+        "direction": "lower",
+        "winner_mean": "0.054",
+        "winner_disp": "± 0.008",
+        "runner_mean": "0.061",
+        "runner_disp": "± 0.004"
+       },
+       {
+        "label": "N43W080 M=49 Decentralized NLPD (dec-pxpGP vs dec-gapxGP)",
+        "direction": "lower",
+        "winner_mean": "-0.086",
+        "winner_disp": "± 0.178",
+        "runner_mean": "0.091",
+        "runner_disp": "± 0.131"
+       }
+      ]
+     },
+     {
+      "caption_start": "Table 2: Computational and Communication Complexity Comparison of Distributed GP Methods",
+      "results_table": "n",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "none",
+      "groups": []
+     }
+    ]
+   }
+  },
+  "P13": {
+   "frame": "caption_pilot",
+   "source_kit": "audits/aamas_pages",
+   "source_id": "094",
+   "paper": "f26ad768b4b28043",
+   "page": 6,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": true,
+   "caption_pages_in_paper": 2,
+   "also_in_hard_case_kit": null,
+   "parser": [
+    {
+     "table": "1",
+     "orientation": "row",
+     "direction": "higher_better",
+     "winner": 55.6,
+     "runner_up": 27.4,
+     "winner_dispersion": 8.1,
+     "runner_dispersion": 17.2,
+     "dispersion_kind": "std",
+     "n_runs": null,
+     "winner_cell": {
+      "x": 189.3,
+      "y": 127.2
+     },
+     "runner_cell": {
+      "x": 395.7,
+      "y": 127.2
+     },
+     "testable": false,
+     "p": null,
+     "caption": "Table 1: Average Performance Comparison Across All Datasets Model Metric CAMA Standard CoT Reflection React S.Discover P.Execute llama-3.2-1b Accuracy ( ↑ ) 55."
+    },
+    {
+     "table": "1",
+     "orientation": "row",
+     "direction": "lower_better",
+     "winner": 1.5,
+     "runner_up": 2.0,
+     "winner_dispersion": 0.6,
+     "runner_dispersion": 0.4,
+     "dispersion_kind": "std",
+     "n_runs": null,
+     "winner_cell": {
+      "x": 242.5,
+      "y": 161.3
+     },
+     "runner_cell": {
+      "x": 294.2,
+      "y": 161.3
+     },
+     "testable": false,
+     "p": null,
+     "caption": "Table 1: Average Performance Comparison Across All Datasets Model Metric CAMA Standard CoT Reflection React S.Discover P.Execute llama-3.2-1b Accuracy ( ↑ ) 55."
+    },
+    {
+     "table": "1",
+     "orientation": "row",
+     "direction": "higher_better",
+     "winner": 90.6,
+     "runner_up": 46.1,
+     "winner_dispersion": 2.3,
+     "runner_dispersion": 15.0,
+     "dispersion_kind": "std",
+     "n_runs": null,
+     "winner_cell": {
+      "x": 189.3,
+      "y": 177.5
+     },
+     "runner_cell": {
+      "x": 506.0,
+      "y": 177.5
+     },
+     "testable": false,
+     "p": null,
+     "caption": "Table 1: Average Performance Comparison Across All Datasets Model Metric CAMA Standard CoT Reflection React S.Discover P.Execute llama-3.2-1b Accuracy ( ↑ ) 55."
+    },
+    {
+     "table": "1",
+     "orientation": "row",
+     "direction": "lower_better",
+     "winner": 0.9,
+     "runner_up": 47.9,
+     "winner_dispersion": 0.9,
+     "runner_dispersion": 16.6,
+     "dispersion_kind": "std",
+     "n_runs": null,
+     "winner_cell": {
+      "x": 191.7,
+      "y": 189.0
+     },
+     "runner_cell": {
+      "x": 506.0,
+      "y": 189.0
+     },
+     "testable": false,
+     "p": null,
+     "caption": "Table 1: Average Performance Comparison Across All Datasets Model Metric CAMA Standard CoT Reflection React S.Discover P.Execute llama-3.2-1b Accuracy ( ↑ ) 55."
+    },
+    {
+     "table": "1",
+     "orientation": "row",
+     "direction": "lower_better",
+     "winner": 4.8,
+     "runner_up": 5.0,
+     "winner_dispersion": 0.2,
+     "runner_dispersion": 0.1,
+     "dispersion_kind": "std",
+     "n_runs": null,
+     "winner_cell": {
+      "x": 293.2,
+      "y": 200.5
+     },
+     "runner_cell": {
+      "x": 243.5,
+      "y": 200.5
+     },
+     "testable": false,
+     "p": null,
+     "caption": "Table 1: Average Performance Comparison Across All Datasets Model Metric CAMA Standard CoT Reflection React S.Discover P.Execute llama-3.2-1b Accuracy ( ↑ ) 55."
+    },
+    {
+     "table": "1",
+     "orientation": "row",
+     "direction": "lower_better",
+     "winner": 1.1,
+     "runner_up": 3.6,
+     "winner_dispersion": 0.1,
+     "runner_dispersion": 2.6,
+     "dispersion_kind": "std",
+     "n_runs": null,
+     "winner_cell": {
+      "x": 242.5,
+      "y": 212.0
+     },
+     "runner_cell": {
+      "x": 294.2,
+      "y": 212.0
+     },
+     "testable": false,
+     "p": null,
+     "caption": "Table 1: Average Performance Comparison Across All Datasets Model Metric CAMA Standard CoT Reflection React S.Discover P.Execute llama-3.2-1b Accuracy ( ↑ ) 55."
+    },
+    {
+     "table": "1",
+     "orientation": "row",
+     "direction": "higher_better",
+     "winner": 92.3,
+     "runner_up": 59.0,
+     "winner_dispersion": 1.5,
+     "runner_dispersion": 9.0,
+     "dispersion_kind": "std",
+     "n_runs": null,
+     "winner_cell": {
+      "x": 189.3,
+      "y": 228.3
+     },
+     "runner_cell": {
+      "x": 292.1,
+      "y": 228.3
+     },
+     "testable": false,
+     "p": null,
+     "caption": "Table 1: Average Performance Comparison Across All Datasets Model Metric CAMA Standard CoT Reflection React S.Discover P.Execute llama-3.2-1b Accuracy ( ↑ ) 55."
+    },
+    {
+     "table": "1",
+     "orientation": "row",
+     "direction": "lower_better",
+     "winner": 0.0,
+     "runner_up": 32.5,
+     "winner_dispersion": 0.0,
+     "runner_dispersion": 12.6,
+     "dispersion_kind": "std",
+     "n_runs": null,
+     "winner_cell": {
+      "x": 191.7,
+      "y": 239.8
+     },
+     "runner_cell": {
+      "x": 342.8,
+      "y": 239.8
+     },
+     "testable": false,
+     "p": null,
+     "caption": "Table 1: Average Performance Comparison Across All Datasets Model Metric CAMA Standard CoT Reflection React S.Discover P.Execute llama-3.2-1b Accuracy ( ↑ ) 55."
+    },
+    {
+     "table": "1",
+     "orientation": "row",
+     "direction": "lower_better",
+     "winner": 4.0,
+     "runner_up": 4.3,
+     "winner_dispersion": 0.9,
+     "runner_dispersion": 1.0,
+     "dispersion_kind": "std",
+     "n_runs": null,
+     "winner_cell": {
+      "x": 242.5,
+      "y": 251.3
+     },
+     "runner_cell": {
+      "x": 294.2,
+      "y": 251.3
+     },
+     "testable": false,
+     "p": null,
+     "caption": "Table 1: Average Performance Comparison Across All Datasets Model Metric CAMA Standard CoT Reflection React S.Discover P.Execute llama-3.2-1b Accuracy ( ↑ ) 55."
+    },
+    {
+     "table": "1",
+     "orientation": "row",
+     "direction": "lower_better",
+     "winner": 12.5,
+     "runner_up": 21.2,
+     "winner_dispersion": 5.2,
+     "runner_dispersion": 2.2,
+     "dispersion_kind": "std",
+     "n_runs": null,
+     "winner_cell": {
+      "x": 240.0,
+      "y": 262.8
+     },
+     "runner_cell": {
+      "x": 397.9,
+      "y": 262.8
+     },
+     "testable": false,
+     "p": null,
+     "caption": "Table 1: Average Performance Comparison Across All Datasets Model Metric CAMA Standard CoT Reflection React S.Discover P.Execute llama-3.2-1b Accuracy ( ↑ ) 55."
+    },
+    {
+     "table": "1",
+     "orientation": "row",
+     "direction": "higher_better",
+     "winner": 90.6,
+     "runner_up": 74.3,
+     "winner_dispersion": 3.1,
+     "runner_dispersion": 6.8,
+     "dispersion_kind": "std",
+     "n_runs": null,
+     "winner_cell": {
+      "x": 189.3,
+      "y": 279.0
+     },
+     "runner_cell": {
+      "x": 292.0,
+      "y": 279.0
+     },
+     "testable": false,
+     "p": null,
+     "caption": "Table 1: Average Performance Comparison Across All Datasets Model Metric CAMA Standard CoT Reflection React S.Discover P.Execute llama-3.2-1b Accuracy ( ↑ ) 55."
+    },
+    {
+     "table": "1",
+     "orientation": "row",
+     "direction": "lower_better",
+     "winner": 0.0,
+     "runner_up": 19.7,
+     "winner_dispersion": 0.0,
+     "runner_dispersion": 9.5,
+     "dispersion_kind": "std",
+     "n_runs": null,
+     "winner_cell": {
+      "x": 191.7,
+      "y": 290.5
+     },
+     "runner_cell": {
+      "x": 292.0,
+      "y": 290.5
+     },
+     "testable": false,
+     "p": null,
+     "caption": "Table 1: Average Performance Comparison Across All Datasets Model Metric CAMA Standard CoT Reflection React S.Discover P.Execute llama-3.2-1b Accuracy ( ↑ ) 55."
+    },
+    {
+     "table": "1",
+     "orientation": "row",
+     "direction": "lower_better",
+     "winner": 4.5,
+     "runner_up": 4.8,
+     "winner_dispersion": 1.1,
+     "runner_dispersion": 0.8,
+     "dispersion_kind": "std",
+     "n_runs": null,
+     "winner_cell": {
+      "x": 293.2,
+      "y": 302.1
+     },
+     "runner_cell": {
+      "x": 243.5,
+      "y": 302.1
+     },
+     "testable": false,
+     "p": null,
+     "caption": "Table 1: Average Performance Comparison Across All Datasets Model Metric CAMA Standard CoT Reflection React S.Discover P.Execute llama-3.2-1b Accuracy ( ↑ ) 55."
+    },
+    {
+     "table": "1",
+     "orientation": "row",
+     "direction": "lower_better",
+     "winner": 19.1,
+     "runner_up": 23.9,
+     "winner_dispersion": 3.6,
+     "runner_dispersion": 2.9,
+     "dispersion_kind": "std",
+     "n_runs": null,
+     "winner_cell": {
+      "x": 240.0,
+      "y": 313.6
+     },
+     "runner_cell": {
+      "x": 292.1,
+      "y": 313.6
+     },
+     "testable": false,
+     "p": null,
+     "caption": "Table 1: Average Performance Comparison Across All Datasets Model Metric CAMA Standard CoT Reflection React S.Discover P.Execute llama-3.2-1b Accuracy ( ↑ ) 55."
+    }
+   ],
+   "census_reader": {
+    "in_census_frame": true,
+    "census_id": "0973",
+    "tables": [
+     {
+      "caption_start": "Table 1: Average Performance Comparison Across All Datasets",
+      "results_table": "y",
+      "orientation": "row",
+      "bar_kind": "unlabelled",
+      "n_runs": "none",
+      "groups": [
+       {
+        "label": "llama-3.2-1b Accuracy (↑)",
+        "direction": "higher",
+        "winner_mean": "55.6",
+        "winner_disp": "8.1",
+        "runner_mean": "27.4",
+        "runner_disp": "17.2"
+       },
+       {
+        "label": "llama-3.2-1b Unknown (↓)",
+        "direction": "lower",
+        "winner_mean": "35.9",
+        "winner_disp": "5.4",
+        "runner_mean": "69.2",
+        "runner_disp": "19.4"
+       },
+       {
+        "label": "llama-3.2-1b Tokens (↓)",
+        "direction": "lower",
+        "winner_mean": "3.8",
+        "winner_disp": "0.8",
+        "runner_mean": "4.9",
+        "runner_disp": "0.2"
+       },
+       {
+        "label": "llama-3.2-1b Time (↓)",
+        "direction": "lower",
+        "winner_mean": "1.5",
+        "winner_disp": "0.6",
+        "runner_mean": "2.0",
+        "runner_disp": "0.4"
+       },
+       {
+        "label": "llama3-8b Accuracy (↑)",
+        "direction": "higher",
+        "winner_mean": "90.6",
+        "winner_disp": "2.3",
+        "runner_mean": "46.1",
+        "runner_disp": "15.0"
+       },
+       {
+        "label": "llama3-8b Unknown (↓)",
+        "direction": "lower",
+        "winner_mean": "0.9",
+        "winner_disp": "0.9",
+        "runner_mean": "47.9",
+        "runner_disp": "16.6"
+       },
+       {
+        "label": "llama3-8b Tokens (↓)",
+        "direction": "lower",
+        "winner_mean": "4.8",
+        "winner_disp": "0.2",
+        "runner_mean": "5.7",
+        "runner_disp": "1.3"
+       },
+       {
+        "label": "llama3-8b Time (↓)",
+        "direction": "lower",
+        "winner_mean": "1.1",
+        "winner_disp": "0.1",
+        "runner_mean": "3.6",
+        "runner_disp": "2.6"
+       },
+       {
+        "label": "llama3-70b Accuracy (↑)",
+        "direction": "higher",
+        "winner_mean": "92.3",
+        "winner_disp": "1.5",
+        "runner_mean": "59.0",
+        "runner_disp": "9.0"
+       },
+       {
+        "label": "llama3-70b Unknown (↓)",
+        "direction": "lower",
+        "winner_mean": "0.0",
+        "winner_disp": "0.0",
+        "runner_mean": "32.5",
+        "runner_disp": "12.6"
+       },
+       {
+        "label": "llama3-70b Tokens (↓)",
+        "direction": "lower",
+        "winner_mean": "4.0",
+        "winner_disp": "0.9",
+        "runner_mean": "4.3",
+        "runner_disp": "1.0"
+       },
+       {
+        "label": "llama3-70b Time (↓)",
+        "direction": "lower",
+        "winner_mean": "12.5",
+        "winner_disp": "5.2",
+        "runner_mean": "21.2",
+        "runner_disp": "2.2"
+       },
+       {
+        "label": "gpt-4o-mini Accuracy (↑)",
+        "direction": "higher",
+        "winner_mean": "90.6",
+        "winner_disp": "3.1",
+        "runner_mean": "74.3",
+        "runner_disp": "6.8"
+       },
+       {
+        "label": "gpt-4o-mini Unknown (↓)",
+        "direction": "lower",
+        "winner_mean": "0.0",
+        "winner_disp": "0.0",
+        "runner_mean": "19.7",
+        "runner_disp": "9.5"
+       },
+       {
+        "label": "gpt-4o-mini Tokens (↓)",
+        "direction": "lower",
+        "winner_mean": "4.5",
+        "winner_disp": "1.1",
+        "runner_mean": "4.8",
+        "runner_disp": "0.8"
+       },
+       {
+        "label": "gpt-4o-mini Time (↓)",
+        "direction": "lower",
+        "winner_mean": "19.1",
+        "winner_disp": "3.6",
+        "runner_mean": "23.9",
+        "runner_disp": "2.9"
+       }
+      ]
+     }
+    ]
+   },
+   "pilot_reader": {
+    "tables": [
+     {
+      "caption_start": "Table 1: Average Performance Comparison Across All Datasets",
+      "results_table": "y",
+      "orientation": "row",
+      "bar_kind": "unlabelled",
+      "n_runs": "none",
+      "groups": [
+       {
+        "label": "llama-3.2-1b / Accuracy (↑)",
+        "direction": "higher",
+        "winner_mean": "55.6",
+        "winner_disp": "8.1",
+        "runner_mean": "27.4",
+        "runner_disp": "17.2"
+       },
+       {
+        "label": "llama-3.2-1b / Unknown (↓)",
+        "direction": "lower",
+        "winner_mean": "35.9",
+        "winner_disp": "5.4",
+        "runner_mean": "69.2",
+        "runner_disp": "19.4"
+       },
+       {
+        "label": "llama-3.2-1b / Tokens (↓)",
+        "direction": "lower",
+        "winner_mean": "3.8",
+        "winner_disp": "0.8",
+        "runner_mean": "4.9",
+        "runner_disp": "0.2"
+       },
+       {
+        "label": "llama-3.2-1b / Time (↓)",
+        "direction": "lower",
+        "winner_mean": "1.5",
+        "winner_disp": "0.6",
+        "runner_mean": "2.0",
+        "runner_disp": "0.4"
+       },
+       {
+        "label": "llama3-8b / Accuracy (↑)",
+        "direction": "higher",
+        "winner_mean": "90.6",
+        "winner_disp": "2.3",
+        "runner_mean": "46.1",
+        "runner_disp": "15.0"
+       },
+       {
+        "label": "llama3-8b / Unknown (↓)",
+        "direction": "lower",
+        "winner_mean": "0.9",
+        "winner_disp": "0.9",
+        "runner_mean": "47.9",
+        "runner_disp": "16.6"
+       },
+       {
+        "label": "llama3-8b / Tokens (↓)",
+        "direction": "lower",
+        "winner_mean": "4.8",
+        "winner_disp": "0.2",
+        "runner_mean": "5.0",
+        "runner_disp": "0.1"
+       },
+       {
+        "label": "llama3-8b / Time (↓)",
+        "direction": "lower",
+        "winner_mean": "1.1",
+        "winner_disp": "0.1",
+        "runner_mean": "3.6",
+        "runner_disp": "2.6"
+       },
+       {
+        "label": "llama3-70b / Accuracy (↑)",
+        "direction": "higher",
+        "winner_mean": "92.3",
+        "winner_disp": "1.5",
+        "runner_mean": "59.0",
+        "runner_disp": "9.0"
+       },
+       {
+        "label": "llama3-70b / Unknown (↓)",
+        "direction": "lower",
+        "winner_mean": "0.0",
+        "winner_disp": "0.0",
+        "runner_mean": "32.5",
+        "runner_disp": "12.6"
+       },
+       {
+        "label": "llama3-70b / Tokens (↓)",
+        "direction": "lower",
+        "winner_mean": "4.0",
+        "winner_disp": "0.9",
+        "runner_mean": "4.3",
+        "runner_disp": "1.0"
+       },
+       {
+        "label": "llama3-70b / Time (↓)",
+        "direction": "lower",
+        "winner_mean": "12.5",
+        "winner_disp": "5.2",
+        "runner_mean": "21.2",
+        "runner_disp": "2.2"
+       },
+       {
+        "label": "gpt-4o-mini / Accuracy (↑)",
+        "direction": "higher",
+        "winner_mean": "90.6",
+        "winner_disp": "3.1",
+        "runner_mean": "74.3",
+        "runner_disp": "6.8"
+       },
+       {
+        "label": "gpt-4o-mini / Unknown (↓)",
+        "direction": "lower",
+        "winner_mean": "0.0",
+        "winner_disp": "0.0",
+        "runner_mean": "19.7",
+        "runner_disp": "9.5"
+       },
+       {
+        "label": "gpt-4o-mini / Tokens (↓)",
+        "direction": "lower",
+        "winner_mean": "4.5",
+        "winner_disp": "1.1",
+        "runner_mean": "4.8",
+        "runner_disp": "0.8"
+       },
+       {
+        "label": "gpt-4o-mini / Time (↓)",
+        "direction": "lower",
+        "winner_mean": "19.1",
+        "winner_disp": "3.6",
+        "runner_mean": "23.9",
+        "runner_disp": "2.9"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "P14": {
+   "frame": "caption_pilot",
+   "source_kit": "audits/aamas_pages",
+   "source_id": "014",
+   "paper": "1bb9e677228dc3bd",
+   "page": 5,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 2,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": true,
+    "census_id": "0117",
+    "tables": []
+   },
+   "pilot_reader": {
+    "tables": [
+     {
+      "caption_start": "Table 3: Item recipes in Craft World domain.",
+      "results_table": "n",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "none",
+      "groups": []
+     }
+    ]
+   }
+  },
+  "P15": {
+   "frame": "caption_pilot",
+   "source_kit": "audits/aamas_pages",
+   "source_id": "053",
+   "paper": "731e4a9f4abbf12b",
+   "page": 5,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": true,
+   "caption_pages_in_paper": 3,
+   "also_in_hard_case_kit": "0490",
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": true,
+    "census_id": "0490",
+    "tables": [
+     {
+      "caption_start": "Table 1: Empirical results",
+      "results_table": "y",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "none",
+      "groups": []
+     }
+    ]
+   },
+   "pilot_reader": {
+    "tables": [
+     {
+      "caption_start": "Table 1: Empirical results on all test tasks with various distributions and problem sizes. Each task includes 1K instances.",
+      "results_table": "y",
+      "orientation": "column",
+      "bar_kind": "none",
+      "n_runs": "none",
+      "groups": [
+       {
+        "label": "Uniform TSP-100 Gap",
+        "direction": "lower",
+        "winner_mean": "0.01%",
+        "winner_disp": "none",
+        "runner_mean": "0.01%",
+        "runner_disp": "none"
+       },
+       {
+        "label": "Uniform TSP-150 Gap",
+        "direction": "lower",
+        "winner_mean": "0.09%",
+        "winner_disp": "none",
+        "runner_mean": "0.12%",
+        "runner_disp": "none"
+       },
+       {
+        "label": "Uniform TSP-200 Gap",
+        "direction": "lower",
+        "winner_mean": "0.27%",
+        "winner_disp": "none",
+        "runner_mean": "0.78%",
+        "runner_disp": "none"
+       },
+       {
+        "label": "Uniform TSP-300 Gap",
+        "direction": "lower",
+        "winner_mean": "0.99%",
+        "winner_disp": "none",
+        "runner_mean": "3.08%",
+        "runner_disp": "none"
+       },
+       {
+        "label": "Cluster TSP-100 Gap",
+        "direction": "lower",
+        "winner_mean": "0.03%",
+        "winner_disp": "none",
+        "runner_mean": "0.03%",
+        "runner_disp": "none"
+       },
+       {
+        "label": "Cluster TSP-150 Gap",
+        "direction": "lower",
+        "winner_mean": "0.15%",
+        "winner_disp": "none",
+        "runner_mean": "0.25%",
+        "runner_disp": "none"
+       },
+       {
+        "label": "Cluster TSP-200 Gap",
+        "direction": "lower",
+        "winner_mean": "0.45%",
+        "winner_disp": "none",
+        "runner_mean": "1.08%",
+        "runner_disp": "none"
+       },
+       {
+        "label": "Cluster TSP-300 Gap",
+        "direction": "lower",
+        "winner_mean": "1.63%",
+        "winner_disp": "none",
+        "runner_mean": "3.52%",
+        "runner_disp": "none"
+       },
+       {
+        "label": "Mixed TSP-100 Gap",
+        "direction": "lower",
+        "winner_mean": "0.03%",
+        "winner_disp": "none",
+        "runner_mean": "0.04%",
+        "runner_disp": "none"
+       },
+       {
+        "label": "Mixed TSP-150 Gap",
+        "direction": "lower",
+        "winner_mean": "0.17%",
+        "winner_disp": "none",
+        "runner_mean": "0.21%",
+        "runner_disp": "none"
+       },
+       {
+        "label": "Mixed TSP-200 Gap",
+        "direction": "lower",
+        "winner_mean": "0.39%",
+        "winner_disp": "none",
+        "runner_mean": "0.81%",
+        "runner_disp": "none"
+       },
+       {
+        "label": "Mixed TSP-300 Gap",
+        "direction": "lower",
+        "winner_mean": "1.16%",
+        "winner_disp": "none",
+        "runner_mean": "3.05%",
+        "runner_disp": "none"
+       },
+       {
+        "label": "Explosion TSP-100 Gap",
+        "direction": "lower",
+        "winner_mean": "0.01%",
+        "winner_disp": "none",
+        "runner_mean": "0.01%",
+        "runner_disp": "none"
+       },
+       {
+        "label": "Explosion TSP-150 Gap",
+        "direction": "lower",
+        "winner_mean": "0.09%",
+        "winner_disp": "none",
+        "runner_mean": "0.14%",
+        "runner_disp": "none"
+       },
+       {
+        "label": "Explosion TSP-200 Gap",
+        "direction": "lower",
+        "winner_mean": "0.31%",
+        "winner_disp": "none",
+        "runner_mean": "0.84%",
+        "runner_disp": "none"
+       },
+       {
+        "label": "Explosion TSP-300 Gap",
+        "direction": "lower",
+        "winner_mean": "1.42%",
+        "winner_disp": "none",
+        "runner_mean": "3.14%",
+        "runner_disp": "none"
+       },
+       {
+        "label": "Expansion TSP-100 Gap",
+        "direction": "lower",
+        "winner_mean": "0.15%",
+        "winner_disp": "none",
+        "runner_mean": "0.18%",
+        "runner_disp": "none"
+       },
+       {
+        "label": "Expansion TSP-150 Gap",
+        "direction": "lower",
+        "winner_mean": "0.58%",
+        "winner_disp": "none",
+        "runner_mean": "0.73%",
+        "runner_disp": "none"
+       },
+       {
+        "label": "Expansion TSP-200 Gap",
+        "direction": "lower",
+        "winner_mean": "1.17%",
+        "winner_disp": "none",
+        "runner_mean": "1.56%",
+        "runner_disp": "none"
+       },
+       {
+        "label": "Expansion TSP-300 Gap",
+        "direction": "lower",
+        "winner_mean": "2.79%",
+        "winner_disp": "none",
+        "runner_mean": "3.14%",
+        "runner_disp": "none"
+       },
+       {
+        "label": "Rotation TSP-100 Gap",
+        "direction": "lower",
+        "winner_mean": "0.02%",
+        "winner_disp": "none",
+        "runner_mean": "0.02%",
+        "runner_disp": "none"
+       },
+       {
+        "label": "Rotation TSP-150 Gap",
+        "direction": "lower",
+        "winner_mean": "0.09%",
+        "winner_disp": "none",
+        "runner_mean": "0.15%",
+        "runner_disp": "none"
+       },
+       {
+        "label": "Rotation TSP-200 Gap",
+        "direction": "lower",
+        "winner_mean": "0.29%",
+        "winner_disp": "none",
+        "runner_mean": "0.83%",
+        "runner_disp": "none"
+       },
+       {
+        "label": "Rotation TSP-300 Gap",
+        "direction": "lower",
+        "winner_mean": "1.15%",
+        "winner_disp": "none",
+        "runner_mean": "3.34%",
+        "runner_disp": "none"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "P16": {
+   "frame": "caption_pilot",
+   "source_kit": "audits/aamas_pages",
+   "source_id": "045",
+   "paper": "20c8391e27af1e28",
+   "page": 6,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 3,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": true,
+    "census_id": "0147",
+    "tables": [
+     {
+      "caption_start": "Table 3: Performance Test.",
+      "results_table": "y",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "1000",
+      "groups": []
+     },
+     {
+      "caption_start": "Table 4: Generalization Test.",
+      "results_table": "y",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "1000",
+      "groups": []
+     }
+    ]
+   },
+   "pilot_reader": {
+    "tables": [
+     {
+      "caption_start": "Table 3: Performance Test. Each matchup evaluated for 1000 games, with errors ±0.03.",
+      "results_table": "y",
+      "orientation": "none",
+      "bar_kind": "unlabelled",
+      "n_runs": "1000",
+      "groups": []
+     },
+     {
+      "caption_start": "Table 4: Generalization Test. Each matchup evaluated for 1000 games, with errors ±0.03.",
+      "results_table": "y",
+      "orientation": "none",
+      "bar_kind": "unlabelled",
+      "n_runs": "1000",
+      "groups": []
+     },
+     {
+      "caption_start": "Table 5: Team Similarity Score Statistics. Comparison between the ≤ 64 seen teams and the 72 unseen teams.",
+      "results_table": "n",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "5",
+      "groups": []
+     }
+    ]
+   }
+  },
+  "P17": {
+   "frame": "caption_pilot",
+   "source_kit": "audits/aamas_pages",
+   "source_id": "032",
+   "paper": "1738a1f014a4956f",
+   "page": 6,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 2,
+   "also_in_hard_case_kit": null,
+   "parser": [
+    {
+     "table": "1",
+     "orientation": "column",
+     "direction": "lower_better",
+     "winner": 0.1,
+     "runner_up": 6.71,
+     "winner_dispersion": null,
+     "runner_dispersion": null,
+     "dispersion_kind": "none",
+     "n_runs": null,
+     "winner_cell": {
+      "x": 439.0,
+      "y": 158.5
+     },
+     "runner_cell": {
+      "x": 439.0,
+      "y": 169.1
+     },
+     "testable": false,
+     "p": null,
+     "caption": "Algorithm 2 1 def modelCheck ( G , ¤ 𝑠 , 𝜑 = ♭ 1 · · · ♭ 𝑚 .𝜓 \u0002 𝜋 𝑘 : ® 𝑥 𝑘 \u0003 𝑚 𝑘 = 1 ) : 2 // Assume 𝜓 contains no nested state formulas 3 A 𝑚 + 1 = LTLtoAPA ("
+    }
+   ],
+   "census_reader": {
+    "in_census_frame": true,
+    "census_id": "0085",
+    "tables": [
+     {
+      "caption_start": "Table 1: We compare HyMASMC",
+      "results_table": "y",
+      "orientation": "row",
+      "bar_kind": "none",
+      "n_runs": "none",
+      "groups": [
+       {
+        "label": "2",
+        "direction": "lower",
+        "winner_mean": "0.1",
+        "winner_disp": "none",
+        "runner_mean": "0.4",
+        "runner_disp": "none"
+       },
+       {
+        "label": "3",
+        "direction": "lower",
+        "winner_mean": "1.9",
+        "winner_disp": "none",
+        "runner_mean": "6.71",
+        "runner_disp": "none"
+       },
+       {
+        "label": "4",
+        "direction": "lower",
+        "winner_mean": "24.5",
+        "winner_disp": "none",
+        "runner_mean": "313.7",
+        "runner_disp": "none"
+       },
+       {
+        "label": "5",
+        "direction": "lower",
+        "winner_mean": "332.1",
+        "winner_disp": "none",
+        "runner_mean": "TO",
+        "runner_disp": "none"
+       }
+      ]
+     }
+    ]
+   },
+   "pilot_reader": {
+    "tables": [
+     {
+      "caption_start": "Table 1: We compare HyMASMC and MCMAS-SL[1G] on the scheduler problem from [24].",
+      "results_table": "y",
+      "orientation": "row",
+      "bar_kind": "none",
+      "n_runs": "none",
+      "groups": [
+       {
+        "label": "n = 2 (|S| = 72, |S_reach| = 9), time in seconds",
+        "direction": "lower",
+        "winner_mean": "0.1",
+        "winner_disp": "none",
+        "runner_mean": "0.4",
+        "runner_disp": "none"
+       },
+       {
+        "label": "n = 3 (|S| = 432, |S_reach| = 21), time in seconds",
+        "direction": "lower",
+        "winner_mean": "1.9",
+        "winner_disp": "none",
+        "runner_mean": "6.71",
+        "runner_disp": "none"
+       },
+       {
+        "label": "n = 4 (|S| = 2592, |S_reach| = 49), time in seconds",
+        "direction": "lower",
+        "winner_mean": "24.5",
+        "winner_disp": "none",
+        "runner_mean": "313.7",
+        "runner_disp": "none"
+       },
+       {
+        "label": "n = 5 (|S| = 15552, |S_reach| = 113), time in seconds",
+        "direction": "lower",
+        "winner_mean": "332.1",
+        "winner_disp": "none",
+        "runner_mean": "TO",
+        "runner_disp": "none"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "P18": {
+   "frame": "caption_pilot",
+   "source_kit": "audits/aamas_pages",
+   "source_id": "070",
+   "paper": "56a2992003182afe",
+   "page": 7,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 2,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": false,
+    "census_id": null,
+    "tables": null
+   },
+   "pilot_reader": {
+    "tables": [
+     {
+      "caption_start": "Table 2: Testing campaign with ROS simulations. As the first task to be scheduled, SSDB sync is not impacted by previous tasks",
+      "results_table": "n",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "none",
+      "groups": []
+     }
+    ]
+   }
+  },
+  "P19": {
+   "frame": "caption_pilot",
+   "source_kit": "audits/aamas_pages",
+   "source_id": "017",
+   "paper": "be2f021c33934883",
+   "page": 6,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 1,
+   "also_in_hard_case_kit": "0792",
+   "parser": [
+    {
+     "table": "1",
+     "orientation": "row",
+     "direction": "lower_better",
+     "winner": 2.0,
+     "runner_up": 3.0,
+     "winner_dispersion": null,
+     "runner_dispersion": null,
+     "dispersion_kind": "unknown",
+     "n_runs": 5,
+     "winner_cell": {
+      "x": 63.8,
+      "y": 281.3
+     },
+     "runner_cell": {
+      "x": 197.6,
+      "y": 281.3
+     },
+     "testable": false,
+     "p": null,
+     "caption": "ance [ 43 ]. Note that apart from Figure 3 revealing that the 1-link arm tasks are similar, it is not clear which task is easier or harder between the two. 1-Li"
+    }
+   ],
+   "census_reader": {
+    "in_census_frame": true,
+    "census_id": "0792",
+    "tables": [
+     {
+      "caption_start": "Table 1: PIC and POIC values",
+      "results_table": "y",
+      "orientation": "none",
+      "bar_kind": "ci",
+      "n_runs": "10^4",
+      "groups": []
+     }
+    ]
+   },
+   "pilot_reader": {
+    "tables": [
+     {
+      "caption_start": "Table 1: PIC and POIC values with N = 10^4 samples (random policies). High PIC and POIC values correspond to easier tasks, while low values correspond to harder",
+      "results_table": "y",
+      "orientation": "none",
+      "bar_kind": "unlabelled",
+      "n_runs": "10^4",
+      "groups": []
+     }
+    ]
+   }
+  },
+  "P20": {
+   "frame": "caption_pilot",
+   "source_kit": "audits/aamas_pages",
+   "source_id": "069",
+   "paper": "b7aa90e3ea227511",
+   "page": 5,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 1,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": true,
+    "census_id": "0763",
+    "tables": [
+     {
+      "caption_start": "Table 1: Mean Feature Value",
+      "results_table": "y",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "none",
+      "groups": []
+     }
+    ]
+   },
+   "pilot_reader": {
+    "tables": [
+     {
+      "caption_start": "Table 1: Mean Feature Value Differences",
+      "results_table": "y",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "none",
+      "groups": []
+     }
+    ]
+   }
+  },
+  "P21": {
+   "frame": "caption_pilot",
+   "source_kit": "audits/aamas_pages",
+   "source_id": "073",
+   "paper": "a718895b3cca4a7d",
+   "page": 2,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": true,
+   "caption_pages_in_paper": 3,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": true,
+    "census_id": "0708",
+    "tables": [
+     {
+      "caption_start": "Table 1: Comparison of corrupted bandits algorithms",
+      "results_table": "n",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "none",
+      "groups": []
+     }
+    ]
+   },
+   "pilot_reader": {
+    "tables": [
+     {
+      "caption_start": "Table 1: Comparison of corrupted bandits algorithms",
+      "results_table": "n",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "none",
+      "groups": []
+     }
+    ]
+   }
+  },
+  "P22": {
+   "frame": "caption_pilot",
+   "source_kit": "audits/aamas_pages",
+   "source_id": "052",
+   "paper": "19602a47d63c8fce",
+   "page": 6,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 1,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": true,
+    "census_id": "0098",
+    "tables": [
+     {
+      "caption_start": "Table 1: Performance of RBQL and Benchmarks.",
+      "results_table": "y",
+      "orientation": "none",
+      "bar_kind": "sd",
+      "n_runs": "10",
+      "groups": [
+       {
+        "label": "Taxi",
+        "direction": "higher",
+        "winner_mean": "10.60",
+        "winner_disp": "3.26",
+        "runner_mean": "3.27",
+        "runner_disp": "3.25"
+       },
+       {
+        "label": "Postman5",
+        "direction": "higher",
+        "winner_mean": "35.75",
+        "winner_disp": "0.11",
+        "runner_mean": "33.84",
+        "runner_disp": "1.05"
+       },
+       {
+        "label": "Postman7",
+        "direction": "higher",
+        "winner_mean": "28.60",
+        "winner_disp": "1.12",
+        "runner_mean": "28.23",
+        "runner_disp": "4.89"
+       }
+      ]
+     }
+    ]
+   },
+   "pilot_reader": {
+    "tables": [
+     {
+      "caption_start": "Table 1: Performance of RBQL and Benchmarks.",
+      "results_table": "y",
+      "orientation": "column",
+      "bar_kind": "unlabelled",
+      "n_runs": "10",
+      "groups": [
+       {
+        "label": "Taxi",
+        "direction": "higher",
+        "winner_mean": "10.60",
+        "winner_disp": "3.26",
+        "runner_mean": "3.27",
+        "runner_disp": "3.25"
+       },
+       {
+        "label": "Postman5",
+        "direction": "higher",
+        "winner_mean": "35.75",
+        "winner_disp": "0.11",
+        "runner_mean": "33.84",
+        "runner_disp": "1.05"
+       },
+       {
+        "label": "Postman7",
+        "direction": "higher",
+        "winner_mean": "28.60",
+        "winner_disp": "1.12",
+        "runner_mean": "28.23",
+        "runner_disp": "4.89"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "P23": {
+   "frame": "caption_pilot",
+   "source_kit": "audits/aamas_pages",
+   "source_id": "051",
+   "paper": "0dd1c6fb437d7729",
+   "page": 1,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 2,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": false,
+    "census_id": null,
+    "tables": null
+   },
+   "pilot_reader": {
+    "tables": [
+     {
+      "caption_start": "Table 1: Summary of results.",
+      "results_table": "n",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "none",
+      "groups": []
+     }
+    ]
+   }
+  },
+  "P24": {
+   "frame": "caption_pilot",
+   "source_kit": "audits/aamas_pages",
+   "source_id": "048",
+   "paper": "e8fc2285294081d6",
+   "page": 7,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": true,
+   "caption_pages_in_paper": 1,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": false,
+    "census_id": null,
+    "tables": null
+   },
+   "pilot_reader": {
+    "tables": [
+     {
+      "caption_start": "Table 1: Properties of specific veto core consistent voting rules.",
+      "results_table": "n",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "none",
+      "groups": []
+     }
+    ]
+   }
+  },
+  "P25": {
+   "frame": "caption_pilot",
+   "source_kit": "audits/aamas_pages",
+   "source_id": "077",
+   "paper": "78196ba3aaebe72a",
+   "page": 6,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": true,
+   "caption_pages_in_paper": 1,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": true,
+    "census_id": "0518",
+    "tables": [
+     {
+      "caption_start": "Table 1: Means for both conditions with SD in parentheses",
+      "results_table": "y",
+      "orientation": "none",
+      "bar_kind": "sd",
+      "n_runs": "none",
+      "groups": []
+     }
+    ]
+   },
+   "pilot_reader": {
+    "tables": [
+     {
+      "caption_start": "Table 1: Means for both conditions with SD in parentheses",
+      "results_table": "y",
+      "orientation": "none",
+      "bar_kind": "sd",
+      "n_runs": "none",
+      "groups": []
+     }
+    ]
+   }
+  },
+  "P26": {
+   "frame": "caption_pilot",
+   "source_kit": "audits/aamas_pages",
+   "source_id": "027",
+   "paper": "1fe287bbe66ddde1",
+   "page": 7,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 3,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": false,
+    "census_id": null,
+    "tables": null
+   },
+   "pilot_reader": {
+    "tables": [
+     {
+      "caption_start": "Table 5: Description of the partitions obtained in the EVS case study. Average distances are computed as the mean pair-wise distances",
+      "results_table": "y",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "none",
+      "groups": []
+     }
+    ]
+   }
+  },
+  "P27": {
+   "frame": "caption_pilot",
+   "source_kit": "audits/aamas_pages",
+   "source_id": "064",
+   "paper": "0e6371874bf186de",
+   "page": 3,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 3,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": true,
+    "census_id": "0052",
+    "tables": []
+   },
+   "pilot_reader": {
+    "tables": [
+     {
+      "caption_start": "Table 1: Summary of Experimental Parameters by Study",
+      "results_table": "n",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "10 (Scalability, Comm. Robustness); 1 (Fault Severity, Cascade Timeline); 3 (Zero-Delay); 5 (Ablation)",
+      "groups": []
+     }
+    ]
+   }
+  },
+  "P28": {
+   "frame": "caption_pilot",
+   "source_kit": "audits/aamas_pages",
+   "source_id": "010",
+   "paper": "a169e92bf53ec60d",
+   "page": 5,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 2,
+   "also_in_hard_case_kit": null,
+   "parser": [
+    {
+     "table": "2",
+     "orientation": "row",
+     "direction": "higher_better",
+     "winner": 2.0,
+     "runner_up": 1.0,
+     "winner_dispersion": null,
+     "runner_dispersion": null,
+     "dispersion_kind": "none",
+     "n_runs": 5,
+     "winner_cell": {
+      "x": 120.9,
+      "y": 230.9
+     },
+     "runner_cell": {
+      "x": 330.6,
+      "y": 230.9
+     },
+     "testable": false,
+     "p": null,
+     "caption": "Table 2: Parameter setting Parameter Value Parameter Value Learning Rate 0.0005 Target Update Interval 200 Discount factor 0.9 Soft update factor 0.001 1 0.8 0."
+    }
+   ],
+   "census_reader": {
+    "in_census_frame": true,
+    "census_id": "0682",
+    "tables": []
+   },
+   "pilot_reader": {
+    "tables": [
+     {
+      "caption_start": "Table 1: Comparison Algorithms",
+      "results_table": "n",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "none",
+      "groups": []
+     }
+    ]
+   }
+  },
+  "P29": {
+   "frame": "caption_pilot",
+   "source_kit": "audits/aamas_pages",
+   "source_id": "031",
+   "paper": "0fc34f7766a8e8d3",
+   "page": 3,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": true,
+   "caption_pages_in_paper": 2,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": false,
+    "census_id": null,
+    "tables": null
+   },
+   "pilot_reader": {
+    "tables": [
+     {
+      "caption_start": "Table 1: Computational profile of the teacher model. The Encoder and LSTM modules are identified as the primary bottlenecks.",
+      "results_table": "n",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "none",
+      "groups": []
+     }
+    ]
+   }
+  },
+  "P30": {
+   "frame": "caption_pilot",
+   "source_kit": "audits/aamas_pages",
+   "source_id": "087",
+   "paper": "ab365d6b1d17aedb",
+   "page": 3,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 1,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": false,
+    "census_id": null,
+    "tables": null
+   },
+   "pilot_reader": {
+    "tables": [
+     {
+      "caption_start": "Table 1: Notation table for the ACE framework",
+      "results_table": "n",
+      "orientation": "none",
+      "bar_kind": "none",
+      "n_runs": "none",
+      "groups": []
+     }
+    ]
+   }
+  },
+  "P31": {
+   "frame": "noncaption",
+   "source_kit": "audits/aamas_noncaption",
+   "source_id": "0005",
+   "paper": "11cbad47f48357a6",
+   "page": 3,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 3,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": false,
+    "census_id": null,
+    "tables": null
+   },
+   "noncaption_reader": {
+    "tables": []
+   }
+  },
+  "P32": {
+   "frame": "noncaption",
+   "source_kit": "audits/aamas_noncaption",
+   "source_id": "0076",
+   "paper": "c85a9446a9d2acb1",
+   "page": 7,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 3,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": false,
+    "census_id": null,
+    "tables": null
+   },
+   "noncaption_reader": {
+    "tables": []
+   }
+  },
+  "P33": {
+   "frame": "noncaption",
+   "source_kit": "audits/aamas_noncaption",
+   "source_id": "0034",
+   "paper": "5d099c6dcea4d487",
+   "page": 3,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 0,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": false,
+    "census_id": null,
+    "tables": null
+   },
+   "noncaption_reader": {
+    "tables": []
+   }
+  },
+  "P34": {
+   "frame": "noncaption",
+   "source_kit": "audits/aamas_noncaption",
+   "source_id": "0039",
+   "paper": "7764b24a40c905a2",
+   "page": 8,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 1,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": false,
+    "census_id": null,
+    "tables": null
+   },
+   "noncaption_reader": {
+    "tables": []
+   }
+  },
+  "P35": {
+   "frame": "noncaption",
+   "source_kit": "audits/aamas_noncaption",
+   "source_id": "0070",
+   "paper": "bc368f6ce75861ed",
+   "page": 4,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 1,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": false,
+    "census_id": null,
+    "tables": null
+   },
+   "noncaption_reader": {
+    "tables": []
+   }
+  },
+  "P36": {
+   "frame": "noncaption",
+   "source_kit": "audits/aamas_noncaption",
+   "source_id": "0019",
+   "paper": "2afc9738f6aa37b8",
+   "page": 1,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 0,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": false,
+    "census_id": null,
+    "tables": null
+   },
+   "noncaption_reader": {
+    "tables": []
+   }
+  },
+  "P37": {
+   "frame": "noncaption",
+   "source_kit": "audits/aamas_noncaption",
+   "source_id": "0022",
+   "paper": "3661c580a2790a9d",
+   "page": 8,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 2,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": false,
+    "census_id": null,
+    "tables": null
+   },
+   "noncaption_reader": {
+    "tables": []
+   }
+  },
+  "P38": {
+   "frame": "noncaption",
+   "source_kit": "audits/aamas_noncaption",
+   "source_id": "0037",
+   "paper": "6a6ad36ff1b028a7",
+   "page": 4,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 0,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": false,
+    "census_id": null,
+    "tables": null
+   },
+   "noncaption_reader": {
+    "tables": []
+   }
+  },
+  "P39": {
+   "frame": "noncaption",
+   "source_kit": "audits/aamas_noncaption",
+   "source_id": "0051",
+   "paper": "91afa760d339d170",
+   "page": 1,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 0,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": false,
+    "census_id": null,
+    "tables": null
+   },
+   "noncaption_reader": {
+    "tables": []
+   }
+  },
+  "P40": {
+   "frame": "noncaption",
+   "source_kit": "audits/aamas_noncaption",
+   "source_id": "0031",
+   "paper": "5497c2b1c038517c",
+   "page": 7,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 0,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": false,
+    "census_id": null,
+    "tables": null
+   },
+   "noncaption_reader": {
+    "tables": []
+   }
+  },
+  "P41": {
+   "frame": "noncaption",
+   "source_kit": "audits/aamas_noncaption",
+   "source_id": "0035",
+   "paper": "62aad5318a8251e8",
+   "page": 8,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 2,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": false,
+    "census_id": null,
+    "tables": null
+   },
+   "noncaption_reader": {
+    "tables": []
+   }
+  },
+  "P42": {
+   "frame": "noncaption",
+   "source_kit": "audits/aamas_noncaption",
+   "source_id": "0012",
+   "paper": "1b1830302c91324f",
+   "page": 4,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 0,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": false,
+    "census_id": null,
+    "tables": null
+   },
+   "noncaption_reader": {
+    "tables": []
+   }
+  },
+  "P43": {
+   "frame": "noncaption",
+   "source_kit": "audits/aamas_noncaption",
+   "source_id": "0021",
+   "paper": "3533a4de21ffb78c",
+   "page": 8,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 2,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": false,
+    "census_id": null,
+    "tables": null
+   },
+   "noncaption_reader": {
+    "tables": []
+   }
+  },
+  "P44": {
+   "frame": "noncaption",
+   "source_kit": "audits/aamas_noncaption",
+   "source_id": "0060",
+   "paper": "a018250b63ed410d",
+   "page": 7,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 0,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": false,
+    "census_id": null,
+    "tables": null
+   },
+   "noncaption_reader": {
+    "tables": []
+   }
+  },
+  "P45": {
+   "frame": "noncaption",
+   "source_kit": "audits/aamas_noncaption",
+   "source_id": "0096",
+   "paper": "f70b7211aa925c3f",
+   "page": 2,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 1,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": false,
+    "census_id": null,
+    "tables": null
+   },
+   "noncaption_reader": {
+    "tables": []
+   }
+  },
+  "P46": {
+   "frame": "noncaption",
+   "source_kit": "audits/aamas_noncaption",
+   "source_id": "0027",
+   "paper": "44f7d1fa0e489166",
+   "page": 5,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 1,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": false,
+    "census_id": null,
+    "tables": null
+   },
+   "noncaption_reader": {
+    "tables": []
+   }
+  },
+  "P47": {
+   "frame": "noncaption",
+   "source_kit": "audits/aamas_noncaption",
+   "source_id": "0006",
+   "paper": "12427532d9055ab7",
+   "page": 5,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 0,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": false,
+    "census_id": null,
+    "tables": null
+   },
+   "noncaption_reader": {
+    "tables": []
+   }
+  },
+  "P48": {
+   "frame": "noncaption",
+   "source_kit": "audits/aamas_noncaption",
+   "source_id": "0075",
+   "paper": "c285fe01c90092d6",
+   "page": 1,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 0,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": false,
+    "census_id": null,
+    "tables": null
+   },
+   "noncaption_reader": {
+    "tables": []
+   }
+  },
+  "P49": {
+   "frame": "noncaption",
+   "source_kit": "audits/aamas_noncaption",
+   "source_id": "0095",
+   "paper": "f61b395d942f6d3a",
+   "page": 3,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 3,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": false,
+    "census_id": null,
+    "tables": null
+   },
+   "noncaption_reader": {
+    "tables": []
+   }
+  },
+  "P50": {
+   "frame": "noncaption",
+   "source_kit": "audits/aamas_noncaption",
+   "source_id": "0084",
+   "paper": "dbeba0d09c81ce94",
+   "page": 2,
+   "zoom": 2.0,
+   "width": 1224,
+   "height": 1584,
+   "in_overlap": false,
+   "caption_pages_in_paper": 2,
+   "also_in_hard_case_kit": null,
+   "parser": [],
+   "census_reader": {
+    "in_census_frame": false,
+    "census_id": null,
+    "tables": null
+   },
+   "noncaption_reader": {
+    "tables": []
+   }
+  }
+ }
+}

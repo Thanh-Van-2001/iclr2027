@@ -1,5 +1,10 @@
 # Hai việc gán nhãn tay cho bài AAMAS (tổng ~1–1,5 giờ)
 
+> Bổ sung (vòng phản biện AAMAS 2027): các bộ kiểm tra **mù** mới (A: 140 so sánh tham chiếu,
+> B: 30 trang ngẫu nhiên, C3: 18 run count tranh chấp, C4: loại thanh sai số) mô tả trong
+> `README.md` (tiếng Anh). Trang `empty_pages/label.html` ở mục B dưới đây đã được làm lại: nhập
+> mã người gán nhãn trước, tự lưu trong trình duyệt, có link mở PDF; cột CSV vẫn như cũ.
+
 Sáu vòng phản biện đều nói cùng một điều: bài chưa có một nhãn nào do **người** gán.
 Hai việc dưới đây là hai chỗ phản biện chỉ đích danh; xong việc nào thì chạy
 `python aamas/human_score.py` rồi `sh run_all_aamas.sh`, số sẽ tự vào bảng.

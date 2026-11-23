@@ -1,0 +1,44 @@
+{
+ "kit": "bartype_random",
+ "python": "3.14.4",
+ "script": "aamas/human_validation_kits.py",
+ "kit_version": "aamas-hv-1",
+ "seeds": {
+  "bartype": 20261130
+ },
+ "pool_rule": "The pool: tables (paper, table, page) on which the frozen parser read an\nerror bar on both sides of at least one comparison and found no statement\nof what the bar is (dispersion_kind 'unknown', read as a deviation by the\npaper's convention), plus the reference-set tables whose bar kind the two\nreaders labelled differently. The unit drawn is the paper, because the\nwhole PDF's methodology is what decides; every pool table of a drawn\npaper is checked.",
+ "pool": {
+  "tables": 30,
+  "papers": 19,
+  "by_reason": {
+   "parser_unlabelled": 27,
+   "readers_disagree": 3
+  }
+ },
+ "draw": "the pool's papers in a seeded random order (random.Random(seed).shuffle of the sorted ids); the first 12 papers are the core sample and every later paper is a reserve to be taken strictly in order, so any prefix is a simple random sample of papers",
+ "counts": {
+  "core_papers": 12,
+  "core_tables": 16,
+  "reserve_papers": 7,
+  "reserve_tables": 14
+ },
+ "images": "none shipped: these tables are checked in the public PDF (link) or data/corpus",
+ "hidden_from_annotators": [
+  "parser values, run counts and verdicts",
+  "the reason each table is in the pool"
+ ],
+ "sources": [
+  {
+   "path": "out/aamas/analysis.json (the frozen run record)",
+   "sha256": "af0e71067f84fd0f71d3d40e9616949977e6dcf383b62ec0542d32590b93d026"
+  },
+  {
+   "path": "audits/aamas_gold/labels.csv",
+   "sha256": "f4528ba5f86109ab58252248ce3eea0a23409b916c444f093926bdd168512521"
+  },
+  {
+   "path": "audits/aamas_gold_gemini/labels.csv",
+   "sha256": "60c529e1c30fe5ce0202dbcbd505eb2aa774d0a222852448069185d2e066f738"
+  }
+ ]
+}

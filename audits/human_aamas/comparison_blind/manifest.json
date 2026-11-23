@@ -1,0 +1,41 @@
+{
+ "kit": "comparison_blind",
+ "python": "3.14.4",
+ "script": "aamas/human_validation_kits.py",
+ "kit_version": "aamas-hv-1",
+ "seeds": {
+  "core": 20261123,
+  "overlap": 20261124,
+  "blind_order": 20261125
+ },
+ "frame": "the 140 reference comparisons of audits/aamas_gold (100 drawn from the parser's testable comparisons, 40 from its bar-less ones, after the parser was frozen)",
+ "draw": {
+  "core": "70 of the 95 boxed testable items and 30 of the 35 boxed bar-less items, simple random samples without replacement (random.Random(seed).sample on the sorted ids)",
+  "overlap": "21 + 9 of the core, same rule, for a second annotator",
+  "optional": "the other 40 items, including the 10 the paper's kit rendered without a box (their answers are void, as in the paper)",
+  "blind_ids": "core first then optional, each shuffled with blind_order; ids B001-B140 carry no stratum"
+ },
+ "counts": {
+  "items": 140,
+  "core": 100,
+  "overlap": 30,
+  "optional": 40
+ },
+ "sampling_fractions": {
+  "testable": "70/95",
+  "no_bar": "30/35"
+ },
+ "report_by_stratum": "the testable stratum is deliberately oversampled relative to the corpus; never pool the two strata",
+ "hidden_from_annotators": [
+  "parser values and verdicts",
+  "both readers' labels",
+  "the stratum of each item",
+  "the run sentences (only shipped for one stratum, so showing them would reveal it)"
+ ],
+ "sources": [
+  {
+   "path": "audits/aamas_gold/items.json",
+   "sha256": "c685f4d0fbaceb8ad7228eb87e2bd0d2636e8db7693d7b6dff51315ddd1a50a9"
+  }
+ ]
+}

@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>AAMAS run counts from the full paper</title><style>
+:root{--bg:#f4f4f2;--panel:#fff;--ink:#141414;--muted:#5b5b5b;--line:#d8d8d4;--accent:#0b5cad;--warn:#b3261e;--ok:#1b7a2f;--hl:#fff4c2}
+*{box-sizing:border-box}
+body{font-family:system-ui,"Segoe UI",Arial,sans-serif;margin:0;background:var(--bg);color:var(--ink);font-size:14px}
+header{position:sticky;top:0;z-index:5;padding:8px 12px;background:var(--panel);border-bottom:1px solid var(--line);display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+header b{font-size:15px}
+header label{font-size:13px}
+button{padding:5px 10px;font-size:13px;cursor:pointer;border:1px solid #999;background:#fafafa;border-radius:3px}
+button.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+#guide{font-size:13px;padding:8px 14px;background:var(--hl);border-bottom:1px solid var(--line);line-height:1.5;max-height:40vh;overflow:auto}
+#guide h3{margin:6px 0 4px;font-size:14px}
+#wrap{display:flex;gap:10px;padding:10px;align-items:flex-start}
+#left{flex:1 1 58%;min-width:0;background:var(--panel);border:1px solid var(--line);padding:6px;max-height:calc(100vh - 120px);overflow:auto}
+#right{flex:0 0 480px;max-width:100%;background:var(--panel);border:1px solid var(--line);padding:10px;max-height:calc(100vh - 120px);overflow:auto}
+@media (max-width:900px){#wrap{flex-direction:column}#right{flex-basis:auto;width:100%}}
+#imgbox{position:relative;display:inline-block;width:100%}
+#imgbox img{width:100%;display:block}
+#imgbox.zoom{width:200%}
+.banner{background:#fdecea;color:var(--warn);border:1px solid #f3b8b3;padding:8px;margin-bottom:6px;font-weight:600}
+.banner a{color:var(--warn)}
+#context{white-space:pre-wrap;font-size:12px;background:#f7f7f5;border:1px solid var(--line);padding:6px;max-height:220px;overflow:auto}
+.meta{font-size:12.5px;color:var(--muted);margin-bottom:6px;line-height:1.45}
+.links a{display:inline-block;margin:0 8px 6px 0;font-weight:600;color:var(--accent)}
+.q{margin:7px 0}
+.q label{display:block;font-size:12.5px;margin-bottom:2px}
+.q .help{font-size:11.5px;color:var(--muted);margin-top:2px}
+.q input,.q select,.q textarea{width:100%;padding:5px 6px;font-size:14px;border:1px solid #b8b8b4;border-radius:3px;background:#fff;color:var(--ink)}
+.q textarea{height:62px;font-size:13px}
+.q.missing input,.q.missing select,.q.missing textarea{border-color:var(--warn);background:#fff6f5}
+.q.skipped{opacity:.45}
+#nav{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+#status{font-size:12px;color:var(--muted);margin-top:6px}
+.done{color:var(--ok);font-weight:600}
+.locked{padding:14px;background:#fdecea;border:1px solid #f3b8b3;color:var(--warn);font-weight:600}
+table.list{border-collapse:collapse;width:100%;font-size:12.5px;margin:4px 0}
+table.list td,table.list th{border:1px solid var(--line);padding:3px 4px;vertical-align:top}
+table.list input,table.list select{width:100%;font-size:12.5px;padding:2px 3px}
+.marker{position:absolute;transform:translate(-50%,-50%);min-width:20px;height:20px;border-radius:10px;background:rgba(179,38,30,.85);color:#fff;font-size:11px;font-weight:700;text-align:center;line-height:20px;padding:0 4px;pointer-events:none}
+.marker.sel{background:rgba(11,92,173,.95)}
+.armed{outline:3px solid var(--accent)}
+</style></head><body>
+<header><b>AAMAS run counts from the full paper</b>
+<label>Annotator ID <input id="ann" size="9" placeholder="e.g. H1"></label>
+<label>Items <select id="set"></select></label>
+<span id="prog"></span>
+<button class="primary" id="exp">Export CSV</button>
+<label>Resume from CSV <input type="file" id="imp" accept=".csv"></label>
+<button id="guideBtn">Show/hide instructions</button>
+</header>
+<div id="guide">
+<h3>What you are doing</h3>
+For each boxed table cell, find in the <b>full paper</b> how many independent runs the table's numbers average over,
+and quote the passage that settles it. The grey box under the image lists sentences a search pattern pulled out of the
+paper (mentions of seeds, runs, trials, episodes); it is only a search aid, may be incomplete, and is not anyone's answer.
+Always check the PDF. Enter your annotator ID first; answers autosave; export the CSV when you stop.
+</div>
+<div id="wrap">
+<div id="left"><div id="banner"></div><div id="imgbox"><img id="img" alt=""></div><div id="ctxhead" class="meta"></div><pre id="context" hidden></pre></div>
+<div id="right"><div class="meta" id="meta"></div><div class="links" id="links"></div><div id="form"></div>
+<div id="nav"><button id="prev">&larr; Previous</button><button class="primary" id="next">Save &amp; next &rarr;</button><button id="skip">Next without completing &rarr;</button></div>
+<div id="status"></div></div></div>
+<script>
+const CFG={"kit": "runcount_disputes", "version": "aamas-hv-1", "items": [{"id": "R01", "sets": ["all"], "image": "images/R01.png", "meta": ["Paper: Efficient Public Health Intervention Planning Using Decomposition-Based Decision-focused Learning", "Table 1, PDF page 7", "Local copy, if you have the corpus: data/corpus/AAMAS2024_c7205e179ed0190f.pdf"], "links": [{"label": "Open the full paper at PDF page 7", "href": "https://www.ifaamas.org/Proceedings/aamas2024/pdfs/p1701.pdf#page=7"}], "context": "6: Run the root-finding algorithm to get the optimal penalty 𝜆★:\n---\nFor example, ARMMAN’s mMitra program runs for 72\n---\nIn fact, “DEC-DFL” outperforms even “SIM-DFL (1000 Trajectories)” till the latter times out\n---\ngains, and to run an equity audit to make sure that our algorithm\n---\ninitializations per split\n---\nized field trial to evaluate the accuracy of the algorithm and verify\n---\nwhere 𝑁(𝑠,𝑎,𝑠′) is the number of times the sub-sequence 𝑠,𝑎,𝑠′", "context_title": "Search aid: sentences a pattern pulled from the paper (not an answer; check the PDF)"}, {"id": "R02", "sets": ["all"], "image": "images/R02.png", "meta": ["Paper: Learning from Delay Distributions: A New Representation for Delay-Aware Reinforcement Learning", "Table 1, PDF page 7", "Local copy, if you have the corpus: data/corpus/AAMAS2026_5ad998cb52e53335.pdf"], "links": [{"label": "Open the full paper at PDF page 7", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/XDQU6782.pdf#page=7"}], "context": "Each method was run 8 random seeds\n---\nance across multiple runs under the same conditions, showcasing its\n---\nmethod was run 8 random seeds\n---\nrepeat\n---\ntask was executed with 8 runs, and the hyperparameter settings of", "context_title": "Search aid: sentences a pattern pulled from the paper (not an answer; check the PDF)"}, {"id": "R03", "sets": ["all"], "image": "images/R03.png", "meta": ["Paper: Puzzle it Out: Local-to-Global World Model for Offline Multi-Agent Reinforcement Learning", "Table 2, PDF page 7", "Local copy, if you have the corpus: data/corpus/AAMAS2026_e778a6a2942e8792.pdf"], "links": [{"label": "Open the full paper at PDF page 7", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/IVNK5836.pdf#page=7"}], "context": "10 rollout steps under identical environmental conditions\n---\nIn the experiments, we set the rollout horizon to 15 steps\n---\nRollout horizon selection\n---\nTable 7: Performance of different rollout horizon and one-\n---\ndation when using a long rollout horizon (e\n---\ngenerate synthetic state-action pairs via pessimistic rollouts while\n---\noutperforms baseline methods across multiple rollout horizons\n---\nparative experiments using rollout horizons of 5, 10, 15, and 20\n---\npropagate during policy rollouts, degrading policy performance\n---\nrollout from three candidate actions proposed by the policy network\n---\ntion through model rollouts\n---\nwith policy rollouts in world models", "context_title": "Search aid: sentences a pattern pulled from the paper (not an answer; check the PDF)"}, {"id": "R04", "sets": ["all"], "image": "images/R04.png", "meta": ["Paper: Confounding Robust Continuous Control via Automatic Reward Shaping", "Table 1, PDF page 7", "Local copy, if you have the corpus: data/corpus/AAMAS2026_2ff9dffbd7640d1e.pdf"], "links": [{"label": "Open the full paper at PDF page 7", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/UUEW5708.pdf#page=7"}], "context": "All results are averaged over 5 seeds (except Recurrent SAC, which is over 3 seeds), and smoothed over 10 evals\n---\ntwo legged, Cheetah-like, agent to run forward in 2D space as fast", "context_title": "Search aid: sentences a pattern pulled from the paper (not an answer; check the PDF)"}, {"id": "R05", "sets": ["all"], "image": "images/R05.png", "meta": ["Paper: UAM-MARL: Uncertainty-Aware Modality-Enhanced Multi-Agent Reinforcement Learning with LLM-Guided Graph Policies", "Table 1, PDF page 5", "Local copy, if you have the corpus: data/corpus/AAMAS2026_2be4fe346be914b5.pdf"], "links": [{"label": "Open the full paper at PDF page 5", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/FHAS5003.pdf#page=5"}], "context": "(↓) over 100+ runs with 4 agents\n---\nTraining is conducted for 10,000 episodes,\n---\ncompletion times, lower token costs, and stronger robustness to\n---\nepisodes in which the multi-agent system successfully completes\n---\nevaluation involves more than 100 independent runs per config-\n---\nfor 500 episodes\n---\ninitialization and environment seeds for fairness\n---\nloop is executed up to three times per high-level instruction to\n---\nmance but also reduce variance across runs, which is critical for\n---\ntask time, are computed over 𝑀= 100 episodes to ensure statistical\n---\ntimes, lower token costs, and stronger robustness to perception\n---\nuncertainty robustness (UR, ↑) over 100+ runs with 4 agents\n---\nwhere 𝑀denotes the total number of evaluated episodes and ⊮[·]", "context_title": "Search aid: sentences a pattern pulled from the paper (not an answer; check the PDF)"}, {"id": "R06", "sets": ["all"], "image": "images/R06.png", "meta": ["Paper: VLM-ReG : Vision-Language Models Enhanced via Reward-Refined GRPO in Remote Sensing Reasoning", "Table 3, PDF page 7", "Local copy, if you have the corpus: data/corpus/AAMAS2026_276c1f2e146887a4.pdf"], "links": [{"label": "Open the full paper at PDF page 7", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/GMIK4254.pdf#page=7"}], "context": "During the initialization training process, the policy model learns\n---\nImage-CoT examples, providing a cold-start initialization\n---\nThe core objective of this initialization is twofold\n---\nThe initialization phase of the policy model is a critical prerequisite\n---\nThe x-axis runs\n---\nThe y-axis runs top-to-\n---\ndataset(RS-IRD) for the cold-start initialization phase, we first curate\n---\ndedicated loss function for cold-start initialization is formulated,\n---\neffective cold-start initialization for RS-MLLMs without man-\n---\nphase implements batch dimensions of 128 for both rollout and\n---\ntraining procedures, incorporating eight rollouts per input instance,", "context_title": "Search aid: sentences a pattern pulled from the paper (not an answer; check the PDF)"}, {"id": "R07", "sets": ["all"], "image": "images/R07.png", "meta": ["Paper: Offline Multi-Agent Preference-based Reinforcement Learning with Agent-aware Direct Preference Optimization", "Table 3, PDF page 8", "Local copy, if you have the corpus: data/corpus/AAMAS2025_67601132bd8b82b8.pdf"], "links": [{"label": "Open the full paper at PDF page 8", "href": "https://www.ifaamas.org/Proceedings/aamas2025/pdfs/p1181.pdf#page=8"}], "context": "Episodes (Hundred)\n---\nEvery algorithm is evaluated for 32 episodes and 5\n---\npolicies to rollout trajectories\n---\nrandom seeds\n---\nrollouts with environments", "context_title": "Search aid: sentences a pattern pulled from the paper (not an answer; check the PDF)"}, {"id": "R08", "sets": ["all"], "image": "images/R08.png", "meta": ["Paper: Don't Blind Your VLA: Aligning Visual Representations for OOD Generalization", "Table 7, PDF page 8", "Local copy, if you have the corpus: data/corpus/AAMAS2026_bcbfe93e27d30640.pdf"], "links": [{"label": "Open the full paper at PDF page 8", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/PPER9186.pdf#page=8"}], "context": "(yielding on average ∼5 episodes per training variation), and multi-\n---\nDuring all fine-tuning runs, LoRA adapters\n---\nEach variant is evaluated over 128 seeds; we\n---\nKnowledge insulating vision-language-action models: Train fast, run fast,\n---\nWe also run linear probing on ImageNet-100 [46] to assess\n---\ntions in VLA models, we run a t-SNE probe on Qwen2", "context_title": "Search aid: sentences a pattern pulled from the paper (not an answer; check the PDF)"}, {"id": "R09", "sets": ["all"], "image": "images/R09.png", "meta": ["Paper: Evaluation-Time Policy Switching for Offline Reinforcement Learning", "Table 1, PDF page 6", "Local copy, if you have the corpus: data/corpus/AAMAS2025_49a1820237d0f056.pdf"], "links": [{"label": "Open the full paper at PDF page 6", "href": "https://www.ifaamas.org/Proceedings/aamas2025/pdfs/p1520.pdf#page=6"}], "context": "10k steps and averaged over 5 seeds and 10 episodes per seed\n---\n95% confidence intervals for the average return over 10 episodes for TD3-N and our method\n---\nTable 2: Normalised average returns on D4RL AntMaze tasks, 100 evaluations per seed over 3 seeds\n---\nacross 5 seeds with 10 episodes per seed\n---\nalgorithms are trained independently and can be run concurrently\n---\naveraged over 3 seeds and 100 episodes per seed\n---\naveraged over 5 seeds\n---\nepisodes for TD3-N and our method\n---\nperformance as well as require longer convergence times\n---\nreplicate the behaviour observed in the offline dataset\n---\nusing different seeds", "context_title": "Search aid: sentences a pattern pulled from the paper (not an answer; check the PDF)"}, {"id": "R10", "sets": ["all"], "image": "images/R10.png", "meta": ["Paper: Scaling Opponent Shaping to High Dimensional Games", "Table 2, PDF page 6", "Local copy, if you have the corpus: data/corpus/AAMAS2024_b427afba596fe349.pdf"], "links": [{"label": "Open the full paper at PDF page 6", "href": "https://www.ifaamas.org/Proceedings/aamas2024/pdfs/p1001.pdf#page=6"}], "context": "Context Challenge: During a trial, after 𝑘episodes, the co-\n---\nEach trial contains 𝐸episodes\n---\nFigure 1: Evaluation results over a single trial (with co-player) compromising over 100 seeds for the CoinGame\n---\nFigure 3: Evaluation results over a single trial (with co-player) compromising over 100 seeds for the IPDitM\n---\nFigure 4: Hardstop Challenge: Average reward per timestep over an evaluation trial for Shaper (a) and GS (b) against a Naive\n---\nIf the meta-agent cannot adapt their policy within a trial, a co-\n---\nInitialise trial reward ¯𝐽= 0\n---\nMean and standard deviation reported across 100 seeds\n---\nTable 4: Episodic reward for in a single evaluation trial\n---\nThis process is repeated over 𝐸episodes in a trial\n---\nWe report mean and std over 5 seeds\n---\nWhen a trial\n---\na meta-agent to adapt its meta-policy within a trial since it only\n---\na sequence of 𝑇trials (denoted “meta-episodes” in the original\n---\na trajectory of a batched (partial) trial ¯𝝉𝑡= (𝝉0,\n---\nacross different episodes\n---\nagents against new co-player (NL) initialisation 𝜙−𝑖\n---\nand context as a trajectory of a (partial) trial t, ¯𝜏𝑡= (𝜏0,\n---\ncooperation requires a repeated commitment to a cooperative strat-\n---\ndifferent episodes\n---\nepisodes\n---\nepisodes to achieve a score of at least 0\n---\ngame many times\n---\nin the grid in the first 20 episodes (≈3\n---\nmemory that only updates after each trial\n---\nnumber of inner-episodes (𝑒= 2), we expect meta-agents with-\n---\nover all episodes) at the end of a trial 𝑡using any model-free optimi-\n---\nretains its hidden state over episodes and only resets after each trial\n---\nseeds\n---\nthat CS is visited more often than DS in early episodes (18%, 15%\n---\nthe beginning of a trial\n---\nthe episodes\n---\ntrial\n---\ntrial and potentially achieve a better meta-return, which we show in\n---\ntrial or need to be inferred from the changing policy itself across\n---\ntrial reward, ¯𝐽= Í𝐸𝑒𝐽𝑒\n---\ntrial, co-players 𝜙−𝑖∼𝜌𝜙are sampled, where 𝜌𝜙is the respective\n---\ntween episodes, removing its ability to use context to shape (Shaper\n---\nupdates parameters after a trial\n---\nwithin a trial 𝑡, conditioned on both agent’s policies, the co-players", "context_title": "Search aid: sentences a pattern pulled from the paper (not an answer; check the PDF)"}, {"id": "R11", "sets": ["all"], "image": "images/R11.png", "meta": ["Paper: VLM-ReG : Vision-Language Models Enhanced via Reward-Refined GRPO in Remote Sensing Reasoning", "Table 3, PDF page 7", "Local copy, if you have the corpus: data/corpus/AAMAS2026_276c1f2e146887a4.pdf"], "links": [{"label": "Open the full paper at PDF page 7", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/GMIK4254.pdf#page=7"}], "context": "During the initialization training process, the policy model learns\n---\nImage-CoT examples, providing a cold-start initialization\n---\nThe core objective of this initialization is twofold\n---\nThe initialization phase of the policy model is a critical prerequisite\n---\nThe x-axis runs\n---\nThe y-axis runs top-to-\n---\ndataset(RS-IRD) for the cold-start initialization phase, we first curate\n---\ndedicated loss function for cold-start initialization is formulated,\n---\neffective cold-start initialization for RS-MLLMs without man-\n---\nphase implements batch dimensions of 128 for both rollout and\n---\ntraining procedures, incorporating eight rollouts per input instance,", "context_title": "Search aid: sentences a pattern pulled from the paper (not an answer; check the PDF)"}, {"id": "R12", "sets": ["all"], "image": "images/R12.png", "meta": ["Paper: Confounding Robust Continuous Control via Automatic Reward Shaping", "Table 1, PDF page 7", "Local copy, if you have the corpus: data/corpus/AAMAS2026_2ff9dffbd7640d1e.pdf"], "links": [{"label": "Open the full paper at PDF page 7", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/UUEW5708.pdf#page=7"}], "context": "All results are averaged over 5 seeds (except Recurrent SAC, which is over 3 seeds), and smoothed over 10 evals\n---\ntwo legged, Cheetah-like, agent to run forward in 2D space as fast", "context_title": "Search aid: sentences a pattern pulled from the paper (not an answer; check the PDF)"}, {"id": "R13", "sets": ["all"], "image": "images/R13.png", "meta": ["Paper: Learning from Delay Distributions: A New Representation for Delay-Aware Reinforcement Learning", "Table 1, PDF page 7", "Local copy, if you have the corpus: data/corpus/AAMAS2026_5ad998cb52e53335.pdf"], "links": [{"label": "Open the full paper at PDF page 7", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/XDQU6782.pdf#page=7"}], "context": "Each method was run 8 random seeds\n---\nance across multiple runs under the same conditions, showcasing its\n---\nmethod was run 8 random seeds\n---\nrepeat\n---\ntask was executed with 8 runs, and the hyperparameter settings of", "context_title": "Search aid: sentences a pattern pulled from the paper (not an answer; check the PDF)"}, {"id": "R14", "sets": ["all"], "image": "images/R14.png", "meta": ["Paper: Puzzle it Out: Local-to-Global World Model for Offline Multi-Agent Reinforcement Learning", "Table 2, PDF page 7", "Local copy, if you have the corpus: data/corpus/AAMAS2026_e778a6a2942e8792.pdf"], "links": [{"label": "Open the full paper at PDF page 7", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/IVNK5836.pdf#page=7"}], "context": "10 rollout steps under identical environmental conditions\n---\nIn the experiments, we set the rollout horizon to 15 steps\n---\nRollout horizon selection\n---\nTable 7: Performance of different rollout horizon and one-\n---\ndation when using a long rollout horizon (e\n---\ngenerate synthetic state-action pairs via pessimistic rollouts while\n---\noutperforms baseline methods across multiple rollout horizons\n---\nparative experiments using rollout horizons of 5, 10, 15, and 20\n---\npropagate during policy rollouts, degrading policy performance\n---\nrollout from three candidate actions proposed by the policy network\n---\ntion through model rollouts\n---\nwith policy rollouts in world models", "context_title": "Search aid: sentences a pattern pulled from the paper (not an answer; check the PDF)"}, {"id": "R15", "sets": ["all"], "image": "images/R15.png", "meta": ["Paper: Puzzle it Out: Local-to-Global World Model for Offline Multi-Agent Reinforcement Learning", "Table 3, PDF page 8", "Local copy, if you have the corpus: data/corpus/AAMAS2026_e778a6a2942e8792.pdf"], "links": [{"label": "Open the full paper at PDF page 8", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/IVNK5836.pdf#page=8"}], "context": "10 rollout steps under identical environmental conditions\n---\nIn the experiments, we set the rollout horizon to 15 steps\n---\nRollout horizon selection\n---\nTable 7: Performance of different rollout horizon and one-\n---\ndation when using a long rollout horizon (e\n---\ngenerate synthetic state-action pairs via pessimistic rollouts while\n---\noutperforms baseline methods across multiple rollout horizons\n---\nparative experiments using rollout horizons of 5, 10, 15, and 20\n---\npropagate during policy rollouts, degrading policy performance\n---\nrollout from three candidate actions proposed by the policy network\n---\ntion through model rollouts\n---\nwith policy rollouts in world models", "context_title": "Search aid: sentences a pattern pulled from the paper (not an answer; check the PDF)"}, {"id": "R16", "sets": ["all"], "image": "images/R16.png", "meta": ["Paper: Hierarchical Imitation Learning of Team Behavior from Heterogeneous Demonstrations", "Table 2, PDF page 7", "Local copy, if you have the corpus: data/corpus/AAMAS2025_eaaf5c6bef0e1d60.pdf"], "links": [{"label": "Open the full paper at PDF page 7", "href": "https://www.ifaamas.org/Proceedings/aamas2025/pdfs/p1886.pdf#page=7"}], "context": "3: repeat\n---\nCollect rollouts 𝑅= {(𝑜,𝑥,𝑎)0:ℎ} using (𝜋𝑘\n---\nthe paths generated by ten different seeds (seed=0:9) for each model\n---\nthe task rewards averaged over three trials for Multi-Jobs-𝑛(MJ-𝑛),", "context_title": "Search aid: sentences a pattern pulled from the paper (not an answer; check the PDF)"}, {"id": "R17", "sets": ["all"], "image": "images/R17.png", "meta": ["Paper: Confounding Robust Continuous Control via Automatic Reward Shaping", "Table 1, PDF page 7", "Local copy, if you have the corpus: data/corpus/AAMAS2026_2ff9dffbd7640d1e.pdf"], "links": [{"label": "Open the full paper at PDF page 7", "href": "https://www.ifaamas.org/Proceedings/aamas2026/pdfs/UUEW5708.pdf#page=7"}], "context": "All results are averaged over 5 seeds (except Recurrent SAC, which is over 3 seeds), and smoothed over 10 evals\n---\ntwo legged, Cheetah-like, agent to run forward in 2D space as fast", "context_title": "Search aid: sentences a pattern pulled from the paper (not an answer; check the PDF)"}, {"id": "R18", "sets": ["all"], "image": "images/R18.png", "meta": ["Paper: Hierarchical Imitation Learning of Team Behavior from Heterogeneous Demonstrations", "Table 4, PDF page 7", "Local copy, if you have the corpus: data/corpus/AAMAS2025_eaaf5c6bef0e1d60.pdf"], "links": [{"label": "Open the full paper at PDF page 7", "href": "https://www.ifaamas.org/Proceedings/aamas2025/pdfs/p1886.pdf#page=7"}], "context": "3: repeat\n---\nCollect rollouts 𝑅= {(𝑜,𝑥,𝑎)0:ℎ} using (𝜋𝑘\n---\nthe paths generated by ten different seeds (seed=0:9) for each model\n---\nthe task rewards averaged over three trials for Multi-Jobs-𝑛(MJ-𝑛),", "context_title": "Search aid: sentences a pattern pulled from the paper (not an answer; check the PDF)"}], "fields": [{"name": "n_runs", "label": "Over how many independent runs are the numbers of this table averaged?", "kind": "text", "help": "An integer; 'none' if the paper never states it; 'unclear' if you cannot decide between counts."}, {"name": "n_unit", "label": "What does that count count?", "kind": "select", "options": [["seeds", "random seeds / independent training runs"], ["episodes", "evaluation episodes / rollouts / games"], ["instances", "problem instances / scenarios / datasets"], ["folds", "cross-validation folds"], ["repetitions", "repetitions of the whole experiment"], ["other", "other (comment)"], ["none", "no count"]]}, {"name": "applies_to_table", "label": "Does the statement apply to THIS table?", "kind": "select", "options": [["explicit", "yes: it names this table or its experiment"], ["paper_wide", "probably: a paper-wide statement"], ["no", "no: it belongs to another experiment"], ["unclear", "unclear"]]}, {"name": "n_source", "label": "Where is it stated?", "kind": "select", "options": [["caption", "the table's caption"], ["page", "text on the same page"], ["elsewhere", "elsewhere in the paper"], ["absent", "nowhere"], ["ambiguous", "several different counts could apply"]]}, {"name": "other_counts", "label": "Other counts the paper states that a reader might take for this table (optional)", "kind": "text", "req": "never"}, {"name": "passage", "label": "The passage that settles it, quoted (as short as possible)", "kind": "area", "help": "If nothing is stated: 'searched seed/run/trial/repeat/independent/average: not stated'."}, {"name": "passage_location", "label": "Where the passage is (PDF page, section, caption/footnote)", "kind": "text"}, {"name": "confidence", "label": "Your confidence", "kind": "select", "options": [["high", "high"], ["medium", "medium"], ["low", "low"]]}, {"name": "comment", "label": "Comment", "kind": "area", "req": "never"}], "gates": [], "sets": {"all": "All items"}, "defaultSet": "all", "exportName": "runcount_disputes_{annotator}.csv"};
+
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+const LS=(function(){try{const k='__hv_t';localStorage.setItem(k,'1');localStorage.removeItem(k);return localStorage;}catch(e){return null;}})();
+function lsGet(k){try{return LS?LS.getItem(k):null;}catch(e){return null;}}
+function lsSet(k,v){try{if(LS)LS.setItem(k,v);}catch(e){}}
+function nowIso(){return new Date().toISOString();}
+function csvCell(s){s=String(s==null?'':s);return /[",\n\r]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s;}
+function parseCsv(text){
+  if(text.charCodeAt(0)===0xFEFF)text=text.slice(1);
+  const rows=[];let row=[],cell='',q=false;
+  for(let i=0;i<text.length;i++){const ch=text[i];
+    if(q){if(ch==='"'){if(text[i+1]==='"'){cell+='"';i++;}else q=false;}else cell+=ch;}
+    else if(ch==='"')q=true;
+    else if(ch===','){row.push(cell);cell='';}
+    else if(ch==='\n'||ch==='\r'){if(ch==='\r'&&text[i+1]==='\n')i++;row.push(cell);rows.push(row);row=[];cell='';}
+    else cell+=ch;}
+  if(cell!==''||row.length){row.push(cell);rows.push(row);}
+  return rows.filter(r=>r.length>1||(r[0]||'').trim()!=='');
+}
+function download(name,text){
+  const blob=new Blob(["﻿"+text],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=name;document.body.appendChild(a);a.click();a.remove();
+}
+
+const ITEMS=CFG.items, FIELDS=CFG.fields, GATES=CFG.gates||[];
+let annotator=(lsGet('aamasHV:annotator')||'').trim();
+let labels={}, view=[], cur=0, setName=lsGet('aamasHV:'+CFG.kit+':set')||CFG.defaultSet, t0=Date.now();
+function storeKey(){return 'aamasHV:'+CFG.kit+':'+CFG.version+':'+annotator;}
+function loadLabels(){labels={};if(!annotator)return;try{labels=JSON.parse(lsGet(storeKey())||'{}');}catch(e){labels={};}}
+function persist(){if(annotator)lsSet(storeKey(),JSON.stringify(labels));}
+function inSet(it){return setName==='all'||(it.sets||[]).indexOf(setName)>=0;}
+function rebuildView(){view=ITEMS.filter(inSet);if(!view.length){setName='all';view=ITEMS.slice();}if(cur>=view.length)cur=0;}
+function skippedFrom(lb){
+  // index of the first field after a gate that switched the rest off
+  for(const g of GATES){const i=FIELDS.findIndex(f=>f.name===g.field);if(i>=0&&g.skip.indexOf(lb[g.field]||'')>=0)return i+1;}
+  return FIELDS.length;
+}
+function isRequired(f,i,lb){
+  if(f.req==='never')return false;
+  if(i>=skippedFrom(lb)&&!f.always)return false;
+  if(f.req&&f.req.if){const g=f.req.if[0],vals=f.req.if[1];return vals.indexOf(lb[g]||'')>=0;}
+  return true;
+}
+function missingFields(lb){return FIELDS.filter((f,i)=>isRequired(f,i,lb)&&!String(lb[f.name]||'').trim()).map(f=>f.name);}
+function hasAny(lb){return !!lb&&FIELDS.some(f=>String(lb[f.name]||'').trim()!=='');}
+function isDone(id){const lb=labels[id];return hasAny(lb)&&missingFields(lb).length===0;}
+function updateProg(){
+  const n=view.filter(x=>isDone(x.id)).length, all=ITEMS.filter(x=>isDone(x.id)).length;
+  document.getElementById('prog').innerHTML='<span class="'+(n===view.length?'done':'')+'">'+n+'/'+view.length+' complete in this set</span> ('+all+'/'+ITEMS.length+' overall)';
+}
+function leaveItem(){
+  if(!annotator||!view.length)return;const it=view[cur];const lb=labels[it.id];
+  if(lb&&hasAny(lb)){lb._seconds=Math.round((lb._seconds||0)+(Date.now()-t0)/1000);persist();}
+}
+function render(){
+  rebuildView();t0=Date.now();
+  const sel=document.getElementById('set');
+  sel.innerHTML=Object.keys(CFG.sets).map(k=>'<option value="'+k+'"'+(k===setName?' selected':'')+'>'+esc(CFG.sets[k])+'</option>').join('');
+  document.getElementById('ann').value=annotator;
+  const form=document.getElementById('form');
+  if(!annotator){form.innerHTML='<div class="locked">Enter your annotator ID at the top before labelling. Each annotator\'s answers are stored separately.</div>';updateProg();return;}
+  const it=view[cur];const lb=labels[it.id]||{};
+  const img=document.getElementById('img'), banner=document.getElementById('banner');
+  banner.innerHTML='';
+  if(it.image){img.hidden=false;img.src=it.image;img.onerror=function(){img.hidden=true;banner.innerHTML='<div class="banner">Image file missing: '+esc(it.image)+'. Run <code>python aamas/human_validation_kits.py check</code>. Use the PDF link instead.</div>';};}
+  else{img.hidden=true;img.removeAttribute('src');banner.innerHTML='<div class="banner">'+esc(it.image_note||'No page image is shipped for this item.')+' Open the full paper with the link on the right.</div>';}
+  document.getElementById('imgbox').classList.remove('zoom');
+  const ctx=document.getElementById('context');
+  if(it.context){ctx.hidden=false;ctx.textContent=it.context;document.getElementById('ctxhead').textContent=it.context_title||'';}
+  else{ctx.hidden=true;document.getElementById('ctxhead').textContent='';}
+  document.getElementById('meta').innerHTML='<b>'+esc(it.id)+'</b> ('+(cur+1)+' of '+view.length+')'+(isDone(it.id)?' <span class="done">complete</span>':'')+'<br>'+(it.meta||[]).map(esc).join('<br>');
+  document.getElementById('links').innerHTML=(it.links||[]).map(l=>'<a href="'+esc(l.href)+'" target="_blank" rel="noopener">'+esc(l.label)+'</a>').join('');
+  let h='';const skipAt=skippedFrom(lb);
+  FIELDS.forEach((f,i)=>{
+    const v=lb[f.name]||'';const skip=i>=skipAt&&!f.always;
+    h+='<div class="q'+(skip?' skipped':'')+'" data-q="'+f.name+'"><label for="f_'+f.name+'">'+esc(f.label)+(isRequired(f,i,lb)?' *':'')+'</label>';
+    if(f.kind==='select'){h+='<select id="f_'+f.name+'" data-f="'+f.name+'"><option value="">--</option>'+f.options.map(o=>'<option value="'+esc(o[0])+'"'+(v===o[0]?' selected':'')+'>'+esc(o[1])+'</option>').join('')+'</select>';}
+    else if(f.kind==='area'){h+='<textarea id="f_'+f.name+'" data-f="'+f.name+'">'+esc(v)+'</textarea>';}
+    else{h+='<input id="f_'+f.name+'" data-f="'+f.name+'" value="'+esc(v)+'" autocomplete="off">';}
+    if(f.help)h+='<div class="help">'+esc(f.help)+'</div>';
+    h+='</div>';});
+  form.innerHTML=h;
+  const els=Array.from(document.querySelectorAll('#form [data-f]'));
+  els.forEach((el,i)=>{
+    el.addEventListener('input',()=>store(false));
+    el.addEventListener('change',()=>{store(false);if(el.tagName==='SELECT'&&GATES.some(g=>g.field===el.dataset.f)){const k=el.dataset.f;render();const n=document.getElementById('f_'+k);if(n)n.focus();}});
+    el.addEventListener('keydown',ev=>{
+      if(ev.key==='Enter'&&(ev.ctrlKey||ev.metaKey)){ev.preventDefault();saveAndNext();return;}
+      if(ev.key==='Enter'&&el.tagName!=='TEXTAREA'){ev.preventDefault();store(false);
+        const nx=els.slice(i+1).find(e=>!e.closest('.q').classList.contains('skipped'));if(nx)nx.focus();else saveAndNext();}
+    });});
+  const first=els.find(e=>!String(lb[e.dataset.f]||'').trim());(first||els[0]).focus();
+  updateProg();
+  document.getElementById('status').textContent=LS?'Autosaved in this browser for annotator '+annotator+'. Export the CSV when you stop.':'This browser blocks local storage: export the CSV before closing the page.';
+}
+function store(){
+  if(!annotator)return;const it=view[cur];const lb=labels[it.id]||{};
+  document.querySelectorAll('#form [data-f]').forEach(el=>{lb[el.dataset.f]=el.value.trim();});
+  if(!lb._first_opened)lb._first_opened=nowIso();lb._last_saved=nowIso();
+  labels[it.id]=lb;persist();updateProg();
+}
+function saveAndNext(){
+  store();const it=view[cur];const lb=labels[it.id]||{};const miss=missingFields(lb);
+  document.querySelectorAll('#form .q').forEach(q=>q.classList.toggle('missing',miss.indexOf(q.dataset.q)>=0));
+  if(miss.length){const q=document.querySelector('#form .q.missing [data-f]');if(q)q.focus();
+    document.getElementById('status').textContent='Missing: '+miss.join(', ')+' (write "unclear" or pick "unclear" where you cannot tell).';return;}
+  go(cur+1);
+}
+function go(i){leaveItem();if(i<0)i=0;if(i>=view.length){updateProg();alert('End of this set. Export the CSV.');i=view.length-1;}cur=i;render();window.scrollTo(0,0);}
+function buildCsv(){
+  const cols=['id','annotator_id','kit','kit_version'].concat(FIELDS.map(f=>f.name)).concat(['complete','first_opened_at','last_saved_at','seconds_on_item']);
+  const lines=[cols.join(',')];
+  ITEMS.slice().sort((a,b)=>a.id<b.id?-1:1).forEach(it=>{const lb=labels[it.id]||{};
+    const row={id:it.id,annotator_id:annotator,kit:CFG.kit,kit_version:CFG.version,complete:isDone(it.id)?'y':'n',
+      first_opened_at:lb._first_opened||'',last_saved_at:lb._last_saved||'',seconds_on_item:(lb._seconds!=null?lb._seconds:'')};
+    FIELDS.forEach(f=>{row[f.name]=lb[f.name]||'';});
+    lines.push(cols.map(c=>csvCell(row[c])).join(','));});
+  return lines.join('\n')+'\n';
+}
+document.getElementById('exp').onclick=()=>{if(!annotator){alert('Enter an annotator ID first.');return;}store();download(CFG.exportName.replace('{annotator}',annotator),buildCsv());};
+document.getElementById('prev').onclick=()=>go(cur-1);
+document.getElementById('next').onclick=saveAndNext;
+document.getElementById('skip').onclick=()=>{store();go(cur+1);};
+document.getElementById('guideBtn').onclick=()=>{const g=document.getElementById('guide');g.hidden=!g.hidden;};
+document.getElementById('img').onclick=()=>document.getElementById('imgbox').classList.toggle('zoom');
+document.getElementById('set').onchange=ev=>{leaveItem();setName=ev.target.value;lsSet('aamasHV:'+CFG.kit+':set',setName);cur=0;render();};
+document.getElementById('ann').onchange=ev=>{
+  const v=ev.target.value.trim().replace(/[^A-Za-z0-9_-]/g,'');
+  if(annotator)leaveItem();annotator=v;lsSet('aamasHV:annotator',annotator);loadLabels();
+  cur=0;rebuildView();const k=view.findIndex(x=>!isDone(x.id));cur=k<0?0:k;render();};
+document.getElementById('imp').addEventListener('change',ev=>{
+  const f=ev.target.files[0];if(!f)return;const rd=new FileReader();
+  rd.onload=()=>{const rows=parseCsv(rd.result);if(!rows.length)return;const head=rows[0].map(s=>s.trim());
+    const ai=head.indexOf('annotator_id');const ids=new Set(ITEMS.map(x=>x.id));
+    const owners=new Set(rows.slice(1).map(r=>ai>=0?(r[ai]||'').trim():'').filter(Boolean));
+    if(owners.size>1){alert('This CSV holds several annotator IDs: '+Array.from(owners).join(', ')+'. Import one annotator\'s file at a time.');return;}
+    const owner=owners.size?Array.from(owners)[0]:'';
+    if(!annotator&&owner){annotator=owner;lsSet('aamasHV:annotator',annotator);loadLabels();}
+    if(owner&&owner!==annotator&&!confirm('The CSV belongs to annotator '+owner+' but the page is set to '+annotator+'. Import into '+annotator+' anyway?'))return;
+    if(!annotator){alert('Enter an annotator ID first.');return;}
+    let n=0;
+    rows.slice(1).forEach(r=>{const id=(r[0]||'').trim();if(!ids.has(id))return;const lb=labels[id]||{};let any=false;
+      FIELDS.forEach(fl=>{const j=head.indexOf(fl.name);if(j>=0&&(r[j]||'').trim()){lb[fl.name]=r[j].trim();any=true;}});
+      const j1=head.indexOf('first_opened_at'),j2=head.indexOf('last_saved_at'),j3=head.indexOf('seconds_on_item');
+      if(j1>=0&&r[j1])lb._first_opened=r[j1];if(j2>=0&&r[j2])lb._last_saved=r[j2];if(j3>=0&&r[j3])lb._seconds=Number(r[j3])||0;
+      if(any){labels[id]=lb;n++;}});
+    persist();alert('Imported '+n+' labelled items for annotator '+annotator+'.');render();};
+  rd.readAsText(f,'utf-8');ev.target.value='';});
+document.addEventListener('keydown',ev=>{if(ev.altKey&&ev.key==='ArrowLeft'){ev.preventDefault();go(cur-1);}if(ev.altKey&&ev.key==='ArrowRight'){ev.preventDefault();store();go(cur+1);}});
+window.addEventListener('beforeunload',()=>{leaveItem();});
+loadLabels();rebuildView();{const k=view.findIndex(x=>!isDone(x.id));cur=k<0?0:k;}render();
+</script></body></html>

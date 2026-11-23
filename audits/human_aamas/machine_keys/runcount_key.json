@@ -1,0 +1,439 @@
+{
+ "kit": "runcount_disputes",
+ "python": "3.14.4",
+ "script": "aamas/human_validation_kits.py",
+ "kit_version": "aamas-hv-1",
+ "items": {
+  "R01": {
+   "orig_id": "070",
+   "paper": "c7205e179ed0190f",
+   "table": "1",
+   "page": 6,
+   "disputed_by": [
+    "reader1_vs_parser",
+    "reader2_vs_parser"
+   ],
+   "parser": {
+    "n_runs": 5,
+    "n_runs_source": "page"
+   },
+   "reader1": {
+    "n_runs": "50 (10 random train-val-test splits x 5 random model initializations per split)",
+    "n_source": "page",
+    "note": "Table 1 Decision Quality Results; boxed cell 2-Stage / MSE row, Normalized Joint Test DQ (↑) Synthetic (5-State) column = 0.38 ± 0.03 (bold, only bold in column; caption: bold = highest entries in the column). Column: 0.16±0.04, 0.38±0.03, 0.15±0.02, 0.16±0.03, 0.19±0.03, 0.18±0.03, 0.34±0.04 (DEC-DFL (L2), italic, runner-up), 0.33±0.04, 0.33±0.04. Page text: 'averaged over 10 random train-val-test splits and 5 random model initializations per split... presented as mean ± 1 standard error of the mean' -> se; runs.txt contains only the fragment 'initializations per split'. Runner-up is in the 'Ours' group, no citation; the 'Wang et al. [29]' rows carry a citation but are not the runner-up."
+   },
+   "reader2": {
+    "n_runs": "none",
+    "n_source": "none",
+    "note": "Boxed cell is the correct column winner."
+   }
+  },
+  "R02": {
+   "orig_id": "041",
+   "paper": "5ad998cb52e53335",
+   "table": "1",
+   "page": 6,
+   "disputed_by": [
+    "reader1_vs_reader2"
+   ],
+   "parser": {
+    "n_runs": 8,
+    "n_runs_source": "caption"
+   },
+   "reader1": {
+    "n_runs": "8",
+    "n_source": "caption",
+    "note": "Table 1 (D2AC paper), Constant 5 delay block, Reacher-v4 column, AD-SAC[34] row boxed: -5.1±0.5 bold. Group = the 6 method rows within the Constant 5 block for the Reacher-v4 column. TWO bold cells in the group: AD-SAC -5.1±0.5 and State Aug-MLP[30] -5.1±0.5 (caption: methods within S.E.M range of the best are also bolded) so bold_ok=n. Best non-bold = VDPO[33] -5.1±1.5 (ties on mean). Caption says mean ± S.E.M and 'Each method was run 8 random seeds'. Runner-up row label carries the citation '[33]' (method reference); caption states every method was re-run 8 seeds, so the citation most likely does not mark a copied number, but literally a citation is present."
+   },
+   "reader2": {
+    "n_runs": "",
+    "n_source": "",
+    "note": "```json\r\n{\r\n  \"results_table\": \"y\",\r\n  \"bold_ok\": \"y\",\r\n  \"orientation\": \"column\",\r\n  \"direction\": \"higher\",\r\n  \"winner_mean\": \"-5.1\",\r\n  \"winner_disp\": \"0.5\",\r\n  \"runner_mean\": \"-5.1\",\r\n  \"runner_disp\": \"1.5\",\r\n  \"disp_type\": \"se\",\r\n  \"n_runs\": 8,\r\n  \"n_source\": \"caption\",\r\n  \"rival_copied\": \"n\",\r\n  \"note\": \"The caption states that methods within the S.E.M of the best are bolded, but several non-bold cells have the same mean"
+   }
+  },
+  "R03": {
+   "orig_id": "016",
+   "paper": "e778a6a2942e8792",
+   "table": "2",
+   "page": 6,
+   "disputed_by": [
+    "reader1_vs_parser",
+    "reader2_vs_parser"
+   ],
+   "parser": {
+    "n_runs": 10,
+    "n_runs_source": null
+   },
+   "reader1": {
+    "n_runs": "none",
+    "n_source": "none",
+    "note": "Table 2 (SMAC), row 3s_vs_5z / MR, boxed cell = LOGO(ours) 19.38±0.98, printed in bold blue (caption: best in each setting highlighted in blue); only highlighted cell in its row. Runner-up = CFCQL 19.07±0.73 (no citation/marker on CFCQL column header). Caption does not name the dispersion type. Runs sentences only mention rollout horizons/steps, no seed or run count that applies."
+   },
+   "reader2": {
+    "n_runs": "none",
+    "n_source": "none",
+    "note": "The table uses blue text instead of bolding to indicate the best results."
+   }
+  },
+  "R04": {
+   "orig_id": "046",
+   "paper": "2ff9dffbd7640d1e",
+   "table": "1",
+   "page": 6,
+   "disputed_by": [
+    "reader1_vs_parser",
+    "reader2_vs_parser"
+   ],
+   "parser": {
+    "n_runs": 3,
+    "n_runs_source": "caption"
+   },
+   "reader1": {
+    "n_runs": "5",
+    "n_source": "caption",
+    "note": "Boxed cell = CQL column, 'State Dim Removed = 1,2,3,4' row of the first (MuJoCo) environment block; bold, only bold cell in its row. Row values: SAC Baseline 304 ± 30, CQL 557 ± 244 (bold), T-REX 310 ± 67, Recurrent SAC 460 ± 95, Causal PBRS 305 ± 15; the 'Full State SAC' column is a merged oracle reference value (3500) for the whole block and is not part of the bold comparison. Metric = evaluation return, higher better. Caption: '± 1 standard deviation' -> sd. Caption: 'All results are averaged over 5 seeds (except Recurrent SAC, which is over 3 seeds)' -> winner CQL n=5 but runner-up Recurrent SAC n=3. No citation/dagger on Recurrent SAC column."
+   },
+   "reader2": {
+    "n_runs": "5",
+    "n_source": "page",
+    "note": "Boxed cell is row winner."
+   }
+  },
+  "R05": {
+   "orig_id": "006",
+   "paper": "2be4fe346be914b5",
+   "table": "1",
+   "page": 4,
+   "disputed_by": [
+    "reader1_vs_parser",
+    "reader1_vs_reader2"
+   ],
+   "parser": {
+    "n_runs": 100,
+    "n_runs_source": "page"
+   },
+   "reader1": {
+    "n_runs": "100+",
+    "n_source": "caption",
+    "note": "Table 1 (four AI2-THOR scenes). Boxed cell = Scene 2 / Avg. Time / UAM-MARL (Ours) 74.57 ± 1.73-style entry read as 74.57 ± 2.13, bold, only bold in the Avg. Time row. Avg. Time marked (↓) in caption so lower is better. Runner-up = LGC-MARL (w/o Critic) 80.94 ± 2.57. Caption: 'over 100+ runs with 4 agents'; runs.txt also has 'more than 100 independent runs per config-'. Caption does not say sd/se/ci for the ± values. No citation/dagger on any column header."
+   },
+   "reader2": {
+    "n_runs": "100",
+    "n_source": "caption",
+    "note": "Valid winner in row."
+   }
+  },
+  "R06": {
+   "orig_id": "030",
+   "paper": "276c1f2e146887a4",
+   "table": "3",
+   "page": 6,
+   "disputed_by": [
+    "reader1_vs_parser",
+    "reader2_vs_parser"
+   ],
+   "parser": {
+    "n_runs": 8,
+    "n_runs_source": "page"
+   },
+   "reader1": {
+    "n_runs": "none",
+    "n_source": "none",
+    "note": "Table 3 ablation of VLM-ReG; caption: 'The best result in each column is highlighted in bold' -> column groups. Boxed cell = VLM-ReG (Ours) row, LRS/STAR column 35.65±0.15 bold, only bold in column. Column: 27.12±0.14, 31.31±0.11, 32.27±0.11, 34.11±0.16, 34.91±0.18, 35.65±0.15. Runner-up = CS + RQPO 34.91±0.18, no citation marker. Caption does not name the dispersion. runs.txt sentences only mention 'eight rollouts per input instance' and batch sizes (GRPO training hyperparameters), no seed/run count for the reported numbers -> none."
+   },
+   "reader2": {
+    "n_runs": "none",
+    "n_source": "none",
+    "note": "Boxed cell is column winner; runner-up is CS+RQPO."
+   }
+  },
+  "R07": {
+   "orig_id": "029",
+   "paper": "67601132bd8b82b8",
+   "table": "3",
+   "page": 7,
+   "disputed_by": [
+    "reader1_vs_reader2"
+   ],
+   "parser": {
+    "n_runs": 5,
+    "n_runs_source": null
+   },
+   "reader1": {
+    "n_runs": "5",
+    "n_source": "paper",
+    "note": "Table 2 'Ablation study on reverse agent-aware weights', MMM2 / Medium row. Boxed cell = AMADPO-Reverse 8.92 ± 0.43 bold (box also clips the row above, 6.85 ± 0.17, but the Medium row is the one enclosed). Only other cell in row: AMADPO-Origin 7.01 ± 0.21 (runner-up, no citation). Higher return is bold throughout. Caption does not name the dispersion. runs.txt: 'Every algorithm is evaluated for 32 episodes and 5 random seeds' (not on the crop) -> n=5, paper."
+   },
+   "reader2": {
+    "n_runs": "",
+    "n_source": "",
+    "note": "```json\r\n{\r\n  \"results_table\": \"y\",\r\n  \"bold_ok\": \"y\",\r\n  \"orientation\": \"row\",\r\n  \"direction\": \"higher\",\r\n  \"winner_mean\": \"8.92\",\r\n  \"winner_disp\": \"0.43\",\r\n  \"runner_mean\": \"7.01\",\r\n  \"runner_disp\": \"0.21\",\r\n  \"disp_type\": \"unlabelled\",\r\n  \"n_runs\": \"5\",\r\n  \"n_source\": \"paper\",\r\n  \"rival_copied\": \"n\",\r\n  \"note\": \"The red box is drawn slightly high, cutting into the row above, but targets the cell for MMM2"
+   }
+  },
+  "R08": {
+   "orig_id": "048",
+   "paper": "bcbfe93e27d30640",
+   "table": "7",
+   "page": 7,
+   "disputed_by": [
+    "reader1_vs_parser",
+    "reader1_vs_reader2"
+   ],
+   "parser": {
+    "n_runs": 128,
+    "n_runs_source": null
+   },
+   "reader1": {
+    "n_runs": "none",
+    "n_source": "none",
+    "note": "Table 7 (VL-Think VLM results), Arrow column, Ovis2.5-9B row '0.99 ± 0.01'; bold and the only bold cell in the Arrow column (bold is per column; Weather column has a two-way bold tie 0.95 ± 0.01 / 0.95 ± 0.00). Arrow column: 0.76 ± 0.01, 0.73 ± 0.05, 0.86 ± 0.01 (Ovis2.5-2B, runner-up), 0.99 ± 0.01, 0.58 ± 0.03, 0.47 ± 0.03, 0.26 ± 0.02, 0.24 ± 0.02. Success rate, higher better. Caption does not say what ± denotes. runs.txt only has 'Each variant is evaluated over 128 seeds; we', which appears to describe the VLA fine-tuning variants (alignment experiments) rather than this VLM benchmark table, so no count is attributed; if it does apply, n would be 128. No citation mark on Ovis2.5-2B row."
+   },
+   "reader2": {
+    "n_runs": "128",
+    "n_source": "paper",
+    "note": "Boxed cell is the column winner."
+   }
+  },
+  "R09": {
+   "orig_id": "008",
+   "paper": "49a1820237d0f056",
+   "table": "1",
+   "page": 5,
+   "disputed_by": [
+    "reader1_vs_parser",
+    "reader1_vs_reader2"
+   ],
+   "parser": {
+    "n_runs": 5,
+    "n_runs_source": "caption"
+   },
+   "reader1": {
+    "n_runs": "5 seeds x 10 episodes per seed",
+    "n_source": "caption",
+    "note": "Table 1 D4RL normalised returns with per-row rank in brackets. Boxed cell = walker2d-med / TD3-N 101.3 ± 2.35 (1), bold, only bold in row. Runner-up = TD3-N+BC (PS) 98.2 ± 1.33 (2). Caption: 'averaged across 5 seeds with 10 episodes per seed' and 'mean ± 95% confidence intervals for the average return over 10 episodes for TD3-N and our method' (other columns carry no bars). Runner-up column is the paper's own method; no citation/dagger."
+   },
+   "reader2": {
+    "n_runs": "5",
+    "n_source": "caption",
+    "note": "Valid row winner."
+   }
+  },
+  "R10": {
+   "orig_id": "069",
+   "paper": "b427afba596fe349",
+   "table": "2",
+   "page": 5,
+   "disputed_by": [
+    "reader1_vs_parser",
+    "reader2_vs_parser",
+    "reader1_vs_reader2"
+   ],
+   "parser": {
+    "n_runs": 100,
+    "n_runs_source": "page"
+   },
+   "reader1": {
+    "n_runs": "20",
+    "n_source": "caption",
+    "note": "Table 2 converged reward per step (meta-agent, co-player) vs Naive Learners; boxed cell is the meta-agent value of the Shaper row in the IPD column: -0.1 ± 0.02 (entire Shaper IPD entry '-0.1 ± 0.02, -2.8 ± 0.05' bold; only bold entry in IPD column; IMP column has two bold rows but that is not the boxed group). IPD meta-agent values: Shaper -0.1±0.02, M-FOS -0.6±0.14 (runner-up), GS -1.0±0.03, CT-NL -2.0±0.00. Caption: 'Mean and standard deviation over 20 randomised co-players' -> sd, n=20 from caption. Caveat: runs.txt has no sentence with this count; it lists '100 seeds' (Figures 1/3, CoinGame/IPDitM) and 'We report mean and std over 5 seeds' (table unspecified). No citation marks on M-FOS row."
+   },
+   "reader2": {
+    "n_runs": "none",
+    "n_source": "none",
+    "note": "The red box highlights the meta-agent reward for SHAPER; the runner-up is M-FOS."
+   }
+  },
+  "R11": {
+   "orig_id": "009",
+   "paper": "276c1f2e146887a4",
+   "table": "3",
+   "page": 6,
+   "disputed_by": [
+    "reader1_vs_parser",
+    "reader2_vs_parser"
+   ],
+   "parser": {
+    "n_runs": 8,
+    "n_runs_source": "page"
+   },
+   "reader1": {
+    "n_runs": "none",
+    "n_source": "none",
+    "note": "Table 3 ablation of VLM-ReG; caption: 'best result in each column is highlighted in bold'. Boxed cell = VLM-ReG (Ours) / MME-RW-RS 60.12±0.12, bold, only bold in column. Benchmark scores, higher is better. Runner-up = CS + RQPO 58.42±0.13. Caption gives no sd/se/ci label. runs.txt only has 'eight rollouts per input instance' (training detail) and batch sizes; no evaluation seed/run count. Runner-up row is an internal ablation, no citation."
+   },
+   "reader2": {
+    "n_runs": "none",
+    "n_source": "none",
+    "note": "Valid column winner."
+   }
+  },
+  "R12": {
+   "orig_id": "023",
+   "paper": "2ff9dffbd7640d1e",
+   "table": "1",
+   "page": 6,
+   "disputed_by": [
+    "reader1_vs_parser",
+    "reader2_vs_parser"
+   ],
+   "parser": {
+    "n_runs": 3,
+    "n_runs_source": "caption"
+   },
+   "reader1": {
+    "n_runs": "5",
+    "n_source": "caption",
+    "note": "Row AdroitHandRelocate-v1 (State Dim Removed 36); boxed cell is 'Causal PBRS (ours)' column, 30 ± 13, bold and only bold in row. Row: SAC Baseline 24 ± 9, CQL 13 ± 2, T-REX 29 ± 11, Recurrent SAC 23 ± 7, Causal PBRS 30 ± 13. Runner-up = T-REX 29 ± 11. Caption: '(± 1 standard deviation)'; 'All results are averaged over 5 seeds (except Recurrent SAC, which is over 3 seeds), and smoothed over 10 evals.' Runner-up T-REX falls under 5 seeds. No citation/dagger on T-REX column."
+   },
+   "reader2": {
+    "n_runs": "5",
+    "n_source": "caption",
+    "note": "Valid winner."
+   }
+  },
+  "R13": {
+   "orig_id": "089",
+   "paper": "5ad998cb52e53335",
+   "table": "1",
+   "page": 6,
+   "disputed_by": [
+    "reader1_vs_reader2"
+   ],
+   "parser": {
+    "n_runs": 8,
+    "n_runs_source": "caption"
+   },
+   "reader1": {
+    "n_runs": "8",
+    "n_source": "caption",
+    "note": "Table 1, Constant 5 block, Reacher-v4 column. Boxed cell = AD-SAC[34] row: -5.1 (subscript ±0.5), bold. NOT the only bold cell in its group: State Aug-MLP[30] directly below is also bold -5.1±0.5 (caption: 'best performing methods, including those within the range of S.E.M of the best, are highlighted in bold'). Column values: VDPO -5.1±1.5, AD-SAC -5.1±0.5 (bold), State Aug-MLP -5.1±0.5 (bold), BPQL -5.2±2.1, DCAC -7.7±2.0, D2AC(ours) -5.2±0.6. Runner-up (best non-bold) = VDPO -5.1±1.5; its row label 'VDPO[33]' carries a citation (method reference; caption says each method was run 8 seeds). Caption: 'mean ± standard error of the mean (S.E.M)'; 'Each method was run 8 random seeds.' Returns, higher better."
+   },
+   "reader2": {
+    "n_runs": "",
+    "n_source": "",
+    "note": "```json\r\n{\r\n  \"results_table\": \"y\",\r\n  \"bold_ok\": \"y\",\r\n  \"orientation\": \"column\",\r\n  \"direction\": \"higher\",\r\n  \"winner_mean\": \"-5.1\",\r\n  \"winner_disp\": \"0.5\",\r\n  \"runner_mean\": \"-5.1\",\r\n  \"runner_disp\": \"1.5\",\r\n  \"disp_type\": \"se\",\r\n  \"n_runs\": 8,\r\n  \"n_source\": \"caption\",\r\n  \"rival_copied\": \"n\",\r\n  \"note\": \"The caption states that methods within the S.E.M of the best are bolded, but several non-bold cells have the same mean"
+   }
+  },
+  "R14": {
+   "orig_id": "071",
+   "paper": "e778a6a2942e8792",
+   "table": "2",
+   "page": 6,
+   "disputed_by": [
+    "reader1_vs_parser",
+    "reader2_vs_parser"
+   ],
+   "parser": {
+    "n_runs": 10,
+    "n_runs_source": null
+   },
+   "reader1": {
+    "n_runs": "none",
+    "n_source": "none",
+    "note": "Table 2 SMAC, row 6h_vs_8z / MR, boxed cell = LOGO(ours) 17.14±1.51 in blue bold (caption: best result in each setting highlighted in blue). Only highlighted cell in its row. Runner-up MAZero 16.35±0.91; MAZero column header carries no citation/marker. Caption does not name the dispersion. Runs sentences only mention rollout steps/horizons (5,10,15,20), no seed/run count."
+   },
+   "reader2": {
+    "n_runs": "none",
+    "n_source": "none",
+    "note": "The winning cells are highlighted in blue and bolded."
+   }
+  },
+  "R15": {
+   "orig_id": "007",
+   "paper": "e778a6a2942e8792",
+   "table": "3",
+   "page": 7,
+   "disputed_by": [
+    "reader1_vs_parser",
+    "reader2_vs_parser"
+   ],
+   "parser": {
+    "n_runs": 10,
+    "n_runs_source": null
+   },
+   "reader1": {
+    "n_runs": "none",
+    "n_source": "none",
+    "note": "Table 3 MaMuJoCo; caption says best result in each row highlighted in blue (blue cells are also bold). Boxed cell = Ho / MR / LOGO(ours) 1659.10 ±130.30 (subscript ±), the only bold/blue cell in that row. Returns, higher is better. Runner-up = Morel 1412.36 ±182.96. Caption gives no sd/se/ci label. runs.txt sentences only mention rollout horizons (5/10/15/20 steps), no seed/run count applicable to this table. No citation marks on column headers."
+   },
+   "reader2": {
+    "n_runs": "none",
+    "n_source": "none",
+    "note": "The caption states that the best results are highlighted in blue, which also appear to be bolded."
+   }
+  },
+  "R16": {
+   "orig_id": "040",
+   "paper": "eaaf5c6bef0e1d60",
+   "table": "2",
+   "page": 6,
+   "disputed_by": [
+    "reader1_vs_parser",
+    "reader2_vs_parser",
+    "reader1_vs_reader2"
+   ],
+   "parser": {
+    "n_runs": 3,
+    "n_runs_source": "caption"
+   },
+   "reader1": {
+    "n_runs": "none",
+    "n_source": "none",
+    "note": "Table 3 'Average cumulative task reward and the rate of wins in SMACv2 domains.' Boxed cell = DTIL row, Protoss/Wins column, printed '0.47 ± 0.06', bold. bold_ok = n because IIQL in the same column is also bold with the identical value 0.47 ± 0.06 (tie; two bold cells in the group). Column (Protoss Wins): Expert 0.55 ± 0.50 (not bold, reference row) | BC 0.17 ± 0.06 | MG 0.27 ± 0.06 | IIQL 0.47 ± 0.06 (bold) | MOG 0.13 ± 0.06 | DTIL 0.47 ± 0.06 (bold). Literal best non-bold cell in the column = Expert 0.55 ± 0.50; best non-bold learned baseline = MG 0.27 ± 0.06. Caption does not label the ±. runs.txt: 'the task rewards averaged over three trials for Multi-Jobs-n (MJ-n), Movers, and Flood' is explicitly scoped to Table 2's domains, and 'the paths generated by ten different seeds (seed=0:9) for each model' concerns generated paths, so no sentence states a count for this SMACv2 table → none. No row label carries a citation/dagger."
+   },
+   "reader2": {
+    "n_runs": "10",
+    "n_source": "paper",
+    "note": "Multiple bold cells; Expert higher."
+   }
+  },
+  "R17": {
+   "orig_id": "057",
+   "paper": "2ff9dffbd7640d1e",
+   "table": "1",
+   "page": 6,
+   "disputed_by": [
+    "reader1_vs_parser",
+    "reader1_vs_reader2"
+   ],
+   "parser": {
+    "n_runs": 3,
+    "n_runs_source": "caption"
+   },
+   "reader1": {
+    "n_runs": "5 (Recurrent SAC, the boxed winner: 3)",
+    "n_source": "caption",
+    "note": "Table of best evaluation returns on confounded environments; boxed cell = Recurrent SAC column, '...h-v5' (Full State SAC 12400) block, State Dim Removed = 8. Row: SAC Baseline 896 ± 494, CQL 373 ± 454, T-REX 615 ± 443, Recurrent SAC 7939 ± 851 (bold, only bold in row), Causal PBRS (ours) 1103 ± 216. The merged 'Full State SAC' reference cell (12400, unconfounded, no bar) is not part of the bold comparison and is excluded from runner-up. Caption: '(± 1 standard deviation)'; 'All results are averaged over 5 seeds (except Recurrent SAC, which is over 3 seeds), and smoothed over 10 evals'; 'Bold numbers indicate best best-performing methods'. Runner-up column is the paper's own method, no citation."
+   },
+   "reader2": {
+    "n_runs": "3",
+    "n_source": "caption",
+    "note": "Recurrent SAC uses 3 seeds."
+   }
+  },
+  "R18": {
+   "orig_id": "005",
+   "paper": "eaaf5c6bef0e1d60",
+   "table": "4",
+   "page": 6,
+   "disputed_by": [
+    "reader1_vs_parser",
+    "reader2_vs_parser"
+   ],
+   "parser": {
+    "n_runs": 3,
+    "n_runs_source": "page"
+   },
+   "reader1": {
+    "n_runs": "none",
+    "n_source": "none",
+    "note": "Table 4 'Accuracy of Subtask Inference'. Boxed = MJ-2-2 row x DTIL-s column, bold 0.75±0.07, the only bold in the row (Random ≈ 0.50, BTIL '-', MOG-s 0.63±0.17). Runner-up = MOG-s 0.63±0.17. Caption gives no sd/se label. runs.txt: 'the task rewards averaged over three trials for Multi-Jobs-n (MJ-n), Movers, and Flood' refers to Table 2 (task rewards, sec 8.2.1 on the same page), not this accuracy table; 'the paths generated by ten different seeds (seed=0:9) for each model' refers to generated paths, not clearly this table - so no count that applies is stated (candidates: 3 from the Table 2 sentence, 10 from the paths sentence). No citation marks on MOG-s column."
+   },
+   "reader2": {
+    "n_runs": "none",
+    "n_source": "none",
+    "note": "Valid row winner."
+   }
+  }
+ }
+}
